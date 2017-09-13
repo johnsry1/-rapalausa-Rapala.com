@@ -1,0 +1,743 @@
+// Copyright © 2013 Priority Fulfillment Services, Inc. All rights reserved.
+/**
+ * Proivides required functionality to call the OrderHistoryForCustomer service
+ */
+importPackage(dw.system);
+importPackage(dw.rpc);
+importPackage(dw.util);
+importPackage(dw.value);
+importPackage(dw.order);
+importPackage(dw.svc);
+
+importScript("bc_common:lib/libOrderHistoryCustom.ds");
+
+function orderSearch(orderID: String, customerID: String): HashMap {
+
+    Logger.debug("libOrderHistory.ds - orderSearch({0}, {1})", orderID, customerID);
+
+    var timeOut: String = this.getTimeOutOrderSearch();
+
+    //Get Session Token
+    var sessionToken = this.retrieveSessionToken();
+
+    //Get the service object
+    var svc: SOAPService = ServiceRegistry.get("jde.soap.orderdetailguest.orderSearch");
+
+    var $this = this;
+
+    //Get Webreference object
+    var webreference: WebReference = $this.serviceReference;
+
+    var response = null;
+
+    //Prepare Params Object
+    var params = {
+        "sessionToken": sessionToken,
+        "timeOut": timeOut,
+        "orderID": orderID,
+        "customerID": customerID
+    };
+
+    try {
+
+        //Execute the service
+        var result: Result = svc.call(params);
+
+        //Check for service availability.
+        if (result.status == Result.SERVICE_UNAVAILABLE) {
+            throw new Error("Service is not available");
+        }
+
+        //Re-try Logic
+        var counter = 0;
+        while (result.msg && result.msg.indexOf('Session Token was not found or invalid') != -1 &&
+            counter < this.getMaxRetries()) {
+            this.sessionToken == null;
+            sessionToken = this.retrieveSessionToken();
+            result = svc.call(params);
+            counter++;
+        }
+
+        response = result.object;
+
+        if (response == null) {
+            var returnArray: HashMap = new HashMap();
+            returnArray.put("ERROR_FLAG", "ORDER_NOTFOUND");
+            return returnArray;
+        } else {
+            //var orderMap : HashMap = new HashMap();
+            var orderMap: LinkedHashMap = new LinkedHashMap();
+            var result = response.orderSearchResult;
+
+            var arrayOfTOrderSearchResponse: Array = result.orderSearchResponse;
+            for (var i: Number = 0; i < arrayOfTOrderSearchResponse.length; i++) {
+                var tOrderSearchResponse = arrayOfTOrderSearchResponse[i];
+                // !!!if (!empty(tOrderSearchResponse.orderNumber) && (empty(customerID) || customerID + this.getStoreID() == tOrderSearchResponse.longAddressNumber))
+                if (!empty(tOrderSearchResponse.reference1)) {
+                    var orderObject: Object = new Object();
+                    orderObject["ApplicationID"] = tOrderSearchResponse.applicationID;
+                    orderObject["AccessID"] = tOrderSearchResponse.accessID;
+                    orderObject["DisplayRecurring"] = tOrderSearchResponse.displayRecurring;
+                    orderObject["EmailAddress"] = tOrderSearchResponse.emailAddress;
+                    orderObject["InvoicedLines"] = tOrderSearchResponse.invoicedLines;
+                    orderObject["InvoiceTotal"] = tOrderSearchResponse.invoiceTotal;
+                    orderObject["LongAddressNumber"] = tOrderSearchResponse.longAddressNumber;
+                    orderObject["OrderCompany"] = tOrderSearchResponse.orderCompany;
+                    orderObject["OrderDate"] = formatOrderDate(new String(tOrderSearchResponse.orderDate));
+                    orderObject["OrderNumber"] = tOrderSearchResponse.orderNumber;
+                    orderObject["OrderStatus"] = tOrderSearchResponse.orderStatus;
+                    orderObject["OrderType"] = tOrderSearchResponse.orderType;
+                    orderObject["Reference1"] = tOrderSearchResponse.reference1;
+                    orderObject["Reference2"] = tOrderSearchResponse.reference2;
+                    orderObject["ShippedLines"] = tOrderSearchResponse.shippedLines;
+                    orderObject["TotalLines"] = tOrderSearchResponse.totalLines;
+                    orderObject["UnshippedLines"] = tOrderSearchResponse.unshippedLines;
+                    orderObject["ErrorID"] = tOrderSearchResponse.errorID;
+                    orderObject["ErrorDescription"] = tOrderSearchResponse.errorDescription;
+                    orderObject["ErrorSource"] = tOrderSearchResponse.errorSource;
+                    orderObject["ErrorSystem"] = tOrderSearchResponse.errorSystem;
+                    orderObject["ErrorFlag"] = tOrderSearchResponse.errorFlag;
+                    if (tOrderSearchResponse.errorFlag == true) {
+                        this.addError("410", "An error occurred on backend side: " + tOrderSearchResponse.errorDescription, 3);
+                        if (tOrderSearchResponse.errorID == 30185) {
+                            var returnArray: HashMap = new HashMap();
+                            returnArray.put("ERROR_FLAG", "ORDER_NOTFOUND");
+                            return returnArray;
+                        }
+                    } else {
+                        Logger.debug("libOrderHistory.ds - orderSearch(): found order {0}", new String(tOrderSearchResponse.orderNumber));
+                        var storeOrderNumber: String = tOrderSearchResponse.reference1;
+                        /*Commenting this because guest user order track fails due to this line when using "LIZ" as store ID.*/
+                        //storeOrderNumber = storeOrderNumber.replace(this.getStoreID(), "");
+                        orderMap.put(storeOrderNumber, orderObject);
+                        Logger.debug("libOrderHistory.ds - orderSearch(): adding order with storeOrderNumber/reference1 {0}/{1}", storeOrderNumber, tOrderSearchResponse.reference1);
+                    }
+                }
+            }
+            return orderMap;
+        }
+    } catch (e) {
+        Logger.error("Error while executing the script libOrderHistory.ds - orderSearch(). Error..." + e.message);
+    }
+}
+
+function completeOrderSummary(orderNumber: String): Object {
+
+    var shopID: String = this.getStoreID();
+    var timeOut: String = this.getTimeOutOrderSummary();
+
+    //Get Session Token
+    var sessionToken = this.retrieveSessionToken();
+
+    //Get the service object
+    var svc: SOAPService = ServiceRegistry.get("jde.soap.orderdetailguest.completeOrderSummary");
+
+    var $this = this;
+
+    //Get Webreference object
+    var webreference: WebReference = $this.serviceReference;
+
+    var response = null;
+
+    //Prepare Params Object
+    var params = {
+        "sessionToken": sessionToken,
+        "timeOut": timeOut,
+        "orderNumber": orderNumber
+    };
+
+    try {
+
+        //Execute the service
+        var result: Result = svc.call(params);
+
+        //Check for service availability.
+        if (result.status == Result.SERVICE_UNAVAILABLE) {
+            throw new Error("Service is not available");
+        }
+
+        //Re-try Logic
+        var counter = 0;
+        while (result.msg && result.msg.indexOf('Session Token was not found or invalid') != -1 &&
+            counter < this.getMaxRetries()) {
+            this.sessionToken == null;
+            sessionToken = this.retrieveSessionToken();
+            result = svc.call(params);
+            counter++;
+        }
+
+        var response = result.object;
+
+        if (response == null) {
+            Logger.debug("libOrderHistory.ds - customerServiceInquiry(): no response");
+            return null;
+        } else {
+            var completeOrderSummaryResult: Object = new Object();
+            var result = response.completeOrderSummaryResult;
+            if (result.errorFlag == true) {
+                if (result.errorID != 4104) {
+                    completeOrderSummaryResult["ReferenceNumber"] = result.reference1;
+                    completeOrderSummaryResult["ErrorID"] = result.errorID;
+                    completeOrderSummaryResult["ErrorDescription"] = result.errorDescription;
+                    completeOrderSummaryResult["ErrorSource"] = result.errorSource;
+                    completeOrderSummaryResult["ErrorSystem"] = result.errorSystem;
+                    completeOrderSummaryResult["ErrorFlag"] = result.errorFlag;
+                    return completeOrderSummaryResult;
+                }
+            }
+
+
+            completeOrderSummaryResult["SessionToken"] = result.sessionToken;
+            completeOrderSummaryResult["AccessID"] = result.accessID;
+            completeOrderSummaryResult["CurrencyMode"] = result.currencyMode;
+            completeOrderSummaryResult["OrderNumber"] = result.orderNumber;
+            completeOrderSummaryResult["OrderType"] = result.orderType;
+            completeOrderSummaryResult["AsIfCurrencyCode"] = result.asIfCurrencyCode;
+            completeOrderSummaryResult["AsIfCurrencyCodeDescription"] = result.asIfCurrencyCodeDescription;
+            completeOrderSummaryResult["OrderCompany"] = result.orderCompany;
+            completeOrderSummaryResult["SoldToAddressNumber"] = result.soldToAddressNumber;
+            completeOrderSummaryResult["SoldToName"] = result.soldToName;
+            completeOrderSummaryResult["SoldToAddress1"] = result.soldToAddress1;
+            completeOrderSummaryResult["SoldToAddress2"] = result.soldToAddress2;
+            completeOrderSummaryResult["SoldToAddress3"] = result.soldToAddress3;
+            completeOrderSummaryResult["SoldToAddress4"] = result.soldToAddress4;
+            completeOrderSummaryResult["SoldToZip"] = result.soldToZip;
+            completeOrderSummaryResult["SoldToCity"] = result.soldToCity;
+            completeOrderSummaryResult["SoldToState"] = result.soldToState;
+            completeOrderSummaryResult["SoldToCountry"] = result.soldToCountry;
+            completeOrderSummaryResult["SoldToCounty"] = result.soldToCounty;
+            completeOrderSummaryResult["ShipToAddressNumber"] = result.shipToAddressNumber;
+            completeOrderSummaryResult["ShipToName"] = result.shipToName;
+            completeOrderSummaryResult["ShipToAddress1"] = result.shipToAddress1;
+            completeOrderSummaryResult["ShipToAddress2"] = result.shipToAddress2;
+            completeOrderSummaryResult["ShipToAddress3"] = result.shipToAddress3;
+            completeOrderSummaryResult["ShipToAddress4"] = result.shipToAddress4;
+            completeOrderSummaryResult["ShipToZip"] = result.shipToZip;
+            completeOrderSummaryResult["ShipToCity"] = result.shipToCity;
+            completeOrderSummaryResult["ShipToState"] = result.shipToState;
+            completeOrderSummaryResult["ShipToCountry"] = result.shipToCountry;
+            completeOrderSummaryResult["ShipToCounty"] = result.shipToCounty;
+            completeOrderSummaryResult["PaymentTerms"] = result.paymentTerms;
+            completeOrderSummaryResult["PaymentTermsDescription"] = result.paymentTermsDescription;
+            completeOrderSummaryResult["PaymentDueDate"] = formatOrderDate(new String(result.paymentDueDate));
+            completeOrderSummaryResult["ShipDate"] = formatOrderDate(new String(result.shipDate));
+            completeOrderSummaryResult["InvoiceDate"] = formatOrderDate(new String(result.invoiceDate));
+            completeOrderSummaryResult["OrderReference1"] = result.orderReference1;
+            completeOrderSummaryResult["OrderReference2"] = result.orderReference2;
+            completeOrderSummaryResult["TaxableAmount"] = result.taxableAmount;
+            completeOrderSummaryResult["Tax"] = result.tax;
+            completeOrderSummaryResult["OrderTotal"] = result.orderTotal;
+            completeOrderSummaryResult["InvoiceTotal"] = result.invoiceTotal;
+            completeOrderSummaryResult["EstimatedFreightAmount"] = result.estimatedFreightAmount;
+            completeOrderSummaryResult["TaxableFreightAmount"] = result.taxableFreightAmount;
+            completeOrderSummaryResult["FreightTaxAmount"] = result.freightTaxAmount;
+            completeOrderSummaryResult["ProductGSTTax"] = result.productGSTTax;
+            completeOrderSummaryResult["ProductPSTTax"] = result.productPSTTax;
+            completeOrderSummaryResult["FreightGSTTax"] = result.freightGSTTax;
+            completeOrderSummaryResult["FreightPSTTax"] = result.freightPSTTax;
+            completeOrderSummaryResult["OrderDate"] = formatOrderDate(new String(result.orderDate));
+            completeOrderSummaryResult["SoldToLongAddress"] = result.soldToLongAddress;
+            completeOrderSummaryResult["ShipToLongAddress"] = result.shipToLongAddress;
+            completeOrderSummaryResult["SoldToPhoneNumber"] = result.soldToPhoneNumber;
+            completeOrderSummaryResult["ShipToPhoneNumber"] = result.shipToPhoneNumber;
+
+            completeOrderSummaryResult["Timeout"] = result.timeout;
+            completeOrderSummaryResult["LocalExitName"] = result.localExitName;
+            completeOrderSummaryResult["LocalExitExtension"] = result.localExitExtension;
+            completeOrderSummaryResult["iSConnectorExitName"] = result.ISConnectorExitName;
+            completeOrderSummaryResult["iSConnectorExitExtension"] = result.ISConnectorExitExtension;
+            completeOrderSummaryResult["ExitToExecuteFirstOnBefore"] = result.exitToExecuteFirstOnBefore;
+            completeOrderSummaryResult["ExitToExecuteFirstOnAfter"] = result.exitToExecuteFirstOnAfter;
+            completeOrderSummaryResult["ErrorID"] = result.errorID;
+            completeOrderSummaryResult["ErrorDescription"] = result.errorDescription;
+            completeOrderSummaryResult["ErrorSource"] = result.errorSource;
+            completeOrderSummaryResult["ErrorSystem"] = result.errorSystem;
+            completeOrderSummaryResult["ErrorFlag"] = result.errorFlag;
+
+            //GET COMPLETE ORDER SUMMARY DETAIL RESPONSE
+
+            var arrayOfTCompleteOrderSummaryDetailResponse: Array = result.completeOrderSummaryDetailResponse;
+            if (arrayOfTCompleteOrderSummaryDetailResponse != null && arrayOfTCompleteOrderSummaryDetailResponse.length > 0) {
+                var productLineMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryDetailResponse.length; i++) {
+
+                    var tCompleteOrderSummaryDetailResponse = arrayOfTCompleteOrderSummaryDetailResponse[i];
+                    var productLineDetails: Object = new Object();
+
+                    productLineDetails["AccessID"] = tCompleteOrderSummaryDetailResponse.accessID;
+                    productLineDetails["ItemDescription1"] = tCompleteOrderSummaryDetailResponse.itemDescription1;
+                    productLineDetails["ItemDescription2"] = tCompleteOrderSummaryDetailResponse.itemDescription2;
+                    productLineDetails["LineNumber"] = tCompleteOrderSummaryDetailResponse.lineNumber;
+                    productLineDetails["Document"] = tCompleteOrderSummaryDetailResponse.document;
+                    productLineDetails["DocumentType"] = tCompleteOrderSummaryDetailResponse.documentType;
+                    productLineDetails["DocumentCompany"] = tCompleteOrderSummaryDetailResponse.documentCompany;
+                    productLineDetails["OrderNumber"] = tCompleteOrderSummaryDetailResponse.orderNumber;
+                    productLineDetails["OrderType"] = tCompleteOrderSummaryDetailResponse.orderType;
+
+                    productLineDetails["OrderCompany"] = tCompleteOrderSummaryDetailResponse.orderCompany;
+                    productLineDetails["RequestedDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.requestedDate));
+                    productLineDetails["UnitOfMeasure"] = tCompleteOrderSummaryDetailResponse.unitOfMeasure;
+                    productLineDetails["QuantityShipped"] = tCompleteOrderSummaryDetailResponse.quantityShipped;
+                    productLineDetails["ExtendedPrice"] = tCompleteOrderSummaryDetailResponse.extendedPrice;
+                    productLineDetails["QuantityOrdered"] = tCompleteOrderSummaryDetailResponse.quantityOrdered;
+                    productLineDetails["QuantityBackOrdered"] = tCompleteOrderSummaryDetailResponse.quantityBackOrdered;
+                    productLineDetails["QuantityCancelled"] = tCompleteOrderSummaryDetailResponse.quantityCancelled;
+                    productLineDetails["UnitPrice"] = tCompleteOrderSummaryDetailResponse.unitPrice;
+
+                    productLineDetails["UnitListPrice"] = tCompleteOrderSummaryDetailResponse.unitListPrice;
+                    productLineDetails["ShortItemNumber"] = tCompleteOrderSummaryDetailResponse.shortItemNumber;
+                    productLineDetails["SecondItemNumber"] = tCompleteOrderSummaryDetailResponse.secondItemNumber;
+                    productLineDetails["ThirdItemNumber"] = tCompleteOrderSummaryDetailResponse.thirdItemNumber;
+                    productLineDetails["ShipDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.shipDate));
+                    productLineDetails["InvoiceDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.invoiceDate));
+                    productLineDetails["CancelDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.cancelDate));
+                    productLineDetails["PromisedDate"] = formatPromisedDate(new String(tCompleteOrderSummaryDetailResponse.promisedDate));
+                    productLineDetails["CarrierCode"] = tCompleteOrderSummaryDetailResponse.carrierCode;
+
+                    productLineDetails["CarrierCodeDescription"] = tCompleteOrderSummaryDetailResponse.carrierCodeDescription;
+                    productLineDetails["CarrierTrackingNumber"] = tCompleteOrderSummaryDetailResponse.carrierTrackingNumber;
+                    productLineDetails["LineStatus"] = tCompleteOrderSummaryDetailResponse.lineStatus;
+                    productLineDetails["ErrorID"] = tCompleteOrderSummaryDetailResponse.errorID;
+                    productLineDetails["ErrorDescription"] = tCompleteOrderSummaryDetailResponse.errorDescription;
+                    productLineDetails["ErrorSource"] = tCompleteOrderSummaryDetailResponse.errorSource;
+                    productLineDetails["ErrorSystem"] = tCompleteOrderSummaryDetailResponse.errorSystem;
+                    productLineDetails["ErrorFlag"] = tCompleteOrderSummaryDetailResponse.errorFlag;
+
+                    determineProductLineStatus(productLineDetails);
+
+                    productLineMap[i] = productLineDetails;
+
+                }
+                completeOrderSummaryResult["completeOrderSummaryDetail"] = productLineMap;
+            }
+
+            //GET COMPLETE ORDER SUMMARY PAYMENT RESPONSE
+
+            var arrayOfTCompleteOrderSummaryPaymentResponse: Array = result.completeOrderSummaryPaymentResponse;
+
+            if (arrayOfTCompleteOrderSummaryPaymentResponse != null && arrayOfTCompleteOrderSummaryPaymentResponse.length > 0) {
+                var paymentMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryPaymentResponse.length; i++) {
+
+                    var tCompleteOrderSummaryPaymentResponse = arrayOfTCompleteOrderSummaryPaymentResponse[i];
+                    var paymentDetails: Object = new Object();
+
+                    paymentDetails["AccessID"] = tCompleteOrderSummaryPaymentResponse.accessID;
+                    paymentDetails["OrderNumber"] = tCompleteOrderSummaryPaymentResponse.orderNumber;
+                    paymentDetails["OrderType"] = tCompleteOrderSummaryPaymentResponse.orderType;
+                    paymentDetails["PrimaryPayment"] = tCompleteOrderSummaryPaymentResponse.primaryPayment;
+                    paymentDetails["OrderCompany"] = tCompleteOrderSummaryPaymentResponse.orderCompany;
+                    paymentDetails["OrderSuffix"] = tCompleteOrderSummaryPaymentResponse.orderSuffix;
+                    paymentDetails["PaymentType"] = tCompleteOrderSummaryPaymentResponse.paymentType;
+                    paymentDetails["PaymentLastFourDigits"] = tCompleteOrderSummaryPaymentResponse.paymentLastFourDigits;
+                    paymentDetails["PaymentExpirationDate"] = formatOrderDate(new String(tCompleteOrderSummaryPaymentResponse.paymentExpirationDate));
+                    paymentDetails["Amount"] = tCompleteOrderSummaryPaymentResponse.amount;
+
+                    paymentDetails["ErrorID"] = tCompleteOrderSummaryPaymentResponse.errorID;
+                    paymentDetails["ErrorDescription"] = tCompleteOrderSummaryPaymentResponse.errorDescription;
+                    paymentDetails["ErrorSource"] = tCompleteOrderSummaryPaymentResponse.errorSource;
+                    paymentDetails["ErrorSystem"] = tCompleteOrderSummaryPaymentResponse.errorSystem;
+                    paymentDetails["ErrorFlag"] = tCompleteOrderSummaryPaymentResponse.errorFlag;
+
+                    paymentMap[i] = paymentDetails;
+                }
+                completeOrderSummaryResult["completeOrderSummaryPayment"] = paymentMap;
+            }
+
+            //GET COMPLETE ORDER SUMMARY REFERENCE RESPONSE
+            var arrayOfTCompleteOrderSummaryReferenceResponse: Array = result.completeOrderSummaryReferenceResponse;
+
+            if (arrayOfTCompleteOrderSummaryReferenceResponse != null && arrayOfTCompleteOrderSummaryReferenceResponse.length > 0) {
+                var referenceMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryReferenceResponse.length; i++) {
+
+                    var tCompleteOrderSummaryReferenceResponse = arrayOfTCompleteOrderSummaryReferenceResponse[i];
+                    var referenceDetails: Object = new Object();
+
+                    referenceDetails["AccessID"] = tCompleteOrderSummaryReferenceResponse.accessID;
+                    referenceDetails["OrderNumber"] = tCompleteOrderSummaryReferenceResponse.orderNumber;
+                    referenceDetails["OrderType"] = tCompleteOrderSummaryReferenceResponse.orderType;
+                    referenceDetails["OrderCompany"] = tCompleteOrderSummaryReferenceResponse.orderCompany;
+                    referenceDetails["LineNumber"] = tCompleteOrderSummaryReferenceResponse.lineNumber;
+                    referenceDetails["DataItem"] = tCompleteOrderSummaryReferenceResponse.dataItem;
+                    referenceDetails["DataText"] = tCompleteOrderSummaryReferenceResponse.dataText;
+
+                    referenceDetails["ErrorID"] = tCompleteOrderSummaryReferenceResponse.errorID;
+                    referenceDetails["ErrorDescription"] = tCompleteOrderSummaryReferenceResponse.errorDescription;
+                    referenceDetails["ErrorSource"] = tCompleteOrderSummaryReferenceResponse.errorSource;
+                    referenceDetails["ErrorSystem"] = tCompleteOrderSummaryReferenceResponse.errorSystem;
+                    referenceDetails["ErrorFlag"] = tCompleteOrderSummaryReferenceResponse.errorFlag;
+
+                    referenceMap[i] = referenceDetails;
+                }
+                completeOrderSummaryResult["completeOrderSummaryReference"] = referenceMap;
+            }
+
+            return completeOrderSummaryResult;
+
+        }
+    } catch (e) {
+        Logger.error("Error while executing the script libOrderHistory.ds - completeOrderSummary(). Error..." + e.message);
+        return null;
+    }
+}
+
+function completeOrderSummaryOrderData(referenceNumber: String, orderNumber: Number, orderType: String, counter: Number): Object {
+
+    var shopID: String = this.getStoreID();
+    var timeOut: String = this.getTimeOutOrderSummary();
+
+    //Get Session Token
+    var sessionToken = this.retrieveSessionToken();
+
+    //Get the service object
+    var svc: SOAPService = ServiceRegistry.get("jde.soap.orderdetail.completeOrderSummary");
+
+    var $this = this;
+
+    //Get Webreference object
+    var webreference: WebReference = $this.serviceReference;
+
+    var response = null;
+
+    //Prepare Params Object
+    var params = {
+        "sessionToken": sessionToken,
+        "timeOut": timeOut,
+        "orderNumber": orderNumber
+    };
+
+    try {
+
+        //Execute the service
+        var result: Result = svc.call(params);
+
+        //Check for service availability.
+        if (result.status == Result.SERVICE_UNAVAILABLE) {
+            throw new Error("Service is not available");
+        }
+
+        //Re-try Logic
+        var counter = 0;
+        while (result.msg && result.msg.indexOf('Session Token was not found or invalid') != -1 &&
+            counter < this.getMaxRetries()) {
+            this.sessionToken == null;
+            sessionToken = this.retrieveSessionToken();
+            result = svc.call(params);
+            counter++;
+        }
+
+        var response = result.object;
+
+        if (response == null) {
+            Logger.debug("libOrderHistory.ds - customerServiceInquiry(): no response");
+            return null;
+        } else {
+            var completeOrderSummaryResult: Object = new Object();
+            var result = response.completeOrderSummaryResult;
+            if (result.errorFlag == true) {
+                if (result.errorID != 4104) {
+                    completeOrderSummaryResult["ReferenceNumber"] = result.reference1;
+                    completeOrderSummaryResult["ErrorID"] = result.errorID;
+                    completeOrderSummaryResult["ErrorDescription"] = result.errorDescription;
+                    completeOrderSummaryResult["ErrorSource"] = result.errorSource;
+                    completeOrderSummaryResult["ErrorSystem"] = result.errorSystem;
+                    completeOrderSummaryResult["ErrorFlag"] = result.errorFlag;
+                    return completeOrderSummaryResult;
+                }
+            }
+
+            completeOrderSummaryResult["SessionToken"] = result.sessionToken;
+            completeOrderSummaryResult["AccessID"] = result.accessID;
+            completeOrderSummaryResult["CurrencyMode"] = result.currencyMode;
+            completeOrderSummaryResult["OrderNumber"] = result.orderNumber;
+            completeOrderSummaryResult["OrderType"] = result.orderType;
+            completeOrderSummaryResult["AsIfCurrencyCode"] = result.asIfCurrencyCode;
+            completeOrderSummaryResult["AsIfCurrencyCodeDescription"] = result.asIfCurrencyCodeDescription;
+            completeOrderSummaryResult["OrderCompany"] = result.orderCompany;
+            completeOrderSummaryResult["SoldToAddressNumber"] = result.soldToAddressNumber;
+            completeOrderSummaryResult["SoldToName"] = result.soldToName;
+            completeOrderSummaryResult["SoldToAddress1"] = result.soldToAddress1;
+            completeOrderSummaryResult["SoldToAddress2"] = result.soldToAddress2;
+            completeOrderSummaryResult["SoldToAddress3"] = result.soldToAddress3;
+            completeOrderSummaryResult["SoldToAddress4"] = result.soldToAddress4;
+            completeOrderSummaryResult["SoldToZip"] = result.soldToZip;
+            completeOrderSummaryResult["SoldToCity"] = result.soldToCity;
+            completeOrderSummaryResult["SoldToState"] = result.soldToState;
+            completeOrderSummaryResult["SoldToCountry"] = result.soldToCountry;
+            completeOrderSummaryResult["SoldToCounty"] = result.soldToCounty;
+            completeOrderSummaryResult["ShipToAddressNumber"] = result.shipToAddressNumber;
+            completeOrderSummaryResult["ShipToName"] = result.shipToName;
+            completeOrderSummaryResult["ShipToAddress1"] = result.shipToAddress1;
+            completeOrderSummaryResult["ShipToAddress2"] = result.shipToAddress2;
+            completeOrderSummaryResult["ShipToAddress3"] = result.shipToAddress3;
+            completeOrderSummaryResult["ShipToAddress4"] = result.shipToAddress4;
+            completeOrderSummaryResult["ShipToZip"] = result.shipToZip;
+            completeOrderSummaryResult["ShipToCity"] = result.shipToCity;
+            completeOrderSummaryResult["ShipToState"] = result.shipToState;
+            completeOrderSummaryResult["ShipToCountry"] = result.shipToCountry;
+            completeOrderSummaryResult["ShipToCounty"] = result.shipToCounty;
+            completeOrderSummaryResult["PaymentTerms"] = result.paymentTerms;
+            completeOrderSummaryResult["PaymentTermsDescription"] = result.paymentTermsDescription;
+            completeOrderSummaryResult["PaymentDueDate"] = formatOrderDate(new String(result.paymentDueDate));
+            completeOrderSummaryResult["ShipDate"] = formatOrderDate(new String(result.shipDate));
+            completeOrderSummaryResult["InvoiceDate"] = formatOrderDate(new String(result.invoiceDate));
+            completeOrderSummaryResult["OrderReference1"] = result.orderReference1;
+            completeOrderSummaryResult["OrderReference2"] = result.orderReference2;
+            completeOrderSummaryResult["orderNo"] = result.orderReference1;
+            completeOrderSummaryResult["TaxableAmount"] = result.taxableAmount;
+            completeOrderSummaryResult["Tax"] = result.tax;
+            completeOrderSummaryResult["OrderTotal"] = result.orderTotal;
+            completeOrderSummaryResult["InvoiceTotal"] = result.invoiceTotal;
+            completeOrderSummaryResult["EstimatedFreightAmount"] = result.estimatedFreightAmount;
+            completeOrderSummaryResult["TaxableFreightAmount"] = result.taxableFreightAmount;
+            completeOrderSummaryResult["FreightTaxAmount"] = result.freightTaxAmount;
+            completeOrderSummaryResult["ProductGSTTax"] = result.productGSTTax;
+            completeOrderSummaryResult["ProductPSTTax"] = result.productPSTTax;
+            completeOrderSummaryResult["FreightGSTTax"] = result.freightGSTTax;
+            completeOrderSummaryResult["FreightPSTTax"] = result.freightPSTTax;
+            completeOrderSummaryResult["OrderDate"] = formatOrderDate(new String(result.orderDate));
+            completeOrderSummaryResult["SoldToLongAddress"] = result.soldToLongAddress;
+            completeOrderSummaryResult["ShipToLongAddress"] = result.shipToLongAddress;
+            completeOrderSummaryResult["SoldToPhoneNumber"] = result.soldToPhoneNumber;
+            completeOrderSummaryResult["ShipToPhoneNumber"] = result.shipToPhoneNumber;
+
+            completeOrderSummaryResult["Timeout"] = result.timeout;
+            completeOrderSummaryResult["LocalExitName"] = result.localExitName;
+            completeOrderSummaryResult["LocalExitExtension"] = result.localExitExtension;
+            completeOrderSummaryResult["iSConnectorExitName"] = result.ISConnectorExitName;
+            completeOrderSummaryResult["iSConnectorExitExtension"] = result.ISConnectorExitExtension;
+            completeOrderSummaryResult["ExitToExecuteFirstOnBefore"] = result.exitToExecuteFirstOnBefore;
+            completeOrderSummaryResult["ExitToExecuteFirstOnAfter"] = result.exitToExecuteFirstOnAfter;
+            completeOrderSummaryResult["ErrorID"] = result.errorID;
+            completeOrderSummaryResult["ErrorDescription"] = result.errorDescription;
+            completeOrderSummaryResult["ErrorSource"] = result.errorSource;
+            completeOrderSummaryResult["ErrorSystem"] = result.errorSystem;
+            completeOrderSummaryResult["ErrorFlag"] = result.errorFlag;
+
+            //GET COMPLETE ORDER SUMMARY DETAIL RESPONSE
+
+            var arrayOfTCompleteOrderSummaryDetailResponse: Array = result.completeOrderSummaryDetailResponse;
+            if (arrayOfTCompleteOrderSummaryDetailResponse != null && arrayOfTCompleteOrderSummaryDetailResponse.length > 0) {
+                var productLineMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryDetailResponse.length; i++) {
+
+                    var tCompleteOrderSummaryDetailResponse = arrayOfTCompleteOrderSummaryDetailResponse[i];
+                    var productLineDetails: Object = new Object();
+
+                    productLineDetails["AccessID"] = tCompleteOrderSummaryDetailResponse.accessID;
+                    productLineDetails["ItemDescription1"] = tCompleteOrderSummaryDetailResponse.itemDescription1;
+                    productLineDetails["ItemDescription2"] = tCompleteOrderSummaryDetailResponse.itemDescription2;
+                    productLineDetails["LineNumber"] = tCompleteOrderSummaryDetailResponse.lineNumber;
+                    productLineDetails["Document"] = tCompleteOrderSummaryDetailResponse.document;
+                    productLineDetails["DocumentType"] = tCompleteOrderSummaryDetailResponse.documentType;
+                    productLineDetails["DocumentCompany"] = tCompleteOrderSummaryDetailResponse.documentCompany;
+                    productLineDetails["OrderNumber"] = tCompleteOrderSummaryDetailResponse.orderNumber;
+                    productLineDetails["OrderType"] = tCompleteOrderSummaryDetailResponse.orderType;
+
+                    productLineDetails["OrderCompany"] = tCompleteOrderSummaryDetailResponse.orderCompany;
+                    productLineDetails["RequestedDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.requestedDate));
+                    productLineDetails["UnitOfMeasure"] = tCompleteOrderSummaryDetailResponse.unitOfMeasure;
+                    productLineDetails["QuantityShipped"] = tCompleteOrderSummaryDetailResponse.quantityShipped;
+                    productLineDetails["ExtendedPrice"] = tCompleteOrderSummaryDetailResponse.extendedPrice;
+                    productLineDetails["QuantityOrdered"] = tCompleteOrderSummaryDetailResponse.quantityOrdered;
+                    productLineDetails["QuantityBackOrdered"] = tCompleteOrderSummaryDetailResponse.quantityBackOrdered;
+                    productLineDetails["QuantityCancelled"] = tCompleteOrderSummaryDetailResponse.quantityCancelled;
+                    productLineDetails["UnitPrice"] = tCompleteOrderSummaryDetailResponse.unitPrice;
+
+                    productLineDetails["UnitListPrice"] = tCompleteOrderSummaryDetailResponse.unitListPrice;
+                    productLineDetails["ShortItemNumber"] = tCompleteOrderSummaryDetailResponse.shortItemNumber;
+                    productLineDetails["SecondItemNumber"] = tCompleteOrderSummaryDetailResponse.secondItemNumber;
+                    productLineDetails["ThirdItemNumber"] = tCompleteOrderSummaryDetailResponse.thirdItemNumber;
+                    productLineDetails["ShipDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.shipDate));
+                    productLineDetails["InvoiceDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.invoiceDate));
+                    productLineDetails["CancelDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.cancelDate));
+                    productLineDetails["PromisedDate"] = formatOrderDate(new String(tCompleteOrderSummaryDetailResponse.promisedDate));
+                    productLineDetails["CarrierCode"] = tCompleteOrderSummaryDetailResponse.carrierCode;
+
+                    productLineDetails["CarrierCodeDescription"] = tCompleteOrderSummaryDetailResponse.carrierCodeDescription;
+                    productLineDetails["CarrierTrackingNumber"] = tCompleteOrderSummaryDetailResponse.carrierTrackingNumber;
+                    productLineDetails["LineStatus"] = tCompleteOrderSummaryDetailResponse.lineStatus;
+                    productLineDetails["ErrorID"] = tCompleteOrderSummaryDetailResponse.errorID;
+                    productLineDetails["ErrorDescription"] = tCompleteOrderSummaryDetailResponse.errorDescription;
+                    productLineDetails["ErrorSource"] = tCompleteOrderSummaryDetailResponse.errorSource;
+                    productLineDetails["ErrorSystem"] = tCompleteOrderSummaryDetailResponse.errorSystem;
+                    productLineDetails["ErrorFlag"] = tCompleteOrderSummaryDetailResponse.errorFlag;
+
+                    determineProductLineStatus(productLineDetails);
+
+                    /*if (productLineMap.containsKey(tCompleteOrderSummaryDetailResponse.secondItemNumber))
+						productLineMap[tCompleteOrderSummaryDetailResponse.secondItemNumber + i] = productLineDetails;
+					else 
+						productLineMap[tCompleteOrderSummaryDetailResponse.secondItemNumber] = productLineDetails;
+					*/
+                    productLineMap[i] = productLineDetails;
+
+                }
+                completeOrderSummaryResult["completeOrderSummaryDetail"] = productLineMap;
+            }
+
+            //GET COMPLETE ORDER SUMMARY PAYMENT RESPONSE
+
+            var arrayOfTCompleteOrderSummaryPaymentResponse: Array = result.completeOrderSummaryPaymentResponse;
+
+            if (arrayOfTCompleteOrderSummaryPaymentResponse != null && arrayOfTCompleteOrderSummaryPaymentResponse.length > 0) {
+                var paymentMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryPaymentResponse.length; i++) {
+
+                    var tCompleteOrderSummaryPaymentResponse = arrayOfTCompleteOrderSummaryPaymentResponse[i];
+                    var paymentDetails: Object = new Object();
+
+                    paymentDetails["AccessID"] = tCompleteOrderSummaryPaymentResponse.accessID;
+                    paymentDetails["OrderNumber"] = tCompleteOrderSummaryPaymentResponse.orderNumber;
+                    paymentDetails["OrderType"] = tCompleteOrderSummaryPaymentResponse.orderType;
+                    paymentDetails["PrimaryPayment"] = tCompleteOrderSummaryPaymentResponse.primaryPayment;
+                    paymentDetails["OrderCompany"] = tCompleteOrderSummaryPaymentResponse.orderCompany;
+                    paymentDetails["OrderSuffix"] = tCompleteOrderSummaryPaymentResponse.orderSuffix;
+                    paymentDetails["PaymentType"] = tCompleteOrderSummaryPaymentResponse.paymentType;
+                    paymentDetails["PaymentLastFourDigits"] = tCompleteOrderSummaryPaymentResponse.paymentLastFourDigits;
+                    paymentDetails["PaymentExpirationDate"] = formatOrderDate(new String(tCompleteOrderSummaryPaymentResponse.paymentExpirationDate));
+                    paymentDetails["Amount"] = tCompleteOrderSummaryPaymentResponse.amount;
+
+                    paymentDetails["ErrorID"] = tCompleteOrderSummaryPaymentResponse.errorID;
+                    paymentDetails["ErrorDescription"] = tCompleteOrderSummaryPaymentResponse.errorDescription;
+                    paymentDetails["ErrorSource"] = tCompleteOrderSummaryPaymentResponse.errorSource;
+                    paymentDetails["ErrorSystem"] = tCompleteOrderSummaryPaymentResponse.errorSystem;
+                    paymentDetails["ErrorFlag"] = tCompleteOrderSummaryPaymentResponse.errorFlag;
+
+                    paymentMap[i] = paymentDetails;
+                }
+                completeOrderSummaryResult["completeOrderSummaryPayment"] = paymentMap;
+            }
+
+            //GET COMPLETE ORDER SUMMARY REFERENCE RESPONSE
+            var arrayOfTCompleteOrderSummaryReferenceResponse: Array = result.completeOrderSummaryReferenceResponse;
+
+            if (arrayOfTCompleteOrderSummaryReferenceResponse != null && arrayOfTCompleteOrderSummaryReferenceResponse.length > 0) {
+                var referenceMap: HashMap = new HashMap();
+                for (var i: Number = 0; i < arrayOfTCompleteOrderSummaryReferenceResponse.length; i++) {
+
+                    var tCompleteOrderSummaryReferenceResponse = arrayOfTCompleteOrderSummaryReferenceResponse[i];
+                    var referenceDetails: Object = new Object();
+
+                    referenceDetails["AccessID"] = tCompleteOrderSummaryReferenceResponse.accessID;
+                    referenceDetails["OrderNumber"] = tCompleteOrderSummaryReferenceResponse.orderNumber;
+                    referenceDetails["OrderType"] = tCompleteOrderSummaryReferenceResponse.orderType;
+                    referenceDetails["OrderCompany"] = tCompleteOrderSummaryReferenceResponse.orderCompany;
+                    referenceDetails["LineNumber"] = tCompleteOrderSummaryReferenceResponse.lineNumber;
+                    referenceDetails["DataItem"] = tCompleteOrderSummaryReferenceResponse.dataItem;
+                    referenceDetails["DataText"] = tCompleteOrderSummaryReferenceResponse.dataText;
+
+                    referenceDetails["ErrorID"] = tCompleteOrderSummaryReferenceResponse.errorID;
+                    referenceDetails["ErrorDescription"] = tCompleteOrderSummaryReferenceResponse.errorDescription;
+                    referenceDetails["ErrorSource"] = tCompleteOrderSummaryReferenceResponse.errorSource;
+                    referenceDetails["ErrorSystem"] = tCompleteOrderSummaryReferenceResponse.errorSystem;
+                    referenceDetails["ErrorFlag"] = tCompleteOrderSummaryReferenceResponse.errorFlag;
+
+                    referenceMap[i] = referenceDetails;
+                }
+                completeOrderSummaryResult["completeOrderSummaryReference"] = referenceMap;
+            }
+
+            return completeOrderSummaryResult;
+
+        }
+    } catch (e) {
+        Logger.error("Error while executing the script libOrderHistory.ds (completeOrderSummaryOrderData). Error..." + e.message);
+        return null;
+    }
+}
+
+/**
+ *	Cause the web service gives us an date format we can not deal with, we need to format it.
+ *	Expected format is either mddyy or mmddyy.
+ *
+ */
+function formatOrderDate(dateString: String): Date {
+
+    if (empty(dateString))
+        return new Date();
+    else {
+        if (dateString.length == 5) {
+            var mm: Number = new Number(dateString.substr(0, 1)) - 1;
+            var dd: Number = new Number(dateString.substr(1, 2)) + 1;
+            var yy: Number = new Number(dateString.substr(3, 2));
+            return new Date(yy, mm, dd);
+        } else if (dateString.length == 6) {
+            var mm: Number = new Number(dateString.substr(0, 2)) - 1;
+            var dd: Number = new Number(dateString.substr(2, 2)) + 1;
+            var yy: Number = new Number(dateString.substr(4, 2));
+            return new Date(yy, mm, dd);
+        } else if (dateString.length == 8) {
+            var mm: Number = new Number(dateString.substr(4, 2)) - 1;
+            var dd: Number = new Number(dateString.substr(6, 2)) + 1;
+            var yyyy: Number = new Number(dateString.substr(0, 4));
+            return new Date(yyyy, mm, dd);
+        } else
+            return new Date();
+    }
+}
+
+/**
+ *	Deal with JDE Promised Date field (i.e., Expected Shipping Date)
+ *	Expected format is either mddyy or mmddyy.
+ *
+ */
+function formatPromisedDate(dateString: String): Date {
+
+    if (empty(dateString))
+        return new Date(0); // 0 ms UTC
+    else {
+        if (dateString.length == 5) {
+            var mm: Number = new Number(dateString.substr(0, 1)) - 1;
+            var dd: Number = new Number(dateString.substr(1, 2)) + 1;
+            var yy: Number = new Number(dateString.substr(3, 2)) + 2000;
+            return new Date(yy, mm, dd);
+        } else if (dateString.length == 6) {
+            var mm: Number = new Number(dateString.substr(0, 2)) - 1;
+            var dd: Number = new Number(dateString.substr(2, 2)) + 1;
+            var yy: Number = new Number(dateString.substr(4, 2)) + 2000;
+            return new Date(yy, mm, dd);
+        } else if (dateString.length == 8) {
+            var mm: Number = new Number(dateString.substr(4, 2)) - 1;
+            var dd: Number = new Number(dateString.substr(6, 2)) + 1;
+            var yyyy: Number = new Number(dateString.substr(0, 4));
+            return new Date(yyyy, mm, dd);
+        } else
+            return new Date(0);
+    }
+}
+
+/**
+ * 	Helper Function! Determines the status of the given line item based on cancelled, ordered and shipped quantity given.
+ * 	The result is added to the given object.
+ *	We have 3 status:
+ *		1 = OPEN / BACKORDERED
+ *		2 = SHIPPED
+ *		3 = CANCELED
+ *
+ * @param productLineDetails - object map of values for a particular product line item
+ */
+function determineProductLineStatus(productLineDetails: Object) {
+    if (!empty(productLineDetails)) {
+        var quantityOrdered: Number = new Number(productLineDetails.QuantityOrdered);
+        var quantityShipped: Number = new Number(productLineDetails.QuantityShipped);
+        var quantityCancelled: Number = new Number(productLineDetails.QuantityCancelled);
+        var quantityBackordered: Number = new Number(productLineDetails.QuantityBackordered);
+        var statusCodeNext: Number = new Number(productLineDetails.StatusCodeNext);
+        var status: Number = null;
+
+        if (quantityShipped > 0 && statusCodeNext >= 580) {
+            status = 2; // SHIPPED			
+        } else if (quantityCancelled > 0) {
+            status = 3; // CANCELED
+        } else if (statusCodeNext >= 540 && statusCodeNext < 580 && quantityShipped > 0) {
+            status = 1; // OPEN
+        } else if (quantityBackordered > 0) {
+            status = 1; // BACKORDERED
+        }
+
+        productLineDetails['status'] = status;
+    }
+    Logger.debug("libOrderHistory.ds - determineProductLinteStatus: setting status for {0} to {1}", productLineDetails.ItemNumberAnyFormat, productLineDetails.status);
+}

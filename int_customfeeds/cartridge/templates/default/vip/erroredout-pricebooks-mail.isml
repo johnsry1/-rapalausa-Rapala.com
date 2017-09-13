@@ -1,0 +1,35 @@
+<isscript>
+	var calendar : dw.util.Calendar = new dw.util.Calendar();
+    calendar.timeZone = "GMT";
+    var dateString : String = dw.util.StringUtils.formatCalendar(calendar, "yyyy-MM-dd-hh-mm-ss");
+	var instanceName : String = !empty( dw.system.System.getInstanceHostname() ) ? dw.system.System.getInstanceHostname() : "(unknown)";
+	var instanceType : Number = dw.system.System.getInstanceType();
+	var instanceTypeString : String = "(unknown)";
+	if      ( instanceType == dw.system.System.DEVELOPMENT_SYSTEM ) { instanceTypeString = 'DEVELOPMENT'; }
+	else if ( instanceType == dw.system.System.STAGING_SYSTEM )     { instanceTypeString = 'STAGING'; }
+	else if ( instanceType == dw.system.System.PRODUCTION_SYSTEM )  { instanceTypeString = 'PRODUCTION'; }
+	try{	
+		var ErrorOutPricebooksFile : dw.io.File = new dw.io.File(dw.io.File.IMPEX + dw.io.File.SEPARATOR + "src" + dw.io.File.SEPARATOR +pdict.Task['error-folder']+"/errored_pricebooks_list_"+dateString+".csv");
+		if( !ErrorOutPricebooksFile.exists() ){
+			ErrorOutPricebooksFile.createNewFile();
+		}
+		var ErrorOutPricebooksFileWriter : dw.io.FileWriter = new dw.io.FileWriter(ErrorOutPricebooksFile);
+		var CSVStreamWriter : dw.io.CSVStreamWriter = new dw.io.CSVStreamWriter(ErrorOutPricebooksFileWriter);
+		for each ( var record in pdict.ErroredOutPriceBookRecords ){
+			CSVStreamWriter.writeNext(record);
+		}
+		ErrorOutPricebooksFileWriter.flush();
+		CSVStreamWriter.close();
+		ErrorOutPricebooksFileWriter.close();
+	}
+	catch( e ){
+		dw.system.Logger.getLogger("GeneratePriceBookXML").error("Error occured in errorOutPricebooks Email template. Error: "+e.message);
+	}
+</isscript>
+<subject>${instanceTypeString}: Errored out Pricebooks csv information </subject>
+<p style="font-family: Calibri;">Please find the following link to have a look at the errored out records from the source csv file while generating the Pricebook...!</p>
+<p style="font-family: Calibri;"><a href = "https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutPricebooksFile.fullPath}">https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutPricebooksFile.fullPath}</a></p>
+<p style="font-family: Calibri;">
+	Thanks & Regards,<br>
+	Rapala
+</p>

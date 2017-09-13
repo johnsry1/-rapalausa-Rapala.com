@@ -1,0 +1,134 @@
+/**
+*	This script calls a webservice, which does address validation
+*
+*	@input  CustomerAddressForm : dw.web.FormGroup UPS Customer Address Form
+*	@output UPSErrorMessage : String UPS Error Message
+*	@output UPSErrorCode : String UPS Error Code
+*	@output AddressList	 : dw.util.List
+*	@output IsMultiAddress : String Multiple Address flag
+*	@output IsExactAddress : Boolean Exact Address flag
+*   @output RequestAddress : dw.web.FormGroup
+*/
+
+importPackage( dw.util );
+importPackage( dw.system );
+importPackage( dw.net );
+importPackage( dw.web );
+importPackage( dw.order );
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.svc );
+
+function execute(pdict) {
+		
+	try{
+		
+		//Get the service object
+		var svc : HTTPService = ServiceRegistry.get("ups.http.dav.post");
+
+		//Prepare Params Object
+		var params : Object = {"customerAddressForm": pdict.CustomerAddressForm};
+		
+		//Execute the service	
+		var result : Result = svc.call(params);
+		
+		//Check for service availability.
+		if(result.status == Result.SERVICE_UNAVAILABLE){
+			pdict.IsMultiAddress = "true";
+			pdict.IsExactAddress = true;
+			return PIPELET_NEXT;
+		}
+		
+		//Check for service availability.
+		if(empty(result.object)){
+			pdict.IsMultiAddress = "true";
+			pdict.IsExactAddress = true;
+			Logger.error("Error while executing the script UPS.ds. Error..."+result.errorMessage);
+			return PIPELET_NEXT;
+		}
+			
+		//Write pdict variable
+		pdict.RequestAddress = pdict.CustomerAddressForm;
+	
+		// Parse the response
+		try {
+			var response  : Object = result.object;	
+			var addressValidationResponseXML : XML = new XML(response);
+			var responseStatusCode : Number = addressValidationResponseXML['Response']['ResponseStatusCode'].toString();
+			var responseStatusdes : String = addressValidationResponseXML['Response']['ResponseStatusDescription'].toString();
+			if (responseStatusCode == 1) {
+				var responseAddrs : ArrayList = new ArrayList();
+				for each(var addressItem in addressValidationResponseXML['AddressKeyFormat']){
+					if (addressItem['AddressLine'].toString().indexOf("-") == -1){
+						if (responseAddrs.size() < 3){
+							var addrItem: AddressItem =new AddressItem(addressItem['AddressLine'],addressItem['PoliticalDivision2'],addressItem['PoliticalDivision1'],addressItem['PostcodePrimaryLow'],addressItem['PostcodeExtendedLow'],addressItem['CountryCode']);
+							responseAddrs.add(addrItem);
+						} else {
+							break;
+						}
+					}
+				}
+				
+				if (responseAddrs.size() == 1){
+					var address : AddressItem = responseAddrs[0];
+					
+					if (pdict.CustomerAddressForm.address1.htmlValue == address.address1.split(",")[0] && pdict.CustomerAddressForm.city.htmlValue == address.city && pdict.CustomerAddressForm.states.state.htmlValue == address.state && pdict.CustomerAddressForm.postal.htmlValue == address.postalCode.substring(0, 10) ){
+						pdict.IsExactAddress = true;
+					}
+				}
+				
+				if (responseAddrs.size() >= 1) {
+					pdict.IsMultiAddress = "true";
+				} else {
+					pdict.IsMultiAddress = "false";	
+					return PIPELET_ERROR;
+				}
+				pdict.AddressList=responseAddrs;
+				return PIPELET_NEXT;
+			}else{
+				var errorXML : XML = addressValidationResponseXML['Response']['Error'];
+				var errorDescription : String = !empty(errorXML['ErrorDescription']) ? errorXML['ErrorDescription'].toString() : null;
+				var errorCode : String	= !empty(errorXML['ErrorCode']) ? errorXML['ErrorCode'].toString() : null;
+				var errorSeverity : String	= !empty(errorXML['ErrorSeverity']) ? errorXML['ErrorSeverity'].toString() : null;
+				Logger.error("ERROR: " + errorCode + "   " + errorDescription);
+				UPSErrorOut(errorCode,errorDescription,pdict);
+				return PIPELET_ERROR;
+			}
+		} catch (e) {
+	        Logger.error("Error occurred calling UPSRequest: " + e.message);
+	        UPSErrorOut("1111", e, pdict);
+			return PIPELET_ERROR;
+		}
+		
+	}catch(e){
+		Logger.error("Error while executing the script UPS.ds. Error..."+e.message);
+		return PIPELET_NEXT;
+	}
+	
+    return PIPELET_NEXT;
+}
+
+function UPSErrorOut(errorCode : String,errorDescription : String, pdict : PipelineDictionary) {
+	
+	Logger.error("UPS ERROR NUMBER:" + errorCode);
+	Logger.error("UPS RESOURCE: "+Resource.msg('ups.errormessage.001', 'ups', null));
+	pdict.UPSErrorMessage =  Resource.msg('ups.errormessage.invalidAddress', 'ups', null);
+	pdict.UPSErrorCode = errorCode;		
+	
+}
+
+function AddressItem(address1,city,state,postalCode1,postalCode2,country){
+	
+	if (address1.toString().indexOf("<AddressLine>")==-1) {
+		this.address1=address1;
+	} else{
+		var newAddr1 : string = address1.toString().replace("<AddressLine>", "").replace("</AddressLine>", ",");
+		var newAddr2 : string = newAddr1.toString().replace("<AddressLine>", " ").replace("</AddressLine>", "");
+		this.address1=newAddr2;
+	}
+	
+	this.city=city;
+	this.state=state;
+	this.postalCode=postalCode1+"-"+postalCode2;
+	this.country=country;
+}

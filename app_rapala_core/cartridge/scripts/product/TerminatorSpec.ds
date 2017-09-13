@@ -1,0 +1,114 @@
+/**
+* TerminatorSpec Script File
+* 
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+
+function catSpec( thisProduct : Product ) : Boolean
+{
+
+	var tables = [];
+	var tableTitles = [];
+	var tableHeaders = [];
+	var columnHeaders = [];
+	//var tabularData = new dw.util.ArrayList();
+	var xAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.xAxis);
+	var xAxisValues = empty(xAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(xAxis);
+	var xAxisTitle = empty(thisProduct.custom.xAxisTitle) ? xAxis.displayName : thisProduct.custom.xAxisTitle;
+	var yAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.yAxis);
+	var yAxisValues = empty(yAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(yAxis);
+	var yAxisTitle = empty(thisProduct.custom.yAxisTitle) ? yAxis.displayName : thisProduct.custom.yAxisTitle;
+	var t = 0, i = 0, j = 0;
+	var tdText = "";
+	var tdValueMap = new dw.util.HashMap();
+	var tdVariants = new dw.util.HashSet();
+	var multiTableSeparatorPref = thisProduct.custom.catalogTableMultiTableSeparator;
+	var multiTables = false;
+	var totalMultiTables = 1;
+	var SKUAttribute = thisProduct.custom.catalogTableSkuAttribute;
+	if (!empty(multiTableSeparatorPref)) {
+		var multiTableSeparator = thisProduct.variationModel.getProductVariationAttribute(multiTableSeparatorPref);
+		var multiTableSeparatorValues = empty(multiTableSeparator) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(multiTableSeparator);
+		totalMultiTables = multiTableSeparatorValues.length;
+		multiTables = true;
+	}
+	
+	var tableWidth = totalMultiTables+ 1;
+	var tableHeight = yAxisValues.length + 1;
+
+	for (t = 0; t < totalMultiTables; t += 1) {
+		var tabularData = new dw.util.ArrayList();
+	
+		for (i = 0; i < totalMultiTables; i += 1) {
+			columnHeaders.push(i === 0 ? yAxisTitle : i == 1 ? SKUAttribute : i == 2 ? xAxisTitle : "");
+		}
+		tableHeaders.push(columnHeaders);
+		columnHeaders = [];
+	
+		for (i = 0; i < tableHeight; i += 1) {
+			
+			tabularData[i] = new dw.util.ArrayList();
+			if (i === 0) {
+				tabularData[i].push(tableHeaders[i]);
+			
+			} else {
+				tabularData[i].push(yAxisValues[i - 1].displayValue);
+				for (j = 0; j <1; j += 1) {
+					tdText = "";
+					tdValueMap.clear();
+					if (multiTables) {
+						tdValueMap.put(multiTableSeparator.ID, multiTableSeparatorValues[t].value);
+					}
+					tdValueMap.put(yAxis.ID, yAxisValues[i - 1].value);
+					tdVariants = thisProduct.variationModel.getVariants(tdValueMap);
+					tabularData[i].push(tdVariants);
+				}
+					var xax= new dw.util.HashSet();
+                 	for each(variant in tdVariants){
+                  	if(!empty(variant)){
+                		xax.add(variant.custom[xAxis.attributeID]);
+                       }
+                 }
+                 tabularData[i].push(xax);
+                 
+			}
+		}
+		//post-processing of the table, removing empty rows
+		
+		i = tabularData.length;
+		while (i-- - 1) {
+			var removeRow = true;
+			for (j = 1; j < tabularData[i].length; j += 1) {
+				if (!empty(tabularData[i][j]) && !tabularData[i][j].isEmpty()) { removeRow = false; }
+			}
+			if (removeRow) {
+				tabularData.removeAt(i);
+			}
+		}
+		
+		tables.push(tabularData);
+		tabularData = new dw.util.ArrayList();
+	}
+	return tables;
+}
+
+function catSep( thisProduct : Product ) : Boolean
+{
+	var multiTableSeparatorPref = thisProduct.custom.catalogTableMultiTableSeparator;
+	var multiTableSeparator = thisProduct.variationModel.getProductVariationAttribute(multiTableSeparatorPref);
+	var multiTableSeparatorValues = empty(multiTableSeparator) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(multiTableSeparator);
+	return multiTableSeparatorValues;
+}
+
+function catSku( thisProduct : Product ) : Boolean
+{
+	var SKUAttribute = thisProduct.custom.catalogTableSkuAttribute;
+	return SKUAttribute;
+}
+module.exports={
+		catSpec : catSpec,
+		catSep : catSep,
+		catSku : catSku
+		
+	}

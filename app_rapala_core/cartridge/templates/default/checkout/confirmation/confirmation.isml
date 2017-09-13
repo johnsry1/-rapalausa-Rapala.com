@@ -1,0 +1,140 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="checkout/pt_orderconfirmation">
+
+	<isinclude template="util/modules"/>
+	<isinclude template="util/reporting/ReportOrder.isml"/>
+	<iscomment>
+		This template visualizes the order confirmation page. Note, that it
+		uses a different decorator template.
+		It displays the order related information, such as the order number,
+		creation date, payment information, order totals and shipments of
+		the order.
+	</iscomment>
+	<div class="orderconfirmation">
+		<div class="upshift cell contentbox">
+			<div class="contentboxcontent">
+				<div class="thankyoumessage">
+					<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
+					<div class="orderdate">
+						<span class="value"><isprint value="${pdict.Order.creationDate}" formatter="MMMMM dd, yyyy" /></span>
+						<div class="clear"><!--  FLOAT CLEAR --></div>
+					</div><!-- END: orderdate -->
+					<div class="ordernumber">
+						<span class="label"><isprint value="${Resource.msg('order.orderdetails.ordernumber','order',null)}"/></span>
+						<span class="value"><isprint value="${pdict.Order.orderNo}"/></span>
+						<div class="clear"><!--  FLOAT CLEAR --></div>
+					</div><!-- END: ordernumber -->
+					<div class="ordermessage-process"><span><isprint value="${Resource.msg('global.ordermsgprocesse','locale',null)}"/></span></div>
+					<div class="order-content">
+					    <div class="impo-things">
+					      <h2><isprint value="${Resource.msg('confirmation.impothingsorder','checkout',null)}"/></h2>
+					      <ul>
+					      	 <li><isprint value="${Resource.msg('confirmation.msgemail','checkout',null)}"/> <isprint value="${pdict.Order.customerEmail}"/>.</li>
+					      	 <li><isprint value="${Resource.msg('confirmation.msgthree','checkout',null)}"/></li>
+					         <li><isprint value="${Resource.msg('confirmation.msgfive','checkout',null)}" encoding="off"/> <span><isprint value="${Resource.msg('confirmation.msgfiveone','checkout',null)}"/></span></li>
+					      </ul>
+					    </div>
+					
+						<div class="submission-box">
+							<div class="button-box returnShopping">
+								<a class="gray-button" title="${Resource.msg('global.returnshopping1','locale',null)}" href="${URLUtils.http('Cart-ContinueShopping')}"><isprint value="${Resource.msg('global.returnshopping','locale',null)}"/></a>
+							</div>
+							<div class="button-box customerService">
+								<a class="gray-button one" title="${Resource.msg('global.ordervisitcustomer','locale',null)}" href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}"><isprint value="${Resource.msg('global.ordervisitcustomer','locale',null)}"/></a>	
+							</div>			
+							<div class="button-box printPage">
+								<a class="button printpage print-page"><isprint value="${Resource.msg('confirmation.print','checkout',null)}"/></a>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		
+		
+		
+		
+		<iscomment><button class="print-page"><isprint value="${Resource.msg('confirmation.print','checkout',null)}"/></button></iscomment>
+
+		<iscomment><div class="confirmation-message">
+			<iscontentasset aid="confirmation-message" />
+		</div></iscomment>
+
+		
+<div class="upshift cell contentbox">
+<div class="contentboxcontent">
+        <div class="order-confirmation-details">
+            <isorderconfirmationdetails order="${pdict.Order}"/>
+        </div>
+		<isset name="isAssignedToVIP" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isVIP(pdict.CurrentCustomer)}" scope="page"/>
+		<isset name="knifeAvailable" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isKnifeAvailable(pdict.Order)}" scope="page"/>
+        
+		<isif condition="${knifeAvailable == true}">
+			<div class="knife-msg">
+				<p><isprint value="${Resource.msg('confirmation.knifemsg','checkout',null)}"/></p>
+			</div>
+		</isif>
+		<isif condition="${isAssignedToVIP}">
+			<div class="vip-msg">
+				<p><isprint value="${Resource.msg('confirmation.vipmsg','checkout',null)}"/></p>
+			</div>
+		</isif>
+		<div class="actions">
+	        <div class="submission-box">
+	        <div class="button-box returnShopping">
+				<a class="button gray-button" title="${Resource.msg('global.continueshopping','locale',null)}" href="${URLUtils.http('Cart-ContinueShopping')}"><isprint value="${Resource.msg('global.returnshopping','locale',null)}"/></a>
+			</div>
+			<div class="button-box customerService">
+				<a class="button gray-button" title="${Resource.msg('global.ordervisitcustomer','locale',null)}" href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}"><isprint value="${Resource.msg('global.ordervisitcustomer','locale',null)}"/></a>
+			</div>
+			<div class="button-box printPage">
+			<a class="button printpage print-page"><isprint value="${Resource.msg('confirmation.print','checkout',null)}"/></a>
+			
+				
+			</div>	
+				<div class="clear"></div>
+			</div>
+		</div>
+</div>
+</div>
+<isset name="productID" value="${}" scope="page" />
+<script>
+	googleAnalyticsEvents.orderConfirm('${pdict.Order.orderNo}');
+	ga("require", "ecommerce", "ecommerce.js");
+					
+	ga("ecommerce:addTransaction", {
+			  "id": "<isprint value="${pdict.Order.orderNo}"/>",                    
+			  "affiliation":"<isprint value="${dw.system.Site.getCurrent().getName()}"/>",
+			  "revenue":"<isprint value="${pdict.Order.totalGrossPrice}" formatter="#.00"/>",               
+			  "shipping":"<isprint value="${pdict.Order.getAdjustedShippingTotalPrice()}" formatter="#.00"/>",                
+			  "tax":"<isprint value="${pdict.Order.totalTax}" formatter="#.00"/>"              
+			});
+		
+		<isloop items="${pdict.Order.getShipments()}" var="shipments">
+			<isloop items="${shipments.getProductLineItems()}" var="pli">
+				<isset name ="productID" value="${empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'"}" scope="page"/>
+				ga("ecommerce:addItem", {
+					  "id":"<isprint value="${pdict.Order.orderNo}"/>", 
+					  "name":"<isprint value="${pli.product.name}" encoding="on"/>",   
+					  "sku":"<isprint value="${pli.product.ID}" encoding="on"/>",
+					  <isif condition="${!empty(pli.product.classificationCategory)}">
+					  "category": "<isprint value="${pli.product.classificationCategory.displayName}" encoding="on"/>",
+					  </isif>
+					  "price":"<isprint value="${pli.adjustedPrice/pli.quantity.value}" formatter="#.00"/>",    
+					  "quantity":"<isprint value="${pli.quantity.value}" formatter="#"/>"   
+				});		
+			</isloop>
+		</isloop>
+			
+		ga("ecommerce:send");
+		
+		fbq('track', 'Purchase',
+			{ content_ids: [${productID}], content_type: 'product', value: ${pdict.Order.totalGrossPrice.value}, currency: 'USD' }
+		);
+		
+</script>
+
+</isdecorate>

@@ -1,0 +1,65 @@
+importPackage( dw.system );
+importPackage( dw.catalog );
+
+importScript("bc_library:object-handling/libInheritance.ds");
+
+// Hack, because vars cannot be imported in DW, only functions
+function getAbstractExportHandler() {
+	return AbstractExportHandler;
+}
+
+var AbstractExportHandler = Class.extend(
+/** @lends AbstractExportHandler.prototype */
+{
+	/**
+	 * Creates a new handler instance 
+	 * Implementing classes need to set this.handlesXXX to indicate to the manager which methods are handled.
+	 *
+	 * @constructs
+	 */
+	init : function(){
+		this.handlesMasters = false;
+		this.handlesProducts = false;
+		this.handlesCategories = false;
+		this.handlesCategoryAssignments = false;
+		// open file writer here
+	},
+	/**
+	 * Handles a master product, called once per master
+	 *
+	 * @param {dw.catalog.Product} product The product to export
+	 */
+	exportMaster: function (product : dw.catalog.Product) {
+	},
+	/**
+	 * Handles a (non-master) product, called once per product
+	 *
+	 * @param {dw.catalog.Product} product The product to export
+	 */
+	exportProduct : function (product : dw.catalog.Product){
+	},
+	/**
+	 * Handles a category, the category tree is traversed recursively
+	 *
+	 * @param {dw.catalog.Category} category The category to export
+	 */
+	exportCategory : function (category : dw.catalog.Category){
+	},
+	/**
+	 * Handles a category assignment
+	 *
+	 * @param {dw.catalog.Category} category The category to export
+	 */
+	exportCategoryAssignment : function (pca : dw.catalog.CategoryAssignment){
+	},
+	/**
+	 * Called once at the begin of the export, initialize Writers here
+	 */
+	beginExport : function() {
+	},
+	/**
+	 * Called once at the end of the export, close all resources like Writers here
+	 */
+	endExport: function () {
+	}
+});

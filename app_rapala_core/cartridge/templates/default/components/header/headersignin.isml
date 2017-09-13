@@ -1,0 +1,45 @@
+<!--- TEMPLATENAME: headersignin.isml --->
+<isinclude template="util/modules"/>
+<div class="returningcustomers">
+	<form action="${URLUtils.https('Account-SignInHeader')}" method="post" id="${pdict.CurrentForms.login.htmlName}" class="header-signin">
+		<iscomment>Login Unsuccessful Error Message</iscomment>
+		<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
+			<div id="message" class="error" style="text-align: left;"><isprint value="${Resource.msg('logininclude.locked','account',null)}"/></div> <div class="clear"><!-- FLOAT CLEAR --></div>
+		<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && (pdict.TempCustomer.profile.credentials.remainingLoginAttempts == 1)}">
+			<div id="message" class="error" style="text-align: left;"><isprint value="${Resource.msg('logininclude.willbelocked','account',null)}"/></div> <div class="clear"><!-- FLOAT CLEAR --></div>
+		</isif>
+		<fieldset>
+			<div class="custom_signin">
+				<div class="signin_main">
+					<div class="top_arrow"></div>
+					<div class="formfield username"  >
+						<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input"  fieldClass="accountemail guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+						<div class="clear"><!-- FLOAT CLEAR --></div>
+					</div>
+					<div class="formfield password sign-in">
+						<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password"  fieldClass="login_password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+					</div>
+					<div class="loginfail errormessage"><isprint value="${Resource.msg('login.error1','account',null)}"/></div>
+					<div class="ExistedUser-error" style="display:none;">
+						<isprint value="${Resource.msg('account.existingaccount','account',null)}"/> <span class="createaccount"><isprint value="${Resource.msg('account.createaccount','account',null)}"/></span><isprint value="${Resource.msg('account.differentemail','account',null)}"/>
+					</div>
+					<div class="forgot-password">
+						<a><isprint value="${Resource.msg('logininclude.forgotpassword','account',null)}"/></a>
+					</div>
+					<div class="formactions">
+						<button onClick="googleAnalyticsEvents.loginCustomer('USER','LOGIN','');" type="button" class="signin-button greybutton" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}"><span><isprint value="${Resource.msg('global.Signin','locale',null)}"/></span></button>
+					</div><!-- END: returningcustomers_button -->
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+					
+					<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+				</div>
+				<div class="sign-message"><span><isprint value="${Resource.msg('account.new','account',null)}"/><a href="javascript.void()"><isprint value="${Resource.msg('account.register','account',null)}"/></a><isprint value="${Resource.msg('account.here','account',null)}"/></span></div>	
+			</div>
+		</fieldset>
+	</form>
+	<div class="clear"><!-- FLOAT CLEAR --></div>
+</div><!-- END: returningcustomers -->
+<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled && pdict.CurrentCustomer.profile != null}">
+   <isgaEvents ga_data="${pdict.CurrentCustomer.profile.email}" ga_category="${Resource.msg('gAnalytics.events.accessinfo','events',null)}" ga_evnet="${Resource.msg('gAnalytics.events.login','events',null)}" />
+</isif>

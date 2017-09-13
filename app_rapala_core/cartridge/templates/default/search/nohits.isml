@@ -1,0 +1,82 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="search/pt_productsearchresult_nohits">
+
+	<iscache type="relative" minute="30"/>
+	<isinclude template="util/modules"/>
+	
+	<iscomment>create reporting event</iscomment>
+	<isinclude template="util/reporting/ReportSearch.isml"/>
+	
+<div class="nohits">
+	<h1><isprint value="${Resource.msg('nohits.header','search',null)}" /></h1>
+
+	<div class="section-header">
+		
+		<p>
+			<isprint value="${Resource.msg('search.nohits.message','search',null)}" /> 
+			<span class="no-hits-search-term">
+				&quot;<isprint value="${pdict.ProductSearchResult.searchPhrase}"/>&quot;
+			</span>
+		</p>
+		
+		<iscomment>render a link to execute the search with an alternative suggested search phrase</iscomment>
+		<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
+			<p class="suggested-term">
+				<isprint value="${Resource.msg('search.nohits.didyoumean','search',null)}" />
+				<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}"><isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/></a>
+			</p>
+		</isif>
+	
+	</div>
+	
+	<iscomment>render a link to content search results if any content was found</iscomment>
+	<isif condition="${!empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+		<p class="no-hits-content-results">
+			<isprint value="${Resource.msg('search.nohits.found','search',null)}" /> 
+			<a href="${pdict.ContentSearchResult.url('Search-ShowContent')}">
+				<isprint value="${Resource.msgf('search.nohits.contenthits','search',null,pdict.ContentSearchResult.count)}" />
+			</a>
+		</p>
+	</isif>
+	
+	<div class="no-hits-search">
+	 	<form action="${URLUtils.url('Search-Show')}" method="get">
+			<fieldset>
+				<div class="form-row label-above">
+					<input type="text" class="input-text" name="q" value="Search Entire Site..." />
+					<button type="submit" value="${Resource.msg('global.go','locale',null)}" name="simplesearch">
+					</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>	
+	<div class="no-hits-help">
+	 	<iscontentasset aid="noresults-help"/>
+	</div>	
+	<div class="no-hits-footer">	
+	</div>
+	<div class="no-hits-banner-section">
+		<div class="noresult-banner">
+			<isslot id="noresult-banner" context="global"  description="Gobal sidebar for category landing page"/>			
+		</div>	
+	</div>
+	</div>
+	<div class="shopping">
+	     <iscomment><div class="bybrand desktopHide"><a href="${URLUtils.http('Page-Show', 'cid', 'shop-by-brand')}">${Resource.msg('nohits.bybrand','search',null)}<span></span></a></div> </iscomment>
+	       <div class="bybrand"><a href="${URLUtils.http('Search-Show', 'cgid', 'rapala-allNewArrivals')}"><isprint value="${Resource.msg('nohits.byNewarrivals','search',null)}" /><span></span></a></div>
+	       <div class="propicks"><a href="${URLUtils.http('Search-Show', 'cgid','rapala-propicks')}"><isprint value="${Resource.msg('nohits.propicks','search',null)}" /><span></span></a></div>
+	       <div class="bestsellers"><a href="${URLUtils.http('Search-Show', 'cgid','rapala-bestSellers')}"><isprint value="${Resource.msg('nohits.bestsellers','search',null)}" /><span></span></a></div>
+	       <div class="customerservices"><a href="${URLUtils.http('Folder-Show', 'fdid', 'rapala-customer-service')}"><isprint value="${Resource.msg('nohits.customerservice','search',null)}" /><span></span></a></div>
+		</div>
+	<iscomment>Event Tracking for SearchHits</iscomment>
+	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
+		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
+			<script>
+			 	googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.nohit','events',null)}','${pdict.ProductSearchResult.searchPhrase}');
+			</script>
+		</isif>
+	
+	</isif>
+	
+</isdecorate>

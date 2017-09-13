@@ -1,0 +1,74 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+	<isscript>
+		var pageContext = {
+			title: 'Storefront',
+			type: 'storefront',
+			ns: 'storefront'
+		};
+		pdict.showCountrySelector = true;
+	</isscript>
+	<isinclude template="util/modules"/>
+
+	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
+
+	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="content/home/pt_storefront_UI"/>
+	
+	<iscomment>Setting up a canonical link to the homepage</iscomment>
+	<isif condition="${'rapala' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.rapala.com/" />
+	<iselseif condition="${'sufix' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.sufix.com/" />
+	<iselseif condition="${'triggerx' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.triggerx.com/" />
+	<iselseif condition="${'storm' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.stormlures.com/" />
+	<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.luhrjensen.com/" />
+	<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.strikemaster.com/" />
+	<iselseif condition="${'iceforce' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.iceforce.com/" />
+	<iselseif condition="${'vmc' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.vmchooks.com/" />
+	<iselseif condition="${'bluefox' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.bluefox.com/" />
+	<iselseif condition="${'terminator' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.terminatorlures.com/" />
+	<iselseif condition="${'marcum' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.marcumtech.com/" />
+	<iselseif condition="${'williamson' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.williamsonlures.com/" />
+	<iselseif condition="${'otter' == session.custom.currentSite}">
+		<link rel="canonical" href="http://www.otteroutdoors.com/" />	
+	</isif>
+	<iscomment>Add page specific header information here.</iscomment>
+	
+</head>
+<body>
+	<div id="container" class="pt_storefront">
+		
+		<isinclude template="components/header/header"/>
+	<div id="main" role="main">
+			<isreplace/>
+			<isinclude template="components/browsertoolscheck"/>
+		</div>
+		
+	    <isinclude template="components/footer/footer"/>
+		<isinclude template="content/home/pt_storefront_VARS"/>		
+	</div><!--  /wrapper -->
+	<iscomment>Google Analytics Event Tracking</iscomment>
+	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
+	  <script>ga('send','event','HOME','VIEW','${dw.system.Site.getCurrent().name}',1);</script>
+	</isif>
+	
+</body>
+</html>

@@ -1,0 +1,30 @@
+<isdecorate template="content/folder/pt_folder_no_left_title">
+<iscache type="relative" hour="24"/>
+<isinclude template="util/modules"/>
+	<isscript>
+		var folder : Folder = pdict.Folder;
+	</isscript>
+ 	<isif condition="${folder != null && folder.online}">
+				<div class="cell pressrelease">
+					<div class="top-spacer"></div>
+			<h1>${Resource.msg('global.pressreleases','locale',null)}</h1>
+		
+			<isscript>
+			var pressReleaseFolder : Folder = pdict.Folder;
+			var onlineArticles: Collection = pressReleaseFolder.getOnlineContent();
+			</isscript>
+				<isloop items="${onlineArticles}" var="article">
+					<div class="press-release">
+						<h2>
+							<a class="links" href="${URLUtils.url('Page-Show','cid', article.ID, 'fdid', pressReleaseFolder.ID)}" title="${article.ID}">
+								<isprint value="${article.name}"/>
+							</a>
+						</h2>
+						<span class="release-date"><a class="links" href="${URLUtils.url('Page-Show','cid', article.ID, 'fdid', pressReleaseFolder.ID)}" title="${article.ID}">
+						-<isprint value="${article.description}"/>
+						</a></span>
+					</div>
+					</isloop>
+				</div><!-- END: cell contentbox upshift -->
+			</isif>
+</isdecorate>

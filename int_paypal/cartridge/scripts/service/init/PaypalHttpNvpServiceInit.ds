@@ -1,0 +1,123 @@
+var system : Object = require('dw/system');
+var net : Object = require('dw/net');
+var util : object = require('dw/util');
+var svc : Object = require('dw/svc');
+
+var NvpUtil : Object = require('../../modules/util/NvpUtil.ds');
+var paypalHelper : Object = require('../../modules/PaypalHelper.ds');
+var prefs : Object = paypalHelper.getPrefs();
+var customResponseParsers : Object = require('../../modules/service/CustomResponseParsers.ds');
+var NvpProcessor : Object = NvpUtil.NvpProcessor;
+var NVP : Object = NvpUtil.NVP;
+
+var serviceConfig : Object = {
+
+	/**
+	 * createRequest() function. parse Object with request data into string line for request
+	 * @param service {dw.svc.HTTPService} service, which will be used for the call
+	 * @param requestDataContainer {Object} object with request data
+	 * @param logger {dw.system.Log} logger
+	 * @returns {Boolean} string line for request
+	 */
+	createRequest : function (service : svc.HTTPService, requestDataContainer : Object , logger : system.Log) {
+
+		var isDataContainerValid : Boolean = checkRequestDataContainer(requestDataContainer);
+
+		if (empty(logger)) {
+			var logger : system.Log = paypalHelper.getLogger(requestDataContainer.method);
+		}
+
+		//Check if requestDataContainer has valid structure
+		if (!isDataContainerValid) {
+			var msg : String = 'Wrong requestDataContainer object specified for service, cannot proceed with call';
+			logger.error(msg);
+			throw new Error(msg);
+		}
+
+		var serviceCredential : svc.ServiceCredential = null;
+
+		try {
+			serviceCredential = service.getConfiguration().getCredential();
+		} catch (error) {
+			var msg : String = 'Cannot get Credential or Configuration object for ' + prefs.nvpServiceName + ' service. Please check configuration';
+			logger.error(msg);
+			throw new Error(msg);
+		}
+
+		//POST is default method
+		//PayPal requires http x-www-form-urlencoded header for NVP
+		service.addHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+		var headers : util.HashMap = require('../../modules/service/CreateRequestHeaders.ds')(requestDataContainer.method, serviceCredential);
+		var credentialId : String = serviceCredential.getID();
+
+		if (prefs.PP_SignatureCredentialsIDs.indexOf(credentialId) != -1) {
+			headers.put('SIGNATURE', system.Site.getCurrent().getCustomPreferenceValue('PP_API_Signature'));
+		}
+
+		var nvp : NVP = NvpProcessor.createNvp(requestDataContainer.data).merge(headers);
+
+		logger.error(nvp.toString());
+		//Create NVP string for request
+		return nvp.toString();
+	},
+
+	parseResponse : function (service : svc.HTTPService, httpClient : net.HTTPClient) {
+		if (service.getRequestData().indexOf('METHOD=TransactionSearch') + 1) {
+			return customResponseParsers.transactionSearch(service, httpClient);
+		} else {
+			//Parse NVP responce and return it to Service object
+			return NvpProcessor.parse(httpClient.getText(), true);
+		}
+	},
+
+	getRequestLogMessage: function(request : Object) : String {
+		return prepareLogData(request);
+	},
+
+	getResponseLogMessage: function(response : Object) : String {
+		return prepareLogData(response.text);
+	}
+};
+
+//NVP service registration
+svc.ServiceRegistry.configure(prefs.nvpServiceName, serviceConfig);
+
+/**
+ * checkRequestDataContainer() function. Checks requestDataContainer object {method: String, data: Object}
+ * @param {Object} equestDataContainer object.
+ * @config {String} [method] API Method to run
+ * @config {Object} [data] Data object
+ * @returns {Boolean} is requestDataContainer valid or not
+ */
+function checkRequestDataContainer(requestDataContainer) : Boolean {
+	var result = (!empty(requestDataContainer)
+				&& !empty(requestDataContainer.method)
+				&& !empty(requestDataContainer.data) 
+				&& typeof requestDataContainer.method === 'string'
+				&& typeof requestDataContainer.data === 'object');
+
+	return result;
+}
+
+/**
+ * prepareLogData() prepare formatted data for writing in log file
+ * @param data {String} URI encoded string
+ * @returns {String} formatted string
+ */
+function prepareLogData(data : String) : String {
+	var result : String = '\n';
+	var params : Array = data.split('&');
+ 
+	params.forEach(function(param) {
+		var paramArr = param.split('=');
+		var key = paramArr[0];
+		var value = paramArr[1];
+		if(key == 'SIGNATURE' || key == 'CVV2' || key == 'EXPDATE' || key == 'ACCT' || key == 'PWD') {
+			value = '*****';
+		}
+		result += decodeURIComponent(key + '=' + value) + '\n';
+	});
+
+	return result;
+}

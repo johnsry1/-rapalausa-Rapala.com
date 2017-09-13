@@ -1,0 +1,41 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="account/pt_account">
+	<isinclude template="util/modules"/>
+	<div id="page-background" class="downshift">
+		<div id="page">
+			<div class="wrapper">
+				<div class="row column1 account-section">
+					<h1 class="title">${Resource.msg('account.header','account',null)}</h1>
+					<div class="column cell2">
+						<div class="checkoutloginsignin cell contentbox upshift">
+							<div class="contentboxcontent account-logs">
+								<div class="formsubmit" style="display: none;"></div>
+								<iscomment>returning customer</iscomment>
+									<isif condition="${pdict.CurrentCustomer.authenticated}">
+								   <isredirect location="${URLUtils.url('Account-Show')}" permanent="false">
+									</isif>		
+								<isinclude template="account/login/logininclude"/>
+								<isif condition="${pdict.CurrentHttpParameterMap.TokenExpired=='TokenError'}"> 
+									<div class="TokenExpired"></div>
+								</isif>
+							</div><!-- END: contentboxcontent -->
+						</div><!-- END: logincreate -->				
+						
+						<isif condition="${pdict.loginfailed}"> 
+							<div class="loginfailedclass"></div>
+						</isif>
+						<div class="createbenefits">
+							<iscontentasset aid="create-account-benefits"/>
+						</div><!-- END: createbenefits -->
+						
+						<isif condition="${!pdict.CurrentCustomer.authenticated}">
+							<div class="createan-account">
+								<isinclude url="${URLUtils.http('Account-StartRegister','MailExisted',pdict.ExistedMail)}"/>
+							</div>
+						</isif>				
+					</div><!-- END: column cell2 -->
+				</div><!-- END: row column1 -->
+			</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+	</div><!-- END: page-background -->
+</isdecorate>

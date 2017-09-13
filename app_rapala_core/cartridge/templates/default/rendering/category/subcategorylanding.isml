@@ -1,0 +1,130 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="search/pt_subcategory_refinements">
+
+	<isscript>
+		var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
+		var compareEnabled = false;
+		if (!empty(pdict.CurrentHttpParameterMap.cgid.value)) {
+			compareEnabled = ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value);
+		} 
+	</isscript>
+	
+	<iscomment>
+		Use the decorator template based on the requested output. If
+		a partial page was requested an empty decorator is used.
+		The default decorator for the product hits page is
+		search/pt_productsearchresult.
+	</iscomment>
+	
+	<iscache type="relative" minute="30" varyby="price_promotion"/>
+	
+	<isinclude template="util/modules"/>
+	
+	<iscomment>
+		Configured as default template for the product search results.
+		Displays a global slot with static html and the product search
+		result grid.
+	</iscomment>
+	
+	<iscomment>create reporting event</iscomment>
+	<isinclude template="util/reporting/ReportSearch.isml"/>
+	
+	<iscomment>
+		Render promotional content at the top of search results as global slot.
+		This content is only displayed if the search result is refined by a category.
+		If the search result is not refined by a category a global default is displayed.
+	</iscomment>
+	<iscomment>Displays sub category recommendations</iscomment>
+	<isset name="display" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').recommendationDisplay(pdict.ProductSearchResult)}" scope="page"/>
+	
+	<isif condition="${(pdict.ProductSearchResult.category.custom.enablecategoryrecommendationslot!=null) && (pdict.ProductSearchResult.category.custom.enablecategoryrecommendationslot=="true")}"> 
+	<iselse/>
+		<isif condition="${display}">
+			<div class="jcarouselcont gridpage subcategory">
+				<isif condition="${(pdict.ProductSearchResult.category.getParent().isTopLevel() && pdict.ProductSearchResult.category.custom.oneupfeature) || (!pdict.ProductSearchResult.category.getParent().isTopLevel())}"> 
+					<isslot id="recommender-category-MoreFromSameCatagory" context="global" context-object="${pdict.ProductSearchResult.category.parent}"  description="Category recommendations"/>
+				<iselse>	
+					<isslot id="recommender-category-MoreFromSameCatagory" context="global" context-object="${pdict.ProductSearchResult.category}"  description="Category recommendations"/>
+				</isif>
+			</div>
+		</isif>
+	</isif>
+	<div class="contentboxcontent">
+		<p><isprint value="${pdict.ProductSearchResult.category.description}" encoding="off"/></p>
+    </div>
+	
+	<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+		
+		<div class="search-result-bookmarks">
+			<isprint value="${Resource.msg('topcontenthits.yoursearch','search',null)}" />
+			<a href="${'#results-products'}" class="first"><isprint value="${Resource.msg('search.producthits.productsfound', 'search', null)}" /></a>
+			<a href="${'#results-content'}"><isprint value="${Resource.msg('topcontenthits.goto', 'search', null)}" /></a>
+		</div>
+
+		<h1 class="content-header" id="results-products"><isprint value="${Resource.msgf('search.producthits.productsfoundcount','search',null,pdict.ProductSearchResult.count)}" /></h1>
+		
+	</isif>
+	
+	<isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">
+		<div class="search-result-content">				
+			<issubcatproductgrid pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}" producthits="${pdict.ProductSearchResult.category}" productstoskip="${0}" productsperrow="${3}" scope="search"/>
+		</div>
+
+		<iscomment>show top content hits</iscomment>
+		<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+			
+			<h1 class="content-header" id="results-content"><isprint value="${Resource.msgf('topcontenthits.articlesfound','search',null,pdict.ContentSearchResult.count)}" /></h1>
+			
+			<div class="search-results-content">
+				<isinclude template="search/topcontenthits"/>
+			</div>
+			
+		</isif>
+						        
+	<iselse/>
+
+		<iscomment>display no results</iscomment>
+		<div class="no-results">
+			<isprint value="${Resource.msg('productresultarea.noresults','search',null)}" />
+		</div>
+
+	</isif>
+	<div class="banner-section">
+		<div class="category-sidebar">
+			<isslot id="category-sidebar" context="global"  description="Category sidebar for category landing page"/>
+		</div>
+		<isinclude template="search/components/globalslots"/>
+	</div>
+	<div class="bannerslot cat_subslots">
+		<isslot id="landingpages-bottom" description="slot for all landing pages" context="category" context-object="${pdict.ProductSearchResult.category}"/>
+	</div>
+	<div class="jcarouselcont gridpage">
+		<iscomment>Recently viewed slot in category  landing page</iscomment>
+		<isif condition="${display}">
+			<isslot id="recommender-category-MoreFromSameCatagory-recentlyviewed" context="global" context-object="${pdict.ProductSearchResult.category}"  description="Category recommendations"/>
+		</isif>
+	</div>	
+	
+	<div class="jcarouselcont gridpage">
+		<iscomment>Buy it again slot in category  landing page</iscomment>
+		<isif condition="${display}">
+			<isslot id="recommender-category-MoreFromSameCatagory-buyagain" context="global" context-object="${pdict.ProductSearchResult.category}"  description="Category recommendations"/>
+		</isif>
+	</div>
+	
+	<iscomment>Render promotional content at the bottom of search results as global slot
+	<div class="search-promo"><isslot id="search-promo" description="Promotional Content at the bottom of Search Results" context="global"/></div>
+	<div class="search-promo one"><isslot id="search-promo" description="Promotional Content at the bottom of Search Results" context="global"/></div></iscomment>
+	<iscomment>Event Tracking For Search hits 
+	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
+		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
+			<script>
+			  var term=$('#q').val();
+			  googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.searchhit','events',null)}','${pdict.ProductSearchResult.searchPhrase}',term);
+			</script>
+		</isif>	
+		
+	 </isif></iscomment>
+	
+</isdecorate>

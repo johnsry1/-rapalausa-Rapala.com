@@ -1,0 +1,33 @@
+/**
+* Demandware Script File
+*
+* Merge the shipments to default shipment
+*
+* @input Basket : dw.order.Basket
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order);
+importPackage( dw.util);
+
+function execute( args : PipelineDictionary ) : Number{
+	var basket : Basket = args.Basket;
+	if(basket != null){
+		if(basket.getShipments().size() > 1){
+			var shipments : ArrayList = basket.getShipments();
+			var plis : ArrayList = basket.getProductLineItems();
+			for(var x = 0; x < shipments.size(); x++){
+				for each (var spli : ProductLineItem in shipments[x].getProductLineItems()) {
+					for each (var pli : ProductLineItem in plis) {
+						if(spli.productID == pli.productID && spli.UUID != pli.UUID){
+							spli.setQuantityValue(spli.quantityValue + pli.quantityValue);
+							basket.removeProductLineItem(pli);
+						}
+					}
+					spli.setShipment(basket.getDefaultShipment());
+				}
+			}
+		}		
+	}
+   return PIPELET_NEXT;
+}

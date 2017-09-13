@@ -1,0 +1,40 @@
+/**
+*	Update transactionID and transactions history for PayPal payment instrument
+*
+*	@input OrderNo : String order number
+*	@input TransactionID : String paypal transaction ID
+*
+*/
+
+var paypalHelper : Object = require('../modules/PaypalHelper.ds');
+var logger : dw.system.Log = paypalHelper.getLogger();
+
+function execute( args : PipelineDictionary ) : Number {
+
+	try {
+		var order : dw.order.Order = dw.order.OrderMgr.getOrder(args.OrderNo);
+	} catch (error) {
+		logger.error(error);
+		return PIPELET_ERROR;
+	}
+
+	if (empty(order)) {
+		return PIPELET_ERROR;
+	}
+
+	var transactionsHistory : Array = [];
+	var transactionID : String;
+	var paymentInstrument : dw.order.OrderPaymentInstrument = paypalHelper.getPaypalExpressPaymentInstrument(order);
+	var paymentTransaction : dw.order.PaymentTransaction = paymentInstrument.getPaymentTransaction();
+
+	for each (transactionID in paymentTransaction.custom.transactionsHistory) {
+		transactionsHistory.push(transactionID);
+	}
+
+	transactionsHistory.push(args.TransactionID);
+
+	paymentTransaction.setTransactionID(args.TransactionID);
+	paymentTransaction.custom.transactionsHistory = transactionsHistory;
+
+	return PIPELET_NEXT;
+}

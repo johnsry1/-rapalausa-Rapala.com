@@ -1,0 +1,26 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscache type="relative" hour="24"/>
+
+<div class="html-slot-container">
+	<isif condition="${slotcontent != null}">
+		<isloop items="${slotcontent.content}" var="markupText">
+			<isprint value="${markupText.markup}" encoding="off"/>	
+		</isloop>
+	</isif>
+</div>
+<isset name="callout" value="${slotcontent.getCalloutMsg()}" scope="page" />
+<isif condition="${callout != null &&   !empty(callout) }"> 
+<input type="hidden" id="slotcallout" value="${callout}" name="promomsg1" />
+<div id="calloutexist" class="hide <isif condition="${callout != null &&   !empty(callout) }"> calloutexist </isif> ">
+	<h1 class="callout-title">Promotional Details</h1>
+	<div class="promotion-calout-description">
+		${slotcontent.getCalloutMsg()}
+	</div>
+	<div class="formactions">
+		<button type="button" id="closeBtn01" class="close" value="close">
+		Close
+		</button>
+	</div>
+</div>
+</isif>
+				

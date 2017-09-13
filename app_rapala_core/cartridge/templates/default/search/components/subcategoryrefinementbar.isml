@@ -1,0 +1,64 @@
+<!--- TEMPLATENAME: subcategoryrefinementbar.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
+
+<isscript>
+	var StringHelpers = require('~/cartridge/scripts/util/StringHelpers');
+</isscript>
+
+<iscomment>NOTE: Removes Refinements if NO Products are found</iscomment>
+<isif condition="${pdict.ProductSearchResult}">
+
+<iscomment>Fetches refinement options for easier handling in the template</iscomment>
+<isset name="Refinements" value="${pdict.ProductSearchResult.refinements}" scope="page"/>
+
+<iscomment>Process refinement options based on configured refinement definitions</iscomment>
+<isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0}">
+
+<h2 class="visually-hidden">${Resource.msg('searchrefinebar.refineresults','search',null)}</h2>
+
+	<iscomment>If we have a category context, we build a path from the root to the category</iscomment>
+	<isscript>
+		var cat = pdict.ProductSearchResult.category;
+		var path = new dw.util.ArrayList();
+		while (cat && cat.parent) {
+			if (!cat.online) {
+				cat = cat.parent;
+				continue;
+			}
+			path.addAt(0, cat);
+			cat = cat.parent;
+		}
+	</isscript>
+
+	<iscomment>Navigation header based on browsing vs. keyword search</iscomment>
+	<div class="column" id="someid">
+		<div class="cell contentbox upshift searchResulthide">
+			<div>
+				<isif condition="${pdict.ProductSearchResult.categorySearch && pdict.ProductSearchResult.category.ID
+				!='root'}">
+					<div class="shop-brand">
+						<span class="shop-brandtext">
+							${Resource.msg('global.shop','locale',null)} <isprint value="${path.get(0).displayName}"/>
+						</span>
+					</div>
+				</isif>
+				  
+				<iscomment>this is used to render left navigation menu </iscomment>
+				<isinclude url="${URLUtils.url('Home-LeftNav','currentSite',session.custom.currentSite, 'cgid',pdict.ProductSearchResult.category.ID)}"/>
+				
+			</div>
+		</div>
+		<iselseif condition="${pdict.ProductSearchResult.count == 0}">
+			<isinclude template="search/components/categoryrefinebar"/>
+		</isif>
+		<div class="desktop desktopHide">
+			<div class="leftnav_bottomfirst contentAsset-new cell contentbox upshift">
+				<isslot id="leftnav_bottomfirst" description="Banner for Leftnav bottom top" context="global" />
+			</div>
+			<div class="leftnav_bottomlast contentAsset-new cell contentbox upshift">
+				<isslot id="leftnav_bottomlast" description="Banner for Leftnav bottom last" context="global" />
+			</div>
+	    </div>
+	</div>
+</isif>

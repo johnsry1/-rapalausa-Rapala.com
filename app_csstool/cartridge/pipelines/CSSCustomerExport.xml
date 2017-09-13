@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>Starts the Daily Customer export file process. 
+/
+In order to use this process you need to ensure that you have a custom field on the &quot;Profile&quot; system object called exportToCSS. This job will take all customers with a value of exportToCSS set to true and will export them to the directory from pfs_OrderExportSFTPPath
+/
+Custom Site Attributes Required: 
+CSSServiceFTPHost
+CSSServiceFTPPath
+CSSServiceFTPPort
+CSSServiceFTPUser
+CSSServiceFTPPassword
+CSSServiceClientID</description>
+        </text-node>
+        <node-display height="5" x="0" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="Start">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="Start" secure="false"/>
+        <node-display x="1" y="0"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="CustomersPerFile" key="To_0"/>
+          <key-binding alias="!empty(CurrentWorkflowComponentInstance.getParameterValue('customerExportMethod'))?CurrentWorkflowComponentInstance.getParameterValue('customerExportMethod'):&quot;readyForExportFlag&quot;" key="From_1"/>
+          <key-binding alias="CustomerExportMethod" key="To_1"/>
+          <key-binding alias="!empty(CurrentWorkflowComponentInstance.getParameterValue('numberOfDays'))?CurrentWorkflowComponentInstance.getParameterValue('numberOfDays').toString():&quot;2&quot;" key="From_2"/>
+          <key-binding alias="NumberOfDays" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+          <key-binding alias="!empty(CurrentWorkflowComponentInstance.getParameterValue('customersPerFile'))?CurrentWorkflowComponentInstance.getParameterValue('customersPerFile').toString() : &quot;100&quot;" key="From_0"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="CustomerExportMethod == &quot;readyForExportFlag&quot;" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="customerexport/cssDailyCustomerExport.ds"/>
+                <key-binding alias="ScriptLog" key="ScriptLog"/>
+                <key-binding alias="CustomersPerFile" key="CustomersPerFile"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../b3.1"/>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node name="OK"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="-1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="customerexport/cssDailyCustomerExport2.ds"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="CustomersPerFile" key="CustomersPerFile"/>
+          <key-binding alias="NumberOfDays" key="NumberOfDays"/>
+        </pipelet-node>
+        <node-display orientation="horizontal" x="3" y="0"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="2"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="-1" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node name="ERROR"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node name="OK"/>
+        <node-display x="1" y="2"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

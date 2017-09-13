@@ -1,0 +1,14 @@
+<!--- TEMPLATENAME: servicecenters.isml --->
+<isset name="DecoratorTemplate" value="content/pt_servicecenters" scope="page"/>
+
+<isdecorate template="${DecoratorTemplate}">
+<iscomment>
+	Use the decorator template based on the page context. If
+	the content page was requested from a search result the
+	decorator search/pt_contentsearchresult is used. The default 
+	decorator for the content page is content/content/pt_content.
+</iscomment>
+<iscache type="relative" hour="24"/>
+<iscomment>This content piece must deliver a valid wrapping div!</iscomment>
+<isinclude template="content/content/htmlcontentasset"/>
+</isdecorate>

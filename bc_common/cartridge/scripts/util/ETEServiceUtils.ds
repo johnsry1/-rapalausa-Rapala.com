@@ -1,0 +1,269 @@
+// Copyright © 2013 Priority Fulfillment Services, Inc. All rights reserved.
+/**
+ *
+ * A library file for generic scripts.
+ * This file is included by several script nodes using:
+ *
+ * importScript( "bc_common:util/ETEServiceUtils.ds" );
+ *
+ *
+ */
+importPackage(dw.system);
+importPackage(dw.util);
+importPackage(dw.catalog);
+importPackage(dw.io);
+importPackage(dw.value);
+importPackage(dw.object);
+importPackage(dw.value);
+importPackage(dw.order);
+importPackage(dw.campaign);
+importPackage(dw.net);
+importPackage(dw.rpc);
+importPackage(dw.web);
+
+importScript("bc_common:util/ETEUtils.ds");
+importScript("bc_common:lib/libCommon.ds");
+
+function getSDRToken(order : Order) {
+	// Set to default client SDR System ID
+	var systemid = Site.getCurrent().preferences.custom.ete_repositorySystemID;
+	// Find CC payment transaction
+	var paymentTransaction : PaymentTransaction;
+	for (var i : Number = 1; i <= order.paymentInstruments.length; i++) {
+		var payment : OrderPaymentInstrument = order.paymentInstruments[i - 1];
+		if (payment.paymentMethod == "CREDIT_CARD") {
+			paymentTransaction = payment.paymentTransaction;
+			if (empty(paymentTransaction)) {
+				return PIPELET_ERROR;
+			}
+			//break;
+		} /*else if (payment.paymentMethod == "Alipay") {
+			paymentTransaction = payment.paymentTransaction;
+			if (empty(paymentTransaction)) {
+				return PIPELET_ERROR;
+			}
+		} */else {
+			continue;
+		}
+		// Send web service request for SDR Token
+		var serviceHelper = getServiceHelper();
+		var sdrService : Stub = serviceHelper.serviceReference.getService("E2EService", "E2EServiceSoap");
+		try {
+			serviceHelper.setWebServiceURL(sdrService);
+		} catch (exService) {
+			var a = exService;
+		}
+		var tempToken;
+		try {
+			if (payment.paymentMethod == "CREDIT_CARD") {
+				tempToken = serviceHelper.repositoryInsertData(getDecryptedCCNumber(paymentTransaction.paymentInstrument), systemid);
+			}
+			/*if (payment.paymentMethod == "Alipay") {
+				var requestID = payment.paymentTransaction.transactionID;
+				tempToken = serviceHelper.repositoryInsertData(requestID, systemid);
+			}*/
+			//pdict.SDRToken = tempToken;
+			paymentTransaction.custom.PFSRepositoryToken = tempToken;
+			paymentTransaction.custom.PFSRepositorySystemID = systemid;
+		} catch (exSDR) {
+			var a = exSDR;
+			dw.system.Logger.error("OrderExport2:ERROR in multiship PFSRepositoryEncryptCC.ds : {0}", exSDR.message);
+			//pdict.SDRToken = "";
+			paymentTransaction.custom.PFSRepositoryToken = "";
+			paymentTransaction.custom.PFSRepositorySystemID = "";
+		}
+	} //end for
+} //end function
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+function reAuth(currentOrder : Order, CurrentRequest : dw.system.Request) {
+	var shipmentIndex : Number = 0;
+	var resultValues : HashMap;
+	//get re-auth for shipment
+	for each(var shipment : Shipment in currentOrder.shipments) {
+		var isPaymentOK : Boolean = true;
+		var isreject : Boolean = false;
+		var isSuccessReauth : Boolean = false;
+		var pi : dw.order.OrderPaymentInstrument;
+		var collPi : Collection;
+		collPi = getPaymentInstrumentsForShipment(currentOrder, shipment, PaymentInstrument.METHOD_CREDIT_CARD);
+		if (collPi.size() == 1) {
+			pi = collPi[0];
+		} else {
+			//TODO : there are no multiple CC supported today but need to change code below to support it if needed.
+		}
+		// Store auth values in custom paymentTransaction attributes.
+		var paymentTransaction : PaymentTransaction = pi.getPaymentTransaction();
+		// Logger.debug("PaymentMethodID : {0}", payment.paymentMethod);
+		if (pi.paymentMethod == "CREDIT_CARD") {
+			try {
+				if ((empty(pi.paymentTransaction.paymentProcessor)) || (!empty(pi.paymentTransaction.paymentProcessor))) {
+					var transactionID : String = paymentTransaction.transactionID || "";
+					// Check for missing Cybersource authorization (based on transactionID and custom.requestToken)
+					if (transactionID === "" || empty(paymentTransaction.custom.requestToken)) {
+						// give 3 attempts
+						for (var csLoop = 0; csLoop < 3; csLoop++) {
+							dw.system.Logger.error("Calling reauth for order " + currentOrder.currentOrderNo);
+							//get the CC auth
+							//resultValues = getCybersourceAuthForShipment(currentOrder, shipment, null, null, currentOrder.currentOrderNo, true);
+
+							//DG fix for repeated auth issue due to transaction id not getting reassigned after re-auth
+							paymentTransaction  = pi.getPaymentTransaction();
+							transactionID = paymentTransaction.transactionID || "";
+
+							if (resultValues != null && resultValues.get("ErrorFlag") == "True") {
+								if ((resultValues.get("ErrorNumber") > 50000) || (resultValues.get("ErrorNumber") == -1)) {
+									//rejection , decline 
+									isreject = true;
+									break;
+								}
+								shipment.custom.iCommerceAuthError = resultValues.get("ErrorNumber") + " " + resultValues.get("ErrorMsg");
+								continue;
+								//return PIPELET_ERROR;
+							} else {
+								if ((paymentTransaction.custom.dmDecision == "ACCEPT" || paymentTransaction.custom.dmDecision == "REVIEW") && transactionID != "" && !empty(paymentTransaction.custom.requestToken)) {
+									shipment.custom.iCommerceAuthError = "Successful reauth:" + transactionID;
+									isSuccessReauth = true;
+									break; // got successful auth
+								}
+							}
+						} // for csloop
+						//after 3 attempts if it is still fails then notify
+						if (isreject) {
+							sendMail("", "", "PreOrderexport : Getting reauth", "Failed for order  " + currentOrder.orderNo + ", Shipment  : " + shipment.ID);
+							currentOrder.setExportStatus(Order.EXPORT_STATUS_FAILED);
+							currentOrder.custom.orderExportDate = dw.util.DateUtils.nowForSite();
+							break;
+						} else if (isSuccessReauth) {} else {
+							currentOrder.custom.iCommerceAuthError = "SEND_TO_JDE_FOR_AUTH";
+							sendMail("", "", "PreOrderexport : Getting reauth", "Needs attention for order  " + currentOrder.orderNo + ", Shipment  : " + shipment.ID);
+							break;
+						}
+					}
+				}
+			} catch (e) {
+				var ex = e;
+				Logger.error("OrderExport2 : Error getting CC reauth" + e.message);
+				throw (e);
+			}
+		}
+	} //end for
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*function SendAuth(cyberSourceRequest : Object, basket : Basket, ForShipment : Shipment) : HashMap {
+	var resultValues : HashMap = new HashMap();
+	var serviceHelper = getServiceHelper();
+	var cyberSourceResponse : Object = serviceHelper.cyberSourceAuth(cyberSourceRequest, 0);
+	if (cyberSourceResponse == null) {
+		resultValues.put("ErrorFlag", "True");
+		resultValues.put("ErrorNumber", new Number(Resource.msg('error.number.WSERROR', 'cybersourceErrorCodes', -1)));
+		resultValues.put("ErrorMsg", Resource.msg('error.msg.WSERROR', 'cybersourceErrorCodes', ''));
+		return resultValues;
+	}
+	resultValues.put("CyberSourceFlag", cyberSourceResponse.ics_rflag);
+	if (cyberSourceResponse.ics_rflag == null) {
+		Logger.debug("No response from the server.");
+		resultValues.put("ErrorFlag", "True");
+		resultValues.put("ErrorMsg", Resource.msg('error.msg.WSERROR', 'cybersourceErrorCodes', ''));
+		return resultValues;
+	}
+	var pi : dw.order.OrderPaymentInstrument;
+	var collPayInstr : Collection;
+	collPayInstr = getPaymentInstrumentsForShipment(basket, ForShipment, PaymentInstrument.METHOD_CREDIT_CARD);
+	if (collPayInstr.size() == 1) {
+		pi = collPayInstr[0];
+	} else {
+		// TODO : Will there be situation where there will be multiple CC payment instruments for one shipment? If so rewrite this.
+	}
+	// Store auth values in custom paymentTransaction attributes.
+	var paymentTransaction : PaymentTransaction = pi.getPaymentTransaction();
+	if (cyberSourceResponse.ics_rflag == "SOK" || cyberSourceResponse.ics_rflag == "DREVIEW") {
+		if (cyberSourceResponse.paymentTransaction != null) {
+			paymentTransaction.amount = new Money(cyberSourceResponse.paymentTransaction.auth_auth_amount, cyberSourceRequest.currencyCode);
+			paymentTransaction.custom.avsCode = cyberSourceResponse.paymentTransaction.auth_auth_avs;
+			paymentTransaction.custom.authCode = cyberSourceResponse.paymentTransaction.auth_auth_code;
+			paymentTransaction.custom.cvCode = cyberSourceResponse.paymentTransaction.auth_cv_result;
+			paymentTransaction.transactionID = cyberSourceResponse.paymentTransaction.request_id;
+			paymentTransaction.custom.requestToken = cyberSourceResponse.paymentTransaction.request_token;
+			paymentTransaction.custom.afsFactorCode = cyberSourceResponse.paymentTransaction.score_factors;
+			paymentTransaction.custom.afsResult = cyberSourceResponse.paymentTransaction.score_rcode;
+			paymentTransaction.custom.afsReasonCode = cyberSourceResponse.paymentTransaction.score_score_result;
+			paymentTransaction.custom.dmDecision = cyberSourceResponse.paymentTransaction.decision;
+			Logger.debug("libCyberSourceAuthorization : stored values to transaction {0}", paymentTransaction.transactionID);
+			ForShipment.custom.iCommerceAmtPaidByCC = cyberSourceResponse.paymentTransaction.auth_auth_amount;
+		}
+	}
+	//
+	// check to see if we need to store SDR system ID & token
+	//
+	//if ("PFSRepositorySystemID" in Site.getCurrent().preferences.custom) {
+	//  paymentTransaction.custom.PFSRepositorySystemID = cyberSourceResponse.PFSRepositorySystemID;
+	//  paymentTransaction.custom.PFSRepositoryToken    = cyberSourceResponse.PFSRepositoryToken;
+	//}
+	var keyNumber : String = "error.number." + cyberSourceResponse.ics_rflag;
+	var errorNumber : Number = new Number(Resource.msg(keyNumber, 'cybersourceErrorCodes', null));
+	var keyMsg : String = "error.msg." + cyberSourceResponse.ics_rflag;
+	var errorMsg = Resource.msg(keyMsg, 'cybersourceErrorCodes', null);
+	if ((errorNumber > 50000) || (errorNumber == -1)) {
+		Logger.error("libCyberSourceAuth : An error occurred. ErrorNumber  : {0} ErrorMsg  : {1}", errorNumber, errorMsg);
+		resultValues.put("ErrorFlag", "True");
+		resultValues.put("ErrorNumber", errorNumber);
+		resultValues.put("ErrorMsg", errorMsg);
+		return resultValues;
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+var creditCardAmount : Number;
+function getCybersourceAuthForShipment(basket : Basket, shipment : Shipment, CurrentRequest : dw.system.Request, CurrentSession : dw.system.Session, OrderNumber : String, reauth : Boolean, transactionAmounts : Object) : HashMap {
+	try {
+		//*****************************************************************************************************
+		//1] Check empty basket/order condition
+		//*****************************************************************************************************
+		if (basket == null) {
+			Logger.debug("CyberSourceAuthorization.ds : No basket form given");
+			return PIPELET_ERROR;
+		}
+		//*****************************************************************************************************
+		//2] Fill request Object
+		//*****************************************************************************************************
+		var cyberSourceRequest : Object = new Object();
+		var _transactionAmounts = new Object();
+		fillPrimaryInfo(cyberSourceRequest, basket, OrderNumber, shipment);
+		fillFingerPrintingInfo(cyberSourceRequest, basket);
+		fillBillingInfo(cyberSourceRequest, basket);
+		fillShippingInfo(cyberSourceRequest, basket, shipment);
+		fillCustomerBrowserInfo(cyberSourceRequest, basket, CurrentSession, CurrentRequest);
+		fillCreditCardInfo(cyberSourceRequest, basket, shipment, CurrentSession);
+		AddAdditionalCharges(cyberSourceRequest, basket, shipment);
+		var amtPutOnCC = cyberSourceRequest['basketTotal'];
+		_transactionAmounts['amtAuthCC'] = amtPutOnCC;
+		if (amtPutOnCC <= 0.00) { //this might happen if you have 2 shipments. One shipment amount auth is less than gift card used on order.
+			_transactionAmounts['amtRemaining'] = amtPutOnCC;
+			transactionAmounts = _transactionAmounts;
+			return transactionAmounts;
+		}
+		//*****************************************************************************************************
+		//3] Send request to cybersource , get the response back and Save response in payment transaction.
+		//*****************************************************************************************************
+		var resultHash : HashMap = new HashMap();
+		resultHash = SendAuth(cyberSourceRequest, basket, shipment);
+		return resultHash;
+	} catch (e) {
+		var ex = e;
+		Logger.error("OrderExport2 : Error while getting cybersource auth for shipment " + shipment.ID + " -" + e.message + ", reauth-" + reauth);
+		var resultValues : HashMap = new HashMap();
+		resultValues.put("ErrorFlag", "True");
+		resultValues.put("ErrorMsg", e.message);
+		return resultValues;
+	}*/
+	/////////////////////////////////////////////
+	/// SIMULATE REJECT  (for FDMS Nashville)
+	/////////////////////////////////////////////
+	//set grandTotalAmount = 3000
+	//set request.shipTo.lastName = "REJECT"
+	//set request.billTo.lastName = "REJECT"
+	//set request.card.fullName = "FirstName REJECT"
+}

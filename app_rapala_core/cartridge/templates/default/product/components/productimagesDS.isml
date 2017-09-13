@@ -1,0 +1,87 @@
+<isscript>
+	importScript("app_disbestpractice:product/ProductImageSO.ds");
+</isscript>
+	
+<isif condition="${pdict.Product.master && pdict.CurrentVariationModel}">
+	<isset name="colorVA" value="${pdict.CurrentVariationModel.getProductVariationAttribute('color')}" scope="page"/>
+	<isif condition="${colorVA && pdict.CurrentVariationModel.getSelectedValue(colorVA)}">
+		<isset name="imageProduct" value="${pdict.CurrentVariationModel.getSelectedValue(colorVA)}" scope="page"/>
+	<iselseif condition="${pdict.CurrentVariationModel.defaultVariant}">
+		<isset name="imageProduct" value="${pdict.CurrentVariationModel.defaultVariant}" scope="page"/>
+	<iselseif condition="${pdict.CurrentVariationModel.variants.size() > 0}">
+		<isset name="imageProduct" value="${pdict.CurrentVariationModel.variants[0]}" scope="page"/>
+	</isif>
+	<isif condition="${!imageProduct}">
+		<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
+	</isif>
+<iselse>
+	<isset name="imageProduct" value="${pdict.Product}" scope="page"/>
+</isif>
+
+<isset name="imageObjDesktop" value="${new ProductImage('PDPMainDesktop',imageProduct, 0)}" scope="page"/>
+<isset name="imageObjIPad" value="${new ProductImage('PDPMainIPad',imageProduct, 0)}" scope="page"/>
+<isset name="imageObjIPhone" value="${new ProductImage('PDPMainIPhone',imageProduct, 0)}" scope="page"/>
+<isset name="imageUrlDesktop" value="${imageObjDesktop.getURL()}" scope="page"/>
+<isset name="imageUrlIPad" value="${imageObjIPad.getURL()}" scope="page"/>
+<isset name="imageUrlIPhone" value="${imageObjIPhone.getURL()}" scope="page"/>
+<isset name="imageAlt" value="${imageObjDesktop.getAlt()}" scope="page"/>
+<isset name="imageTitle" value="${imageObjDesktop.getTitle()}" scope="page"/>
+
+<div class="product-primary-image">
+	<h2 class="visually-hidden">Images</h2>		
+	
+	<isset name="hi_res" scope="page" value="${new ProductImage('PDPZoom',imageProduct, 0).getURL().toString()}" />
+	<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
+	
+	<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
+	<isif condition="${imageTitle.charAt(0) == ','}">
+		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
+	</isif>	
+	<a ${href} class="product-image main-image" title="${imageTitle}">
+		<img itemprop="image" class="primary-image desktop-only" src="${imageUrlDesktop}" alt="${imageAlt}"/>
+		<img itemprop="image" class="primary-image ipad-only" src="${imageUrlIPad}" alt="${imageAlt}"/>
+		<img itemprop="image" class="primary-image iphone-only" src="${imageUrlIPhone}" alt="${imageAlt}"/>
+	</a>
+</div>
+
+<isset name="largeImagesSize" value="${imageProduct.getImages('large').size()}" scope="page"/>
+<isset name="noOfImages" value="${largeImagesSize}" scope="page"/>
+<isif condition="${largeImagesSize > 1}">
+	<div id="thumbnails" class="product-thumbnails">		
+		
+		<ul>
+			<isloop items="${imageProduct.getImages('large')}" var="img" status="imgSmStatus">
+				<iscomment>we only show the smallest of large or small images, there is 1-1 correspondence</iscomment>
+				<isif condition="${imgSmStatus.count > noOfImages}">
+					<isbreak/>
+				</isif>					
+				
+				<isset name="lgImageDesktop" value="${new ProductImage('pdpMainDesktop',imageProduct, imgSmStatus.index)}" scope="page"/>
+				<isset name="lgImageIPad" value="${new ProductImage('pdpMainIPad',imageProduct, imgSmStatus.index)}" scope="page"/>
+				<isset name="lgImageIPhone" value="${new ProductImage('pdpMainIPhone',imageProduct, imgSmStatus.index)}" scope="page"/>
+			
+				<isif condition="${!empty(imageProduct.getImages('large')) && pdict.Product.getImages('large').length>imgSmStatus.index}">
+					<isset name="hi_res" scope="page" value="${new ProductImage('PDPZoom',imageProduct, imgSmStatus.index).getURL()}" />
+					<isset name="href" scope="page" value="${'href='+hi_res+' target=_blank'}" />
+				<iselse/>
+					<isset name="hi_res" scope="page" value="${''}" />
+					<isset name="href" scope="page" value="${'name=product_detail_image'}" />
+				</isif>
+				
+				<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
+				<isset name="imageTitle" value="${img.title}" scope="page"/>
+				<isif condition="${imageTitle.charAt(0) == ','}">
+					<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
+				</isif>					
+
+				<li class="thumb${imgSmStatus.first ? ' selected' : ''}">
+					<a ${href} class="thumbnail-link">
+						<img class="productthumbnail desktop-only" src="${new ProductImage('PDPAltThumbDesktop',imageProduct,imgSmStatus.index).getURL()}" alt="${img.alt}" data-lgimg='{"url":"${lgImageDesktop.getURL()}", "title":"<isprint value="${lgImageDesktop.title}" encoding="on"/>", "alt":"<isprint value="${lgImageDesktop.alt}" encoding="on"/>", "hires":"${hi_res}"}'/>
+						<img class="productthumbnail ipad-only" src="${new ProductImage('PDPAltThumbIPad',imageProduct,imgSmStatus.index).getURL()}" alt="${img.alt}" data-lgimg='{"url":"${lgImageIPad.getURL()}", "title":"<isprint value="${lgImageIPad.title}" encoding="on"/>", "alt":"<isprint value="${lgImageIPad.alt}" encoding="on"/>", "hires":"${hi_res}"}'/>
+						<img class="productthumbnail iphone-only" src="${new ProductImage('PDPAltThumbIPhone',imageProduct,imgSmStatus.index).getURL()}" alt="${img.alt}" data-lgimg='{"url":"${lgImageIPhone.getURL()}", "title":"<isprint value="${lgImageIPhone.title}" encoding="on"/>", "alt":"<isprint value="${lgImageIPhone.alt}" encoding="on"/>", "hires":"${hi_res}"}'/>								 
+					</a>
+				</li>										
+			</isloop>					
+		</ul>			
+	</div>
+</isif>

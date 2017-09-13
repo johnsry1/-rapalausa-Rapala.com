@@ -1,0 +1,166 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscache type="relative" hour="24" varyby="price_promotion"/>
+
+<isobject object="${pdict.Product}" view="detail">
+	<div id="pdpMain" class="pdp-main productdetail"  itemscope itemtype="http://schema.org/Product">				
+		<iscomment>Image and variation options are part of the include template</iscomment>
+		<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+		<div class="wrapper top">				
+			<isif condition="${pdict.Product.productSet || pdict.Product.bundle}">
+				<isinclude template="product/producttopcontentPS" />
+			<iselse/>
+				<isinclude template="product/producttopcontent" />
+			</isif>
+		</div>
+		
+<isif condition="${!isQuickView}">
+<div id="page-background">
+	<div id="page">
+		<div class="wrapper">
+			<div class="row column1">
+				<div class="product-info column tab-sec">
+					<h2 class="visually-hidden">Additional Information</h2>
+					<isset name="vags" value="${pam.getVisibleAttributeGroups()}" scope="page"/>
+					<isset name="showAttributes" value="${false}" scope="page"/>
+						<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
+						<isif condition="${AttributeGroup.ID != 'mainAttributes'}">
+							<isset name="showAttributes" value="${true}" scope="page"/>
+						</isif>
+					</isloop>
+					<div id="tabs" class="cell">
+						<isscript>
+							// get all orderable cross sell recommendations (1 = cross sell)
+							var recommendations = pdict.Product.getOrderableRecommendations(1).iterator();
+							var recProducts = new dw.util.ArrayList();
+							var counter = 0;
+							// display 20 recommendations at maximum
+							while (recommendations.hasNext() && counter < 20) {
+								var recommendedProduct = recommendations.next().getRecommendedItem();
+								recProducts.add(recommendedProduct);
+								counter++;
+							}
+						</isscript>
+						<ul>
+						<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
+							<input type="hidden" id="productURL" value="${URLUtils.url('Product-YouTubeVideos','pid', pdict.Product.ID)}" />
+							<isif condition="${pdict.Product.custom.videoId.length > 0}">					
+								<li id="videoTab">
+									<a class="videoTab" onClick="googleAnalyticsEvents.productDetails('PRODUCT','Video Tab','${pdict.Product.ID}');" href="#pdpVideoTab">
+										<span><isprint value="${Resource.msg('product.tab2','product',null)}"/> (<isprint value="${pdict.Product.custom.videoId.length}"/>)</span>
+										<span class="active-state-tab"></span>
+									</a>
+								</li>
+							</isif>
+						</isif>
+						<isif condition="${!empty(pdict.Product.custom.xAxis || pdict.Product.custom.specTable)}">
+							<li>
+								<a href="#specChartTab">
+									<span>${Resource.msg('product.tab4','product',null)}</span>
+									<span class="active-state-tab"></span>
+								</a>
+							</li>
+						</isif>
+						<isif condition="${pdict.Product.custom.downloadURL.length > 0}">
+							<li>
+								<a href="#pdpDownloadTab">
+									<span><isprint value="${Resource.msg('product.tab3','product',null)}"/> (<isprint value="${pdict.Product.custom.downloadURL.length}"/>)</span>
+									<span class="active-state-tab"></span>
+								</a>
+							</li>
+						</isif>
+						<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
+							<li>
+								<a href="#pdpTab1" onClick="googleAnalyticsEvents.productDetails('PRODUCT','Feature & Details Tab','${pdict.Product.ID}');">
+								<span><isprint value="${Resource.msg('product.tab1','product',null)}"/></span>
+								<span class="active-state-tab"></span>
+								</a>
+							</li>
+						</isif>
+						<iscomment> COMMENTED OUT BY LGELBERG 9/16/11
+						    <li>
+	                        <a href="#pdpReviewsTab">
+	                        	<span>${Resource.msg('product.tab4','product',null)}</span>
+	                        	<span class="active-state-tab"></span>
+	                        </a>
+	                        </li>
+						</iscomment>
+
+					</ul>
+					<div class="clear"></div>
+					<isif condition="${pdict.Product.custom.videoId.length > 0}">
+						<div class="mobile-tabs-section">
+							<span class="tabsHeader iphone-view videoTab"><isprint value="${Resource.msg('product.tab2','product',null)}"/> (<isprint value="${pdict.Product.custom.videoId.length}"/>)</span>
+							<div id="pdpVideoTab">
+								<input type="hidden" id="productURL" value="${URLUtils.url('Product-YouTubeVideos','pid', pdict.Product.ID)}" />
+							</div>
+						</div>
+					</isif>
+					<div class="mobile-tabs-section">
+						<isif condition="${!empty(pdict.Product.custom.xAxis || pdict.Product.custom.specTable)}">
+							<span class="tabsHeader iphone-view specTab">${Resource.msg('product.tab4','product',null)}</span>
+						</isif>
+						<div id="specChartTab">
+							
+							<iscomment> CATALOG TABLE </iscomment>
+							<isinclude template="product/components/catalogtable"/>
+							
+							<iscomment> SPECIFICATIONS </iscomment>
+							<isinclude template="product/components/specifications"/>
+									
+						</div>
+					</div>
+					<isif condition="${pdict.Product.custom.downloadURL.length > 0}">
+						<div class="mobile-tabs-section">
+							<span class="tabsHeader iphone-view guideTab"><isprint value="${Resource.msg('product.tab3', 'product', null)}"/> (<isprint value="${pdict.Product.custom.downloadURL.length}"/>)</span>
+							<div id="pdpDownloadTab">
+								<isif condition="${pdict.Product.custom.downloadURL.length > 0}">
+									<div class="tab-content">
+										<isinclude template="product/components/downloads"/>
+									</div>
+								</isif>
+							</div>
+						</div>
+					</isif>
+					<div class="mobile-tabs-section active">
+						<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
+							<span class="tabsHeader iphone-view"><isprint value="${Resource.msg('product.tab1','product',null)}"/></span>
+						</isif>
+						<div id="pdpTab1">
+							<div class="leftsec">
+								<div class="featuredesc clear">
+									<div class="description">
+										<iscomment><h2><isprint value="${Resource.msg('product.tab.description', 'product', null)}" encoding="off" /></h2></iscomment>
+											<isif condition="${!empty(pdict.Product.custom.swimActionVideo)}"/>
+												<isinclude template="product/components/swimActionVideo"/>
+											</isif>
+											<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
+												<p>
+													<isprint value="${pdict.Product.longDescription}" encoding="off"/>
+												</p>
+											</isif>
+									</div>
+									<div class="prodfeature">
+										<isif condition="${! empty(pdict.Product.shortDescription) && pdict.Product.shortDescription.markup.length > 0}">
+											<iscomment><h2>${Resource.msg('product.features','product',null)}</h2></iscomment>
+											<isprint value="${pdict.Product.shortDescription}" encoding="off"/>
+										</isif>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+							</div>
+						</div>
+			    	</div>
+			    </div>
+			    <div class="jcarouselcont pdppage">             
+                     <isslot id="recommender-PDP-MoreFromSameCatagory" context="global" context-object="${pdict.Product}" description="Product recommendations for PDP with other products from that same category"/>
+                </div>
+    		</div>
+    	</div>
+    </div>
+  </div>
+</isif>
+		
+	</div><!--/pdpMain -->
+</isobject>
+<isslot id="recomm-prod-anchor" description="Product page slot" context="global" context-object="${pdict.Product}"/>

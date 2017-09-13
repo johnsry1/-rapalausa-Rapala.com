@@ -1,0 +1,194 @@
+/**
+* Process order status file from JDE
+*
+* @input FileName : String  name of the output file to upload, relative to the Impex share, src folder
+* @output ImportStatus : dw.system.Status
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.order );
+
+var statusMap = {
+	'NOT_CONFIRMED'		: dw.order.Order.CONFIRMATION_STATUS_NOTCONFIRMED,
+	'CONFIRMED'			: dw.order.Order.CONFIRMATION_STATUS_CONFIRMED,
+	'NOT_SHIPPED'		: dw.order.Order.SHIPPING_STATUS_NOTSHIPPED,
+	'PART_SHIPPED'		: dw.order.Order.SHIPPING_STATUS_PARTSHIPPED,
+	'SHIPPED'			: dw.order.Order.SHIPPING_STATUS_SHIPPED,
+	'NEW'				: dw.order.Order.ORDER_STATUS_NEW,
+	'OPEN'				: dw.order.Order.ORDER_STATUS_OPEN,
+	'CANCELLED'			: dw.order.Order.ORDER_STATUS_CANCELLED,
+	'REPLACED'			: dw.order.Order.ORDER_STATUS_REPLACED,
+	'COMPLETED'			: dw.order.Order.ORDER_STATUS_COMPLETED };
+
+// represents a shipment
+var Shipment = function() {
+	this.id;
+	this.trackingNumber;
+	this.customAttributes;	
+}
+
+//represents an order
+var Order = function() {
+	this.num ;
+	this.date;
+	this.currency;
+	this.orderStatus;
+	this.shippingStatus;
+	this.confirmationStatus;
+	this.shipments;
+}
+
+// Main entry point
+function execute( args : PipelineDictionary ) : Number {
+	var orders;
+	var file : File = new File(File.IMPEX + '/src/' + args.FileName);
+	var importFileReader : FileReader = new FileReader(file);
+	var xmlReader : XMLStreamReader = new XMLStreamReader(importFileReader);
+	try {
+		orders = parseXml(xmlReader);
+		updateOrders(orders);
+	} catch (err) {
+		Logger.getLogger().error(err);
+		args.ImportStatus = new Status(1 , 130 , err);
+		return PIPELET_ERROR;
+	} finally {
+		xmlReader.close();
+		importFileReader.close();	
+	}
+	var successMap : dw.util.Map = new dw.util.HashMap();
+	var successStatus : dw.system.Status = new dw.system.Status(0 , "IMPEX-0");
+	successStatus.addDetail("DataErrorCount",0);
+	args.ImportStatus = successStatus;
+	return PIPELET_NEXT;
+}
+
+// Update the orders with our parsed javascript objects
+function updateOrders(orders : ArrayList) {
+	var log = Logger.getRootLogger();
+	var i : Iterator = orders.iterator();
+	while (i.hasNext()) {
+		var o : Order = i.next();
+		var order: dw.order.Order = OrderMgr.queryOrder('orderNo = {0}', o.num);
+		try {				
+			if (order != null) {
+				//order.setShippingStatus(statusMap[o.shippingStatus]);
+				order.setStatus(statusMap[o.orderStatus]);
+				//order.setConfirmationStatus(statusMap[o.confirmationStatus]);
+				if (order.shipments != null) {
+					var s : Iterator = order.shipments.iterator();
+					while (s.hasNext()) {
+						var shipment : Shipment = s.next();
+						var oi : Iterator = o.shipments.iterator();
+						while (oi.hasNext()) {
+							var oShipment : Shipment = oi.next();
+							if (oShipment.id == shipment.shipmentNo) {
+								shipment.trackingNumber = oShipment.trackingNumber;
+								break;	
+							}
+						}
+					}
+				}				
+			}
+		} catch (err) {
+			//log.error("Error changing order {0} statuses.  shippingStatus: {1}={2}, status: {3}={4}, confirmationStatus: {5}={6}.",
+			log.error("Error changing order {0} statuses.  status: {1}={2}.",
+				o.num, 
+				//o.shippingStatus,
+				//statusMap[o.shippingStatus],
+				o.orderStatus, 
+				statusMap[o.orderStatus]);
+				//o.confirmationStatus, 
+				//statusMap[o.confirmationStatus]); 
+			log.error(err); 
+		}
+	}	
+}
+// read the xml file and parse into javascript value objects
+function parseXml(xmlReader : XMLStreamReader) : ArrayList {
+	var orders = new ArrayList();
+	var eventType : Number = 0;
+	var version : String = '';
+	var name : String = '';
+	var text : String = '';
+	var currentOrder : Order;
+	var timeString : String = '';
+	var currentShipment : Shipment;
+	
+	while(xmlReader.hasNext()) {
+		eventType = xmlReader.getEventType();
+		switch (eventType) {
+			case XMLStreamConstants.START_DOCUMENT:
+				version = xmlReader.getVersion();
+				break;
+			case XMLStreamConstants.END_DOCUMENT:
+				break;
+			case XMLStreamConstants.START_ELEMENT:
+				name = xmlReader.getLocalName();	
+				if (name == 'order') {
+					currentOrder = new Order();
+					currentOrder.shipments = new ArrayList();
+					currentOrder.num = xmlReader.getAttributeValue(0);
+					orders.push(currentOrder);
+				} else if (name == 'order-date') {
+					currentOrder.date = new Calendar();
+					timeString = xmlReader.getElementText();
+					timeString = timeString.replace('T', ' ');
+					currentOrder.date.parseByFormat(timeString, 'yyyy-MM-dd HH:mm:ss');
+				} else if (name == 'currency') {
+					currentOrder.currency = xmlReader.getElementText();	
+				} else if (name == 'order-status') {
+					currentOrder.orderStatus = xmlReader.getElementText();	
+				} else if (name == 'shipping-status') {
+					currentOrder.shippingStatus = xmlReader.getElementText();
+				} else if (name == 'confirmation-status') {
+					currentOrder.confirmationStatus = xmlReader.getElementText();
+				} else if (name == 'shipment') {
+					currentShipment = new Shipment();
+					currentShipment.id = xmlReader.getAttributeValue(0);
+					currentOrder.shipments.push(currentShipment);	
+				} else if (name == 'tracking-number') {
+					currentShipment.trackingNumber = xmlReader.getElementText();
+				} 
+				break;
+			
+			case XMLStreamConstants.END_ELEMENT:
+				break;
+				
+			case XMLStreamConstants.CHARACTERS:
+				break;
+				
+			case XMLStreamConstants.SPACE:
+				break;
+
+			case XMLStreamConstants.ENTITY_DECLARATION:
+				break;
+				
+			case XMLStreamConstants.CDATA:
+				break;
+				
+			case XMLStreamConstants.ENTITY_REFERENCE:
+				break;				
+
+			case XMLStreamConstants.ATTRIBUTE:
+				break;
+				
+			case XMLStreamConstants.PROCESSING_INSTRUCTION:
+				break;	
+				
+			case XMLStreamConstants.NOTATION_DECLARATION:
+				break;	
+				
+			case XMLStreamConstants.NAMESPACE:
+				break;						
+				
+			case XMLStreamConstants.DTD:
+				break;					
+				
+			case XMLStreamConstants.COMMENT:
+				break;				
+		};			
+		xmlReader.next();
+	}
+	return orders;
+}

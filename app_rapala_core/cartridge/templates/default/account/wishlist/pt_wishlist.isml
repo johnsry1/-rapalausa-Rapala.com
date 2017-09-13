@@ -1,0 +1,43 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<iscomment>
+		Include all important information globally , e.g. meta-data, link information, and
+		javascript.
+	</iscomment>
+	<isscript>
+		var pageContext = {
+			title: 'Wishlist',
+			type: 'Wishlist',
+			ns: 'wishlist'
+		};
+	</isscript>
+	<isinclude template="util/modules"/>
+	<isinclude template="components/header/htmlhead"/>
+
+	<iscomment>Add page type specific header information here.</iscomment>
+
+</head>
+<body>
+
+<div id="container" class="pt_account wishlistLogin">
+
+		<isinclude template="components/header/header"/>
+
+		<div id="main" role="main" class="page-content clearfix">
+			<isinclude template="components/browsertoolscheck"/>
+		
+			<div id="primary" class="primary-content content">
+				<isreplace/>
+			</div>
+		</div><!-- /main -->
+
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="account/pt_account_VARS"/>
+	</div>
+</body>
+</html>

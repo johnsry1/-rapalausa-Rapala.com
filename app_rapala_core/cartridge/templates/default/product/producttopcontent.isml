@@ -1,0 +1,87 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>In the product pipeline, if a product was not found for the selected attributes, we need to refresh the ProductVariationModel using the default selected variant</iscomment>
+<isinclude template="util/modules"/>
+<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+
+<isif condition="${isQuickView && pdict.CurrentHttpParameterMap.source.stringValue != 'cart'}">
+	<div class="quickview-nav">
+		<button class="quickview-prev">< <isprint value="${Resource.msg('global.previous', 'locale', null)}" /></button>
+		<button class="quickview-next"><isprint value="${Resource.msg('global.next', 'locale', null)}" /> ></button>
+	</div>
+</isif>
+
+<div class="pdpmain-content">
+	<div class="productname h-one-tag" itemprop="name">
+		<isset name="name" value="${pdict.Product.name}" scope="page" />
+		<isif condition="${name.indexOf('&reg;') >= 0}">
+			<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
+		<iselseif condition="${name.indexOf('&trade;') >= 0}">
+			<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
+		<iselseif condition="${name.indexOf('&#8482;') >= 0}">
+			<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
+		<iselseif condition="${name.indexOf('™') >= 0}">
+			<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
+		</isif>
+		<isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/><isprint value="${name}" encoding="off" />
+	</div>
+	<isif condition="${pdict.Product.custom.videoId.length > 0 || (!empty(pdict.Product.custom.xAxis || pdict.Product.custom.specTable))}">
+		<ul class="provideo-spec-link">
+			<isif condition="${pdict.Product.custom.videoId.length > 0}">
+				<li class="video-link">
+					<span class="video-icon"></span>
+					<a href="javascript:void(0)"><isprint value="${Resource.msg('product.videotab','product',null)}"/></a>
+				</li>
+			</isif>
+			<isif condition="${!empty(pdict.Product.custom.xAxis || pdict.Product.custom.specTable)}">
+				<li class="specChart-link">
+					<a href="javascript:void(0)"><isprint value="${Resource.msg('product.tab4','product',null)}"/></a>
+				</li>
+			</isif>
+		</ul>
+	</isif>
+</div>
+<div class="product-col-1 product-image-container floatright">
+	<div class="cell contentbox productdetailcolumn productimages">
+		<div class="contentboxcontent_halfsize productimage">
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('imageTransformationService') == 'DIS' || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}">
+				<isinclude template="product/components/productimagesDS"/>
+			<iselse/>
+				<isinclude template="product/components/productimages"/>
+			</isif>
+		</div>
+	</div>	
+</div>
+
+<div class="product-col-2  product-detail floatright">
+	<div class="cell productdetailcolumn productinfo contentbox">
+		<div class="contentboxcontent_halfsize">
+		<div class="productname h-one-tag" itemprop="name">
+			<isset name="name" value="${pdict.Product.name}" scope="page" />
+			<isif condition="${name.indexOf('&reg;') >= 0}">
+				<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
+			<iselseif condition="${name.indexOf('&trade;') >= 0}">
+				<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
+			<iselseif condition="${name.indexOf('&#8482;') >= 0}">
+				<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
+			<iselseif condition="${name.indexOf('™') >= 0}">
+				<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
+			</isif>
+			<isprint value="${name}" encoding="off" /><isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/>
+		</div>
+			<div id="product-content">
+				<isinclude template="product/productcontent"/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clear" style="height: 43px;"><!-- FLOAT CLEAR --></div>
+
+<!-- Facebook Pixel Code for product view -->
+<isif condition="${!pdict.Product.isVariant() && !pdict.Product.isMaster()}">
+<script>
+	fbq('track','ViewContent',{
+	content_ids: ['${pdict.Product.ID}'],
+	content_type: 'product'
+	});
+</script>
+</isif>

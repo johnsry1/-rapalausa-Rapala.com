@@ -1,0 +1,72 @@
+<!--- TEMPLATENAME: pt_leftnav_account.isml --->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<isinclude template="util/modules"/>
+	<head>
+		<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
+		<isinclude template="components/header/htmlhead"/>
+	</head>
+	<body>
+		<iscomment><isinclude url="${URLUtils.url('Home-IncludeNoScriptAlert')}"/></iscomment>
+		<isset name="cu" value="${pdict.CurrentCustomer.getCustomerGroups()}" scope="page" />  
+		<isscript>
+		var isVIP = false;
+		var isProStaff = false;
+		var ccg : dw.customer.CustomerGroup = null;
+		var customerGrp : dw.customer.CustomerGroup = null;
+		var customerGrpCol : Collection = cu;
+		for each(customerGrp in customerGrpCol){
+			if(customerGrp.getID().indexOf('VIP') != -1){
+				isVIP = true;
+				ccg = customerGrp;
+				break;
+			} 
+			
+			if(!isVIP && customerGrp.getID().indexOf('ProStaff') != -1){
+				isProStaff=true;
+				ccg = customerGrp
+			} 
+			if(!isProStaff && customerGrp.getID().indexOf('employee') != -1){
+				ccg = customerGrp
+			}
+		}
+		
+		 </isscript>
+		 	
+		<div id="container" class="pt_acc_landing <isif condition="${isVIP}">vipcustomer</isif> "> 
+			<isinclude template="components/header/header"/>
+			<div id="main">
+				<div id="content">
+					<iscomment><isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account"/></iscomment>
+					<div id="page-background" class="downshift">
+						<div id="page">
+							<div class="wrapper">
+								<div class="content-outer">
+									<div id="primary" class="primary-content">
+										<isreplace/>
+									</div>
+									<div id="secondary" class="nav">
+										<nav>
+											<div class="secondary-navigation">
+												<isif condition="${pdict.CurrentCustomer.registered}">
+													<iscontentasset aid="account-nav-registered"/>
+													<iselse>
+													<iscontentasset aid="account-nav-unregistered"/>
+													</iselse>
+												</isif>
+													<div class="account-nav-asset">
+														<iscontentasset aid="account-nav-text"/>
+													</div>
+												</div>
+										</nav>
+									</div>
+								</div>
+							</div><!-- END: wrapper -->
+						</div><!-- END: page -->
+					</div><!-- END: page-background -->
+				</div><!-- END: content -->
+			</div><!-- END: main -->
+			<isinclude template="components/footer/footer"/>
+		</div><!-- END: container -->
+	</body>
+</html>

@@ -1,0 +1,56 @@
+/**
+* This script will put a image to a FTP server.
+*- @input HostName : String The hostname of the FTP server.
+*- @input Username : String The username for the FTP server.
+*- @input Password : String The password for the FTP server.
+*
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.util );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+	var ff : String = File.IMPEX;
+	var filename : String = File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "Commission_Junction" + File.SEPARATOR + "Rapala_Product_Feed.csv" ;
+	var file : File = new File(filename);
+   
+    var path : String = "/Rapala";
+    if (empty(path))
+    	path = "";
+    	
+  	var host     : String = dw.system.Site.getCurrent().getCustomPreferenceValue("FTP_address");
+	var username : String = dw.system.Site.getCurrent().getCustomPreferenceValue("Username");
+	var password : String = dw.system.Site.getCurrent().getCustomPreferenceValue("CJPassword");
+	var sftp : FTPClient = null;
+	if (empty(host) || empty(username) || empty(password)) {
+		Logger.warn("ProductFeed is not fully defined host={1}, username={2}.",host, username);
+		return PIPELET_ERROR;
+	}
+	
+	try {
+		
+		sftp = new FTPClient();
+		sftp.setTimeout(0);
+		if (sftp == null || !sftp.connect(host,username,password)) {
+			//sftp.connect(host,username,password);
+			Logger.error("Can not connect to FTP: host:{0} username:{1}", host, username);
+			return PIPELET_ERROR;
+		}
+		var fileuploadstatus : Boolean = sftp.putBinary(file.name, file);
+		if(fileuploadstatus) {
+			file.remove();
+		}
+	} 
+	catch(e){
+  		Logger.error("Error while executing the script  ERROR :"+e.message);
+  		Logger.debug("ProductFeedExport completed.*******************.");
+		return PIPELET_ERROR;
+	}
+	finally {
+		sftp.disconnect();
+	}
+
+	return PIPELET_NEXT;
+}

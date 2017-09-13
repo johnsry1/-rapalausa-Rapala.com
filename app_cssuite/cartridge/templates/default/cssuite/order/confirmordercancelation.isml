@@ -1,0 +1,45 @@
+<!--- TEMPLATENAME: dialogConfirmOrderCancellation.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<isinclude template="cssuite/utils/modules">
+
+<form id="OrderCancelationForm" action="${URLUtils.httpsContinue()}" onsubmit="return false;">
+	<isif condition="${!empty(pdict.Prerequisites.messages) || !empty(pdict.Prerequisites.errors)}">
+		<h2>Please note:</h2>
+		<br/>
+	</isif>
+	<isif condition="${!empty(pdict.Prerequisites.messages)}">
+		<ul>
+			<isloop iterator="${pdict.Prerequisites.messages}" alias="message">
+				<li>${message}</li>
+			</isloop>
+		</ul>
+		<br/>
+	</isif>
+	<isif condition="${!empty(pdict.Prerequisites.errors)}">
+		<ul>
+			<isloop iterator="${pdict.Prerequisites.errors}" alias="error">
+				<li><span class="warning">${error}</span></li>
+			</isloop>
+		</ul>
+		<br/>
+	</isif>
+	<isif condition="${pdict.Prerequisites.cancelOrderAllowed}">
+		<p class="ui-dialog-text_dialog">Do you really want to cancel the order?</p>
+	</isif>
+</form>
+<script type="text/javascript">
+<!--
+	Dialog.formDialog("Confirm Order Cancellation for Order ${pdict.Order.orderNo}", 
+		{
+			<isif condition="${pdict.Prerequisites.cancelOrderAllowed}">
+				"Proceed": function() { 
+					$(this).dialog("destroy");
+					Order.cancelOrder("Confirmed");
+				},
+			</isif>
+			"Cancel": function() { 
+				$(this).dialog("destroy");}
+		}, false, 'auto', 'auto'
+	);
+//-->
+</script>

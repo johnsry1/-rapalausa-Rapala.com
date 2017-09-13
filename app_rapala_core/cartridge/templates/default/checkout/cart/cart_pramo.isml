@@ -1,0 +1,65 @@
+<div class="cart-footer  pre_cart mobileHide">			
+								
+								<div class="cart-footer-right pre-cart-footer">	
+						
+									  <input type="hidden" name="${pdict.CurrentForms.cart.updateCart.htmlName}" value="${pdict.CurrentForms.cart.updateCart.htmlName}"/>
+									 <div class="couponcodenew pre-couponcode">
+									  <div id="couponentry" class="couponcode pre-cpncode">								
+											<div class="cart-coupon-code applycoupon dropdown" id="applycoupon">
+												<span class="label pre_label">Have a Promo Code?</span>
+												 <div class="promo-sec pre-promo">
+												 <span class="input-sec pre-input">
+													<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" placeholder="${Resource.msg('cart.entercouponcode','checkout',null)}" />
+							
+													<button type="submit"  value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon" class="gray-button cartcoupon-apply">
+														${Resource.msg('global.apply','locale',null)}
+													</button>
+													</span>
+													<isif condition="${pdict.CurrentHttpParameterMap.promoappliedposition.stringValue=='topsection'}"> 
+														<isif condition="${pdict.CouponError && pdict.CouponError=='COUPON_CODE_MISSING'}">
+															<div class="error">
+																${Resource.msg('cart.COUPON_CODE_MISSING','checkout', null)}
+															</div>
+														<iselseif condition="${pdict.CouponError && pdict.CouponError=='NO_ACTIVE_PROMOTION'}">
+															<div class="error">
+																${Resource.msgf("cart.NO_ACTIVE_PROMOTION", "checkout", "", pdict.CurrentForms.cart.couponCode.htmlValue)}
+															</div>
+														<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='COUPON_CODE_UNKNOWN'}">
+															<div class="error">
+																${Resource.msg('global.COUPON_CODE_UNKNOWN','locale', null)}
+															</div>
+														<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='COUPON_CODE_ALREADY_IN_BASKET'}">
+															<div class="error">
+																${Resource.msg('global.COUPON_CODE_ALREADY_IN_BASKET','locale', null)}
+															</div>
+														<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='COUPON_DISABLED' || pdict.CouponStatus.code=='NO_ACTIVE_PROMOTION'}">
+															<div class="error">
+																${Resource.msg('global.COUPON_DISABLED','locale', null)}
+															</div>
+														<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='NO_APPLICABLE_PROMOTION'}">
+															<div class="error">
+																	${Resource.msg('global.NO_APPLICABLE_PROMOTION','locale', null)}
+															</div>
+														<iselseif condition="${pdict.CouponStatusCode != null && pdict.CouponStatusCode.error}">
+															<div class="error">
+															   <span class="coupon-code-error">${Resource.msgf('cart.' + pdict.CouponStatusCode.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}</span>
+														     </div>
+														<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='CUSTOMER_REDEMPTION_LIMIT_EXCEEDED'}">
+															<div class="error">
+																<isprint value="${Resource.msg('billingcoupon.couponused','forms', null)}"/>
+															</div>
+														</isif>
+													</isif>
+													<span class="apply-code-message"><a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}"> ${Resource.msg('global.applycodemessage1','locale',null)}</a></span>
+													<iscomment>Update Cart
+													<button class="simple" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}" id="update-cart">
+														${Resource.msg('global.updatecart','locale',null)}
+													</button></iscomment>
+											</div>
+										</div>
+										
+											
+									</div> 
+									</div>
+								</div>
+						</div>

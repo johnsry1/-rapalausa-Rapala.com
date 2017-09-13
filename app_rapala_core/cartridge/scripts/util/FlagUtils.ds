@@ -1,0 +1,167 @@
+/**
+*This ds file is used to check whether new, new colr, new size badges has to be displayed or not
+**getVariants :  returns variants
+*showNewFlag : returns true if "NEW" flag has to be shown for the product
+*getSizeCollection :  returns a Collection of custom.size values if set on the variant(Used for "NEW SIZES" flag in PLP& NEW tag for swatches in PDP)
+*getColorCollection : getSizeCollection :  returns a Collection of custom.color values if set on the variant(Used for "NEW SIZES" flag in PLP& NEW tag for swatches in PDP)
+*getTestPoundsCollection :  returns a Collection of custom.testLb values if set on the variant(Used for "NEW SIZES" flag in PLP& NEW tag for swatches in PDP)
+*getPakCollection :  returns a Collection of custom.pak values if set on the variant(Used for "NEW SIZES" flag in PLP& NEW tag for swatches in PDP)
+*showNewPakFlag : returns true if "NEW PAK" flag has to be shown for the product
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+
+var rightNow : Date = dw.util.DateUtils.nowForSite();
+
+function showNewFlag(product:Product) : Boolean
+{
+	var showNew : boolean;
+	var rightNow = dw.util.DateUtils.nowForSite();
+	showNew = false;
+	
+	if(!product.variant) {
+		if((product.custom.newUntil != null) && (product.custom.newUntil > rightNow)) {
+			showNew = true;
+		}
+	}
+	else if(product.variationModel.master.custom.newUntil != null && product.variationModel.master.custom.newUntil > rightNow) {
+		showNew = true;
+	}
+	if(showNew == false && product.variant
+		 && 'newSnipeAttributeList' in dw.system.Site.current.preferences.custom 
+	     && dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
+		for ( var index : String in dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
+			var attr = dw.system.Site.current.preferences.custom.newSnipeAttributeList[index];
+			if(product.custom[attr] != null && product.custom[attr] > rightNow) {
+				showNew = true;
+			}
+		}
+	}
+	return showNew;
+}
+
+function getVariants(product:Product){
+	
+	if(product.isMaster() || product.isVariant()) {
+    	var variants: dw.util.Collection = (product.isMaster()) ? product.getVariants() : product.getMasterProduct().getVariants();
+    } else {
+    	var variants: dw.util.Collection = new dw.util.ArrayList(product);
+    }
+	return variants;
+}
+
+function getSizeCollection(product:Product)
+{
+	var variants = getVariants(product);
+    var variantIter : dw.util.Iterator = variants.iterator();
+    var newSizes: dw.util.List = new dw.util.ArrayList();
+    
+    while (variantIter.hasNext()) 
+    {
+        var variant : dw.catalog.Variant = variantIter.next();
+        
+        if (variant.custom.sizeNewUntil != null && 
+            variant.custom.sizeNewUntil > rightNow &&
+            !(newSizes.contains(variant.custom.size)))
+        {
+            newSizes.add(variant.custom.size);
+        }
+        //for yard spool
+        if (variant.custom.sizeNewUntil != null && 
+            variant.custom.sizeNewUntil > rightNow &&
+            variant.custom.yardSpool != null &&
+            !(newSizes.contains(variant.custom.yardSpool)))
+        {
+            newSizes.add(variant.custom.yardSpool);
+        }
+    }	
+    return newSizes;
+}
+
+function getColorCollection(product:Product){
+	
+	var newColors: dw.util.List = new dw.util.ArrayList();
+	var variants = getVariants(product);
+	var variantIter : dw.util.Iterator = variants.iterator();
+        
+        while (variantIter.hasNext()) 
+    	{
+	        var variant : dw.catalog.Variant = variantIter.next();
+	        if (variant.custom.colorNewUntil != null && 
+	            variant.custom.colorNewUntil > rightNow &&
+	            !(newColors.contains(variant.custom.color)))
+	        {
+	            newColors.add(variant.custom.color);
+	        }
+    	}
+   	return newColors;
+}
+
+function getTestPoundsCollection(product:Product){
+	var newTestPounds: dw.util.List = new dw.util.ArrayList();
+	var variants = getVariants(product);
+	var variantIter : dw.util.Iterator = variants.iterator();
+	while (variantIter.hasNext()) 
+    {
+        var variant : dw.catalog.Variant = variantIter.next();
+		if (variant.custom.testPoundNewUntil != null && 
+	            variant.custom.testPoundNewUntil > rightNow &&
+	            !(newTestPounds.contains(variant.custom.testLb)))
+	        {
+	            newTestPounds.add(variant.custom.testLb);
+	        }
+    }
+	return newTestPounds;
+}
+
+function showNewPakFlag(product:Product){
+	var showNewPak : boolean;
+	showNewPak = false;
+	if(product.isVariant()) {
+		if((product.custom.pakNewUntil != null) && (product.custom.pakNewUntil > rightNow) && (product.custom.newUntil == null || product.custom.newUntil < rightNow)) {
+			showNewPak = true;
+		}
+	} else if(product.isMaster() && (product.custom.newUntil == null || product.custom.newUntil < rightNow)) {
+		var variants: dw.util.Collection = product.getVariants();  
+	    var variantIter : dw.util.Iterator = variants.iterator();
+	    while (variantIter.hasNext()) 
+	    {
+	        var variant : dw.catalog.Variant = variantIter.next();     
+	        if (variant.custom.pakNewUntil != null && variant.custom.pakNewUntil > rightNow)
+	        {
+	            showNewPak = true;
+	        }
+		}
+	} else {
+		if((product.custom.pakNewUntil != null) && (product.custom.pakNewUntil > rightNow) && (product.custom.newUntil == null || product.custom.newUntil < rightNow)) {
+			showNewPak = true;
+		}
+	}
+	
+	return showNewPak;
+}
+
+function getPakCollection(product:Product){
+	var newPak : dw.util.List = new dw.util.ArrayList();
+	var variants = getVariants(product);
+	var variantIter : dw.util.Iterator = variants.iterator();
+	while (variantIter.hasNext()) 
+    {
+        var variant : dw.catalog.Variant = variantIter.next();
+		if (variant.custom.pakNewUntil != null && 
+	            variant.custom.pakNewUntil > rightNow &&
+	            !(newPak.contains(variant.custom.testLb)))
+	        {
+	            newPak.add(variant.custom.pak);
+	        }
+    }
+	return newPak;
+}
+module.exports={
+	showNewFlag : showNewFlag,
+	getSizeCollection : getSizeCollection,
+	getColorCollection : getColorCollection,
+	getTestPoundsCollection : getTestPoundsCollection,
+	showNewPakFlag : showNewPakFlag,
+	getPakCollection : getPakCollection
+}

@@ -1,0 +1,48 @@
+<isdecorate template="callcenter/pt_agentlogin"> 
+	<isinclude template="util/modules">
+	<div class="contentMain">
+		<div class="contentInner">
+			<div class="loginagent">
+				<h2>${Resource.msg('callcenter.loginagent','callcenter',null)}</h2>
+				<div class="returningcustomers">
+					<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.loginagent.htmlName}">
+						<iscomment>Login Unsuccessful Error Message</iscomment>
+						<isif condition="${!pdict.CurrentForms.loginagent.loginsucceeded.valid}">
+							<div class="errorform">${Resource.msg('logininclude.loginerror','account',null)}</div>
+						</isif>
+						<fieldset>
+						
+							<div class="formfield username">
+								<isinputfield formfield="${pdict.CurrentForms.loginagent.username}" type="input"  xhtmlclass="email">
+								<div class="clear"><!-- FLOAT CLEAR --></div>
+							</div>
+							
+							<div class="formfield password">
+								<isinputfield formfield="${pdict.CurrentForms.loginagent.password}" type="password">
+								<div class="clear"><!-- FLOAT CLEAR --></div>
+							</div>
+											
+							<isif condition="${pdict.Status != null}">
+								<div class="errorMsg">
+									<isif condition="${pdict.Status.code == "USER_LOCKED"}"><span class="error">${Resource.msg('callcenter.loginagent.001','callcenter',null)}</span></isif>
+									<isif condition="${pdict.Status.code == "USER_DISABLED"}"><span class="error">${Resource.msg('callcenter.loginagent.002','callcenter',null)}</span></isif>
+									<isif condition="${pdict.Status.code == "PASSWORD_EXPIRED"}"><span class="error">${Resource.msg('callcenter.loginagent.003','callcenter',null)}</span></isif>
+									<isif condition="${pdict.Status.code == "CREDENTIALS_INVALID"}"><span class="error">${Resource.msg('callcenter.loginagent.004','callcenter',null)}</span></isif>
+									<isif condition="${pdict.Status.code == "INSUFFICIENT_PERMISSION"}"><span class="error">${Resource.msg('callcenter.loginagent.005','callcenter',null)}</span></isif>
+								</div>
+							</isif>
+							
+							<div class="formactions">
+								<button type="submit" class="agentLogBtn" value="${Resource.msg('global.login','locale',null)}" tabindex="3" title="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.loginagent.login.htmlName}"><span>Login</span></button>
+								<div class="clear"><!-- FLOAT CLEAR --></div>
+							</div><!-- END: returningcustomers_button -->
+			
+						</fieldset>
+					 </form>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div><!-- END: returningcustomers -->
+				<div class="clear"><!-- FLOAT CLEAR --></div>
+			</div><!-- END: logincustomers -->
+		</div>
+	</div>
+</isdecorate>

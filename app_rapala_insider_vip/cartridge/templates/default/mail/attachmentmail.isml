@@ -1,0 +1,287 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head></head>
+	<body>
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td allign="center">
+					<table>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;text-transform: capitalize;">
+								<span>
+									First Name:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.firstname.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;text-transform: capitalize;">
+								<span>
+									Last Name:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.lastname.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Email address:
+								</span>
+								<span>&nbsp;</span>
+								<span style="text-decoration: underline;">
+									${pdict.CurrentForms.vipinsider.customer.email.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									State:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.states.state.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									City:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.city.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Zip Code:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.zip.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Phone Number:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.phone.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Country:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									USA
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Program applying for:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+								${pdict.Program}
+								</span> 
+							</td>
+						</tr>
+						
+						
+					<isif condition="${pdict.Program == "fieldstaff" || pdict.Program == "Guide and OutFitters"}"> 
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Website:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.website.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Qualifications:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.qualifications.htmlValue}
+								</span> 
+							</td>
+						</tr>
+					<iselseif condition="${pdict.Program == "industry"}" >
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Company:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.company.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Website:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.website.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Qualifications:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.qualifications.htmlValue}
+								</span> 
+							</td>
+						</tr>
+					</iselseif>
+					<iselseif condition="${pdict.Program == "sports"}" >
+					<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Retailer:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.retailer.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Manager:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.manager.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Qualifications:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.qualifications.htmlValue}
+								</span> 
+							</td>
+						</tr>
+					</iselseif>
+					<iselseif condition="${pdict.Program == "donation"}" >
+						<tr>
+								<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+									<span>
+										Website:
+									</span>
+									<span>&nbsp;</span>
+									<span>
+										${pdict.CurrentForms.vipinsider.customer.websites.htmlValue}
+									</span> 
+								</td>
+						</tr>
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Reason:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.reason.htmlValue}
+								</span> 
+							</td>
+						</tr>
+					</iselseif>
+					<iselseif condition="${pdict.Program == "Decal Request"}" >
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Brand:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.states.brands.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>						
+						<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Street Address:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.streetAddress.htmlValue}
+								</span> 
+							</td>
+						</tr>
+						<tr>
+						<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Street Address2:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+									${pdict.CurrentForms.vipinsider.customer.streetAddress2.htmlValue}
+								</span> 
+							</td>
+						</tr>
+					</iselseif>
+					</isif>	
+					<isif condition="${pdict.Program != null}">
+						<tr>
+							<td style = "font-size:15px; color: #272425; font-family: Lucida Bright,georgia,serif;padding-top: 20px;text-align: left;">
+								<span>
+									Attached:
+								</span>
+								<span>&nbsp;</span>
+								<span>
+								<isloop iterator="${fileList1}" alias="file" status="st" > 
+									<span class="updatetext">${file}</span>
+									<isif condition="${!st.last}">
+									,	
+									</isif>
+								</isloop>
+								</span> 
+							</td>
+						</tr>
+					 </isif>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

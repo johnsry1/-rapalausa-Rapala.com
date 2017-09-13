@@ -1,0 +1,169 @@
+/* .country-selector {
+	border-bottom: 5px solid darken($dim-gray, 10%);
+	color: $white;
+	width: 100%;
+	@media screen and (min-width: 768px) {
+		border-bottom: none;
+		padding: 0;
+		position: absolute;
+		top: -1rem;
+		right: .2rem;
+		z-index: 30;
+		width: auto;
+	}
+	.selector {
+		display: none;
+		margin-top: .5rem;
+		padding-left: 2rem;
+		&.active {
+			display: block;
+		}
+		@media screen and (min-width: 768px) {
+			background-color: $white;
+			border-radius: 3px;
+			box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
+			margin-top: 1rem;
+			padding: 1rem;
+		}
+	}
+	.current-country {
+		cursor: pointer;
+		padding: .8em 1rem;
+		&.selector-active {
+			border-bottom: 1px solid darken($night-rider, 10%);
+			.selector-icon {
+				transform: rotate(270deg);
+			}
+		}
+		@media screen and (min-width: 768px) {
+			padding: 0;
+			&.selector-active {
+				border-bottom: none;
+				padding-bottom: 0;
+				// prevent the text from shifting left to accommmodate the selector width
+				position: absolute;
+				right: 0;
+			}
+		}
+		.selector-icon {
+			margin-right: .3rem;
+			@media screen and (min-width: 768px) {
+				float: right;
+				margin-right: 0;
+				margin-left: .3rem;
+				// display as angle-down icon for desktop
+				transform: rotate(90deg);
+			}
+		}
+		.flag-icon {
+			border: none;
+		}
+	}
+	.continent-name {
+		margin-top: 0;
+		margin-bottom: .5rem;
+		@media screen and (min-width: 768px) {
+			color: $sangria;
+		}
+	}
+	.country {
+		margin-bottom: .5rem;
+	}
+	.locale {
+		border-right: 1px solid $gainsboro;
+		display: inline-block;
+		padding: 0 .3rem;
+		vertical-align: middle;
+		&:first-of-type {
+			padding-left: 0;
+		}
+		&:last-of-type {
+			border-right: none;
+			padding-right: 0;
+		}
+	}
+	.flag-icon {
+		border: 1px solid $gainsboro;
+		margin-right: .3rem;
+	}
+}
+*/
+#headerwrapper {
+	#header {
+		.row {
+			&.column1 {
+				.headercustomerinfo {
+				    .change-regionnew {
+					    background: url(../images/drop_arrow.png) no-repeat scroll 21px 13px rgba(0,0,0,0);
+					    display: block;
+					    float: left;
+					    padding: 7px 12px 8px 0;
+					    width: 18px;
+					    position: relative;
+					    z-index: 99;
+					    @media screen and (max-width: 959px) {
+					    	display: none;	
+					    }
+					}
+					.domainswitch-header {
+					    background: $domainswitch-header-bg-color;
+					    width: 131px;
+					    top: 30px;
+					    z-index: 99;
+					    padding: 0;
+					    border: 1px solid $domainswitch-header-border-color;
+					    position: absolute;
+					    left: -44px;
+					    height: auto;
+					    display: none;
+					    .top_arrow {
+						    left: 62px;
+						}
+						ul {
+						    width: 100%;
+						    
+						    li {
+							    background: none repeat scroll 0 0 $country-region-bg-static-color;
+							    border-top: 1px solid $country-region-border-color;
+							    color: $country-region-text-static-color;
+							    float: left;
+							    height: 28px;
+							    padding: 0;
+							    text-align: center;
+							    width: 100%;
+							    a {
+								    color: $country-region-text-static-color;
+								    font-weight: normal;
+								    font-size: 11px;
+							        text-decoration: none;
+								}
+								&:hover {
+								    background: none repeat scroll 0 0 $country-region-bg-hover-color;
+								    color: #666;
+								    height: 28px;
+								    padding: 0;
+								    
+								    a {
+								    	color: $country-region-text-hover-color;
+										text-decoration: none;
+										width: 100%;
+										float: left;
+								    }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.top_arrow {
+    background: url('../images/droparrow_icon.png') no-repeat right bottom transparent;
+    position: absolute;
+    z-index: 100;
+    height: 20px;
+    width: 13px;
+    left: 93px;
+    top: -19px;
+}

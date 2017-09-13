@@ -1,0 +1,56 @@
+<!--- TEMPLATENAME: pt_international.isml --->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<iscomment>
+			Include all important information globally , e.g. meta-data, link information, and
+			javascript.
+		</iscomment>
+		<isscript>
+			var pageContext = {
+				title: 'international',
+				type: 'international',
+				ns: 'international'
+			};
+		</isscript>
+		<isinclude template="components/header/htmlhead"/>
+		    <iscomment>Insert meta tag for the "Google-Verification" feature to verify that you are the owner of this site.</iscomment>
+	    <isif condition="${'GoogleVerificationTag' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.GoogleVerificationTag!=''}">
+	        <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.GoogleVerificationTag}"/>" />
+	    </isif>
+		
+		<iscomment>Setting up a canonical link to the homepage</iscomment>
+		<isif condition="${'rapala' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.rapala.com/" />
+		<iselseif condition="${'sufix' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.sufix.com/" />
+		<iselseif condition="${'triggerx' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.triggerx.com/" />
+		<iselseif condition="${'storm' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.stormlures.com/" />
+		<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.luhrjensen.com/" />
+		<iselseif condition="${'iceforce' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.iceforce.com/" />
+		<iselseif condition="${'vmc' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.vmchooks.com/" />
+		<iselseif condition="${'bluefox' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.bluefox.com/" />
+		<iselseif condition="${'terminator' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.terminatorlures.com/" />
+		<iselseif condition="${'williamson' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.williamsonlures.com/" />
+		<iselseif condition="${'marcum' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.marcumtech.com/" />
+		<iselseif condition="${'otter' == session.custom.currentSite}">
+			<link rel="canonical" href="http://www.otteroutdoors.com/" />		
+		<iselse/>
+			<link rel="canonical" href="http://www.rapala.com/" />
+		</isif>
+		<iscomment>Add page type specific header information here.</iscomment>
+	</head>
+	<body>
+		<isreplace/>
+		<isinclude template="components/footer/footer_UI"/>
+	</body>
+</html>

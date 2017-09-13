@@ -1,0 +1,28 @@
+/**
+*
+* @input NewCustomer : dw.customer.Customer
+* @output Status : String
+*
+*/
+importPackage( dw.system );
+
+importScript("app_csstool:gmfunctions/lib_GMCustomers.ds");
+
+function execute( args : PipelineDictionary ) : Number
+{
+
+	var cssService : CSSService = new CSSService();
+   	
+   	var emptyObject : Object = cssService.getEmpty();
+
+   	var response : Object = cssService.createCustomerRecordV2(args.NewCustomer, emptyObject);
+   	
+   	if(!response.successFlag) {
+		args.Status = "Error - " + response.errorMessage;
+		Logger.info("Error creating ICS customer record =  " + response.errorMessage);	
+	} 
+   	
+   	args.NewCustomer.profile.custom.readyForExport = true;
+
+   	return PIPELET_NEXT;
+}

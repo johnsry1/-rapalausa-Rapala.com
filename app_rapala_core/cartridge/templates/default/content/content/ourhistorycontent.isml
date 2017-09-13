@@ -1,0 +1,24 @@
+<iscomment>
+  Renders any HTML content asset. This template is supposed to be included by another
+  template. The enclosing template would define caching attributes.
+  Currently content assets are static, thus caching of content assets is possible.
+</iscomment>
+<isdecorate template="content/pt_ourhistoryleft">
+<isinclude template="util/modules"/>
+<div class="column colspan2">
+<div class="content-box">
+
+<iscomment>make sure we have an asset at all</iscomment>
+<isif condition="${pdict.Content != null}">
+	<isif condition="${'body' in pdict.Content.custom && pdict.Content.custom.body != null}">
+		<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
+			<isprint value="${pdict.Content.custom.body}" encoding="off"/>
+			
+		</div> <!-- End contentasset -->
+	<iselse/>
+		${Resource.msg('global.nocontent','locale',null)}
+	</isif>
+</isif>
+</div>
+</div>
+</isdecorate>

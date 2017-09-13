@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<isinclude template="util/modules"/>
+
+<head>
+	<iscomment>
+		Include all important information globally , e.g. meta-data, link information, and
+		javascript.
+	</iscomment>
+	<isinclude template="components/header/htmlhead"/>
+
+	<iscomment>Add page type specific header information here.</iscomment>
+
+</head>
+<body>
+<iscomment><isinclude url="${URLUtils.url('Home-IncludeNoScriptAlert')}"/></iscomment>
+<div id="container" class="pt_customerservice">
+	<isinclude template="components/header/header"/>
+		<div id="main">
+	<iscomment><isbreadcrumbs  bctext1="${!empty(pdict.Content)?pdict.Content.name : ''}"/></iscomment>
+	
+		<div id="content">
+		<div id="page-background" class="downshift">
+				<div id="page">
+					<div class="wrapper">
+						<div class="row column1">
+							<div class="column cell1">
+								<div class="cell upshift contentbox">
+									<div class="contentboxcontent">
+									   <iscomment>make sure we have an asset at all</iscomment>
+										<isif condition="${pdict.Content != null}">
+											<isif condition="${'body' in pdict.Content.custom && pdict.Content.custom.body != null}">
+												<iscomment>don't remove or rename DIV and Marker, necessary for mark and editing, no css attributes defined</iscomment>
+												<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
+													<isprint value="${pdict.Content.custom.body}" encoding="off"/>
+												</div> <!-- End contentasset -->
+											<iselse/>
+												${Resource.msg('global.nocontent','locale',null)}
+											</isif>
+											<iscomment><isinputfield formfield="baseurl" name="baseurl" value="${URLUtils.url('','','')}" type="hidden" id="hiddenid"/></iscomment>
+										</isif>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		</div>
+	
+	
+	<isinclude template="components/footer/footer"/>
+</div><!-- END: container -->
+</body>
+</html>

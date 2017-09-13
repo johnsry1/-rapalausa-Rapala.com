@@ -1,0 +1,50 @@
+/**
+*
+*   @input LocalFile : dw.io.File
+*   
+*/
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.system );
+importPackage( dw.util );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var host     : String = Site.getCurrent().getCustomPreferenceValue("googel_productFeed_host");
+	var username : String = Site.getCurrent().getCustomPreferenceValue("googel_productFeed_username");
+	var password : String = Site.getCurrent().getCustomPreferenceValue("googel_productFeed_password");
+	var remotePath : String = Site.getCurrent().getCustomPreferenceValue("googel_productFeed_path");
+		if (empty(host) || empty(username)) {
+			Logger.warn("ProductFeed is not fully defined host={1}, username={2}.",host, username);
+			return PIPELET_ERROR;
+		}
+
+		var sftp : SFTPClient = new SFTPClient();
+		sftp.setTimeout(120000);
+		var sftpConnectionStatus = sftp.connect(host,username,password);
+		if (!sftpConnectionStatus) {
+			Logger.error("Can not connect to ProductFeed sFTP: host:{0} username:{1}", host, username);
+			return PIPELET_ERROR;
+		}
+		try {
+			if(!empty(remotePath)){
+			var fileuploadstatus : Boolean = sftp.putBinary(remotePath+'/'+args.LocalFile.name,args.LocalFile);
+			}
+			else
+			{
+			Logger.error("Location not available");
+			return PIPELET_ERROR;
+			}
+		} 
+		catch(e){
+			var message = e.message;
+	  	Logger.error("Error while executing the script  ERROR :"+e.message);
+	  	Logger.debug("ProductFeedExport completed.*******************.");
+		return PIPELET_ERROR;
+		}
+		finally {
+			sftp.disconnect();
+		}
+
+	return PIPELET_NEXT;
+}

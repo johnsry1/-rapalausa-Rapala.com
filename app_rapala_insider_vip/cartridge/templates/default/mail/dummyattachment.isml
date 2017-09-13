@@ -1,0 +1,43 @@
+<iscontent type="multipart/mixed; boundary=------------000001030701020908040900" compact="false">
+<isscript>
+	importPackage( dw.util );
+	importPackage( dw.system );
+	importPackage( dw.io );
+	importPackage( dw.web );
+	importScript( 'mail/dummyAttachments.ds' );
+	var fileList : ArrayList = new ArrayList();
+	var fileList1 : ArrayList = new ArrayList();
+	var fname : File = new File( File.IMPEX + "/src/VIPInsider/");
+	var fileslists  =  fname.listFiles();
+	var extraPart = request.httpCookies["progcookie"].value+"**" + session.sessionID + "**";
+    	for(var i=0;i<fileslists.length;i++){  
+	    	var fpart = fileslists[i].name.split('**')[0];
+		    var spart = fileslists[i].name.split('**')[1];
+		    var pref = fpart+"**"+spart+"**";
+		    if(pref == extraPart){
+		    fileList.add(fileslists[i].fullPath);
+			var base64FileMap : Map = getBase64EncodedAttachments(fileList);
+		    }
+		}
+
+</isscript>
+This is a multi-part message in MIME format.
+--------------000001030701020908040900
+Content-Type: text/html; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+
+<isinclude template="mail/attachmentmail"/>
+
+--------------000001030701020908040900
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Hällo Wörld
+<isif condition="${ !empty(base64FileMap) }">
+<isloop items="${ base64FileMap.keySet() }" var="key">
+<isset name="fileContent" value="${ base64FileMap.get(key) }" scope="page"/>--------------000001030701020908040900
+Content-Description: ${key}
+Content-Disposition: attachment; filename="${key}"; size=${fileContent.length}; creation-date="${(new Date()).toISOString()}"; modification-date="${(new Date()).toISOString()}"
+Content-Transfer-Encoding: base64
+
+${fileContent}</isloop>
+</isif>--------------000001030701020908040900--

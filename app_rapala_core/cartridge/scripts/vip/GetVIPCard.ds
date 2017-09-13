@@ -1,0 +1,22 @@
+/**
+* Demandware Script File
+*This ds is used to fetch the VIPCard/VITCard2 object
+*/
+importPackage( dw.system );
+function getVIPCard(cardnumber, cardtype)
+{
+	var id : String = cardnumber;
+	if(cardtype == "VIPCard"){
+		var card : Object = dw.object.CustomObjectMgr.getCustomObject("VIPCard", id);
+	} else if(cardtype == "VIPCard2"){
+		var card : Object = dw.object.CustomObjectMgr.getCustomObject("VIPCard2", id);
+	}
+	if (empty(card)) {
+		return null;
+	}
+	return card;
+}
+
+module.exports = {
+	    getVIPCard: getVIPCard
+	};

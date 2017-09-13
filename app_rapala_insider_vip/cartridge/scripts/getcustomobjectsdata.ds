@@ -1,0 +1,260 @@
+/**
+* Commission Junction CSV generation from site products.
+* @output File : String
+* @output RemoteFile : String
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.util );
+importPackage( dw.io );
+importPackage( dw.web );
+importPackage( dw.net );
+importPackage(dw.value);
+importPackage( dw.campaign );
+function execute( args : PipelineDictionary ) : Number
+{
+	
+	var prevdate : Date = new Date();
+	var mon = prevdate.getMonth();
+	prevdate.setMonth(mon-1);
+	var curdate : Date = new Date();
+	curdate.setDate(curdate.getDate()-1);
+	
+	var today : Date = new Date();
+	var lastDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+	
+	var fromdateformat : String = prevdate.getMonth() + 1 + "_" + prevdate.getDate() + "_" + prevdate.getYear();
+	var todateformat : String = curdate.getMonth()+ 1 + "_" + curdate.getDate() + "_" + curdate.getYear();
+	
+	var calendar : Calendar = new Calendar();
+	calendar.timeZone = "GMT";
+	var gmtDateString : String = StringUtils.formatCalendar( calendar, "MM_dd_yyyy" ); 
+	var TempFolder : String = "VIPInsiderFeed";
+	var FilePrefix : String = "RapalaInsiderData_"+fromdateformat + "-" + todateformat;
+	var FileExtension : String = "csv";
+	try{
+		Logger.getLogger("simplefeeds").debug( "CSV Preparaion starts here to export to Rapala..." );
+		var products : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("IndustryAffiliate", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		var donproducts : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("DonationRequest", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		var decproducts : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("DecalRequests", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		var fproducts : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("fieldstaff", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		var gproducts : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("GuideAndOutFitters", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		var sproducts : SeekableIterator = dw.object.CustomObjectMgr.queryCustomObjects("SportingGoodsRetail", "creationDate >= {0} AND creationDate <{1}",null,prevdate,curdate);
+		
+			
+			if ( !createTempFolder(TempFolder)){				
+				return PIPELET_ERROR;
+			}
+			//remove of old files generated from the temp location to do space management
+			var tempdir : File = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder);
+			for(var v = 0; v < tempdir.listFiles().length; v++){
+				tempdir.listFiles()[v].remove();
+			}
+			var targetfile : File = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension);
+			var generatedfile : String = TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension;
+			args.File = generatedfile;
+			var remoteFile : String = ( !empty( FilePrefix ) ? FilePrefix : "" ) + "." + FileExtension;
+			args.RemoteFile = remoteFile;						
+			var writer : CSVStreamWriter = new CSVStreamWriter(new FileWriter(targetfile));
+			var csvrowmain : Array = ['Date Submitted', 'program','firstname','lastname','email','state','city','zipcode','phonenumber','company','website','retailer', 'storemanagername', 'qualification', 'reasonforrequest', 'brand'];
+			//Create header line in generating CSV
+			writer.writeNext(csvrowmain);
+			var counter = 0;
+			if(products.hasNext()){
+			while(products.hasNext()){				
+				//exempt variant
+				product = products.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "IndustryAffiliate";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[9] = product.getCustom().company;
+					csvrow[10] = product.getCustom().website;
+					csvrow[13] = product.getCustom().qualification;
+					writer.writeNext(csvrow);
+		}}
+		
+		
+		
+		if(donproducts.hasNext()){
+			
+			var counter = 0;
+			while(donproducts.hasNext()){				
+				//exempt variant
+				product = donproducts.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "DonationRequest";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[14] = product.getCustom().reasonforrequest + " ";
+					writer.writeNext(csvrow);
+			}
+		}
+		
+		
+		if(decproducts.hasNext()){
+			var counter = 0;
+			while(decproducts.hasNext()){				
+				//exempt variant
+				product = decproducts.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "DecalRequest";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[15] = product.getCustom().brand + " ";
+					writer.writeNext(csvrow);
+			}
+		}
+		
+		
+		if(fproducts.hasNext()){
+			var counter = 0;
+			while(fproducts.hasNext()){				
+				//exempt variant
+				product = fproducts.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "FieldStaff";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[9] = product.getCustom().website;
+					csvrow[13] = product.getCustom().qualification;
+					writer.writeNext(csvrow);
+			}
+		}
+		
+		
+		
+		if(gproducts.hasNext()){
+			var counter = 0;
+			while(gproducts.hasNext()){				
+				//exempt variant
+				product = gproducts.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "GuideandOutFitters";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[10] = product.getCustom().website;
+					csvrow[13] = product.getCustom().qualification;
+					writer.writeNext(csvrow);
+			}
+		}
+		
+		if(sproducts.hasNext()){
+			var counter = 0;
+			while(sproducts.hasNext()){				
+				//exempt variant
+				product = sproducts.next();
+					counter++;
+					var csvrow : String = [];
+					var creationDate : Date = product.creationDate;
+					var nowSite : Calendar = dw.system.Site.getCurrent().getCalendar();
+					nowSite.setTime(creationDate);
+					var stringDate : String = dw.util.StringUtils.formatCalendar(nowSite,"MM_dd_yyyy HH:mm:ss");
+					
+					csvrow[0] = stringDate;
+					csvrow[1] = "SportingGoodsandRetail";
+					csvrow[2] = product.getCustom().firstname;
+					csvrow[3] = product.getCustom().lastname;
+					csvrow[4] = product.getCustom().email;
+					csvrow[5] = product.getCustom().state;
+					csvrow[6] = product.getCustom().city;
+					csvrow[7] = product.getCustom().zipcode;
+					var phone = product.getCustom().phonenumber.replace(' ' , '','g');
+					csvrow[8] = phone;
+					csvrow[11] = product.getCustom().retailer + " ";
+					csvrow[12] = product.getCustom().storemanagername + " ";
+					csvrow[13] = product.getCustom().qualification + " ";
+					writer.writeNext(csvrow);
+			}
+		}
+		
+		writer.close();
+		Logger.getLogger("simplefeeds").debug( "CSV Preparaion end here to export to AMAZON..." );
+	}catch (e) {	    	
+		Logger.getLogger("simplefeeds").error( "GenerateAmazonCSV: Error :: " + e );
+   		return PIPELET_ERROR;
+	}	
+    return PIPELET_NEXT;
+}
+		
+		function createTempFolder( tempFolder : String ) : boolean
+		{
+			var folder : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + tempFolder );
+			if ( folder.exists() )	{		
+				return true;
+			}
+			Logger.getLogger("simplefeeds").debug( "GenerateAmazonCSV: Creating temp folder " + folder.fullPath );	
+			var result : boolean = folder.mkdirs();
+			if ( !result ){
+				Logger.getLogger("simplefeeds").error( "GenerateAmazonCSV: Error creating temp folder " + folder.fullPath );
+				return false;
+			}
+			return true;
+		}
+
+

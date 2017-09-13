@@ -1,0 +1,232 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="search/pt_productsearchresult_content">
+
+	<isscript>
+		var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
+	</isscript>
+	<isscript>
+	var StringHelpers = require('~/cartridge/scripts/util/StringHelpers');
+	var URLUtils = require('dw/web/URLUtils');
+	var Resource = require('dw/web/Resource');
+	var ArrayList = require('dw/util/ArrayList');
+	var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+
+	var pagingModel = pdict.ProductPagingModel;
+	var psr = pdict.ProductSearchResult;
+	var searchPhrase = psr.getSearchPhrase();
+	var suggestedSearchPhrase = psr.getSuggestedSearchPhrase();
+	var searchPhraseURL = URLUtils.url('Search-Show', 'q', searchPhrase);
+	var suggestedSearchPhraseURL = suggestedSearchPhrase ? URLUtils.url('Search-Show', 'q', suggestedSearchPhrase) : '';
+	var resultsText = Resource.msg('searchbreadcrumbs.resultstext', 'search', null);
+	if (pagingModel) {
+		searchPhraseURL = pagingModel.appendPaging(searchPhraseURL, 0);
+	}
+	if (suggestedSearchPhrase) {
+		resultsText = Resource.msg('searchbreadcrumbs.searchphrase', 'search', null);
+	}
+
+	var category = psr.getCategory();
+	var categories = new ArrayList();
+	var cat = category;
+	while (cat != null && !empty(cat)  && cat.parent) {
+		if (cat.online) {
+			categories.addAt(0, cat);
+		}
+		cat = cat.parent;
+	}
+</isscript>
+	<iscomment>
+		Use the decorator template based on the requested output. If
+		a partial page was requested an empty decorator is used.
+		The default decorator for the product hits page is
+		search/pt_productsearchresult.
+	</iscomment>
+	
+	<iscache type="relative" minute="30" varyby="price_promotion"/>
+	
+	<isinclude template="util/modules"/>
+	
+	<iscomment>
+		Configured as default template for the product search results.
+		Displays a global slot with static html and the product search
+		result grid.
+	</iscomment>
+	
+	<iscomment>create reporting event</iscomment>
+	<isinclude template="util/reporting/ReportSearch.isml"/>
+	
+	<iscomment>Load custom CSS file on demand</iscomment>
+	<script type="text/javascript">/*<![CDATA[*/
+		//app.util.clearDynamicCSS();
+		
+		<isif condition="${!empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null}">
+			<isscript>
+				var categoryCustomCSS = new dw.util.ArrayList();
+				var category = pdict.ProductSearchResult.category;
+				
+				if ( category != null )
+				{
+					while( category.parent != null )
+					{
+						if( category.online && ('customCSSFile' in category.custom) && !empty(category.custom.customCSSFile)) 
+						{
+							categoryCustomCSS.addAt( 0, category );
+						}
+						category = category.parent;
+					}
+				}
+			</isscript>
+		
+			<isloop items="${categoryCustomCSS}" var="category">
+				app.util.loadCSSFile("${category.custom.customCSSFile.url}");
+			</isloop>
+		</isif>
+	/* ]]> */</script>	
+	
+	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+		<div id="tabs">
+			<ul class="search-tabs">
+		    	<li class="active"><a href="${pdict.ProductSearchResult.url('Search-Show')}"   name="" id="producttab"><span>${Resource.msg('foldercontenthits.producttab','rendering',null)}</span></a></li>
+		    		<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+		        		<li><a href="${URLUtils.http('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab"><span>${Resource.msg('foldercontenthits.contenttab','rendering',null)}</span></a></li>
+		         	</isif>
+		        <div class="clear"></div>
+	    	</ul>
+		</div>
+	</isif>
+	<iscomment>SORTING INFO </iscomment>
+	<isif condition="${!empty(psr) && !empty(psr.sortingRule) && (psr.category != null)}">
+		<isif condition="${psr.sortingRule.ID}">
+		<iscomment> 	<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span></iscomment>
+		</isif>	
+		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}"  var="sortingOption">
+			<isif condition="${sortingOption.getSortingRule().ID == psr.sortingRule.ID}">
+			<iscomment>	<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span> </iscomment>
+			</isif>
+		</isloop>
+	</isif>
+	<div class="banner-section desktopHide">
+			<div class="brand-searchresult">
+				<isslot id="brand-searchresults" context="global"  description="brand-searchresults for search results page"/>
+			</div>
+			
+			<div class="global-searchresult">
+				<isslot id="global-searchresults" context="global"  description="global-searchresults for search results page"/>
+			</div>
+	</div>
+	<isif condition="${pdict.ProductSearchResult.searchPhrase!=null}"> 
+		<div class="search-blk"><span class="resultstext"><isprint value="${Resource.msg('searchbreadcrumbs.resultstext','search',null)}" /></span>
+		<a class="searchedfor" href="${URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase)}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>
+		</div>
+	</isif>
+	
+	<iscomment>
+		Render promotional content at the top of search results as global slot.
+		This content is only displayed if the search result is refined by a category.
+		If the search result is not refined by a category a global default is displayed.
+	</iscomment>
+		
+	<div class="content-slot slot-grid-header">
+		<isif condition="${!empty(pdict.ProductSearchResult.category)}">
+			<isslot id="cat-banner" context="category" description="Category Banner" context-object="${pdict.ProductSearchResult.category}"/>
+		<iselse/>
+			<isif condition="${pdict.SearchPromo != null}">			
+				<isif condition="${'body' in pdict.SearchPromo.custom && pdict.SearchPromo.custom.body != null}">
+					<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
+						<isprint value="${pdict.SearchPromo.custom.body}" encoding="off"/>
+					</div> <!-- End contentasset -->
+				</isif>
+			<iselse/>	
+				<isslot id="search-result-banner" description="Promotional Search Result Banner" context="global"/>
+			</isif>
+		</isif>
+	</div>
+
+	<isslot id="global_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+
+	<isif condition="${'rapala' == session.custom.currentSite}">
+		<isslot id="brand_rapala_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'sufix' == session.custom.currentSite}">
+		<isslot id="brand_sufix_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'triggerx' == session.custom.currentSite}">
+		<isslot id="brand_triggerx_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'storm' == session.custom.currentSite}">
+		<isslot id="brand_storm_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'vmc' == session.custom.currentSite}">
+		<isslot id="brand_vmc_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+	   	<isslot id="brand_luhrjensen_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'marcum' == session.custom.currentSite}">
+	   	<isslot id="brand_marcum_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'terminator' == session.custom.currentSite}">
+	  	<isslot id="brand_terminator_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+	   	<isslot id="brand_strikemaster_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'bluefox' == session.custom.currentSite}">
+	   	<isslot id="brand_bluefox_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'williamson' == session.custom.currentSite}">
+	  	<isslot id="brand_williamson_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'iceforce' == session.custom.currentSite}">
+	   	<isslot id="brand_iceforce_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	<iselseif condition="${'otter' == session.custom.currentSite}">
+	   	<isslot id="brand_otter_searchresult" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+	</isif>
+	
+	
+	<isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">			
+		<div class="search-result-options search-top">
+			<div class="searchresultsheader">
+		       <div class="sortitem-blk">
+		            <iscomment>sort by</iscomment>
+		            <isproductsortingoptions productsearchmodel="${pdict.ProductSearchResult}" pagingmodel="${pdict.ProductPagingModel}" uniqueid="grid-sort-header"/>
+		            
+		            <iscomment>pagination</iscomment>
+					<ispaginginformation pagingmodel="${pdict.ProductPagingModel}" pageurl="${pdict.ProductSearchResult.url('Search-Show')}"  uniqueid="grid-paging-header"/>
+		        </div>
+		        <div class="sorthitscontainer">
+		        	<ispagingbar pageurl="${pdict.ProductSearchResult.url('Search-Show')}" pagingmodel="${pdict.ProductPagingModel}" iscontent="false"/>
+		        </div>
+
+		</div>
+		</div>
+		
+		<div class="search-result-content">				
+			<isproductgrid pagingmodel="${pdict.ProductPagingModel}" category="${pdict.ProductSearchResult.category}"/>
+		</div>
+
+        <div class="search-result-options search-top bottom">
+        	<div class="searchresultsheader">
+				<ispagingbar pageurl="${pdict.ProductSearchResult.url('Search-Show')}" pagingmodel="${pdict.ProductPagingModel}" iscontent="false"/>
+		    </div>		
+		</div>
+		
+		<isif condition="${pdict.CurrentHttpParameterMap.q.stringValue==null}">
+		<div class="bannerslot cat_subslots">
+		     <isslot id="landingpages-bottom" description="slot for all landing pages" context="category" context-object="${pdict.ProductSearchResult.category}"/>
+		</div>
+		</isif>
+		
+	<iselse/>
+
+		<iscomment>display no results</iscomment>
+		<div class="no-results">
+			<isprint value="${Resource.msg('productresultarea.noresults','search',null)}" />
+		</div>
+
+	</isif>
+
+	<iscomment>Render promotional content at the bottom of search results as global slot</iscomment>
+	
+	<iscomment>Event Tracking For Search hits </iscomment>
+	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
+		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
+			<script>
+			  var term=$('#q').val();
+			  googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.searchhit','events',null)}','${pdict.ProductSearchResult.searchPhrase}',term);
+			</script>
+		</isif>	
+		
+	 </isif>
+	
+</isdecorate>

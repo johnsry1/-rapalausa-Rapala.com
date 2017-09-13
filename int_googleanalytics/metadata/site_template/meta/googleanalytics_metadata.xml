@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">   
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="GA_Domain">
+                <display-name xml:lang="x-default">Domanin Name</display-name>
+                <description xml:lang="x-default">Specify domain name</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <default-value>demandware.net</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="GA_TrackingID">
+                <display-name xml:lang="x-default">Tracking ID</display-name>
+                <description xml:lang="x-default">Specify Google Analytic's Tracking ID</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="isEcommerceTrackingEnabled">
+                <display-name xml:lang="x-default">Is Ecommerce Tracking Enabled</display-name>
+                <description xml:lang="x-default">Tick check box to make E-commerce Tracking Enabled</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="isGoogleAnalyticsGoalsEnable">
+                <display-name xml:lang="x-default">Is Google Analytics Goals Enable</display-name>
+                <description xml:lang="x-default">Tick check box to make Google Analytics Goals Enable</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="isEventTrackingEnabled">
+                <display-name xml:lang="x-default">Is Google Analytics Events Tracking Enable</display-name>
+                <description xml:lang="x-default">Tick check box to make Google Analytics Events Tracking Enable</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>            
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="GA">
+                <display-name xml:lang="x-default">Google Analytics</display-name>
+                <attribute attribute-id="GA_TrackingID"/>
+                <attribute attribute-id="GA_Domain"/>
+                <attribute attribute-id="isEcommerceTrackingEnabled"/>
+                <attribute attribute-id="isGoogleAnalyticsGoalsEnable"/>
+                <attribute attribute-id="isEventTrackingEnabled"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

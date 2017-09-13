@@ -1,0 +1,65 @@
+/**
+ * This script sets the shipping method of the given shipment to
+ * the passed method.  The list of allowed shipping methods may be
+ * passed in as a parameter.  If not, then it is retrieved using
+ * ShipmentShippingModel.getApplicableShippingMetods().
+ * If the passed shipping method is not
+ * in this list, then the script uses the default shipping method.
+ * If the default shipping method is not in the list, the script
+ * uses the first method in the list.
+ * 
+ */
+importPackage( dw.customer );
+importPackage( dw.order );
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.web );
+var Transaction = require('dw/system/Transaction');
+
+function setShippingMethod( basket, city, postalCode )
+{
+	//var basket : Basket = pdict.Basket;
+	var shipment : Shipment = basket.defaultShipment;
+	if(shipment.getShippingMethod() == null){
+		// country code
+		var countryCode = "US";
+		var stateCode = "NY"; 
+		// postal code
+		//var city : String = pdict.City;
+		// postal code
+		//var postalCode : String	= pdict.PostalCode;
+		// Construct an address from request parameters.
+		var addressObj = new Object();
+		addressObj.countryCode = countryCode;
+		addressObj.stateCode = stateCode;
+		addressObj.postalCode = postalCode;
+		addressObj.city = city;
+		// Retrieve the list of applicabnle shipping methods for the given shipment and address.
+		var shippingModel : ShipmentShippingModel = ShippingMgr.getShipmentShippingModel(shipment);
+		var ret : Collection = new ArrayList();
+		ret = shippingModel.getApplicableShippingMethods(addressObj);
+		//var shippingMethod : dw.order.ShippingMethod = pdict.ShippingMethod;
+		var defaultShippingMethod = ShippingMgr.getDefaultShippingMethod();
+		if (ret.contains(defaultShippingMethod))
+		{
+			// 2) Set the default shipping method if it is applicable.
+			Transaction.wrap(function(){
+				shipment.setShippingMethod( defaultShippingMethod );
+			});
+		}
+		else if (shippingMethods.length > 0)
+		{
+			// 3) Set the first shipping method in the applicable list.
+			shipment.setShippingMethod(ret.iterator().next());
+		}
+		else
+		{
+			// 4) Invalidate the current shipping method selection.
+			shipment.setShippingMethod(null);
+		}
+	}	
+}
+
+module.exports={
+	setShippingMethod : setShippingMethod
+}

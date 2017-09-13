@@ -1,0 +1,55 @@
+/**
+* This script will converts the customers CSV into an Array.  
+* @input SourceVIPCardsCSV : String
+* @output VIPCardArray : Array
+* @output ErroredOutVIPCards : dw.util.ArrayList
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage(dw.util);
+function execute( args : PipelineDictionary ) : Number
+{	
+	var srcfile : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + args.SourceVIPCardsCSV );
+	try{
+    	args.VIPCardArray = ConevertCSVTOARRAY(srcfile, args);    	
+	}
+	catch(e){
+		Logger.getLogger("VIPCardImport").error("Error while converting CSV to Array. Error:"+e.message);
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}
+function ConevertCSVTOARRAY(srcfile : File, args : PipelineDictionary)
+{
+	var retArray = [];
+	var csvioreader : FileReader = new FileReader(srcfile);	
+	args.ErroredOutVIPCards = new ArrayList();
+	var csvreader : CSVStreamReader = new CSVStreamReader(csvioreader);
+	csvreader.readNext();
+	var currenRecord : Array = new Array();
+	Logger.getLogger("VIPCardImport").debug("VIP cards CSV to VIP cards array conversion starts...");
+	while(currenRecord = csvreader.readNext()){
+		var tempobject : Object = new Object();
+		Logger.getLogger("VIPCardImport").debug("Processing VIP card "+currenRecord[0]);
+		if(!empty(currenRecord[0])){
+			tempobject.code = currenRecord[0];
+			var customergrouplist : ArrayList = new ArrayList();
+			Logger.getLogger("VIPCardImport").debug("Get customer group list of "+currenRecord[0]);
+			for(var i=0; i<5; i++){
+				if(!empty(currenRecord[1+i])){
+					customergrouplist.add(currenRecord[1+i]);
+				}
+			}
+			tempobject.customergrouplist = customergrouplist;
+			Logger.getLogger("VIPCardImport").debug("Get giftcard amount of "+currenRecord[0]);
+			if(!empty(currenRecord[6]))
+				tempobject.amount = new Number(currenRecord[6]);
+			retArray.push(tempobject);
+		}
+		else{
+			args.ErroredOutVIPCards.add(currenRecord[0]);
+		}		 
+	}	
+	Logger.getLogger("VIPCardImport").debug("VIP cards CSV to VIP cards array conversion ends...");
+	return retArray;	
+}

@@ -1,0 +1,199 @@
+// Copyright (C) 2012 Priority Fulfillment Services, Inc. All rights reserved.
+/*
+*  CSS Catalog Export Feed
+*  Revision 1.00
+*
+*  07/29/2012 - SC - Initial revision of catalog export, implemented for Starbuck's CSS catalog load
+*
+* @input 	OverrideProductNameField 			: String
+*/
+
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.catalog );
+importPackage( dw.web );
+importPackage( dw.net );
+
+function execute( pdict : PipelineDictionary ) : Number {
+	var GMClientID : String = Site.getCurrent().getCustomPreferenceValue("CSSServiceClientID");
+	var products : SeekableIterator = ProductMgr.queryAllSiteProducts();
+	
+	var overrideProductNameField = null;
+	if ('OverrideProductNameField' in pdict && pdict.OverrideProductNameField != null) {
+		overrideProductNameField = pdict.OverrideProductNameField;
+	}
+	
+	if (products.hasNext()) {
+		var date : Calendar = new Calendar();
+		var timestamp = StringUtils.formatCalendar(date, "MMddyyyyHHmmss");
+		var file : File = new File(dw.io.File.IMPEX + File.SEPARATOR + "upload" + File.SEPARATOR + "GMCatalog_" + dw.system.Site.getCurrent().ID + "_" + timestamp + ".xml");
+		var fileWriter : FileWriter = new FileWriter(file, "utf-8");
+	  	var xmlWriter : XMLIndentingStreamWriter = new XMLIndentingStreamWriter(fileWriter);
+		    		    	
+	  	xmlWriter.writeStartDocument("UTF-8", "1.0");
+	  	xmlWriter.writeStartElement("GlobalMerchant");
+		while (products.hasNext()) {
+			try {
+				var product : Product = products.next();
+				if ((ProductMgr.getProduct(product.ID).isProduct()) && !(ProductMgr.getProduct(product.ID).isMaster()) && !(ProductMgr.getProduct(product.ID).isBundle())){
+					xmlWriter.writeStartElement("Item");
+					addXMLElement(xmlWriter, "CatalogID", "1");
+					addXMLElement(xmlWriter, "CatalogItemID", "1");
+					if ('CSSClassificationCategory' in product.custom && product.custom.CSSClassificationCategory !='') {
+						addXMLElement(xmlWriter, "ItemTypeID", product.custom.CSSClassificationCategory);
+					} else {
+						addXMLElement(xmlWriter, "ItemTypeID", "1");
+					}
+					addXMLElement(xmlWriter, "Active", "1");
+					addXMLElement(xmlWriter, "ClientID", GMClientID);
+					
+					//Check for product name and if nothing is set use the product ID and message - used because field is required for item creation in GM
+					
+					// Check for override on product name field
+					if (overrideProductNameField != null) {
+						if (!empty(product[overrideProductNameField])) {
+							addXMLElement(xmlWriter, "Description", product[overrideProductNameField]);
+						}
+						else {
+							addXMLElement(xmlWriter, "Description", product.ID + " - No Product " + overrideProductNameField + " Defined");
+						}
+					}
+					else {
+						if (!empty(product.name) && product.name != "") {
+							addXMLElement(xmlWriter, "Description", product.name);
+						} else {
+							addXMLElement(xmlWriter, "Description", product.ID + " - No Product Name Defined");
+						}
+					}
+					
+					//Check for product short description and if nothing is set use the product ID and message - used because field is required for item creation in GM
+					if (!empty(product.shortDescription) && product.shortDescription != "") {
+						addXMLElement(xmlWriter, "ExtendedDescription", product.shortDescription);
+					} else {
+						addXMLElement(xmlWriter, "ExtendedDescription", product.ID + " - No Product Short Description Defined");
+					}
+					addXMLElement(xmlWriter, "LocaleID", "1");
+					addXMLElement(xmlWriter, "ManufacturerID", "1");
+					if (!empty(product.ID) && product.ID != "") {
+						addXMLElement(xmlWriter, "ProductCode", product.ID);
+					}
+					if ("size" in product.custom && !empty(product.custom.size) && product.custom.size != "") {
+						addXMLElement(xmlWriter, "Size", product.custom.size);
+					}
+					if ("color" in product.custom && !empty(product.custom.color) && product.custom.color != "") {
+						addXMLElement(xmlWriter, "Color", product.custom.color);
+					}
+					if ("masterProduct" in product && !empty(product.masterProduct.ID) && product.masterProduct.ID != "") {
+						addXMLElement(xmlWriter, "Style", product.masterProduct.ID);
+					} else {
+						addXMLElement(xmlWriter, "Style", product.ID);
+					}
+					xmlWriter.writeEndElement();
+				}
+			} catch (e) {
+				Logger.error("CSS Catalog Export: Error writing product data for catalog export. ProductID: {0}", product.ID);
+				return PIPELET_ERROR;
+			}	
+		}
+		xmlWriter.writeEndElement();
+		xmlWriter.writeEndDocument();
+		xmlWriter.flush();
+		xmlWriter.close();
+		fileWriter.flush();
+		fileWriter.close();    		
+		try {
+			if (uploadSFTP(file)) {
+
+				} else {
+	  				Logger.error("500","Connection Error - Unable to connect to SFTP Server!");
+	  				products.close();
+	  				return PIPELET_ERROR;		  			
+	  			}
+	  	} catch(e) {
+	  		var loc = e;
+	    	if (e.message.indexOf("java.net.UnknownHostException")>0) {
+	      		Logger.error("500","Connection Error - Host not found!");
+	    	} else {
+	      		Logger.error("499 - Unexpected/Unhandled error occurred: " + e.message);
+	    	}
+	    	products.close();
+	    	return PIPELET_ERROR;
+		}
+	
+	}
+	products.close();
+	return PIPELET_NEXT;
+}
+
+function addXMLElement( xWriter : XMLIndentingStreamWriter, nodeName : string, content : string) {
+   	xWriter.writeStartElement(nodeName);
+   	if (content != null) {
+   		xWriter.writeCharacters(content);
+   	}
+   	else {
+   		xWriter.writeCharacters("");	
+   	}
+   	xWriter.writeEndElement();
+}
+ 
+function addXMLElementCDATA( xWriter : XMLIndentingStreamWriter, nodeName : string, content : string) {
+   	xWriter.writeStartElement(nodeName);
+   	if (content != null) {
+   		xWriter.writeCData(content);
+   	}
+   	else {
+   		xWriter.writeCharacters("");	
+   	}
+   	xWriter.writeEndElement();
+}
+ 
+function uploadSFTP(file : File) : Boolean {
+	var isSuccess : Boolean = false;
+
+	if (file == null || !file.isFile()) {
+    	Logger.error("CSS Catalog Export Error: File is not a file!");
+    	return PIPELET_ERROR;
+  	}
+
+  	var ftpServer   = Site.getCurrent().preferences.custom.CSSServiceFTPHost;
+  	var ftpUser     = Site.getCurrent().preferences.custom.CSSServiceFTPUser;
+  	var ftpPassword = Site.getCurrent().preferences.custom.CSSServiceFTPPassword;
+  	var ftpPath     = Site.getCurrent().preferences.custom.CSSServiceFTPPath;
+  	var ftpPort     = 22;
+  	try {
+    	ftpPort 	= Site.getCurrent().preferences.custom.CSSServiceFTPPort;
+  	} catch (e) {}
+
+  	if (empty(ftpServer) || empty(ftpUser) || empty(ftpPassword) || empty(ftpPath)) {
+    	Logger.error("CSS Catalog Export SFTP ERROR: site preferences not defined - server/{0};port/{1};user/{2};password/{3};path/{4} not set!\n", ftpServer, ftpPort, ftpUser, ftpPassword, ftpPath);
+    	return PIPELET_ERROR;
+  	}
+
+  	//
+  	// ftp each file and afterwards delete it from the server
+  	//
+  	var sftp : SFTPClient = new SFTPClient();
+  	sftp.setTimeout(10000);
+  	if (sftp.connect(ftpServer, ftpPort, ftpUser, ftpPassword) && sftp.connected) {
+
+    	var path = ftpPath; // + (ftpPath.match(/\/$/) ? '' : '/');
+    	var isUploaded = sftp.putBinary(path + "/Catalog/" + file.name, file);
+    	if (!isUploaded) {
+    		var errSFTP = sftp.errorMessage;
+    		Logger.error("CSS Catalog Export SFTP ERROR: Failed to upload file " + file.fullPath + " : " + errSFTP);
+    		isSuccess = false;
+    	}
+    	else {
+    		// SUCCESS - set orders to Exported
+    		isSuccess = true;	
+    	}
+    	
+  	} 
+  	else {
+    	Logger.error("CSS Catalog Export SFTP ERROR: Can not establish ftp connection to {0}!", ftpServer);
+    	isSuccess = false;
+  	}
+  	sftp.disconnect();
+  	return isSuccess;	
+}

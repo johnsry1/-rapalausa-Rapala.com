@@ -1,0 +1,138 @@
+/**
+ * The purpose of this script is to provide customization hooks for customizable order elements.
+ * If a certain part of the webservice request has such elements, the appropriate function is provided here.
+ */
+importPackage(dw.system);
+importPackage(dw.rpc);
+importPackage(dw.util);
+importPackage(dw.value);
+importPackage(dw.order);
+importPackage(dw.catalog);
+importPackage(dw.net);
+importPackage(dw.campaign);
+importPackage(dw.io);
+importPackage(dw.customer);
+
+//make sure you have this file. This is the settings script
+importScript("bc_common:lib/libImageServer.ds");
+importScript("bc_common:util/ETEUtils.ds");
+
+/**
+ * Adds the customizable request elements to the order header
+ *
+ * @input - OrderHeader
+ * @input - currentOrder Order that needs to be exported
+ */
+function addOrderHeaderCustom(xWriter: XMLIndentingStreamWriter, currentOrder: Order, ForShipment: Shipment) {
+
+	var agentID = currentOrder.createdBy.toLowerCase();
+	if ('overrideAgentID' in currentOrder.custom && currentOrder.custom.overrideAgentID != null) {
+		addXMLElement(xWriter, "AgentID", agentID);
+	} else {
+		addXMLElement(xWriter, "AgentID", agentID);
+	}
+	if ('StoreNumber' in currentOrder.custom && currentOrder.custom.StoreNumber) {
+		addXMLElement(xWriter, "StoreNumber", currentOrder.custom.StoreNumber);
+	}
+
+	var tmpOrderType = (empty(currentOrder.createdBy) || currentOrder.createdBy == "Customer") ? "W" : "T";
+	if (ForShipment != null) {
+		if ('iCommerceIsStorePickup' in ForShipment.custom && ForShipment.custom.iCommerceIsStorePickup) {
+
+			tmpOrderType = "S";
+		}
+	}
+	addXMLElement(xWriter, "OrderType", tmpOrderType);
+	addXMLElement(xWriter, "SearchType", "E");
+
+	// Customer ID
+	var customer: Customer = currentOrder.getCustomer();
+	if (customer && empty(customer.profile)) {
+		addXMLElement(xWriter, "CustomerID", currentOrder.customerNo);
+	}
+
+	// Customer Registered
+	if (customer && customer.registered) {
+		addXMLElement(xWriter, "CustomerRegistered", "Y");
+	} else {
+		addXMLElement(xWriter, "CustomerRegistered", "N");
+	}
+}
+
+/**
+ * Adds the customizable request elements to the line items
+ *
+ * @input - LineItemRequest
+ * @input - LineItem that needs to be exported
+ */
+function addLineItemRequestCustom(xWriter: XMLIndentingStreamWriter, productLineItem: ProductLineItem, shipment: Shipment) {
+
+	var product: Product = productLineItem.product;
+	var tmpAltName: String = "";
+
+	if (product.isVariant()) {
+
+		var variations: ProductVariationModel = product.variationModel;
+		var variationAttributes: Collection = variations.productVariationAttributes;
+		var altNameAdd: String = "";
+		for each(var variationAttribute: ProductVariationAttribute in variationAttributes) {
+			altNameAdd += variations.getSelectedValue(variationAttribute).displayValue + "|";
+			if (variationAttribute.ID == "color") {
+				// get the display value for color and safe it to stringAttribute1
+				addXMLElement(xWriter, 'StringAttribute1', variations.getSelectedValue(variationAttribute).displayValue);
+				// get the image url if we have a style
+				if ('style' in product.custom && product.custom.style) {
+					var selectedColorValue = variations.getSelectedValue(variationAttribute).ID;
+					//var imageURL = getImageURL("0.9", 80, 80, "enlargements%2Fe", product.custom.style, selectedColorValue);
+					var imageURL = getImageURL("OrderExport", product.custom.style, selectedColorValue, true);
+					addXMLElement(xWriter, 'StringAttribute2', imageURL);
+				}
+			}
+
+			if (variationAttribute.ID == "size") {
+				addXMLElement(xWriter, 'StringAttribute3', variations.getSelectedValue(variationAttribute).displayValue);
+			}
+		}
+
+		// remove the last "|" 
+		var lastIndex: Number = altNameAdd.lastIndexOf("|");
+		if (lastIndex > 0) {
+			altNameAdd = altNameAdd.substring(0, lastIndex);
+		}
+		tmpAltName = altNameAdd;
+	}
+
+	if ('availabilityMessage' in productLineItem.custom && productLineItem.custom.availabilityMessage != null) {
+		addXMLElement(xWriter, 'StringAttribute4', productLineItem.custom.availabilityMessage);
+	}
+
+	//add shipment gift informations also to line items
+	addXMLElement(xWriter, 'GiftAttribute1', shipment.isGift());
+	addXMLElement(xWriter, 'GiftAttribute2', shipment.custom.giftWrappingFlag);
+	addXMLElement(xWriter, 'GiftAttribute3', shipment.giftMessage);
+
+}
+
+/**
+ * Adds the customizable request elements to the shipment line items
+ *
+ * @input - OrderHeader
+ * @input - currentOrder Order that needs to be exported
+ */
+function addShipmentCustom(xWriter: XMLIndentingStreamWriter, shipment: Shipment) {
+	addXMLElement(xWriter, 'GiftAttribute1', shipment.isGift());
+	addXMLElement(xWriter, 'GiftAttribute2', shipment.custom.giftWrappingFlag);
+	addXMLElement(xWriter, 'GiftAttribute3', shipment.giftMessage);
+	addXMLElement(xWriter, 'ShippingMethodID', shipment.getShippingMethod().custom.jdeID);
+}
+
+/**
+ * Adds the customizable request elements to the payment auth section
+ *
+ * @input - paymentAuthRequest
+ * @input - paymentTransaction
+ */
+function addPaymentAuthCustom(xWriter: XMLIndentingStreamWriter, currentOrder: Order) {
+	addXMLElement(xWriter, 'MerchantID', Site.getCurrent().preferences.custom.ete_cs_SCMP_MerchantID);
+	addXMLElement(xWriter, 'MerchantRefNum', currentOrder.orderNo);
+}

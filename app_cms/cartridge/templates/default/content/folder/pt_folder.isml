@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<isinclude template="util/modules"/>
+<head>
+	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
+	<isinclude template="components/header/htmlhead"/>
+</head>
+<body>
+
+<div id="container" class="pt_customerservice">
+	<isinclude template="components/header/header"/>
+	<div id="main">
+		<div id="content">
+		<isscript>
+			var bc = [];
+			bc.push(folder);
+			var nextFolder = folder.parent;
+			var brandNames = new dw.util.HashSet();
+			brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce','otter']);
+			while(nextFolder.root == false) {
+				if(!brandNames.contains(nextFolder.ID)) {
+					bc.push(nextFolder);
+				}
+				nextFolder = nextFolder.parent;
+			}
+			var len = bc.length;
+			var bcmap = new dw.util.LinkedHashMap();
+			while(len--) {
+				if(len > 0) {
+					bcmap.put(bc[len].displayName, URLUtils.http('Folder-Show','fdid',bc[len].ID));
+				} else {
+					bcmap.put(bc[len].displayName, null);
+				}
+			}
+		</isscript>
+        <ismapbreadcrumbs bcmap="${bcmap.entrySet()}" />
+			<div id="page-background" class="downshift">
+				<div id="page">
+		<div class="wrapper">
+		<isscript>
+			var folder : Folder = pdict.Folder;
+		</isscript>
+  		<isif condition="${folder != null && folder.online}">
+		<div class="row column3 about-us">
+			<div class="column">
+			 <div class="cell contentbox upshift">
+				<div class="contentboxcontent">
+					<h1 class="about-title">${folder.displayName}</h1>
+					<isif condition="${!empty(folder.description)}">
+					<p><isprint value="${folder.description}" encoding="off" /></p>
+					</isif>
+				</div>
+			</div>
+			<isscript>
+			 	var rootfolder : dw.content.Folder = null;
+			 	var potentialFolder = folder;
+			 	while(empty(rootfolder)) {
+			 		if(potentialFolder.custom.leftNavRoot) {
+			 			rootfolder = potentialFolder;
+			 			break;
+			 		}
+			 		if(empty(rootfolder) && potentialFolder.root) {
+			 			rootfolder = potentialFolder;
+			 			break;
+			 		}
+			 		potentialFolder = potentialFolder.parent;
+			 	}
+			</isscript>
+			<isif condition="${!empty(rootfolder)}">
+			<div class="cell contentbox upshift desktop-view ">
+				<isinclude url="${URLUtils.url('LeftNav-Show','currentSite',session.custom.currentSite,'rootfdid',rootfolder.ID,'fdid',folder.ID)}"/>
+			</div><!-- END: cell -->
+			</isif>
+		</div><!-- END: column -->
+			<div class="column colspan2">
+			  <isreplace/>   
+			</div>
+			
+			<isif condition="${!empty(rootfolder)}">
+			<div class="cell contentbox upshift secondbox mobile-view ">
+				<isinclude url="${URLUtils.url('LeftNav-Show','currentSite',session.custom.currentSite,'rootfdid',rootfolder.ID,'fdid',folder.ID)}"/>
+			</div><!-- END: cell -->
+			</isif>
+			</div><!-- END: row column3 -->
+			</isif>
+		</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+		</div><!-- END: page-background -->
+		</div><!-- END: content -->
+	</div><!-- END: main -->
+	<isinclude template="components/footer/footer"/>
+</div><!-- END: container -->
+</body>
+</html>

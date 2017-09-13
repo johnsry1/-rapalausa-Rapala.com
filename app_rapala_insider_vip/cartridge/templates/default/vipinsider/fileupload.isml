@@ -1,0 +1,51 @@
+<!--- TEMPLATENAME: fieldstaff.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<isinclude template="util/modules"/>
+<isscript>
+	importPackage( dw.util );
+	importPackage( dw.system );
+	importPackage( dw.io );
+	var fileList : ArrayList = new ArrayList();
+	var fileSize : ArrayList = new ArrayList();
+	var fname : File = new File( File.IMPEX + "/src/VIPInsider/");
+	var fileslists  =  fname.listFiles();
+	if(pdict.FileName!=null){
+	var uploaded = pdict.FileName.split('**')[0] +"**" +pdict.FileName.split('**')[1]+"**";
+		for(var i=0;i<fileslists.length;i++){
+					var fpart = fileslists[i].name.split('**')[0];
+				    var spart = fileslists[i].name.split('**')[1];
+				    var pref = fpart+"**"+spart+"**";
+				    if(uploaded==pref){
+					    fileList.add(fileslists[i].name.split('**')[2]);
+						fileSize.add(fileslists[i].length());
+				    }
+				}
+	}
+	else if(pdict.removeFileName.value!=null){
+	var Fullname = pdict.removeFileName.value;
+	var uploaded : String = Fullname.split('**')[0] + "**" +  Fullname.split('**')[1] + "**";
+	for(var i=0;i<fileslists.length;i++){
+			var fpart = fileslists[i].name.split('**')[0];
+		    var spart = fileslists[i].name.split('**')[1];
+		    var pref = fpart+"**"+spart+"**";
+			    if(uploaded==pref){
+			   	 fileList.add(fileslists[i].name.split('**')[2]);
+			   	 fileSize.add(fileslists[i].length());
+			    }
+		}
+	}
+	var iter : Iterator = fileSize.iterator();
+	var add = 0;
+	while(iter.hasNext()){
+		add += iter.next();
+	}
+	add = add/1024/1024;
+</isscript>
+
+<ul>
+<isloop iterator="${fileList}" alias="file"> 
+	<li><span class="updatetext" value="${add}">${file}</span>
+	<isset name="indiv_file" value="${uploaded + file}" scope="page" />
+	<button class="remove" type="submit" data-file="${indiv_file}" value="${Resource.msg('global.remove', 'locale',null)}" name="remove"><span>${Resource.msg('global.remove','locale',null)}</span></button></li>
+</isloop>
+</ul>

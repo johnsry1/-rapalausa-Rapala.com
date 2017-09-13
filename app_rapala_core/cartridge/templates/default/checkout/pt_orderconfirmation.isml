@@ -1,0 +1,74 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+	<meta name="format-detection" content="telephone=no">
+	<isinclude template="util/modules"/>
+
+	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
+	<isscript>
+		var pageContext = {
+			title: 'Order Confirmation',
+			type: 'orderconfirmation',
+			ns: 'orderconfirmation'
+		};
+	</isscript>
+	<isinclude template="components/header/checkouthtmlhead"/>
+	<iscomment>commission junction storing cookies into OMS i.e order level </iscomment>
+	<isif condition="${pdict.Order}">
+		<isinclude template="components/header/setcookie" />
+  		<isinclude url="${URLUtils.url('CommissionJunction-StoreUDOToOms','OrderID',pdict.Order.originalOrderNo)}" />
+ 	</isif> 
+	<isinclude template="checkout/pt_orderconfirmation_UI"/>
+
+	<iscomment>Add template-specific header information here.</iscomment>
+
+</head>
+
+<body>
+	<div id="container" class="pt_orderconfirmation">
+		<isinclude template="components/header/checkoutheader"/>
+
+		<div id="main" role="main" class="clearfix primary-focus">
+			<div id="content">
+				<div id="page-background" class="downshift">
+					<div id="page">
+						<div class="wrapper">
+							<div class="row column3">
+								<div class="column colspan2">
+									<isreplace/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<isinclude template="components/footer/checkoutfooter"/>
+		<script type=text/javascript src="https://services.xg4ken.com/js/kenshoo.js?cid=4f5a1e0a-d511-47bd-8354-af06bc6e7700" ></script>
+		<script type=text/javascript>
+			kenshoo.trackConversion('1157','4f5a1e0a-d511-47bd-8354-af06bc6e7700',{
+   			/*OPTIONAL PARAMETERS. FILL VALUES OR REMOVE UNNEEDED PARAMETERS*/
+   			conversionType: 'order', /*specific conversion type. example: type:'AppInstall' default is 'conv'*/
+   			revenue: 25, /*numeric conversion value. example convValue: 12.34*/
+   			currency:'USD', /*example currency:'USD'*/
+   			orderId:'',/*example orderId: 'abc'*/
+   			promoCode:'',
+   			customParam1:'', /*any custom parameter. example: Airport: 'JFK'*/
+   			customParam2:'', /*any custom parameter. example: Rooms: '3'*/
+   			customParamN:'' })
+		</script>
+
+		<noscript>
+   			<img src="https://1157.xg4ken.com/pixel/v1?track=1&token=4f5a1e0a-d511-47bd-8354-af06bc6e7700&conversionType=order&revenue=25&currency=USD&orderId=&promoCode=&customParam1=&customParam2=" width="1" height="1" />
+		</noscript>
+		<isinclude template="checkout/pt_orderconfirmation_VARS"/>
+
+	</div>
+</body>
+</html>

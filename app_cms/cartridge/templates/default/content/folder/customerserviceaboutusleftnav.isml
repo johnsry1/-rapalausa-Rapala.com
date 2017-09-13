@@ -1,0 +1,59 @@
+<iscache type="relative" hour="24"/>
+<div class="left-content">
+<isscript>
+	var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.custom.currentSite);
+</isscript>
+	   <isif condition="${aboutUsFolder != null && aboutUsFolder.online}">
+	      <div class="contentboxcontent">
+			<h2 class="left-nav-style">${aboutUsFolder.displayName}</h2>
+			<ul class="nav-group">
+			<isloop items="${aboutUsFolder.onlineSubFolders}" var="subFolder">
+				<isif condition="${!subFolder.onlineContent.empty}">
+					<isif condition="${subFolder.ID == 'strikemaster-customer-shipping' || subFolder.ID == 'marcum-customer-warranty' || subFolder.ID == 'strikemaster-customer-returns' || subFolder.ID == 'strikemaster-warranty' || subFolder.ID=='strikemaster-about-warranty' || subFolder.ID == 'rapala-current-promotions'}">
+						<li id = "${subFolder.ID}" class="first-level navfirstClick handle-non-us"><span>${subFolder.displayName}</span>
+					<iselse>
+						<li id = "${subFolder.ID}" class="first-level navfirstClick"><span>${subFolder.displayName}</span>
+					</isif>
+						<ul class="second-level" style="display: none;">
+						<isloop items="${subFolder.onlineContent}" var="subContent">
+							<isif condition="${pdict.CurrentHttpParameterMap.cid.stringValue == subContent.ID}">
+								<li class="active">
+							<iselse>
+								<li>
+							</isif>
+							<a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+						</isloop>
+						</ul>
+					</li>
+				</isif>
+			</isloop>
+			<isloop items="${aboutUsFolder.onlineContent}" var="subContent">
+				<isif condition="${pdict.CurrentHttpParameterMap.cid.stringValue == subContent.ID  }">
+					<li id="${subContent.ID}" class="first-level-no-children active">
+				<iselse>
+					<isif condition="${subContent.ID == 'strikemaster-customer-shipping' || subContent.ID == 'marcum-warranty' || subContent.ID == 'strikemaster-customer-returns' || subContent.ID == 'strikemaster-warranty' || subContent.ID == 'marcum-customer-returns' || subContent.ID == 'marcum-customer-shipping'}">
+						<li id="${subContent.ID}" class="first-level-no-children handle-non-us">
+					<iselse>
+						<li id="${subContent.ID}" class="first-level-no-children">
+					</isif>
+				</isif>
+				<span>
+					<a class="nolink" title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a>
+				</span>
+				</li>
+			</isloop>
+			</ul>
+		</div><!-- End of contentboxcontent -->	
+		</isif>
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery('.first-level').live('click',function() {
+			jQuery(this).children('.second-level').toggle();
+			jQuery(this).toggleClass('navfirstClick');
+	});
+	jQuery('.first-level li.active').closest('.first-level').click();
+	jQuery('.first-level li a').click(function(event) {
+		event.stopPropagation();
+	});
+/* ]]> */</script>
+

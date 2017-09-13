@@ -1,0 +1,107 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/> 
+<iscomment>
+	This template renders the bread crumb navigation for the product detail page.
+</iscomment>
+<div class="breadcrumb">
+	<div class="wrapper">
+		<div class="row column1">
+			<div class="column">
+				<div class="cell">
+					<ul>
+					<isset name="site" value="${session.custom.currentSite}" scope="page" />
+	
+					<isif condition="${'rapala' == site}">
+						<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','1')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'sufix' == site}">
+						<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','2')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'triggerx' == site}">
+						<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','3')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					<iselseif condition="${'storm' == site}">
+						<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','4')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					<iselseif condition="${'vmc' == site}">
+						<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','6')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'luhrjensen' == site}">
+	   					<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','5')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'marcum' == site}">
+	   					<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','10')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					<iselseif condition="${'terminator' == site}">
+					  	<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','7')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'strikemaster' == site}">
+					   	<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','11')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					<iselseif condition="${'bluefox' == site}">
+					   	<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','8')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					<iselseif condition="${'williamson' == site}">
+					  	<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','9')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					<iselseif condition="${'iceforce' == site}">
+	   					<a class="breadcrumb-element" href="${URLUtils.http('Home-Show','id','20')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					</isif>
+						
+					<iscomment>
+						the category context is determined based on the product search
+						which was triggered or through the products primary category
+					</iscomment>
+					<isscript>
+						var category : dw.catalog.Category = null;
+						var currentSite : String = session.custom.currentSite;
+				
+						// get category from search context
+						/*if( !empty(pdict.ProductSearchResult) )
+						{
+							category = pdict.ProductSearchResult.category;
+						}*/
+				
+						// get category from parameters
+						/*if( category == null && pdict.CurrentHttpParameterMap.cgid != null)
+						{
+							categoryTmp = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
+							// check if category is assigned to product
+							if(categoryTmp != null && (pdict.Product.isAssignedToCategory(categoryTmp) ? true : pdict.Product.variationModel.master != null ? pdict.Product.variationModel.master.isAssignedToCategory(categoryTmp) : false) )
+							{
+								category = categoryTmp;
+							}
+						}*/
+				
+						if( category == null )
+						{
+							// get category from products primary category
+							category = pdict.Product.primaryCategory;
+				
+							// get category from product master if not set at variant
+							if( category == null && pdict.Product.variant )
+							{
+								category = pdict.Product.variationModel.master.primaryCategory;
+							}
+						}
+					</isscript>
+				
+				   	<iscomment>if we have any category context, we show it</iscomment>
+				  	<isif condition="${category != null && category.online}">
+				
+						<isactivedatacontext category="${category}"/>
+				
+						<isscript>
+							var path : dw.util.Collection = new dw.util.ArrayList();
+							while( category.parent != null )
+							{
+								if( category.online ) path.addAt( 0, category );
+								category = category.parent;
+							}
+						</isscript>
+				
+						<iscomment>display the path</iscomment>
+						<isloop items="${path}" var="cat" status="loopstate">
+						<isif condition="${!loopstate.first}">
+							<a class="breadcrumb-element" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}">${cat.displayName}</a>
+						<span class="breadcrumb-element-slash">  </span>
+						</isif>
+						</isloop>
+				
+						<iscomment>append product name</iscomment>
+						<span class="breadcrumb-element"><isprint value="${pdict.Product.name}" encoding="off"/></span>
+					</isif>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

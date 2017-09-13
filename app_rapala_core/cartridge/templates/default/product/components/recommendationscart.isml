@@ -1,0 +1,63 @@
+<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
+	<isscript>
+		importScript("app_disbestpractice:product/ProductImageSO.ds");
+	</isscript>
+</isif>
+
+<isif condition="${!empty(pdict.RecommendetionList)}">
+	<div class="recommendations cross-sell">
+		<isif condition="${pdict.RecommendetionList.size() > 0}">		
+			<span class="cart-recommendations-heading">	
+					${Resource.msg('recommendations.essentialproducts','product',null)}
+			</span>
+			<div class="search-result-items tiles-container">	
+				<div class="owl-carousel pdprecomo-owl">
+				<isloop items="${pdict.RecommendetionList}" var="recProduct">
+					<isset name="pName" value="${recProduct.name}" scope="page"/>
+						<div class="producttile item">
+							<div class="analytics capture-product-id"><isprint value="${recProduct.ID}"/></div>
+							<div class="product-image recommendation_image">
+								<a class="thumb-link" href="${URLUtils.http('Product-Show','pid', recProduct.ID)}">	
+									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
+									    <isset name="imageObjDesktop" value="${new ProductImage('minicartDesktop',recProduct,0,'minicart')}" scope="page"/>
+									    <isset name="imageObjIPad" value="${new ProductImage('minicartIPad',recProduct,0,'minicart')}" scope="page"/>
+									    <isset name="imageObjIPhone" value="${new ProductImage('minicartIPhone',recProduct,0,'minicart')}" scope="page"/>
+									    <img src="${imageObjDesktop.getURL()}" alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}" class="desktop-only"/>
+									    <img src="${imageObjIPad.getURL()}" alt="${imageObjIPad.getAlt()}" title="${imageObjIPad.getTitle()}" class="ipad-only"/>
+									    <img src="${imageObjIPhone.getURL()}" alt="${imageObjIPhone.getAlt()}" title="${imageObjIPhone.getTitle()}" class="iphone-only"/>
+									</isif>
+								</a>
+							</div>
+							<div class="cartrecommads_cont">
+								<div class="product-name">
+									<a class="cart-recommendationName" href="${URLUtils.http('Product-Show','pid',recProduct.ID)}" title="${pName}"><isprint value="${pName}" encoding="off" /></a>
+								</div>
+								<iscomment>
+								StandardPrice:  quantity-one unit price from the configured list price book.
+								SalesPrice:     product line item base price.
+								If these are different, then we display crossed-out StandardPrice and also SalesPrice.
+								</iscomment>
+								
+								<iscomment>Get the price model for this product.</iscomment>
+								<isset name="PriceModel" value="${recProduct.getPriceModel()}" scope="page"/>
+								
+							<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>	
+				            <div class="cartrecommendetionprice">
+					            <isif condition="${(recProduct.custom.availableForSale != null) && (recProduct.custom.availableForSale != false)}">	
+									<isset name="Product" value="${recProduct}" scope="pdict"/>
+									<isset name="showTieredPrice" value="${true}" scope="pdict"/>
+									<isinclude template="product/components/pricing"/>
+								</isif>	
+							</div>
+							</div>
+							<a id="quickviewbutton" class="quickview"  href="${URLUtils.https('Product-Show','pid', recProduct.ID)}" title="<isprint value="${recProduct.name}" encoding="off" />">
+								<isprint value="${Resource.msg('product.quickview','product',null)}"/>
+							</a>
+							
+						</div>
+				</isloop>
+				</div>
+			</div>
+		</isif>
+	</div>
+</isif>

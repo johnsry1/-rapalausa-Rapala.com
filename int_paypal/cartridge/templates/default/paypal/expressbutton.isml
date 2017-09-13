@@ -1,0 +1,29 @@
+<isscript>
+	var prefs : Object = require('../../../scripts/modules/util/Preferences.ds');
+	var site : dw.system.Site = dw.system.Site.getCurrent();
+	var merchantID : String = site.getCustomPreferenceValue('PP_Merchant_ID');
+	var buttonSrc : String = site.getCustomPreferenceValue('PP_CheckoutButtonUrl');
+	var buttonID : String = 'paypalExpressButton' + (new Date()).getTime();
+</isscript>
+
+<isif condition="${site.getCustomPreferenceValue('PP_ShowExpressCheckoutButtonOnCart')}">
+	<isif condition="${site.getCustomPreferenceValue('PP_EnableIncontextCheckout')}">
+		<a href="${dw.web.URLUtils.https('Paypal-IncontextCheckout', 'checkoutFromtCart', 'true')}" id="${buttonID}"><img src="${buttonSrc}" /></a>
+		<script>
+			window.paypalCheckoutButtons ? window.paypalCheckoutButtons.push('${buttonID}') : window.paypalCheckoutButtons = ['${buttonID}'];
+			window.paypalCheckoutReady = function () { 
+				paypal.checkout.setup('${merchantID}', {
+					button : window.paypalCheckoutButtons,
+					environment : '${prefs.incontextEnvironment}'
+				});
+			}
+		</script>
+		<isif condition="${!request.custom.checkoutJsLoaded}">
+			<script src="//www.paypalobjects.com/api/checkout.js" defer></script>
+			<isset name="checkoutJsLoaded" value="true" scope="request" />
+		</isif>
+	<iselse>
+		<a href="${dw.web.URLUtils.https('Paypal-StartExpressCheckoutFromCartFlow')}"><img src="${buttonSrc}" /></a>
+	</isif>
+	<span>${Resource.msg('paypal.or','locale',null)}</span>
+</isif>

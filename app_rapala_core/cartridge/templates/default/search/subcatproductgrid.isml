@@ -1,0 +1,41 @@
+<iscomment>
+	Produces a product listing as a matrix.
+	Expects to see productsperrow and productrows in dictionary.
+	The value productstoskip has to be set to start with a product later
+	in the iterator not with the first one.
+
+	Examples:
+		producthits		    , an iterator with products to display
+		productstoskip 	= 1 , means the first product will be skipped, we start with the second one
+		productsperrow	= 3 , display three products in a row
+		productprices   = productprices
+		category		= current category
+
+	Of course, this works only as expected when the number of products is sufficient. In all other cases
+	you will see less rows and less products in the last row.
+</iscomment>
+
+<iscomment>Check definition in case they are missing</iscomment>
+
+<isif condition="${pdict.productstoskip == null}">
+	<isset name="productstoskip" value="${0}" scope="page"/>
+<iselse>
+	<isset name="productstoskip" value="${pdict.productstoskip}" scope="page"/>
+</isif>
+
+<iscomment>Counter for product determination</iscomment>
+
+<iscomment>Uses the paging model to identify the product offset. This value is used to with the loop counter to generate the correct start number.</iscomment>
+<isset name="startingOffset"  value="${(pdict.pagingmodel.start)}" scope="page"/>
+<iscomment>Display the remaining products as list</iscomment>
+<ul id="search-result-items" class="search-result-items tiles-container subCategory-landing clearfix">
+	<isloop items="${pdict.producthits.getOnlineSubCategories().iterator()}" var="LoopSubcategoryHit" status="loopstate">
+		<li>
+			<isset name="SubcategoryHit" value="${LoopSubcategoryHit}" scope="page"/>
+			<isset name="starting" value="${(loopstate.count + startingOffset)}" scope="page"/>
+			<iscomment>display a tile per product</iscomment>
+			<isinclude template="product/subcatproductsearchhittile"/>
+		</li>
+	</isloop>
+</ul>
+

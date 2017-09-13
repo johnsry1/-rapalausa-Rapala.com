@@ -1,0 +1,70 @@
+importPackage(dw.svc);
+
+importScript("bc_common:lib/libCommon.ds");
+var serviceHelper = getServiceHelper();
+
+/**
+ * Initialize ETE Services
+ */
+
+//Logon Service
+ServiceRegistry.configure("common.soap.ete.logon", {
+
+    initServiceClient: function() {
+        // create the service stub
+        var serviceClient: Stub = serviceHelper.serviceReference.getService("E2EService", "E2EServiceSoap");
+        serviceHelper.setWebServiceURL(serviceClient);
+        return serviceClient;
+    },
+
+    createRequest: function(svc: Service, params) {
+        // create the logon request
+        var request = serviceHelper.serviceReference.Logon();
+        // add the logon request to the request body	
+        params.addLogonRequest(serviceHelper, request);
+        return request;
+    },
+
+    execute: function(svc: Service, arg: Object) {
+        return svc.getServiceClient().logon(arg);
+    },
+
+    parseResponse: function(svc: Service, response: Object) {
+        return response;
+    }
+});
+
+
+//SDR Token
+ServiceRegistry.configure("common.soap.ete.PFSRepositoryInsertData", {
+	
+	initServiceClient: function() {
+       var serviceClient : Stub = serviceHelper.serviceReference.getService("E2EService", "E2EServiceSoap");
+	   serviceHelper.setWebServiceURL(serviceClient);
+       return serviceClient; 
+   },
+
+   createRequest: function(svc:Service, params) {
+   		var request = new serviceHelper.serviceReference.PFSRepositoryInsertData();
+	    var sdrRequest = new serviceHelper.serviceReference.TPFSRepositoryInsertDataRequest();
+	
+		sdrRequest.timeout = serviceHelper.getTimeOut();
+		sdrRequest.value = params.dataElement;
+		sdrRequest.sessionToken = params.sessionToken;
+		  
+		sdrRequest.PFSRepositoryToken = new serviceHelper.serviceReference.TPFSRepositoryToken();
+		sdrRequest.PFSRepositoryToken.systemID = params.systemID;
+		
+		request.PFSRepositoryInsertDataRequest = sdrRequest;
+		
+		return request;
+   },
+
+   execute: function(svc:Service, arg:Object) {
+        return svc.getServiceClient().PFSRepositoryInsertData( arg );
+   },
+
+   parseResponse: function(svc:Service, response: Object) {
+        return response;
+   }
+});

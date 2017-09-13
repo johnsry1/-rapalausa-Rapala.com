@@ -1,0 +1,145 @@
+/**
+* Demandware Script File
+* To define input and output parameters, create entries of the form:
+*
+* @<paramUsageType> <paramName> : <paramDataType> [<paramComment>]
+*
+* where
+*   <paramUsageType> can be either 'input' or 'output'
+*   <paramName> can be any valid parameter name
+*   <paramDataType> identifies the type of the parameter
+*   <paramComment> is an optional comment
+*
+* For example:
+*
+*-   @input ExampleIn : String This is a sample comment.
+*-   @output ExampleOut : Number
+*
+*/
+importPackage( dw.object );
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.catalog );
+importPackage( dw.io );
+
+function execute( args : PipelineDictionary ) : Number
+{
+
+      var filePath = File.IMPEX + File.SEPARATOR+"src"+File.SEPARATOR+"customization"+File.SEPARATOR+"Pro Anglers Data.csv";
+      
+      var csvReader : dw.io.CSVStreamReader = new CSVStreamReader( new FileReader( new File( filePath ) ) );
+
+      try{
+      	
+	      var line =  csvReader.readNext();
+	      
+	      while(!empty(line)){
+	      	   var proAnglerName : String = line[0];
+	      	   //var newIcon : Boolean = line[];
+	           var homeTown : String = line[1];
+	           var website : String = line[3];
+	           var largeImage : String = line[22];
+	           var tileImage : String = line[21];
+	           var thisYearsFavoriteRapalaLure : String = line[5];
+	           var theOneGotoRapalaLure : String = line[6];
+	           var favoriteFishingMemory : String = line[10];
+	           var mustHaveLuresAndWhy : String = line[4];
+	           var favoriteLake : String = line[8];
+	           
+	           var yearTurnedPro : String = line[2];
+	           
+	           var blueFoxBrand : String = line[20];
+	           var sufixBrand : String = line[13];
+	           var stormBrand : String = line[16];
+	           var luhrJensenBrand : String = line[17];
+	           var terminatorBrand : String = line[18];
+	           var rapalaBrand : String = line[12];
+	           var triggerXBrand : String = line[14];
+	           var vmcBrand : String = line[15];
+	           var williamsonBrand : String = line[19];
+	           
+	           var didYouKnow : String = line[7];
+	           var favoriteTechnique : String = line[9];
+	           var hobbies : String = line[11];
+	           
+	           if(empty(proAnglerName))     { proAnglerName = "";}
+	           if(empty(homeTown))       { homeTown = "";}
+	           if(empty(website))     { website = "";}
+	           if(empty(thisYearsFavoriteRapalaLure))       { thisYearsFavoriteRapalaLure = "";}
+	           if(empty(theOneGotoRapalaLure)){ theOneGotoRapalaLure = "";}
+	           if(empty(favoriteFishingMemory)){ favoriteFishingMemory = "";}
+	           if(empty(mustHaveLuresAndWhy))     { mustHaveLuresAndWhy = "";}
+	           if(empty(favoriteLake))       { favoriteLake = "";}
+	           if(empty(yearTurnedPro))     { yearTurnedPro = "";}
+	           if(empty(largeImage)){largeImage = "";}
+	           if(empty(tileImage)){tileImage = "";}
+
+	           var blueFox : Boolean = 0;
+	           if(!empty(blueFoxBrand) && "YES".equalsIgnoreCase(blueFoxBrand.toString()) )  { blueFox = Boolean('true');}
+
+	           var sufix : Boolean = 0;
+	           if(!empty(sufixBrand) && "YES".equalsIgnoreCase(sufixBrand.toString()) ){ sufix = Boolean('true');}
+	           
+	           var storm : Boolean = 0;
+	           if(!empty(stormBrand) && "YES".equalsIgnoreCase(stormBrand.toString()) ){ storm = Boolean('true');}
+	           
+	           var luhrJensen : Boolean = 0;
+	           if(!empty(luhrJensenBrand) && "YES".equalsIgnoreCase(luhrJensenBrand.toString()) )     { luhrJensen = Boolean('true');}
+	           
+	           var terminator : Boolean = 0;
+	           if(!empty(terminatorBrand) && "YES".equalsIgnoreCase(terminatorBrand.toString()) )       { terminator = Boolean('true');}
+	           
+	           var rapala :  Boolean = 0;
+	           if(!empty(rapalaBrand) && "YES".equalsIgnoreCase(rapalaBrand.toString()) )     { rapala = Boolean('true');}
+	           
+	           var triggerx : Boolean =  0;
+	           if(!empty(triggerXBrand) && "YES".equalsIgnoreCase(triggerXBrand.toString()) )       { triggerx = Boolean('true');}
+	           
+	           var vmc : Boolean = 0;
+	           if(!empty(vmcBrand) && "YES".equalsIgnoreCase(vmcBrand.toString()) ){ vmc = Boolean('true');}
+	           
+	           var williamson : Boolean = 0;
+	           if(!empty(williamsonBrand) && "YES".equalsIgnoreCase(williamsonBrand.toString()) ){ williamson = Boolean('true');}
+	           
+	           if(empty(didYouKnow)){ didYouKnow = "";}
+	           if(empty(favoriteTechnique)){ favoriteTechnique = "";}
+	           if(empty(hobbies)){ hobbies = "";}
+	           
+	           
+               var uuid : String = dw.util.UUIDUtils.createUUID();
+               var lineObj : CustomObject = CustomObjectMgr.createCustomObject("ProStaff",uuid);
+               lineObj.custom.prostaffid = proAnglerName;
+	           lineObj.custom.proanglername = proAnglerName;
+	      	   lineObj.custom.homeTown = homeTown;
+	      	   lineObj.custom.website = website;
+	      	   lineObj.custom.largeImage = largeImage;
+	      	   lineObj.custom.tileImage = tileImage;
+	      	   lineObj.custom.thisyearsfavoriterapalalure = thisYearsFavoriteRapalaLure;
+	      	   lineObj.custom.theonegotorapalalure = theOneGotoRapalaLure;
+	      	   lineObj.custom.favoritefishingmemory = favoriteFishingMemory;
+			   lineObj.custom.musthaveluresandwhy = mustHaveLuresAndWhy;
+			   lineObj.custom.favoritelake = favoriteLake;
+			   lineObj.custom.yearTurnedPro = yearTurnedPro;
+			   lineObj.custom.bluefoxbrand = Boolean(blueFox);
+			   lineObj.custom.sufixbrand = Boolean(sufix);
+			   lineObj.custom.stormbrand = Boolean(storm);
+			   lineObj.custom.luhrjensenbrand = Boolean(luhrJensen);
+			   lineObj.custom.terminatorbrand = Boolean(terminator);
+			   lineObj.custom.rapalabrand = Boolean(rapala);
+			   lineObj.custom.triggerxbrand = Boolean(triggerx);
+			   lineObj.custom.vmcbrand = Boolean(vmcBrand);
+			   lineObj.custom.williamsonbrand = Boolean(williamson);
+			   lineObj.custom.didYouKnow = didYouKnow;
+			   lineObj.custom.favoriteTechnique = favoriteTechnique;
+			   lineObj.custom.hobbies = hobbies;
+	      	   line =  csvReader.readNext();
+	      }
+      
+      }catch(e){
+      	 csvReader.close();
+      	 Logger.error(" ERROR Downloading Pro Staff Data :: "+e);
+      	 return PIPELET_ERROR;
+      }
+      csvReader.close();
+      return PIPELET_NEXT;
+}

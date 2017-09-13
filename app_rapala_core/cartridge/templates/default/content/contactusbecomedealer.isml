@@ -1,0 +1,100 @@
+<isif condition="${pdict.CurrentHttpParameterMap.format.value == 'ajax'}">
+	<isset name="decoratortemplate" value="util/pt_empty" scope="page" />
+	<isset name="isajax" value="true" scope="page" />
+<iselse>
+	<isset name="decoratortemplate" value="content/pt_customerservice" scope="page" />
+	<isset name="isajax" value="false" scope="page" />
+</isif>
+
+<isdecorate template="${decoratortemplate}">
+<isinclude template="util/modules"/>
+<isif condition="${isajax}">
+	<div class="cell contentbox upshift">
+</isif>
+<div class="dealer contentboxcontent">
+	<div class="">
+	<div class="">
+	<h1 class="mobile-view">Become a Dealer</h1>
+	<isif condition="${!empty(pdict.ConfirmationMessage)}">
+		<div class="confirmation-message contactus messagesent">
+				<p>${Resource.msg('forms.contactus.messagesent','forms',null)} 
+			${Resource.msg('forms.contactus.messagerequires','forms',null)}</p>
+		</div>
+		<div class="clear"></div>	
+	<iselse/>
+	<h1>${Resource.msg('global.customerbecomedealer','locale',null)}</h1>
+	<iscontentasset aid="customer-dealer"/>	
+	<hr>
+	
+	<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
+		<fieldset>
+			<div class="formfields">
+				  <div class="formfield formfield_50 formfield_left firstname">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.firstname}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.firstname}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div><!-- END: firstname -->
+				<div class="formfield formfield_50 formfield_right lastname">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.lastname}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.lastname}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				 <div class="formfield formfield_50 formfield_left emailAddress">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.emailaddress}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.emailaddress}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield formfield_50 formfield_right phonenumber">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.phonenumber}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.phonenumber}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield_left stack-fullwidth">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessname}" type="input" class="fullwidth" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessname}" type="input" class="fullwidth" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield formfield_50 formfield_left businessaddress1">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessaddress1}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessaddress1}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield formfield_50 formfield_right pbusinessaddress2">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessaddress2}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.businessaddress2}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield formfield_50 formfield_left city">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.city}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.city}" type="input" label="false"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield formfield_25 formfield_right zip">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.maxdistance}" type="input" value="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.dealer.maxdistance}" type="input" label="false"/>
+					<div class="clear"></div>
+				</div>
+				<div class="formfield formfield_25 formfield_right zip">
+					<isinputfield formfield="${pdict.CurrentForms.dealer.states.state}" type="select"/>
+					<div class="clear"></div>
+				</div>
+					<div class="clear"></div>
+					
+				<div class="formfield">
+					<isinputfield attribute1="rows" value1="8" attribute2="cols" value2="40" formfield="${pdict.CurrentForms.dealer.message}" type="textarea"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formactions">
+					<button id="sendBtn" class="customersubmit" type="submit" value="${Resource.msg('global.send','locale',null)}" name="${pdict.CurrentForms.dealer.send.htmlName}"><span>${Resource.msg('global.send','locale',null)}</span></button>
+				</div>
+			</div><!-- END: formfields -->
+		</fieldset>
+	</form>
+	</isif>
+	</div>
+	</div>
+</div>	
+<isif condition="${isajax}">
+</div>
+</isif>
+</isdecorate>	

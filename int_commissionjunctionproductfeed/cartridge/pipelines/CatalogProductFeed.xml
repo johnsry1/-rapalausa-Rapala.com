@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <description>This is used to export csv product feed to commission junction</description>
+  <branch basename="ProductFeedToCJ">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ProductFeedToCJ" secure="false"/>
+        <node-display x="1" y="0"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="ProductCSVFeed.ds"/>
+          <key-binding alias="loggy" key="ScriptLog"/>
+          <key-binding alias="File" key="File"/>
+          <key-binding alias="RemoteFile" key="RemoteFile"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./b3.1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="source" x="3" y="0"/>
+              <bend-point relative-to="source" x="3" y="2"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="ProductFeedToCJFTP.ds"/>
+          <key-binding alias="loggy" key="ScriptLog"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
+          <key-binding alias="&quot;noreply@rapala.com&quot;" key="MailFrom"/>
+          <key-binding alias="&quot;mail/feedmail&quot;" key="MailTemplate"/>
+          <key-binding alias="&quot;hemanthkumar.bodemu@revsolutionsinc.com;bhockin@rapalausa.com;zcannon@gen3marketing.com&quot;" key="MailTo"/>
+          <key-binding alias="&quot;Rapala Product Feed has been placed in your FTP location.&quot;" key="MailSubject"/>
+          <key-binding alias="null" key="LocaleID"/>
+          <key-binding alias="null" key="MailCC"/>
+          <key-binding alias="null" key="MailBCC"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

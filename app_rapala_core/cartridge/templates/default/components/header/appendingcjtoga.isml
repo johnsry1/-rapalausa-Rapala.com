@@ -1,0 +1,18 @@
+<isset name="cookie_AID" value="${request.httpCookies['CJ_AID'] != null ? request.httpCookies['CJ_AID'].value : null}" scope="page" />
+<isset name="cookie_PID" value="${request.httpCookies['CJ_PID'] != null ? request.httpCookies['CJ_PID'].value : null}" scope="page" />
+<isset name="cookie_SID" value="${request.httpCookies['CJ_SID'] != null ? request.httpCookies['CJ_SID'].value : null}" scope="page" />
+<isset name="cookie_Source" value="${request.httpCookies['CJ_Source'] != null ? request.httpCookies['CJ_Source'].value : null}" scope="page" />
+<isset name="cookie_pub" value="${request.httpCookies['CJ_pub'] ? request.httpCookies['CJ_pub'].value : null}" scope="page" />
+<isset name="cookie_LINK" value="${request.httpCookies['CJ_LINK'] ? request.httpCookies['CJ_LINK'].value : null}" scope="page" />
+<isset name="cookie_CID" value="${request.httpCookies['CJ_CID'] != null ? request.httpCookies['CJ_CID'].value : null}" scope="page" />
+<script type="text/javascript">
+ googleAnalyticsEvents.cjValuesToGa('AID','${cookie_AID}');
+ googleAnalyticsEvents.cjValuesToGa('PID','${cookie_PID}');
+ googleAnalyticsEvents.cjValuesToGa('SID','${cookie_SID}');
+ googleAnalyticsEvents.cjValuesToGa('Source','${cookie_Source}');
+ googleAnalyticsEvents.cjValuesToGa('pub','${cookie_pub}');
+ googleAnalyticsEvents.cjValuesToGa('LINK','${cookie_LINK}');
+ googleAnalyticsEvents.cjValuesToGa('CID','${cookie_CID}');
+</script>
+
+

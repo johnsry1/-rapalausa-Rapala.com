@@ -1,0 +1,30 @@
+<isif condition="${pdict.CurrentHttpParameterMap.format.value == 'ajax'}">
+	<isset name="decoratortemplate" value="util/pt_empty" scope="page" />
+	<isset name="isajax" value="true" scope="page" />
+<iselse>
+	<isset name="decoratortemplate" value="content/pt_customerservice" scope="page" />
+	<isset name="isajax" value="false" scope="page" />
+</isif>
+<isdecorate template="${decoratortemplate}">
+<isinclude template="util/modules"/>
+<isif condition="${isajax}">
+	<div class="cell contentbox upshift">
+</isif>
+<div class="dealer contentboxcontent">
+	<div class="">
+	<div class="">
+	<h1 class="mobile-view">Dealer Locator Additions</h1>
+	<isif condition="${!empty(pdict.ConfirmationMessage)}">
+		<div class=" confirmation-message contactus messagesent">
+			<p>${Resource.msg('forms.contactus.messagesent','forms',null)}
+			${Resource.msg('forms.contactus.messagerequires','forms',null)}</p>
+		</div>
+		<div class="clear"></div>	
+	</isif>
+	</div>
+	</div>
+</div>	
+<isif condition="${isajax}">
+</div>
+</isif>
+</isdecorate>	

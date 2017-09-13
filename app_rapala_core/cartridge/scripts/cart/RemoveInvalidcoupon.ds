@@ -1,0 +1,33 @@
+/**
+* Demandware Script File
+*
+* For example:
+*
+*  @input basket : dw.order.Basket 
+*
+*/
+importPackage( dw.system );
+importPackage(dw.campaign);
+importPackage(dw.order);
+
+
+function removeInvalidCoupon( basket )
+{
+	//var basket : Basket=args.basket;
+		if(basket.couponLineItems.length > 0){
+			for(var i=0;i<basket.couponLineItems.length;i++){
+				 if (empty(basket.allProductLineItems) ){
+				 	basket.removeCouponLineItem(basket.couponLineItems[i]);
+				 } else if (!basket.couponLineItems[i].applied) {
+				 	basket.removeCouponLineItem(basket.couponLineItems[i]);
+				 }
+			}	
+		}
+    return true;
+}
+
+
+module.exports = {
+    removeInvalidCoupon : removeInvalidCoupon
+};
+ 

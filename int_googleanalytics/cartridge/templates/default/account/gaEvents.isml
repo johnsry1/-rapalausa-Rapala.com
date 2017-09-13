@@ -1,0 +1,19 @@
+<!--- TEMPLATENAME: gaEvents.isml --->
+<isscript>
+   	if( (! ('isUserRegistered' in session.privacy)) && empty(session.privacy.isUserRegistered))
+   	{
+   		session.privacy.isUserRegistered = false;
+   	}
+</isscript>  
+
+<isif condition="${pdict.CurrentCustomer.isAuthenticated() && (!session.privacy.isUserRegistered)}">
+   <script>
+   	   	googleAnalyticsEvents.login('${pdict.ga_category}','${pdict.ga_evnet}', '${pdict.ga_data}');   	
+   	</script>
+</isif>
+
+<isscript>
+   	session.privacy.isUserRegistered = true;
+</isscript>
+
+   

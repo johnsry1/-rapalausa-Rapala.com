@@ -1,0 +1,70 @@
+<isif condition="${pdict.MultiAddressCheck=='true'}">	
+	<div id="address-validation-dialog" class="hide">
+		<div class="addresses-section">
+			<h1><isprint value="${Resource.msg('ups.verifySA','ups',null)}"/></h1><br/>
+			<div class="center">
+				<h2><isprint value="${Resource.msg('ups.originaladdress','ups',null)}"/></h2>
+				<div class="original-address left-pane">
+					<p>
+						<isprint value="${pdict.RequestAddress.address1.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.address2.htmlValue}"/>&nbsp;<br/><isprint value="${pdict.RequestAddress.city.htmlValue}"/>&nbsp;,
+						<isprint value="${pdict.RequestAddress.states.state.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.country.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.postal.htmlValue}"/> 
+					</p>
+					<div class="edit-original-address-button col-1">
+						<button class="gray-button" id="original-address-edit"><isprint value="${Resource.msg('global.edit','locale',null)}"/></a>
+					</div>
+					<div class="ship-to-original-address col-2">
+						<button class="green-button" id="ship-to-original-address"><span><isprint value="${Resource.msg('global.select','locale',null)}"/></span></button>
+					</div>
+				</div>
+				<h2>${Resource.msg('ups.suggestedaddress','ups',null)}</h2>
+				<div class="suggested-addresses origin">
+					<isloop iterator="${pdict.AddressList}" var="address" status="st">
+						<div class="suggested-addresses-${st.count}">
+							<isscript>
+								var addr1 : String = address.address1.split(",")[0];
+								var addr2 : String = address.address1.split(",")[1];
+								var addressStr = addr1+"||"+addr2+"||"+address.city+"||"+address.state+"||"+address.country+"||"+address.postalCode;
+							</isscript>
+							<div class="suggested-address-text" id="suggested-address-tex-${st.count}">
+								<p>
+									<isprint value="${addr1}"/><isif condition="${addr2!=null}"><br/><isprint value="${addr2}"/></isif><br/><isprint value="${address.city}"/>&nbsp;, 
+									<isprint value="${address.state}"/>&nbsp;<isprint value="${address.country}"/>&nbsp;<isprint value="${address.postalCode}"/>
+								</p>
+							</div>
+							<div class="edit-address-button col-1">
+								<button class="gray-button" id="suggested-address-edit-${st.count}" data-address="${addressStr}"><isprint value="${Resource.msg('global.edit','locale',null)}"/></a>
+							</div>
+		                	<div class="col-2 select-addrs"  data-address="${addressStr}">
+		                		<button class="green-button" id="ship-to-address-selected-${st.count}" data-address="${addressStr}"><span><isprint value="${Resource.msg('global.select','locale',null)}"/></span></button>
+		                	</div>
+						</div>
+					</isloop>
+				</div>
+			</div>
+		</div>	
+		<p class="responsible-accuracy"><isprint value="${Resource.msg('ups.suggalert','ups',null)}"/></p>
+	</div>
+<iselseif  condition="${pdict.MultiAddressCheck=='false'}">
+	<div id="address-validation-dialog" class="hide">
+		<div class="addresses-section">
+			<h1><isprint value="${Resource.msg('ups.verifySA','ups',null)}"/></h1><br/>
+			<p><isprint value="${Resource.msg('ups.cannotship','ups',null)}"/></p><br/>
+			<div class="center">
+				<h2><isprint value="${Resource.msg('ups.originaladdress','ups',null)}"/></h2>
+				<div class="original-address left-pane">
+					<p>
+						<isprint value="${pdict.RequestAddress.address1.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.address2.htmlValue}"/>&nbsp;<br/><isprint value="${pdict.RequestAddress.city.htmlValue}"/>&nbsp;,
+						<isprint value="${pdict.RequestAddress.states.state.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.country.htmlValue}"/>&nbsp;<isprint value="${pdict.RequestAddress.postal.htmlValue}"/> 
+					</p>
+					<div class="edit-original-address-button col-1">
+						<button class="gray-button" id="original-address-edit"><isprint value="${Resource.msg('global.edit','locale',null)}"/></a>
+					</div>
+					<div class="ship-to-original-address col-2">
+						<button class="green-button" id="ship-to-original-address"><isprint value="${Resource.msg('global.select','locale',null)}"/></button>
+					</div>
+				</div>
+			</div>
+			<p class="responsible-accuracy"><isprint value="${Resource.msg('ups.suggalert','ups',null)}"/></p>
+		</div>
+	</div>
+</isif>

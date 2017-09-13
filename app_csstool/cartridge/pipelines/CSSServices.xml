@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="_ANONYMOUS_BRANCH_1">
+    <segment>
+      <node>
+        <text-node>
+          <description>Used to set the custom Profile value &quot;readyToExport&quot; for the CSSCustomerExport-Start job to export.
+/
+This pipeline should be called after any update to a customer's profile in Demandware to flag the profile to be sent to GlobalMerchant / CSS</description>
+        </text-node>
+        <node-display height="4" x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="SetCustomerForExport">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="SetCustomerForExport" secure="false"/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="CurrentCustomer.profile" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <key-binding alias="true" key="From_0"/>
+                <key-binding alias="CurrentCustomer.profile.custom.readyForExport" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node name="error"/>
+        <node-display x="1" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_3">
+    <segment>
+      <node>
+        <text-node>
+          <description>Used to create a customer stub in GlobalMerchant. This pipeline should be called after a new user registration to get the basic information added to the GlobalMerchant database. 
+/
+This pipeline is dependent upon the following site preferences: 
+CSSServiceHostName
+CSSServiceUserURL
+CSSServicePrivateKey
+CSSServiceClientID
+/
+This typically only needs to be called from the Account-CreateAccount pipeline, but if there are additional places that a customer can create an account, such as during checkout that call a different registration pipeline, ensure that this pipeline is called from there as well.</description>
+        </text-node>
+        <node-display height="5" x="4" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="CreateGMCustomerV2">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="CreateGMCustomerV2" secure="false"/>
+        <node-display x="5" y="2"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="gmfunctions/CreateGMCustomerV2.ds"/>
+          <config-property key="Timeout" value="5"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="CurrentCustomer" key="NewCustomer"/>
+          <key-binding alias="Status" key="Status"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="2" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="error"/>
+              <node-display x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_5">
+    <segment>
+      <node>
+        <text-node>
+          <description>Used to apply a promotion code that has been passed into Demandware as part of a CSS session. This pipeline should be called in the Cart-Show pipeline before the cart-calculate that is run prior to showing the customer the cart page. 
+/
+When the coupon is added to the cart it is removed from the session, therefore if it is removed it will not be able to be added again by the agent. Additionally, these coupon codes are inteded to be hidden from the Call Center Agent and Customer, so you should add the custom property to Coupon Line Item &quot;cssProvidedPromotion&quot; and check for the existence of that propety on the couponLineItem when outputting the coupon code. If the value is present you should mask it with text indicating that a promotion from CSS has been applied to the order.</description>
+        </text-node>
+        <node-display height="6" x="8" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="AddHiddenCoupon">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="AddHiddenCoupon" secure="false"/>
+        <node-display x="9" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="(('CSSPromotionCode' in CurrentSession.custom) &amp;&amp; !empty(CurrentSession.custom.CSSPromotionCode))" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in" transaction-control="begin">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="AddCouponToBasket2" pipelet-set-identifier="bc_api">
+                <key-binding alias="Basket" key="Basket"/>
+                <key-binding alias="CurrentSession.custom.CSSPromotionCode" key="CouponCode"/>
+                <key-binding alias="CouponStatus" key="Status"/>
+                <key-binding alias="CouponLineItem" key="CouponLineItem"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1"/>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="1" y="0"/>
+                  </node>
+                  <simple-transition transaction-control="rollback">
+                    <transition-display>
+                      <bend-point relative-to="target" x="0" y="-1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display x="0" y="2"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <key-binding alias="true" key="From_0"/>
+                <key-binding alias="CouponLineItem.custom.cssProvidedPromotion" key="To_0"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+                <key-binding alias="delete CurrentSession.custom.CSSPromotionCode" key="From_1"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition transaction-control="commit">
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
+          <description>This is an incomplete stub at this point, but will be used for the return exchange discounts from CSS. Additional information will be added as the work is completed.</description>
+        </text-node>
+        <node-display height="6" x="14" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="AddReturnExchangeDiscount">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="AddReturnExchangeDiscount" secure="false"/>
+        <node-display x="15" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="(('CSSReturnExchangeDiscount' in CurrentSession.custom) &amp;&amp;  !empty(CurrentSession.custom.CSSReturnExchangeDiscount))" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in" transaction-control="begin"/>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="GetBasket" pipelet-set-identifier="bc_api">
+                <config-property key="Create" value="false"/>
+                <key-binding alias="Basket" key="Basket"/>
+                <key-binding alias="null" key="StoredBasket"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="./b3.1">
+                  <transition-display>
+                    <bend-point relative-to="source" x="2" y="0"/>
+                  </transition-display>
+                </transition>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="returnexchange/processCSSDiscount.ds"/>
+                <key-binding alias="ScriptLog" key="ScriptLog"/>
+                <key-binding alias="Basket" key="Basket"/>
+                <key-binding alias="CurrentSession.custom.CSSReturnExchangeDiscount" key="DiscountAmount"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b3" source-connector="error">
+                <transition target-connector="in1"/>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="1" y="0"/>
+                  </node>
+                  <simple-transition transaction-control="rollback"/>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition transaction-control="commit"/>
+            <node>
+              <end-node/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display orientation="horizontal" x="1" y="0"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="ClearStoredCart">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ClearStoredCart" secure="false"/>
+        <node-display x="19" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="GetBasket" pipelet-set-identifier="bc_api">
+          <config-property key="Create" value="false"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="null" key="StoredBasket"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Basket != null" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="util/clearStoredCart.ds"/>
+                <key-binding alias="ScriptLog" key="ScriptLog"/>
+                <key-binding alias="Basket" key="Basket"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../+1"/>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <end-node/>
+              <node-display x="0" y="2"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Eval" pipelet-set-identifier="bc_api">
+          <config-property key="OnError" value="null"/>
+          <config-property key="Transactional" value="false"/>
+          <config-property key="Expression" value="dw.system.Logger.warn(&quot;Error On Clearing Basket For Session {1}, Customer ID {2}&quot;)"/>
+          <key-binding alias="Result" key="Result"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node name="error"/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="AbandonCSSCart">
+    <segment>
+      <node>
+        <start-node name="AbandonCSSCart" secure="false"/>
+        <node-display x="22" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="CurrentSession.userName != 'storefront'" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="0" y="1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSSServices-ClearStoredCart"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="../+1"/>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="Eval" pipelet-set-identifier="bc_api">
+                <config-property key="OnError" value="null"/>
+                <config-property key="Transactional" value="true"/>
+                <config-property key="Expression" value="'CSSReturnExchangeDiscount' in CurrentSession.custom ? delete  CurrentSession.custom.CSSReturnExchangeDiscount : &quot;&quot;"/>
+                <key-binding alias="Result" key="Result"/>
+              </pipelet-node>
+              <node-display x="0" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <jump-node start-name-ref="Home-Show"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="1" y="2"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="error/clearcartfailure"/>
+        </interaction-node>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="RemoveCSSPromotions">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="RemoveCSSPromotions" secure="false"/>
+        <node-display x="25" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <decision-node condition-key="Basket != null" condition-operator="expr"/>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in1" target-path="./+1"/>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="source" x="1" y="-1"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="GetBasket" pipelet-set-identifier="bc_api">
+          <config-property key="Create" value="false"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="null" key="StoredBasket"/>
+        </pipelet-node>
+        <node-display x="1" y="0"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="0" y="3"/>
+            </node>
+            <transition target-connector="in1" target-path="../+2"/>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="2"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="-1" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="util/removeCSSAdjustments.ds"/>
+          <key-binding alias="ScriptLog" key="ScriptLog"/>
+          <key-binding alias="Basket" key="Basket"/>
+          <key-binding alias="ScriptErrors" key="Errors"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./+1">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="1" y="0"/>
+            </transition-display>
+          </transition>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

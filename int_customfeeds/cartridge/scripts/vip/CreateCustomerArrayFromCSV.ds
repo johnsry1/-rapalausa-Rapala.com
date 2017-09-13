@@ -1,0 +1,260 @@
+/**
+* This script will converts the customers CSV into an Array.  
+* @input SourceCustomersCSV : String
+* @output CustomerArray : Array
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage(dw.util);
+function execute( args : PipelineDictionary ) : Number
+{	
+	var srcfile : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + args.SourceCustomersCSV );
+	try{
+    	args.CustomerArray = ConevertCSVTOARRAY(srcfile);    	
+	}
+	catch(e){
+		Logger.getLogger("VIPCustomerImport").error("Error While converting CSV to array. Error:"+e.message);
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}
+function ConevertCSVTOARRAY(srcfile : File)
+{
+	var retArray = [];
+	var custMap : HashMap = new HashMap();
+	var csvioreader : FileReader = new FileReader(srcfile);	
+	var csvreader : CSVStreamReader = new CSVStreamReader(csvioreader);
+	csvreader.readNext();
+	var currenRecord : Array = new Array();
+	var counter : Number = 0;
+	Logger.getLogger("VIPCustomerImport").debug("Processing the CSV file....");
+	Logger.getLogger("VIPCustomerImport").debug("Customer CSV to Customer array Conversion starts....");
+	while(currenRecord = csvreader.readNext()){
+		var currCustFlag : Boolean = false;
+		var tempobject : Object = null;
+		var addresslist : Array = null;
+		var customergrouplist : Array = new Array();
+		if(custMap.get(currenRecord[0]) != null){
+			tempobject = retArray[custMap.get(currenRecord[0])];
+			addresslist = tempobject.addresslist; 
+			currCustFlag = true;
+		}else{
+			tempobject = new Object();
+			addresslist = new ArrayList();
+		}
+		if(!currCustFlag){
+			Logger.getLogger("VIPCustomerImport").debug("Processing customer "+currenRecord[0]);
+			Logger.getLogger("VIPCustomerImport").debug("Set profile attributes to customer object");
+			tempobject.email = currenRecord[0];
+			tempobject.password = "India@123";
+			tempobject.salutation = currenRecord[1];
+			tempobject.title = currenRecord[2];
+			tempobject.firstname = currenRecord[3];
+			tempobject.secondname = currenRecord[4];
+			tempobject.lastname = currenRecord[5];
+			tempobject.suffix = currenRecord[6];
+			tempobject.companyname = currenRecord[7];
+			tempobject.jobtitle = currenRecord[8];
+			tempobject.phonehome = currenRecord[9];
+			tempobject.phonebusiness = currenRecord[10];
+			tempobject.phonemobile = currenRecord[11];
+			tempobject.fax = currenRecord[12];
+		}
+		Logger.getLogger("VIPCustomerImport").debug("Set address list to the customer object");
+		if(!empty(currenRecord[13])){
+			var tempaddrObj = new Object();
+			if(!empty(currenRecord[13])){
+				tempaddrObj.addressid = currenRecord[13];
+			}
+			if(!empty(currenRecord[14])){
+				tempaddrObj.preferred = currenRecord[14];
+			}
+			if(!empty(currenRecord[15])){
+				tempaddrObj.salutation = currenRecord[15];
+			}
+			if(!empty(currenRecord[16])){
+				tempaddrObj.title = currenRecord[16];
+			}
+			if(!empty(currenRecord[17])){
+				tempaddrObj.firstname = currenRecord[17];
+			}
+			if(!empty(currenRecord[18])){
+				tempaddrObj.secondname = currenRecord[18];
+			}
+			if(!empty(currenRecord[19])){
+				tempaddrObj.lastname = currenRecord[19];
+			}
+			if(!empty(currenRecord[20])){
+				tempaddrObj.suffix = currenRecord[20];
+			}
+			if(!empty(currenRecord[21])){
+				tempaddrObj.companyname = currenRecord[21];
+			}
+			if(!empty(currenRecord[22])){
+				tempaddrObj.jobtitle = currenRecord[22];
+			}
+			if(!empty(currenRecord[23])){
+				tempaddrObj.address1 = currenRecord[23];
+			}
+			if(!empty(currenRecord[24])){
+				tempaddrObj.address2 = currenRecord[24];
+			}
+			if(!empty(currenRecord[25])){
+				tempaddrObj.suite = currenRecord[25];
+			}
+			if(!empty(currenRecord[26])){
+				tempaddrObj.postbox = currenRecord[26];
+			}
+			if(!empty(currenRecord[27])){
+				tempaddrObj.city = currenRecord[27];
+			}
+			if(!empty(currenRecord[28])){
+				tempaddrObj.postlcode = currenRecord[28];
+			}
+			if(!empty(currenRecord[29])){
+				tempaddrObj.statecode = currenRecord[29];
+			}
+			if(!empty(currenRecord[30])){
+				tempaddrObj.phone = currenRecord[30];
+			}
+			addresslist.push(tempaddrObj);
+		} 
+		if(!empty(currenRecord[31])){
+			var tempaddrObj = new Object();
+			if(!empty(currenRecord[31])){
+				tempaddrObj.addressid = currenRecord[31];
+			}
+			if(!empty(currenRecord[32])){
+				tempaddrObj.preferred = currenRecord[32];
+			}
+			if(!empty(currenRecord[33])){
+				tempaddrObj.salutation = currenRecord[33];
+			}
+			if(!empty(currenRecord[34])){
+				tempaddrObj.title = currenRecord[34];
+			}
+			if(!empty(currenRecord[35])){
+				tempaddrObj.firstname = currenRecord[35];
+			}
+			if(!empty(currenRecord[36])){
+				tempaddrObj.secondname = currenRecord[36];
+			}
+			if(!empty(currenRecord[37])){
+				tempaddrObj.lastname = currenRecord[37];
+			}
+			if(!empty(currenRecord[38])){
+				tempaddrObj.suffix = currenRecord[38];
+			}
+			if(!empty(currenRecord[39])){
+				tempaddrObj.companyname = currenRecord[39];
+			}
+			if(!empty(currenRecord[40])){
+				tempaddrObj.jobtitle = currenRecord[40];
+			}
+			if(!empty(currenRecord[41])){
+				tempaddrObj.address1 = currenRecord[41];
+			}
+			if(!empty(currenRecord[42])){
+				tempaddrObj.address2 = currenRecord[42];
+			}
+			if(!empty(currenRecord[43])){
+				tempaddrObj.suite = currenRecord[43];
+			}
+			if(!empty(currenRecord[44])){
+				tempaddrObj.postbox = currenRecord[44];
+			}
+			if(!empty(currenRecord[45])){
+				tempaddrObj.city = currenRecord[45];
+			}
+			if(!empty(currenRecord[46])){
+				tempaddrObj.postlcode = currenRecord[46];
+			}
+			if(!empty(currenRecord[47])){
+				tempaddrObj.statecode = currenRecord[47];
+			}
+			if(!empty(currenRecord[48])){
+				tempaddrObj.phone = currenRecord[48];
+			}
+			addresslist.push(tempaddrObj);
+		} 
+		if(!empty(currenRecord[49])){
+			var tempaddrObj = new Object();
+			if(!empty(currenRecord[49])){
+				tempaddrObj.addressid = currenRecord[49];
+			}
+			if(!empty(currenRecord[50])){
+				tempaddrObj.preferred = currenRecord[50];
+			}
+			if(!empty(currenRecord[51])){
+				tempaddrObj.salutation = currenRecord[51];
+			}
+			if(!empty(currenRecord[52])){
+				tempaddrObj.title = currenRecord[52];
+			}
+			if(!empty(currenRecord[53])){
+				tempaddrObj.firstname = currenRecord[53];
+			}
+			if(!empty(currenRecord[54])){
+				tempaddrObj.secondname = currenRecord[54];
+			}
+			if(!empty(currenRecord[55])){
+				tempaddrObj.lastname = currenRecord[55];
+			}
+			if(!empty(currenRecord[56])){
+				tempaddrObj.suffix = currenRecord[56];
+			}
+			if(!empty(currenRecord[57])){
+				tempaddrObj.companyname = currenRecord[57];
+			}
+			if(!empty(currenRecord[58])){
+				tempaddrObj.jobtitle = currenRecord[58];
+			}
+			if(!empty(currenRecord[59])){
+				tempaddrObj.address1 = currenRecord[59];
+			}
+			if(!empty(currenRecord[60])){
+				tempaddrObj.address2 = currenRecord[60];
+			}
+			if(!empty(currenRecord[61])){
+				tempaddrObj.suite = currenRecord[61];
+			}
+			if(!empty(currenRecord[62])){
+				tempaddrObj.postbox = currenRecord[62];
+			}
+			if(!empty(currenRecord[63])){
+				tempaddrObj.city = currenRecord[63];
+			}
+			if(!empty(currenRecord[64])){
+				tempaddrObj.postlcode = currenRecord[64];
+			}
+			if(!empty(currenRecord[65])){
+				tempaddrObj.statecode = currenRecord[65];
+			}
+			if(!empty(currenRecord[66])){
+				tempaddrObj.phone = currenRecord[66];
+			}
+			addresslist.push(tempaddrObj);
+		} 
+		tempobject.addresslist = addresslist;
+		if(!currCustFlag){
+			Logger.getLogger("VIPCustomerImport").debug("Set customer group list to the customer object");
+			for(var i=0; i<5; i++){
+				if(!empty(currenRecord[67+i])){
+					customergrouplist.push(currenRecord[67+i]);
+				}
+			}
+			tempobject.customergrouplist = customergrouplist;
+			if(custMap.get(tempobject.email) == null){
+				custMap.put(tempobject.email,counter);
+			}	
+		}	
+		if(currCustFlag){
+			retArray[custMap.get(tempobject.email)] = tempobject;
+		}else{
+			counter++;
+			retArray.push(tempobject);
+		}		 
+	}
+	Logger.getLogger("VIPCustomerImport").debug("Customer CSV to Customer array Conversion ends....");	
+	return retArray;	
+}

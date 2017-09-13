@@ -1,0 +1,84 @@
+/**
+* GoogleGeolocator.ds
+*
+* The script takes a collection of stores and performs google
+* geocoding http calls to retrieve their LatLng co-ordinates
+* for storage in the system.  
+*
+* A Demandware xml file is written for import as these attributes 
+* are read only.  The file name is then passed out of the script 
+* so the import can be triggered.
+*
+*   @input Stores : dw.util.Iterator This is a sample comment.
+*   @output FileName : String
+*
+*/
+importPackage( dw.system );
+importPackage( dw.util );
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.catalog );
+importPackage( dw.svc );
+
+function execute(pdict) {
+	try{
+	
+		//Get the service object
+		var svc : HTTPService = ServiceRegistry.get("storelocator.http.geolocator.get");
+		
+		var stores : Iterator = pdict.Stores;
+		
+		var result : Result = null;
+		
+		if(!empty(stores)) {
+			
+			// Initialize StreamWriter and httpClient
+	    	var filename : String = '/marketing/stores_' + new Date().getTime() + '.xml';
+	    	
+	    	var writer : FileWriter = new FileWriter(new File(File.IMPEX+'/src'+filename),'UTF-8');
+	    
+	    	var xmlwriter : XMLStreamWriter = new XMLStreamWriter(writer);
+	    
+	    	xmlwriter.writeRaw('<?xml version="1.0" encoding="UTF-8"?><stores xmlns="http://www.demandware.com/xml/impex/store/2007-04-30">');
+			
+			// Perform query for stores in collection
+			while(stores.hasNext()) {
+			
+				var store : dw.catalog.Store = stores.next();
+				
+				//var message : String = client.text;
+				result = svc.call(store);
+				
+				//Check for service availability.
+				if(result.status == Result.SERVICE_UNAVAILABLE){
+					throw new Error("Service is not available");
+				}
+				
+				//Check for service availability.
+				if(empty(result.object)){
+					throw new Error(result.errorMessage);
+				}
+				
+				var response : Object = JSON.parse(result.object);	
+				 				
+				if(!empty(response["results"][0]["geometry"]["location"])) {
+					xmlwriter.writeRaw('<store store-id="' + store.ID + '"><latitude>' + response["results"][0]["geometry"]["location"]["lat"] + '</latitude><longitude>' + response["results"][0]["geometry"]["location"]["lng"] + '</longitude></store>');
+				}
+			}
+				
+			xmlwriter.writeRaw('</stores>');
+		
+			xmlwriter.close();
+		
+			pdict.FileName = filename;
+			
+			return PIPELET_NEXT;
+		}else{
+			return PIPELET_NEXT;
+		}
+		
+	}catch(e){
+		Logger.error("Error while executing the script GoogleGeolocator.ds. Error..."+e.message);
+		return PIPELET_ERROR;
+	}
+}

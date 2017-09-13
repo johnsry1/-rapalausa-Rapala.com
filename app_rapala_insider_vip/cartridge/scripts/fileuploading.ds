@@ -1,0 +1,35 @@
+/**
+ 
+ * @input CurrentSession : String
+ * @output fullfilename  : String
+ * @output csvfile : String the csv file uploaded to server
+ */
+importPackage( dw.system );
+importPackage( dw.web );
+importPackage( dw.io );
+importPackage( dw.util );
+
+function upload( httpParameterMap,session ) : Number {
+	var filename : String;
+	var fullfilename : String;
+	var params : HttpParameterMap = httpParameterMap;
+	var files : LinkedHashMap = new LinkedHashMap();
+	var pre = session.sessionID;
+	var cook = request.httpCookies["progcookie"].value;
+	//callback function
+	var fname : File;
+	var closure : Object = function(field, ct, oname){
+		filename = oname;
+		fname = new File( File.IMPEX + "/src/VIPInsider/" + cook +"**"+ pre + "**" + oname );
+		//pdict.csvfile = fname.getFullPath();
+		fullfilename = cook +"**"+ pre + "**";
+		return fname;
+	};
+	files = params.processMultipart(closure);
+	return fullfilename;
+}
+
+
+module.exports = {
+    upload : upload
+};

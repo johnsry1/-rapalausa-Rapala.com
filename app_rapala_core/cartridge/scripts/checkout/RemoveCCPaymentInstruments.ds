@@ -1,0 +1,31 @@
+/**
+*   @input Basket : dw.order.Basket
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+function removeCreditCardPI( basket )
+{
+  try{
+  	 var paymentInstruments : ArrayList = new ArrayList();
+  	 //var basket : Basket = args.Basket;
+ 	 for each( var PI : PaymentInstrument in basket.getPaymentInstruments()){
+   		if(PI.getPaymentMethod() == "CREDIT_CARD"){
+   			paymentInstruments.add(PI);
+   		}
+   	 }
+   	 for each( var PI : PaymentInstrument in paymentInstruments){
+   	 	basket.removePaymentInstrument(PI);	
+   	 }
+  	 return;
+  }
+  catch(e){
+  	Logger.error("Error while executing the script RemoveCCPaymentInstruments.ds ERROR:"+e.message);
+  	return;
+  }
+   
+}
+
+module.exports={
+	removeCreditCardPI : removeCreditCardPI
+}

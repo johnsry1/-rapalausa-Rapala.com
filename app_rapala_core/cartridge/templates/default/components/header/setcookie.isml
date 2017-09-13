@@ -1,0 +1,119 @@
+<!--- TEMPLATENAME: setcookie.isml --->
+<isset name="AID" value="${pdict.CurrentHttpParameterMap.AID.stringValue}" scope="page" />
+<isset name="SID" value="${pdict.CurrentHttpParameterMap.SID.stringValue}" scope="page" />
+<isset name="PID" value="${pdict.CurrentHttpParameterMap.PID.stringValue}" scope="page" />
+<isset name="source" value="${pdict.CurrentHttpParameterMap.source.stringValue}" scope="page" />
+<isset name="pub" value="${pdict.CurrentHttpParameterMap.pub.stringValue}" scope="page" />
+<isset name="LINK" value="${pdict.CurrentHttpParameterMap.LINK.stringValue}" scope="page" />
+<isset name="CID" value="${pdict.CurrentHttpParameterMap.CID.stringValue}" scope="page" />
+<isif condition="${AID !=null && !empty(AID)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_AID_value= AID;
+if(!empty(cj_AID_value)){
+	var CJ_AID_cookie = new dw.web.Cookie("CJ_AID",cj_AID_value);
+	CJ_AID_cookie.setPath("/");
+	CJ_AID_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_AID_cookie);
+}
+</isscript>
+</isif>
+
+<isif condition="${SID !=null && !empty(SID)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_SID_value= SID;
+if(!empty(cj_SID_value)){
+	var CJ_SID_cookie = new dw.web.Cookie("CJ_SID",cj_SID_value);
+	CJ_SID_cookie.setPath("/");
+	CJ_SID_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_SID_cookie);
+}
+</isscript>
+</isif>
+
+
+
+
+
+<isif condition="${source !=null && !empty(source)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_source_value= source;
+if(!empty(cj_source_value)){
+	var CJ_Source_cookie = new dw.web.Cookie("CJ_Source",cj_source_value);
+	CJ_Source_cookie.setPath("/");
+	CJ_Source_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_Source_cookie);
+}
+</isscript>
+</isif>
+
+<isif condition="${PID !=null && !empty(PID)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_PID_value= PID;
+if(!empty(cj_PID_value)){
+	var CJ_PID_cookie = new dw.web.Cookie("CJ_PID",cj_PID_value);
+	CJ_PID_cookie.setPath("/");
+	CJ_PID_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_PID_cookie);
+}
+</isscript>
+</isif>
+
+<isif condition="${pub !=null && !empty(pub)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_pub_value= pub;
+if(!empty(cj_pub_value)){
+	var CJ_pub_cookie = new dw.web.Cookie("CJ_pub",cj_pub_value);
+	CJ_pub_cookie.setPath("/");
+	CJ_pub_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_pub_cookie);
+}
+</isscript>
+</isif>
+
+
+<isif condition="${LINK !=null && !empty(LINK)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_LINK_value= LINK;
+if(!empty(cj_LINK_value)){
+	var CJ_LINK_cookie = new dw.web.Cookie("CJ_LINK",cj_LINK_value);
+	CJ_LINK_cookie.setPath("/");
+	CJ_LINK_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_LINK_cookie);
+}
+</isscript>
+</isif>
+
+<isif condition="${CID !=null && !empty(CID)}"> 
+<isscript>
+importPackage ( dw.web );
+importPackage ( dw.object );
+importPackage ( dw.system );
+var cj_CID_value= CID;
+if(!empty(cj_CID_value)){
+	var CJ_CID_cookie = new dw.web.Cookie("CJ_CID",cj_CID_value);
+	CJ_CID_cookie.setPath("/");
+	CJ_CID_cookie.maxAge = 2592000 ;
+	response.addHttpCookie(CJ_CID_cookie);
+}
+</isscript>
+</isif>
+
+

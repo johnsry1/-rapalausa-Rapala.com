@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<isinclude template="util/modules"/>
+<head>
+	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
+	<isinclude template="components/header/htmlheadinsider"/>
+	<isscript>
+                var pageContext = {
+                        title: 'rapalainsider',
+                        type: 'rapalainsider',
+                        ns: 'rapalainsider'
+                };
+                pdict.showCountrySelector = true;
+        </isscript>
+</head>
+<body class="insider_body">
+<div id="insider_container" class="pt_vipinsider">
+	<div id="main"> 
+		<div id="content">
+			<isreplace/>
+		</div><!-- END: content -->
+		<div class="clear"><!-- FLOAT CLEAR --></div>
+	</div><!-- END: main -->
+
+</div><!-- END: container -->
+<isinclude template="components/footer/footer_UI"/>	
+</body>
+</html>

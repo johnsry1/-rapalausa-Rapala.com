@@ -1,0 +1,46 @@
+<isscript>
+	response.addHttpHeader(dw.system.Response.X_FRAME_OPTIONS, dw.system.Response.X_FRAME_OPTIONS_SAMEORIGIN_VALUE);
+</isscript>
+<isinclude template="util/modules"/>
+
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '1'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','rapala-home')}" />
+</isif>
+ <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '2'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','sufix-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '3'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','triggerx-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '4'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','storm-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '5'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','luhrjensen-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null  && pdict.CurrentHttpParameterMap.id.value == '6'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','vmc-home')}" />
+</isif>  
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '7'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','terminator-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '8'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','bluefox-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '9'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','williamson-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '11'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','strikemaster-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '10'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','marcum-home')}" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '20'}">
+  <isredirect location="${URLUtils.url('Search-Show','cgid','iceforce-home')}" />
+</isif>
+ <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '21'}">
+   <isredirect location="${URLUtils.url('Search-Show','cgid','otter-home')}" />
+<iselse/>
+	<isinclude url="${URLUtils.url('Home-Page','currentSite',session.custom.currentSite)}" />
+</isif>

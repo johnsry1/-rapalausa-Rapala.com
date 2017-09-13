@@ -1,0 +1,60 @@
+<isdecorate template="content/folder/pt_customerserviceaboutuslanding">
+<iscache type="relative" hour="24"/>
+<isinclude template="util/modules"/>
+	<isscript>
+		var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.custom.currentSite);
+	</isscript>
+ 	<isif condition="${aboutUsFolder != null && aboutUsFolder.online}">
+		<isloop items="${aboutUsFolder.onlineSubFolders}" var="subFolder">
+			<isif condition="${!subFolder.onlineContent.empty}">
+				<div class="cell contentbox upshift accordion">
+				<div class="contentboxcontent">	
+					<h1 class="customerservicetabs head">${subFolder.displayName}</h1>
+					<div class="disabled expandcontent">
+					<ul>
+						<isloop items="${subFolder.onlineContent}" var="subContent">
+						<li><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+						</isloop>
+					</ul>
+					</div>
+				</div><!-- End of contentboxcontent -->
+				</div><!-- END: cell contentbox upshift -->
+			</isif>
+		</isloop>
+		
+		<isloop items="${aboutUsFolder.onlineContent}" var="subContent">
+			<div class="cell contentbox upshift accordion">
+			<div class="contentboxcontent">
+				<h1 class="customerservicetabs head"><a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></h1>
+			</div><!-- End of contentboxcontent -->
+			</div><!-- END: cell contentbox upshift -->
+		</isloop>
+	</isif>
+</isdecorate>
+
+
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(function(event){
+	jQuery(".accordion")
+		.hover(function(event) {
+				var $this = jQuery(this);
+			   if ($this.hasClass('highlight')) {
+				   $this.addClass('contentbox');
+			   } else {
+				   $this.removeClass('contentbox').addClass('tabover');
+	           }
+			},
+			function(event) {
+		   		jQuery(this).removeClass('tabover').addClass('contentbox');
+        	}
+        ).click(function() {
+			var $this = jQuery(this);
+			if ($this.find('.expandcontent').length > 0) {
+				$this.find('h1').toggleClass('downarrow').next().toggle('fast');
+				$this.toggleClass('highlight').toggleClass('tabover').toggleClass('contentbox');
+			} else {
+				window.location.href=$this.find('a').attr('href');
+			}
+		});       
+});	
+/* ]]> */</script>

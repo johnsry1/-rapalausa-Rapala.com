@@ -1,0 +1,68 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="DecoratorTemplate" value="search/pt_subcategoryresults" scope="page"/>
+
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+	
+</isif>
+
+<isdecorate template="${DecoratorTemplate}">
+	<div id="content">
+			<div id="page-background" class="downshift">
+				<div class="wrapper">					
+					<isinclude template="search/components/productsearchbreadcrumbs"/>
+					<div class="contentboxcontent mobileHide">
+						<isif condition="${'rapala' == session.custom.currentSite}">
+							<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+						<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite}">
+							<h1 class="left-nav-style"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+						<iselse>
+							<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+						</isif>
+						<span class="count">${pdict.ProductPagingModel.count} <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>						
+					</div>
+					<div class="desktop mobileHide">
+					   <div class="leftnav_bottomfirst contentAsset-new cell contentbox upshift">
+						   <isslot id="leftnav_bottomfirst" description="Banner for Leftnav bottom top" context="global" />
+					   </div>
+					   <div class="leftnav_bottomlast contentAsset-new cell contentbox upshift">
+						    <isslot id="leftnav_bottomlast" description="Banner for Leftnav bottom last" context="global" />
+					   </div>
+			        </div>
+				</div>
+				<div id="page">
+					<div class="wrapper">
+						<div class="row column3 ">
+						<iscomment> 
+						<a class="mobile-filter-by mobileHide">
+							filter by
+							<span class="active"></span>
+						</a>
+						<a class="sortby-button mobileHide">
+							Sort By
+							<span class="active"></span>
+						</a>
+						</iscomment>
+						
+						<div id="secondary" class="refinements">
+							<isinclude template="search/components/subcategoryrefinementbar"/>
+						</div>
+						<div id="primary" class="primary-content">
+							<div class="contentboxcontent desktopHide">
+								<isif condition="${'rapala' == session.custom.currentSite}">
+									<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+								<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite}">
+									<h1 class="left-nav-style"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+								<iselse>
+									<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+								</isif>
+							</div>
+							<isreplace/>
+						</div>
+					</div>	
+				</div>
+			 </div>
+		</div>
+	</div>	 	
+</isdecorate>

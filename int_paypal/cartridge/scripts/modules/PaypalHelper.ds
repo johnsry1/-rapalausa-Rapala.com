@@ -1,0 +1,824 @@
+var order : Object = require('dw/order');
+var catalog : Object = require('dw/catalog');
+var util : Object = require('dw/util');
+var system : Object = require('dw/system');
+var value : Object = require('dw/value');
+var svc : Object = require('dw/svc');
+var campaign : Object = require('dw/campaign');
+
+var prefs : Object = require('../modules/util/Preferences.ds');
+
+var PaypalHelper : Object = {};
+
+
+/**
+ * Returns object with data for SetExpressCheckout call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} basket object
+ * @param returnUrl {String} URL address, on which PayPal a buyer should be returned  after Express Checkout
+ * @param isPayPalCredit {Boolean} indicate if PayPal credit (BML) flow is active
+ * @param isBillingAgreement {Boolean} indicate if Billeng Agreement should be proposed to customer
+ * @param paypalCheckoutFromCart {Boolean} indicate if PayPal payment triggered from cart
+ * @param isRefund {Boolean} indicate, if current transaction is a Refund operation
+ * @param isStore {Boolean} indicate, if shipping address should be store address (ship to store feature)
+ * @returns {dw.util.HashMap} requested data
+ */
+PaypalHelper.createSetExpressCheckoutRequestData = function (lineItemContainer : order.LineItemCtnr, returnUrl : String, isPayPalCredit : Boolean, isBillingAgreement : Boolean, paypalCheckoutFromCart : Boolean, isRefund : Boolean, isStore : Boolean) : util.HashMap {
+
+	var request : util.HashMap = new util.HashMap();
+
+	request.put('PAYMENTREQUEST_0_PAYMENTACTION', prefs.PP_API_ExpressPaymentAction);
+	request.put('REQCONFIRMSHIPPING', prefs.PP_API_ReqConfirmShipping ? 1 : 0);
+	request.put('NOSHIPPING', prefs.PP_API_NoShipping ? 1 : 0);
+	request.put('ALLOWNOTE', prefs.PP_API_AllowNote ? 1 : 0);
+	request.put('ADDROVERRIDE', prefs.PP_API_ShippingAddressOverride ? 1 : 0);
+	request.put('REQBILLINGADDRESS', prefs.PP_API_RequestBillingAddressFromPayPal ? 1 : 0);
+	request.put('SOLUTIONTYPE', prefs.PP_SolutionType);
+	request.put('LANDINGPAGE', prefs.PP_Landing_Page);
+	request.put('RETURNURL', returnUrl);
+	request.put('CANCELURL', paypalCheckoutFromCart ? prefs.paypalFromCartCancelUrl : prefs.paypalCancelUrl);
+	request.put('USERSELECTEDFUNDINGSOURCE', isPayPalCredit ? 'Finance' : null);
+
+	if (lineItemContainer.getCustomer().isAuthenticated()) {
+		if (prefs.PP_API_BillingAgreementStatus) {
+			request.put('BILLINGTYPE', isBillingAgreement ? prefs.PP_Billing_type : null);
+			request.put('BILLINGAGREEMENTDESCRIPTION', isBillingAgreement ? truncatePreferenceString(prefs.PP_API_BillingAgreementDescription) : null);
+			request.put('PAYMENTTYPE', isBillingAgreement ? prefs.PP_API_BillingAgreementPaymentType : null);
+		}
+	}
+
+	var customerEmail : String = lineItemContainer.getCustomerEmail();
+
+	request.put('EMAIL', customerEmail);
+
+	var siteLocale : String = system.Site.getCurrent().getDefaultLocale();
+
+	if (siteLocale != 'default' && prefs.PP_API_Use_The_Same_Locale) {
+		request.put('LOCALECODE', siteLocale);
+	}
+
+	if (isRefund) {
+		request.put('PAYMENTREQUEST_0_PAYMENTREASON', 'Refund'); 
+	}
+
+	// Get shipping and payment data prepaired for request and append it to existing request data object
+	var shippingRequestData : util.HashMap = getShippingRequestData(lineItemContainer, isStore);
+	var paymentRequestData : util.HashMap = getPaymentRequestData(lineItemContainer);
+	var lineItems : Object = getProductLineItemsRequestData(lineItemContainer);
+	var lineItemsRequestData : util.HashMap = lineItems.productLineItemsRequestData;
+	var count : Number = lineItems.index;
+	var giftLineItemsRequestData : util.HashMap = getGiftLineItemsRequestData(lineItemContainer, count);
+	var pageDecoration : util.HashMap = getPageDecorationParameters();
+	var pageDecoration : util.HashMap = getPageDecorationParameters();
+
+	request.putAll(giftLineItemsRequestData);
+	request.putAll(shippingRequestData);
+	request.putAll(paymentRequestData);
+	request.putAll(lineItemsRequestData);
+	request.putAll(pageDecoration);
+	request.putAll(pageDecoration);
+	
+	return request;
+};
+
+/**
+ * Returns object with data for DoExpressCheckout call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @param paymentInstrument {dw.order.OrderPaymentInstrument} order payment isnstrument with token and paypalPayerID from SetExpressCheckout call
+ * @returns {dw.util.HashMap} request data
+ */
+PaypalHelper.createDoExpressCheckoutRequestData = function (lineItemContainer : order.LineItemCtnr, paymentInstrument : order.OrderPaymentInstrument) : util.HashMap {
+
+	var request : util.HashMap = new util.HashMap();
+
+	request.put('PAYMENTREQUEST_0_PAYMENTACTION', prefs.PP_API_ExpressPaymentAction);
+	request.put('BUTTONSOURCE', prefs.PP_API_ButtonSource);
+	request.put('PAYERID', paymentInstrument.custom.paypalPayerID);
+	request.put('TOKEN', paymentInstrument.custom.paypalToken);
+	request.put('PAYMENTREQUEST_0_INVNUM', lineItemContainer.getOrderNo());
+
+	var paymentRequestData : util.HashMap = getPaymentRequestData(lineItemContainer);
+	var lineItems : Object = getProductLineItemsRequestData(lineItemContainer);
+	var lineItemsRequestData = lineItems.productLineItemsRequestData;
+	var count : Number = lineItems.index;
+	var giftLineItemsRequestData : util.HashMap = getGiftLineItemsRequestData(lineItemContainer, count);
+
+	request.putAll(paymentRequestData);
+	request.putAll(giftLineItemsRequestData);
+	request.putAll(lineItemsRequestData);
+
+	return request;
+
+};
+
+/**
+ * Executes http request
+ *
+ * @param service {dw.svc.Service} service from business manager with configuration
+ * @param requestDataContainer {Object} request data
+ * @param logger {dw.system.Log} logger for operation
+ * @returns {Object} call response
+ */
+PaypalHelper.call = function (service : dw.svc.Service, requestDataContainer : Object, logger : system.Log) : Object {
+
+	try{
+		if (service == null) {
+			throw new Error('Service is undefine. Method specified : ' + method);
+		}
+	
+		if (empty(logger)) {
+			var logger : system.Log = this.getLogger();
+		}
+	
+		var result : svc.Result = service.setThrowOnError().call(requestDataContainer, logger);
+	
+		if (!result.isOk()) {
+			logger.error(result.getMsg());
+		}
+		
+		var responseData : util.HashMap = service.getResponse();
+	
+		return responseData;
+	}catch(e){
+		logger.error("Error calling paypal Service "+e.message);
+		return 'error';
+	}
+};
+
+/**
+ * Creates or get logger
+ *
+ * @param method {String} API operation
+ * @returns {dw.system.Log} logger for API operation
+ */
+PaypalHelper.getLogger = function (method : String) : system.Log {
+	var categoryName : String = 'PayPal_General';
+	var fileName : String = method == 'Notification' ? 'PayPalNotifications' : 'PayPal';
+
+	if (method) {
+		var methodPreferences : Object = prefs.getMethodPreferences(method);
+		if (!empty(methodPreferences) && methodPreferences.logCategory) {
+			categoryName = methodPreferences.logCategory;
+		}
+	}
+
+	return system.Logger.getLogger(fileName, categoryName);
+};
+
+/**
+ * Returns requested object with data for TransactionSearch call
+ *
+ * @param data {Object} input data from script pipelet
+ * @returns {Object} request data
+ */
+PaypalHelper.createTransactionSearchRequestData = function (data : Object) : util.HashMap {
+	var params : util.HashMap = new util.HashMap();
+
+	params.put('AMT', data.AMT);
+	params.put('CURRENCYCODE', data.CURRENCYCODE);
+	params.put('ENDDATE', createISODate(data.ENDDATE));
+	params.put('FIRSTNAME', data.FIRSTNAME);
+	params.put('INVNUM', data.INVNUM);
+	params.put('LASTNAME', data.LASTNAME);
+	params.put('MIDDLENAME', data.MIDDLENAME);
+	params.put('RECEIPTID', data.RECEIPTID);
+	params.put('RECEIVER', data.RECEIVER);
+	params.put('SALUTATION', data.SALUTATION);
+	params.put('STARTDATE', createISODate(data.STARTDATE));
+	params.put('STATUS', data.STATUS);
+	params.put('SUFFIX', data.SUFFIX);
+	params.put('TRANSACTIONCLASS', data.TRANSACTIONCLASS);
+	params.put('TRANSACTIONID', data.TRANSACTIONID);
+
+	return params;
+};
+
+/**
+ * Returns requested object with data for DirectPayment call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} basket object
+ * @param cvn {String} cnv code
+ * @param ip {String} customer's ip address
+ * @returns {dw.util.HashMap} request data
+ */
+PaypalHelper.createDirectPaymentData = function (lineItemContainer : order.LineItemCtnr, cvn : String, ip : String) : util.HashMap {
+
+	var params : util.HashMap = new util.HashMap();
+	var orderPaymentInstruments : util.Collection = lineItemContainer.getPaymentInstruments();
+	var paymentInstrument : order.OrderPaymentInstrument = getCreditPaymentInstrument(orderPaymentInstruments);
+	var shipmentData : HashMap = getCreditShippingRequestData(lineItemContainer);
+	var billingAddress : order.OrderAddress = lineItemContainer.getBillingAddress();
+
+	params.put('IPADDRESS', ip);
+	params.put('ACCT', paymentInstrument.getCreditCardNumber());
+	params.put('EXPDATE', formExpDate(paymentInstrument));
+	params.put('CVV2', cvn);
+	params.put('TYPE', paymentInstrument.getCreditCardType());
+	params.put('FIRSTNAME', billingAddress.getFirstName());
+	params.put('LASTNAME', billingAddress.getLastName());
+	params.put('EMAIL', lineItemContainer.getCustomerEmail());
+	params.put('AMT', paymentInstrument.getPaymentTransaction().getAmount().getValueOrNull());
+	params.put('CURRENCYCODE', lineItemContainer.getCurrencyCode());
+	params.put('INVNUM', lineItemContainer.getOrderNo());
+	params.put('PAYMENTACTION', prefs.PP_API_PaymentsProPaymentAction);
+	params.put('STREET', billingAddress.getAddress1());
+	params.put('STREET2', billingAddress.getAddress2());
+	params.put('CITY', billingAddress.getCity());
+	params.put('STATE', billingAddress.getStateCode());
+	params.put('COUNTRYCODE', billingAddress.getCountryCode().getValue());
+	params.put('ZIP', billingAddress.getPostalCode());
+
+	params.putAll(shipmentData);
+
+	return params;
+}
+
+/**
+ * Returns requested object with data for ReferenceTransaction call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} request data
+ */
+PaypalHelper.createReferenceTransactionRequestData = function (lineItemContainer : order.LineItemCtnr) : util.HashMap {
+
+	var params : util.HashMap = new util.HashMap();
+	var shipmentData : HashMap = getCreditShippingRequestData(lineItemContainer);
+	var lineItems : Object = getReferenceTransactionLineItemsDetalis(lineItemContainer);
+	var lineItemsRequestData : util.HashMap = lineItems.productLineItemsRequestData;
+	var count : Number = lineItems.index;
+	var giftLineItemsRequestData : util.HashMap = getGiftLineItemsRequestData(lineItemContainer, count);
+	var orderInfo : util.HashMap = getReferenceTransactionPaymentDetalis(lineItemContainer);
+
+	params.put('BUTTONSOURCE', prefs.PP_API_ButtonSource);
+	params.put('PAYMENTACTION', prefs.PP_API_ReferenceTransactionPaymentAction);
+
+	params.putAll(shipmentData);
+	params.putAll(lineItemsRequestData);
+	params.putAll(orderInfo);
+
+	return params;
+}
+
+/**
+ * Returns site preferences from Preference.ds file 
+ *
+ * @returns {Object} object with preferences
+ */
+PaypalHelper.getPrefs = function () : Object {
+	return prefs;
+}
+
+/**
+ * Saves billing agreement id into user profile
+ *
+ * @param ID {String} billing agreement ID
+ * @param profile {dw.customer.Profile} current customer profile
+ */
+PaypalHelper.saveBillingAgreementID = function (ID : String, profile : dw.customer.Profile) {
+	if (!profile.custom.paypalBillingAgreementId) {
+		profile.custom.paypalBillingAgreementId = ID;
+	}
+}
+
+/**
+ * Return paypal order payment instrument
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.order.OrderPaymentInstrument} payment instument with id PAYPAL_EXPRESS
+ */
+PaypalHelper.getPaypalExpressPaymentInstrument = function (lineItemContainer : order.LineItemCtnr) : order.OrderPaymentInstrument {
+	var paymentInstruments : util.Collection = lineItemContainer.getPaymentInstruments();
+	var paypalPaymentInstrument : order.OrderPaymentInstrument = null;
+
+	for each (let paymentInstrument : order.OrderPaymentInstrument in paymentInstruments) {
+		
+		let paymentProcessor : order.PaymentProcessor = paymentInstrument.getPaymentTransaction().getPaymentProcessor();
+		let paymentProcessorId : String = paymentProcessor ? paymentProcessor.getID(): paymentInstrument.getPaymentMethod(); // For Gift Certificates: If no Payment Processor ID available
+
+		//Defined paymentProcessor ID
+		if (paymentProcessorId == 'PAYPAL_EXPRESS') {
+			paypalPaymentInstrument = paymentInstrument;
+			break;
+		}
+	}
+
+	return paypalPaymentInstrument;
+}
+
+/**
+ * Converts map to object
+ *
+ * @param map {dw.util.Map}
+ * @returns {Object} filtered
+ */
+PaypalHelper.mapToObject = function (map : util.Map) : Object {
+
+	if (empty(map)) {
+		throw new Error('Cannot convert non map object or its sub class instance');
+	}
+
+	var data : Object = {};
+	var keys : dw.util.Set = map.keySet();
+
+	for (var i = 0, lenght = keys.size(); i < lenght; i++) {
+		let key : String = keys[i];
+		data[key] = map.get(key);
+	}
+
+	return data;
+}
+
+
+/**
+ * Parses response and remove unnecessary information
+ *
+ * @param data {dw.util.HashMap} response data
+ * @returns {Array} filtered response message
+ */
+PaypalHelper.parseResponseForMessages = function (data : util.HashMap) : Array {
+	var messages : Array = [];
+
+	for (let i = 0, len = data.size(); i < len; i++) {
+
+		let message : String = null;
+
+		let errorcodeIndex : String = 'l_errorcode' + i;
+		let shortMessageIndex : String = 'l_shortmessage' + i;
+		let longMessageIndex : String = 'l_longmessage' + i;
+
+		if (data.containsKey(errorcodeIndex)) {
+			message = data.get(errorcodeIndex) + '; ' + data.get(shortMessageIndex) + '; ' + data.get(longMessageIndex)
+			messages.push(message);
+		} else {
+			continue;
+		}
+	}
+
+	return messages;
+}
+
+
+
+// Private module functions:
+
+/**
+ * Creates credit card expiration date in the proper format
+ *
+ * @param paymentInstrument {dw.order.OrderPaymentInstrument} order payment instrument with credit card data
+ * @returns {String} credit card expiration date
+ */
+function formExpDate(paymentInstrument : order.OrderPaymentInstrument) : String {
+	var currentMonth : Number = paymentInstrument.getCreditCardExpirationMonth();
+	var formatMonth : String = currentMonth.length === 1 ? String(currentMonth) : '0' +  currentMonth; 
+	var year : String = String(paymentInstrument.getCreditCardExpirationYear());
+
+	return formatMonth + year;
+}
+
+/**
+ * Returns credit cart payment instrument from order payment instruments collection
+ *
+ * @param orderPaymentInstruments {dw.util.Collection} order payment instruments collection
+ * @returns {dw.util.Collection} credit card payment instrument
+ */
+function getCreditPaymentInstrument(orderPaymentInstruments : util.Collection) : order.OrderPaymentInstrument {
+
+	for each (let instrument : order.OrderPaymentInstrument in orderPaymentInstruments) {
+		if (instrument.getPaymentMethod() === 'CREDIT_CARD') {
+			return instrument;
+		}
+	}
+}
+
+/**
+ * Creates date to ISO formated string
+ *
+ * @param date {String} date in traditional new Date() javascript format
+ * @returns {String} date in UTC format
+ */
+function createISODate(date : String) : String {
+
+	var isoDate : String = null;
+
+	if (date) {
+		var timezone : String = (dw.system.Site.getCurrent().getTimezoneOffset() / (60 * 60 * 1000)).toString();
+		var GMT : String  = timezone.indexOf ('-') != -1 ? timezone : '+' + timezone;
+		var time : String = date + ' GMT +' + timezone + '00';
+		isoDate =  new Date(time).toISOString();
+	}
+
+	return isoDate;
+}
+
+/**
+ * Returns shipping data from order object for SetExpressCheckout call
+ *
+ * @param lineItemContainer {order.LineItemCtnr} basket object
+ * @param isStore {Boolean} indicate if ship to store option is active
+ * @returns {dw.util.HashMap} shipping data
+ */
+function getShippingRequestData(lineItemContainer : order.LineItemCtnr, isStore : Boolean) : util.HashMap {
+
+	var shippingRequestData : util.HashMap = new util.HashMap();
+	var defaultShipment : order.Shipment = lineItemContainer.getDefaultShipment();
+	var shippingAddress : order.OrderAddress = defaultShipment.getShippingAddress();
+
+	if (!empty(shippingAddress) && shippingAddress != null) {
+
+		let storeName : String = shippingAddress.getFullName();
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOSTREET', shippingAddress.getAddress1());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOSTREET2', shippingAddress.getAddress2());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOCITY', shippingAddress.getCity());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE', shippingAddress.getCountryCode().getValue());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTONAME', isStore ? decorateByShipToStorePrefix(storeName) : storeName);
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOPHONENUM', shippingAddress.getPhone());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOSTATE', shippingAddress.getStateCode());
+		shippingRequestData.put('PAYMENTREQUEST_0_SHIPTOZIP', shippingAddress.getPostalCode());
+	}
+
+	return shippingRequestData;
+}
+
+/**
+ * Returns shipping data from order object for DoDirectPayment & DoReferenceTransaction API call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} shipping data
+ */
+function getCreditShippingRequestData(lineItemContainer : order.LineItemCtnr) : util.HashMap {
+
+	var shippingRequestData : util.HashMap = new util.HashMap();
+	var defaultShipment : order.Shipment = lineItemContainer.getDefaultShipment();
+	var shippingAddress : order.OrderAddress = defaultShipment.getShippingAddress();
+
+	shippingRequestData.put('SHIPTOSTREET', shippingAddress.getAddress1());
+	shippingRequestData.put('SHIPTOSTREET2', shippingAddress.getAddress2());
+	shippingRequestData.put('SHIPTOCITY', shippingAddress.getCity());
+	shippingRequestData.put('SHIPTOCOUNTRY', shippingAddress.getCountryCode().getValue());
+	shippingRequestData.put('SHIPTONAME', shippingAddress.getFullName());
+	shippingRequestData.put('SHIPTOSTATE', shippingAddress.getStateCode());
+	shippingRequestData.put('SHIPTOZIP', shippingAddress.getPostalCode());
+
+	return shippingRequestData;
+}
+
+/**
+ * Returns payment data from order object for SetExpressCheckout & DoExpressCheckout API call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} payment data
+ */
+function getPaymentRequestData(lineItemContainer : order.LineItemCtnr) : util.HashMap {
+
+	var paymentRequestData : util.HashMap = new util.HashMap();
+	var appliedGiftCertificatesAmount : value.Money = calculateAppliedGiftCertificatesAmount(lineItemContainer);
+	var amount : value.Money;
+	if(lineItemContainer.getTotalGrossPrice().available){
+		amount = lineItemContainer.getTotalGrossPrice().subtract(appliedGiftCertificatesAmount);
+	} else{
+		amount = lineItemContainer.getAdjustedMerchandizeTotalPrice(true).add(lineItemContainer.giftCertificateTotalPrice).subtract(appliedGiftCertificatesAmount);
+	}
+	var itemsAmount : value.Money = lineItemContainer.getTotalNetPrice().subtract(appliedGiftCertificatesAmount).subtract(lineItemContainer.getAdjustedShippingTotalNetPrice());
+	var shippingDiscountAmount : value.Money = lineItemContainer.getAdjustedShippingTotalNetPrice().subtract(lineItemContainer.getShippingTotalNetPrice());
+
+	paymentRequestData.put('PAYMENTREQUEST_0_AMT', amount.getValue());
+	paymentRequestData.put('PAYMENTREQUEST_0_CURRENCYCODE', lineItemContainer.getCurrencyCode());
+	paymentRequestData.put('PAYMENTREQUEST_0_ITEMAMT', itemsAmount.getValue());
+	paymentRequestData.put('PAYMENTREQUEST_0_TAXAMT', lineItemContainer.getTotalTax().getValue());
+	paymentRequestData.put('PAYMENTREQUEST_0_SHIPPINGAMT', lineItemContainer.getShippingTotalPrice().getValue());
+	paymentRequestData.put('PAYMENTREQUEST_0_SHIPDISCAMT', shippingDiscountAmount.getValue());
+
+	return paymentRequestData;
+}
+
+/**
+ * Calculates amount of all applied Gift Certificates
+ * @param lineItemContainer {dw.order.LineItemCtnr} Order or Basket
+ * @returns {dw.value.Money}
+ */
+function calculateAppliedGiftCertificatesAmount(lineItemContainer : order.LineItemCtnr) : value.Money {
+
+	var amount : value.Money =  new value.Money(0, lineItemContainer.getCurrencyCode());
+	var paymentInstruments : util.Collection = lineItemContainer.getGiftCertificatePaymentInstruments();
+
+	for each (let paymentInstrument : order.PaymentInstrument in paymentInstruments) {
+		amount = amount.add(paymentInstrument.getPaymentTransaction().getAmount());
+	}
+
+	return amount;
+}
+
+/**
+ * Returns gift data from basket for SetExpressCheckout & DoExpressCheckout API call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} request data about gift items and certificates
+ */
+function getGiftLineItemsRequestData(lineItemContainer : order.LineItemCtnr, counter : Number) : util.HashMap {
+
+	var giftItems : util.Collection = lineItemContainer.getGiftCertificateLineItems();
+	var giftCertificates : util.Collection = lineItemContainer.getGiftCertificatePaymentInstruments();
+	var giftLineItems : util.HashMap = new util.HashMap();
+	var index : Number = counter;
+
+	for (let i = 0, len = giftItems.size(); i < len; i++) {
+
+		let giftLineItem : order.GiftCertificateLineItem = giftItems[i];
+
+		giftLineItems.put('L_PAYMENTREQUEST_0_NAME' + index, giftLineItem.getLineItemText());
+		giftLineItems.put('L_PAYMENTREQUEST_0_DESC' + index, truncatePreferenceString(giftLineItem.getLineItemText())); //Field quota from PayPal 127 characters max
+		giftLineItems.put('L_PAYMENTREQUEST_0_NUMBER' + index, giftLineItem.getGiftCertificateID() ? giftLineItem.getGiftCertificateID() : giftLineItem.getLineItemText());
+		giftLineItems.put('L_PAYMENTREQUEST_0_AMT' + index, giftLineItem.getBasePrice().getValueOrNull());
+		giftLineItems.put('L_PAYMENTREQUEST_0_QTY' + index, '1');
+
+		index++;
+	}
+
+	for (let i = 0, len = giftCertificates.size(); i < len; i++) {
+
+		let giftCertificate : order.OrderPaymentInstrument = giftCertificates[i];
+
+		giftLineItems.put('L_PAYMENTREQUEST_0_NAME' + index, giftCertificate.getPaymentMethod());
+		giftLineItems.put('L_PAYMENTREQUEST_0_DESC' + index, truncatePreferenceString(giftCertificate.getPaymentMethod())); //Field quota from PayPal 127 characters max
+		giftLineItems.put('L_PAYMENTREQUEST_0_NUMBER' + index, giftCertificate.getGiftCertificateCode());
+		giftLineItems.put('L_PAYMENTREQUEST_0_AMT' + index, (giftCertificate.getPaymentTransaction().getAmount().getValueOrNull() * -1)); //Multiply Number value to -1 to get negative value
+		giftLineItems.put('L_PAYMENTREQUEST_0_QTY' + index, '1');
+
+		index++;
+	}
+
+	return giftLineItems;
+}
+
+/**
+ * Returns payment detalis for DoReferenceTransaction API call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} payment request data
+ */
+function getReferenceTransactionPaymentDetalis(lineItemContainer : order.LineItemCtnr) : util.HashMap {
+
+	var data : util.HashMap = new util.HashMap();
+	var appliedGiftCertificatesAmount : value.Money = calculateAppliedGiftCertificatesAmount(lineItemContainer);
+	var amount : value.Money = lineItemContainer.getTotalGrossPrice().subtract(appliedGiftCertificatesAmount);
+	var itemsAmount : value.Money = lineItemContainer.getTotalNetPrice().subtract(appliedGiftCertificatesAmount).subtract(lineItemContainer.getAdjustedShippingTotalNetPrice());
+
+	data.put('AMT', amount.getValue());
+	data.put('CURRENCYCODE', lineItemContainer.getCurrencyCode());
+	data.put('ITEMAMT', itemsAmount.getValue());
+	data.put('TAXAMT', lineItemContainer.getTotalTax().getValue());
+	data.put('SHIPPINGAMT', lineItemContainer.getAdjustedShippingTotalNetPrice().getValue());
+
+	return data;
+}
+
+/**
+ * Returns line items information for DoReferenceTransaction API call
+ *
+ * @param lineItem {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} line items request data
+ */
+function getReferenceTransactionLineItemsDetalis(lineItemContainer : order.LineItemCtnr) : util.HashMap {
+
+	var lineItems : util.Collection = lineItemContainer.getAllLineItems();
+	var productLineItemsRequestData : util.HashMap = new util.HashMap();
+	var index : Number = 0;
+
+	for (let i = 0, len = lineItems.size(); i < len; i++) {
+
+		let productLineItem : order.ProductLineItem = lineItems[i];
+
+		if (productLineItem instanceof order.ProductLineItem || productLineItem instanceof dw.catalog.Variant) {
+
+			let product : catalog.Product = productLineItem.getProduct();
+			let productDescription : String = '';
+
+			if (!productLineItem.isBonusProductLineItem() && !productLineItem.isOptionProductLineItem() && !empty(product)) {
+
+				if (!empty(product.getShortDescription())) {
+					productDescription = product.getShortDescription().getMarkup();
+				} else if (!empty(product.getLongDescription())) {
+					productDescription = product.getLongDescription().getMarkup();
+				} else {
+					productDescription = dw.web.Resource.msg('paypal.referencetransaction.noitemdesc', 'locale', 'No description given');
+				}
+
+			} else {
+				productDescription = productLineItem.getProductName();
+			}
+			
+			productLineItemsRequestData.put('L_NAME' + index, productLineItem.getProductName());
+			productLineItemsRequestData.put('L_DESC' + index, truncatePreferenceString(productDescription)); //Field quota from PayPal 127 characters max
+			productLineItemsRequestData.put('L_NUMBER' + index, productLineItem.getProductID());
+			productLineItemsRequestData.put('L_AMT' + index, productLineItem.getBasePrice().getValueOrNull());
+			productLineItemsRequestData.put('L_QTY' + index, productLineItem.getQuantity().getValue());
+
+			index++;
+
+			var priceAdjustments : util.Collection = productLineItem.getPriceAdjustments();
+
+			if (priceAdjustments.size() > 0) {
+				for each (let priceAdjustment : order.PriceAdjustment in priceAdjustments) {
+
+					let promotion : campaign.Promotion = priceAdjustment.getPromotion();
+					let promotionClass : String = promotion.getPromotionClass();
+					
+					if (!empty(promotion) && promotionClass === campaign.Promotion.PROMOTION_CLASS_PRODUCT) {
+						let promotionName : String = promotion.getName() || dw.web.Resource.msg('paypal.adjustment', 'locale', null);
+						let promotionDesc : String = promotion.getCalloutMsg();
+						let coupon : String  = dw.web.Resource.msg('paypal.coupon', 'locale', null);
+
+						productLineItemsRequestData.put('L_NAME' +  index, promotion.isBasedOnCoupons() ? coupon : promotionName);
+						productLineItemsRequestData.put('L_QTY' + index, 1);
+						productLineItemsRequestData.put('L_AMT' + index, priceAdjustment.getBasePrice().getValueOrNull());
+						productLineItemsRequestData.put('L_DESC' + index, promotionDesc ? truncatePreferenceString(promotionDesc.getMarkup()) : null);
+
+						index++;
+					}
+				}
+			}
+		} else if (productLineItem instanceof order.PriceAdjustment) {
+
+			let promotion = productLineItem.getPromotion();
+			let promotionClass : String = productLineItem.getPromotion().getPromotionClass();
+
+			if (!empty(promotion) && promotionClass === campaign.Promotion.PROMOTION_CLASS_ORDER) {
+
+				let promotionDesc : String = promotion.getCalloutMsg();
+				let promotionName : String = promotion.getName();
+				let coupon : String  = dw.web.Resource.msg('paypal.coupon', 'locale', null);
+				
+				productLineItemsRequestData.put('L_NAME' +  index, productLineItem.isBasedOnCoupon() ? coupon : promotionName);
+				productLineItemsRequestData.put('L_QTY' + index, 1);
+				productLineItemsRequestData.put('L_AMT' + index, productLineItem.getBasePrice().getValueOrNull());
+				productLineItemsRequestData.put('L_DESC' + index, promotionDesc ? truncatePreferenceString(promotionDesc.getMarkup()) : null);
+
+				index++;
+			};
+		}
+	}
+	return {
+		productLineItemsRequestData : productLineItemsRequestData, 
+		index : index
+	};
+}
+
+/**
+ * Returns line items information for SetExpressCheckout and DoExpressCheckout API call
+ *
+ * @param lineItemContainer {dw.order.LineItemCtnr} order object
+ * @returns {dw.util.HashMap} line items request data (include promotion)
+ */
+function getProductLineItemsRequestData(lineItemContainer : order.LineItemCtnr) : Object {
+
+	var lineItems : util.Collection = lineItemContainer.getAllLineItems();
+	var productLineItemsRequestData : util.HashMap = new util.HashMap();
+	var index : Number = 0;
+
+	for (let i = 0, len = lineItems.size(); i < len; i++) {
+
+		let productLineItem : order.ProductLineItem = lineItems[i];
+
+		if (productLineItem instanceof order.ProductLineItem || productLineItem instanceof dw.catalog.Variant) {
+
+			let product : catalog.Product = productLineItem.getProduct();
+			let productDescription : String = '';
+
+			if (!productLineItem.isBonusProductLineItem() && !productLineItem.isOptionProductLineItem() && !empty(product)) {
+
+				if (!empty(product.getShortDescription())) {
+					productDescription = product.getShortDescription().getMarkup();
+				} else if (!empty(product.getLongDescription())) {
+					productDescription = product.getLongDescription().getMarkup();
+				} else {
+					productDescription = dw.web.Resource.msg('paypal.referencetransaction.noitemdesc', 'locale', 'No description given');
+				}
+
+			} else {
+				productDescription = productLineItem.getProductName();
+			}
+
+			productLineItemsRequestData.put('L_PAYMENTREQUEST_0_NAME' + index, productLineItem.getProductName());
+			productLineItemsRequestData.put('L_PAYMENTREQUEST_0_DESC' + index, truncatePreferenceString(productDescription)); //Field quota from PayPal 127 characters max
+			productLineItemsRequestData.put('L_PAYMENTREQUEST_0_NUMBER' + index, productLineItem.getProductID());
+			productLineItemsRequestData.put('L_PAYMENTREQUEST_0_AMT' + index, productLineItem.getBasePrice().getValueOrNull());
+			productLineItemsRequestData.put('L_PAYMENTREQUEST_0_QTY' + index, productLineItem.getQuantity().getValue());
+
+			index++;
+
+			var priceAdjustments : util.Collection = productLineItem.getPriceAdjustments();
+
+			if (priceAdjustments.size() > 0) {
+				for each (let priceAdjustment : order.PriceAdjustment in priceAdjustments) {
+
+					let promotion : campaign.Promotion = priceAdjustment.getPromotion();
+					let promotionClass : String = promotion.getPromotionClass();
+					
+					if (!empty(promotion) && promotionClass === campaign.Promotion.PROMOTION_CLASS_PRODUCT) {
+						let promotionName : String = promotion.getName() || dw.web.Resource.msg('paypal.adjustment', 'locale', null);
+						let promotionDesc : String = promotion.getCalloutMsg();
+						let coupon : String  = dw.web.Resource.msg('paypal.coupon', 'locale', null);
+
+						productLineItemsRequestData.put('L_PAYMENTREQUEST_0_NAME' +  index, promotion.isBasedOnCoupons() ? coupon : promotionName);
+						productLineItemsRequestData.put('L_PAYMENTREQUEST_0_QTY' + index, 1);
+						productLineItemsRequestData.put('L_PAYMENTREQUEST_0_AMT' + index, priceAdjustment.getBasePrice().getValueOrNull());
+						productLineItemsRequestData.put('L_PAYMENTREQUEST_0_DESC' + index, promotionDesc ? truncatePreferenceString(promotionDesc.getMarkup()) : null);
+
+						index++;
+					}
+				}
+			}
+		} else if (productLineItem instanceof order.PriceAdjustment) {
+
+			let promotion = productLineItem.getPromotion();
+			let promotionClass : String = productLineItem.getPromotion().getPromotionClass();
+
+			if (!empty(promotion) && promotionClass === campaign.Promotion.PROMOTION_CLASS_ORDER) {
+
+				let promotionDesc : String = promotion.getCalloutMsg();
+				let promotionName : String = promotion.getName();
+				let coupon : String  = dw.web.Resource.msg('paypal.coupon', 'locale', null);
+				
+				productLineItemsRequestData.put('L_PAYMENTREQUEST_0_NAME' +  index, productLineItem.isBasedOnCoupon() ? coupon : promotionName);
+				productLineItemsRequestData.put('L_PAYMENTREQUEST_0_QTY' + index, 1);
+				productLineItemsRequestData.put('L_PAYMENTREQUEST_0_AMT' + index, productLineItem.getBasePrice().getValueOrNull());
+				productLineItemsRequestData.put('L_PAYMENTREQUEST_0_DESC' + index, promotionDesc ? truncatePreferenceString(promotionDesc.getMarkup()) : null);
+
+				index++;
+			};
+		}
+	}
+	return {
+		productLineItemsRequestData : productLineItemsRequestData, 
+		index : index
+	};
+}
+
+/**
+ * Returns information for checkout page decoration
+ *
+ * @returns {dw.util.HashMap} information for checkout page decoration
+ */
+function getPageDecorationParameters() : util.HashMap {
+
+	var parametes : util.HashMap = new util.HashMap();
+
+	// API aprameter has length quota
+	parametes.put('PAGESTYLE', validateParameterLength(prefs.PP_API_PageStyle, 30));
+	parametes.put('CARTBORDERCOLOR', validateParameterLength(prefs.PP_API_CartBorderColor, 6));
+	parametes.put('LOGOIMG', validateParameterLength(prefs.PP_API_LogoImg, 127));
+	parametes.put('BRANDNAME', validateParameterLength(prefs.PP_API_BrandName, 127));
+	parametes.put('CUSTOMERSERVICENUMBER', validateParameterLength(prefs.PP_API_CustomerServicenNumber, 16));
+
+	return parametes;
+}
+
+/**
+ * Returns null if value length is too long
+ *
+ * @param param {String} parameter value
+ * @param size {Number} max length of parameter
+ * @returns {dw.util.HashMap} parameter value or null
+ */
+function validateParameterLength(param : String, size : Number) : String {
+	var result : String = null;
+
+	if (empty(param) || param == 'null') {
+		return result;
+	}
+
+	result = param.length <= size ? param : null;
+
+	return result;
+}
+
+/**
+ * Returns store name for ship to store feature
+ * 
+ * @param storeName {String}
+ * @returns {String} store name that indicate that ship to store feature is active
+ */
+function decorateByShipToStorePrefix(storeName : String) : String {
+	return 'S2S ' + storeName;
+}
+
+/**
+ * Returns truncated description
+ *
+ * @param description {String} description
+ * @returns {String} truncated description
+ */
+function truncatePreferenceString(description : String) : String {
+	var truncatedString : String = null;
+
+	if (description) {
+		var newDescription : String = description.substring(0, 110);
+		var separator : Number = newDescription.lastIndexOf('.') + 1; //locates position of the last sentence in truncated description
+		truncatedString =  newDescription.slice(0, separator);
+	} 
+
+	return truncatedString;
+}
+
+module.exports = PaypalHelper;

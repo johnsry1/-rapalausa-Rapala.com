@@ -1,0 +1,15 @@
+<isdecorate template="error/pt_error">
+<isinclude template="util/modules">
+
+<div class="notfound">
+
+	<div class="errorpage">		
+		<div class="errorfooter">
+			<isif condition="${pdict.Status!=null}">
+				Error Details : <isprint value="${pdict.Status.code}"/> : <isprint value="${pdict.Status.message}"/><br/>
+			</isif>
+			Customer not found or could not login on behalf of customer. Please try again later.<br/>
+		</div><!-- END: errorfooter -->
+	</div><!-- END: errorpage -->
+</div><!-- END: notfound -->
+</isdecorate>

@@ -1,0 +1,61 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<meta name="format-detection" content="telephone=no">
+
+<head>
+	<isscript>
+		var pageContext = {
+			title: 'My Account',
+			type: 'MyAccount',
+			ns: 'account'
+		};
+	</isscript>
+	<isinclude template="util/modules"/>
+
+	<isinclude template="components/header/htmlhead"/>
+	
+	<isinclude template="account/pt_account_UI"/>
+</head>
+<body>
+<iscomment> <isinclude url="${URLUtils.url('Home-IncludeNoScriptAlert')}"/>  </iscomment>
+<div id="container" class="pt_leftnav-addressbook">
+	<isinclude template="components/header/header"/>
+	<div id="main" role="main" class="page-content clearfix">
+		<div id="content">
+			<div id="page-background" class="downshift">
+				<div id="page">
+					<div class="wrapper">
+						<isbreadcrumbs bcurl1="${URLUtils.https('Account-Show')}" bctext1="My Account" bctext2="Address Book"/>
+						<div class="content-outer">
+							<div id="primary" class="primary-content">
+								<isreplace/>
+							</div>
+							<div id="secondary" class="nav">
+								<nav>
+									<div class="secondary-navigation">
+										<isif condition="${pdict.CurrentCustomer.registered}">
+											<iscontentasset aid="account-nav-registered"/>
+										</isif>
+									</div>
+									<div class="account-nav-asset">
+										<iscontentasset aid="account-nav-text"/>
+									</div>
+								</nav>
+							</div>
+						</div>
+						<div class="clear"><!-- FLOAT CLEAR --></div>
+					</div><!-- END: cell -->
+				</div><!-- END: column -->
+			</div><!-- END: row column3 -->
+		</div>
+	</div>
+</div>
+	<isinclude template="components/footer/footer"/>
+	<isinclude template="account/pt_account_VARS"/>
+</div><!-- END: container -->
+</body>
+</html>

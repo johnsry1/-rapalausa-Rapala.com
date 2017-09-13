@@ -1,0 +1,23 @@
+<!--- TEMPLATENAME: prostafffolder.isml --->
+<isdecorate template="content/folder/pt_folder">
+	<isscript>
+		var folder : Folder = pdict.Folder;
+	</isscript>
+	<isif condition="${folder != null && folder.online}">
+<div class="proStaffImageContent prostaff">
+	<h2 class="left-nav-style">${Resource.msg('global.prostaff','locale',null)}</h2>
+	<isloop items="${folder.onlineContent}" var="subContent">
+	<div class="prostaff-tile">
+		<a href="${URLUtils.url('Page-Show','cid',subContent.ID)}">
+			<img alt="${subContent.name}" src="${URLUtils.staticURL(URLUtils.CONTEXT_LIBRARY, 'rapala', 'images/proStaff/tile/'+subContent.ID+'-thumb.jpg')}"></img>
+		</a>
+		<div class="prostaff name">
+		<a href="${URLUtils.url('Page-Show','cid',subContent.ID)}">
+			<isprint value="${subContent.name}"></isprint>
+		</a>
+		</div>	
+	</div>
+	</isloop>
+</div>
+</isif>
+</isdecorate>

@@ -1,0 +1,123 @@
+/**
+ 
+ * @output users : String the csv file uploaded to server
+ * @output userslistindustry : dw.util.Collection
+ * @output userslistdonation : dw.util.Collection
+ * @output userslistfield : dw.util.Collection
+ * @output userslistguide : dw.util.Collection
+ * @output userslistsports : dw.util.Collection
+ */
+importPackage( dw.system );
+importPackage( dw.web );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.object );
+
+function execute( pdict : PipelineDictionary ) : Number {
+
+	var todaysDate : Date = new Date();
+	var date = todaysDate.getDate();
+	todaysDate.setDate(date-1);
+	var createDate: Date = null;
+	
+	//Industry Affiliate
+	var products : SeekableIterator = dw.object.CustomObjectMgr.getAllCustomObjects("IndustryAffiliate");
+	var tmail = dw.system.Site.current.preferences.custom.triggermailindustry;
+	var test : String = '';
+	var fl : ArrayList = new ArrayList();
+	while(products.hasNext()){ 
+	var product = products.next();
+	var fromdate = product.creationDate; 
+	var mailstatus = product.custom.mailstatus;
+	var usermail = product.custom.email;
+				if(fromdate<=todaysDate){
+					if(!empty(tmail) && (tmail==true) && (empty(mailstatus) || mailstatus==false)){
+					product.custom.mailstatus=new Boolean(1);
+					fl.add(usermail);
+					}
+				}
+	}
+	
+	//Donation requests
+	var dons : SeekableIterator = dw.object.CustomObjectMgr.getAllCustomObjects("DonationRequest");
+	var triggermaildonation = dw.system.Site.current.preferences.custom.triggermaildonation;
+	var test3 : String = '';
+	var f3 : ArrayList = new ArrayList();
+	while(dons.hasNext()){ 
+	var product = dons.next();
+	fromdate = product.creationDate; 
+	var mailstatus = product.custom.mailstatus;
+	var usermail = product.custom.email;
+				if(fromdate<=todaysDate){
+					if(!empty(triggermaildonation) && (triggermaildonation==true) && (empty(mailstatus) || mailstatus==false)){
+					product.custom.mailstatus=new Boolean(1);
+					f3.add(usermail);
+					}
+				}
+	}
+	
+	
+	//field staff
+	var fields : SeekableIterator = dw.object.CustomObjectMgr.getAllCustomObjects("fieldstaff");
+	var triggermailfieldstaff = dw.system.Site.current.preferences.custom.triggermailfieldstaff;
+	var test3 : String = '';
+	var f4 : ArrayList = new ArrayList();
+	while(fields.hasNext()){ 
+	var product = fields.next();
+	fromdate = product.creationDate; 
+	var mailstatus = product.custom.mailstatus;
+	var usermail = product.custom.email;
+					if(fromdate<=todaysDate){
+					if(!empty(triggermailfieldstaff) && (triggermailfieldstaff==true) && (empty(mailstatus) || mailstatus==false)){
+					product.custom.mailstatus=new Boolean(1);
+					f4.add(usermail);
+					}
+				}
+	}
+	
+	//Guide and Outfitters
+	var guides : SeekableIterator = dw.object.CustomObjectMgr.getAllCustomObjects("GuideAndOutFitters");
+	var triggermailguide = dw.system.Site.current.preferences.custom.triggermailguide;
+	var test3 : String = '';
+	var f5 : ArrayList = new ArrayList();
+	while(guides.hasNext()){ 
+	var product = guides.next();
+	fromdate = product.creationDate; 
+	var mailstatus = product.custom.mailstatus;
+	var usermail = product.custom.email;
+				if(fromdate<=todaysDate){
+					if(!empty(triggermailguide) && (triggermailguide==true) && (empty(mailstatus) || mailstatus==false)){
+					product.custom.mailstatus=new Boolean(1);
+					f5.add(usermail);
+					}
+				}
+	}
+	
+	
+		//SportingGoodsRetail
+	var sports : SeekableIterator = dw.object.CustomObjectMgr.getAllCustomObjects("SportingGoodsRetail");
+	var triggermailsport = dw.system.Site.current.preferences.custom.triggermailsport;
+	var test3 : String = '';
+	var f6 : ArrayList = new ArrayList();
+	while(sports.hasNext()){ 
+	var product = sports.next();
+	fromdate = product.creationDate; 
+	var mailstatus = product.custom.mailstatus;
+	var usermail = product.custom.email;
+				if(fromdate<=todaysDate){
+					if(!empty(triggermailsport) && (triggermailsport==true) && (empty(mailstatus) || mailstatus==false)){
+					product.custom.mailstatus=new Boolean(1);
+					f6.add(usermail);
+					}
+				}
+		}
+	
+	pdict.users = test.substr(1,test.length);
+	pdict.userslistindustry = fl;
+	pdict.userslistdonation = f3;
+	pdict.userslistfield = f4;
+	pdict.userslistguide = f5;
+	pdict.userslistsports = f6;
+	
+	return PIPELET_NEXT;
+}

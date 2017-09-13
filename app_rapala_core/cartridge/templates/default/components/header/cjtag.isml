@@ -1,0 +1,5 @@
+<!--- TEMPLATENAME: cjtag.isml --->
+<isif condition="${!empty(dw.system.Site.current.preferences.custom.EnableCJ) && dw.system.Site.current.preferences.custom.EnableCJ}">
+	<iscache type="relative" hour="0"/>
+	<isprint value="${dw.system.Site.getCurrent().getCustomPreferenceValue('CommissionJunctionHTML')}" encoding="off"  />
+</isif>

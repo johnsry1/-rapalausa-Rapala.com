@@ -1,0 +1,102 @@
+<!--- TEMPLATENAME: youTubeVideos.isml --->
+<iscache type="relative" minute="30" varyby="price_promotion"/>
+<isset name="Product" value="${dw.catalog.ProductMgr.getProduct(pdict.pid)}" scope="page" />
+<isscript>
+	var videos : dw.util.ArrayList = new dw.util.ArrayList();
+	var newVideos : dw.util.ArrayList = new dw.util.ArrayList();
+	var oldVideos : dw.util.ArrayList = new dw.util.ArrayList();
+	
+	for ( var x in Product.custom.videoId ) {
+		var video = {};
+		video.id = Product.custom.videoId[x];
+		video.id = video.id.substring(video.id.indexOf('|') + 1);
+		video.title = Product.custom.videoTitle[x] ? Product.custom.videoTitle[x] : "";
+		video.title = video.title.substring(video.title.indexOf('|') + 1);
+		video.isNew = Product.custom.videoNewFlag[x] ? Product.custom.videoNewFlag[x] : "false";
+		video.isNew = video.isNew.substring(video.isNew.indexOf('|') + 1);
+		video.description = Product.custom.videoShortDescription[x] ? Product.custom.videoShortDescription[x] : "";
+		video.description = video.description.substring(video.description.indexOf('|') + 1);
+		video.img = Product.custom.videoThumbnail[x] ? Product.custom.videoThumbnail[x] : "";
+		video.img = video.img.substring(video.img.indexOf('|') + 1);
+		if(video.isNew == 'true') {
+			newVideos.add(video);
+		} else {
+			oldVideos.add(video);
+		}
+	}
+	newVideos.reverse();
+	oldVideos.reverse();
+	videos.addAll(newVideos);
+	videos.addAll(oldVideos);
+</isscript>
+
+<isif condition="${Product.custom.videoId.length > 0}">
+<div id="youTubeVideos" class="clear">
+    <div class="leftcol">
+    	<div id="pdpVideoTitle" class="videoTitle">
+    		<h2><isprint value="${videos[0].title}"/></h2>
+    	</div>
+        <div id="pdpVideoTabPlayer">
+           <iframe width="462" height="270" src="${'http://www.youtube.com/embed/' + videos[0].id + '?rel=0'}" frameborder="0">
+            </iframe>
+        </div>
+        <div id="pdpVideoDescription" class="videoDescription">
+        	<isprint value="${videos[0].description}" />
+        </div>
+    </div>
+
+    <div class="rightcol">
+	    <h2 class="onlyMobile-hide">${Resource.msg('product.videoplaylist','product',null)}
+		</h2>
+	    <div class="skin-slidedeck">	
+		<dl id="youtube_slide_deck" class="yt_slidedeck">
+		<dd><ul>
+	    <isloop items="${videos}" var="video" status="videoStatus">
+	    
+	    
+	    		<isif condition="${videoStatus.index == 0}">
+                   <isset name="selectedString" value="${'selected '}" scope="page" />
+               		<iselse/>
+               		<isset name="selectedString" value="${''}" scope="page" />
+               </isif>
+	           <li class="youtube-list-video">
+	               <a rel="${video.id}" href="${"http://www.youtube.com/?v="+  video.id}">
+	                   <isif condition="${video.img != ''}">
+	                       <img class="videothumbnail contentbox" src="${URLUtils.imageURL(URLUtils.CONTEXT_LIBRARY,'rapala',video.img, null)}" alt="${video.title}"/><br/>
+	                   </isif>
+	                   <div class="title">
+	                       <isprint value="${video.title}"/>
+	                       <isif condition="${video.isNew == 'true'}">
+	                           <img src="${URLUtils.staticURL('/images/icon-new-small.png')}" />
+	                       </isif>
+	                   </div>
+	    				<div class="description">
+	    					<isprint value="${video.description}"/>
+	    				</div>
+	              </a>   
+	           </li>
+	    </isloop>
+	   
+	    	</ul><div class="clear"></div></dd>
+	    <div class="clear"></div>
+	    </dd>
+	    </dl>
+	    </div>
+	    <script>
+	    jQuery('.productdetail .yt_slidedeck li a').click(function(e) {
+            e.preventDefault();
+            var $this = jQuery(this);
+            if(!$this.parent().hasClass('selected')) {
+                jQuery('.productdetail .yt_slidedeck li').removeClass('selected');
+                $this.parent().addClass('selected');
+                jQuery('${"#"}pdpVideoTitle h2').html($this.find('.title').text());
+                jQuery('${"#"}pdpVideoTabPlayer iframe').attr('src','http://www.youtube.com/embed/' + $this.attr('rel') + '?rel=0');
+				jQuery('${"#"}pdpVideoDescription').html($this.find('.description').text());
+            }
+        });
+	    </script>
+    </div>
+</div>
+<iselse>
+<h2>${Resource.msg('product.novideo','product',null)}</h2>
+</isif>

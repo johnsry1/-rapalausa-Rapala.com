@@ -1,0 +1,27 @@
+/**
+*
+* @input NewCustomer : dw.customer.Customer
+* @output Status : String
+*
+*/
+importPackage( dw.system );
+
+importScript("app_csstool:gmfunctions/lib_GMCustomers.ds");
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+
+	var cssService : CSSService = new CSSService();
+   	
+   	var response : Object = cssService.createCustomerRecord(pdict.NewCustomer);
+   	
+   	if(!response.successFlag) {
+		pdict.Status = "Error - " + response.errorMessage;
+	} 
+   	
+   	if ('readyForExport' in pdict.NewCustomer.profile.custom) {
+   		pdict.NewCustomer.profile.custom.readyForExport = true;
+   	}
+
+   	return PIPELET_NEXT;
+}

@@ -1,0 +1,25 @@
+<!--- TEMPLATENAME: leftnav.isml --->
+<iscache type="relative" hour="24"/>
+<isscript>
+	var brandNames : dw.util.LinkedHashSet = new dw.util.LinkedHashSet();
+		brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce']);
+</isscript>
+<div class="contentboxcontent">
+	<h2 class="left-nav-style">${Resource.msg('content.bybrand','content',null)}</h2>
+	<ul class="nav-group">
+	<isloop items="${brandNames}" var="brand">
+		<isset name="brandFolder" value="${dw.content.ContentMgr.getFolder(brand+'-customer-service')}" scope="page" />
+		<isif condition="${brandFolder != null}">
+			<isif condition="${pdict.CurrentHttpParameterMap.currentSite.stringValue == brand }">
+				<li class="first-level-no-children active">
+			<iselse>
+				<li class="first-level-no-children">
+			</isif>
+			<span>
+				<a class="nolink" title="${brand}" href="${URLUtils.url('Folder-Show','fdid', brand+'-customer-service')}">${Resource.msg("brand."+brand,"common",null)}</a>
+			</span>
+			</li>
+		</isif>
+	</isloop>
+	</ul>
+</div><!-- End of contentboxcontent -->

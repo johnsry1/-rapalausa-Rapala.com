@@ -1,0 +1,8 @@
+<isset name="site" value="${dw.system.Site.getCurrent()}" scope="page" />
+
+<isif condition="${site.getCustomPreferenceValue('PP_ShowCartPayPalCreditButton')}">
+	<a href="${dw.web.URLUtils.https('Paypal-StartPayPalCreditFromCartFlow')}">
+		<img src="${site.getCustomPreferenceValue('PP_CreditButtonUrl')}" />
+	</a>
+	<span>${Resource.msg('paypal.or','locale',null)}</span>
+</isif>

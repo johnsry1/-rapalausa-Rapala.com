@@ -1,0 +1,52 @@
+<isdecorate template="content/folder/pt_cslanding">
+<!--  test cslanding.isml -->
+<iscache type="relative" hour="24"/>
+<isinclude template="util/modules"/>
+	<isscript>
+		var rootFolder : Folder = pdict.Folder;
+		var folderGroups = [];
+		var sfi = rootFolder.onlineSubFolders.iterator();
+		while(sfi.hasNext()) {
+			var folder = sfi.next();
+			if(folderGroups[folder.custom.csColumnNumber.value-1] == null) {
+				folderGroups[folder.custom.csColumnNumber.value-1] = new dw.util.ArrayList();
+			}
+			folderGroups[folder.custom.csColumnNumber.value-1].add(folder);
+		}
+	</isscript>
+	<iscomment>
+	<div class="cell contentbox upshift">
+		<iscontentasset aid="${'brand-' + session.custom.currentSite + '-customer-service-top-questions'}"/>
+	</div></iscomment>
+	<div class="site-map">
+	<isloop items="${folderGroups}" var="folder">
+		<ul class="cs-landing">
+			<isloop items="${folder}" var="subFolder">
+				<isif condition="${!subFolder.onlineContent.empty}">
+					<li class="first-level">
+						<h2>${subFolder.displayName}</h2>
+						<ul>
+						<isloop items="${subFolder.onlineContent}" var="subContent">							
+							<isif condition="${pdict.CurrentHttpParameterMap.cid.stringValue == subContent.ID}">
+								<li class="active">
+							<iselse>
+								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume'||subContent.ID == 'strikemaster-customer-shipping' || subContent.ID == 'marcum-customer-warranty' || subContent.ID == 'strikemaster-customer-returns' || subContent.ID == 'strikemaster-warranty'|| subContent.ID =='strikemaster-become-dealer' || subContent.ID =='strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID =='marcum-become-dealer' || subContent.ID =='marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center' || subContent.ID == 'email-preference-center'}">
+									<li class="handle-non-us">
+								<iselse>
+									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
+										<li class="non-us-contactus hide">
+									<iselse>
+										<li>
+									</isif>
+								</isif>
+							</isif>
+							<a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID,'fdid',subFolder.ID)}">${subContent.name}</a></li>
+						</isloop>
+						</ul>
+					</li><!-- END: cell contentbox upshift -->
+				</isif>
+			</isloop>
+		</ul>
+	</isloop>
+	</div>
+</isdecorate>

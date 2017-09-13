@@ -1,0 +1,35 @@
+/**
+* CreateOrderCustomData.ds
+* To define input and output parameters, create entries of the form:
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+
+function setOrderCustomAttr( order )
+{
+	//var order : Order = args.Order;
+	var knifeAvailable : String = '';
+	var plis : Iterator = order.getProductLineItems().iterator();
+	while(plis.hasNext())
+	{
+		var pli : ProductLineItem = plis.next();
+		if(pli.product.custom.blade == 'true')
+		{
+			knifeAvailable = true;
+		}
+	}
+	var calendar : Calendar = new Calendar();
+    calendar.timeZone = "GMT-5";
+    var gmtDateString : String = StringUtils.formatCalendar( calendar, "MM/dd/yy hh:mm:ss a" );
+    var Textstmt : String = "I verify that I am 18 years of age or older and I agree that by purchasing or ordering any knife on Rapala.com I take full responsibility for compliance with all applicable federal state and local laws regulations and other restrictions.";
+	if(knifeAvailable){
+	order.custom.ageverifydate = gmtDateString +" , "+ Textstmt;
+	}
+   return true;
+}
+
+module.exports={
+	setOrderCustomAttr : setOrderCustomAttr
+}

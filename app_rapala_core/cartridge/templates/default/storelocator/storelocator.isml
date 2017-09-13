@@ -1,0 +1,113 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isdecorate template="storelocator/pt_storelocator">
+	
+<isinclude template="util/modules"/>
+
+<div id="page-background" class="downshift">
+	<div id="page">
+		<div class="wrapper">
+			<div class="row column1">
+				<div class="column cell1">
+					<div id="storelocator" class="storelocator">
+						<div class="cell contentbox upshift">
+							<div class="contentboxcontent">
+								<div id="storelocatorsearch" class="storelocatorsearch ">
+								    <h1>${Resource.msg('storelocator.header','storelocator',null)}</h1>
+								    <p>${Resource.msg('storelocator.findstoremessage','storelocator',null)}</p>
+									<h3 id="noresultserror" style="display:none;">${Resource.msg('storelocator.noresults','storelocator',null)}</h3>	
+								</div>
+								<div class="clear"><!-- FLOAT CLEAR --></div>
+								<div>	
+    								<div class="storelocatorzipsearch">
+    									<h2>${Resource.msg('storelocator.brandsheader','storelocator',null)}</h2>
+    								
+    								<div class="zipsearchactions">
+        								<form class="locatorForm store-Locator-page" action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}" novalidate>
+	        								<fieldset>
+	        								
+	        								<isscript>
+							        			if(session.custom.currentSite == "iceforce") {
+							        				pdict.CurrentForms.storelocator.rapala.setValue(true);
+							        				pdict.CurrentForms.storelocator.sufix.setValue(true);
+							        				pdict.CurrentForms.storelocator.marcum.setValue(true);
+							        				pdict.CurrentForms.storelocator.strikemaster.setValue(true);
+							        			} else {
+							        				pdict.CurrentForms.storelocator.rapala.setValue(true);
+							        				pdict.CurrentForms.storelocator.vmc.setValue(true);
+							        				pdict.CurrentForms.storelocator.storm.setValue(true);
+							        				pdict.CurrentForms.storelocator.luhrjensen.setValue(true);
+							        				pdict.CurrentForms.storelocator.sufix.setValue(true);
+							        				pdict.CurrentForms.storelocator.bluefox.setValue(true);
+							        				pdict.CurrentForms.storelocator.terminator.setValue(true);
+							        				pdict.CurrentForms.storelocator.williamson.setValue(true);
+							        				pdict.CurrentForms.storelocator.triggerx.setValue(true);
+							        				pdict.CurrentForms.storelocator.marcum.setValue(true);
+							        				pdict.CurrentForms.storelocator.strikemaster.setValue(true);
+							        				
+							        			}
+							        		</isscript>
+	        								<isinputfield fieldClass="rapalaCheck" formfield="${pdict.CurrentForms.storelocator.rapala}" type="checkbox" />
+											<isinputfield fieldClass="vmcCheck" formfield="${pdict.CurrentForms.storelocator.vmc}" type="checkbox"/>
+											<isinputfield fieldClass="stormCheck" formfield="${pdict.CurrentForms.storelocator.storm}" type="checkbox"/>
+											<isinputfield fieldClass="luhrCheck" formfield="${pdict.CurrentForms.storelocator.luhrjensen}" type="checkbox"/>
+											<isinputfield fieldClass="sufixCheck" formfield="${pdict.CurrentForms.storelocator.sufix}" type="checkbox"/>
+											<isinputfield fieldClass="bluefoxCheck" formfield="${pdict.CurrentForms.storelocator.bluefox}" type="checkbox"/>
+											<isinputfield fieldClass="terminatorCheck" formfield="${pdict.CurrentForms.storelocator.terminator}" type="checkbox"/>
+											<isinputfield fieldClass="williamCheck" formfield="${pdict.CurrentForms.storelocator.williamson}" type="checkbox"/>
+											<isinputfield fieldClass="triggerCheck" formfield="${pdict.CurrentForms.storelocator.triggerx}" type="checkbox"/>
+											<isinputfield fieldClass="marcumCheck" formfield="${pdict.CurrentForms.storelocator.marcum}" type="checkbox"/>
+											<isinputfield fieldClass="strikeCheck" formfield="${pdict.CurrentForms.storelocator.strikemaster}" type="checkbox"/>
+
+											
+											</fieldset>
+	        								<div style="height: 36px; float: left; width: 100%;"></div>
+	        								<fieldset class="mobile-style">
+											<input type="hidden" name="${pdict.CurrentForms.storelocator.countryCode.htmlName}" value="US" />
+											<input type="hidden" name="${pdict.CurrentForms.storelocator.distanceUnit.htmlName}" value="mi" />
+											<div class="stack more-mobile-padding">
+												<isinputfield fieldClass="postalCheck" formfield="${pdict.CurrentForms.storelocator.postalCode}" type="input" attribute1="pattern" value1="[0-9]*"/>
+												<div class="clear"></div>
+											</div>
+											<div class="stack less-mobile-padding">
+												<isinputfield fieldClass="mxdistanceCheck" formfield="${pdict.CurrentForms.storelocator.maxdistance}" type="select" rowClass="custom-select"/>
+												<div class="clear"></div>
+											</div>
+											<div class="stack buttonstack">
+												<div class="label">
+													<span class="labeltext">&nbsp;</span>
+												</div>
+												<button class="submitdealer-button" type="submit" name="${pdict.CurrentForms.storelocator.findbyzip.htmlName}" value="${Resource.msg('storelocator.locatedealer','storelocator',null)}">
+													<span>${Resource.msg('storelocator.locatedealer','storelocator',null)}</span>
+												</button>
+											</div>
+											<div class="stack messagestack">
+												<div class="label">
+													<span class="labeltext">&nbsp;</span>
+												</div>
+												<div id="message" class="success" style="display:none;">${Resource.msg('storelocator.storelocatorresults.yoursearchfound','storelocator',null)} <span id="storeCount"></span> ${Resource.msg('storelocator.storelocatorresults.dealersinarea','storelocator',null)}</div>
+											</div>
+										</fieldset>	
+        								</form>
+        							</div>
+    								</div>
+    							</div>
+								
+							</div>
+						</div>
+						<div id="results" style="display:none;">
+						   	<div class="cell upshift desktop-view">
+						   		<h2 class="nobg noborder">${Resource.msg('storelocator.storelocatorresults.dealersinyourarea','storelocator',null)}</h2>
+						    </div>
+						   	<div class="cell upshift contentbox result-box-filter">
+								<div class="contentboxcontent">
+						       		<div class="storelocatorsearchresults"></div><!-- END: storelocatorsearchresults -->
+						    	</div><!-- END: contentboxcontent -->
+							</div><!-- END: contentbox -->
+						</div><!-- END: results -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</isdecorate>

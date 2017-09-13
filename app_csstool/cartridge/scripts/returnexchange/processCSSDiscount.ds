@@ -1,0 +1,93 @@
+/**
+*
+* @input Basket : dw.order.Basket
+* @input DiscountAmount : String
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.value );
+importPackage( dw.catalog );
+importPackage( dw.util );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	if(args.DiscountAmount != null){
+		var Basket : Basket = args.Basket;
+		var DiscountAmount : Number = new Number(args.DiscountAmount);
+		var MerchandiseTotal : Number = Basket.merchandizeTotalGrossPrice.value;
+		var TotalExcludedProdPrice : Number = 0;
+		var NumberOfQualifyProd : Number = Basket.productLineItems.length;
+		
+		for each (var pli : ProductLineItem in Basket.productLineItems) {
+			try {
+				for each (var pliadj : PriceAdjustment in pli.priceAdjustments) {
+					if (pliadj.getPromotionID() == "CSSReturnExchangeDiscount") {
+						pli.removePriceAdjustment(pliadj);
+					}
+				}			
+			} catch (e) {
+				var error = e.message;	
+			}
+			var currentProduct1 : Product = pli.getProduct();
+			var curProdQnt : Number = pli.quantityValue;
+			if(currentProduct1.custom.excludedFromCSSExchangeDiscount || currentProduct1.custom.isGiftWrap){
+				TotalExcludedProdPrice = TotalExcludedProdPrice + (currentProduct1.priceModel.price.value * curProdQnt);
+				MerchandiseTotal = MerchandiseTotal - (currentProduct1.priceModel.price.value * curProdQnt);
+				NumberOfQualifyProd = NumberOfQualifyProd - 1; 
+			}
+		}
+		
+		var iterator : Number = 0;
+		for each (var pli : ProductLineItem in Basket.productLineItems) {
+			var currentProduct : Product = pli.getProduct();
+			if(!currentProduct.custom.excludedFromCSSExchangeDiscount && !currentProduct.custom.isGiftWrap){
+				iterator = iterator + 1;
+				var plValue : Number = pli.netPrice.value; 
+				var plPercentage : Number =  plValue / MerchandiseTotal;
+				//Computes the actual discount for each ProductLine
+				var actualDiscount : Number = (DiscountAmount * plPercentage) * -1;
+				
+				var DiscountAdjustment : PriceAdjustment = pli.createPriceAdjustment("CSSReturnExchangeDiscount");
+				DiscountAdjustment.setPriceValue(actualDiscount);
+				if(iterator == NumberOfQualifyProd){
+					var currentMerchandiseTotal : Number = Basket.adjustedMerchandizeTotalNetPrice.value;
+					var currentDiscount : Number = MerchandiseTotal - (currentMerchandiseTotal - TotalExcludedProdPrice);
+					var decimalValue : Number = (DiscountAmount - currentDiscount) * -1;
+					actualDiscount = actualDiscount + decimalValue;
+					
+					try {
+						for each (var pliadj : PriceAdjustment in pli.priceAdjustments) {
+							if (pliadj.getPromotionID() == "CSSReturnExchangeDiscount") {
+								pli.removePriceAdjustment(pliadj);
+							}
+						}			
+					} catch (e) {
+						var error = e.message;	
+					}
+					var DiscountAdjustment1 : PriceAdjustment = pli.createPriceAdjustment("CSSReturnExchangeDiscount");
+					DiscountAdjustment1.setPriceValue(actualDiscount);
+				}
+			}
+		}
+		//Prevent a negative value on each product line item
+		for each (var pli : ProductLineItem in Basket.productLineItems) {
+			if(pli.adjustedNetPrice.value.toString().indexOf("-") > -1){
+				var currentProduct : Product = pli.getProduct();
+				var actualDiscount : Number = currentProduct.priceModel.price.value * -1;
+				try {
+					for each (var pliadj : PriceAdjustment in pli.priceAdjustments) {
+						if (pliadj.getPromotionID() == "CSSReturnExchangeDiscount") {
+							pli.removePriceAdjustment(pliadj);
+						}
+					}			
+				} catch (e) {
+					var error = e.message;	
+				}
+				var DiscountAdjustment1 : PriceAdjustment = pli.createPriceAdjustment("CSSReturnExchangeDiscount");
+				DiscountAdjustment1.setPriceValue(actualDiscount);				
+			}
+		}		
+	}
+   return PIPELET_NEXT;
+}

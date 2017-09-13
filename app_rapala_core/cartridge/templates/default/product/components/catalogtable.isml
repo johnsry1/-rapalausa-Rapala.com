@@ -1,0 +1,119 @@
+<!--- TEMPLATENAME: catalogtable.isml --->
+
+<iscomment>PRODUCT SPECIFICATIONS TO RENDER FOR ANY BRAND </iscomment>
+<isif condition="${pdict.Product.getClassificationCategory() != null}">
+	<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
+		<isif condition="${pdict.Product.isVariant()}">
+		    <isset name="thisProduct" value="${pdict.Product.masterProduct}" scope="page"/>
+		<iselse>
+		    <isset name="thisProduct" value="${pdict.Product}" scope="page"/>
+		</isif>
+	<iselse/>
+		<isset name="thisProduct" value="${pdict.Product}" scope="page"/>
+	</isif>
+	<isif condition="${!empty(thisProduct) && !empty(thisProduct.custom.xAxis) && !empty(thisProduct.custom.yAxis) && !(thisProduct.custom.yAxis.toLowerCase() === "pak")}">
+				
+		<isset name="cat" value="${require('app_rapala_core/cartridge/scripts/product/CatalogSpecChart.ds')}" scope="page" />
+		<isset name="tables" value="${cat.getTerminatorSpecChart(thisProduct)}" scope="page" />
+		<isset name="tab" value="${cat.getMultiTableSeparator(thisProduct)}" scope="page">
+		<isset name="SKUAttribute" value="${cat.getSKUAttribute(thisProduct)}" scope="page">	
+		
+		<isif condition="${tables.length > 0}">
+			<div class="product-specifications">
+				<iscomment> <h2 class="cell-vertical-margin"><isprint value="${Resource.msg('product.specifications', 'product', null)}" /></h2> </iscomment> 
+				<isloop items="${tables}" var="tabularData" status="tablesStatus">
+					<div class="specTable-wrapper">
+					<isprint value="${tab[tablesStatus.index].displayValue}" />  
+					<table class="specificiations">
+							<tbody>
+							<isloop items="${tabularData}" var="rowVal" status="spectTableRowLoopStatus">
+								<isset name="evenodd" value="${(spectTableRowLoopStatus.even ? 'oddrow' : 'evenrow') + ' row' + spectTableRowLoopStatus.index}" scope="page"/>
+								<tr class="${evenodd}"> 
+									<isloop items="${rowVal}" var="colVal" status="spectTableColumnLoopStatus">			  			
+						  				<isif condition="${typeof(colVal) == 'string'}">
+						  					<isif condition="${spectTableRowLoopStatus.count == 1}"> 
+						  						<th><isprint value="${colVal}" /></th>
+						  					<iselse/>
+						  						<td><isprint value="${colVal}" /></td>
+						  					</isif>
+						  				<iselse/>
+						  					<isif condition="${spectTableColumnLoopStatus.count == 2}">
+						  						<td>
+							  						<isloop items="${colVal}" var="sku" status="skuStatus">
+							  							<isif condition="${skuStatus.index > 0}">, </isif>
+							  								<isif condition="${empty(SKUAttribute)}">
+							  									<isprint value="${sku.ID}" />	 
+							  								<iselse/>
+							  									<isprint value="${sku.custom[SKUAttribute]}" />		 
+							  								</isif>	
+							  						</isloop>
+							  					</td>
+							  				<iselse/>
+							  					<td>
+							  						<isloop items="${colVal}" var="sku" status="skuStatus">
+							  							<isif condition="${skuStatus.index > 0}">, </isif>
+					  										<isprint value="${sku}"/> 
+							  						</isloop>
+							  					</td>	
+						  					</isif>
+						  				</isif>
+						  			</isloop>
+								</tr>
+							</isloop>
+							</tbody>
+					</table>
+					</div>
+				</isloop>
+			</div>
+		</isif>
+	</isif>
+	
+	<isif condition="${!empty(thisProduct) && !empty(thisProduct.custom.xAxis) && !empty(thisProduct.custom.yAxis) && thisProduct.custom.yAxis.toLowerCase() === "pak"}">
+		<isset name="cat" value="${require('app_rapala_core/cartridge/scripts/product/CatalogSpecChart.ds')}" scope="page" />
+		<isset name="tablesVal" value="${cat.getVmcSpecChart(thisProduct)}" scope="page" />
+		<isset name="tab" value="${cat.getMultiTableSeparator(thisProduct)}" scope="page">
+		<isset name="SKUAttribute" value="${cat.getSKUAttribute(thisProduct)}" scope="page">	
+		
+		<isif condition="${tablesVal.length > 0}">
+		 	<div class="product-specifications">
+			<iscomment> <h2 class="cell-vertical-margin"><isprint value="${Resource.msg('product.specifications', 'product', null)}" /></h2> </iscomment>
+				<isloop items="${tablesVal}" var="tabularData" status="tablesStatus"> 
+				<div class="specTable-wrapper">	
+				<isprint value="${tab[tablesStatus.index].displayValue}" />  
+				<table class="specificiations">
+					<tbody>
+					<isloop items="${tabularData}" var="rowVal" status="spectTableRowLoopStatus">
+						<isset name="evenodd" value="${(spectTableRowLoopStatus.even ? 'evenrow' : 'oddrow') + ' row' + spectTableRowLoopStatus.index}" scope="page"/>
+						<tr class="${evenodd}"> 
+							<isloop items="${rowVal}" var="colVal" status="spectTableColumnLoopStatus">
+						  			<isif condition="${empty(colVal)}">
+						  				 <td> - </td>
+						  			<iselseif condition="${typeof(colVal) == 'string'}">
+						  			   <isif condition="${spectTableRowLoopStatus.count == 1}"> 
+						  					<th><isprint value="${colVal}" /></th>
+						  				<iselse/>
+						  					<td><isprint value="${colVal}" /></td>
+						  				</isif>
+						  			<iselse/>
+						  				<td>
+						  					<isloop items="${colVal}" var="sku" status="skuStatus">
+						  						<isif condition="${empty(SKUAttribute)}">
+						  							<isprint value="${sku.ID}" />	
+						  						<iselse/>
+						  							<isprint value="${sku.custom[SKUAttribute]}" />	
+						  						</isif>
+						  					</isloop>
+						  				</td>
+						  			</isif>
+						  	</isloop>
+						</tr>
+					</isloop>
+					</tbody>
+				</table>
+				</div>
+				</isloop>
+			</div>
+		</isif>
+	</isif>
+
+</isif>

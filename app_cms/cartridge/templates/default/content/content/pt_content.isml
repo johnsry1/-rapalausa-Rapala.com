@@ -1,0 +1,148 @@
+<!--- TEMPLATENAME: pt_content.isml --->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<isinclude template="util/modules"/>
+<head>
+	<iscomment>Include all important information globally , e.g. meta-data, link information, and javascript.</iscomment>
+	<isinclude template="components/header/htmlhead"/>
+</head>
+<body>
+<div id="container" class="pt_customerservice">
+	<isinclude template="components/header/header"/>
+	<div id="main">
+		<div id="content">
+		<isscript>
+			var bcmap = new dw.util.LinkedHashMap();
+			var brandNames = new dw.util.HashSet();
+			brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce','otter']);	
+			var containingFolder = null;
+			if(pdict.ContentSearchResult.folder) {
+				containingFolder = pdict.ContentSearchResult.folder;
+			}
+			if(empty(containingFolder) && !empty(pdict.CurrentHttpParameterMap.fdid.stringValue)) {
+				containingFolder = dw.content.ContentMgr.getFolder(pdict.CurrentHttpParameterMap.fdid.stringValue);
+			}
+			if(empty(containingFolder) && !pdict.Content.folders.empty && pdict.Content.folders.length == 1 && pdict.Content.folders[0].online) {
+				containingFolder = pdict.Content.folders[0];
+			}
+			if(empty(containingFolder) && !pdict.Content.folders.empty) {
+				var folderPaths = new dw.util.HashMap();
+				var folderPathStartingPoints = pdict.Content.folders;
+				
+				var fpspi = folderPathStartingPoints.iterator();
+				var nextFolder = null;
+				
+				while(fpspi.hasNext()) {
+					var firstFolder = nextFolder = fpspi.next();
+					if(firstFolder.online) {
+						var context = "global";
+						while(nextFolder.root == false) {
+							if(brandNames.contains(nextFolder.ID)) {
+								context = nextFolder.ID;
+								break;
+							}
+							nextFolder = nextFolder.parent;
+						}
+						folderPaths.put(context,firstFolder);
+						folderPaths.put(firstFolder,context);
+					}
+				}
+				var defaultContext = folderPaths.get(pdict.Content.classificationFolder);
+				if(defaultContext == session.custom.currentSite) {
+					containingFolder = pdict.Content.classificationFolder;
+				} else if(folderPaths.containsKey(session.custom.currentSite)) {
+					containingFolder = folderPaths.get(session.custom.currentSite);
+				} else if(folderPaths.containsKey('global')) {
+					containingFolder = folderPaths.get('global');
+				} else {
+					containingFolder = pdict.Content.classificationFolder;
+				}
+			}
+			if(!containingFolder.online) {
+				containingFolder = null;
+			}
+			if(!empty(containingFolder)) {
+				var bc = [];
+				bc.push(pdict.Content);
+				
+				var nextFolder = containingFolder;
+				while(nextFolder.root == false) {
+					if(!brandNames.contains(nextFolder.ID)) {
+						bc.push(nextFolder);
+					}
+					nextFolder = nextFolder.parent;
+				}
+				var len = bc.length;
+	
+				while(len--) {
+					if(len > 0) {
+						bcmap.put(bc[len].displayName, URLUtils.http('Folder-Show','fdid',bc[len].ID));
+					} else {
+						bcmap.put(bc[len].name, null);
+					}
+				}
+				bc.push(pdict.Content);
+			}
+			if(empty(containingFolder) && pdict.Content.folders.empty) {
+				bcmap.put(pdict.Content.name, null);
+			}
+		</isscript>
+		
+        <ismapbreadcrumbs bcmap="${bcmap.entrySet()}" />
+			<div id="page-background" class="downshift">
+				<div id="page">
+		<div class="wrapper">
+		<isscript>
+			var folder : Folder = pdict.Folder;
+		</isscript>
+  		<isif condition="${pdict.Content != null && pdict.Content.online}">
+		<div class="row column3 style-cservice">
+			<div class="column">
+			<isif condition="${!empty(containingFolder)}">
+			<isscript>
+			 	var rootfolder : dw.content.Folder = null;
+			 	var potentialFolder = containingFolder;
+			 	while(empty(rootfolder)) {
+			 		if(potentialFolder.custom.leftNavRoot) {
+			 			rootfolder = potentialFolder;
+			 			break;
+			 		}
+			 		if(empty(rootfolder) && potentialFolder.root) {
+			 			rootfolder = potentialFolder;
+			 			break;
+			 		}
+			 		potentialFolder = potentialFolder.parent;
+			 	}
+			</isscript>
+			<isif condition="${!empty(rootfolder)}">
+			<div class="cell contentbox upshift">
+				<isinclude url="${URLUtils.url('LeftNav-Show','currentSite',session.custom.currentSite,'rootfdid',rootfolder.ID,'cid',pdict.Content.ID)}"/>
+			</div><!-- END: cell -->
+			</isif>
+			</isif>
+		</div><!-- END: column -->
+			<div class="column colspan2">
+				<div class="cell-header">
+				  <isreplace/>
+				  <isset name="flag" value="${false}" scope="page"/>
+				  <isif condition="${(typeof back_btn_paddingleft !== 'undefined') && !empty(back_btn_paddingleft)}">
+				  	<isset name="flag" value="${back_btn_paddingleft}" scope="page"/>
+				  </isif>
+				  <isif condition="${!empty(containingFolder)}">
+				  	<div <isif condition="${flag}">class="back"<iselse>class="back-noborder content-button"</isif>>
+				  		<a class="button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}">${Resource.msg("global.back","locale",null)}</a>
+				  	</div>
+				  </isif>
+				</div>
+			</div>
+			</div><!-- END: row column3 -->
+			</isif>
+		</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+		</div><!-- END: page-background -->
+		</div><!-- END: content -->
+	</div><!-- END: main -->
+	<isinclude template="components/footer/footer"/>
+</div><!-- END: container -->
+</body>
+</html>

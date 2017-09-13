@@ -1,0 +1,149 @@
+// Copyright � 2013 Priority Fulfillment Services, Inc. All rights reserved.
+/*
+ *  This is the library holding all functionality for calling the CyberSourceAuth service of PFSweb.
+ *  This should NOT be called directly, it should be called within scripts/libPFSWeb.ds
+ *
+ */
+importPackage(dw.system);
+importPackage(dw.rpc);
+importPackage(dw.util);
+importPackage(dw.web);
+importPackage(dw.value);
+importPackage(dw.catalog);
+importPackage(dw.svc);
+
+
+/**
+ *  At the moment there are rounding issues in the web service implementation.
+ *  That means a value from 8.95 is rounded to 8.949999999999999.
+ *  We add a defined small amount to avoid this issues.
+ */
+var shouldAvoidRounding: Number = 0.00001;
+
+/*
+ *
+ */
+/*function cyberSourceAuth(cyberSourceRequest: Object, counter: Number): Object {
+
+    // Obtain a valid session token for this request
+    var sessionToken = this.retrieveSessionToken();
+
+    // get ws timeout from site preference
+    var wsTimeOut: Number = this.getTimeOut();
+    // Get CyberSource client settings defined as System Objects Definitions
+    // under type SitePreferences.
+    var csEnableAdvancedFraudScreen: Boolean = Site.getCurrent().preferences.custom.ete_cs_SCMP_EnableAdvancedFraudScreen;
+    //var csDistributorProduct : String =         Site.getCurrent().preferences.custom.cs_DistributorProduct;
+    //var csDisableAVS : Boolean =                Site.getCurrent().preferences.custom.cs_DisableAVS;
+    //var csIgnoreAVS : Boolean =                 Site.getCurrent().preferences.custom.cs_IgnoreAVS;
+    var csOverrideIgnoreAVS: Boolean = null;
+    if (cyberSourceRequest['csOverrideIgnoreAVS']) {
+        csOverrideIgnoreAVS = cyberSourceRequest['csOverrideIgnoreAVS'];
+    }
+    //var csIgnoreBadCV : Boolean =               Site.getCurrent().preferences.custom.cs_IgnoreBadCV;
+    //var csReturnsAccepted : Boolean =           Site.getCurrent().preferences.custom.cs_ReturnsAccepted;
+    var csMerchantID: String = Site.getCurrent().preferences.custom.ete_cs_SCMP_MerchantID;
+    //var csProductCode : String =                Site.getCurrent().preferences.custom.cs_ProductCode.value;
+    //var csProductRisk : String =                Site.getCurrent().preferences.custom.cs_ProductRisk.value;
+    //var csScoreCategoryGender : String =        Site.getCurrent().preferences.custom.cs_ScoreCategoryGender.value;
+    //var csScoreCategoryGift : Boolean =         Site.getCurrent().preferences.custom.cs_ScoreCategoryGift;
+    //var csScoreCategoryLongterm : String =      Site.getCurrent().preferences.custom.cs_ScoreCategoryLongterm.value;
+    //var csScoreCategoryTime : String =          Site.getCurrent().preferences.custom.cs_ScoreCategoryTime.value;
+    //var csScoreHostHedge : String =             Site.getCurrent().preferences.custom.cs_ScoreHostHedge.value;
+    //var csScoreNonsensicalHedge : String =      Site.getCurrent().preferences.custom.cs_ScoreNonsensicalHedge.value;
+    //var csScorePhoneHedge : String =            Site.getCurrent().preferences.custom.cs_ScorePhoneHedge.value;
+    //var csScoreThreshold : Number =             Site.getCurrent().preferences.custom.cs_ScoreThreshold;
+    //var csScoreTimeHedge : String =             Site.getCurrent().preferences.custom.cs_ScoreTimeHedge.value;
+    //var csScoreVelocityHedge : String =         Site.getCurrent().preferences.custom.cs_ScoreVelocityHedge.value;
+    var csServerHost: String = Site.getCurrent().preferences.custom.ete_cs_SCMP_ServerHost;
+    //var csTimeout : Number =                    Site.getCurrent().preferences.custom.cs_Timeout; 
+    var csAddAuthAmount: Number = Site.getCurrent().preferences.custom.ete_cs_AddAuthAmount;
+
+    var $this = this;
+
+    //Get the service object
+    var svc: SOAPService = ServiceRegistry.get("etecybersource.scmp.payment.cyberSourceAuth");
+
+    //Prepare Params Object
+    var params: Object = {
+        "cyberSourceRequest": cyberSourceRequest,
+        "sessionToken": sessionToken,
+        "csEnableAdvancedFraudScreen": csEnableAdvancedFraudScreen,
+        "csServerHost": csServerHost,
+        "csOverrideIgnoreAVS":csOverrideIgnoreAVS,
+        "shouldAvoidRounding":shouldAvoidRounding,
+        "csAddAuthAmount":csAddAuthAmount,
+        "getClassificationCategory":getClassificationCategory,
+        "csMerchantID":csMerchantID
+    };
+
+    //Execute the service
+    var result: Result = svc.call(params);
+
+    //Check for service availability.
+    if (result.status == Result.SERVICE_UNAVAILABLE) {
+        return {"SERVICE_UNAVAILABLE": true};
+    }
+
+    //Re-try Logic
+    var counter = 0;
+    while (result.msg && result.msg.indexOf('Session Token was not found or invalid') != -1 &&
+        counter < this.getMaxRetries()) {
+        this.sessionToken == null;
+        sessionToken = this.retrieveSessionToken();
+        result = svc.call(params);
+        counter++;
+    }
+
+    var response = result.object;
+
+    var cyberSourceResponse: Object = new Object();
+
+    cyberSourceResponse['ics_rflag'] = response.cyberSourceAuthResult.ics_rflag;
+
+    if (cyberSourceResponse.ics_rflag == "SOK" || cyberSourceResponse.ics_rflag == "DREVIEW") {
+
+        cyberSourceResponse['paymentTransaction'] = new Object();
+
+        cyberSourceResponse.paymentTransaction['auth_auth_amount'] = new Number();
+        cyberSourceResponse.paymentTransaction.auth_auth_amount = response.cyberSourceAuthResult.auth_auth_amount;
+        cyberSourceResponse.paymentTransaction['auth_auth_avs'] = response.cyberSourceAuthResult.auth_auth_avs;
+        cyberSourceResponse.paymentTransaction['auth_auth_code'] = response.cyberSourceAuthResult.auth_auth_code;
+        cyberSourceResponse.paymentTransaction['auth_cv_result'] = response.cyberSourceAuthResult.auth_cv_result;
+        cyberSourceResponse.paymentTransaction['request_id'] = response.cyberSourceAuthResult.request_id;
+        cyberSourceResponse.paymentTransaction['request_token'] = response.cyberSourceAuthResult.request_token;
+        cyberSourceResponse.paymentTransaction['score_factors'] = response.cyberSourceAuthResult.score_factors;
+        cyberSourceResponse.paymentTransaction['score_rcode'] = response.cyberSourceAuthResult.score_rcode;
+        cyberSourceResponse.paymentTransaction['score_score_result'] = response.cyberSourceAuthResult.score_score_result;
+        cyberSourceResponse.paymentTransaction['decision'] = response.cyberSourceAuthResult.decision;
+    }
+
+    return cyberSourceResponse;
+}*/
+
+function getClassificationCategory(sku: String): String {
+
+    Logger.debug("checking sku = " + sku);
+    var classificationCategory: String;
+
+    try {
+
+        var product = ProductMgr.getProduct(sku);
+        Logger.debug("checking variant = " + product.variant);
+        if (product.variant) {
+            product = product.variationModel.master;
+        }
+
+        if (product.classificationCategory) {
+            classificationCategory = product.classificationCategory.ID;
+        } else {
+            classificationCategory = '';
+        }
+        Logger.debug("checking classificationCategory = " + classificationCategory);
+        return classificationCategory;
+    } catch (e) {
+        classificationCategory = '';
+        return classificationCategory
+    }
+
+}

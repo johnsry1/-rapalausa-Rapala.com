@@ -1,0 +1,294 @@
+/**
+* Facebook CSV generation from site products.
+* 	@output File : String
+* 	@output RemoteFile : String
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.util );
+importPackage( dw.io );
+importPackage( dw.web );
+importPackage( dw.net );
+importPackage(dw.value);
+importPackage( dw.campaign );
+importScript("app_disbestpractice:product/ProductImageSO.ds");
+function execute( args : PipelineDictionary ) : Number
+{
+	var TempFolder : String = "Rapala_Facebook_Feed";
+	var FilePrefix : String = "Facebook_Product_Feed";
+	var tempdir : File;
+	var targetfile : File;
+	var FileExtension : String = "csv";
+	var generatedfile : String ="";
+	var remoteFile : String ="";
+	var writer : CSVStreamWriter ;
+	var csvrow : Array ;
+	var product : Product = null;
+	var title : String = '';
+	var desc : String = '';
+	var descArray : Array ;
+	var descString : String = "";
+	var liCounter : Number = 0 ;
+	var descElementInst : String = "";
+	var BuyUrl : String = '';
+	var avail : String = '';
+	var promos : Collection ;
+	var length : Number = 0 ;
+	var minPrice = 0.00;
+	var discountedPrice = 0.00;
+	var listPrice = 0.00;
+	var mpn : String = '';
+	var imageURL : String = '';
+	var google_product_category : String = '';
+	var items : Collection ;
+	var variationval : String = '' ; 
+	var SelectedVariationValue : String = '';
+	try{
+		Logger.getLogger("facebookfeeds").debug( "CSV Preparaion starts here to export product data." );
+		var products : SeekableIterator = ProductMgr.queryAllSiteProducts();
+		if(products.hasNext()){
+			if ( !createTempFolder(TempFolder)){				
+				return PIPELET_ERROR;
+			}
+			//remove of old files generated from the temp location to do space management
+			tempdir = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder);
+			for(var v = 0; v < tempdir.listFiles().length; v++){
+				tempdir.listFiles()[v].remove();
+			}
+			targetfile = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension);
+			generatedfile = TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension;
+			args.File = generatedfile;
+			remoteFile = ( !empty( FilePrefix ) ? FilePrefix : "" ) + "." + FileExtension;
+			args.RemoteFile = remoteFile;						
+			writer = new CSVStreamWriter(new FileWriter(targetfile,"UTF-8"));
+			
+			csvrow = ['title','description','id','link','availability','image_link','price','google_product_category','brand','gtin','condition','color','product_type','gender','age_group','size','item_group_id','additional_image_link'];
+			//Create header line in generating CSV
+			writer.writeNext(csvrow);
+			
+			while(products.hasNext()){
+				product = products.next();
+				if(product.isOnline() && product.isSearchable() && product != null) {
+					title = product.getName().trim().replace('&reg;','','g').replace('&trade;','','g').replace('&amp;','','g').replace('&#8482;','','g').replace('®','','g').replace('™','','g');
+					if(!empty(product.getBrand() && product.getBrand() != null)) {
+					title = product.getBrand() + ' ' + title;
+					}
+					//variations
+					variationval = '' ; 
+					SelectedVariationValue = '';
+					var i : number = 0 ;
+					if(product != null && product.isVariant()) {
+						items = product.variationModel.getProductVariationAttributes();
+						for( i = 0 ; i <items.length ; i++) {
+							SelectedVariationValue = product.variationModel.getSelectedValue(items[i]);
+							if(SelectedVariationValue != null) {
+								if(i < items.length-1){
+								SelectedVariationValue = SelectedVariationValue.displayValue;
+								variationval = variationval + SelectedVariationValue + '; ' ;
+								} else {
+									SelectedVariationValue = SelectedVariationValue.displayValue;
+									variationval = variationval + SelectedVariationValue ; 
+								}
+							} else {
+								SelectedVariationValue = '';
+							} 
+						}
+					} 
+					csvrow[0] = (title + ' ' + variationval).substr(0, 100) ;
+  					if(!empty(product.getLongDescription())) { 
+   						 desc = product.getLongDescription();
+  					}
+  					if(!empty(product.getShortDescription())) {
+  						descArray = product.getShortDescription().toString().split("</li>");
+             			descString = "";
+             			liCounter = 0;
+             			descElementInst = "";
+             			for each(var descElement : String in descArray ) {
+             				if(liCounter>=1) {
+             					descElementInst =  ". ";
+             				}
+             				descElementInst = descElementInst +  descElement;
+             				descString = descString + descElementInst;
+             				liCounter = liCounter + 1;
+             			}
+   						if(!empty(desc) && desc != null){
+    			  		desc = desc + ' ' + descString;
+    			  		
+    				} else {
+     					desc = descString;
+   					}
+  					} 
+             		if(!empty(desc) && desc != null){
+   				 		desc = desc.toString().replace(/<\/?[^>]+(>|$)/g, "");
+    					desc =	desc.replace("\"", "","g").replace('\r\n',' ','g').replace('\n',"","g").replace('  ',' ','g').replace('&reg;','','g').replace('&trade;','','g').replace('&#8482;','','g').replace('&amp;','','g').replace('®','','g').replace('™','','g');
+   				 		desc = desc.trim();
+  					}
+					csvrow[1] = desc.substr(0, 5000);
+					csvrow[2] = product.getID().substr(0, 50);
+					BuyUrl =  URLUtils.abs('Product-Show', 'pid', product.getID()).toString();
+					csvrow[3] = BuyUrl;
+					avail = product.availabilityModel.getAvailabilityStatus();
+					if(avail == 'NOT_AVAILABLE'){
+						csvrow[4] = 'out of stock';
+					} else {
+						csvrow[4] = 'in stock';
+					} 
+					imageURL = new ProductImage('list',product, 0).getURL().toString();
+					imageURL = imageURL.replace("sw=0", "sw=600");
+					imageURL = imageURL.replace("sh=0", "sh=600");
+					csvrow[5] = imageURL + "&sm=fit";
+					if(product.master){
+					if (product.priceModel.isPriceRange()) {
+						minPrice = product.variants[0].priceModel.minPrice;
+						for (var i = 1; i <= product.variants.length-1; i++) {
+							if(minPrice > product.variants[i].priceModel.minPrice){
+            						minPrice = product.variants[i].priceModel.minPrice;
+        					}
+						}
+						csvrow[6] = minPrice + ' USD';
+						minPrice = 0;
+					} else {
+						minPrice = 0;
+						if(product.variants.length>0){
+						minPrice = product.variants[0].priceModel.minPrice;
+						csvrow[6] = minPrice + ' USD';
+						} else {
+							csvrow[6] = minPrice + ' USD';
+							}
+						}
+					} else {
+					promos = PromotionMgr.activePromotions.getProductPromotions(product);
+					length = promos.length;
+					if (promos == null || length < 1) {
+							listPrice = product.getPriceModel().getPrice();
+							csvrow[6] = listPrice + ' USD';
+						} else {
+						discountedPrice = promos[0].getPromotionalPrice(product);
+   						if (promos[0].getPromotionalPrice(product).available != false ){
+							for (var i = 1; i <= length-1; i++) {
+								if (promos[i].getPromotionalPrice(product).available != false){
+        							if(discountedPrice > promos[i].getPromotionalPrice(product)){
+            						discountedPrice = promos[i].getPromotionalPrice(product);
+        							}
+								}
+   							 }
+   							  csvrow[6]=discountedPrice + ' USD';
+						} else {
+							listPrice = product.getPriceModel().getPrice();
+							csvrow[6] = listPrice + ' USD';
+							}
+						}
+					}
+					csvrow[7] = google_product_category;
+					if(product.getBrand() != null &&product.getBrand() != undefined) {
+						csvrow[8] = product.getBrand().substr(0,70);
+					} else {
+						csvrow[8] = '';
+					}
+					if(product.getUPC() != null && !empty(product.getUPC())) {
+						csvrow[9] = 'z' + product.getUPC().substr(0,50);
+					} else {
+						mpn = product.getManufacturerSKU();
+						csvrow[9] = mpn;
+					}
+					csvrow[10] = 'new';
+					if(!empty(product.custom.color)){
+						csvrow[11] = product.custom.color;
+					} else {
+						csvrow[11] = '';
+					}
+					if(!empty(getCategoryPath(product))){
+						csvrow[12] = getCategoryPath(product).substr(0,750);
+					} else	{
+						csvrow[12] = '' ;
+					}
+					if('gender' in product.custom && (!empty(product.custom.gender) && product.custom.gender != null)) {
+						csvrow[13] = product.custom.gender;
+					} else {
+						csvrow[13] = '';
+					}
+					if('age_group' in product.custom && (!empty(product.custom.age_group) && product.custom.gender != null)) {
+						csvrow[14] = product.custom.age_group;
+					} else {
+						csvrow[14] = '';
+					}
+					if(!empty(product.custom.bodyLength) && product.custom.bodyLength != null) {
+						csvrow[15] = product.custom.bodyLength;
+					} else {
+						csvrow[15] = '';
+					}
+					if(product.master){
+                    	csvrow[16] = '';
+                    } else {
+                     if(product.getVariationModel() != null && product.getVariationModel().master != null ){
+                     	csvrow[16] = product.getVariationModel().master.ID.substr(0,50);
+                     	} else {
+                         csvrow[16] = '';
+                       	}
+                     }
+					csvrow[17] = '';
+				//Write this product line to the CSV, start new line
+				writer.writeNext(csvrow);
+			}//end valid product check
+			product = null;
+		}
+		writer.close();
+		Logger.getLogger("facebookfeeds").debug( "CSV Preparaion ends here to export product data." );
+		}			 
+	}catch (e) {	    	
+		Logger.getLogger("facebookfeeds").error( "GenerateFBCSV: Error :: " + e);
+   		return PIPELET_ERROR;
+	}	
+    return PIPELET_NEXT;
+}
+
+function createTempFolder( tempFolder : String ) : boolean {
+	var folder : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + tempFolder );
+	if( folder.exists() ) {		
+		return true;
+	}
+	Logger.getLogger("facebookfeeds").debug( "GenerateFBCSV: Creating temp folder " + folder.fullPath );	
+	var result : boolean = folder.mkdirs();
+	if( !result ) {
+		Logger.getLogger("facebookfeeds").error( "GenerateFBCSV: Error creating temp folder " + folder.fullPath );
+		return false;
+	}
+	return true;
+}
+
+function getCategoryPath(product : Product) : String {
+	var categoryPath : String ="";	
+	var topProduct : Product = product;
+		if( topProduct.isVariant() ) {
+			topProduct = product.masterProduct;	
+		}
+		var theCategory : Category = topProduct.getPrimaryCategory();
+		if( empty(theCategory) ) {
+			var categories : Collection = topProduct.categories;
+			if( !empty(	categories ) ) {
+				theCategory = categories[0];	
+			}
+		}
+
+	var cat : Category = theCategory;
+	var path : dw.util.ArrayList = new dw.util.ArrayList();
+		if(cat!=null){
+			while( cat.parent != null)
+			{
+				if(cat.online){
+					path.addAt( 0, cat );
+				}	
+				cat = cat.parent; 
+			}
+		}
+
+	var index : Number;	
+	for(index=0; index<path.length ; index++) {
+		if(index==0) {
+			categoryPath = categoryPath + path[index].getDisplayName();
+		} else {
+			categoryPath = categoryPath + ">" + path[index].getDisplayName();
+		}
+	}	
+	return categoryPath;
+}

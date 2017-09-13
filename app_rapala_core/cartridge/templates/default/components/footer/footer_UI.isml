@@ -1,0 +1,38 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+
+<!--[if lte IE 8]>
+  <script src="//cdn.rawgit.com/weblinc/media-match/master/media.match.min.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
+<![endif]-->
+
+<!--[if IE 9]>
+  <script src="//cdn.rawgit.com/paulirish/matchMedia.js/master/matchMedia.js" type="text/javascript"></script>
+  <script src="//cdn.rawgit.com/paulirish/matchMedia.js/master/matchMedia.addListener.js" type="text/javascript"></script>
+<![endif]-->
+
+<script type="text/javascript"><isinclude template="resources/appresources"/></script>
+<script type="text/javascript"><isinclude url="${URLUtils.url('Resources-LoadTransient')}"/></script>
+
+<iscomment>third-party add-ons</iscomment>
+<!--- BEGIN JS files to merge.(source_path=app_rapala_core/cartridge/static/default;targetfile=js/allinone.js) --->
+<script src="${URLUtils.staticURL('/lib/jquery/ui/jquery-ui.min.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/jquery/jquery.jcarousel.min.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/jquery/jquery.validate.min.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/jquery/tooltip/jquery.tooltipster.min.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/owl-carousel/owl.carousel.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/selectbox/jquery.selectbox-0.2.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/jquery/scrollbar/tinyscrollbar.js')}" type="text/javascript"></script>
+<script src="${URLUtils.staticURL('/lib/slimscroll/jquery.slimscroll.js')}" ></script>
+<script src="${URLUtils.staticURL('/lib/zoomer/magiczoomplus.js')}" ></script>
+<script src="${URLUtils.staticURL('/js/app.js')}"></script>
+
+<!--- END JS files to merge. --->
+
+<isif condition="${!('pageContext' in this) || empty(pageContext)}">
+	<isscript>pageContext = new Object();</isscript>
+</isif>
+<script>pageContext = <isprint value="${JSON.stringify(pageContext)}" encoding="off"/>;</script>
+<script>
+var meta = "${pdict.CurrentPageMetaData.description}";
+var keywords = "${pdict.CurrentPageMetaData.keywords}";
+</script>

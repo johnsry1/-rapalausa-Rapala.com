@@ -1,0 +1,56 @@
+/**
+* This ds file adds the customer to Customer Group
+*
+*/
+importPackage( dw.system );
+
+function assignCustomerToCG( Customer, CustGroups )
+{
+	//old
+	var oldcustomer : dw.customer.Customer = Customer;
+	
+	var groups : Array = CustGroups;
+	//old
+	
+	var customer : dw.customer.Customer = Customer;
+	var group : dw.customer.CustomerGroup = null;
+	Logger.getLogger("VIPCustomerImport").debug("Assigning customer groups to the customer "+customer.profile.email);
+	var progroup : dw.customer.CustomerGroup = dw.customer.CustomerMgr.getCustomerGroup("ProStaff");
+	var empgroup : dw.customer.CustomerGroup = dw.customer.CustomerMgr.getCustomerGroup("employee");
+		for(var i = 0; i < groups.length; i++) {
+			group = dw.customer.CustomerMgr.getCustomerGroup(groups[i]);
+			if(groups.length>0 && group==dw.customer.CustomerMgr.getCustomerGroup("VIP"))
+			{
+				if(customer.isMemberOfCustomerGroup(progroup))
+				{
+					progroup.unassignCustomer(customer);
+				}			
+				else if(customer.isMemberOfCustomerGroup(empgroup))
+				
+				{
+					empgroup.unassignCustomer(customer);
+				}
+			}
+			else{
+				if(customer.isMemberOfCustomerGroup(empgroup) && group == dw.customer.CustomerMgr.getCustomerGroup("ProStaff"))
+				{
+					empgroup.unassignCustomer(customer);
+				}
+			}
+		}
+		for(var i = 0; i < groups.length; i++) {
+			if(!empty(group)){
+			
+				Logger.getLogger("VIPCustomerImport").debug("Assigning customer "+customer.profile.email+" to " +groups[i]+" group");
+				group.assignCustomer(customer);
+			}
+		}
+	
+	var newcustomer : dw.customer.Customer = customer;
+   //args.OutCustomer = customer;
+    return customer;
+}
+
+module.exports = {
+	assignCustomerToCG : assignCustomerToCG
+}

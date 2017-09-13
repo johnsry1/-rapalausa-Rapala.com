@@ -1,0 +1,94 @@
+<isset name="DecoratorTemplate" value="error/pt_error" scope="page"/>
+<isif condition="${!empty(pdict.nodecorator) && pdict.nodecorator == true}">
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+</isif>
+<isdecorate template="${DecoratorTemplate}">
+<isinclude template="util/modules"/>
+<div id="page-background" class="downshift">
+<div id="page">
+<div class="wrapper">
+<div class="row column1">
+<div class="column cell1">
+<div class="generalerror cell contentbox upshift notfound">
+	<div class="">
+	<isset name="searchTextBoxValue" value="" scope="page"/>
+<isif condition="${session.custom.currentSite == 'rapala'}">
+		<isset name="searchTextBoxValue" value="Search Rapala" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'sufix'}">
+		<isset name="searchTextBoxValue" value="Search Sufix" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'triggerx'}">
+		<isset name="searchTextBoxValue" value="Search Triggerx" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'storm'}">
+		<isset name="searchTextBoxValue" value="Search Storm" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'luhrjensen'}">
+		<isset name="searchTextBoxValue" value="Search Luhrjensen" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'vmc'}">
+		<isset name="searchTextBoxValue" value="Search VMC" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'terminator'}">
+		<isset name="searchTextBoxValue" value="Search Terminator" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'bluefox'}">
+		<isset name="searchTextBoxValue" value="Search BlueFox" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'williamson'}">
+		<isset name="searchTextBoxValue" value="Search Williamson" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'marcum'}">
+		<isset name="searchTextBoxValue" value="Search Marcum" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'strikemaster'}">
+		<isset name="searchTextBoxValue" value="Search StrikeMaster" scope="page"/>
+	<iselseif condition="${session.custom.currentSite == 'otter'}">
+		<isset name="searchTextBoxValue" value="Search Otter" scope="page"/>
+	<iselse>
+		<isset name="searchTextBoxValue" value="" scope="page"/>
+	</isif>
+		<div class="contentboxcontent">
+	<isslot id="error-banner." description="Banner for error pages" context="global"/>
+	<div class="errorpage">
+		<isif condition="${'sufix' == session.custom.currentSite}">
+			<h5 class="subheader">An Error Occurred</h5>
+	 		<h1 class="subheader">${Resource.msg('nohits.errorlabel','search',null)}</h1>
+			<iselse/>
+			<h1>${Resource.msg('nohits.errorlabel','search',null)}</h1>		
+	  </isif>
+		<div id="message" class="error errorempty">
+			<iscontentasset aid="error-callout"/>	
+		</div><!-- END: errorpagemessage -->
+		
+		<div class="nohits">
+			<div class="goback">
+				<a class="button" href="${URLUtils.url('Home-Show')}" id="goback">
+					<span>${Resource.msg('nohits.errorgobutton','search',null)}</span>
+				</a>
+				</div>
+			<div class="home">
+				<a class="button" href="${URLUtils.url('Home-Show')}"/>
+					<span>${Resource.msg('nohits.errorhomebutton','search',null)}</span>
+				</a>
+			</div>
+		 	<form action="${URLUtils.url('Search-Show')}" method="get">
+				<fieldset class="nohitsearch">
+					<input  type="text" name="q" value="${Resource.msg('global.searchentire','locale',null)}" class="box"/>
+					<button type="submit" class="btn" value="${Resource.msg('global.go','locale',null)}" name="simplesearch"><span>${Resource.msg('global.go','locale',null)}</span></button>
+				</fieldset>
+			</form>
+		</div><!-- END: errorssearch -->
+		<br>
+		<div class="errorfooter">
+			<div class="errorfooterbottom">
+				<iscontentasset aid="error-service"/>
+			</div><!-- END: errorfooterbottom -->
+			
+		</div><!-- END: errorfooter -->
+		</div>
+		</div>
+	</div><!-- END: errorpage -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!--End page-background -->
+</isdecorate>
+<script type="text/javascript">/*<![CDATA[*/
+
+		
+		
+/* ]]> */</script>

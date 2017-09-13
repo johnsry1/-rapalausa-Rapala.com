@@ -1,0 +1,72 @@
+/**
+* Demandware Script File
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importScript( "export/handlers/AbstractExportHandler.ds" );
+importScript( "export/FieldMapper.ds" );
+
+// Hack, because vars cannot be imported in DW, only functions
+function getCSVExportHandler() {
+	return CSVExportHandler;
+}
+var AbstractExportHandler = getAbstractExportHandler();
+
+var CSVExportHandler = AbstractExportHandler.extend(
+/** @lends CSVExportHandler.prototype */
+{
+	/**
+	 * Creates a new CSV export handler instance 
+	 *
+	 * @constructs
+	 * @augments AbstractExportHandler
+	 * @param {dw.io.File} file The file to export to
+	 * @param {String} encoding The file encoding
+	 * @param {String} separator The separator to use
+	 * @param {Array} fields An array with the fields to use
+	 * @param {Array} header An array with the header to use
+	 */
+	init : function(writer : Writer, separator, fields : Array, header : Array){
+		this.handlesProducts = true;
+		this.fileWriter = writer;
+		this.writer = new CSVStreamWriter(this.fileWriter, separator);
+		this.header = header || fields;
+		this.fields = fields;
+		this.initFieldCache();
+	},
+	/**
+	 * Initialize the a field cache to avoid parsing the expressions for every product
+	 *
+	 * @param {dw.catalog.Product} product A product to get the attribute model (can be any product)
+	 */
+	initFieldCache :function(product : Product){
+		this.fieldCache = {};
+		for each(var field : String in this.fields){
+			this.fieldCache[field] = FieldMapper.parseField(field,product);
+		}
+	},
+	/**
+	 * Get the values for all field as an array
+	 *
+	 * @param {dw.catalog.Product} product The product to export
+	 * @returns {Array} An array with the defined values
+	 */
+	getFields : function(product : dw.catalog.Product){
+		result = [];
+		for each(var field : String in this.fields){
+			var f = this.fieldCache[field];
+			result.push(FieldMapper.getField(product,f.attribute,f.format));
+		}		
+		return result;
+	},
+	exportProduct : function (product : dw.catalog.Product){
+		this.writer.writeNext(this.getFields(product));
+	},
+	beginExport : function() {
+		this.writer.writeNext(this.header);
+	},
+	endExport: function () {
+		this.writer.close();
+		this.fileWriter.close();
+	}
+});

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	
+	<field formid="firstname" label="forms.dealer.firstname.label" type="string" mandatory="true" binding="firstName" max-length="50"/>
+	<field formid="lastname" label="forms.dealer.lastname.label" type="string" mandatory="true" binding="lastName" max-length="50"/>
+	<field formid="emailaddress" label="forms.dealer.emailaddress.label" type="string" mandatory="true" regexp="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,4}$" parse-error="forms.contactus.email.parse-error" binding="email" max-length="50"/>	
+	<field formid="phone" label="forms.dealer.phonenumber.label"  type="string" mandatory="true" binding="phoneHome" max-length="50"/>		
+ 	<field formid="businessname" label="forms.dealer.businessname.label" type="string" mandatory="true" binding="orderNumber" missing-error="forms.businessname.missing-error"/>
+ 	<field formid="businessaddress1" label="forms.dealer.businessaddress1.label" type="string" mandatory="true" binding="orderNumber" missing-error="forms.businessaddress1.missing-error"/>
+ 	<field formid="businessaddress2" label="forms.dealer.businessaddress2.label" type="string" mandatory="false" binding="orderNumber"/>
+ 	<field formid="organisation" label="forms.dealer.organisation.label" type="string" mandatory="true" binding="orderNumber"/>
+	
+	
+	<include formid="states" name="states"/>
+ 	<field formid="city" label="forms.dealer.cityname.label" type="string" mandatory="true" binding="city" min-length="2" max-length="50" missing-error="forms.address.city.missing" range-error="forms.address.field.invalid" />
+ 	<field formid="zipCode" label="forms.dealer.distancelabel.label" type="string" mandatory="true" binding="postalCode" parse-error="storelocator.ziperror" missing-error="storelocator.ziperror" regexp="^\d{5}" value-error="forms.errorzip"/>
+	
+	
+	<field formid="myquestion" label="forms.dealer.myquestion.label" type="string" mandatory="false" binding="passwordQuestion">
+		<options>
+			<option optionid="General Information" value="General Information" label="forms.contactus.generalinformation"/>
+			<option optionid="Order Status" value="Order Status" label="forms.contactus.orderstatus"/>
+			<option optionid="My Account" value="My Account" label="forms.contactus.myaccount"/>
+			<option optionid="Other" value="Other" label="forms.contactus.other"/>
+		</options>	
+	</field>
+	<field formid="message" label="forms.dealer.message" type="string" mandatory="false" binding="comment" max-length="50"/>
+
+	<action formid="submit" valid-form="true"/>
+</form>

@@ -1,0 +1,32 @@
+/**
+*   @input Basket : dw.order.Basket
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+function removeGC(basket)
+{
+  try{
+  	 //var paymentInstruments : ArrayList = new ArrayList();
+  	 //var basket : Basket = args.Basket;
+  	 if(null != basket){
+	 	 var gcPaymentInstrs : dw.util.Collection = basket.getGiftCertificatePaymentInstruments();
+		 var iter : dw.util.Iterator = gcPaymentInstrs.iterator();
+		 var orderPI : dw.order.OrderPaymentInstrument = null;		
+		 while( iter.hasNext() )
+		 {
+			orderPI = iter.next();
+			basket.removePaymentInstrument(orderPI);
+		 }
+  	 }
+  	 return true;
+  }
+  catch(e){
+  	Logger.error("Error while executing the script RemoveGiftPaymentInstruments.ds ERROR:"+e.message);
+  	return false;
+  }
+   
+}
+module.exports={
+	removeGC : removeGC
+}

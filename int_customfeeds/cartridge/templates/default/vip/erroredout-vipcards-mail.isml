@@ -1,0 +1,41 @@
+<isscript>
+	var calendar : dw.util.Calendar = new dw.util.Calendar();
+    calendar.timeZone = "GMT";
+    var dateString : String = dw.util.StringUtils.formatCalendar(calendar, "yyyy-MM-dd-hh-mm-ss");
+	var instanceName : String = !empty( dw.system.System.getInstanceHostname() ) ? dw.system.System.getInstanceHostname() : "(unknown)";
+	var instanceType : Number = dw.system.System.getInstanceType();
+	var instanceTypeString : String = "(unknown)";
+	if      ( instanceType == dw.system.System.DEVELOPMENT_SYSTEM ) { instanceTypeString = 'DEVELOPMENT'; }
+	else if ( instanceType == dw.system.System.STAGING_SYSTEM )     { instanceTypeString = 'STAGING'; }
+	else if ( instanceType == dw.system.System.PRODUCTION_SYSTEM )  { instanceTypeString = 'PRODUCTION'; }
+	try{
+		var ErrorOutVIPCardsFile : dw.io.File = new dw.io.File(dw.io.File.IMPEX + dw.io.File.SEPARATOR + "src" + dw.io.File.SEPARATOR +pdict.Task['error-folder']+"/errored_vipcards_list_"+dateString+".csv");
+		if( !ErrorOutVIPCardsFile.exists() ){
+			ErrorOutVIPCardsFile.createNewFile();
+		}
+		var ErrorOutVIPCardsFileWriter : dw.io.FileWriter = new dw.io.FileWriter(ErrorOutVIPCardsFile);
+		var CSVStreamWriter : dw.io.CSVStreamWriter = new dw.io.CSVStreamWriter(ErrorOutVIPCardsFileWriter);
+		var srcCSVFile : dw.io.File = new dw.io.File( dw.io.File.IMPEX + dw.io.File.SEPARATOR + "src" + dw.io.File.SEPARATOR + pdict.File );
+		var srcCSVFileReader : dw.io.FileReader = new dw.io.FileReader(srcCSVFile);
+		var srcCSVStreamReader : dw.io.CSVStreamReader = new dw.io.CSVStreamReader(srcCSVFileReader);
+		CSVStreamWriter.writeNext(srcCSVStreamReader.readNext());
+		while(record = srcCSVStreamReader.readNext()){
+			if( pdict.ErroredOutVIPCards.contains(record[0]) ){
+				CSVStreamWriter.writeNext(record);
+			}
+		}
+		ErrorOutVIPCardsFileWriter.flush();
+		CSVStreamWriter.close();
+		ErrorOutVIPCardsFileWriter.close();
+	}
+	catch( e ){
+		dw.system.Logger.getLogger("VIPCardImport").error("Error occured in errorOutVIPCards Email template. Error: "+e.message);
+	}
+</isscript>
+<subject>${instanceTypeString}: Errored out VIP cards csv information </subject>
+<p style="font-family: Calibri;">Please find the following link to have a look at the errored out records from the source csv file while importing the VIP cards...!</p>
+<p style="font-family: Calibri;"><a href = "https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutVIPCardsFile.fullPath}">https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutVIPCardsFile.fullPath}</a></p>
+<p style="font-family: Calibri;">
+	Thanks & Regards,<br>
+	Rapala
+</p>

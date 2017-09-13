@@ -1,0 +1,86 @@
+/**
+* 
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.value );
+importPackage( dw.order );
+importScript("app_rapala_core:checkout/Utils.ds");
+function checkAllotmentPayment( customer, basket )
+{
+   //var customer: Customer = args.Customer;
+   var allotmentExpired : Boolean = true;
+   //var basket : Basket = args.Basket;
+   var currencyCode : String = Site.getCurrent().getCurrencyCode();
+   var orderTotal : Money = new Money(0.0, currencyCode);
+   var cardAmount : Money = new Money(0.0, currencyCode);
+   var paymentInstr : PaymentInstrument; 
+   session.custom.isProStaffAllotmentused = null;
+   session.custom.amountUsedFromProStaffAllowance = null;
+   var today : Date = new Date();
+	 if(!empty(customer.profile.custom)){
+	 	 var allowanceBalance : Number = customer.profile.custom.allotment;
+	 	 var test = basket.getPaymentInstruments();
+		 if(!empty(customer.profile.custom.allotmentExpires)){
+		  if(allowanceBalance > 0.01){
+			  try{ 
+				   if(today.getFullYear() < customer.profile.custom.allotmentExpires.getFullYear()){
+							allotmentExpired = false;
+				   }
+				   else if(today.getFullYear() == customer.profile.custom.allotmentExpires.getFullYear()){
+						if(today.getMonth() < customer.profile.custom.allotmentExpires.getMonth()){
+							allotmentExpired = false;
+						}else if(today.getMonth() == customer.profile.custom.allotmentExpires.getMonth()){
+							if(today.getDate() <= customer.profile.custom.allotmentExpires.getDate()){
+								allotmentExpired = false;
+							}
+						}
+				   }
+				   if(!allotmentExpired){
+				   		if(!empty(basket) && basket.totalGrossPrice.available){
+				   			orderTotal = basket.totalGrossPrice;
+				   		}else if(!empty(basket)){
+				   			orderTotal = basket.getAdjustedMerchandizeTotalPrice(true).add(basket.giftCertificateTotalPrice);
+				   		}
+				   		if(orderTotal.available && orderTotal.value > allowanceBalance){
+				   			orderTotal = orderTotal.subtract(new Money(allowanceBalance,Site.getCurrent().getCurrencyCode()));
+				   			cardAmount = orderTotal;
+				   			session.custom.isProStaffAllotmentused = true;
+				   			session.custom.amountUsedFromProStaffAllowance = allowanceBalance;
+				   		}else{
+				   			session.custom.isProStaffAllotmentused = true;
+				   			session.custom.amountUsedFromProStaffAllowance = orderTotal.value;
+				   			orderTotal =  new Money(0.0, currencyCode);
+				   		}
+				   		if(session.custom.isProStaffAllotmentused && session.custom.amountUsedFromProStaffAllowance > 0){
+							removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
+							removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("CREDIT_CARD").getName());
+							paymentInstr = basket.createPaymentInstrument(PaymentMgr.getPaymentMethod("ALLOTMENT").getName(), new Money(session.custom.amountUsedFromProStaffAllowance,currencyCode));	   		
+				   		}
+				   }else{
+				   		session.custom.isProStaffAllotmentused = false;
+				   		session.custom.amountUsedFromProStaffAllowance = new Money(0.0, currencyCode);
+				   		removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
+						removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("CREDIT_CARD").getName());	   			   		
+				   }
+				   return orderTotal;
+			  }
+			  catch(e){
+			  		Logger.error("Error while executing the script UseProStaffAllowance.ds Error: "+e.message);
+			  		return null;
+			  }
+		  }else{
+		  	removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
+		  }
+		}else{
+		 	removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
+		 	return orderTotal;
+	 	}
+	 }
+	 return orderTotal;
+}
+
+
+module.exports={
+	checkAllotmentPayment : checkAllotmentPayment
+}

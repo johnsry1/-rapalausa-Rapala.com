@@ -1,0 +1,341 @@
+/**
+*	CSS Daily Customer Export
+*	Revision 1.01
+*
+*	7/16/2012 - SC - Initial version, checked in for Carter's CSS project
+*   7/30/2012 - SC - Changed FTP account information, converting to new CSS specific preferences	
+* 
+* @input CustomersPerFile : String		Allows for you to control the number of customers in each XML file generated.
+*
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.net );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.catalog );
+importPackage( dw.object );
+
+function execute( args : PipelineDictionary ) : Number {
+
+   		//Allow for users per file override from job parameter
+   		var iterLimit = args.CustomersPerFile;
+		var sql = "custom.readyForExport = true";
+	    var totalCount = CustomerMgr.queryProfiles(sql,"customerNo ASC").count;
+	    var iteration = ( totalCount / iterLimit ).toFixed(0);
+	    var GMClientID = Site.getCurrent().getCustomPreferenceValue("CSSServiceClientID");
+	    var addiCaNotes = false;
+	    if (!empty(Site.getCurrent().getCustomPreferenceValue("iCaNotesGroup"))) {
+		    var groupLabel = Site.getCurrent().getCustomPreferenceValue("iCaNotesGroup");
+			// retrieve the Attribute Grouping "iCaNotes" from the CustomerAddress system object
+			var notesGroup : ObjectAttributeGroup = dw.object.SystemObjectMgr.describe("CustomerAddress").getAttributeGroup(groupLabel);
+			// get the collection of attribute definitions in the group
+			if (notesGroup != null) {
+				var noteAttributes : Collection = notesGroup.getAttributeDefinitions();
+				if (noteAttributes.length > 0) {
+					addiCaNotes = true;
+				}
+			}
+	    }
+	    
+	    for( i = 0 ; i <= iteration ; i++ ){
+	    	var customersFound : Collection = CustomerMgr.queryProfiles(sql,"customerNo ASC").asList(0, iterLimit);	
+			var date : Calendar = new Calendar();
+			var timestamp = StringUtils.formatCalendar(date, "MMddyyyyHHmmss");
+			var file : File = new File(dw.io.File.IMPEX + File.SEPARATOR + "upload" + File.SEPARATOR + "GMCustomer_" + dw.system.Site.getCurrent().ID + "_" + timestamp + "_" + i + ".xml");
+			
+			if (customersFound.length<1) {
+				break;	
+			}
+					
+			var fileWriter : FileWriter = new FileWriter(file, "utf-8");
+  			var xmlWriter : XMLIndentingStreamWriter = new XMLIndentingStreamWriter(fileWriter);
+	    		    	
+  			xmlWriter.writeStartDocument("UTF-8", "1.0");
+  			xmlWriter.writeStartElement("GlobalMerchant");
+	    	
+	    	for( j in customersFound ){
+				try {
+					var preferredAddress : String = '';
+					
+					xmlWriter.writeStartElement("User");					
+					addXMLElement(xmlWriter, "ClientID", GMClientID);
+					addXMLElement(xmlWriter, "UserName", customersFound[j].customerNo);
+					addXMLElement(xmlWriter, "Description", customersFound[j].firstName + " " + customersFound[j].lastName);
+					addXMLElement(xmlWriter, "UserTypeID", "3");
+					
+					if (customersFound[j].preferredLocale != "") { 
+						try {
+							customerLocale = dw.web.Resource.msg("locale."+ customersFound[j].preferredLocale,'locales','1');
+						} catch (e) {
+							customerLocale = "1";
+						}
+						addXMLElement(xmlWriter, "LocaleID", customerLocale);
+					} else {
+						addXMLElement(xmlWriter, "LocaleID", "1");
+					}
+					
+					addXMLElement(xmlWriter, "CurrencyID", "1");
+					addXMLElement(xmlWriter, "CatalogID", "1");
+					addXMLElement(xmlWriter, "Active", "1");
+					addXMLElement(xmlWriter, "Email", customersFound[j].email);
+					addXMLElement(xmlWriter, "GeneralUseColumn6", customersFound[j].email);
+
+					//#########################################################################################
+					//Add Custom Attributes of Profile if existing in attribute group called iCA
+					//#########################################################################################
+					//var notesout : XML = new XML();
+					var profileGroup : ObjectAttributeGroup = dw.object.SystemObjectMgr.describe("Profile").getAttributeGroup("iCA");
+					if (profileGroup!=null) {
+						var attDefs = profileGroup.getAttributeDefinitions();
+						insertProfileCustomAttrs(customersFound[j], xmlWriter, attDefs);					
+					}
+					//#########################################################################################
+					
+					xmlWriter.writeStartElement("Addresses");					
+					
+					if (customersFound[j].addressBook.preferredAddress != null) {
+						preferredAddress = customersFound[j].addressBook.preferredAddress.ID;
+						xmlWriter.writeStartElement("Address");
+						addXMLElement(xmlWriter, "ClientID", GMClientID);
+						addXMLElement(xmlWriter, "Address1", customersFound[j].addressBook.preferredAddress.address1);
+						addXMLElement(xmlWriter, "Address2", customersFound[j].addressBook.preferredAddress.address2);
+						addXMLElement(xmlWriter, "City", customersFound[j].addressBook.preferredAddress.city);
+						addXMLElement(xmlWriter, "State", customersFound[j].addressBook.preferredAddress.stateCode);
+						addXMLElement(xmlWriter, "PostalCode", customersFound[j].addressBook.preferredAddress.postalCode);
+						addXMLElement(xmlWriter, "Country", customersFound[j].addressBook.preferredAddress.countryCode.value);
+						addXMLElement(xmlWriter, "Phone1", customersFound[j].addressBook.preferredAddress.phone);
+						addXMLElement(xmlWriter, "Email", customersFound[j].email);
+						addXMLElement(xmlWriter, "FirstName", customersFound[j].addressBook.preferredAddress.firstName);
+						addXMLElement(xmlWriter, "MiddleName", customersFound[j].addressBook.preferredAddress.secondName);
+						addXMLElement(xmlWriter, "LastName", customersFound[j].addressBook.preferredAddress.lastName);
+						addXMLElement(xmlWriter, "Suffix",customersFound[j].addressBook.preferredAddress.suffix);
+						addXMLElement(xmlWriter, "AttributeName", "BILLTO");
+						if (addiCaNotes) {
+							insertNotesFields(customersFound[j].addressBook.preferredAddress, xmlWriter,noteAttributes,GMClientID);
+						}
+						xmlWriter.writeEndElement(); //Address
+					}
+					
+					for( k in customersFound[j].addressBook.addresses ) {
+						xmlWriter.writeStartElement("Address");
+						addXMLElement(xmlWriter, "ClientID", GMClientID);
+						addXMLElement(xmlWriter, "Address1", customersFound[j].addressBook.addresses[k].address1);
+						addXMLElement(xmlWriter, "Address2", customersFound[j].addressBook.addresses[k].address2);
+						addXMLElement(xmlWriter, "City", customersFound[j].addressBook.addresses[k].city);
+						addXMLElement(xmlWriter, "State", customersFound[j].addressBook.addresses[k].stateCode);
+						addXMLElement(xmlWriter, "PostalCode", customersFound[j].addressBook.addresses[k].postalCode);
+						addXMLElement(xmlWriter, "Country", customersFound[j].addressBook.addresses[k].countryCode.value);
+						addXMLElement(xmlWriter, "Phone1", customersFound[j].addressBook.addresses[k].phone);
+						addXMLElement(xmlWriter, "Email", customersFound[j].email);
+						addXMLElement(xmlWriter, "FirstName", customersFound[j].addressBook.addresses[k].firstName);
+						addXMLElement(xmlWriter, "MiddleName", customersFound[j].addressBook.addresses[k].secondName);
+						addXMLElement(xmlWriter, "LastName", customersFound[j].addressBook.addresses[k].lastName);
+						addXMLElement(xmlWriter, "Suffix",customersFound[j].addressBook.addresses[k].suffix);
+						addXMLElement(xmlWriter, "AttributeName", "SHIPTO");
+						var isPreferred : Boolean = (customersFound[j].addressBook.addresses[k].ID == preferredAddress);
+						if (addiCaNotes && !isPreferred) {
+							insertNotesFields(customersFound[j].addressBook.addresses[k], xmlWriter,noteAttributes,GMClientID);
+						}
+						xmlWriter.writeEndElement(); //Address
+					}
+				
+					xmlWriter.writeEndElement(); //Addresses
+					xmlWriter.writeEndElement(); //User
+
+					var updateCustomer : Profile = dw.customer.CustomerMgr.getProfile(customersFound[j].customerNo);
+					updateCustomer.custom.readyForExport = false;
+
+				} catch(e) {
+					Logger.error("CSS Customer Export Feed Error, Customer Number:{0} Error: {1}",customersFound[j].customerNo ,e.message);
+				}
+			}
+	    		
+			xmlWriter.writeEndElement(); //GlobalMerchant
+			xmlWriter.writeEndDocument();
+			xmlWriter.flush();
+			xmlWriter.close();
+			fileWriter.flush();
+			fileWriter.close();
+		    		
+			try {
+				if (customersFound.length>0) {
+		  			if (uploadSFTP(file)) {
+
+		  			} else {
+		  				Logger.error("500","Connection Error - Unable to connect to SFTP Server!");
+		  				return PIPELET_ERROR;		  			
+		  			}
+				}
+		  	} catch(e) {
+		  		var loc = e;
+		    	if (e.message.indexOf("java.net.UnknownHostException")>0) {
+		      		Logger.error("500","Connection Error - Host not found!");
+		    	} else {
+		      		Logger.error("499","Unexpected/Unhandled error occurred: " + e.message);
+		    	}
+		    	return PIPELET_ERROR;
+		  	}
+	    }
+   return PIPELET_NEXT;
+}
+
+ function addXMLElement( xWriter : XMLIndentingStreamWriter, nodeName : string, content : string) {
+   	xWriter.writeStartElement(nodeName);
+   	if (content != null) {
+   		xWriter.writeCharacters(content);
+   	}
+   	else {
+   		xWriter.writeCharacters("");	
+   	}
+   	xWriter.writeEndElement();
+ }
+ 
+ function addXMLElementCDATA( xWriter : XMLIndentingStreamWriter, nodeName : string, content : string) {
+   	xWriter.writeStartElement(nodeName);
+   	if (content != null) {
+   		xWriter.writeCData(content);
+   	}
+   	else {
+   		xWriter.writeCharacters("");	
+   	}
+   	xWriter.writeEndElement();
+ }
+ 
+function uploadSFTP(file : File) : Boolean {
+	var isSuccess : Boolean = false;
+
+	if (file == null || !file.isFile()) {
+    	Logger.error("CSS Customer Feed SFTP Error: file object is not a file!");
+    	return PIPELET_ERROR;
+  	}
+
+  	var ftpServer   = Site.getCurrent().preferences.custom.CSSServiceFTPHost;
+  	var ftpUser     = Site.getCurrent().preferences.custom.CSSServiceFTPUser;
+  	var ftpPassword = Site.getCurrent().preferences.custom.CSSServiceFTPPassword;
+  	var ftpPath     = Site.getCurrent().preferences.custom.CSSServiceFTPPath;
+  	var ftpPort     = 22;
+  	try {
+    	ftpPort 	= Site.getCurrent().preferences.custom.CSSServiceFTPPort;
+  	} catch (e) {}
+
+  	if (empty(ftpServer) || empty(ftpUser) || empty(ftpPassword) || empty(ftpPath)) {
+    	Logger.error("CSS Customer Feed SFTP ERROR: site preferences not defined - server/{0};port/{1};user/{2};password/{3};path/{4} not set!\n", ftpServer, ftpPort, ftpUser, ftpPassword, ftpPath);
+    	return PIPELET_ERROR;
+  	}
+
+  	//
+  	// ftp each file and afterwards delete it from the server
+  	//
+  	var sftp : SFTPClient = new SFTPClient();
+  	sftp.setTimeout(10000);
+  	if (sftp.connect(ftpServer, ftpPort, ftpUser, ftpPassword) && sftp.connected) {
+
+    	var path = ftpPath; // + (ftpPath.match(/\/$/) ? '' : '/');
+    	var isUploaded = sftp.putBinary(path + "/" + file.name, file);
+    	if (!isUploaded) {
+    		var errSFTP = sftp.errorMessage;
+    		Logger.error("CSS Customer Feed SFTP ERROR: Failed to upload file " + file.fullPath + " : " + errSFTP);
+    		isSuccess = false;
+    	}
+    	else {
+    		// SUCCESS - set orders to Exported
+    		isSuccess = true;	
+    	}
+    	
+  	} 
+  	else {
+    	Logger.error("CSS Customer Feed SFTP ERROR: Can not establish ftp connection to {0}!", ftpServer);
+    	isSuccess = false;
+  	}
+  	sftp.disconnect();
+  	return isSuccess;	
+}
+
+//if attributes exist in "iCaNotes" attribute grouping, add a <Notes> section to xml
+function insertNotesFields(address, xmlWriter, noteAttributes, GMClientID) {
+	var allAttrs = address;
+	var indx = 0;
+	for each (var attr in noteAttributes) {
+		var found = null;
+		//try to find our attribute, attr.  Look first in CustomerAddress, then in CustomerAddress.custom
+		if (attr.ID in allAttrs) {
+			found = allAttrs[attr.ID];
+		}
+		else if (attr.ID in allAttrs.custom) {
+			found = allAttrs.custom[attr.ID];
+		}
+		if (found != null) {
+			if (indx==0) {
+				xmlWriter.writeStartElement("Notes");
+			}
+			//if attr type is multi-value (e.g. set of strings), create a unique Note for each, appending "_[index]" to Note Name
+			if (attr.multiValueType) {
+				for (var key in found) {
+					if (found.hasOwnProperty(key)) {
+						xmlWriter.writeStartElement("Note");
+						addXMLElement(xmlWriter, "ClientID", GMClientID);
+						addXMLElement(xmlWriter, "Name", attr.ID+'_'+key);
+						addXMLElement(xmlWriter, "Value", found[key]);
+						addXMLElement(xmlWriter, "TableID", 1);
+						xmlWriter.writeEndElement(); //Note
+					}
+				}
+			} else {
+				xmlWriter.writeStartElement("Note");
+				addXMLElement(xmlWriter, "ClientID", GMClientID);
+				addXMLElement(xmlWriter, "Name", attr.ID);
+				addXMLElement(xmlWriter, "Value", found);
+				addXMLElement(xmlWriter, "TableID", 1);
+				xmlWriter.writeEndElement(); //Note
+			}
+			indx++;
+		}
+	}
+	if (indx > 0) {
+		xmlWriter.writeEndElement(); //Notes
+	}
+}
+
+//if attributes exist in "iCaNotes" attribute grouping, add a <Notes> section to xml
+function insertProfileCustomAttrs(profile, xmlWriter, noteAttributes) {
+	var allAttrs = profile;
+	var indx = 0;
+	for each (var attr in noteAttributes) {
+		var found = null;
+		//try to find our attribute, attr.  Look first in CustomerAddress, then in CustomerAddress.custom
+		if (attr.ID in allAttrs) {
+			found = allAttrs[attr.ID];
+		}
+		else if (attr.ID in allAttrs.custom) {
+			found = allAttrs.custom[attr.ID];
+		}
+		if (found != null) {
+			if (indx==0) {
+				xmlWriter.writeStartElement("Notes");
+			}
+			//if attr type is multi-value (e.g. set of strings), create a unique Note for each, appending "_[index]" to Note Name
+			if (attr.multiValueType) {
+				for (var key in found) {
+					if (found.hasOwnProperty(key)) {
+						xmlWriter.writeStartElement("Note");
+						addXMLElement(xmlWriter, "Name", attr.ID+'_'+key);
+						addXMLElement(xmlWriter, "Value", found[key]);
+						addXMLElement(xmlWriter, "Sequence", 1);
+						xmlWriter.writeEndElement(); //Note
+					}
+				}
+			} else {
+				xmlWriter.writeStartElement("Note");
+				addXMLElement(xmlWriter, "Name", attr.ID);
+				addXMLElement(xmlWriter, "Value", found);
+				addXMLElement(xmlWriter, "Sequence", 1);
+				xmlWriter.writeEndElement(); //Note
+			}
+			indx++;
+		}
+	}
+	if (indx > 0) {
+		xmlWriter.writeEndElement(); //Notes
+	}
+} 

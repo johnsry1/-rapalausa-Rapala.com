@@ -1,0 +1,45 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+	<isscript>var pageContext={title:'Product Search Results', type:'search', ns:'search'};</isscript>
+	<isinclude template="util/modules"/>	
+	<iscomment>
+		Please mind that the productsearchrefinebar contains price information that is subject to personalization.
+		Make sure the decorated template specifies ISCACHE varyby="price_promotion".
+	</iscomment>
+	<isinclude template="components/header/htmlhead"/>	
+	
+	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
+	<isset name="parentname" value="${pdict.CurrentHttpParameterMap.cgid}" scope="page" />
+    <isset name="category" value="${dw.catalog.CatalogMgr.getCategory(parentname)}" scope="page" />
+    <isset name="brand" value="${session.custom.currentSite}" scope="page" />
+    <isif condition="${category != null && !empty(category)}"> 
+		<isif condition="${(category.ID == brand+'-gifts') || (category.ID == brand+'-clothing') || (category.parent.ID == brand+'-gifts') || (category.parent.ID == brand+'-clothing')}"> 
+			<link rel="canonical" href="${URLUtils.abs('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+        </isif>
+     </isif>
+	</isif>
+	<iscomment>Add  template-specific header information here.</iscomment>	
+</head>
+<body>
+	<div id="container" class="pt_product-search-result ${!empty(pdict.CurrentHttpParameterMap.q.value) && pdict.CurrentHttpParameterMap.q.value!=null ? 'searchresult' : 'categorylanding' }">
+
+		<isinclude template="components/header/header"/>
+		
+		<div id="main" role="main" class="clearfix">
+			
+			<isinclude template="components/browsertoolscheck"/>
+			<isreplace/>
+		</div>
+		
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="search/pt_productsearchresult_UI"/>
+		<isinclude template="search/pt_productsearchresult_VARS"/>		
+	</div>
+</body>
+</html>

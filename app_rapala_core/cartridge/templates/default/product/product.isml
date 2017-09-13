@@ -1,0 +1,40 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>
+	Renders product detail page both quickview and normal view.
+	If the product is a product set or bundle, then it also includes subproduct template to
+	render sub product details.
+</iscomment>
+
+<isscript>
+	importScript('app_rapala_core:product/GetProductDetailUrl.ds');
+	var productDetailUrl = GetProductDetailUrl(pdict);
+	var source = pdict.CurrentHttpParameterMap.source.stringValue;
+	var format = pdict.CurrentHttpParameterMap.format.stringValue;
+	var isCart = pdict.CurrentHttpParameterMap.isCart.stringValue;
+	var lineItemID = pdict.CurrentHttpParameterMap.lineitemID.stringValue;
+	if(isCart != null){
+		productDetailUrl += "&isCart=true";
+	}
+	if(lineItemID != null){
+		var lItem = "&lineItemID="+lineItemID;
+		productDetailUrl += lItem;
+	}
+	
+	var DecoratorTemplate = 'product/pt_productdetails';
+	if (format == 'ajax' || source == 'search' || source == 'quickview' || source == 'giftregistry' || source == 'wishlist') {
+		DecoratorTemplate = 'util/pt_empty';
+	}
+</isscript>
+
+<isdecorate template="${DecoratorTemplate}">
+	
+	<isinclude url="${productDetailUrl}"/>
+	
+	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
+	 	<isif condition="${!isQuickView}"> 
+			<script>googleAnalyticsEvents.pdpView('${pdict.Product.ID}');</script>
+		</isif>
+	</isif>
+</isdecorate>

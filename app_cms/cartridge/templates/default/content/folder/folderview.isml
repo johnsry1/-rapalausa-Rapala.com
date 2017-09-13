@@ -1,0 +1,78 @@
+<isdecorate template="content/folder/pt_folder">
+<iscache type="relative" hour="24"/>
+<isinclude template="util/modules"/>
+	<isscript>
+		var folder : Folder = pdict.Folder;
+	</isscript>
+ 	<isif condition="${folder != null && folder.online}">
+		<isloop items="${folder.onlineSubFolders}" var="subFolder">
+			<isif condition="${!subFolder.onlineContent.empty}">
+				<isif condition="${subFolder.ID == 'strikemaster-customer-shipping' || subFolder.ID == 'marcum-customer-warranty' || subFolder.ID == 'strikemaster-customer-returns' || subFolder.ID == 'strikemaster-warranty'}">
+					<div class="cell contentbox upshift accordion handle-non-us">
+					<div class="contentboxcontent">	
+						<h1 class="customerservicetabs head">${subFolder.displayName}</h1>
+						<div class="disabled expandcontent">
+						<ul>
+							<isloop items="${subFolder.onlineContent}" var="subContent">
+								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume' || subContent.ID == 'marcum-become-dealer' || subContent.ID == 'marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-become-dealer' || subContent.ID == 'strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us'}">								
+									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+								<iselse>
+									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
+										<li class="non-us-contactus hide">				
+									<iselse>
+										<li>
+									</isif>
+									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+								</isif>
+							</isloop>
+						</ul>
+						</div>
+					</div><!-- End of contentboxcontent -->
+					</div><!-- END: cell contentbox upshift -->
+				<iselse>
+				<isif condition="${subFolder.ID=='strikemaster-about-warranty' || subFolder.ID == 'rapala-current-promotions'}">
+					<div class="cell contentbox upshift accordion handle-non-us">
+				<iselse>
+					<div class="cell contentbox upshift accordion">
+				</isif>
+					<div class="contentboxcontent">
+						<h1 class="customerservicetabs head">${subFolder.displayName}</h1>
+						<div class="disabled expandcontent">
+					   <ul>
+							<isloop items="${subFolder.onlineContent}" var="subContent">
+								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume' || subContent.ID == 'marcum-become-dealer' || subContent.ID == 'marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-become-dealer' || subContent.ID == 'strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center'}">								
+									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+								<iselse>
+									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
+										<li class="non-us-contactus hide">				
+									<iselse>
+										<li>
+									</isif>
+									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+								</isif>
+							</isloop>
+						</ul>
+						</div>
+					</div><!-- End of contentboxcontent -->
+					</div><!-- END: cell contentbox upshift -->
+				</isif>
+			</isif>
+		</isloop>
+		
+		<isloop items="${folder.onlineContent}" var="subContent">
+		<isif condition="${subContent.ID == 'customer-warranty' || subContent.ID == 'customer-returns' || subContent.ID == 'customer-shipping'|| subContent.ID == 'marcum-customer-returns' || subContent.ID == 'marcum-warranty' || subContent.ID == 'marcum-customer-shipping' || subContent.ID == 'strikemaster-customer-shipping' || subContent.ID == 'marcum-customer-warranty' || subContent.ID == 'strikemaster-customer-returns' || subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'customer-sendresume' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'strikemaster-become-dealer' || subContent.ID == 'strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID == 'marcum-become-dealer' || subContent.ID == 'marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'strikemaster-customer-prostaff-inquiry'  || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center' || subContent.ID == 'email-preference-center'}">
+			<div class="cell contentbox upshift accordion handle-non-us">
+		<iselse>
+			<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
+				<div class="non-us-contactus cell contentbox upshift accordion hide">				
+			<iselse>
+				<div class="cell contentbox upshift accordion">
+			</isif>
+		</isif>
+			<div class="contentboxcontent">
+				<h1 class="customerservicetabs head"><a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></h1>
+			</div><!-- End of contentboxcontent -->
+			</div><!-- END: cell contentbox upshift -->
+		</isloop>
+	</isif>
+</isdecorate>

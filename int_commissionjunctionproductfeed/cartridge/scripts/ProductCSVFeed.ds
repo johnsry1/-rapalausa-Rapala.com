@@ -1,0 +1,137 @@
+/**
+* Commission Junction CSV generation from site products.
+* @output File : String
+* @output RemoteFile : String
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.util );
+importPackage( dw.io );
+importPackage( dw.web );
+importPackage( dw.net );
+importPackage(dw.value);
+importPackage( dw.campaign );
+importScript("app_disbestpractice:product/ProductImageSO.ds");
+function execute( args : PipelineDictionary ) : Number
+{
+	var TempFolder : String = "Commission_Junction";
+	var FilePrefix : String = "Rapala_Product_Feed";
+	var FileExtension : String = "csv";
+	try{
+		Logger.getLogger("simplefeeds").debug( "CSV Preparaion starts here to export to AMAZON..." );
+		var products : SeekableIterator = ProductMgr.queryAllSiteProducts();
+		if(products.hasNext()){
+			var calendar : Calendar = new Calendar();
+			calendar.timeZone = "GMT";
+			var gmtDateString : String = StringUtils.formatCalendar( calendar, "yyyy_MM_dd_HH_mm_ss" ); 
+			if ( !createTempFolder(TempFolder)){				
+				return PIPELET_ERROR;
+			}
+			//remove of old files generated from the temp location to do space management
+			var tempdir : File = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder);
+			for(var v = 0; v < tempdir.listFiles().length; v++){
+				tempdir.listFiles()[v].remove();
+			}
+			var targetfile : File = new File(new File(File.IMPEX), "src" + File.SEPARATOR + TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension);
+			var generatedfile : String = TempFolder + File.SEPARATOR + FilePrefix + '.' + FileExtension;
+			args.File = generatedfile;
+			var remoteFile : String = ( !empty( FilePrefix ) ? FilePrefix : "" ) + "." + FileExtension;
+			args.RemoteFile = remoteFile;						
+			var writer : CSVStreamWriter = new CSVStreamWriter(new FileWriter(targetfile));
+			
+			// get some default values from the site preferences for creating the header
+			var sitePref:SitePreferences = dw.system.Site.getCurrent().preferences;
+			var cid:String = dw.system.Site.getCurrent().getCustomPreferenceValue("FeedCID");
+			var subid:String ='169926';
+			//var calendar : Calendar = new Calendar();
+			//calendar.timeZone = "GMT";
+			//var dateFormat : String = StringUtils.formatCalendar( calendar, "MM/dd/yyyy HH:mm:ss a");
+			var ptype:String = 'OVERWRITE';
+			var aid:String =  dw.system.Site.getCurrent().getCustomPreferenceValue("FeedAID");
+			var params:String = 'NAME|KEYWORDS|DESCRIPTION|SKU|BUYURL|AVAILABLE|IMAGEURL|PRICE';
+					var tempcsvrow : Array = ['&CID='+cid];
+					
+					//First build the header in the string, this is going to be a tab delimited file
+					writer.writeNext(tempcsvrow);
+					tempcsvrow = ['&SUBID='+subid];
+					writer.writeNext(tempcsvrow);
+					//tempcsvrow = ['&DATEFMT='+dateFormat];
+					//writer.writeNext(tempcsvrow);
+					tempcsvrow = ['&PROCESSTYPE='+ptype];
+					writer.writeNext(tempcsvrow);
+					tempcsvrow = ['&AID='+aid];
+					writer.writeNext(tempcsvrow);
+					tempcsvrow = ['&PARAMETERS='+params];
+					writer.writeNext(tempcsvrow);
+			var csvrow : Array = ['NAME','KEYWORDS','DESCRIPTION','SKU','BUYURL','AVAILABLE','IMAGEURL','PRICE'];
+			//Create header line in generating CSV
+			//writer.writeNext(csvrow);
+			var product : Product = null;
+			var counter = 0;
+			while(products.hasNext()){
+								
+				//exempt variant
+				product = products.next();
+				var prod : Product = ProductMgr.getProduct(product.getID());
+				
+				if(product.isOnline() && product.isSearchable() && product != null && (!prod.isMaster())){
+					counter++;
+					csvrow[0] = product.getName();
+					csvrow[1] = product.getPageKeywords();
+					var desc : String = !empty(product.getShortDescription()) ? product.getShortDescription().markup.replace(/<\/?[^>]+(>|$)/g, "") : (!empty(product.getLongDescription()) ? product.getLongDescription().markup.replace(/<\/?[^>]+(>|$)/g, ""): '');
+					var desc1 : String =	desc.replace(';',"");
+					var prodDesc : String =	desc1.replace("\"", "","g").replace('\r\n',' ','g').replace('\n',"","g").replace('  ',' ','g').replace('  ',' ','g').replace('  ',' ','g');
+					var prodDesc1 : String = prodDesc.trim();
+					csvrow[2] = prodDesc1;
+					csvrow[3] = product.getID();
+					//Buy URL for mentioned ID 
+					var BuyUrl : String =  URLUtils.abs('Product-Show', 'pid', product.getID()).toString();
+					csvrow[4] = BuyUrl;
+					//Availability of a product
+					if(prod.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
+						csvrow[5] = "YES";
+					}
+					else{
+						csvrow[5] = "NO";
+					}
+					
+					var imageURL = new ProductImage('list',prod, 0).getURL().toString();//ProductUtils.refineImageUrl(prod, "zoom2").toString();
+					imageURL = imageURL.replace("sw=0", "sw=130");
+					imageURL = imageURL.replace("sh=0", "sh=92");
+					//var imageURL = getImageUrl(prod, "list");
+					csvrow[6] = imageURL;
+					
+					//list pricing
+					var pricemodel : Pricing = prod.getPriceModel();
+					var listPricing : Money = pricemodel.getPriceBookPrice('usd-list-prices');
+					csvrow[7] = listPricing.value;
+					
+				//Write this product line to the CSV, start new line
+				writer.writeNext(csvrow);
+			}//end valid product check
+			product = null;
+		}
+		writer.close();
+		Logger.getLogger("simplefeeds").debug( "CSV Preparaion end here to export to AMAZON..." );
+		}			 
+	}catch (e) {	    	
+		Logger.getLogger("simplefeeds").error( "GenerateAmazonCSV: Error :: " + e );
+   		return PIPELET_ERROR;
+	}	
+    return PIPELET_NEXT;
+}
+
+function createTempFolder( tempFolder : String ) : boolean
+{
+	var folder : File = new File( File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + tempFolder );
+	if ( folder.exists() )	{		
+		return true;
+	}
+	Logger.getLogger("simplefeeds").debug( "GenerateAmazonCSV: Creating temp folder " + folder.fullPath );	
+	var result : boolean = folder.mkdirs();
+	if ( !result ){
+		Logger.getLogger("simplefeeds").error( "GenerateAmazonCSV: Error creating temp folder " + folder.fullPath );
+		return false;
+	}
+	return true;
+}

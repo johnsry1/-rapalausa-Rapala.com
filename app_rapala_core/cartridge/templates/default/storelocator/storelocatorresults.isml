@@ -1,0 +1,191 @@
+<isdecorate template="storelocator/pt_storelocatorresults">
+
+<isinclude template="util/modules"/>
+<div id="page-background" class="downshift">
+<div id="page">
+<div class="wrapper">
+<div class="row column1">
+<div class="column cell1">
+<div id="storelocator" class="storelocator">
+<div class="contentbox cell upshift">
+<div class="contentboxcontent">
+	<div id="storelocatorsearch" class="storelocatorsearch ">
+	    <h1>${Resource.msg('storelocator.header','storelocator',null)}</h1>
+	    <p>${Resource.msg('storelocator.findstoremessage','storelocator',null)}</p>
+	
+				<isif condition="${pdict.Stores != null && empty(pdict.Stores)}">
+					<h3>${Resource.msg('storelocator.noresults','storelocator',null)}</h3>
+					<isprint value="${pdict.StoresPagingModel}"/>
+				</isif>	
+	
+	</div>
+	<div class="clear"><!-- FLOAT CLEAR --></div>
+
+<div class="">	
+    <div class="storelocatorzipsearch">
+        <h2>${Resource.msg('storelocator.brandsheader','storelocator',null)}</h2>
+
+        <div class="zipsearchactions">
+        <form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}"  novalidate>
+        	<fieldset>
+        		<isinputfield formfield="${pdict.CurrentForms.storelocator.rapala}" type="checkbox" />
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.sufix}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.storm}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.luhrjensen}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.bluefox}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.triggerx}"  type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.vmc}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.williamson}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.terminator}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.marcum}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.strikemaster}" type="checkbox"/>
+				<isinputfield formfield="${pdict.CurrentForms.storelocator.otter}" type="checkbox"/>
+				
+        	</fieldset>
+        	<div style="height: 36px;"></div>
+			<fieldset class="mobile-style">
+				<input type="hidden" name="${pdict.CurrentForms.storelocator.countryCode.htmlName}" value="US" />
+				<input type="hidden" name="${pdict.CurrentForms.storelocator.distanceUnit.htmlName}" value="mi" />
+				<div class="stack more-mobile-padding">
+					<isinputfield formfield="${pdict.CurrentForms.storelocator.postalCode}" type="input" attribute1="pattern" value1="[0-9]*"/>
+					<div class="clear"></div>
+				</div>
+				<div class="stack less-mobile-padding">
+					<isinputfield formfield="${pdict.CurrentForms.storelocator.maxdistance}" type="select" attribute1="pattern" value1="[0-9]*"/>
+					<div class="clear"></div>
+				</div>
+				<div class="stack buttonstack">
+					<div class="label">
+						<span class="labeltext">&nbsp;</span>
+					</div>
+					<button class="submitdealer-button" type="submit" name="${pdict.CurrentForms.storelocator.findbyzip.htmlName}" value="${Resource.msg('storelocator.locatedealer','storelocator',null)}"><span>${Resource.msg('storelocator.locatedealer','storelocator',null)}</span></button>
+				</div>
+				<div class="stack messagestack">
+					<div class="label">
+						<span class="labeltext">&nbsp;</span>
+					</div>
+					<div id="message" class="success">${Resource.msg('storelocator.storelocatorresults.yoursearchfound','storelocator',null)} <isprint value="${pdict.StoresCount}"/> ${Resource.msg('storelocator.storelocatorresults.dealersinarea','storelocator',null)}</div>
+				</div>
+			</fieldset>
+        </form>
+        </div>
+    </div><!-- END: storelocatorzipsearch -->
+</div><!-- END: domestic -->
+<div class="clear"><!-- FLOAT CLEAR --></div>
+</div><!-- END: contentboxcontent -->
+</div><!-- END: contentbox -->
+
+    <isif condition="${!empty(pdict.Stores)}">
+    	<div class="cell upshift desktop-view">
+    	<h2 class="nobg noborder">${Resource.msg('storelocator.storelocatorresults.dealersinyourarea','storelocator',null)}</h2>
+        </div>
+    	<div class="cell upshift contentbox result-box-filter">
+		<div class="contentboxcontent">
+        <div class="storelocatorsearchresults">
+         <isloop items="${pdict.Stores}" var="Store" status="loopstate">
+             <div class="storeresult">
+                <div class="storeinformation">
+					<h4><isprint value="${Store.name}"/></h4>
+                     <div><isprint value="${Store.address1}"/><br/>
+                     <isprint value="${Store.city}"/><isif condition="${Store.city != null && Store.stateCode != null}">,</isif> <isprint value="${Store.stateCode}"/> <isprint value="${Store.postalCode}"/><br/>
+                     <!-- <isprint value="${Store.countryCode}"/> -->
+                      <isif condition="${Store.phone != null}">
+                     	<div class="storephone"><isprint value="${Store.phone}"/></div>
+                      </isif>
+                      <isif condition="${Store.storeHours != null}">
+                         <div class="storehours"><isprint value="${Store.storeHours}" encoding="off"/></div>
+                     </isif>
+                     <isif condition="${Store.storeEvents != null}">
+                         <div class="storeevents"><isprint value="${Store.storeEvents}" encoding="off"/></div>
+                     </isif>
+                    </div>
+
+                     
+                 </div>
+                 <div class="storebrands">
+                     <span class="brandlabel">${Resource.msg('storelocator.storelocatorresults.brandscarried','storelocator',null)}</span>
+                     
+                     <hr></hr>
+                    
+                     <isif condition="${Store.custom.rapala}">
+                         <img alt="${Resource.msg('storelocator.rapala','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-rapala.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.vmc}">
+                         <img alt="${Resource.msg('storelocator.vmc','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-vmc.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.sufix}">
+                         <img alt="${Resource.msg('storelocator.sufix','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-sufix.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.storm}">
+                         <img alt="${Resource.msg('storelocator.storm','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-storm.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.triggerx}">
+                         <img alt="${Resource.msg('storelocator.triggerx','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-triggerx.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.luhrjensen}">
+                         <img alt="${Resource.msg('storelocator.luhrjensen','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-luhrjensen.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.terminator}">
+                         <img alt="${Resource.msg('storelocator.terminator','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-terminator.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.bluefox}">
+                         <img alt="${Resource.msg('storelocator.bluefox','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-bluefox.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.williamson}">
+                         <img alt="${Resource.msg('storelocator.williamson','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-williamson.jpg')}"></img>
+                     </isif>
+                    
+                     <isif condition="${Store.custom.marcum}">
+                         <img alt="${Resource.msg('storelocator.marcum','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-marcum.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.strikemaster}">
+                         <img alt="${Resource.msg('storelocator.strikemaster','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-strikemaster.jpg')}"></img>
+                     </isif>
+                     <isif condition="${Store.custom.otter}">
+                         <img alt="${Resource.msg('storelocator.otter','forms',null)}" class="logo medium" src="${URLUtils.staticURL('/images/logo-otter.jpg')}"></img>
+                     </isif>
+                 </div>
+                 <iscomment>Example for a link to a map service</iscomment>
+                 <isscript>
+                     var qAttr = "";
+                     if(Store.address1    != null) qAttr += Store.address1 + ", ";
+                     if(Store.address2    != null) qAttr += Store.address2 + ", ";
+                     if(Store.city        != null) qAttr += Store.city + ", ";
+                     if(Store.postalCode  != null) qAttr += Store.postalCode + ", ";
+                     if(Store.stateCode   != null) qAttr += Store.stateCode + ", ";
+                     if(Store.countryCode != null) qAttr += Store.countryCode;
+
+                     var glink = "http://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
+                 </isscript>
+                 <div class="storemap">
+                 	<span class="storemap-miles">1.31 Miles Away</span>
+                     <a class="button googlemap" name="${glink}">${Resource.msg('storelocator.storelocatorresults.map','storelocator',null)}</a>
+                     <isif condition="${Store.custom.website != null}">
+                     <br />
+                     <isscript>
+                     	var websiteUrl = Store.custom.website;
+                     	if(websiteUrl.indexOf("http") < 0) {
+                     		websiteUrl = "http://" + websiteUrl;
+                     	}
+                     </isscript>
+                     <a target="_blank" class="button" href="<isprint value="${websiteUrl}"/>">${Resource.msg('storelocator.storelocatorresults.website','storelocator',null)}</a>
+                	 </isif>
+                 </div>
+                 <div class="clear"><!-- FLOAT CLEAR --></div>
+             </div>
+         </isloop>         
+          </div><!-- END: storelocatorsearchresults -->
+        </div><!-- END: contentboxcontent -->
+		</div><!-- END: contentbox -->
+    </isif>
+</div><!-- END: storelocator -->
+</div><!-- END: column cell1-->
+</div><!-- END: row column1 -->
+</div><!-- END: wrapper -->
+</div><!-- END: page -->
+</div><!-- END: page-background -->
+
+
+</isdecorate>
+
+

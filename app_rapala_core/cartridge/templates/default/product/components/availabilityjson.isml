@@ -1,0 +1,23 @@
+<iscomment><isscript>
+var ProductUtils = require('~/cartridge/scripts/product/ProductUtils.js');
+var av = ProductUtils.getAvailability(pdict.Product, pdict.CurrentHttpParameterMap.Quantity.stringValue);
+</isscript>
+<isprint value="${JSON.stringify(av)}" encoding="off"/></iscomment>
+<iscontent type="application/json" charset="UTF-8" compact="true"/>
+<isset name="qty" value="${empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue}" scope="page"/>
+"avStatus": "${AVM.availabilityStatus}",
+"avStatusQuantity": ${qty},
+"inStock": ${AVM.inStock},
+<isset name="levels" value="${AVM.getAvailabilityLevels(qty)}" scope="page"/>
+<isif condition="${null != levels}">
+"avLevels": {"${dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK}": ${levels.inStock.value},
+"${dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_PREORDER}": ${levels.preorder.value},
+"${dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_BACKORDER}": ${levels.backorder.value},
+"${dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_NOT_AVAILABLE}": ${levels.notAvailable.value}},
+</isif>
+<isscript>
+	var nonCloseoutLowQtyThreshold : Number = empty(dw.system.Site.getCurrent().getCustomPreferenceValue('nonCloseoutLowQtyThreshold')) ? dw.system.Site.getCurrent().getPreferences().describe().getCustomAttributeDefinition("nonCloseoutLowQtyThreshold").getDefaultValue().value : dw.system.Site.getCurrent().getCustomPreferenceValue('nonCloseoutLowQtyThreshold');	
+</isscript>
+"nonCloseoutLowQtyThreshold": ${nonCloseoutLowQtyThreshold},
+"ATS": <isif condition="${!empty(AVM.inventoryRecord)}">${AVM.inventoryRecord.ATS.value}<iselse>0</isif>,
+"inStockDate": "${!empty(AVM.inventoryRecord) ? AVM.inventoryRecord.inStockDate : ''}"

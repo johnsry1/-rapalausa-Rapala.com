@@ -1,0 +1,86 @@
+/**
+* Demandware Script File
+* To define input and output parameters, create entries of the form:
+*
+* @<paramUsageType> <paramName> : <paramDataType> [<paramComment>]
+*
+* where
+*   <paramUsageType> can be either 'input' or 'output'
+*   <paramName> can be any valid parameter name
+*   <paramDataType> identifies the type of the parameter
+*   <paramComment> is an optional comment
+*
+* For example:
+*
+*	@output IsUnAcceptableState : Boolean
+*	@output IskniveState : Boolean
+*	@output IsShiplimit : Boolean
+*	@output IsproductState : Boolean
+*   @input  Basket : dw.order.Basket
+*	@input CustomerAddressForm : dw.web.FormGroup UPS Customer Address Form
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.catalog );
+
+
+/**
+ * FUNCTION: ValidateProductCategory
+ */
+function validateProductCategory(basket : Basket, singleShippingForm) {
+	var IsUnAcceptableState = false;
+	var IskniveState = false;
+	var IsShiplimit = false;
+	var IsproductState = false;
+    // read pipeline dictionary input parameter
+    var basket : Basket = basket; 
+	var shipState : String = singleShippingForm.object.shippingAddress.addressFields.states.state.htmlValue;
+	var shipcity : String = singleShippingForm.object.shippingAddress.addressFields.city.htmlValue;
+	var shipzip	: String = singleShippingForm.object.shippingAddress.addressFields.postal.htmlValue;
+	var productLIs : Iterator  = basket.getProductLineItems().iterator();
+	while(productLIs.hasNext()){
+		var isKnife : boolean = false;
+		var prodstateList : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('Isproduct'));
+		var prodstateListitr : Iterator = prodstateList.iterator();
+		var pli : ProductLineItem = productLIs.next();
+		if(pli.getProduct().custom.blade != null){
+			isKnife = true;		
+		}
+		
+		if(isKnife){
+			var knivestateList : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('knivestates'));
+			var Kniveziplist : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('KniveZip'));
+			if(!empty(knivestateList) && knivestateList.contains(shipState) || Kniveziplist.contains(shipzip) || knivestateList.contains(shipcity.toLocaleLowerCase())) {
+				IskniveState = true;
+			}
+		}
+		
+		while(prodstateListitr.hasNext()){
+			var currPid : String  = prodstateListitr.next();
+			if(currPid.equals(pli.productID)){
+				if(!empty(prodstateList) && prodstateList.contains(pli.productID)){
+					var ProdareaList : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('ProductState'));
+					var ProdcityList : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('ProductCity'));
+					if(!empty(ProdareaList) && ProdareaList.contains(shipzip) || ProdcityList.contains(shipcity.toLocaleLowerCase())){
+						IsproductState = true;
+					}
+				}
+			}
+		}
+		
+		if(IsUnAcceptableState == true || IskniveState == true || IsproductState == true){
+				IsShiplimit = true;
+			}
+		
+	}
+	
+	return IsShiplimit;
+	
+}
+
+
+module.exports = {
+    validateProductCategory : validateProductCategory
+};

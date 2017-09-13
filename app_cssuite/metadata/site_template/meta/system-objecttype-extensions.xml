@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+	<type-extension type-id="Order">
+		<custom-attribute-definitions>
+			<attribute-definition attribute-id="notesAndHistory">
+				<display-name xml:lang="x-default">Notes and History</display-name>
+				<description xml:lang="x-default">This attribute is used to store all notes and order events that have to be exported to Lifetime.</description>
+				<type>set-of-string</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+		</custom-attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="general">
+				<display-name xml:lang="x-default">General</display-name>
+				<attribute attribute-id="notesAndHistory"/>
+			</attribute-group>
+		</group-definitions>
+	</type-extension>
+	<type-extension type-id="OrderPaymentInstrument">
+		<custom-attribute-definitions>
+			<attribute-definition attribute-id="toRemove">
+				<display-name xml:lang="x-default">Flagged For Removal</display-name>
+				<description xml:lang="x-default">The payment instrument is flagged to be removed at order save.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+		</custom-attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="CSSuite">
+				<display-name xml:lang="x-default">Customer Service Suite</display-name>
+				<attribute attribute-id="toRemove"/>
+			</attribute-group>
+		</group-definitions>
+	</type-extension>
+	<type-extension type-id="SitePreferences">
+		<custom-attribute-definitions>
+			<attribute-definition attribute-id="cssuite_emailFrom">
+				<display-name xml:lang="x-default">Email From</display-name>
+				<description xml:lang="x-default">Email from appearing in emails.</description>
+				<type>string</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+				<field-length>0</field-length>
+				<default-value>DoNotReply@demandware.com</default-value>
+			</attribute-definition>
+			<attribute-definition attribute-id="cssuite_orderCancelConfirmationSubject">
+				<display-name xml:lang="x-default">Order Cancellation Confirmation Subject</display-name>
+				<description xml:lang="x-default">Message that will be included in the email subject</description>
+				<type>string</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+				<field-length>0</field-length>
+				<default-value>Your order has been cancelled:</default-value>
+			</attribute-definition>
+			<attribute-definition attribute-id="cssuite_orderChangeConfirmationSubject">
+				<display-name xml:lang="x-default">Order Modification Confirmation Email Subject</display-name>
+				<description xml:lang="x-default">The subject that would be sent in the order modification email</description>
+				<type>string</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<min-length>0</min-length>
+				<field-length>0</field-length>
+				<default-value>Your order has been modified:</default-value>
+			</attribute-definition>
+			<attribute-definition attribute-id="cssuite_sendOrderCancelConfirmation">
+				<display-name xml:lang="x-default">Send Order Cancellation Confirmation</display-name>
+				<description xml:lang="x-default">Defines if a confirmation email should be sent to the customer if it gets cancelled.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+			<attribute-definition attribute-id="cssuite_sendOrderChangeConfirmation">
+				<display-name xml:lang="x-default">Send Order Change Confirmation</display-name>
+				<description xml:lang="x-default">Defines if an order modification confirmation/notification should be sent to the customer.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+		</custom-attribute-definitions>
+		<group-definitions>
+			<attribute-group group-id="CSSuite">
+				<display-name xml:lang="x-default">Customer Service Suite</display-name>
+				<attribute attribute-id="cssuite_emailFrom"/>
+				<attribute attribute-id="cssuite_sendOrderChangeConfirmation"/>
+				<attribute attribute-id="cssuite_orderChangeConfirmationSubject"/>
+				<attribute attribute-id="cssuite_sendOrderCancelConfirmation"/>
+				<attribute attribute-id="cssuite_orderCancelConfirmationSubject"/>
+			</attribute-group>
+		</group-definitions>
+	</type-extension>
+</metadata>

@@ -1,0 +1,41 @@
+<isscript>
+	var calendar : dw.util.Calendar = new dw.util.Calendar();
+    calendar.timeZone = "GMT";
+    var dateString : String = dw.util.StringUtils.formatCalendar(calendar, "yyyy-MM-dd-hh-mm-ss");
+	var instanceName : String = !empty( dw.system.System.getInstanceHostname() ) ? dw.system.System.getInstanceHostname() : "(unknown)";
+	var instanceType : Number = dw.system.System.getInstanceType();
+	var instanceTypeString : String = "(unknown)";
+	if      ( instanceType == dw.system.System.DEVELOPMENT_SYSTEM ) { instanceTypeString = 'DEVELOPMENT'; }
+	else if ( instanceType == dw.system.System.STAGING_SYSTEM )     { instanceTypeString = 'STAGING'; }
+	else if ( instanceType == dw.system.System.PRODUCTION_SYSTEM )  { instanceTypeString = 'PRODUCTION'; }
+	try{	
+		var ErrorOutCustomersFile : dw.io.File = new dw.io.File(dw.io.File.IMPEX + dw.io.File.SEPARATOR + "src" + dw.io.File.SEPARATOR +pdict.Task['error-folder']+"/errored_customers_list_"+dateString+".csv");
+		if( !ErrorOutCustomersFile.exists() ){
+			ErrorOutCustomersFile.createNewFile();
+		}
+		var ErrorOutCustomersFileWriter : dw.io.FileWriter = new dw.io.FileWriter(ErrorOutCustomersFile);
+		var CSVStreamWriter : dw.io.CSVStreamWriter = new dw.io.CSVStreamWriter(ErrorOutCustomersFileWriter);
+		var srcCSVFile : dw.io.File = new dw.io.File( dw.io.File.IMPEX + dw.io.File.SEPARATOR + "src" + dw.io.File.SEPARATOR + pdict.File );
+		var srcCSVFileReader : dw.io.FileReader = new dw.io.FileReader(srcCSVFile);
+		var srcCSVStreamReader : dw.io.CSVStreamReader = new dw.io.CSVStreamReader(srcCSVFileReader);
+		CSVStreamWriter.writeNext(srcCSVStreamReader.readNext());
+		while(record = srcCSVStreamReader.readNext()){
+			if( pdict.ErrorOutCustomers.contains(record[0]) ){
+				CSVStreamWriter.writeNext(record);
+			}
+		}
+		ErrorOutCustomersFileWriter.flush();
+		CSVStreamWriter.close();
+		ErrorOutCustomersFileWriter.close();
+	}
+	catch( e ){
+		dw.system.Logger.getLogger("VIPCustomerImport").error("Error occured in errorOutCustomers Email template. Error: "+e.message);
+	}
+</isscript>
+<subject>${instanceTypeString}: Errored out VIP Customers csv information </subject>
+<p style="font-family: Calibri;">Please find the following link to have a look at the errored out file which don't have data...!</p>
+<p style="font-family: Calibri;"><a href = "https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutCustomersFile.fullPath}">https://${instanceName}/on/demandware.servlet/webdav/Sites${ErrorOutCustomersFile.fullPath}</a></p>
+<p style="font-family: Calibri;">
+	Thanks & Regards,<br>
+	Rapala
+</p>

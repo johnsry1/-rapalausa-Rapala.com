@@ -1,0 +1,59 @@
+importPackage(dw.system);
+importPackage(dw.svc);
+importPackage(dw.web);
+
+/**
+ * Initialize UPS service
+ */    
+
+ServiceRegistry.configure("ups.http.dav.post", {
+	
+   createRequest: function(svc:Service, params) {
+   		
+   		var accessLicenseNumber : String = Site.getCurrent().getCustomPreferenceValue('upsaccessLicenseNumber');
+		var userID : String	= Site.getCurrent().getCustomPreferenceValue('upsuserID');
+		var password : String = Site.getCurrent().getCustomPreferenceValue('upspassword');
+		var addressValidationURL : String = Site.getCurrent().getCustomPreferenceValue('upsaddressValidationURL');
+		
+		var customerAddressForm : FormGroup=  params.customerAddressForm;
+		
+		var accessRequest : XML =
+			<AccessRequest xml:lang="en-US">
+				<AccessLicenseNumber>{accessLicenseNumber}</AccessLicenseNumber>
+				<UserId>{userID}</UserId>
+				<Password>{password}</Password>
+			</AccessRequest>;		
+	
+		var addressRequest : XML =
+			<AddressValidationRequest xml:lang="en-US">
+				<Request>
+					<TransactionReference>
+						<CustomerContext /><XpciVersion>1.0001</XpciVersion>
+					</TransactionReference>
+					<RequestAction>XAV</RequestAction>
+					<RequestOption>3</RequestOption>
+				</Request>
+				<MaximumListSize>2</MaximumListSize>
+				<AddressKeyFormat>
+					<AddressLine>{customerAddressForm.address1.htmlValue}</AddressLine>
+					<AddressLine>{customerAddressForm.address2.htmlValue}</AddressLine>
+					<PoliticalDivision2>{customerAddressForm.city.htmlValue}</PoliticalDivision2>
+					<PoliticalDivision1>{customerAddressForm.states.state.htmlValue}</PoliticalDivision1>
+					<CountryCode>US</CountryCode>
+					<PostcodePrimaryLow>{customerAddressForm.postal.htmlValue}</PostcodePrimaryLow>
+				</AddressKeyFormat>
+			</AddressValidationRequest>;
+		
+		//Set HTTP Method
+		svc = svc.setRequestMethod("POST");
+
+		//Set content type
+		svc = svc.addHeader("Content-Type", "text/xml");
+
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + accessRequest + "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +addressRequest;
+   },
+
+   parseResponse: function(svc:Service, response: Object) {
+		return response.text;
+   }
+});

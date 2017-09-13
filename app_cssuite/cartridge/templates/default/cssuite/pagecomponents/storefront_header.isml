@@ -1,0 +1,32 @@
+<!---  CSSuite SF Header --->
+<!---  This template must NOT be cached --->
+<!---  Start: cssuite/pagecomponents/storefront_header --->
+
+<isif condition="${pdict.CurrentSession.userAuthenticated}">
+
+	<div style="clear: both;">
+		<font color="black" style="font-size:14px;">Agent: <b><isprint value="${pdict.CurrentSession.userName}"></b> logged in as  
+	        <isif condition="${pdict.CurrentSession.customerAuthenticated}">
+	              customer: <b><isprint value="${pdict.CurrentUser.profile.firstName}" /> <isprint value="${pdict.CurrentUser.profile.lastName}" /></b>
+	        <iselse>
+	            an <b>Unregistered User</b>
+	        </isif>
+	     </font>
+	     <button class="cssuite close-oob-session" style="font: inherit; border: inherit;">Close Window</button>
+	</div>
+	
+	<script type="text/javascript">
+	<!--
+		//initialize app
+		jQuery(document).ready(function () {
+			$('button.close-oob-session').on('click', function( e ){
+				  if (confirm("Close Order on Behalf Window?")) {
+				    close();
+				  }
+			});
+		});
+	-->
+	</script>
+
+</isif>
+<!---  End: cssuite/pagecomponents/storefront_header --->

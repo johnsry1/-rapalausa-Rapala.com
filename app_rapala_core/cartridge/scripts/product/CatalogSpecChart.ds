@@ -1,0 +1,252 @@
+/**
+*CatalogSpecChart Script File
+* 
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+
+function getTerminatorSpecChart( thisProduct : Product )
+{
+	var tables = [];
+	var tableTitles = [];
+	var tableHeaders = [];
+	var columnHeaders = [];
+	//var tabularData = new dw.util.ArrayList();
+	var xAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.xAxis);
+	var xAxisValues = empty(xAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(xAxis);
+	var xAxisTitle = empty(thisProduct.custom.xAxisTitle) ? xAxis.displayName : thisProduct.custom.xAxisTitle;
+	var yAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.yAxis);
+	var yAxisValues = empty(yAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(yAxis);
+	var yAxisTitle = empty(thisProduct.custom.yAxisTitle) ? yAxis.displayName : thisProduct.custom.yAxisTitle;
+	var t = 0, i = 0, j = 0;
+	var tdText = "";
+	var tdValueMap = new dw.util.HashMap();
+	var tdVariants = new dw.util.HashSet();
+	var multiTableSeparatorPref = thisProduct.custom.catalogTableMultiTableSeparator;
+	var multiTables = false;
+	var totalMultiTables = 1;
+	var SKUAttribute = thisProduct.custom.catalogTableSkuAttribute;
+	if (!empty(multiTableSeparatorPref)) {
+		var multiTableSeparator = thisProduct.variationModel.getProductVariationAttribute(multiTableSeparatorPref);
+		var multiTableSeparatorValues = empty(multiTableSeparator) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(multiTableSeparator);
+		totalMultiTables = multiTableSeparatorValues.length;
+		multiTables = true;
+	}
+	
+	var tableWidth = totalMultiTables+ 1;
+	var tableHeight = yAxisValues.length + 1;
+
+	for (t = 0; t < totalMultiTables; t += 1) {
+		var tabularData = new dw.util.ArrayList();
+	
+		for (i = 0; i < totalMultiTables; i += 1) {
+			columnHeaders.push(i === 0 ? yAxisTitle : i == 1 ? SKUAttribute : i == 2 ? xAxisTitle : "");
+		}
+		tableHeaders.push(columnHeaders);
+		columnHeaders = [];
+	
+		for (i = 0; i < tableHeight; i += 1) {
+			
+			tabularData[i] = new dw.util.ArrayList();
+			if (i === 0) {
+				tabularData[i].push(tableHeaders[i]);
+			
+			} else {
+				tabularData[i].push(yAxisValues[i - 1].displayValue);
+				for (j = 0; j <1; j += 1) {
+					tdText = "";
+					tdValueMap.clear();
+					if (multiTables) {
+						tdValueMap.put(multiTableSeparator.ID, multiTableSeparatorValues[t].value);
+					}
+					tdValueMap.put(yAxis.ID, yAxisValues[i - 1].value);
+					tdVariants = thisProduct.variationModel.getVariants(tdValueMap);
+					tabularData[i].push(tdVariants);
+				}
+					var xax= new dw.util.HashSet();
+                 	for each(variant in tdVariants){
+                  	if(!empty(variant)){
+                		xax.add(variant.custom[xAxis.attributeID]);
+                       }
+                 }
+                 tabularData[i].push(xax);
+                 
+			}
+		}
+		//post-processing of the table, removing empty rows
+		
+		i = tabularData.length;
+		while (i-- - 1) {
+			var removeRow = true;
+			for (j = 1; j < tabularData[i].length; j += 1) {
+				if (!empty(tabularData[i][j]) && !tabularData[i][j].isEmpty()) { removeRow = false; }
+			}
+			if (removeRow) {
+				tabularData.removeAt(i);
+			}
+		}
+		
+		tables.push(tabularData);
+		tabularData = new dw.util.ArrayList();
+	}
+	return tables;
+}
+
+function getVmcSpecChart( thisProduct : Product )
+{
+
+	var tables = [];
+			var tableTitles = [];
+			var tableHeaders = [];
+			var columnHeaders = [];
+			var tabularData = new dw.util.ArrayList();
+			var xAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.xAxis);
+			var xAxisValues = empty(xAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(xAxis);
+			var xAxisTitle = empty(thisProduct.custom.xAxisTitle) ? xAxis.displayName : thisProduct.custom.xAxisTitle;
+			var yAxis = thisProduct.variationModel.getProductVariationAttribute(thisProduct.custom.yAxis);
+			var yAxisValues = empty(yAxis) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(yAxis);
+			var yAxisTitle = empty(thisProduct.custom.yAxisTitle) ? yAxis.displayName : thisProduct.custom.yAxisTitle;
+			var tableWidth = xAxisValues.length + 1;
+			var tableHeight = yAxisValues.length + 1;
+			var t = 0, i = 0, j = 0, k = 0;
+			var tdText = "";
+			var tdValueMap = new dw.util.HashMap();
+			var tdVariants = new dw.util.HashSet();
+			var multiTableSeparatorPref = thisProduct.custom.catalogTableMultiTableSeparator;
+			var multiTables = false;
+			var totalMultiTables = 1;
+			var SKUAttribute = thisProduct.custom.catalogTableSkuAttribute;
+			if (!empty(multiTableSeparatorPref)) {
+				var multiTableSeparator = thisProduct.variationModel.getProductVariationAttribute(multiTableSeparatorPref);
+				var multiTableSeparatorValues = empty(multiTableSeparator) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(multiTableSeparator);
+				totalMultiTables = multiTableSeparatorValues.length;
+				multiTables = true;
+			}
+			
+			for (t = 0; t < totalMultiTables; t += 1) {
+			
+				if (multiTables) {
+					tableTitles.push(multiTableSeparatorValues[t].displayValue);
+				}
+			
+				for (i = 0; i < tableWidth; i += 1) {
+					columnHeaders.push(i === 0 ? yAxisTitle : i == 1 ? xAxisTitle : "");
+				}
+				tableHeaders.push(columnHeaders);
+				columnHeaders = [];
+			
+				for (i = 0; i < tableHeight; i += 1) {
+					
+					tabularData[i] = new dw.util.ArrayList();
+					if (i === 0) {
+						tabularData[i].push(xAxisTitle);
+						for (j = 0; j < xAxisValues.length; j += 1) {
+							tabularData[i].push(xAxisValues[j].displayValue);
+						}
+					} else {
+						tabularData[i].push(yAxisValues[i - 1].displayValue);
+						for (j = 0; j < xAxisValues.length; j += 1) {
+							tdText = "";
+							tdValueMap.clear();
+							if (multiTables) {
+								tdValueMap.put(multiTableSeparator.ID, multiTableSeparatorValues[t].value);
+							}
+							tdValueMap.put(yAxis.ID, yAxisValues[i - 1].value);
+							tdValueMap.put(xAxis.ID, xAxisValues[j].value);
+							tdVariants = thisProduct.variationModel.getVariants(tdValueMap);
+							
+							tabularData[i].push(tdVariants);
+						}
+					}
+				}
+				//post-processing of the table. 
+				//removing blank rows
+				i = tabularData.length;
+				while (i-- - 1) {
+					var removeRow = true;
+					for (j = 1; j < tabularData[i].length; j += 1) {
+						if (!empty(tabularData[i][j]) && !tabularData[i][j].isEmpty()) { removeRow = false; }
+					}
+					if (removeRow) {
+						tabularData.removeAt(i);
+					}
+				}
+				if (thisProduct.custom.yAxis.toLowerCase() === "pak") {
+					//summing up "pak"
+					i = tabularData.length;
+					while (i-- - 1) {
+						for (j = 1; j < tabularData[i].length; j += 1) {
+							if (!empty(tabularData[i][j]) && !tabularData[i][j].isEmpty()) {
+								if (tabularData[i][j][0].ID[tabularData[i][j][0].ID.length-1] === 'P') {
+										if (tabularData[i][j][0].ID[tabularData[i][j][0].ID.length - 2] === 'V') {
+										tabularData[i][0] = "Value Pack";
+										}
+										else {
+										tabularData[i][0] = "Pro Pack";
+										}	
+									
+								} else {
+									tabularData[i][0] = tabularData[i][j][0].ID[tabularData[i][j][0].ID.length-1] + " Pack";
+								}
+							}
+						}
+					}
+					i = tabularData.length;
+					while (i-- - 1) {
+						j = i;
+						while (j-- - 1) {
+							if(tabularData[i][0] === tabularData[j][0]) {
+								k = tabularData[i].length;
+								while(k-- - 1) {
+									tabularData[j][k].addAll(tabularData[i][k]);
+								}
+								tabularData.removeAt(i);
+								break;
+							}
+						}
+					}
+				}
+				tables.push(tabularData);
+				tabularData = new dw.util.ArrayList();
+			}
+			var tData = null;
+			var tdArraylist = null;
+			var tablesVal = new dw.util.ArrayList();
+			var x=0;
+			for each (var tabularData in tables){
+				for each(var rowData in tabularData){
+					tdArraylist = new dw.util.ArrayList();
+					for(x=0; x<rowData.length; x++){
+						tData = new dw.util.ArrayList();
+						for(y=0; y<tabularData.size(); y++){
+							tData.push(tabularData[y][x]);
+						}
+						tdArraylist.push(tData);
+					}
+					tablesVal.push(tdArraylist);
+					break;
+				}
+			}
+	return tablesVal;
+}
+
+function getMultiTableSeparator( thisProduct : Product )
+{
+	var multiTableSeparatorPref = thisProduct.custom.catalogTableMultiTableSeparator;
+	var multiTableSeparator = thisProduct.variationModel.getProductVariationAttribute(multiTableSeparatorPref);
+	var multiTableSeparatorValues = empty(multiTableSeparator) ? new dw.util.HashSet() : thisProduct.variationModel.getAllValues(multiTableSeparator);
+	return multiTableSeparatorValues;
+}
+
+function getSKUAttribute( thisProduct : Product )
+{
+	var SKUAttribute = thisProduct.custom.catalogTableSkuAttribute;
+	return SKUAttribute;
+}
+module.exports={
+		getTerminatorSpecChart :getTerminatorSpecChart,
+		getVmcSpecChart : getVmcSpecChart,
+		getMultiTableSeparator : getMultiTableSeparator,
+		getSKUAttribute : getSKUAttribute
+		
+	}

@@ -1,0 +1,29 @@
+/**
+* Set the customer groups to which the logged in customer belongs to
+*
+*/
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.customer );
+
+function setCustomergrp( currentCustomer, order )
+{
+    var assignedToGroups : ArrayList = currentCustomer.getCustomerGroups();
+    var cscgroups : String = "";
+	for(var k=0; k<assignedToGroups.length;k++){
+		if(assignedToGroups[k].ID != "Everyone" && assignedToGroups[k].ID != "Registered"){
+			cscgroups = cscgroups + assignedToGroups[k].ID + ",";			
+		}
+	}
+	if(cscgroups.substr(cscgroups.length-1,cscgroups.length) == ","){
+		cscgroups = cscgroups.substring(0, cscgroups.length-1);
+	}
+	// set the groups list for which the current customer belongs to
+	order.custom.customerGroups=cscgroups;
+   
+   	return true;
+}
+
+module.exports={
+	setCustomergrp : setCustomergrp
+}

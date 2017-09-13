@@ -1,0 +1,36 @@
+<isdecorate template="account/pt_vipsignup">
+	<isinclude template="util/modules"/>
+	<div id="vippage-background" class="downshift">
+		<div id="page">
+			<div class="wrapper">
+				<div class="row column1">
+					<isbreadcrumbs  bcurl1="${URLUtils.url('Home-Show')}"  bctext1="${Resource.msg('vipaccountsignup.home', 'vip', null)}" bctext2="${Resource.msg('vipflwaccountsignup.vipinitial', 'vip', null)}"/>
+					<div class="vip-signup-top1">
+						<h1>${Resource.msg('vipaccountsignup.mainheader','vip',null)}</h1>
+						<span class="vip-signup-top-info"><isprint value="${Resource.msg('vipaccountsignup.mainheaderinfo2','vip',null)}" encoding="off"/><a href="${URLUtils.http('Account-Show')}">Log In</a></span>
+						<span class="upgrade-now iphone-view"><isprint value="${Resource.msg('vipaccountsignup.mainheaderupgrade','vip',null)}" encoding="off"/><a href="javascript:void(0)" class="upgradenow-link">Upgrade Now</a></span>
+					</div>
+					<div class="column cell2">
+							<div class="viplogin checkoutloginasguest cell contentbox upshift">
+								<div class="contentboxcontent">
+			 						<isinclude template="vip/flwregistration"/>
+								</div>
+							</div>
+							<div class="separator">
+								<span class="separator-image"></span>
+							</div>
+						<div class="viploginsignin cell contentbox upshift">
+							<div class="contentboxcontent">
+								<iscomment>returning customer</iscomment>
+								<isinclude template="vip/flwlogininclude"/>
+							</div><!-- END: contentboxcontent -->						
+							<div class="clear"></div>
+						</div><!-- END: logincreate -->	
+						<div class="clear"></div>
+					</div><!-- END: column cell2 -->
+				</div><!-- END: row column1 -->
+			</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+	</div><!-- END: page-background -->
+</isdecorate>
+

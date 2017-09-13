@@ -1,0 +1,68 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+
+	<isscript>
+		var pageContext = {
+			title: 'Customer Service',
+			type: 'customerservice',
+			ns:'account'
+		};
+	</isscript>
+	<isinclude template="util/modules"/>
+
+	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
+
+	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="content/pt_customerservice_UI"/>
+
+	<iscomment>Add template-specific header information here.</iscomment>
+
+</head>
+
+<body>
+
+	<div id="container" class="pt_customerservice">
+
+		<isinclude template="components/header/header"/>
+
+		<div id="main">
+			<div id="content">
+				<iscomment><isbreadcrumbs bcurl1="${URLUtils.url('CustomerService-Show')}" bctext1="${Resource.msg('global.customerservice','locale',null)}" bctext2="${empty(pdict.Content) ? null : pdict.Content.name}" /></iscomment>
+			
+		<div id="page-background" class="downshift">
+		
+		<div id="page">
+			<div class="wrapper">
+			<div class="row column3 style-cservice">
+				<div class="column">
+				   <div class="cell contentbox upshift">
+				   <isinclude url="${URLUtils.url('CustomerService-LeftNav','cid', pdict.CurrentHttpParameterMap.cid.stringValue,'currentSite',session.custom.currentSite)}"/>
+			</div><!-- END: cell -->
+			</div><!-- END: column -->
+				<div class="column colspan2">
+				     <div class="cell contentbox upshift">
+				    		<isreplace/>
+				     </div>
+				</div>
+				</div><!-- END: row column3 -->
+			</div><!-- END: wrapper -->
+			</div><!-- END: page -->
+			</div><!-- END: page-background -->
+			</div><!-- END: content -->
+		
+		
+	</div><!-- END: main -->
+
+		<isinclude template="components/footer/footer"/>
+		<isinclude template="content/pt_customerservice_VARS"/>
+
+	</div><!--  /wrapper -->
+
+</body>
+</html>

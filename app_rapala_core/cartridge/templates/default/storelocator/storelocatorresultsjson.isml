@@ -1,0 +1,69 @@
+<iscontent type="application/json" charset="UTF-8" compact="true"/>
+{
+	"storeCount": <isprint value="${pdict.StoresCount}"/>,
+	"brandLogos": {
+		"rapala" : { "altText" : "${Resource.msg('storelocator.rapala','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-rapala.jpg')}" },
+		"vmc" : { "altText" : "${Resource.msg('storelocator.vmc','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-vmc.jpg')}" },
+		"sufix" : { "altText" : "${Resource.msg('storelocator.sufix','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-sufix.jpg')}" },
+		"storm" : { "altText" : "${Resource.msg('storelocator.storm','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-storm.jpg')}" },
+		"triggerx" : { "altText" : "${Resource.msg('storelocator.triggerx','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-triggerx.jpg')}" },
+		"luhrjensen" : { "altText" : "${Resource.msg('storelocator.luhrjensen','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-luhrjensen.jpg')}" },
+		"terminator" : { "altText" : "${Resource.msg('storelocator.terminator','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-terminator.jpg')}" },
+		"bluefox" : { "altText" : "${Resource.msg('storelocator.bluefox','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-bluefox.jpg')}" },
+		"williamson" : { "altText" : "${Resource.msg('storelocator.williamson','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-williamson.jpg')}" },
+		"marcum" : { "altText" : "${Resource.msg('storelocator.marcum','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-marcum.jpg')}" },
+		"strikemaster" : { "altText" : "${Resource.msg('storelocator.strikemaster','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-strikemaster.jpg')}" },
+		"otter" : { "altText" : "${Resource.msg('storelocator.otter','forms',null)}", "url":"${URLUtils.staticURL('/images/logo-otter.jpg')}" }
+	},
+	"stores": [
+	<isloop items="${pdict.Stores}" var="EntryStore" status="loopstate">
+	<isset name="Store" value="${EntryStore.getKey()}" scope="request" />
+	{
+		"distance":"<isprint value="${EntryStore.value}"/> ${Resource.msg('storelocator.milesaway','storelocator',null)}",
+		"name":"<isprint value="${EntryStore.key.name}"/>",
+		"address1":"<isprint value="${EntryStore.key.address1}"/>",
+		"city":"<isprint value="${EntryStore.key.city}"/>",
+		"state":"<isprint value="${EntryStore.key.stateCode}"/>",
+		"postalCode":"<isprint value="${EntryStore.key.postalCode}"/>",
+		"phone":"<isprint value="${EntryStore.key.phone}"/>",
+		"storeHours":"<isprint value="${EntryStore.key.storeHours}" />",
+		"storeEvents":"<isprint value="${EntryStore.key.storeEvents}" />",
+		"custom":{
+			"brands":{
+				"rapala":${EntryStore.key.custom.rapala},
+				"vmc":${EntryStore.key.custom.vmc},
+				"sufix":${EntryStore.key.custom.sufix},
+				"storm":${EntryStore.key.custom.storm},
+				"triggerx":${EntryStore.key.custom.triggerx},
+				"luhrjensen":${EntryStore.key.custom.luhrjensen},
+				"terminator":${EntryStore.key.custom.terminator},
+				"bluefox":${EntryStore.key.custom.bluefox},
+				"williamson":${EntryStore.key.custom.williamson},
+				"marcum":${EntryStore.key.custom.marcum},
+				"strikemaster":${EntryStore.key.custom.strikemaster},
+				"otter":${EntryStore.key.custom.otter}
+				
+			}
+		},
+		<isscript>
+             var qAttr = "";
+             if(EntryStore.key.address1    != null) qAttr += EntryStore.key.address1 + ", ";
+             if(EntryStore.key.address2    != null) qAttr += EntryStore.key.address2 + ", ";
+             if(EntryStore.key.city        != null) qAttr += EntryStore.key.city + ", ";
+             if(EntryStore.key.postalCode  != null) qAttr += EntryStore.key.postalCode + ", ";
+             if(EntryStore.key.stateCode   != null) qAttr += EntryStore.key.stateCode + ", ";
+             if(EntryStore.key.countryCode != null) qAttr += EntryStore.key.countryCode;
+
+             var glink = "http://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
+         </isscript>
+         "map":"${glink}",
+         <isscript>
+          	var websiteUrl = EntryStore.key.custom.website;
+          	if(websiteUrl != null && websiteUrl.indexOf("http") < 0) {
+          		websiteUrl = "http://" + websiteUrl;
+          	}
+          </isscript>
+         "website":"<isprint value="${websiteUrl}"/>"
+	}<isif condition="${!loopstate.last}">,</isif>
+	</isloop>
+]}

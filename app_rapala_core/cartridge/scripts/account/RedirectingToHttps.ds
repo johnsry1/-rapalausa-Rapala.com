@@ -1,0 +1,35 @@
+/**
+*	This ds is used to redirect a http request to https
+*
+*	 @input Cur_req :  dw.system.Request
+*    @output pageurl : String URL for the passed
+*
+*/
+importPackage( dw.system );
+importPackage( dw.web );
+importPackage( dw.util );
+
+function getHttpsUrl( currentreq ) : Number
+{
+     try {
+         //var outUrl : String = args.IncomingUrl.replace("http", "https");
+         var  pageurl : String = '';
+         var host=currentreq.httpHost;
+         var path=currentreq.httpPath;
+         var q_string = decodeURIComponent(currentreq.httpQueryString);
+         var pageurl ="https://"+host+path;
+         if(!empty(q_string) && q_string != "null"){
+         	var pageurl ="https://"+host+path+"?"+q_string;
+         }
+         return pageurl;
+    	}
+     catch (e) {
+          Logger.error(e);
+          return null;
+     }
+}
+
+
+module.exports = {
+	    getHttpsUrl: getHttpsUrl
+	};

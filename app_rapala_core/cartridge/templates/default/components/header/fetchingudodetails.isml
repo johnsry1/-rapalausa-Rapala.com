@@ -1,0 +1,21 @@
+<isset name="OrderID" value="${pdict.OrderID}" scope="page" /> 
+<isscript>
+   var order : Order = dw.order.OrderMgr.getOrder(OrderID)
+ </isscript>
+<isif condition="${!empty(dw.system.Site.current.preferences.custom.EnableCJ) && dw.system.Site.current.preferences.custom.EnableCJ}">
+		<isif condition=${!empty(order)}>
+			<isscript>
+			importScript( "common/UDODetails.ds" );
+		    var orderDetailsJSON = JSON.stringify(getUDOOrderDetails(order));
+		    </isscript>
+		    <isif condition="${!empty(orderDetailsJSON)}" >
+						<iscomment> adding script for datalayer attribute</iscomment>
+						<script>
+							var MasterTmsUdo = {					 
+									'CJ' : <isprint value="${orderDetailsJSON}" encoding="off"  /> };
+						</script>
+			</isif>
+		</isif>
+</isif>
+<iscomment>Commission Junction Script</iscomment>
+<isinclude template="components/header/cjtag" />	

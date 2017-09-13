@@ -1,0 +1,11 @@
+<script>
+	setTimeout(function(){window.close()}, 3000);
+</script>
+
+<isif condition="${!empty(pdict.SetExpressCheckoutResponseContainer) && pdict.SetExpressCheckoutResponseContainer.data.get('ack') == 'Failure'}">
+	<div id="paypalStorefrontIncontextError">
+		<isprint value="${Resource.msg('paypal.error.code' + pdict.SetExpressCheckoutResponseContainer.data.l_errorcode0, 'locale', pdict.SetExpressCheckoutResponseContainer.data.l_longmessage0)}" encoding="off" />
+	</div>
+</isif>
+
+<p>${Resource.msg('paypal.incontext.error', 'locale', null)}</p>

@@ -1,0 +1,41 @@
+/**
+*
+* For example:
+*   
+*   @input UpperBound : String  Date formatted in 2010-01-01T00:00:00 yyyy-MM-ddTHH:MM:SS format.
+*   @input LowerBound : String	Date formatted in 2010-01-01T00:00:00 yyyy-MM-ddTHH:MM:SS format.
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.net );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.catalog );
+
+function execute( args : PipelineDictionary ) : Number {
+
+	var sql = "";
+    if (!empty(args.LowerBound) && !empty(args.UpperBound)) {
+       	sql = "creationDate >= "+ args.LowerBound + " AND creationDate <= "+ args.UpperBound;
+	} else { 
+ 		sql = "orderNo like '*'";
+    }
+
+	var iterLimit = 1000;
+	var totalCount = OrderMgr.queryOrders(sql,"orderNo ASC").count;
+	var iteration = ( totalCount / iterLimit ).toFixed(0);
+	
+	for( i = 0 ; i <= iteration ; i++ ){
+		var ordersFound : Collection = OrderMgr.queryOrders(sql,"orderNo ASC").asList(i * iterLimit, iterLimit);
+		for( j in ordersFound ){
+			try {
+				ordersFound[j].custom.exportedToCSS = false;
+			} catch (e) {
+				Logger.error("CSS Order Prep Error, Customer Number:{0} Error: {1}",ordersFound[j].orderNo ,e.message);
+			}
+		}
+	}
+	 return PIPELET_NEXT;
+}
+

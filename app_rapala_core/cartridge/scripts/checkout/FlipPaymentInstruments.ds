@@ -1,0 +1,49 @@
+/**
+* This ds reorders the payment instruments so that always CC is authorized first.
+* If CC is authorized only then Gift Certificates has to be authorized.
+*
+*/
+importPackage( dw.object );
+importPackage( dw.order );
+importPackage( dw.system );
+importPackage( dw.util);
+importPackage( dw.value );
+
+function flipPI( paymentInstrs ) : Number
+{
+	// get basket from pipeline dictionary
+    var paymentInstruments : Collection = paymentInstrs;
+    // collects all not applicable payment instruments
+    var gcPaymentInstruments :  Collection = new ArrayList();
+    var ccPaymentInstruments : Collection = new ArrayList();
+    
+    // get payment instruments from basket
+    for each( var pi : PaymentInstrument in paymentInstruments )
+	{
+        // adding gift certificate payment instruments
+        if( PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod) )
+        {
+        	gcPaymentInstruments.add(pi);
+        }else{
+        	//adding cradit card payment instruments
+        	ccPaymentInstruments.add(pi);
+        }
+	}
+	var newPaymentInstruments : Collection = new ArrayList();
+	  for each( var pi : PaymentInstrument in ccPaymentInstruments )
+	{
+		newPaymentInstruments.add(pi);
+        	
+	}
+	  for each( var pi : PaymentInstrument in gcPaymentInstruments )
+	{
+		newPaymentInstruments.add(pi);
+        	
+	}
+	//pdict.newPaymentInstruments = newPaymentInstruments;
+    return newPaymentInstruments;
+}
+
+module.exports={
+	flipPI : flipPI
+}

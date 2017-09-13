@@ -1,0 +1,64 @@
+<!--- TEMPLATENAME: downloads.isml --->
+<isscript>
+	var downloads : dw.util.ArrayList = new dw.util.ArrayList();
+	var newDownloads : dw.util.ArrayList = new dw.util.ArrayList();
+	var oldDownloads : dw.util.ArrayList = new dw.util.ArrayList();
+	
+	for ( var x in pdict.Product.custom.downloadURL ) {
+		var download = {};
+		download.URL = pdict.Product.custom.downloadURL[x];
+		download.URL = download.URL.substring(download.URL.indexOf('|') + 1);
+		download.title = pdict.Product.custom.downloadTitle[x] ? pdict.Product.custom.downloadTitle[x] : "";
+		download.title = download.title.substring(download.title.indexOf('|') + 1);
+		download.isNew = pdict.Product.custom.downloadNewFlag[x] ? pdict.Product.custom.downloadNewFlag[x] : "false";
+		download.isNew = download.isNew.substring(download.isNew.indexOf('|') + 1);
+		download.img = pdict.Product.custom.downloadThumbnail[x] ? pdict.Product.custom.downloadThumbnail[x] : "";
+		download.img = download.img.substring(download.img.indexOf('|') + 1);
+		if(download.isNew == 'true') {
+			newDownloads.add(download);
+		} else {
+			oldDownloads.add(download);
+		}
+	}
+	newDownloads.reverse();
+	oldDownloads.reverse();
+	downloads.addAll(newDownloads);
+	downloads.addAll(oldDownloads);
+</isscript>
+<div id="downloads" class="clear">
+
+    <isif condition="${downloads.length == 0}">
+    <iselse>
+	    <isset name="urlPrefix" value="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null, '/')}" scope="page"/>
+<div class="downloads skin-slidedeck">	
+		<dl id="dl_slide_deck" class="dl_slidedeck">
+		<dd><ul>
+	    <isloop items="${downloads}" var="download" status="downloadStatus">
+	    	<iscomment>setting max items to 99 therefore pagination won't happen</iscomment>
+		    <isif condition="${downloadStatus.index != 0 && downloadStatus.index % 99 == 0}">
+		    	</ul><div class="clear"></div></dd><dd><ul>
+		    </isif>
+	        <isif condition="${download != null}">
+	            <li class="index${(downloadStatus.index % 5).toString()}">
+	                <a href="${urlPrefix + download.URL}" title="${download.title}">
+	                    <isif condition="${download.img != null}">
+	                        <img class="videothumbnail contentbox" src="${urlPrefix + download.img}"/><br/>
+	                    </isif>
+	                    <div class="title">
+		                    <isprint value="${download.title}"/>
+		                    <isif condition="${download.isNew == 'true'}">
+							   <img src="${URLUtils.staticURL('/images/icon-new-small.png')}" />
+						    </isif>
+	                    </div>
+	                </a>
+	            </li>
+	        </isif>
+	    </isloop>
+	    </ul>
+	    <div class="clear"></div>
+    </dd>
+    </dl>
+</div><!-- END: downloads (class) -->
+    </isif>
+
+</div><!-- END: downloads (id) -->

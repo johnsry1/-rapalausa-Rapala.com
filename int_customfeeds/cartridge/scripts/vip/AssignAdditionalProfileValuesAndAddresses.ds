@@ -1,0 +1,124 @@
+/**
+*   @input Customer : dw.customer.Customer 
+*   @input NewCustomer : Object 
+*
+*/
+importPackage( dw.system );
+importPackage( dw.io );
+importPackage(dw.util);
+importPackage(dw.catalog);
+importPackage(dw.customer);
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var newcustomer : Object = args.NewCustomer; 
+	var _customer : dw.customer.Customer = args.Customer;
+	Logger.getLogger("VIPCustomerImport").debug("Assign additional profile attributes to customer");
+	try{
+		//Setting the profile values
+		if(!empty(newcustomer.email)){
+			_customer.profile.setEmail(newcustomer.email);
+		}
+		if(!empty(newcustomer.title)){
+			_customer.profile.setTitle(newcustomer.title);
+		}
+		if(!empty(newcustomer.salutation)){
+			_customer.profile.setSaluation(newcustomer.salutation);
+		}
+		if(!empty(newcustomer.firstname)){
+			_customer.profile.setFirstName(newcustomer.firstname);
+		}
+		if(!empty(newcustomer.secondname)){
+			_customer.profile.setSecondName(newcustomer.secondname);
+		}
+		if(!empty(newcustomer.lastname)){
+			_customer.profile.setLastName(newcustomer.lastname);
+		}
+		if(!empty(newcustomer.suffix)){
+			_customer.profile.setSuffix(newcustomer.suffix);
+		}
+		if(!empty(newcustomer.companyname)){
+			_customer.profile.setCompanyName(newcustomer.companyname);
+		}
+		if(!empty(newcustomer.jobtitle)){
+			_customer.profile.setJobTitle(newcustomer.jobtitle);
+		}
+		if(!empty(newcustomer.phonehome)){
+			_customer.profile.setPhoneHome(newcustomer.phonehome);
+		}
+		if(!empty(newcustomer.phonebusiness)){
+			_customer.profile.setPhoneBusiness(newcustomer.phonebusiness);
+		}
+		if(!empty(newcustomer.phonemobile)){
+			_customer.profile.setPhoneMobile(newcustomer.phonemobile);
+		}
+		if(!empty(newcustomer.fax)){
+			_customer.profile.setFax(newcustomer.fax);
+		}
+		//adding addresses to the customer
+		Logger.getLogger("VIPCustomerImport").debug("Create addresses in addresses book");
+		for(var k=0; k < newcustomer.addresslist.length; k++){
+			Logger.getLogger("VIPCustomerImport").debug("Create address "+newcustomer.addresslist[k].addressid);
+			var address : CustomerAddress = _customer.getAddressBook().createAddress( newcustomer.addresslist[k].addressid );
+			if(!empty(address)){
+				if(!empty(newcustomer.addresslist[k].salutation)){
+					address.setSalutation(newcustomer.addresslist[k].salutation);
+				}
+				if(!empty(newcustomer.addresslist[k].title)){
+					address.setTitle(newcustomer.addresslist[k].title);
+				}
+				if(!empty(newcustomer.addresslist[k].firstname)){
+					address.setFirstName(newcustomer.addresslist[k].firstname);
+				}
+				if(!empty(newcustomer.addresslist[k].secondname)){
+					address.setSecondName(newcustomer.addresslist[k].secondname);
+				}
+				if(!empty(newcustomer.addresslist[k].lastname)){
+					address.setLastName(newcustomer.addresslist[k].lastname);
+				}
+				if(!empty(newcustomer.addresslist[k].suffix)){
+					address.setSuffix(newcustomer.addresslist[k].suffix);
+				}
+				if(!empty(newcustomer.addresslist[k].companyname)){
+					address.setCompanyName(newcustomer.addresslist[k].companyname);
+				}
+				if(!empty(newcustomer.addresslist[k].jobtitle)){
+					address.setJobTitle(newcustomer.addresslist[k].jobtitle);
+				}
+				if(!empty(newcustomer.addresslist[k].address1)){
+					address.setAddress1(newcustomer.addresslist[k].address1);
+				}
+				if(!empty(newcustomer.addresslist[k].address2)){
+					address.setAddress2(newcustomer.addresslist[k].address2);
+				}
+				if(!empty(newcustomer.addresslist[k].suite)){
+					address.setSuite(newcustomer.addresslist[k].suite);
+				}
+				if(!empty(newcustomer.addresslist[k].postbox)){
+					address.setPostBox(newcustomer.addresslist[k].postbox);
+				}
+				if(!empty(newcustomer.addresslist[k].city)){
+					address.setCity(newcustomer.addresslist[k].city);
+				}
+				if(!empty(newcustomer.addresslist[k].postlcode)){
+					address.setPostalCode(newcustomer.addresslist[k].postlcode);
+				}
+				if(!empty(newcustomer.addresslist[k].statecode)){
+					address.setStateCode(newcustomer.addresslist[k].statecode);
+				}
+				if(!empty(newcustomer.addresslist[k].phone)){
+					address.setPhone(newcustomer.addresslist[k].phone);
+				}
+				if(!empty(newcustomer.addresslist[k].preferred) && newcustomer.addresslist[k].preferred.toLowerCase() == 'true'){
+					Logger.getLogger("VIPCustomerImport").debug("Preferred address ID: "+newcustomer.addresslist[k].addressid);
+					_customer.getAddressBook().setPreferredAddress(address);
+				}
+			}
+		}
+	}
+	catch(e){
+		Logger.getLogger("VIPCustomerImport").error("An error occured while assigning the cutomer information: "+e.message);
+		return PIPELET_ERROR;
+	}
+   return PIPELET_NEXT;
+}

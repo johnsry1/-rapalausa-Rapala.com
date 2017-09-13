@@ -1,0 +1,126 @@
+<!--- TEMPLATENAME: fieldstaff.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true">
+<isinclude template="util/modules"/>
+<iscache type="relative" hour="24"/>
+<div class="fieldstaff-container">
+<div class="fieldstaff">			
+		<form action="${URLUtils.https('VIPInsider-Enroll')}" method="post" id="VipinsiderForm" class="vipfieldstaff" novalidate>
+				<input type="hidden" name="ltkSubscriptionCode" value="vipregister" />
+				<input type="hidden" name="source" value="vipregister" />
+				<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+				<fieldset>
+				   <isscript>
+						var attributes = {
+							maxlength: 255
+						};
+					</isscript>
+					<div class="vipinsiderform">	
+					        <h1>${Resource.msg('vipinsider.heading','vipinsider',null)}</h1>
+					         <div class="vipinsiderformfield dummy-input-for-insider">
+                                   <input type="text" class="dummy-input" />
+                             </div>
+							<div class="vipinsiderformfield_name floatleft formfield formfield_name">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.firstname}" type="input" fieldClass="firstname validateinput" attributes="${attributes}" requiredtext="${Resource.msg('forms.vipinsider.firstname.missing','forms',null)}"/>
+							</div><!-- END: firstname -->
+							
+							<div class="vipformfield_name floatleft formfield">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.lastname}" type="input" attributes="${attributes}" requiredtext="${Resource.msg('forms.vipinsider.lastname.missing','forms',null)}"/>
+							</div><!-- END: lastname -->
+							
+							<div class="vipinsiderformfield_name floatleft formfield">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.email}" type="input" attributes="${attributes}" fieldClass="emailCMrapala vip-email"  xhtmlclass="vipinsideremail" requiredtext="${Resource.msg('forms.vipinsider.email.missing','forms',null)}"/>
+							</div><!-- END: Email -->
+							
+							 <div class="vipinsiderformfield_name floatleft select-style formfield state">
+						    	<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.state}" type="select" rowclass="customized-select" requiredtext="${Resource.msg('forms.vipinsider.state.missing','forms',null)}"/>
+						    	<span class="mobile-select-arrow hide-desktop"></span>
+						    	<div class="hide">
+						    		<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.stateUS}" type="select" label="false" />
+						    		<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.stateCA}" type="select" label="false"/>
+				    				<isinputfield formfield="${pdict.CurrentForms.billing.vipinsider.states.stateDE}" type="select" label="false"/>
+						    	</div>
+		    				</div><!-- END: state --> 
+							
+							<div class="vipinsiderformfield_name floatleft formfield">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.city}" type="input" attributes="${attributes}" requiredtext="${Resource.msg('forms.vipinsider.city.missing','forms',null)}"/>
+							</div><!-- END: city -->
+							
+							<div class="vipformfield_name floatleft formfield">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.zip}" type="input" fieldClass="zipCodeCustom vip-zip" requiredtext="${Resource.msg('forms.vipinsider.zipcode.missing','forms',null)}"/>
+							</div><!-- END: zip -->
+							
+							<div class="vipformfield_name floatleft formfield">
+								<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.phone}" type="input" fieldClass="phoneCustom vip-phone" requiredtext="${Resource.msg('forms.vipinsider.phone.missing','forms',null)}"/>
+							</div><!-- END: Phone -->
+							
+							<div class="vipformfield_name floatleft country-labl">
+								<span class="labeltext">${Resource.msg('vipinsider.country','vipinsider',null)}</span>
+							</div>
+							
+							<div class="vipinsiderformfield_name floatleft select-style formfield">
+                                                <isinputfield formfield="${pdict.CurrentForms.vipinsider.states.programs}" type="select" value="false" rowclass="dyn-cat-select"/>
+                                                <isinputfield formfield="${pdict.CurrentForms.vipinsider.states.programs}" type="select" label="false" rowclass="dyn-cat-select customized-select" requiredtext="${Resource.msg('forms.vipinsider.program.missing','forms',null)}"/>
+                                                <span class="mobile-select-arrow hide-desktop"></span>
+                                                <div class="hide">
+                                                       <isinputfield formfield="${pdict.CurrentForms.vipinsider.states.programs}" type="select" label="false" />
+                                             </div>
+                            </div><!-- END: Program Applying For -->
+
+		    				 
+		    				<iscomment>dynamicaly added of form fields block</iscomment>
+		    				
+			    				<div class="dynamic-content-holder-vip">
+			    				 	
+			    				</div>
+		    				<iscomment>
+		    				<div class="formactions">
+								<button class="decal_sign" onclick="googleAnalyticsEvents.loginCustomer('USER','LOGIN','');" tabindex="29" type="submit" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.vipinsider.customer.login.htmlName}"><span>${Resource.msg('global.login','locale',null)}</span></button>
+							</div><!-- END: returningcustomers_button -->	
+							</iscomment>
+							<div class="submit_form_wrap">
+							    <span class="cancel_btn"><a href="javascript:void(0)" id="VIPInsider-form-cancel-id" class="VIPInsider-form-submit-btn dialog-close">Cancel</a></span>
+								<span class="submit_btn"><button class="VIPInsider-form-submit-btn" id="VIPInsider-form-sbmt-id" >Submit</button></span>			
+							</div>
+					</div>
+				</fieldset>
+		</form>
+</div>
+<div class="vip-uploadform-holder hide">
+	<form action="${URLUtils.https('VIPInsider-Upload')}" enctype="multipart/form-data" method="post" class="trigger_singleupload" id="trigger_singleupload">
+		<div class="upload-input-holder formfield">
+			<span class="file-limit-holder">Max Limit 2 MB</span>
+			<div class="label">
+			<label class="upload-upper-wrapper" for="fileid">
+				<span class="text-holder-upload">Attach Resume</span>
+				<span class="upload-icon-holder">
+					<img src="${URLUtils.staticURL('/images/browse_ico_new.png')}" alt="upload-img" />
+				</span>
+			</label>
+			</div>
+			 <div class="value"><input type="file" id="fileid" name="fileid" value="">
+			 <input type="submit" name="add"/>
+			 
+			 </div>
+		</div>
+		<span class="file-size-exceed-error uploadfile-errormsg hide">
+			${Resource.msg('forms.vipinsider.uploadfilesize.exceed','forms',null)}
+		</span>
+		<span class="file-format-exceed-error uploadfile-errormsg hide">
+			${Resource.msg('forms.vipinsider.uploadfileformat.exceed','forms',null)}
+		</span>
+		<span class="empty-attachment-error uploadfile-errormsg hide">Please upload a Flyer</span>
+		<div class="progressbar" style="display: none;">
+			<span class="count">0%</span>
+			<span class="progressload"></span>
+		</div>
+	</form>
+	<form action="${URLUtils.https('VIPInsider-RemoveFile')}" method="post" class="remove_singleupload" id="remove_singleupload">
+	<div class="filelist"></div>
+	</form>
+</div>
+<div class="bottom-note">
+	This application is intended for U.S. residents only
+</div>
+
+</div>
+

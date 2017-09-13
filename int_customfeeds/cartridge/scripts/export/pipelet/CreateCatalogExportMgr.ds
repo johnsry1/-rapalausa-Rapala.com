@@ -1,0 +1,81 @@
+/**
+ * Creates and registers export handlers from their custom object definitions
+ *
+ * @input WorkflowComponent : Object The WorkFlowComponentInstance of the current workflow
+ * @output CatalogExportMgr : Object
+ *
+ */
+importPackage( dw.system );
+importPackage( dw.io );
+importScript('export/CatalogExportMgr.ds');
+importScript('export/handlers/CSVExportHandler.ds');
+importScript('export/handlers/TemplateExportHandler.ds');
+var CatalogExportMgr = getCatalogExportMgr();
+var CSVExportHandler = getCSVExportHandler();
+var TemplateExportHandler = getTemplateExportHandler();
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var exportMgr = new CatalogExportMgr(args.WorkflowComponent);
+	registerConfigurableHandlers(exportMgr,args.WorkflowComponent);
+
+    args.CatalogExportMgr = exportMgr;
+
+    return PIPELET_NEXT;
+}
+
+/**
+ * Helper function which handles the custom objects
+ */
+function registerConfigurableHandlers(exportMgr, cmp){
+	for each(var co in dw.object.CustomObjectMgr.getAllCustomObjects("CustomFeedConfig")){
+		var folder : File = new File(co.custom.folderName);
+		if(!folder.exists() && !folder.mkdirs()){
+			throw new Error("Could not create folder "+co.custom.folderName);
+		}
+		var fileName = co.custom.fileName.replace(/\{\{[^}]*\}\}/g,function(a : String){
+			var parts : Array = a.split(/(?:\{\{| |\}\})/g);
+			var variable = parts[1];
+			if(variable == "timestamp"){
+				var format = 'yyyyMMddhhmmss';
+				parts.forEach(function(part : String){
+					if(part.indexOf('format=') == 0){
+						format = part.substring(0,part.length-1).substring(8);
+					}
+				});
+				return dw.util.StringUtils.formatCalendar(Site.getCalendar(),format);
+			}
+			if(variable == "countrycode"){
+				return dw.util.Locale.getLocale(Site.getCurrent().defaultLocale).country;
+			}
+			return "";
+		});
+		var file = new File(folder,fileName);
+		var encoding = co.custom.fileEncoding || 'UTF-8';
+		if(!file.exists() && !file.createNewFile()){
+			throw new Error("Could not create export file");
+		}
+		
+		if(cmp) cmp.addMessage('Registering Configurable Feed '+co.custom.id,'INFO');
+		if(co.custom.type == "XML"){
+			exportMgr.registerExportHandler(new TemplateExportHandler(new FileWriter(file, encoding),co.custom.configuration));
+		}else if(co.custom.type == "CSV"){
+			var lines : Reader = new Reader(co.custom.configuration);
+			var config = {separator : ','};
+			var line;
+			while((line = lines.readLine()) !=null){
+				if(line.indexOf('separator ') == 0){
+					config.separator = line.substring(10);
+				}else if(!config.fields){
+					// use first line as fields
+					config.fields = line.split(config.separator);
+				}else if(!config.header){
+					// if there are more lines, we previously read the header
+					config.header = config.fields;
+					config.fields = line.split(config.separator);
+				}
+			}
+			exportMgr.registerExportHandler(new CSVExportHandler(new FileWriter(file, encoding), config.separator,config.fields,config.header));
+		}
+	}
+}

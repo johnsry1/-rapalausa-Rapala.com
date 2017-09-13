@@ -1,0 +1,109 @@
+// Copyright © 2013 Priority Fulfillment Services, Inc. All rights reserved.
+/*
+*	This is the library holding all functionality for login on to the web service.
+*	This should NOT be called directly, it should be called within webservice/libE2EService.ds
+*
+*/
+
+importPackage( dw.system );
+importPackage( dw.rpc );
+importPackage( dw.svc );
+
+/* 
+*	Try to read saved the session token from attribute, if this is null we need to retrieve the session token from WS Logon call 
+*	We return "-1" as session token to indicate that there was an error while getting the session token
+*/
+function retrieveSessionToken() : String {
+	// return "0e7d3dc6-19cf-4824-9392-1dfda9426994";
+	// try to get it from saved position	
+	if (this.sessionToken != null) {
+		return this.sessionToken;
+	}
+	
+	// token is null (for this request the logon service never was called), we need to get a new session token	
+	
+	var $this = this;
+	
+    //Get the service object
+	var svc : SOAPService = ServiceRegistry.get("common.soap.ete.logon");
+
+	//Prepare Params Object
+	var params : Object = {"addLogonRequest":addLogonRequest};
+		
+	//Execute the service
+	var result : Result = svc.call(params);
+	
+	//Check for service availability.
+	if(result.status == Result.SERVICE_UNAVAILABLE){
+		throw new Error("Service is not available");
+	}
+	
+	// create response object, set it to null
+	var response = null;
+	
+	try{
+		response = result.object;
+		this.sessionToken = response.logonResult.sessionToken;
+		Logger.debug("libLogon.ds: {0}", this.sessionToken);
+		return this.sessionToken;
+	} catch (e) {
+		if(e.message.indexOf("java.net.UnknownHostException">0)) {
+			this.addError("500", "Error while trying to get a Session Token: Host not found!", 1);
+		} else {
+			this.addError("400", "Unexpected/Unhandled error occurred: " + e.message, 2);
+		}
+		return null;
+	}
+}
+
+/**
+* Adds a LogonRequest to the provided request body.
+*/
+function addLogonRequest(serviceProvider, request : Object) {
+	
+	// get accountnumber, username, password and timeout
+	var wsAccountNumber : String = serviceProvider.getAccountNumber();
+	var wsUserName : String = serviceProvider.getUserName();
+	var wsPassword : String = serviceProvider.getPassword();
+	var wsTimeOut : Number = serviceProvider.getTimeOut();
+			
+	// begin creating request body, for serviceProvider we first need a tLogonRequest object
+	// NOTE: all _types_ in the WSDL will be generated with UPPERCASE letter starting
+	var tLogonRequest = new serviceProvider.serviceReference.TLogonRequest();
+			
+	// set the timeout to the request
+	tLogonRequest.timeout = wsTimeOut.toFixed();
+			
+	// create a tLogonRequestValues object
+	var tLogonRequestValue = new serviceProvider.serviceReference.TLogonRequestValues();
+			
+	// create an array of tLogonRequestValues
+	var tLogonRequestValuesArray : Array = new Array(); 
+	// create a new tLogonRequestValues object
+	tLogonRequestValue = new serviceProvider.serviceReference.TLogonRequestValues();
+	// set elements "name" and "value" from tLogonRequestValues object
+	// call them with <object>.<element_name> notation
+	tLogonRequestValue.name = "AccountNumber";
+	tLogonRequestValue.value = wsAccountNumber;
+	// push tLogonRequest to array
+	tLogonRequestValuesArray.push(tLogonRequestValue);
+				
+	tLogonRequestValue = new serviceProvider.serviceReference.TLogonRequestValues();
+	tLogonRequestValue.name = "UserName";
+	tLogonRequestValue.value = wsUserName;
+	tLogonRequestValuesArray.push(tLogonRequestValue);
+			
+	tLogonRequestValue = new serviceProvider.serviceReference.TLogonRequestValues();
+	tLogonRequestValue.name = "Password";
+	tLogonRequestValue.value = wsPassword;
+	tLogonRequestValuesArray.push(tLogonRequestValue);
+			
+	// set the array of tLogonRequestValues to tLogonRequest
+	// NOTE: all _element_ names are generated in LOWER case
+	tLogonRequest.logonRequestValues = tLogonRequestValuesArray;
+			
+	// set the tLogonRequest to the method we call
+	// which in this case is: "request = e2EService.Logon()"
+	request.logonRequest = tLogonRequest;
+			
+}	

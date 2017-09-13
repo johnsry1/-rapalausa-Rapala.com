@@ -1,0 +1,57 @@
+
+<isscript>
+	var prefs : Object = require('../../../scripts/modules/util/Preferences.ds');	
+	var site : dw.system.Site = dw.system.Site.getCurrent();
+	var merchantID : String = site.getCustomPreferenceValue('PP_Merchant_ID');
+	var incontext : Boolean = site.getCustomPreferenceValue('PP_EnableIncontextCheckout');
+</isscript>
+
+<isif condition="${incontext}"> 
+	<script>			
+		window.paypalCheckoutReady = function () { 
+			
+			paypal.checkout.setup('${merchantID}', {
+				button : '${billingFormSubmitButtonID}',
+				environment : '${prefs.incontextEnvironment}',
+				condition: function() {
+					var conditionResult = false;
+					if (typeof window.paypalBillingIncontextConditionHandle === 'function') {
+						conditionResult = window.paypalBillingIncontextConditionHandle();
+				    } else {
+				    	var methodRadios = document.querySelectorAll('div.payment-method-options input');
+						for(var i = 0, len = methodRadios.length; i < len; i++) {
+							var radioInput = methodRadios[i];
+							if(radioInput.checked && radioInput.value == 'PayPal') {
+								conditionResult = true;
+							}
+						}
+						document.querySelectorAll('form.checkout-billing')[0].target = conditionResult ? '_blank' : '_self';
+				    }
+					return conditionResult;
+				}
+			});
+			
+			setInterval(function() {
+				var win = paypal.checkout.win;
+				if (win && !win.closed) {
+					var errorElement = win.document.getElementById('paypalStorefrontIncontextError');
+					if(errorElement) {
+						var errorHtml = errorElement.innerHTML;	
+						win.close();
+						if (typeof window.paypalBillingIncontextErrorHandle === 'function') {
+					        window.paypalBillingIncontextErrorHandle(errorHtml);
+					    } else {
+					    	var errorContainer = window.document.getElementById('paypalIncontextErrorContainer') || document.getElementsByClassName('error-form')[0];
+					    	if(errorContainer) {
+								errorContainer.innerHTML = errorHtml;
+								errorContainer.style.display = 'block';
+								window.scrollBy(0, -Math.max(document.body.scrollTop, document.documentElement.scrollTop));
+							}
+					    }
+					}
+				}
+			}, 500);
+		}
+	</script>		
+	<script src="//www.paypalobjects.com/api/checkout.js" defer></script>	
+</isif>

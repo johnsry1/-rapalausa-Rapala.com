@@ -1,0 +1,32 @@
+<isdecorate template="account/wishlist/pt_wishlist">
+<isinclude template="util/modules"/>
+	<div id="page-background" class="downshift">
+		<div id="page">
+			<div class="wrapper">
+				<div class="row column1 account-section">
+					<div class="column cell2">
+						<div class="checkoutloginsignin cell contentbox upshift">
+							<div class="contentboxcontent account-logs">
+								<div class="formsubmit" style="display: none;"></div>
+								<iscomment>returning customer</iscomment>
+								<isinclude template="account/login/logininclude"/>
+								<isif condition="${pdict.CurrentHttpParameterMap.TokenExpired=='TokenError'}"> 
+									<div class="TokenExpired"></div>
+								</isif>
+							</div><!-- END: contentboxcontent -->
+						</div><!-- END: logincreate -->				
+						
+						<isif condition="${pdict.loginfailed}"> 
+							<div class="loginfailedclass"></div>
+						</isif>
+						
+						<div class="createan-account">
+							<isinclude url="${URLUtils.http('Account-StartRegister')}"/>
+						</div>
+									
+					</div><!-- END: column cell2 -->
+				</div><!-- END: row column1 -->
+			</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+	</div><!-- END: page-background -->
+</isdecorate>

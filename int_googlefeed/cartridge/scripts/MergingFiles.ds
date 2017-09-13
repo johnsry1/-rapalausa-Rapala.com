@@ -1,0 +1,38 @@
+
+importPackage(dw.io);
+importPackage(dw.util);
+
+function execute(args: PipelineDictionary): Number {
+    var targetFilePath: String = (File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "google" + File.SEPARATOR + "PREVAIL_google_id_equals_sku_feed.txt");
+    var fileName: String = (File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "google" + File.SEPARATOR + "PREVAIL_google_id_equals_sku_feed.txt");
+    var fileNameTemp: String = "PREVAIL_google_id_equals_sku_feed";
+    var directory: File = new File(fileName.substr(0, fileName.lastIndexOf(File.SEPARATOR)));
+    var folder: dw.util.List = directory.listFiles();
+    var tagetFile: File = new File(targetFilePath);
+    tagetFile.createNewFile();
+    var isHeader: Boolean = true;
+    for (var currentPosition: Number = 0; currentPosition < folder.length; currentPosition++) {
+        var currentFile: File = folder.get(currentPosition);
+        var isThis: Boolean = currentFile.getName().substring(0, currentFile.getName().length - 6).equalsIgnoreCase(fileNameTemp);
+        if (isThis) {
+            var fileReader: FileReader = new FileReader(currentFile);
+            var fileWriter: FileWriter = new FileWriter(tagetFile, true);
+            var lineData: String = "";
+            var count: Number = 0;
+            while ((lineData = fileReader.readLine()) != null) {
+                count = count + 1;
+                if (isHeader == false && count == 1) {
+                    continue;
+                }
+                fileWriter.writeLine(lineData);
+                isHeader = false;
+            }
+
+            fileWriter.flush();
+            fileWriter.close();
+            currentFile.remove();
+        }
+    }
+
+    return PIPELET_NEXT;
+}

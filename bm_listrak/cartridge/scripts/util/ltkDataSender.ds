@@ -1,0 +1,46 @@
+/**
+* Purpose:	Sends data queued in an ltkData custom object to Listrak. ltkData custom object is 
+*			removed upon successful submission to Listrak. 
+*
+*	@input 	ltkdata			: Object
+*	@input	ltkErrorCount	: Number
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+importPackage( dw.net );
+importPackage( dw.crypto );
+importPackage( dw.web );
+importPackage( dw.svc );
+importScript( "util/ltkErrorHandling.ds" );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	// don't even attempt if we've had more than 5 consecutive errors
+	if (args.ltkErrorCount >= 5 ) { return PIPELET_ERROR; } 
+	
+	var strURL : string = args.ltkdata.custom.data;
+	if (strURL == "")
+	{
+		reportError("ltkdata.custom.data is empty.", "Medium", "ltk_dataSender.ds");
+		return PIPELET_NEXT; // We can't continue but their data is stored. Don't show the user the error	
+	}
+	
+	/* Create the HTTP service and set the timeout. */
+	var httpService : Service = ServiceRegistry.get("listrak.http");
+	httpService.URL = strURL;
+	httpService.call();	
+	var httpResult : Result = httpService.call();	
+             
+	if (httpResult.error != 0 || !httpResult.ok)
+	{
+		reportError("Post to Listrak Endpoint failed with status code:" + req.statusCode + " --> " + strURL, "Medium", "ltk_dataSender.ds");
+		return PIPELET_NEXT; // We can't continue but their data is stored. Don't show the user the error
+	}
+
+	CustomObjectMgr.remove(args.ltkdata);
+		
+	return PIPELET_NEXT;
+}
+
+

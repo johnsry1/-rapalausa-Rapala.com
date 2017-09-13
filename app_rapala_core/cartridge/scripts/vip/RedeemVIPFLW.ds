@@ -1,0 +1,52 @@
+/**
+* Demandware Script File
+* This ds redeems the VIPFLW card
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.object );
+importPackage( dw.util );
+
+function redeemVIPFLWCard(VIPCard2, Customer)
+{
+
+	var card : CustomObject = VIPCard2;
+	var customer : dw.customer.Customer = Customer;
+
+	if (empty(card) || empty(customer)) {
+		return false;	
+	}
+
+	var data : String = customer.profile.customerNo + " - " + dw.util.StringUtils.formatCalendar(dw.system.Site.getCalendar(), "yyyy.MM.dd hh:mm:ss");
+	//card.custom.redeemingCustomer&redeemDate = data;
+	var records : ArrayList = new ArrayList();
+	if( 'redeemedcustomerNO_date' in card.custom)
+	{
+		var redeemedcustomerNO_date_records : ArrayList  = card.custom.redeemedcustomerNO_date;
+		if( redeemedcustomerNO_date_records != null){
+        	for(var i=0;i<redeemedcustomerNO_date_records.length;i++){    
+            	records.add(redeemedcustomerNO_date_records[i]);
+            }
+        }
+        var lastrecord : String = records.pop();
+        if(lastrecord.split("|").length < 100){
+        	lastrecord = lastrecord +" | "+data;
+        	records.add(lastrecord);
+        }
+        else{
+        	records.add(lastrecord);
+        	records.add(data);
+        }
+		
+	}
+	else{
+		records.add(data);
+	}
+	card.custom.redeemedcustomerNO_date = records;
+	
+   return true;
+}
+
+module.exports= {
+	    redeemVIPFLWCard: redeemVIPFLWCard
+	};

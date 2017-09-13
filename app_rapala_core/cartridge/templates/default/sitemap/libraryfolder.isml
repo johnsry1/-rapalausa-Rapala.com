@@ -1,0 +1,76 @@
+<!--- TEMPLATENAME: libraryfolder.isml --->
+<!--  
+    This template gets included from sitemap.isml in order to show the contents on a top level library folder that
+    gets initialized as the "folder" page parameter in the sitemap template.
+ -->
+           
+           
+       <isscript>
+	var csFolder : Folder = dw.content.ContentMgr.getFolder(session.custom.currentSite + "-customer-service");
+	if(empty(csFolder)) {
+		csFolder = dw.content.ContentMgr.getFolder("customer-service");
+	}
+</isscript>
+
+           
+          
+              		
+                 <ul>
+                 <li class="first-level">
+		                <h2 class="left-nav-style">    
+		                        ${csFolder.displayName}
+		                </h2><br>
+		                <!-- loop through the sub-folders of a library folder -->
+		                   <ul>
+		                       <isloop iterator="${csFolder.onlineSubFolders}" alias="subfolder">
+		                        <isif condition="${subfolder.displayName =='Shipping Information' || subfolder.displayName =='Returns' ||subfolder.displayName =='Warranty'}">
+                         			<li class="handle-non-us">
+                        			 <iselse>
+                         			 <li class="first-levell">
+			                             <a><isprint value="${subfolder.displayName}"></a>
+	                                       <isif condition="${subfolder.onlineContent}">
+				                               <ul class="second-levell">
+		                                          <isloop iterator="${subfolder.onlineContent}" alias="content">
+		                                          <isif condition="${content.ID == 'customer-donation-request' || content.ID == 'become-dealer' || content.ID == 'dealer-locator-addition' || content.ID == 'customer-sendresume' || content.ID == 'marcum-become-dealer' || content.ID == 'marcum-customer-donation-request' || content.ID == 'marcum-dealer-locator-addition' || content.ID == 'strikemaster-become-dealer' || content.ID == 'strikemaster-customer-donation-request' || content.ID == 'strikemaster-dealer-locator-addition' || content.ID == 'customer-prostaff-enquire' || content.ID =='marcum-customer-prostaff-inquiry' || content.ID =='strikemaster-customer-prostaff-inquiry' || content.ID == 'customer-contact-us' || content.ID == 'marcum-contact-us' || content.ID == 'strikemaster-contact-us' || content.ID == 'strikemaster-find-service-center'}">
+		                                          	<li class="handle-non-us">
+		                                          <iselse>		                                          
+		                                          	<isif condition="${content.ID == 'customer-contact-us-non-usa'}">
+		                                          		<li class="non-us-contactus hide">
+		                                          	<iselse>
+		                                          		<li>
+		                                          	</isif>
+		                                          </isif>
+		                                          <a href="${URLUtils.http("Page-Show", "cid", content.ID)}" title="${content.name}">
+						                             <isif condition="${(content.name.length) >=18}">
+						                                  	<isprint value="${content.name.substring(0,18)+'..'}">
+						                                    <iselse>
+						                                     <isprint value="${content.name}">
+						                             </isif>
+					                        	 </a>
+					                 </li>
+					           </isloop>
+							</ul>
+							 </isif>
+		                     </li>
+		                     </isif>
+		                     </isloop>
+		                     
+                   
+                    <isloop iterator="${csFolder.onlineContent}" alias="content">
+                         <isif condition="${content.name =='Shipping Information' ||content.name =='Returns' ||content.name =='Warranty'}">
+                         	<li class="handle-non-us">
+                         <iselse>
+                         	<li>
+                         </isif>
+                            <a href="${URLUtils.http("Page-Show", "cid", content.ID)}">
+                            <span><isprint value="${content.name}"></span></a><br/>
+                            </li>
+                            
+                    </isloop>
+                 </li>
+                
+		       </ul>
+		           
+		       
+             
+                  </ul>

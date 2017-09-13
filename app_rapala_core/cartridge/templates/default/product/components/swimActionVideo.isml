@@ -1,0 +1,30 @@
+<!--- TEMPLATENAME: swimActionVideo.isml --->
+<iscomment>SWF Video Added by LGELBERG 8/28/11</iscomment>
+<isset name="saVideo" value="${pdict.Product.getImage('swimActionVideo',0).url}" scope="page"/>
+<isif condition="${saVideo != null}">
+	<div id="swimActionVideo" class="new-swim">
+		<div id="swimActionWrapper" class="contentbox">
+			<div class="product-primary-video">
+				<iframe id="pdp-video" width="170" height="116" src="${'http://www.youtube.com/embed/' + pdict.Product.custom.swimActionVideo + '?rel=0&amp;showinfo=0&modestbranding=1'}" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+		<p>${Resource.msg('product.swimaction', 'product', null)}</p>
+	</div>
+
+    <div id="swimActionVideo" class="old-swim">
+    	<div id="swimActionWrapper" class="contentbox">
+    	<object data="${saVideo}" type="image/gif" width="160" height="116" id="swimActionVideoObject">
+            <param name="movie" value="${saVideo}" />
+            <param name="quality" value="high" /> 
+            <param name="bgcolor" value="#ffffff" /> 
+            <iscomment>
+            <EMBED src="${saVideo}" quality=high bgcolor=#ffffff WIDTH="163" HEIGHT="133" NAME="Swimming Action" ALIGN="" TYPE="image/gif" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"></EMBED> 
+        	</iscomment>
+        </object>
+        </div>
+        <p>${Resource.msg('product.swimaction', 'product', null)}</p>
+    </div>
+</isif>
+
+
+              

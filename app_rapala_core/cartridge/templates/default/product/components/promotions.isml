@@ -1,0 +1,43 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>
+Desc:
+Includes promotions into the product information area
+
+Parameter:
+Product - the product to use
+
+Options:
+none
+
+Available if empty: no
+Full-Block-Element: yes
+</iscomment>
+<iscomment>Active product promotions</iscomment>
+<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(pdict.Product)}" scope="page"/>
+<isif condition="${! empty(promos)}">
+<iscomment><h2 class="visually-hidden">Promotions</h2></iscomment>
+<div id="special-offers" class="promotion handle-non-us">
+	<div class="promotion-title">${Resource.msg('product.promotions.special','product',null)}</div>
+	<ul class="promotion-callout">
+		<isloop items="${promos}" var="promo">
+			<isif condition="${(!empty(promo.calloutMsg) && promo.calloutMsg != null) || !empty(promo.details)}">
+				<li>
+					<isprint value="${promo.calloutMsg}" encoding="off"/>
+					<isif condition="${! empty(promo.details)}">
+						<span class="formfieldtooltip">
+							<a class="tooltip" href="javascript:void(0)">
+								(<span class="detailMsg">${Resource.msg('global.details','locale',null)}</span>)
+								<div class="tooltip-content tooltip-body">
+									<div class="tooltipcontainer">
+										<isprint value="${promo.details}" encoding="off"/>
+									</div>
+								</div>
+							</a>
+						</span>
+					</isif>
+				</li>
+			</isif>
+		</isloop>
+	</ul>
+</div>
+</isif>

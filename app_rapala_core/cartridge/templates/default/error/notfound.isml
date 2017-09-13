@@ -1,0 +1,66 @@
+<isdecorate template="error/pt_error">
+<isinclude template="util/modules"/>
+<div id="page-background" class="downshift">
+<div id="page">
+<div class="wrapper">
+<div class="row column1">
+<div class="column cell1">
+<div class="notfound cell contentbox upshift">
+<div class="">
+<div class="contentboxcontent">
+	<div class="errorpage">
+	<isif condition="${'sufix' == session.custom.currentSite}">
+		<h5 class="subheader"></h5>
+	 	<h1 class="subheader">${Resource.msg('nohits.error404sufixlabel','search',null)}</h1>
+	 <iselse/>
+		<h1>${Resource.msg('nohits.error404label.responsive','search',null)}</h1>
+	  </isif>
+	<div id="message" class="error">
+		<iscontentasset aid="404-callout"/>
+	</div>
+		<div class="nohits">
+			<div class="goback">
+				<a class="button" href="${URLUtils.url('Home-Show')}" id="goback">
+				<span>${Resource.msg('nohits.errorgobutton','search',null)}</span>
+				</a>
+			</div>
+			<div class="home">
+				<a class="button" href="${URLUtils.url('Home-Show')}"/>
+				<span>${Resource.msg('nohits.errorhomebutton','search',null)}</span>
+				</a>
+			</div>
+		 	<form style="display:inline;" action="${URLUtils.url('Search-Show')}" method="get">
+				<fieldset  class="nohitsearch desktopHide">
+					<input style="margin-left: 0px;"  type="text" name="q" value="${Resource.msg('global.searchentire','locale',null)}" class="box"/>
+					<button style="margin: 0 0 0 224px;" type="submit" class="btn" value="${Resource.msg('global.go','locale',null)}" name="simplesearch"><span>${Resource.msg('global.go','locale',null)}</span></button>
+				</fieldset>
+			</form>
+			<div class="no-hits-search mobileHide">
+				<form action="/s/rapala/search" method="get" novalidate="novalidate">
+					<fieldset>
+						<div class="form-row label-above">
+							<input type="text" class="input-text valid" name="q" value="Search Entire Site..." aria-invalid="false">
+							<button type="submit" value="Go" name="simplesearch">
+							</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>		
+		</div><!-- END: errorssearch -->		
+		<div class="errorfooter">
+			<div class="errorfooterbottom"><br>
+				<iscontentasset aid="404-service"/>
+			</div><!-- END: errorfooterbottom -->
+		</div><!-- END: errorfooter -->	
+		
+	</div><!-- END: errorpage -->
+	</div>
+	</div>
+</div><!-- END: notfound -->
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</isdecorate>

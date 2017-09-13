@@ -1,0 +1,47 @@
+<!--- TEMPLATENAME: displayvariantnew.isml --->
+<iscomment>
+	Displays the "new" image tag for the product.
+	p_productli : the product line item to render
+	p_email : a boolean that indicates this is used inside an email template
+				if true, display absolute url for image, otherwise use relative
+	p_bigimage : a boolean that indicates whether to show new-stamp (false or null) or new-stamp-big (true)
+	p_imagecheckout :  a boolean that indicates fot checkout new image
+</iscomment>
+
+<iscomment>Create page variable representing the product line item</iscomment>
+<isset name="p_product" value="${pdict.p_product}" scope="page"/>
+<iscomment>Create page variable representing if this is used in an email template</iscomment>
+<isset name="p_email" value="${pdict.p_email}" scope="page"/>
+<iscomment>Create page variable representing if the big image should be shown</iscomment>
+<isset name="p_bigimage" value="${pdict.p_bigimage}" scope="page"/>
+<isset name="flagUtils" value="${require('app_rapala_core/cartridge/scripts/util/FlagUtils.ds')}" scope="page" />
+<isset name="showNew" value="${flagUtils.showNewFlag(p_product)}" scope="page" />
+<isif condition="${showNew}">
+<iscomment>displays new flag</iscomment>
+	<div class="newFlag">
+		
+	    <isif condition="${p_bigimage}">
+	        <isset name="imgName" value="new-stamp-big" scope="page"/>
+	    <iselse>
+	        <isset name="imgName" value="new-stamp" scope="page"/>    
+	    </isif>
+	    
+		<isif condition="${!empty(p_email)}">
+			<isset name="imgName" value="/images/new-stamp.png" scope="page"/>
+			<img class="new" src="${URLUtils.httpStatic(imgName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+		<iselse>
+			<span class=" small-new ${imgName}">
+				<isif condition="${!empty(pdict.p_imagecheckout)}">
+					<isprint value="${Resource.msg('global.newflag','locale',null)}"/>
+				<iselse>
+					<isif condition="${pdict.currentActiveBrand!=null && !empty(pdict.currentActiveBrand)}">
+						<isset name="brandname" value="${p_product.brand.toLowerCase()}" scope="page" />
+						<isprint value="${Resource.msg('global.newflag','locale',null)}"/>
+					<iselse>
+						<isprint value="${Resource.msg('global.newflag','locale',null)}"/>
+					 </isif>
+				</isif>
+			</span>
+		</isif>
+	</div>
+</isif>

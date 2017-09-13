@@ -1,0 +1,56 @@
+/**
+* looking for error code 10736 in IPN response and records error message into pdict
+*
+* @input ResponseData : Object Response Data from service call
+* @output PayPalErrorMessage : String Error text to be presented to the customer
+*/
+
+var web : Object = require('dw/web');
+var util : Object = require('dw/util');
+
+var paypalHeper : Object = require('../modules/PaypalHelper.ds');
+var prefs : Object = paypalHeper.getPrefs();
+
+function execute( args : PipelineDictionary ) : Number {
+
+	var responseData : Object = args.ResponseData || new util.HashMap();
+	var errorMessage : String = null;
+	var codes : Array = parseResponseForCodes(responseData);
+
+	if (codes.indexOf('10736') != -1) {
+		errorMessage = web.Resource.msg('paypal.error.code10736','locale',null);
+	} else {
+		errorMessage = web.Resource.msg('paypal.error.general','locale',null);
+	}
+
+	args.PayPalErrorMessage = errorMessage;
+
+	return PIPELET_NEXT;
+}
+
+/**
+ * parseResponseForCodes() get error codes from response
+ *
+ * @param data {dw.util.HashMap} IPN response
+ * @returns {Array} array with codes
+ */
+function parseResponseForCodes (data : util.HashMap) : Array {
+	var codes : Array = [];
+
+	for (let i = 0, len = data.size(); i < len; i++) {
+
+		let message : String = null;
+
+		let errorcodeIndex : String = 'l_errorcode' + i;
+		let shortMessageIndex : String = 'l_shortmessage' + i;
+		let longMessageIndex : String = 'l_longmessage' + i;
+
+		if (data.containsKey(errorcodeIndex)) {
+			codes.push(data.get(errorcodeIndex));
+		} else {
+			continue;
+		}
+	}
+
+	return codes;
+}

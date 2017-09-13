@@ -1,0 +1,26 @@
+/**
+* This ds file redeems the VIP card
+*
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.object );
+function redeemVIPCard( VIPCard, Customer )
+{
+
+	var card : CustomObject = VIPCard;
+	var customer : dw.customer.Customer = Customer;
+
+	if (empty(card) || empty(customer)) {
+		return false;	
+	}
+
+	card.getCustom().redeemingCustomer = customer.profile.customerNo;
+	card.getCustom().redeemDate = dw.system.Site.getCalendar().getTime();
+
+   return true;
+}
+
+module.exports= {
+	    redeemVIPCard: redeemVIPCard
+	};

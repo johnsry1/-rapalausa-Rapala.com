@@ -1,0 +1,20 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscache type="relative" hour="24"/>
+
+<iscomment>
+    This template renders the search suggestions popup.
+</iscomment>
+
+<isif condition="${!empty(pdict.Suggestions)}">
+    <div class="search-suggestion-wrapper">
+        <isloop items="${pdict.Suggestions.keySet().iterator()}" var="Suggestion" status="InfoState">
+            <iscomment> Custom search Pages </iscomment>
+                <div class="unselected">
+                	<a href="${URLUtils.url('Search-Show', 'q', Suggestion)}">
+	                    <div class="suggestionterm"><isprint value="${Suggestion}"/></div>
+	                    <span class="hits"><isprint value="${pdict.Suggestions.get(Suggestion)}"/><isif condition="${pdict.Suggestions.get(Suggestion) == 1}"> ${Resource.msg('suggestions.result','search',null)}<iselse> ${Resource.msg('suggestions.results','search',null)}</isif></span>
+	                </a>
+                </div>
+        </isloop>
+    </div>
+</isif>

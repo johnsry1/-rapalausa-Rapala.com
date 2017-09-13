@@ -1,0 +1,43 @@
+/**
+* This ds assigns price books to VIP Customer Group
+*
+*/
+importPackage( dw.system );
+importPackage( dw.object );
+importPackage( dw.util );
+
+function getApplicablePriceBooks( VIPCard )
+{
+    // read pipeline dictionary input parameter
+    // ... = args.ExampleIn;
+	var vccgs : Array = VIPCard.custom.groups;
+    // insert business logic here
+	//var cgi : dw.util.Iterator = cgs.iterator();
+	var pbs : Array = new Array();
+	
+	// get the current site's price books and add them first:
+	var pbi : dw.util.Iterator = dw.catalog.PriceBookMgr.getSitePriceBooks().iterator();
+	while (pbi.hasNext()) {
+		var pb : dw.catalog.PriceBook = pbi.next();
+		if(pb.isOnline()) {
+			pbs.push(pb.ID);
+		}
+	}
+	
+	for (var i=0;i<vccgs.length;i++) {
+		var group : dw.customer.CustomerGroup =dw.customer.CustomerMgr.getCustomerGroup(vccgs[i]);
+		if(!empty(group.custom.priceBook)) {
+			pbs.push(group.custom.priceBook);	
+		}
+	}
+    // write pipeline dictionary output parameter
+    // args.ExampleOut = ...
+    
+    
+	//args.PriceBooks = pbs;
+   return pbs;
+}
+
+module.exports = {
+	getApplicablePriceBooks : getApplicablePriceBooks
+	}

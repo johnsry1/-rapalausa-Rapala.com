@@ -1,0 +1,177 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="DecoratorTemplate" value="search/pt_productsearchresult" scope="page"/>
+
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+	
+</isif>
+
+<isdecorate template="${DecoratorTemplate}">
+	<div id="content">
+		<div id="page-background" class="downshift">
+			<div id="page">
+				<div class="wrapper">
+					<div class="contentboxcontent mobileHide">
+					<isinclude template="search/components/productsearchbreadcrumbs"/>
+						
+						<isif condition="${'rapala' == session.custom.currentSite}">
+							<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+								<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+							</isif>
+						<iselse/>
+							<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+								<h1 class="leftnav">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+							</isif>
+						</isif>
+						<isif condition="${pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null &&!empty(pdict.ProductSearchResult.category) && pdict.ProductSearchResult.category.displayName!=null}"> 
+						<h1 class="leftnav categoryTitle">${pdict.ProductSearchResult.category.displayName}</h1> 
+						</isif>
+						
+						<span class="count"><isprint value="${pdict.ProductPagingModel.count}"/> <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>
+					</div>
+				    <div class="desktop mobileHide">
+					   <div class="leftnav_bottomfirst contentAsset-new cell contentbox upshift">
+						   <isslot id="leftnav_bottomfirst" description="Banner for Leftnav bottom top" context="global" />
+					   </div>
+					   <div class="leftnav_bottomlast contentAsset-new cell contentbox upshift">
+						    <isslot id="leftnav_bottomlast" description="Banner for Leftnav bottom last" context="global" />
+					   </div>
+			        </div>
+					<div class="banner-section mobileHide">
+							<div class="brand-searchresult">
+								<isslot id="brand-searchresults" context="global"  description="brand-searchresults for search results page"/>
+							</div>
+							
+							<div class="global-searchresult">
+								<isslot id="global-searchresults" context="global"  description="global-searchresults for search results page"/>
+							</div>
+					</div>	
+					<div class="row column3 4">
+						<iscomment><isinclude template="search/components/productsearchbreadcrumbs"/></iscomment>
+						<div class="refinebar-outer mobileHide">
+							<a class="mobile-filter-by mobileHide">
+								filter by
+								<span class="active"></span>
+							</a>
+							<a class="sortby-button mobileHide">
+								Sort By
+								<span class="active"></span>
+							</a>
+							
+							<div class="refine-display refine-values">
+						
+						<isset name="hasAttributes" value="${false}" scope="page" />
+						<isloop items="${psr.refinements.refinementDefinitions}" var="definition" status="attributes">
+					<isif condition="${definition.isAttributeRefinement() && psr.isRefinedByAttribute(definition.attributeID)}">
+						<span class="breadcrumb-refinement">
+						<iscomment>
+							<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
+					 		<span class="breadcrumb-refinement-name">
+							<isprint value="${definition.displayName}"/>
+							</span> 
+							</iscomment>
+							<isset name="hasAttributes" value="${true}" scope="page" />
+							<isloop items="${psr.refinements.getRefinementValues(definition)}" var="value" status="values">
+								<isif condition="${psr.isRefinedByAttributeValue(definition.attributeID, value.value)}">
+									<span class="breadcrumb-refinement-value">
+										${Resource.msg('refinement.' + definition.attributeID + '.' + value.displayValue, 'locale', value.displayValue)}
+										<isif condition="${empty(pagingModel)}">
+											<isset name="breadcrumbHref" value="${psr.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
+											<iselse/>
+											<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
+										</isif>
+										<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+									</span>
+								</isif>
+							</isloop>
+						</span>
+				</isif>
+					</isloop>
+			<isif condition="${psr.refinements.priceRefinementDefinition && psr.refinedByPrice}">
+				<isscript>
+					// for price refinements, we use the display value of the price refinement definition's value
+					var breadcrumbLabel = null
+	
+					var refinements = psr.refinements;
+					var prdValues = refinements.getRefinementValues(refinements.priceRefinementDefinition);
+					if (prdValues.iterator().hasNext()) {
+						breadcrumbLabel = prdValues.iterator().next().getDisplayValue();
+					}
+				</isscript><span class="breadcrumb-refinement">
+					<iscomment>
+					<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
+						<span class="breadcrumb-refinement-name">
+							<isprint value="${psr.refinements.priceRefinementDefinition.displayName}"/>
+						</span>
+					</iscomment>
+	
+					<span class="breadcrumb-refinement-value">
+						<isif condition="${!empty(breadcrumbLabel)}">
+							<isprint value="${breadcrumbLabel}"/>
+						<iselse/>
+							<isprint value="${psr.priceMin}"/>
+							${Resource.msg('searchbreadcrumbs.to','search',null)}
+							<isprint value="${psr.priceMax}"/>
+						</isif>
+	
+						<isif condition="${empty(pagingModel)}">
+							<isset name="breadcrumbHref" value="${psr.urlRelaxPrice('Search-Show')}" scope="page" />
+						<iselse/>
+							<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
+						</isif>
+						<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+					</span>
+				</span>
+	
+			</isif>
+			</div>
+							
+						</div>
+						
+						
+						<div id="secondary" class="refinements searchResult-refinement visible-hidden">
+ 							<isinclude template="search/components/productsearchrefinebar"/>						
+ 						</div>
+						<div id="primary" class="primary-content">
+							<div class="column colspan2 cell4">
+								<div class="contentboxcontent desktopHide">
+									<isif condition="${'rapala' == session.custom.currentSite}">
+										<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+											<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+										</isif>
+									<iselse/>
+										<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+											<h1 class=" ss search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+										</isif>
+									</isif>
+								</div>
+								<div class="contentboxcontent desktopHide">
+									<isif condition="${'rapala' == session.custom.currentSite && pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category) }">
+										<h1 class="leftnav"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+									<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite &&  pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
+										<h1 class="left-nav-style"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+									<iselse>
+									<isif condition="${ pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}"> 
+										<h1 class="leftnav"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
+									</isif>
+									</isif>
+									<isif condition="${pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}"> 
+										<p><isprint value="${pdict.ProductSearchResult.category.description}"/></p>
+									</isif>
+									<div class="bannerslot">
+										<isslot id="landingpage-slot" description="slot for all landing pages" context="global" />
+									</div>
+								</div>
+								<isreplace/>
+								<div class="bannerslot">
+									<isslot id="landingpage-bottom" description="slot for all landing pages" context="global" />
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			 </div>
+		</div>
+	</div>	 	
+</isdecorate>

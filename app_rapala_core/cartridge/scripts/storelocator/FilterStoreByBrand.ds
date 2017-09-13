@@ -1,0 +1,105 @@
+/**
+* FilterStoreByBrand.ds
+*
+* This file takes a list of stores and filters out the stores that have none of the selected brands
+* available. 
+*
+*/
+importPackage( dw.util );
+importPackage( dw.system );
+
+function filterStoreByBrand(storeLocatorForm,stores)
+{
+	var storeform = storeLocatorForm;
+   	var IStores : dw.util.Iterator = stores.entrySet().iterator();;
+	var NewStores : dw.util.LinkedHashMap = new dw.util.LinkedHashMap();
+    // insert business logic here
+	while(IStores.hasNext()) {
+		var entryStore : dw.util.MapEntry = IStores.next();
+		var store : dw.catalog.Store = entryStore.getKey();
+		var custom : dw.object.CustomAttributes = store.getCustom();
+		var rapala : Boolean = custom.rapala;
+		var sufix : Boolean = custom.sufix;
+		var storm : Boolean = custom.storm;
+		var luhrjensen : Boolean = custom.luhrjensen;
+		var vmc : Boolean = custom.vmc;
+		var triggerx : Boolean = custom.triggerx;
+		var bluefox : Boolean = custom.bluefox;
+		var terminator : Boolean = custom.terminator;
+		var williamson : Boolean = custom.williamson;
+		var marcum : Boolean = custom.marcum;
+		var strikemaster : Boolean = custom.strikemaster;
+		var otter : Boolean = custom.otter;
+		
+		
+		if(typeof(storeform.rapala)!='undefined' && storeform.rapala.value &&
+		   typeof(rapala)!='undefined' && rapala) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.sufix)!='undefined' && storeform.sufix.value &&
+		   typeof(sufix)!='undefined' && sufix) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.storm)!='undefined' && storeform.storm.value &&
+		   typeof(storm)!='undefined' && storm) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.luhrjensen)!='undefined' && storeform.luhrjensen.value &&
+		   typeof(luhrjensen)!='undefined' && luhrjensen) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.vmc)!='undefined' && storeform.vmc.value &&
+		   typeof(vmc)!='undefined' && vmc) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.triggerx)!='undefined' && storeform.triggerx.value &&
+		   typeof(triggerx)!='undefined' && triggerx) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.bluefox)!='undefined' && storeform.bluefox.value &&
+		   typeof(bluefox)!='undefined' && bluefox) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.terminator)!='undefined' && storeform.terminator.value &&
+		   typeof(terminator)!='undefined' && terminator) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.williamson)!='undefined' && storeform.williamson.value &&
+		   typeof(williamson)!='undefined' && williamson) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.marcum)!='undefined' && storeform.marcum.value &&
+		   typeof(marcum)!='undefined' && marcum) {
+			NewStores.put(store, entryStore.getValue());
+		}
+		else if(typeof(storeform.strikemaster)!='undefined' && storeform.strikemaster.value &&
+		   typeof(strikemaster)!='undefined' && strikemaster) {
+			NewStores.put(store, entryStore.getValue());
+		}
+	}
+	return NewStores;
+}
+
+function filterStoreByServiceCenter(stores){
+	
+	var IStores : dw.util.Iterator = stores.entrySet().iterator();
+	var NewStores : dw.util.LinkedHashMap = new dw.util.LinkedHashMap();
+    // insert business logic here
+	while(IStores.hasNext()) {
+		var entryStore : dw.util.MapEntry = IStores.next();
+		var store : dw.catalog.Store = entryStore.getKey();
+		var custom : dw.object.CustomAttributes = store.getCustom();
+		var serviceCenter : Boolean = custom.serviceCenter;
+		
+		
+		if(serviceCenter) {
+			NewStores.put(store, entryStore.getValue());
+		}
+	}
+   return NewStores;
+}
+
+module.exports = {
+    filterStoreByBrand : filterStoreByBrand,
+    filterStoreByServiceCenter : filterStoreByServiceCenter
+};

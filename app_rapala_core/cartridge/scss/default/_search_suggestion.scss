@@ -1,0 +1,228 @@
+.search-suggestion-wrapper {
+	a {
+		div.suggestionterm {
+		    color: $white;
+	    }
+	    span.hits {
+	    	color: $white;
+	    }
+	    &:hover {
+	    	text-decoration: none;
+	    }
+    }
+}
+.floatright {
+	&.site-suggestion-section {
+		float: left;
+		background: #FFFFFF;
+		margin: 15px 10px;
+		border: 1px solid #cdcfcf;
+		width: 260px;
+		z-index:9;
+	}
+	@media screen and (min-width: 960px) {
+	    float: right;
+	    position: relative;
+	    &.site-suggestion-section {
+			position: absolute;
+			top: 72px;
+			right: -4px;
+			margin:0;
+			background: transparent;
+			border: none;
+			width: auto;
+		    
+    	}
+    }
+}
+.pt_storefront {
+	.floatright.site-suggestion-section {
+		@media screen and (min-width: 960px) {
+			right: 14px;
+		}
+	}
+}
+.sitesearch {
+	form {
+    	&.simplesearch {
+    		position: relative;
+    		
+    		input {
+    			&.simplesearchinput { 
+    				background: transparent !important;
+				    border: 0;
+				    margin: 0;
+				    font-family: $global-font-family;
+				    color: #ccc;
+				    width: 167px;
+				    padding: 0 0 0 10px;
+				    height: 30px;
+				    font-size: 12px;
+				    line-height: initial;
+				    box-sizing: border-box;
+				    -ms-box-sizing: border-box;
+				    -moz-box-sizing: border-box;
+				    -webkit-box-sizing: border-box;
+    			}
+    			&:focus {
+    			  color:#999;
+    			}
+    		   &.simplesearchinput:focus {
+			     color:#999;
+			  } 
+    		}
+    		button {
+				&.search-button {
+					background: url("../images/search-icon-70percent.jpg") no-repeat 0 0 transparent;
+				    border: 0 none;
+				    margin: 0;
+				    top: 4px;
+				    right: 5px;
+				    width: 24px;
+				    height: 25px;
+				    padding: 0;
+				    &:hover {
+					    background: url("../images/search-icon.png") no-repeat 0 0 transparent;
+					}
+				}
+			}
+    	}
+    }
+	@media screen and (max-width: 960px) {
+		form {
+			&.simplesearch {
+				input {
+					&.simplesearchinput {
+					    height: 40px;
+					    font-size: 13px;
+					    color: #ccc;
+				        width: 230px;
+						
+						&:focus + .searchLabel {
+						    margin-top: -20px;
+						    color:#999;
+						}
+					}
+					&.simplesearchinput:focus {
+					   color:#999;
+					} 
+					
+				}
+				.searchLabel{
+					font-size: 13px;
+					color: #cccccc;
+					position: absolute;
+				    top: 12px;
+				    bottom: 0;
+				    left: 10px;
+				    transition: .2s;
+				}
+					
+				button {
+					&.search-button {
+						top: 9px;
+						background: url(../images/responsive-icons/navigation-assets-1.svg) no-repeat;
+						background-position: -11px -112px;
+					    //background-position: 0 0;
+					    width: 18px;
+					    height: 25px;
+					    &:hover {
+					    	background: url(../images/responsive-icons/search-icon.svg) no-repeat;
+					    	background-position: -11px -112px;
+				    	    //background-position: 0 0;
+					    }
+					}
+				}
+			}
+		}
+	}
+	@media screen and (min-width: 960px) {
+		background: url('../images/search-bg.png') no-repeat left top $white;
+	    width: 200px;
+	    top: 0;
+	    float: right;
+	    height: 30px;
+	    position: relative;
+	}
+}  
+.sitesearch button span {
+    background: transparent none;
+    visibility: hidden;
+}
+#headerwrapper {
+	#header {
+		.row {
+			&.column1 {
+				
+			}
+		}
+	}
+} 
+
+
+/**********New code started here************/    
+/* SEARCH SUGGESTION
+--------------------------------------------------------------------------------------- */
+.suggestions {
+	background: $bg-darkbrown;
+	border-radius: 3px;
+	cursor: pointer;
+	display: none;
+	padding: 20px 0 10px 0;
+	width: 287px;
+	color: $white;
+	font-family: $search-suggestion-font-family;
+	font-size: 12px;
+	opacity: 1;
+	position: absolute;
+	z-index: 9999;
+    top: 47px;
+    left: -86px;
+	.unselected {
+		clear: both;
+	    overflow: hidden;
+	    padding: 2px 0px 2px 10px;
+	    white-space: nowrap;
+	    &.selected,&:hover {
+			background-color: gray;
+			color: $white;
+		}
+		div{
+			&.suggestionterm {
+				float: left;
+				overflow: hidden;
+				width: 190px;
+				clear: both;
+			    padding: 2px 0 2px 9px;
+			    white-space: initial;
+			}
+		}
+		span{
+			&.hits {
+				line-height:18px;
+				font-style: italic; 
+			}
+		}
+	}
+}
+.suggestions:after, .suggestions:before {
+	bottom: 98%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.suggestions:after {
+	border-bottom-color: $bg-darkbrown;
+	border-width: 15px;
+	margin-left: -15px;
+}
+.suggestions:before {
+	border-bottom-color: $bg-darkbrown;
+	border-width: 15px;
+	margin-left: -15px;
+}

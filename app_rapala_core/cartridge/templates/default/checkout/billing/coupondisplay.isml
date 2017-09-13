@@ -1,0 +1,17 @@
+<!--- TEMPLATENAME: coupondisplay.isml --->
+<isinclude template="util/modules"/>
+<isloop items="${pdict.Basket.couponLineItems}" var="couponLineItems" >
+		<div class="discount-success">
+			<span class="submitedcoupon"> ${couponLineItems.couponCode}&nbsp;${couponLineItems.promotion.name}</span> 
+			<button value=${couponLineItems.couponCode} class="remove-cop">Remove</button>
+		</div>
+		<div class="clear"><!-- FLOAT CLEAR --></div>
+</isloop>
+<isif condition="${pdict.Basket && pdict.Basket.giftCertificatePaymentInstruments.size() > 0}">	
+	<div class="hide" id="giftCertificateData">    			
+ 			<isloop items="${pdict.Basket.giftCertificatePaymentInstruments}" var="giftCertPI" status="loopstatus">	
+    				<isprint value="${giftCertPI.giftCertificateID}"/>-<isprint value="${giftCertPI.paymentTransaction.amount}"/>
+			<isif condition="${!loopstatus.last}">|</isif>
+ 		</isloop>
+ 		</div>
+</isif>

@@ -1,0 +1,58 @@
+{
+    "dependencies": [
+        {
+            "repository": "file://scratch/jenkins/workspace/${WORKSPACE_NAME}/",
+            "id": "rapala",
+            "branch": "",
+            "type": "file",
+            "includeCartridges": [
+                "app_cms",
+                "app_cssuite",
+                "app_disbestpractice",
+                "app_rapala_core",
+                "app_rapala_controllers",
+                "app_rapala_insider_vip",
+                "app_rapala_themes",
+                "app_spc",
+                "bc_common",
+                "bc_integrationframework",
+                "bc_library",
+                "bc_orderguard",
+                "bm_contentcopytool",
+                "bm_customfeeds",
+                "bm_integrationframework",
+                "bm_tools",
+                "bm_listrak",
+                "int_browseratest",
+                "int_commissionjunctionproductfeed",
+                "int_customfeeds",
+                "int_googleanalytics",
+                "int_paypal",
+                "int_storelocator",
+                "int_ups",
+				"int_googlefeed",
+				"int_listrak_controllers",
+                "test_console"
+            ]
+        }
+    ],
+    "environment": {
+        "watch.path": "/scratch/jenkins/workspace/${WORKSPACE_NAME}/",
+        "webdav.username": "${ENVIRONMENT_USER_NAME}",
+        "webdav.password": "${ENVIRONMENT_PASSWORD}",
+        "webdav.two_factor": "${ENABLE_TWO_FACTOR}",
+        "webdav.two_factor.cert": "${TWO_FACTOR_CERT_PATH}",
+        "webdav.two_factor.password": "${TWO_FACTOR_CERT_PASSWORD}",
+        "webdav.server": "${ENVIRONMENT_HOST}",
+        "webdav.server.cert.url": "${CERT_ENVIRONMENT_HOST}",
+        "webdav.cartridge.root": "/on/demandware.servlet/webdav/Sites/Cartridges/",
+        "webdav.impex.root": "/on/demandware.servlet/webdav/Sites/ImpEx/",
+        "webdav.site_import.root": "/on/demandware.servlet/webdav/Sites/ImpEx/src/instance/",
+        "webdav.captcha.root": "/on/demandware.servlet/webdav/Sites/ImpEx",
+        "source.path": "",
+        "site_import.path": "sites/site_template",
+        "source.glob": "**/*",
+        "sass.src": "scss/default",
+        "sass.dest": "static/default/css"
+    }
+}

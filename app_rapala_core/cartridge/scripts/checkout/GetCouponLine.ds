@@ -1,0 +1,24 @@
+/**
+*   
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+
+function getCouponLineItem( basket, couponID ) : Number
+{
+	//var basket : Basket=args.Basket;
+	if(!empty(couponID)){
+		var coupon : CouponLineItem = basket.getCouponLineItem(couponID);
+		if(!coupon){return PIPELET_ERROR;}
+		else{
+			return coupon;
+		}
+	}else{
+		return null;
+	}	
+}
+
+module.exports = {
+	getCouponLineItem : getCouponLineItem
+}

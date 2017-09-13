@@ -1,0 +1,126 @@
+<iscache type="relative" hour="24"/>
+
+<iscomment>
+       This template displays a 3-level category tree as top navigation.
+       Only categories marked with showInMenu are shown.
+</iscomment>
+
+<isscript>
+		importScript( "util/ViewHelpers.ds" );
+       importScript( "common/GetCount.ds" );
+       importScript( "common/GetCategoryprods.ds" );
+</isscript>
+<isif condition="${session.custom.currentSite == 'rapala'}"> 
+    <isset name="ID" value="1" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'vmc'}" >
+        <isset name="ID" value="6" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'luhrjensen'}" >
+        <isset name="ID" value="5" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'storm'}" >
+        <isset name="ID" value="4" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'sufix'}" >
+        <isset name="ID" value="2" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'bluefox'}" >
+        <isset name="ID" value="8" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'terminator'}" >
+        <isset name="ID" value="7" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'williamson'}" >
+        <isset name="ID" value="9" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'triggerx'}" >
+        <isset name="ID" value="3" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'marcum'}" >
+        <isset name="ID" value="10" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'strikemaster'}" >
+        <isset name="ID" value="11" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'otter'}" >
+        <isset name="ID" value="21" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'iceforce'}" >
+        <isset name="ID" value="20" scope="page" />
+</isif>
+<isset name="root" value="${getTopLevelCategory()}" scope="page"/>
+<isif condition="${root != null}">
+       <div class="categorymenusnew">
+       <ul>
+       <isloop items="${getSubcategoriesInMenuForCategory(root)}" var="topCat">  <!--- Loop over Brands --->
+      	 <isif condition="${topCat.getID() == session.custom.currentSite}">
+      	 	 
+      	 	 <isset name="getsecondLevel" value="${getSubcategoriesInMenuForCategory(topCat)}" scope="page" />
+      	 	 <isloop items="${getsecondLevel}" var="secondLevel">
+      	 	  <li class="<isprint value="${secondLevel.custom.categoryClassName}"/> category-top-level <isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && secondLevel.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">active</isif>" >
+	                 <a href="${URLUtils.http('Search-Show', 'cgid', secondLevel.getID(),'id',ID)}" >
+	                     <isscript>
+	                           var count : Number = getcategoryProductCount(secondLevel.ID);
+	                           var subcatcount : Number = getcategoryProducts(secondLevel.ID);
+	                     </isscript>
+	                  <isif condition="${getsecondLevel.size()>0}">
+	                       <isprint value="${secondLevel.getDisplayName()}"/><span class="count-products">&nbsp;(<isprint value="${count.toFixed()}" />)</span>
+					  </isif>
+	                  </a>
+	                  <iscomment> 
+		                  <isif condition="${getsecondLevel.size()>0}">
+		                  	<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && secondLevel.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">&#x25BC;<iselse/>&#x25B6; </isif>
+		                  </isif>
+	                  </iscomment>
+                  		<isset name="getsubCat" value="${getSubcategoriesInMenuForCategory(secondLevel)}" scope="page" />
+                  		<isif condition="${getsubCat.size() > 0}">
+                           <ul class="category-top-level2">
+                                  <isloop items="${getsubCat}" var="subCat">
+                                  	<isscript>
+		                                var count : Number = getcategoryProductCount(subCat.ID);
+		                                var subcatcount : Number = getcategoryProducts(subCat.ID);
+		                          	</isscript>
+                                    <li class="<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && subCat.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">active</isif><isif condition="${subCat.onlineProducts.size()==0 && (subCat.onlineSubCategories.size()==0 && subcatcount==0)}"> hide</isif>">
+		                                    <a href="${URLUtils.http('Search-Show', 'cgid', subCat.getID(),'id',ID)}">
+					                          	<isif condition="${getsubCat.size()>0}">
+					                                <isprint value="${subCat.getDisplayName()}"/><span class="count-products">&nbsp;(<isprint value="${count.toFixed()}" />)</span>
+					                           </isif>      
+		                                     </a>
+		                                     <iscomment> 
+			                                     <isif condition="${getsubCat.size()>0}">
+			                                     	<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && subCat.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">&#x25BC;<iselse/>&#x25B6; </isif>
+			                                      </isif>    
+		                                      </iscomment>
+	                                     <isset name="getsubCatsub" value="${getSubcategoriesInMenuForCategory(subCat)}" scope="page" />
+	                                     <isif condition="${getsubCatsub.size() > 0}">
+                                          	<ul class="category-top-level3">
+                                            	<isloop items="${getsubCatsub}" var="subCatsub">
+                                            		<li class="<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && subCatsub.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">active</isif>">
+                                                       <isscript>
+					                                         var count : Number = getcategoryProductCount(subCatsub.ID);
+					                                         var subcatcount : Number = getcategoryProducts(subCatsub.ID);
+					                                   </isscript>
+						                                <isif condition="${getsubCatsub.size()}">
+                                                              <a href="${URLUtils.http('Search-Show', 'cgid', subCatsub.getID(),'id',ID)}" >
+                                    							  <isprint value="${subCatsub.getDisplayName()}"/><span class="count-products">&nbsp;(<isprint value="${count.toFixed()}" />)</span>
+                                                              </a>
+                                                              <iscomment>
+						                                     	<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && subCatsub.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">&#x25BC;<iselse/>&#x25B6; </isif>
+						                                      </iscomment>
+	                                                     </isif>
+	                                                     
+	                                                     	<isset name="getsubCatsub1" value="${getSubcategoriesInMenuForCategory(subCatsub)}" scope="page" />
+	                                                      <isif condition="${getsubCatsub1.size() > 0}">
+	                                                          <ul class="category-top-level4">
+		                                                          <isloop items="${getsubCatsub1}" var="subCatsub1">
+		                                                          
+		                                                          </isloop>
+	                                                          </ul>
+	                                                      </isif>
+					                                 </li>
+												</isloop><iscomment>fourth or subCatsub level categories loop</iscomment>
+											</ul>
+										</isif>	
+										
+										                                                                           
+                                     </li>
+                                   </isloop><iscomment>third or subcat level categories loop</iscomment>
+                            </ul>
+                        </isif>  
+               </li>
+      	 	 </isloop><iscomment>second level categories loop</iscomment>
+         </isif> 
+       </isloop><iscomment>First level or brand bar level categories loop</iscomment>
+       </ul>
+       </div>
+</isif>
+

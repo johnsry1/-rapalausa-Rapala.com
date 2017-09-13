@@ -1,0 +1,51 @@
+<!--- TEMPLATENAME: mainmenu.isml --->
+<iscache type="relative" hour="24"/>
+<isloop items="${pdict.MainMenuFolders}" var="item">
+	<li>
+		<a title="${item.displayName}" href="${dw.web.URLUtils.http('Folder-Show','fdid',item.ID)}">${item.displayName}</a>	
+		<isif condition="${item.custom.expandable}">
+			<ul>
+			<isloop items="${item.onlineSubFolders}" var="subFolder">
+				<isif condition="${!subFolder.onlineContent.empty && subFolder.custom.expandable}">
+					<isif condition="${subFolder.ID =='strikemaster-about-warranty' ||subFolder.ID == 'rapala-current-promotions' }">
+						<li class="handle-non-us">
+					<iselse>
+						<li>
+					</isif>
+						<a title="${subFolder.displayName}" href="${'#'}">${subFolder.displayName}</a>
+						<div style="display:none;">
+						<isloop items="${subFolder.onlineContent}" var="subContent">
+							<isif condition="${subContent.ID =='strikemaster-become-dealer' ||subContent.ID =='strikemaster-customer-donation-request' || subContent.ID =='strikemaster-dealer-locator-addition' || subContent.ID =='strikemaster-about-product-service' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' || subContent.ID == 'strikemaster-find-service-center'}">
+								<div class="handle-non-us">
+							<iselse>
+								<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
+									<div class="non-us-contactus hide">
+								<iselse>
+									<div>
+								</isif>
+							</isif>
+								<a title="${subContent.name}" href="${URLUtils.url('Page-Show','fdid',subFolder.ID,'cid',subContent.ID)}">${subContent.name}</a></div>
+						</isloop>
+						</div>
+					</li>
+				<iselse>
+					<isif condition="${subFolder.ID =='strikemaster-about-warranty'}">
+						<li class="handle-non-us">
+					<iselse>
+						<li>
+					</isif>
+					<a title="${subFolder.displayName}" href="${dw.web.URLUtils.http('Folder-Show','fdid',subFolder.ID)}">${subFolder.displayName}</a>
+				</isif>
+			</isloop>
+			<isloop items="${item.onlineContent}" var="subContent">
+				<li><a title="${subContent.name}" href="${URLUtils.url('Page-Show','fdid',item.ID,'cid',subContent.ID)}">${subContent.name}</a></li>
+			</isloop>
+			</ul>
+		</isif>
+	</li>
+</isloop>
+<isloop items="${pdict.MainMenuContent}" var="item">
+	<li>
+		<a title="${item.name}" href="${dw.web.URLUtils.http('Page-Show','cid',item.ID)}">${item.name}</a>	
+	</li>
+</isloop>

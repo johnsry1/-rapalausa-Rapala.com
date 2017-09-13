@@ -1,0 +1,226 @@
+<div class="productlisting sub-cat">
+	<isloop items="${SubcategoryHit.onlineSubCategories}" var="SubSubcategoryHit" status="status">
+<isif condition="${SubSubcategoryHit.getOnlineProducts().size()>0}">
+		<isloop items="${SubSubcategoryHit.getOnlineProducts().iterator()}" var="ProductHit" status="subcatloopstatus">
+			<isif condition="${!empty(SubSubcategoryHit.getOnlineProducts().iterator())}">
+			<isset name="Product" value="${ProductHit}" scope="page"/>
+						<isset name="productUrl" value="${URLUtils.http('Product-Show', 'pid', Product.ID)}" scope="page"/>
+					    <iscomment>append the paging parameters to the product URL</iscomment>
+						<isset name="productUrl" value="${productUrl.append('start', starting)}" scope="page"/>
+						<iscomment>append the search query parameters to the product URL</iscomment>
+						<isif condition="${!empty(pdict.ProductSearchResult)}">
+							<isset name="productUrl" value="${pdict.ProductSearchResult.url( productUrl )}" scope="page"/>
+						</isif>
+						
+						
+						<div class="product producttile cell"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
+							
+							<isobject object="${SubSubcategoryHit}" view="searchhit">
+								<div class="image">
+									<iscomment>Render the thumbnail</iscomment>
+									<div class="thumbnail">
+					                    <div class="productimage">
+									       <isproductimagewidget p_product="${Product}" p_role="grid" p_productlinkid="${productUrl}"/>
+					                    </div>
+										<!-- IE Hack to Collaspe DIV with display:none -->
+									</div>
+									<div class="quickviewbutton">
+										<a href="${productUrl}" title="<isprint value="${Product.name}" encoding="off" />">Quick View</a>
+									</div><!-- END: quickviewbutton -->
+								</div><!-- END: image -->
+								
+								 <div class="newFlag">
+								 	<isdisplayvariantnew p_product="${Product}"/>
+								 </div>
+								 <isdisplayvariantnewcolorsize p_product="${Product}"/>
+								 <isdisplayvariantnewpaksize p_product="${Product}"/>
+								 <isscript>
+									var count= 0;
+									if(Product.isMaster()){
+									var variants: dw.util.Collection =Product.getVariants();
+									var variantIter : dw.util.Iterator = variants.iterator();
+										while(variantIter.hasNext()){ 
+										var variant : dw.catalog.Variant = variantIter.next();
+													  if(variant.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
+													  count = count+1;
+													  }
+										}
+									}
+									else{
+										if(Product.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
+										count = count+1;
+										}
+									}
+								</isscript>	
+								
+								<div class="name">
+									<a href="${productUrl}" title="${Product.name}">
+											<isprint value="${(Product.name)}" encoding="off"/>
+									</a>
+								</div><!-- END: name -->
+								
+								<div class="promo">
+									<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>	
+						            <isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
+									<iscomment>Render information on active product promotions</iscomment>
+									<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(Product)}" scope="page"/>
+									<isif condition="${!empty(promos)}">
+										<isloop items="${promos}" var="promo">
+											<div class="promotionalMessage">
+												<isprint value="${(promo.calloutMsg)}" encoding="off"/>
+											</div>
+										</isloop>
+									</isif>
+									</isif>
+								</div><!-- END: promo -->
+								
+								<div class="pricing">
+									<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>
+									<isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
+									<iscomment>Renders pricing information depending on the option or variation model, as well as scaled prices and so on.</iscomment>
+									<div class="price">
+										<isif condition="${Product.productSet}">
+											<iscomment>Product set pricing</iscomment>
+											<div class="productsetprice">${Resource.msg('global.buyall','locale',null)}</div>
+										<iselseif condition="${Product.master && Product.priceModel.priceRange}"/>
+											<iscomment>Product master price range depending on the represented variants</iscomment>						
+												<div class="salesprice">${Resource.msg('pricing.startingat','product',null)} <isprint value="${Product.priceModel.minPrice}"/></div>
+										<iselse/>						
+											<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
+											<isif condition="${Product.master && !Product.priceModel.priceRange}"/>
+												<iscomment>Preserve current product instance</iscomment>
+												<isset name="OrgProduct" value="${Product}" scope="page"/>
+												<isset name="Product" value="${Product.variationModel.getVariants()[0]}" scope="page"/>
+											</isif>
+											<iscomment>
+												Regular pricing through price model of the product. If the product is an option product,
+												we have to initialize the product price model with the option model.
+											</iscomment>
+											<isif condition="${Product.optionProduct}">
+												<isset name="PriceModel" value="${Product.getPriceModel(Product.getOptionModel())}" scope="page"/>
+											<iselse/>
+												<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
+											</isif>
+						
+											<iscomment>
+												Check whether the product has price in the sale pricebook. If so, then
+												display two prices: crossed-out standard price and sales price.
+											</iscomment>
+											<isinclude template="product/components/standardprice"/>
+											
+											<!-- <isset name="SalesPrice" value="${Product.priceModel.minPrice}" scope="page"/> -->
+											
+											<isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page"/>
+						
+											<isif condition="${ShowStandardPrice}">
+												<div class="discountprice">
+													<div class="standardprice"><isprint value="${StandardPrice}"/></div>
+													<div class="salesprice"><isprint value="${SalesPrice}"/></div>
+												</div>
+											<iselse/>
+												<div class="salesprice">
+													<isif condition="${SalesPrice == dw.value.Money.NOT_AVAILABLE && !empty(Product.custom.earlyBirdMessage)}">
+														<isprint value="${Product.custom.earlyBirdMessage}"/>
+													<iselse/>
+														<isprint value="${SalesPrice}"/>
+													</isif>							
+												</div>
+											</isif>
+											<isif condition="${!empty(pdict.OrgProduct)}">
+												<iscomment>Restore current product instance</iscomment>
+												<isset name="Product" value="${OrgProduct}" scope="page"/>
+												<isset name="OrgProduct" value="${null}" scope="page"/>
+											</isif>
+										</isif>
+									</div><!-- price  -->
+									</isif>
+								
+								<div id="stock">
+									<iscomment>out of stock label</iscomment>
+									<isif condition="${count == 0}">
+									<span class="out_stock"><isprint value="${'Out Of Stock'}"/></span> 
+									</isif>
+								</div>
+								</div><!-- pricing -->
+						
+								<div class="review"></div><!-- END: review -->
+								<iscomment>
+									Render the compare checkbox, if search result is based on a category context.
+									The checkbox is displayed if either the category or one of its parent categories
+									has the custom attribute "enableCompare" set to true.
+								</iscomment>
+								<isscript>
+									var cat 			= pdict.ProductSearchResult.category,
+										enableCompare 	= false;
+									
+									while (cat != null) {
+										if ('enableCompare' in cat.custom && cat.custom.enableCompare) {
+											enableCompare = true;
+											break;
+										}
+										cat = cat.parent;
+									}
+								</isscript>
+								
+										<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.category) && enableCompare}">
+									        <div class="compare">
+												<isif condition="${!Product.productSet && !Product.bundle}">
+													<isscript>
+														// mark the compare checkbox checked if the current product is 
+														// in the current comparison list for the current category
+														
+														importScript( "catalog/libCompareList.ds" );
+														importScript( "common/libJson.ds" );
+							
+														var comparison = GetProductCompareList();
+														// Set the category
+														comparison.setCategory(pdict.ProductSearchResult.category.ID);
+								
+														var comparisonProducts = null;
+														
+														if (comparison) {
+															comparisonProducts = comparison.getProducts();
+														}
+														
+														var checkedStr = '';
+														
+														if (!empty(comparisonProducts)) {								
+															var pIt = comparisonProducts.iterator();
+															var productId = null;
+															
+															while (pIt.hasNext()) {
+																productId = pIt.next();									
+																if (productId == Product.ID) {
+																	checkedStr = 'checked=true';
+																	break;
+																}
+															}
+														}		    				
+									    			</isscript>	
+													<isset name="compareId" value="${dw.util.UUIDUtils.createUUID()}" scope="page"/>
+													<input type="checkbox" id="compare${compareId}" class="compareCheck" ${checkedStr}/>
+													<span class="hidden json">{boxId:"compare${compareId}", id:"<isprint value="${escapeJsonString(Product.ID)}"/>", catId:"<isprint value="${escapeJsonString(pdict.ProductSearchResult.category.ID)}"/>"}</span><!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js -->
+													<label for="compare${compareId}">Compare</label>						
+												</isif>
+											</div><!-- END: compare -->
+										</isif>
+									</isobject>
+						</div><!--producttile-->
+							
+							<isif condition="${(subcatloopstatus.count >= 4)}">
+								<isbreak></isbreak>
+							</isif>
+
+			</isif>
+
+		</isloop>
+
+<isif condition="${(status.count >= 1)}">
+<isbreak></isbreak>
+									
+</isif>
+</isif>
+
+	</isloop>
+
+</div>

@@ -1,0 +1,406 @@
+<isdecorate template="content/pt_sitemapcustomerservice">
+<isinclude template="util/modules"/>
+<div id="content">
+	<div id="page-background" class="downshift">
+	<div id="page">
+	<div class="wrapper">
+	<div class="row column1">
+		<div class="column cell1">
+		   <div class="cell upshift contentbox">
+		   <div class="contentboxcontent">
+
+	<h1>${Resource.msg('global.storemap','locale',null)}</h1>
+	<div class="categories">
+	
+		<isloop items="${dw.catalog.CatalogMgr.getSiteCatalog().getRoot().getOnlineSubCategories().iterator()}" var="topCategory" status="loopstatus">
+		<div class="site-map">
+		<isif condition="${'rapala' == session.custom.currentSite}">
+		<isif condition="${topCategory.displayName == 'Rapala'}">
+			<isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+				<ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
+						<li class="first-level"><h2><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+						<isif condition="${innerloopstatus1.count%4==0}">
+							<div class="clear"></div>
+						</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		</isif>
+		<iselseif condition="${'sufix' == session.custom.currentSite}">
+		<isif condition="${topCategory.displayName == 'Sufix'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+						<li class="first-level"><h2 class="boldborder"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 <iselseif condition="${'triggerx' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Trigger X'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'storm' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Storm'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Luhr-Jensen'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 <iselseif condition="${'marcum' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'MarCum'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'vmc' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'VMC'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'terminator' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Terminator'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'strikemaster' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'StrikeMaster'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 <iselseif condition="${'bluefox' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Blue Fox'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		  <iselseif condition="${'williamson' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Williamson'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+						<isif condition="${innerloopstatus1.count%4==0}">
+							<div class="clear"></div>
+						</isif>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		<iselseif condition="${'otter' == session.custom.currentSite}">
+		 <isif condition="${topCategory.displayName == 'Otter'}">
+		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
+		      <ul>
+					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
+					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<isprint value="${subCategory.displayName}"/></a></h2>
+							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
+								<ul >
+									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
+									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
+									<li>
+										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<isprint value="${subsubCategory.displayName}"/></a>
+									</li>
+									</isif>
+									</isloop>
+								</ul>
+							</isif>
+						</li>
+						<isif condition="${innerloopstatus1.count%4==0}">
+							<div class="clear"></div>
+						</isif>
+					</isif>
+					 </isloop>
+					
+				</ul>
+			</isif>
+			<div class="clear"></div>
+		 </isif>
+		 
+		 
+		</isif>
+	    </div><!-- site-map -->
+		</isloop>
+   
+		<div class="site-map">
+		
+				
+					<ul>
+						<li class="first-level">
+						    <isif condition="${'rapala' == session.custom.currentSite}">
+							<h2>Rapala Brands</h2>
+							<iselseif condition="${'sufix' == session.custom.currentSite}">
+							<h2> Respected Rapala Brands</h2>
+							<iselse>
+								<h2  class="left-nav-style"> Respected Rapala Brands</h2><br>
+							</iselse>
+							</isif>
+						    <ul>
+								<li><a href="${URLUtils.http('Home-Show','id','1')}"  title="${Resource.msg('headertab.rapala','common',null)}" >${Resource.msg('account.rapala','account',null)}</a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','6')}" title="${Resource.msg('headertab.vmc','common',null)}" target="_blank">${Resource.msg('account.vmc','account',null)} </a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','4')}" title="${Resource.msg('headertab.storm','common',null)}" target="_blank">${Resource.msg('account.storm','account',null)}</a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','2')}"  title="${Resource.msg('headertab.sufix','common',null)}" target="_blank">${Resource.msg('account.sufix','account',null)}</a></li>
+								<li><a  href="${URLUtils.http('Home-Show','id','3')}" title="${Resource.msg('headertab.triggerx','common',null)}" target="_blank">${Resource.msg('account.triggerx','account',null)}</a></li>
+								<li><a  href="${URLUtils.http('Home-Show','id','5')}" title="${Resource.msg('headertab.luhrjensen','common',null)}" target="_blank">${Resource.msg('account.luhrjensen','account',null)}</a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','7')}" title="${Resource.msg('headertab.terminator','common',null)}" target="_blank">${Resource.msg('account.terminator','account',null)}</a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','8')}" title="${Resource.msg('headertab.bluefox','common',null)}" target="_blank">${Resource.msg('account.bluefox','account',null)}</a></li>
+								<li><a href="${URLUtils.http('Home-Show','id','9')}" title="${Resource.msg('headertab.williamson','common',null)}" target="_blank">${Resource.msg('account.williamson','account',null)}</a></li>
+								<li><a  href="${URLUtils.http('Home-Show','id','10')}" title="${Resource.msg('headertab.marcum','common',null)}" target="_blank">${Resource.msg('account.marcum','account',null)}</a></li>
+								<li><a  href="${URLUtils.http('Home-Show','id','11')}" title="${Resource.msg('headertab.strikemaster','common',null)}" target="_blank">${Resource.msg('account.strikemaster','account',null)}</a></li>
+							</ul>
+						</li>
+							
+							<isif condition="${'triggerx' == session.custom.currentSite}">
+								<iscontentasset aid="my-account-sitemap-triggerx"/>
+							<iselseif condition="${'iceforce' == session.custom.currentSite}">
+							<iselse>
+								<iscontentasset aid="my-account-sitemap"/>
+							</isif>
+                            <isinclude url="${URLUtils.url('SiteMap-LeftNav','cid', pdict.CurrentHttpParameterMap.cid.stringValue)}"/>
+					 </ul>
+					<div class="clear"></div>
+       </div>
+ </div><!-- categories -->       
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</isdecorate>

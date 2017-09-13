@@ -1,0 +1,39 @@
+/**
+* Demandware Script File
+* This ds get applicable price books
+*
+*/
+importPackage( dw.system );
+
+function getApplicablePriceBooks( customerGroups ) : Number
+{
+    // read pipeline dictionary input parameter
+    // ... = args.ExampleIn;
+	var cgs : dw.util.Collection = customerGroups;
+    // insert business logic here
+	var cgi : dw.util.Iterator = cgs.iterator();
+	var pbs : Array = new Array();
+	
+	// get the current site's price books and add them first:
+	var pbi : dw.util.Iterator = dw.catalog.PriceBookMgr.getSitePriceBooks().iterator();
+	while (pbi.hasNext()) {
+		var pb : dw.catalog.PriceBook = pbi.next();
+		if(pb.isOnline()) {
+			pbs.push(pb.ID);
+		}
+	}
+	while (cgi.hasNext()) {
+		var group : dw.customer.CustomerGroup = cgi.next();
+		if(!empty(group.custom.priceBook)) {
+			pbs.push(group.custom.priceBook);	
+		}
+	}
+    // write pipeline dictionary output parameter
+    // args.ExampleOut = ...
+	//args.PriceBooks = pbs;
+   return pbs;
+}
+
+module.exports = {
+	getApplicablePriceBooks : getApplicablePriceBooks
+	}

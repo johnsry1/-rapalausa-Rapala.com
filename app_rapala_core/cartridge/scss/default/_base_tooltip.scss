@@ -1,0 +1,81 @@
+.tooltip {
+	cursor: help;
+	position: relative;
+	&.product-tile {
+		cursor: pointer;
+	}
+}
+
+.tooltip-content {
+	display: none;
+}
+
+.ui-tooltip {
+	border-radius: 5px;
+    border: 0 solid #000;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: 0;
+	&.ui-widget-content {
+		background: $night-rider;
+		border-radius: 3px;
+		box-shadow: 2px 3px 3px 0 $nobel;
+		color: $white;
+	}
+	 ul {
+	 	li {
+		    list-style: inside square;
+		}
+	 }
+}
+
+.ui-tooltip-content {
+	font-family: $lucida-font-family;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 8px 10px;
+    overflow: hidden;
+    b {
+        font-weight: bold;
+    }
+    hr {
+	    display: block;
+	    -webkit-margin-before: 0.5em;
+	    -webkit-margin-after: 0.5em;
+	    -webkit-margin-start: auto;
+	    -webkit-margin-end: auto;
+	    border-style: inset;
+	    border-width: 1px;
+	}
+	.recommendation-tooltip-header {
+		font-size: 1.2em;
+		font-weight: bold;
+		padding: 0.5em;
+		.product-price {
+			font-weight: 400;
+			.price-standard {
+				color: $nobel;
+				text-decoration: line-through;
+			}
+		}
+	}
+	.recommendation-tooltip-description,
+	.recommendation-tooltip-attributes {
+		padding: 0.8em;
+	}
+	.shipping-method-cost,
+	.surcharge-product,
+	.promo {
+		text-align: right;
+		padding-bottom: .3rem;
+	}
+	.shippingtotal {
+		clear: right;
+		text-align: right;
+		margin-top: .3rem;
+		.value {
+			border-top: 1px solid $charcoal;
+			padding-top: .3rem;
+		}
+	}
+}

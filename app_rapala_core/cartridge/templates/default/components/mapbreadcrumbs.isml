@@ -1,0 +1,28 @@
+<iscomment>
+	This template renders a dynamic breadcrumb navigation. 
+	Each breadcrumb map entry consists of a key for 
+	the display text and a value for the URL to call.
+</iscomment>
+<div class="productsearchbreadcrumb">
+<div class="wrapper">
+<div class="row column1">
+<div class="column">
+<div class="cell">
+<ul>
+	<iscomment> HOME BREADCRUMB  </iscomment>
+	<a href="${URLUtils.httpHome()}" class="breadcrumb-element" title="${Resource.msg('global.home','locale',null)}">${Resource.msg('global.home','locale',null)}</a><span class="breadcrumb-element-slash"></span>
+<iscomment>	REMAINING BREADCRUMB  </iscomment>
+	<isloop items="${pdict.bcmap}" var="entry">
+		<isif condition="${entry.value != null}">
+	    	<a class="breadcrumb-element" href="${entry.value}" title="${entry.key}"> ${entry.key}</a><span class="breadcrumb-element-slash"></span>
+		<iselseif condition="${entry.value == null && entry.key != null}">
+		<span class="breadcrumb-element">	${entry.key} </span>
+		</isif>
+	</isloop>
+</ul>
+</div><!-- END: cell -->	
+</div><!-- END: column -->
+</div><!-- END: row column1 -->
+<div class="clear"></div>
+</div><!-- END: wrapper -->
+</div><!-- END: breadcrumb -->

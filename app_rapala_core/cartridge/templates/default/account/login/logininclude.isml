@@ -1,0 +1,122 @@
+<div class="logincustomers">
+<h1><isprint value="${Resource.msg('logininclude.logintomyaccount','account',null)}" encoding="off"></isprint></h1>
+<isscript>
+var currRequest : dw.system.Request = pdict.CurrentRequest;
+        var httpUserAgent : String = currRequest.httpUserAgent.toLowerCase();
+        var agentID = "desktop";
+        if(httpUserAgent.indexOf("iphone") > -1 || httpUserAgent.indexOf("android") > -1 || httpUserAgent.indexOf("ipad") > -1 ){
+                agentID = "device";
+        }
+        			var customAttributes = {
+						tabindex : 26
+					};
+					var customAttributes1 = {
+						tabindex : 27
+					};
+					var customAttributes2 = {
+						tabindex : 28
+					};
+</isscript>
+
+
+	<div class="returningcustomers">
+		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.login.htmlName}">
+			<iscomment>Login Unsuccessful Error Message</iscomment>
+			<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
+				<div id="message" class="error" style="text-align: left;">${Resource.msg('logininclude.locked','account',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && (pdict.TempCustomer.profile.credentials.remainingLoginAttempts == 1)}">
+				<div id="message" class="error" style="text-align: left;">${Resource.msg('logininclude.willbelocked','account',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			</isif>
+			<fieldset>
+				<input type="text" name="first-hidden" class="first-hidden"/>
+				<div class="formfield username account-email err <isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">log_error</isif>" >
+					<isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
+						<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" rowClass="inputlabel" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+						<span class="email_error logerror">Please try again; the email and/or password do not match our records.</span>
+					<iselse>
+					    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+					</iselse>
+					</isif>
+					
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				
+				<div class="formfield password <isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">log_error</isif>" >
+					<isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
+						<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowClass="inputlabel" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+						<span class="pwd_error logerror">Please try again; the email and/or password do not match our records. Passwords are CaSe SeNsItIvE.</span>
+					 <iselse>
+					 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+					 </iselse>
+					</isif>
+					
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="custom-checkbox custom desktopHide ">
+					<div class="custom-link"></div>
+					<isinputfield formfield="${pdict.CurrentForms.login.rememberme}"  type="checkbox" attributes="${customAttributes2}"/>
+				</div>
+				<div class="custom-checkbox custom tab mobileHide">
+					<div class="chkbox-outerdiv">
+						<div class="custom-link"></div>
+						<isinputfield formfield="${pdict.CurrentForms.login.remembermedevice}"  type="checkbox" attributes="${customAttributes2}"/>
+					</div>
+				</div>
+				<isif condition="${ agentID == "desktop"}">
+					<div class="resetpwd">
+						<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('account.login.logininclude.forgotpassword.label','account',null)}">
+		                    ${Resource.msg('account.login.logininclude.forgotpassword','account',null)}
+		                 </a>
+	                 </div>
+				</isif>
+				<div class="formactions">
+					<button class="signinbtn" tabindex="29" type="submit" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}"><span>${Resource.msg('global.login','locale',null)}</span> <span class='loadImage'></span></button>
+				</div><!-- END: returningcustomers_button -->
+				<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+				<isif condition="${ agentID == "device"}">
+					<div class="resetpwd">
+						<a id="password-reset" href="${URLUtils.url('Account-PasswordResetDialog')}" title="${Resource.msg('account.login.logininclude.forgotpassword.label','account',null)}">
+		                    ${Resource.msg('account.login.logininclude.forgotpassword','account',null)}
+		                 </a>
+	                 </div>
+				</isif>
+			</fieldset>
+		</form>
+		<div class="clear"><!-- FLOAT CLEAR --></div>
+	</div><!-- END: returningcustomers -->
+	<div class="clear"><!-- FLOAT CLEAR --></div>
+</div><!-- END: logincustomers -->
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(document).ready(function() {
+		jQuery("[name=${pdict.CurrentForms.login.username.htmlName}]").attr('tabindex', 21);
+		jQuery("[name=${pdict.CurrentForms.login.password.htmlName}]").attr('tabindex', 22);
+		$('.returningcustomers').find('input[name$="login_rememberme"]').attr('tabindex', 23);
+		// see if we have password reset dialog div
+		// we need to add this dynamically as login panel can be present multiple times in the window
+		// but we want to use only 1 password reset dialog
+		if (jQuery(".PasswordResetDialog").length <=0) {
+	   		// create this div only once
+	   		jQuery("<div/>").attr("class", "PasswordResetDialog").appendTo(document.body);
+	   	}
+	  	jQuery('#PasswordReset').click(function() {
+	    	app.ajax.load({selector: ".PasswordResetDialog", url: '${URLUtils.url('Account-PasswordResetDialog')}'});
+	  	});
+
+	});
+	setTimeout(function(){
+		$("button").on('click',function () {
+			if($('.resetpassword').is(':Visible')) {
+				$('.resetpassword').closest('div.dialog-content').addClass('confirmationcontainer')
+			}
+			else 
+			{
+		
+			}
+		
+		});
+	}, 500);
+	
+	
+	
+
+/* ]]> */</script>

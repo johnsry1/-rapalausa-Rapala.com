@@ -1,0 +1,439 @@
+/***********************************************************************
+* Make sure variable names do not contain underscores in them and make
+* sure I/O variables are accessed through PipelineDictionary "pdict".
+*
+* File:
+*   SetCurrentSiteContext.ds
+*
+* Description:
+*   This script file sets a session variable so we know
+*   which site we are in (RAP, SUF).
+*   The ids 1,2,3 etc., to the brands has been reasigned based on site launch timeline.
+*         Rapala (1)
+*         Sufix (2)
+*		  Trigger X (3)
+*         Storm (4)
+*         Luhr-Jensen (5)
+*         VMC (6)
+*         Terminator (7)
+*         Blue Fox (8)
+*         Williamson (9)
+*
+************************************************************************/
+importPackage(dw.system);
+importPackage(dw.web);
+importPackage(dw.catalog);
+
+function determineFolderContext (folder : dw.content.Folder) : String {
+	var nextFolder : dw.content.Folder = folder;
+	var brandNames : dw.util.HashSet = new dw.util.HashSet();
+		brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce']);	
+		
+	var context : String = "global";
+	while(nextFolder.root == false) {
+		if(brandNames.contains(nextFolder.ID)) {
+			context = nextFolder.ID;
+			break;
+		}
+		nextFolder = nextFolder.parent;
+	}
+	return context;
+}
+
+function execute(pdict : PipelineDictionary) : Number {
+	return setSiteContext(request.httpParameterMap);
+}
+
+function setSiteContext(http : CurrentHttpParameterMap) {
+	
+	var currentSite : String = session.custom.currentSite;
+	var homeSplash : Boolean = false;
+	
+	//this section used for swithching the brand for PDP redirect scenarios
+	if(!empty(http.get("brandname")) && http.get("brandname").value !=null )
+		{
+			var brand = http.get("brandname").value;
+		    currentSite = brand;
+		}
+	
+	else if (!empty(http.get("id").value) &&  http.get("id")!=null) 
+	    {
+	    	switch(http.get("id").value.toUpperCase())
+	    	{
+	    		
+	    		case "1": currentSite = "rapala";
+	    					break;
+	    					
+	    		case "2": currentSite = "sufix";
+	    					break;
+	    					
+	    		case "3": currentSite = "triggerx";
+	    					break;
+	    					
+	    		case "4": currentSite = "storm";
+	    					break;
+	    					
+	    		case "5": currentSite = "luhrjensen";
+	    					break;
+	    					
+	    		case "6": currentSite = "vmc";
+	    					break;
+	    					
+	    		case "7": currentSite = "terminator";
+	    					break;
+	    					
+	    		case "8": currentSite = "bluefox";
+	    					break;
+	    					
+	    		case "9": currentSite = "williamson";
+	    					break;
+	    					
+	    		case "10": currentSite = "marcum";
+	    					break;
+	    					
+	    		case "11": currentSite = "strikemaster";
+	    					break;
+	    					
+	    		case "20": currentSite = "iceforce";
+	    					break;
+	    		
+	    	}
+		} 
+		
+		//this section to set current site based on the cgid
+		else if (!empty(http.get("cgid").value) && CatalogMgr.getCategory(http.get("cgid").value) != null) 
+		{
+	      	var catID = http.get("cgid").value;
+	      	var category : dw.catalog.Category = CatalogMgr.getCategory(catID);
+	      	
+	      	if (category) 
+	      	{
+		      	while (category.parent && !category.parent.root) 
+		      	{
+		        	category = category.parent;
+		      	}
+	      	}
+	      
+	      	if ("rapala"==category.ID || category.ID.indexOf("rapala") != -1)
+	      	{
+	        	currentSite = "rapala";
+	      	}
+	      	else if ("sufix"==category.ID || category.ID.indexOf("sufix") != -1)
+	      	{
+	        	currentSite = "sufix";
+			}
+			else if ("triggerx"==category.ID || category.ID.indexOf("triggerx") != -1)
+	      	{
+	        	currentSite = "triggerx";
+			}
+			else if ("storm"==category.ID || category.ID.indexOf("storm") != -1)
+	      	{
+	        	currentSite = "storm";
+			}
+			else if ("luhrjensen"==category.ID || category.ID.indexOf("luhrjensen") != -1)
+	      	{
+	        	currentSite = "luhrjensen";
+			}
+			else if ("vmc"==category.ID || category.ID.indexOf("vmc") != -1)
+	      	{
+	        	currentSite = "vmc";
+			}
+			else if ("terminator"==category.ID || category.ID.indexOf("terminator") != -1)
+	      	{
+	        	currentSite = "terminator";
+			}
+			else if ("bluefox"==category.ID || category.ID.indexOf("bluefox") != -1)
+	      	{
+	        	currentSite = "bluefox";
+			}
+			else if ("williamson"==category.ID || category.ID.indexOf("williamson") != -1)
+	      	{
+	        	currentSite = "williamson";
+			}
+			else if ("marcum"==category.ID || category.ID.indexOf("marcum") != -1)
+	      	{
+	        	currentSite = "marcum";
+			}
+			else if ("strikemaster"==category.ID || category.ID.indexOf("strikemaster") != -1)
+	      	{
+	        	currentSite = "strikemaster";
+			}
+			else if (category.ID.indexOf("iceforce") != -1)
+	      	{
+	        	currentSite = "iceforce";
+			}	
+			else
+			{
+				currentSite = "rapala";
+				homeSplash = true;
+			}
+		}
+		
+	    // Product-Show with pid
+	    else if (!http.get("pid").empty && ProductMgr.getProduct(http.get("pid").value) != null ) 
+	    {
+	      	var prodID : String = http.get("pid").value;
+	      	var product : Product = ProductMgr.getProduct(prodID);
+	      	if(http.get("oneresult").value != false &&  product.getPrimaryCategory() != null)
+	        {
+	    		currentSite = product.getPrimaryCategory().ID.split('-')[0];	    		
+	        }
+	      	
+	      	else{
+		      	if (product.variant) // only master products are categorized
+		      	{
+		        	product = product.masterProduct;
+		      	}
+		      	var category : Category;
+		      	var siteflag : Boolean = false;
+		      	if(!empty(product.onlineCategories) && product.onlineCategories.length >= 1) {
+	      			for(var i=0; i<product.onlineCategories.length;i++){
+	      				var tempCategory : dw.cataloog.Category  = product.onlineCategories[i];
+	      				if(tempCategory.ID.indexOf(currentSite) != -1){
+	      					category = tempCategory;
+	      					siteflag = true;
+	      					break;
+	      				}
+	      				else{
+	      					while (tempCategory.parent && !tempCategory.parent.root) 
+		      				{
+		        				tempCategory = tempCategory.parent;
+		        				if(tempCategory.ID.indexOf(currentSite) != -1){
+	      							siteflag = true;
+	      							category = tempCategory;
+	      							break;
+	      						}
+		    			  	}
+	      				}
+	      				if(siteflag){break;}
+	      			}
+	      			if(!siteflag){
+	      				if(product.getPrimaryCategory()){
+	      					category = product.getPrimaryCategory();
+	      				}
+	      				else{
+	      					category =  product.categories[0];
+	      				}		
+	      			}
+		      			
+		      	} else {
+		      		category = product.categories[0];
+		      	}
+		      	
+		      	if (category) 
+		      	{
+			      	while (category.parent && !category.parent.root) 
+			      	{
+			        	category = category.parent;
+			      	}
+		      	}
+		      
+		      	if ("rapala"==category.ID)
+		      	{
+		        	currentSite = "rapala";
+		      	}
+		      	else if ("sufix"==category.ID)
+		      	{
+		        	currentSite = "sufix";
+				}
+				else if ("triggerx"==category.ID)
+		      	{
+		        	currentSite = "triggerx";
+				}
+				else if ("storm"==category.ID)
+		      	{
+		        	currentSite = "storm";
+				}
+				else if ("luhrjensen"==category.ID)
+		      	{
+		        	currentSite = "luhrjensen";
+				}
+				else if ("vmc"==category.ID)
+		      	{
+		        	currentSite = "vmc";
+				}
+				else if ("terminator"==category.ID)
+		      	{
+		        	currentSite = "terminator";
+				}
+				else if ("bluefox"==category.ID)
+		      	{
+		        	currentSite = "bluefox";
+				}
+				else if ("williamson"==category.ID)
+		      	{
+		        	currentSite = "williamson";
+				}
+				else if ("marcum"==category.ID)
+		      	{
+		        	currentSite = "marcum";
+				}
+				else if ("strikemaster"==category.ID)
+		      	{
+		        	currentSite = "strikemaster";
+				}
+			
+	      	}
+			
+	    }
+		else if (!http.get("fdid").empty && !empty(dw.content.ContentMgr.getFolder(http.get("fdid").stringValue)) ) 
+	    {
+	    	var host : String = request.getHttpHost();
+	    	var path : String = request.getHttpPath();
+	    	
+	    	if(host.indexOf('Page-Show') > -1 || path.indexOf('Page-Show') > -1){
+	    		
+	    	switch(session.custom.currentSite){
+				case 'rapala' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','1'));
+				break;
+				case 'sufix' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','2'));
+				break;
+				case 'triggerx' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','3'));
+				break;
+				case 'storm' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','4'));
+				break;
+				case 'luhrjensen' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','5'));
+				break;
+				case 'vmc' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','6'));
+				break;
+				case 'terminator' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','7'));
+				break;
+				case 'bluefox' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','8'));
+				break;
+				case 'williamson' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','9'));
+				break;
+				case 'marcum' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','10'));
+				break;
+				case 'strikemaster' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','11'));
+				break;
+				case 'iceforce' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','12'));
+				break;
+				default: response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','1'));
+					}
+			
+	    	
+	    	}else{
+		    	switch(session.custom.currentSite){
+				case 'rapala' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
+				break;
+				case 'sufix' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','2'));
+				break;
+				case 'triggerx' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','3'));
+				break;
+				case 'storm' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','4'));
+				break;
+				case 'luhrjensen' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','5'));
+				break;
+				case 'vmc' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','6'));
+				break;
+				case 'terminator' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','7'));
+				break;
+				case 'bluefox' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','8'));
+				break;
+				case 'williamson' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','9'));
+				break;
+				case 'marcum' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','10'));
+				break;
+				case 'strikemaster' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','11'));
+				break;
+				case 'iceforce' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','12'));
+				break;
+				default:response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
+					}
+	    		}
+
+	    	
+	    }	
+		else {
+			var host : String = request.getHttpHost();
+			var path : String = request.getHttpPath();
+			if(host.indexOf('sufix') > -1 || path.indexOf('sufix') > -1) {
+				currentSite = "sufix";
+			}
+			else if(host.indexOf('triggerx') > -1 || path.indexOf('triggerx') > -1) {
+				currentSite = "triggerx";
+			}
+			else if(host.indexOf('storm') > -1 || path.indexOf('storm') > -1) {
+				currentSite = "storm";
+			}
+			else if(host.indexOf('luhrjensen') > -1 || path.indexOf('luhrjensen') > -1) {
+				currentSite = "luhrjensen";
+			}
+			else if(host.indexOf('vmc') > -1 || path.indexOf('vmc') > -1) {
+				currentSite = "vmc";
+			}
+			else if(host.indexOf('terminator') > -1 || path.indexOf('terminator') > -1) {
+				currentSite = "terminator";
+			}
+			else if(host.indexOf('bluefox') > -1 || path.indexOf('bluefox') > -1) {
+				currentSite = "bluefox";
+			}
+			else if(host.indexOf('williamson') > -1 || path.indexOf('williamson') > -1) {
+				currentSite = "williamson";
+			}
+			else if(host.indexOf('marcum') > -1 || path.indexOf('marcum') > -1) {
+				currentSite = "marcum";
+			}
+
+			else if(host.indexOf('strikemaster') > -1 || path.indexOf('strikemaster') > -1) {
+				currentSite = "strikemaster";
+			}
+
+			else if(host.indexOf('iceforce') > -1 || path.indexOf('iceforce') > -1) {
+				currentSite = "iceforce";
+			}
+			/*else if(host.indexOf('otter') > -1 || path.indexOf('otter') > -1) {
+				currentSite = "otter";
+			}*/
+
+			else if(host.indexOf('rapala') > -1 && path == "/on/demandware.store/Sites-rapala-Site") {
+				currentSite = "rapala";
+			}
+			else if(!currentSite || currentSite == "") {
+				currentSite = "rapala";
+			}
+			homeSplash = true;
+		}
+		
+	// Last resort, if session was not set previously and can't be determined from the above rules, redirect to Splash screen    
+	if (null==currentSite) 
+	    {
+	    	homeSplash = true;
+	        currentSite = "rapala";
+	    }
+	   
+	 // examine the international redirect cookie. If it exists, don't show the site selector
+    if(empty(request.httpCookies.internationalSiteSelected)) {
+    	if(!homeSplash) {
+    		var cookie : Cookie = new Cookie("internationalSiteSelected","true");
+    		cookie.setMaxAge(-1);
+    		cookie.setPath("/");
+    		response.addHttpCookie(cookie);
+    	}
+    } else {
+    	homeSplash = false;
+    }
+    
+    if(homeSplash) {
+    	if(empty(dw.system.Site.getCurrent().getCustomPreferenceValue('enableInternationalLandingPage')) || dw.system.Site.current.preferences.custom['enableInternationalLandingPage'] == false) {
+    		homeSplash = false;
+    	}	
+    }
+    
+    //if((currentSite == "strikemaster" || currentSite = ="iceforce") && homeSplash == true) {
+    	//   	homeSplash = false;
+    //}
+    
+    if(currentSite != session.custom.currentSite) {
+    	session.getCustom().currentSite = currentSite;
+    }
+    
+    if(homeSplash == true || session.getCustom().homeSplash != null) {
+    	session.getCustom().homeSplash = homeSplash;
+    }
+	
+}
+
+module.exports = {
+    setSiteContext : setSiteContext
+};

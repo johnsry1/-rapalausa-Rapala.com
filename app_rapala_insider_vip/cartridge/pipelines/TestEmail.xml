@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="Start">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="Start" secure="false"/>
+        <node-display x="1" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="SendMail" pipelet-set-identifier="bc_api">
+          <key-binding alias="&quot;RapalaInsider@demandware.net&quot;" key="MailFrom"/>
+          <key-binding alias="Program +&quot; Application  &quot; + CurrentForms.vipinsider.customer.firstname.htmlValue +CurrentForms.vipinsider.customer.lastname.htmlValue" key="MailSubject"/>
+          <key-binding alias="null" key="LocaleID"/>
+          <key-binding alias="null" key="MailCC"/>
+          <key-binding alias="&quot;mail/dummyattachment&quot;" key="MailTemplate"/>
+          <key-binding alias="dw.system.Site.current.preferences.custom.DataSummisionEmail" key="MailTo"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="2"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>This pipeline is used to send mail to the rapala repository with attachments</description>
+        </text-node>
+        <node-display x="2" y="1"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

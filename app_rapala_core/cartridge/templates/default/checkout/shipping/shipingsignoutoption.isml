@@ -1,0 +1,45 @@
+<!--- TEMPLATENAME: shipingsignoutoption.isml --->
+<div class="signoutDialog">
+	<div class="heading">Log Out and...</div>
+	<div class="signoutDialogCont">
+		<iscomment> 
+			<div class="greater-than-767">
+				<form action="${URLUtils.url('COShipping-EmptyCart')}"  class="signout-option-empty" method="post" id="emptycart">
+					<div class="emptycart-div">
+						<div class="section-head">START WITH AN EMPTY CART</div>
+						<div class="fisrt-span">Log the Current User out and start shopping with an empty cart.</div>
+						<div class="second-span">(All items currently in the cart will remain in the Current User's cart.)</div>
+					<button class="continuecheckout shipping-emptycart" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.emptycart.htmlName}" value="EMPTY_CART">
+								<span>EMPTY CART</span>
+					</button>
+					</div>
+					<input type="hidden" name="${pdict.CurrentForms.singleshipping.secureKeyHtmlName}" value="${pdict.CurrentForms.singleshipping.secureKeyValue}"/>
+				</form>
+				<form action="${URLUtils.url('COShipping-CopyCart')}"  class="signout-option-copy" method="post" id="${pdict.CurrentForms.singleshipping.shippingAddress.htmlName}">
+					<div class="copycartdiv">
+					<div class="section-head">COPY ITEMS TO A NEW CART</div>
+						<div class="fisrt-span">Log the Current User out and copy all existing cart items to a new cart.</div>
+						<div class="second-span">(All items currently in the cart will remain in the Current User's cart.)</div>
+					<button class="continuecheckout shipping-copycart" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.copycart.htmlName}" value="Copy">
+								<span>COPY CART</span>
+					</button>
+					</div>
+				<input type="hidden" name="${pdict.CurrentForms.singleshipping.secureKeyHtmlName}" value="${pdict.CurrentForms.singleshipping.secureKeyValue}"/>
+				</form>
+			</div>
+		</iscomment>
+		<div class="emptycart-div">
+			<div class="section-head">Empty cart</div>
+			<div class="fisrt-span">Log the Current User out and start shopping with an empty cart.</div>
+		</div>
+		<div class="copycartdiv">
+			<div class="section-head">Copy cart</div>
+			<div class="fisrt-span">Log the Current User out and copy all existing cart items to a new cart.</div>
+			<div class="second-span">*All items currently in the cart will remain in the Current User's cart.</div>
+		</div>
+		<div>
+			<a href="${URLUtils.url('COShipping-EmptyCart')}" class="empty-cart-button">Empty cart</a>
+			<a href="${URLUtils.url('COShipping-CopyCart')}" class="cart-cart-button">copy cart</a>
+		</div>
+	</div>	
+</div>	

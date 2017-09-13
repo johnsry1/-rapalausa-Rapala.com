@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="PP_AuthorizationInCaseOfOrder">
+                <display-name xml:lang="x-default">Run Authorization in Case of Order</display-name>
+                 <description xml:lang="x-default">Run Authorization in Case of Order (DoAuthorization call will be invoked right after PaymentAction Order)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_AllowNote">
+                <display-name xml:lang="x-default">Allow Buyers Note</display-name>
+                <description xml:lang="x-default">Allows buyer to leave note for merchant in express checkout flow (on the PayPal side)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_NoShipping">
+                <display-name xml:lang="x-default">Do not use shipping</display-name>
+                <description xml:lang="x-default">Do not use shipping (useful for a digital goods)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ExpressPaymentAction">
+                <display-name xml:lang="x-default">Payment Action</display-name>
+                <description xml:lang="x-default">Payment action can be Order, Sale, Authorization</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Authorization</display>
+                        <value>Authorization</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Sale</display>
+                        <value>Sale</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Order</display>
+                        <value>Order</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ReqConfirmShipping">
+                <display-name xml:lang="x-default">Accept only confirmed shipping addresses</display-name>
+                <description xml:lang="x-default">If enabled then Customer address should be confirmed and verified by PayPal. If not then address verification is omitted.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_RequestBillingAddressFromPayPal">
+                <display-name xml:lang="x-default">Retrieve Billing Address From PayPal</display-name>
+                <description xml:lang="x-default">If checked and address from PayPal is used then save it to Demandware order record. Note: Please contact PayPal support to be sure that this feature is enabled for you.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_CheckoutButtonUrl">
+                <display-name xml:lang="x-default">URL to the PayPal Express Checkout button</display-name>
+                <description xml:lang="x-default">Path must include protocol e.g http://</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_ShowExpressCheckoutButtonOnCart">
+                <display-name xml:lang="x-default">Visibility of PayPal Express Checkout Button on the Cart page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_CreditBannerHeight">
+                <display-name xml:lang="x-default">PayPal Credit Banner Height</display-name>
+                <description xml:lang="x-default">Height can't be a random value. See PayPal banner sizes on the PayPal's finance portal for more information</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>100</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_CreditBannerWidth">
+                <display-name xml:lang="x-default">PayPal Credit Banner Width</display-name>
+                <description xml:lang="x-default">Width can't be a random value. See PayPal banner sizes for more information</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>190</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_CreditButtonUrl">
+                <display-name xml:lang="x-default">Url to PayPal Express Credit button</display-name>
+                <description xml:lang="x-default">Url must include protocol e.g http://</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>https://www.paypalobjects.com/webstatic/en_US/i/buttons/ppcredit-logo-small.png</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_ShowCartPayPalCreditButton">
+                <display-name xml:lang="x-default">Visibility of PayPal Credit Button on the Cart page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_PaymentsProPaymentAction">
+                <display-name xml:lang="x-default">Credit Cart Payment Action</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sale</display>
+                        <value>Sale</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization</display>
+                        <value>Authorization</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ShippingAddressOverride">
+                <display-name xml:lang="x-default">Shipping Address Override</display-name>
+                <description xml:lang="x-default">Defines where to take shipping address. If preference is unchecked - shipping address is taken from PayPal (data, entered on shipping page, doesn't matter)</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_PageStyle">
+                <display-name xml:lang="x-default">PayPal Page Style</display-name>
+                <description xml:lang="x-default">Name of the Custom Payment Page Style</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_LogoImgageUrl">
+                <display-name xml:lang="x-default">Logo image Url</display-name>
+                <description xml:lang="x-default">Url shiuld include protocol e.g. https</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_CartBorderColor">
+                <display-name xml:lang="x-default">Cart Border Color</display-name>
+                <description xml:lang="x-default">The HTML hex code for your principal identifying color</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_BrandName">
+                <display-name xml:lang="x-default">Brand Name</display-name>
+                <description xml:lang="x-default">Brand Name will be displayed on the PayPal pages</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_CustomerServicePhoneNumber">
+                <display-name xml:lang="x-default">Customer Service Phone Number</display-name>
+                <description xml:lang="x-default">Merchant's customer service number.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_PaymentsProPaymentAction">
+                <display-name xml:lang="x-default">PaymentsPro Payment Action</display-name>
+                <description xml:lang="x-default">Credit Card Transaction Payment Action. Used for the PaymentsPro feature</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sale</display>
+                        <value>Sale</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization</display>
+                        <value>Authorization</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ExpressCheckoutSolutionType">
+                <display-name xml:lang="x-default">Express Checkout Solution Type</display-name>
+                <description xml:lang="x-default">Sole – Buyer does not need to create a PayPal account to check out. This is referred to as PayPal Account Optional. Mark – Buyer must have a PayPal account to check out</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sole</display>
+                        <value>Sole</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Mark</display>
+                        <value>Mark</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ExpressCheckoutLandingPage">
+                <display-name xml:lang="x-default">Express Checkout Landing Page</display-name>
+                <description xml:lang="x-default">Type of PayPal page to display. It is one of the following values: Billing – Non-PayPal account, Login – PayPal account login</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Login</display>
+                        <value>Login</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Billing</display>
+                        <value>Billing</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_EnableIncontextCheckout">
+                <display-name xml:lang="x-default">Enable In-Context Checkout</display-name>
+                <description xml:lang="x-default">Enables In-Context Checkout feature</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_OfferBillingAgreementForEachPaymentAction">
+                <display-name xml:lang="x-default">Offer Billing Agreement</display-name>
+                <description xml:lang="x-default">Offer Billing Agreement with the PayPal for each Payment Action for the buyer. If enabled then Billing Agreement will be offered for any Order on the storefront</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_BillingAgreementDescription">
+                <display-name xml:lang="x-default">Billing Agreement Description</display-name>
+                <description xml:lang="x-default">Maximum length: 126 characters</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-height>5</field-height>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_BillingAgreementType">
+                <display-name xml:lang="x-default">Billing Agreement Type</display-name>
+                <description xml:lang="x-default">Billing Agreement Type</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">MerchantInitiatedBilling</display>
+                        <value>MerchantInitiatedBilling</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">MerchantInitiatedBillingSingleAgreement</display>
+                        <value>MerchantInitiatedBillingSingleAgreement</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_BillingAgreementPaymentType">
+                <display-name xml:lang="x-default">Billing Agreement Payment Type</display-name>
+                <description xml:lang="x-default">Allows you to specify what payment types you will accept for payments made under this billing agreement</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Any</display>
+                        <value>Any</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">InstantOnly</display>
+                        <value>InstantOnly</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_ReferenceTransactionPaymentAction">
+                <display-name xml:lang="x-default">Reference Transaction Payment Action</display-name>
+                <description xml:lang="x-default">Payment Action for the Reference Transactions</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">Sale</display>
+                        <value>Sale</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Authorization</display>
+                        <value>Authorization</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Order</display>
+                        <value>Order</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_EnableEasyPayments">
+                <display-name xml:lang="x-default">Enable Easy Payments</display-name>
+                <description xml:lang="x-default">Easy Payments must be configured by PayPal. Please contact your PayPal account representative for assistance</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_Merchant_ID">
+                <display-name xml:lang="x-default">Merchant ID</display-name>
+                <description xml:lang="x-default">Your PayPal Merchant ID</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_Merchant_Publisher_ID">
+                <display-name xml:lang="x-default">Merchant Publisher ID</display-name>
+                <description xml:lang="x-default">PP MerchantPublisher ID for the credit banner and other financing tools</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_LogIpnNotifications">
+                <display-name xml:lang="x-default">Write IPN notifications to the Logs</display-name>
+                <description xml:lang="x-default">Notifications will appear in the logs in the JSON format in the logs folder with custom name 'notification'</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_API_Signature">
+                <display-name xml:lang="x-default">PayPal Signature</display-name>
+                <description xml:lang="x-default">API Signature in case of API Signature Credentials</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_Credit_Campaign_ID">
+                <display-name xml:lang="x-default">Campaign ID for PayPal credit banner</display-name>
+                <description xml:lang="x-default">Id of the campaigning that will show the PayPal credit banner</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="PP_Timeout">
+                <display-name xml:lang="x-default">IPN Timeout</display-name>
+                <description xml:lang="x-default">Timeout value for IPN</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>30000</default-value>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+           <attribute-group group-id="Paypal_General_Configuration">
+                <display-name xml:lang="x-default">Paypal General Configuration</display-name>
+                <attribute attribute-id="PP_EnableIncontextCheckout"/>
+                <attribute attribute-id="PP_Merchant_ID"/>
+                <attribute attribute-id="PP_Merchant_Publisher_ID"/>
+                <attribute attribute-id="PP_LogIpnNotifications"/>
+                <attribute attribute-id="PP_API_Signature"/>
+                <attribute attribute-id="PP_Credit_Campaign_ID"/>
+                <attribute attribute-id="PP_CreditBannerWidth"/>
+                <attribute attribute-id="PP_CreditBannerHeight"/>
+                <attribute attribute-id="PP_Timeout"/>
+            </attribute-group>
+            <attribute-group group-id="Paypal_Express_Configuration">
+                <display-name xml:lang="x-default">Paypal ExpressCheckout/Credit/EasyPayments Configuration</display-name>
+                <attribute attribute-id="PP_ShowExpressCheckoutButtonOnCart"/>
+                <attribute attribute-id="PP_ShowCartPayPalCreditButton"/>
+                <attribute attribute-id="PP_API_ExpressPaymentAction"/>
+                <attribute attribute-id="PP_API_ReferenceTransactionPaymentAction"/>
+                <attribute attribute-id="PP_AuthorizationInCaseOfOrder"/>
+                <attribute attribute-id="PP_API_OfferBillingAgreementForEachPaymentAction"/>
+                <attribute attribute-id="PP_API_BillingAgreementDescription"/>
+                <attribute attribute-id="PP_API_BillingAgreementType"/>
+                <attribute attribute-id="PP_API_BillingAgreementPaymentType"/>
+                <attribute attribute-id="PP_API_ShippingAddressOverride"/>
+                <attribute attribute-id="PP_API_RequestBillingAddressFromPayPal"/>
+                <attribute attribute-id="PP_API_ReqConfirmShipping"/>
+                <attribute attribute-id="PP_API_ExpressCheckoutSolutionType"/>
+                <attribute attribute-id="PP_API_ExpressCheckoutLandingPage"/>
+                <attribute attribute-id="PP_API_NoShipping"/>
+                <attribute attribute-id="PP_API_AllowNote"/>
+                <attribute attribute-id="PP_EnableEasyPayments"/>
+                <attribute attribute-id="PP_CheckoutButtonUrl"/>
+                <attribute attribute-id="PP_CreditButtonUrl"/>
+            </attribute-group>
+            <attribute-group group-id="Paypal_PaymentsPro_Configuration">
+                <display-name xml:lang="x-default">Paypal Payments Pro Configuration</display-name>
+                <attribute attribute-id="PP_API_PaymentsProPaymentAction"/>
+            </attribute-group>
+            <attribute-group group-id="Paypal_CoBranding_Configuration">
+                <display-name xml:lang="x-default">Paypal Co-Branding Configuration</display-name>
+                <attribute attribute-id="PP_API_BrandName"/>
+                <attribute attribute-id="PP_API_CustomerServicePhoneNumber"/>
+                <attribute attribute-id="PP_API_CartBorderColor"/>
+                <attribute attribute-id="PP_API_LogoImgageUrl"/>
+                <attribute attribute-id="PP_API_PageStyle"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="OrderPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="paypalAck">
+                <display-name xml:lang="x-default">PayPal Acknowledgement</display-name>
+                <description xml:lang="x-default">PayPal Acknowledgement it is result of payment action (Auth, Order, Sale)</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paypalCorrelationId">
+                <display-name xml:lang="x-default">PayPal Correlation ID</display-name>
+                <description xml:lang="x-default">PayPal Correlation ID it is reference ID for PayPal API calls</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paypalPayerID">
+                <display-name xml:lang="x-default">PayPal Payer ID</display-name>
+                <description xml:lang="x-default">Required for PayPal integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paypalPaymentStatus">
+                <display-name xml:lang="x-default">PayPal Payment Status</display-name>
+                <description xml:lang="x-default">PayPal Payment Status</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paypalToken">
+                <display-name xml:lang="x-default">PayPal Token</display-name>
+                <description xml:lang="x-default">Used to identify Set, Get, Do ExpressCheckout API calls</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="paypalCredit">
+                <display-name xml:lang="x-default">PayPal Credit</display-name>
+                <description xml:lang="x-default">Indicate if credit flow is active</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="paypal">
+                <display-name xml:lang="x-default">PayPal</display-name>
+                <attribute attribute-id="paypalPayerID"/>
+                <attribute attribute-id="paypalToken"/>
+                <attribute attribute-id="paypalCorrelationId"/>
+                <attribute attribute-id="paypalAck"/>
+                <attribute attribute-id="paypalPaymentStatus"/>
+                <attribute attribute-id="paypalCredit"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="Profile">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="paypalBillingAgreementId">
+                <display-name xml:lang="x-default">Billing Agreement ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+         <group-definitions>
+            <attribute-group group-id="BillingAgreement">
+                <display-name xml:lang="x-default">Billing Agreement</display-name>
+                <attribute attribute-id="paypalBillingAgreementId"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="paypalPaymentMethod">
+                <display-name xml:lang="x-default">Paypal Payment Method</display-name>
+                <description xml:lang="x-default">express for the Express Checkout&#13;
+directpayment for PayPal Direct Payment and Payments Pro</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+	<type-extension type-id="PaymentTransaction">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="transactionsHistory">
+                <display-name xml:lang="x-default">Transactions History</display-name>
+                <description xml:lang="x-default">All transactions is related with the order</description>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+    </type-extension>
+</metadata>

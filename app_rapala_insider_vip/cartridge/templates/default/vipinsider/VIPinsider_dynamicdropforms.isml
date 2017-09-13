@@ -1,0 +1,120 @@
+<!--- TEMPLATENAME: fieldstaff.isml --->
+<isinclude template="util/modules"/>
+
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('field'))}">
+
+	<div class="vipinsider-onload-data-holder">
+		<div class="content-holder upload-form">
+			<div class="vipformfield_name floatleft formfield" >
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.website}" type="input" requiredtext="${Resource.msg('forms.vipinsider.website.missing','forms',null)}"/>
+			</div><!-- END: Website -->
+						
+			<div class="vipformfield_name floatleft qualifications-block formfield" >
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.qualifications}" fieldClass= "vip-textarea" type="textarea" attribute1="rows" attribute2="cols" attribute3="data-character-limit" attribute4="maxlength" value1="4" value2="50" value3="1200" value4="1200" attribute5="attributemaxlength" value5="1200" requiredtext="${Resource.msg('forms.vipinsider.qualification.missing','forms',null)}"/>
+			</div><!-- END: Qualifications -->
+			<iscomment>
+				<div class="vipinsiderformfield_name floatleft fileUpload">
+					<span>Attach Resume</span>		
+					<span class="upload-icon-holder">
+						<img src="${URLUtils.staticURL('/images/browse_ico_new.png')}" alt="upload-img" />
+					</span>				
+					<input type="file" name="file" class="valid upload">
+				</div>
+			</iscomment>
+		</div>	
+	</div>
+</isif>
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('decal'))}">
+	<div class="vipinsider-onload-data-holder">
+	<div class="content-holder">
+		<div class="vipinsiderformfield_name floatleft select-style formfield">
+	    	<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.brands}" type="select" value="false" rowclass="decal"/>
+	    	<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.brands}" type="select" label="false" rowclass="customized-select" requiredtext="${Resource.msg('forms.vipinsider.brands.missing','forms',null)}"/>
+	    	<span class="mobile-select-arrow hide-desktop"></span>
+	    	<div class="hide">
+	    		<isinputfield formfield="${pdict.CurrentForms.vipinsider.states.brands}" type="select" label="false" />
+	    	</div>	
+		</div><!-- END: Brand Decal list --> 
+		
+		<div class="vipinsiderformfield_name floatleft formfield">
+		 <isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.streetAddress}" type="input"  xhtmlclass= "vip-textarea1" attribute1="attributemaxlength" value1="30" attribute2="placeholder" value2="${Resource.msg('forms.vipinsider.streetAddressplaceholder','forms',null)}" requiredtext="${Resource.msg('forms.vipinsider.streetAddress.missing','forms',null)}" />
+		 </div>		 
+		 <div class="vipinsiderformfield_name floatleft_Second  formfield">
+	    <isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.streetAddress2}" type="input"/>
+	   </div>	   
+	</div>
+	</div>
+</isif>
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('sports'))}">
+
+	<div class="vipinsider-onload-data-holder">
+		<div class="content-holder">
+			<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.retailer}" type="input" attribute1="attributemaxlength" value1="30" requiredtext="${Resource.msg('forms.vipinsider.retailer.missing','forms',null)}"/>
+			</div><!-- END: retailer -->
+						
+			<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.manager}" type="input" attribute1="attributemaxlength" value1="30" requiredtext="${Resource.msg('forms.vipinsider.manager.missing','forms',null)}"/>
+			</div><!-- END: manager -->
+			
+			<div class="vipformfield_name floatleft qualifications-block formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.qualifications}" type="textarea" fieldClass= "vip-textarea" attribute1="rows" attribute2="cols" attribute3="data-character-limit" attribute4="maxlength" value1="4" value2="50" value3="1200" value4="1200" attribute5="attributemaxlength" value5="1200" requiredtext="${Resource.msg('forms.vipinsider.qualification.missing','forms',null)}"/>
+			</div><!-- END: Qualifications -->
+			<iscomment>
+				<div class="vipinsiderformfield_name floatleft fileUpload">
+					<span>Attach Resume</span>		
+					<span class="upload-icon-holder">
+						<img src="${URLUtils.staticURL('/images/browse_ico_new.png')}" alt="upload-img" />
+					</span>				
+					<input type="file" name="file" class="valid upload">
+				</div>	
+			</iscomment>
+		</div>		
+	</div>
+</isif>
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('guide'))}">
+
+	<div class="vipinsider-onload-data-holder">
+		<div class="content-holder">
+			<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.website}" type="input" requiredtext="${Resource.msg('forms.vipinsider.website.missing','forms',null)}"/>
+			</div><!-- END: Website -->
+						
+			<div class="vipformfield_name floatleft qualifications-block formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.qualifications}" type="textarea" fieldClass= "vip-textarea" attribute1="rows" attribute2="cols" attribute3="data-character-limit" attribute4="maxlength" value1="4" value2="50" value3="1200" value4="1200" attribute5="attributemaxlength" value5="1200" requiredtext="${Resource.msg('forms.vipinsider.qualification.missing','forms',null)}"/>
+			</div><!-- END: Qualifications -->
+		</div>	
+	</div>
+</isif>
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('industry'))}">
+
+	<div class="vipinsider-onload-data-holder">
+		<div class="content-holder">
+			<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.company}" type="input" attribute1="attributemaxlength" value1="30" requiredtext="${Resource.msg('forms.vipinsider.company.missing','forms',null)}"/>
+			</div><!-- END: company -->
+								
+			<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.website}" type="input" requiredtext="${Resource.msg('forms.vipinsider.website.missing','forms',null)}"/>
+			</div><!-- END: Website -->
+						
+			<div class="vipformfield_name floatleft qualifications-block formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.qualifications}" type="textarea" fieldClass= "vip-textarea" attribute1="rows" attribute2="cols" attribute3="data-character-limit" attribute4="maxlength" value1="4" value2="50" value3="1200" value4="1200" attribute5="attributemaxlength" value5="1200" requiredtext="${Resource.msg('forms.vipinsider.qualification.missing','forms',null)}"/>
+			</div><!-- END: Qualifications -->
+		</div>	
+	</div>
+</isif>
+<isif condition="${('prodid' in pdict.CurrentHttpParameterMap && !empty(pdict.CurrentHttpParameterMap.prodid.value)) && (pdict.CurrentHttpParameterMap.prodid.value.equals('donation'))}">
+
+	<div class="vipinsider-onload-data-holder">
+		<div class="content-holder">
+		<div class="vipformfield_name floatleft formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.websites}" type="input" requiredtext="${Resource.msg('forms.vipinsider.website.missing','forms',null)}"/>
+			</div><!-- END: Website -->
+		
+			<div class="vipformfield_name floatleft qualifications-block formfield">
+				<isinputfield formfield="${pdict.CurrentForms.vipinsider.customer.reason}" type="textarea" fieldClass= "vip-textarea" attribute1="rows" attribute2="cols" attribute3="data-character-limit" attribute4="maxlength" value1="4" value2="50" value3="1200" value4="1200" attribute5="attributemaxlength" value5="1200" requiredtext="${Resource.msg('forms.vipinsider.reason.missing','forms',null)}"/>
+			</div><!-- END: Qualifications -->
+		</div>	
+	</div>
+</isif>

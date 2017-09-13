@@ -1,0 +1,69 @@
+// Copyright © 2013 Priority Fulfillment Services, Inc. All rights reserved.
+/**
+ * Copy the xml file after the import to archive or failure folder.
+ *
+ * @input TargetFolder 	: String
+ * @input Type 			: String
+ * @input FileName 		: String
+ * @input IsSuccess		: Boolean
+ */ 
+
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.net );
+importPackage( dw.io );
+
+function execute( pdict : PipelineDictionary ) : Number {
+
+	var targetFolder 	: String 	= pdict.TargetFolder;
+	var type 			: String 	= pdict.Type;
+	var fileName 		: String 	= pdict.FileName;
+	var isSuccess		: Boolean	= pdict.IsSuccess;
+	
+	if(targetFolder == null || fileName == null) {
+		Logger.debug("Input values are not set.");
+		return PIPELET_ERROR;
+	}
+	
+	// checks correctness of target path
+	var targetDirectory : File = new File(File.IMPEX);
+	var srcDirectory : File = new File(targetDirectory, "src");
+	srcDirectory = new File(srcDirectory, type);
+
+	if(!srcDirectory.isDirectory())	{
+		Logger.debug("Error by access of sourcet path '" + type + "' .");		
+		return PIPELET_ERROR;
+	}
+
+	targetDirectory = new File(targetDirectory, "src");
+	targetDirectory = new File(targetDirectory, type);		
+	targetDirectory = new File(targetDirectory, targetFolder);
+
+	if (!targetDirectory.exists()) {
+		if(!targetDirectory.mkdir()) {
+			Logger.debug("Error by create " + targetFolder + " directory.");
+			return PIPELET_ERROR;
+		}
+	}
+
+	var srcFile 	: File = new File(srcDirectory, fileName);
+	fileName = fileName.replace(".xml", "-0.zip");
+	var targetFile 	: File = new File(targetDirectory, fileName);
+	var i = 0;
+	while(targetFile.exists()) {
+		fileName = fileName.replace(/-\d*\.zip$/, "-"+(i+1)+".zip");
+		Logger.debug(fileName);
+	    targetFile = new File(targetDirectory, fileName);
+	    // when there are already 1000 files the 1000 will be overwritten all the time	
+	    if(i>1000) {
+	    	break;
+	    }
+	    i++;
+	}	
+
+	srcFile.zip(targetFile);
+	srcFile.remove();
+
+	return PIPELET_NEXT;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<group formid="customer">
+		<field formid="firstname" label="profile.firstname" type="string" mandatory="true" binding="firstName"  max-length="30"/>
+		<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName"  max-length="30"/>
+		<field formid="email" label="profile.email" type="string" mandatory="true" regexp="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,4}$" parse-error="profile.emailparseerror" binding="email" max-length="50" value-error=""/>
+		<field formid="phone" label="profile.phone" type="string"  mandatory="true" binding="phoneHome" max-length="14"  regexp="^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$" parse-error="profile.phoneparseerror" />
+		<field formid="city" label="forms.city" type="string" mandatory="true" binding="city" max-length="30" missing-error="forms.address.city.missing" range-error="forms.address.field.invalid" />
+		<field formid="zip" label="forms.zippostalcode" type="string" mandatory="true" max-length="10" regexp="^(\d{5})((-\d{4})|(\d{4}))?$" binding="postalCode" missing-error="forms.errorzip" range-error="forms.address.field.invalid" parse-error="forms.address.field.invalid" />
+		<field formid="website" label="profile.website" type="string" mandatory="true" binding="website"  max-length="30"/>
+		<field formid="websites" label="profile.website" type="string" mandatory="false" binding="website"  max-length="30"/>
+		<field formid="company" label="profile.company" type="string" mandatory="true" binding="company"  max-length="30"/>
+		<field formid="retailer" label="profile.retailer" type="string" mandatory="true" binding="retailer"  max-length="30"/>
+        <field formid="manager" label="profile.manager" type="string" mandatory="true" binding="manager"  max-length="30"/>
+        <field formid="qualifications" label="forms.qualifications" type="string" mandatory="true" binding="qualifications"  max-length="1200"/>
+        <field formid="reason" label="forms.reason" type="string" mandatory="true" binding="reason"  max-length="1200"/>
+              
+        <field formid="streetAddress" label="forms.streetAddress" type="string" mandatory="true" binding="streetAddress"   max-length="30"  />
+		<field formid="streetAddress2" label="forms.streetAddress2" type="string" mandatory="false" binding="streetAddress2" max-length="30" />
+		
+		<action formid="redeemVIPCard" valid-form="true"/>
+		<action formid="login" valid-form="true"/>
+		<action formid="confirm" valid-form="true"/>
+	</group>
+	
+	<include formid="states" name="states"/>
+</form>

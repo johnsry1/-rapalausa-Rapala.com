@@ -1,0 +1,67 @@
+/**
+*   
+*   @input UpperBound : String  Date formatted in 2010-01-01T00:00:00 yyyy-MM-ddTHH:MM:SS format.
+*   @input LowerBound : String	Date formatted in 2010-01-01T00:00:00 yyyy-MM-ddTHH:MM:SS format.
+*	@input MaxRecords : Number	Maximum number of profile records to execute against
+*
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.net );
+importPackage( dw.io );
+importPackage( dw.util );
+importPackage( dw.catalog );
+importPackage( dw.object );
+
+
+var count=0;
+var maxRecords=1000;
+var SCRIPT_NAME='** prepareCustomersForExport2.ds - ';
+
+function cb_ProcessProfile(profile : Profile) { 
+	count++;
+	
+	if (count <= maxRecords) {
+		try {
+			profile.custom.readyForExport = true;
+		} 
+		catch (e) {
+			Logger.error(SCRIPT_NAME + "error, Customer Number:{0} Error: {1}", profile.customerNo, e.message);
+		}
+		Logger.debug("customer found: " + profile.customerNo);
+	}
+}
+
+function execute( pdict : PipelineDictionary ) : Number { 
+
+	Logger.error(SCRIPT_NAME + "setting custom.readyForExport");
+	
+	if (!empty(pdict.MaxRecords) && pdict.MaxRecords > 0) {
+		maxRecords = pdict.MaxRecords;
+	}
+
+	var sql : String;
+    if (!empty(pdict.LowerBound) && !empty(pdict.UpperBound)) {
+       	sql = "creationDate >= "+ pdict.LowerBound + " AND creationDate <= "+ pdict.UpperBound;
+	} else { 
+ 		sql = "customerNo like '*'";
+    }
+    sql += " AND custom.readyForExport = false OR custom.readyForExport = NULL";
+    
+    var totalCount;
+    try {
+    	totalCount = CustomerMgr.searchProfiles(sql, "customerNo ASC").count;
+    }
+    catch (e) {
+    	Logger.error(SCRIPT_NAME + "error doing searchProfiles: " + e.message);
+    }
+    Logger.error(SCRIPT_NAME + "found " + totalCount + " customers.  Processing " + maxRecords);
+         
+    CustomerMgr.processProfiles(cb_ProcessProfile, sql,  "customerNo ASC");
+    Logger.error(SCRIPT_NAME + "processed " + count + " records");
+
+	return PIPELET_NEXT;
+}
+
+
+

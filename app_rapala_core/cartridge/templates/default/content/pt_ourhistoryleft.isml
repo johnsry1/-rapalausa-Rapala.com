@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<isinclude template="util/modules"/>
+
+<head>
+	<iscomment>
+		Include all important information globally , e.g. meta-data, link information, and
+		javascript.
+	</iscomment>
+	<isinclude template="components/header/htmlhead"/>
+
+	<iscomment>Add page type specific header information here.</iscomment>
+
+</head>
+<body>
+<iscomment><isinclude url="${URLUtils.url('Home-IncludeNoScriptAlert')}"/></iscomment>
+<div id="container" class="pt_customerservice">
+	<isinclude template="components/header/header"/>
+    <iscomment><isbreadcrumbs bcurl1="${URLUtils.http('AboutUs-Show')}" bctext1="${Resource.msg('global.aboutus','locale',null)}"   bctext2="${pdict.Content.name}"/></iscomment>	
+    <div id="main">
+	<div id="content">
+	<div id="page-background" class="downshift">
+	<div id="page">
+	<div class="wrapper">
+	<div class="row column3 style-cservice">
+		<div class="column">
+		<div class="cell contentbox upshift">
+			 <isinclude url="${URLUtils.url('AboutUs-LeftNav','cid', pdict.CurrentHttpParameterMap.cid.stringValue,'currentSite',session.custom.currentSite)}"/>
+		</div><!-- END: cell -->
+		</div><!-- END: column -->
+			<isreplace/>
+			</div><!-- END: row column3 -->
+				<div class="clear"><!-- FLOAT CLEAR --></div>
+		</div><!-- END: wrapper -->
+		</div><!-- END: page -->
+		</div><!-- END: page-background -->
+		</div><!-- END: content -->
+	</div><!-- END: main -->
+	<isinclude template="components/footer/footer"/>
+</div><!-- END: container -->
+</body>
+</html>
