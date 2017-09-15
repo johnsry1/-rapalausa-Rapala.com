@@ -27,10 +27,10 @@ function getBonusProducts() {
         if (bp.options) {
             for (a = 0, alen = bp.options.length; a < alen; a++) {
                 var opt = bp.options[a];
-                p.options = {optionName : opt.name, optionValue : opt.value};
+                p.options = {optionName: opt.name, optionValue: opt.value};
             }
         }
-        bonusproducts.push({product : p});
+        bonusproducts.push({product: p});
     }
     return {bonusproducts: bonusproducts};
 }
@@ -121,8 +121,8 @@ function initializeGrid() {
         attributes.each(function () {
             var li = $(this);
             product.attributes[li.data('attributeId')] = {
-                displayName : li.children('.display-name').html(),
-                displayValue : li.children('.display-value').html()
+                displayName: li.children('.display-name').html(),
+                displayValue: li.children('.display-value').html()
             };
         });
         selectedList.push(product);
@@ -144,137 +144,139 @@ function initializeGrid() {
             }
         });
     })
-    .on('change', '.input-text', function () {
-        $bonusProductList.find('.select-bonus-item').removeAttr('disabled');
-        $(this).closest('.bonus-product-form').find('.quantity-error').text('');
-    })
-    .on('click', '.select-bonus-item', function (e) {
-        e.preventDefault();
-        if (selectedList.length >= maxItems) {
-            $bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
-            $bonusProductList.find('.bonus-items-available').text('0');
-            return;
-        }
+        .on('change', '.input-text', function () {
+            $bonusProductList.find('.select-bonus-item').removeAttr('disabled');
+            $(this).closest('.bonus-product-form').find('.quantity-error').text('');
+        })
+        .on('click', '.select-bonus-item', function (e) {
+            e.preventDefault();
+            if (selectedList.length >= maxItems) {
+                $bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
+                $bonusProductList.find('.bonus-items-available').text('0');
+                return;
+            }
 
-        var form = $(this).closest('.bonus-product-form'),
-            detail = $(this).closest('.product-detail'),
-            uuid = form.find('input[name="productUUID"]').val(),
-            qtyVal = form.find('input[name="Quantity"]').val(),
-            qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
+            var form = $(this).closest('.bonus-product-form'),
+                detail = $(this).closest('.product-detail'),
+                uuid = form.find('input[name="productUUID"]').val(),
+                qtyVal = form.find('input[name="Quantity"]').val(),
+                qty = (isNaN(qtyVal)) ? 1 : (+qtyVal);
 
-        if (qty > maxItems) {
-            $bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
-            form.find('.quantity-error').text(Resources.BONUS_PRODUCT_TOOMANY);
-            return;
-        }
+            if (qty > maxItems) {
+                $bonusProductList.find('.select-bonus-item').attr('disabled', 'disabled');
+                form.find('.quantity-error').text(Resources.BONUS_PRODUCT_TOOMANY);
+                return;
+            }
 
-        var product = {
-            uuid: uuid,
-            pid: form.find('input[name="pid"]').val(),
-            qty: qty,
-            name: detail.find('.product-name').text(),
-            attributes: detail.find('.product-variations').data('attributes'),
-            options: []
-        };
+            var product = {
+                uuid: uuid,
+                pid: form.find('input[name="pid"]').val(),
+                qty: qty,
+                name: detail.find('.product-name').text(),
+                attributes: detail.find('.product-variations').data('attributes'),
+                options: []
+            };
 
-        var optionSelects = form.find('.product-option');
+            var optionSelects = form.find('.product-option');
 
-        optionSelects.each(function () {
-            product.options.push({
-                name: this.name,
-                value: $(this).val(),
-                display: $(this).children(':selected').first().html()
+            optionSelects.each(function () {
+                product.options.push({
+                    name: this.name,
+                    value: $(this).val(),
+                    display: $(this).children(':selected').first().html()
+                });
             });
-        });
-        selectedList.push(product);
-        updateSummary();
-    })
-    .on('click', '.remove-link', function (e) {
-        e.preventDefault();
-        var container = $(this).closest('.selected-bonus-item');
-        if (!container.data('uuid')) { return; }
-
-        var uuid = container.data('uuid');
-        var i, len = selectedList.length;
-        for (i = 0; i < len; i++) {
-            if (selectedList[i].uuid === uuid) {
-                selectedList.splice(i, 1);
-                break;
+            selectedList.push(product);
+            updateSummary();
+        })
+        .on('click', '.remove-link', function (e) {
+            e.preventDefault();
+            var container = $(this).closest('.selected-bonus-item');
+            if (!container.data('uuid')) {
+                return;
             }
-        }
-        updateSummary();
-    })
-    .on('click', '.add-to-cart-bonus', function (e) {
-        e.preventDefault();
-        var url = util.appendParamsToUrl(Urls.addBonusProduct, {bonusDiscountLineItemUUID: bliUUID});
-        var bonusProducts = getBonusProducts();
-        if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
-            bonusProducts.bonusproducts[0].product.qty = maxItems;
-        }
-        // make the server call
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            cache: false,
-            contentType: 'application/json',
-            url: url,
-            data: JSON.stringify(bonusProducts)
-        })
-        .done(function () {
-            // success
-            page.refresh();
-        })
-        .fail(function (xhr, textStatus) {
-            // failed
-            if (textStatus === 'parsererror') {
-                window.alert(Resources.BAD_RESPONSE);
-            } else {
-                window.alert(Resources.SERVER_CONNECTION_ERROR);
-            }
-        })
-        .always(function () {
-            $bonusProduct.dialog('close');
-        });
-    })
-    .on('click', '#more-bonus-products', function (e) {
-        e.preventDefault();
-        var uuid = $('#bonus-product-list').data().lineItemDetail.uuid;
 
-        //get the next page of choice of bonus products
-        var lineItemDetail = JSON.parse($('#bonus-product-list').attr('data-line-item-detail'));
-        lineItemDetail.pageStart = lineItemDetail.pageStart + lineItemDetail.pageSize;
-        $('#bonus-product-list').attr('data-line-item-detail', JSON.stringify(lineItemDetail));
-
-        var url = util.appendParamsToUrl(Urls.getBonusProducts, {
-            bonusDiscountLineItemUUID: uuid,
-            format: 'ajax',
-            lazyLoad: 'true',
-            pageStart: lineItemDetail.pageStart,
-            pageSize: $('#bonus-product-list').data().lineItemDetail.pageSize,
-            bonusProductsTotal: $('#bonus-product-list').data().lineItemDetail.bpTotal
-        });
-
-        $.ajax({
-            type: 'GET',
-            cache: false,
-            contentType: 'application/json',
-            url: url
-        })
-        .done(function (data) {
-            //add the new page to DOM and remove 'More' link if it is the last page of results
-            $('#more-bonus-products').before(data);
-            if ((lineItemDetail.pageStart + lineItemDetail.pageSize) >= $('#bonus-product-list').data().lineItemDetail.bpTotal) {
-                $('#more-bonus-products').remove();
+            var uuid = container.data('uuid');
+            var i, len = selectedList.length;
+            for (i = 0; i < len; i++) {
+                if (selectedList[i].uuid === uuid) {
+                    selectedList.splice(i, 1);
+                    break;
+                }
             }
+            updateSummary();
         })
-        .fail(function (xhr, textStatus) {
-            if (textStatus === 'parsererror') {
-                window.alert(Resources.BAD_RESPONSE);
-            } else {
-                window.alert(Resources.SERVER_CONNECTION_ERROR);
+        .on('click', '.add-to-cart-bonus', function (e) {
+            e.preventDefault();
+            var url = util.appendParamsToUrl(Urls.addBonusProduct, {bonusDiscountLineItemUUID: bliUUID});
+            var bonusProducts = getBonusProducts();
+            if (bonusProducts.bonusproducts[0].product.qty > maxItems) {
+                bonusProducts.bonusproducts[0].product.qty = maxItems;
             }
+            // make the server call
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                contentType: 'application/json',
+                url: url,
+                data: JSON.stringify(bonusProducts)
+            })
+                .done(function () {
+                    // success
+                    page.refresh();
+                })
+                .fail(function (xhr, textStatus) {
+                    // failed
+                    if (textStatus === 'parsererror') {
+                        window.alert(Resources.BAD_RESPONSE);
+                    } else {
+                        window.alert(Resources.SERVER_CONNECTION_ERROR);
+                    }
+                })
+                .always(function () {
+                    $bonusProduct.dialog('close');
+                });
+        })
+        .on('click', '#more-bonus-products', function (e) {
+            e.preventDefault();
+            var uuid = $('#bonus-product-list').data().lineItemDetail.uuid;
+
+            //get the next page of choice of bonus products
+            var lineItemDetail = JSON.parse($('#bonus-product-list').attr('data-line-item-detail'));
+            lineItemDetail.pageStart = lineItemDetail.pageStart + lineItemDetail.pageSize;
+            $('#bonus-product-list').attr('data-line-item-detail', JSON.stringify(lineItemDetail));
+
+            var url = util.appendParamsToUrl(Urls.getBonusProducts, {
+                bonusDiscountLineItemUUID: uuid,
+                format: 'ajax',
+                lazyLoad: 'true',
+                pageStart: lineItemDetail.pageStart,
+                pageSize: $('#bonus-product-list').data().lineItemDetail.pageSize,
+                bonusProductsTotal: $('#bonus-product-list').data().lineItemDetail.bpTotal
+            });
+
+            $.ajax({
+                type: 'GET',
+                cache: false,
+                contentType: 'application/json',
+                url: url
+            })
+                .done(function (data) {
+                    //add the new page to DOM and remove 'More' link if it is the last page of results
+                    $('#more-bonus-products').before(data);
+                    if ((lineItemDetail.pageStart + lineItemDetail.pageSize) >= $('#bonus-product-list').data().lineItemDetail.bpTotal) {
+                        $('#more-bonus-products').remove();
+                    }
+                })
+                .fail(function (xhr, textStatus) {
+                    if (textStatus === 'parsererror') {
+                        window.alert(Resources.BAD_RESPONSE);
+                    } else {
+                        window.alert(Resources.SERVER_CONNECTION_ERROR);
+                    }
+                });
         });
-    });
 }
 
 var bonusProductsView = {
@@ -303,9 +305,11 @@ var bonusProductsView = {
      * @description Open bonus product promo prompt dialog
      */
     loadBonusOption: function () {
-        var    self = this,
+        var self = this,
             bonusDiscountContainer = document.querySelector('.bonus-discount-container');
-        if (!bonusDiscountContainer) { return; }
+        if (!bonusDiscountContainer) {
+            return;
+        }
 
         // get the html from minicart, then trash it
         var bonusDiscountContainerHtml = bonusDiscountContainer.outerHTML;

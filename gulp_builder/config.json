@@ -1,0 +1,242 @@
+{
+
+    "sites" : [
+        {
+            "name": "lyonscg-demandware-ref-app",
+            "publicJavascript": "./app_lyonscg",
+            "cartridges": [
+                "./app_csstool",
+                "./app_cms",
+                "./int_commissionjunctionproductfeed",
+                "./app_cssuite",
+                "./app_disbestpractice",
+                "./app_rapala_controllers",
+                "./app_rapala_core",
+                "./app_rapala_insider_vip",
+                "./app_rapala_pipelines",
+                "./app_rapala_themes",
+                "./bc_common",
+                "./bc_integrationframework",
+                "./bc_library",
+                "./bc_orderguard",
+                "./bm_contentcopytool",
+                "./bm_customfeeds",
+                "./bm_integrationframework",
+                "./bm_listrak",
+                "./bm_tools",
+                "./buildsuite_cs",
+                "./int_browseratest",
+                "./int_customfeeds",
+                "./int_dataloader",
+                "./int_googleanalytics",
+                "./int_googlefeed",
+                "./int_listrak_controllers",
+                "./int_paypal",
+                "./int_storelocator",
+                "./int_ups",
+                "./test_console"
+
+            ],
+            "javascriptPluginPaths": [
+                "../app_storefront_core/cartridge/static/default/lib/jquery/jquery-2.1.1.min.js",
+                "../app_storefront_core/cartridge/static/default/lib/jquery/ui/jquery-ui.min.js",
+                "../app_lyonscg/cartridge/static/default/lib/svg4everybody.js",
+                "../app_lyonscg/cartridge/static/default/lib/slick/slick.min.js",
+                "../app_storefront_core/cartridge/static/default/lib/jquery/jquery.validate.min.js",
+                "../app_storefront_core/cartridge/static/default/lib/jquery/jquery.zoom.min.js"
+            ]
+        }
+    ],
+
+    "deployment" : {
+        "instanceRoot": ".evaluation.dw.demandware.net",
+        "siteDataFolderName": "core",
+        "dataDeployDelay": 2000,
+        "dataBundles" : {
+            "core-config": [
+                "core",
+                "config_test"
+            ],
+            "core-config-data": [
+                "core",
+                "config_test",
+                "data_test"
+            ]
+        }
+    },
+
+    "tasks" : {
+        "styles": {
+            "taskName": "build-styles",
+            "subModules": [
+                "/lib/styles/get-style-directories",
+                "/lib/styles/sass-lint",
+                "/lib/styles/sass"
+            ],
+            "subTasks": [
+                "get-style-directories",
+                "sass-lint",
+                "sass"
+            ]
+        },
+        "client-javascript": {
+            "taskName": "build-client-js",
+            "subModules": [
+                "/lib/client-js/get-paths-client-js",
+                "/lib/client-js/eslint-client-js",
+                "/lib/client-js/build-temp-client-js",
+                "/lib/client-js/client-js",
+                "/lib/client-js/delete-temp-client-js"
+            ],
+            "subTasks": [
+                "get-paths-client-js",
+                "eslint-client-js",
+                "build-temp-client-js",
+                "client-js",
+                "delete-temp-client-js"
+            ]
+        },
+        "server-javascript": {
+            "taskName": "server-js",
+            "subModules": [
+                "/lib/server-js/eslint-server-js"
+            ],
+            "subTasks": [
+                "eslint-server-js"
+            ],
+            "lintDirectories": [
+                "../app_lyonscg/cartridge/scripts/**/*.js",
+                "../app_lyonscg/cartridge/controllers/**/*.js"
+            ]
+        },
+        "builder-javascript": {
+            "taskName": "builder-js",
+            "subModules": [
+                "/lib/builder-js/eslint-builder-js"
+            ],
+            "subTasks": [
+                "eslint-builder-js"
+            ]
+        },
+        "combine-plugins-javascript": {
+            "taskName": "combine-plugins-js",
+            "subModules": [
+                "/lib/client-js/combine-plugin-js"
+            ],
+            "subTasks": [
+                "combine-plugin-js"
+            ]
+        },
+        "svg": {
+            "taskName": "build-svg",
+            "subModules": [
+                "/lib/svg/get-svg-sprite-projects",
+                "/lib/svg/combine-svg"
+            ],
+            "subTasks": [
+                "get-svg-sprite-projects",
+                "combine-svg"
+            ]
+        },
+        "deploy": {
+            "taskName": "run-deploy",
+            "subModules": [
+                "/lib/client-js/combine-plugin-js",
+                "/lib/svg/get-svg-sprite-projects",
+                "/lib/svg/combine-svg",
+                "/lib/styles/get-style-directories",
+                "/lib/styles/sass-lint",
+                "/lib/styles/sass",
+                "/lib/styles/minify",
+                "/lib/styles/bless",
+                "/lib/client-js/get-paths-client-js",
+                "/lib/client-js/eslint-client-js",
+                "/lib/client-js/build-temp-client-js",
+                "/lib/client-js/client-js",
+                "/lib/client-js/delete-temp-client-js",
+                "/lib/client-js/uglify-client-js",
+                "/lib/deploy/init-deployment",
+                "/lib/deploy/copy-cartridges",
+                "/lib/deploy/update-cartridge-properties",
+                "/lib/deploy/update-cartridge-references",
+                "/lib/deploy/zip-files",
+                "/lib/deploy/make-directories",
+                "/lib/deploy/webdav-upload",
+                "/lib/deploy/cleanup-code",
+                "/lib/deploy/unzip-files",
+                "/lib/deploy/activate-code"
+            ],
+            "subTasks": [
+                "combine-plugin-js",
+                "get-svg-sprite-projects",
+                "combine-svg",
+                "get-style-directories",
+                "sass-lint",
+                "sass",
+                "minify",
+                "bless",
+                "get-paths-client-js",
+                "eslint-client-js",
+                "build-temp-client-js",
+                "client-js",
+                "delete-temp-client-js",
+                "uglify-client-js",
+                "init-deployment",
+                "copy-cartridges",
+                "update-cartridge-properties",
+                "update-cartridge-references",
+                "zip-files",
+                "webdav-upload",
+                "cleanup-code",
+                "unzip-files",
+                "activate-code"
+            ],
+            "styleDependencies": [
+                "combine-svg"
+            ],
+            "deployDependencies": [
+                "bless",
+                "delete-temp-client-js"
+            ],
+            "uploadDependencies": [
+                "webdav-delete",
+                "make-directories",
+                "zip-files"
+            ]
+        },
+        "deploy-data": {
+            "taskName": "run-deploy-data",
+            "subModules": [
+                "/lib/deploy/init-deployment",
+                "/lib/data/zip-data-files",
+                "/lib/deploy/webdav-upload",
+                "/lib/data/import-data",
+                "/lib/data/cleanup-data"
+            ],
+            "subTasks": [
+                "init-deployment",
+                "webdav-upload",
+                "import-data",
+                "cleanup-data"
+            ],
+            "uploadDependencies": [
+                "webdav-delete-data",
+                "zip-data-files"
+            ]
+        },
+        "system-objects-report": {
+            "taskName": "run-system-objects-report",
+            "subModules": [
+                "/lib/deploy/init-deployment",
+                "/lib/data/sysobj-report",
+                "/lib/data/system-objects-report",
+                "/lib/util/xml-reporting-util"
+            ],
+            "subTasks": [
+                "init-deployment",
+                "system-objects-report"
+            ]
+        }
+    }
+
+}

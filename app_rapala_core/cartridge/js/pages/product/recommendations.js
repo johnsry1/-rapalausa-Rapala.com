@@ -3,7 +3,7 @@
 /**
  * @description Creates product recommendation carousel using jQuery jcarousel plugin
  **/
-module.exports = function() {
+module.exports = function () {
     var $carousel = $('#carousel-recommendations');
     if (!$carousel || $carousel.length === 0 || $carousel.children().length === 0) {
         return;

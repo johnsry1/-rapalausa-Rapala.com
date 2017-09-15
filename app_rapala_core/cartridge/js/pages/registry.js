@@ -63,13 +63,13 @@ function initializeEvents() {
         }
         populateForm(addressID, $beforeAddress);
     })
-    .on('change', 'select[name$="_addressAfterList"]', function () {
-        var addressID = $(this).val();
-        if (addressID.length === 0) {
-            return;
-        }
-        populateForm(addressID, $afterAddress);
-    });
+        .on('change', 'select[name$="_addressAfterList"]', function () {
+            var addressID = $(this).val();
+            if (addressID.length === 0) {
+                return;
+            }
+            populateForm(addressID, $afterAddress);
+        });
 
     $('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
         e.preventDefault();

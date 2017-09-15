@@ -9,8 +9,7 @@ var zoomMediaQuery = matchMedia('(min-width: 960px)');
  * @param zmq {Media Query List}
  */
 var loadZoom = function (zmq) {
-    var $imgZoom = $('#pdpMain .main-image'),
-        hiresUrl;
+    var $imgZoom = $('#pdpMain .main-image');
     if (!zmq) {
         zmq = zoomMediaQuery;
     }
@@ -19,13 +18,6 @@ var loadZoom = function (zmq) {
         $imgZoom.trigger('zoom.destroy');
         return;
     }
-    hiresUrl = $imgZoom.attr('href');
-
-   /* if (hiresUrl && hiresUrl !== 'null' && hiresUrl.indexOf('noimagelarge') === -1 && zoomMediaQuery.matches) {
-        $imgZoom.zoom({
-            url: hiresUrl
-        });
-    }*/
 };
 
 zoomMediaQuery.addListener(loadZoom);
@@ -68,7 +60,7 @@ var replaceImages = function () {
 /**
  * @description by default, this function sets up zoom and event handler for thumbnail click
  **/
-module.exports = function() {
+module.exports = function () {
     if (dialog.isActive() || util.isMobile()) {
         $('#pdpMain .main-image').removeAttr('href');
     }

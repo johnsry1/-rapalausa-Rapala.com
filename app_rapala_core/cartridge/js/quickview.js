@@ -6,7 +6,6 @@ var dialog = require('./dialog'),
     util = require('./util'),
     _ = require('lodash');
 
-
 var makeUrl = function (url, source, productListID) {
     if (source) {
         url = util.appendParamToURL(url, 'source', source);
@@ -112,7 +111,7 @@ var quickview = {
             this.init();
         }
         url = makeUrl(options.url, options.source, options.productlistid);
-        $("#QuickViewDialog").empty();
+        $('#QuickViewDialog').empty();
         var quickViewDialog = dialog.create({
             target: this.$container,
             options: {
@@ -122,16 +121,16 @@ var quickview = {
                 title: Resources.QUICK_VIEW_POPUP
             }
         });
-        quickViewDialog.dialog("open");
-        progress.show("#QuickViewDialog");
-    	$.ajax({
-    		url: url,
-    		success: function(data){
-    			$(quickViewDialog).append(data);
-    			product.init();
-    			progress.hide();
-    		}
-    	})
+        quickViewDialog.dialog('open');
+        progress.show('#QuickViewDialog');
+        $.ajax({
+            url: url,
+            success: function (data) {
+                $(quickViewDialog).append(data);
+                product.init();
+                progress.hide();
+            }
+        });
         //PREVAIL-Added for GA integration
         //GAcommented
         if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
@@ -141,7 +140,7 @@ var quickview = {
     exists: function () {
         return this.$container && (this.$container.length > 0);
     },
-    close : function () {
+    close: function () {
         jQuery('#QuickViewDialog').dialog('close');
     }
 };

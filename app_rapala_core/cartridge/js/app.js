@@ -18,9 +18,8 @@ var countries = require('./countries'),
     megamenu = require('./megamenu'),
     headerinit = require('./headerinit'),
     uievents = require('./uievents'),
-    progress = require('./progress'),
+    //progress = require('./progress'),
     tls = require('./tls');
-
 
 // if jQuery has not been loaded, load from google cdn
 if (!window.jQuery) {
@@ -37,86 +36,87 @@ require('./captcha')();
 var $ = window.jQuery;
 
 function resetPasswordEvents() {
-	$("body").find('.PasswordResetDialog .field-wrapper input').off("change").on("click change", function(){
-		$(this).removeClass("errorclient");
-		$(this).closest(".passwordreset").find("#message").hide();
-		$(this).closest(".formfield").find(".label").find("span.errorclient").remove();
-		$(this).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
-	});
-	if($('.PasswordResetDialog').length > 0){
-		$('.PasswordResetDialog').find('.formfield').each(function () {
-               if($(this).find('.field-wrapper .clearbutton').length == 0 && $(this).find('.field-wrapper input[type="text"]').length > 0 || $(this).find('.field-wrapper input[type="password"]').length > 0) {
-                    $(this).find('.field-wrapper').append('<a class="clearbutton"></a>');
-                }
-		});
-	}
-	$("body").find('.PasswordResetDialog a.clearbutton').on("click",function(){
-		 $(this).closest(".field-wrapper").find('span').remove();
-		 $(this).closest(".field-wrapper").find('.required').removeClass('errorclient');
-		 $(this).closest('.formfield ').find('.form-row , .label span').removeClass('inputlabel');
-		 $(this).closest('.formfield').find('input') .val("");
-		 $(this).closest('.formfield').find('a.clearbutton').hide();
-		 $(this).closest(".formfield").find("span.logerror , .existing_register").hide();
-		 
-   });
-	// Attach keypress handler to input box.  Submit form if user presses 'enter' key.
-	$("body").find(".PasswordResetDialog input.resetold").keypress(function(e) {
-		if(e.which == 13) {
-			//jQuery('#sendBtn').click();
-			return false;
-		}
-		return true;
-	});
-	$("body").find('.PasswordResetDialog .field-wrapper input').on('keyup input blur', function () {
-       if($(this).val() != undefined) {
-           if($(this).val().length > 0) {
-        	   $(this).closest('.formfield').find('a.clearbutton').show();
+    $('body').find('.PasswordResetDialog .field-wrapper input').off('change').on('click change', function () {
+        $(this).removeClass('errorclient');
+        $(this).closest('.passwordreset').find('#message').hide();
+        $(this).closest('.formfield').find('.label').find('span.errorclient').remove();
+        $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
+    });
+    if ($('.PasswordResetDialog').length > 0) {
+        $('.PasswordResetDialog').find('.formfield').each(function () {
+            if ($(this).find('.field-wrapper .clearbutton').length == 0 && $(this).find('.field-wrapper input[type="text"]').length > 0 || $(this).find('.field-wrapper input[type="password"]').length > 0) {
+                $(this).find('.field-wrapper').append('<a class="clearbutton"></a>');
             }
-            else {
-            	$(this).closest('.formfield').find('a.clearbutton').hide();
+        });
+    }
+    $('body').find('.PasswordResetDialog a.clearbutton').on('click', function () {
+        $(this).closest('.field-wrapper').find('span').remove();
+        $(this).closest('.field-wrapper').find('.required').removeClass('errorclient');
+        $(this).closest('.formfield ').find('.form-row , .label span').removeClass('inputlabel');
+        $(this).closest('.formfield').find('input').val('');
+        $(this).closest('.formfield').find('a.clearbutton').hide();
+        $(this).closest('.formfield').find('span.logerror , .existing_register').hide();
+
+    });
+    // Attach keypress handler to input box.  Submit form if user presses 'enter' key.
+    $('body').find('.PasswordResetDialog input.resetold').keypress(function (e) {
+        if (e.which == 13) {
+            //jQuery('#sendBtn').click();
+            return false;
+        }
+        return true;
+    });
+    $('body').find('.PasswordResetDialog .field-wrapper input').on('keyup input blur', function () {
+        if ($(this).val() != undefined) {
+            if ($(this).val().length > 0) {
+                $(this).closest('.formfield').find('a.clearbutton').show();
+            } else {
+                $(this).closest('.formfield').find('a.clearbutton').hide();
             }
         }
-	});
-	var $requestPasswordForm = $('[name$="_requestpassword"]'),
-    $submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
-	$($submit).on('click', function (e) {
-          if (!$requestPasswordForm.valid()) {
-              return;
-          }
-          e.preventDefault();
-          dialog.submit($submit.attr('name'));
-          setTimeout(function(){
-        	  resetPasswordEvents();  
-          },1300);
-	});
-	validator.init();
+    });
+    var $requestPasswordForm = $('[name$="_requestpassword"]'),
+        $submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
+    $($submit).on('click', function (e) {
+        if (!$requestPasswordForm.valid()) {
+            return;
+        }
+        e.preventDefault();
+        dialog.submit($submit.attr('name'));
+        setTimeout(function () {
+            resetPasswordEvents();
+        }, 1300);
+    });
+    validator.init();
 }
+
 function initializeEvents() {
-	var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-	var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-	var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
-    var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
-    var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-    var is_opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
-    if ((is_chrome)&&(is_safari)) {is_safari=false;}
-    if ((is_chrome)&&(is_opera)) {is_chrome=false;}
-	 if(is_safari) {
-		 $("body").addClass("safari-browser");
-	 }
-	 else if(is_firefox){
-		 $("body").addClass("firefox-browser");
-	 }
-	 else if(is_explorer){
-		 $("body").addClass("ie-browser");
-	 }
-	 else if(is_chrome){
-		 $("body").addClass("chrome-browser");
-	 }
-	 if (navigator.userAgent.indexOf('Mac OS X') != -1) {
-		  $("body").addClass("mac");
-		} else {
-		  $("body").addClass("pc");
-	}
+    var isSafari = navigator.userAgent.indexOf('Safari') > -1;
+    var isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+    var isExplorer = navigator.userAgent.indexOf('MSIE') > -1;
+    var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+    //var is_safari = navigator.userAgent.indexOf('Safari') > -1;
+    var isOpera = navigator.userAgent.toLowerCase().indexOf('op') > -1;
+    if ((isChrome) && (isSafari)) {
+        isSafari = false;
+    }
+    if ((isChrome) && (isOpera)) {
+        isChrome = false;
+    }
+    if (isSafari) {
+        $('body').addClass('safari-browser');
+    } else if (isFirefox) {
+        $('body').addClass('firefox-browser');
+    } else if (isExplorer) {
+        $('body').addClass('ie-browser');
+    } else if (isChrome) {
+        $('body').addClass('chrome-browser');
+    }
+    if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+        $('body').addClass('mac');
+    } else {
+        $('body').addClass('pc');
+    }
     var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
 
     //PREVAIL-Added to handle form dialog boxes server side issues.
@@ -148,18 +148,18 @@ function initializeEvents() {
      * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
      * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
      * */
-    
+
     /*** minicart hide ***/
-    var minicartlink= $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
-    minicartlink.on("click",function() {
-	    if($(window).width() < 959 ) {
-	    	$('#minicart .minicartcontent').hide();
-	    }
+    var minicartlink = $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
+    minicartlink.on('click', function () {
+        if ($(window).width() < 959) {
+            $('#minicart .minicartcontent').hide();
+        }
     });
-     
+
     var $searchContainer = $('.site-suggestion-section');
     searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
-    
+
     $('#password-reset').on('click', function (e) {
         e.preventDefault();
         dialog.open({
@@ -168,130 +168,126 @@ function initializeEvents() {
                 //Start JIRA PREV-334 : Title is missing for the Forgot password overlay.
                 title: Resources.FORGOT_PASSWORD,
                 width: 475,
-                dialogClass:"PasswordResetDialog",
+                dialogClass: 'PasswordResetDialog',
                 open: function () {
-                	resetPasswordEvents();
+                    resetPasswordEvents();
                 }
             }
         });
     });
-    
+
     // print handler
     $('.print-page').on('click', function () {
         window.print();
         return false;
     });
-    
-        $('.mobile-banner-stuff').on('click', function (e) {
-        	e.preventDefault();
-        	if($('.calloutexist').length > 0) {
-        		var promoCallOut = $('.calloutexist').html();
-    		   var bannerDialogOpen = dialog.create({
-                   target: '#calloutexist',
-                   options: {
-                      dialogClass: 'dialogBanner'
-                  }
-	              });
-    		   	util.scrollBrowser($("html").offset().top);
-	              bannerDialogOpen.html(promoCallOut);
-	              $(".ui-dialog-content:visible").each(function () {
-	       	        $( this ).dialog("option","position",$(this).dialog("option","position"));
-	       	    	});
-	              bannerDialogOpen.dialog("open");
-        	}
-       });
-	$(document).on('click','.dialogBanner #closeBtn01', function (e) {
-    	e.preventDefault();
-    	$(this).parents('.dialogBanner').find('.ui-dialog-titlebar-close').trigger('click');
-	});
-    //footer change region event
-	$(".change-region-footer").hover(function(m) {
-        $(".domainswitch").show();
-    }, function(m) {
-        $(".domainswitch").hide();
+
+    $('.mobile-banner-stuff').on('click', function (e) {
+        e.preventDefault();
+        if ($('.calloutexist').length > 0) {
+            var promoCallOut = $('.calloutexist').html();
+            var bannerDialogOpen = dialog.create({
+                target: '#calloutexist',
+                options: {
+                    dialogClass: 'dialogBanner'
+                }
+            });
+            util.scrollBrowser($('html').offset().top);
+            bannerDialogOpen.html(promoCallOut);
+            $('.ui-dialog-content:visible').each(function () {
+                $(this).dialog('option', 'position', $(this).dialog('option', 'position'));
+            });
+            bannerDialogOpen.dialog('open');
+        }
     });
-    $(".domainswitch").hover(function(m) {
-        if (!clicked) {
-            $(this).show();
-        }
-    }, function(m) {
-        if (!clicked) {
-            $(this).hide();
-        }
+    $(document).on('click', '.dialogBanner #closeBtn01', function (e) {
+        e.preventDefault();
+        $(this).parents('.dialogBanner').find('.ui-dialog-titlebar-close').trigger('click');
+    });
+    //footer change region event
+    $('.change-region-footer').hover(function () {
+        $('.domainswitch').show();
+    }, function () {
+        $('.domainswitch').hide();
+    });
+    $('.domainswitch').hover(function () {
+        $(this).show();
+    }, function () {
+        $(this).hide();
     });
     $('div.pseudo_self_label').each(
-            function () {
-                var $this = jQuery(this);
-                var $input = $this
-                    .children('input[type="text"]');
-                $input.data('toggle', $input.val());
-                //used to add a class to placeholder for styling
-                if($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()){
-             	   $('.emailinput.emailfooter').addClass('footerplace');
-                }
-                /**
-                 * if(jQuery.trim($input.val()) != "") {
+        function () {
+            var $this = jQuery(this);
+            var $input = $this
+                .children('input[type="text"]');
+            $input.data('toggle', $input.val());
+            //used to add a class to placeholder for styling
+            if ($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()) {
+                $('.emailinput.emailfooter').addClass('footerplace');
+            }
+            /**
+             * if(jQuery.trim($input.val()) != "") {
                  * $input.data('toggle').hide(); } else
-                 *if($input.data('toggle') &&
-                 * $input.data('toggle').size() >= 1) {
+             *if($input.data('toggle') &&
+             * $input.data('toggle').size() >= 1) {
                  * $input.val($input.data('toggle')); }
-                 */
-                $input
-                    .blur(function () {
-                        var $this = jQuery(this);
-                       if(jQuery
-                            .trim($this.val()) == "") {
-                            // $this.data('toggle').show();
-                            $this
-                                .val($this
-                                    .data('toggle'));
-                          //used to add a class to placeholder for styling
-                           if($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()){
-                        	   $('.emailinput.emailfooter').addClass('footerplace');
-                           }
-                            
+             */
+            $input
+                .blur(function () {
+                    var $this = jQuery(this);
+                    if (jQuery
+                            .trim($this.val()) == '') {
+                        // $this.data('toggle').show();
+                        $this
+                            .val($this
+                                .data('toggle'));
+                        //used to add a class to placeholder for styling
+                        if ($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()) {
+                            $('.emailinput.emailfooter').addClass('footerplace');
                         }
-                    });
-                $input
-                    .focus(function () {
-                    	$('.emailinput.emailfooter').removeClass('footerplace');
-                        var $this = jQuery(this);
-                       if($this.data('toggle') && (jQuery
+
+                    }
+                });
+            $input
+                .focus(function () {
+                    $('.emailinput.emailfooter').removeClass('footerplace');
+                    var $this = jQuery(this);
+                    if ($this.data('toggle') && (jQuery
                             .trim($this
                                 .val()) == jQuery
                             .trim($this
                                 .data('toggle')))) {
-                            // $this.data('toggle').show();
-                            $this.val('');
-                        }
-                    });
-                $this
-                    .parents('form')
-                    .submit(
-                        function () {
-                            var $this = jQuery(this);
-                            $this
-                                .find(
-                                    "div.pseudo_self_label input")
-                                .each(
-                                    function () {
-                                        var $this = jQuery(this);
-                                       if($this
+                        // $this.data('toggle').show();
+                        $this.val('');
+                    }
+                });
+            $this
+                .parents('form')
+                .submit(
+                    function () {
+                        var $this = jQuery(this);
+                        $this
+                            .find(
+                                'div.pseudo_self_label input')
+                            .each(
+                                function () {
+                                    var $this = jQuery(this);
+                                    if ($this
                                             .data('toggle') && $this
                                             .data('toggle') == $this
                                             .val()) {
-                                            $this
-                                                .val('');
-                                        }
-                                    });
-                        });
-            });
-    
+                                        $this
+                                            .val('');
+                                    }
+                                });
+                    });
+        });
+
     //
-    $("body").on("submit","#customercontactus", function (e) {
-    	e.preventDefault();
-    	var $form = $(this);
-    	if($form.valid()) {
+    $('body').on('submit', '#customercontactus', function (e) {
+        e.preventDefault();
+        var $form = $(this);
+        if ($form.valid()) {
             // set the action
             $('<input/>').attr({
                 name: $form.attr('action'),
@@ -304,7 +300,7 @@ function initializeEvents() {
             if (data.indexOf('ajax') === -1) {
                 data += '&format=ajax';
             }
-            
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -313,126 +309,124 @@ function initializeEvents() {
             }).done(function (response) {
                 $('.column.colspan2').empty().html(response);
             });
-    	}
-	}); 
-    
-    $('.first-level').on('click',function() {
-    	$(this).children('.second-level').toggle();
-    	$(this).toggleClass('list-active');
+        }
+    });
+
+    $('.first-level').on('click', function () {
+        $(this).children('.second-level').toggle();
+        $(this).toggleClass('list-active');
     });
     $('.first-level li.active').closest('.first-level').click();
-    $('.first-level li a').click(function(event) {
-    event.stopPropagation();
+    $('.first-level li a').click(function (event) {
+        event.stopPropagation();
     });
-    $('.first-levell').on('click',function() {
-    	$(this).children('.second-levell').toggle();
-    	//$(this).toggleClass('list-active');
+    $('.first-levell').on('click', function () {
+        $(this).children('.second-levell').toggle();
+        //$(this).toggleClass('list-active');
     });
-  	$(window).load(function(){
-  		if($('.newMargin').length > 0) {
-  			var currentItem = $('.newMargin');
-  			currentItem.parents('.cell-header').addClass('new-margin-update');
-  		}
-  		if($('.newMargin-one').length > 0) {
-  			var currentItem = $('.newMargin-one');
-  			currentItem.parents('.cell-header').addClass('new-margin-updateone');
-  		}
-  		if($('.vmc-manufacturer-margin').length > 0) {
-  			var currentItem = $('.vmc-manufacturer-margin');
-  			currentItem.parents('.cell-header').addClass('manufacture-margin-update');
-  		}
-  		if($('.strikemaster-paragraph').length > 0) {
-  			var currentItem = $('.strikemaster-paragraph');
-  			currentItem.parents('.cell-header').addClass('strikemaster-margin-update');
-  		}
-  		var spancountleftnav = $('.pt_customerservice .customer .column .contentbox .left-nav-top .contentboxcontent .nav-group li span');
-		spancountleftnav.each(function(){
-			if($(this).height() > 19) {
-				$(this).addClass('newone');
-			}
-			else {
-				$(this).removeClass('newone');
-			}
-		});
-		var spancountleftnav = $('.pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group li span');
-		spancountleftnav.each(function(){
-			if($(this).height() > 19) {
-				$(this).addClass('newone');
-			}
-			else {
-				$(this).removeClass('newone');
-			}
-		});
-  		if($('.shadow-box').length > 0) {
-  			var currentItem = $('.shadow-box');
-  			currentItem.parents('.pt_customerservice').addClass('pt_customerservice-box');
-  		}
-  		if($('.zero-margin').length > 0) {
-  			var currentItem = $('.zero-margin');
-  			currentItem.parents('.cell-header').addClass('zero-margin-cell-header');
-  		}
-  		if($('.checkoutloginsignin').find('.TokenExpired').length>0){
-			$("#password-reset").trigger("click");
-			setTimeout(function(){
-				$('#dialog-container').find('p').hide();
-				if($('#dialog-container #PasswordResetForm').length>0){
-					$('#dialog-container #PasswordResetForm').prepend('<div class="TokenExpireError">We&#39;re sorry, the link to reset your password has expired. Reset Password links expire after 30 minutes for security purposes. Please submit your email again.</div>');
-						$('#dialog-container #PasswordResetForm .passwordemail').prepend('<div class="Emaillabel">Enter your email address to get reset password instructions sent to your inbox.</div>');
-				}
-			}, 2000);
-	  	}	
-  	});
-    $(window).resize(function(){
-    	if( $(window).width() > 960 ) {
-    		if($("#container").hasClass("js-container-active")) {
-    			$("#container, .open-menu-wrap").removeAttr("style");
-    			$("#container").removeClass("js-container-active").find(".menu-toggle").removeClass("js-menu-toggle");
-    			$("#main, #footernew").unwrap();
-    			$("#brand-tabs-header").unwrap();
-    		}
-    		//megamenu.init();
-    	}
+    $(window).load(function () {
+        var currentItem = null;
+        if ($('.newMargin').length > 0) {
+            currentItem = $('.newMargin');
+            currentItem.parents('.cell-header').addClass('new-margin-update');
+        }
+        if ($('.newMargin-one').length > 0) {
+            currentItem = $('.newMargin-one');
+            currentItem.parents('.cell-header').addClass('new-margin-updateone');
+        }
+        if ($('.vmc-manufacturer-margin').length > 0) {
+            currentItem = $('.vmc-manufacturer-margin');
+            currentItem.parents('.cell-header').addClass('manufacture-margin-update');
+        }
+        if ($('.strikemaster-paragraph').length > 0) {
+            currentItem = $('.strikemaster-paragraph');
+            currentItem.parents('.cell-header').addClass('strikemaster-margin-update');
+        }
+        var spancountleftnav = $('.pt_customerservice .customer .column .contentbox .left-nav-top .contentboxcontent .nav-group li span');
+        spancountleftnav.each(function () {
+            if ($(this).height() > 19) {
+                $(this).addClass('newone');
+            } else {
+                $(this).removeClass('newone');
+            }
+        });
+        spancountleftnav = $('.pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group li span');
+        spancountleftnav.each(function () {
+            if ($(this).height() > 19) {
+                $(this).addClass('newone');
+            } else {
+                $(this).removeClass('newone');
+            }
+        });
+        if ($('.shadow-box').length > 0) {
+            currentItem = $('.shadow-box');
+            currentItem.parents('.pt_customerservice').addClass('pt_customerservice-box');
+        }
+        if ($('.zero-margin').length > 0) {
+            currentItem = $('.zero-margin');
+            currentItem.parents('.cell-header').addClass('zero-margin-cell-header');
+        }
+        if ($('.checkoutloginsignin').find('.TokenExpired').length > 0) {
+            $('#password-reset').trigger('click');
+            setTimeout(function () {
+                $('#dialog-container').find('p').hide();
+                if ($('#dialog-container #PasswordResetForm').length > 0) {
+                    $('#dialog-container #PasswordResetForm').prepend('<div class="TokenExpireError">We&#39;re sorry, the link to reset your password has expired. Reset Password links expire after 30 minutes for security purposes. Please submit your email again.</div>');
+                    $('#dialog-container #PasswordResetForm .passwordemail').prepend('<div class="Emaillabel">Enter your email address to get reset password instructions sent to your inbox.</div>');
+                }
+            }, 2000);
+        }
+    });
+    $(window).resize(function () {
+        if ($(window).width() > 960) {
+            if ($('#container').hasClass('js-container-active')) {
+                $('#container, .open-menu-wrap').removeAttr('style');
+                $('#container').removeClass('js-container-active').find('.menu-toggle').removeClass('js-menu-toggle');
+                $('#main, #footernew').unwrap();
+                $('#brand-tabs-header').unwrap();
+            }
+            //megamenu.init();
+        }
     });
     // add generic toggle functionality
     $('.toggle').next('.toggle-content').hide();
-    if($(".pt_checkout").length == 0) {
-    	if($(".pt_customerservice").length == 0) {
-    		$('.toggle').off("click").on("click",function (e) {
-    			e.preventDefault(); //JIRA PREV-90 : When click on advance search from gift registry login page, focus is happening towards top of the page.
-    			$(this).toggleClass('expanded').next('ul, .toggle-content').toggle();
-    		}); 
-    	}
+    if ($('.pt_checkout').length == 0) {
+        if ($('.pt_customerservice').length == 0) {
+            $('.toggle').off('click').on('click', function (e) {
+                e.preventDefault(); //JIRA PREV-90 : When click on advance search from gift registry login page, focus is happening towards top of the page.
+                $(this).toggleClass('expanded').next('ul, .toggle-content').toggle();
+            });
+        }
     }
     // toggle for customer service FAQ
-    if( $(".pt_customerservice").length > 0) {
-    	 $('.section a.toggle').off("click").on("click",function (e) {
-    		 e.preventDefault();
-    		 	$(this).parent().next('.reveal').slideToggle('fast', function() {
-    	 	});
-    	 	return false;
-    	});
+    if ($('.pt_customerservice').length > 0) {
+        $('.section a.toggle').off('click').on('click', function (e) {
+            e.preventDefault();
+            $(this).parent().next('.reveal').slideToggle('fast', function () {
+            });
+            return false;
+        });
     }
-    
+
     $('#footernew .footer-main #linkheading').click(function () {
-	$(this).toggleClass('show');
-	$(this).closest('div').toggleClass('expanded');
-	if($('#about, #customer-service, #More-ways-to-shop').hasClass('expanded')) {
-		$('#rapala_insider').addClass('new');
-	}
-	else {
-		$('#rapala_insider').removeClass('new');
-	}
-	if($('#busniness').hasClass('expanded')) {
-		$('#follow_us').addClass('new');
-	}
-	else {
-		$('#follow_us').removeClass('new');
-	}
-	});
- 
+        $(this).toggleClass('show');
+        $(this).closest('div').toggleClass('expanded');
+        if ($('#about, #customer-service, #More-ways-to-shop').hasClass('expanded')) {
+            $('#rapala_insider').addClass('new');
+        } else {
+            $('#rapala_insider').removeClass('new');
+        }
+        if ($('#busniness').hasClass('expanded')) {
+            $('#follow_us').addClass('new');
+        } else {
+            $('#follow_us').removeClass('new');
+        }
+    });
+
     function isTouchDevice() {
-        return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+        return true == ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
     }
+
     if (isTouchDevice() === true) {
         //alert('Touch Device'); //your logic for touch device here
         $('.old-swim').removeClass('show').addClass('hide');
@@ -442,25 +436,25 @@ function initializeEvents() {
         $('.old-swim').removeClass('hide').addClass('show');
         $('.new-swim').removeClass('show').addClass('hide');
     }
-    $(window).bind('scroll resize', function(){
-    	if($('.rapala_device').length > 0 && $(window).width() < 768){
-    		if( $('#footerEmailDialog.ui-dialog-content').length > 0){
-    			$('.ui-dialog').css({'left':($(document).width() - $('.ui-dialog').width())/2, 'top':'100px'});   
-    		}else{
-    			$('.ui-dialog').css({'left':($(document).width() - $('.ui-dialog').width())/2});
-    		}
-  		
-    	}
-	});
+    $(window).bind('scroll resize', function () {
+        if ($('.rapala_device').length > 0 && $(window).width() < 768) {
+            if ($('#footerEmailDialog.ui-dialog-content').length > 0) {
+                $('.ui-dialog').css({'left': ($(document).width() - $('.ui-dialog').width()) / 2, 'top': '100px'});
+            } else {
+                $('.ui-dialog').css({'left': ($(document).width() - $('.ui-dialog').width()) / 2});
+            }
 
-    $(".tabsHeader").bind("click", function(event) {
-    	var currentItem = $(this);
-    	currentItem.closest('.mobile-tabs-section').toggleClass('active');
-    }); 
+        }
+    });
 
-    $(document).on("click", ".upgradenow-link" ,function(e){
+    $('.tabsHeader').bind('click', function () {
+        var currentItem = $(this);
+        currentItem.closest('.mobile-tabs-section').toggleClass('active');
+    });
+
+    $(document).on('click', '.upgradenow-link', function () {
         $('html, body').animate({
-            scrollTop: $(".viploginsignin").offset().top
+            scrollTop: $('.viploginsignin').offset().top
         }, 2000);
     });
     $('.menu-category li .menu-item-toggle').on('click', function (e) {
@@ -470,23 +464,23 @@ function initializeEvents() {
         $parentLi.toggleClass('active');
         $(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
     });
-     
-    $("body").on("click",".dialog-close", function(){
-    	$(this).closest(".ui-dialog").find(".ui-dialog-titlebar-close").trigger("click");
+
+    $('body').on('click', '.dialog-close', function () {
+        $(this).closest('.ui-dialog').find('.ui-dialog-titlebar-close').trigger('click');
     });
-    if ($(window).width() > 959){	
-		var item = $('.sign-up-blk'),
-			clickItem = item.find('.userlogin');
-		
-		clickItem.on('click',function () {
-			return false;
-		});
-	}
-    
+    if ($(window).width() > 959) {
+        var item = $('.sign-up-blk'),
+            clickItem = item.find('.userlogin');
+
+        clickItem.on('click', function () {
+            return false;
+        });
+    }
+
     $('.email-subscribe').submit(function (e) {
-    	e.preventDefault();
-    	var $form = $(this);
-    	if($form.valid()) {
+        e.preventDefault();
+        var $form = $(this);
+        if ($form.valid()) {
             // set the action
             $('<input/>').attr({
                 name: $form.attr('action'),
@@ -499,22 +493,24 @@ function initializeEvents() {
             if (data.indexOf('ajax') === -1) {
                 data += '&format=ajax';
             }
-       
-    		dialog.open({
+
+            dialog.open({
                 url: url,
                 data: data,
                 options: {
-                    title: "email",
+                    title: 'email',
                     width: 800,
-    			    height: 530,
-                    dialogClass:"footerEmailDialog"
+                    height: 530,
+                    dialogClass: 'footerEmailDialog'
                 },
-                open: function () {}
-           });
-    	}
-	});
-    
+                open: function () {
+                }
+            });
+        }
+    });
+
 }
+
 /**
  * @private
  * @function
@@ -547,47 +543,47 @@ var pages = {
 
 var app = {
     init: function () {
-    	 if(typeof geoip_country_code == 'function') {
-             var IP_GeoCode = geoip_country_code();
-             var allowed_countries = $(".allowed-countries").text();
-            if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined") {
-                 allowed_countries = "US";
-             }
-            if(allowed_countries.indexOf(IP_GeoCode) == -1) {
-           	  $('html').addClass('no-pricing');
-                 $('.non-usa-alert').removeClass('hide');
-                 $('.ui-customer,.dividers.pipe,.ui-email,.ui-storelocator,.ui-wishlist,.ui-login,.handle-non-us,.welcomemessage,.anonymous,.site-suggestion-section').addClass('hide');
-                 $('.minicart, .promotional-message, .product-colors-size').css({"display":'none'});
-                 $('#customer-returns,#customer-shipping,#customer-warranty').addClass('hide');
-                 $(".addtowishlist").addClass("hide");
-                 $(".non-us-contactus geo,.us-contactus").addClass("hide");
-                 $('.non-us-contactus-non').removeClass('hide');
-                 $('.desktopHide.handle-non-us.geo').removeClass('desktopHide');
-                 $('.mobileHide.handle-non-us.geo').removeClass('mobileHide');
-                 var contactus_nonus_url = Urls.contactusnonus;
-                 $('.handle-non-us.geo').addClass('hide')
-                 $(".ca-contactus-link").attr('href', contactus_nonus_url);
-                 $('.cust-non-us').find('a').attr('href',contactus_nonus_url);
-                 $('.ui-login,.magnifier-icon').css({"background":'none'});
-                 $(".handle-non-us-vh").addClass("vhide");
-                 $('.subscribe').prop('disabled', true);
-                 setTimeout(function(){
-                	 $('.product-promo, .newrecommendation').css({"display":'none'}); 
-                 },5000);
+        if (typeof geoipCountryCode == 'function') {
+            var IPGeoCode = geoipCountryCode();
+            var allowedCountries = $('.allowed-countries').text();
+            if (allowedCountries == null || allowedCountries == 'null' || allowedCountries == 'undefined') {
+                allowedCountries = 'US';
+            }
+            if (allowedCountries.indexOf(IPGeoCode) == -1) {
+                $('html').addClass('no-pricing');
+                $('.non-usa-alert').removeClass('hide');
+                $('.ui-customer,.dividers.pipe,.ui-email,.ui-storelocator,.ui-wishlist,.ui-login,.handle-non-us,.welcomemessage,.anonymous,.site-suggestion-section').addClass('hide');
+                $('.minicart, .promotional-message, .product-colors-size').css({'display': 'none'});
+                $('#customer-returns,#customer-shipping,#customer-warranty').addClass('hide');
+                $('.addtowishlist').addClass('hide');
+                $('.non-us-contactus geo,.us-contactus').addClass('hide');
+                $('.non-us-contactus-non').removeClass('hide');
+                $('.desktopHide.handle-non-us.geo').removeClass('desktopHide');
+                $('.mobileHide.handle-non-us.geo').removeClass('mobileHide');
+                var contactusNonusUrl = Urls.contactusnonus;
+                $('.handle-non-us.geo').addClass('hide');
+                $('.ca-contactus-link').attr('href', contactusNonusUrl);
+                $('.cust-non-us').find('a').attr('href', contactusNonusUrl);
+                $('.ui-login,.magnifier-icon').css({'background': 'none'});
+                $('.handle-non-us-vh').addClass('vhide');
+                $('.subscribe').prop('disabled', true);
+                setTimeout(function () {
+                    $('.product-promo, .newrecommendation').css({'display': 'none'});
+                }, 5000);
 
-             }
-         }
-     	   	
+            }
+        }
+
         // Check TLS status if indicated by site preference
         var checkTLS = SitePreferences.CHECK_TLS;
-        if(checkTLS == true){
-        	var tls_broswer =  tls.getUserAgent();
-            if((tls_broswer.name == "Chrome" && tls_broswer.version < 22) || (tls_broswer.name == "Firefox" && tls_broswer.version < 27) || (tls_broswer.name == "Safari" && tls_broswer.version < 5) || (tls_broswer.name == "MSIE" && tls_broswer.version < 11)){
-            	if(tls_broswer.name == "MSIE"){
-    		    	 tls_broswer.name = "Internet Explorer";
-    		      } 
-            	$('.browser-compatibility-alert').removeClass('hide');
-         	    $('.browser-compatibility-alert p').find('.browser_version').text(" " + tls_broswer.name + " " + tls_broswer.version+".");
+        if (checkTLS == true) {
+            var tlsBroswer = tls.getUserAgent();
+            if ((tlsBroswer.name == 'Chrome' && tlsBroswer.version < 22) || (tlsBroswer.name == 'Firefox' && tlsBroswer.version < 27) || (tlsBroswer.name == 'Safari' && tlsBroswer.version < 5) || (tlsBroswer.name == 'MSIE' && tlsBroswer.version < 11)) {
+                if (tlsBroswer.name == 'MSIE') {
+                    tlsBroswer.name = 'Internet Explorer';
+                }
+                $('.browser-compatibility-alert').removeClass('hide');
+                $('.browser-compatibility-alert p').find('.browser_version').text(' ' + tlsBroswer.name + ' ' + tlsBroswer.version + '.');
             }
         }
         initializeDom();
@@ -624,31 +620,31 @@ var app = {
     };
 })();
 
-jQuery(function(event){
-	jQuery(".accordion")
-		.hover(function(event) {
-				var $this = jQuery(this);
-			   if ($this.hasClass('highlight')) {
-				   $this.addClass('contentbox');
-			   } else {
-				   $this.removeClass('contentbox').addClass('tabover');
-	           }
-			},
-			function(event) {
-		   		jQuery(this).removeClass('tabover').addClass('contentbox');
-        	}
-        ).click(function() {
-			var $this = jQuery(this);
-			if ($this.find('.expandcontent').length > 0) {
-				$this.find('h1').toggleClass('downarrow').next().toggle('fast');
-				$this.toggleClass('highlight').toggleClass('tabover').toggleClass('contentbox');
-			} else {
-				window.location.href=$this.find('a').attr('href');
-			}
-		});       
-});	
+jQuery(function () {
+    jQuery('.accordion')
+        .hover(function () {
+            var $this = jQuery(this);
+            if ($this.hasClass('highlight')) {
+                $this.addClass('contentbox');
+            } else {
+                $this.removeClass('contentbox').addClass('tabover');
+            }
+        },
+            function () {
+                jQuery(this).removeClass('tabover').addClass('contentbox');
+            }
+        ).click(function () {
+            var $this = jQuery(this);
+            if ($this.find('.expandcontent').length > 0) {
+                $this.find('h1').toggleClass('downarrow').next().toggle('fast');
+                $this.toggleClass('highlight').toggleClass('tabover').toggleClass('contentbox');
+            } else {
+                window.location.href = $this.find('a').attr('href');
+            }
+        });
+});
 
 // initialize app
 $(document).ready(function () {
-    app.init();  
+    app.init();
 });

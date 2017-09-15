@@ -34,25 +34,23 @@ function initializeDom() {
     }
 }
 
-
 function initializeEvents() {
 
     $cache.validatoionDialog.on('click', '#original-address-edit', function () {
         $cache.validatoionDialog.dialog('close');
-        $(".shipping-address-field-section").removeClass("hide");
-        $(".selected-shipping-address").addClass("hide");
-        $(".new-address-field").addClass("hide");
-         
+        $('.shipping-address-field-section').removeClass('hide');
+        $('.selected-shipping-address').addClass('hide');
+        $('.new-address-field').addClass('hide');
+
         /*jQuery('html, body').animate({
             scrollTop: $('#navigation').position().top
         }, 500);*/
     });
     $cache.validatoionDialog.on('click', '#suggested-address-edit-1', function () {
-        
-        $(".shipping-address-field-section").removeClass("hide");
-        $(".selected-shipping-address").addClass("hide");
+
+        $('.shipping-address-field-section').removeClass('hide');
+        $('.selected-shipping-address').addClass('hide');
     });
-	
 
     $cache.validatoionDialog.on('click', '#ship-to-original-address', function () {
 
@@ -94,7 +92,7 @@ function initializeEvents() {
     });
 }
 
-exports.init = function() {
+exports.init = function () {
     initializeCache();
     initializeDom();
 };

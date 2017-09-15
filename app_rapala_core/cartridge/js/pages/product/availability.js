@@ -99,6 +99,6 @@ var getAvailability = function () {
     });
 };
 
-module.exports = function() {
+module.exports = function () {
     $('#pdpMain').on('change', '.pdpForm input[name="Quantity"]', getAvailability);
 };

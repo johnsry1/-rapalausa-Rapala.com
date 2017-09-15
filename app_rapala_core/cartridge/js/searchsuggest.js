@@ -9,6 +9,7 @@ var currentQuery = null,
     listCurrent = -1,
     delay = 30,
     $resultsContainer;
+
 /**
  * @function
  * @description Handles keyboard's arrow keys
@@ -53,84 +54,62 @@ var searchsuggest = {
             if (!$resultsContainer) {
                 // create results container if needed
                 //$resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
-                $resultsContainer = $('<div/>').attr('class', 'suggestions').attr('id','suggestions').appendTo($searchContainer);
+                $resultsContainer = $('<div/>').attr('class', 'suggestions').attr('id', 'suggestions').appendTo($searchContainer);
             }
             if ($searchField.val() === defaultValue) {
                 $searchField.val('');
             }
         });
-        $searchField.blur(function() {
-        	var temp = $searchField.val();
-        		if ($.trim(temp) == "") {
-                	$searchField.val("Search Entire Site...");
-                }
-            
+        $searchField.blur(function () {
+            var temp = $searchField.val();
+            if ($.trim(temp) == '') {
+                $searchField.val('Search Entire Site...');
+            }
+
         });
         $(document).on('click', function (e) {
             if (!$searchContainer.is(e.target)) {
                 setTimeout(this.clearResults, 200);
             }
         }.bind(this));
-     // on submit we do not submit the form, but change the window location
-		// in order to avoid https to http warnings in the browser
-		// only if it's not the default value and it's not empty
-        $searchForm.submit(function() {
-			var searchUrl = $searchForm.attr("action");
-			var sessionId=jQuery("#footerhiddenid").text();
-			if(sessionId == "rapala")
-			{
-				var k=searchUrl+'?id=1';
-			}
-			else if(sessionId == "sufix")
-			{
-				var k=searchUrl+'?id=2';
-			}
-			else if(sessionId == "triggerx")
-			{
-				var k=searchUrl+'?id=3';
-			}
-			else if(sessionId == "storm")
-			{
-				var k=searchUrl+'?id=4';
-			}
-			else if(sessionId == "luhrjensen")
-			{
-				var k=searchUrl+'?id=5';
-			}
-			else if(sessionId == "vmc")
-			{
-				var k=searchUrl+'?id=6';
-			}
-			else if(sessionId == "terminator")
-			{
-				var k=searchUrl+'?id=7';
-			}
-			else if(sessionId == "bluefox")
-			{
-				var k=searchUrl+'?id=8';
-			}
-			else if(sessionId == "williamson")
-			{
-				var k=searchUrl+'?id=9';
-			}
-			else if(sessionId == "marcum")
-			{
-				var k=searchUrl+'?id=10';
-			}
-			else if(sessionId == "strikemaster")
-			{
-				var k=searchUrl+'?id=11';
-			}
-			else if(sessionId == "otter")
-			{
-				var k=searchUrl+'?id=21';
-			}
-			var searchTerm = $searchField.val();
-			if (searchTerm != defaultValue && searchTerm != '') {
-				window.location = util.appendParamToURL(k, "q", searchTerm).replace("https", "http");
-			}
-			return false;					
-		});
+        // on submit we do not submit the form, but change the window location
+        // in order to avoid https to http warnings in the browser
+        // only if it's not the default value and it's not empty
+        $searchForm.submit(function () {
+            var searchUrl = $searchForm.attr('action');
+            var sessionId = jQuery('#footerhiddenid').text();
+            var k = ''
+            if (sessionId == 'rapala') {
+                k = searchUrl + '?id=1';
+            } else if (sessionId == 'sufix') {
+                k = searchUrl + '?id=2';
+            } else if (sessionId == 'triggerx') {
+                k = searchUrl + '?id=3';
+            } else if (sessionId == 'storm') {
+                k = searchUrl + '?id=4';
+            } else if (sessionId == 'luhrjensen') {
+                k = searchUrl + '?id=5';
+            } else if (sessionId == 'vmc') {
+                k = searchUrl + '?id=6';
+            } else if (sessionId == 'terminator') {
+                k = searchUrl + '?id=7';
+            } else if (sessionId == 'bluefox') {
+                k = searchUrl + '?id=8';
+            } else if (sessionId == 'williamson') {
+                k = searchUrl + '?id=9';
+            } else if (sessionId == 'marcum') {
+                k = searchUrl + '?id=10';
+            } else if (sessionId == 'strikemaster') {
+                k = searchUrl + '?id=11';
+            } else if (sessionId == 'otter') {
+                k = searchUrl + '?id=21';
+            }
+            var searchTerm = $searchField.val();
+            if (searchTerm != defaultValue && searchTerm != '') {
+                window.location = util.appendParamToURL(k, 'q', searchTerm).replace('https', 'http');
+            }
+            return false;
+        });
         // on key up listener
         $searchField.keyup(function (e) {
 
@@ -217,8 +196,12 @@ var searchsuggest = {
      * @description
      */
     clearResults: function () {
-        if (!$resultsContainer) { return; }
-        $resultsContainer.fadeOut(200, function () {$resultsContainer.empty(); });
+        if (!$resultsContainer) {
+            return;
+        }
+        $resultsContainer.fadeOut(200, function () {
+            $resultsContainer.empty();
+        });
     },
     /**
      * @function

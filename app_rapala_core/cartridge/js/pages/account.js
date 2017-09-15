@@ -47,102 +47,104 @@ function initializeAddressForm() {
             }
         });
     })
-    .on('click', '.cancel-button, .close-button', function (e) {
-        e.preventDefault();
-        dialog.close();
-    })
-    .on('click', '.delete-button', function (e) {
-        e.preventDefault();
-        if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-            var url = util.appendParamsToUrl(Urls.deleteAddress, {
-                AddressID: $form.find('#addressid').val(),
-                format: 'ajax'
-            });
-            $.ajax({
-                url: url,
-                method: 'POST',
-                dataType: 'json'
-            }).done(function (data) {
-                if (data.status.toLowerCase() === 'ok') {
-                    dialog.close();
-                    page.refresh();
-                } else if (data.message.length > 0) {
-                    window.alert(data.message);
-                    return false;
-                } else {
-                    dialog.close();
-                    page.refresh();
+        .on('click', '.cancel-button, .close-button', function (e) {
+            e.preventDefault();
+            dialog.close();
+        })
+        .on('click', '.delete-button', function (e) {
+            e.preventDefault();
+            if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+                var url = util.appendParamsToUrl(Urls.deleteAddress, {
+                    AddressID: $form.find('#addressid').val(),
+                    format: 'ajax'
+                });
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.status.toLowerCase() === 'ok') {
+                        dialog.close();
+                        page.refresh();
+                    } else if (data.message.length > 0) {
+                        window.alert(data.message);
+                        return false;
+                    } else {
+                        dialog.close();
+                        page.refresh();
+                    }
+                });
+            }
+        });
+    if ($('.logerror:visible').length > 0) {
+        $('.account-logs .returningcustomers').find('.accountemail').addClass('errorclient');
+        $('.account-logs .logincustomers .login_password').addClass('errorclient');
+        //$(".pt_account .wrapper .account-section .returningcustomers .value ").css("margin-bottom", "0");
+    }
+    $('.registration-button').click(function () {
+        var maskheight = $('.createan-account .formsubmit').parent('div').outerHeight();
+        var realForm = jQuery(this).closest('form');
+        if (!realForm.valid()) {
+            $(this).closest('.form-row').addClass('inputlabel');
+            realForm.find('.max-length-error').each(function () {
+                if ($(this).closest('.value').find('input').val().length > 0) {
+                    realForm.find('.max-length-error').remove();
                 }
+            });
+            return false;
+        } else {
+            $('.registration-button span.loadImage').css('display', 'block');
+            $('.createan-account .formsubmit').css({'height': maskheight + 'px', 'display': 'block'});
+
+        }
+    });
+    if ($('.existing_register:visible').length > 0) {
+        $('.createan-account .registration').find('.accountemail').addClass('errorclient');
+        $('.createan-account .registration').find('.formfield_email').find('.labeltext').addClass('inputlabel');
+        $('.createan-account .registration').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
+        if ($('.registration').find('input.required').val().length > 0) {
+            $('.registration').find('.clearbutton').show();
+        }
+    }
+    if ($('.account-email.err.log_error:visible').length > 0) {
+        $('.returningcustomers').find('.formfield_email').find('.labeltext').addClass('inputlabel');
+        $('.returningcustomers').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
+    }
+    $('.signinbtn').click(function () {
+        var maskheight = $('.account-logs .formsubmit').parent('div').outerHeight();
+        var maskheightwishlist = $('.wish-logs .formsubmit').parent('div').outerHeight();
+        var realForm = jQuery(this).closest('form');
+        if (!realForm.valid()) {
+            return false;
+        } else {
+            //$(this).closest('.formactions').addClass('loadImage');
+            $('.signinbtn span.loadImage').css('display', 'block');
+            $('.account-logs .formsubmit').css({'height': maskheight + 'px', 'display': 'block'});
+            $(this).closest('.wish-logs').find('.formsubmit').css({
+                'height': maskheightwishlist + 'px',
+                'display': 'block'
             });
         }
     });
-    if($('.logerror:visible').length > 0){
-  		$('.account-logs .returningcustomers').find('.accountemail').addClass('errorclient');
-  		$('.account-logs .logincustomers .login_password').addClass('errorclient');
-  		//$(".pt_account .wrapper .account-section .returningcustomers .value ").css("margin-bottom", "0");
-  	}
-    $(".registration-button").click(function () {
-  		var maskheight= $('.createan-account .formsubmit').parent('div').outerHeight();
-  		var realForm = jQuery(this).closest('form');
-	  		if(!realForm.valid()){
-	  			$(this).closest(".form-row").addClass("inputlabel");
-	  			realForm.find('.max-length-error').each(function(){
-	  				if($(this).closest('.value').find('input').val().length > 0){
-	  				realForm.find('.max-length-error').remove();
-	  				}
-	  			});
-	  			return false;
-	  		}
-	  		else{	
-	  			$('.registration-button span.loadImage').css('display',"block");
-   	  		$(".createan-account .formsubmit").css({"height":maskheight + "px", "display":"block"});   
+    if ($('.ui-login .header-forgot-pwd').length > 0) {
+        $(this).find('input.required').bind('keydown keyup focusin focusout keypress', function () {
+            //e.stopPropagation();
+            $(this).closest('.value').find('errorclient').remove();
 
-	  		}
-    });
-    if($('.existing_register:visible').length > 0) {
-  		$('.createan-account .registration').find('.accountemail').addClass('errorclient');
-  		$('.createan-account .registration').find('.formfield_email').find('.labeltext').addClass('inputlabel');
-  		$('.createan-account .registration').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
-	  		if($('.registration').find("input.required").val().length > 0) {
-				$('.registration').find('.clearbutton').show();
-			}
-  	}
-    if($('.account-email.err.log_error:visible').length > 0) {
-    	$('.returningcustomers').find('.formfield_email').find('.labeltext').addClass('inputlabel');
-    	$('.returningcustomers').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
+        });
+        $('.ui-login header-forgot-pwd').find('input.required').bind('focusin', function () {
+            $(this).closest('.value').find('errorclient').remove();
+        });
     }
-    $(".signinbtn").click(function () {
-  		var maskheight= $('.account-logs .formsubmit').parent('div').outerHeight();
-  		var maskheightwishlist= $('.wish-logs .formsubmit').parent('div').outerHeight();
-  		var realForm = jQuery(this).closest('form');
-	  		if(!realForm.valid()){
-	  			return false;
-	  		}
-	  		else{	
-	  		//$(this).closest('.formactions').addClass('loadImage');
-	  		$('.signinbtn span.loadImage').css('display',"block");
-	  		$(".account-logs .formsubmit").css({"height":maskheight + "px", "display":"block"}); 
-	  		$(this).closest(".wish-logs").find('.formsubmit').css({"height":maskheightwishlist + "px", "display":"block"});
-	  		}
+    $('.sample-section').click(function () {
+        if (!$(this).find('.sample_mail_main').is(':visible')) {
+            $(this).find('.sample_mail_main').slideDown(500);
+        }
     });
-  	if( $('.ui-login .header-forgot-pwd').length > 0){
-	  	$(this).find("input.required").bind('keydown keyup focusin focusout keypress', function(e) {
-			//e.stopPropagation();
-			$(this).closest(".value").find('errorclient').remove();
-		
-		});
-		$(".ui-login header-forgot-pwd").find("input.required").bind('focusin', function(e) {
-			$(this).closest(".value").find('errorclient').remove();
-		});
-  	}	
-	$(".sample-section").click(function(){
-	  if(!$(this).find('.sample_mail_main').is(':visible')){
-		$(this).find('.sample_mail_main').slideDown(500);  
-		  }
-	});  
     validator.init();
 }
-/** 
+
+/**
  * @private
  * @function
  * @description Toggles the list of Orders
@@ -158,6 +160,7 @@ function toggleFullOrder() {
             $(this).remove();
         });
 }
+
 /**
  * @private
  * @function
@@ -174,7 +177,7 @@ function initAddressEvents() {
         dialog.open({
             url: this.href,
             options: {
-            	dialogClass:"addressadd",
+                dialogClass: 'addressadd',
                 open: initializeAddressForm
             }
         });
@@ -196,6 +199,7 @@ function initAddressEvents() {
         }
     });
 }
+
 /**
  * @private
  * @function
@@ -208,7 +212,7 @@ function initPaymentEvents() {
             //PREVAIL-Added  to handle validation issues
             url: $(e.target).attr('href'),
             options: {
-            	dialogClass:"payment-settings",
+                dialogClass: 'payment-settings',
                 open: initializePaymentForm
             }
         });
@@ -236,19 +240,21 @@ function initPaymentEvents() {
             url: $(this).attr('action'),
             data: data
         })
-        .done(function () {
-            page.redirect(Urls.paymentsList);
-        });
+            .done(function () {
+                page.redirect(Urls.paymentsList);
+            });
     });
 }
+
 function initializePaymentForm() {
-	
-	$('#CreditCardForm').on('click', '.cancel-button', function (e) {
-      e.preventDefault();
-      dialog.close();
-	});
-	
+
+    $('#CreditCardForm').on('click', '.cancel-button', function (e) {
+        e.preventDefault();
+        dialog.close();
+    });
+
 }
+
 /**
  * @private
  * @function
@@ -269,6 +275,7 @@ function initLoginPage() {
         }
     });
 }
+
 /**
  * @private
  * @function
@@ -280,18 +287,18 @@ function initializeEvents() {
     initAddressEvents();
     initPaymentEvents();
     initLoginPage();
-    if($(".server-error").length > 0 ) {
-    	$(window).scrollTop($(".server-error").offset().top);
+    if ($('.server-error').length > 0) {
+        $(window).scrollTop($('.server-error').offset().top);
     }
-    $("body").on("change input",".desktop-accesscode",function(){
-    	var curValue = $(this).val();
-    	$("body").find(".mobile-accesscode").val(curValue);
-    	$("body").find(".mobile-accesscode").attr("value",curValue);
+    $('body').on('change input', '.desktop-accesscode', function () {
+        var curValue = $(this).val();
+        $('body').find('.mobile-accesscode').val(curValue);
+        $('body').find('.mobile-accesscode').attr('value', curValue);
     });
-    $("body").on("change input",".mobile-accesscode",function(){
-    	var curValue = $(this).val();
-    	$("body").find(".desktop-accesscode").val(curValue);
-    	$("body").find(".desktop-accesscode").attr("value",curValue);
+    $('body').on('change input', '.mobile-accesscode', function () {
+        var curValue = $(this).val();
+        $('body').find('.desktop-accesscode').val(curValue);
+        $('body').find('.desktop-accesscode').attr('value', curValue);
     });
 }
 

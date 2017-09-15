@@ -80,7 +80,8 @@ var dialog = {
             this.$container.dialog('option', 'position', position);
         }.bind(this));
 
-        callback = (typeof params.callback === 'function') ? params.callback : function () {};
+        callback = (typeof params.callback === 'function') ? params.callback : function () {
+        };
         callback();
     },
     /**
@@ -144,9 +145,9 @@ var dialog = {
             dataType: 'html',
             success: function (html) {
                 this.$container.html(html);
-                $(".ui-dialog-content:visible").each(function () {
-        	        $( this ).dialog("option","position",$(this).dialog("option","position"));
-        	    });
+                $('.ui-dialog-content:visible').each(function () {
+                    $(this).dialog('option', 'position', $(this).dialog('option', 'position'));
+                });
             }.bind(this),
             failure: function () {
                 window.alert(Resources.SERVER_ERROR);

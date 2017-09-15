@@ -1,309 +1,312 @@
 .paymentslist {
-	float: left;
-	width: 100%;
-	.paymentsettings {
-	    font-variant: normal;
-    	text-transform: uppercase;
-	}
-	.address-head {
-		padding-bottom: 30px;
-	    border-bottom: 1px solid $very-light-gray;
-	    float: left;
-	    width: 100%;
-	}
-	.paymentinstruments {
-		float: left;
-		width: 100%;
-		.creditcard {
-			float: left;
-		    margin: 15px 0 15px 1px;
-		    width: 100%;
-			.payment-list {
-				li {
-					width: 33%;
-					display:block;
-					float:left;
-    				padding: 1em;
-    				box-sizing: border-box;
-    				@media screen and (max-width: 480px) {
-    					width: 100%;
-    				}
-    				&.null{
-    					display:none;
-    				}
-				}
-				
-				label {
-					margin: 0;
-				}
-				.actions{
-					fieldset{
-						margin:0;
-						width:100%;
-					}
-				}
-				.cc-owner {
-					overflow: hidden;
-				    padding-bottom:3px;
-				    white-space: nowrap;
-				    text-transform:uppercase;
-				}
-				.cc-exp {
-					.label {
-						color: $my-account-grey;
-					    float: left;
-					    font-size: 12px;
-					    font-variant: normal;
-					    font-weight: bold;
-					    font-style: italic;
-					    font-family: $lucida-font-family;
-					}
-					label {
-						padding-left: 5px;
-						clear: left;
-					    display: inline;
-					    font-weight: bold;
-					    text-align: right;
-					    word-wrap: break-word;
-					}
-				}
-				.actions {
-					margin: 5px 0 5px 0;
-    				text-align: left;
-    				.button-text {
-    					&.delete {
-    						background-color: $shaded-grey;
-						    border-bottom: 1px solid $shadeddeep-veryLight-grey;
-						    border-left: 1px solid $shaded-veryLight-grey;
-						    border-right: 1px solid $shaded-veryLight-grey;
-						    border-top: 1px solid $shaded-light-grey;
-						    color: $bg-darkbrown;
-						    display: block;
-						    float: left;
-						    font-family: $lucida-font-family;
-						    font-size: 11px;
-						    font-style: normal;
-						    font-weight: bold;
-						    height: 28px;
-						    letter-spacing: 1px;
-						    line-height: 28px;
-						    padding: 0 18px;
-						    text-transform: uppercase;
-						    margin: 9px 0 0 0;
-						    &:hover {
-						    	color: $shadow-light-grey;
-						    }
-    					}
-    				}
-				}
-			}	
-		}
-	}
+    float: left;
+    width: 100%;
+    .paymentsettings {
+        font-variant: normal;
+        text-transform: uppercase;
+    }
+    .address-head {
+        padding-bottom: 30px;
+        border-bottom: 1px solid $very-light-gray;
+        float: left;
+        width: 100%;
+    }
+    .paymentinstruments {
+        float: left;
+        width: 100%;
+        .creditcard {
+            float: left;
+            margin: 15px 0 15px 1px;
+            width: 100%;
+            .payment-list {
+                li {
+                    width: 33%;
+                    display: block;
+                    float: left;
+                    padding: 1em;
+                    box-sizing: border-box;
+                    @media screen and (max-width: 480px) {
+                        width: 100%;
+                    }
+                    &.null {
+                        display: none;
+                    }
+                }
+
+                label {
+                    margin: 0;
+                }
+                .actions {
+                    fieldset {
+                        margin: 0;
+                        width: 100%;
+                    }
+                }
+                .cc-owner {
+                    overflow: hidden;
+                    padding-bottom: 3px;
+                    white-space: nowrap;
+                    text-transform: uppercase;
+                }
+                .cc-exp {
+                    .label {
+                        color: $my-account-grey;
+                        float: left;
+                        font-size: 12px;
+                        font-variant: normal;
+                        font-weight: bold;
+                        font-style: italic;
+                        font-family: $lucida-font-family;
+                    }
+                    label {
+                        padding-left: 5px;
+                        clear: left;
+                        display: inline;
+                        font-weight: bold;
+                        text-align: right;
+                        word-wrap: break-word;
+                    }
+                }
+                .actions {
+                    margin: 5px 0 5px 0;
+                    text-align: left;
+                    .button-text {
+                        &.delete {
+                            background-color: $shaded-grey;
+                            border-bottom: 1px solid $shadeddeep-veryLight-grey;
+                            border-left: 1px solid $shaded-veryLight-grey;
+                            border-right: 1px solid $shaded-veryLight-grey;
+                            border-top: 1px solid $shaded-light-grey;
+                            color: $bg-darkbrown;
+                            display: block;
+                            float: left;
+                            font-family: $lucida-font-family;
+                            font-size: 11px;
+                            font-style: normal;
+                            font-weight: bold;
+                            height: 28px;
+                            letter-spacing: 1px;
+                            line-height: 28px;
+                            padding: 0 18px;
+                            text-transform: uppercase;
+                            margin: 9px 0 0 0;
+                            &:hover {
+                                color: $shadow-light-grey;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-.pt_leftnav-payment{
-	.dialog-required{
-		.required-indicator{
-		   	font-family:Verdana, Arial, sans-serif;
-		    line-height: 13px;
-		    font-size: 13px;
-		    em{
-		    	font-family:global-font-family;
-		    }
-		}
-	}
+
+.pt_leftnav-payment {
+    .dialog-required {
+        .required-indicator {
+            font-family: Verdana, Arial, sans-serif;
+            line-height: 13px;
+            font-size: 13px;
+            em {
+                font-family: global-font-family;
+            }
+        }
+    }
 }
+
 .payment-settings {
-	.dialog-content {
-		border: 0;
-	    padding: 6px 12px;
-		background: $white;
-	    overflow: auto;
-	    zoom: 1;
-	}
+    .dialog-content {
+        border: 0;
+        padding: 6px 12px;
+        background: $white;
+        overflow: auto;
+        zoom: 1;
+    }
 }
+
 .creditcardform {
-	.credit-cart-form-title {
-	}
-	#CreditCardForm {
-		.form-row {
-			.form-caption{ 
-				&.error-message{
-					color:$red;
-				} 
-			}
-			&.month.custom-select{
-				margin-bottom:20px !important;
-				.form-caption.error-message{
-						margin-left:1% !important;
-					}
-				.field-wrapper{
-					width:83px !important;
-					background-position:63px 6px !important;
-					.input-select{
-						width:100%;
-					}
-				}
-			}
-			&.year.custom-select{
-				margin-bottom:20px !important;
-				.form-caption.error-message{
-						margin-left:1% !important;
-					}
-				.field-wrapper{
-					width:63px !important;
-					background-position:44px 6px !important;
-					.input-select{
-						width:100%;
-					}
-				}
-			}
-			margin: .5rem 0 1rem;
-			.label {
-				text-align: right;
-			    width: 25%;
-			    margin-top:2px;
-			    float: left;
-			    .requiredindicator {
-			    	float: none;
-				    font-size: 13px;
-				    font-weight: bold;
-				    font-family: $lucida-font-family;
-				    font-weight: bold;
-				    color: $red;
-			    }
-			    .labeltext {
-				    text-transform: uppercase;
-				    font-variant: normal;
-			    }
-			}
-			.field-wrapper {
-				float: left;
-			    padding-left: 2% !important;
-			    width: 50% !important;
-			    margin-bottom: .5rem;
-				.input-select  {
-					background:#fff;
-				    box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				    border-radius:2px;
-				    margin:0;
-				    width:100% !important;
-				    height: 24px;
-				    line-height:24px;
-				    padding:0 .5em;
-				    &.errorclient{
-								background: #ffcccc;
-								border: 1px solid $red;
-							}
-				}
-				.textinput {
-				    box-sizing: border-box;
-				    width: 100%;
-				    margin:0;
-				    box-shadow: none;
-				    height:22px;
-				    line-height:22px;
-			        box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-				}
-				label {
-					&.error	{
-						margin: 0;
-					    background: transparent;
-					    text-align: left;
-					    width: 100%;
-					    font-size: 11px;
-					    font-weight: normal;
-					    color: red;
-					    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
-					}
-				}
-			}
-			.form-caption {
-				margin-left: 27.5%;
-				font-size:12px;
-				font-weight:normal;
-				font-family: $global-font-family;
-				color:$night-rider;
-			}
-			&.month,&.year  {
-				clear: none;
-			    float: left;
-			    margin: 0 0 2% 2%;
-			    .label {
-			    	display: none;
-			    }
-				.field-wrapper {
-					.input-select {
-						width: auto;
-					}
-				}
-			}
-			&.form-row-button {
-				margin-left: 27%;
-				button {
-					clear: none;
-					margin-right: 9px;
-					border-radius: 3px;
-					&.cancel-button {
-						background-color: $shaded-grey;
-					    border-bottom: 1px solid $shadeddeep-veryLight-grey;
-					    border-left: 1px solid $shaded-veryLight-grey;
-					    border-right: 1px solid $shaded-veryLight-grey;
-					    border-top: 1px solid $shaded-light-grey;
-					    color: $bg-darkbrown;
-					    &:hover {
-					    	background-color: $payment-settingddd;
-							text-decoration: none;
-					    }
-					}
-				}
-			}
-		}
-		.form-label-text {
-			float: left;
-			text-align: right;
-		    width: 25%;
-		    font-size: 12px;
-		    padding: 0;
-		    font-weight: normal;
-		    .label {
-		    	text-align: right;
-		    	.requiredindicator  {
-			    	float: none;
-			    }
-			    .labeltext {
-				    text-transform: uppercase;
-				    font-variant: normal;
-			    }
-		    }
-		}
-	}
+    .credit-cart-form-title {
+    }
+    #CreditCardForm {
+        .form-row {
+            .form-caption {
+                &.error-message {
+                    color: $red;
+                }
+            }
+            &.month.custom-select {
+                margin-bottom: 20px !important;
+                .form-caption.error-message {
+                    margin-left: 1% !important;
+                }
+                .field-wrapper {
+                    width: 83px !important;
+                    background-position: 63px 6px !important;
+                    .input-select {
+                        width: 100%;
+                    }
+                }
+            }
+            &.year.custom-select {
+                margin-bottom: 20px !important;
+                .form-caption.error-message {
+                    margin-left: 1% !important;
+                }
+                .field-wrapper {
+                    width: 63px !important;
+                    background-position: 44px 6px !important;
+                    .input-select {
+                        width: 100%;
+                    }
+                }
+            }
+            margin: .5rem 0 1rem;
+            .label {
+                text-align: right;
+                width: 25%;
+                margin-top: 2px;
+                float: left;
+                .requiredindicator {
+                    float: none;
+                    font-size: 13px;
+                    font-weight: bold;
+                    font-family: $lucida-font-family;
+                    font-weight: bold;
+                    color: $red;
+                }
+                .labeltext {
+                    text-transform: uppercase;
+                    font-variant: normal;
+                }
+            }
+            .field-wrapper {
+                float: left;
+                padding-left: 2% !important;
+                width: 50% !important;
+                margin-bottom: .5rem;
+                .input-select {
+                    background: #fff;
+                    box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                    border-radius: 2px;
+                    margin: 0;
+                    width: 100% !important;
+                    height: 24px;
+                    line-height: 24px;
+                    padding: 0 .5em;
+                    &.errorclient {
+                        background: #ffcccc;
+                        border: 1px solid $red;
+                    }
+                }
+                .textinput {
+                    box-sizing: border-box;
+                    width: 100%;
+                    margin: 0;
+                    box-shadow: none;
+                    height: 22px;
+                    line-height: 22px;
+                    box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+                }
+                label {
+                    &.error {
+                        margin: 0;
+                        background: transparent;
+                        text-align: left;
+                        width: 100%;
+                        font-size: 11px;
+                        font-weight: normal;
+                        color: red;
+                        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                    }
+                }
+            }
+            .form-caption {
+                margin-left: 27.5%;
+                font-size: 12px;
+                font-weight: normal;
+                font-family: $global-font-family;
+                color: $night-rider;
+            }
+            &.month, &.year {
+                clear: none;
+                float: left;
+                margin: 0 0 2% 2%;
+                .label {
+                    display: none;
+                }
+                .field-wrapper {
+                    .input-select {
+                        width: auto;
+                    }
+                }
+            }
+            &.form-row-button {
+                margin-left: 27%;
+                button {
+                    clear: none;
+                    margin-right: 9px;
+                    border-radius: 3px;
+                    &.cancel-button {
+                        background-color: $shaded-grey;
+                        border-bottom: 1px solid $shadeddeep-veryLight-grey;
+                        border-left: 1px solid $shaded-veryLight-grey;
+                        border-right: 1px solid $shaded-veryLight-grey;
+                        border-top: 1px solid $shaded-light-grey;
+                        color: $bg-darkbrown;
+                        &:hover {
+                            background-color: $payment-settingddd;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+        .form-label-text {
+            float: left;
+            text-align: right;
+            width: 25%;
+            font-size: 12px;
+            padding: 0;
+            font-weight: normal;
+            .label {
+                text-align: right;
+                .requiredindicator {
+                    float: none;
+                }
+                .labeltext {
+                    text-transform: uppercase;
+                    font-variant: normal;
+                }
+            }
+        }
+    }
 }
-.pt_leftnav-payment{
-	.paymentslist{ 
-		.paymentinstruments{ 
-			.creditcard{ 
-				.payment-list{ 
-					.cc-owner{ 
-						.label {
-							font-family:$global-font-family;
-							font-size:13px;
-							text-transform:capitalize;
-							font-variant:normal;
-							font-weight:bold;
-						} 
-					} 
-				} 
-			} 
-		}
-	
-	
-		.address-head{
-			border-bottom:none;
-			padding:0;
-		}
-	}
+
+.pt_leftnav-payment {
+    .paymentslist {
+        .paymentinstruments {
+            .creditcard {
+                .payment-list {
+                    .cc-owner {
+                        .label {
+                            font-family: $global-font-family;
+                            font-size: 13px;
+                            text-transform: capitalize;
+                            font-variant: normal;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
+        .address-head {
+            border-bottom: none;
+            padding: 0;
+        }
+    }
 }

@@ -28,7 +28,8 @@ var cartInventory = {
                 stores: stores,
                 selectedStoreId: selectedStore,
                 selectedStoreText: Resources.SELECTED_STORE,
-                continueCallback: function () {},
+                continueCallback: function () {
+                },
                 selectStoreCallback: self.setSelectedStore.bind(self)
             });
         }).done();

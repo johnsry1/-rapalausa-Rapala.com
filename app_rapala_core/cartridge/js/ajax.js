@@ -31,27 +31,27 @@ var getJson = function (options) {
         type: options.type || 'GET' //PREVAIL-Added to handle security form issues.
     })
     // success
-    .done(function (response) {
-        if (options.callback) {
-            options.callback(response);
-        }
-    })
-    // failed
-    .fail(function (xhr, textStatus) {
-        if (textStatus === 'parsererror') {
-            window.alert(Resources.BAD_RESPONSE);
-        }
-        if (options.callback) {
-            options.callback(null);
-        }
-    })
-    // executed on success or fail
-    .always(function () {
-        // remove current request from hash
-        if (currentRequests[options.url]) {
-            delete currentRequests[options.url];
-        }
-    });
+        .done(function (response) {
+            if (options.callback) {
+                options.callback(response);
+            }
+        })
+        // failed
+        .fail(function (xhr, textStatus) {
+            if (textStatus === 'parsererror') {
+                window.alert(Resources.BAD_RESPONSE);
+            }
+            if (options.callback) {
+                options.callback(null);
+            }
+        })
+        // executed on success or fail
+        .always(function () {
+            // remove current request from hash
+            if (currentRequests[options.url]) {
+                delete currentRequests[options.url];
+            }
+        });
 };
 /**
  * @function
@@ -80,29 +80,29 @@ var load = function (options) {
         },
         type: options.type || 'GET' //PREVAIL-Added to handle security form issues.
     })
-    .done(function (response) {
-        // success
-        if (options.target) {
-            $(options.target).empty().html(response);
-        }
-        if (options.callback) {
-            options.callback(response);
-        }
-    })
-    .fail(function (xhr, textStatus) {
-        // failed
-        if (textStatus === 'parsererror') {
-            window.alert(Resources.BAD_RESPONSE);
-        }
-        options.callback(null, textStatus);
-    })
-    .always(function () {
-        progress.hide();
-        // remove current request from hash
-        if (currentRequests[options.url]) {
-            delete currentRequests[options.url];
-        }
-    });
+        .done(function (response) {
+            // success
+            if (options.target) {
+                $(options.target).empty().html(response);
+            }
+            if (options.callback) {
+                options.callback(response);
+            }
+        })
+        .fail(function (xhr, textStatus) {
+            // failed
+            if (textStatus === 'parsererror') {
+                window.alert(Resources.BAD_RESPONSE);
+            }
+            options.callback(null, textStatus);
+        })
+        .always(function () {
+            progress.hide();
+            // remove current request from hash
+            if (currentRequests[options.url]) {
+                delete currentRequests[options.url];
+            }
+        });
 };
 
 exports.getJson = getJson;

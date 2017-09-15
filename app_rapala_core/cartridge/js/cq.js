@@ -1,4 +1,5 @@
 'use strict';
+
 /* global CQuotient */
 
 function clickThruAfter() {
@@ -29,7 +30,7 @@ function clickThruAfter() {
     }
 }
 
-exports.init = function() {
+exports.init = function () {
     // set cookie before click through from product tile
     $('body').on('click', '.product-tile[data-recommendername] a', function () {
         // if currently on a product page, send its productId as the anchor
