@@ -98,6 +98,39 @@ div {
     height: auto;
     min-height: 400px;
     width: 460px !important;
+    .returningcustomers {
+        text-align: left !important;
+        .requiredindicator {
+            margin-top: 0;
+        }
+        .field-wrapper {
+            margin-bottom: 0;
+            float: left;
+            span {
+                &.errorclient {
+                    background: none !important;
+                    position: static;
+                    line-height: 20px;
+                    font-size: 10px;
+                    font-family: $lucida-font-family !important;
+                }
+            }
+        }
+    }
+    .formfield {
+        &.password {
+            #password-reset {
+                text-decoration: underline;
+                font-style: italic;
+                font-family: $lucida-font-family;
+                font-weight: bold;
+                font-size: 11px;
+                position: absolute;
+                margin-left: 173px;
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 .viplogin {
@@ -153,6 +186,9 @@ div {
 }
 
 .vipformfieldaddtoemail {
+    margin-bottom: 26px;
+    margin-top: 15px;
+    float: left;
     .form-row {
         width: auto;
         float: left;
@@ -240,14 +276,6 @@ div.returningcustomers div.formfield div.label {
     text-align: left;
     width: auto;
 } */
-.vipformfieldaddtoemail label {
-    font-family: $lucida-font-family;
-    font-weight: bold;
-    font-size: 11px;
-    text-align: left;
-    padding-left: 0 !important;
-    float: left;
-}
 
 .profile-update .checkbox label,
 .checkoutbilling .checkbox label,
@@ -264,6 +292,10 @@ div.returningcustomers div.formfield div.label {
 }
 
 .vipformfieldaddtoemail label {
+    font-family: $lucida-font-family;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: left;
     padding-left: 40px !important;
     float: none;
 }
@@ -272,6 +304,34 @@ div.returningcustomers div.formfield div.label {
 .vipregform .vipformfieldaddtoterms.addtoterms1 {
     padding-left: 40px !important;
     margin: 0;
+    #message {
+        clear: both;
+        background-repeat: no-repeat;
+        border-style: solid;
+        border-width: 1px;
+        font-family: $lucida-font-family;
+        font-size: 12px;
+        line-height: 18px;
+        &.error {
+            padding: 10px;
+            color: $bip-brown-bg;
+            border-color: $dip-red;
+            background-color: $light-pink-bg;
+            border-width: 1px;
+            background-color: $light-pink-bg;
+            background-image: none;
+            background-position: 13px 9px;
+            width: 107%;
+            @media screen and (max-width: 959px) {
+                width: 118%;
+            }
+            @media screen and (max-width: 480px) {
+                background-image: none;
+                width: 112%;
+            }
+        }
+    }
+
     #message.error {
         width: 390px;
         box-sizing: border-box;
@@ -368,10 +428,13 @@ div.returningcustomers div.formfield div.label {
 
 .pt_account .returningcustomers input.textinput,
 .returningcustomers input.textinputpw {
-    background: none repeat scroll 0 0 $white;
+    background: $white;
     border: 1px solid $very-light-gray;
-    box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
+    box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
     margin-top: 3px;
+    margin-bottom: 0;
+    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
+    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
 }
 
 .pt_account {
@@ -406,15 +469,7 @@ div.returningcustomers div.formfield div.label {
     width: 275px;
 }
 
-.pt_account .returningcustomers input.textinput,
-.returningcustomers input.textinputpw {
-    background: $white;
-    border: 1px solid $very-light-gray;
-    box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-    -moz-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-    -webkit-box-shadow: inset 1px 1px 5px rgba(153, 153, 153, 0.2);
-    margin-bottom: 0;
-}
+
 
 .returningcustomers .value .textinput,
 .returningcustomers .value .textinputpw {
@@ -440,48 +495,6 @@ div.returningcustomers div.formfield div.label {
     text-align: right;
 }
 
-.vipformfieldaddtoemail {
-    margin-bottom: 26px;
-    margin-top: 15px;
-    float: left;
-}
-
-.viploginsignin {
-    .returningcustomers {
-        text-align: left !important;
-        .requiredindicator {
-            margin-top: 0;
-        }
-        .field-wrapper {
-            margin-bottom: 0;
-            float: left;
-            span {
-                &.errorclient {
-                    background: none !important;
-                    position: static;
-                    line-height: 20px;
-                    font-size: 10px;
-                    font-family: $lucida-font-family !important;
-                }
-            }
-        }
-    }
-    .formfield {
-        &.password {
-            #password-reset {
-                text-decoration: underline;
-                font-style: italic;
-                font-family: $lucida-font-family;
-                font-weight: bold;
-                font-size: 11px;
-                position: absolute;
-                margin-left: 173px;
-                margin-top: 0;
-            }
-        }
-    }
-}
-
 .error {
     color: #e80000;
 }
@@ -503,38 +516,6 @@ div.returningcustomers div.formfield div.label {
     color: $nobel;
     border-color: $light-blue-bg;
     background-color: $white-grey-bg;
-}
-
-.returningcustomers .vipformfieldaddtoterms.addtoterms,
-.vipregform .vipformfieldaddtoterms.addtoterms1 {
-    #message {
-        clear: both;
-        background-repeat: no-repeat;
-        border-style: solid;
-        border-width: 1px;
-        font-family: $lucida-font-family;
-        font-size: 12px;
-        line-height: 18px;
-        &.error {
-            padding: 10px;
-            color: $bip-brown-bg;
-            border-color: $dip-red;
-            background-color: $light-pink-bg;
-            border-width: 1px;
-            background-color: $light-pink-bg;
-            background-image: none;
-            background-position: 13px 9px;
-            width: 107%;
-            @media screen and (max-width: 959px) {
-                width: 118%;
-            }
-            @media screen and (max-width: 480px) {
-                background-image: none;
-                width: 112%;
-            }
-        }
-    }
-
 }
 
 .disign-header-title {
