@@ -23,6 +23,8 @@ module.exports = function (gb) {
                     .pipe(source('app.js'))
                     .pipe(gb.gulp.dest('../' + proj + '/cartridge/static/default/js'));
 
+            console.log("destination: " + '../' + proj + '/cartridge/static/default/js');
+
             // When the stream has finished processing set the promise to resolved
             stream.on('end', function () {
                 deferred.resolve();
