@@ -36,7 +36,10 @@ module.exports = function (gb) {
 
         //build styles for each directory
         for ( var i = 0; i < gb.allStyleDirectories.length; i++ ) {
+
+            //console.log("/build styles for each directory:  " + gb.allStyleDirectories[i]);
             promises.push(buildSass(gb.allStyleDirectories[i]));
+
         }
 
         return gb.Q.all(promises);
