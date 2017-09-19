@@ -62,13 +62,13 @@
 .in-stock-date-msg,
 .not-available,
 .out-of-stock,
-.store-error, {
+.store-error {
     color: $teal;
 }
 
 .availability {
     .out-of-stock {
-        color: #000000;
+        color: #000;
         font-size: 12px;
         font-weight: bold;
     }
@@ -110,16 +110,14 @@
     width: 175px;
     &.selected {
         background-color: rgba($citrus, 0.5);
+        .select-store-button {
+            @extend button.simple;
+        }
     }
     .store-status {
         display: block;
         font-size: 0.9em;
         margin: 1rem 0;
-    }
-    &.selected {
-        .select-store-button {
-            @extend button.simple;
-        }
     }
 }
 
@@ -161,7 +159,8 @@
 }
 
 .multishipprogress {
-    div, .step-3 {
+    div,
+    .step-3 {
         display: inline;
         padding: 1em;
     }
@@ -171,7 +170,7 @@
 }
 
 .multishipaddressestable {
-    margin: 9px 0px 20px 0px;
+    margin: 9px 0 20px 0;
     width: 706px;
 }
 
@@ -278,7 +277,7 @@
 }
 
 #cart-table .item-delivery-options {
-    padding: 1em 0 1em 0;
+    padding: 1em 0;
     width: 8rem;
 }
 

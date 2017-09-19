@@ -37,9 +37,36 @@
                     margin: 0;
                 }
                 .actions {
+                    margin: 5px 0;
+                    text-align: left;
                     fieldset {
                         margin: 0;
                         width: 100%;
+                    }
+                    .button-text {
+                        &.delete {
+                            background-color: $shaded-grey;
+                            border-bottom: 1px solid $shadeddeep-veryLight-grey;
+                            border-left: 1px solid $shaded-veryLight-grey;
+                            border-right: 1px solid $shaded-veryLight-grey;
+                            border-top: 1px solid $shaded-light-grey;
+                            color: $bg-darkbrown;
+                            display: block;
+                            float: left;
+                            font-family: $lucida-font-family;
+                            font-size: 11px;
+                            font-style: normal;
+                            font-weight: bold;
+                            height: 28px;
+                            letter-spacing: 1px;
+                            line-height: 28px;
+                            padding: 0 18px;
+                            text-transform: uppercase;
+                            margin: 9px 0 0 0;
+                            &:hover {
+                                color: $shadow-light-grey;
+                            }
+                        }
                     }
                 }
                 .cc-owner {
@@ -67,41 +94,34 @@
                         word-wrap: break-word;
                     }
                 }
-                .actions {
-                    margin: 5px 0 5px 0;
-                    text-align: left;
-                    .button-text {
-                        &.delete {
-                            background-color: $shaded-grey;
-                            border-bottom: 1px solid $shadeddeep-veryLight-grey;
-                            border-left: 1px solid $shaded-veryLight-grey;
-                            border-right: 1px solid $shaded-veryLight-grey;
-                            border-top: 1px solid $shaded-light-grey;
-                            color: $bg-darkbrown;
-                            display: block;
-                            float: left;
-                            font-family: $lucida-font-family;
-                            font-size: 11px;
-                            font-style: normal;
-                            font-weight: bold;
-                            height: 28px;
-                            letter-spacing: 1px;
-                            line-height: 28px;
-                            padding: 0 18px;
-                            text-transform: uppercase;
-                            margin: 9px 0 0 0;
-                            &:hover {
-                                color: $shadow-light-grey;
-                            }
-                        }
-                    }
-                }
             }
         }
     }
 }
 
 .pt_leftnav-payment {
+    .paymentslist {
+        .paymentinstruments {
+            .creditcard {
+                .payment-list {
+                    .cc-owner {
+                        .label {
+                            font-family: $global-font-family;
+                            font-size: 13px;
+                            text-transform: capitalize;
+                            font-variant: normal;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
+        .address-head {
+            border-bottom: none;
+            padding: 0;
+        }
+    }
     .dialog-required {
         .required-indicator {
             font-family: Verdana, Arial, sans-serif;
@@ -114,7 +134,8 @@
     }
 }
 
-.payment-settings {
+
+    .payment-settings {
     .dialog-content {
         border: 0;
         padding: 6px 12px;
@@ -125,8 +146,6 @@
 }
 
 .creditcardform {
-    .credit-cart-form-title {
-    }
     #CreditCardForm {
         .form-row {
             .form-caption {
@@ -196,7 +215,7 @@
                     line-height: 24px;
                     padding: 0 .5em;
                     &.errorclient {
-                        background: #ffcccc;
+                        background: #fcc;
                         border: 1px solid $red;
                     }
                 }
@@ -231,7 +250,8 @@
                 font-family: $global-font-family;
                 color: $night-rider;
             }
-            &.month, &.year {
+            &.month,
+            &.year {
                 clear: none;
                 float: left;
                 margin: 0 0 2% 2%;
@@ -282,31 +302,6 @@
                     font-variant: normal;
                 }
             }
-        }
-    }
-}
-
-.pt_leftnav-payment {
-    .paymentslist {
-        .paymentinstruments {
-            .creditcard {
-                .payment-list {
-                    .cc-owner {
-                        .label {
-                            font-family: $global-font-family;
-                            font-size: 13px;
-                            text-transform: capitalize;
-                            font-variant: normal;
-                            font-weight: bold;
-                        }
-                    }
-                }
-            }
-        }
-
-        .address-head {
-            border-bottom: none;
-            padding: 0;
         }
     }
 }

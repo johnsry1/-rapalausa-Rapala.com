@@ -34,9 +34,6 @@
             top: 0;
         }
     }
-}
-
-.mini-cart-total {
     .mini-cart-empty {
         color: $nobel;
         transition: color 500ms ease;
@@ -131,7 +128,8 @@
     width: 50%;
 }
 
-.mini-cart-attributes, .mini-cart-product .product-availability-list {
+.mini-cart-attributes,
+.mini-cart-product .product-availability-list {
     float: right;
     font-size: 0.9em;
     font-weight: bold;
@@ -168,7 +166,7 @@
     border: 1px solid $gainsboro;
     font-size: 0.9em;
     font-style: italic;
-    margin: 1em 1em;
+    margin: 1em;
 }
 
 .mini-cart-link-checkout {
@@ -216,14 +214,14 @@
                     }
                     a {
                         &.minicart-button {
-                            background: url(../images/responsive-icons/cart-icon-static.svg) no-repeat left top transparent;
+                            background: url("../images/responsive-icons/cart-icon-static.svg") no-repeat left top transparent;
                             width: 36px;
                             height: 37px;
                             text-indent: -9999px;
                             clear: both;
 
                             &.active {
-                                background: url(../images/responsive-icons/cart-icon-active.svg) no-repeat left top transparent;
+                                background: url("../images/responsive-icons/cart-icon-active.svg") no-repeat left top transparent;
                             }
                             @media screen and (min-width: 960px) {
                                 color: $minicart-button-glb-text-color;
@@ -244,7 +242,7 @@
                                 background: -webkit-linear-gradient(to bottom, $minicart-button-static-top-color 60%, $minicart-button-static-bottom-color 100%);
                                 background: -ms-linear-gradient(to bottom, $minicart-button-static-top-color 60%, $minicart-button-static-bottom-color 100%);
                                 background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, $minicart-button-static-top-color), color-stop(100%, $minicart-button-static-bottom-color));
-                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$minicart-button-static-top-color', endColorstr='$minicart-button-static-bottom-color', GradientType=0);
+                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$minicart-button-static-top-color", endColorstr="$minicart-button-static-bottom-color", GradientType=0);
                                 color: $minicart-checkout-button-text-color;
                                 text-align: center;
                                 text-decoration: none;
@@ -267,7 +265,7 @@
                                 background: -webkit-linear-gradient(to bottom, $minicart-button-hover-top-color 0, $minicart-button-hover-bottom-color 60%);
                                 background: -ms-linear-gradient(to bottom, $minicart-button-hover-top-color 0, $minicart-button-hover-bottom-color 60%);
                                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $minicart-button-hover-top-color), color-stop(60%, $minicart-button-hover-bottom-color));
-                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$minicart-button-hover-top-color', endColorstr='$minicart-button-hover-bottom-color', GradientType=0);
+                                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$minicart-button-hover-top-color", endColorstr="$minicart-button-hover-bottom-color", GradientType=0);
                                 font-weight: normal;
                             }
                         }
@@ -275,7 +273,7 @@
                     #multi-site-one-cart {
                         display: none;
                         @media screen and (min-width: 960px) {
-                            background: url(../images/mini_cart_newbg.png) no-repeat left top transparent;
+                            background: url("../images/mini_cart_newbg.png") no-repeat left top transparent;
                             width: 70px;
                             padding: 0;
                             display: inline-block;
@@ -348,14 +346,14 @@
     width: auto;
     @media screen and (max-width: 959px) {
         position: relative;
-        margin: 0 0 0 20px
+        margin: 0 0 0 20px;
     }
     @media screen and (max-width: 480px) {
         position: relative;
-        margin: 0 0 0 10px
+        margin: 0 0 0 10px;
     }
     .cart-icon {
-        background: url(../images/shoppig-icon.png) 0 6px no-repeat;
+        background: url("../images/shoppig-icon.png") 0 6px no-repeat;
         width: 30px;
         float: left;
         height: 30px;
@@ -431,15 +429,15 @@ a {
 .minicartcontent {
     background-color: white;
     display: none;
-    right: 0px;
-    margin: 0px;
+    right: 0;
+    margin: 0;
     position: absolute;
     top: 30px;
     width: 400px;
     z-index: 98;
-    -webkit-box-shadow: 0px 5px 5px 1px #888;
-    -moz-box-shadow: 0px 5px 5px 1px #888;
-    box-shadow: 0px 5px 5px 1px #888;
+    -webkit-box-shadow: 0 5px 5px 1px #888;
+    -moz-box-shadow: 0 5px 5px 1px #888;
+    box-shadow: 0 5px 5px 1px #888;
     .minicartclose {
         cursor: pointer;
         position: absolute;
@@ -448,7 +446,7 @@ a {
         margin: 0;
         display: block;
         text-indent: -9999999px;
-        background: url('../images/close-minicart-button.svg') no-repeat -7px -7px;
+        background: url("../images/close-minicart-button.svg") no-repeat -7px -7px;
         overflow: hidden;
         height: 33px;
         width: 34px;
@@ -480,9 +478,9 @@ a {
     }
     .slimScrollRail {
         width: 12px !important;
-        border-radius: 0px !important;
+        border-radius: 0 !important;
         opacity: 0.15 !important;
-        right: 0px !important;
+        right: 0 !important;
         background: none !important;
         box-shadow: 0 0 7px rgba(107, 107, 107, 0.15);
         -moz-box-shadow: inset 0 0 10px #6b6b6b;
@@ -512,11 +510,11 @@ a {
         span {
             padding: 14px 0 12px 0;
             display: inline-block;
-            text-transform: upperca
+            text-transform: uppercase;
         }
     }
     .minicartcontainer .minicarttotal {
-        background-color: #CCCCCC;
+        background-color: #ccc;
         color: #fff;
         clear: both;
         padding: 1px 3px;
@@ -524,7 +522,7 @@ a {
     }
     .minicartcontent .checkoutminicart .summaryproduct {
         font-size: 11px;
-        background: white url(../images/row-shading.jpg) bottom center repeat-x;
+        background: white url("../images/row-shading.jpg") bottom center repeat-x;
     }
     .minicarttotals {
         background-color: #7f7c79;
@@ -551,11 +549,12 @@ a {
     .ordertotals td .label {
         width: 141px;
         float: right;
-        color: #E80000;
+        color: #e80000;
         text-transform: uppercase;
         text-align: right;
     }
-    .ordersubtotal .label, .ordersubtotal .value {
+    .ordersubtotal .label,
+    .ordersubtotal .value {
         font-size: 14px;
         font-weight: bold;
     }
@@ -565,12 +564,6 @@ a {
     .link2cart {
         margin: 2px 0 0 0;
         text-align: center;
-    }
-    .link2cart a {
-
-    }
-    .link2cart a:hover {
-
     }
     .minicarttableheader {
         width: 400px;
@@ -641,10 +634,10 @@ a {
             background: #fffddf;
             padding: 3px 0 5px 0;
             .notifications-summery {
-                padding: 0px 1px 1px 17px;
+                padding: 0 1px 1px 17px;
                 color: #e6ba45;
                 background-color: #fffedf;
-                background-image: url(../images/yellow-alert-icon.svg);
+                background-image: url("../images/yellow-alert-icon.svg");
                 background-color: #fffddf;
                 background-repeat: no-repeat;
                 background-position: 2px 2px;
@@ -689,7 +682,7 @@ a {
             background: -o-linear-gradient(top, #fff 0, #fff 39%, #fff 86.25%, #f2f2f3 100%);
             background: -ms-linear-gradient(top, #fff 0, #fff 39%, #fff 86.25%, #f2f2f3 100%);
             background: linear-gradient(to bottom, #fff 0, #fff 39%, #fff 86.25%, #f2f2f3 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f3', GradientType=0);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#f2f2f3", GradientType=0);
             div {
                 border: 0;
                 padding: 0;
@@ -795,7 +788,7 @@ a {
                             font-size: 12px;
                             color: white;
                             padding: 4px 8px;
-                            box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
+                            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.65);
                             margin-right: 3px;
                             position: inherit;
                             top: -5px;
@@ -806,13 +799,13 @@ a {
                     position: relative;
                     top: 2px;
                     width: auto;
-                    .new-colors-snipe, .new-sizes-snipe {
-
-                    }
                 }
 
-                .newFlagColorSize, .newPakSizeFlag {
-                    .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
+                .newFlagColorSize,
+                .newPakSizeFlag {
+                    .new-colors-snipe,
+                    .new-sizes-snipe,
+                    .new-pak-size {
                         border-radius: 15px;
                         background-color: $red;
                         font-style: italic;
@@ -904,7 +897,7 @@ a {
             background: -o-linear-gradient(top, rgba(193, 194, 195, 1) 0, rgba(239, 239, 240, 1) 23%, rgba(241, 241, 242, 1) 49%, rgba(239, 239, 240, 1) 74%, rgba(193, 194, 195, 1) 100%);
             background: -ms-linear-gradient(top, rgba(193, 194, 195, 1) 0, rgba(239, 239, 240, 1) 23%, rgba(241, 241, 242, 1) 49%, rgba(239, 239, 240, 1) 74%, rgba(193, 194, 195, 1) 100%);
             background: linear-gradient(to bottom, rgba(193, 194, 195, 1) 0, rgba(239, 239, 240, 1) 23%, rgba(241, 241, 242, 1) 49%, rgba(239, 239, 240, 1) 74%, rgba(193, 194, 195, 1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c1c2c3', endColorstr='#c1c2c3', GradientType=0);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c1c2c3", endColorstr="#c1c2c3", GradientType=0);
             border: 1px solid #848688;
             .miniapproachingpromo_msg {
                 width: 352px;
@@ -1019,13 +1012,13 @@ a {
             float: left;
             width: 386px;
             text-align: left;
-            padding: 10px 0 10px 0;
+            padding: 10px 0;
             a.mini-cart-link-checkout {
                 line-height: 17px;
                 width: 209px;
                 text-transform: capitalize;
                 font-size: 11px;
-                border-radius: 5px 5px 5px 5px;
+                border-radius: 5px;
                 padding: 0;
                 border-style: none;
                 height: 28px;
@@ -1039,7 +1032,7 @@ a {
                 background: -o-linear-gradient(top, #52a300 1%, #360 100%) !important;
                 background: -ms-linear-gradient(top, #52a300 1%, #360 100%) !important;
                 background: linear-gradient(to bottom, #52a300 1%, #360 100%) !important;
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#52a300', endColorstr='#336600', GradientType=0) !important;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#52a300", endColorstr="#336600", GradientType=0) !important;
                 text-align: center;
                 margin: 0;
                 float: right;
@@ -1052,7 +1045,7 @@ a {
                 -ms-border-radius: 5px;
                 span {
                     line-height: normal;
-                    background: url('../images/lock-white.svg') no-repeat 45px 6px transparent;
+                    background: url("../images/lock-white.svg") no-repeat 45px 6px transparent;
                     padding: 0 0 0 15px;
                     width: 100%;
                     height: 28px;
@@ -1097,7 +1090,7 @@ a {
                 background: -o-linear-gradient(top, #f1f1f2 1%, #d0d2d3 100%) !important;
                 background: -ms-linear-gradient(top, #f1f1f2 1%, #d0d2d3 100%) !important;
                 background: linear-gradient(to bottom, #f1f1f2 1%, #d0d2d3 100%) !important;
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0', endColorstr='#bdbdbd', GradientType=0);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e0e0e0", endColorstr="#bdbdbd", GradientType=0);
                 -webkit-box-shadow: 0 1px 0 #404041;
                 -moz-box-shadow: 0 1px 0 #404041;
                 box-shadow: 0 1px 0 #404041;
@@ -1109,7 +1102,7 @@ a {
                     text-decoration: none;
                     line-height: 26px;
                     display: inline-block;
-                    background: url('../images/minicart-arrow-blk.svg') no-repeat 84% 12.5px transparent;
+                    background: url("../images/minicart-arrow-blk.svg") no-repeat 84% 12.5px transparent;
                     width: 100%;
                     font-weight: normal;
                     font-family: $global-font-family;
@@ -1137,7 +1130,7 @@ a {
     float: right;
     background-position: 0 0;
     background-repeat: no-repeat;
-    background-color: #E80000;
+    background-color: #e80000;
     overflow: hidden;
     height: 30px;
     width: 168px;
@@ -1150,8 +1143,3 @@ a {
 .minicart a.minicart-checkout-button-big:hover {
     background-position: 0 -30px;
 }
-
-
-
-
-

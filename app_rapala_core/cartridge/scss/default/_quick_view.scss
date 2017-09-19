@@ -37,17 +37,17 @@
         background-color: $white;
         padding: 8px;
         text-align: center;
-        background-image: url(../images/zoomloader.gif);
+        background-image: url("../images/zoomloader.gif");
         background-repeat: no-repeat;
         background-position: 43px 30px;
         z-index: 110;
         width: 90px;
         height: 43px;
         position: absolute;
-        top: 0px;
-        left: 0px;
-        *width: 100px;
-        *height: 49px;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 49px;
     }
     .zoomPup {
         overflow: hidden;
@@ -63,8 +63,8 @@
     }
     .zoomOverlay {
         position: absolute;
-        left: 0px;
-        top: 0px;
+        left: 0;
+        top: 0;
         background: $white;
         z-index: 5000;
         width: 100%;
@@ -98,8 +98,8 @@
         text-align: center;
         font-size: 10px;
         position: absolute;
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         z-index: 120;
         -moz-opacity: 0.6;
         opacity: 0.6;
@@ -111,7 +111,7 @@
         overflow: hidden;
         z-index: 110;
         img {
-            border: 0px;
+            border: 0;
             display: block;
             position: absolute;
             z-index: 101;
@@ -120,8 +120,8 @@
     .zoomIframe {
         z-index: -1;
         filter: alpha(opacity=0);
-        -moz-opacity: 0.80;
-        opacity: 0.80;
+        -moz-opacity: 0.8;
+        opacity: 0.8;
         position: absolute;
         display: block;
     }
@@ -168,7 +168,8 @@
                     .pdp-owl-customization {
                         .owl-stage-outer {
                             .owl-nav {
-                                .owl-next, .owl-prev {
+                                .owl-next,
+                                .owl-prev {
                                     z-index: 9999;
                                     cursor: pointer;
                                 }
