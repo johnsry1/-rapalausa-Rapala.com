@@ -1,14 +1,14 @@
 'use strict';
 
 var ajax = require('../../ajax'),
-    formPrepare = require('./formPrepare'),
     progress = require('../../progress'),
     tooltip = require('../../tooltip'),
     util = require('../../util'),
     dialog = require('../../dialog'),
     uievents = require('../../uievents');
 
-var shippingMethods;
+//var shippingMethods;
+
 /**
  * @function
  * @description Initializes gift message box, if shipment is gift
@@ -26,10 +26,10 @@ function updateSummary() {
     var $summary = $('#secondary .new-summery-cart');
     // indicate progress
     progress.show($summary);
-    var stateValue = $("body").find('select[id$="_addressFields_states_state"]').val();
-    var url = util.appendParamToURL(Urls.summaryRefreshURL,"selectedState",stateValue);
+    var stateValue = $('body').find('select[id$="_addressFields_states_state"]').val();
+    var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
     // load the updated summary area
-    $summary.load(url, function() {
+    $summary.load(url, function () {
         // hide edit shipping method link
         $summary.fadeIn('fast');
         $summary.find('.checkout-mini-cart .minishipment .header a').hide();
@@ -83,7 +83,6 @@ function selectShippingMethod(shippingMethodID) {
             // if some promotions were applied
             $('.shippingpromotions').empty();
 
-
             // if (data.shippingPriceAdjustments && data.shippingPriceAdjustments.length > 0) {
             // 	var len = data.shippingPriceAdjustments.length;
             // 	for (var i=0; i < len; i++) {
@@ -124,7 +123,7 @@ function updateShippingMethodList() {
 
             // We need to update the UI.  The list has changed.
             // Cache the array of returned shipping methods.
-            shippingMethods = data;
+            //shippingMethods = data;
             // indicate progress
             progress.show($shippingMethodList);
 
@@ -134,8 +133,8 @@ function updateShippingMethodList() {
                 $shippingMethodList.fadeIn('fast');
                 // rebind the radio buttons onclick function to a handler.
                 $shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
-                	$(".shipping-methods .shipping-method .value .custom-link ").removeClass("active");
-                	$(this).closest(".custom-link").addClass("active");
+                    $('.shipping-methods .shipping-method .value .custom-link ').removeClass('active');
+                    $(this).closest('.custom-link').addClass('active');
                     selectShippingMethod($(this).val());
                 });
 
@@ -157,33 +156,29 @@ function signin() {
     $('#addressform .textinput').addClass('blured');
     $('#addressform .custom-select').addClass('blured');
     $('#addressform .custom-checkbox').addClass('blured');
-    $(".signintomyaccount-block,.shipping-createrapalaaccount,.shipping-confirmemailaddress,.shipping-emailaddress,.shipping-guestconfirmemailaddress,.shipping-guestemailaddress,.shipping-password,.shipping-confirmpassword,.shipping-checkoutasguest,.or1,.createaccountmsg")
-        .addClass("hide");
-    $(".checkoutasguest-block,.shippinglogindetails,.createanaccount-block,.or2,.addressoptions-addToAddressBook,.addressoptions-makedefault,.addressid").removeClass("hide");
-    $(".shippinglogindetails").find("input[name$='_username'],input[name$='_password']").addClass("required");
-    $(".New-shipping-authentication-detail").find("input[name$='_passwordconfirm'],input[name$='_password'],input[name$='_email'],input[name$='_emailconfirm'],input[name$='_guestemailconfirm'],input[name$='_guestemail']").removeClass("required");
-    $(".New-shipping-authentication-detail").find("input[name$='_ProcessWay']").val("2");
-    $(".New-shipping-authentication-detail").find("input[name$='_passwordconfirm'],input[name$='_password']").val("");
+    $('.signintomyaccount-block,.shipping-createrapalaaccount,.shipping-confirmemailaddress,.shipping-emailaddress,.shipping-guestconfirmemailaddress,.shipping-guestemailaddress,.shipping-password,.shipping-confirmpassword,.shipping-checkoutasguest,.or1,.createaccountmsg')
+        .addClass('hide');
+    $('.checkoutasguest-block,.shippinglogindetails,.createanaccount-block,.or2,.addressoptions-addToAddressBook,.addressoptions-makedefault,.addressid').removeClass('hide');
+    $('.shippinglogindetails').find('input[name$=\'_username\'],input[name$=\'_password\']').addClass('required');
+    $('.New-shipping-authentication-detail').find('input[name$=\'_passwordconfirm\'],input[name$=\'_password\'],input[name$=\'_email\'],input[name$=\'_emailconfirm\'],input[name$=\'_guestemailconfirm\'],input[name$=\'_guestemail\']').removeClass('required');
+    $('.New-shipping-authentication-detail').find('input[name$=\'_ProcessWay\']').val('2');
+    $('.New-shipping-authentication-detail').find('input[name$=\'_passwordconfirm\'],input[name$=\'_password\']').val('');
     $('.checkout .shipping-address-field-section .formfield span.errorclient').remove();
-    $('.shipping-address-field-section').addClass('signin-error'); 
+    $('.shipping-address-field-section').addClass('signin-error');
     uievents.synccheckoutH();
 }
 
-exports.init = function() {
-    /*formPrepare.init({
-        continueSelector: '[name$="shippingAddress_save"]',
-        formSelector: '[id$="singleshipping_shippingAddress"]'
-    });*/
-	if($(document).find('.address-select').val() != "" && $(document).find('.address-select').val() != undefined){
-    	$(document).find('.shipping-address-field-section').addClass('hide');
+exports.init = function () {
+    if ($(document).find('.address-select').val() != '' && $(document).find('.address-select').val() != undefined) {
+        $(document).find('.shipping-address-field-section').addClass('hide');
     } else {
-    	$(document).find('.shipping-address-field-section').removeClass('hide');
-    	$(document).find('.selected-shipping-address').addClass('hide');
-    	$(document).find('.new-address-field').addClass('hide');    	
+        $(document).find('.shipping-address-field-section').removeClass('hide');
+        $(document).find('.selected-shipping-address').addClass('hide');
+        $(document).find('.new-address-field').addClass('hide');
     }
-	if($(document).find('.fromreturn1').val() == 'true'){
-	 	$(document).find('.shipping-address-field-section').removeClass('hide');
-	}
+    if ($(document).find('.fromreturn1').val() == 'true') {
+        $(document).find('.shipping-address-field-section').removeClass('hide');
+    }
     $('input[name$="_shippingAddress_isGift"]').on('click', giftMessageBox);
 
     $('.address').on('change',
@@ -193,104 +188,103 @@ exports.init = function() {
 
     giftMessageBox();
     updateShippingMethodList();
-   
-    $('.continue-checkout-button .continue-checkout').on('click', function(){
-		var form = $(this).closest('form[id$="_shippingAddress"]');
-		if($('.state-blk select').valid() == 0) {
-	 		if(!$('.state-blk.custom-select').hasClass('blured')){
-	 			$('.state-blk.custom-select').addClass('customselect-error');
-				//$('.state-blk .stateerror').show(); 
-	 		}	
-		}else{
-			//$('.state-blk  .stateerror').hide();
-			$('.state-blk.custom-select').removeClass('customselect-error');
-		}
-		
-		if(!$('.checkoutasguestbutton').is(':visible')){
-			$('.guestemailcon').blur();
-			$('.guestemail').blur();
-		}
-		if(!form.valid()){ 
-			if(jQuery('.shipping-address-field-section').hasClass('hide'))
-			{	
-				$('select[name$=singleshipping_addressList]').val('');
-				$('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');
-				$('.custom-select').each(function(){
-					var select_val = $(this)	.find(":selected").text();	 
-					$(this).find('.selectorOut').text(select_val);
-				});
-				$('.shipping-address-field-section').removeClass('hide');
-				$('.selected-shipping-address').addClass('hide');
-			}	 
-			if(!$('.shippinglogindetails').is(':visible')){
-				$('.singleshipping_error').removeClass("hide");
-				$('.signinabove').hide();
-			}else  if($('.shippinglogindetails').is( ':visible')) {
-	        	if(!$('.shippinglogindetails form').valid()){
-	        		$('.shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw').blur();
-	        		$('button[name$="login_login"]').trigger('click');
-	        	}
-	            var errormsg = "<div id='message' class='error-alert signinabove' style='text-align: left;'>Please Log in above to continue</div>";
-	           if($('#dwfrm_singleshipping_shippingAddress .formactions #message').length > 0 || $('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').length > 0) {
-	                jQuery( "#dwfrm_singleshipping_shippingAddress .formactions #message").remove();
-	                jQuery('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').hide();
-	            } 
-	            jQuery('.singleshipping_error').hide();
-	            jQuery("#dwfrm_singleshipping_shippingAddress .formactions").prepend(errormsg);
-	            uievents.synccheckoutH();
-	           return false;
-	        } 	
-		}else{
-			$('.singleshipping_error').addClass("hide");
-		} 
-		uievents.synccheckoutH();
-	});
-   
-    $("body").on("click", ".go-as-guest-checkout",function(){
-  		$(".shipping-checkoutasguest, .signintomyaccount-block").removeClass("hide");
-  		$(".shippinglogindetails , .addressid").addClass("hide");
-  		uievents.synccheckoutH();
-  	});
-    if( $(".state-shipping-valid-dialog").length > 0 ) {
-   	 	var dialogWidth = 511;
-		var singOutDialog = dialog.create({
-			target: "#dialog-container",
-			options: {
-				 bgiframe: true,
-			     autoOpen: false,
-			     modal: true,
-			     width: dialogWidth,
-			     dialogClass: 'state-shipping-dialog'
-			}
-		});
-		$(singOutDialog).empty().append($(".state-shipping-valid-dialog").html());
-		singOutDialog.dialog("open");	
-   }
-    $("body").on("click", '.shippingsignout',function(e){
-		e.preventDefault(); 
-		$.ajax({
-			 url: this.href,
-			 success: function(data) {
-				 var dialogWidth = 500;
-				 /*if( $(window).width() < 767 ){
-					 dialogWidth = 300
-				 }*/
-				 var singOutDialog = dialog.create({
-			         target: "#dialog-container",
-			         options: {
-			        	 bgiframe: true,
-			             autoOpen: false,
-			             modal: true,
-			             width: dialogWidth,
-			             dialogClass: 'sing-out-dialog'
-			         }
-				 });
-				 $(singOutDialog).empty().append(data);
-				 singOutDialog.dialog("open");	  
-			 }
-		});
-	});
-    $("body").on("click", ".signintomyaccountbutton" ,function () {
+
+    $('.continue-checkout-button .continue-checkout').on('click', function () {
+        var form = $(this).closest('form[id$="_shippingAddress"]');
+        if ($('.state-blk select').valid() == 0) {
+            if (!$('.state-blk.custom-select').hasClass('blured')) {
+                $('.state-blk.custom-select').addClass('customselect-error');
+                //$('.state-blk .stateerror').show();
+            }
+        } else {
+            //$('.state-blk  .stateerror').hide();
+            $('.state-blk.custom-select').removeClass('customselect-error');
+        }
+
+        if (!$('.checkoutasguestbutton').is(':visible')) {
+            $('.guestemailcon').blur();
+            $('.guestemail').blur();
+        }
+        if (!form.valid()) {
+            if (jQuery('.shipping-address-field-section').hasClass('hide')) {
+                $('select[name$=singleshipping_addressList]').val('');
+                $('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');
+                $('.custom-select').each(function () {
+                    var selectVal = $(this).find(':selected').text();
+                    $(this).find('.selectorOut').text(selectVal);
+                });
+                $('.shipping-address-field-section').removeClass('hide');
+                $('.selected-shipping-address').addClass('hide');
+            }
+            if (!$('.shippinglogindetails').is(':visible')) {
+                $('.singleshipping_error').removeClass('hide');
+                $('.signinabove').hide();
+            } else if ($('.shippinglogindetails').is(':visible')) {
+                if (!$('.shippinglogindetails form').valid()) {
+                    $('.shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw').blur();
+                    $('button[name$="login_login"]').trigger('click');
+                }
+                var errormsg = '<div id=\'message\' class=\'error-alert signinabove\' style=\'text-align: left;\'>Please Log in above to continue</div>';
+                if ($('#dwfrm_singleshipping_shippingAddress .formactions #message').length > 0 || $('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').length > 0) {
+                    jQuery('#dwfrm_singleshipping_shippingAddress .formactions #message').remove();
+                    jQuery('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').hide();
+                }
+                jQuery('.singleshipping_error').hide();
+                jQuery('#dwfrm_singleshipping_shippingAddress .formactions').prepend(errormsg);
+                uievents.synccheckoutH();
+                return false;
+            }
+        } else {
+            $('.singleshipping_error').addClass('hide');
+        }
+        uievents.synccheckoutH();
+    });
+
+    $('body').on('click', '.go-as-guest-checkout', function () {
+        $('.shipping-checkoutasguest, .signintomyaccount-block').removeClass('hide');
+        $('.shippinglogindetails , .addressid').addClass('hide');
+        uievents.synccheckoutH();
+    });
+    if ($('.state-shipping-valid-dialog').length > 0) {
+        var dialogWidth = 511;
+        var singOutDialog = dialog.create({
+            target: '#dialog-container',
+            options: {
+                bgiframe: true,
+                autoOpen: false,
+                modal: true,
+                width: dialogWidth,
+                dialogClass: 'state-shipping-dialog'
+            }
+        });
+        $(singOutDialog).empty().append($('.state-shipping-valid-dialog').html());
+        singOutDialog.dialog('open');
+    }
+    $('body').on('click', '.shippingsignout', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: this.href,
+            success: function (data) {
+                var dialogWidth = 500;
+                /*if( $(window).width() < 767 ){
+                    dialogWidth = 300
+                }*/
+                var singOutDialog = dialog.create({
+                    target: '#dialog-container',
+                    options: {
+                        bgiframe: true,
+                        autoOpen: false,
+                        modal: true,
+                        width: dialogWidth,
+                        dialogClass: 'sing-out-dialog'
+                    }
+                });
+                $(singOutDialog).empty().append(data);
+                singOutDialog.dialog('open');
+            }
+        });
+    });
+    $('body').on('click', '.signintomyaccountbutton', function () {
         signin();
         $('form[id$="_login"] .formfield.username, form[id$="_login"] .formfield.password').each(function () {
             $(this).find('.value input').val('').removeClass('errorclient');
@@ -298,41 +292,40 @@ exports.init = function() {
         });
         $('form[id$="_login"] .wrongaddress').hide();
         $('form[id$="_login"] .#message.error').remove();
-     
+
         $('.singleshipping_error').hide();
-        $(".shipping-emaildetaillinks").addClass('loginactive');
-        $(".shipping-emaildetaillinks").removeClass('reginactive');
+        $('.shipping-emaildetaillinks').addClass('loginactive');
+        $('.shipping-emaildetaillinks').removeClass('reginactive');
         $('.New-shipping-authentication-detail input[id$="shippingAddress_email"]').removeClass('accemail');
         $('.New-shipping-authentication-detail input[id$="shippingAddress_emailconfirm"]').removeClass('accemailcon');
-        $(".New-shipping-authentication-detail input[name$='_guestemailconfirm']").removeClass('guestemailcon');
-   	 	$(".New-shipping-authentication-detail input[name$='_guestemail']").removeClass('guestemail');
-        $(".shippinglogindetails input[name$='login_username']").addClass('loggedemail');
+        $('.New-shipping-authentication-detail input[name$=\'_guestemailconfirm\']').removeClass('guestemailcon');
+        $('.New-shipping-authentication-detail input[name$=\'_guestemail\']').removeClass('guestemail');
+        $('.shippinglogindetails input[name$=\'login_username\']').addClass('loggedemail');
         $('.shippinglogindetails .correctaddress').removeClass('error').hide();
-        if($('.emailhidden').val()){
-        	$('input[id$="login_username"]').val($('.emailhidden').val());	
-        	$('input[id$="login_username"]').blur();
-        	$('input[id$="login_username"]').closest('.formfield').find('.correctaddress').show();
+        if ($('.emailhidden').val()) {
+            $('input[id$="login_username"]').val($('.emailhidden').val());
+            $('input[id$="login_username"]').blur();
+            $('input[id$="login_username"]').closest('.formfield').find('.correctaddress').show();
         }
-        $(".New-shipping-authentication-detail input[name$='shippingAddress_password']").removeClass('c_password');
-        $(".New-shipping-authentication-detail input[name$='shippingAddress_passwordconfirm']").removeClass('cm_password');
-        $(".shippinglogindetails input[name$='login_password']").addClass('login_password');
-        $(".shipping-address-field-section .value input").removeClass('errorclient');
+        $('.New-shipping-authentication-detail input[name$=\'shippingAddress_password\']').removeClass('c_password');
+        $('.New-shipping-authentication-detail input[name$=\'shippingAddress_passwordconfirm\']').removeClass('cm_password');
+        $('.shippinglogindetails input[name$=\'login_password\']').addClass('login_password');
+        $('.shipping-address-field-section .value input').removeClass('errorclient');
         $('.shipping-address-field-section .value span.errorclient').hide();
         $('.custom-select').removeClass('customselect-error');
         $('.stateerror').hide();
         uievents.synccheckoutH();
     });
-    
+
     $('.shipping-guestemailaddress .textinput, .shipping-guestconfirmemailaddress .textinput, .shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw, .shipping-emailaddress .textinput, .shipping-confirmemailaddress .textinput, .shipping-password .textinputpw, .shipping-confirmpassword .textinputpw').blur(function () {
-        if($(this).valid() == 0) {
+        if ($(this).valid() == 0) {
             $(this).closest('.formfield').find('.correctaddress').addClass('error').show();
-        }
-        else {
+        } else {
             $(this).closest('.formfield').find('.correctaddress').removeClass('error').show();
         }
     });
     //PREVAIL - init Address Validation
-      require('../../addressvalidation').init();
+    require('../../addressvalidation').init();
 };
 
 exports.updateShippingMethodList = updateShippingMethodList;

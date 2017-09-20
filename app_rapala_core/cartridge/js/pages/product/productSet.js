@@ -4,12 +4,12 @@ var ajax = require('../../ajax'),
     tooltip = require('../../tooltip'),
     util = require('../../util');
 
-module.exports = function() {
+module.exports = function () {
     var $addToCart = $('#add-to-cart'),
         $addAllToCart = $('#add-all-to-cart'),
         $productSetList = $('#product-set-list');
 
-    var updateAddToCartButtons = function() {
+    var updateAddToCartButtons = function () {
         if ($productSetList.find('.add-to-cart[disabled]').length > 0) {
             $addAllToCart.attr('disabled', 'disabled');
             // product set does not have an add-to-cart button, but product bundle does

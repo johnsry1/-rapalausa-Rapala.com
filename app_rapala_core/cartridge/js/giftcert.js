@@ -47,6 +47,6 @@ var setAddToCartHandler = function (e) {
     });
 };
 
-exports.init = function() {
+exports.init = function () {
     $('#AddToBasketButton').on('click', setAddToCartHandler);
 };

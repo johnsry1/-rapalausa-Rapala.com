@@ -6,7 +6,7 @@ var ajax = require('./ajax'),
     validator = require('./validator'),
     dialog = require('./dialog');
 
-var setDialogify = function(e) {
+var setDialogify = function (e) {
     e.preventDefault();
     var actionSource = $(this),
         dlgAction = $(actionSource).data('dlg-action') || {}, // url, target, isForm
@@ -69,6 +69,6 @@ var setDialogify = function(e) {
         type: method
 
     });
-}
+};
 
 exports.setDialogify = setDialogify;

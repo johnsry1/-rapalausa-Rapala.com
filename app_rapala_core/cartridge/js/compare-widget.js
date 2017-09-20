@@ -29,6 +29,7 @@ function refreshContainer() {
     /*End JIRA PREV-234*/
     $compareContainer.toggle(numActive > 0);
 }
+
 /**
  * @private
  * @function
@@ -59,6 +60,7 @@ function addToList(data) {
         .data('itemid', data.itemid)
         .append($(data.img).clone().addClass('compare-item-image'));
 }
+
 /**
  * @private
  * @function
@@ -178,7 +180,7 @@ function addProduct(args) {
         promise = TPromise.resolve(0);
     }
     return promise.then(function () {
-        return addProductAjax(args).then(function() {
+        return addProductAjax(args).then(function () {
             addToList(args);
             if ($cb && $cb.length > 0) {
                 $cb[0].checked = true;

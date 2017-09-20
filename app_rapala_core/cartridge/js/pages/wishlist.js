@@ -1,12 +1,10 @@
 'use strict';
 
-var addProductToCart = require('./product/addToCart'),
-    page = require('../page'),
+var page = require('../page'),
     account = require('./account'),
     util = require('../util');
 
-exports.init = function() {
-   // addProductToCart();
+exports.init = function () {
     //Start JIRA PREV-412 : SG Issue: Password reset overlay displayed as a page
     account.initCartLogin();
     $('#editAddress').on('change', function () {

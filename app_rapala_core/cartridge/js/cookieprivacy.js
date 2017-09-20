@@ -3,9 +3,9 @@
 var dialog = require('./dialog');
 
 /**
- * @function cookieprivacy	Used to display/control the scrim containing the cookie privacy code
+ * @function cookieprivacy    Used to display/control the scrim containing the cookie privacy code
  **/
-module.exports = function() {
+module.exports = function () {
     /**
      * If we have not accepted cookies AND we're not on the Privacy Policy page, then show the notification
      * NOTE: You will probably want to adjust the Privacy Page test to match your site's specific privacy / cookie page

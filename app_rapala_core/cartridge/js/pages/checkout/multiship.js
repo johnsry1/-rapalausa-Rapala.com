@@ -26,7 +26,6 @@ function initMultiGiftMessageBox() {
     });
 }
 
-
 /**
  * @function
  * @description capture add edit adddress form events
@@ -77,9 +76,9 @@ function addEditAddress(target) {
                 $select = $shippingAddress.find('.select-address'),
                 $selected = $select.find('option:selected'),
                 newOption = '<option value="' + address.UUID + '">' +
-                ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
-                address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
-                '</option>';
+                    ((address.ID) ? '(' + address.ID + ')' : address.firstName + ' ' + address.lastName) + ', ' +
+                    address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
+                    '</option>';
             dialog.close();
             if (add) {
                 $('.shippingaddress select').removeClass('no-option').append(newOption);
@@ -111,7 +110,7 @@ function addEditAddress(target) {
  * @function
  * @description shows gift message box in multiship, and if the page is the multi shipping address page it will call initmultishipshipaddress() to initialize the form
  */
-exports.init = function() {
+exports.init = function () {
     initMultiGiftMessageBox();
     if ($('.cart-row .shippingaddress .select-address').length > 0) {
         formPrepare.init({

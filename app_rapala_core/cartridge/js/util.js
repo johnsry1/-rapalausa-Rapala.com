@@ -6,7 +6,7 @@ var cardregex = {
     visa: /^4[0-9]{3,15}$/,
     amex: /^3[47]([0-9]{2,13})$/,
     discover: /^6(?:011[0-9]{0,12}|5[0-9]{2,14})$/
-}
+};
 var util = {
     /**
      * @function
@@ -15,7 +15,7 @@ var util = {
      * @param {String} name the name of the parameter
      * @param {String} value the value of the parameter
      */
-    appendParamToURL: function(url, name, value) {
+    appendParamToURL: function (url, name, value) {
         // quit if the param already exists
         if (url.indexOf(name + '=') !== -1) {
             return url;
@@ -24,51 +24,53 @@ var util = {
         return url + separator + name + '=' + encodeURIComponent(value);
     },
     hiddenData: function () {
-        jQuery.each(jQuery(".hidden"), function () {
+        jQuery.each(jQuery('.hidden'), function () {
             var hiddenStr = jQuery(this).html();
 
-           if(hiddenStr === "") {
+            if (hiddenStr === '') {
                 return;
             }
 
             // see if its a json string
-           if(jQuery(this).hasClass("json")) {
+            if (jQuery(this).hasClass('json')) {
                 // try to parse it as a json
                 try {
-                    hiddenStr = window["eval"]("(" + hiddenStr + ")");
+                    hiddenStr = window.eval('(' + hiddenStr + ')');
+                } catch (e) {
+                    // Do Nothing
                 }
-                catch (e) {}
             }
 
-            jQuery(this).prev().data("data", hiddenStr);
+            jQuery(this).prev().data('data', hiddenStr);
 
             jQuery(this).remove();
         });
     },
-    
-    	/**** Read cookieee  *****/
-    	readCookie : function (name) {
-        var nameEQ = name + "=";
+
+    /**** Read cookieee  *****/
+    readCookie: function (name) {
+        var nameEQ = name + '=';
         var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) {
+                return c.substring(nameEQ.length, c.length);
+            }
         }
         return null;
     },
-    
-    
-	/***  Read cookie ***/
+
+    /***  Read cookie ***/
     /**
      * @function
      * @description appends the parameters to the given url and returns the changed url
      * @param {String} url the url to which the parameters will be added
      * @param {Object} params
      */
-    appendParamsToUrl: function(url, params) {
+    appendParamsToUrl: function (url, params) {
         var _url = url;
-        _.each(params, function(value, name) {
+        _.each(params, function (value, name) {
             _url = this.appendParamToURL(_url, name, value);
         }.bind(this));
         return _url;
@@ -80,7 +82,7 @@ var util = {
      * @param {String} url the url from which the parameter will be removed
      * @param {String} name the name of parameter that will be removed from url
      */
-    removeParamFromURL: function(url, name) {
+    removeParamFromURL: function (url, name) {
         if (url.indexOf('?') === -1 || url.indexOf(name + '=') === -1) {
             return url;
         }
@@ -109,7 +111,7 @@ var util = {
      * @description extract the query string from URL
      * @param {String} url the url to extra query string from
      **/
-    getQueryString: function(url) {
+    getQueryString: function (url) {
         var qs;
         if (!_.isString(url)) {
             return;
@@ -127,7 +129,7 @@ var util = {
      * @param {String}
      * @param {String}
      */
-    elementInViewport: function(el, offsetToTop) {
+    elementInViewport: function (el, offsetToTop) {
         var top = el.offsetTop,
             left = el.offsetLeft,
             width = el.offsetWidth,
@@ -167,7 +169,7 @@ var util = {
      * @description Appends the parameter 'format=ajax' to a given path
      * @param {String} path the relative path
      */
-    ajaxUrl: function(path) {
+    ajaxUrl: function (path) {
         return this.appendParamToURL(path, 'format', 'ajax');
     },
 
@@ -176,7 +178,7 @@ var util = {
      * @description
      * @param {String} url
      */
-    toAbsoluteUrl: function(url) {
+    toAbsoluteUrl: function (url) {
         if (url.indexOf('http') !== 0 && url.charAt(0) !== '/') {
             url = '/' + url;
         }
@@ -187,7 +189,7 @@ var util = {
      * @description Loads css dynamically from given urls
      * @param {Array} urls Array of urls from which css will be dynamically loaded.
      */
-    loadDynamicCss: function(urls) {
+    loadDynamicCss: function (urls) {
         var i, len = urls.length;
         for (i = 0; i < len; i++) {
             this.loadedCssFiles.push(this.loadCssFile(urls[i]));
@@ -199,7 +201,7 @@ var util = {
      * @description Loads css file dynamically from given url
      * @param {String} url The url from which css file will be dynamically loaded.
      */
-    loadCssFile: function(url) {
+    loadCssFile: function (url) {
         return $('<link/>').appendTo($('head')).attr({
             type: 'text/css',
             rel: 'stylesheet'
@@ -212,7 +214,7 @@ var util = {
      * @function
      * @description Removes all css files which were dynamically loaded
      */
-    clearDynamicCss: function() {
+    clearDynamicCss: function () {
         var i = this.loadedCssFiles.length;
         while (0 > i--) {
             $(this.loadedCssFiles[i]).remove();
@@ -224,7 +226,7 @@ var util = {
      * @description Extracts all parameters from a given query string into an object
      * @param {String} qs The query string from which the parameters will be extracted
      */
-    getQueryStringParams: function(qs) {
+    getQueryStringParams: function (qs) {
         if (!qs || qs.length === 0) {
             return {};
         }
@@ -233,14 +235,14 @@ var util = {
         // Use the String::replace method to iterate over each
         // name-value pair in the string.
         unescapedQS.replace(new RegExp('([^?=&]+)(=([^&]*))?', 'g'),
-            function($0, $1, $2, $3) {
+            function ($0, $1, $2, $3) {
                 params[$1] = $3;
             }
         );
         return params;
     },
 
-    fillAddressFields: function(address, $form) {
+    fillAddressFields: function (address, $form) {
         for (var field in address) {
             if (field === 'ID' || field === 'UUID' || field === 'key') {
                 continue;
@@ -263,8 +265,8 @@ var util = {
      * @description Updates the number of the remaining character
      * based on the character limit in a text area
      */
-    limitCharacters: function() {
-        $('form').find('textarea[data-character-limit]').each(function() {
+    limitCharacters: function () {
+        $('form').find('textarea[data-character-limit]').each(function () {
             var characterLimit = $(this).data('character-limit');
             var charCountHtml = String.format(Resources.CHAR_LIMIT_MSG,
                 '<span class="char-remain-count">' + characterLimit + '</span>',
@@ -283,98 +285,90 @@ var util = {
     },
     cardtype: {
         init: function () {
-           if($('#paymentmethods').find('.creditCard-number').length > 0) {
-            	$('#paymentmethods').find('.creditCard-number').bind('keypress keyup', function(){
-            		if($(this).val().length){
-            			$('.carderror.error').hide();	
-            		}
-            		if($(this).val().length < 4){
-            		$('.cardtypeimg > div').hide();
-            		}
-            	});
-            	$('.creditCard-number, .creditcard_cvn').on('keypress', function (e) {
+            if ($('#paymentmethods').find('.creditCard-number').length > 0) {
+                $('#paymentmethods').find('.creditCard-number').bind('keypress keyup', function () {
+                    if ($(this).val().length) {
+                        $('.carderror.error').hide();
+                    }
+                    if ($(this).val().length < 4) {
+                        $('.cardtypeimg > div').hide();
+                    }
+                });
+                $('.creditCard-number, .creditcard_cvn').on('keypress', function (e) {
                     e = (e) ? e : window.event;
                     var charCode = (e.which) ? e.which : e.keyCode;
-                   if(charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                         return false;
                     }
                     return true;
                 });
                 $('#paymentmethods').find('.creditCard-number').blur(function () {
-                            var val = $.trim($(this).val());
-                            var regex = /^[a-zA-Z]+$/;
-                            var errorspan = $(this).closest('.formfield').find('span.carderror');
-                           if(!val) {
-                                errorspan.hide();
-                                return;
+                    var val = $.trim($(this).val());
+                    //var regex = /^[a-zA-Z]+$/;
+                    var errorspan = $(this).closest('.formfield').find('span.carderror');
+                    if (!val) {
+                        errorspan.hide();
+                        return;
+                    }
+                    if (val.length) {
+                        if ($('.carderror.error').length == 0) {
+                            $(this).closest('.formfield').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
+                        }
+                        $('.carderror.error').hide();
+                        var cardTypeval = util.validatecardtype(val);
+                        if (cardTypeval != 'Error') {
+                            errorspan.hide();
+                            $('#paymentmethods').find('select[name$="_paymentMethods_creditCard_type"]').val(cardTypeval);
+                            $('.cardtypeimg > div').hide();
+                            $('.cardtypeimg > div.' + cardTypeval).show();
+
+                            if ((cardTypeval == 'MasterCard') || (cardTypeval == 'Visa') || (cardTypeval == 'Discover')) {
+                                if (val.length < 16) {
+                                    $('.carderror.error').show();
+                                    $(this).addClass('errorclient');
+                                }
+                            } else if (cardTypeval == 'Amex') {
+                                if (val.length < 15) {
+                                    $('.carderror.error').show();
+                                    $(this).addClass('errorclient');
+                                }
+                            } else {
+                                $('.carderror.error').hide();
+                                $(this).removeClass('errorclient');
                             }
-                           if(val.length) {
-                            	if ($('.carderror.error').length == 0) {
-                            		$(this).closest('.formfield').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
-                            	}	
-                            	$('.carderror.error').hide();
-                                var cardTypeval = util.validatecardtype(val);
-                               if(cardTypeval != "Error") {
-                                    errorspan.hide();
-                                    $('#paymentmethods').find('select[name$="_paymentMethods_creditCard_type"]').val(cardTypeval);
+                        } else {
+                            if ($(this).val().indexOf('*') == -1) {
+                                if (val.length < 16) {
+                                    $('.carderror.error').show();
+                                    $(this).addClass('errorclient');
                                     $('.cardtypeimg > div').hide();
-                                    $('.cardtypeimg > div.' + cardTypeval).show();
-                                    
-                                    if((cardTypeval == "MasterCard") || (cardTypeval == "Visa") || (cardTypeval == "Discover")){
-                                    	if(val.length < 16){ 
-                                    		$('.carderror.error').show();
-                                    		$(this).addClass('errorclient');
-                                    	}
-                                    }else if(cardTypeval = "Amex"){
-                                    	if(val.length < 15){ 
-                                    		$('.carderror.error').show(); 
-                                    		$(this).addClass('errorclient');
-                                    	}
-                                    }else{
-                                    	$('.carderror.error').hide(); 
-                                    	$(this).removeClass('errorclient');
-                                    }
-                                }
-                                else {   
-                                	if($(this).val().indexOf('*') == -1){
-                                		if(val.length < 16){
-                                			$('.carderror.error').show();
-                                        	$(this).addClass('errorclient');
-                                        	$('.cardtypeimg > div').hide();	
-                                		}
-                                	} 
                                 }
                             }
-                           if($('#paymentmethods').find('.creditCard-number').val().length < 4) {
-                                $('.cardtypeimg > div').hide(); 
-                            }
-                        });
+                        }
+                    }
+                    if ($('#paymentmethods').find('.creditCard-number').val().length < 4) {
+                        $('.cardtypeimg > div').hide();
+                    }
+                });
             }
 
         }
 
     },
-    validatecardtype: function(val) {
-        var result = " ",
+    validatecardtype: function (val) {
+        var result = ' ',
             carNo = val;
 
-        // first check for MasterCard
-       if(cardregex.mastercard.test(carNo)) {
-            result = "MasterCard";
-        }
-        // then check for Visa
-       else if(cardregex.visa.test(carNo)) {
-            result = "Visa";
-        }
-        // then check for AmEx
-       else if(cardregex.amex.test(carNo)) {
-            result = "Amex";
-        }
-       else if(cardregex.discover.test(carNo)) {
-            result = "Discover";
-        }
-        else {
-            result = "Error"
+        if (cardregex.mastercard.test(carNo)) {// first check for MasterCard
+            result = 'MasterCard';
+        } else if (cardregex.visa.test(carNo)) {// then check for Visa
+            result = 'Visa';
+        } else if (cardregex.amex.test(carNo)) {// then check for AmEx
+            result = 'Amex';
+        } else if (cardregex.discover.test(carNo)) {
+            result = 'Discover';
+        } else {
+            result = 'Error';
         }
         return result;
     },
@@ -386,7 +380,7 @@ var util = {
      * @param {String} message The message the will be shown upon a click
      */
     setDeleteConfirmation: function (container, message) {
-        $(container).on('click', '.delete', function() {
+        $(container).on('click', '.delete', function () {
             return window.confirm(message);
         });
     },

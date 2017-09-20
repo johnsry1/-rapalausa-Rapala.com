@@ -1,195 +1,196 @@
 // Order History - Order Details Styling
 
-
-.pt_order{
-	.search-result-options{
-	}
-		.search-result-items{
-			li{
-			.order-history-header {
-		    	/*background:$shaded-grey; */
-		    	    background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $shaded-grey;
-    overflow: hidden;
-    padding: 10px;
-		    	/*padding:18px; */
-				.order-date,
-				.order-status,
-				.order-number{
-				/*	width:auto;
-					margin:0 27px 0 0; */
-				}
-				button{
-					margin-top:3px;
-				}
-				.label{
-					font-weight: bold !important;
-				    color: $shadow-light-grey !important;
-				    text-align: left;
-				    width: auto;
-				    font-style: italic;
-				    font-family: $global-font-family;
-				    font-size: 11px !important;
-				    font-variant: inherit;
-				    text-transform: capitalize;
-				    float:left;
-				    line-height:13px;
-				}
-				.value{
-					color:$night-rider;
-				    position: relative;
-				    text-align: left;
-				    width: auto;
-				    font-weight: bold;
-				    font-family: $global-font-family;
-				    font-size: 11px;
-				    float:left;
-				    line-height:13px;
-				    	&.processing {
-				    		color:$red;
-				    	}
-				}
-		    }
-		    .order-history-items{
-		    	.order-history-table{
-		    		    border-bottom: none;
-		    		th{
-		    			background:none;
-		    		}
-		    		.value{
-		    			font-size:12px;
-		    			line-height:12px;
-		    			font-family:$global-arialfont-family;
-		    		}
-		    		.order-items{
-		    			ul{
-		    				li{
-		    					font-size:12px;
-		    					line-height:12px;
-		    					font-family:$global-arialfont-family;
-		    				}
-		    			}
-		    		}
-		    	}
-		    }
-		 }
-	}
-}
-
-
-.pt_order{
-	.actions{
-		 @media screen and (min-width: 959px) {
-            margin-bottom:20px;
+.pt_order {
+    .search-result-items {
+        li {
+            .order-history-header {
+                /*background:$shaded-grey; */
+                background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $shaded-grey;
+                overflow: hidden;
+                padding: 10px;
+                /*padding:18px; */
+                .order-date,
+                .order-status,
+                .order-number {
+                    /*	width:auto;
+                        margin:0 27px 0 0; */
+                }
+                button {
+                    margin-top: 3px;
+                }
+                .label {
+                    font-weight: bold !important;
+                    color: $shadow-light-grey !important;
+                    text-align: left;
+                    width: auto;
+                    font-style: italic;
+                    font-family: $global-font-family;
+                    font-size: 11px !important;
+                    font-variant: inherit;
+                    text-transform: capitalize;
+                    float: left;
+                    line-height: 13px;
+                }
+                .value {
+                    color: $night-rider;
+                    position: relative;
+                    text-align: left;
+                    width: auto;
+                    font-weight: bold;
+                    font-family: $global-font-family;
+                    font-size: 11px;
+                    float: left;
+                    line-height: 13px;
+                    &.processing {
+                        color: $red;
+                    }
+                }
+            }
+            .order-history-items {
+                .order-history-table {
+                    border-bottom: none;
+                    th {
+                        background: none;
+                    }
+                    .value {
+                        font-size: 12px;
+                        line-height: 12px;
+                        font-family: $global-arialfont-family;
+                    }
+                    .order-items {
+                        ul {
+                            li {
+                                font-size: 12px;
+                                line-height: 12px;
+                                font-family: $global-arialfont-family;
+                            }
+                        }
+                    }
+                }
+            }
         }
-	}
-	.orderdetails{ 
-		.order-payment-instruments{
-			 @media screen and (min-width:767px) {
-            		margin-top:0;
-            		float:left;
-            		width:50%;
-       		}
-		}
-		.order-billing{
-			@media screen and (min-width:767px) {
-            		width:50%;
-            		float:left;
-       		}
-       		.mini-address-location{
-       			.miniadddrephone{
-       				width:100%;
-       				float:left;
-       			}
-       		}
-		}
-		.order-payment-summary{
-			@media screen and (min-width:767px) {
-            		width:50%;
-       		}
-			.order-detail-summary{
-				.order-totals-table{ 
-					border-bottom:none;
-					tr{
-						&.order-subtotal{
-							td{
-								.ordersubtotal-strike {
-									color:#999;
-									text-decoration: line-through;
-								}		
-							}
-						}
-						&.order-total {
-							td{
-								padding-bottom:20px;
-							}
-						}
-						&.ordertotalsaving{ 
-							&.discount{
-								td{
-									padding:0;
-									text-align:center;
-									vertical-align:middle;
-									.label{
-										font-size:13px;
-										font-family:$global-font-family;
-										font-weight:bold;
-										font-variant:normal;
-										text-transform:uppercase;
-										color:$red;
-									}
-								}
-							}
-						}
-						&.order-shipping {
-							.basicordershippingcharge{ 
-								&.ordersubtotal-strike{
-									color:#999;
-								} 
-							}
-							.discountedordershippingcharge{
-								color:$night-rider;
-							}
-							.label{ 
-								&.discount{ 
-									&.yousaved{
-										width:100%;
-									} 
-								}
-							}
-						}
-						td{
-							border:none;
-							.label{
-								margin:0;
-							}
-						} 
-					}
-				} 
-			}
-		}
-	}
+    }
 }
+
+.pt_order {
+    .actions {
+        @media screen and (min-width: 959px) {
+            margin-bottom: 20px;
+        }
+    }
+    .orderdetails {
+        .order-payment-instruments {
+            @media screen and (min-width: 767px) {
+                margin-top: 0;
+                float: left;
+                width: 50%;
+            }
+        }
+        .order-billing {
+            @media screen and (min-width: 767px) {
+                width: 50%;
+                float: left;
+            }
+            .mini-address-location {
+                .miniadddrephone {
+                    width: 100%;
+                    float: left;
+                }
+            }
+        }
+        .order-payment-summary {
+            @media screen and (min-width: 767px) {
+                width: 50%;
+            }
+            .order-detail-summary {
+                .order-totals-table {
+                    border-bottom: none;
+                    tr {
+                        &.order-subtotal {
+                            td {
+                                .ordersubtotal-strike {
+                                    color: #999;
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
+                        &.order-total {
+                            td {
+                                padding-bottom: 20px;
+                            }
+                        }
+                        &.ordertotalsaving {
+                            &.discount {
+                                td {
+                                    padding: 0;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                    .label {
+                                        font-size: 13px;
+                                        font-family: $global-font-family;
+                                        font-weight: bold;
+                                        font-variant: normal;
+                                        text-transform: uppercase;
+                                        color: $red;
+                                    }
+                                }
+                            }
+                        }
+                        &.order-shipping {
+                            .basicordershippingcharge {
+                                &.ordersubtotal-strike {
+                                    color: #999;
+                                }
+                            }
+                            .discountedordershippingcharge {
+                                color: $night-rider;
+                            }
+                            .label {
+                                &.discount {
+                                    &.yousaved {
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                        td {
+                            border: none;
+                            .label {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .order-history-header {
-   /* background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke; */
+    /* background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke; */
     overflow: hidden;
     padding: 10px;
     .label {
         font-weight: 700;
-        font-family:$global-font-family;
+        font-family: $global-font-family;
     }
     button {
         float: right;
     }
-    .order-date, .order-status, .order-number {
+    .order-date,
+    .order-status,
+    .order-number {
         float: left;
         margin: 2px 0;
         width: 60%;
     }
 }
+
 .order-history-items {
     margin: 20px 0;
     .order-history-table {
-        th, td {
+        th,
+        td {
             padding: 5px 10px;
         }
         ul {
@@ -211,13 +212,12 @@
         }
     }
 }
+
 .js .order-history-table .hidden {
     display: none;
 }
 
 // Details Styling
-
-
 
 .orderdetails {
     font-family: $sans-serif-alt;
@@ -276,293 +276,293 @@
             float: right;
         }
     }
-    .order-payment-instruments{
-    	.label{
-    			font-family:$global-arialfont-family;
-    		    color: #a3a3a3;
-			    font-weight: normal;
-			    font-style: italic;
-			    text-transform:capitalize;
-			    font-size:15px;
-			    line-height:17px;
-    	}
-    	.payment-type{
-    		font-family:$global-arialfont-family;
-    		color:$my-account-grey;
-    		font-weight:bold;
-    		font-size:11px;
-    		line-height:14px;
-    	}
-    	.cc-owner{
-    		.label{
-	    		font-family:$global-arialfont-family;
-	    		color:$my-account-grey;
-	    		font-weight:bold;
-	    		font-size:11px;
-	    		line-height:14px;
-	    		font-style:normal;
-    		}
-    	}
-    	.cc-type ,
-    	.cc-number {
-    		label{
-	    		font-family:$global-arialfont-family;
-	    		color:$my-account-grey;
-	    		font-weight:bold;
-	    		font-size:11px;
-	    		line-height:14px;
-	    		font-style:normal;
-    		}
-    	}
-    	.payment-amount{
-    		.label{
-				font-family:$global-arialfont-family;
-			    color: $shadow-light-grey !important;
-			    text-align: left;
-			    width: auto;
-			    font-style: italic;
-			    font-family: $global-font-family;
-			    font-size: 11px !important;
-			    line-height:14px;
-			    font-variant: inherit;
-			    text-transform: capitalize;
-			    font-weight:normal;
-			}
-    		.value{
-    			color:$black;
-    			font-family:$global-arialfont-family;
-    		}
-    	}
+    .order-payment-instruments {
+        .label {
+            font-family: $global-arialfont-family;
+            color: #a3a3a3;
+            font-weight: normal;
+            font-style: italic;
+            text-transform: capitalize;
+            font-size: 15px;
+            line-height: 17px;
+        }
+        .payment-type {
+            font-family: $global-arialfont-family;
+            color: $my-account-grey;
+            font-weight: bold;
+            font-size: 11px;
+            line-height: 14px;
+        }
+        .cc-owner {
+            .label {
+                font-family: $global-arialfont-family;
+                color: $my-account-grey;
+                font-weight: bold;
+                font-size: 11px;
+                line-height: 14px;
+                font-style: normal;
+            }
+        }
+        .cc-type,
+        .cc-number {
+            label {
+                font-family: $global-arialfont-family;
+                color: $my-account-grey;
+                font-weight: bold;
+                font-size: 11px;
+                line-height: 14px;
+                font-style: normal;
+            }
+        }
+        .payment-amount {
+            .label {
+                font-family: $global-arialfont-family;
+                color: $shadow-light-grey !important;
+                text-align: left;
+                width: auto;
+                font-style: italic;
+                font-family: $global-font-family;
+                font-size: 11px !important;
+                line-height: 14px;
+                font-variant: inherit;
+                text-transform: capitalize;
+                font-weight: normal;
+            }
+            .value {
+                color: $black;
+                font-family: $global-arialfont-family;
+            }
+        }
     }
-    .order-payment-summary{
-    	.order-detail-summary{
-    		.order-totals-table {
-    			.order-total {
-    				.label-total {
-    					font-weight: bold;
-    					font-style: normal;
-    					font-size: 18px;
-    					font-family: $global-font-family;
-    				}
-    				.miniright{
-    					.value{
-    						font-size: 20px;
-						    line-height: 20px;
-						    font-style: italic;
-						    color:#111;
-						    font-family: $global-font-family;
-    					}
-    				}
-    			}
-    			.order-shipping ,
-    			.order-sales-tax {
-    				.label{
-    					font-family:$global-arialfont-family !important;
-					    font-weight: bold;
-					    font-style: italic;
-					    margin: 0 3px 0 10px;
-					    float: left;
-					    white-space: nowrap;
-					    font-size: 9px;
-					    line-height:20px;
-					    color:$my-account-grey;
-					    text-transform:capitalize;
-					    font-variant:normal;
-    				}
-    				.value{
-    					font-family:$global-font-family;
-					    white-space: nowrap;
-					    font-weight: bold;
-					    font-size: 12px;
-					    color:$my-account-grey;
-    				}
-    				.value-sales{
-    					font-family:$global-font-family;
-					    white-space: nowrap;
-					    font-weight: bold;
-					    font-size: 12px;
-					    color:$my-account-grey;
-    				}
-    			}
-    			.order-subtotal,
-    			.ordersurcharges{
-    				.label{
-    					font-family:$global-arialfont-family;
-					    font-weight: bold;
-					    font-style: italic;
-					    margin: 0 3px 0 10px;
-					    float: left;
-					    white-space: nowrap;
-					    font-size: 9px;
-					    line-height:20px;
-					    color:$my-account-grey;
-					    text-transform:capitalize;
-					    text-align:left;
-					    font-variant:normal;
-    				}
-    				.value{
-    					font-family:$global-font-family;
-					    white-space: nowrap;
-					    font-weight: bold;
-					    font-size: 12px;
-					    color:$my-account-grey;
-    				}
-    			}
-    		}
-    	}
+    .order-payment-summary {
+        .order-detail-summary {
+            .order-totals-table {
+                .order-total {
+                    .label-total {
+                        font-weight: bold;
+                        font-style: normal;
+                        font-size: 18px;
+                        font-family: $global-font-family;
+                    }
+                    .miniright {
+                        .value {
+                            font-size: 20px;
+                            line-height: 20px;
+                            font-style: italic;
+                            color: #111;
+                            font-family: $global-font-family;
+                        }
+                    }
+                }
+                .order-shipping,
+                .order-sales-tax {
+                    .label {
+                        font-family: $global-arialfont-family !important;
+                        font-weight: bold;
+                        font-style: italic;
+                        margin: 0 3px 0 10px;
+                        float: left;
+                        white-space: nowrap;
+                        font-size: 9px;
+                        line-height: 20px;
+                        color: $my-account-grey;
+                        text-transform: capitalize;
+                        font-variant: normal;
+                    }
+                    .value {
+                        font-family: $global-font-family;
+                        white-space: nowrap;
+                        font-weight: bold;
+                        font-size: 12px;
+                        color: $my-account-grey;
+                    }
+                    .value-sales {
+                        font-family: $global-font-family;
+                        white-space: nowrap;
+                        font-weight: bold;
+                        font-size: 12px;
+                        color: $my-account-grey;
+                    }
+                }
+                .order-subtotal,
+                .ordersurcharges {
+                    .label {
+                        font-family: $global-arialfont-family;
+                        font-weight: bold;
+                        font-style: italic;
+                        margin: 0 3px 0 10px;
+                        float: left;
+                        white-space: nowrap;
+                        font-size: 9px;
+                        line-height: 20px;
+                        color: $my-account-grey;
+                        text-transform: capitalize;
+                        text-align: left;
+                        font-variant: normal;
+                    }
+                    .value {
+                        font-family: $global-font-family;
+                        white-space: nowrap;
+                        font-weight: bold;
+                        font-size: 12px;
+                        color: $my-account-grey;
+                    }
+                }
+            }
+        }
     }
-    .order-billing{
-    	.mini-address-location{
-    		address{
-	    		font-family:$global-arialfont-family;
-	    		color:$my-account-grey;
-	    		font-weight:bold;
-	    		font-size:11px;
-	    		font-style:normal;
-	    		line-height:14px;
-    		}
-    	}
-    	.mini-address-name{
-    		font-family:$global-arialfont-family;
-    		color:$my-account-grey;
-    		font-weight:bold;
-    		font-size:11px;
-    		line-height:14px;
-    	}
+    .order-billing {
+        .mini-address-location {
+            address {
+                font-family: $global-arialfont-family;
+                color: $my-account-grey;
+                font-weight: bold;
+                font-size: 11px;
+                font-style: normal;
+                line-height: 14px;
+            }
+        }
+        .mini-address-name {
+            font-family: $global-arialfont-family;
+            color: $my-account-grey;
+            font-weight: bold;
+            font-size: 11px;
+            line-height: 14px;
+        }
     }
-    .order-shipments{
-    	h2{
-    		padding:10px 0 !important;
-    		border-bottom:none !important;
-    	}
-    	.order-shipment-table{
-    		.order-shipment-address{
-		    	.summarybox{
-		    		.name{
-		    			.address{
-		    				font-family:$global-arialfont-family;
-				    		color:$my-account-grey;
-				    		font-weight:bold;
-				    		font-size:11px;
-				    		line-height:14px;
-				    		
-		    			}
-		    			.phone{
-			    			font-family:$global-arialfont-family;
-				    		color:$my-account-grey;
-				    		font-weight:bold;
-				    		font-size:11px;
-				    		line-height:14px;
-				    	}
-		    		}
-		    	}
-		    }
-		    .shipping-status{
-		    	.label{
-		    		font-family:$global-arialfont-family;
-		    		color:$my-account-grey;
-		    		font-weight:bold;
-		    		font-size:11px;
-		    		line-height:14px;
-		    		text-transform:capitalize;
-		    	}
-		    	.value{
-		    		font-family:$global-arialfont-family;
-		    		color:$my-account-grey;
-		    		font-weight:normal;
-		    		font-size:11px;
-		    		line-height:14px;
-		    		text-transform:capitalize;
-		    	}
-		    }
-		    .shipping-method{
-		    	.label{
-		    		font-family:$global-arialfont-family;
-		    		color:$my-account-grey;
-		    		font-weight:bold;
-		    		font-size:11px;
-		    		line-height:14px;
-		    		text-transform:capitalize;
-		    	}
-		    	.value{
-		    		font-family:$global-arialfont-family;
-		    		color:$my-account-grey;
-		    		font-weight:normal;
-		    		font-size:11px;
-		    		line-height:14px;
-		    		text-transform:capitalize;
-		    	}
-		    }
-		    .line-items{
-		    	.line-item-quantity{
-		    		font-family:$global-arialfont-family;
-		    	}
-		    	.line-item-details{
-		    		.product-list-item{
-		    			.name{
-		    				a{
-		    					color:$black;
-    							font-weight: bold;
-    							font-family:$global-arialfont-family;
-    							line-height: 14px;
-    							font-size:12px;
-		    				}
-		    			}
-		    			.attribute ,
-		    			.sku{
-		    				.label{
-		    					color:$nobel;
-		    					font-weight: bold;
-    							font-family:$global-arialfont-family;
-    							line-height: 14px;
-    							font-size:12px;
-    							text-transform:capitalize;
-		    				}
-		    				.value{
-		    					color:$black;
-		    					font-weight: bold;
-    							font-family:$global-arialfont-family;
-    							line-height: 14px;
-    							font-size:12px;
-    							text-transform:capitalize;
-		    				}
-		    			}
-		    		}
-		    	}
-		    }
-    	}
+    .order-shipments {
+        h2 {
+            padding: 10px 0 !important;
+            border-bottom: none !important;
+        }
+        .order-shipment-table {
+            .order-shipment-address {
+                .summarybox {
+                    .name {
+                        .address {
+                            font-family: $global-arialfont-family;
+                            color: $my-account-grey;
+                            font-weight: bold;
+                            font-size: 11px;
+                            line-height: 14px;
+
+                        }
+                        .phone {
+                            font-family: $global-arialfont-family;
+                            color: $my-account-grey;
+                            font-weight: bold;
+                            font-size: 11px;
+                            line-height: 14px;
+                        }
+                    }
+                }
+            }
+            .shipping-status {
+                .label {
+                    font-family: $global-arialfont-family;
+                    color: $my-account-grey;
+                    font-weight: bold;
+                    font-size: 11px;
+                    line-height: 14px;
+                    text-transform: capitalize;
+                }
+                .value {
+                    font-family: $global-arialfont-family;
+                    color: $my-account-grey;
+                    font-weight: normal;
+                    font-size: 11px;
+                    line-height: 14px;
+                    text-transform: capitalize;
+                }
+            }
+            .shipping-method {
+                .label {
+                    font-family: $global-arialfont-family;
+                    color: $my-account-grey;
+                    font-weight: bold;
+                    font-size: 11px;
+                    line-height: 14px;
+                    text-transform: capitalize;
+                }
+                .value {
+                    font-family: $global-arialfont-family;
+                    color: $my-account-grey;
+                    font-weight: normal;
+                    font-size: 11px;
+                    line-height: 14px;
+                    text-transform: capitalize;
+                }
+            }
+            .line-items {
+                .line-item-quantity {
+                    font-family: $global-arialfont-family;
+                }
+                .line-item-details {
+                    .product-list-item {
+                        .name {
+                            a {
+                                color: $black;
+                                font-weight: bold;
+                                font-family: $global-arialfont-family;
+                                line-height: 14px;
+                                font-size: 12px;
+                            }
+                        }
+                        .attribute,
+                        .sku {
+                            .label {
+                                color: $nobel;
+                                font-weight: bold;
+                                font-family: $global-arialfont-family;
+                                line-height: 14px;
+                                font-size: 12px;
+                                text-transform: capitalize;
+                            }
+                            .value {
+                                color: $black;
+                                font-weight: bold;
+                                font-family: $global-arialfont-family;
+                                line-height: 14px;
+                                font-size: 12px;
+                                text-transform: capitalize;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     .order-information {
         padding-bottom: .5em;
         padding-top: .5em;
-        .order-status{
-        	.label{
-	        	color: $nobel;
-	            font-size:11px;
-	            font-style:italic;
-	            font-family:$global-font-family;
-	            text-transform: none;
-	            font-weight:bold;
-        	}
-        	.value{
-        		&.processing{
-        			color:red;
-        		}
-        	}
+        .order-status {
+            .label {
+                color: $nobel;
+                font-size: 11px;
+                font-style: italic;
+                font-family: $global-font-family;
+                text-transform: none;
+                font-weight: bold;
+            }
+            .value {
+                &.processing {
+                    color: red;
+                }
+            }
         }
         .label {
             color: $nobel;
-            font-size:11px;
-            font-style:italic;
-            font-family:$global-font-family;
+            font-size: 11px;
+            font-style: italic;
+            font-family: $global-font-family;
             text-transform: none;
-            font-weight:bold;
+            font-weight: bold;
         }
         .value {
             font-weight: 700;
         }
         .order-number {
-        	
+
             font-size: 1.75rem;
         }
     }
@@ -579,6 +579,7 @@
         }
     }
 }
+
 .pt_order,
 .confirmation {
     .actions {
@@ -588,10 +589,12 @@
         }
     }
 }
+
 .confirmation-message {
     border-bottom: 3px solid $citrus;
     padding: 1rem 1%;
 }
+
 .confirmation {
     &.create-account {
         .login-create-account,
@@ -623,1036 +626,1021 @@
     }
 }
 
+.pt_orderconfirmation {
+    #headerwrapper {
+        #header {
+            box-shadow: inset 0 6px 5px -2px rgba(0, 0, 0, .3);
+            .row.column1 {
+                #topcell {
+                    width: 948px;
+                    float: none;
+                    margin: 0 auto;
+                    .headercustomerinfo {
+                        #userinfo {
+                            margin: 3px 6px 0 0 !important;
+                            @media screen and (min-width: 768px) and (max-width: 959px) {
+                                margin: 3px 0 0 0 !important;
+                            }
+                            @media screen and (max-width: 767px) {
+                                margin: 3px 5px 0 0 !important;
+                            }
+                            a {
+                                padding-top: 8px;
+                            }
+                            .arrow-size.right-arrow {
+                                margin-top: 9px;
+                                @media screen and (max-width: 959px) {
+                                    margin-top: 10px;
+                                    height: 8px;
+                                }
+                            }
+                        }
+                        #user {
+                            padding: 2px 0 0 0;
+                            .guest-welcomemessage,
+                            .anonymous {
+                                font-size: 12px;
+                                font-family: $global-font-family;
+                            }
+                            .guest-welcomemessage {
+                                margin-left: 0;
+                            }
+                        }
+                        &.newcheckout-headercustomerinfo {
+                            .checkout-header-center {
+                                left: 50%;
+                                margin-left: -69px;
+                                width: auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    .orderdetailsummary {
+        span.Custom-tooltip {
+            background: url("../images/responsive-icons/tooltip.svg") no-repeat 0 0;
+            height: 12px;
+            width: 12px;
+            margin-left: 1px;
+            margin-top: 1px;
+            background-size: cover;
+            text-decoration: none;
+            color: #999;
+            display: inline-block;
+            float: left;
+        }
+    }
+    #header-brands {
+        li {
+            a {
+                text-indent: 1px;
+                width: 100%;
+                height: 100%;
+                line-height: 30px;
+                float: left;
+                font-size: 0;
+            }
+            &.rapala {
+                background-position: -7px -45px;
+                width: 68px;
 
+                &:hover {
+                    background-position: -7px -6px;
+                    width: 68px;
+                }
+            }
+            &.vmc {
+                background-position: -97px -44px;
+                width: 70px;
+                &:hover {
+                    background-position: -97px -5px;
+                    width: 70px;
+                }
 
-
-.pt_orderconfirmation{
-	#headerwrapper{ 
-		#header{ 
-		    box-shadow: inset 0 6px 5px -2px rgba(0,0,0,.3);
-			.row.column1{ 
-				#topcell{
-					width:948px;
-					float:none;
-					margin:0 auto;
-					.headercustomerinfo{ 
-						#userinfo{
-							margin:3px 6px 0 0 !important;
-							@media screen and (min-width:768px) and (max-width:959px){
-								margin:3px 0 0 0 !important;
-							}
-							@media screen and (max-width:767px){
-								margin:3px 5px 0 0 !important;
-							}
-							a{
-								padding-top:8px;
-							}
-							.arrow-size.right-arrow{
-								margin-top:9px;
-								@media screen and (max-width:959px){
-									margin-top:10px;
-									height:8px;
-								}
-							}
-						}
-						#user{
-							padding:2px 0 0 0;
-							.guest-welcomemessage ,
-							.anonymous {
-								font-size:12px;
-								font-family:$global-font-family;
-							}
-							.guest-welcomemessage{
-								margin-left:0;
-							}
-						}
-						&.newcheckout-headercustomerinfo{ 
-							.checkout-header-center{
-								left:50%;
-								margin-left:-69px;
-								width:auto;
-							}
-						}   
-					}
-				}
-			}
-		}
-	}
-
-	.orderdetailsummary{
-		span.Custom-tooltip {
-		    background: url("../images/responsive-icons/tooltip.svg") no-repeat 0 0;
-		    height: 12px;
-		    width: 12px;
-		    margin-left:1px;
-		    margin-top: 1px;
-		    background-size: cover;
-		    text-decoration: none;
-		    color: #999;
-		    display: inline-block;
-		    float:left;
-		}
-	}
-	 #header-brands{
-          li {  
-	          a {
-				  text-indent: 1px;
-				  width: 100%;
-				  height: 100%;
-				  line-height: 30px;
-				  float: left; 
-				  font-size: 0px; 
-	             }
-		         &.rapala {
-				    background-position: -7px -45px;
-		    		width: 68px;
-		    		
-		    		&:hover{
-		    			background-position: -7px -6px;
-	    				width: 68px;
-		    		}
-			    }
-			    &.vmc {
-			    	background-position: -97px -44px;
-					width: 70px;
-					&:hover {
-						background-position: -97px -5px;
-						width: 70px;
-					}
-				
-			    }
-			    &.luhrjensen {
-				    background-position: -183px -43px;
-		    		width: 75px;
-		    		&:hover {
-				        background-position: -183px -4px;
-						width: 75px;
-					}
-			    }
-			    &.storm {
-				    background-position: -281px -43px;
-				    width: 61px;
-				    &:hover {
-					   background-position: -281px -4px;
-	    				width: 61px;
-					}
-				}
-				&.sufix {
-				    background-position: -380px -42px;
-				    width: 44px;
-				    &:hover {
-					    background-position: -380px -3px;
-	    				width: 44px;
-					}
-				}
-				&.bluefox {
-				    background-position: -467px -42px;
-				    width: 50px;
-					&:hover {
-				        background-position: -467px -3px;
-	    				width: 50px;
-					}
-				}
-				&.terminator {
-				    background-position: -544px -39px;
-				    width: 74px;
-					&:hover {
-				       background-position: -544px 0;
-	    				width: 74px;
-					}
-				}
-				&.williamson {
-				    background-position: -645px -39px;
-				    width: 55px;
-					&:hover {
-			    	    background-position: -645px 0;
-	   					width: 55px;
-				    }
-				}
-				&.triggerx {
-				    background-position: -726px -39px;
-				    width: 70px;
-					&:hover {
-				        background-position: -726px 0;
-						width: 70px;
-					}
-				}
-				&.marcum {
-				    background-position: -824px -39px;
-				    width: 53px;
-				     &:hover {
-			            background-position: -824px 0;
-	    				width: 53px;
-					}
-				}
-				&.strikemaster {
-				    background-position: -909px -39px;
-				    width: 65px;
-				     &:hover {
-			            background-position: -909px 0;
-						width: 65px;
-					}
-				}
-				&.iceforce {
-				    background-position: -993px -39px;
-				    width: 83px;
-			    	&:hover {
-			            background-position: -993px 0;
-	    				width: 83px;
-					}
-				}
-	   		}
-		}       
-	.custom-table{ 
-		.custom-table-data{
-			display:table-cell;
-		} 
-	}
-	#content{ 
-		.row{ 
-			.colspan2{ 
-				.cell{
-					width: 948px;
-    				margin: 10px 18px;
-    				.contentboxcontent{
-    					margin:16px 20px 30px;
-	    				.thankyoumessage{
-	    					h1{
-	    						text-align:center;
-	    						font-size:24px;
-	    						line-height:24px;
-	    						font-family:$global-font-family;
-	    						font-weight:bold;
-	    						font-variant:normal;
-	    						margin-bottom:13px;
-	    						color:#333;
-	    					}
-	    					.orderdate{
-	    						text-align:center;
-	    						margin-bottom:5px;
-	    						color:#333;
-	    						.value{
-		    						text-align:center;
-		    						font-size:15px;
-		    						line-height:17px;
-		    						font-family:$global-font-family;
-		    						font-weight:bold;
-		    						color:#333;
-		    					}
-	    					}
-	    					.ordernumber{
-	    						text-align:center;
-	    						font-size:15px;
-	    						line-height:17px;
-	    						font-family:$global-font-family;
-	    						font-weight:bold;
-	    						color:#333;
-	    							.value{
-	    								color:#333 !important;
-	    								text-decoration:none;
-	    							}
-	    					}
-	    					.ordermessage-process{
-	    						text-align:center;
-	    						padding:20px 0 23px;
-	    						span{
-	    							font-size:12px;
-		    						line-height:14px;
-		    						font-family:$global-font-family;
-		    						font-style:italic;
-	    						}
-	    					}
-	    					.order-content{
-	    						.impo-things{
-	    							background-color:#dbdbdb;
-	    							border:1px solid #cdcfcf;
-	    							padding:12px 20px 16px;
-	    							margin-bottom:20px;
-	    							border-radius:3px;
-	    							box-sizing:border-box;
-									-moz-box-sizing:border-box;
-									-webkit-box-sizing:border-box;
-    								@media screen and (min-width:960px){
-										height:138px;
-									}
-									h2{
-										font-size:15px;
-			    						line-height:17px;
-			    						font-family:$global-font-family;
-			    						font-weight:bold;
-			    						font-variant:normal;
-			    						text-transform: capitalize;
-			    						padding:0 0 11px 0;
-									}
-									ul{	
-										padding-left:16px;
-										li{
-											list-style:initial;
-											font-size:12px;
-				    						line-height:24px;
-				    						font-family:$global-font-family;
-				    						margin-bottom:6px;
-				    						&:last-child{
-				    							margin-bottom:0;
-				    						}
-				    							span{
-				    								font-style:italic;
-				    							}
-										}
-									}	
-	    						}
-	    					}
-	    				}
-    				}
-    				.order-confirmation-details{
-						.orderpayment{
-							.orderpaymentdetails{
-								.orderpaymentdetailstable{
-									border-bottom: 1px solid #ccc;
-									padding:0 0 26px 0;
-									.custom-table{
-										&.contenttable{
-											border-bottom:none;
-										}
-									}
-									.custom-table-head{ 
-										padding: 3px 0;
-										border-bottom:2px solid $night-rider;
-										font-size:12px;
-										line-height:14px;
-										font-family:$global-font-family;
-										font-weight:bold;
-										display:block;
-										margin-bottom:5px;
-										border-right:none;
-										&.shippingdetails{
-											max-width:240px;
-											margin-right:30px;
-										} 
-										&.billing-address{
-											max-width:280px;
-											margin-right:15px;
-										}
-										&.order-total{
-											max-width:none;
-										}
-									}
-									.custom-table-data{ 
-										padding:4px 0 3px;
-										border-top:none;
-										margin-bottom:26px;
-										&.ordershipping{
-											width:240px;
-											margin-right:30px;
-											div{
-												
-											}
-											.ordershipmentaddress{
-												.name{
-													.address{
-														font-size:12px;
-														line-height:14px;
-														font-family:$global-font-family;
-														text-transform:uppercase;
-														padding:0 0 14px;
-														.miniaddressphone{
-															display:none;
-														}
-													}
-												}	
-											}
-											.trackingnumber {
-												margin-bottom:14px;
-												margin-right:30px;
-												float:left;
-												.value{
-													text-transform:none !important;
-												}
-											}
-											.shippingmethod ,
-											.shippingstatus ,
-											.trackingnumber {
-												margin-bottom:14px;
-												float:left;
-												.label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$nobel;
-													width:100%;
-													float:left;
-													font-weight:normal;
-												}
-												.value{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:100%;
-													float:left;
-												}
-											}	
-										} 
-										&.orderpaymentinstruments{
-											width:280px;
-											margin-right:15px;
-											div{
-												
-											}
-											.mini-address-name{
-												font-size:12px;
-												line-height:14px;
-												font-family:$global-font-family;
-												text-transform: uppercase;
-												font-style:normal;
-												font-weight:normal;
-											}
-											.mini-address-location{
-												address{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:uppercase;
-													padding:0 0 14px;
-													font-style:normal;
-													font-weight:normal;
-													.miniadddrephone{
-														display:none;
-													}
-												}
-											}
-											.label{ 
-												&.paymenttype{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$nobel;
-													width:100%;
-													float:left;
-													font-weight:normal;
-												}
-											}
-											.cc-owner{
-												display:none;
-												.label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:100%;
-													float:left;
-													font-weight:normal;
-												}
-											}
-											.cc-type ,
-											.cc-number{
-												label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:100%;
-													float:left;
-													font-weight:normal;
-												}
-											}
-											.paymenttype{
-												width:100%;
-												font-size:12px;
-												line-height:14px;
-												font-family:$global-font-family;
-												text-transform:capitalize;
-												color:$nobel;
-												float:left;
-												font-weight: normal;
-												&.paypal{
-													margin-top:18px;
-												}
-												.label{
-													margin-top:18px;
-													font-weight: normal !important;
-												}
-											}
-											.paymentamount{
-												.label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:auto;
-													float:left;
-													font-weight:normal;
-												}
-												.value{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:auto;
-													float:left;
-												}
-											}
-											.Order-instruments{
-												width:100%;
-											}
-											.orderpaymentinstrumentsgc{
-												.label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$nobel;
-													width:100%;
-													float:left;
-													font-weight:normal;
-													margin-top:18px;
-												}
-												.paymentamount{
-													.label{
-														margin-top:0;
-														font-size:12px;
-														line-height:14px;
-														font-family:$global-font-family;
-														text-transform:capitalize;
-														color:$night-rider;
-														width:auto;
-														float:left;
-														font-weight:normal;
-													}
-													.value{
-														font-size:12px;
-														line-height:14px;
-														font-family:$global-font-family;
-														text-transform:capitalize;
-														color:$night-rider;
-														width:auto;
-														float:left;
-													}
-												}
-											}	
-										}
-										&.orderpaymentsummary{
-											width:300px;
-											.custom-table-row{
-												width:100%;
-												float:left;
-												margin-bottom:7px;
-												.custom-table-data{ 
-													strike{
-														text-decoration:none;
-														color:#999;
-														.ordersubtotal-strike{
-															color:#999;
-															text-decoration:line-through;
-														}
-													}
-													.discount{ 
-													 	&.yousaved{
-													 		float:right;
-													 		width:100%;
-													 		text-align:right;
-													 		text-transform:lowercase;
-														 } 
-													 }												
-													float:left;
-													padding:0 0 5px;
-													margin-bottom:0;
-													&.first{
-														width:50%;
-														float:left;
-													} 
-													&.last{
-														width:50%;
-														float:left;
-														.value{
-															text-align:right;
-														}
-														span{
-														}
-													}
-												}
-												.label{
-													font-size:12px;
-													line-height:14px;
-													font-family:$global-font-family;
-													text-transform:capitalize;
-													color:$night-rider;
-													width:auto;
-													float:left;
-													font-weight:normal;
-												}
-												.value{
-													font-size: 12px;
-													line-height: 14px;
-													font-family: $global-font-family;
-													text-transform: capitalize;
-													color: $night-rider;
-													width: auto;
-													float: right;
-													font-weight:normal;
-														strike{
-															margin-right:10px;
-															text-decoration:none;
-														}
-														 .discount{ 
-														 	&.yousaved{
-														 		float:right;
-														 		text-transform: lowercase;
-														 	} 
-														 }
-												}
-												&.ordertotal{
-													margin-bottom:5px;
-													.label-total{
-														font-size:15px;
-														font-family:$global-font-family;
-														text-transform:capitalize;
-														color:$night-rider;
-														font-weight:bold;
-													}
-													.value{
-														font-size:15px;
-														font-family:$global-font-family;
-														text-transform:capitalize;
-														color:$night-rider;
-														font-weight:bold;
-													}
-												}
-												&.ordertotalsaving{
-													&.discount{
-														display:table !important;
-														text-align:center;
-														float:none;
-															span{
-																display:table-cell;
-																vertical-align:middle;
-																float:none;
-																font-size:12px;
-																line-height:20px;
-																font-family:$global-font-family;
-																text-transform: uppercase;
-																color:$red;
-																font-weight:normal;
-															}
-													} 
-												}
-												&.ordersalestax{
-													border-bottom:2px solid $border-orderconfirm;
-													margin-bottom:5px;
-														.value-sales{
-															font-size:12px;
-															line-height:14px;
-															font-family:$global-font-family;
-															text-transform:capitalize;
-															color:$night-rider;
-															font-weight:normal;
-															float:right;
-														}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-    				}
-				} 
-			} 
-		}
-	}
+            }
+            &.luhrjensen {
+                background-position: -183px -43px;
+                width: 75px;
+                &:hover {
+                    background-position: -183px -4px;
+                    width: 75px;
+                }
+            }
+            &.storm {
+                background-position: -281px -43px;
+                width: 61px;
+                &:hover {
+                    background-position: -281px -4px;
+                    width: 61px;
+                }
+            }
+            &.sufix {
+                background-position: -380px -42px;
+                width: 44px;
+                &:hover {
+                    background-position: -380px -3px;
+                    width: 44px;
+                }
+            }
+            &.bluefox {
+                background-position: -467px -42px;
+                width: 50px;
+                &:hover {
+                    background-position: -467px -3px;
+                    width: 50px;
+                }
+            }
+            &.terminator {
+                background-position: -544px -39px;
+                width: 74px;
+                &:hover {
+                    background-position: -544px 0;
+                    width: 74px;
+                }
+            }
+            &.williamson {
+                background-position: -645px -39px;
+                width: 55px;
+                &:hover {
+                    background-position: -645px 0;
+                    width: 55px;
+                }
+            }
+            &.triggerx {
+                background-position: -726px -39px;
+                width: 70px;
+                &:hover {
+                    background-position: -726px 0;
+                    width: 70px;
+                }
+            }
+            &.marcum {
+                background-position: -824px -39px;
+                width: 53px;
+                &:hover {
+                    background-position: -824px 0;
+                    width: 53px;
+                }
+            }
+            &.strikemaster {
+                background-position: -909px -39px;
+                width: 65px;
+                &:hover {
+                    background-position: -909px 0;
+                    width: 65px;
+                }
+            }
+            &.iceforce {
+                background-position: -993px -39px;
+                width: 83px;
+                &:hover {
+                    background-position: -993px 0;
+                    width: 83px;
+                }
+            }
+        }
+    }
+    .custom-table {
+        .custom-table-data {
+            display: table-cell;
+        }
+    }
+    #content {
+        .row {
+            .colspan2 {
+                .cell {
+                    width: 948px;
+                    margin: 10px 18px;
+                    .contentboxcontent {
+                        margin: 16px 20px 30px;
+                        .thankyoumessage {
+                            h1 {
+                                text-align: center;
+                                font-size: 24px;
+                                line-height: 24px;
+                                font-family: $global-font-family;
+                                font-weight: bold;
+                                font-variant: normal;
+                                margin-bottom: 13px;
+                                color: #333;
+                            }
+                            .orderdate {
+                                text-align: center;
+                                margin-bottom: 5px;
+                                color: #333;
+                                .value {
+                                    text-align: center;
+                                    font-size: 15px;
+                                    line-height: 17px;
+                                    font-family: $global-font-family;
+                                    font-weight: bold;
+                                    color: #333;
+                                }
+                            }
+                            .ordernumber {
+                                text-align: center;
+                                font-size: 15px;
+                                line-height: 17px;
+                                font-family: $global-font-family;
+                                font-weight: bold;
+                                color: #333;
+                                .value {
+                                    color: #333 !important;
+                                    text-decoration: none;
+                                }
+                            }
+                            .ordermessage-process {
+                                text-align: center;
+                                padding: 20px 0 23px;
+                                span {
+                                    font-size: 12px;
+                                    line-height: 14px;
+                                    font-family: $global-font-family;
+                                    font-style: italic;
+                                }
+                            }
+                            .order-content {
+                                .impo-things {
+                                    background-color: #dbdbdb;
+                                    border: 1px solid #cdcfcf;
+                                    padding: 12px 20px 16px;
+                                    margin-bottom: 20px;
+                                    border-radius: 3px;
+                                    box-sizing: border-box;
+                                    -moz-box-sizing: border-box;
+                                    -webkit-box-sizing: border-box;
+                                    @media screen and (min-width: 960px) {
+                                        height: 138px;
+                                    }
+                                    h2 {
+                                        font-size: 15px;
+                                        line-height: 17px;
+                                        font-family: $global-font-family;
+                                        font-weight: bold;
+                                        font-variant: normal;
+                                        text-transform: capitalize;
+                                        padding: 0 0 11px 0;
+                                    }
+                                    ul {
+                                        padding-left: 16px;
+                                        li {
+                                            list-style: initial;
+                                            font-size: 12px;
+                                            line-height: 24px;
+                                            font-family: $global-font-family;
+                                            margin-bottom: 6px;
+                                            &:last-child {
+                                                margin-bottom: 0;
+                                            }
+                                            span {
+                                                font-style: italic;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .order-confirmation-details {
+                        .orderpayment {
+                            .orderpaymentdetails {
+                                .orderpaymentdetailstable {
+                                    border-bottom: 1px solid #ccc;
+                                    padding: 0 0 26px 0;
+                                    .custom-table {
+                                        &.contenttable {
+                                            border-bottom: none;
+                                        }
+                                    }
+                                    .custom-table-head {
+                                        padding: 3px 0;
+                                        border-bottom: 2px solid $night-rider;
+                                        font-size: 12px;
+                                        line-height: 14px;
+                                        font-family: $global-font-family;
+                                        font-weight: bold;
+                                        display: block;
+                                        margin-bottom: 5px;
+                                        border-right: none;
+                                        &.shippingdetails {
+                                            max-width: 240px;
+                                            margin-right: 30px;
+                                        }
+                                        &.billing-address {
+                                            max-width: 280px;
+                                            margin-right: 15px;
+                                        }
+                                        &.order-total {
+                                            max-width: none;
+                                        }
+                                    }
+                                    .custom-table-data {
+                                        padding: 4px 0 3px;
+                                        border-top: none;
+                                        margin-bottom: 26px;
+                                        &.ordershipping {
+                                            width: 240px;
+                                            margin-right: 30px;
+                                            .ordershipmentaddress {
+                                                .name {
+                                                    .address {
+                                                        font-size: 12px;
+                                                        line-height: 14px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: uppercase;
+                                                        padding: 0 0 14px;
+                                                        .miniaddressphone {
+                                                            display: none;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            .trackingnumber {
+                                                margin-bottom: 14px;
+                                                margin-right: 30px;
+                                                float: left;
+                                                .value {
+                                                    text-transform: none !important;
+                                                }
+                                            }
+                                            .shippingmethod,
+                                            .shippingstatus,
+                                            .trackingnumber {
+                                                margin-bottom: 14px;
+                                                float: left;
+                                                .label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $nobel;
+                                                    width: 100%;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                                .value {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: 100%;
+                                                    float: left;
+                                                }
+                                            }
+                                        }
+                                        &.orderpaymentinstruments {
+                                            width: 280px;
+                                            margin-right: 15px;
+                                            .mini-address-name {
+                                                font-size: 12px;
+                                                line-height: 14px;
+                                                font-family: $global-font-family;
+                                                text-transform: uppercase;
+                                                font-style: normal;
+                                                font-weight: normal;
+                                            }
+                                            .mini-address-location {
+                                                address {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: uppercase;
+                                                    padding: 0 0 14px;
+                                                    font-style: normal;
+                                                    font-weight: normal;
+                                                    .miniadddrephone {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                            .label {
+                                                &.paymenttype {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $nobel;
+                                                    width: 100%;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                            }
+                                            .cc-owner {
+                                                display: none;
+                                                .label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: 100%;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                            }
+                                            .cc-type,
+                                            .cc-number {
+                                                label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: 100%;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                            }
+                                            .paymenttype {
+                                                width: 100%;
+                                                font-size: 12px;
+                                                line-height: 14px;
+                                                font-family: $global-font-family;
+                                                text-transform: capitalize;
+                                                color: $nobel;
+                                                float: left;
+                                                font-weight: normal;
+                                                &.paypal {
+                                                    margin-top: 18px;
+                                                }
+                                                .label {
+                                                    margin-top: 18px;
+                                                    font-weight: normal !important;
+                                                }
+                                            }
+                                            .paymentamount {
+                                                .label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: auto;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                                .value {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: auto;
+                                                    float: left;
+                                                }
+                                            }
+                                            .Order-instruments {
+                                                width: 100%;
+                                            }
+                                            .orderpaymentinstrumentsgc {
+                                                .label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $nobel;
+                                                    width: 100%;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                    margin-top: 18px;
+                                                }
+                                                .paymentamount {
+                                                    .label {
+                                                        margin-top: 0;
+                                                        font-size: 12px;
+                                                        line-height: 14px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: capitalize;
+                                                        color: $night-rider;
+                                                        width: auto;
+                                                        float: left;
+                                                        font-weight: normal;
+                                                    }
+                                                    .value {
+                                                        font-size: 12px;
+                                                        line-height: 14px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: capitalize;
+                                                        color: $night-rider;
+                                                        width: auto;
+                                                        float: left;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        &.orderpaymentsummary {
+                                            width: 300px;
+                                            .custom-table-row {
+                                                width: 100%;
+                                                float: left;
+                                                margin-bottom: 7px;
+                                                .custom-table-data {
+                                                    strike {
+                                                        text-decoration: none;
+                                                        color: #999;
+                                                        .ordersubtotal-strike {
+                                                            color: #999;
+                                                            text-decoration: line-through;
+                                                        }
+                                                    }
+                                                    .discount {
+                                                        &.yousaved {
+                                                            float: right;
+                                                            width: 100%;
+                                                            text-align: right;
+                                                            text-transform: lowercase;
+                                                        }
+                                                    }
+                                                    float: left;
+                                                    padding: 0 0 5px;
+                                                    margin-bottom: 0;
+                                                    &.first {
+                                                        width: 50%;
+                                                        float: left;
+                                                    }
+                                                    &.last {
+                                                        width: 50%;
+                                                        float: left;
+                                                        .value {
+                                                            text-align: right;
+                                                        }
+                                                    }
+                                                }
+                                                .label {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: auto;
+                                                    float: left;
+                                                    font-weight: normal;
+                                                }
+                                                .value {
+                                                    font-size: 12px;
+                                                    line-height: 14px;
+                                                    font-family: $global-font-family;
+                                                    text-transform: capitalize;
+                                                    color: $night-rider;
+                                                    width: auto;
+                                                    float: right;
+                                                    font-weight: normal;
+                                                    strike {
+                                                        margin-right: 10px;
+                                                        text-decoration: none;
+                                                    }
+                                                    .discount {
+                                                        &.yousaved {
+                                                            float: right;
+                                                            text-transform: lowercase;
+                                                        }
+                                                    }
+                                                }
+                                                &.ordertotal {
+                                                    margin-bottom: 5px;
+                                                    .label-total {
+                                                        font-size: 15px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: capitalize;
+                                                        color: $night-rider;
+                                                        font-weight: bold;
+                                                    }
+                                                    .value {
+                                                        font-size: 15px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: capitalize;
+                                                        color: $night-rider;
+                                                        font-weight: bold;
+                                                    }
+                                                }
+                                                &.ordertotalsaving {
+                                                    &.discount {
+                                                        display: table !important;
+                                                        text-align: center;
+                                                        float: none;
+                                                        span {
+                                                            display: table-cell;
+                                                            vertical-align: middle;
+                                                            float: none;
+                                                            font-size: 12px;
+                                                            line-height: 20px;
+                                                            font-family: $global-font-family;
+                                                            text-transform: uppercase;
+                                                            color: $red;
+                                                            font-weight: normal;
+                                                        }
+                                                    }
+                                                }
+                                                &.ordersalestax {
+                                                    border-bottom: 2px solid $border-orderconfirm;
+                                                    margin-bottom: 5px;
+                                                    .value-sales {
+                                                        font-size: 12px;
+                                                        line-height: 14px;
+                                                        font-family: $global-font-family;
+                                                        text-transform: capitalize;
+                                                        color: $night-rider;
+                                                        font-weight: normal;
+                                                        float: right;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.pt_orderconfirmation{
-	.prostaff-header{
-		position:relative;
-		max-width:948px;
-		width:100%;
-		margin:0 auto;
-		.allotment-label{
-			position:absolute;
-			right:9px;
-			top:14px;
-			text-align:right;
-			font-size:12px;
-			line-height:14px;
-			font-family:$global-font-family;
-			text-transform:capitalize;
-			color:$night-rider;
-			width:auto;
-			float:right;
-			background:#f5f5f5;
-			border:1px solid #d9d9d9;
-			border-radius:3px;
-			width:200px;
-			text-align:center;
-			padding:4px 0 3px;
-			color:#999;
-			.prostaff-allowance-balance{
-			}
-			.allowance-amount{}
-		}
-	}
-	.actions{
-		.submission-box{
-			margin-top:10px;
-		}
-	}
-	.submission-box{
-		.button-box{
-			width:33.33%;
-			float:left;
-				&.returnShopping{
-					text-align:left;
-				}
-				&.customerService{
-					text-align: center;
-				}
-				&.printPage{
-					text-align:right;
-				}
-			
-		}
-		a{
-			width: 150px;
-		    height: 40px;
-		    text-align: center;
-		    border: 0 none;
-		    color: #fff;
-		    float: none;
-		    display:inline-block;
-		    cursor: pointer;
-		    font-size: 12px;
-		    line-height:40px;
-		    font-family:$global-font-family;
-		    text-transform: none;
-		    border-radius:2px;
-		    font-weight:normal;
-		    letter-spacing:0;
-		    padding: 0;
-		    margin:0;
-		    box-sizing: border-box;
-		    background: #4e4e4e;
-		    background: -moz-linear-gradient(top,#4e4e4e 0,#2b2b2b 100%);
-		    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#4e4e4e),color-stop(100%,#2b2b2b));
-		    background: -webkit-linear-gradient(top,#4e4e4e 0,#2b2b2b 100%);
-		    background: -o-linear-gradient(top,#4e4e4e 0,#2b2b2b 100%);
-		    background: -ms-linear-gradient(top,#4e4e4e 0,#2b2b2b 100%);
-		    background: linear-gradient(to bottom,#4e4e4e 0,#2b2b2b 100%);
-		    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e',endColorstr='#2b2b2b',GradientType=0);
-		    border: 1px solid $night-rider;
-	    	&:hover{
-	    			text-decoration:none;
-				    background: #2b2b2b;
-				    background: -moz-linear-gradient(top,#2b2b2b 0,#4e4e4e 100%);
-				    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#2b2b2b),color-stop(100%,#4e4e4e));
-				    background: -webkit-linear-gradient(top,#2b2b2b 0,#4e4e4e 100%);
-				    background: -o-linear-gradient(top,#2b2b2b 0,#4e4e4e 100%);
-				    background: -ms-linear-gradient(top,#2b2b2b 0,#4e4e4e 100%);
-				    background: linear-gradient(to bottom,#2b2b2b 0,#4e4e4e 100%);
-				    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2b2b2b',endColorstr='#4e4e4e',GradientType=0);
-	    	}
-		}
-	}
-	.knife-msg ,
-	.vip-msg {
-		padding:0 0 18px;
-			p{
-				padding-bottom:0;
-			}
-	}
+.pt_orderconfirmation {
+    .prostaff-header {
+        position: relative;
+        max-width: 948px;
+        width: 100%;
+        margin: 0 auto;
+        .allotment-label {
+            position: absolute;
+            right: 9px;
+            top: 14px;
+            text-align: right;
+            font-size: 12px;
+            line-height: 14px;
+            font-family: $global-font-family;
+            text-transform: capitalize;
+            color: $night-rider;
+            width: auto;
+            float: right;
+            background: #f5f5f5;
+            border: 1px solid #d9d9d9;
+            border-radius: 3px;
+            width: 200px;
+            text-align: center;
+            padding: 4px 0 3px;
+            color: #999;
+        }
+    }
+    .actions {
+        .submission-box {
+            margin-top: 10px;
+        }
+    }
+    .submission-box {
+        .button-box {
+            width: 33.33%;
+            float: left;
+            &.returnShopping {
+                text-align: left;
+            }
+            &.customerService {
+                text-align: center;
+            }
+            &.printPage {
+                text-align: right;
+            }
+
+        }
+        a {
+            width: 150px;
+            height: 40px;
+            text-align: center;
+            border: 0 none;
+            color: #fff;
+            float: none;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 40px;
+            font-family: $global-font-family;
+            text-transform: none;
+            border-radius: 2px;
+            font-weight: normal;
+            letter-spacing: 0;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background: #4e4e4e;
+            background: -moz-linear-gradient(top, #4e4e4e 0, #2b2b2b 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4e4e4e), color-stop(100%, #2b2b2b));
+            background: -webkit-linear-gradient(top, #4e4e4e 0, #2b2b2b 100%);
+            background: -o-linear-gradient(top, #4e4e4e 0, #2b2b2b 100%);
+            background: -ms-linear-gradient(top, #4e4e4e 0, #2b2b2b 100%);
+            background: linear-gradient(to bottom, #4e4e4e 0, #2b2b2b 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e', endColorstr='#2b2b2b', GradientType=0);
+            border: 1px solid $night-rider;
+            &:hover {
+                text-decoration: none;
+                background: #2b2b2b;
+                background: -moz-linear-gradient(top, #2b2b2b 0, #4e4e4e 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2b2b2b), color-stop(100%, #4e4e4e));
+                background: -webkit-linear-gradient(top, #2b2b2b 0, #4e4e4e 100%);
+                background: -o-linear-gradient(top, #2b2b2b 0, #4e4e4e 100%);
+                background: -ms-linear-gradient(top, #2b2b2b 0, #4e4e4e 100%);
+                background: linear-gradient(to bottom, #2b2b2b 0, #4e4e4e 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2b2b2b', endColorstr='#4e4e4e', GradientType=0);
+            }
+        }
+    }
+    .knife-msg,
+    .vip-msg {
+        padding: 0 0 18px;
+        p {
+            padding-bottom: 0;
+        }
+    }
 }
 
-.pt_orderconfirmation{
-	.couponsection{
-		border-bottom:none;
-		.tablerow{ 
-			&.summary-rowcoupons{
-				border-bottom:1px solid #ccc;
-				td{
-					vertical-align:middle;
-					border-top:none;
-					    padding: 4px 0 3px 0;
-					&.summary-promotion{
-					    width: 211px;
-						text-align: center;
-					}
-					&.summary-description{
-						width: 338px;
-						padding: 10px 0;
-						font-size:15px;
-						font-family:$global-font-family;
-						color:$night-rider;
-						font-weight: bold;
-						.mobileviewQty ,
-						.mobileviewPrice {
-							display:none;
-						}
-					}
-					&.quantitycolumn{
-						width:116px;
-						text-align:center;
-						font-size:15px;
-						font-family:$global-font-family;
-						color:$night-rider;
-						font-weight: bold;
-					}
-					&.itemtotalcolumn{ 
-						&.coupontotal{
-							width:226px;
-							text-align:center;
-							.discount_amount{ 
-								font-size:15px;
-								font-family:$global-font-family;
-							    color: #52a300;
-								text-transform: uppercase;
-								&.discount_amount-prod{
-									font-size:15px;
-									font-family:$global-font-family;
-								    color: #52a300;
-									text-transform: uppercase;
-								}
-							}
-						} 
-					}
-				}
-			}
-		}
-	}
+.pt_orderconfirmation {
+    .couponsection {
+        border-bottom: none;
+        .tablerow {
+            &.summary-rowcoupons {
+                border-bottom: 1px solid #ccc;
+                td {
+                    vertical-align: middle;
+                    border-top: none;
+                    padding: 4px 0 3px 0;
+                    &.summary-promotion {
+                        width: 211px;
+                        text-align: center;
+                    }
+                    &.summary-description {
+                        width: 338px;
+                        padding: 10px 0;
+                        font-size: 15px;
+                        font-family: $global-font-family;
+                        color: $night-rider;
+                        font-weight: bold;
+                        .mobileviewQty,
+                        .mobileviewPrice {
+                            display: none;
+                        }
+                    }
+                    &.quantitycolumn {
+                        width: 116px;
+                        text-align: center;
+                        font-size: 15px;
+                        font-family: $global-font-family;
+                        color: $night-rider;
+                        font-weight: bold;
+                    }
+                    &.itemtotalcolumn {
+                        &.coupontotal {
+                            width: 226px;
+                            text-align: center;
+                            .discount_amount {
+                                font-size: 15px;
+                                font-family: $global-font-family;
+                                color: #52a300;
+                                text-transform: uppercase;
+                                &.discount_amount-prod {
+                                    font-size: 15px;
+                                    font-family: $global-font-family;
+                                    color: #52a300;
+                                    text-transform: uppercase;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.pt_orderconfirmation{
-	.ordershipments{
-		.ordershipment{
-			margin-bottom:18px;
-			.ordershipmenttable {
-				margin:1px 0 0 0;
-				table{
-					border:none;
-				}
-				.tablerow{ 
-					&.sledscatrow{ 
-						background-color: #fffedf;
-    					background-image: none;
-    					.ordertotals_conatiner{
-    						tr{
-    							.ordernotification{
-    								padding:12px 0 0;
-    							#message{ 
-    							    clear: both;
-								    background-repeat: no-repeat;
-								    border-style: solid;
-								    border-width: 1px;
-								    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-								    font-size: 11px;
-								    line-height: 18px;
-    								&.notification-summery {
-    									padding: 3px 1px 1px 17px;
-									    color: #e7ba44;
-									    font-size:12px;
-									    background-color: #fffedf;
-									    background-image: url(../images/icon-alert-e6ba45.png);
-									    background-position: 2px 6px;
-									    margin: 0;
-									    margin-left:10px;
-									    border-width: 0;
-    								} 
-    							} 
-    						
-    					}
-    						}
-    					}
-					}
-				}
-				.mobileheader{
-					display:none;
-				}
-				thead{
-					th{
-					text-align:center;
-					padding: 5px 0;
-					background-color:#eee;
-					font-size:18px;
-					font-family:$global-font-family;
-					color:$night-rider;
-					font-weight:normal;
-					margin:0;
-						&.item{ 
-							&.ordercol1{
-								width:211px;
-							} 
-						}
-						&.itemdetails{ 
-							&.orderco2{
-								width:338px;
-							} 
-						}
-						&.qty{ 
-							&.ordercol3{
-								width:116px;
-							} 
-						}
-						&.price{ 
-							&.ordercol4{
-								width:226px;
-								border-right:none;
-							} 
-						}
-					}
-				}
-				
-				.ordertotals_conatiner{
-					padding:0;
-					border-bottom:1px solid #ccc;
-					tbody{
-						td{
-							border:none;
-							padding:4px 0 3px 0;
-							vertical-align:top;
-							&.item{ 
-								&.ordercol1{
-									width:211px;
-									text-align:center;
-										.prod_image {
-											padding-top:9px;
-											@media screen and (min-width:480px){
-												padding-top:11px;
-												margin-bottom:5px;
-											}
-											float:left;
-											.newFlag{
-												width:100%;
-												margin-top:3px;
-											}
-											.newFlagColorSize{
-												margin-top:3px;
-											}
-											
-											a{	
-												display:block;
-												img{
-												@media screen and (min-width:959px){
-													max-width:64%;
-												}
-													max-width:100%;
-												}
-											}
-										}
-								} 	
-							} 
-							&.details{ 
-								&.ordercol2{
-									width:338px;
-									padding:12px 0 10px;
-									.mobileviewQty ,
-									.mobileviewPrice {
-										display:none;
-									}
-									.product-list-item{
-										padding-left:1px;
-										.name{
-										@media screen and (min-width:480px) {
-											padding-bottom:9px;
-										}
-											padding-bottom:4px;
-										}
-									}
-								} 
-							}
-							&.qty { 
-								&.ordercol3{
-									width:116px;
-									text-align:center;
-									vertical-align:middle;
-								} 
-							}
-							&.price{ 
-								&.ordercol4{
-									width:226px;
-									text-align:center;
-									vertical-align:middle;
-								} 
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+.pt_orderconfirmation {
+    .ordershipments {
+        .ordershipment {
+            margin-bottom: 18px;
+            .ordershipmenttable {
+                margin: 1px 0 0 0;
+                table {
+                    border: none;
+                }
+                .tablerow {
+                    &.sledscatrow {
+                        background-color: #fffedf;
+                        background-image: none;
+                        .ordertotals_conatiner {
+                            tr {
+                                .ordernotification {
+                                    padding: 12px 0 0;
+                                    #message {
+                                        clear: both;
+                                        background-repeat: no-repeat;
+                                        border-style: solid;
+                                        border-width: 1px;
+                                        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                        font-size: 11px;
+                                        line-height: 18px;
+                                        &.notification-summery {
+                                            padding: 3px 1px 1px 17px;
+                                            color: #e7ba44;
+                                            font-size: 12px;
+                                            background-color: #fffedf;
+                                            background-image: url("../images/icon-alert-e6ba45.png");
+                                            background-position: 2px 6px;
+                                            margin: 0;
+                                            margin-left: 10px;
+                                            border-width: 0;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                .mobileheader {
+                    display: none;
+                }
+                thead {
+                    th {
+                        text-align: center;
+                        padding: 5px 0;
+                        background-color: #eee;
+                        font-size: 18px;
+                        font-family: $global-font-family;
+                        color: $night-rider;
+                        font-weight: normal;
+                        margin: 0;
+                        &.item {
+                            &.ordercol1 {
+                                width: 211px;
+                            }
+                        }
+                        &.itemdetails {
+                            &.orderco2 {
+                                width: 338px;
+                            }
+                        }
+                        &.qty {
+                            &.ordercol3 {
+                                width: 116px;
+                            }
+                        }
+                        &.price {
+                            &.ordercol4 {
+                                width: 226px;
+                                border-right: none;
+                            }
+                        }
+                    }
+                }
+
+                .ordertotals_conatiner {
+                    padding: 0;
+                    border-bottom: 1px solid #ccc;
+                    tbody {
+                        td {
+                            border: none;
+                            padding: 4px 0 3px 0;
+                            vertical-align: top;
+                            &.item {
+                                &.ordercol1 {
+                                    width: 211px;
+                                    text-align: center;
+                                    .prod_image {
+                                        padding-top: 9px;
+                                        @media screen and (min-width: 480px) {
+                                            padding-top: 11px;
+                                            margin-bottom: 5px;
+                                        }
+                                        float: left;
+                                        .newFlag {
+                                            width: 100%;
+                                            margin-top: 3px;
+                                        }
+                                        .newFlagColorSize {
+                                            margin-top: 3px;
+                                        }
+
+                                        a {
+                                            display: block;
+                                            img {
+                                                @media screen and (min-width: 959px) {
+                                                    max-width: 64%;
+                                                }
+                                                max-width: 100%;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.details {
+                                &.ordercol2 {
+                                    width: 338px;
+                                    padding: 12px 0 10px;
+                                    .mobileviewQty,
+                                    .mobileviewPrice {
+                                        display: none;
+                                    }
+                                    .product-list-item {
+                                        padding-left: 1px;
+                                        .name {
+                                            @media screen and (min-width: 480px) {
+                                                padding-bottom: 9px;
+                                            }
+                                            padding-bottom: 4px;
+                                        }
+                                    }
+                                }
+                            }
+                            &.qty {
+                                &.ordercol3 {
+                                    width: 116px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                }
+                            }
+                            &.price {
+                                &.ordercol4 {
+                                    width: 226px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.pt_orderconfirmation{
-	.ordertotals_conatiner{
-		.details{ 
-			&.ordercol2{
-				.product-list-item{
-					.name{
-						a{
-							font-size:15px;
-							font-family:$global-font-family;
-							color:$night-rider;
-							font-weight:bold;
-						}
-					}
-					.attribute ,
-					.sku {
-						.label{
-							font-size:12px;
-							font-family:$global-font-family;
-							color:$nobel;
-							font-weight:normal;
-						}
-						.value{
-							font-size:12px;
-							font-family:$global-font-family;
-							color:$night-rider;
-						}
-					}
-				}
-			} 
-		}
-		.qty{ 
-			&.ordercol3{
-				font-size:15px;
-				font-family:$global-font-family;
-				color:$night-rider;
-				font-weight:bold;
-			} 
-		}
-		.price{ 
-			text-align:center;
-			&.ordercol4{
-				.discountprice{
-					.standardprice{
-						font-size:15px;
-						font-family:$global-font-family;
-						color:$night-rider;
-						font-weight:bold;
-					}
-				}
-				.totalprice {
-					font-size:15px;
-					font-family:$global-font-family;
-					color:$night-rider;
-					font-weight:bold;
-						&.cartitemtotalprice{
-							color:$red;
-						}
-				}
-				.bonusitem{
-					font-size:15px;
-					font-family:$global-font-family;
-					color:$light-green;
-					text-transform:uppercase;
-				}
-			} 
-		}
-	}
+.pt_orderconfirmation {
+    .ordertotals_conatiner {
+        .details {
+            &.ordercol2 {
+                .product-list-item {
+                    .name {
+                        a {
+                            font-size: 15px;
+                            font-family: $global-font-family;
+                            color: $night-rider;
+                            font-weight: bold;
+                        }
+                    }
+                    .attribute,
+                    .sku {
+                        .label {
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            color: $nobel;
+                            font-weight: normal;
+                        }
+                        .value {
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            color: $night-rider;
+                        }
+                    }
+                }
+            }
+        }
+        .qty {
+            &.ordercol3 {
+                font-size: 15px;
+                font-family: $global-font-family;
+                color: $night-rider;
+                font-weight: bold;
+            }
+        }
+        .price {
+            text-align: center;
+            &.ordercol4 {
+                .discountprice {
+                    .standardprice {
+                        font-size: 15px;
+                        font-family: $global-font-family;
+                        color: $night-rider;
+                        font-weight: bold;
+                    }
+                }
+                .totalprice {
+                    font-size: 15px;
+                    font-family: $global-font-family;
+                    color: $night-rider;
+                    font-weight: bold;
+                    &.cartitemtotalprice {
+                        color: $red;
+                    }
+                }
+                .bonusitem {
+                    font-size: 15px;
+                    font-family: $global-font-family;
+                    color: $light-green;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
 }

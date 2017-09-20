@@ -11,7 +11,7 @@ var ajax = require('./ajax'),
 //PREVAIL-Added pin to handle Custom GC.
 exports.checkBalance = function (id, callback) {
     // load gift certificate details
-    var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);    
+    var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
     ajax.getJson({
         url: url,
         callback: callback

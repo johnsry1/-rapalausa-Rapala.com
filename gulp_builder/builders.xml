@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="base" basedir="." default="deploy" xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <property name="workingCopy" value="deploy/working" />
+    <property name="zipfile" value="deploy/output/${env.BUILD_NUMBER}.zip" />
+
+    <condition property="have-node" else="false">
+        <and>
+            <available file="${basedir}/node_modules" type="dir"/>
+        </and>
+    </condition>
+
+    <target name="core-modification-warning">
+        <echo>WARNING: A core cartridge has been modified. Typically this is not correct and the modifications should be made in a site or organization cartridge.</echo>
+    </target>
+
+    <target name="check-node" unless="${have-node}">
+        <echo level="info">The node_modules directory was not found.</echo>
+        <echo level="info">Please ensure the node modules are installed in the following directory:</echo>
+        <echo level="info">- ${basedir}</echo>
+        <echo level="info">Using the following command:</echo>
+        <echo level="info">&gt; npm install</echo>
+        <echo level="info">Users on Mac or Linux may need to use sudo:</echo>
+        <echo level="info">&gt; sudo npm install</echo>
+        <fail message="The directory 'node_modules' is missing."/>
+    </target>
+
+    <target name="deploy">
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp deploy
+                --basedir="${basedir}"
+                --buildVersion="${buildVersion}"
+                --cartridgeSuffix="${cartridgeSuffix}"
+                --user="${user}"
+                --password="${password}"
+                --twoFactor="${twoFactor}"
+                --twoFactorp12="${twoFactorp12}"
+                --twoFactorPassword="${twoFactorPassword}"
+                --instances="${instances}"
+                --instanceRoot="${instanceRoot}"
+                --activationInstances="${activationInstances}"
+                --overwriteRelease="${overwriteRelease}"
+            '/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value='export PATH=/usr/local/bin:$PATH; 
+                cd "${basedir}"; 
+                gulp deploy 
+                --basedir="${basedir}"
+                --buildVersion="${buildVersion}"
+                --cartridgeSuffix="${cartridgeSuffix}"
+                --user="${user}"
+                --password="${password}"
+                --twoFactor="${twoFactor}"
+                --twoFactorp12="${twoFactorp12}"
+                --twoFactorPassword="${twoFactorPassword}"
+                --instances="${instances}"
+                --instanceRoot="${instanceRoot}"
+                --activationInstances="${activationInstances}"
+                --overwriteRelease="${overwriteRelease}"
+            '/>
+        </exec>
+        <echo level="info">Deployment done!</echo>
+    </target>
+
+    <target name="deploy-data">
+        <exec executable="cmd" osfamily="windows">
+            <arg value="/c"/>
+            <arg value='gulp deploy-data
+                --basedir="${basedir}"
+                --buildVersion="${buildVersion}"
+                --user="${user}"
+                --password="${password}"
+                --twoFactor="${twoFactor}"
+                --twoFactorp12="${twoFactorp12}"
+                --twoFactorPassword="${twoFactorPassword}"
+                --instances="${instances}"
+                --instanceRoot="${instanceRoot}"
+                --importInstances="${importInstances}"
+                --siteDataFolderName="${siteDataFolderName}"
+                --siteDataProject="${siteDataProject}"
+                --dataBundle="${dataBundle}"
+                --dataReleaseFolderName="${dataReleaseFolderName}"
+                --dataDeltaOnly="${dataDeltaOnly}"
+            '/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix">
+            <arg value="-c"/>
+            <arg value='export PATH=/usr/local/bin:$PATH; cd "${basedir}"; gulp deploy-data
+                --basedir="${basedir}"
+                --buildVersion="${buildVersion}"
+                --user="${user}"
+                --password="${password}"
+                --twoFactor="${twoFactor}"
+                --twoFactorp12="${twoFactorp12}"
+                --twoFactorPassword="${twoFactorPassword}"
+                --instances="${instances}"
+                --instanceRoot="${instanceRoot}"
+                --importInstances="${importInstances}"
+                --siteDataFolderName="${siteDataFolderName}"
+                --siteDataProject="${siteDataProject}"
+                --dataBundle="${dataBundle}"
+                --dataReleaseFolderName="${dataReleaseFolderName}"
+                --dataDeltaOnly="${dataDeltaOnly}"
+            '/>
+        </exec>
+        <echo level="info">Data Deployment Done!</echo>
+    </target>
+
+    <target name="svg" depends="check-node" if="${have-node}">
+        <echo level="info">Running gulp build task for ${os.name} in ${basedir}</echo>
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp svg --basedir="${basedir}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value="export PATH=/usr/local/bin:$PATH; cd ${basedir}; gulp svg --basedir=${basedir}"/>
+        </exec>
+        <echo level="info">SVG build done!</echo>
+    </target>
+
+    <target name="styles" depends="check-node" if="${have-node}">
+        <echo level="info">Running gulp build task for ${os.name} in ${basedir}</echo>
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp styles --basedir="${basedir}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value="export PATH=/usr/local/bin:$PATH; cd ${basedir}; gulp styles --basedir=${basedir}"/>
+        </exec>
+        <echo level="info">Styles build done!</echo>
+    </target>
+
+    <target name="client-javascript" depends="check-node" if="${have-node}">
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp client-javascript --basedir="${basedir}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value="export PATH=/usr/local/bin:$PATH; cd ${basedir}; gulp client-javascript --basedir=${basedir}"/>
+        </exec>
+        <echo level="info">Client javascript build done!</echo>
+    </target>
+
+    <target name="server-javascript" depends="check-node" if="${have-node}">
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp server-javascript --basedir="${basedir}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value="export PATH=/usr/local/bin:$PATH; cd ${basedir}; gulp server-javascript --basedir=${basedir}"/>
+        </exec>
+        <echo level="info">Server-side javascript linting complete!</echo>
+    </target>
+
+    <target name="builder-javascript" depends="check-node" if="${have-node}">
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c"/>
+            <arg value='gulp builder-javascript --basedir="${basedir}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix" failonerror="true">
+            <arg value="-c"/>
+            <arg value="export PATH=/usr/local/bin:$PATH; cd ${basedir}; gulp builder-javascript --basedir=${basedir}"/>
+        </exec>
+        <echo level="info">Builder javascript linting complete!</echo>
+    </target>
+
+    <target name="build-reporting">
+        <exec executable="cmd" osfamily="windows">
+            <arg value="/c"/>
+            <arg value='gulp js --basedir="${workingCopy}" --cartridgeSuffix="${cartridgeSuffix}" --user="${user}" --password="${password}"'/>
+        </exec>
+        <exec executable="/bin/bash" osfamily="unix">
+            <arg value="-c"/>
+            <arg value='export PATH=/usr/local/bin:$PATH; cd "${basedir}"; gulp system-objects-report --basedir="${basedir}"'/>
+        </exec>
+        <echo level="info">Build Reporting Done!</echo>
+    </target>
+
+</project>

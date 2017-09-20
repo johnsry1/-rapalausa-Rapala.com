@@ -37,6 +37,6 @@ function initEmailSubscription() {
     initializeEvents();
 }
 
-exports.init = function() {
+exports.init = function () {
     initEmailSubscription();
 };

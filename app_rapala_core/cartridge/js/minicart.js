@@ -1,7 +1,7 @@
 'use strict';
 
-var util = require('./util'),
-    bonusProductsView = require('./bonus-products-view');
+var util = require('./util');
+    //bonusProductsView = require('./bonus-products-view');
 
 var timer = {
     id: null,
@@ -11,39 +11,41 @@ var timer = {
             delete this.id;
         }
     },
-    start: function (duration, callback) { 
+    start: function (duration, callback) {
         this.id = setTimeout(callback, duration);
     }
 };
 
 var minicart = {
-	url: util.ajaxUrl(Urls.addProduct),
+    url: util.ajaxUrl(Urls.addProduct),
     init: function () {
-    	minicart.reset();
-    	$('.checkoutminicart').slimscroll();
+        minicart.reset();
+        $('.checkoutminicart').slimscroll();
         this.$el = $('#minicart');
-        this.$content = this.$el.find('.minicartcontent'); 
-        jQuery(".minicarticon-cont").on('mouseover touchstart', function (e) { 
-            (minicart.isShow() ? true : minicart.hoverSlide());
-            $('.Custom-tooltip, .cvc_tooltip, .ordergothrough_tooltip').each(function(){
-            	if($('.rapala_device').length == 1){
-            		jQuery(this).tooltipster({
-    					content: jQuery(this).find('.tooltipcontainer').html(),
-    					contentAsHTML: true,
-    					maxWidth: 300,
-    					touchDevices: true,
-    					trigger: 'click'
-    				});
-            	}else{
-            		jQuery(this).tooltipster({
-    					content: jQuery(this).find('.tooltipcontainer').html(),
-    					contentAsHTML: true,
-    					maxWidth: 300,
-    					touchDevices: true
-    				});
-            	} 
-			}); 
-            
+        this.$content = this.$el.find('.minicartcontent');
+        jQuery('.minicarticon-cont').on('mouseover touchstart', function () {
+            if (minicart.isShow()) {
+                minicart.hoverSlide();
+            }
+            $('.Custom-tooltip, .cvc_tooltip, .ordergothrough_tooltip').each(function () {
+                if ($('.rapala_device').length == 1) {
+                    jQuery(this).tooltipster({
+                        content: jQuery(this).find('.tooltipcontainer').html(),
+                        contentAsHTML: true,
+                        maxWidth: 300,
+                        touchDevices: true,
+                        trigger: 'click'
+                    });
+                } else {
+                    jQuery(this).tooltipster({
+                        content: jQuery(this).find('.tooltipcontainer').html(),
+                        contentAsHTML: true,
+                        maxWidth: 300,
+                        touchDevices: true
+                    });
+                }
+            });
+
         });
         // register close button event
         $('.minicartcontent .minicartclose').click(function () {
@@ -52,42 +54,39 @@ var minicart = {
             minicart.close(0);
             $('.rapala_device .minicart-button').removeClass('clicked');
         });
-        $('.minicartcontent').click(function (e) {
+        $('.minicartcontent').click(function () {
             clearTimeout(minicart.timer);
             minicart.timer = null;
         });
-        $('.minicart').mouseenter(function(){
-        	minicart.setminicarheight();
-        	 clearTimeout(minicart.timer);
-             minicart.timer = null;
-                 if($(".minicartcontent").is(':animated')) {
-  		         $(".minicartcontent").stop();
-  		         $(".minicartcontent").css({"opacity":'1','height':'auto'})
-  		         minicart.init();
-             }
+        $('.minicart').mouseenter(function () {
+            minicart.setminicarheight();
+            clearTimeout(minicart.timer);
+            minicart.timer = null;
+            if ($('.minicartcontent').is(':animated')) {
+                $('.minicartcontent').stop();
+                $('.minicartcontent').css({'opacity': '1', 'height': 'auto'});
+                minicart.init();
+            }
         }).mouseleave(function () {
-        	 $('.rapala_device .minicart-button').removeClass('clicked');
+            $('.rapala_device .minicart-button').removeClass('clicked');
             clearTimeout(minicart.timer);
             minicart.timer = null;
             // after a time out automatically close it
             minicart.timer = setTimeout(
                 'minicart.close()', 30);
-            	minicart.close();
+            minicart.close();
         });
-        
-        if($('.mini-cart-product').length > 1) {
-        	$('.minicartcontent').removeClass('lessone');
-        	$('.minicartcontent .slimScrollDiv').removeClass('less');
+
+        if ($('.mini-cart-product').length > 1) {
+            $('.minicartcontent').removeClass('lessone');
+            $('.minicartcontent .slimScrollDiv').removeClass('less');
+        } else {
+            $('.minicartcontent').addClass('lessone');
+            $('.minicartcontent .slimScrollDiv').addClass('less');
         }
-        else {
-        	$('.minicartcontent').addClass('lessone');
-        	$('.minicartcontent .slimScrollDiv').addClass('less');
-        }
-        
 
     },
-    
-    
+
     // returns a boolean if a minicart is visible/shown or hidden
     isShow: function () {
         return jQuery('.minicartcontent').css('display') == 'none' ? false : true;
@@ -95,80 +94,77 @@ var minicart = {
 
     // reset minicart
     reset: function () {
-        jQuery(".minicarticon-cont").unbind("hover");
-        jQuery('.minicart').unbind("mouseenter").unbind(
-            "mouseleave");
+        jQuery('.minicarticon-cont').unbind('hover');
+        jQuery('.minicart').unbind('mouseenter').unbind(
+            'mouseleave');
     },
-    
-    enablehovereffect : function(){
-   	 jQuery(".minicarttotal").mouseenter(function(){
-   		 minicart.setminicarheight();
-   		 //clearTimeout(minicart.timer);
+
+    enablehovereffect: function () {
+        jQuery('.minicarttotal').mouseenter(function () {
+            minicart.setminicarheight();
+            //clearTimeout(minicart.timer);
             //minicart.timer = null;
-   		 	timer.clear();
-            if($(".minicartcontent").is(':animated')) {
-		         $(".minicartcontent").stop();
-		         $(".minicartcontent").css({"opacity":'1','height':'auto'})
-		         minicart.init();
+            timer.clear();
+            if ($('.minicartcontent').is(':animated')) {
+                $('.minicartcontent').stop();
+                $('.minicartcontent').css({'opacity': '1', 'height': 'auto'});
+                minicart.init();
             }
-   		 
-   	 });
-   	 jQuery(".minicarttotal").mouseleave(function(){
-   		 jQuery(".minicartcontent").fadeOut(1000);
-   		 $('.rapala_device .minicart-button').removeClass('clicked');
-   		 
-   	 });
-   	
-   },
+
+        });
+        jQuery('.minicarttotal').mouseleave(function () {
+            jQuery('.minicartcontent').fadeOut(1000);
+            $('.rapala_device .minicart-button').removeClass('clicked');
+
+        });
+
+    },
     /**
      * @function
      * @description Shows the given content in the mini cart
      * @param {String} A HTML string with the content which will be shown
      */
-   // shows the given content in the mini cart
-   show: function (html) {
-       jQuery('#minicart').html(html);
-       // bind all the events
-       minicart.init();
-      if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
-           // do nothing
-           // the hook 'MiniCart.suppressSlideDown()' should have done
-           // the refresh
-       }
-       else {
-           minicart.slide();
-       }
-   },
-    setminicarheight: function (){
-    	var scrollheight = $(".mini-cart-product:eq(0)").height();
-        if($('.mini-cart-product').length > 1){
-        	var scrollheight2 = $(".mini-cart-product:eq(1)").height();
-        	var avgheight = (scrollheight+scrollheight2)/2;
-        	var newscrollheight=((avgheight)+(avgheight-(avgheight/4))) + 20;
-            
-        	$('.slimScrollDiv').css('height',newscrollheight + "px");
-        	$('.checkoutminicart').css('height',newscrollheight + "px");
-        }
-        else{
-        	var heightImg = $('.minibrandcolumn').find('a').height();
-        	var heightImg1 = $('.minibrandcolumn').find('img').height();
-        	
-        	
-        	while(scrollheight < heightImg + heightImg1) { 
-        		heightImg = $('.minibrandcolumn').find('a').height();
-        		scrollheight = $( ".tr_rotation" ).height();
-        		$('.slimScrollDiv').css('height',scrollheight + "px");
-            	
-        		var scrollheight1 = $( ".checkoutminicart" ).height();	
-            	if(scrollheight1 > scrollheight) {
-            		$('.checkoutminicart').css('height',scrollheight1 + "px");
-            	} else {
-            		$('.checkoutminicart').css('height',scrollheight + "px");
-            	}
-        	}
+    // shows the given content in the mini cart
+    show: function (html) {
+        jQuery('#minicart').html(html);
+        // bind all the events
+        minicart.init();
+        if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
+            // do nothing
+            // the hook 'MiniCart.suppressSlideDown()' should have done
+            // the refresh
+        } else {
+            minicart.slide();
         }
     },
- // hook which can be replaced by individual pages/page types (e.g.
+    setminicarheight: function () {
+        var scrollheight = $('.mini-cart-product:eq(0)').height();
+        if ($('.mini-cart-product').length > 1) {
+            var scrollheight2 = $('.mini-cart-product:eq(1)').height();
+            var avgheight = (scrollheight + scrollheight2) / 2;
+            var newscrollheight = ((avgheight) + (avgheight - (avgheight / 4))) + 20;
+
+            $('.slimScrollDiv').css('height', newscrollheight + 'px');
+            $('.checkoutminicart').css('height', newscrollheight + 'px');
+        } else {
+            var heightImg = $('.minibrandcolumn').find('a').height();
+            var heightImg1 = $('.minibrandcolumn').find('img').height();
+
+            while (scrollheight < heightImg + heightImg1) {
+                heightImg = $('.minibrandcolumn').find('a').height();
+                scrollheight = $('.tr_rotation').height();
+                $('.slimScrollDiv').css('height', scrollheight + 'px');
+
+                var scrollheight1 = $('.checkoutminicart').height();
+                if (scrollheight1 > scrollheight) {
+                    $('.checkoutminicart').css('height', scrollheight1 + 'px');
+                } else {
+                    $('.checkoutminicart').css('height', scrollheight + 'px');
+                }
+            }
+        }
+    },
+    // hook which can be replaced by individual pages/page types (e.g.
     // cart)
     suppressSlideDown: function () {
         return false;
@@ -183,8 +179,8 @@ var minicart = {
         this.$content.slideDown('slow');
         // after a time out automatically close it
         timer.start(6000, this.close.bind(this));
-        
-       if(minicart.suppressSlideDown && minicart.suppressSlideDown()) { 
+
+        if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
             return;
         }
         // register close button event
@@ -194,37 +190,37 @@ var minicart = {
             minicart.close(0);
             $('.rapala_device .minicart-button').removeClass('clicked');
         });
-        
-      //Removing padding from the banner if it doesnot contains data/image
-	  	if($('.slot_banner').find('img').length==0){
-	  		$('.slot_banner').css('padding','0 0 0px 0');
-	  	}
-	  	
+
+        //Removing padding from the banner if it doesnot contains data/image
+        if ($('.slot_banner').find('img').length == 0) {
+            $('.slot_banner').css('padding', '0 0 0px 0');
+        }
+
         // register the mouseout events
-        jQuery('.minicartcontent').mouseenter(function (e) {
-        	minicart.setminicarheight();
+        jQuery('.minicartcontent').mouseenter(function () {
+            minicart.setminicarheight();
             clearTimeout(minicart.timer);
             minicart.timer = null;
-            if($(this).is(':animated')) {
-		         $(this).stop();
-		         $(this).css({"opacity":'1','height':'auto'});
-		         minicart.init();
+            if ($(this).is(':animated')) {
+                $(this).stop();
+                $(this).css({'opacity': '1', 'height': 'auto'});
+                minicart.init();
             }
         });
-         $('.minicart').mouseleave(function (){
-        	 $('.rapala_device .minicart-button').removeClass('clicked');
-                clearTimeout(minicart.timer);
-                minicart.timer = null;
-                // after a time out automatically close it
-                minicart.timer = setTimeout(
-                    'minicart.close()', 30);
-                minicart.init();
-                minicart.close();
-            }); 
+        $('.minicart').mouseleave(function () {
+            $('.rapala_device .minicart-button').removeClass('clicked');
+            clearTimeout(minicart.timer);
+            minicart.timer = null;
+            // after a time out automatically close it
+            minicart.timer = setTimeout(
+                'minicart.close()', 30);
+            minicart.init();
+            minicart.close();
+        });
 
         // show the item
-        jQuery('.minicartcontent').slideDown('2000', function(){
-        	 minicart.setminicarheight();
+        jQuery('.minicartcontent').slideDown('2000', function () {
+            minicart.setminicarheight();
         });
         // show("slide",
         // { direction:
@@ -237,27 +233,26 @@ var minicart = {
         jQuery('.summaryproduct').each(
             function () {
                 var $this = jQuery(this);
-               if($this.find(".imageexpanded").is(":visible")) {
-                    $this.find(".hideoncollapse").hide().end()
-                        .find(".attribute").addClass(
-                            "collapsed");
-                    var height = $(this).find('.attributes')
-                        .height();
+                var height = '';
+                if ($this.find('.imageexpanded').is(':visible')) {
+                    $this.find('.hideoncollapse').hide().end()
+                        .find('.attribute').addClass(
+                        'collapsed');
+                    height = $(this).find('.attributes').height();
                     height += $(this).find('.name').height();
                     jQuery(this).find('.image').css({
                         'min-height': height
-                    }) + 30;
+                    });
                 }
-               if($this.find(".imagecollapsed").is(":visible")) {
-                    var height = $(this).find('.attributes')
-                        .height();
+                if ($this.find('.imagecollapsed').is(':visible')) {
+                    height = $(this).find('.attributes').height();
                     height += $(this).find('.name').height() + 30;
                     jQuery(this).find('.image').css({
                         'min-height': height
                     });
                 }
             });
-      
+
         clearTimeout(minicart.timer);
         minicart.timer = null;
 
@@ -268,242 +263,235 @@ var minicart = {
         if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
             googleAnalyticsEvents.miniCart();
         }
-        
+
     },
     hoverSlide: function () {
-        if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
-             return;
-         }
-         // register close button event
-         jQuery('.minicartcontent .minicartclose').click(function () {
-             // reset all the events bindings
-             minicart.reset();
-             minicart.close(0);
-             $('.rapala_device .minicart-button').removeClass('clicked');
-         });
-         
-       //Removing padding from the banner if it doesnot contains data/image
- 	  	if($('.slot_banner').find('img').length==0){
- 	  		$('.slot_banner').css('padding','0 0 0px 0');
- 	  	}
- 	  	
-         // register the mouseout events
-         jQuery('.minicartcontent').mouseenter(function (e) {
-         	minicart.setminicarheight();
-             clearTimeout(minicart.timer);
-             minicart.timer = null;
-             if($(this).is(':animated')) {
-		         $(this).stop();
-		         $(this).css({"opacity":'1','height':'auto'});
-		         minicart.init();
-             }
-         });
-          $('.minicart').mouseleave(function (e){
-         	 $('.rapala_device .minicart-button').removeClass('clicked');
-                 clearTimeout(minicart.timer);
-                 minicart.timer = null;
-                 // after a time out automatically close it
-                 minicart.timer = setTimeout(
-                     'minicart.close()', 30);
-                 minicart.close();
-             }); 
+        if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
+            return;
+        }
+        // register close button event
+        jQuery('.minicartcontent .minicartclose').click(function () {
+            // reset all the events bindings
+            minicart.reset();
+            minicart.close(0);
+            $('.rapala_device .minicart-button').removeClass('clicked');
+        });
 
-         // show the item
-         jQuery('.minicartcontent').slideDown('2000', function(){
-         	 minicart.setminicarheight();
-         });
-         // show("slide",
-         // { direction:
-         // "up" },
-         // 1000);
+        //Removing padding from the banner if it doesnot contains data/image
+        if ($('.slot_banner').find('img').length == 0) {
+            $('.slot_banner').css('padding', '0 0 0px 0');
+        }
 
-         // add the open class to the total
-         jQuery('.minicart .minicarttotal').addClass('open');
+        // register the mouseout events
+        jQuery('.minicartcontent').mouseenter(function () {
+            minicart.setminicarheight();
+            clearTimeout(minicart.timer);
+            minicart.timer = null;
+            if ($(this).is(':animated')) {
+                $(this).stop();
+                $(this).css({'opacity': '1', 'height': 'auto'});
+                minicart.init();
+            }
+        });
+        $('.minicart').mouseleave(function () {
+            $('.rapala_device .minicart-button').removeClass('clicked');
+            clearTimeout(minicart.timer);
+            minicart.timer = null;
+            // after a time out automatically close it
+            minicart.timer = setTimeout(
+                'minicart.close()', 30);
+            minicart.close();
+        });
 
-         jQuery('.summaryproduct').each(
-             function () {
-                 var $this = jQuery(this);
-                if($this.find(".imageexpanded").is(":visible")) {
-                     $this.find(".hideoncollapse").hide().end()
-                         .find(".attribute").addClass(
-                             "collapsed");
-                     var height = $(this).find('.attributes')
-                         .height();
-                     height += $(this).find('.name').height();
-                     jQuery(this).find('.image').css({
-                         'min-height': height
-                     }) + 30;
-                 }
-                if($this.find(".imagecollapsed").is(":visible")) {
-                     var height = $(this).find('.attributes')
-                         .height();
-                     height += $(this).find('.name').height() + 30;
-                     jQuery(this).find('.image').css({
-                         'min-height': height
-                     });
-                 }
-             });
+        // show the item
+        jQuery('.minicartcontent').slideDown('2000', function () {
+            minicart.setminicarheight();
+        });
+        // show("slide",
+        // { direction:
+        // "up" },
+        // 1000);
 
+        // add the open class to the total
+        jQuery('.minicart .minicarttotal').addClass('open');
 
-         // Google Analytics code to track mini cart open.
-         if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
-             googleAnalyticsEvents.miniCart();
-         }
-         
-         jQuery(".minicarttotal").addClass("enablehover");
-         minicart.enablehovereffect();
-         
-         $('#main , #header , #footernew, #footernew .row').unbind('touchstart').bind('touchstart',function(e){
-         	if($(".minicartcontent").is(":visible")) {
-         		var currentLinkLength = $(e.target).closest('.minicartcontent').length;
-         		var minicarttotal = $(e.target).closest('.minicart-button').length;
-         		if (currentLinkLength === 0 && minicarttotal === 0) {
-         			clearTimeout(minicart.timer);
-                     minicart.timer = null;
-                     // after a time out automatically close it
-                     minicart.timer = setTimeout(
-                         'minicart.close()', 30);
-                     minicart.reset();
-                     minicart.close();
-                     minicart.init();
-                     $('.rapala_device .minicart-button').removeClass('clicked');
-         		}
-         		else if (minicarttotal > 0 && cartPageLength == 0) {
-         			
-         			$('.rapala_device .minicart-button').trigger('click');
-         		}
-         	}
-         
-         });
-     },
-     // adds a product to the mini cart
-     // @params
-     // progressImageSrc - source/url of the image to show when the item
-     // is being added to the cart
-     // postdata - form data containing the product information to be
-     // added to mini-cart
-     // callback - call back function/handler
-     add: function (progressImageSrc, postdata, callback) {
-         // get the data of the form as serialized string
-         var postdata = postdata;
+        jQuery('.summaryproduct').each(
+            function () {
+                var $this = jQuery(this);
+                var height = '';
+                if ($this.find('.imageexpanded').is(':visible')) {
+                    $this.find('.hideoncollapse').hide().end()
+                        .find('.attribute').addClass(
+                        'collapsed');
+                    height = $(this).find('.attributes').height();
+                    height += $(this).find('.name').height();
+                    jQuery(this).find('.image').css({
+                        'min-height': height
+                    });
+                }
+                if ($this.find('.imagecollapsed').is(':visible')) {
+                    height = $(this).find('.attributes').height();
+                    height += $(this).find('.name').height() + 30;
+                    jQuery(this).find('.image').css({
+                        'min-height': height
+                    });
+                }
+            });
 
-         // get button reference
-         var addButtons = [];
+        // Google Analytics code to track mini cart open.
+        if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
+            googleAnalyticsEvents.miniCart();
+        }
 
-         // the button to update
-         var addButton = null;
+        jQuery('.minicarttotal').addClass('enablehover');
+        minicart.enablehovereffect();
 
-         // it is an array of buttons, but we need only one all
-         // other combinations are strange so far
-        if(addButtons.length == 1) {
-             addButton = addButtons[0];
-         }
+        $('#main , #header , #footernew, #footernew .row').unbind('touchstart').bind('touchstart', function (e) {
+            if ($('.minicartcontent').is(':visible')) {
+                var currentLinkLength = $(e.target).closest('.minicartcontent').length;
+                var minicarttotal = $(e.target).closest('.minicart-button').length;
+                if (currentLinkLength === 0 && minicarttotal === 0) {
+                    clearTimeout(minicart.timer);
+                    minicart.timer = null;
+                    // after a time out automatically close it
+                    minicart.timer = setTimeout(
+                        'minicart.close()', 30);
+                    minicart.reset();
+                    minicart.close();
+                    minicart.init();
+                    $('.rapala_device .minicart-button').removeClass('clicked');
+                } else if (minicarttotal > 0 && cartPageLength == 0) {
+                    $('.rapala_device .minicart-button').trigger('click');
+                }
+            }
 
-         var previousImageSrc = null;
+        });
+    },
+    // adds a product to the mini cart
+    // @params
+    // progressImageSrc - source/url of the image to show when the item
+    // is being added to the cart
+    // postdata - form data containing the product information to be
+    // added to mini-cart
+    // callback - call back function/handler
+    add: function (progressImageSrc, postdata, callback) {
+        // get the data of the form as serialized string
+        //var postdata = postdata;
 
-         // show progress indicator
-        if(addButton != null) {
-             previousImageSrc = addButton.src;
-             addButton.src = progressImageSrc;
-         }
+        // get button reference
+        var addButtons = [];
 
-         // handles successful add to cart
-         var handlerFunc = function (req) {
-             // hide progress indicator
-            if(addButton != null) {
-                 addButton.src = previousImageSrc;
-             }
+        // the button to update
+        var addButton = null;
 
-             // replace the content
-             jQuery('#minicart').html(req);
+        // it is an array of buttons, but we need only one all
+        // other combinations are strange so far
+        if (addButtons.length == 1) {
+            addButton = addButtons[0];
+        }
 
-             // bind all the events
-             minicart.init();
-             if($('.mini-cart-product').length > 1 ){
-                   $('.checkoutminicart').slimscroll({
-			  			railVisible: true,
-			  		    alwaysVisible: true
-			  		});
-             	$('.minicarttable').find('thead').first().addClass('theadfixedTop');
-             	$('.checkoutminicart').find('.cartordertotals').removeClass('carttotals');
-     	  		$('.checkoutminicart').find('.minicarttable').removeClass('miniwithoutScroll');
-     	  		$('.minicartcontent').find('.minicarttableheader').removeClass('miniwithoutScrollhead');
-     	  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');
-     	  		
-     	  	}
-     	  	else {
-     	  		$('.minicarttable').find('.theadfixedTop').removeClass('theadfixedTop');
-     	  		$('.minicarttable').find('.fixedTop').removeClass('fixedTop');
-     	  		$('.minicart').find('.cartordertotals').addClass('carttotals');
-     	  		$('.checkoutminicart').find('.minicarttable').addClass('miniwithoutScroll');
-     	  		$('.minicartcontent').find('.minicarttableheader').addClass('miniwithoutScrollhead');
-     	  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');    	  		
-             }
-             $(".minicarttable .mini-cart-product:last-child").find('.mini-cart-product').css('border','0px');
-             
-             if($('body').hasClass('rapala_device')){
-             	$(".checkoutminicart").find(".minicarttable").removeClass("miniwithoutScroll");
-             	// $(".minicarttable .tr_rotation:last-child").find('.minirow').css('border','1px');
-             	 $('.minicarttable').find('thead').first().addClass('theadfixedTop');
-             	 $(".minicarttable .mini-cart-product:last-child").find('.mini-cart-product').css('border','0px');
-             	 $(".minicarttableheader").css('border-bottom','1px solid #ccc');
-             }
-             
-             
-            if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
-                 // do nothing
-                 // the hook 'MiniCart.suppressSlideDown()' should have
-                 // done the refresh
-             }
-             else {
-                 minicart.slide();
-                 minicart.setminicarheight();	
-                if(callback)
-                     callback();
-             }
-             $("#pdpMain .addtocartconfirm-tooltip").fadeIn(400).show()
-                 .delay(1500).fadeOut(400);
-             // fire the BonusDiscountLineItemCheck event so we can check
-             // if there is a bonus discount line item
-             jQuery(document).trigger(
-                 jQuery.Event("BonusDiscountLineItemCheck"));
-         }
+        var previousImageSrc = null;
 
-         // handles add to cart error
-         var errFunc = function (req) {
-             // hide progress indicator
-            if(addButton != null) {
-                 addButton.src = previousImageSrc;
-             }
-         }
+        // show progress indicator
+        if (addButton != null) {
+            previousImageSrc = addButton.src;
+            addButton.src = progressImageSrc;
+        }
 
-         // closes a previous mini cart
-         minicart.close();
+        // handles successful add to cart
+        var handlerFunc = function (req) {
+            // hide progress indicator
+            if (addButton != null) {
+                addButton.src = previousImageSrc;
+            }
 
-         // add the product
-         jQuery.ajax({
-             type: "POST",
-             url: minicart.url,
-             cache: true,
-             data: postdata,
-             success: handlerFunc,
-             error: errFunc
-         });
-     },
+            // replace the content
+            jQuery('#minicart').html(req);
 
-     // closes the mini cart with given delay
-     close: function (delay) {
-        if(minicart.timer != null || delay == 0) {
-             clearTimeout(minicart.timer);
-             minicart.timer = null;
-             jQuery('.minicartcontent').fadeOut(1000);
-             // hide with "slide" causes to fire mouse enter/leave events
-             // sometimes infinitely thus changed it to fadeOut
-             // add the open class to the total
-             jQuery('.minicart .minicarttotal').removeClass('open');
-             jQuery('.minicartcontent .minicartclose').unbind("click");
-         }
-     }
+            // bind all the events
+            minicart.init();
+            if ($('.mini-cart-product').length > 1) {
+                $('.checkoutminicart').slimscroll({
+                    railVisible: true,
+                    alwaysVisible: true
+                });
+                $('.minicarttable').find('thead').first().addClass('theadfixedTop');
+                $('.checkoutminicart').find('.cartordertotals').removeClass('carttotals');
+                $('.checkoutminicart').find('.minicarttable').removeClass('miniwithoutScroll');
+                $('.minicartcontent').find('.minicarttableheader').removeClass('miniwithoutScrollhead');
+                $('.minicarttableheader').css('border-bottom', '1px solid #ccc');
+
+            } else {
+                $('.minicarttable').find('.theadfixedTop').removeClass('theadfixedTop');
+                $('.minicarttable').find('.fixedTop').removeClass('fixedTop');
+                $('.minicart').find('.cartordertotals').addClass('carttotals');
+                $('.checkoutminicart').find('.minicarttable').addClass('miniwithoutScroll');
+                $('.minicartcontent').find('.minicarttableheader').addClass('miniwithoutScrollhead');
+                $('.minicarttableheader').css('border-bottom', '1px solid #ccc');
+            }
+            $('.minicarttable .mini-cart-product:last-child').find('.mini-cart-product').css('border', '0px');
+
+            if ($('body').hasClass('rapala_device')) {
+                $('.checkoutminicart').find('.minicarttable').removeClass('miniwithoutScroll');
+                // $(".minicarttable .tr_rotation:last-child").find('.minirow').css('border','1px');
+                $('.minicarttable').find('thead').first().addClass('theadfixedTop');
+                $('.minicarttable .mini-cart-product:last-child').find('.mini-cart-product').css('border', '0px');
+                $('.minicarttableheader').css('border-bottom', '1px solid #ccc');
+            }
+
+            if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
+                // do nothing
+                // the hook 'MiniCart.suppressSlideDown()' should have
+                // done the refresh
+            } else {
+                minicart.slide();
+                minicart.setminicarheight();
+                if (callback) {
+                    callback();
+                }
+            }
+            $('#pdpMain .addtocartconfirm-tooltip').fadeIn(400).show()
+                .delay(1500).fadeOut(400);
+            // fire the BonusDiscountLineItemCheck event so we can check
+            // if there is a bonus discount line item
+            jQuery(document).trigger(jQuery.Event('BonusDiscountLineItemCheck'));
+        };
+
+        // handles add to cart error
+        var errFunc = function () {
+            // hide progress indicator
+            if (addButton != null) {
+                addButton.src = previousImageSrc;
+            }
+        };
+
+        // closes a previous mini cart
+        minicart.close();
+
+        // add the product
+        jQuery.ajax({
+            type: 'POST',
+            url: minicart.url,
+            cache: true,
+            data: postdata,
+            success: handlerFunc,
+            error: errFunc
+        });
+    },
+
+    // closes the mini cart with given delay
+    close: function (delay) {
+        if (minicart.timer != null || delay == 0) {
+            clearTimeout(minicart.timer);
+            minicart.timer = null;
+            jQuery('.minicartcontent').fadeOut(1000);
+            // hide with "slide" causes to fire mouse enter/leave events
+            // sometimes infinitely thus changed it to fadeOut
+            // add the open class to the total
+            jQuery('.minicart .minicarttotal').removeClass('open');
+            jQuery('.minicartcontent .minicartclose').unbind('click');
+        }
+    }
 };
 
 module.exports = minicart;

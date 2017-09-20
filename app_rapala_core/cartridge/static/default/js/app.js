@@ -43,17 +43,17 @@ function initializeEvents() {
         $(".shipping-address-field-section").removeClass("hide");
         $(".selected-shipping-address").addClass("hide");
         $(".new-address-field").addClass("hide");
-         
+
         /*jQuery('html, body').animate({
             scrollTop: $('#navigation').position().top
         }, 500);*/
     });
     $cache.validatoionDialog.on('click', '#suggested-address-edit-1', function () {
-        
+
         $(".shipping-address-field-section").removeClass("hide");
         $(".selected-shipping-address").addClass("hide");
     });
-	
+
 
     $cache.validatoionDialog.on('click', '#ship-to-original-address', function () {
 
@@ -271,7 +271,7 @@ function resetPasswordEvents() {
 		 $(this).closest('.formfield').find('input') .val("");
 		 $(this).closest('.formfield').find('a.clearbutton').hide();
 		 $(this).closest(".formfield").find("span.logerror , .existing_register").hide();
-		 
+
    });
 	// Attach keypress handler to input box.  Submit form if user presses 'enter' key.
 	$("body").find(".PasswordResetDialog input.resetold").keypress(function(e) {
@@ -300,7 +300,7 @@ function resetPasswordEvents() {
           e.preventDefault();
           dialog.submit($submit.attr('name'));
           setTimeout(function(){
-        	  resetPasswordEvents();  
+        	  resetPasswordEvents();
           },1300);
 	});
 	validator.init();
@@ -362,7 +362,7 @@ function initializeEvents() {
      * initialize search suggestions, pending the value of the site preference(enhancedSearchSuggestions)
      * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
      * */
-    
+
     /*** minicart hide ***/
     var minicartlink= $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
     minicartlink.on("click",function() {
@@ -370,10 +370,10 @@ function initializeEvents() {
 	    	$('#minicart .minicartcontent').hide();
 	    }
     });
-     
+
     var $searchContainer = $('.site-suggestion-section');
     searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
-    
+
     $('#password-reset').on('click', function (e) {
         e.preventDefault();
         dialog.open({
@@ -389,13 +389,13 @@ function initializeEvents() {
             }
         });
     });
-    
+
     // print handler
     $('.print-page').on('click', function () {
         window.print();
         return false;
     });
-    
+
         $('.mobile-banner-stuff').on('click', function (e) {
         	e.preventDefault();
         	if($('.calloutexist').length > 0) {
@@ -419,16 +419,16 @@ function initializeEvents() {
     	$(this).parents('.dialogBanner').find('.ui-dialog-titlebar-close').trigger('click');
 	});
     //footer change region event
-	$(".change-region-footer").hover(function(m) {
+	$(".change-region-footer").hover(function() {
         $(".domainswitch").show();
-    }, function(m) {
+    }, function() {
         $(".domainswitch").hide();
     });
-    $(".domainswitch").hover(function(m) {
+    $(".domainswitch").hover(function() {
         if (!clicked) {
             $(this).show();
         }
-    }, function(m) {
+    }, function() {
         if (!clicked) {
             $(this).hide();
         }
@@ -463,7 +463,7 @@ function initializeEvents() {
                            if($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()){
                         	   $('.emailinput.emailfooter').addClass('footerplace');
                            }
-                            
+
                         }
                     });
                 $input
@@ -500,7 +500,7 @@ function initializeEvents() {
                                     });
                         });
             });
-    
+
     //
     $("body").on("submit","#customercontactus", function (e) {
     	e.preventDefault();
@@ -518,7 +518,7 @@ function initializeEvents() {
             if (data.indexOf('ajax') === -1) {
                 data += '&format=ajax';
             }
-            
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -528,8 +528,8 @@ function initializeEvents() {
                 $('.column.colspan2').empty().html(response);
             });
     	}
-	}); 
-    
+	});
+
     $('.first-level').on('click',function() {
     	$(this).children('.second-level').toggle();
     	$(this).toggleClass('list-active');
@@ -594,7 +594,7 @@ function initializeEvents() {
 						$('#dialog-container #PasswordResetForm .passwordemail').prepend('<div class="Emaillabel">Enter your email address to get reset password instructions sent to your inbox.</div>');
 				}
 			}, 2000);
-	  	}	
+	  	}
   	});
     $(window).resize(function(){
     	if( $(window).width() > 960 ) {
@@ -614,7 +614,7 @@ function initializeEvents() {
     		$('.toggle').off("click").on("click",function (e) {
     			e.preventDefault(); //JIRA PREV-90 : When click on advance search from gift registry login page, focus is happening towards top of the page.
     			$(this).toggleClass('expanded').next('ul, .toggle-content').toggle();
-    		}); 
+    		});
     	}
     }
     // toggle for customer service FAQ
@@ -626,7 +626,7 @@ function initializeEvents() {
     	 	return false;
     	});
     }
-    
+
     $('#footernew .footer-main #linkheading').click(function () {
 	$(this).toggleClass('show');
 	$(this).closest('div').toggleClass('expanded');
@@ -643,7 +643,7 @@ function initializeEvents() {
 		$('#follow_us').removeClass('new');
 	}
 	});
- 
+
     function isTouchDevice() {
         return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
     }
@@ -659,18 +659,18 @@ function initializeEvents() {
     $(window).bind('scroll resize', function(){
     	if($('.rapala_device').length > 0 && $(window).width() < 768){
     		if( $('#footerEmailDialog.ui-dialog-content').length > 0){
-    			$('.ui-dialog').css({'left':($(document).width() - $('.ui-dialog').width())/2, 'top':'100px'});   
+    			$('.ui-dialog').css({'left':($(document).width() - $('.ui-dialog').width())/2, 'top':'100px'});
     		}else{
     			$('.ui-dialog').css({'left':($(document).width() - $('.ui-dialog').width())/2});
     		}
-  		
+
     	}
 	});
 
     $(".tabsHeader").bind("click", function(event) {
     	var currentItem = $(this);
     	currentItem.closest('.mobile-tabs-section').toggleClass('active');
-    }); 
+    });
 
     $(document).on("click", ".upgradenow-link" ,function(e){
         $('html, body').animate({
@@ -684,19 +684,19 @@ function initializeEvents() {
         $parentLi.toggleClass('active');
         $(e.target).toggleClass('fa-chevron-right fa-chevron-up active');
     });
-     
+
     $("body").on("click",".dialog-close", function(){
     	$(this).closest(".ui-dialog").find(".ui-dialog-titlebar-close").trigger("click");
     });
-    if ($(window).width() > 959){	
+    if ($(window).width() > 959){
 		var item = $('.sign-up-blk'),
 			clickItem = item.find('.userlogin');
-		
+
 		clickItem.on('click',function () {
 			return false;
 		});
 	}
-    
+
     $('.email-subscribe').submit(function (e) {
     	e.preventDefault();
     	var $form = $(this);
@@ -713,7 +713,7 @@ function initializeEvents() {
             if (data.indexOf('ajax') === -1) {
                 data += '&format=ajax';
             }
-       
+
     		dialog.open({
                 url: url,
                 data: data,
@@ -727,7 +727,7 @@ function initializeEvents() {
            });
     	}
 	});
-    
+
 }
 /**
  * @private
@@ -761,8 +761,8 @@ var pages = {
 
 var app = {
     init: function () {
-    	 if(typeof geoip_country_code == 'function') {
-             var IP_GeoCode = geoip_country_code();
+    	 if(typeof geoipCountryCode == 'function') {
+             var IP_GeoCode = geoipCountryCode();
              var allowed_countries = $(".allowed-countries").text();
             if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined") {
                  allowed_countries = "US";
@@ -786,12 +786,12 @@ var app = {
                  $(".handle-non-us-vh").addClass("vhide");
                  $('.subscribe').prop('disabled', true);
                  setTimeout(function(){
-                	 $('.product-promo, .newrecommendation').css({"display":'none'}); 
+                	 $('.product-promo, .newrecommendation').css({"display":'none'});
                  },5000);
 
              }
          }
-     	   	
+
         // Check TLS status if indicated by site preference
         var checkTLS = SitePreferences.CHECK_TLS;
         if(checkTLS == true){
@@ -799,7 +799,7 @@ var app = {
             if((tls_broswer.name == "Chrome" && tls_broswer.version < 22) || (tls_broswer.name == "Firefox" && tls_broswer.version < 27) || (tls_broswer.name == "Safari" && tls_broswer.version < 5) || (tls_broswer.name == "MSIE" && tls_broswer.version < 11)){
             	if(tls_broswer.name == "MSIE"){
     		    	 tls_broswer.name = "Internet Explorer";
-    		      } 
+    		      }
             	$('.browser-compatibility-alert').removeClass('hide');
          	    $('.browser-compatibility-alert p').find('.browser_version').text(" " + tls_broswer.name + " " + tls_broswer.version+".");
             }
@@ -859,12 +859,12 @@ jQuery(function(event){
 			} else {
 				window.location.href=$this.find('a').attr('href');
 			}
-		});       
-});	
+		});
+});
 
 // initialize app
 $(document).ready(function () {
-    app.init();  
+    app.init();
 });
 
 },{"./browsera":5,"./captcha":6,"./cookieprivacy":8,"./countries":9,"./dialog":10,"./dialogify":11,"./headerinit":14,"./jquery-ext":15,"./megamenu":16,"./minicart":17,"./page":18,"./pages/account":19,"./pages/cart":20,"./pages/checkout":24,"./pages/compare":27,"./pages/international":28,"./pages/product":30,"./pages/rapalainsider":32,"./pages/registry":33,"./pages/search":34,"./pages/storefront":35,"./pages/storelocator":36,"./pages/wishlist":37,"./progress":39,"./searchplaceholder":41,"./searchsuggest":42,"./tls":45,"./tooltip":46,"./uievents":47,"./util":48,"./validator":49}],4:[function(require,module,exports){
@@ -1926,7 +1926,7 @@ var ajax = require('./ajax'),
 //PREVAIL-Added pin to handle Custom GC.
 exports.checkBalance = function (id, callback) {
     // load gift certificate details
-    var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);    
+    var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
     ajax.getJson({
         url: url,
         callback: callback
@@ -1996,21 +1996,21 @@ var uievents = require('./uievents'),
 
 var $con = $('body');
 var appGlobal = {
-	global_timer: 0
+	globalTimer: 0
 };
 var headerEvents = {
 		initializeEvent: function() {
 			$("body").find("input, select.input-select").focusin(function() {
 				$(this).closest(".formfield").removeClass('inputlabel');
 				$(this).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
-				$(this).removeClass('errorclient');	
-				$(this).closest('.formfield').find('.logerror , .existing_register').css('display','none');		
+				$(this).removeClass('errorclient');
+				$(this).closest('.formfield').find('.logerror , .existing_register').css('display','none');
 			});
 		  if($('.logincustomers').length > 0 ){
 				 var crrobj=$(this).find('.formfield  .logerror');
 				$(crrobj).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
 			}
-			
+
 			 $('.privacy-policy').on('click', function (e) {
 		        e.preventDefault();
 		        dialog.open({
@@ -2020,7 +2020,7 @@ var headerEvents = {
 		            }
 		        });
 		    });
-			//label text color change on submit		
+			//label text color change on submit
 			if( $('.account-logs').length > 0 ||  $('.new-register').length > 0  ||  $('.wish-logs').length > 0 ||  $('.createan-account').length > 0  || $('.headercustomerinfo').length > 0  ||  $('.ui-login').length > 0 || $('.passwordreset').length > 0 ){
 				$('.formactions button').click(function(){
 					$('span.existing_register').hide();
@@ -2033,10 +2033,10 @@ var headerEvents = {
 							$(this).closest('.formfield').find('.label .labeltext').removeClass('inputlabel');
 							$(this).closest('.formfield').find('.label .requiredindicator').removeClass('inputlabel');
 						}
-					});	 
+					});
 				});
 			}
-			//login & wish list validations		
+			//login & wish list validations
 			if( $('.account-logs').length > 0 ||  $('.new-register').length > 0  ||  $('.wish-logs').length > 0 ||  $('.createan-account').length > 0  || $('.headercustomerinfo').length > 0  ||  $('.ui-login').length > 0 ){
 				 $('a.clearbutton').click(function(){
 					 $(this).closest('.formfield').find('input') .val("");
@@ -2047,18 +2047,18 @@ var headerEvents = {
 					 $(this).closest('.formfield ').find('.form-row').removeClass('inputlabel');
 					 $(this).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
 					 $(this).closest(".formfield").find("span.logerror , .existing_register").hide();
-					 
+
 		        });
 		      }
 			$(".ui-login .sign-up-blk > a").on('mouseenter click',function(e){
 				if($(window).width() < 960) {
 					return true;
-					
+
 				} else {
 					if(e.type == 'click' && $('.accountcontent').is(':visible')){
-						clearTimeout(appGlobal.global_timer);
-						appGlobal.global_timer == 0;
-						$('.accountcontent').hide();	
+						clearTimeout(appGlobal.globalTimer);
+						appGlobal.globalTimer == 0;
+						$('.accountcontent').hide();
 						$('.headermask').hide();
 						$('.confirmationcontainer').hide();
 							return false;
@@ -2071,24 +2071,24 @@ var headerEvents = {
 					$('.sign-up-blk').addClass('js-active');
 					if(!$(this).closest('.ui-login').find('.header-sign-in').is(':visible')){
 						headerEvents.accountContPos($(".ui-login .sign-up-blk > a"),$(this).closest('.ui-login').find('.header-sign-in'));
-						$(this).closest('.ui-login').find('.header-sign-in').show();	
+						$(this).closest('.ui-login').find('.header-sign-in').show();
 					}
 					$('.headermask').show();
 					/*if(appGlobal.util.readCookie("emailId")){
 						$('.header-sign-in.accountcontent .guestemail').val(appGlobal.util.readCookie("emailId"));
 						$('.header-sign-in.accountcontent .login_password').removeAttr('placeholder').val('');
 					}*/
-					clearTimeout(appGlobal.global_timer);
-					appGlobal.global_timer == 0;
-					appGlobal.global_timer = setTimeout(function(){
-						$('.accountcontent').hide();	
+					clearTimeout(appGlobal.globalTimer);
+					appGlobal.globalTimer == 0;
+					appGlobal.globalTimer = setTimeout(function(){
+						$('.accountcontent').hide();
 					$('.headermask').hide();
 					$('.headercustomerinfo').find('.js-active').removeClass('js-active');
 					}, 5000);
 					$('.confirmationcontainer').hide();
 				}
-				
-			});  
+
+			});
 			  	$(".signingin").click(function(e){
 					e.preventDefault();
 					$('.accountcontent').hide();
@@ -2105,36 +2105,36 @@ var headerEvents = {
 					$('.header-sign-in .signin_main .loginfail.errormessage').hide();
 					$('.headermask').addClass('no-hide').show();
 				});
-		 	  	
+
 		 		$(".sign-message a, .ExistedUser-error .createaccount").click(function(e){
 		 			e.preventDefault();
 		 			$('.accountcontent').hide();
-		 			$(this).closest('.ui-login').find('.header-create').show(); 
+		 			$(this).closest('.ui-login').find('.header-create').show();
 		 			var validator = $(this).closest('form').validate();
 		 			if(validator.element($(this).closest('form').find('.guestemail'))){
 		 				$('.accountcontent .guestemail').val($(this).closest('.accountcontent').find('.guestemail').val());
 		 				$('.accountcontent .guestemail').removeClass('error');
 		 				$('.accountcontent .guestemail').next('span.error').remove();
 		 				$('.accountcontent .guestemail').addClass('click-mark valid');
-		 			} 
+		 			}
 		 			headerEvents.accountContPos($(".ui-login .sign-up-blk > a"),$(this).closest('.ui-login').find('.header-create'));
 		 			$('.headermask').show();
 		 			$('.ExistedUser-error').hide();
-		 			clearTimeout(appGlobal.global_timer);
-		 			appGlobal.global_timer == 0;
-		 			appGlobal.global_timer = setTimeout(function(){
-		 				$('.accountcontent').hide();	
+		 			clearTimeout(appGlobal.globalTimer);
+		 			appGlobal.globalTimer == 0;
+		 			appGlobal.globalTimer = setTimeout(function(){
+		 				$('.accountcontent').hide();
 		 				$('.headermask').hide();
 		 				$('.headercustomerinfo').find('.js-active').removeClass('js-active');
 		 			}, 5000);
 		 		});
-		 	  	
-		 	  	
+
+
 		 		$(".forgot-password a").click(function(e){
 		 			e.preventDefault();
 		 			$('.accountcontent').hide();
 		 			$(".header-forgot-pwd span.reset_email_error").hide();
-		 			$(this).closest('.ui-login').find('.header-forgot-pwd').show(); 
+		 			$(this).closest('.ui-login').find('.header-forgot-pwd').show();
 		 			headerEvents.accountContPos($(".ui-login .sign-up-blk > a"),$(this).closest('.ui-login').find('.header-forgot-pwd'));
 		 			$('.headermask').show();
 		 			var validator = $(this).closest('form').validate({
@@ -2146,28 +2146,28 @@ var headerEvents = {
 		 				$('.accountcontent .guestemail').next('span.error').remove();
 		 				$('.accountcontent .guestemail').addClass('click-mark valid');
 		 			}
-		 			clearTimeout(appGlobal.global_timer);
-		 			appGlobal.global_timer == 0;
-		 			appGlobal.global_timer = setTimeout(function(){
-		 				$('.accountcontent').hide();	
+		 			clearTimeout(appGlobal.globalTimer);
+		 			appGlobal.globalTimer == 0;
+		 			appGlobal.globalTimer = setTimeout(function(){
+		 				$('.accountcontent').hide();
 		 				$('.headermask').hide();
 		 				$('.headercustomerinfo').find('.js-active').removeClass('js-active');
 		 			}, 5000);
 		 		});
-		     	
+
 		 		$('.accountcontent').mouseenter(function(){
 		     		$('.headermask').removeClass('no-hide');
 		     		$('.headermask').show();
 		     		$('.confirmationcontainer').hide();
 		     		$('.sign-up-blk').addClass('js-active');
-		     		clearTimeout(appGlobal.global_timer);
-		     		appGlobal.global_timer == 0;
+		     		clearTimeout(appGlobal.globalTimer);
+		     		appGlobal.globalTimer == 0;
 		     	});
-		     	
+
 		 		$(".headermask").click(function(e){
 		 			headerEvents.maskEvent(e);
 		 	  	});
-		 		
+
 		 		$(".headermask").mouseenter(function(e){
 		 			headerEvents.maskEvent(e);
 		 	  	});
@@ -2176,8 +2176,8 @@ var headerEvents = {
 		 			$('.headermask').show();
 		 			$('.confirmationcontainer').hide();
 		 			$('.sign-up-blk').addClass('js-active');
-		 			clearTimeout(appGlobal.global_timer);
-		 			appGlobal.global_timer == 0;
+		 			clearTimeout(appGlobal.globalTimer);
+		 			appGlobal.globalTimer == 0;
 		 		});
 		 	   $('.user-account').on('click', function (e) {
 		 	        e.preventDefault();
@@ -2203,13 +2203,13 @@ var headerEvents = {
 		 		});
 		 		$(".sample-section").click(function(){
 		 			if(!$(this).find('.sample_mail_main').is(':visible')){
-		 				$(this).find('.sample_mail_main').slideDown(500);  
+		 				$(this).find('.sample_mail_main').slideDown(500);
 		 			}
-		 		});  
-		 		$(".signupfor-email .seesamples").click(function(e){
-		 			$(this).closest('.signupfor-email').find('.sample_mail_main').slideToggle(500); 
 		 		});
-		 		
+		 		$(".signupfor-email .seesamples").click(function(e){
+		 			$(this).closest('.signupfor-email').find('.sample_mail_main').slideToggle(500);
+		 		});
+
 		 		$("body").click(function(event){
 		 			if (!$(event.target).is(".signupfor-email .seesamples") && (!$(event.target).is(".create_email_checkbox .seesamples"))) {
 		 				$('.sample_mail_main').slideUp(500);
@@ -2219,29 +2219,29 @@ var headerEvents = {
 		 		$('.ui-login input.required').blur(function(){
 		 			if($(this).hasClass("valid")){ $(this).addClass("click-mark");}
 		 			else{$(this).removeClass("click-mark");}
-		 		});	  
-		 	  	
+		 		});
+
 		 		$('.back-link, .signingin').click(function(e){
 		 			$('.accountcontent').hide();
-		 			$(this).closest('.ui-login').find('.header-sign-in').show(); 
+		 			$(this).closest('.ui-login').find('.header-sign-in').show();
 		 			$('.header-sign-in .signin_main .loginfail.errormessage').hide();
 		 		});
-		 		
+
 		 		$('.forgot_create').click(function(e){
 		 			$('.header-forgot-pwd').hide();
-		 			$('.header-create').show(); 
+		 			$('.header-create').show();
 		 			$('.header-create .errormessage').hide();
 		 	  	});
-		 		
+
 		 		$('.loggeduser a, .headercustomerinfo .second_name').on('mouseenter', function(e){
 		 			e.preventDefault();
 		 			if($('.rapala_device').length == 0){
 		 				$('.accountcontent').hide();
 		 				headerEvents.accountContPos($('.headercustomerinfo .loggeduser a'),$('.user-info'));
-		 			$('.user-info').show();	
+		 			$('.user-info').show();
 		 			}
 		 		});
-		 		
+
 		 		$('.rapala_device .loggeduser a,.headercustomerinfo .second_name').on('click', function(e){
 		 			e.preventDefault();
 		 			$('.accountcontent').hide();
@@ -2264,7 +2264,7 @@ var headerEvents = {
 					if (str.process !== "sign-in") {
 						return;
 					}
-					
+
 					if (str.status === "success") {
 						if (typeof str.email === "string") {
 							headerEvents.userCookie(str.email);
@@ -2286,7 +2286,7 @@ var headerEvents = {
 			  			return false;
 			  		}
 			  		$('.loginfail').hide();
-			  		progress.show('.header-sign-in.accountcontent'); 
+			  		progress.show('.header-sign-in.accountcontent');
 			  		var iframeId = 'js-header-signin-iframe';
 			  		var formId = 'js-header-signin-form';
 			  		$("#" + iframeId).remove();
@@ -2296,15 +2296,15 @@ var headerEvents = {
 			  		$form.attr('action', realForm.attr('action'));
 			  		$form.attr('target', iframeId);
 			  		$form.attr('method', 'POST');
-			  		
+
 			  		$('<iframe name="' + iframeId + '" id="' + iframeId + '" />').appendTo('body');
 			  		$("#" + iframeId).attr('style', 'display: none;');
-			  		
+
 			  		realForm.find('input, select, textarea').each(function(){
 			  			var $input = $(this).clone();
 			  			$form.append($input);
 			  		});
-			  		
+
 			  		$("body").append($form);
 			  		$form.hide();
 			  		$form.submit();
@@ -2334,7 +2334,7 @@ var headerEvents = {
 			 	        		$(".header-forgot-pwd").show();
 			 	        		$(".header-forgot-pwd span.reset_email_error").show();
 			 	        		$('.accountcontent .loading').remove();
-			 	    			
+
 			 	    		}else{
 			 	    			progress.hide();
 			 	            	$('.header-forgot-pwd').hide();
@@ -2365,7 +2365,7 @@ var headerEvents = {
 					if (str.process !== "create-account") {
 						return;
 					}
-					
+
 					if (str.status === "success") {
 						if (typeof str.email === "string") {
 							headerEvents.userCookie(str.email);
@@ -2415,20 +2415,20 @@ var headerEvents = {
 		 			$form.attr('action', realForm.attr('action'));
 		 			$form.attr('target', iframeId);
 		 			$form.attr('method', 'POST');
-		 			
+
 		 			$('<iframe name="' + iframeId + '" id="' + iframeId + '" />').appendTo('body');
 		 			$("#" + iframeId).attr('style', 'display: none;');
-		 			
+
 		 			realForm.find('input, select, textarea').each(function(){
 		 				var $input = $(this).clone();
 		 				$form.append($input);
 		 			});
-		 		
+
 		 			$("body").append($form);
 		 			$form.hide();
 		 			$form.submit();
 			  	});
-		 	  	
+
 		 	  	if($('#user').length > 0){firstnamesplit();}
 		 	  	function firstnamesplit(){
 		     	  	  var firstname = $('.loggeduser > a span.username').text();
@@ -2442,15 +2442,15 @@ var headerEvents = {
 		       	  }else if(firstname_words.length > 0){
 		       		 $('.loggeduser > a span.username').text('');
 		       		 if($('.loggeduser > a span.username .first_name').length == 0){
-		       			$('.loggeduser > a span.username').html('<span class="first_name"></span>');	 
+		       			$('.loggeduser > a span.username').html('<span class="first_name"></span>');
 		       		 }
 		       		 if($('.headercustomerinfo .second_name').length == 0){
-		       			$('.headercustomerinfo').append('<span class="second_name"></span>');	 
+		       			$('.headercustomerinfo').append('<span class="second_name"></span>');
 		       		 }
-		       		 
+
 		       		 var fName = $('.loggeduser > a span.username span.first_name').eq(0);
 			         	 var Lname = $('.headercustomerinfo > .second_name');
-			         	 
+
 			         	 jQuery.each(firstname_words, function(i,v){
 			         		  textlength = textlength == 0 ? textlength + v.length : textlength + v.length + 1;
 			         		  if(i == 0 && v.length > limit){
@@ -2466,35 +2466,35 @@ var headerEvents = {
 			         				Lname.text(v);
 			         			 }else{
 			         				Lname.text(Lname.text() +' '+ v);
-			         			 } 
+			         			 }
 			         		  }
-			         		  
+
 			         	  });
 			         	 Lname.text(Lname.text() +' '+ $.trim($('.loggeduser > a .badge-mini').text()));
 			         	 if($('#user .loggeduser').width() > Lname.width()){
 			         		$('.loggeduser').append(Lname.clone());
 			         		Lname.remove();
 			         	 }
-			            $('.loggeduser > a .prostaff-header.badge-header').remove(); 
+			            $('.loggeduser > a .prostaff-header.badge-header').remove();
 			         	 $('.loggeduser > a .badge-mini').remove();
 		       	}else{
 		       		$('.loggeduser > a span.username span').hide();
-		       	}  
+		       	}
 		 	  	}
-		 	  	
+
 		 	  	$('.accountcontent input[type="text"], .accountcontent input[type="password"]').bind('keyup', function(e){
 		 	  		var keycode =  e.keyCode ? e.keyCode : e.which;
 		 	  		if(!$(this).closest('.accountcontent').hasClass('js-entered')){
-		 	  			$(this).closest('.accountcontent').addClass('js-entered');	
+		 	  			$(this).closest('.accountcontent').addClass('js-entered');
 		 	  		}
-		 	  		
+
 		 	  		if(keycode == 13){
 		 	  			$(this).closest('form').find('.formactions button').trigger('click');
 		 	  		}
-		     	  	clearTimeout(appGlobal.global_timer);
-		     	  	appGlobal.global_timer == 0;
+		     	  	clearTimeout(appGlobal.globalTimer);
+		     	  	appGlobal.globalTimer == 0;
 		 	  	});
-		 	  	
+
 		 	  	$('.rapala_device .user-profile a').on('hover', function(){
 		 	  		window.location.href = $(this).attr('href');
 		 	  	});
@@ -2519,23 +2519,23 @@ var headerEvents = {
 			$(".domainswitch-header").hide();
 			$(".domainswitch").hide();
 			if(!$('.headermask').hasClass('no-hide')){
-				clearTimeout(appGlobal.global_timer);
-				appGlobal.global_timer == 0;
+				clearTimeout(appGlobal.globalTimer);
+				appGlobal.globalTimer == 0;
 				if(ele.type != "click" && $('.rapala_device').length == 0 && ele.pageY > 60 && ele.pageY < 100){
-					$('.headermask').hide(); 
+					$('.headermask').hide();
 				}
 				if(ele.type == "click"){
 					$('.headermask').hide();
 					$('.accountcontent').hide();
 					$('.headercustomerinfo').find('.js-active').removeClass('js-active');
 				}else{
-					clearTimeout(appGlobal.global_timer);
-					appGlobal.global_timer == 0;
+					clearTimeout(appGlobal.globalTimer);
+					appGlobal.globalTimer == 0;
 					if($('.accountcontent:visible').hasClass('js-entered')){
-						appGlobal.global_timer = setTimeout(function(){
+						appGlobal.globalTimer = setTimeout(function(){
 							$('.accountcontent').hide();
 							$('.headermask').hide();
-						}, 5000);	
+						}, 5000);
 					}else{
 						$('.accountcontent').hide();
 						$('.headermask').hide();
@@ -2590,12 +2590,12 @@ var $main = $("#main"),
 	$banner = $(".banner_prostaff");
 
 var megamenu = {
-	global_timer: 0,
+	globalTimer: 0,
     init: function () {
     	megamenu.megamenuEvent();
     },
     open: function() {
-    	
+
     	var $width = $("#brand-tabs-header").width();
     	// To make default menu based on the brand active
 	    $("#brand-tabs-header > ul > li.active .mobile-main-menu-heading").trigger("click");
@@ -2626,7 +2626,7 @@ var megamenu = {
 		setTimeout(function(){
 			$(window).scrollTop(0);
 		},300);
-		
+
     },
     megamenuEvent: function($con){
 		if($con == null){
@@ -2659,7 +2659,7 @@ var megamenu = {
 			var prev = "";
 			var next = "";
 			$mega.find('.brand-assets').remove();
-	  
+
 			for(var i=1; i<= divlength; i++){
 				$mega.append('<div class="menulist menulist-'+ i +'" style="width:'+ containerwidth +'"></div>');
 				$mega.find('.mega_subcategory').each(function(){
@@ -2672,7 +2672,7 @@ var megamenu = {
 					$mega.find(".menulist-"+i).append(brandlist);
 				}
 			}
-	  
+
 			$mega.find('.menulist').each(function($i){
 				$i = $i + 1;
 				if($(this).find('> a').length > maxlength){
@@ -2680,7 +2680,7 @@ var megamenu = {
 					if(end > maxlength){
 						datalist = $(this).find('> a').slice(maxlength, end).clone();
 						if($mega.find(".menulist-"+($i+1)).length != 0){
-							$mega.find(".menulist-"+($i+1)).prepend(datalist);  
+							$mega.find(".menulist-"+($i+1)).prepend(datalist);
 						}
 					}
 				}
@@ -2721,7 +2721,7 @@ var megamenu = {
 						$(mainContent).find(".sub-cat-drop-down").width(dropDownWisth);
 					}
 				});
-				
+
 			}
 			else if($(window).width() > 959 && $(window).width() < 1025){
 				var deviceAgent = navigator.userAgent.toLowerCase(),
@@ -2752,13 +2752,13 @@ var megamenu = {
 				$this.closest("ul").removeClass("hide-after");
 				setTimeout(function(){
 					if($this.find(".megamenu-drop").position().left == $width) {
-						
-						$this.removeClass("js-sub-menu-active");	
+
+						$this.removeClass("js-sub-menu-active");
 					}
 				},400);
 			}
 		});
-		
+
 		/* Click event for sub menu drop down in mobile */
 		$("body").off("click",".sub-category-section-1 .sub-cat-drop-down").on("click",".sub-category-section-1 .sub-cat-drop-down",function(e){
 			if($(window).width() <= 959){
@@ -2775,7 +2775,7 @@ var megamenu = {
 						$this.delay(1000).removeClass("js-active-sub-menu");
 					}
 				}
-				
+
 			}
 		});
 	    // main menu toggle
@@ -2812,41 +2812,41 @@ var megamenu = {
 	    		}
 	    	}
 	    });
-	    
+
 	    // Mega menu events for window width greater than 959
 		$('#brand-tabs-header > ul > li').mouseenter(function(e){
 			var $id = $(this).find(".mobile-main-menu-heading > a").attr('class');
 			var $this = $(this);
-			
+
 			if($(window).width() > 959){
 				$('.owl-carousel').find(".owl-item, .owl-item img").trigger("mouseenter");
 				$this.siblings("li").find('.megamenudrop, .megamenu-drop').hide();
 				$('.accountcontent').hide();
-				clearTimeout(megamenu.global_timer);
-				megamenu.global_timer == 0;
+				clearTimeout(megamenu.globalTimer);
+				megamenu.globalTimer == 0;
 				$('#brand-tabs-header li').removeClass('current');
 				if($this.find('.megamenudrop').find('a').length != 0){
 					$this.find('.megamenudrop').show();
 					$this.find('.megamenu-drop').show();
 				//$('.megamenudrop[id="'+ $id +'"]').closest('.mega-menu').find('.mask').css('left',$(this).offset().left);
 				//$('.megamenudrop[id="'+ $id +'"]').closest('.mega-menu').find('.mask').attr('href',$(this).find('a').attr('href'));
-				}	
+				}
 				var containerwidth = $('.megamenu-drop .wrapper').width()/$('#'+$id+' .menulist').length;
 				containerwidth = containerwidth - 21;
 				$('#'+$id+' .menulist').removeAttr('style');
 				$('#'+$id+' .menulist').width(containerwidth);
 				megamenu.syncheight($('#'+$id+'.megamenudrop .menulist'));
-				
+
 				$(this).addClass('current');
 				if(!$(this).hasClass('active')){
-					$('#brand-tabs-header li.active').addClass('inactive');	
+					$('#brand-tabs-header li.active').addClass('inactive');
 				}else{
 					$(this).removeClass('inactive');
 				}
 				$('.brand-tabs-header-mask').show();
 			}
 		}).mouseleave(function(){
-			
+
 			if($(window).width() > 959){
 				$('.owl-carousel').find(".owl-item, .owl-item img").trigger("mouseout");
 				/*var deviceAgent = navigator.userAgent.toLowerCase(),
@@ -2857,30 +2857,30 @@ var megamenu = {
 				}*/
 			}
 		});
-		
+
 		/** single click redirecting of megamenu categories*/
 		/*$('.rapala_device .menulist a').mouseenter(function(){
 			window.location.href = $(this).attr('href');
 		});*/
 		$('#brand-tabs-header').mouseleave(function(){
 			if($(window).width() > 959){
-				$('.megamenu-drop').hide(); 
+				$('.megamenu-drop').hide();
 				$('.megamenudrop').hide();
 				$('#brand-tabs-header > ul > li.active').removeClass('inactive');
 				$('#brand-tabs-header > ul > li').removeClass('current');
 			}
 		});
-		
+
 		$(".brand-tabs-header-mask").mouseenter(function(){
 			if($(window).width() > 959){
-				$('.megamenu-drop').hide(); 
+				$('.megamenu-drop').hide();
 				$('.megamenudrop').hide();
 				$('#brand-tabs-header > ul > li.active').removeClass('inactive');
 				$('#brand-tabs-header > ul > li').removeClass('current');
 				$(this).hide();
 			}
 		});
-			
+
 		/*$(".rapala_device #brand-tabs-header a").click(function(e){
 			e.preventDefault();
 			if($(this).hasClass('selected')){
@@ -2926,7 +2926,7 @@ var timer = {
             delete this.id;
         }
     },
-    start: function (duration, callback) { 
+    start: function (duration, callback) {
         this.id = setTimeout(callback, duration);
     }
 };
@@ -2937,8 +2937,8 @@ var minicart = {
     	minicart.reset();
     	$('.checkoutminicart').slimscroll();
         this.$el = $('#minicart');
-        this.$content = this.$el.find('.minicartcontent'); 
-        jQuery(".minicarticon-cont").on('mouseover touchstart', function (e) { 
+        this.$content = this.$el.find('.minicartcontent');
+        jQuery(".minicarticon-cont").on('mouseover touchstart', function (e) {
             (minicart.isShow() ? true : minicart.hoverSlide());
             $('.Custom-tooltip, .cvc_tooltip, .ordergothrough_tooltip').each(function(){
             	if($('.rapala_device').length == 1){
@@ -2956,9 +2956,9 @@ var minicart = {
     					maxWidth: 300,
     					touchDevices: true
     				});
-            	} 
-			}); 
-            
+            	}
+			});
+
         });
         // register close button event
         $('.minicartcontent .minicartclose').click(function () {
@@ -2989,7 +2989,7 @@ var minicart = {
                 'minicart.close()', 30);
             	minicart.close();
         });
-        
+
         if($('.mini-cart-product').length > 1) {
         	$('.minicartcontent').removeClass('lessone');
         	$('.minicartcontent .slimScrollDiv').removeClass('less');
@@ -2998,11 +2998,11 @@ var minicart = {
         	$('.minicartcontent').addClass('lessone');
         	$('.minicartcontent .slimScrollDiv').addClass('less');
         }
-        
+
 
     },
-    
-    
+
+
     // returns a boolean if a minicart is visible/shown or hidden
     isShow: function () {
         return jQuery('.minicartcontent').css('display') == 'none' ? false : true;
@@ -3014,7 +3014,7 @@ var minicart = {
         jQuery('.minicart').unbind("mouseenter").unbind(
             "mouseleave");
     },
-    
+
     enablehovereffect : function(){
    	 jQuery(".minicarttotal").mouseenter(function(){
    		 minicart.setminicarheight();
@@ -3026,14 +3026,14 @@ var minicart = {
 		         $(".minicartcontent").css({"opacity":'1','height':'auto'})
 		         minicart.init();
             }
-   		 
+
    	 });
    	 jQuery(".minicarttotal").mouseleave(function(){
    		 jQuery(".minicartcontent").fadeOut(1000);
    		 $('.rapala_device .minicart-button').removeClass('clicked');
-   		 
+
    	 });
-   	
+
    },
     /**
      * @function
@@ -3060,21 +3060,21 @@ var minicart = {
         	var scrollheight2 = $(".mini-cart-product:eq(1)").height();
         	var avgheight = (scrollheight+scrollheight2)/2;
         	var newscrollheight=((avgheight)+(avgheight-(avgheight/4))) + 20;
-            
+
         	$('.slimScrollDiv').css('height',newscrollheight + "px");
         	$('.checkoutminicart').css('height',newscrollheight + "px");
         }
         else{
         	var heightImg = $('.minibrandcolumn').find('a').height();
         	var heightImg1 = $('.minibrandcolumn').find('img').height();
-        	
-        	
-        	while(scrollheight < heightImg + heightImg1) { 
+
+
+        	while(scrollheight < heightImg + heightImg1) {
         		heightImg = $('.minibrandcolumn').find('a').height();
         		scrollheight = $( ".tr_rotation" ).height();
         		$('.slimScrollDiv').css('height',scrollheight + "px");
-            	
-        		var scrollheight1 = $( ".checkoutminicart" ).height();	
+
+        		var scrollheight1 = $( ".checkoutminicart" ).height();
             	if(scrollheight1 > scrollheight) {
             		$('.checkoutminicart').css('height',scrollheight1 + "px");
             	} else {
@@ -3098,8 +3098,8 @@ var minicart = {
         this.$content.slideDown('slow');
         // after a time out automatically close it
         timer.start(6000, this.close.bind(this));
-        
-       if(minicart.suppressSlideDown && minicart.suppressSlideDown()) { 
+
+       if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
             return;
         }
         // register close button event
@@ -3109,12 +3109,12 @@ var minicart = {
             minicart.close(0);
             $('.rapala_device .minicart-button').removeClass('clicked');
         });
-        
+
       //Removing padding from the banner if it doesnot contains data/image
 	  	if($('.slot_banner').find('img').length==0){
 	  		$('.slot_banner').css('padding','0 0 0px 0');
 	  	}
-	  	
+
         // register the mouseout events
         jQuery('.minicartcontent').mouseenter(function (e) {
         	minicart.setminicarheight();
@@ -3135,7 +3135,7 @@ var minicart = {
                     'minicart.close()', 30);
                 minicart.init();
                 minicart.close();
-            }); 
+            });
 
         // show the item
         jQuery('.minicartcontent').slideDown('2000', function(){
@@ -3172,7 +3172,7 @@ var minicart = {
                     });
                 }
             });
-      
+
         clearTimeout(minicart.timer);
         minicart.timer = null;
 
@@ -3183,7 +3183,7 @@ var minicart = {
         if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
             googleAnalyticsEvents.miniCart();
         }
-        
+
     },
     hoverSlide: function () {
         if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
@@ -3196,12 +3196,12 @@ var minicart = {
              minicart.close(0);
              $('.rapala_device .minicart-button').removeClass('clicked');
          });
-         
+
        //Removing padding from the banner if it doesnot contains data/image
  	  	if($('.slot_banner').find('img').length==0){
  	  		$('.slot_banner').css('padding','0 0 0px 0');
  	  	}
- 	  	
+
          // register the mouseout events
          jQuery('.minicartcontent').mouseenter(function (e) {
          	minicart.setminicarheight();
@@ -3221,7 +3221,7 @@ var minicart = {
                  minicart.timer = setTimeout(
                      'minicart.close()', 30);
                  minicart.close();
-             }); 
+             });
 
          // show the item
          jQuery('.minicartcontent').slideDown('2000', function(){
@@ -3264,10 +3264,10 @@ var minicart = {
          if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
              googleAnalyticsEvents.miniCart();
          }
-         
+
          jQuery(".minicarttotal").addClass("enablehover");
          minicart.enablehovereffect();
-         
+
          $('#main , #header , #footernew, #footernew .row').unbind('touchstart').bind('touchstart',function(e){
          	if($(".minicartcontent").is(":visible")) {
          		var currentLinkLength = $(e.target).closest('.minicartcontent').length;
@@ -3284,11 +3284,11 @@ var minicart = {
                      $('.rapala_device .minicart-button').removeClass('clicked');
          		}
          		else if (minicarttotal > 0 && cartPageLength == 0) {
-         			
+
          			$('.rapala_device .minicart-button').trigger('click');
          		}
          	}
-         
+
          });
      },
      // adds a product to the mini cart
@@ -3344,7 +3344,7 @@ var minicart = {
      	  		$('.checkoutminicart').find('.minicarttable').removeClass('miniwithoutScroll');
      	  		$('.minicartcontent').find('.minicarttableheader').removeClass('miniwithoutScrollhead');
      	  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');
-     	  		
+
      	  	}
      	  	else {
      	  		$('.minicarttable').find('.theadfixedTop').removeClass('theadfixedTop');
@@ -3352,10 +3352,10 @@ var minicart = {
      	  		$('.minicart').find('.cartordertotals').addClass('carttotals');
      	  		$('.checkoutminicart').find('.minicarttable').addClass('miniwithoutScroll');
      	  		$('.minicartcontent').find('.minicarttableheader').addClass('miniwithoutScrollhead');
-     	  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');    	  		
+     	  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');
              }
              $(".minicarttable .mini-cart-product:last-child").find('.mini-cart-product').css('border','0px');
-             
+
              if($('body').hasClass('rapala_device')){
              	$(".checkoutminicart").find(".minicarttable").removeClass("miniwithoutScroll");
              	// $(".minicarttable .tr_rotation:last-child").find('.minirow').css('border','1px');
@@ -3363,8 +3363,8 @@ var minicart = {
              	 $(".minicarttable .mini-cart-product:last-child").find('.mini-cart-product').css('border','0px');
              	 $(".minicarttableheader").css('border-bottom','1px solid #ccc');
              }
-             
-             
+
+
             if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
                  // do nothing
                  // the hook 'MiniCart.suppressSlideDown()' should have
@@ -3372,7 +3372,7 @@ var minicart = {
              }
              else {
                  minicart.slide();
-                 minicart.setminicarheight();	
+                 minicart.setminicarheight();
                 if(callback)
                      callback();
              }
@@ -3542,9 +3542,9 @@ function initializeAddressForm() {
 	  			});
 	  			return false;
 	  		}
-	  		else{	
+	  		else{
 	  			$('.registration-button span.loadImage').css('display',"block");
-   	  		$(".createan-account .formsubmit").css({"height":maskheight + "px", "display":"block"});   
+   	  		$(".createan-account .formsubmit").css({"height":maskheight + "px", "display":"block"});
 
 	  		}
     });
@@ -3567,10 +3567,10 @@ function initializeAddressForm() {
 	  		if(!realForm.valid()){
 	  			return false;
 	  		}
-	  		else{	
+	  		else{
 	  		//$(this).closest('.formactions').addClass('loadImage');
 	  		$('.signinbtn span.loadImage').css('display',"block");
-	  		$(".account-logs .formsubmit").css({"height":maskheight + "px", "display":"block"}); 
+	  		$(".account-logs .formsubmit").css({"height":maskheight + "px", "display":"block"});
 	  		$(this).closest(".wish-logs").find('.formsubmit').css({"height":maskheightwishlist + "px", "display":"block"});
 	  		}
     });
@@ -3578,20 +3578,20 @@ function initializeAddressForm() {
 	  	$(this).find("input.required").bind('keydown keyup focusin focusout keypress', function(e) {
 			//e.stopPropagation();
 			$(this).closest(".value").find('errorclient').remove();
-		
+
 		});
 		$(".ui-login header-forgot-pwd").find("input.required").bind('focusin', function(e) {
 			$(this).closest(".value").find('errorclient').remove();
 		});
-  	}	
+  	}
 	$(".sample-section").click(function(){
 	  if(!$(this).find('.sample_mail_main').is(':visible')){
-		$(this).find('.sample_mail_main').slideDown(500);  
+		$(this).find('.sample_mail_main').slideDown(500);
 		  }
-	});  
+	});
     validator.init();
 }
-/** 
+/**
  * @private
  * @function
  * @description Toggles the list of Orders
@@ -3691,12 +3691,12 @@ function initPaymentEvents() {
     });
 }
 function initializePaymentForm() {
-	
+
 	$('#CreditCardForm').on('click', '.cancel-button', function (e) {
       e.preventDefault();
       dialog.close();
 	});
-	
+
 }
 /**
  * @private
@@ -3834,16 +3834,16 @@ function initializeEvents() {
 		  			$(fieldSection).slideDown();
 		  		}
 	  		}
-	  	});	
-	    var $curObj = $(".couponcode .label.post-couponcode"); 
+	  	});
+	    var $curObj = $(".couponcode .label.post-couponcode");
 	  	var fieldSection = $curObj.closest(".cart-coupon-code").find(".promo-sec.bottom-promo-section");
 	  	if($(fieldSection).length>0){
-	  		if ($(".promo-sec.bottom-promo-section .error").length>0) { 
+	  		if ($(".promo-sec.bottom-promo-section .error").length>0) {
 	  			$(fieldSection).slideDown();
 	  			$(".promo-sec.bottom-promo-section").find('.couponinput').addClass('inputlabel');
 	  			if( $(window).width() < 481 ) {
-		  		$("body, html").animate({ 
-		  			scrollTop: $('.couponcode .label.post-couponcode').offset().top 
+		  		$("body, html").animate({
+		  			scrollTop: $('.couponcode .label.post-couponcode').offset().top
 		  			}, 600);
 	  			}
 	  		}
@@ -3851,21 +3851,21 @@ function initializeEvents() {
 	  	var $curObjtop = $(".couponcode .label.pre_label");
 	  	var fieldSectiontop = $curObjtop.closest(".cart-coupon-code").find(".promo-sec.pre-promo");
 	  	if($(fieldSectiontop).length>0){
-	  		if ($(".promo-sec.pre-promo .error").length>0) { 
+	  		if ($(".promo-sec.pre-promo .error").length>0) {
 	  			$(fieldSectiontop).slideDown();
 	  			$(".promo-sec.pre-promo").find('.couponinput').addClass('inputlabel');
-		  		$("body, html").animate({ 
-		  			scrollTop: $('.couponcode .label.pre_label').offset().top 
+		  		$("body, html").animate({
+		  			scrollTop: $('.couponcode .label.pre_label').offset().top
 		  			}, 600);
 	  			}
-	  	}	
+	  	}
 
   	}
   	$(".promo-sec").find('.couponinput').click(function(){
-  		$('.promo-sec').find('.couponinput').removeClass('inputlabel'); 
+  		$('.promo-sec').find('.couponinput').removeClass('inputlabel');
   	});
- 	
-  	
+
+
   	var cartpromo = $('.pt_cart .upshift.cell.contentbox .contentboxcontent table#cart-table tr.cart-row td.itemtotalcolumn');
   	cartpromo.each(function(){
   	if($(this).find('.promo-adjustment').length >= 1) {
@@ -3875,7 +3875,7 @@ function initializeEvents() {
   	 $(this).removeClass('promodiv');
   	}
   	});
-  	
+
   	$("body").on("click",".cartcoupon-apply",function(){
   		if($(this).closest(".bottom-promo-section").length > 0) {
   			$(".promo-applied-position").val("bottomsection");
@@ -3883,11 +3883,11 @@ function initializeEvents() {
   			var $curObj = $(".couponcode .label");
   		  	var fieldSection = $curObj.closest(".cart-coupon-code").find(".promo-sec.bottom-promo-section");
   		  	if($(fieldSection).length>0){
-  		  		if ($(".error").length>0) { 
+  		  		if ($(".error").length>0) {
   		  			$(fieldSection).slideDown();
   		  			$(".promo-sec.bottom-promo-section").find('.couponinput').addClass('inputlabel');
   		  		}
-  		  	}	  
+  		  	}
   		}
   		else if($(this).closest(".top-promo-section").length > 0) {
   			$(".promo-applied-position").val("topsection");
@@ -3895,11 +3895,11 @@ function initializeEvents() {
   			var $curObj = $(".couponcode .label");
   		  	var fieldSection = $curObj.closest(".cart-coupon-code").find(".promo-sec.top-promo-section");
   		  	if($(fieldSection).length>0){
-  		  		if ($(".error").length>0) { 
+  		  		if ($(".error").length>0) {
   		  			$(fieldSection).slideDown();
   		  			$(".promo-sec.top-promo-section").find('.couponinput').addClass('inputlabel');
   		  		}
-  		  	}	  
+  		  	}
   		}
   	});
   	$('.pt_cart .cartrecommads_cont').css( "height", "44px" );
@@ -3910,7 +3910,7 @@ function initializeEvents() {
             $(this).closest("form").find('.cartcoupon-apply').click();
         } // JIRA PREV-30 : Cart page:  Coupon Code is not applying, when the user hit enter key.
     });
-    
+
     $("body").on("change,input", function(){
     	var	$curObj = $(this);
     	$("body").find(".couponinput").val($curObj.val());
@@ -3925,7 +3925,7 @@ function initializeEvents() {
             removeItemEvent = true;
         }
     });
-	var owl = $('.owl-carousel'); 
+	var owl = $('.owl-carousel');
 	owl.owlCarousel({
 		items:3,
 		slideBy: 3,
@@ -3982,7 +3982,7 @@ exports.init = function() {
     			$("input[name$='_addressFields_postal']").closest("div.zip").find("span.errorclient").remove();
     			$(".addressform .form-row.custom-select").removeClass("customselect-error");
     			$('.custom-select').each(function(){
-    				var select_val = $(this)	.find(":selected").text();	 
+    				var select_val = $(this)	.find(":selected").text();
     				$(this).find('.selectorOut').text(select_val);
     			});
     			$("a.clearbutton").hide();
@@ -4010,7 +4010,7 @@ exports.init = function() {
                     city: selectedAddress.city,
                     stateCode: selectedAddress.stateCode,
                     countryCode: "US",
-                    phone: selectedAddress.phone, 
+                    phone: selectedAddress.phone,
         	}
         	$(".new-address-field").addClass("hide");
         	$(".edit-address-field").attr("data-address",editAddressObject);
@@ -4045,9 +4045,9 @@ exports.init = function() {
     	        $(".selected-shipping-address, .new-address-field").removeClass("hide");
     	        $(".shipping-address-field-section").addClass("hide");
     	    }
-    	
+
     }*/
-   
+
 };
 
 },{"../../uievents":47,"../../util":48,"./shipping":26}],22:[function(require,module,exports){
@@ -4067,7 +4067,7 @@ var ajax = require('../../ajax'),
  * @function
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
-var flageallotmentcover = $("input.flageallotmentcover").val(); 
+var flageallotmentcover = $("input.flageallotmentcover").val();
 var allotmentAmount = parseInt($("input.allotmentAmount").val());
 var couponMenthods = {
 	updateSummary: function() {
@@ -4085,7 +4085,7 @@ var couponMenthods = {
 	        uievents.synccheckoutH();
 	    });
 	},
-	updatecartsummary: function () 
+	updatecartsummary: function ()
 	{
         var url = util.appendParamToURL(Urls.UpdateCartSummary);
         // load the updated cart summary area
@@ -4147,15 +4147,15 @@ var couponMenthods = {
 			});
 	},
 	setPaymentSection: function(orderBalance) {
-		
+
 		/*if(!orderBalance) {
 			return;
 		}*/
-		
+
 		if (orderBalance <= 0) {
 			//Clearing the CC Form if the remaining balance after allotment and GC is zero
 			couponMenthods.refreshCC();
-			
+
 			// if the whole order total was paid with gift certs then hide other payment methods and show a message
 			$("#paymentmethods").hide();
 			$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
@@ -4164,7 +4164,7 @@ var couponMenthods = {
 				$(".giftcertused").addClass("allotmentcover");
 				$(".giftcertused").html("<p class='first-para'>Your allotment balance will cover the full cost of this order.</p><p>No further payment will be necessary.</p>").show();
 			}
-			else{		
+			else{
 				if(allotmentAmount > 0){
 					$(".giftcertused").addClass("allotmentcover");
 					var allotmentMessage = '<div class="greater-than-767"><p class="first-para">Your allotment balance will cover the full cost of this order.</p><p>No further payment will be necessary.</p></div><div class="less-than-767"><p>Your allotment balance will cover the full cost of this order. No further payment will be necessary.</p></div>'
@@ -4175,7 +4175,7 @@ var couponMenthods = {
 				}
 			}
 			$(".cardnotworking").hide();
-		} 
+		}
 		if ((orderBalance > 0) && ($('input[name$="paymentMethods_selectedPaymentMethodID"]:checked').val() == "CREDIT_CARD")) {
 			$(".cardnotworking").show();
 		}else{
@@ -4195,7 +4195,7 @@ var couponMenthods = {
 					}
 					uievents.synccheckoutH();
 				}
-		 }); 
+		 });
 	},
 	removeGiftCertificate: function(giftCertificateId) {
 		jQuery(".balance").empty();
@@ -4216,9 +4216,9 @@ var couponMenthods = {
 				}
 					// hide gift cert used for otder total message
 					if(!flageallotmentcover){
-						jQuery(".giftcertused").hide(); 
+						jQuery(".giftcertused").hide();
 					}
-				//commenting this since we don't need to clear the payment form on applying GC as in order CC fields are first.			
+				//commenting this since we don't need to clear the payment form on applying GC as in order CC fields are first.
 				//var countryCode = jQuery("input[name=${pdict.CurrentForms.billing.billingAddress.addressFields.country.htmlName}]").val();
 				//updatePaymentMethods( countryCode );
 				var countryCode = jQuery("input[name$='addressFields_country']").val();
@@ -4231,8 +4231,8 @@ var couponMenthods = {
 				uievents.synccheckoutH();
 				if($('#paymentmethods .toggle').eq(0).hasClass('active')){
 					$('.cardnotworking').show();
-				}			
-				
+				}
+
 			}
 		});
 	},
@@ -4281,7 +4281,7 @@ var couponMenthods = {
 		}
 
 		// ensure checkbox of payment method is checked
-		jQuery("#is-" + paymentMethodID).attr("checked", true); 
+		jQuery("#is-" + paymentMethodID).attr("checked", true);
 		if($("#PaymentMethod_CREDIT_CARD").is(':visible')){
 			if(paymentMethodID == "PayPal"){
 				$('.cardnotworking').hide();
@@ -4290,7 +4290,7 @@ var couponMenthods = {
 				jQuery('.paymentform.paypal .paypalmsg').removeClass('error');
 			}
 		}*/
-		
+
 		var $paymentMethods = $('.payment-method');
 	    $paymentMethods.removeClass('payment-method-expanded');
 
@@ -4313,12 +4313,12 @@ var couponMenthods = {
 					 jQuery("input[name$='paymentMethods_creditCard_owner']").val('');
 					 jQuery("input[name$='paymentMethods_creditCard_number']").val('');
 					 jQuery("select[name$='paymentMethods_creditCard_month']").val('');
-					 jQuery("select[name$='paymentMethods_creditCard_year']").val(''); 
-					 jQuery("select[name$='paymentMethods_creditCard_cvn']").val(''); 
+					 jQuery("select[name$='paymentMethods_creditCard_year']").val('');
+					 jQuery("select[name$='paymentMethods_creditCard_cvn']").val('');
 					 $('.cardtypeimg > div').hide();
-					 $('.expirationdate.error').hide(); 
-					 jQuery('.paymentform a.clearbutton').hide(); 
-					 $('.custom-select').each(function(){var select_val = $(this)	.find(":selected").text();	 $(this).find('.selectorOut').text(select_val); }); 
+					 $('.expirationdate.error').hide();
+					 jQuery('.paymentform a.clearbutton').hide();
+					 $('.custom-select').each(function(){var select_val = $(this)	.find(":selected").text();	 $(this).find('.selectorOut').text(select_val); });
 					 return false;
 			  }else{
 				  jQuery("form[id$='paymentMethods_creditCard'] input, form[id$='paymentMethods_creditCard'] select").removeClass('errorclient');
@@ -4332,9 +4332,9 @@ var couponMenthods = {
 		});
 	},
 	bindPaymentMethodChangeHandler: function()
-	{ 
+	{
 		// bind payment method change handler
-		$("#paymentmethods .toggle").click(function() { 
+		$("#paymentmethods .toggle").click(function() {
 			 if(jQuery('input[name$="billing_paypalprocessed"]').val() != "true"){
 					$("#paymentmethods .toggle").removeClass('active');
 					$(this).addClass('active');
@@ -4358,7 +4358,7 @@ var couponMenthods = {
 					}
 					$(this).find('input[name="billing_paymentMethods_selectedPaymentMethodID"]').prop('checked', true);
 					couponMenthods.changePaymentMethod(selectedID);
-				}	
+				}
 		});
 		$("#paymentmethods .paymentform.creditcardpayment").click(function() {
 			$(".paymentmethods .toggle input#is-CREDIT_CARD").closest(".toggle").addClass("active");
@@ -4367,9 +4367,9 @@ var couponMenthods = {
 			$(".paymentmethods .toggle input#is-PayPal").closest(".toggle").addClass("active");
 		});
 	},
-	updatePaymentMethods: function(countryCode) 
+	updatePaymentMethods: function(countryCode)
 	{
-			
+
 		var url = util.appendParamToURL(Urls.RefreshPaymentMethods, "countryCode", countryCode);
 
 		// indicate progress
@@ -4388,8 +4388,8 @@ var couponMenthods = {
 		    $(".expirationdate .custom-select select");
 		    $('#PaymentMethod_CREDIT_CARD input');
 		    $('#PaymentMethod_CREDIT_CARD select');
-		    uievents.init($("#paymentmethodform")); 
-		  //load checking for payment type 
+		    uievents.init($("#paymentmethodform"));
+		  //load checking for payment type
 			var $paySelected = jQuery('#paymentmethods').find('input[name$="paymentMethods_selectedPaymentMethodID"]:checked');
 			if($paySelected.length == 1){
 				$paySelected.closest('.toggle').addClass('active');
@@ -4410,13 +4410,13 @@ var couponMenthods = {
 		}
 		// attempt to remove
 		jQuery("input[name$='billing_couponCode']").val("");
-				
+
 		var url = util.appendParamToURL(Urls.RemoveCoupon,"couponCode", couponCode);
 		$.get( url, function( data ) {
 			couponMenthods.updateSummary();
 			couponMenthods.updatecartsummary();
 			jQuery("#couponentry .redemption").html( data );
-			
+
 			var giftCertificates = jQuery(data).filter('#giftCertificateData').text();
 			if(giftCertificates != 'undefined' && giftCertificates.length > 0 ){
 				var giftCertificatedata = giftCertificates.split("|");
@@ -4432,12 +4432,12 @@ var couponMenthods = {
 		}
 		couponMenthods.updatePaymentMethods(countryCode);
 		couponMenthods.ordertotals();
-		
-		
+
+
 		// Determine if a bonus-product promotion was triggered by the coupon.
 		// If so, display a popup alert and give the customer a chance to
 		// return to the cart and select the bonus product.
-		
+
 		/*$('.noBonusBtn').unbind("click").click( function() {
             $('.bonusdiscountcontainer').dialog('close');
       	});*/
@@ -4479,7 +4479,7 @@ var couponMenthods = {
 					$("#PaymentMethod_CREDIT_CARD span.errormessage").remove();
 					$("#PaymentMethod_CREDIT_CARD input.errormessage").removeClass("errormessage");
 					$("#PaymentMethod_CREDIT_CARD .errorlabel").removeClass("errorlabel");
-				
+
 					$(".paymentform.creditcardpayment .formfield .field-wrapper").each(function(){
 						if($(this).find("input").val() != undefined){
 				    		if($(this).find("input").val().length > 0){
@@ -4587,7 +4587,7 @@ var couponMenthods = {
  * @param {Object} data The Credit Card data (holder, type, masked number, expiration month/year)
  */
 function setCCFields(data) {
-	
+
     var $creditCard = $('[data-method="CREDIT_CARD"]');
     $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('change');
     $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('blur');
@@ -4681,52 +4681,52 @@ exports.init = function() {
     if( activePaymentMethodID == "is-PayPal" ) {
     	$(".paymentform .textinput, .paymentform .yearselect select, .paymentform .monthselect select, .addressoptions .checkinput").removeClass("required");
 		$(".cardnotworking").hide();
-    	
+
     } else {
     	  $(".paymentform .textinput, .paymentform .yearselect select, .paymentform .monthselect select, .addressoptions .checkinput").addClass("required");
     	  $(".cardnotworking").show();
-		
+
 	}
     if(!jQuery(".creditcardlist select").val()){
 			 $(".creditcard_name").val('');
 			 $(".creditCard-number").val('');
 			 $(".monthselect").val('');
-			 $(".yearselect").val(''); 
-			 $(".creditcard_cvn").val(''); 
+			 $(".yearselect").val('');
+			 $(".creditcard_cvn").val('');
 			 $('.cardtypeimg > div').hide();
-			 $('.expirationdate.error').hide(); 
+			 $('.expirationdate.error').hide();
 			 $('.expirationdatevalid.error').hide();
-			 $('.paymentform a.clearbutton').hide(); 
+			 $('.paymentform a.clearbutton').hide();
 	}
-    $(".expirationdate .custom-select select").on('blur', function() {  
+    $(".expirationdate .custom-select select").on('blur', function() {
     	var d = new Date(),
         mth = d.getMonth() + 1,
         yy = d.getFullYear();
     		if(!jQuery(this).val()){
-    			$('.expirationdate.error').show(); 
-    			$('.expirationdatevalid.error').hide(); 
+    			$('.expirationdate.error').show();
+    			$('.expirationdatevalid.error').hide();
     		}else{
     		  if(jQuery('.expirationdate .custom-select.customselect-error').length == 0){
     			  $('.expirationdate.error').hide();
-    			  $('.expirationdatevalid.error').hide(); 
+    			  $('.expirationdatevalid.error').hide();
     		  }
     		  var selectedMth = $(".expirationdate .custom-select select[id$='billing_paymentMethods_creditCard_expiration_month']").val();
     		  var selectedyear = $(".expirationdate .custom-select select[id$='billing_paymentMethods_creditCard_expiration_year']").val();
     				if(selectedyear && selectedMth){
-    					selectedyear = selectedyear.replace(',','');	
+    					selectedyear = selectedyear.replace(',','');
     					if((selectedyear <= yy) && (selectedMth < mth)){
     						  $('.expirationdate.error').hide();
-    						  $('.expirationdatevalid.error').show(); 
+    						  $('.expirationdatevalid.error').show();
     					  }
     				}
-    		} 
+    		}
     });
     $("body").on('click','.redemption .discount-success button.remove-cop',function(e) {
 		e.preventDefault();
 		var url = $(this).val();
 		couponMenthods.removeCouponCode(url);
 		return false;
-	}); 
+	});
     /* JIRA PREV-135 : Disabled Credit Card in BM is displaying in the application.
        Changed default option from 'CREDIT_CARD' to first available payment method.*/
     updatePaymentMethod((selectedPaymentMethod) ? selectedPaymentMethod : $('.payment-method-options input').first().val());
@@ -4758,7 +4758,7 @@ exports.init = function() {
             return;
         }
         populateCreditCardForm(cardUUID);
-        
+
         // remove server side error
         $('.required.error').removeClass('error');
         $('.error-message').remove();
@@ -4779,7 +4779,7 @@ exports.init = function() {
     $("body").on('click','#add-giftcert', function (e) {
         e.preventDefault();
         var gcId = jQuery("input[name$='billing_giftCertCode']").val().toUpperCase();
-        couponMenthods.redeemGiftCert(gcId); 
+        couponMenthods.redeemGiftCert(gcId);
         uievents.synccheckoutH();
 		return false;
     });
@@ -4808,7 +4808,7 @@ exports.init = function() {
         	 if(data.redemption.redemptionErrorMsg) {
         		 couponMenthods.setCouponError(data.redemption.redemptionErrorMsg);
 				return false;
-			}	
+			}
 			if(!data.redemption)
 			{
 				msg = Resources.COUPON_INVALID;
@@ -4827,7 +4827,7 @@ exports.init = function() {
 			if(typeof countryCode == 'undefined'){
 				countryCode = 'US';
 			}
-		
+
             couponMenthods.updateSummary();
             couponMenthods.updatecartsummary();
             couponMenthods.updatePaymentMethods( countryCode );
@@ -4840,8 +4840,8 @@ exports.init = function() {
 			{
 				$(".bonusdiscountcontainer .bonusproductpromo").append(data.redemption.bonusPromotionCallout);
 				$(".bonusdiscountcontainer div.details").html(data.redemption.bonusPromotionDetails);
-				
-				$('.bonusdiscountcontainer').show();	
+
+				$('.bonusdiscountcontainer').show();
 			   	$('.bonusdiscountcontainer').dialog({
 				   		title: Resources.BONUS_PRODUCT,
 				   		bgiframe: true,
@@ -4852,7 +4852,7 @@ exports.init = function() {
 				    	resizable: false
 				});
 				jQuery('.bonusdiscountcontainer').dialog('open');
-				
+
 			}
 
 			jQuery('.selectBonusBtn').unbind("click").click( function() {
@@ -4880,14 +4880,14 @@ exports.init = function() {
             $("#add-giftcert").click();
         }
     });
-    
+
     $('.trypaypal').on("click",function(){
         $('.continuecheckout-paypallogin').trigger('click');
     });
-    
+
     if($('.pt_checkout .paymentform.paypal .error-paypal-heading').length > 0 || $('.pt_checkout .paymentform.paypal .paypalmsg.success-paypal').length > 0 ){
-    	$("body, html").animate({ 
-    		scrollTop: $('#paymentmethodform legend').offset().top 
+    	$("body, html").animate({
+    		scrollTop: $('#paymentmethodform legend').offset().top
     	  	}, 600);
     }
 
@@ -4896,7 +4896,7 @@ exports.init = function() {
 	});
     //PREVAIL - init Address Validation
     require('../../addressvalidation').init();
-    
+
     util.cardtype.init();
     $("body").on("click",".couponcode .label",function(){
 		if($(".promo-input-button").is(":visible")==true){
@@ -4912,7 +4912,7 @@ exports.init = function() {
     if($('.guestbillingform .password .errormessage').length > 0) {
 		$('.guestbillingform .password .errormessage').remove();
 	}
-    
+
     $('.guestbillingform .billing-conpassword').blur(function () {
 		var billing_pas = $( '.guestbillingform .billing-password').val();
 		var billing_conpas = $('.guestbillingform .billing-conpassword').val();
@@ -4920,34 +4920,34 @@ exports.init = function() {
 		if(billing_pas.length > 0) {
 			if(billing_conpas.length < 5) {
 				$('.guestbillingform .billing-conpassword').addClass('errorclient');
-                $('.billingconfpassword').text(app.resources["billingpasswordconfirm_min"]).removeClass('hide');
+                $('.billingconfpassword').text(app.resources.billingpasswordconfirm_min).removeClass('hide');
                 //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
 			}
 			else if(billing_pas != billing_conpas) {
 				$('.guestbillingform .billing-conpassword').addClass('errorclient');
-				$('.billingconfpassword').text(app.resources["billingpasswordconfirm"]).removeClass('hide');
+				$('.billingconfpassword').text(app.resources.billingpasswordconfirm).removeClass('hide');
                 //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
 			}
 			else {
 				$('.guestbillingform .billing-conpassword').removeClass('errorclient');
-				$('.billingconfpassword').text(app.resources["billingpasswordconfirm"]).addClass('hide');
+				$('.billingconfpassword').text(app.resources.billingpasswordconfirm).addClass('hide');
 				if(!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
 					//$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
-				}	
+				}
             }
 	        }  else {
 	        	$('.guestbillingform .billing-conpassword').removeClass('errorclient');
 	        	$('.billingconfpassword').text(app.resources["billingpasswordconfirm"]).addClass('hide');
 	        	if(!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
 	        		//$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
-	        	}	
+	        	}
 	        }
 	});
     $('.guestbillingform .billing-password').bind('blur',function(){
 		var billing_pas = $( '.guestbillingform .billing-password').val();
 		var billing_conpas = $('.guestbillingform .billing-conpassword').val();
 		//$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
-		
+
 		if($(this).length > 0) {
 			$('.guestbillingform .billing-conpassword').addClass('required');
 		}
@@ -4972,15 +4972,15 @@ exports.init = function() {
 		if((billing_pas == billing_conpas) && (billing_pas.length >= 5)){
 			if(!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
 		//$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
-			}	
-		} 
+			}
+		}
 	});
-    
+
     if($('.expirationdate .custom-select .field-wrapper span.errormessage').length > 0) {
 		$('.expirationdate .custom-select span.errormessage').hide();
 		$('.expirationdate.error').show();
 	}
-    $( '.checkoutbilling .continue-checkout-button .continuecheckout').click(function () { 
+    $( '.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
 		var errorcount = 0;
 		if(!($("#PaymentMethod_CREDIT_CARD").is(':visible'))){
 			$(".paymentform .textinput, .paymentform select").removeClass("required");
@@ -4992,73 +4992,73 @@ exports.init = function() {
         		$('select[name$=billing_addressList]').val('');
 				$('input[name$="billingAddress_selectedbillingadd"]').val('');
 				$('.custom-select').each(function(){
-					var select_val = $(this)	.find(":selected").text();	 
+					var select_val = $(this)	.find(":selected").text();
 					$(this).find('.selectorOut').text(select_val);
 				});
 				jQuery('.billing-address-fields').removeClass('hide');
 				jQuery('.selected-billing-address , .selected-shipping-address').addClass('hide');
 				uievents.customFields();
-			}	
-        	errorcount++; 
+			}
+        	errorcount++;
     	}
        if($("#PaymentMethod_CREDIT_CARD").is(':visible')) {
         	if(!$('form[id$="dwfrm_billing"]').valid()){
         		$('.expirationdate select').trigger('blur');
-        	
+
                if($('.vip-terms .custom-link').is(':visible')) {
-                   if(!$('input[name$="_isvip"]').is(':checked')) { 
+                   if(!$('input[name$="_isvip"]').is(':checked')) {
                     	if( $('.vip-terms .custom-checkbox .vip-message #message').length == 0){
                             $('.vip-terms .custom-checkbox .vip-message').prepend('<span id="message" class="error vipcheckmessage">Please check the box to confirm you have read and agree to the Rapala VIP Terms & Conditions.</span>');
                             $('.singleshipping_error').show();
-                    	} 
+                    	}
                             $('.vip-terms .custom-checkbox .custom-link').addClass('error');
                             uievents.synccheckoutH();
                     }
                 }
                if($('.knife .custom-link.agecheck-link').is(':visible')) {
-                   if(!$('input[name$="agecheck_ischeck"]').is(':checked')) { 
+                   if(!$('input[name$="agecheck_ischeck"]').is(':checked')) {
                     	if($('.addressoptions.knife .agecheck_message #message').length == 0){
                             $('.addressoptions.knife .agecheck_message').prepend('<span id="message" class="error agecheckmessage">Please Verify you are 18 years of age or older, or remove all knives from your cart.</span>');
                             $('.singleshipping_error').show();
-                    	}  
+                    	}
                             $('.addressoptions.knife > .custom-checkbox .custom-link').addClass('error');
                             uievents.synccheckoutH();
                     }
                 }
-                errorcount++;	 
+                errorcount++;
         	}else{
-        		 
+
         		if ($('.vip-terms .custom-link').is(':visible')) {
-                   if(!$('input[name$="_isvip"]').is(':checked')) { 
+                   if(!$('input[name$="_isvip"]').is(':checked')) {
                     	if( $('.vip-terms .custom-checkbox .vip-message #message').length == 0){
                             $('.vip-terms .custom-checkbox .vip-message').prepend('<span id="message" class="error vipcheckmessage">Please check the box to confirm you have read and agree to the Rapala VIP Terms & Conditions.</span>');
                             $('.singleshipping_error').show();
-                    	}  
+                    	}
                             $('.vip-terms .custom-checkbox .custom-link').addClass('error');
                             uievents.synccheckoutH();
                             errorcount++;
                     }
                 }
                if($('.knife .custom-link.agecheck-link').is(':visible')) {
-                   if(!$('input[name$="agecheck_ischeck"]').is(':checked')) { 
+                   if(!$('input[name$="agecheck_ischeck"]').is(':checked')) {
                     	if($('.addressoptions.knife .agecheck_message #message').length == 0){
                             $('.addressoptions.knife .agecheck_message').prepend('<span id="message" class="error agecheckmessage">Please Verify you are 18 years of age or older, or remove all knives from your cart.</span>');
                             $('.singleshipping_error').show();
-                    	}  
+                    	}
                             $('.addressoptions.knife > .custom-checkbox .custom-link').addClass('error');
                             uievents.synccheckoutH();
                             errorcount++;
                     }
                 }
-                
-        	} 
+
+        	}
         }
         else {
            if($('.vip-terms .custom-link').is(':visible') && !$('input[name$="_isvip"]').is(':checked')) {
                     	if( $('.vip-terms .custom-checkbox .vip-message #message').length == 0){
                             $('.vip-terms .custom-checkbox .vip-message').prepend('<span id="message" class="error vipcheckmessage">Please check the box to confirm you have read and agree to the Rapala VIP Terms & Conditions.</span>');
                             $('.singleshipping_error').show();
-                    	} 
+                    	}
                         $('.vip-terms .custom-checkbox .custom-link').addClass('error');
                         uievents.synccheckoutH();
                         errorcount++;
@@ -5075,7 +5075,7 @@ exports.init = function() {
        /*     if(!$('input.paypalprocessed').val()){
             	$('.paymentform.paypal .paypalmsg').addClass('error');
             	 return false;
-            	 
+
             }*/
         }
         if(errorcount > 0){
@@ -5095,7 +5095,7 @@ exports.init = function() {
 		$('.cardnumber input').addClass('errorclient');
 		$('.cardnumber .labeltext').addClass('error');
 		$('<span class="invalidcredit error">- Invalid Credit Card Number</span>').appendTo('.cardnumber .field-wrapper');
-		//$('.singleshipping_error').show();	
+		//$('.singleshipping_error').show();
 		$('.cardnumber .errormessage').css('display','none');
 	}
 };
@@ -5228,8 +5228,8 @@ exports.init = function () {
     $('body').find("input").focusin(function() {
     	$(this).closest(".formfield, .form-row").removeClass('inputlabel');
 		$(this).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
-		$(this).removeClass('errorclient');	
-		$(this).closest('.formfield , .form-row').find('.logerror , .existing_register').css('display','none');		
+		$(this).removeClass('errorclient');
+		$(this).closest('.formfield , .form-row').find('.logerror , .existing_register').css('display','none');
 	});
 	$("body").find('.form-row a.clearbutton').on("click",function(){
 		$(this).closest(".field-wrapper").find('span').remove();
@@ -5239,7 +5239,7 @@ exports.init = function () {
 		$(this).closest('.form-row').find('a.clearbutton').hide();
 		$(this).closest(".form-row").find("span.logerror , .existing_register").hide();
 	});
-	
+
 	$('.pt_checkout .textinput, .pt_checkout .custom-select-wrap, .pt_checkout .textinputpw').bind('keyup blur', function () {
         if(jQuery(".New-shipping-authentication-detail").find("input[name$='_ProcessWay']").val() == 2) {
              var errordiv = "<div class='error loginerror'>" + app.resources['checkout_login_error'] + "</div>";
@@ -5257,7 +5257,7 @@ exports.init = function () {
   			uievents.synccheckoutH();
   		},100);
 	});
-	
+
 	$(".new-address-button").bind('click', function(){
 		//jQuery("input[name=${pdict.CurrentForms.singleshipping.shippingAddress.makedefault.htmlName}]").attr('checked', true);
 		$(".addressoptions-addToAddressBook,.addressoptions-makedefault ").removeClass("hide");
@@ -5279,7 +5279,7 @@ exports.init = function () {
 		$("input[name$='_addressFields_postal']").closest("div.zip").find("span.errorclient").remove();
 		$(".addressform .form-row.custom-select").removeClass("customselect-error");
 		$('.custom-select').each(function(){
-			var select_val = $(this)	.find(":selected").text();	 
+			var select_val = $(this)	.find(":selected").text();
 			$(this).find('.selectorOut').text(select_val);
 		});
 		if($(".checkout").hasClass("billingsection")) {
@@ -5640,7 +5640,7 @@ function signin() {
     $(".New-shipping-authentication-detail").find("input[name$='_ProcessWay']").val("2");
     $(".New-shipping-authentication-detail").find("input[name$='_passwordconfirm'],input[name$='_password']").val("");
     $('.checkout .shipping-address-field-section .formfield span.errorclient').remove();
-    $('.shipping-address-field-section').addClass('signin-error'); 
+    $('.shipping-address-field-section').addClass('signin-error');
     uievents.synccheckoutH();
 }
 
@@ -5654,7 +5654,7 @@ exports.init = function() {
     } else {
     	$(document).find('.shipping-address-field-section').removeClass('hide');
     	$(document).find('.selected-shipping-address').addClass('hide');
-    	$(document).find('.new-address-field').addClass('hide');    	
+    	$(document).find('.new-address-field').addClass('hide');
     }
 	if($(document).find('.fromreturn1').val() == 'true'){
 	 	$(document).find('.shipping-address-field-section').removeClass('hide');
@@ -5668,35 +5668,35 @@ exports.init = function() {
 
     giftMessageBox();
     updateShippingMethodList();
-   
+
     $('.continue-checkout-button .continue-checkout').on('click', function(){
 		var form = $(this).closest('form[id$="_shippingAddress"]');
 		if($('.state-blk select').valid() == 0) {
 	 		if(!$('.state-blk.custom-select').hasClass('blured')){
 	 			$('.state-blk.custom-select').addClass('customselect-error');
-				//$('.state-blk .stateerror').show(); 
-	 		}	
+				//$('.state-blk .stateerror').show();
+	 		}
 		}else{
 			//$('.state-blk  .stateerror').hide();
 			$('.state-blk.custom-select').removeClass('customselect-error');
 		}
-		
+
 		if(!$('.checkoutasguestbutton').is(':visible')){
 			$('.guestemailcon').blur();
 			$('.guestemail').blur();
 		}
-		if(!form.valid()){ 
+		if(!form.valid()){
 			if(jQuery('.shipping-address-field-section').hasClass('hide'))
-			{	
+			{
 				$('select[name$=singleshipping_addressList]').val('');
 				$('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');
 				$('.custom-select').each(function(){
-					var select_val = $(this)	.find(":selected").text();	 
+					var select_val = $(this)	.find(":selected").text();
 					$(this).find('.selectorOut').text(select_val);
 				});
 				$('.shipping-address-field-section').removeClass('hide');
 				$('.selected-shipping-address').addClass('hide');
-			}	 
+			}
 			if(!$('.shippinglogindetails').is(':visible')){
 				$('.singleshipping_error').removeClass("hide");
 				$('.signinabove').hide();
@@ -5709,18 +5709,18 @@ exports.init = function() {
 	           if($('#dwfrm_singleshipping_shippingAddress .formactions #message').length > 0 || $('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').length > 0) {
 	                jQuery( "#dwfrm_singleshipping_shippingAddress .formactions #message").remove();
 	                jQuery('#dwfrm_singleshipping_shippingAddress .formactions .singleshipping_error').hide();
-	            } 
+	            }
 	            jQuery('.singleshipping_error').hide();
 	            jQuery("#dwfrm_singleshipping_shippingAddress .formactions").prepend(errormsg);
 	            uievents.synccheckoutH();
 	           return false;
-	        } 	
+	        }
 		}else{
 			$('.singleshipping_error').addClass("hide");
-		} 
+		}
 		uievents.synccheckoutH();
 	});
-   
+
     $("body").on("click", ".go-as-guest-checkout",function(){
   		$(".shipping-checkoutasguest, .signintomyaccount-block").removeClass("hide");
   		$(".shippinglogindetails , .addressid").addClass("hide");
@@ -5739,10 +5739,10 @@ exports.init = function() {
 			}
 		});
 		$(singOutDialog).empty().append($(".state-shipping-valid-dialog").html());
-		singOutDialog.dialog("open");	
+		singOutDialog.dialog("open");
    }
     $("body").on("click", '.shippingsignout',function(e){
-		e.preventDefault(); 
+		e.preventDefault();
 		$.ajax({
 			 url: this.href,
 			 success: function(data) {
@@ -5761,7 +5761,7 @@ exports.init = function() {
 			         }
 				 });
 				 $(singOutDialog).empty().append(data);
-				 singOutDialog.dialog("open");	  
+				 singOutDialog.dialog("open");
 			 }
 		});
 	});
@@ -5773,7 +5773,7 @@ exports.init = function() {
         });
         $('form[id$="_login"] .wrongaddress').hide();
         $('form[id$="_login"] .#message.error').remove();
-     
+
         $('.singleshipping_error').hide();
         $(".shipping-emaildetaillinks").addClass('loginactive');
         $(".shipping-emaildetaillinks").removeClass('reginactive');
@@ -5784,7 +5784,7 @@ exports.init = function() {
         $(".shippinglogindetails input[name$='login_username']").addClass('loggedemail');
         $('.shippinglogindetails .correctaddress').removeClass('error').hide();
         if($('.emailhidden').val()){
-        	$('input[id$="login_username"]').val($('.emailhidden').val());	
+        	$('input[id$="login_username"]').val($('.emailhidden').val());
         	$('input[id$="login_username"]').blur();
         	$('input[id$="login_username"]').closest('.formfield').find('.correctaddress').show();
         }
@@ -5797,7 +5797,7 @@ exports.init = function() {
         $('.stateerror').hide();
         uievents.synccheckoutH();
     });
-    
+
     $('.shipping-guestemailaddress .textinput, .shipping-guestconfirmemailaddress .textinput, .shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw, .shipping-emailaddress .textinput, .shipping-confirmemailaddress .textinput, .shipping-password .textinputpw, .shipping-confirmpassword .textinputpw').blur(function () {
         if($(this).valid() == 0) {
             $(this).closest('.formfield').find('.correctaddress').addClass('error').show();
@@ -5917,10 +5917,10 @@ function initializationEvent() {
 	    default:
 	    	currentSiteID = "1";
 	}
-	
+
 	if(document.location.pathname.indexOf('ChangeRegion') < 0) {
-		if(typeof geoip_country_code == 'function') {
-			var IP_GeoCode = geoip_country_code();			
+		if(typeof geoipCountryCode == 'function') {
+			var IP_GeoCode = geoipCountryCode();
 			var allowed_countries = $(".allowed-countries").text();
 			if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){
 				allowed_countries = "US";
@@ -5931,7 +5931,7 @@ function initializationEvent() {
 			 }
 		}
 	}
-	
+
 }
 
 var international = {
@@ -5983,8 +5983,8 @@ var addAllToCart = function (e) {
 // added to mini-cart
 // callback - call back function/handler
 var addToCart = {
-	init: function() { 
-		$('.checkoutminicart').slimscroll(); 
+	init: function() {
+		$('.checkoutminicart').slimscroll();
 		$('.add-to-cart[disabled]').attr('title', $('.availability-msg').text());
 	    //Start JIRA PREV-454, PREV-469 : Application navigation not consistent when click of add to cart button of the Product set page
 	    $('#add-all-to-cart').on('click', addAllToCart);
@@ -6000,7 +6000,7 @@ var addToCart = {
 	add : function (progressImageSrc, postdata, callback) {
 	    // get the data of the form as serialized string
 	    var postdata = postdata;
-	    
+
 	    fbq('track','AddToCart', {
 			content_ids: [postdata.pid],
 			content_type: 'product'
@@ -6028,7 +6028,7 @@ var addToCart = {
 
 	    // handles successful add to cart
 	    var handlerFunc = function (req) {
-	    	
+
 	    	if ( $("#container").hasClass("pt_cart") ) {
 	    		window.location.href = window.location.href;
 	    	}
@@ -6038,7 +6038,7 @@ var addToCart = {
 	        }
 
 	        // replace the content
-	        jQuery('#minicart').html(req); 
+	        jQuery('#minicart').html(req);
 	        addToCart.init();
 	        if($('.minirow').length > 1 && !($('body').hasClass('rapala_device'))){
 	              $('.checkoutminicart').slimscroll({
@@ -6050,7 +6050,7 @@ var addToCart = {
 		  		$('.checkoutminicart').find('.minicarttable').removeClass('miniwithoutScroll');
 		  		$('.minicartcontent').find('.minicarttableheader').removeClass('miniwithoutScrollhead');
 		  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');
-		  		
+
 		  	}
 		  	else {
 		  		$('.minicarttable').find('.theadfixedTop').removeClass('theadfixedTop');
@@ -6059,9 +6059,9 @@ var addToCart = {
 		  		$('.checkoutminicart').find('.minicarttable').addClass('miniwithoutScroll');
 		  		$('.minicartcontent').find('.minicarttableheader').addClass('miniwithoutScrollhead');
 		  		$(".minicarttableheader").css('border-bottom','1px solid #ccc');
-		  		
-	        } 
-	        
+
+	        }
+
 	        if($('body').hasClass('rapala_device')){
 	        	$(".checkoutminicart").find(".minicarttable").removeClass("miniwithoutScroll");
 	        	// $(".minicarttable .tr_rotation:last-child").find('.minirow').css('border','1px');
@@ -6070,7 +6070,7 @@ var addToCart = {
 	        	 $(".minicarttableheader").css('border-bottom','1px solid #ccc');
 	        }
 	        $(".minicarttable .tr_rotation:last-child").find('.minirow').css('border','0px');
-	        
+
 	       if(minicart.suppressSlideDown && minicart.suppressSlideDown()) {
 	            // do nothing
 	            // the hook 'MiniCart.suppressSlideDown()' should have
@@ -6078,7 +6078,7 @@ var addToCart = {
 	        }
 	        else {
 	            minicart.slide();
-	            minicart.setminicarheight();	
+	            minicart.setminicarheight();
 	           if(callback)
 	                callback();
 	        }
@@ -6111,7 +6111,7 @@ var addToCart = {
     	} else {
     		var url = Urls.addProduct;
     	}
-	    
+
 	    $.ajax({
 	        type: "POST",
 	        url: util.ajaxUrl(url),
@@ -6167,7 +6167,7 @@ var Product = function(response) {
 	// once the data is retrieved, it fires VariationsLoaded event so that UI can be refreshed appropriately
 	var loadVariants	= function(thisProduct) {
 		isLoadingVar = true;
-		// build the url and load variants data				
+		// build the url and load variants data
 		ajax.getJson({
 			url		: Urls.getVariants,
 			data	: {"pid": thisProduct.pid, "format": "json"},
@@ -6182,20 +6182,20 @@ var Product = function(response) {
 			}
 		});
 	}
-	
+
 	// helper function to reload availability data.
 	// by default, availability data is based on a quantity of 1.
-	// if a customer changes the quantity, use this method 
+	// if a customer changes the quantity, use this method
 	// to reload the availability based on the new quantity.
 	var reloadAvailability = function(thisProduct, quantity) {
-		
+
 		var id = "";
 		if(thisProduct.master || thisProduct.variant) {
 			id = thisProduct.selectedVar.id;
 		} else {
 			id = thisProduct.pid;
 		}
-		
+
 		ajax.getJson({
 			url		: Urls.getAvailability,
 			data	: {"pid": id, "Quantity": quantity, "format": "json"},
@@ -6220,10 +6220,10 @@ var Product = function(response) {
 		});
 
 	}
-	// returns the aggregate available to sell value 
+	// returns the aggregate available to sell value
 	// from all variants
-	var getATS = function(variants) { 
-		
+	var getATS = function(variants) {
+
 		var atsCount = 0;
 		var variant;
 		for (var i=0; i<variants.length; i++) {
@@ -6235,10 +6235,10 @@ var Product = function(response) {
 		return atsCount;
 	}
 
-	// returns the aggregate available to sell value 
+	// returns the aggregate available to sell value
 	// from all variants
-	var getAvailability = function(variants) { 
-		
+	var getAvailability = function(variants) {
+
 		var available = false;
 		var variant;
 		for (var i=0; i<variants.length; i++) {
@@ -6266,11 +6266,11 @@ var Product = function(response) {
 				thisProduct.selectedPrice[this.id] = vals[1];
 				thisProduct.showUpdatedPrice(computePrice(thisProduct), model.pricing.standard);
 			});
-			
+
 			// let us get the currently selected value and intilize the ui
 			pdpOpt.each(function(i) {
 				var vals = this.options[this.selectedIndex].value.split("%?%"); // 0 = value, 1 = price
-				
+
 				thisProduct.selectedOptions[this.id] = vals[0];
 				thisProduct.selectedPrice[this.id] = vals[1];
 				thisProduct.showUpdatedPrice(computePrice(thisProduct), model.pricing.standard);
@@ -6285,44 +6285,44 @@ var Product = function(response) {
 				if (thisProduct.selectedVar == null) {
 					return false;
 				}
-				
+
 				// it is necessary to update the option id to be variant-specific
 				jQuery(thisProduct.containerId+" .product_options:last select").each(function(){
 					 var value = thisProduct.selectedOptions[this.id];
 					 var newId = this.id.replace(thisProduct.pid, thisProduct.selectedVar.id);
-					 thisProduct.selectedOptions[newId] = value; 
+					 thisProduct.selectedOptions[newId] = value;
 					 delete thisProduct.selectedOptions[this.id];
 					});
-											
+
 				thisProduct.selectedOptions.pid = thisProduct.selectedVar.id;
-				thisProduct.selectedOptions.masterPid = thisProduct.pid;						
+				thisProduct.selectedOptions.masterPid = thisProduct.pid;
 			}
 			else {
 				// check if we are adding a bundle/productset to the cart
-				if (model.bundle || model.productSet) {							
+				if (model.bundle || model.productSet) {
 					var subProducts = thisProduct.subProducts;
 					var comma 		= ",";
 					var tempQty 	= "";
 					var subproduct 	= null;
-					
+
 					thisProduct.selectedOptions.childPids = "";
-												
+
 					if (model.productSet) {
 						thisProduct.selectedOptions.Quantity = "";
 					}
-					
+
 					// process each individual products in the set/bundle
 					// and prepare product.selectedOptions for final submission
 					for (var i = 0; i < subProducts.length; i++) {
 						subproduct = subProducts[i];
-						
+
 						if (i == subProducts.length - 1) {
 							comma = ""; // at the end of the list
 						}
-						
+
 						// see if any of the sub products are variations, if so then get the selected variation id
 						// from selectedVar property and make it a comma separated list
-						if (subproduct.variant || subproduct.master) {									
+						if (subproduct.variant || subproduct.master) {
 							if (subproduct.selectedVar == null) {
 								return false;
 							}
@@ -6331,20 +6331,20 @@ var Product = function(response) {
 						else {
 							thisProduct.selectedOptions.childPids += subproduct.pid+comma;
 						}
-						
+
 						var tempPid = subproduct.selectedOptions.pid;
 						subproduct.selectedOptions.pid = null;
 						// merge selected options of sub product with the main product
 						thisProduct.selectedOptions = jQuery.extend({}, thisProduct.selectedOptions, subproduct.selectedOptions);
 						subproduct.selectedOptions.pid = tempPid;
-						
+
 						// if it is a product set then sub products can have their separate qty
 						if (model.productSet) {
 							tempQty += subproduct.selectedOptions.Quantity+comma;
 						}
 					}
 				}
-				
+
 				// if it is a product set then sub products can have their separate qty
 				// tempQty is a comma separated list of qty for each product in the set
 				if (model.productSet) {
@@ -6361,14 +6361,14 @@ var Product = function(response) {
 			else if (!model.productSet) {
 				// grab the user entered qty
 				thisProduct.selectedOptions.Quantity = jQuery(thisProduct.containerId+" .quantityinput:last").val();
-				 
+
 			}
-			
+
 			// if it is not a productset then make sure qty is specified greater than 0
 			if (model.productSet || thisProduct.selectedOptions.Quantity > 0) {
 				// disable a2c button
 				addToCartBtn.prop("disabled", true);
-				
+
 				// close the quick view when user clicks A2C.
 				if( $("#QuickViewDialog").length > 0 ) {
 					$('#QuickViewDialog').dialog('close');
@@ -6377,7 +6377,7 @@ var Product = function(response) {
 				// then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
 				var event = jQuery.Event("AddToCart");
 				event.selectedOptions = thisProduct.selectedOptions;
-				
+
 				(jQuery.event.global["AddToCart"] == undefined || jQuery.event.global["AddToCart"] == null) ? addToCart.add( "", thisProduct.selectedOptions, function(){addToCartBtn.prop("disabled",false)} ) : jQuery(document).trigger(event);
 			}
 			return false;
@@ -6387,12 +6387,12 @@ var Product = function(response) {
 	}
 
 	// bind qty box keyup handler
-	// the handler grabs the value and updates 
+	// the handler grabs the value and updates
 	// product.selectedOption.Quantity
 	// show the updated availabilty message in case the available qty is different than available etc.
 	// trigger AddtoCartEnabled event
-	var getQtyBox 		= function(thisProduct) {				
-		
+	var getQtyBox 		= function(thisProduct) {
+
 		jQuery(thisProduct.containerId+" .quantityinput:last").keyup(function(e){
 			var val = null;
 			try {
@@ -6401,7 +6401,7 @@ var Product = function(response) {
 
 			if (val) {
 				thisProduct.selectedOptions.Quantity = val;
-				
+
 				// if the product has variations check for non selected ones and display missing value
 				if (model.variations != undefined) {
 					var nonSelectedVars = [];
@@ -6412,25 +6412,25 @@ var Product = function(response) {
 							nonSelectedVars.push(this.name);
 						}
 					});
-					
+
 					if (nonSelectedVars.length > 0) {
-						
+
 						// make sure there is something to sell
 						var atsCount = getATS(model.variations.variants);
 						if (atsCount == 0) {
 							return;
 						}
-						
+
 						var tooltipStr = getNonSelectedTooltip(nonSelectedVars);
 						var missingMsg = $.validator.format(Resources["MISSING_VAL"], tooltipStr);
 						setAvailabilityMsg(missingMsg);
 						return;
 					}
 				}
-				
+
 				// If the quantity value is different than
 				// when we loaded the availability data, then
-				// refresh availability data for this variant 
+				// refresh availability data for this variant
 				if (val != thisProduct.getAvailabilityQty()) {
 					reloadAvailability(thisProduct, val);
 				}
@@ -6439,10 +6439,10 @@ var Product = function(response) {
 				//jQuery(thisProduct).trigger("AddtoCartEnabled");
 			}
 		});
-		
+
 		// grab the currently displayed value basically the initial displayed value
 		thisProduct.selectedOptions.Quantity = jQuery(thisProduct.containerId+" .quantityinput:last").val();
-		
+
 		if (!isLoadingVar) {
 			// show proper availability message
 			setAvailabilityMsg(createAvMessage(thisProduct, thisProduct.selectedOptions.Quantity));
@@ -6464,11 +6464,11 @@ var Product = function(response) {
 		});
 	}
 
-	
+
 	// register initializations here
 	//show and hide handling of specific country.
-	if(typeof geoip_country_code == 'function') {
-		var IP_GeoCode = geoip_country_code();
+	if(typeof geoipCountryCode == 'function') {
+		var IP_GeoCode = geoipCountryCode();
 		var allowed_countries = $(".allowed-countries").text();
 		if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){
 			allowed_countries = "US";
@@ -6477,22 +6477,22 @@ var Product = function(response) {
 			$(".addtowishlist").addClass("hide");
 		 }
 	}
-	
+
 	// bind addtowishlist, giftregistry, send to friend click handlers
 	// bind handlers to AddtoCartDisabled, AddtoCartEnabled events for disabling/enabling wishlist/gift registry links
 	var getMiscLinks 	= function(thisProduct) {
-	
+
 		var disablelinks = function() {
 			if ((model.master || model.variant) && thisProduct.selectedVar == null) {
 				// disable wishlist/gift registry links for master products
 				jQuery(thisProduct.containerId+" .addtowishlist, "+thisProduct.containerId+" .addtoregistry").addClass("unselectable");
 			}
 		}
-		
+
 		disablelinks(); // call it for initial display and then register it with AddtoCartDisabled event
-		
+
 		jQuery(thisProduct).bind("AddtoCartDisabled", {}, disablelinks);
-		
+
 		jQuery(thisProduct).bind("AddtoCartEnabled", {}, function(e, source){
 			// enable wishlist/gift registry links for variant products
 			jQuery(thisProduct.containerId+" .addtowishlist, "+thisProduct.containerId+" .addtoregistry").removeClass("unselectable");
@@ -6500,22 +6500,22 @@ var Product = function(response) {
 
 		// listen for availability reload events
 		jQuery(thisProduct).bind("ReloadAvailability", {}, function(e) {
-			// update the availability message	
+			// update the availability message
 			var variant = e.target.selectedVar;
 			setAvailabilityMsg(createAvMessage(e.target, (variant == null ? model.avStatusQuantity : variant.avStatusQuantity)));
 			jQuery(e.target).trigger("AddtoCartEnabled");
-			
+
 		});
 
-		
+
 		// Add to wishlist, Add to gift registry click handler
-		
+
 		jQuery(thisProduct.containerId+" .addtowishlist a.auth").click(function(e) {
 			// append the currently selectied options to the url
-			
+
 			// create a local copy of the selected options
 			var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
-			
+
 			if (model.master || model.variant) {
 				if (thisProduct.selectedVar != null) {
 					selectedOptions.pid = thisProduct.selectedVar.id;
@@ -6527,9 +6527,9 @@ var Product = function(response) {
 			else {
 				selectedOptions.pid = thisProduct.pid;
 			}
-			
+
 			var tempUrl = this.href;
-			
+
 			if (!(tempUrl.indexOf("?") > 0)) {
 				tempUrl = tempUrl + "?";
 			}
@@ -6540,13 +6540,13 @@ var Product = function(response) {
 			var url = tempUrl + jQuery.param(selectedOptions);
 			$.ajax({
 				type : "GET",
-				url : url, 
+				url : url,
 				dataType : "html",
-				success : function () { 
+				success : function () {
 					jQuery('#pdpMain .addtowishlist .addtowish-tooltip').fadeIn(400).delay(1500).fadeOut(400);
 				},
-				failure : function () { 
-					alert("${Resource.msg('global.serverconnection','locale',null)}");	
+				failure : function () {
+					alert("${Resource.msg('global.serverconnection','locale',null)}");
 				}
 			});
 			setTimeout(function () {
@@ -6554,15 +6554,15 @@ var Product = function(response) {
 				}, 1500);
 			//window.location = tempUrl + jQuery.param(selectedOptions);
 			return false;
-		});	
-		
+		});
+
 		// Add to wishlist, Add to gift registry click handler
 		jQuery(thisProduct.containerId+" .addtowishlist a.non-auth, "+thisProduct.containerId+" .addtoregistry a").click(function(e) {
 			// append the currently selectied options to the url
-			
+
 			// create a local copy of the selected options
 			var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
-			
+
 			if (model.master || model.variant) {
 				if (thisProduct.selectedVar != null) {
 					selectedOptions.pid = thisProduct.selectedVar.id;
@@ -6574,9 +6574,9 @@ var Product = function(response) {
 			else {
 				selectedOptions.pid = thisProduct.pid;
 			}
-			
+
 			var tempUrl = this.href;
-			
+
 			if (!(tempUrl.indexOf("?") > 0)) {
 				tempUrl = tempUrl + "?";
 			}
@@ -6587,12 +6587,12 @@ var Product = function(response) {
 			//var url = tempUrl + jQuery.param(selectedOptions);
 			window.location = tempUrl + jQuery.param(selectedOptions);
 			return false;
-		});	
-						
+		});
+
 		jQuery(thisProduct.containerId+" .sendtofriend").click(function(e) {
 			 // create a local copy of the selected options
             var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
-            
+
             if ((model.master || model.variant) && thisProduct.selectedVar != null) {
                         selectedOptions.pid = thisProduct.selectedVar.id;
             }
@@ -6604,7 +6604,7 @@ var Product = function(response) {
             return false;
 		} );
 	}
-	
+
 	// binds product reviews click handlers
 	// read review link opens reviews tab
 	var getRatingSection = function(containerId) {
@@ -6620,19 +6620,19 @@ var Product = function(response) {
 	// based on availability status, creates a message
 	// param val - the stock value to compare i.e. qty entered by user
 	var createAvMessage = function(thisProduct, val) {
-			
+
 		var avStatus 	= thisProduct.getAvStatus(); // availability status
 		var avMessage 	= Resources[avStatus];
 		var ats 		= thisProduct.getATS(); // get available to sell qty
 		var avLevels	= thisProduct.getAvLevels();
 		var nonCloseoutLowQtyThreshold = thisProduct.getNonCloseoutLowQtyThreshold();
-		
+
 		// get ats levels per-status
 		var inStockLevel = avLevels[Constants.AVAIL_STATUS_IN_STOCK];
 		var backOrderLevel = avLevels[Constants.AVAIL_STATUS_BACKORDER];
 		var preOrderLevel = avLevels[Constants.AVAIL_STATUS_PREORDER];
 		var notAvailLevel = avLevels[Constants.AVAIL_STATUS_NOT_AVAILABLE];
-		
+
 		if (avStatus === Constants.AVAIL_STATUS_IN_STOCK) {
 			avMessage = "<span class='in-stock'>" + avMessage + "</span>";
 		}
@@ -6649,7 +6649,7 @@ var Product = function(response) {
 			avMessage = avMessage + getInStockDateMsg(thisProduct);
 		}
 		else if (val > inStockLevel && avStatus !== Constants.AVAIL_STATUS_NOT_AVAILABLE) {
-			
+
 			avMessage = "";
 			if (inStockLevel > 0) {
 				avMessage = avMessage + "<span class='in-stock'>" + $.validator.format(Resources["QTY_"+Constants.AVAIL_STATUS_IN_STOCK], inStockLevel) + "</span>";
@@ -6663,37 +6663,37 @@ var Product = function(response) {
 				avMessage = avMessage + $.validator.format(Resources["QTY_"+Constants.AVAIL_STATUS_PREORDER], preOrderLevel);
 				// uncomment the following line to display availability message with back order information
 				// avMessage = avMessage + getInStockDateMsg(thisProduct);
-			} 
+			}
 		}
-		else if (ats !== 0 && ats <= nonCloseoutLowQtyThreshold) {				
+		else if (ats !== 0 && ats <= nonCloseoutLowQtyThreshold) {
 			avMessage = "<span class='low'>" + $.validator.format(Resources["LOW"], nonCloseoutLowQtyThreshold) + "</span>";
 		}
 		if(thisProduct.selectedVar != null) {
-			var standardPrice 	= Number(thisProduct.selectedVar.pricing.standard || 0);	
+			var standardPrice 	= Number(thisProduct.selectedVar.pricing.standard || 0);
 		} else {
-			var standardPrice 	= Number(model.pricing.standard || 0);	
-			
+			var standardPrice 	= Number(model.pricing.standard || 0);
+
 		}
 		var salePrice 		= Number(computePrice(thisProduct) || 0);
-		
+
 		if(standardPrice === 0 && salePrice === 0){
 			if(thisProduct.selectedVar != null){
 				if(thisProduct.selectedVar.earlyBirdMessage != ""){
-					avMessage = "<span class='coming-soon'>" + thisProduct.selectedVar.earlyBirdMessage + "</span>";	
+					avMessage = "<span class='coming-soon'>" + thisProduct.selectedVar.earlyBirdMessage + "</span>";
 				}else{
 					avMessage = "";
 				}
 			}else{
 				if($(".ebm-std-prod").length >0 && $.trim($(".ebm-std-prod").text()) != ""){
-					avMessage = "<span class='coming-soon'>" + $(".ebm-std-prod").text() + "</span>";	
+					avMessage = "<span class='coming-soon'>" + $(".ebm-std-prod").text() + "</span>";
 				}else{
 					avMessage = "";
 				}
-			}					
+			}
 		}
 		return avMessage;
 	}
-	
+
 	// helper function that returns the in-stock date
 	var getInStockDateMsg = function(product) {
 		var msg = "";
@@ -6710,8 +6710,8 @@ var Product = function(response) {
 
 	/**
 	 * Private. Computes price of a given product instance based on the selected options.
-	 * 
-	 * @param thisProduct - the product instance 
+	 *
+	 * @param thisProduct - the product instance
 	 * @return price of the product to 2 decimal points.
 	 */
 	var computePrice = function(thisProduct) {
@@ -6741,22 +6741,22 @@ var Product = function(response) {
 				 target.html(data);
 			 }
 		 });
-	});	
+	});
 	// bind click handlers for prev/next buttons on pdp from search
 	var getNavLinks = function() {
-		
+
 		// NOTE:  WE COMMENT THIS OUT BECAUSE POWER REVIEWS RENDERING LIBRARY DOES NOT
-		// WORK IN SOME BROWSERS WHEN A PRODUCT DETAIL PAGE IS PARTIALLY RELOADED USING AJAX.  
-		// IF WE DO NOT BIND EVENTS, THEN THE PREV/NEXT ANCHORS JUST WORK AS STANDARD 
-		// HYPERLINKS AND POWERREVIEWS WORKS FINE.	
-		
+		// WORK IN SOME BROWSERS WHEN A PRODUCT DETAIL PAGE IS PARTIALLY RELOADED USING AJAX.
+		// IF WE DO NOT BIND EVENTS, THEN THE PREV/NEXT ANCHORS JUST WORK AS STANDARD
+		// HYPERLINKS AND POWERREVIEWS WORKS FINE.
+
 		// bind events
 		//jQuery(".productnavigation a").click(function(e) {
 		//	app.getProduct({url: this.href, source: "search"});
 		//	return false;
 		//});
 	}
-	
+
 	// size chart link click binding
 	var getSizeChart = function() {
 		jQuery(".attributecontentlink").click(function(e){
@@ -6765,30 +6765,30 @@ var Product = function(response) {
 			if (jQuery("#sizeChartDialog").length == 0) {
 				jQuery("<div/>").attr("id", "sizeChartDialog").appendTo(document.body);
 			}
-			
+
 			var sizeChartDialog = dialog.create({id: 'sizeChartDialog', options: {
 		    	height: 530,
 		    	width: 800,
 		    	title: Resources["SIZECHART_TITLE"]
 			}});
-			
+
 			sizeChartDialog.dialog('open');
-			
+
 			// make the server call to load the size chart html
 			$("#sizeChartDialog").load(this.href);
-			
+
 			return false;
 		});
-		
-		$(".product-specifications").ready(function(){	
+
+		$(".product-specifications").ready(function(){
 			$(".product-specifications").load(jQuery('.attributecontentlink').attr("href"));
 		});
-	}	
+	}
 	// build the tooltip string for non selected variations
 	var getNonSelectedTooltip = function(nonSelectedVars) {
 		var tooltipStr = '';
 		var nsLen = nonSelectedVars.length;
-		if (nsLen == 1 || nsLen == 2) {					
+		if (nsLen == 1 || nsLen == 2) {
 			tooltipStr = nonSelectedVars.join(" & ");
 		}
 		else {
@@ -6799,14 +6799,14 @@ var Product = function(response) {
 				}
 				else {
 					tooltipStr += nonSelectedVars[i] + ", ";
-				} 
+				}
 			}
-		}		
+		}
 
 		return tooltipStr;
 	}
-	
-				
+
+
 	// Product instance
 	return  {
 		pid					: model.ID,
@@ -6814,34 +6814,34 @@ var Product = function(response) {
 		variant				: model.variant,
 		master				: model.master,
 		bundled				: model.bundled,
-		selectedVarAttribs	: {}, // object containing variation attributes values as name value e.g. {color: "blue", size: "3", width: ""}				
+		selectedVarAttribs	: {}, // object containing variation attributes values as name value e.g. {color: "blue", size: "3", width: ""}
 		selectedVar			: null, // currently selected variant
 		selectedOptions		: {}, // holds currently selected options object {optionName, selected val}
 		selectedPrice		: {}, // holds prices for selected options as {warranty: ""}
 		containerId			: null, // holds the html container id of this product
-		subProducts			: [], // array to keep sub products instances 
+		subProducts			: [], // array to keep sub products instances
 		bonusProduct		: false,
-		
+
 		/**
 		 * Enable Add to Cart Button.
 		 */
 		enableA2CButton: function() {
 			jQuery(this.containerId+" .addtocart input, "+this.containerId+" .addtocartbutton:last").prop('disabled',false);
 			jQuery(this.containerId+" .addtocartbutton:last, "+this.containerId+" .addtocart").removeClass("disabled");
-			
+
 		},
-		
+
 		/**
 		 * Disable Add to Cart Button.
 		 */
 		disableA2CButton: function() {
 			jQuery(this.containerId+" .addtocart input, "+this.containerId+" .addtocartbutton:last").prop('disabled',true);
 			jQuery(this.containerId+" .addtocartbutton:last, "+this.containerId+" .addtocart").addClass("disabled");
-			
+
 		},
-		
+
 		removeA2CButton: function() {
-			
+
 			jQuery('.addtocart').css('display','none');
 			jQuery('.productinfo .price').css('display','none');
 			if(ProductCache.master) {
@@ -6877,12 +6877,12 @@ var Product = function(response) {
 		setBonusProduct		: function(bonusProduct) {
 			this.bonusProduct = bonusProduct;
 		},
-		
+
 		// determine if this product is part of a bundle/product set VIEW
 		isBonusProduct		: function() {
 			return this.bonusProduct;
 		},
-		
+
 		// determine if this product is part of a bundle/product set VIEW
 		isSubProduct		: function() {
 			return (model.bundled || model.productSetProduct);
@@ -6892,31 +6892,31 @@ var Product = function(response) {
 		showSelectedVarAttrVal: function(varId, val) {
 			jQuery(this.containerId+" .variationattributes div:not(.clear)").each(function(){
 				var id = jQuery(this).data("data");
-				
+
 				if (varId === id) {
 					jQuery(this).find('span.selectedvarval').html(val);
 				}
 			});
 		},
-		
+
 		// selects review tab
 		readReviews: function() {
 			jQuery(this.containerId+" #tabs").tabs("select", "pdpReviewsTab");
 		},
-		
+
 		// shows product images and thumbnails
 		// @param selectedVal - currently selected variation attr val
 		// @param vals - total available variation attr values
 		showImages: function(selectedVal, vals)  {
 			var that = this;
 			vals = vals || {};
-			
-			// show swatch related images for the current variation value					
+
+			// show swatch related images for the current variation value
 			jQuery.each(vals, function(){
 				var imgCounter = -1;
 				var thisVal = this;
 				if (this.val === selectedVal && this.images) {
-					
+
 					if (this.images.small.length > 0) {
 						jQuery(that.containerId+" .productthumbnails:last").html("");
 						/**
@@ -6928,11 +6928,11 @@ var Product = function(response) {
 						$("body").find('.MagicZoom img').attr('src',zoomimageurl);
 						MagicZoom.update('product-image',zoomimageurl,zoomimageurl);
 						// jQuery(that.containerId+" .productimage").html("").append(jQuery("<img/>").attr("src", thisVal.images.large[0].url).attr("alt", thisVal.images.large[0].alt).attr("title", thisVal.images.large[0].title));
-					}							
-					
+					}
+
 					// make sure to show number of images based on the smallest of large or small as these have to have 1-1 correspondence.
 					var noOfImages = this.images.large.length >= this.images.small.length ? this.images.small.length : this.images.large.length;
-					
+
 					// show thumbnails only if more than 1 or if this is a subproduct (bundled/subproduct)
 					if ((this.images.small.length > 1 || that.isSubProduct()) && !that.isBonusProduct()) {
 						jQuery.each(this.images.small, function(index){
@@ -6975,7 +6975,7 @@ var Product = function(response) {
 						}
 						if ($(window).width() > 480) {
 							if(this.images.small.length > 4) {
-								
+
 								var pdpOwlCarousel = $('.pdp-owl-customization');
 				    	    	pdpOwlCarousel.owlCarousel({
 				    	    		margin:10,
@@ -7073,14 +7073,14 @@ var Product = function(response) {
 			this.showSelectedVarAttrVal(e.data.id, e.data.val || "");
 
 			this.selectedVarAttribs[e.data.id] = e.data.val;
-			
-			// if this is a deselection and user landed on a variant page then reset its variant flag 
+
+			// if this is a deselection and user landed on a variant page then reset its variant flag
 			// as now user has deselected an attribute thus making it essentially a master product view
-			if (e.data.val == null && this.variant) { 
+			if (e.data.val == null && this.variant) {
 				this.variant = false;
 				this.master = true;
 			}
-			
+
 			// store this ref
 			var that = this;
 
@@ -7094,7 +7094,7 @@ var Product = function(response) {
 				var selectedVarAttrs = jQuery.extend({}, {}, this.selectedVarAttribs);
 				var validVariants = null;
 				var unselectedVarAttrs = new Array();
-				
+
 				// for each selected variation attribute find valid variants
 				for (var selectedVar in selectedVarAttrs) {
 					if (selectedVarAttrs[selectedVar]) {
@@ -7107,13 +7107,13 @@ var Product = function(response) {
 				// update each variation attribute display
 				jQuery.each(model.variations.attributes, function () {
 					if ((this.id != e.data.id || e.data.val == null) && selectedVarAttrs[this.id] == null) {
-						that.varAttrDisplayHandler(this.id, validVariants);								
+						that.varAttrDisplayHandler(this.id, validVariants);
 					}
 					else if (this.id != e.data.id && selectedVarAttrs[this.id] != null) {
 						that.varAttrDisplayHandler(this.id, selectedVarAttrVariants);
 					}
 					else {
-						// show swatch related images for the current value								
+						// show swatch related images for the current value
 						that.showImages(e.data.val, this.vals);
 					}
 				});
@@ -7160,7 +7160,7 @@ var Product = function(response) {
 			});
 			jQuery(this.containerId + " .variationattributes .variantdropdown select").not(".current select").not(".selected select").each(function(){
 				var $select = jQuery(this);
-				var vaId = $select.data("data").id;  // data is id set via app.hiddenData api							 
+				var vaId = $select.data("data").id;  // data is id set via app.hiddenData api
 					var options = $select.data('options');
 					if(!options) {
 						options = [];
@@ -7171,10 +7171,10 @@ var Product = function(response) {
 				        $select.data('options', options);
 					}
 					var len = options.length;
-					var selectedVal = $select.val(); 
+					var selectedVal = $select.val();
 					$select.empty();
 					jQuery.each(options, function(index, value){
-						
+
 						if (len > 1 && index == 0) {
 							$select.append(
 									jQuery('<option></option>').text(value.text).val(value.value)
@@ -7191,7 +7191,7 @@ var Product = function(response) {
 						else {
 							// no variant found with this value combination so disable it
 							//this.disabled = true;
-							
+
 							/**if (this.selected) {
 								// remove the currently selected value if the value is not selectable
 								that.showSelectedVarAttrVal(attrId, "");
@@ -7199,17 +7199,17 @@ var Product = function(response) {
 							}*/
 							// remove current selection
 							//this.selected = false;
-						}							
-						
+						}
+
 					});
 					$select.val(selectedVal);
 			});
 		},
-		
+
 		/**
-		* given a variation attribute id and valid variants, it would adjust the ui i.e. enable/disable 
+		* given a variation attribute id and valid variants, it would adjust the ui i.e. enable/disable
 		* appropriate attribute values.
-		* 
+		*
 		* @param attrId - String, id of the variation attribute
 		* @param validVariants - Array of json objects of valid variants for the given attribute id
 		* */
@@ -7227,13 +7227,13 @@ var Product = function(response) {
 			jQuery(this.containerId + " .variationattributes .swatches.future, " + this.containerId + " .variationattributes .swatches.current").each(function(){
 				var $swatch = jQuery(this);
 				var swatchId = $swatch.data("data");  // data is id set via app.hiddenData api
-				
+
 				if (swatchId === attrId && validVariants) {
-					
+
 					$swatch.find("a.swatchanchor").each(function(){
 						var $this = jQuery(this);
 						var parentLi= $this.parent();
-						
+
 						// find A variation with this val
 						if($swatch.hasClass("future")) {
 							var filteredVariants = that.findVariations({id:attrId, val:this.title}, futureVariants);
@@ -7272,7 +7272,7 @@ var Product = function(response) {
 						else {
 							// no variant found with this value combination so disable it
 							parentLi.addClass("unselectable");
-							
+
 							if (parentLi.hasClass("selected")) {
 								// remove the currently selected value if the value is not selectable
 								that.showSelectedVarAttrVal(attrId, "");
@@ -7284,13 +7284,13 @@ var Product = function(response) {
 					});
 				}
 			});
-			
+
 			// loop thru all the non-swatches(drop down) attributes
 			jQuery(this.containerId + " .variationattributes .variantdropdown.future select, " + this.containerId + " .variationattributes .variantdropdown.current select").each(function(){
 				var $select = jQuery(this);
 				var vaId = $select.data("data").id;  // data is id set via app.hiddenData api
 				if (vaId === attrId && validVariants) {
-					
+
 					var options = $select.data('options');
 					if(!options) {
 						options = [];
@@ -7304,14 +7304,14 @@ var Product = function(response) {
 					var selectedVal = $select.val();
 					$select.empty();
 					jQuery.each(options, function(index, value){
-						
+
 						if (len > 1 && index == 0) {
 							$select.append(
 									jQuery('<option></option>').text(value.text).val(value.value)
 							);
 							return; // very first option when the length is greater than 1 is 'Select ...' message so skip it
 						}
-						
+
 						// find A variation with this val
 						if($select.closest(".variantdropdown").hasClass("future")) {
 							var filteredVariants = that.findVariations({id:attrId, val:value.value}, futureVariants);
@@ -7332,7 +7332,7 @@ var Product = function(response) {
 						else {
 							// no variant found with this value combination so disable it
 							//this.disabled = true;
-							
+
 							/**if (this.selected) {
 								// remove the currently selected value if the value is not selectable
 								that.showSelectedVarAttrVal(attrId, "");
@@ -7345,7 +7345,7 @@ var Product = function(response) {
 					$select.val(selectedVal);
 				}
 			});
-			
+
 		},
 
 		/**
@@ -7353,7 +7353,7 @@ var Product = function(response) {
 		 */
 		refreshView: function() {
 			var thisProduct = this;
-			
+
 			if (!isLoadingVar && this.selectedVar == null) {
 				// if we have loaded the variations data then lets if the user has already selected some values
 				// find a matching variation
@@ -7371,7 +7371,7 @@ var Product = function(response) {
 				// update price
 				this.showUpdatedPrice(computePrice(thisProduct), this.selectedVar.pricing.standard);
 
-				if (!(!this.selectedVar.inStock && this.selectedVar.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE) && (this.getPrice() > 0 || this.isPromoPrice())) 
+				if (!(!this.selectedVar.inStock && this.selectedVar.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE) && (this.getPrice() > 0 || this.isPromoPrice()))
 				{
 					// Replace the hero shot with the specific variant chosen
 					var varID = this.selectedVar.id;
@@ -7385,7 +7385,7 @@ var Product = function(response) {
 						$("body").find('.MagicZoom img').attr('src',zoomImageUrl);
 						MagicZoom.update('product-image',zoomImageUrl,zoomImageUrl);
 					}
-					
+
 					this.showItemNo();
 					this.showAvailability();
 					// enable add to cart button
@@ -7425,55 +7425,55 @@ var Product = function(response) {
 				// disable add to cart button
 				this.disableA2CButton();
 				jQuery(this).trigger("AddtoCartDisabled");
-				
-				
+
+
 			}
-			
+
 			var nonSelectedVars = [];
-			
+
 			var validVariants = null;
-			
+
 			for (var selectedVar in this.selectedVarAttribs) {
 				if (this.selectedVarAttribs[selectedVar]) {
 					validVariants = this.findVariations({id: selectedVar, val: this.selectedVarAttribs[selectedVar]}, validVariants);
-				}						
+				}
 			}
-				
+
 			// update selected var attr vals and refresh their display
 			jQuery.each(model.variations.attributes, function(){
 				thisProduct.showSelectedVarAttrVal(this.id, thisProduct.selectedVarAttribs[this.id]);
-				
+
 				if (!thisProduct.selectedVarAttribs[this.id] || thisProduct.selectedVarAttribs[this.id] == "" ) {
 					nonSelectedVars.push(this.name);
-					
+
 					thisProduct.varAttrDisplayHandler(this.id, validVariants);
 				}
 			});
-			
+
 			// process non-selected vals and show updated tooltip for A2C button as a reminder
-			// and show it along availability 
-			var tooltipStr = getNonSelectedTooltip(nonSelectedVars);					
+			// and show it along availability
+			var tooltipStr = getNonSelectedTooltip(nonSelectedVars);
 			//var missingvalue = $(".missingvalue").val();
 			if (nonSelectedVars.length > 0) {
 				var availMsg = $.validator.format(Resources.MISSING_VAL, tooltipStr);
 				setAvailabilityMsg(availMsg);
 				//jQuery(thisProduct.containerId+" .addtocartbutton:last").attr("title", availMsg);
-			}					
+			}
 		},
 
 		/**
 		 * renders pricing div given a sale price and optional standard price
 		 * To format the price display, it goes to server via an ajax call.
-		 * 
-		 * @param sale - sale price 
+		 *
+		 * @param sale - sale price
 		 * @param standard - standard price
 		 */
 		showUpdatedPrice: function(sale, standard) {
-			var standardPrice 	= Number(standard || 0);					
+			var standardPrice 	= Number(standard || 0);
 			var salePrice 		= Number(sale || 0);
 			var priceHtml 		= "";
 			var formattedPrices = {"salePrice": salePrice, "standardPrice": standardPrice};
-			
+
 			// send server request to format the money baed on site settings using Money api
 			ajax.getJson({
 				url		: Urls.formatMoney,
@@ -7484,21 +7484,21 @@ var Product = function(response) {
 					formattedPrices = data;
 				}
 			});
-			
+
 			// in case it is a promotional price then we do not care if it is 0
 			priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice">' + formattedPrices.salePrice + '</div>' : ' <div class="salesprice">N/A</div>';
-			
+
 			if (standardPrice > 0 && standardPrice > salePrice) {
 				// show both prices
-				priceHtml = '<div class="standardprice">' + formattedPrices.standardPrice + '</div>' + priceHtml;						
-			}					
+				priceHtml = '<div class="standardprice">' + formattedPrices.standardPrice + '</div>' + priceHtml;
+			}
 			if (standardPrice === 0 && salePrice === 0) {
 				if(this.selectedVar.earlyBirdMessage != ""){
-					priceHtml = '<div class="salesprice">' + this.selectedVar.earlyBirdMessage + '</div>';	
+					priceHtml = '<div class="salesprice">' + this.selectedVar.earlyBirdMessage + '</div>';
 				}else{
 					priceHtml = '<div class="salesprice"></div>';
 				}
-				
+
 			}
 			var $price = jQuery(this.containerId+" .productinfo .price:first");
 			if(!$price.data('originalPrice')) {
@@ -7508,26 +7508,26 @@ var Product = function(response) {
 			// containerId contains #, get rid of it before finding the right price div
 			jQuery(this.containerId+" #pdpATCDiv"+this.containerId.substring(1)+" .price").html(priceHtml);
 		},
-		
+
 		/**
 		 * returns a computed price for this product
-		 */				
+		 */
 		getPrice: function() {
 			return computePrice(this);
 		},
-		
+
 		/**
 		 * Determines if the selected product has promotional price.
-		 * 			 * 
+		 * 			 *
 		 * @return boolean true if promotional price is present otherwise false
 		 */
 		isPromoPrice: function() {
 			return (this.selectedVar != null ? this.selectedVar.pricing.isPromoPrice : model.pricing.isPromoPrice);
 		},
-		
+
 		/**
 		 * receives 2 or 1 variation attribute values and tries to figure out if there is a variant with these values.
-		 * 
+		 *
 		 * @param val1 - variation attribute value
 		 * @param val2 - variation attribute value
 		 * @return boolean - true if a variant exists otherwise false
@@ -7551,7 +7551,7 @@ var Product = function(response) {
 			});*/
 			return false;
 		},
-		
+
 		/**
 		* find 0 or more variants matching the given attribs object(s) and in stock
 		* return null or found variants
@@ -7559,20 +7559,20 @@ var Product = function(response) {
 		findVariations: function(attr, variants) {
 			var foundVariants = new Array();
 			variants = variants || model.variations.variants;
-			
+
 			var variant = null;
 			for (var i=0; i<variants.length; i++) {
 				variant = variants[i];
-				if ((variant.attributes[attr.id] === attr.val) /*&& 
+				if ((variant.attributes[attr.id] === attr.val) /*&&
 						//(variant.inStock || (variant.avStatus === app.constants.AVAIL_STATUS_BACKORDER && variant.ATS > 0) || (variant.avStatus === app.constants.AVAIL_STATUS_PREORDER && variant.ATS > 0))*/
 					) {
 					foundVariants.push(variant);
 				}
 			}
-			
+
 			return foundVariants;
 		},
-		
+
 		/**
 		* find a variant with the given attribs object
 		* return null or found variation json
@@ -7600,7 +7600,7 @@ var Product = function(response) {
 			}
 			return null;
 		},
-		
+
 		// find a variation with the give id otherwise empty object
 		findVariationById: function(id) {
 
@@ -7628,7 +7628,7 @@ var Product = function(response) {
 			}
 			return true;
 		},
-		
+
 		// given an id, return attr definition from model.variations.attributes
 		getAttrByID: function(id) {
 			for (var i=0; i<model.variations.attributes.length; i++) {
@@ -7638,7 +7638,7 @@ var Product = function(response) {
 			}
 			return {};
 		},
-		
+
 		// returns current availability status e.g. in_stock, preorder etc.
 		getAvStatus: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
@@ -7648,7 +7648,7 @@ var Product = function(response) {
 				return model.avStatus;
 			}
 		},
-		
+
 		// return available to sell qty
 		getATS: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
@@ -7658,7 +7658,7 @@ var Product = function(response) {
 				return model.ATS;
 			}
 		},
-		
+
 		// return non-closeout low qty threshold
 		getNonCloseoutLowQtyThreshold: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
@@ -7668,7 +7668,7 @@ var Product = function(response) {
 				return model.nonCloseoutLowQtyThreshold;
 			}
 		},
-		
+
 		// return the quantity that was used to calculate availability
 		getAvailabilityQty: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
@@ -7678,7 +7678,7 @@ var Product = function(response) {
 				return model.avStatusQuantity;
 			}
 		},
-		
+
 		// return the availability levels
 		getAvLevels: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
@@ -7686,10 +7686,10 @@ var Product = function(response) {
 			}
 			else {
 				return model.avLevels;
-			}					
+			}
 		},
-		
-		// returns in stock date 
+
+		// returns in stock date
 		getInStockDate: function() {
 			if ((this.variant || this.master) && this.selectedVar != null) {
 				return this.selectedVar.inStockDate;
@@ -7698,16 +7698,16 @@ var Product = function(response) {
 				return model.inStockDate;
 			}
 		},
-		
+
 		// set the add to cart button and bind handlers for bundle/product set
 		getSubProductsBinding: function() {
 			var thisProduct = this;
-			
+
 			// For bundles and product-sets, enable or disable the add-to-cart button.
 			// The button should be disabled if the add-to-cart button of any subproduct is disabled, enabled otherwise.
 			// For product-sets, display a price which is the sum of the set-products prices as long as the add-to-cart button is enabled.
 			if (model.bundle || model.productSet) {
-				
+
 				var bundleA2CEnabled = false;
 				var price = new Number();
 				for (var i = 0; i < thisProduct.subProducts.length; i++) {
@@ -7716,16 +7716,16 @@ var Product = function(response) {
 					if (!bundleA2CEnabled) {
 						break;
 					}
-					
+
 					// collect price info
 					price += new Number(subProduct.getPrice());
 				}
 
 				// if any of the bundled product has its A2C button disabled then the bundle is not orderable
-				if (!bundleA2CEnabled) {							
+				if (!bundleA2CEnabled) {
 					this.disableA2CButton();
-				} 
-				else {							
+				}
+				else {
 					this.enableA2CButton();
 
 					// show total price except for a bundle
@@ -7734,7 +7734,7 @@ var Product = function(response) {
 					}
 				}
 			}
-			
+
 			// bind AddtoCartDisabled event for each subproduct (bundle or product set)
 			jQuery.each(thisProduct.subProducts, function(){
 				jQuery(this).bind("AddtoCartDisabled", {},
@@ -7746,7 +7746,7 @@ var Product = function(response) {
 					thisProduct.disableA2CButton();
 				});
 			});
-			
+
 			// see if have any sub-products and bind AddtoCartEnabled event
 			jQuery.each(thisProduct.subProducts, function(){
 				jQuery(this).bind("AddtoCartEnabled", {},
@@ -7775,7 +7775,7 @@ var Product = function(response) {
 								else {
 									subProducts[i].selectedOptions.pid = subProducts[i].pid;
 								}
-								
+
 								// Multiply the subproduct quantity-one price by the entered quantity.
 								// Important note:  This value will be incorrect if subproduct uses
 								// tiered pricing !!!!!
@@ -7786,7 +7786,7 @@ var Product = function(response) {
 								price += new Number(subproductQuantity * subProducts[i].getPrice())
 							}
 						}
-						
+
 						if (enableAddToCart && (model.productSet || model.inStock) && (price > 0 || thisProduct.isPromoPrice())) {
 							thisProduct.enableA2CButton();
 
@@ -7800,9 +7800,9 @@ var Product = function(response) {
 						}
 					}
 				);
-			});		
+			});
 		},
-		
+
 		// determine if A2C button is enabled or disabled
 		// true if enabled, false otherwise
 		isA2CEnabled: function() {
@@ -7829,7 +7829,7 @@ var Product = function(response) {
 		 * bind all the product display events and handlers
 		 * load variants in case this is a variation product
 		 * bind subproducts a2c button enable event handler
-		 * 
+		 *
 		 * @param options.cotainerId - id of the containing div
 		 * @param options.source - source of this product show request, mainly quickview
 		 */
@@ -7841,10 +7841,10 @@ var Product = function(response) {
 			// and we need to refresh the ui
 			jQuery(this).bind("VariationsLoaded", {}, function(e, source){
 				// enable/disable unavailable values
-				// and set the currently selected values 
+				// and set the currently selected values
 				// reset the currently selected variation attributes i.e. reset the ui
 				thisProduct.resetVariations();
-				
+
 				// create the default availability message based on ATS count
 				// from the variants
 				var atsCount = getATS(model.variations.variants);
@@ -7875,9 +7875,9 @@ var Product = function(response) {
 							$this.removeClass("selected");
 						}
 					}
-					
+
 				}).each(function(index) {
-					var $this = jQuery(this); 
+					var $this = jQuery(this);
 					if(someAreNotSelected) {
 						$this.removeClass("selected").addClass("future").find(".selected").removeClass("selected");
 						$this.find(".optionwrapper").slideUp();
@@ -7897,14 +7897,14 @@ var Product = function(response) {
 						}
 					}
 				});
-				 
+
 				// Grab the currently selected values and update the UI
 				// swatch variation attributes
 				jQuery(thisProduct.containerId + " .variationattributes .swatches, "+thisProduct.containerId + " .variationattributes .variantdropdown select").each(function(index){
 					if(index===0) {
 						var $swatch = jQuery(this);
 						var swatchId = $swatch.data("data");  // data is id set via app.hiddenData api
-						
+
 						if (model.variations.variants) {
 							if(typeof this.selectedIndex === "undefined") {
 								$swatch.find("a.swatchanchor").each(function(){
@@ -7936,14 +7936,14 @@ var Product = function(response) {
 											if ( $this.find("span").text().indexOf("New") !== -1 ) {
 												$this.find("span").text( $this.find("span").text().replace(" / Out of Stock" , ""));
 											} else {
-												
+
 												$this.find("span").text( $this.find("span").text().replace("Out of Stock" , ""));
 											}
 										}
 									}
 								});
 							} else {
-								
+
 								$swatch.find("option").each(function(){
 									if(this.value !== "") {
 										var filteredVariants = thisProduct.findVariations({id:swatchId.id, val:this.value}, model.variations.variants);
@@ -7955,12 +7955,12 @@ var Product = function(response) {
 							}
 						}
 					}
-					
+
 					if(typeof this.selectedIndex === "undefined") {
 						var thisSwatch 	= jQuery(this),
 							pdpVarId 	= thisSwatch.data("data"); // data is id which is set via app.hiddenData onload
-						
-						// grab the currently selected variation attribute val																
+
+						// grab the currently selected variation attribute val
 						thisSwatch.find(".selected a").each(function(){
 							thisProduct.varAttrSelected({data: {id: pdpVarId, val: this.title}});
 						});
@@ -7976,23 +7976,23 @@ var Product = function(response) {
 				/**
 				// loop thru all non-dropdown ui elements i.e. swatches e.g. color, width, length etc.
 				jQuery(this.containerId + " .variationattributes .swatches").each(function(){
-					
+
 				});*/
 			});
 
-			this.containerId 	= "#"+options.containerId;					
+			this.containerId 	= "#"+options.containerId;
 			var isQuickView 	= false;
 
 			if (options.source && options.source == "quickview") {
 				isQuickView = true;
-				this.containerId 	= ".ui-dialog #"+options.containerId;	
+				this.containerId 	= ".ui-dialog #"+options.containerId;
 			}
-			
+
 			myContainerId = this.containerId;
-			
+
 			// bind click handlers for prev/next links
 			getNavLinks();
-			
+
 			// size chart click binding
 			getSizeChart();
 
@@ -8000,7 +8000,7 @@ var Product = function(response) {
 			if (model.master || model.variant) {
 				loadVariants(this); // make a server call to load the variants, this is due to the performance reasons
 				// meanwhile display the available variation attributes
-				
+
 				// bind the "next" buttons in the picker
 				jQuery("button.next").click(function() {
 					/**var $this = jQuery(this);
@@ -8014,7 +8014,7 @@ var Product = function(response) {
 					});
 					}*/
 				});
-				
+
 				//bind the "previous" buttons in the picker
 				jQuery("a.previous").click(function(e) {
 					e.preventDefault();
@@ -8026,8 +8026,8 @@ var Product = function(response) {
 				});
 				$('.MagicZoom img.primary-image').bind('click', function(e) {
 					$('.new-swim,.old-swim').addClass('swimHide');
-					
-					setTimeout(function(){ 
+
+					setTimeout(function(){
 						var zoomedContent = $('.mz-expand-stage').html();
 						$('.mz-button-close').on('click', function(e) {
 							$('.new-swim,.old-swim').removeClass('swimHide');
@@ -8054,18 +8054,18 @@ var Product = function(response) {
 					});
 					$(this).parent().find(".swatchesdisplay .selected a").click();
 					$(this).parent().find('select').val('');
-					
-					
-					jQuery(".variationattributes").find(".future .optionwrapper").slideUp(400,function() {								 
+
+
+					jQuery(".variationattributes").find(".future .optionwrapper").slideUp(400,function() {
 						jQuery(".current .optionwrapper").slideDown(400, function(){
 							$(this).find('.filter .value').text('');
-						});									
-					});	
-					jQuery(".variationattributes").find(".current .optionwrapper").slideDown(400,function() {								 
-						  $(this).closest('.current').find('.filter .value').text(''); 
+						});
+					});
+					jQuery(".variationattributes").find(".current .optionwrapper").slideDown(400,function() {
+						  $(this).closest('.current').find('.filter .value').text('');
 					});
 				});
-				
+
 				// bind the "learn more" links
 				jQuery("span.learnmore a").click(function(e){
 					e.preventDefault();
@@ -8074,33 +8074,33 @@ var Product = function(response) {
 					if (jQuery("#learnMoreDialog").length == 0) {
 						jQuery("<div></div>").attr("id", "learnMoreDialog").appendTo(document.body);
 					}
-					
+
 					var learnMoreDialog = dialog.create({id: 'learnMoreDialog', options: {
 				    	height: 530,
 				    	width: 800,
 				    	title: Resources["SIZECHART_TITLE"]
 					}});
-					
+
 					learnMoreDialog.dialog('open');
-					
+
 					// make the server call to load the learn more html
 					jQuery("#learnMoreDialog").load(this.href);
 				});
-				
+
 				// loop thru all the swatches and bind events etc.
 				jQuery(thisProduct.containerId + " .variationattributes .swatches").each(function(){
 					var thisSwatch 	= jQuery(this);
 					var pdpVarId 	= thisSwatch.data("data"); // data is id which is set via app.hiddenData onload
 					var attrDef 	= thisProduct.getAttrByID(pdpVarId);
-					
+
 					if (!attrDef) {
 						return;
 					}
-					
+
 					// click handler for swatches links
-					var varEventHandler = function(e){									
+					var varEventHandler = function(e){
 						var thisObj = jQuery(this);
-						
+
 						e.data = {id: pdpVarId, val: this.title};
 
 						if (thisObj.parent().hasClass("unselectable")) {
@@ -8118,59 +8118,59 @@ var Product = function(response) {
 						else {
 							// selection
 							e.data = {id: pdpVarId, val: this.title};
-							// remove the current selection										
+							// remove the current selection
 							thisSwatch.find(".selected").removeClass("selected");
 							if (thisObj.closest(".swatches").nextUntil(".swatches, .variantdropdown").next().size() > 0) {
 								thisObj.parent().addClass("selected").closest(".swatches").find("button").removeClass("non-selectable");
 								var $this = jQuery(this);
 								if(!$this.hasClass("non-selectable")) {
-									$this.closest(".swatches").find(".optionwrapper").slideUp(400,function(){										
-								 
+									$this.closest(".swatches").find(".optionwrapper").slideUp(400,function(){
+
 										 jQuery(this).closest(".swatches").removeClass("current").addClass("selected").nextUntil(".swatches").next().not(".clear").first()
 										.addClass("current").removeClass("future").find(".optionwrapper").slideDown(400,function(){
 											jQuery(this).find("select option").each(function(index){
 													if($(this).closest('select').find('option').length == 2 && index == 1){
-														$(this).prop('selected', true).trigger('change'); 
-														//$(this).attr('selected','selected').trigger('change'); 
+														$(this).prop('selected', true).trigger('change');
+														//$(this).attr('selected','selected').trigger('change');
 													}
 												});
-											 
+
 										}).find('select').change();
-												 
-										 
-											 
+
+
+
 									});
 								}
 							} else {
 								thisObj.parent().addClass("selected");
 							}
 							thisProduct.varAttrSelected(e);
-						}																
-						
+						}
+
 						return false;
 					}
-					
+
 					// all swtach anchors
 					var varJqryObjs = thisSwatch.find("a.swatchanchor");
-					
+
 					// if its a color attr then render its swatches and images
 					if (pdpVarId === "color") {
 						var colorAttrDef = thisProduct.getAttrByID('color');
-						
+
 						varJqryObjs.each(function(){
-						
+
 							// given a variation attr value, find its swatch image url
 							var findSwatch = function(val) {
 								for (var i=0; i<colorAttrDef.vals.length; i++){
-									if (colorAttrDef.vals[i].val === val) {													
+									if (colorAttrDef.vals[i].val === val) {
 										return colorAttrDef.vals[i].images.swatch;
 									}
 								}
 								return ""; // no swatch image found
 							}
-							
+
 							var swatchUrl = (findSwatch(this.title)).url; // find swatch url
-							
+
 							if (swatchUrl && swatchUrl != "") {
 								//jQuery(this).css("color", "transparent").parent().css("background", "url(" + swatchUrl + ")");
 								jQuery(this).css("text-indent", "-9999px").prepend('<img alt="'+this.title+'" src="'+swatchUrl+'"/>');
@@ -8179,12 +8179,12 @@ var Product = function(response) {
 								jQuery(this).css("color", "transparent"); // no swatch image found
 							}
 						});
-						
+
 						// swatches click, hover and mouseleave event handlers
 						varJqryObjs.data("data", {id: pdpVarId}).click(varEventHandler);
 						if ($(window).width() > 1024) {
 							varJqryObjs.data("data", {id: pdpVarId}).mouseenter(function(e){
-								thisProduct.showSelectedVarAttrVal("color", this.title);										
+								thisProduct.showSelectedVarAttrVal("color", this.title);
 								thisProduct.showImages(this.title, colorAttrDef.vals)
 							}).mouseleave(function(e) {
 								if(thisProduct.selectedVar) {
@@ -8196,39 +8196,39 @@ var Product = function(response) {
 								else {
 									thisProduct.showImages("", [{val: "", images: model.images}]);
 								}
-								
+
 								thisProduct.showSelectedVarAttrVal("color", thisProduct.selectedVarAttribs["color"] || "");
 							});
 						}
-						
+
 					}
-					else {								
+					else {
 						// not a color swatch, we only have click handler for this type of variation attribute e.g. width, length etc.
 						varJqryObjs.data("data", {id: pdpVarId}).click(varEventHandler);
 					}
 				});
-				 
-				jQuery(thisProduct.containerId + " .variationattributes .variantdropdown select option").each(function(index){							
+
+				jQuery(thisProduct.containerId + " .variationattributes .variantdropdown select option").each(function(index){
 					if(jQuery(thisProduct.containerId + " .variationattributes .variantdropdown select option").length == 2 && index == 1){
-						$(this).prop('selected', true).trigger('change'); 
+						$(this).prop('selected', true).trigger('change');
 					}
 				});
-				
+
 				// loop thru all the non-swatches attributes and bind events etc.
-				jQuery(thisProduct.containerId + " .variationattributes .variantdropdown select").each(function(){ 
+				jQuery(thisProduct.containerId + " .variationattributes .variantdropdown select").each(function(){
 					// default ui i.e. drop downy
 					jQuery(this).data("data", {id: jQuery(this).data("data"), val: ''}).change(function(e){
 						// if there is only 1 value to be selected then return i.e. no deselection available
 						//if (this.selectedIndex == 0 && this.options.length == 1) { return; }
-						
+
 						e.data = jQuery(this).data("data"); // data is id
 						// this.selectedIndex == 0, it is deselection
 						e.data.val = (this.selectedIndex == 0 && this.options.length > 1) ? null: this.options[this.selectedIndex].value;
-						
+
 						if (this.selectedIndex == 0 && this.options.length > 1) {
 							// deselection
 							//jQuery(this).closest(".variantdropdown").find("button").addClass("non-selectable");
-						} else { 
+						} else {
 							// selection
 							//jQuery(this).closest(".variantdropdown").find("button").removeClass("non-selectable");
 							jQuery(this).closest(".variantdropdown").find(".optionwrapper").slideUp(400,function(){
@@ -8246,7 +8246,7 @@ var Product = function(response) {
 											}).find('select').change();
 							});
 						}
-						
+
 						thisProduct.varAttrSelected(e);
 						if (this.selectedIndex == 0 && this.options.length > 1) {
 							// clear the current selection
@@ -8254,21 +8254,21 @@ var Product = function(response) {
 						}
 					});
 				});
-				
+
 				if (thisProduct.selectedVarAttribs["color"]) {
-					// show swatch related images for the current value								
+					// show swatch related images for the current value
 					thisProduct.showImages(thisProduct.selectedVarAttribs["color"], thisProduct.getAttrByID('color').vals);
 				}
 				else {
-					// show images and bind hover event handlers for small/thumbnails to toggle large image								
+					// show images and bind hover event handlers for small/thumbnails to toggle large image
 					thisProduct.showImages("", [{val: "", images: model.images}]);
 				}
 			}
 			else {
-				// show images and bind hover event handlers for small/thumbnails to toggle large image								
+				// show images and bind hover event handlers for small/thumbnails to toggle large image
 				thisProduct.showImages("", [{val: "", images: model.images}]);
 			}
-			
+
 			// bind product options event(s)
 			getOptionsDiv(this);
 
@@ -8288,9 +8288,9 @@ var Product = function(response) {
 			// if the price is 0 or not available, its disabled
 			// if not in stock, its disabled
 			// isPromoPrice would be true in case if a product has a promotional price which could make product's price 0
-			if (!(this.getPrice() > 0 || this.isPromoPrice()) || 
-				model.master || model.variant || model.productSet || model.bundle || 
-				(!model.inStock && model.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE && !model.productSet)) {						
+			if (!(this.getPrice() > 0 || this.isPromoPrice()) ||
+				model.master || model.variant || model.productSet || model.bundle ||
+				(!model.inStock && model.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE && !model.productSet)) {
 				this.disableA2CButton();
 				/** if((this.getPrice() == 0 && !this.isPromoPrice())) {
 					this.hideAvailability();
@@ -8303,20 +8303,20 @@ var Product = function(response) {
 
 			// customer rating section only displayed for the main product
 			if (!model.productSetProduct && !model.bundled) {
-				if (!model.productSet && !isQuickView && !model.bundle) {							
-					getRatingSection(this.containerId);							
+				if (!model.productSet && !isQuickView && !model.bundle) {
+					getRatingSection(this.containerId);
 				}
 			}
-			
+
 			// wish list, sent to friend, add to gift
 			getMiscLinks(this);
 
 			// product tabs
-			getTabs(this.containerId);		
-			
+			getTabs(this.containerId);
+
 			// setup bundle/product set
 			this.getSubProductsBinding();
-			
+
 			},
 		toString: function() {
 			return this.model;
@@ -8339,7 +8339,7 @@ var quickviewShow = function(options) {
     });
     quickViewDialog.dialog("open");
     progress.show("#QuickViewDialog");
-    
+
 	$.ajax({
 		url: url,
 		success: function(data){
@@ -8484,8 +8484,8 @@ var pdpEvents = {
 	                  {
 	                       $('.pdprecomo-owl').find('.owl-prev, .owl-next').show();
 	                       $('.pdprecomo-owl').find('.owl-dots').show();
-	                     
-	                  } 
+
+	                  }
 	                  else
 	                  {
 	                	  $('.pdprecomo-owl').find('.owl-prev, .owl-next').hide();
@@ -8544,16 +8544,16 @@ var rapalainsider= {
            	 	vipform = $('.VipinsiderForm');
            var validatorinit = $(this).closest('form').validate();
            $('#PasswordReset123').click(function(e){
-		                e.preventDefault(); 
+		                e.preventDefault();
 		                $vipinsider.load(Urls.vipInsider, function(){
 			            	$vipinsider.dialog({
 			                   bgiframe: true,
 			                   autoOpen: false,
-			                   modal: true, 
-			                   overlay: {                    
+			                   modal: true,
+			                   overlay: {
 			                       opacity: 0.5,
 			                       background: "white"
-			                   }, 
+			                   },
 			                   width: 358,
 			                   dialogClass: 'vipInsider-dlg',
 			                   resizable: false,
@@ -8577,10 +8577,10 @@ var rapalainsider= {
 			        	    	      e.preventDefault();
 			        	    	      var filename = $(this).attr('data-file');
 			        	    	      var form = $(this).closest('form');
-			        	    	      var url= form.attr('action'); 
-			        	    	      var finalURL = util.appendParamToURL(url,'filename',filename); 
+			        	    	      var url= form.attr('action');
+			        	    	      var finalURL = util.appendParamToURL(url,'filename',filename);
 			        	    	      ajax.load({
-			        	         			url: finalURL, 
+			        	         			url: finalURL,
 			        	     				callback : function () {
 			        	     				  }
 			        	     			});
@@ -8591,7 +8591,7 @@ var rapalainsider= {
 			               $(window).scrollTop(0);
 			           });
 		    });
-    },  
+    },
     dialogEvents: function(){
     	var $vipinsider = $('.vipinsider-container'),
    	 	vipform = $('.VipinsiderForm');
@@ -8614,7 +8614,7 @@ var rapalainsider= {
 				jQuery("#msgcontianer").remove();
 				 $("<div/>").attr("id", "msgcontianer").html(" ").appendTo(document.body);
 				 ajax.load({
-					url: vipURL, 
+					url: vipURL,
 					data: vipData,
 					type: "POST",
 					callback : function (vipData) {
@@ -8629,10 +8629,10 @@ var rapalainsider= {
 		                   bgiframe: true,
 		                   autoOpen: false,
 		                   modal: true,
-		                   overlay: {                    
+		                   overlay: {
 		                       opacity: 0.5,
 		                       background: "white"
-		                   }, 
+		                   },
 		                   width: width,
 		                   height: height,
 		                   dialogClass: 'vipInsider-dlg '+dlgClass,
@@ -8644,7 +8644,7 @@ var rapalainsider= {
 					   	 $('.vipInsider-dlg.ui-dialog.existinguserdlg button.close, .vipInsider-dlg.ui-dialog.newuserdlg button.close').on("click",function(e){
 							 e.preventDefault();
 							 $(this).closest(".ui-dialog").find(".ui-dialog-titlebar-close").trigger("click");
-						 }); 
+						 });
 					  }
 				});
 			 });
@@ -8656,21 +8656,21 @@ var rapalainsider= {
 			 if($(this).closest(".vip-uploadform-holder").find(".empty-attachment-error").is(":visible")){
 				 $(this).closest(".vip-uploadform-holder").find(".empty-attachment-error").addClass("hide");
 			 }
-		 }); 
-		    //VIP insider dropdown change   
+		 });
+		    //VIP insider dropdown change
 		 $(".fieldstaff form").find(".dyn-cat-select select").off("change").on("change", function(e){
 		    	e.preventDefault();
 		    	var $curObj = $(this);
 		    	if( $(this).closest(".dyn-cat-select").find(".sbHolder").length > 0 ) {
-		    		var selectedText = $(this).closest(".dyn-cat-select").find(".sbSelector").text(); 
+		    		var selectedText = $(this).closest(".dyn-cat-select").find(".sbSelector").text();
 		    		var prodid = $(this).find('option[label="'+selectedText+'"]').attr("value");
 		    	}
 		    	else {
 		    		var prodid = $(this).find(':selected').val();
 		    	}
-		    	//alert($(this).find(':selected').val()); 
+		    	//alert($(this).find(':selected').val());
 		    	var url =  Urls.vipInsiderDynamicForms;
-		
+
 		    	if(prodid == 'field' || prodid == 'sports' || prodid == 'industry' || prodid == 'donation'){
 		    		if (prodid == 'sports'){
 		    			$('.vip-uploadform-holder').find('span.text-holder-upload').replaceWith('<span class="text-holder-upload">*Upload Business Card or Pay Stub</span>' );
@@ -8693,11 +8693,11 @@ var rapalainsider= {
 				}else{
 					$('.vip-uploadform-holder').addClass('hide');
 				}
-		    	
+
 		    	if(prodid != undefined && prodid != null && prodid.length>0){
 					 url = url+"?prodid="+prodid;
 				}else {return false};
-				
+
 				progress.show($(".fieldstaff form"));
 				ajax.load({
 					url: url,
@@ -8720,7 +8720,7 @@ var rapalainsider= {
 		                 		type:'opacity'
 		                 	});
 							if( $curObj.closest(".dyn-cat-select").find(".sbHolder").length > 0 ) {
-					    		var selectedText = $curObj.closest(".dyn-cat-select").find(".sbSelector").text(); 
+					    		var selectedText = $curObj.closest(".dyn-cat-select").find(".sbSelector").text();
 					    		var prodid = $curObj.find('option[label="'+selectedText+'"]').attr("value");
 					    	}
 					    	else {
@@ -8733,12 +8733,12 @@ var rapalainsider= {
 								$(".dyn-cat-select").find("select").removeClass("errorclient").addClass("valid");
 							}
 							if($('.filelist').find('ul').length>0){
-								$('.filelist').find('ul').css({"display":'none'});		
+								$('.filelist').find('ul').css({"display":'none'});
 		    					}
 		    			  }
 		    			}
 		    		});
-		         }); 
+		         });
     },
     // sub namespace app.ajax.* contains application specific ajax
     // components
@@ -8838,12 +8838,12 @@ var rapalainsider= {
             }
         }
     },
-    
+
     vipinsiderevents: function(){
     	var $vipinsider = $('.vipinsider-container'),
    	 	vipform = $('.VipinsiderForm');
   		 $vipinsider.find('.trigger_singleupload input[type="file"]').unbind('change').change(function(){
-  			 
+
 	    		var xhr = new XMLHttpRequest(),
 	    			data = new FormData(),
 	    			files = $("#fileid").get(0).files,
@@ -8851,22 +8851,22 @@ var rapalainsider= {
 	    			//if($(this).hasClass('errorclient')){ $(this).trigger('blur'); }
 	    			var totalsize= 0;
 	    				totalsize = $('.vip-uploadform-holder .remove_singleupload span.updatetext').eq(0).attr('value');
-	    				
+
 	    			if((this.files[0].size/1024/1024) > 2 || totalsize > 2 ){
 	    		 		$vipinsider.find(".vip-uploadform-holder .file-size-exceed-error").removeClass("hide");
 	    		 		return false;
 	    	 		}
-	    			
+
 	    			var extension = this.files[0].name.split('.')[1].toLowerCase();
 	    			if((extension != "jpg") && (extension != "png") && (extension != "PNG") && (extension != "jpeg") && (extension != "pdf") && (extension != "gif") && (extension != "doc")  && (extension != "docx") && (extension != "pages")){
 	    		 		$vipinsider.find(".vip-uploadform-holder .file-format-exceed-error").removeClass("hide");
 	    		 		return false;
 	    	 		}
-	    			
+
 	    			$vipinsider.find(".vip-uploadform-holder .file-format-exceed-error").addClass("hide");
 	    			$vipinsider.find(".vip-uploadform-holder .file-size-exceed-error").addClass("hide");
 	    			form.find(".progressbar").fadeIn(500);
-	    			
+
 	    			for (var i = 0; i < files.length; i++) {
 		   		      data.append(files[i].name, files[i]);
 		   		    }
@@ -8879,7 +8879,7 @@ var rapalainsider= {
 		   		    }, false);
 		   		    xhr.open("POST", form.attr('action'));
 		   		    xhr.send(data);
-		   		    
+
 			   		  xhr.upload.addEventListener('loadend', function(evt) {
 			   			form.find("#fileid").val('');
 			   			setTimeout(function(){
@@ -8889,13 +8889,13 @@ var rapalainsider= {
 				   			});
 			   			}, 500);
 			   		  });
-		   		  
+
 		   		  xhr.onload=function(){
 		   			$('.vip-uploadform-holder .filelist').html(xhr.responseText);
 		   			rapalainsider.vipinsiderevents();
 		   		  }
 	    	 });
-	    	
+
   		 if($(window).width() <= 767){
 	    		 $('.insider_body.rapala_device [maxlength]').bind('keypress keyup',function(e){
                    var $this = $(this);
@@ -8912,10 +8912,10 @@ var rapalainsider= {
 	    	      e.preventDefault();
 	    	      var filename = $(this).attr('data-file');
 	    	      var form = $(this).closest('form');
-	    	      var url= form.attr('action'); 
-	    	      var finalURL = util.appendParamToURL(url,'filename',filename); 
+	    	      var url= form.attr('action');
+	    	      var finalURL = util.appendParamToURL(url,'filename',filename);
 	    	      ajax.load({
-	         			url: finalURL, 
+	         			url: finalURL,
 	         			type: "POST",
 	     				callback : function (data) {
 	     					$('.vip-uploadform-holder .filelist').html(data);
@@ -8923,12 +8923,12 @@ var rapalainsider= {
 	     				  }
 	     			});
 	    	 });
-  		     
-	    	
+
+
   	 },
-  	 
+
      formPrepare: function (opts) {
-     	
+
      	var $form, $continue, $requiredInputs, validator;
 
      	var hasEmptyRequired = function () {
@@ -8972,7 +8972,7 @@ var rapalainsider= {
      	$requiredInputs.change(validateEl);
      	$requiredInputs.filter('input').blur(validateEl);
      },
-     
+
      customselecteventsb: function(){
          if(!$('body').hasClass('rapala_device')){
          	var $con = $('body');
@@ -8981,14 +8981,14 @@ var rapalainsider= {
  				else{ $(this).selectbox();}
  				$('.sbOptions li:last').addClass('last');
  			}).focus(function(){
- 				$(this).next('.sbHolder').trigger('focus');	
+ 				$(this).next('.sbHolder').trigger('focus');
  			});
-      	   
+
          }
-         
-     	
+
+
      },
-     
+
      textarearapala: function(){
  	  	$('textarea[maxlength]').each(function(){
 			charcount($(this));
@@ -8996,7 +8996,7 @@ var rapalainsider= {
 		}).on('keyup keypress', function(){
 			charcount($(this));
 		});
-		
+
 		function charcount($this){
 			var characterLimit = "1200";
 			var charRemains = characterLimit - $this.val().trim().length;
@@ -9014,18 +9014,18 @@ var rapalainsider= {
 				$this.prev('div.char-count').html(charCountHtml);
 			}
 		}
-    	 
-    	 
+
+
      },
-     
-     clearbuttonfunct: function(){    	 
+
+     clearbuttonfunct: function(){
  	 	if($('#dialogcontainer123').length > 0){
 			$('#dialogcontainer123').find('.formfield').each(function () {
 	               if($(this).find('.field-wrapper .clearbutton').length == 0 && $(this).find('.field-wrapper input[type="text"]').length > 0 || $(this).find('.field-wrapper input[type="password"]').length > 0 || $(this).find('.field-wrapper textarea').length > 0){
 	                    $(this).find('.field-wrapper').append('<a class="clearbutton"></a>');
 	                }
 			});
-		}  
+		}
 		$("body").find('#dialogcontainer123 .field-wrapper input, textarea').on('keyup input blur', function () {
 		       if($(this).val() != undefined) {
 		           if($(this).val().length > 0) {
@@ -9036,7 +9036,7 @@ var rapalainsider= {
 		            }
 		        }
 			});
-		
+
 		$("body").find('#dialogcontainer123 .field-wrapper a.clearbutton').on('click', function () {
 			var characterLimit = "Characters Remaining 1200";
 			 $(this).closest('.formfield').find('input') .val("");
@@ -9050,10 +9050,10 @@ var rapalainsider= {
 			 $('div.char-count').html(characterLimit);
         });
      }
-     
-     
+
+
 };
-module.exports = rapalainsider;  
+module.exports = rapalainsider;
 },{"../ajax":2,"../progress":39,"../tooltip":46,"../uievents":47,"../util":48,"../validator":49}],33:[function(require,module,exports){
 'use strict';
 
@@ -9207,7 +9207,7 @@ function infiniteScroll() {
 function updateProductListing(url) {
     if (url == null) {
         return;
-    }  
+    }
     $('#main').addClass('hidecontent');
     progress.show("#main");
 	  $('#main').load(util.appendParamToURL(url, 'format', 'ajax'), function () {
@@ -9223,27 +9223,27 @@ function updateProductListing(url) {
 	            railVisible: true,
 	            alwaysVisible: true
 	        });
-	    	
+
 	    });*/
-	    
+
 	    progress.hide();
 	    $('#main').removeClass('hidecontent');
 	    history.pushState(undefined, '', url);
 	    $("html, body").animate({ scrollTop: 0 }, "fast");
 	    if($('.pt_product-search-result .search-blk').length > 0) {
-	    	$('.pt_product-search-result').find('#primary').addClass('search-result');   	
+	    	$('.pt_product-search-result').find('#primary').addClass('search-result');
 	    }
 	    if($('.refine-display.refine-values .breadcrumb-refinement').length > 0){
-	    	$('.pt_product-search-result.searchresult').find('#primary').addClass('search-result');  
+	    	$('.pt_product-search-result.searchresult').find('#primary').addClass('search-result');
 	    	$('.pt_product-search-result.categorylanding').find('#primary').addClass('search-result');
 	    }
 	    else {
-	    	$('.pt_product-search-result.searchresult').find('#primary').addClass('search-result');   
+	    	$('.pt_product-search-result.searchresult').find('#primary').addClass('search-result');
 	    	$('.pt_product-search-result.categorylanding').find('#primary').removeClass('search-result');
 	    }
 	    gridSyncheight();
 	    $("#secondary").removeClass("visible-hidden").addClass("secondary-hide");
-    });	    
+    });
 }
 // updates the grid using the 'post hash' refinement values
 function gridSyncheight() {
@@ -9253,7 +9253,7 @@ function updateGrid() {
 	if(util.readCookie("selectedOption") && window.location.hash.length == 0 && window.location.href.indexOf('srule=') == -1 && $('.sortitem-blk').is(":visible")){
 		window.location.hash = "srule="+util.readCookie("selectedOption");
 	}
-	
+
 	if (window.location.hash)
 	{
 		var url = window.location.href;
@@ -9266,9 +9266,9 @@ function updateGrid() {
 		updateProductListing(url);
 	}
 }
-function owlcarousel() { 
+function owlcarousel() {
 setTimeout(function(){
-    var owl = $('.owl-carousel'); 
+    var owl = $('.owl-carousel');
        owl.owlCarousel({
     	       items:5,
                   slideBy: 5,
@@ -9292,48 +9292,48 @@ setTimeout(function(){
                 }
             }
        });
-       
+
        var viewport = jQuery(window).width();
        var current = $(this);
        var itemCount = $(".recommendations.cross-sell.Recommended.For.You .owl-carousel .owl-item").length;
        if(
-           (viewport >= 768 && itemCount > 5) || (viewport < 768 && itemCount > 2) 
+           (viewport >= 768 && itemCount > 5) || (viewport < 768 && itemCount > 2)
        )
        {
             $('.recommendations.cross-sell.Recommended.For.You .pdprecomo-owl').find('.owl-prev, .owl-next').show();
             $('.recommendations.cross-sell.Recommended.For.You .pdprecomo-owl').find('.owl-dots').show();
-          
-       } 
+
+       }
        else
        {
     	   $('.recommendations.cross-sell.Recommended.For.You .pdprecomo-owl').find('.owl-prev, .owl-next').hide();
     	   $('.recommendations.cross-sell.Recommended.For.You .pdprecomo-owl').find('.owl-dots').hide();
        }
-       
+
        var viewportone = jQuery(window).width();
        var currentone = $(this);
        var itemCountone = $(".recommendations.cross-sell.Recently.Viewed .owl-carousel .owl-item").length;
-       
+
        if(
-           (viewport >= 768 && itemCountone > 5) || (viewport < 768 && itemCountone> 2) 
+           (viewport >= 768 && itemCountone > 5) || (viewport < 768 && itemCountone> 2)
        )
        {
             $('.recommendations.cross-sell.Recently.Viewed .pdprecomo-owl').find('.owl-prev, .owl-next').show();
             $('.recommendations.cross-sell.Recently.Viewed .pdprecomo-owl').find('.owl-dots').show();
-          
-       } 
+
+       }
        else
        {
     	   $('.recommendations.cross-sell.Recently.Viewed .pdprecomo-owl').find('.owl-prev, .owl-next').hide();
     	   $('.recommendations.cross-sell.Recently.Viewed .pdprecomo-owl').find('.owl-dots').hide();
        }
        $(".product-listing").find("h2.hide").removeClass("hide");
-       
+
        productTile.init();
        $('.pt_product-search-result .recommendations.cross-sell .search-result-items .product-tile.item').last().addClass('recomlast');
- },5500); 
+ },5500);
 
-} 
+}
 var searchRefinment = {
 		searchRefinementToggle : function(){
 			//$("#secondary").removeAttr("style");
@@ -9352,10 +9352,10 @@ var searchRefinment = {
                         		color: '#a0a0a0',
                         	    alwaysVisible: true
                             });
-            				//$(this).tinyscrollbar({trackSize : 200});	
+            				//$(this).tinyscrollbar({trackSize : 200});
             			}else{
             				$(this).find('.overview').css('position','static');
-            				
+
             			}
             		}else{
             			//$(this).tinyscrollbar({trackSize : 200});
@@ -9367,7 +9367,7 @@ var searchRefinment = {
                     		color: '#a0a0a0',
                     	    alwaysVisible: true
                         });
-            			
+
             		}
         		}else{
         			/*if($(this).find('li').length > thresholdValue && $(this).find('.seeMoreRefinements').length == 0){
@@ -9375,7 +9375,7 @@ var searchRefinment = {
         					$(this).append('<a href="#" class="seeNextRefinements">See Next</a>');
             				$(this).append('<a href="#" class="seePrevRefinements">See Previous</a>');
         				}
-        				thresholdValue -= 1; 
+        				thresholdValue -= 1;
         				$(this).find('li').eq(thresholdValue).nextAll('li').hide();
         				$('.seePrevRefinements').hide();
         			}
@@ -9384,7 +9384,7 @@ var searchRefinment = {
         				$(this).find('.seeNextRefinements').hide();
         			}*/
         		}
-        		
+
         		if($i == ($(".js-scrollbar").length - 1)){
         			$('#searchrefinements div.navgroup').each(function (i) {
         				if($(window).width() < 960 ) {
@@ -9392,7 +9392,7 @@ var searchRefinment = {
                            	  $(this).find('div.refineattributes').hide();
                            	  $(this).find(".filter").addClass('expand');
                            	  $(this).addClass('collapse-expand');
-                             } 
+                             }
         				}
         				else {
 							if (i > 2 && $(this).find('li.selected').length == 0) {
@@ -9405,12 +9405,12 @@ var searchRefinment = {
 	                         	  $(this).removeClass('collapse-expand');
 							}
         				}
-                       
+
                    });
         		}
         	});
-			
-			
+
+
 			// init refinement toggling
 			$('#searchrefinements .filter').off('click').on("click",function(e) {
 					e.preventDefault();
@@ -9419,7 +9419,7 @@ var searchRefinment = {
 					jQuery(this).closest('.navgroup').find("div.refineattributes").toggle();
 					//jQuery(this).closest('.navgroup').find(".js-scrollbar").tinyscrollbar({trackSize : 200});
 			});
-			
+
 			$(window).load(function(){
 				$("#secondary").removeClass("visible-hidden").addClass("secondary-hide");
 			});
@@ -9460,7 +9460,7 @@ function initializeEvents() {
         });
 
     });
-    
+
 	if($('.contentAsset-new').find('.html-slot-container').length > 0 ) {
         var current = $('.contentAsset-new').find('.html-slot-container');
         current.parents('.desktop').removeClass('promohide').addClass('promoshow');
@@ -9468,7 +9468,7 @@ function initializeEvents() {
 		else {
 		$('.desktop').removeClass('promoshow').addClass('promohide');
    }
-	
+
     $main.on('click', '.mobile-filter-by', function () {
 	    if(!$(".mobile-filter-by").hasClass("js-filter-active")) {
 	    	$(".mobile-filter-by").addClass("js-filter-active");
@@ -9486,19 +9486,19 @@ function initializeEvents() {
         var href = $(this).attr("href");
         window.location = href;
     });
-     
+
     $main.on('click', '#tabs input[type="radio"]', function () {
     	var checked = $(this).prop('checked', true);
-    	if(checked){ 
+    	if(checked){
     	    $(this).prop('checked', false);
     	  }
-    	  else{ 
+    	  else{
     	    $(this).prop('checked', true);
     	  }
         $(this).next('a').trigger('click');
         $(this).prop('checked', true);
     });
-    
+
     //searchcontent-section
     $main.on('click', '.mobile-filter-by.results-content', function () {
 	    if(!$(".mobile-filter-by.results-content").hasClass("js-filter-active")) {
@@ -9511,18 +9511,18 @@ function initializeEvents() {
 	        //$("#secondary").css("top",secondaryTop+"px");
 	    }
     });
-    
+
     if($('.pt_product-search-result .search-blk').length > 0) {
-    	$('.pt_product-search-result').find('#primary').addClass('search-result');   	
+    	$('.pt_product-search-result').find('#primary').addClass('search-result');
     }
-    
+
     if($('.pt_content-search-result .folder-content-list').length > 0) {
-    	$('.pt_content-search-result').find('#tabs #producttab').prop('checked', false);  	
-    	$('.pt_content-search-result').find('#tabs #contenttab').prop('checked', true); 
+    	$('.pt_content-search-result').find('#tabs #producttab').prop('checked', false);
+    	$('.pt_content-search-result').find('#tabs #contenttab').prop('checked', true);
     }
-    
+
     $main.on('click', '.sortby-button', function () {
-	    if( $(window).width() >= 481 &&  $(window).width() <= 959 ) {	   
+	    if( $(window).width() >= 481 &&  $(window).width() <= 959 ) {
 	    	    if(!$(".sortby-button").hasClass("js-sort-active")) {
 	    	    	$(".sortby-button").addClass("js-sort-active");
 	    	    	$('.search-result-options').addClass('show-sort');
@@ -9532,16 +9532,16 @@ function initializeEvents() {
 	    	    	$('.search-result-options').removeClass('show-sort');
 	    	    	$(".mobile-sort-by-content").hide();
 	    	    }
-	    
+
 	       }
     });
-  
+
     searchRefinment.searchRefinementToggle();
 
     /*$(window).resize(function(){
 		searchRefinment.searchRefinementToggle();
     });*/
-    
+
     /* $('.scrollable').each(function(){
     	$(this).slimScroll({
             size: '10px',
@@ -9549,18 +9549,18 @@ function initializeEvents() {
             railVisible: true,
             alwaysVisible: true
         });
-    	
+
     });*/
     // handle toggle refinement blocks
    /* $main.on('click', '.refinement h3', function () {
     	 if( !$(this).hasClass('expand') ){
          	$(this).addClass('expand').closest('.navgroup').addClass('collapse-expand').find('.sub-refinement').hide();
-         	
+
          }else {
          	$(this).removeClass('expand').closest('.navgroup').removeClass('collapse-expand').find('.sub-refinement').show();
          }
     });*/
-    
+
     // color swatches events //
     $main.on('click', '.product-swatches .product-swatches-all', function () {
     	if($(this).hasClass('loaded')){
@@ -9574,7 +9574,7 @@ function initializeEvents() {
         	 if($(this).data('href')){
         		 $(this).find('img').attr('src', $(this).data('href'));
         	 }
-        	 
+
 		 });
          cont.show().focus();
     });
@@ -9591,27 +9591,27 @@ function initializeEvents() {
 		while(reltg != tg && reltg.nodeName != 'BODY')
 			reltg = reltg.parentNode
 		if (reltg == tg) return;
-		
+
 		// mouseout took place when mouse actually left layer
 		// handle event now
 		$(this).hide();
 		return false;
 	});
-    	
+
     $(".swatch-list.swatch-toggle").mouseleave(function() {
     	$(".swatch-list.swatch-toggle").hide();
     });
-    
+
 	jQuery("#content .producttile div.swatches div.invisible").hide();
 	jQuery("#content .producttile div.swatches a.swatch img.hiddenthumbnail").hide();
-	
+
 	$("#content.product-swatches .product-swatches-all.loaded").click(function() {
-		var swatch = jQuery(this);	
+		var swatch = jQuery(this);
 		updateProductListing(this.href);
 		// omit following the swatch link
 		return false;
 	});
-	
+
     $('body').mouseleave(function() {
     	if($(window).width() > 960) {
     		$(".swatch-list.swatch-toggle").hide();
@@ -9619,9 +9619,9 @@ function initializeEvents() {
     });
     $('body').bind('blur',function(){
     	$(".swatch-list.swatch-toggle").hide();
-    	
+
     });
-       
+
     // handle events for updating grid
     $main.on('click', '.refinement a, .sorthitscontainer .pagination a, .breadcrumb-refinement-value a, .mobile-sort-by-content a', function (e) {
         // don't intercept for category and folder refinements, as well as unselectable
@@ -9633,14 +9633,14 @@ function initializeEvents() {
         window.location.hash = query;
         if (this.href === window.location.href) {
             return;
-        }  
+        }
         updateProductListing(this.href);
     });
-    
+
     $('.productlisting.sub-cat').each(function() {
   	  $(this).find('.product.producttile.cell').first().addClass( "subfirst");
   	});
-    
+
     // handle events item click. append params.
     $main.on('click', '.product-tile a:not("#quickviewbutton")', function () {
         var a = $(this);
@@ -9664,7 +9664,7 @@ function initializeEvents() {
             params.cgid = tile.data('cgid');
         }
         /*End JIRA PREV-50*/
-   
+
         // convert params.start to integer and add index
         params.start = (+params.start) + (idx + 1);
         // set the hash and allow normal action to continue
@@ -9672,7 +9672,7 @@ function initializeEvents() {
     });
 
     // handle sorting change
-    $main.on('change', '.sort-by select', function (e) {  
+    $main.on('change', '.sort-by select', function (e) {
 		var selectedOption = $( ".sort-by option:selected" ).val().split('?')[1].split('&');
 		var url = $(this).val();
 		var	selectedOptionval = "";
@@ -9681,14 +9681,14 @@ function initializeEvents() {
 				selectedOptionval = v.split('=')[1];
 			}
 		});
-		
+
 		if(selectedOptionval.length != 0){
 			var dateObj = new Date();
 			dateObj.setTime(dateObj.getTime() + (60*60*1000));
 			document.cookie="selectedOption="+selectedOptionval+"; expires="+dateObj.toUTCString()+"; path=/";
 			var sortRule = url.split('?')[1].split('&');
 			var sortType = "";
-			
+
 			$.each(sortRule, function(i, v){
 				if(v.indexOf('srule') != -1){
 					sortType = v.split('=')[1];
@@ -9700,7 +9700,7 @@ function initializeEvents() {
        window.location.hash = query;
        if ($(this).find('option:selected').val() === window.location.href) {
            return;
-       } 
+       }
        updateProductListing($(this).find('option:selected').val());
     }).on('change', '.items-per-page select', function () {
         var refineUrl = $(this).find('option:selected').val();
@@ -9712,12 +9712,12 @@ function initializeEvents() {
             window.location.hash = query;
             if (refineUrl === window.location.href) {
                 return;
-            } 
+            }
             updateProductListing(refineUrl);
         }
     });
 }
- 
+
 exports.init = function () {
     compareWidget.init();
     if (SitePreferences.LISTING_INFINITE_SCROLL) {
@@ -9729,8 +9729,8 @@ exports.init = function () {
 
 },{"../compare-widget":7,"../product-tile":38,"../progress":39,"../uievents":47,"../util":48,"imagesloaded":50}],35:[function(require,module,exports){
 'use strict';
-exports.init = function() {  
-	var owl = $('.owl-carousel'); 
+exports.init = function() {
+	var owl = $('.owl-carousel');
 	owl.owlCarousel({
 		items:1,
         loop:true,
@@ -9767,12 +9767,12 @@ exports.init = function () {
         });
     });
     storeLocator.init();
-}; 
+};
 $('.customersubmit').on('click', function(){
 	if($('.floatleft.state.custom-select select').valid() == 0) {
  		if(!$('.floatleft.state.custom-select').hasClass('blured')){
  			$('.floatleft.state.custom-select').addClass('customselect-error');
- 		}	
+ 		}
 	}else{
 		$('.floatleft.state.custom-select').removeClass('customselect-error');
 	}
@@ -9787,7 +9787,7 @@ var storeLocator = {
 				e.preventDefault();
 				var $form = jQuery(this);
 				if( $('#locatorForm button').prop('disabled')) {
-					return false;	
+					return false;
 				}
 		    	$('#noresultserror').hide();
 		    	$('#message.success').hide();
@@ -9849,7 +9849,7 @@ var storeLocator = {
 							                }
 							                if(store.storeEvents != "") {
 												html.push('<div class="storeEvents">'+store.storeEvents+'</div>');
-							                }   
+							                }
 							                html.push('</div></div><div class="storebrands">');
 							                html.push('<span class="brandlabel">'+ Resources.BRAND_CATEGORY1 +'</span><hr></hr>');
 							                if(store.custom.brands.rapala) {
@@ -9892,8 +9892,8 @@ var storeLocator = {
 							                html.push('<div class="storemap"><a class="button googlemap" name="'+store.map+'">'+ Resources.STORELOCATER_MAP +'</a>');
 							                if(store.website != "") {
 												html.push('<br /><a target="_blank" class="button" href="'+store.website+'">'+ Resources.STORELOCATER_WEBSITE +'</a>');
-									                	 
-							                }     
+
+							                }
 							                html.push('</div><div class="clear"><!-- FLOAT CLEAR --></div></div>');
 							                allStoreHtml += html.join('');
 								    	}
@@ -9953,13 +9953,13 @@ var storeLocator = {
 							                }
 							                if(store.storeEvents != "") {
 												html.push('<div class="storeEvents">'+store.storeEvents+'</div>');
-							                }   
+							                }
 											html.push('</div></div>');
 							                html.push('<div class="storemap"><div class="storedistance">'+store.distance+'</div><a class="button googlemap" name="'+store.map+'">'+ Resources.STORELOCATER_MAP +'</a>');
 							                if(store.website != "") {
 												html.push('<br /><a target="_blank" class="button" href="'+store.website+'">'+ Resources.STORELOCATER_WEBSITE +'</a>');
-									                	 
-							                }     
+
+							                }
 							                html.push('</div><div class="clear"><!-- FLOAT CLEAR --></div></div>');
 							                allStoreHtml += html.join('');
 								    	}
@@ -10047,9 +10047,9 @@ function gridViewToggle() {
 			$('.product-img').each(function(){
 				$(this).find('img').remove();
 				$(this).append('<img src="'+ $(this).attr('data-large-src')  +'" title="'+ $(this).attr('data-title')+'" alt="'+ $(this).attr('data-alt')+'"></img>')
-				
+
 			});
-			
+
 		}else{
 			jQuery('.search-result-content').removeClass('wide-tiles');
 			jQuery('.product-image').removeClass('grid');
@@ -10063,14 +10063,14 @@ function gridViewToggle() {
 				$(this).append('<img src="'+ $(this).attr('data-small-src')  +'" title="'+ $(this).attr('data-title')+'" alt="'+ $(this).attr('data-alt')+'"></img>')
 			});
 		}
-		 
+
 		if($('.listview.active').length == 1){
 			$('.pt_product-search-result').attr('data-viewType','listview');
 		}else{
 			$('.pt_product-search-result').attr('data-viewType','gridview');
 		}
 	}
-	
+
 	     $('.toggle-grid i').on('click', function () {
 		     var dateObj = new Date();
 		     dateObj.setTime(dateObj.getTime() + (60*60*1000));
@@ -10085,14 +10085,14 @@ function gridViewToggle() {
 					$(this).find('img').remove();
 					$(this).append('<img src="'+ $(this).attr('data-large-src')  +'" title="'+ $(this).attr('data-title')+'" alt="'+ $(this).attr('data-alt')+'"></img>')
 				});
-	         } 
+	         }
 	         else if($(this).hasClass('listview')) {
 	        	 document.cookie="ImageSize="+"listview"+"; expires="+dateObj.toUTCString()+"; path=/";
 	             $('.toggle-grid i').parent('.toggle-grid').removeClass('wide');
 	             $('.toggle-grid i').removeClass('active');
 	             $(this).parent('.toggle-grid').addClass('wide');
 	             $(this).addClass('active');
-	             $('.search-result-content').addClass('wide-tiles');     
+	             $('.search-result-content').addClass('wide-tiles');
 	             $('.search-result-content.wide-tiles .product-tile .product-image img').each(function() {
 	            	this.src = this.src.replace("sw=130&sh=92", "sw=352&sh=251");
 	            });
@@ -10110,7 +10110,7 @@ function gridViewToggle() {
 				$('.pt_product-search-result').attr('data-viewType','gridview');
 			}
 	    });
-	   
+
 }
 
 /**
@@ -10142,7 +10142,7 @@ function initializeEvents() {
         if ($(this).hasClass('selected')) {
             return;
         }
-        
+
         var $tile = $(this).closest('.product-tile');
         $(this).closest('.swatch-list').find('.swatch.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -10196,7 +10196,7 @@ function initializeEvents() {
         $('.search-result-content.wide-tiles .product-tile .product-image a.thumb-link.currentimg img').each(function() {
         	this.src = this.src.replace("sw=130&sh=92", "sw=352&sh=251");
         });
-        
+
     });
 }
 
@@ -10436,9 +10436,9 @@ function initializeEvents() {
             return false;
         }
     });
-    
+
     if($('.pt_product-search-noresult .nohits .noresult-banner').length > 0) {
-    	$('.pt_product-search-noresult .nohits').css("height", "auto");         
+    	$('.pt_product-search-noresult .nohits').css("height", "auto");
     }
     /*End JIRA PREV-53,PREV-54 */
 }
@@ -10512,7 +10512,7 @@ var searchsuggest = {
         		if ($.trim(temp) == "") {
                 	$searchField.val("Search Entire Site...");
                 }
-            
+
         });
         $(document).on('click', function (e) {
             if (!$searchContainer.is(e.target)) {
@@ -10577,7 +10577,7 @@ var searchsuggest = {
 			if (searchTerm != defaultValue && searchTerm != '') {
 				window.location = util.appendParamToURL(k, "q", searchTerm).replace("https", "http");
 			}
-			return false;					
+			return false;
 		});
         // on key up listener
         $searchField.keyup(function (e) {
@@ -10966,7 +10966,7 @@ module.exports = storeinventory;
  * @function getUserAgent Checks the TLS and displays a warning if appropriate
  **/
 function getUserAgent() {
-    
+
 	var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
     if(/trident/i.test(M[1])){
         tem=/\brv[ :]+(\d+)/g.exec(ua) || [];
@@ -10982,8 +10982,8 @@ function getUserAgent() {
       name: M[0],
       version: M[1]
     };
-	
-	
+
+
 }
 
 
@@ -11022,7 +11022,7 @@ exports.init = function () {
     	 $.extend({}, settings, {
     		 content: function () {
 	            return $(this).find('.tooltip-content , .tooltip-body').html();
-	        } 
+	        }
     }));
 	/*$('.Custom-tooltip').tooltipster({
 			content: jQuery(this).find('.tooltipcontainer').html(),
@@ -11073,7 +11073,7 @@ var uievents= {
 			        jQuery(this).find('.custom-link').addClass('active');
 			   }
 		   });
-		
+
 		   $con.find('.custom-checkbox .custom-link').off('click').on('click', function () {
 		        var $customcheck = $(this).closest('.custom-checkbox');
 		        $(this).removeClass('error');
@@ -11093,9 +11093,9 @@ var uievents= {
 	   				$(this).closest(".field-wrapper").removeClass('expanded');
 	   			});
 		   }*/
-		   
-		 
-	   		// custom select implementation in VIP insider 
+
+
+	   		// custom select implementation in VIP insider
 	   		/*if(!$('body').hasClass('rapala_device')){
 	   			$con.find(".customized-select").find("select").each(function(){
 	   				if($(this).attr('disabled')){
@@ -11106,15 +11106,15 @@ var uievents= {
 					}
 	   				$('.sbOptions li:last').addClass('last');
 	   			}).focus(function(){
-	   				$(this).next('.sbHolder').trigger('focus');	
+	   				$(this).next('.sbHolder').trigger('focus');
 	   			});
-		   
+
 	   		}
 		   */
 	   		$con.find('.custom-checkbox input[type="checkbox"]').off('change').on('change', function () {
 	   			$(this).closest('.custom-checkbox').find('.custom-link').removeClass('error');
 	   			var $form = $('.address');
-	   			if($(this).is(':checked')){ 
+	   			if($(this).is(':checked')){
 	   				$(this).closest('.custom-checkbox').find('.custom-link').addClass('active');
 	   				if($(this).is("[name$=_sameasshippingaddress]")) {
 		   				var selectedAddress = $(this).closest(".custom-checkbox").data("address")
@@ -11127,7 +11127,7 @@ var uievents= {
 		   		        uievents.customFields();
 		   		        uievents.synccheckoutH();
 	   				}
-	   				
+
 	   			}else{
 	   				$(this).closest('.custom-checkbox').find('.custom-link').removeClass('active');
 	   				if($(this).is("[name$=_sameasshippingaddress]")) {
@@ -11150,7 +11150,7 @@ var uievents= {
 	   					$("input[name$='_addressFields_postal']").closest("div.zip").find("span.errorclient").remove();
 	   					$(".addressform .form-row.custom-select").removeClass("customselect-error");
 	   					$('.custom-select').each(function(){
-	   						var select_val = $(this)	.find(":selected").text();	 
+	   						var select_val = $(this)	.find(":selected").text();
 	   						$(this).find('.selectorOut').text(select_val);
 	   					});
 	   					$("a.clearbutton").hide();
@@ -11158,10 +11158,10 @@ var uievents= {
 	   					uievents.customFields();
 	   					uievents.synccheckoutH();
 	   				}
-	   				
-	   			} 
+
+	   			}
 	   		});
-		
+
 	   		$con.find('.custom-select').each(function () {
 	   			$(this).find('select').removeAttr("style");
 	   			var selWidth = $(this).find('select').width();
@@ -11176,21 +11176,21 @@ var uievents= {
 					'position': 'relative',
 					'float': 'left',
 					'padding': '0px'
-	   			});                   
+	   			});
 				$(this).find(".field-wrapper").css({
 				    'background-position': selWidth,
 					'width': selWidth + 20,
 					'padding': '0px'
 				});
-				if($('.creditCard').length>0){                    	
+				if($('.creditCard').length>0){
 					 $(this).css({
 					     'background-position': selWidth,
 						 'width': selWidth + 15,
 						 'padding': '0px'
 					 });
 				}
-	    
-	
+
+
 				if($(this).find('.selectorOut').length == 0) {
 					$(this).find('select').after("<div class='selectorOut' style='position:absolute;top:0px;z-index:1;padding:0 20px 0 10px;'></div>");
 				}
@@ -11198,7 +11198,7 @@ var uievents= {
 					$(this).closest('.formfield .field-wrapper').append("<div class='selectorError error'></div>");
 				}
 				$(this).find('.selectorOut').text('').text($(this).find(":selected").text());
-	
+
 	   		}).change(function () {
 	   			var str = "";
 				str = $(this).find(":selected").text();
@@ -11210,8 +11210,8 @@ var uievents= {
 					}
 				}
 	   		});
-		
-	   		$con.find('.custom-select select').bind('blur change', function () {  
+
+	   		$con.find('.custom-select select').bind('blur change', function () {
 	   			if($(this).hasClass('valid') || $(this).val().length > 0) {
 	   				$(this).closest('.custom-select').removeClass('customselect-error');
 	   				$(this).removeClass("errorclient").addClass("valid");
@@ -11220,11 +11220,11 @@ var uievents= {
 	   					$('.state-blk .stateerror.error').hide();
 	   				}
 	   			}
-	   			else { 
-	   				$(this).closest('.custom-select').addClass('customselect-error');     
+	   			else {
+	   				$(this).closest('.custom-select').addClass('customselect-error');
 					if(jQuery(this).closest('.formfield').hasClass('state') && !jQuery(this).closest('.custom-select').hasClass('blured')){
 						jQuery('.state-blk .stateerror.error').show();
-					} 
+					}
 	   			}
 				if(jQuery(this).hasClass('yearselect') || jQuery(this).hasClass('monthselect') ){
 					if(jQuery('.yearselect').valid() == 1 && jQuery('.monthselect').valid() == 1){
@@ -11248,17 +11248,17 @@ var uievents= {
 			}
 			selectElem.selectedIndex = idx;
 			$('.custom-select').each(function(){
-				var select_val = $(this)	.find(":selected").text();	 
+				var select_val = $(this)	.find(":selected").text();
 				$(this).find('.selectorOut').text(select_val);
 			});
 		}
 	},
 	init: function ($con) {
-	
+
 	   if($con == null) {
 	        $con = $('body');
 	   }
-	 
+
 	   uievents.customFields();
    	  // Dynamicaly generating tabindex for VIP
  	   if($('.ui-dialog').hasClass('vipInsider-dlg')){
@@ -11281,7 +11281,7 @@ var uievents= {
 	            $('.cardtypeimg > div').hide();
 	        }
 	        if($(this).closest('.formfield').find('.field-wrapper .maxelement').length > 0){
-	        	$(this).closest('.formfield').find('.field-wrapper .maxelement').remove();	
+	        	$(this).closest('.formfield').find('.field-wrapper .maxelement').remove();
 	        }
 		});
 		$con.find('.promo-input-button .field-wrapper').on('keyup blur', function () {
@@ -11305,7 +11305,7 @@ var uievents= {
 		            }
 	        }
 	    });
-		    
+
 	   if($('.ui-login').length > 0 || $('.passwordreset').length>0 ) {
 		    $con.find('.ui-login .formfield').each(function () {
 		 	   var $val = $(this).find('input[type="text"]').length > 0 ? $(this).find('input[type="text"]').val() : $(this).find('input[type="password"]').val()
@@ -11329,7 +11329,7 @@ var uievents= {
                }
             });
         }
-			
+
 		$con.find('.formfield .field-wrapper input,.formfield .field-wrapper textarea').on('keyup input blur', function () {
 	       if($(this).val() != undefined) {
 	           if($(this).val().length > 0) {
@@ -11344,9 +11344,9 @@ var uievents= {
 	   if (navigator.appVersion.indexOf("Mac") != -1) {
 	   $('.pt_vipinsider').find('span.rapala-entity-holder i').addClass('macfont');
 	   }
-	   
+
 	   $('.paymentmethods_cont .toggle').click(function(){uievents.synccheckoutH();});
-	   
+
 	   $("button[name='dwfrm_login_login']").click(function(){
 		   setTimeout(function(){
 	  			uievents.synccheckoutH();
@@ -11382,15 +11382,15 @@ var uievents= {
        	var keycode =  e.keyCode ? e.keyCode : e.which;
        	var maxlength = $(this).attr('maxlength');
        	var maxlmsg = "This field is limited to "+ maxlength +" characters.";
-       	if(jQuery(this).hasClass('phone') || jQuery(this).hasClass('phoneCDUS')){  
-       		maxlength = 14; 
+       	if(jQuery(this).hasClass('phone') || jQuery(this).hasClass('phoneCDUS')){
+       		maxlength = 14;
        		$(this).attr('maxlength', maxlength);
        		var maxlmsg = "This field is limited to 10 numbers.";
        	}
-       	 
-       	
-       	if(jQuery(this).hasClass('postal')){  
-       		maxlength = 10;  
+
+
+       	if(jQuery(this).hasClass('postal')){
+       		maxlength = 10;
        		$(this).attr('maxlength', maxlength);
        		var maxlmsg = "This field is limited to 9 numbers.";
        	}
@@ -11399,7 +11399,7 @@ var uievents= {
            	if(($(this).val().length >= maxlength)&&(keycode != 9)){
            		if($(this).closest('.field-wrapper').find('span.errorclient').length != 0){
            			$(this).closest('.field-wrapper').find('span.errorclient').remove();
-           		}	
+           		}
            		if($(this).closest('.field-wrapper').find('.maxelement').length == 0){
            			$(this).closest('.field-wrapper').append(maxElement);
            		}else {
@@ -11408,12 +11408,12 @@ var uievents= {
            				return false;
            		}
            	}else{
-           		if($(this).closest('.field-wrapper').find('.maxelement').length > 0){ 
+           		if($(this).closest('.field-wrapper').find('.maxelement').length > 0){
            			$(this).closest('.field-wrapper').find('.maxelement').remove();
-           		}  
+           		}
            	}
        	 }
-       	
+
        });
 	   $("body").on('blur','input[id$="_addressid"],input[id$="_addressFields_firstName"],input[id$="_addressFields_lastName"],input[id$="_addressFields_address1"],input[id$="_addressFields_address2"],input[id$="_addressFields_city"],input[id$="_addressFields_phone"],input[id$="_addressFields_postal"],input[id$="_contactus_phone"]', function(e){
        	$('.maxelement').addClass('hide');
@@ -11435,7 +11435,7 @@ var uievents= {
 						$(this).closest(".formfield").find(".label").find("span.errorclient").remove();
 						$(this).closest(".formfield").find(".label").removeClass("erroroccured");
 						$(this).closest(".formfield").find(".form-row , .label span").removeClass('inputlabel');
-					}else return false; 
+					}else return false;
 				});
 				$(this).find(".field-wrapper select").unbind("change").bind("focusin change", function(){
 					if($(this).hasClass("errorclient")){
@@ -11449,20 +11449,20 @@ var uievents= {
 			$("#VIPInsider-form-cancel-id").click(function(){
 				$('.ui-dialog-titlebar-close').trigger("click");
 			});
-		  	
+
 		  /********************* vip phone and zip error exceed code **************************/
-		  	
+
 		  	 $('input[id$="_vipinsider_customer_zip"],input[id$="_vipinsider_customer_phone"]').bind('keypress keyup', function(e){
 		     	var keycode =  e.keyCode ? e.keyCode : e.which;
 		     	var maxlength = $(this).attr('maxlength');
 		     	var maxlmsg = "This field is limited to "+ maxlength +" characters.";
-		     	if(jQuery(this).hasClass('vip-phone')){  
-		     		maxlength = 14; 
+		     	if(jQuery(this).hasClass('vip-phone')){
+		     		maxlength = 14;
 		     		$(this).attr('maxlength', maxlength);
 		     		var maxlmsg = "-This field is limited to 10 numbers.";
 		     	}
-		     	if(jQuery(this).hasClass('vip-zip')){  
-		     		maxlength = 10;  
+		     	if(jQuery(this).hasClass('vip-zip')){
+		     		maxlength = 10;
 		     		$(this).attr('maxlength', maxlength);
 		     		var maxlmsg = "-This field is limited to 9 numbers.";
 		     	}
@@ -11471,7 +11471,7 @@ var uievents= {
 		        	if($(this).val().length >= maxlength){
 		        		if($(this).closest('.field-wrapper').find('span.errorclient').length != 0){
 		        			$(this).closest('.field-wrapper').find('span.errorclient').remove();
-		        		}	
+		        		}
 		        		if($(this).closest('.formfield').find('.maxelement').length == 0){
 		        			$(this).closest('.formfield').find(".label").append(maxElement);
 		        		}else {
@@ -11483,10 +11483,10 @@ var uievents= {
 		        			}
 		        		}
 		        	}else{
-		        		if($(this).closest('.formfield').find('.maxelement').length > 0){ 
+		        		if($(this).closest('.formfield').find('.maxelement').length > 0){
 		        			$(this).closest('.formfield').find('.maxelement').remove();
 		        			$(this).closest('.formfield').find(".label").removeClass("erroroccured");
-		        		}  
+		        		}
 		        	}
 		     	 }
 		     });
@@ -11496,8 +11496,8 @@ var uievents= {
 		    		$('.maxelement').addClass('hide');
 		         	$('#VipinsiderForm').find('span').removeClass('maxelement');
 		         	$(this).closest('.formfield').find(".label").removeClass("erroroccured");
-		    	} 
-		     });	
+		    	}
+		     });
 		}
 		/**------- left nav----------------*/
 		$con.find('.categorymenusnew li.active').closest('.category-top-level').addClass('current');
@@ -11508,7 +11508,7 @@ var uievents= {
 					if($(this).not('.active')){
 						 if($(this).find('> ul').length > 0){
 							$(this).find('> a .count-products').addClass('select_sublevelarrow');
-						 }	
+						 }
 					};
 				});
 		        $this.find('> ul').show();
@@ -11545,7 +11545,7 @@ var uievents= {
              var checkout_leftH = $('.pt_checkout .checkout_cont').height(),
                  summaryH = $('.pt_checkout .summary-section').height(),
                  newsummaryH = $('.pt_checkout  .new-summery-cart').not(".mobile-view").height();
-             		
+
              var newHeightRight = summaryH + newsummaryH;
              if(newHeightRight >= checkout_leftH) {
              	var summaryHeight = checkout_leftH - newsummaryH;
@@ -11618,7 +11618,7 @@ var util = {
             jQuery(this).remove();
         });
     },
-    
+
     	/**** Read cookieee  *****/
     	readCookie : function (name) {
         var nameEQ = name + "=";
@@ -11630,8 +11630,8 @@ var util = {
         }
         return null;
     },
-    
-    
+
+
 	/***  Read cookie ***/
     /**
      * @function
@@ -11859,7 +11859,7 @@ var util = {
            if($('#paymentmethods').find('.creditCard-number').length > 0) {
             	$('#paymentmethods').find('.creditCard-number').bind('keypress keyup', function(){
             		if($(this).val().length){
-            			$('.carderror.error').hide();	
+            			$('.carderror.error').hide();
             		}
             		if($(this).val().length < 4){
             		$('.cardtypeimg > div').hide();
@@ -11884,7 +11884,7 @@ var util = {
                            if(val.length) {
                             	if ($('.carderror.error').length == 0) {
                             		$(this).closest('.formfield').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
-                            	}	
+                            	}
                             	$('.carderror.error').hide();
                                 var cardTypeval = util.validatecardtype(val);
                                if(cardTypeval != "Error") {
@@ -11892,34 +11892,34 @@ var util = {
                                     $('#paymentmethods').find('select[name$="_paymentMethods_creditCard_type"]').val(cardTypeval);
                                     $('.cardtypeimg > div').hide();
                                     $('.cardtypeimg > div.' + cardTypeval).show();
-                                    
+
                                     if((cardTypeval == "MasterCard") || (cardTypeval == "Visa") || (cardTypeval == "Discover")){
-                                    	if(val.length < 16){ 
+                                    	if(val.length < 16){
                                     		$('.carderror.error').show();
                                     		$(this).addClass('errorclient');
                                     	}
                                     }else if(cardTypeval = "Amex"){
-                                    	if(val.length < 15){ 
-                                    		$('.carderror.error').show(); 
+                                    	if(val.length < 15){
+                                    		$('.carderror.error').show();
                                     		$(this).addClass('errorclient');
                                     	}
                                     }else{
-                                    	$('.carderror.error').hide(); 
+                                    	$('.carderror.error').hide();
                                     	$(this).removeClass('errorclient');
                                     }
                                 }
-                                else {   
+                                else {
                                 	if($(this).val().indexOf('*') == -1){
                                 		if(val.length < 16){
                                 			$('.carderror.error').show();
                                         	$(this).addClass('errorclient');
-                                        	$('.cardtypeimg > div').hide();	
+                                        	$('.cardtypeimg > div').hide();
                                 		}
-                                	} 
+                                	}
                                 }
                             }
                            if($('#paymentmethods').find('.creditCard-number').val().length < 4) {
-                                $('.cardtypeimg > div').hide(); 
+                                $('.cardtypeimg > div').hide();
                             }
                         });
             }
@@ -12021,23 +12021,23 @@ var settings = {
 	errorElement: 'span',
 	focusInvalid: false,
 	onkeyup: function (element) {
-		if(!this.checkable(element)) { 
+		if(!this.checkable(element)) {
 			$(element).addClass('stopKeypress');
 			if($(element).val().length > 0){this.element(element);}
 			if($('.account-logs').length > 0 ||  $('.new-register').length > 0  ||  $('.wish-logs').length > 0 || $('.forgot_old').length > 0 ||  $('.createan-account').length > 0 ||  $('.promo-sec').length > 0 || $('.headercustomerinfo').length > 0  ||  $('.ui-login').length > 0 || $('.vipInsider-dlg.ui-dialog ').length > 0 || $('.passwordreset').length > 0){
 				$(element).closest(".formfield").find(".label span").removeClass("inputlabel");
 				$('.promo-sec').find('.couponinput').removeClass('inputlabel');
-			}	
-		}	
+			}
+		}
 	},
 	//focusCleanup: false,
 	//onfocusout: false,
-	 
+
 	onfocusout: function (element) {
-		if(!this.checkable(element)) { 
+		if(!this.checkable(element)) {
 			$(element).removeClass('stopKeypress');
 			this.element(element);
-			
+
 			if( $('.account-logs').length > 0 ||  $('.new-register').length > 0  ||  $('.wish-logs').length > 0 || $('.forgot_old').length > 0 || $('.passwordreset').length > 0 || $('.vipInsider-dlg.ui-dialog ').length > 0 ||  $('.promo-sec').length > 0 || $('.pt_checkout').length > 0){
 				if($(element).hasClass("errorclient")) {
 					$(element).closest(".form-row").addClass("inputlabel");
@@ -12046,7 +12046,7 @@ var settings = {
 					$(element).closest(".form-row").find(".label span").addClass("inputlabel");
 					$(element).closest(".formfield").find(".logerror , .existing_register").hide();
 				}
-				else {    				
+				else {
 					$(element).closest(".form-row").removeClass("inputlabel");
 					$(element).closest(".formfield").removeClass("inputlabel");
 					$(element).closest(".form-row").find(".label span").removeClass("inputlabel");
@@ -12073,7 +12073,7 @@ var settings = {
 			$(element).closest(".form-row").find(".label span").addClass("inputlabel");
 			$(element).closest(".formfield").find(".logerror , .existing_register").hide();
 		}
-		else {    				
+		else {
 			$(element).closest(".form-row").removeClass("inputlabel");
 			$(element).closest(".formfield").removeClass("inputlabel");
 			$(element).closest(".form-row").find(".label span").removeClass("inputlabel");
@@ -12096,22 +12096,22 @@ var settings = {
 				$(element).after(error);
 				$('.passwordreset').find('button.send.clickedButton').removeClass('clickedButton');
 			} else {
-				if($('.header-forgot-pwd.accountcontent').css('display') == "none") { 
+				if($('.header-forgot-pwd.accountcontent').css('display') == "none") {
 					$(element).after(error);
-				} else if($('.header-forgot-pwd.accountcontent').css('display') == "block") { 	
-					
+				} else if($('.header-forgot-pwd.accountcontent').css('display') == "block") {
+
 				}
 				else{
 					if($(element).hasClass("custom-select-wrap")) {
 						$(element).closest(".field-wrapper").after(error);
 					} else {
-						$(element).after(error);	
+						$(element).after(error);
 					}
-					
+
 				}
-			}	
+			}
 		}
-	}    
+	}
 };
 
 //firstname validation
@@ -12126,14 +12126,14 @@ $('input[attributemaxlength],textarea[attributemaxlength]').on('keydown', functi
                                 j = document.getElementById('dwfrm_profile_customer_lastname');
                 }
                                 if (e.keyCode == 17) ctrl = true;
-                                
+
                                 if(($(this).hasClass('vip-textarea') && e.keyCode != 8 && e.keyCode != 46 && !selectText) || (((e.keyCode >= 48 && e.keyCode <=90) ||(e.keyCode >= 96 && e.keyCode <=105)) && !ctrl && !selectText)) {
                                                 var currObj = $(this);
                                     var maxchars = $(this).attr('maxlength');
                                     var tlength = $(this).val().length;
                                     if(tlength >= maxchars) {
                                                 $(this).val($(this).val().substring(0, maxchars));
-                                                                if($(currObj).closest('.field-wrapper').find('.max-length-error').length == 0 && $(currObj).closest('.formfield').find('.max-length-error').length == 0) {  
+                                                                if($(currObj).closest('.field-wrapper').find('.max-length-error').length == 0 && $(currObj).closest('.formfield').find('.max-length-error').length == 0) {
                                                                                 if($(currObj).hasClass("vip-textarea")){
                                                                                                 var error = "<div class='max-length-error'> -This field is limited to 1200 characters.</div>";
                                                                                 }
@@ -12146,12 +12146,12 @@ $('input[attributemaxlength],textarea[attributemaxlength]').on('keydown', functi
                                                                                 else{
                                                                                 var error = "<div class='max-length-error'> This field is limited to 30 characters.</div>";
                                                                                 }
-                                                                                
+
                                                                                 $(this).closest('form').hasClass('vipfieldstaff') > 0 ? $(this).closest('.formfield').find('.label').append(error) : $(this).closest('.field-wrapper').append(error);
                                                                                 $(this).closest('.formfield').find('.label span').addClass('countlabelerror');
                                                                                 $(this).addClass('counterror');
                                                                 }
-                                                                else if(e.keyCode != 9){ 
+                                                                else if(e.keyCode != 9){
                                                                                 $(this).closest('form').hasClass('vipfieldstaff') > 0 ? $(this).closest('.formfield').find('.label').find(".max-length-error").removeClass("hide") : $(this).closest('.field-wrapper').find(".max-length-error").removeClass("hide");
                                                                                 $(this).addClass('counterror');
                                                                                 $(this).closest('.formfield').find('.label span').addClass('countlabelerror');
@@ -12188,14 +12188,14 @@ $(this).removeClass('counterror');
                 selectText = true;
                 $(this).removeClass('counterror');
                 $(this).closest('.formfield').find('.label span').removeClass('countlabelerror');
-});           
+});
 $('input[attributemaxlength],textarea[attributemaxlength]').on('focusout', function() {
                                 $(this).removeClass('counterror');
                                 $(this).closest('.formfield').find('.label span').removeClass('countlabelerror');
                                 $(this).closest('.field-wrapper').find(".max-length-error").remove();
                                 $(this).closest('.formfield').find(".max-length-error").remove();
                                 //$(this).closest('.formfield').find('.label span').removeClass('inputlabel');
-});                           
+});
 if($('.loginfailedclass:visible').length>0){
                 $('.registration .formfield_email').find('.labeltext').removeClass('inputlabel');
                 $('.registration .formfield_email').find('.requiredindicator').removeClass('inputlabel');
@@ -12204,7 +12204,7 @@ if($('.loginfailedclass:visible').length>0){
 }
 
 
-//$("body").on('change input',".accountemail , .guestemail, .emailCMrapala, .guestemailcon, .vipinsideremail, .emailfooter, .accountemailconf, .accountEmailConfirmation, .resetemail, .accemailcon, .loggedemail", function (e) { 
+//$("body").on('change input',".accountemail , .guestemail, .emailCMrapala, .guestemailcon, .vipinsideremail, .emailfooter, .accountemailconf, .accountEmailConfirmation, .resetemail, .accemailcon, .loggedemail", function (e) {
 //	//$(this).val(this.value.replace(/[\s]/g, ''));
 //
 //});
@@ -12217,13 +12217,13 @@ $(".accountemail , .guestemail, .emailCMrapala, .guestemailcon, .vipinsideremail
 	    this.value = this.value.replace(/\s/g, "");
 	  }
 });
-//override default required field message 
+//override default required field message
 $.validator.messages.required = function ($1, ele, $3) {
 	 var requiredText = $(ele).closest('.form-row').attr(
         'data-required-text');
     return requiredText || "";
 };
- 
+
 /**
  * Add phone validation method to $ validation plugin. Text
  * fields must have 'phone' css class to be validated as phone
@@ -12300,18 +12300,18 @@ $.validator.addMethod("postal", function (value, element) {
 	} else  {
        if(value == ''){
         	 return true;
-        } 
+        }
         return /^\d{5}((-\d{4})|(\d{4}))?$/.test(value);
 	}
     }, "Please enter your 5 or 9 digit Zip Code with or without a hyphen");
-    
+
 $.validator.addMethod("zipCodeCustom", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
 		return true;
 	} else {
         if(value == ''){
          	 return true;
-         } 
+         }
          return /^\d{5}((-\d{4})|(\d{4}))?$/.test(value);
 	}
  }, "- Please enter a valid ZipCode");
@@ -12349,10 +12349,10 @@ $.validator.addMethod("emailCMrapala", function (value, element) {
          var fchar = value.substring(0, 1);
          var lchar = value.substring(vIndex - 1);
         if(value.indexOf('@') != -1) {
-             var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                         
-         }                   
+             var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+         }
          var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-         var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+         var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
         if((fchar_s == false) || (lchar_s == false)) {customErrormsg = "-Something doesn't look right, please try again.";
              return false;
          }else if(email_check == false) {customErrormsg = "Oops - the email entered is not in a valid format.";
@@ -12360,28 +12360,28 @@ $.validator.addMethod("emailCMrapala", function (value, element) {
          } else {  return true; }
 		}
 }, customError);
- 
+
 $.validator.addMethod("creditcard_name", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
 		return true;
 	} else {
-       if(value == ''){return true;} 
+       if(value == ''){return true;}
         return /^[a-zA-Z ]+$/.test(value);
 	}
 }, "Only letters are valid for this field");
 
 $.validator.addMethod("creditcard_cvn", function (value, element) {
-	if($(element).hasClass('stopKeypress')){    
+	if($(element).hasClass('stopKeypress')){
 		return true;
 	} else {
-		
+
 		var cardtype = $(".select-creditCard-type").val();
     	var cvv_length = 3;
-       if(value == ''){return true;}  
+       if(value == ''){return true;}
         if(cardtype == 'Amex'){	cvv_length = 4; }
         if((value.length != cvv_length)){ $('.errorKeypress').remove(); return false;}else{return true;}
 	}
-}, "Please enter a valid Security Code for the Credit Card entered");            
+}, "Please enter a valid Security Code for the Credit Card entered");
 
 $.validator.addMethod("guestemailcon", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
@@ -12391,8 +12391,8 @@ $.validator.addMethod("guestemailcon", function (value, element) {
                 var fchar = value.substring(0, 1);
                 var lchar = value.substring(vIndex - 1);
                if(value.indexOf('@') != -1) {
-                    var splitval = value.split('@'); fchar = splitval[0].substring(0, 1); lchar = splitval[0].substring(splitval[0].length - 1);                                 
-                } 
+                    var splitval = value.split('@'); fchar = splitval[0].substring(0, 1); lchar = splitval[0].substring(splitval[0].length - 1);
+                }
                 var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);
                 var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
                 var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
@@ -12410,7 +12410,7 @@ $.validator.addMethod("guestemailcon", function (value, element) {
                 }
 
             }
-        }, customError);  
+        }, customError);
 
 $.validator.addMethod("guestemail",function (value, element) {
 			if($(element).hasClass('stopKeypress')){
@@ -12422,9 +12422,9 @@ $.validator.addMethod("guestemail",function (value, element) {
                if(value.indexOf('@') != -1) {
                     var splitval = value.split('@');
                     fchar = splitval[0].substring(0, 1);
-                    lchar = splitval[0].substring(splitval[0].length - 1);                                 
+                    lchar = splitval[0].substring(splitval[0].length - 1);
                 }
-               
+
                 var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);
                 var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
                 var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
@@ -12451,8 +12451,8 @@ $.validator.addMethod("loggedemail", function (value, element) {
            if(value.indexOf('@') != -1) {
                 var splitval = value.split('@');
                 fchar = splitval[0].substring(0, 1);
-                lchar = splitval[0].substring(splitval[0].length - 1);                             
-            } 
+                lchar = splitval[0].substring(splitval[0].length - 1);
+            }
             var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);
             var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
             var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
@@ -12464,7 +12464,7 @@ $.validator.addMethod("loggedemail", function (value, element) {
            else if(email_check == false) {
                 customErrormsg = "Oops - the email entered is not in a valid format.";
                 return false;
-            } 
+            }
             else {
                 return true;
             }
@@ -12482,7 +12482,7 @@ $.validator.addMethod("accemailcon", function (value, element) {
                if(value.indexOf('@') != -1) {
                     var splitval = value.split('@');
                     fchar = splitval[0].substring(0, 1);
-                    lchar = splitval[0].substring(splitval[0].length - 1);                                 
+                    lchar = splitval[0].substring(splitval[0].length - 1);
                 }
                 var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);
                 var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
@@ -12508,9 +12508,9 @@ $.validator.addMethod("a-zA-Z0-9", function (value, element) {
                if(value.indexOf('@') != -1) {
                     var splitval = value.split('@');
                     fchar = splitval[0].substring(0, 1);
-                    lchar = splitval[0].substring(splitval[0].length - 1);                                
+                    lchar = splitval[0].substring(splitval[0].length - 1);
                 }
-                 
+
                 var fchar_s = /^[a-zA-Z]$/.test(fchar);
                 var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
                 var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
@@ -12525,7 +12525,7 @@ $.validator.addMethod("a-zA-Z0-9", function (value, element) {
             }
 }, customError);
 
- 
+
 
 $.validator.addMethod("cm_password", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
@@ -12535,7 +12535,7 @@ $.validator.addMethod("cm_password", function (value, element) {
     	if($(element).closest('form').length > 0 && $(element).closest('form').attr('id') == "RegistrationForm"){
     		password_val = $(element).closest('form').find('.c_password').val();
         }
-    	
+
         if(value.length < 5){
         	customErrormsg = "Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.";
         	return false;
@@ -12572,9 +12572,9 @@ $.validator.addMethod("confirm_password", function (value, element) {
 $.validator.addMethod("c_password", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
 		return true;
-	}else if($(element).hasClass('required') && (value.length < 5)) {  
+	}else if($(element).hasClass('required') && (value.length < 5)) {
         	customErrormsg = "Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.";
-        	return false; 
+        	return false;
     }else {
         return true;
     }
@@ -12583,38 +12583,38 @@ $.validator.addMethod("c_password", function (value, element) {
 $.validator.addMethod("login_password", function (value, element) {
 	if($(element).hasClass('stopKeypress')){
 		return true;
-	}else if($(element).hasClass('required') && (value.length < 5)) {  
+	}else if($(element).hasClass('required') && (value.length < 5)) {
         	customErrormsg = "Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.";
-        	return false; 
+        	return false;
     }else {
         return true;
     }
 }, customError);
 
-$.validator.addMethod("resetemail", function (value, element) { 
+$.validator.addMethod("resetemail", function (value, element) {
 	var vIndex = value.length;
     var fchar = value.substring(0, 1);
     var lchar = value.substring(vIndex - 1);
-    
+
     if($(element).hasClass('stopKeypress')){
 		return true;
 	}else{
 		 if(value.indexOf('@') != -1) {
-                var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                         
-            }                   
+                var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+            }
             var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-            var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+            var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
            if((fchar_s == false) || (lchar_s == false)) {customErrormsg = "Something doesn't look right, please try again.";
                 return false;
             }else if(email_check == false) {customErrormsg = "Oops - the email entered is not in a valid format.";
-            	
+
                 return false;
             } else {  return true; }
 	}
 }, customError);
 
 
-$.validator.addMethod("accountemail", function (value, element) { 
+$.validator.addMethod("accountemail", function (value, element) {
         var vIndex = value.length;
         var fchar = value.substring(0, 1);
         var lchar = value.substring(vIndex - 1);
@@ -12622,22 +12622,22 @@ $.validator.addMethod("accountemail", function (value, element) {
 			return true;
 		}else{
 			if(value.indexOf('@') != -1) {
-                var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                         
-            }                   
+                var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+            }
             var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-            var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+            var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
            if((fchar_s == false) || (lchar_s == false)) {customErrormsg = "Something doesn't look right, please try again.";
                 return false;
             }else if(email_check == false) {customErrormsg = "Oops - the email entered is not in a valid format.";
                 return false;
             } else {  return true; }
 		}
-       
+
 	}, customError);
 
 //email validation for vipinsider
 
-$.validator.addMethod("vipinsideremail", function (value, element) { 
+$.validator.addMethod("vipinsideremail", function (value, element) {
 	 if($(element).hasClass('stopKeypress')){
 			return true;
 		}else{
@@ -12645,10 +12645,10 @@ $.validator.addMethod("vipinsideremail", function (value, element) {
         var fchar = value.substring(0, 1);
         var lchar = value.substring(vIndex - 1);
        if(value.indexOf('@') != -1) {
-            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                         
-        }                   
+            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+        }
         var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
        if((fchar_s == false) || (lchar_s == false)) {customErrormsg = "-Something doesn't look right, please try again.";
             return false;
         }else if(email_check == false) {customErrormsg = "Oops - the email entered is not in a valid format.";
@@ -12657,7 +12657,7 @@ $.validator.addMethod("vipinsideremail", function (value, element) {
 		}
 }, customError);
 
-$.validator.addMethod("emailfooter", function (value, element) { 
+$.validator.addMethod("emailfooter", function (value, element) {
 	 if($(element).hasClass('stopKeypress')){
 			return true;
 		}else{
@@ -12666,10 +12666,10 @@ $.validator.addMethod("emailfooter", function (value, element) {
         var fchar = value.substring(0, 1);
         var lchar = value.substring(vIndex - 1);
         if (value.indexOf('@') != -1) {
-            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                         
-        }                   
+            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+        }
         var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
         if ((fchar_s == false) || (lchar_s == false)) {customErrormsg = "Something doesn't look right, please try again.";
             return false;
         } else if (email_check == false) {customErrormsg = "Oops - the email entered is not in a valid format.";
@@ -12677,12 +12677,12 @@ $.validator.addMethod("emailfooter", function (value, element) {
         } else {  return true; }
         }
         else{customErrormsg ="Please enter your email address.";
-        	
+
         }
 		}
 }, customError);
 
-$.validator.addMethod("accountemailconf", function (value, element) { 
+$.validator.addMethod("accountemailconf", function (value, element) {
 	 if($(element).hasClass('stopKeypress')){
 			return true;
 		}else{
@@ -12690,10 +12690,10 @@ $.validator.addMethod("accountemailconf", function (value, element) {
         var fchar = value.substring(0, 1);
         var lchar = value.substring(vIndex - 1);
        if(value.indexOf('@') != -1) {
-            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                    
-        } 
+            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+        }
         var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
         var email_val = $('.accountemail').val();
         if($(element).closest('form').length > 0 && $(element).closest('form').attr('id') == "RegistrationForm"){
         	email_val = $(element).closest('form').find('.accountemail').val();
@@ -12716,10 +12716,10 @@ $.validator.addMethod("accountEmailConfirmation", function (value, element) {
         var fchar = value.substring(0, 1);
         var lchar = value.substring(vIndex - 1);
        if(value.indexOf('@') != -1) {
-            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);                    
-        } 
+            var splitval = value.split('@'); fchar = splitval[0].substring(0, 1);  lchar = splitval[0].substring(splitval[0].length - 1);
+        }
         var fchar_s = /^[a-zA-Z0-9]$/.test(fchar);  var lchar_s = /^[a-zA-Z0-9]$/.test(lchar);
-        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); 
+        var email_check = /^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
         var email_val = $(element).closest('form').find('.accountemail').val();
        if((fchar_s == false) || (lchar_s == false)) { customErrormsg = "Something doesn't look right, please try again.";
             return false;
@@ -12761,7 +12761,7 @@ $.validator.addMethod("monthselect", function (value, element) {
 
 
 			if(selectedyear){
-				selectedyear = selectedyear.replace(',','');	
+				selectedyear = selectedyear.replace(',','');
 				if((selectedyear <= yy) && (selectedMth < mth)){
 					  return false;
 				}else{
@@ -12769,7 +12769,7 @@ $.validator.addMethod("monthselect", function (value, element) {
 				}
 			}
 		}
-    }, ""); 
+    }, "");
 
 $.validator.addMethod("yearselect", function (value, element) {
 	 if($(element).hasClass('stopKeypress')){
@@ -12784,7 +12784,7 @@ $.validator.addMethod("yearselect", function (value, element) {
 
 
 			if(selectedyear){
-				selectedyear = selectedyear.replace(',','');	
+				selectedyear = selectedyear.replace(',','');
 				if((selectedyear <= yy) && (selectedMth < mth)){
 					return false;
 				}else{
@@ -12792,7 +12792,7 @@ $.validator.addMethod("yearselect", function (value, element) {
 				}
 			}
 		}
-    }, "");  
+    }, "");
 
 // register form validator for form elements
 // except for those which are marked "suppress"
@@ -12901,17 +12901,17 @@ var validator = {
             $(this).validate(self.settings);
         });
         validator.phoneValidation();
-        validator.Zipformatter();
+        validator.zipFormatter();
     },
     initForm: function (f) {
         $(f).validate(this.settings);
     },
-    phoneValidation: function() { 
+    phoneValidation: function() {
         // phone validation
     	var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
     	var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
 		if (is_firefox || is_explorer) {
-			$("input[name$='phone']").bind('keyup keydown', function (e) { 
+			$("input[name$='phone']").bind('keyup keydown', function (e) {
 	    		if (e.shiftKey || e.ctrlKey || e.altKey) {
 	    			e.preventDefault();
 	    		} else {
@@ -12922,12 +12922,12 @@ var validator = {
 	    		}
 	    		var curchr = $(this).val().length;
 	    		var curval = $(this).val();
-	    		
+
 	    		 var curval1 = curval.replace(/[A-Za-z` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 	    		 var str1 = curval1.substring(0, 3);
 	    		 var str2 = curval1.substring(3, 6);
 	    		 var str3 = curval1.substring(6, 10);
-	    		 
+
 	    		 if(curval.indexOf('(') == -1 && curval.indexOf(')') == -1 && curval1.length == 3){
 	    			 $(this).val( "(" + str1 + ") ");
 	    		 }else if(curval.indexOf('(') != -1 && curval.indexOf(')') == -1  && curval1.length == 4){
@@ -12943,7 +12943,7 @@ var validator = {
 	    	});
 		}
 		else {
-			$("body").on('change input keyup',"input[name$='phone']", function (e) { 
+			$("body").on('change input keyup',"input[name$='phone']", function (e) {
 	    		var curchr = $(this).val().length;
 	    		$(this).val(this.value.replace(/[^\d]/g, ''));
 	    		var curval = $(this).val();
@@ -12953,7 +12953,7 @@ var validator = {
 	    		 var str2 = curval1.substring(3, 6);
 	    		 var str3 = curval1.substring(6, 10);
 				var key = event.which || event.keyCode || event.charCode;
-				
+
 				 if(key == 8 || e.shiftKey || e.ctrlKey || e.altKey) {
 					e.preventDefault();
 					if(curval1.length == 4 || curval1.length == 5 || curval1.length == 6){
@@ -12977,8 +12977,8 @@ var validator = {
 				 }
 	    	});
 		}
-    	
-    	
+
+
        /* $("input[name$='phone']").blur(function (e) {
         	$(this).val(this.value.replace(/[A-Za-z` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''));
         		var curval = $(this).val();
@@ -12995,15 +12995,15 @@ var validator = {
     				$(this).val( "(" + str1 + ") " + str2 + "-" + str3);
     			}
         });*/
-       
+
     },
-    Zipformatter: function() {
-    	$("body").on('change input',"input[name$='postal'], input[name$='zip']", function (e) { 
+    zipFormatter: function() {
+    	$("body").on('change input',"input[name$='postal'], input[name$='zip']", function (e) {
         		$(this).val(this.value.replace(/[^\d]/g, ''));
         		var curval = $(this).val();
     			if(curval.length > 5){
     				 $(this).val(curval.substring(0, 5) + '-' + curval.substring(5, 9));
-        		 } 
+        		 }
     	});
     }
 };
@@ -26763,7 +26763,7 @@ function denodeifyWithoutCount(fn) {
     'args[argLength] = cb;',
     'res = fn.apply(self, args);',
     '}',
-    
+
     'if (res &&',
     '(typeof res === "object" || typeof res === "function") &&',
     'typeof res.then === "function"',

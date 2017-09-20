@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-var $form, $continue, $requiredInputs, validator;
+var $form, $requiredInputs, validator;
 
 var hasEmptyRequired = function () {
     // filter out only the visible fields
@@ -29,7 +29,7 @@ var validateForm = function () {
 
 var validateEl = function () {
     if ($(this).val() === '') {
-       // $continue.attr('disabled', 'disabled');
+        // $continue.attr('disabled', 'disabled');
     } else {
         // enable continue button on last required field that is valid
         // only validate single field
@@ -46,7 +46,7 @@ var init = function (opts) {
         throw new Error('Missing form and continue action selectors.');
     }
     $form = $(opts.formSelector);
-    $continue = $(opts.continueSelector);
+    //$continue = $(opts.continueSelector);
     validator = $form.validate();
     $requiredInputs = $('.required', $form).find(':input');
     validateForm();

@@ -1,53 +1,60 @@
 body {
-	color: #333333;
-	font-size: 12px;
+    color: #333333;
+    font-size: 12px;
     font-family: $global-font-family;
 }
+
 body {
-	background: url(../images/global/body-background-70.jpg) repeat;
+    background: url(../images/global/body-background-70.jpg) repeat;
     background-color: $body-bg-color;
     text-align: left;
     -webkit-tap-highlight-color: transparent;
 }
+
 a {
-	color: $global-static-link-color;
+    color: $global-static-link-color;
     text-decoration: none;
-	
-	&:hover {
-	    text-decoration: underline;
-	    cursor: pointer;
-	}
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
+
 button {
     outline: 0;
     &:focus {
-	    outline: none;
-	}
+        outline: none;
+    }
 }
+
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: $global-static-link-color;
-    
-    &:hover{
-	    color: $global-hover-link-color;
-	    text-decoration: none;
-	}
+
+    &:hover {
+        color: $global-hover-link-color;
+        text-decoration: none;
+    }
 }
+
 .h-one-tag {
-	sup {
-	    font-size: 16px;
-	    left: 0;
-	    zoom: 1;
-	    position: relative;
-    	top: -5px;
-	}
+    sup {
+        font-size: 16px;
+        left: 0;
+        zoom: 1;
+        position: relative;
+        top: -5px;
+    }
 }
+
 fieldset {
-	border: 0 none;
-	margin: 0;
-	padding: 0;
-	float: left;
-	width: 100%;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100%;
 }
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
     margin: 0;
     padding: 0;
@@ -56,125 +63,133 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-    
+
 }
+
 p {
     color: #333;
-    font-family: "Times New Roman",Times,Garamond,serif;
+    font-family: "Times New Roman", Times, Garamond, serif;
     font-size: 13px;
     font-weight: normal;
     word-spacing: normal;
     line-height: 18px;
     padding: 0 0 18px 0;
 }
+
 table {
     border-collapse: collapse;
     border-bottom: 1px solid #ccc;
-    font-family: arial,helvetica,sans-serif;
+    font-family: arial, helvetica, sans-serif;
     font-size: 10px;
     line-height: 14px;
     margin: 0;
     padding: 0;
     width: 100%;
     th {
-	    background-color: #ccc;
-	    border-right: 2px solid white;
-	    border-bottom: 2px solid white;
-	    color: Black;
-	    font-size: 1.2em;
-	    font-weight: bold;
-	    margin: 1px;
-	    padding: 3px 15px;
-	    text-align: left;
-	    white-space: nowrap;
-	}
-	td {
-	    border-top: 1px solid #ccc;
-	    padding: 4px 30px 3px 0;
-	    text-align: left;
-	}
+        background-color: #ccc;
+        border-right: 2px solid white;
+        border-bottom: 2px solid white;
+        color: Black;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 1px;
+        padding: 3px 15px;
+        text-align: left;
+        white-space: nowrap;
+    }
+    td {
+        border-top: 1px solid #ccc;
+        padding: 4px 30px 3px 0;
+        text-align: left;
+    }
 }
+
 tr {
-	.tablerow {
-	    background: url("../images/row-shading.jpg") repeat-x center bottom transparent;
-	}
+    .tablerow {
+        background: url("../images/row-shading.jpg") repeat-x center bottom transparent;
+    }
 }
+
 th {
-	text-align: left;
+    text-align: left;
 }
 
 td {
-	padding: 1em;
-	vertical-align: top;
+    padding: 1em;
+    vertical-align: top;
 }
+
 ol, ul {
-	li {
-	    list-style: none;
-	}
+    li {
+        list-style: none;
+    }
 }
+
 button,
 .button,
 .buttonstyle,
 input[type="button"] {
-	background-color: $citrus;
-	border-color: darken($citrus, 10%);
-	border-radius: 2px;
-	border-style: solid;
-	border-width: 1px;
-	color: $white;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 1.1em;
-	font-weight: 400;
-	padding: 0.5em 2em;
-	text-align: center;
-	transition: all 0.3s ease;
-	outline: none;
-	&.large {
-		font-size: 1.35em;
-		text-transform: uppercase;
-	}
-	&:hover {
-		background-color: $global-hover-button-color;
-		text-decoration: none;
-	}
-	&.raised {
-		border-width: 0;
-		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-		&:hover {
-			background-color: darken($citrus, 10%);
-			color: $white;
-		}
-	}
-	&.simple {
-		background-color: $white;
-		color: darken($citrus, 10%);
-	}
-	&[disabled],
-	&.disabled {
-		background-color: $very-light-gray;
-		border-color: $very-light-gray;
-		color: $dim-gray;
-		opacity: 0.5;
-	}
-	a {
-		color: $white;
-		&:hover {
-			color: $citrus;
-		}
-	}
-	i {
-		&.left {
-			margin-right: 0.6em;
-		}
-		&.right {
-			margin-left: 0.6em;
-		}
-	}
+    background-color: $citrus;
+    border-color: darken($citrus, 10%);
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    color: $white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 400;
+    padding: 0.5em 2em;
+    text-align: center;
+    transition: all 0.3s ease;
+    outline: none;
+    &.large {
+        font-size: 1.35em;
+        text-transform: uppercase;
+    }
+    &:hover {
+        background-color: $global-hover-button-color;
+        text-decoration: none;
+    }
+    &.raised {
+        border-width: 0;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        &:hover {
+            background-color: darken($citrus, 10%);
+            color: $white;
+        }
+    }
+    &.simple {
+        background-color: $white;
+        color: darken($citrus, 10%);
+    }
+    &[disabled],
+    &.disabled {
+        background-color: $very-light-gray;
+        border-color: $very-light-gray;
+        color: $dim-gray;
+        opacity: 0.5;
+    }
+    a {
+        color: $white;
+        &:hover {
+            color: $citrus;
+        }
+    }
+    i {
+        &.left {
+            margin-right: 0.6em;
+        }
+        &.right {
+            margin-left: 0.6em;
+        }
+    }
 }
+
 input, select option {
     background: $white;
 }
+
 .button-fancy-small {
 }
 
@@ -182,28 +197,32 @@ input, select option {
 }
 
 .button-fancy-large {
-	@extend .button.large;
+    @extend .button.large;
 }
+
 button {
-    -webkit-border-radius: 3px !important; 
-  	-moz-border-radius: 3px !important; 
-  	border-radius: 3px !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
 }
+
 input[type="password"] {
-	font-family: $vip-password-font;
+    font-family: $vip-password-font;
     font-size: 15px;
     letter-spacing: -1px;
 }
+
 .button-text {
-	background-color: transparent;
-	border-width: 0;
-	color: $citrus;
-	padding: 0;
-	&:hover {
-		background-color: transparent;
-		text-decoration: underline;
-	}
+    background-color: transparent;
+    border-width: 0;
+    color: $citrus;
+    padding: 0;
+    &:hover {
+        background-color: transparent;
+        text-decoration: underline;
+    }
 }
+
 table {
     border-collapse: collapse;
     border-bottom: 1px solid $border-very-light-gray;
@@ -214,35 +233,39 @@ table {
     padding: 0;
     width: 100%;
     td {
-	    border-top: 1px solid $border-very-light-gray;
-	    padding: 4px 30px 3px 0;
-	    text-align: left;
-	}
+        border-top: 1px solid $border-very-light-gray;
+        padding: 4px 30px 3px 0;
+        text-align: left;
+    }
 }
+
 .button-full-width {
-	padding-left: 0;
-	padding-right: 0;
-	text-align: center;
-	width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    width: 100%;
 }
+
 select {
     border: 1px solid #ccc;
     height: 28px;
     padding: 0;
     z-index: -1;
 }
+
 input, select {
     border: 1px solid #cecece;
     background: url(../images/input-background.jpg) 100% 0 no-repeat;
     height: 24px;
     margin: 0 18px 18px 0;
     padding: 0 9px 0 9px;
-    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 11px;
     color: #333;
     outline: 0;
 }
-input[type="checkbox"], 
+
+input[type="checkbox"],
 input.checkbox {
     width: 13px;
     height: 13px;
@@ -251,27 +274,29 @@ input.checkbox {
     border: 0;
     vertical-align: middle;
 }
-a{
-	-webkit-tap-highlight-color: rgba(0,0,0,0); 
+
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 .sitesearch {
-	input[type=text] 
-		{
-		  -webkit-user-select: text !important;
-		  -khtml-user-select: text !important;
-		  -moz-user-select: text !important;
-		  -ms-user-select: text !important;
-		  user-select: text !important;
-		}
+    input[type=text] {
+        -webkit-user-select: text !important;
+        -khtml-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
+    }
 }
 
 a:visited,
-a:focus  {
-	background: transparent;
-	outline: -webkit-focus-ring-color auto 5px;
-	box-shadow: none;
+a:focus {
+    background: transparent;
+    outline: -webkit-focus-ring-color auto 5px;
+    box-shadow: none;
 }
+
 input[type=text]::-ms-clear,
 input[type=password]::-ms-reveal {
-	display: none;
+    display: none;
 }
