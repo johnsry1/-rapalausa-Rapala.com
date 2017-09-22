@@ -19,7 +19,7 @@ var addAllToCart = function (e) {
     }
 
     var $productForms = $('#product-set-list').find('form').toArray();
-    TPromise.all(_.map($productForms, addItemToCart))
+    TPromise.all(_.map($productForms, addToCart))
         .then(function (responses) {
             dialog.close();
             // show the final response only, which would include all the other items
@@ -141,7 +141,7 @@ var addToCart = {
             // fire the BonusDiscountLineItemCheck event so we can check
             // if there is a bonus discount line item
             jQuery(document).trigger(
-                jQuery.Event('BonusDiscountLineItemCheck'));
+                jQuery.event('BonusDiscountLineItemCheck'));
         };
 
         // handles add to cart error

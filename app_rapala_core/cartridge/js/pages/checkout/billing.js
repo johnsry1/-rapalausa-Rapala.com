@@ -14,7 +14,7 @@ var ajax = require('../../ajax'),
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 var flageallotmentcover = $('input.flageallotmentcover').val();
-var allotmentAmount = parseInt($('input.allotmentAmount').val());
+var allotmentAmount = parseInt($('input.allotmentAmount').val(), 10);
 var couponMenthods = {
     updateSummary: function () {
         var $summary = $('#secondary .new-summery-cart');
@@ -855,22 +855,22 @@ exports.init = function () {
         if (billingPas.length > 0) {
             if (billingConpas.length < 5) {
                 $('.guestbillingform .billing-conpassword').addClass('errorclient');
-                $('.billingconfpassword').text(app.resources.billingpasswordconfirm_min).removeClass('hide');
+                $('.billingconfpassword').text(Resources.billingpasswordconfirm_min).removeClass('hide');
                 //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
             } else if (billingPas != billingConpas) {
                 $('.guestbillingform .billing-conpassword').addClass('errorclient');
-                $('.billingconfpassword').text(app.resources.billingpasswordconfirm).removeClass('hide');
+                $('.billingconfpassword').text(Resources.billingpasswordconfirm).removeClass('hide');
                 //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
             } else {
                 $('.guestbillingform .billing-conpassword').removeClass('errorclient');
-                $('.billingconfpassword').text(app.resources.billingpasswordconfirm).addClass('hide');
+                $('.billingconfpassword').text(Resources.billingpasswordconfirm).addClass('hide');
                 if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
                     //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
                 }
             }
         } else {
             $('.guestbillingform .billing-conpassword').removeClass('errorclient');
-            $('.billingconfpassword').text(app.resources.billingpasswordconfirm).addClass('hide');
+            $('.billingconfpassword').text(Resources.billingpasswordconfirm).addClass('hide');
             if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
                 //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
             }
@@ -890,7 +890,7 @@ exports.init = function () {
         if (billingPas.length > 0) {
             if (billingPas.length < 5) {
                 $('.guestbillingform .billing-password').addClass('errorclient');
-                $('.billingpassword').text(app.resources.billingpasswordconfirm_min).removeClass('hide');
+                $('.billingpassword').text(Resources.billingpasswordconfirm_min).removeClass('hide');
                 //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
             } else {
                 $('.guestbillingform .billing-password').removeClass('errorclient');

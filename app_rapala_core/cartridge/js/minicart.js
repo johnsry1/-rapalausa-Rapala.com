@@ -360,7 +360,7 @@ var minicart = {
                     minicart.close();
                     minicart.init();
                     $('.rapala_device .minicart-button').removeClass('clicked');
-                } else if (minicarttotal > 0 && cartPageLength == 0) {
+                } else if (minicarttotal > 0) {
                     $('.rapala_device .minicart-button').trigger('click');
                 }
             }
@@ -454,7 +454,7 @@ var minicart = {
                 .delay(1500).fadeOut(400);
             // fire the BonusDiscountLineItemCheck event so we can check
             // if there is a bonus discount line item
-            jQuery(document).trigger(jQuery.Event('BonusDiscountLineItemCheck'));
+            jQuery(document).trigger(jQuery.event('BonusDiscountLineItemCheck'));
         };
 
         // handles add to cart error
