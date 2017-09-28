@@ -65,7 +65,7 @@
                            if(Store.stateCode   != null) qAttr += Store.stateCode + ", ";
                            if(Store.countryCode != null) qAttr += Store.countryCode;
 
-                           var glink = "http://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
+                           var glink = "https://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
                        </isscript>
                        <td class="store-address">
                        	   <a class="stores result-map-addres" href="${glink}" target="_blank">
@@ -118,7 +118,7 @@
 						'</div>'+
 						'<p><isprint value="${Store.address1}"/><br /><isprint value="${Store.city}"/>, <isprint value="${Store.stateCode}"/> <isprint value="${Store.postalCode}"/></p>'+
 						'<div class="storephone"><isprint value="${Store.phone}"/><br/><isprint value="${Store.getEmail()}"/></div>'+
-						'<div class="storemap"><a class="googlemap" href="http://maps.google.com/maps?hl=en&f=q&q=${Store.address1},${Store.city},${Store.stateCode},${Store.postalCode},${Store.countryCode}" target="_blank">View on larger map</a></div>'+
+						'<div class="storemap"><a class="googlemap" href="https://maps.google.com/maps?hl=en&f=q&q=${Store.address1},${Store.city},${Store.stateCode},${Store.postalCode},${Store.countryCode}" target="_blank">View on larger map</a></div>'+
 				'</div>';
 	
 			    var marker = new google.maps.Marker({
