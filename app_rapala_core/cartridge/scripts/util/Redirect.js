@@ -23,7 +23,7 @@ function validateURL(url) {
 	var hostRegExp = new RegExp('^https?://' + request.getHttpHost() + '(?=/|$)');
 	var location;
 	if (!url || !hostRegExp.test(url)) {
-		location = URLUtils.httpHome().toString();
+		location = URLUtils.httpsHome().toString();
 	} else {
 		location = url;
 	}

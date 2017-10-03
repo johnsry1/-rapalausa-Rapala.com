@@ -31,7 +31,7 @@ function continueShopping() {
     if (location) {
         response.redirect(location);
     } else {
-        response.redirect(URLUtils.httpHome());
+        response.redirect(URLUtils.httpsHome());
     }
 }
 

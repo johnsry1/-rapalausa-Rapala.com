@@ -5,7 +5,7 @@
 
 var HOME_BREADCRUMB = {
     name: dw.web.Resource.msg('global.home', 'locale', null),
-    url: dw.web.URLUtils.httpHome()
+    url: dw.web.URLUtils.httpsHome()
 };
 
 /**

@@ -41,7 +41,7 @@ exports.lastCatalogURL = function lastCatalogURL() {
         }
     }
 
-    return dw.web.URLUtils.httpHome().toString();
+    return dw.web.URLUtils.httpsHome().toString();
 };
 
 //add url parser (libUrl)
