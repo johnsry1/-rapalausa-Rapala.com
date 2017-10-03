@@ -6,7 +6,7 @@
 		<isloop items="${slotcontent.content}" var="category" status="loopstate">
 			<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
 			<isif condition="${category.image != null}">
-				<img src="${category.image.httpURL}" alt="${category.displayName}" />
+				<img src="${category.image.httpsURL}" alt="${category.displayName}" />
 			<iselse/>
 				<!-- BLANK -->
 			</isif>

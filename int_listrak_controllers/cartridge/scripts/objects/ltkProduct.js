@@ -116,7 +116,7 @@ ltkProduct.prototype.getImageURL = function(image) {
 	if (!empty(image))
 	{ 
 		if (empty(this.useAbsoluteImageURLs) || this.useAbsoluteImageURLs == true)
-			imageurl = image.httpURL;
+			imageurl = image.httpsURL;
 		else
 			imageurl = image.URL;
 	}

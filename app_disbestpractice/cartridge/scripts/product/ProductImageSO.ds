@@ -100,7 +100,7 @@ function ProductImage( viewType: String, imageObject : Object, index : Number ) 
 	*/	
 	this.getMediaFile = function() {
 		if ( this.mediaFile == null ){
-			var baseImageURL : String = this.image.httpURL.toString();
+			var baseImageURL : String = this.image.httpsURL.toString();
 			baseImageURL = baseImageURL.substr( baseImageURL.indexOf("/on/demandware.static/") + 22);
 			var baseImageURLArray : Array = baseImageURL.split( '/' );
 			var filePathArray : Array = [ dw.io.File.CATALOGS ];
@@ -406,7 +406,7 @@ function ProductImage( viewType: String, imageObject : Object, index : Number, r
 	*/	
 	this.getMediaFile = function() {
 		if ( this.mediaFile == null ){
-			var baseImageURL : String = this.image.httpURL.toString();
+			var baseImageURL : String = this.image.httpsURL.toString();
 			baseImageURL = baseImageURL.substr( baseImageURL.indexOf("/on/demandware.static/") + 22);
 			var baseImageURLArray : Array = baseImageURL.split( '/' );
 			var filePathArray : Array = [ dw.io.File.CATALOGS ];

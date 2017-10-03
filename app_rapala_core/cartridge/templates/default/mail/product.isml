@@ -23,7 +23,7 @@
 					<tr>
 						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<isset name="image" value="${pdict.Product.getImage('medium',0)}" scope="page"/>	
-							<isset name="imageURL" value="${image.httpURL}" scope="page"/>	
+							<isset name="imageURL" value="${image.httpsURL}" scope="page"/>	
 							<isif condition="${!empty(image)}">
 								<isset name="thumbnailUrl" value="${imageURL}" scope="page"/>
 								<isset name="imageAlt" value="${image.alt}" scope="page"/>
