@@ -47,7 +47,7 @@
       	 	 <isset name="getsecondLevel" value="${getSubcategoriesInMenuForCategory(topCat)}" scope="page" />
       	 	 <isloop items="${getsecondLevel}" var="secondLevel">
       	 	  <li class="<isprint value="${secondLevel.custom.categoryClassName}"/> category-top-level <isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && secondLevel.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">active</isif>" >
-	                 <a href="${URLUtils.http('Search-Show', 'cgid', secondLevel.getID(),'id',ID)}" >
+	                 <a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID(),'id',ID)}" >
 	                     <isscript>
 	                           var count : Number = getcategoryProductCount(secondLevel.ID);
 	                           var subcatcount : Number = getcategoryProducts(secondLevel.ID);
@@ -70,7 +70,7 @@
 		                                var subcatcount : Number = getcategoryProducts(subCat.ID);
 		                          	</isscript>
                                     <li class="<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid) && subCat.ID == pdict.CurrentHttpParameterMap.cgid.stringValue}">active</isif><isif condition="${subCat.onlineProducts.size()==0 && (subCat.onlineSubCategories.size()==0 && subcatcount==0)}"> hide</isif>">
-		                                    <a href="${URLUtils.http('Search-Show', 'cgid', subCat.getID(),'id',ID)}">
+		                                    <a href="${URLUtils.https('Search-Show', 'cgid', subCat.getID(),'id',ID)}">
 					                          	<isif condition="${getsubCat.size()>0}">
 					                                <isprint value="${subCat.getDisplayName()}"/><span class="count-products">&nbsp;(<isprint value="${count.toFixed()}" />)</span>
 					                           </isif>      
@@ -90,7 +90,7 @@
 					                                         var subcatcount : Number = getcategoryProducts(subCatsub.ID);
 					                                   </isscript>
 						                                <isif condition="${getsubCatsub.size()}">
-                                                              <a href="${URLUtils.http('Search-Show', 'cgid', subCatsub.getID(),'id',ID)}" >
+                                                              <a href="${URLUtils.https('Search-Show', 'cgid', subCatsub.getID(),'id',ID)}" >
                                     							  <isprint value="${subCatsub.getDisplayName()}"/><span class="count-products">&nbsp;(<isprint value="${count.toFixed()}" />)</span>
                                                               </a>
                                                               <iscomment>

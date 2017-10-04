@@ -133,7 +133,7 @@ ltkProduct.prototype.getProductURL = function(product) {
 	if (!empty(product.ID))
 	{
 		if (empty(this.useAbsoluteProductURLs) || this.useAbsoluteProductURLs == true)
-			linkurl = URLUtils.http('Product-Show', 'pid', product.ID);
+			linkurl = URLUtils.https('Product-Show', 'pid', product.ID);
 		else
 			linkurl = URLUtils.url('Product-Show', 'pid', product.ID);
 	}

@@ -303,7 +303,7 @@ function prepareData(product: Product, product_type: String, googleProductCatego
     productStringWriter.write(sizeCustom ? sizeCustom + "\t" : '' + "\t");
     productStringWriter.write(colorGroup ? colorGroup + "\t" : '' + "\t");
     productStringWriter.write(itemGroupId ? itemGroupId + "\t" : '' + "\t");
-    productStringWriter.write(URLUtils.http('Product-Show', 'pid', product.ID).toString() + "\t");
+    productStringWriter.write(URLUtils.https('Product-Show', 'pid', product.ID).toString() + "\t");
     productStringWriter.write(image1 ? image1 + "\t" : '' + "\t");
     productStringWriter.write('New' + "\t");
     productStringWriter.write(brandname ? brandname + "\t" : '' + "\t");

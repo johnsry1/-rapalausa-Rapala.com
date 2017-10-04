@@ -88,7 +88,7 @@
 			<ul class="search-tabs">
 		    	<li class="active"><a href="${pdict.ProductSearchResult.url('Search-Show')}"   name="" id="producttab"><span>${Resource.msg('foldercontenthits.producttab','rendering',null)}</span></a></li>
 		    		<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
-		        		<li><a href="${URLUtils.http('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab"><span>${Resource.msg('foldercontenthits.contenttab','rendering',null)}</span></a></li>
+		        		<li><a href="${URLUtils.https('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab"><span>${Resource.msg('foldercontenthits.contenttab','rendering',null)}</span></a></li>
 		         	</isif>
 		        <div class="clear"></div>
 	    	</ul>

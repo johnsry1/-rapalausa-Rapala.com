@@ -40,7 +40,7 @@
 		                                          		<li>
 		                                          	</isif>
 		                                          </isif>
-		                                          <a href="${URLUtils.http("Page-Show", "cid", content.ID)}" title="${content.name}">
+		                                          <a href="${URLUtils.https("Page-Show", "cid", content.ID)}" title="${content.name}">
 						                             <isif condition="${(content.name.length) >=18}">
 						                                  	<isprint value="${content.name.substring(0,18)+'..'}">
 						                                    <iselse>
@@ -62,7 +62,7 @@
                          <iselse>
                          	<li>
                          </isif>
-                            <a href="${URLUtils.http("Page-Show", "cid", content.ID)}">
+                            <a href="${URLUtils.https("Page-Show", "cid", content.ID)}">
                             <span><isprint value="${content.name}"></span></a><br/>
                             </li>
                             
