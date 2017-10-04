@@ -61,7 +61,7 @@ function getSubCategoriesLayout(topCat) {
 *	uses custom attribute of type MarkupText to be able to maintain url-util styled urls - i.e $url('GiftCert-Purchase')$
 */
 function getCategoryUrl(category) {
-	var url : dw.web.URL = dw.web.URLUtils.http('Search-Show', 'cgid', category.getID());
+	var url : dw.web.URL = dw.web.URLUtils.https('Search-Show', 'cgid', category.getID());
 	if (('alternativeUrl' in category.custom) && !empty(category.custom.alternativeUrl)) {
 		url = category.custom.alternativeUrl;
 	}

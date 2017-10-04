@@ -49,7 +49,7 @@
 										
 										<isif condition="${!empty(p_email)}">
 											<isset name="imgSizeName" value="/images/new-sizes-snipe.png" scope="page"/>
-											<img class="new" src="${URLUtils.httpStatic('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+											<img class="new" src="${URLUtils.httpsStatic(('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
 										<iselse/>
 											<span class="${imgSizeName}">
 												<isif condition="${pdict.currentActiveBrand!=null && !empty(pdict.currentActiveBrand)}">
@@ -86,7 +86,7 @@
 								   		
 								   		<isif condition="${!empty(p_email)}">
 								   			<isset name="imgColorName" value="/images/new-colors-snipe.png" scope="page"/>
-								   			<img class="new" src="${URLUtils.httpStatic('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+								   			<img class="new" src="${URLUtils.httpsStatic(('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
 								   		<iselse/>
 								   			<span class="${imgColorName}">
 									   			<isif condition="${!empty(pdict.p_imagecheckout)}">
@@ -128,7 +128,7 @@
 					
 					<isif condition="${!empty(p_email)}">
 						<isset name="imgSizeName" value="/images/new-sizes-snipe.png" scope="page"/>
-						<span><img class="new" src="${URLUtils.httpStatic('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
+						<span><img class="new" src="${URLUtils.httpsStatic(('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
 					<iselse/>
 						<span class="${imgSizeName}">
 							<isif condition="${!empty(pdict.p_imagecheckout)}">
@@ -158,7 +158,7 @@
 					
 					<isif condition="${!empty(p_email)}">
 						<isset name="imgColorName" value="/images/new-colors-snipe.png" scope="page"/>
-						<span><img class="new" src="${URLUtils.httpStatic('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
+						<span><img class="new" src="${URLUtils.httpsStatic(('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
 					<iselse/>
 						<span class="${imgColorName}">
 							<isif condition="${pdict.currentActiveBrand!=null && !empty(pdict.currentActiveBrand)}">
