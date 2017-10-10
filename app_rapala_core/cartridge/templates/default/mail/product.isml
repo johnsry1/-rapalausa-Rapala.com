@@ -16,7 +16,7 @@
 					<tr>
 						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
 							<a href="${URLUtils.httpsHome()}" title="${Resource.msg('global.storename','locale',null)}">
-								<img src="${URLUtils.httpsStatic(('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
+								<img src="${URLUtils.httpsStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
 							</a>
 						</td>
 					</tr>
@@ -29,7 +29,7 @@
 								<isset name="imageAlt" value="${image.alt}" scope="page"/>
 								<isset name="imageTitle" value="${image.title}" scope="page"/>
 							<iselse/>
-								<isset name="thumbnailUrl" value="${URLUtils.httpsStatic(('/images/noimagesmall.png')}" scope="page"/>
+								<isset name="thumbnailUrl" value="${URLUtils.httpsStatic('/images/noimagesmall.png')}" scope="page"/>
 								<isset name="imageTitle" value="${p_productli.product.name}" scope="page"/>
 								<isset name="imageAlt" value="${p_productli.product.name}" scope="page"/>
 							</isif>
