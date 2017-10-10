@@ -37,11 +37,11 @@ exports.lastCatalogURL = function lastCatalogURL() {
             case 'Search-Show':
                 // catalog related click
                 // replace well-known http parameter names 'source' and 'format' to avoid loading partial page markup only
-                return 'http://' + click.host + click.url.replace(/source=/g, 'src=').replace(/format=/g, 'frmt=');
+                return 'https://' + click.host + click.url.replace(/source=/g, 'src=').replace(/format=/g, 'frmt=');
         }
     }
 
-    return dw.web.URLUtils.httpHome().toString();
+    return dw.web.URLUtils.httpsHome().toString();
 };
 
 //add url parser (libUrl)

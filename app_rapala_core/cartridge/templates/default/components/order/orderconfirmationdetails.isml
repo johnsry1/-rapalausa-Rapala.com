@@ -390,7 +390,7 @@
 								 	
 									<div class="prod_image <isif condition="${productLineItem.product.getClassificationCategory().displayName == 'Sleds' || productLineItem.product.getClassificationCategory().displayName == 'Shelters' }">summary_notifications_img</isif>">
 										<isif condition="${productLineItem.product != null && productLineItem.product.getImage('large',0) != null}">
-											<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID)}" title="${productLineItem.productName}">
+											<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID)}" title="${productLineItem.productName}">
 												<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 													<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'cart')}" scope="page"/>
 													<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>

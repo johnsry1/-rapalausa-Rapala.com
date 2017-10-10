@@ -16,12 +16,12 @@
 				<isset name="columnNo" value="${positionEntry.key.substr(0,positionEntry.key.length-1)}" scope="page" />
 				<isif condition="${('redirectingToPdp' in secondLevel.custom) && secondLevel.custom.redirectingToPdp.valueOf()}">
 						<isset name="brand" value="${secondLevel.getParent()}" scope="page" />			
-						<a href="${URLUtils.http('Product-Show', 'pid', secondLevel.custom.redirectToPdp,'brandname',brand.ID)}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">saeffw
+						<a href="${URLUtils.https('Product-Show', 'pid', secondLevel.custom.redirectToPdp,'brandname',brand.ID)}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">saeffw
 						<isprint value="${secondLevel.getDisplayName()}"/>
 						</a>
 				<iselse>
 					<isif condition="${(secondLevel.onlineProducts.size()>0) || (secondLevel.onlineSubCategories.size()>0)}">
-						<a href="${URLUtils.http('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${secondLevel.getDisplayName()}">
+						<a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${secondLevel.getDisplayName()}">
 						<isprint value="${secondLevel.getDisplayName()}"/>
 						</a>
 					</isif>

@@ -19,13 +19,13 @@
 			<isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 				<ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
-						<li class="first-level"><h2><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isloop>
@@ -46,13 +46,13 @@
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
-						<li class="first-level"><h2 class="boldborder"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="boldborder"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isloop>
@@ -70,13 +70,13 @@
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isloop>
@@ -95,13 +95,13 @@
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories().iterator()}" var="subsubCategory" status="loopstatus">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isloop>
@@ -121,14 +121,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -149,14 +149,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -178,14 +178,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -207,14 +207,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -236,14 +236,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -265,14 +265,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="loopstatus">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -294,14 +294,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -326,14 +326,14 @@
 		      <ul>
 					<isloop items="${topCategory.getOnlineSubCategories().iterator()}" var="subCategory" status="innerloopstatus1">
 					<isif condition="${('showInMenu' in subCategory.custom) && subCategory.custom.showInMenu.valueOf()}">
-						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.http('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
+						<li class="first-level"><h2 class="left-nav-style"><a href="${URLUtils.https('Search-Show','cgid', subCategory.getID())}" title="${subCategory.displayName}">
 						<isprint value="${subCategory.displayName}"/></a></h2>
 							<isif condition="${subCategory.getOnlineSubCategories().iterator().hasNext()}">
 								<ul >
 									<isloop items="${subCategory.getOnlineSubCategories()}" var="subsubCategory">
 									<isif condition="${('showInMenu' in subsubCategory.custom) && subsubCategory.custom.showInMenu.valueOf()}">
 									<li>
-										<a href="${URLUtils.http('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
+										<a href="${URLUtils.https('Search-Show','cgid', subsubCategory.getID())}" title="${subsubCategory.displayName}">
 										<isprint value="${subsubCategory.displayName}"/></a>
 									</li>
 									</isif>
@@ -371,17 +371,17 @@
 							</iselse>
 							</isif>
 						    <ul>
-								<li><a href="${URLUtils.http('Home-Show','id','1')}"  title="${Resource.msg('headertab.rapala','common',null)}" >${Resource.msg('account.rapala','account',null)}</a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','6')}" title="${Resource.msg('headertab.vmc','common',null)}" target="_blank">${Resource.msg('account.vmc','account',null)} </a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','4')}" title="${Resource.msg('headertab.storm','common',null)}" target="_blank">${Resource.msg('account.storm','account',null)}</a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','2')}"  title="${Resource.msg('headertab.sufix','common',null)}" target="_blank">${Resource.msg('account.sufix','account',null)}</a></li>
-								<li><a  href="${URLUtils.http('Home-Show','id','3')}" title="${Resource.msg('headertab.triggerx','common',null)}" target="_blank">${Resource.msg('account.triggerx','account',null)}</a></li>
-								<li><a  href="${URLUtils.http('Home-Show','id','5')}" title="${Resource.msg('headertab.luhrjensen','common',null)}" target="_blank">${Resource.msg('account.luhrjensen','account',null)}</a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','7')}" title="${Resource.msg('headertab.terminator','common',null)}" target="_blank">${Resource.msg('account.terminator','account',null)}</a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','8')}" title="${Resource.msg('headertab.bluefox','common',null)}" target="_blank">${Resource.msg('account.bluefox','account',null)}</a></li>
-								<li><a href="${URLUtils.http('Home-Show','id','9')}" title="${Resource.msg('headertab.williamson','common',null)}" target="_blank">${Resource.msg('account.williamson','account',null)}</a></li>
-								<li><a  href="${URLUtils.http('Home-Show','id','10')}" title="${Resource.msg('headertab.marcum','common',null)}" target="_blank">${Resource.msg('account.marcum','account',null)}</a></li>
-								<li><a  href="${URLUtils.http('Home-Show','id','11')}" title="${Resource.msg('headertab.strikemaster','common',null)}" target="_blank">${Resource.msg('account.strikemaster','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','1')}"  title="${Resource.msg('headertab.rapala','common',null)}" >${Resource.msg('account.rapala','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('headertab.vmc','common',null)}" target="_blank">${Resource.msg('account.vmc','account',null)} </a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','4')}" title="${Resource.msg('headertab.storm','common',null)}" target="_blank">${Resource.msg('account.storm','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','2')}"  title="${Resource.msg('headertab.sufix','common',null)}" target="_blank">${Resource.msg('account.sufix','account',null)}</a></li>
+								<li><a  href="${URLUtils.https('Home-Show','id','3')}" title="${Resource.msg('headertab.triggerx','common',null)}" target="_blank">${Resource.msg('account.triggerx','account',null)}</a></li>
+								<li><a  href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('headertab.luhrjensen','common',null)}" target="_blank">${Resource.msg('account.luhrjensen','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','7')}" title="${Resource.msg('headertab.terminator','common',null)}" target="_blank">${Resource.msg('account.terminator','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','8')}" title="${Resource.msg('headertab.bluefox','common',null)}" target="_blank">${Resource.msg('account.bluefox','account',null)}</a></li>
+								<li><a href="${URLUtils.https('Home-Show','id','9')}" title="${Resource.msg('headertab.williamson','common',null)}" target="_blank">${Resource.msg('account.williamson','account',null)}</a></li>
+								<li><a  href="${URLUtils.https('Home-Show','id','10')}" title="${Resource.msg('headertab.marcum','common',null)}" target="_blank">${Resource.msg('account.marcum','account',null)}</a></li>
+								<li><a  href="${URLUtils.https('Home-Show','id','11')}" title="${Resource.msg('headertab.strikemaster','common',null)}" target="_blank">${Resource.msg('account.strikemaster','account',null)}</a></li>
 							</ul>
 						</li>
 							

@@ -155,7 +155,7 @@
                      if(Store.stateCode   != null) qAttr += Store.stateCode + ", ";
                      if(Store.countryCode != null) qAttr += Store.countryCode;
 
-                     var glink = "http://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
+                     var glink = "https://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
                  </isscript>
                  <div class="storemap">
                  	<span class="storemap-miles">1.31 Miles Away</span>
@@ -165,7 +165,7 @@
                      <isscript>
                      	var websiteUrl = Store.custom.website;
                      	if(websiteUrl.indexOf("http") < 0) {
-                     		websiteUrl = "http://" + websiteUrl;
+                     		websiteUrl = "https://" + websiteUrl;
                      	}
                      </isscript>
                      <a target="_blank" class="button" href="<isprint value="${websiteUrl}"/>">${Resource.msg('storelocator.storelocatorresults.website','storelocator',null)}</a>

@@ -22,7 +22,7 @@ ul li.onorder {color:red;}
 <table style="width:100%">
 	<tr>
 		<td style="vertical-align:top;">
-			<a href="${URLUtils.httpHome()}" title="${Resource.msg('global.storename','locale',null)}"><img src="${URLUtils.httpStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/></a>
+			<a href="${URLUtils.httpsHome()}" title="${Resource.msg('global.storename','locale',null)}"><img src="${URLUtils.httpsStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/></a>
 		</td>
 		<td style="text-align:right;">
 			<b>${Resource.msg('global.storename','locale',null)}</b><br />
@@ -113,7 +113,7 @@ ul li.onorder {color:red;}
 					<isif condition="${item.product == null || !item.product.availabilityModel.orderable}">
 						${Resource.msg('product.displayproductlistitems.notavailable','product',null)}
 					<iselse/>
-						<a href="${URLUtils.http('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
+						<a href="${URLUtils.https('Product-Show', 'pid', item.product.ID)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" title="${Resource.msg('productlist.purchaseitem','account',null)}" style="font-weight:bold;line-height:24pt">${Resource.msg('productlist.purchaseitem','account',null)}</a>
 					</isif>
 				</td>
 			</tr>

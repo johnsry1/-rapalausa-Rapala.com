@@ -130,7 +130,7 @@ function getImageURL(type : String, productID : String, color : String, httpStat
 	
 	var basePath : String = CATALOG_ID +"/default/" + CUSTOMER_KEY + productID + "/";
 	
-	var baseURL : String = httpStatic ? URLUtils.httpStatic(URLUtils.CONTEXT_CATALOG, CATALOG_ID, CUSTOMER_KEY + productID + "/").toString() : 
+	var baseURL : String = httpStatic ? URLUtils.httpsStatic(URLUtils.CONTEXT_CATALOG, CATALOG_ID, CUSTOMER_KEY + productID + "/").toString() : 
 									URLUtils.staticURL(URLUtils.CONTEXT_CATALOG, CATALOG_ID, CUSTOMER_KEY  + productID + "/").toString();
 	baseURL = baseURL.replace("/"+request.getLocale()+"/", "/default/");
 	

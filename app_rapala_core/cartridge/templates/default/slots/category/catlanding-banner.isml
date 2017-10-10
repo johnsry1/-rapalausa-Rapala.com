@@ -8,7 +8,7 @@
 <div class="category-slot">
 	<isloop items="${slotcontent.content}" var="category" status="loopstate">
 		<div class="catlanding-banner">
-			<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
+			<a href="${URLUtils.https('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
 				<isif condition="${"slotBannerImage" in category.custom && !empty(category.custom.slotBannerImage)}">
 					<img src="${category.custom.slotBannerImage.getURL()}" alt="${category.displayName}"/>
 					<h1><isprint value="${category.displayName}" encoding="off"/></h1>

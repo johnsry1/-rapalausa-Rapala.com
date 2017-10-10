@@ -8,7 +8,7 @@
 				<li class="<isif condition="${status.odd}">odd<iselse/>even</isif><isif condition = "${brandtab.split('|')[0] == session.custom.currentSite}"> active</isif>">
 					<span class="mobile-main-menu-heading">
 					<isset name="cat_name" value="${brandtab.split('|')[0]}" scope="page" />
-						<a onclick="googleAnalyticsEvents.brandSwitch('${cat_name}');" class="${brandtab.split('|')[0]}" href="${URLUtils.http('Home-Show','id',+brandtab.split('|')[1])}">
+						<a onclick="googleAnalyticsEvents.brandSwitch('${cat_name}');" class="${brandtab.split('|')[0]}" href="${URLUtils.https('Home-Show','id',+brandtab.split('|')[1])}">
 						<isprint value="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}" encoding="off" />
 							<i></i>
 						</a>

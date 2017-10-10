@@ -22,7 +22,7 @@
 					 <div class="cart contentbox upshift cell">
 					    <div class="contentboxcontent">
 		<div class="cart-empty">
-			<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+			<form class="cart-action-continue-shopping" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 				<fieldset>
 					<button class="button-text" type="submit" value="${Resource.msg('global.returnshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 						<isprint value="${Resource.msg('global.returnshopping','locale',null)}"/>
@@ -72,7 +72,7 @@
 					    <div class="contentboxcontent">
 		  				  <div class="cart-actions cart-actions-top">
 							<iscomment>continue shop url is a non-secure but checkout needs a secure and that is why separate forms!</iscomment>
-							<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+							<form class="cart-action-continue-shopping" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 								<fieldset>
 									<button class="button-text" type="submit" value="${Resource.msg('global.returnshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 										<span><isprint value="${Resource.msg('global.returnshopping','locale',null)}"/></span>
@@ -171,7 +171,7 @@
 								<isprint value="${pdict.CartError}"/>
 							</div>
 						</isif>
-						 <form action="${URLUtils.httpContinue()}" method="post"	name="submit" id="cart-items-form">
+						 <form action="${URLUtils.httpsContinue()}" method="post"	name="submit" id="cart-items-form">
 							<fieldset>
 								<input type="hidden" value="" name="promoappliedposition" class="promo-applied-position"/>
 								<div class="top-promo-section">
@@ -180,7 +180,7 @@
 								</fieldset>
 								</form>
 						<iscomment>show the basket when we have data</iscomment>
-						<form action="${URLUtils.httpContinue()}" method="post"	name="${pdict.CurrentForms.cart.htmlName}" id="cart-items-form">
+						<form action="${URLUtils.httpsContinue()}" method="post"	name="${pdict.CurrentForms.cart.htmlName}" id="cart-items-form">
 							<fieldset>
 								<iscomment>This button is hidden but required to ensure that update cart is called whenever the "enter" key is pressed in an input field</iscomment>
 								<button class="visually-hidden" type="submit" value="${pdict.CurrentForms.cart.updateCart.htmlName}" name="${pdict.CurrentForms.cart.updateCart.htmlName}"></button>
@@ -326,7 +326,7 @@
 																</isif>
 															</td>
 															<td class="product-image">
-																	<isset name="itemUrl" value="${empty(lineItem.categoryID) ? URLUtils.http('Product-Show','pid', lineItem.productID) : URLUtils.http('Product-Show','pid', lineItem.productID, 'cgid', lineItem.categoryID)}" scope="page"/>
+																	<isset name="itemUrl" value="${empty(lineItem.categoryID) ? URLUtils.https('Product-Show','pid', lineItem.productID) : URLUtils.https('Product-Show','pid', lineItem.productID, 'cgid', lineItem.categoryID)}" scope="page"/>
 																	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 																	<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',lineItem.product, 0,'cart')}" scope="page"/>
 																	  <a href="${itemUrl}"><img src="${imageObjDesktop.getURL()}"	alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}"/></a>
@@ -1307,7 +1307,7 @@
 								</div>
 						</div>
 			    		 <div class="continueshoppingbottom">
-							<form class="cart-action-continue-shopping" action="${URLUtils.httpContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
+							<form class="cart-action-continue-shopping" action="${URLUtils.httpsContinue()}" method="post" name="${pdict.CurrentForms.cart.dynamicHtmlName}" id="continue-shopping">
 								<fieldset>
 									<button class="button-text" type="submit" value="${Resource.msg('global.returnshopping','locale',null)}" name="${pdict.CurrentForms.cart.continueShopping.htmlName}">
 										<span><isprint value="${Resource.msg('global.returnshopping','locale',null)}"/></span>

@@ -9,7 +9,7 @@
 	<h2><isprint value="${slotcontent.calloutMsg}" encoding="off"/></h2>
 	<isloop items="${slotcontent.content}" var="category" status="loopstate">
 		<div class="category-tile">	
-			<a href="${URLUtils.http('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
+			<a href="${URLUtils.https('Search-Show', 'cgid', category.ID)}" title="${category.displayName}">
 				<isif condition="${"slotBannerImage" in category.custom && !empty(category.custom.slotBannerImage)}">
 					<img src="${category.custom.slotBannerImage.getURL()}" alt="${category.displayName}"/>
 					<h3><isprint value="${category.displayName}" encoding="off"/></h3>
