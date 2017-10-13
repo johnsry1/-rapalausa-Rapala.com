@@ -1,6 +1,5 @@
 /**
 * Purpose:	Exports Orders placed or modified since last successful export. Order file is sent to Listrak via FTP.
-*	@output products : Array
 */
 importPackage( dw.system );
 importPackage( dw.order );
@@ -37,9 +36,6 @@ function execute( args : PipelineDictionary ) : Number
 
 	
 	// Get the orders ready for export
-	var products : Array = new Array();
-	
-	//var products : List = new dw.util.List(Product);
 	var orders : SeekableIterator = OrderMgr.queryOrders("lastModified >= {1}", "orderNo", false, lastExportDate);
 	
 	if (orders.hasNext())
@@ -123,15 +119,10 @@ function execute( args : PipelineDictionary ) : Number
 				itemfile.AddRowItem(i.TrackingNumber, true);
 				
 				itemfile.WriteRow();
-				
-				if (i.Product != null)
-					products.push(i.Product);
 			}
 			
 		}
-		
-		args.products = products;
-		
+			
 		// Write the files and submit via FTP to Listrak
 		var orderResult = orderfile.SubmitFile();
 		var itemResult = itemfile.SubmitFile();
