@@ -141,7 +141,7 @@ var addToCart = {
             // fire the BonusDiscountLineItemCheck event so we can check
             // if there is a bonus discount line item
             jQuery(document).trigger(
-                jQuery.Event('BonusDiscountLineItemCheck'));
+                jQuery.event('BonusDiscountLineItemCheck'));
         };
 
         // handles add to cart error

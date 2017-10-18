@@ -228,7 +228,7 @@ var product = function (response) {
                 }
                 // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
                 // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
-                var event = jQuery.Event('AddToCart');
+                var event = jQuery.event('AddToCart');
                 event.selectedOptions = thisProduct.selectedOptions;
 
                 if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
