@@ -24,7 +24,7 @@ var minicart = {
         this.$el = $('#minicart');
         this.$content = this.$el.find('.minicartcontent');
         jQuery('.minicarticon-cont').on('mouseover touchstart', function () {
-            if (minicart.isShow()) {
+            if (!minicart.isShow()) {
                 minicart.hoverSlide();
             }
             $('.Custom-tooltip, .cvc_tooltip, .ordergothrough_tooltip').each(function () {
