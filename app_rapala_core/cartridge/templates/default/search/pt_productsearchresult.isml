@@ -20,7 +20,7 @@
     <isset name="brand" value="${session.custom.currentSite}" scope="page" />
     <isif condition="${category != null && !empty(category)}"> 
 		<isif condition="${(category.ID == brand+'-gifts') || (category.ID == brand+'-clothing') || (category.parent.ID == brand+'-gifts') || (category.parent.ID == brand+'-clothing')}"> 
-			<link rel="canonical" href="${URLUtils.abs('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+			<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
         </isif>
      </isif>
 	</isif>
