@@ -27,7 +27,7 @@
 			||  dw.campaign.CouponStatusCodes.COUPON_DISABLED.equals(status)
 			||  dw.campaign.CouponStatusCodes.NO_APPLICABLE_PROMOTION.equals(status))
 			{
-				errorMsg = Resource.msg("billing.couponinvalid", "checkout", null);
+				errorMsg = Resource.msg("billingcoupon.commonerror", "forms", null);
 			}
 
 			// coupon code already in basket
@@ -51,6 +51,11 @@
 			{
 				errorMsg = Resource.msg("billingcoupon.couponexpired", "forms", null);
 			}
+		} else {
+			if(!(pdict.NewCouponLineItem.applied)) {
+				errorMsg = Resource.msg("billingcoupon.commonerror", "forms", null);
+			}
+			
 		}
 	</isscript>
 	

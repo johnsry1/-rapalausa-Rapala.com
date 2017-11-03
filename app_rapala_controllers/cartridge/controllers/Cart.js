@@ -442,9 +442,9 @@ function addCouponJson() {
     cart = app.getModel('Cart').goc();
     
 
-    //Transaction.wrap(function () {//PREVAIL - Removed transaction to prevent error log.
-    couponStatus = cart.addCoupon(couponCode);
-    //});
+    Transaction.wrap(function () {
+    	couponStatus = cart.addCoupon(couponCode);
+    });
     //var template : Template = new Template('checkout/billing/couponapplyjson');
     if (request.httpParameterMap.format.stringValue === 'ajax') {
         //let r = require('~/cartridge/scripts/util/Response');
