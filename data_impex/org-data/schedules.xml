@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schedules xmlns="http://www.demandware.com/xml/impex/schedules/2007-03-31">
+    <schedule schedule-id="AffliatesImport">
+        <description/>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>AffiliatesData</name>
+            <startnode>Load</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2012-01-06T04:38:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <email-from>ImportAffiliates@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="CJProductFeed">
+        <description>This job is meant for sending product feed to commission junction FTP daily.</description>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>CatalogProductFeed</name>
+            <startnode>ProductFeedToCJ</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2015-04-29T05:59:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="CleanupInsiderFiles">
+        <description>This is used to clean up the files which was not submitted.</description>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>InsiderFeed</name>
+            <startnode>DeleteFilesInsider</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2015-11-04T12:44:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="FBProductFeed">
+        <description>Generating product feed.</description>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>FBProductFeed</name>
+            <startnode>Start</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2017-04-06T16:12:00.000Z</run-once>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>rapalajobs@rapala.com</email-from>
+            <email-to>shayyal@pfsweb.com,tfoy@pfsweb.com,bhockin@rapalausa.com</email-to>
+            <threshold>
+                <success/>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>true</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ImportB2BCustomers">
+        <description/>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>ImportB2BCustomers</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2013-01-11T11:59:00.000Z</run-once>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>ImportB2BCustomers@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <success/>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ImportCustomers">
+        <description/>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>ImportVIPCustomers</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2013-01-16T21:16:00.000Z</run-once>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>ImportCustomers@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ImportInventory">
+        <description/>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>StartDefault</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2011-10-26T13:52:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <email-from>InventoryImportErrors@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>10</max-execution-time>
+            <hang-detection-enabled-flag>true</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ImportVIPCards">
+        <description/>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>ImportVIPCards</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2016-01-13T06:24:00.000Z</run-once>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>ImportVIPCards@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="OrderExport">
+        <description/>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>ExportOrders</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <recurrence>
+            <date-from>2011-09-27Z</date-from>
+            <start-time>17:09:00.000Z</start-time>
+            <interval>60m</interval>
+            <day-of-week>
+                <weekday>Sunday</weekday>
+                <weekday>Monday</weekday>
+                <weekday>Tuesday</weekday>
+                <weekday>Wednesday</weekday>
+                <weekday>Thursday</weekday>
+                <weekday>Friday</weekday>
+                <weekday>Saturday</weekday>
+            </day-of-week>
+        </recurrence>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>OrdersExport@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="OrderStatusImport">
+        <description>Order Status and Tracking Number feed</description>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>Custom_FeedJobs</name>
+            <startnode>StartOrderStatus</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <recurrence>
+            <date-from>2011-11-01Z</date-from>
+            <start-time>14:09:54.000Z</start-time>
+            <interval>12h</interval>
+            <day-of-week>
+                <weekday>Sunday</weekday>
+                <weekday>Monday</weekday>
+                <weekday>Tuesday</weekday>
+                <weekday>Wednesday</weekday>
+                <weekday>Thursday</weekday>
+                <weekday>Friday</weekday>
+                <weekday>Saturday</weekday>
+            </day-of-week>
+        </recurrence>
+        <notification>
+            <enabled-flag>true</enabled-flag>
+            <email-from>OrderStatusImport@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <threshold>
+                <exception/>
+                <error/>
+                <hang/>
+                <retry/>
+            </threshold>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ProStaffImport">
+        <description/>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>ProStaffData</name>
+            <startnode>Load</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2012-01-06T04:11:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <email-from>ProStaffImport@rapala.com</email-from>
+            <email-to>dwnotifications@rapalausa.com</email-to>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="TwentyFourHoursDelayMail">
+        <description>This feed is used to trigger mail to the users which are enrolled to the programs in past 24 hrs.</description>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>InsiderFeed</name>
+            <startnode>TwentyFourHoursDelay</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <recurrence>
+            <date-from>2016-10-11Z</date-from>
+            <start-time>21:01:00.000Z</start-time>
+            <interval>10m</interval>
+            <day-of-week>
+                <weekday>Sunday</weekday>
+                <weekday>Monday</weekday>
+                <weekday>Tuesday</weekday>
+                <weekday>Wednesday</weekday>
+                <weekday>Thursday</weekday>
+                <weekday>Friday</weekday>
+                <weekday>Saturday</weekday>
+            </day-of-week>
+        </recurrence>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="VIPInsiderCustomObjectsData">
+        <description>VIPInsider Custom Objects Data for every month</description>
+        <enabled-flag>true</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>VIPInsider</name>
+            <startnode>GetCustomObjects</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <run-once>2015-10-27T11:40:00.000Z</run-once>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ltkProcessing">
+        <description>Listrak Data Processing</description>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>ltkDataSync</name>
+            <startnode>Processing</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <recurrence>
+            <date-from>2012-04-02Z</date-from>
+            <start-time>04:00:00.000Z</start-time>
+            <interval>10m</interval>
+            <day-of-week>
+                <weekday>Sunday</weekday>
+                <weekday>Monday</weekday>
+                <weekday>Tuesday</weekday>
+                <weekday>Wednesday</weekday>
+                <weekday>Thursday</weekday>
+                <weekday>Friday</weekday>
+                <weekday>Saturday</weekday>
+            </day-of-week>
+        </recurrence>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+    <schedule schedule-id="ltkProcessing-Daily">
+        <description>Listrak Daily Processing</description>
+        <enabled-flag>false</enabled-flag>
+        <priority>0</priority>
+        <execution-scope>site</execution-scope>
+        <pipeline>
+            <name>ltkDataSync</name>
+            <startnode>ProcessingDaily</startnode>
+        </pipeline>
+        <sites>
+            <site site-id="rapala"/>
+        </sites>
+        <recurrence>
+            <date-from>2012-04-02Z</date-from>
+            <start-time>06:00:00.000Z</start-time>
+            <interval>1d</interval>
+            <day-of-week>
+                <weekday>Sunday</weekday>
+                <weekday>Monday</weekday>
+                <weekday>Tuesday</weekday>
+                <weekday>Wednesday</weekday>
+                <weekday>Thursday</weekday>
+                <weekday>Friday</weekday>
+                <weekday>Saturday</weekday>
+            </day-of-week>
+        </recurrence>
+        <notification>
+            <enabled-flag>false</enabled-flag>
+            <max-execution-time>60</max-execution-time>
+            <hang-detection-enabled-flag>false</hang-detection-enabled-flag>
+            <failure-rule>continue</failure-rule>
+        </notification>
+    </schedule>
+
+</schedules>
