@@ -27,6 +27,11 @@ var storeLocator = {
         $('.googlemap').on('click', function () {
             window.open(this.name);
         });
+        $('.brand-filters .checkinput').on('click', function () {
+            if ($('.storelocatorsearchresults').find('.storeresult').length > 0) {
+                $('body').find('form.locatorForm').trigger('submit');
+            }
+        })
         $('body').find('form.locatorForm').submit(function (e) {
             e.preventDefault();
             var $form = jQuery(this);
