@@ -108,7 +108,8 @@ function submitForm() {
                     }
                     result.CouponStatus = {
                         code: status.CouponStatus,
-                        error: status.CouponStatus !== 'APPLIED'
+                        error: status.CouponStatus !== 'APPLIED',
+                        couponCodeValue: cpnname
                     };
                 } else {
                     result.dontRedirect = true;
