@@ -15,14 +15,7 @@
 	<isinclude template="components/header/htmlhead"/>	
 	
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
-	<isset name="parentname" value="${pdict.CurrentHttpParameterMap.cgid}" scope="page" />
-    <isset name="category" value="${dw.catalog.CatalogMgr.getCategory(parentname)}" scope="page" />
-    <isset name="brand" value="${session.custom.currentSite}" scope="page" />
-    <isif condition="${category != null && !empty(category)}"> 
-		<isif condition="${(category.ID == brand+'-gifts') || (category.ID == brand+'-clothing') || (category.parent.ID == brand+'-gifts') || (category.parent.ID == brand+'-clothing')}"> 
-			<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
-        </isif>
-     </isif>
+   		<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
 	</isif>
 	<iscomment>Add  template-specific header information here.</iscomment>	
 </head>
