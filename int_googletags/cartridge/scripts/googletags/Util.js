@@ -28,7 +28,7 @@ const PATH = {
      * Path to app.js
      * @type {String}
      */
-    APP: 'app_storefront_controllers/cartridge/scripts/app'
+    APP: 'app_rapala_controllers/cartridge/scripts/app'
 
 };
 
