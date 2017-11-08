@@ -1,0 +1,21 @@
+/**
+* Sets the closest StoreID cookie
+*
+* @input NearestStores : dw.util.LinkedHashMap  The nearest stores
+*
+*/
+importPackage(dw.system);
+importPackage(dw.web);
+importPackage(dw.util);
+
+function execute(args : PipelineDictionary) : Number {
+
+    var nearestStore = !empty(args.NearestStores) ? args.NearestStores.keySet()[0].ID : "",
+        storeID : Cookie = new Cookie("storeID", nearestStore);
+        storeID.path = "/";
+        storeID.maxAge = 604800;
+        response.addHttpCookie(storeID);
+
+    return PIPELET_NEXT;
+
+}

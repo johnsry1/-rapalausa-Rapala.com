@@ -128,6 +128,16 @@ ResourceHelper.getResources = function(pageContext) {
         VALIDATE_RANGE                    : Resource.msg('validate.range', 'forms', null),
         VALIDATE_MAX                      : Resource.msg('validate.max', 'forms', null),
         VALIDATE_MIN                      : Resource.msg('validate.min', 'forms', null),
+
+		// Store Locator resources
+		STORE_DETAILS                     : Resource.msg('storelocator.storelocatorresults.storedetails', 'storelocator', null),
+		STORE_DIRECTIONS                  : Resource.msg('storelocator.storelocatorresults.directions', 'storelocator', null),
+		STORE_NO_RESULTS                  : Resource.msg('storelocator.results.none', 'storelocator', null),
+		STORE_NO_RESULTS_GEO              : Resource.msg('storelocator.results.none.geolocation', 'storelocator', null),
+		POSTAL_CODE                       : Resource.msg('storelocator.results.postalcode', 'storelocator', null),
+		STORE_RESULTS_MULT                : Resource.msg('storelocator.results.storetext.mult', 'storelocator', null),
+		STORE_RESULTS_ONE                 : Resource.msg('storelocator.results.storetext.one', 'storelocator', null),
+
         LOW								  : Resource.msg('global.low','locale',null),
         BRAND_CATEGORY1					  :	Resource.msg('storelocator.storelocatorresults.brandscarried','storelocator',null),
         STORELOCATER_RAPALA				  : Resource.msg('storelocator.rapala','forms',null),
@@ -309,6 +319,44 @@ ResourceHelper.getUserSettings = function(pageContext) {
     var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
     return {
         zip: session.custom.zipcode == "null" ? null : session.custom.zipcode,
-        storeId: session.custom.storeId == "null" ? null : session.custom.storeId
+        storeId: session.custom.storeId == "null" ? null : session.custom.storeId,
+        geolocation : (!empty(request.geolocation)) ? {
+            city            : request.geolocation.city,
+            countryCode     : request.geolocation.countryCode,
+            countryName     : request.geolocation.countryName,
+            latitude        : request.geolocation.latitude,
+            longitude       : request.geolocation.longitude,
+            postalCode      : request.geolocation.postalCode,
+            regionCode      : request.geolocation.regionCode,
+            regionName      : request.geolocation.regionName
+        } : null
     };
+}
+
+/**
+ * Get the client-side Javascript settings
+ * @returns {Object} An objects key key-value pairs holding the settings
+ */
+ResourceHelper.getScriptSettings = function (pageContext) {
+    var URLUtils = require('dw/web/URLUtils');
+
+    // Application Javascript files
+    var scripts = {
+        // Script paths
+        storeLocator : {
+            vars   : {
+                zoomradius              : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorZoomRadius")) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorZoomRadius") : '{"0": 600000,"1": 600000,"2": 10000,"3": 6000,"4": 3000,"5": 1600,"6": 800,"7": 300,"8": 150,"9": 100,"10": 70,"11": 40,"12": 20,"13": 10,"14": 5,"15": 3,"16": 3,"17": 3,"18": 3,"19": 3,"20": 3}',
+                storeurl                : URLUtils.url("Stores-Details").toString() + "?StoreID=",
+                markerurl               : URLUtils.absStatic("images/marker.png").toString(),
+                markerdetailurl         : URLUtils.absStatic("images/markerdetail.png").toString(),
+                queryurl                : URLUtils.url("Stores-GetNearestStores").toString(),
+                cookieurl               : URLUtils.url("Stores-SetGeoLocation").toString(),
+                cookiename              : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorCookieName")) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorCookieName") : "CustomerLocation",
+                defaultlocation         : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorDefaultLocation")) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorDefaultLocation") : "39.9502843, -74.9521867",
+                maptype                 : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType")) && !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType").value) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType").value : "ROADMAP"
+            }
+        }
+    };
+
+    return scripts;
 }

@@ -1,0 +1,18 @@
+/**
+*
+*   @output latitude : Number  gets the users latitude
+*	@output longitude : Number  gets the users longitude
+*/
+importPackage(dw.system);
+
+function execute(args : PipelineDictionary) : Number {
+
+    if (!empty(request.geolocation) && !empty(request.geolocation.latitude) && !empty(request.geolocation.longitude)) {
+        args.latitude = request.geolocation.latitude;
+        args.longitude = request.geolocation.longitude;
+        return PIPELET_NEXT;
+    }
+
+    return PIPELET_ERROR;
+
+}
