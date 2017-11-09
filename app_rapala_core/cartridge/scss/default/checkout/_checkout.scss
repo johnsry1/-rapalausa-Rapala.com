@@ -233,7 +233,7 @@
     float: left;
     margin-top: 10px;
     margin-left: 7px;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         margin-left: 0;
     }
     a {
@@ -1085,13 +1085,13 @@ body {
                             .headercustomerinfo {
                                 &.newcheckout-headercustomerinfo {
                                     .checkout-header-center {
-                                        @media screen and (min-width: 960px) {
+                                        @include respond($desktop-breakpoint) {
                                             line-height: 13px;
                                         }
                                     }
                                     #userinfo {
                                         a {
-                                            @media screen and (min-width: 960px) {
+                                            @include respond($desktop-breakpoint) {
                                                 line-height: 12px;
                                             }
                                         }
@@ -1115,7 +1115,7 @@ body {
                                     #userinfo {
                                         .arrow-size {
                                             &.right-arrow {
-                                                @media screen and (min-width: 960px) {
+                                                @include respond($desktop-breakpoint) {
                                                     margin-top: 14px;
                                                 }
                                             }
@@ -1133,7 +1133,7 @@ body {
         .pt_checkout {
             .ordergothrough_tooltip {
                 img {
-                    @media screen and (min-width: 960px) {
+                    @include respond($desktop-breakpoint) {
                         top: 0;
                     }
                 }
@@ -1147,10 +1147,10 @@ body {
                                     #userinfo {
                                         .arrow-size {
                                             &.right-arrow {
-                                                @media screen and (min-width: 960px) {
+                                                @include respond($desktop-breakpoint) {
                                                     margin-top: 13.5px;
                                                 }
-                                                @media screen and (max-width: 960px) {
+                                                @include respond(0, $desktop-breakpoint) {
                                                     margin-top: 8px;
                                                 }
                                             }
@@ -1174,7 +1174,7 @@ body {
                 }
             }
             .encapsulate-section {
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     .arrow-size {
                         &.left-arrow {
                             margin-top: 4px;
@@ -1191,7 +1191,7 @@ body {
             }
             .formfield,
             .form-row {
-                @media screen and (min-width: 960px) {
+                @include respond($desktop-breakpoint) {
                     .Custom-tooltip,
                     .tooltip {
                         top: 2px;
@@ -1211,7 +1211,7 @@ body {
                         }
                     }
                 }
-                @media screen and (min-width: 768px) and (max-width: 959px) {
+                @include respond($large-breakpoint, $desktop-breakpoint - 1) {
                     .Custom-tooltip,
                     .tooltip {
                         top: 1px;
@@ -1290,7 +1290,7 @@ body {
     #main {
         padding-top: 47px;
         &.allotment-available {
-            @media screen and (min-width: 960px) {
+            @include respond($desktop-breakpoint) {
                 padding-top: 10px;
             }
         }
@@ -1687,7 +1687,7 @@ body {
             clear: both;
             float: left;
             margin-left: 3px;
-            @media screen and (max-width: 767px) {
+            @include respond(0, $large-breakpoint - 1) {
                 margin-left: 0;
             }
         }
@@ -2365,7 +2365,7 @@ body {
             position: relative;
             top: 3px;
             left: -3px;
-            @media screen and (max-width: 959px) {
+            @include respond(0, $desktop-breakpoint - 1) {
                 top: 0;
             }
         }
@@ -3627,7 +3627,7 @@ body {
                 &.paypal {
                     height: 250px;
                     border: 1px solid #ccc;
-                    @media screen and (max-width: 767px) {
+                    @include respond(0, $large-breakpoint - 1) {
                         height: auto;
                     }
                     .error-paypal-heading p {
@@ -4184,7 +4184,7 @@ body {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #embed_npfido {
         font-size: 0;
         display: none;
@@ -4301,7 +4301,7 @@ body {
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 959px) {
+@include respond($large-breakpoint, $desktop-breakpoint - 1) {
     body {
         &.checkout-page {
             background: none;
@@ -4562,7 +4562,7 @@ body {
     }
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     #couponentry, #giftcertentry {
         padding: 0;
         width: 100%;
@@ -5653,7 +5653,7 @@ body {
                                 padding-bottom: 20px;
                                 font-style: normal;
                                 /*changes done as per RAP-1907*/
-                                @media screen and (max-width: 767px) {
+                                @include respond(0, $large-breakpoint - 1) {
                                     font-style: italic;
                                     padding-bottom: 5px;
                                 }
@@ -5866,7 +5866,7 @@ body {
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .pt_orderconfirmation,
     .pt_checkout {
         .encapsulate-section {

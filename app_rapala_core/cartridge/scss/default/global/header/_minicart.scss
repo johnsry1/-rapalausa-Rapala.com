@@ -4,7 +4,7 @@
     right: 1.6em;
     top: .2em;
     z-index: 20;
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         right: 5.7em;
         top: .5em;
     }
@@ -192,7 +192,7 @@
                         -webkit-box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.3);
                         -moz-box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.3);
                         box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.3);
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             display: inline-block;
                             background: none;
                             border: none;
@@ -205,7 +205,7 @@
                             padding: 0 1px;
                             .cart-icon {
                                 display: none;
-                                @media screen and (min-width: 960px) {
+                                @include respond($desktop-breakpoint) {
                                     width: 25px;
                                     display: inline-block;
                                 }
@@ -223,7 +223,7 @@
                             &.active {
                                 background: url("../images/responsive-icons/cart-icon-active.svg") no-repeat left top transparent;
                             }
-                            @media screen and (min-width: 960px) {
+                            @include respond($desktop-breakpoint) {
                                 color: $minicart-button-glb-text-color;
                                 background: none !important;
                                 text-decoration: underline;
@@ -236,7 +236,7 @@
                         }
                         &.minicart-checkout-button {
                             display: none;
-                            @media screen and (min-width: 960px) {
+                            @include respond($desktop-breakpoint) {
                                 background: linear-gradient(to bottom, $minicart-button-static-top-color 60%, $minicart-button-static-bottom-color 100%);
                                 background: -moz-linear-gradient(to bottom, $minicart-button-static-top-color 60%, $minicart-button-static-bottom-color 100%);
                                 background: -webkit-linear-gradient(to bottom, $minicart-button-static-top-color 60%, $minicart-button-static-bottom-color 100%);
@@ -272,7 +272,7 @@
                     }
                     #multi-site-one-cart {
                         display: none;
-                        @media screen and (min-width: 960px) {
+                        @include respond($desktop-breakpoint) {
                             background: url("../images/mini_cart_newbg.png") no-repeat left top transparent;
                             width: 70px;
                             padding: 0;
@@ -308,7 +308,7 @@
 #minicart {
     float: right;
     height: auto;
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         display: block;
         float: right;
         height: 30px;
@@ -344,11 +344,11 @@
 .minicarticon-cont {
     float: left;
     width: auto;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         position: relative;
         margin: 0 0 0 20px;
     }
-    @media screen and (max-width: 480px) {
+    @include respond(0, $medium-breakpoint) {
         position: relative;
         margin: 0 0 0 10px;
     }
@@ -367,7 +367,7 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 11px;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             position: absolute;
             padding: 0;
             top: -23px;

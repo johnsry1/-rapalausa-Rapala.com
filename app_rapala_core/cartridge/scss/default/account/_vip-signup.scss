@@ -53,7 +53,7 @@ div {
                                     margin-left: 2px;
                                     text-transform: capitalize;
                                     font-variant: small-caps;
-                                    @media screen and (max-width: 480px) {
+                                    @include respond(0, $medium-breakpoint) {
                                         font-size: 12px;
                                         color: $dim-gray;
                                     }
@@ -322,10 +322,10 @@ div.returningcustomers div.formfield div.label {
             background-image: none;
             background-position: 13px 9px;
             width: 107%;
-            @media screen and (max-width: 959px) {
+            @include respond(0, $desktop-breakpoint - 1) {
                 width: 118%;
             }
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 background-image: none;
                 width: 112%;
             }
@@ -445,7 +445,7 @@ div.returningcustomers div.formfield div.label {
             &.inputlabel {
                 color: $red;
             }
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 font-size: 12px;
                 color: $dim-gray;
             }
@@ -1557,7 +1557,7 @@ div#msgcontianer {
 div#vippage-background {
     .registration {
         .vipcontent-heading {
-            @media screen and (min-width: 960px) {
+            @include respond($desktop-breakpoint) {
                 margin-top: 45px !important;
                 width: 100%;
                 float: left;

@@ -21,7 +21,7 @@
         width: 260px;
         z-index: 9;
     }
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         float: right;
         position: relative;
         &.site-suggestion-section {
@@ -39,7 +39,7 @@
 
 .pt_storefront {
     .floatright.site-suggestion-section {
-        @media screen and (min-width: 960px) {
+        @include respond($desktop-breakpoint) {
             right: 14px;
         }
     }
@@ -91,7 +91,7 @@
             }
         }
     }
-    @media screen and (max-width: 960px) {
+    @include respond(0, $desktop-breakpoint) {
         form {
             &.simplesearch {
                 input {
@@ -139,7 +139,7 @@
             }
         }
     }
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         background: url("../images/search-bg.png") no-repeat left top $white;
         width: 200px;
         top: 0;

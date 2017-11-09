@@ -6,10 +6,10 @@
     position: relative;
     transition: left 0.2s ease-in;
     width: 100%;
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         width: 760px;
     }
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         width: 960px;
     }
     &.pt_storefront,
@@ -20,7 +20,7 @@
         width: 100%;
         .primary-content {
             padding-bottom: 0;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 width: 80%;
             }
         }
@@ -28,7 +28,7 @@
             border-right: 0;
             display: none;
             width: 0;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 display: block;
                 width: 20%;
             }
@@ -42,7 +42,7 @@
     &.menu-active {
         left: 50%;
     }
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         &.menu-active {
             left: auto;
         }
@@ -51,7 +51,7 @@
 
 .primary-content {
     width: 100%;
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         border-left: 1px solid $gainsboro;
         float: right;
         margin-left: -1px;
@@ -76,7 +76,7 @@
     float: none;
     font-size: 1.1em;
     width: 100%;
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top transparent;
         border-right: 1px solid $gainsboro;
         float: left;
@@ -102,7 +102,7 @@
     .pt_content-search-result &,
     .pt_order & {
         display: none;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             display: block;
         }
     }

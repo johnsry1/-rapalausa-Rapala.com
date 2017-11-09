@@ -52,20 +52,20 @@
         width: auto;
     }
     .product-col-1 {
-        @media screen and (min-width: 480px) {
+        @include respond(medium-up) {
             float: left;
             width: 37%;
         }
     }
     .product-col-2 {
-        @media screen and (min-width: 480px) {
+        @include respond(medium-up) {
             float: right;
             width: 59.5%;
         }
     }
     .product-name {
         margin-bottom: .3rem;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             width: 65%;
         }
     }
@@ -108,14 +108,14 @@
         clear: both;
         padding-top: 1em;
         // Height for PDP Tabs
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             height: 25em;
         }
         ul {
             font-size: .8rem;
             list-style: square;
             padding: 0 5em;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 padding-bottom: 1em;
                 padding-top: 1em;
             }
@@ -140,7 +140,7 @@
             &.add-all-to-cart {
                 width: auto;
             }
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 height: 37px;
                 width: auto;
             }
@@ -153,7 +153,7 @@
             float: none;
             margin-right: 1rem;
             padding-top: 1em;
-            @media screen and (min-width: 960px) {
+            @include respond($desktop-breakpoint) {
                 float: left;
                 padding-top: 0;
             }
@@ -167,7 +167,7 @@
                 }
                 i {
                     font-size: 3rem;
-                    @media screen and (min-width: 768px) {
+                    @include respond(large-up) {
                         font-size: 2rem;
                     }
                 }
@@ -322,7 +322,7 @@
             font-weight: bold;
             padding: 1.3em 0 0 .4em;
             text-transform: uppercase;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 padding-top: .8em;
             }
         }
@@ -344,7 +344,7 @@
 }
 
 .tab {
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         display: inline-block;
         float: none;
     }
@@ -352,7 +352,7 @@
         display: none;
         &:checked {
             + .tab-label {
-                @media screen and (min-width: 768px) {
+                @include respond(large-up) {
                     background: #fff;
                     border-bottom-color: $citrus;
                     color: $black;
@@ -380,7 +380,7 @@
         text-transform: none;
         top: 0;
         transition: all 0.25s;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             cursor: pointer;
             padding: 0 1.25rem;
             &:hover {
@@ -394,7 +394,7 @@
         padding: 1em 0;
         text-align: left;
         z-index: 1;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             left: 0;
             opacity: 0;
             position: absolute;
@@ -450,7 +450,7 @@
     .product-image-container {
         width: 525px;
         margin-bottom: 25px;
-        @media screen and (max-width: 480px) {
+        @include respond(0, $medium-breakpoint) {
             margin-bottom: 0;
             height: 290px;
         }
@@ -459,7 +459,7 @@
                 width: 100% !important;
                 padding: 0;
                 border: none;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     position: relative;
                     width: 85% !important;
                     margin: 0 auto;
@@ -643,7 +643,7 @@
         margin: 9px 0;
         height: 20px;
         clear: both;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             display: none;
         }
     }
@@ -667,7 +667,7 @@
                 &:hover {
                     text-decoration: none;
                 }
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     display: none;
                 }
             }
@@ -681,7 +681,7 @@
     .availability {
         clear: both;
         margin: 4px 0 0 0;
-        @media screen and (min-width: 960px) {
+        @include respond($desktop-breakpoint) {
             margin-bottom: 7px;
         }
         .value {
@@ -970,7 +970,7 @@ a {
     float: left;
     width: 100%;
     .mobile-pricing {
-        @media screen and (min-width: 960px) {
+        @include respond($desktop-breakpoint) {
             margin-top: 16px;
             float: left;
             width: 100%;
@@ -1084,7 +1084,7 @@ a {
                                 font-family: $lucida-font-family;
                                 font-size: 12px;
                                 color: #333;
-                                @media screen and (max-width: 480px) {
+                                @include respond(0, $medium-breakpoint) {
                                     width: 100%;
                                 }
                                 p {
@@ -1094,7 +1094,7 @@ a {
                                     padding-bottom: 20px;
                                     color: #333;
                                     line-height: 18px;
-                                    @media screen and (max-width: 959px) {
+                                    @include respond(0, $desktop-breakpoint - 1) {
                                         clear: both;
                                     }
                                 }
@@ -1181,14 +1181,14 @@ a {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         -ms-box-sizing: border-box;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             padding: 10px;
         }
         .wrapper {
             .cell {
                 margin: 9px 18px;
                 padding: 0;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     margin: 0;
                 }
                 ul {
@@ -1201,7 +1201,7 @@ a {
                         height: 18px;
                         line-height: 20px;
                         float: left;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             float: none;
                         }
                         &:first-child {
@@ -1283,14 +1283,14 @@ a {
             float: left;
             width: 462px;
             margin-right: 40px;
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 margin-right: 0;
             }
             h2 {
                 padding: 0 0 9px 0;
                 text-transform: capitalize;
                 font-variant: normal;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     padding: 0 0 5px 0;
                 }
             }
@@ -1303,7 +1303,7 @@ a {
                 float: left;
                 margin-top: 4px;
                 line-height: normal;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     margin-bottom: 30px;
                     color: #333;
                     font-size: 12px;
@@ -1319,7 +1319,7 @@ a {
             @media screen and (max-width: 656px) {
                 width: 100%;
             }
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 margin: 0;
                 width: 100%;
                 max-width: initial;
@@ -1348,7 +1348,7 @@ a {
                     ul {
                         background: 0;
                         padding: 0;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             float: none;
                             padding-bottom: 15px;
                         }
@@ -1365,13 +1365,13 @@ a {
                         width: 130px;
                         line-height: 13px;
                         vertical-align: middle;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             &:nth-child(even),
                             &:last-child {
                                 padding-right: 0;
                             }
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             margin-top: 0;
                             float: none;
                             display: inline-block;
@@ -1414,7 +1414,7 @@ a {
                         &.index2,
                         &.index5 {
                             padding-right: 0;
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 padding-right: 36px;
                             }
                         }
@@ -1500,7 +1500,7 @@ a {
         border-top-right-radius: 5px;
         table-layout: fixed;
         border-collapse: inherit;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
@@ -1588,11 +1588,11 @@ a {
                 display: inline;
                 float: left;
                 width: auto;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     float: none;
                 }
                 .new {
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         mix-blend-mode: multiply;
                         vertical-align: middle;
                     }
@@ -1619,10 +1619,10 @@ a {
                         float: left;
                         padding-left: 0;
                         padding-bottom: 6px;
-                        @media screen and (min-width: 480px) and (max-width: 959px) {
+                        @include respond($medium-breakpoint, $desktop-breakpoint - 1) {
                             padding-left: 0;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             padding-left: 0;
                         }
                         .video-icon {
@@ -1646,10 +1646,10 @@ a {
                         float: right;
                         padding-right: 0;
                         padding-bottom: 6px;
-                        @media screen and (min-width: 480px) and (max-width: 959px) {
+                        @include respond($medium-breakpoint, $desktop-breakpoint - 1) {
                             padding-left: 10px;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             padding-right: 0;
                         }
                         a {
@@ -1764,7 +1764,7 @@ a {
                     margin-right: 0;
                     box-sizing: border-box;
                     padding: 10px;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         padding: 0;
                         padding-bottom: 10px;
                     }
@@ -1799,7 +1799,7 @@ a {
 .alternate-image {
     margin-top: 1px;
     a {
-        @media screen and (max-width: 480px) {
+        @include respond(0, $medium-breakpoint) {
             width: 90%;
             box-sizing: border-box;
         }
@@ -1877,7 +1877,7 @@ a {
         #special-offers {
             background: transparent;
             border: none;
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 margin: 0;
                 padding: 0;
             }
@@ -1976,19 +1976,19 @@ a {
                 margin: 0 auto;
                 clear: both;
                 padding-top: 30px;
-                @media screen and (max-width: 767px) {
+                @include respond(0, $large-breakpoint - 1) {
                     background: $white;
                     float: left;
                     padding: 0;
                 }
-                @media screen and (min-width: 481px) and (max-width: 767px) {
+                @include respond($medium-breakpoint + 1, $large-breakpoint - 1) {
                     padding-bottom: 28px;
                 }
-                @media screen and (min-width: 768px) and (max-width: 959px) {
+                @include respond($large-breakpoint, $desktop-breakpoint - 1) {
                     padding-bottom: 40px;
                 }
                 > div {
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         width: 70%;
                         box-sizing: border-box;
                         float: none;
@@ -2001,7 +2001,7 @@ a {
                         padding: 0 0 7px;
                         background: url("../images/recommender-shadow.svg") bottom left no-repeat;
                         float: none;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             margin-bottom: 30px;
                             padding: 0;
                         }
@@ -2018,12 +2018,12 @@ a {
                             .search-result-items {
                                 margin: 0 27px;
                                 height: auto;
-                                @media screen and (max-width: 767px) {
+                                @include respond(0, $large-breakpoint - 1) {
                                     margin: 0;
                                 }
                                 .pdprecomo-owl {
                                     .owl-stage-outer {
-                                        @media screen and (max-width: 480px) {
+                                        @include respond(0, $medium-breakpoint) {
                                             margin: 0;
                                         }
                                         .owl-stage {
@@ -2037,7 +2037,7 @@ a {
                                                 .product-tile {
                                                     padding: 0;
                                                     height: auto;
-                                                    @media screen and (max-width: 767px) {
+                                                    @include respond(0, $large-breakpoint - 1) {
                                                         width: 100%;
                                                         border-right: 1px solid #f1f1f1;
                                                     }
@@ -2046,7 +2046,7 @@ a {
                                                         height: 56.62px;
                                                         margin: 10px 26px 7px;
                                                         float: left;
-                                                        @media screen and (max-width: 480px) {
+                                                        @include respond(0, $medium-breakpoint) {
                                                             width: 115px;
                                                             height: 86px;
                                                             margin: 0 auto;
@@ -2064,7 +2064,7 @@ a {
                                                         width: 132px;
                                                         text-align: center;
                                                         float: left;
-                                                        @media screen and (max-width: 480px) {
+                                                        @include respond(0, $medium-breakpoint) {
                                                             width: 100%;
                                                         }
                                                         img {
@@ -2150,7 +2150,7 @@ a {
                                             padding: 0;
                                             z-index: 0;
                                             display: block !important;
-                                            @media screen and (max-width: 767px) {
+                                            @include respond(0, $large-breakpoint - 1) {
                                                 right: 0;
                                                 top: auto;
                                                 left: 0;
@@ -2166,7 +2166,7 @@ a {
                                                     width: 8px;
                                                     height: 9px;
                                                     margin: 7px 5px 0 0;
-                                                    @media screen and (max-width: 767px) {
+                                                    @include respond(0, $large-breakpoint - 1) {
                                                         margin: 10px 5px 0 5px;
                                                     }
                                                 }
@@ -2176,7 +2176,7 @@ a {
                                                         width: 8px;
                                                         height: 8px;
                                                         margin: 8px 5px 0 0;
-                                                        @media screen and (max-width: 767px) {
+                                                        @include respond(0, $large-breakpoint - 1) {
                                                             margin: 10px 5px 0 5px;
                                                         }
                                                     }
@@ -2198,7 +2198,7 @@ a {
                                                 position: absolute;
                                                 cursor: pointer;
                                                 transform: translate(-50%, -50%);
-                                                @media screen and (max-width: 767px) {
+                                                @include respond(0, $large-breakpoint - 1) {
                                                     left: -17px;
                                                 }
                                                 &.disabled {
@@ -2224,7 +2224,7 @@ a {
                                                     opacity: 0.5;
                                                 }
 
-                                                @media screen and (max-width: 767px) {
+                                                @include respond(0, $large-breakpoint - 1) {
                                                     right: -27px;
                                                 }
                                             }
@@ -2444,7 +2444,7 @@ a {
         .wrapper {
             .cell {
                 margin-left: 4px;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     margin: 0;
                 }
             }
@@ -2462,7 +2462,7 @@ a {
                     text-transform: capitalize;
                     border: none;
                     background: none;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         text-align: center;
                         padding: 20px 0 15px 0;
                     }
@@ -2475,10 +2475,10 @@ a {
                     .product-primary-image {
                         .main-image {
                             padding: 10px;
-                            @media screen and (min-width: 481px) and (max-width: 767px) {
+                            @include respond($medium-breakpoint + 1, $large-breakpoint - 1) {
                                 height: auto;
                             }
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 height: auto;
                                 padding: 0;
                             }
@@ -2532,7 +2532,7 @@ a {
         width: 100%;
         margin-top: 1em;
         margin-bottom: 15px;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             margin-top: 0;
         }
         input {
@@ -2598,11 +2598,11 @@ a {
         width: 80.8%;
         margin: 15px auto;
         position: relative;
-        @media screen and (min-width: 480px) {
+        @include respond(medium-up) {
             margin-bottom: 15px;
         }
         &.pdp-owl-customization {
-            @media screen and (min-width: 481px) {
+            @include respond($medium-breakpoint + 1) {
                 .alternate-images {
                     margin: 0;
                     text-align: center;
@@ -2633,7 +2633,7 @@ a {
                     }
                 }
             }
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 position: absolute;
                 z-index: 1;
                 height: auto;
@@ -2698,7 +2698,7 @@ a {
                 .owl-nav {
                     cursor: pointer;
                     margin: 0;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         display: none;
                     }
                     .owl-prev {
@@ -2721,7 +2721,7 @@ a {
                         &:hover {
                             background: url("../images/recommender-arrow-left.svg") 0 -45px no-repeat;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             top: -158px;
                             display: block !important;
                         }
@@ -2746,7 +2746,7 @@ a {
                         &:hover {
                             background: url("../images/recommender-arrow-right.svg") 0 -45px no-repeat;;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             top: -158px;
                             display: block !important;
                         }
@@ -2755,7 +2755,7 @@ a {
                 .owl-dots {
                     display: none !important;
 
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         display: none !important;
                         top: 3px;
                         position: absolute;
@@ -2781,13 +2781,13 @@ a {
                             width: 8.2px;
                             height: 8.2px;
                             margin: 8px 0 0 1px;
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 margin-top: 0;
                             }
                         }
                         &.active {
                             span {
-                                @media screen and (max-width: 480px) {
+                                @include respond(0, $medium-breakpoint) {
                                     background: transparent url("../images/active-dot.svg") top left no-repeat;
                                 }
                             }
@@ -2854,7 +2854,7 @@ a {
     left: 50%;
     border-radius: 5px;
     opacity: 0;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         top: -49px;
     }
     &.added-overlay {
@@ -2903,11 +2903,11 @@ a {
     .addtocartconfirm-tooltip {
         right: 70px;
         bottom: -5px;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             bottom: 0;
             right: 0;
         }
-        @media screen and (max-width: 480px) {
+        @include respond(0, $medium-breakpoint) {
             display: none !important;
         }
     }
@@ -3121,7 +3121,7 @@ a {
                         .recommendations {
                             .search-result-items {
                                 width: 680px;
-                                @media screen and (max-width: 767px) {
+                                @include respond(0, $large-breakpoint - 1) {
                                     width: 100%;
                                 }
                             }
@@ -3142,7 +3142,7 @@ a {
     font-weight: bold;
     color: #e80000;
     font-style: italic;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         font-size: 13px;
     }
 }

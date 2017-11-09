@@ -34,7 +34,7 @@ h1 .account-logout {
         list-style-type: none;
         padding: 1em;
         width: 90%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             width: 25%;
         }
         &.default {
@@ -687,7 +687,7 @@ div.returningcustomers {
     }
     .floatright {
         &.site-suggestion-section {
-            @media screen and (min-width: 960px) {
+            @include respond($desktop-breakpoint) {
                 top: 64px;
                 right: -4px;
             }
@@ -770,7 +770,7 @@ div.returningcustomers {
                 .new-register {
                     .registration {
                         .formfield {
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 margin-bottom: 15px;
                             }
                         }
@@ -969,7 +969,7 @@ div.returningcustomers {
                         letter-spacing: 0;
                         text-transform: none;
                         margin: 0 0 18px 0;
-                        @media screen and (min-width: 481px) and (max-width: 959px) {
+                        @include respond($medium-breakpoint + 1, $desktop-breakpoint - 1) {
                             margin-bottom: 22px;
                         }
                     }
@@ -1154,7 +1154,7 @@ div.returningcustomers {
                     &.active {
                         background: url(../images/chk-imgnew.png) left top no-repeat;
                     }
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         background: url("../images/checkbox.svg") no-repeat left top transparent;
                         background-position: 0 0;
                         height: 32px;
@@ -1512,7 +1512,7 @@ div.returningcustomers {
     .breadcrumb {
         display: none;
     }
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         .downshift {
             top: 38px !important;
         }
@@ -1927,7 +1927,7 @@ div.returningcustomers {
     }
     .contentboxcontent h1 {
         font-variant: initial;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             font-weight: 700;
         }
     }
@@ -1962,7 +1962,7 @@ div.returningcustomers {
                 width: 400px;
                 height: 28px;
                 margin-top: 0;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     border: 1px solid $very-light-gray;
                     box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
                     box-sizing: border-box;
@@ -1972,7 +1972,7 @@ div.returningcustomers {
                     width: 392px;
                     margin: 0 auto;
                 }
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     width: 300px;
                     margin-bottom: 20px;
                 }
@@ -1985,7 +1985,7 @@ div.returningcustomers {
                     width: 346px;
                     color: #333;
                     border: 0;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         width: 89%;
                         margin-left: 0px;
                         height: 48px;
@@ -1997,7 +1997,7 @@ div.returningcustomers {
                         margin: 0;
                         padding-left: 20px;
                         border-color: transparent;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             font-size: 12px;
                             width: 85%;
                         }
@@ -2029,7 +2029,7 @@ div.returningcustomers {
                     -ms-border-bottom-right-radius: 3px;
                     -ms-border-top-left-radius: 0px;
                     -ms-border-bottom-left-radius: 0px;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         background: url("../images/no-search-results_icon.png") no-repeat scroll 72% 86% transparent;
                         background-color: transparent;
                         margin: 0;
@@ -2156,7 +2156,7 @@ div.returningcustomers {
             margin-top: -13.5px;
             display: inline-block;
             overflow: hidden;
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 padding: 0 10px;
             }
         }
@@ -2233,7 +2233,7 @@ div.returningcustomers {
                         font-variant: normal;
                         font-weight: normal;
                         &.requiredindicator {
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 color: $red;
                             }
                         }
@@ -2267,7 +2267,7 @@ div.returningcustomers {
                         float: left;
                         padding-top: 8px;
                     }
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                     }
                 }
                 p {
@@ -2330,7 +2330,7 @@ div.returningcustomers {
                     line-height: 40px;
                     font-size: 13px;
                     letter-spacing: normal;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
 
                     }
                     &:hover {
@@ -2475,7 +2475,7 @@ span.existing_register {
             }
         }
     }
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         #NewPasswordForm {
             margin-bottom: 20px;
             .form-row {
@@ -2489,7 +2489,7 @@ span.existing_register {
 
 .seesamples.desktopHide {
     display: initial;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         display: none;
     }
 }
@@ -2651,7 +2651,7 @@ span.existing_register {
                     width: 185px;
                     padding: 18px 18px 18px 0;
                     float: left;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         margin: 0 auto;
                         float: none;
                         padding: 12px 0px 10px 0;
@@ -2826,13 +2826,13 @@ span.existing_register {
                     }
                     &.new-margin-updateone {
                         margin-bottom: 18px;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             margin: 0;
                         }
                     }
                     &.manufacture-margin-update {
                         margin: 36px;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             margin: 0;
                         }
                     }
@@ -2846,7 +2846,7 @@ span.existing_register {
                                 line-height: initial;
                             }
                         }
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             margin: 0;
                         }
                     }
@@ -3199,14 +3199,14 @@ ul {
     #page-background {
         .formfield {
             margin-bottom: 15px;
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 margin-bottom: 0;
             }
         }
         .field-wrapper {
             margin-bottom: 0;
             width: 100%;
-            @media screen and (min-width: 959px) {
+            @include respond($desktop-breakpoint - 1) {
                 width: auto;
             }
 
@@ -3718,7 +3718,7 @@ ul {
                 .cell {
                     margin: 18px 0;
                     width: 100%;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         margin-top: 0;
                     }
                 }
@@ -3837,11 +3837,11 @@ ul {
                     &.contact-us {
                         width: 90.5%;
                         text-align: right;
-                        @media screen and (max-width: 768px) {
+                        @include respond(0, $large-breakpoint) {
                             width: 100%;
                             padding: 0 0 0 18px;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             box-sizing: border-box;
                         }
                     }
@@ -3897,7 +3897,7 @@ ul {
     }
     .Register_Auger {
         padding: 0 18px 0;
-        @media screen and (max-width: 480px) {
+        @include respond(0, $medium-breakpoint) {
             padding: 0;
         }
         .formfields {
@@ -3939,7 +3939,7 @@ ul {
             .value {
                 border-radius: 0px;
                 box-shadow: none;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     border-radius: 3px;
                 }
                 .selectbox {
@@ -4155,13 +4155,13 @@ ul {
                                     &.contentbox {
                                         box-shadow: $nobel 0 0 10px;
                                         margin: 18px;
-                                        @media screen and (max-width: 959px) {
+                                        @include respond(0, $desktop-breakpoint - 1) {
                                             margin: 0;
                                             box-shadow: none;
                                             top: 0;
                                         }
                                         .shadow-box {
-                                            @media screen and (max-width: 959px) {
+                                            @include respond(0, $desktop-breakpoint - 1) {
                                                 margin: 0;
                                                 padding: 0;
                                             }
@@ -4185,7 +4185,7 @@ ul {
                     &.contentbox {
                         box-shadow: #999 0 0 10px;
                         margin: 18px;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             box-shadow: none;
                             margin: 0;
                         }

@@ -50,7 +50,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 	margin: 0 auto;
 	width: 200px; // width of image
 	z-index: 1;
-	@media screen and (min-width: 768px) {
+	@include respond(large-up) {
 		margin: 0;
 		padding: 0.3em 0 0 .5em;
 	}
@@ -73,7 +73,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 	input[type="text"] {
 		margin:0;
 	}
-	@media screen and (min-width: 768px) {
+	@include respond(large-up) {
 		background-color: $white;
 		border: 1px solid $nobel;
 		border-radius: 10px;
@@ -96,7 +96,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 		height: 2.3rem;
 		width: 85%; // default for older browser
 		width: calc(100% - 2.5rem);
-		@media screen and (min-width: 768px) {
+		@include respond(large-up) {
 			height: 1.75rem;
 			padding: 0 1rem;
 		}
@@ -106,7 +106,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 		border: none;
 		color: $nobel;
 		padding: .7em .5em;
-		@media screen and (min-width: 768px) {
+		@include respond(large-up) {
 			padding: .4em .5em;
 		}
 		&:hover {
@@ -123,11 +123,11 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
     float: left;
     width: 100%;
     background: #fff;
-    @media screen and (min-width: 959px) {
+    @include respond($desktop-breakpoint - 1) {
         background: transparent url("../images/header-background.jpg") top left repeat-x;
     }
     #header {
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             padding: 0;
             box-sizing: border-box;
             position: relative;
@@ -320,7 +320,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
         }
         .row {
             &.column1 {
-                @media screen and (min-width: 960px) {
+                @include respond($desktop-breakpoint) {
                     padding: 21px 0 0 0;
                 }
                 .cell {
@@ -335,7 +335,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                     -webkit-box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     box-sizing: border-box;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         min-height: 70px;
                     }
                 }
@@ -404,14 +404,14 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                 width: 123px;
                 height: 70px;
                 margin: 17.5px 0;
-                @media screen and (min-width: 960px) {
+                @include respond($desktop-breakpoint) {
                     float: left;
                     width: 210px;
                     height: 28px;
                     padding: 0 0 0 10px;
                     margin: 0;
                 }
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     &.rapala {
                         a {
                             background: url("../images/responsive-icons/Rapala_Logo_mobile-bar.svg") no-repeat left top transparent;
@@ -538,7 +538,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                         font-family: $bankgothic;
                         width: 122px;
                         padding: 0;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             display: none;
                         }
                     }
@@ -550,7 +550,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                 .row {
                     &.column1 {
                         padding: 7px 0 0 0;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             padding: 0;
                         }
                         .headerbanner {
@@ -565,7 +565,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 }
 
 #header {
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         ul {
             float: left;
             line-height: 30px;

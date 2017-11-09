@@ -1,4 +1,4 @@
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     div,
     img {
         max-width: 100%;
@@ -274,7 +274,7 @@
             .wrapper {
                 .cell {
                     ul {
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             .breadcrumb-element:last-child {
                                 height: auto;
                             }
@@ -3579,7 +3579,7 @@
                                 width: 45.68%;
                                 height: 45.68%;
                                 padding-bottom: 20px;
-                                @media screen and (max-width: 480px) {
+                                @include respond(0, $medium-breakpoint) {
                                     padding-bottom: 10px;
                                 }
                             }
@@ -4350,7 +4350,7 @@
             .value {
                 width: 100%;
                 margin: 0 0 35px;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     margin: 0 0 20px 0;
                 }
             }
@@ -4445,7 +4445,7 @@
                 .formactions {
                     button {
                         margin: 0 0 18px 0;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             margin: 0 0 18px 0;
                         }
                     }
@@ -4474,7 +4474,7 @@
                             margin: 0;
                             border-radius: 3px;
                         }
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             margin-bottom: 18px;
                         }
                     }
@@ -4506,7 +4506,7 @@
                                         border-radius: 3px;
                                         margin: 0 auto;
                                         width: 768px;
-                                        @media screen and (max-width: 480px) {
+                                        @include respond(0, $medium-breakpoint) {
                                             width: 310px;
                                             margin: 0 auto;
                                             p {
@@ -4528,7 +4528,7 @@
                                             border-radius: 3px;
                                             padding: 5px 50px;
                                             background: #dce2ce;
-                                            @media screen and (max-width: 480px) {
+                                            @include respond(0, $medium-breakpoint) {
                                                 padding: 10px;
                                                 margin: 0;
                                             }
@@ -4549,7 +4549,7 @@
                     width: 50%;
                     box-sizing: border-box;
                     //padding: 0;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         width: 100%;
                         padding: 0;
                     }
@@ -4630,7 +4630,7 @@
 			.brand:nth-child(3n+1) {
 				padding-left: 0 !important;
 			}*/
-                    @media screen and (min-width: 481px) {
+                    @include respond($medium-breakpoint + 1) {
                         .brand:nth-child(3n-1) {
                             text-align: center;
                             a {
@@ -4877,7 +4877,7 @@
                         &.colspan2 {
                             .cell-header {
                                 padding: 30px 50px 0;
-                                @media screen and (max-width: 480px) {
+                                @include respond(0, $medium-breakpoint) {
                                     padding: 0 10px;
                                 }
                             }
@@ -4936,7 +4936,7 @@
 }
 
 //959
-@media screen and (min-width: 480px) and (max-width: 959px) {
+@include respond($medium-breakpoint, $desktop-breakpoint - 1) {
 
     .pt_customerservice {
         #content {
@@ -4958,7 +4958,7 @@
 
 }
 
-@media screen and (min-width: 480px) and (max-width: 767px) {
+@include respond($medium-breakpoint, $large-breakpoint - 1) {
     .product-tile .pr_stars {
         left: 40px;
     }
@@ -4993,7 +4993,7 @@
 }
 
 /* recommendation section */
-@media screen and (min-width: 960px) {
+@include respond($desktop-breakpoint) {
     .pt_product-search-result {
         #page-background {
             #primary {
@@ -5015,7 +5015,7 @@
     }
 }
 
-@media screen and (min-width: 481px) {
+@include respond($medium-breakpoint + 1) {
     .pt_product-details .productdetail .jcarouselcont.pdppage {
         padding-top: 20px;
     }
@@ -5129,7 +5129,7 @@
     }
 }
 
-@media screen and (min-width: 481px) and (max-width: 959px) {
+@include respond($medium-breakpoint + 1, $desktop-breakpoint - 1) {
     div#vippage-background {
         #page {
             padding-top: 4px;
@@ -6035,7 +6035,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 959px) {
+@include respond($large-breakpoint, $desktop-breakpoint - 1) {
     .pt_leftnav-addressbook {
         #addresses {
             .address-list {
@@ -6376,7 +6376,7 @@
     }
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px) {
+@include respond($medium-breakpoint + 1, $large-breakpoint - 1) {
     .paymentslist {
         .paymentinstruments {
             .creditcard {
@@ -6736,7 +6736,7 @@
 
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     .pt_product-details {
         .productdetail {
             .jcarouselcont.pdppage {
@@ -6877,7 +6877,7 @@
 
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     /*.onlyMobile-hide {
 			display: none;
 		}*/
@@ -8390,7 +8390,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@include respond($large-breakpoint, 1024) {
     .ipad-only {
         display: inherit !important;
     }
@@ -8401,7 +8401,7 @@
 
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px) {
+@include respond($medium-breakpoint + 1, $large-breakpoint - 1) {
     div {
         &.international-links-background-wrapper {
             min-width: 100%;
@@ -8480,7 +8480,7 @@
 
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .breadcrumb-element:after {
         margin-left: 0;
     }
@@ -8667,7 +8667,7 @@
 
 /*--- my account styles ---*/
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .ui-dialog {
         &.PasswordResetDialog {
             .ui-dialog-titlebar-close {
@@ -8782,7 +8782,7 @@
         .contentboxcontent {
             text-align: center;
             margin: 30px 30px 320px 30px;
-            @media screen and (max-width: 480px) {
+            @include respond(0, $medium-breakpoint) {
                 margin: 30px;
             }
             .no-hits-search {
@@ -8860,7 +8860,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .pt_account {
         .returningcustomers {
             input.textinput,
@@ -9468,7 +9468,7 @@
                         dd {
                             width: 100% !important;
                             box-sizing: border-box;
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 text-align: center;
                             }
                             ul {
@@ -10065,7 +10065,7 @@
     }
 }
 
-@media screen and (min-width: 481px) and (max-width: 959px) {
+@include respond($medium-breakpoint + 1, $desktop-breakpoint - 1) {
     .pt_store-locator {
         .storelocator {
             .form-row {
@@ -10766,7 +10766,7 @@
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 959px) {
+@include respond($large-breakpoint, $desktop-breakpoint - 1) {
 
     #vippage-background {
         .upshift {
@@ -10846,7 +10846,7 @@
     }
 }
 
-@media screen and (min-width: 481px) and (max-width: 767px) {
+@include respond($medium-breakpoint + 1, $large-breakpoint - 1) {
     .pt_product-search-result,
     .pt_content-search-result {
         #page-background {
@@ -10928,7 +10928,7 @@
 
 }
 
-@media screen and (max-width: 960px) {
+@include respond(0, $desktop-breakpoint) {
     .searchResult-refinement {
         #tabs {
             display: block;
@@ -10943,7 +10943,7 @@
 
 /** recommendation section ---**/
 
-@media screen and (min-width: 481px) and (max-width: 959px) {
+@include respond($medium-breakpoint + 1, $desktop-breakpoint - 1) {
     .pt_store-locator .storelocator .form-row.form-indent .label {
         padding: 10px;
     }
@@ -11098,7 +11098,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .pt_store-locator,
     pt_customerservice {
         .storelocator .zipsearchactions .stack.less-mobile-padding .form-row .field-wrapper {
@@ -11748,7 +11748,7 @@
     position: relative;
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .mobile-pricing {
         margin-top: 20px;
     }
@@ -11798,7 +11798,7 @@
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .confirmationcontainer {
         .actions {
             button {

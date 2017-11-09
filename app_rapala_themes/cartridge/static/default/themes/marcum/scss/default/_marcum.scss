@@ -756,7 +756,7 @@ p a {
             .returningcustomers {
                 .form-row {
                     /* margin: 8px 0 16px 1px; */
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         /* margin: 0px 0 16px 1px; */
                     }
                 }
@@ -978,7 +978,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #vippage-background {
         .disign-header-title,
         h1 {
@@ -1204,7 +1204,7 @@ div {
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     #container {
         &.pt_account {
             #primary {
@@ -1286,7 +1286,7 @@ div {
     }
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .receive-emails a, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
         color: #fff;
     }
@@ -1567,7 +1567,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .breadcrumb-element-slash:after {
         content: '/';
         color: $white;
@@ -1635,7 +1635,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #headerwrapper #header div.logo {
         margin: 21px 0;
     }
@@ -1759,7 +1759,7 @@ div {
                 line-height: 30px;
                 font-variant: normal;
                 color: $marcum-white;
-                @media screen and (max-width: 480px) {
+                @include respond(0, $medium-breakpoint) {
                     color: $marcum-black;
                 }
             }
@@ -1851,7 +1851,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_customerservice {
         #content {
             .productsearchbreadcrumb {
@@ -1881,7 +1881,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_customerservice {
         #content {
             .style-cservice {
@@ -1969,7 +1969,7 @@ div {
                     li {
                         a {
                             color: #fff;
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 color: #666;
                             }
                         }

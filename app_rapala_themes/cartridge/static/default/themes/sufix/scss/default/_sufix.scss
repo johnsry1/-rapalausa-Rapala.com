@@ -41,7 +41,7 @@ form .label {
     line-height: 16px;
     margin: 0;
     letter-spacing: 0px;
-    @media screen and (max-width: 480px) {
+    @include respond(0, $medium-breakpoint) {
         line-height: 12px;
     }
 }
@@ -62,7 +62,7 @@ div {
                         line-height: 16px;
                         margin: 0;
                         letter-spacing: 0px;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             line-height: 12px;
                         }
                     }
@@ -782,7 +782,7 @@ h1.search-result {
     width: 126px;
     height: 32px;
     padding-right: 25px;
-    @media screen and (max-width: 959px) {
+    @include respond(0, $desktop-breakpoint - 1) {
         padding-right: 0px;
     }
 }
@@ -1120,11 +1120,11 @@ h1.search-result {
                 border: none;
                 background: none;
                 text-align: left;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     text-align: center;
                 }
                 .section-header p {
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         text-align: center;
                     }
                 }
@@ -1132,7 +1132,7 @@ h1.search-result {
             .no-hits-help {
                 h2 {
                     background: none;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         text-align: center;
                     }
                 }
@@ -1185,7 +1185,7 @@ h1.search-result {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #vippage-background {
         .disign-header-title,
         h1,
@@ -1369,7 +1369,7 @@ h1.search-result {
     color: #333;
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .product-specifications {
         .specificiations {
             border-bottom: none;
@@ -1833,7 +1833,7 @@ h1.search-result {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_cart {
         #main {
             .breadcrumb {

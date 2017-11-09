@@ -69,7 +69,7 @@ form .label {
     font-variant: small-caps;
     font-family: $rap-font1;
     color: $rap-black;
-    @media screen and (max-width: 480px) {
+    @include respond(0, $medium-breakpoint) {
         line-height: 12px;
     }
 }
@@ -130,7 +130,7 @@ button:hover, a.button:hover {
     background-image: url(../images/container-background-80.jpg);
     background-position: 50% 0;
     background-repeat: repeat-x;
-    @media screen and (min-width: 960px) {
+    @include respond($desktop-breakpoint) {
         min-height: 544px;
     }
 
@@ -691,7 +691,7 @@ input, .quantity {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #container {
         &.pt_account {
             #primary {
@@ -888,7 +888,7 @@ input, .quantity {
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .mobile-view li {
         display: block;
     }
@@ -963,11 +963,11 @@ input, .quantity {
                     padding-right: 20px;
                     width: 200px;
                     background: none;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         width: 50%;
                         box-sizing: border-box;
                         padding: 0;
-                        @media screen and (max-width: 480px) {
+                        @include respond(0, $medium-breakpoint) {
                             width: 100%;
                         }
                     }
@@ -1134,7 +1134,7 @@ input, .quantity {
     }
 }
 
-@media screen and (min-width: 481px) {
+@include respond($medium-breakpoint + 1) {
     .product-specifications {
         .specificiations {
             thead {
@@ -1176,7 +1176,7 @@ input, .quantity {
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .product-specifications {
         &.iphone-view {
             .specificiations {
@@ -1249,7 +1249,7 @@ input, .quantity {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #vippage-background {
         h1, .labeltext, h2 {
             text-transform: none;

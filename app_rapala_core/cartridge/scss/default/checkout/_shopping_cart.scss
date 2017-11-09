@@ -18,7 +18,7 @@
 #cart-table {
     thead {
         display: none;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             display: table-header-group;
         }
     }
@@ -30,7 +30,7 @@
         float: left;
         text-align: center;
         width: 40%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             float: none;
             width: 7rem;
         }
@@ -38,7 +38,7 @@
     .item-details {
         float: left;
         width: 60%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             float: none;
             width: auto;
         }
@@ -48,7 +48,7 @@
         // Removes Edit Details Quickview link for handheld devices
         .item-edit-details {
             display: none;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 display: block;
             }
         }
@@ -58,7 +58,7 @@
         float: left;
         text-align: center;
         width: 40%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             clear: none;
             float: none;
             text-align: left;
@@ -73,7 +73,7 @@
         float: left;
         text-align: center;
         width: 40%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             clear: none;
             float: none;
             text-align: left;
@@ -85,7 +85,7 @@
                 display: block;
                 width: 100%;
                 margin: .3rem 0;
-                @media screen and (min-width: 768px) {
+                @include respond(large-up) {
                     width: auto;
                 }
             }
@@ -94,7 +94,7 @@
     .item-price {
         float: left;
         width: 60%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             float: none;
             width: auto;
         }
@@ -115,13 +115,13 @@
         text-align: right;
         width: 100%;
         word-wrap: break-word;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             float: none;
             font-size: 1em;
             width: auto;
         }
         .promo-adjustment {
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 width: 7.5rem;
             }
         }
@@ -166,14 +166,14 @@
 }
 
 .cart-coupon-code {
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         float: left;
         width: 60%;
     }
     input {
         margin-bottom: .5rem;
         width: 35%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             width: 45%;
         }
     }
@@ -187,7 +187,7 @@
 
 .cart-order-totals {
     margin: 1rem 0;
-    @media screen and (min-width: 768px) {
+    @include respond(large-up) {
         float: right;
         margin-top: 0;
         width: 40%;

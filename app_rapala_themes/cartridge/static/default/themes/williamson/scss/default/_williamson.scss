@@ -749,7 +749,7 @@ a.button:hover, button:hover {
             .returningcustomers {
                 .form-row {
                     /* margin: 8px 0 16px 1px; */
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         /* margin: 0px 0 16px 1px; */
                     }
                 }
@@ -977,7 +977,7 @@ div {
                     li {
                         &.specChart-link {
                             a {
-                                @media screen and (min-width: 481px) {
+                                @include respond($medium-breakpoint + 1) {
                                     color: $white;
                                 }
                             }
@@ -986,7 +986,7 @@ div {
                 }
                 .productname {
                     color: $white;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         color: $wil-black;
                     }
                 }
@@ -995,7 +995,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
 
     #vippage-background {
         .disign-header-title,
@@ -1253,13 +1253,13 @@ div {
     }
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
         color: #fff;
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .product-specifications {
         &.iphone-view {
             .specificiations {
@@ -1744,7 +1744,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .breadcrumb-element-slash:after {
         content: '/';
         color: $white !important;
@@ -1810,7 +1810,7 @@ div {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #headerwrapper #header div.logo {
         margin: 20.5px 0;
     }
@@ -2034,7 +2034,7 @@ input {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_customerservice {
         #content {
             .productsearchbreadcrumb, .breadcrumb {
@@ -2053,7 +2053,7 @@ input {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_customerservice {
         #content {
             .style-cservice {
