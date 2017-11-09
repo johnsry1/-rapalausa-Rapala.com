@@ -1,10 +1,6 @@
 @import url("https://fast.fonts.com/cssapi/e1d62d77-1f31-4ff7-9f89-bfd805e66f34.css");
 
 body {
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    background: #dbe9f4 url(../images/body-background-70.jpg) 50% 0 repeat-x;
     &.js-body {
         background: none;
     }
@@ -27,8 +23,7 @@ body {
 
 /* H1-H6 */
 h1, h2, h4, h5, h6, .h-one-tag {
-    font-family: 'ITCLubalinGraphW01-Demi', 'LubalGraph Bd BT', Rockwell,
-    serif;
+    font-family: $font-third;
     font-weight: normal;
     color: #333;
     text-transform: uppercase;
@@ -116,7 +111,7 @@ a {
         float: left;
         width: 184px;
         line-height: 18px;
-        font-family: $bluefox-lucida;
+        font-family: $font-secondary;
         font-size: 14px;
         font-style: normal;
         font-weight: bold;
@@ -130,26 +125,14 @@ a {
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
         background: rgba(245, 131, 32, 1);
-        background: -moz-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245, 131, 32, 1)), color-stop(100%, rgba(209, 111, 0, 1)));
-        background: -webkit-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-        background: -o-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-        background: -ms-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
         background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58320', endColorstr='#d16f00', GradientType=0);
         border-top-color: #CF6F1C;
         border-right-color: #EF8020;
         border-bottom-color: #FBCFA9;
         border-left-color: #F08428;
         &:hover {
             background: rgba(209, 111, 0, 1);
-            background: -moz-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(209, 111, 0, 1)), color-stop(100%, rgba(245, 131, 32, 1)));
-            background: -webkit-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-            background: -o-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-            background: -ms-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
             background: linear-gradient(to bottom, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d16f00', endColorstr='#f58320', GradientType=0);
             border-top-color: #D7812C;
             border-right-color: #F99533;
             border-bottom-color: #FFD8B1;
@@ -210,11 +193,6 @@ a.button:hover, button:hover {
 
 .addTo-cart-section {
     a.button:hover, button:hover {
-        background: -moz-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%) !important;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(209, 111, 0, 1)), color-stop(100%, rgba(245, 131, 32, 1))) !important;
-        background: -webkit-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%) !important;
-        background: -o-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%) !important;
-        background: -ms-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%) !important;
         background: linear-gradient(to bottom, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%) !important;
         text-decoration: none;
         /*border-top-color: #0056AC;
@@ -230,7 +208,7 @@ p a {
 }
 
 h1.search-result {
-    font-family: $bluefox-lucida;
+    font-family: $font-secondary;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -243,11 +221,6 @@ h1.search-result {
         thead {
             tr {
                 background: #f58220;
-                background: -moz-linear-gradient(top, #f58220 0%, #d17000 100%);
-                background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58220), color-stop(100%, #d17000));
-                background: -webkit-linear-gradient(top, #f58220 0%, #d17000 100%);
-                background: -o-linear-gradient(top, #f58220 0%, #d17000 100%);
-                background: -ms-linear-gradient(top, #f58220 0%, #d17000 100%);
                 background: linear-gradient(to bottom, #f58220 0%, #d17000 100%);
                 color: #fff;
             }
@@ -270,7 +243,7 @@ h1.search-result {
                 a {
                     transition: none;
                     h2 {
-                        font-family: $bluefox-original;
+                        font-family: $font-third;
                         text-transform: uppercase;
                         font-weight: bold;
                         font-size: 25px;
@@ -353,9 +326,6 @@ h1.search-result {
     font-weight: normal;
     width: 58px;
     border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -ms-border-radius: 5px;
     text-transform: capitalize;
     background-image: url(../images/multi-site-one-cart-bg.png);
 }
@@ -374,11 +344,6 @@ h1.search-result {
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
     background: linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-    background: -moz-linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-    background: -webkit-linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-    background: -ms-linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #f58220), color-stop(100%, #cd6200));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58220', endColorstr='#cd6200', GradientType=0);
     color: #ffffff;
     text-align: center;
     text-decoration: none;
@@ -388,18 +353,10 @@ h1.search-result {
     font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 11px;
     border-radius: 0 5px 5px 0;
-    -moz-border-radius: 0 5px 5px 0;
-    -webkit-border-radius: 0 5px 5px 0;
-    -ms-border-radius: 0 5px 5px 0;
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
     background: linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-    background: -moz-linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-    background: -webkit-linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-    background: -ms-linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cd6200), color-stop(60%, #f58220));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cd6200', endColorstr='#f58220', GradientType=0);
 }
 
 .owl-carousel {
@@ -411,7 +368,7 @@ h1.search-result {
 }
 
 .shop-brand {
-    font-family: $bluefox-original;
+    font-family: $font-third;
     font-size: 24px;
     font-weight: normal;
     line-height: 22px;
@@ -519,14 +476,14 @@ h1.search-result {
 .pt_leftnav-addressbook {
     #main {
         .breadcrumb {
-            font-family: $bluefox-lucida;
+            font-family: $font-secondary;
         }
     }
     #addresses {
         .address-list {
             .address-tile {
                 .mini-address-title {
-                    font-family: $bluefox-Arial;
+                    font-family: $font;
                     color: $bluefox-list-black;
                     font-size: 12px;
                     font-weight: bold;
@@ -562,7 +519,7 @@ h1.search-result {
             .order-history-items {
                 .order-history-table {
                     th {
-                        font-family: $bluefox-Arial;
+                        font-family: $font;
                         text-transform: uppercase;
                         font-size: 12px;
                         line-height: 12px;
@@ -571,7 +528,7 @@ h1.search-result {
                     tr {
                         .order-price {
                             .value {
-                                font-family: $bluefox-Baskerville;
+                                font-family: $font-fourth;
                                 color: $bluefox-bgorange;
                                 font-weight: bold;
                                 font-size: 30px;
@@ -591,7 +548,7 @@ h1.search-result {
             .label {
                 font-size: 25px;
                 line-height: 25px;
-                font-family: $bluefox-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $bluefox-list-black;
                 text-transform: uppercase;
@@ -600,7 +557,7 @@ h1.search-result {
             .value {
                 font-size: 25px;
                 line-height: 25px;
-                font-family: $bluefox-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $bluefox-list-black;
                 text-transform: uppercase;
@@ -619,7 +576,7 @@ h1.search-result {
     .line-item-price {
         .label {
             color: $bluefox-list-black;
-            font-family: $bluefox-Arial;
+            font-family: $font;
             font-weight: bold;
             font-size: 12px;
             line-height: 12px;
@@ -632,7 +589,7 @@ h1.search-result {
     .line-items {
         .line-item {
             .line-item-price {
-                font-family: $bluefox-Baskerville;
+                font-family: $font-fourth;
                 color: $bluefox-bgorange;
                 font-weight: bold;
                 font-style: italic;
@@ -640,7 +597,7 @@ h1.search-result {
                 line-height: 24px;
                 .label {
                     color: $bluefox-list-black;
-                    font-family: $bluefox-Arial;
+                    font-family: $font;
                     font-weight: bold;
                     font-size: 12px;
                     line-height: 12px;
@@ -666,7 +623,7 @@ h1.search-result {
                     line-height: normal;
                     text-align: left;
                     width: auto;
-                    font-family: $bluefox-lucida;
+                    font-family: $font-secondary;
                     padding: 0;
                 }
             }
@@ -830,13 +787,6 @@ form {
     padding: 5px 18px 0 0;
 }
 
-body {
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    background: #dbe9f4 url(../images/body-background-70.jpg) 50% 0 repeat-x;
-}
-
 #footernew #footer-brands {
     clear: both;
     margin: 27px auto 0px auto;
@@ -876,13 +826,7 @@ body {
                     color: $bluefox-white;
                     background-image: none;
                     background: rgba(245, 131, 32, 1);
-                    background: -moz-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245, 131, 32, 1)), color-stop(100%, rgba(209, 111, 0, 1)));
-                    background: -webkit-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                    background: -o-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                    background: -ms-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
                     background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58320', endColorstr='#d16f00', GradientType=0);
                     transition: inherit;
                     text-transform: inherit;
                     border: none;
@@ -893,7 +837,7 @@ body {
                     font-size: 13px !important;
                     font-style: normal;
                     font-weight: normal !important;
-                    font-family: $bluefox-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
@@ -1006,22 +950,10 @@ body {
                 color: $bluefox-white;
                 border: 1px solid #cc6600;
                 background: rgba(245, 131, 32, 1);
-                background: -moz-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245, 131, 32, 1)), color-stop(100%, rgba(209, 111, 0, 1)));
-                background: -webkit-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                background: -o-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                background: -ms-linear-gradient(top, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
                 background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58320', endColorstr='#d16f00', GradientType=0);
                 &:hover {
                     background: rgba(209, 111, 0, 1);
-                    background: -moz-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-                    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(209, 111, 0, 1)), color-stop(100%, rgba(245, 131, 32, 1)));
-                    background: -webkit-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-                    background: -o-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-                    background: -ms-linear-gradient(top, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
                     background: linear-gradient(to bottom, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d16f00', endColorstr='#f58320', GradientType=0);
                 }
             }
         }
@@ -1049,8 +981,7 @@ body {
                 line-height: 25px;
             }
             h1 {
-                &.leftnav,
-                {
+                &.leftnav {
                     font-size: 20px;
                     line-height: 25px;
                 }
@@ -1067,9 +998,6 @@ body {
                 margin: 0;
                 width: 100%;
                 box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
-                -moz-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
-                -webkit-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
-                -ms-box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
             }
         }
     }
@@ -1090,11 +1018,6 @@ body {
                 tr {
                     &:first-child {
                         background: #f58220;
-                        background: -moz-linear-gradient(top, #f58220 0%, #d17000 100%);
-                        background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58220), color-stop(100%, #d17000));
-                        background: -webkit-linear-gradient(top, #f58220 0%, #d17000 100%);
-                        background: -o-linear-gradient(top, #f58220 0%, #d17000 100%);
-                        background: -ms-linear-gradient(top, #f58220 0%, #d17000 100%);
                         background: linear-gradient(to bottom, #f58220 0%, #d17000 100%);
                         color: #fff;
                         th {
@@ -1204,14 +1127,12 @@ body {
         .account-options {
             li {
                 background: $bluefox-white;
-                -webkit-box-shadow: #999 0 0 10px;
-                -moz-box-shadow: #999 0 0 10px;
                 box-shadow: #999 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
                     background: none;
-                    font-family: $bluefox-original;
+                    font-family: $font-third;
                     font-size: 36px;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -1239,7 +1160,7 @@ body {
                 h1 {
                     &.left-nav-style {
                         color: $bluefox-black;
-                        font-family: $bluefox-original;
+                        font-family: $font-third;
                         font-size: 24px;
                         font-weight: normal;
                         border: none;
@@ -1397,7 +1318,7 @@ body {
                     .product-promo {
                         text-align: left;
                         color: $bluefox-red;
-                        font-family: $bluefox-lucida;
+                        font-family: $font-secondary;
                         font-size: 10px;
                         padding-top: 3px;
                         font-weight: normal;
@@ -1430,19 +1351,19 @@ body {
             .folder-content-list {
                 li {
                     a {
-                        font-family: $bluefox-original;
+                        font-family: $font-third;
                         font-size: 16px;
                         line-height: 16px;
                         font-weight: normal;
                         color: $bluefox-list-black;
                     }
                     p {
-                        font-family: $bluefox-Arial;
+                        font-family: $font;
                         color: $bluefox-list-black;
                         font-size: 13px;
                         a {
                             &.readmore {
-                                font-family: $bluefox-Arial;
+                                font-family: $font;
                                 color: $bluefox-bgorange;
                                 &:hover {
                                     color: $bluefox-bg-light-orange;
@@ -1530,13 +1451,13 @@ body {
         line-height: 24px;
         letter-spacing: 0px;
         .standardprice {
-            font-family: $bluefox-lucida;
+            font-family: $font-secondary;
             font-size: 15px;
             line-height: 24px;
             color: #999;
         }
         .salesprice {
-            font-family: $bluefox-lucida;
+            font-family: $font-secondary;
         }
     }
 
@@ -1607,10 +1528,7 @@ body {
                                                 a {
                                                     background-image: none;
                                                     background: #f58220; /* Old browsers */
-                                                    background: -moz-linear-gradient(top, #f58220 10%, rgba(255, 255, 255, 1) 10%, #f58220 10%, rgba(255, 255, 255, 1) 10%); /* FF3.6-15 */
-                                                    background: -webkit-linear-gradient(top, #f58220 10%, rgba(255, 255, 255, 1) 10%, #f58220 10%, rgba(255, 255, 255, 1) 10%); /* Chrome10-25,Safari5.1-6 */
                                                     background: linear-gradient(to bottom, #f58220 10%, rgba(255, 255, 255, 1) 10%, #f58220 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-                                                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0); /* IE6-9 */
                                                 }
                                             }
                                         }
@@ -1644,7 +1562,7 @@ body {
                     h1 {
                         font-size: 20px;
                         line-height: 25px;
-                        font-family: $bluefox-original;
+                        font-family: $font-third;
                     }
                 }
             }
@@ -1691,7 +1609,7 @@ body {
                             padding: 12px 0;
                             font-size: 20px;
                             line-height: 25px;
-                            font-family: $bluefox-original;
+                            font-family: $font-third;
                         }
                     }
                 }
@@ -1717,7 +1635,7 @@ body {
                         h1 {
                             font-size: 20px;
                             line-height: 25px;
-                            font-family: $bluefox-original;
+                            font-family: $font-third;
                         }
                         .cellbox {
                             &.accordion {
