@@ -657,7 +657,7 @@ h1.search-result {
             .returningcustomers {
                 .form-row {
                     margin: 8px 0 16px 1px;
-                    @media screen and (max-width: 480px) {
+                    @include respond(0, $medium-breakpoint) {
                         margin: 0px 0 16px 1px;
                     }
                 }
@@ -871,7 +871,7 @@ body {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #vippage-background {
         .disign-header-title,
         h1 {
@@ -1039,7 +1039,7 @@ body {
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     #container {
         &.pt_account {
             #primary {
@@ -1168,7 +1168,7 @@ body {
     }
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .footer-main {
         margin: 0px;
     }
@@ -1458,7 +1458,7 @@ body {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #headerwrapper #header div.logo {
         margin: 26.5px 0;
     }
@@ -1555,7 +1555,7 @@ body {
     margin: 0 2em 1em 0;
     width: 310px;
     vertical-align: top;
-    @media screen and (max-width: 480px) {
+    @include respond(0, $medium-breakpoint) {
         width: 100%;
     }
     &:last-child {
@@ -1708,7 +1708,7 @@ body {
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     .pt_customerservice {
         #content {
             .style-cservice {

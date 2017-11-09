@@ -2,7 +2,7 @@
 	border-bottom: 5px solid darken($dim-gray, 10%);
 	color: $white;
 	width: 100%;
-	@media screen and (min-width: 768px) {
+	@include respond(large-up) {
 		border-bottom: none;
 		padding: 0;
 		position: absolute;
@@ -18,7 +18,7 @@
 		&.active {
 			display: block;
 		}
-		@media screen and (min-width: 768px) {
+		@include respond(large-up) {
 			background-color: $white;
 			border-radius: 3px;
 			box-shadow: -1px 2px 4px rgba(0, 0, 0, .3);
@@ -35,7 +35,7 @@
 				transform: rotate(270deg);
 			}
 		}
-		@media screen and (min-width: 768px) {
+		@include respond(large-up) {
 			padding: 0;
 			&.selector-active {
 				border-bottom: none;
@@ -47,7 +47,7 @@
 		}
 		.selector-icon {
 			margin-right: .3rem;
-			@media screen and (min-width: 768px) {
+			@include respond(large-up) {
 				float: right;
 				margin-right: 0;
 				margin-left: .3rem;
@@ -62,7 +62,7 @@
 	.continent-name {
 		margin-top: 0;
 		margin-bottom: .5rem;
-		@media screen and (min-width: 768px) {
+		@include respond(large-up) {
 			color: $sangria;
 		}
 	}
@@ -101,7 +101,7 @@
                         width: 18px;
                         position: relative;
                         z-index: 99;
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             display: none;
                         }
                     }

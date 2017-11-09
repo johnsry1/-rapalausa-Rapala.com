@@ -74,20 +74,20 @@
 
 .pt_order {
     .actions {
-        @media screen and (min-width: 959px) {
+        @include respond($desktop-breakpoint - 1) {
             margin-bottom: 20px;
         }
     }
     .orderdetails {
         .order-payment-instruments {
-            @media screen and (min-width: 767px) {
+            @include respond($large-breakpoint - 1) {
                 margin-top: 0;
                 float: left;
                 width: 50%;
             }
         }
         .order-billing {
-            @media screen and (min-width: 767px) {
+            @include respond($large-breakpoint - 1) {
                 width: 50%;
                 float: left;
             }
@@ -99,7 +99,7 @@
             }
         }
         .order-payment-summary {
-            @media screen and (min-width: 767px) {
+            @include respond($large-breakpoint - 1) {
                 width: 50%;
             }
             .order-detail-summary {
@@ -272,7 +272,7 @@
         }
     }
     .order-payment-summary {
-        @media screen and (min-width: 480px) {
+        @include respond(medium-up) {
             float: right;
         }
     }
@@ -638,10 +638,10 @@
                     .headercustomerinfo {
                         #userinfo {
                             margin: 3px 6px 0 0 !important;
-                            @media screen and (min-width: 768px) and (max-width: 959px) {
+                            @include respond($large-breakpoint, $desktop-breakpoint - 1) {
                                 margin: 3px 0 0 0 !important;
                             }
-                            @media screen and (max-width: 767px) {
+                            @include respond(0, $large-breakpoint - 1) {
                                 margin: 3px 5px 0 0 !important;
                             }
                             a {
@@ -649,7 +649,7 @@
                             }
                             .arrow-size.right-arrow {
                                 margin-top: 9px;
-                                @media screen and (max-width: 959px) {
+                                @include respond(0, $desktop-breakpoint - 1) {
                                     margin-top: 10px;
                                     height: 8px;
                                 }
@@ -872,7 +872,7 @@
                                     box-sizing: border-box;
                                     -moz-box-sizing: border-box;
                                     -webkit-box-sizing: border-box;
-                                    @media screen and (min-width: 960px) {
+                                    @include respond($desktop-breakpoint) {
                                         height: 138px;
                                     }
                                     h2 {
@@ -1510,7 +1510,7 @@
                                     text-align: center;
                                     .prod_image {
                                         padding-top: 9px;
-                                        @media screen and (min-width: 480px) {
+                                        @include respond(medium-up) {
                                             padding-top: 11px;
                                             margin-bottom: 5px;
                                         }
@@ -1526,7 +1526,7 @@
                                         a {
                                             display: block;
                                             img {
-                                                @media screen and (min-width: 959px) {
+                                                @include respond($desktop-breakpoint - 1) {
                                                     max-width: 64%;
                                                 }
                                                 max-width: 100%;
@@ -1546,7 +1546,7 @@
                                     .product-list-item {
                                         padding-left: 1px;
                                         .name {
-                                            @media screen and (min-width: 480px) {
+                                            @include respond(medium-up) {
                                                 padding-bottom: 9px;
                                             }
                                             padding-bottom: 4px;

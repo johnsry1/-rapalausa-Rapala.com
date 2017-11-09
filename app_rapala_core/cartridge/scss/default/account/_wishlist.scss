@@ -41,7 +41,7 @@
                 }
             }
             #secondary {
-                @media screen and (min-width: 960px) {
+                @include respond($desktop-breakpoint) {
                     width: auto;
                     max-width: 150px;
                 }
@@ -104,7 +104,7 @@
     &#container {
         min-height: 1px;
         margin-bottom: 30px;
-        @media screen and (max-width: 959px) {
+        @include respond(0, $desktop-breakpoint - 1) {
             margin-bottom: 0;
         }
         #dwfrm_wishlist_shipping {
@@ -540,7 +540,7 @@
             padding: 6px 12px;
             background: $white;
             border-radius: 4px;
-            @media screen and (min-width: 481px) and (max-width: 959px) {
+            @include respond($medium-breakpoint + 1, $desktop-breakpoint - 1) {
                 overflow: auto !important;
             }
             .dialog-required {
@@ -683,7 +683,7 @@
     }
 }
 
-@media screen and (min-width: 959px) {
+@include respond($desktop-breakpoint - 1) {
     .pt_wish-list,
     .pt_leftnav-addressbook,
     .pt_order,
@@ -754,7 +754,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@include respond(0, $medium-breakpoint) {
     .pt_account.wishlistLogin {
         .logincustomers {
             h1 {

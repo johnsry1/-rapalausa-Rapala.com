@@ -44,14 +44,14 @@
                     width: auto;
                     float: right;
                     margin: 18px 0 15px 0;
-                    @media screen and (max-width: 959px) {
+                    @include respond(0, $desktop-breakpoint - 1) {
                         margin: 16px 5px 15px 0;
                         .second_name {
                             display: none;
                         }
                     }
 
-                    @media screen and (min-width: 960px) {
+                    @include respond($desktop-breakpoint) {
                         position: relative;
                         width: calc(100% - 220px);
                         float: left;
@@ -65,7 +65,7 @@
                         padding: 0 0 0 5px;
                         background: 0;
 
-                        @media screen and (max-width: 959px) {
+                        @include respond(0, $desktop-breakpoint - 1) {
                             display: none;
                         }
                     }
@@ -101,7 +101,7 @@
                                 span.mobileHide {
                                     text-transform: capitalize;
                                 }
-                                @media screen and (max-width: 959px) {
+                                @include respond(0, $desktop-breakpoint - 1) {
                                     position: absolute;
                                     padding: 0;
                                     top: -23px;
@@ -110,7 +110,7 @@
                                     width: 100%;
                                 }
                             }
-                            @media screen and (max-width: 959px) {
+                            @include respond(0, $desktop-breakpoint - 1) {
                                 display: inline-block;
                                 background: url("../images/responsive-icons/profile-icon-static.svg") no-repeat;
                                 width: 36px;
@@ -125,13 +125,13 @@
                                     position: relative;
                                 }
                             }
-                            @media screen and (max-width: 480px) {
+                            @include respond(0, $medium-breakpoint) {
                                 margin: 0 0 0 10px;
                             }
                             .userlogin {
                                 &.signin {
                                     display: block;
-                                    @media screen and (min-width: 960px) {
+                                    @include respond($desktop-breakpoint) {
                                         background: url("../images/drop_arrow.png") no-repeat scroll 33px 14px rgba(0, 0, 0, 0);
                                         display: block;
                                         float: left;
@@ -147,7 +147,7 @@
                             font-family: $lucida-font-family;
                             padding: 0 5px;
 
-                            @media screen and (max-width: 959px) {
+                            @include respond(0, $desktop-breakpoint - 1) {
                                 display: none;
                             }
                         }
@@ -167,7 +167,7 @@
                 height: 30px;
                 line-height: 30px;
                 color: $user-info-static-color;
-                @media screen and (max-width: 959px) {
+                @include respond(0, $desktop-breakpoint - 1) {
                     height: auto;
                 }
                 &.forgot_create {

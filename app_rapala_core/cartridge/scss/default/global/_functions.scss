@@ -1,0 +1,105 @@
+////-----------------------------------------------
+/// GLOBAL FUNCTIONS
+////-----------------------------------------------
+
+///	strip-units - Strip unit off of a number value, return just the number
+///	@param {number} $value - a unit value to strip
+///	@return {number} a unitless number value
+
+@function strip-units($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+///	calculateRem - Calculates a proper rem value (usually a font-size) given a pixel value.
+///	@param {number} $size - a pixel || verbal attribute: auto, initial, etcetera.
+///	@return {number} a rem value based on a default browser font size of 16px
+///	@alias rem()
+
+@function calculateRem($size) {
+    @if type-of($size) == string or $size == 0 or unit($size) == "rem" {
+        @return $size;
+    }
+    @if unit($size) != "px" {
+        @error "The calculateRem function expects a pixel || verbal attribute: auto, initial, etcetera.";
+    }
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@function rem($size) {
+    @return calculateRem($size);
+}
+
+///	calculateEm - Calculates an em value given a px value - mainly used in media queries.
+/// @param {number} $size - a pixel || verbal attribute auto, initial, etcetera.
+///	@return {number} an em value based on a font size of 16px
+
+@function calculateEm($size) {
+    @if type-of($size) == string or $size == 0 or unit($size) == "em" {
+        @return $size;
+    }
+    @if unit($size) != "px" {
+        @error "The calculateEm function expects a pixel || verbal attribute: auto, initial, etcetera.";
+    }
+    $emSize: $size / 16px;
+    @return $emSize * 1em;
+}
+
+///	calculateVw - Given a target font-size (in px) and a target viewport width (in px),
+///	calculates a vw (scaling) value that will equal the px size at exactly the given screen
+///	width.
+///	@param {number} $pxsize - a target font size in pixels
+///	@param {number} $screenwidth - a target viewport size in pixels
+///	@return {number} a vw value that will equal the targeted px value at the targeted viewport.
+
+@function calculateVw($pxsize, $screenwidth) {
+    $vwunit: $screenwidth / 100;
+    @return $pxsize / $vwunit * 1vw;
+}
+
+///	calculatePerc - Calculates a proper % value at a specified viewport, given a target
+///	font-size (in px) and viewport width (in px).
+///	@param {number} $pxsize - a target font size in pixels
+///	@param {number} $screenwidth - a target viewport size in pixels
+///	@return {number} a percentage value that will equal the targeted px value at the targeted viewport.
+
+@function calculatePerc($pxsize, $screenwidth) {
+    @return $pxsize / $screenwidth * 100%;
+}
+
+@function map-has-nested-keys($map, $keys...) {
+    @each $key in $keys {
+        @if type-of($map) != "map" {
+            @return false;
+        }
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+        $map: map-get($map, $key);
+    }
+    @return true;
+}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        @if type-of($map) == "map" {
+            $map: map-get($map, $key);
+        }
+    }
+    @return $map;
+}
+
+@function z($layers...) {
+    @if not map-has-nested-keys($z-layers, $layers...) {
+        @error "No layer found for `#{inspect($layers)}` in $z-layers map.";
+    }
+    $deepest-layer: map-deep-get($z-layers, $layers...);
+
+    @if type-of($deepest-layer) != map {
+        @return map-deep-get($deepest-layer);
+    } @elseif map-has-key($deepest-layer, "this") {
+        @return map-get($deepest-layer, "this");
+    } @else {
+        @error "Key ID of 'this' not found in `#{inspect($layers)}` nested list.";
+    }
+}

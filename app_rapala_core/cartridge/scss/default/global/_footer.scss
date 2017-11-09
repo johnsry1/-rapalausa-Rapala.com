@@ -13,7 +13,7 @@ footer {
         display: block;
         padding: .5em 1.5em;
         width: 100%;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             display: table-cell;
             padding: 1.5em;
             width: 25%;
@@ -26,7 +26,7 @@ footer {
         float: none;
         margin: .5em;
         padding: 0;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             margin: 1em 0;
         }
         li {
@@ -676,7 +676,7 @@ footer {
             a {
                 cursor: pointer;
             }
-            @media screen and (max-width: 767px) {
+            @include respond(0, $large-breakpoint - 1) {
                 div {
                     max-width: initial;
                 }
@@ -704,13 +704,13 @@ footer {
     }
 }
 
-@media screen and (max-width: 767px) {
+@include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness.expanded .domainswitch ul li {
         padding: 7px 0 0 0;
     }
 }
 
-@media screen and (max-width: 959px) {
+@include respond(0, $desktop-breakpoint - 1) {
     #footernew {
         .social-icons {
             #fallow-us-on {

@@ -172,7 +172,7 @@
     .sort-by {
         padding-bottom: 1em;
         position: relative;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             float: left;
             margin-right: .5em;
             padding-bottom: 0;
@@ -217,14 +217,14 @@
     }
     .pagination {
         float: right;
-        @media screen and (min-width: 768px) {
+        @include respond(large-up) {
             padding-top: .8em;
         }
         .results-hits {
             color: $dim-gray;
             float: left;
             display: none;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 display: block;
             }
         }
@@ -235,7 +235,7 @@
             float: right;
             margin: 0;
             padding: 0;
-            @media screen and (min-width: 768px) {
+            @include respond(large-up) {
                 background-color: transparent;
                 border: none;
             }
@@ -250,7 +250,7 @@
             i {
                 text-align: center;
                 width: 32px;
-                @media screen and (min-width: 768px) {
+                @include respond(large-up) {
                     font-size: inherit;
                     height: auto;
                     line-height: inherit;
@@ -483,7 +483,7 @@
         list-style-type: none;
         margin: .25rem;
         padding: 1rem;
-        @media screen and (min-width: 480px) {
+        @include respond(medium-up) {
             flex-basis: 40%;
         }
     }
@@ -767,7 +767,7 @@
                                     padding-top: 4px;
                                 }
                                 .newFlag {
-                                    @media screen and (min-width: 960px) {
+                                    @include respond($desktop-breakpoint) {
                                         width: 100%;
                                         .small-new.new-stamp {
                                             float: none !important;
@@ -782,7 +782,7 @@
                                     .new-colors-snipe,
                                     .new-sizes-snipe,
                                     .new-pak-size {
-                                        @media screen and (min-width: 960px) {
+                                        @include respond($desktop-breakpoint) {
                                             float: none !important;
                                             margin-right: 0 !important;
                                         }
@@ -792,11 +792,11 @@
                                 .newFlag,
                                 .newFlagColorSize,
                                 .newPakSizeFlag {
-                                    @media screen and (min-width: 960px) {
+                                    @include respond($desktop-breakpoint) {
                                         width: 100% !important;
                                         margin-right: 0 !important;
                                     }
-                                    @media screen and (max-width: 480px) {
+                                    @include respond(0, $medium-breakpoint) {
                                         margin-top: 5px !important;
                                     }
                                     float: left;
@@ -850,12 +850,12 @@
                                         font-weight: normal;
                                     }
                                     .product-standard-price {
-                                        @media screen and (min-width: 960px) {
+                                        @include respond($desktop-breakpoint) {
                                             float: left;
                                             width: 100%;
                                             text-align: center;
                                         }
-                                        @media screen and (max-width: 959px) {
+                                        @include respond(0, $desktop-breakpoint - 1) {
                                             font-size: 12px;
                                             line-height: 12px;
                                         }
@@ -868,14 +868,14 @@
                                         line-height: 15px;
                                     }
                                     span.product-sales-price.discount-price {
-                                        @media screen and (min-width: 960px) {
+                                        @include respond($desktop-breakpoint) {
                                             float: left;
                                             width: 100%;
                                             text-align: center;
                                             line-height: 15px;
                                             margin-left: 0;
                                         }
-                                        @media screen and (max-width: 959px) {
+                                        @include respond(0, $desktop-breakpoint - 1) {
                                             font-size: 12px;
                                             line-height: 12px;
                                         }
@@ -1416,7 +1416,7 @@
                             padding: 10px;
                             width: 130px;
                             height: auto !important;
-                            @media screen and (max-width: 959px) {
+                            @include respond(0, $desktop-breakpoint - 1) {
                                 width: 25%;
                                 margin: 0;
                                 height: 256px !important;
@@ -1424,12 +1424,12 @@
                             }
                             &:first-child {
                                 margin: 0;
-                                @media screen and (max-width: 959px) {
+                                @include respond(0, $desktop-breakpoint - 1) {
                                     margin: 0;
                                 }
                             }
                             &:last-child {
-                                @media screen and (max-width: 959px) {
+                                @include respond(0, $desktop-breakpoint - 1) {
                                     margin-right: 0;
                                 }
                             }
