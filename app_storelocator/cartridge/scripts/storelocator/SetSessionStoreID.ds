@@ -1,0 +1,18 @@
+/**
+* Sets the closest StoreID attribute in session
+*
+* @input NearestStores : dw.util.LinkedHashMap  The nearest stores
+*
+*/
+importPackage(dw.system);
+importPackage(dw.util);
+
+function execute(args : PipelineDictionary) : Number {
+
+    var nearestStore = !empty(args.NearestStores) ? args.NearestStores.keySet()[0].ID : "";
+    session.custom.storeID = nearestStore;
+
+
+    return PIPELET_NEXT;
+
+}
