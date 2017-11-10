@@ -1,0 +1,19 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isif condition="${!empty(pdict.Store)}">
+    <div class="footer-store-locator">
+        <isset name="secondaryName" value="${('storeSecondaryName' in pdict.Store.custom && !empty(pdict.Store.custom.storeSecondaryName)) ? '(' + pdict.Store.custom.storeSecondaryName + ')' : ''}" scope="page" />
+        <div class="footer-store-address" itemscope itemtype="http://schema.org/LocalBusiness">
+            <a href="${URLUtils.url('Stores-Details', 'StoreID', pdict.Store.ID)}" title="Store details" itemprop="name">
+                <isprint value="${pdict.Store.name}"/> <span class="secondary-name"><isprint value="${secondaryName}"/></span>
+            </a>
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <p itemprop="streetAddress"><isprint value="${pdict.Store.address1}"/></p>
+                <isif condition="${pdict.Store.address2 != null || !empty(pdict.Store.address2)}">
+                <p><isprint value="${pdict.Store.address2}"/></p>
+                </isif>
+                <p temprop="addressLocality"><span itemprop="addressLocality"><isprint value="${pdict.Store.city}"/></span>, <span itemprop="addressRegion"><isprint value="${pdict.Store.stateCode}"/></span> <span itemprop="postalCode"><isprint value="${pdict.Store.postalCode}"/></span></p>
+            </span>
+        </div>
+        <div class="footer-find-store"><a href="${URLUtils.http('Stores-Find')}" title="Find all stores"><span class="find-stores-link">${Resource.msg('storelocator.footer.find','storelocator',null)}</span><span class="find-stores-carat"></span></a></div>
+    </div>
+</isif>
