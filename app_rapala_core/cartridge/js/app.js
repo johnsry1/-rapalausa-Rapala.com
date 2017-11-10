@@ -19,7 +19,8 @@ var countries = require('./countries'),
     headerinit = require('./headerinit'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
-    tls = require('./tls');
+    tls = require('./tls'),
+    tagmanager = require('./tagmanager');
 
 // if jQuery has not been loaded, load from google cdn
 if (!window.jQuery) {
@@ -596,6 +597,8 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
+        tagmanager.init(window.pageContext.ns);
+        
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;

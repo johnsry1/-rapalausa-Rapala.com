@@ -29,6 +29,7 @@
 		if (pdict.available && !empty(avm.inventoryRecord)) {
 			availableCount = avm.inventoryRecord.perpetual ? "999" : avm.inventoryRecord.ATS.value.toFixed().toString();
 		}
+		var tagManager = require('int_googletags/cartridge/scripts/googletags/Org_TagManager');
 	</isscript>
 	<iscomment>
 		primary details
@@ -236,7 +237,7 @@
 										<input type="hidden" value="${pdict.CurrentHttpParameterMap.lineItemID.stringValue}" name="lineItemId" class="line-itemid"/>				
 										<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}');"  type="button"  title="${Resource.msg('global.updatecart','locale',null)}"  value="${Resource.msg('global.updatecart','locale',null)}"  class="button-fancy-large add-to-cart addtocartbutton">${Resource.msg('global.cartupdate','locale',null)}</button>
 									<iselse/>
-										<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}');" id="add-to-cart" type="button" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart addtocartbutton recommendation_cart">${buttonTitle}</button>
+										<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}');" id="add-to-cart" type="button" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart addtocartbutton recommendation_cart" data-gtmdata="${JSON.stringify(tagManager.getProductData(pdict.Product.ID))}">${buttonTitle}</button>
 									</isif>
 								</div>
 							</div>

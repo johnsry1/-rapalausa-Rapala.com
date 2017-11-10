@@ -1,0 +1,40 @@
+<!--- TEMPLATENAME: sessiondebug.isml --->
+<isinclude template="util/modules"/>
+
+<isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
+	<isscript>
+		var debugMode = false;
+		if (dw.system.System.getPreferences().getCustom()["debugCookieName"] != null && !empty(dw.system.System.getPreferences().getCustom()["debugCookieName"])) {
+		    var cookies = request.getHttpCookies();
+	        for each (var cookie in cookies) {
+	            if (cookie.getName() == "dw_rapala_session_debug") {
+	            	if (dw.system.System.getPreferences().getCustom()["debugCookieValue"] == cookie.getValue()) {
+	            		debugMode = true;
+	            	}
+	            }
+	        }
+        }
+	</isscript>
+	<isif condition="${debugMode}">
+		<isscript>
+			var attributes = new dw.util.ArrayList();
+			if (session != null && 'custom' in session) {
+			    for (var key in session.custom) {
+			        if (session.custom.hasOwnProperty(key)) {
+			            attributes.add({'name' : key, 'value' : session.custom[key]})
+			        }
+			    }
+		    }
+		</isscript>
+		<p style="border-right:1px black;border-style:solid;padding:5px;text-align:center">
+			Current Site: ${dw.system.Site.getCurrent().ID}<br>
+			Current Currency: ${session.currency} <br>
+			Current Locale: ${request.locale}<br><br>
+			
+			Session custom attributes:<br>
+			<isloop items="${attributes}" var="attribute">
+				${attribute.name} : ${attribute.value} <br>
+			</isloop>
+		</p>
+	</isif>
+</isif>
