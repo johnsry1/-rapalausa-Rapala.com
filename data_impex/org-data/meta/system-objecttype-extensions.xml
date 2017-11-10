@@ -6548,8 +6548,87 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+        	<attribute-definition attribute-id="googleAPIKey">
+                <display-name xml:lang="x-default">Google API Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        	<attribute-definition attribute-id="storeLocatorCookieName">
+                <display-name xml:lang="x-default">Name of Geo-Cookie</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeLocatorDefaultCountry">
+                <display-name xml:lang="x-default">Default Country (if no geoloaction can be detected)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeLocatorMapType">
+                <display-name xml:lang="x-default">Type of google map to use</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">This map type displays a transparent layer of major streets on satellite images.</display>
+                        <value>HYBRID</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">This map type displays a normal street map.</display>
+                        <value>ROADMAP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">This map type displays satellite images.</display>
+                        <value>SATELLITE</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">This map type displays maps with physical features such as terrain and vegetation.</display>
+                        <value>TERRAIN</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeLocatorZoomRadius">
+                <display-name xml:lang="x-default">Radius (Km) for each google zoom level (0-20)</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+                <default-value>{"0": 600000,"1": 600000,"2": 10000,"3": 6000,"4": 3000,"5": 1600,"6": 800,"7": 300,"8": 150,"9": 100,"10": 70,"11": 40,"12": 20,"13": 10,"14": 5,"15": 3,"16": 3,"17": 3,"18": 3,"19": 3,"20": 3}</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeLookupUnit">
+                <display-name xml:lang="x-default">Store Lookup Unit</display-name>
+                <description xml:lang="x-default">Used in finding the store near the zip code specified in the store front by the end user.</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">kilometers</display>
+                        <value>km</value>
+                    </value-definition>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">miles</display>
+                        <value>mi</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
+            <attribute-group group-id="StoreLocator">
+                <display-name xml:lang="x-default">Store Locator</display-name>
+                <attribute attribute-id="googleAPIKey"/>
+                <attribute attribute-id="storeLocatorCookieName"/>
+                <attribute attribute-id="storeLocatorZoomRadius"/>
+                <attribute attribute-id="storeLocatorDefaultCountry"/>
+                <attribute attribute-id="storeLocatorMapType"/>
+            </attribute-group>
             <attribute-group group-id="PriceBook">
                 <display-name xml:lang="x-default">Price Book Settings</display-name>
                 <attribute attribute-id="listPriceDefault"/>
@@ -7102,6 +7181,71 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="TestAttribute">
+                <display-name xml:lang="en-US">Test Attribute</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="countryCodeValue">
+                <display-name xml:lang="x-default">Country Code Value</display-name>
+                <description xml:lang="x-default">Country Code Value - for the form values</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="inventoryListId">
+                <display-name xml:lang="x-default">Store Inventory List Id</display-name>
+                <description xml:lang="x-default">Store Inventory List Id</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="mapImage">
+                <display-name xml:lang="x-default">Map Image</display-name>
+                <description xml:lang="x-default">This is the nearest store map image located in the footer.</description>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeDetails">
+                <display-name xml:lang="x-default">Store Details</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeLocationDetails">
+                <display-name xml:lang="x-default">Store Location Details</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeSecondaryName">
+                <display-name xml:lang="x-default">Store Secondary Name</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeType">
+                <display-name xml:lang="x-default">Store Type</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Basic">
@@ -7109,6 +7253,7 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="ID" system="true"/>
                 <attribute attribute-id="name" system="true"/>
                 <attribute attribute-id="inventoryListID" system="true"/>
+                <attribute attribute-id="storeSecondaryName"/>
             </attribute-group>
             <attribute-group group-id="Address">
                 <display-name xml:lang="x-default">Address</display-name>
@@ -7120,6 +7265,7 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="countryCode" system="true"/>
                 <attribute attribute-id="longitude" system="true"/>
                 <attribute attribute-id="latitude" system="true"/>
+                <attribute attribute-id="storeLocationDetails"/>
             </attribute-group>
             <attribute-group group-id="Contact">
                 <display-name xml:lang="x-default">Contact Details</display-name>
@@ -7135,6 +7281,9 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="image" system="true"/>
                 <attribute attribute-id="posEnabled" system="true"/>
                 <attribute attribute-id="serviceCenter"/>
+                <attribute attribute-id="storeType"/>
+                <attribute attribute-id="storeDetails"/>
+                <attribute attribute-id="mapImage"/>
             </attribute-group>
             <attribute-group group-id="Brands">
                 <display-name xml:lang="x-default">Brands</display-name>
@@ -7151,6 +7300,10 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="serviceCenter"/>
                 <attribute attribute-id="strikemaster"/>
                 <attribute attribute-id="otter"/>
+            </attribute-group>
+            <attribute-group group-id="Inventory">
+                <display-name xml:lang="x-default">Inventory</display-name>
+                <attribute attribute-id="inventoryListId"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
