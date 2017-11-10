@@ -1916,8 +1916,30 @@ directpayment for PayPal Direct Payment and Payments Pro</description>
         </group-definitions>
     </type-extension>
 
-    <type-extension type-id="OrganizationPreferences"/>
-
+    <type-extension type-id="OrganizationPreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="debugCookieValue">
+                <display-name xml:lang="x-default">Cookie value that used in debug mode</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="debugCookieName">
+                <display-name xml:lang="x-default">Cookie name that used in debug mode</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="DebugPreferences">
+                <display-name xml:lang="x-default">Debug Configurations</display-name>
+                <attribute attribute-id="debugCookieValue"/>
+                <attribute attribute-id="debugCookieName"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    
     <type-extension type-id="PaymentCard">
         <system-attribute-definitions>
             <attribute-definition attribute-id="UUID">
