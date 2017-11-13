@@ -38,7 +38,7 @@ function getDeviceType() {
     return deviceType;
 }
 
-function geoIpDefaultCurrency() {
+function geoIpDefaultCurrency() { 
     var logMessage = '';
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
