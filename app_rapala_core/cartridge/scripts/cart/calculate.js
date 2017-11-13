@@ -246,26 +246,29 @@ function calculateTax (basket, stateCode) {
 
         // if we have a shipping address, we can determine a tax jurisdiction for it
         if (shipment.shippingAddress !== null) {
-        	if(stateCode != null && shipment.getShippingAddress().stateCode != stateCode){
-				var location : ShippingLocation = new ShippingLocation();
-				location.setStateCode(stateCode);
-				taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
-			}else{
+        	if(stateCode != null && shipment.getShippingAddress().stateCode != stateCode) {
+						var location : ShippingLocation = new ShippingLocation();
+						location.setStateCode(stateCode);
+						taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
+					} else {
 	        	var location = new ShippingLocation(shipment.shippingAddress);
 	            taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
-			}
-        }else if (stateCode != null) {
+					}
+      	} else if (stateCode != null) {
         	var location = new ShippingLocation();
         	location.setStateCode(stateCode);
-            taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
-		}
+          taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
+				}
 
         if (taxJurisdictionID === null) {
             taxJurisdictionID = TaxMgr.defaultTaxJurisdictionID;
         }
 
+				Logger.debug('taxJurisdictionID: ' + taxJurisdictionID);
+
         // if we have no tax jurisdiction, we cannot calculate tax
         if (taxJurisdictionID === null) {
+						Logger.debug('taxJurisdictionID is NULL.  Cannot calculate tax');
             continue;
         }
 
@@ -294,6 +297,8 @@ function calculateTax (basket, stateCode) {
             }
 
             // get the tax rate
+            Logger.debug('getTaxRate with Tax ClassID: {0} && Jurisdiction:  {1} for Line Item {2}', taxClassID, taxJurisdictionID, lineItem.lineItemText);
+
             var taxRate = TaxMgr.getTaxRate(taxClassID, taxJurisdictionID);
             // w/o a valid tax rate, we cannot calculate tax for the line item
             if (taxRate === null) {
