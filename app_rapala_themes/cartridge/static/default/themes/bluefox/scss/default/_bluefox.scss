@@ -51,7 +51,7 @@ a {
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0;
-        color: $bluefox-white !important;
+        color: $white !important;
         padding: 5px 28px 5px 10px;
         border-style: solid;
         border-width: 1px;
@@ -86,7 +86,7 @@ a {
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #F93;
+    color: $link-hover-color;
 }
 
 /*buttons*/
@@ -115,12 +115,8 @@ a.button, button {
 }
 
 a.button:hover, button:hover {
-    background: #F93;
+    background: $link-hover-color;
     text-decoration: none;
-    /*border-top-color: #0056AC;
-    border-right-color: #0064C7;
-    border-bottom-color: #9DC4EB;
-    border-left-color: #0064C7;*/
     cursor: pointer;
 }
 
@@ -186,17 +182,17 @@ h1.search-result {
                     }
                 }
                 &:hover {
-                    background-color: $bluefox-bgorange;
-                    border-color: $bluefox-bgorange;
+                    background-color: $main-color;
+                    border-color: $main-color;
                     transition: none;
                     h2 {
-                        color: $bluefox-white;
+                        color: $white;
                     }
                     p {
-                        color: $bluefox-white;
+                        color: $white;
                     }
                     i {
-                        color: $bluefox-white;
+                        color: $white;
                     }
                 }
             }
@@ -235,7 +231,7 @@ h1.search-result {
                 a {
                     display: inline-block;
                     text-transform: capitalize;
-                    color: $bluefox-bgorange;
+                    color: $main-color;
                     &:hover {
                         text-decoration: none;
                     }
@@ -308,7 +304,7 @@ h1.search-result {
 .categorymenusnew {
     a {
         &:hover {
-            color: $bluefox-hov-orange;
+            color: $hover-color;
             text-decoration: underline;
         }
 
@@ -316,24 +312,24 @@ h1.search-result {
     .category-top-level {
         a {
             &:hover {
-                color: $bluefox-hov-orange;
+                color: $hover-color;
                 .count-products {
-                    color: $bluefox-hov-orange;
+                    color: $hover-color;
                 }
             }
         }
         &.active {
             a {
-                color: $bluefox-hov-orange;
+                color: $hover-color;
                 &:hover {
-                    color: $bluefox-hov-orange;
+                    color: $hover-color;
                     .count-products {
-                        color: $bluefox-hov-orange;
+                        color: $hover-color;
                     }
 
                 }
                 .count-products {
-                    color: $bluefox-hov-orange;
+                    color: $hover-color;
                 }
             }
             ul {
@@ -346,18 +342,18 @@ h1.search-result {
             li {
                 &.active {
                     a {
-                        color: $bluefox-hov-orange;
+                        color: $hover-color;
                         text-decoration: underline;
                         .count-products {
-                            color: $bluefox-hov-orange;
+                            color: $hover-color;
                         }
                     }
                 }
                 a {
                     &:hover {
-                        color: $bluefox-hov-orange;
+                        color: $hover-color;
                         .count-products {
-                            color: $bluefox-hov-orange;
+                            color: $hover-color;
                         }
                     }
                 }
@@ -372,7 +368,7 @@ h1.search-result {
             .product-list-item {
                 span {
                     &.price-sales {
-                        color: $bluefox-bgorange;
+                        color: $main-color;
                         font-size: 15px;
                     }
                 }
@@ -389,10 +385,10 @@ h1.search-result {
                     &.form-row-button {
                         button {
                             &.simple {
-                                background-color: $bluefox-bgorange;
-                                color: $bluefox-white;
+                                background-color: $main-color;
+                                color: $white;
                                 &:hover {
-                                    background: $bluefox-bg-light-orange;
+                                    background: $link-hover-color;
                                 }
                             }
                         }
@@ -414,7 +410,7 @@ h1.search-result {
             .address-tile {
                 .mini-address-title {
                     font-family: $font;
-                    color: $bluefox-list-black;
+                    color: $list-color;
                     font-size: 12px;
                     font-weight: bold;
                     padding: 4px 0 2px;
@@ -459,7 +455,7 @@ h1.search-result {
                         .order-price {
                             .value {
                                 font-family: $font-fourth;
-                                color: $bluefox-bgorange;
+                                color: $main-color;
                                 font-weight: bold;
                                 font-size: 30px;
                                 line-height: 30px;
@@ -480,7 +476,7 @@ h1.search-result {
                 line-height: 25px;
                 font-family: $font-third;
                 font-weight: normal;
-                color: $bluefox-list-black;
+                color: $list-color;
                 text-transform: uppercase;
                 font-style: normal;
             }
@@ -489,7 +485,7 @@ h1.search-result {
                 line-height: 25px;
                 font-family: $font-third;
                 font-weight: normal;
-                color: $bluefox-list-black;
+                color: $list-color;
                 text-transform: uppercase;
                 font-style: normal;
             }
@@ -505,7 +501,7 @@ h1.search-result {
     .line-item-quantity,
     .line-item-price {
         .label {
-            color: $bluefox-list-black;
+            color: $list-color;
             font-family: $font;
             font-weight: bold;
             font-size: 12px;
@@ -520,13 +516,13 @@ h1.search-result {
         .line-item {
             .line-item-price {
                 font-family: $font-fourth;
-                color: $bluefox-bgorange;
+                color: $main-color;
                 font-weight: bold;
                 font-style: italic;
                 font-size: 24px;
                 line-height: 24px;
                 .label {
-                    color: $bluefox-list-black;
+                    color: $list-color;
                     font-family: $font;
                     font-weight: bold;
                     font-size: 12px;
@@ -620,7 +616,7 @@ h1.search-result {
 }
 
 .international-investor-link a:hover {
-    color: #F93;
+    color: $link-hover-color;
     border-top-color: $border-hover-top;
     border-right-color: $border-hover-right;
     border-bottom-color: $border-hover-bottom;
@@ -641,7 +637,7 @@ h1.search-result {
             &.column {
                 &.tab-sec {
                     #tabs ul.ui-tabs-nav li.ui-state-active a, #tabs ul.ui-tabs-nav li.active a, #tabs ul.ui-tabs-nav li.ui-state-active a:hover, #tabs ul.ui-tabs-nav li.active a:hover {
-                        color: $bluefox-bg-light-orange;
+                        color: $link-hover-color;
                     }
                 }
             }
@@ -753,7 +749,7 @@ form {
                     background-image: none;
                     height: 40px;
                     line-height: 40px;
-                    color: $bluefox-white;
+                    color: $white;
                     background-image: none;
                     background: rgba(245, 131, 32, 1);
                     background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
@@ -844,11 +840,11 @@ form {
             &.filter {
                 span {
                     font-style: normal;
-                    color: $bluefox-white;
+                    color: $white;
                     font-weight: normal;
                 }
                 .selectedvarval {
-                    color: $bluefox-white;
+                    color: $white;
                 }
             }
         }
@@ -856,7 +852,7 @@ form {
             .salesprice {
                 font-style: bold !important;
                 font-size: 15px !important;
-                color: $bluefox-bgorange !important;
+                color: $main-color !important;
             }
         }
     }
@@ -877,7 +873,7 @@ form {
     .current {
         a {
             &.filter {
-                color: $bluefox-white;
+                color: $white;
                 border: 1px solid #cc6600;
                 background: rgba(245, 131, 32, 1);
                 background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
@@ -1036,10 +1032,10 @@ form {
                     background: url("../images/search-full-bluefox.png") no-repeat scroll 0 0 transparent;
                 }
                 button.btn {
-                    background: url("../images/search-full-bluefox.png") no-repeat scroll right top $bluefox-bgorange;
+                    background: url("../images/search-full-bluefox.png") no-repeat scroll right top $main-color;
                     transition: none;
                     &:hover {
-                        background: url("../images/search-full-bluefox.png") no-repeat $bluefox-bg-light-orange;
+                        background: url("../images/search-full-bluefox.png") no-repeat $link-hover-color;
                         background-position: -202px -28px;
                         transition: none;
                     }
@@ -1056,7 +1052,7 @@ form {
     .content-asset {
         .account-options {
             li {
-                background: $bluefox-white;
+                background: $white;
                 box-shadow: #999 0 0 10px;
                 position: relative;
                 h2 {
@@ -1066,16 +1062,16 @@ form {
                     font-size: 36px;
                     font-variant: small-caps;
                     font-weight: normal;
-                    color: $bluefox-list-black;
+                    color: $list-color;
                 }
                 p, a {
-                    color: $bluefox-list-black;
+                    color: $list-color;
                 }
                 &:hover {
-                    background-color: $bluefox-bgorange;
-                    border-color: $bluefox-bgorange;
+                    background-color: $main-color;
+                    border-color: $main-color;
                     a, h2, p {
-                        color: $bluefox-white;
+                        color: $white;
                     }
                 }
             }
@@ -1089,7 +1085,7 @@ form {
             .contentboxcontent {
                 h1 {
                     &.left-nav-style {
-                        color: $bluefox-black;
+                        color: $black;
                         font-family: $font-third;
                         font-size: 24px;
                         font-weight: normal;
@@ -1104,7 +1100,7 @@ form {
 .product-tile {
     .product-image {
         .quickview {
-            background-color: $bluefox-hov-orange;
+            background-color: $hover-color;
             border-style: solid;
             border-width: 1px;
             border-top-color: $border-top;
@@ -1115,7 +1111,7 @@ form {
         }
         .quickview:hover {
             color: white;
-            background-color: $bluefox-bg-light-orange;
+            background-color: $link-hover-color;
             text-decoration: none;
             border-top-color: $border-hover-top;
             border-right-color: $border-hover-right;
@@ -1133,7 +1129,7 @@ form {
                     .product-image {
                         .quickview {
                             color: white;
-                            background-color: $bluefox-hov-orange;
+                            background-color: $hover-color;
                             border-style: solid;
                             border-width: 1px;
                             border-top-color: $border-top;
@@ -1142,7 +1138,7 @@ form {
                             border-left-color: $border-left;
                         }
                         .quickview:hover {
-                            background-color: $bluefox-bg-light-orange;
+                            background-color: $link-hover-color;
                             text-decoration: none;
                             border-top-color: $border-hover-top;
                             border-right-color: $border-hover-right;
@@ -1164,7 +1160,7 @@ form {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $bluefox-black;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
@@ -1183,7 +1179,7 @@ form {
             .search-result-content {
                 .product-tile {
                     .product-swatches-all {
-                        color: $bluefox-hov-orange;
+                        color: $hover-color;
                     }
                     .product-swatches-all:hover {
                         color: $main-color !important;
@@ -1220,7 +1216,7 @@ form {
                 .product-tile {
                     .product-swatches {
                         img:hover {
-                            border: 1px solid $bluefox-bg-light-orange;
+                            border: 1px solid $link-hover-color;
                             height: 12px;
                             margin: 0px;
                             padding: 0px;
@@ -1231,7 +1227,7 @@ form {
                             border-color: $bluefox-yellow;
                         }
                         .selected img:hover {
-                            border: 1px solid $bluefox-bg-light-orange;
+                            border: 1px solid $link-hover-color;
                         }
                     }
                 }
@@ -1270,7 +1266,7 @@ form {
                             &.active {
                                 a {
                                     span {
-                                        color: $bluefox-bgorange;
+                                        color: $main-color;
                                     }
                                 }
                             }
@@ -1285,18 +1281,18 @@ form {
                         font-size: 16px;
                         line-height: 16px;
                         font-weight: normal;
-                        color: $bluefox-list-black;
+                        color: $list-color;
                     }
                     p {
                         font-family: $font;
-                        color: $bluefox-list-black;
+                        color: $list-color;
                         font-size: 13px;
                         a {
                             &.readmore {
                                 font-family: $font;
-                                color: $bluefox-bgorange;
+                                color: $main-color;
                                 &:hover {
-                                    color: $bluefox-bg-light-orange;
+                                    color: $link-hover-color;
                                 }
                             }
                         }
@@ -1313,7 +1309,7 @@ form {
     }
     .accordion {
         &.tabover {
-            background-color: $bluefox-bgorange;
+            background-color: $main-color;
         }
     }
 }
@@ -1356,7 +1352,7 @@ form {
     border-bottom-color: $border-hover-bottom;
     background-position: 0 -20px;
     text-decoration: none;
-    background-color: #F93;
+    background-color: $link-hover-color;
     border-color: $main-color;
 }
 
@@ -1374,7 +1370,7 @@ form {
 
 .productdetail {
     .price {
-        color: $bluefox-hov-orange;
+        color: $hover-color;
         font-family: $font-secondary;
         font-weight: bold;
         font-size: 15px;
@@ -1403,7 +1399,7 @@ form {
     a {
         &.filter {
             span {
-                color: $bluefox-white;
+                color: $white;
                 font-size: 12px;
                 font-weight: normal;
             }
@@ -1417,14 +1413,14 @@ form {
             a {
                 background-image: url("../images/product-detail-size.jpg");
                 &:hover {
-                    color: $bluefox-white;
-                    border-color: $bluefox-hov-orange;
+                    color: $white;
+                    border-color: $hover-color;
                 }
             }
             &.selected {
                 a {
-                    color: $bluefox-white;
-                    border-color: $bluefox-hov-orange;
+                    color: $white;
+                    border-color: $hover-color;
                 }
             }
         }
@@ -1436,7 +1432,7 @@ form {
         a {
             &:hover {
                 background-position: 2px 50%;
-                color: $bluefox-bg-light-orange !important;
+                color: $link-hover-color !important;
                 text-decoration: none;
             }
         }
@@ -1514,7 +1510,7 @@ form {
                                         li {
                                             &.active {
                                                 a {
-                                                    color: $bluefox-bgorange;
+                                                    color: $main-color;
                                                 }
                                             }
                                         }
@@ -1571,7 +1567,7 @@ form {
                             &.accordion {
                                 &.tabover {
                                     .folder-contentboxcontent {
-                                        background-color: $bluefox-bgorange;
+                                        background-color: $main-color;
                                     }
                                 }
                             }
@@ -1636,7 +1632,7 @@ form {
 .productdetail {
     .price {
         .salesprice {
-            color: $bluefox-bgorange;
+            color: $main-color;
             font-size: 15px;
             font-weight: bold;
             letter-spacing: 0;
@@ -1653,14 +1649,14 @@ form {
                     a {
                         &:hover {
                             span {
-                                color: #F93;
+                                color: $link-hover-color;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #F93;
+                                color: $link-hover-color;
                             }
                         }
                     }
@@ -1735,7 +1731,7 @@ form {
     #special-offers {
         ul {
             li {
-                color: $bluefox-bgorange;
+                color: $main-color;
             }
         }
     }
