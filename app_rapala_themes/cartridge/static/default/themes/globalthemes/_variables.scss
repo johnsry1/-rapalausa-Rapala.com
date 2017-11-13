@@ -8,47 +8,140 @@ $body-line-height: 21px;
 $body-letter-spacing: 0;
 
 // Main Colors
-$body-color: black;
+$body-color: $night-rider;
 $body-background: '';
+$open-menu-bg: '';
 
 // H1-h6
 $header-font: $font;
+$header-link-color: $body-color;
+$header-link-hover-color: $body-color;
+$header-link-decoration: none;
+$header-link-hover-decoration: none;
 
 $h1-font: $header-font;
 $h1-font-size: 25px;
 $h1-font-weight: bold;
+$h1-font-style: normal;
 $h1-line-height: 25px;
 $h1-text-transform: uppercase;
+$h1-color: $body-color;
 
 $h2-font: $header-font;
-$h2-font-size: 25px;
+$h2-font-size: 16px;
 $h2-font-weight: bold;
-$h2-line-height: 25px;
+$h2-font-style: normal;
+$h2-line-height: 16px;
 $h2-text-transform: uppercase;
+$h2-color: $body-color;
 
 $h3-font: $header-font;
-$h3-font-size: 25px;
+$h3-font-size: 16px;
 $h3-font-weight: bold;
-$h3-line-height: 25px;
+$h3-font-style: normal;
+$h3-line-height: 16px;
 $h3-text-transform: uppercase;
+$h3-color: $body-color;
 
 $h4-font: $header-font;
-$h4-font-size: 25px;
+$h4-font-size: 24px;
 $h4-font-weight: bold;
-$h4-line-height: 25px;
+$h4-font-style: normal;
+$h4-line-height: 24px;
 $h4-text-transform: uppercase;
+$h4-color: $body-color;
 
 $h5-font: $header-font;
-$h5-font-size: 25px;
+$h5-font-size: 18px;
 $h5-font-weight: bold;
-$h5-line-height: 25px;
+$h5-font-style: normal;
+$h5-line-height: 18px;
 $h5-text-transform: uppercase;
+$h5-color: $body-color;
 
 $h6-font: $header-font;
-$h6-font-size: 25px;
+$h6-font-size: 16px;
 $h6-font-weight: bold;
-$h6-line-height: 25px;
+$h6-font-style: normal;
+$h6-line-height: 16px;
 $h6-text-transform: uppercase;
+$h6-color: $body-color;
+
+@mixin h1 {
+    font-family: $h1-font;
+    font-size: $h1-font-size;
+    font-weight: $h1-font-weight;
+    font-style: $h1-font-style;
+    line-height: $h1-line-height;
+    text-transform: $h1-text-transform;
+    color: $h1-color;
+}
+@mixin h2 {
+    font-family: $h2-font;
+    font-size: $h2-font-size;
+    font-weight: $h2-font-weight;
+    font-style: $h2-font-style;
+    line-height: $h2-line-height;
+    text-transform: $h2-text-transform;
+    color: $h2-color;
+}
+@mixin h3 {
+    font-family: $h3-font;
+    font-size: $h3-font-size;
+    font-weight: $h3-font-weight;
+    font-style: $h3-font-style;
+    line-height: $h3-line-height;
+    text-transform: $h3-text-transform;
+    color: $h3-color;
+}
+@mixin h4 {
+    font-family: $h4-font;
+    font-size: $h4-font-size;
+    font-weight: $h4-font-weight;
+    font-style: $h4-font-style;
+    line-height: $h4-line-height;
+    text-transform: $h4-text-transform;
+    color: $h4-color;
+}
+@mixin h5 {
+    font-family: $h5-font;
+    font-size: $h5-font-size;
+    font-weight: $h5-font-weight;
+    font-style: $h5-font-style;
+    line-height: $h5-line-height;
+    text-transform: $h5-text-transform;
+    color: $h5-color;
+}
+@mixin h6 {
+    font-family: $h6-font;
+    font-size: $h6-font-size;
+    font-weight: $h6-font-weight;
+    font-style: $h6-font-style;
+    line-height: $h6-line-height;
+    text-transform: $h6-text-transform;
+    color: $h6-color;
+}
+
+// p
+$p-color: $body-color;
+$p-font-family: $font;
+$p-font-size: 12px;
+$p-font-weight: normal;
+$p-word-spacing: normal;
+$p-line-height: 18px;
+$p-padding: 9px 0 9px 0;
+$p-text-align: left;
+
+@mixin p {
+    color: $p-color;
+    font-family: $p-font-family;
+    font-size: $p-font-size;
+    font-weight: $p-font-weight;
+    word-spacing: $p-word-spacing;
+    line-height: $p-line-height;
+    padding: $p-padding;
+    text-align: $p-text-align;
+}
 
 // Label
 $label-color: $body-color;
@@ -67,4 +160,29 @@ $label-text-transform: none;
     font-weight: $label-weight;
     font-style: $label-font-style;
     text-transform: $label-text-transform;
+}
+
+@mixin btn-border-color {
+    border-top-color: $border-top;
+    border-right-color: $border-right;
+    border-bottom-color: $border-bottom;
+    border-left-color: $border-left;
+}
+@mixin btn-border-hover-color {
+    border-top-color: $border-hover-top;
+    border-right-color: $border-hover-right;
+    border-bottom-color: $border-hover-bottom;
+    border-left-color: $border-hover-left;
+}
+
+@mixin btn-border {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-border-color;
+}
+
+@mixin btn-border-hover {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-border-hover-color;
 }
