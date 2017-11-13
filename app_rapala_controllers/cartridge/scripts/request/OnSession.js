@@ -61,6 +61,7 @@ function geoIpDefaultCurrency() {
                         session.setCurrency(dw.util.Currency.getCurrency(currency));
                         logMessage += 'Sep up session currency to: ' + currency + '\n';
                     } else {
+                        logMessage += 'Currency not allowed by current site : ' + currency + '\n';
                         session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
                         logMessage += 'Sep up session currency to default : ' + currencies['default'] + '\n';
                     }
