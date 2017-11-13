@@ -53,7 +53,7 @@ var CartModel = AbstractModel.extend({
     getVar : function(){
         return paypalErrorValue;
     },
-    
+
 
     addProductToCart: function () {
         var cart = this;
@@ -895,6 +895,17 @@ var CartModel = AbstractModel.extend({
                 baseShippingAdjusted = baseShipping.add(priceAdjTotal);
             }
 
+            var logger = require('dw/system/Logger').getLogger('debug');
+            logger.info("preCalculateShipping - shippingExclDiscounts: " + this.getShippingTotalPrice())
+            logger.info("preCalculateShipping - shippingInclDiscounts: " + this.getAdjustedShippingTotalPrice())
+            logger.info("preCalculateShipping - productShippingCosts: " + productShippingCosts)
+            logger.info("preCalculateShipping - productShippingDiscounts: " + productShippingDiscounts)
+            logger.info("preCalculateShipping - priceAdjArray: " + priceAdjArray)
+            logger.info("preCalculateShipping - priceAdjTotal: " + priceAdjTotal)
+            logger.info("preCalculateShipping - adustedSurchargeTotal: " + adustedSurchargeTotal)
+            logger.info("preCalculateShipping - baseShipping: " + baseShipping)
+            logger.info("preCalculateShipping - baseShippingAdjusted: " + baseShippingAdjusted)
+
             return {
                 shippingExclDiscounts: this.getShippingTotalPrice(),
                 shippingInclDiscounts: this.getAdjustedShippingTotalPrice(),
@@ -1000,7 +1011,7 @@ var CartModel = AbstractModel.extend({
         // The total redemption amount of all gift certificate payment instruments in the basket.
         var giftCertTotal = new Money(0.0, this.getCurrencyCode());
         var allotmentAmount = new Money( 0.0, this.getCurrencyCode() );
-        
+
         // Gets the list of all gift certificate payment instruments
         var gcPaymentInstrs = this.getGiftCertificatePaymentInstruments();
         var iter = gcPaymentInstrs.iterator();
@@ -1026,7 +1037,7 @@ var CartModel = AbstractModel.extend({
     		orderPI = iterTemp.next();
     		allotmentAmount = allotmentAmount.add( orderPI.getPaymentTransaction().getAmount() );
     	}
-    	
+
     	amountOpen = amountOpen.subtract( allotmentAmount );
         // Returns the open amount to be paid.
         return amountOpen;
@@ -1111,7 +1122,7 @@ var CartModel = AbstractModel.extend({
         //other payments
       	OPT  = giftCertTotal;
       	OPT  = OPT.add(allotmentTotal);
-      	
+
         // Gets the order total.
         var orderTotal = this.getTotalGrossPrice();
 
@@ -1212,7 +1223,7 @@ var CartModel = AbstractModel.extend({
 
         var giftCertTotal = new Money(0.0, this.getCurrencyCode());
         var allotmentAmt = new dw.value.Money(0.0, this.getCurrencyCode());
-        
+
         // Iterates over the list of gift certificate payment instruments
         // and updates the total redemption amount.
         gcPaymentInstrs = this.getGiftCertificatePaymentInstruments().iterator();
@@ -1222,17 +1233,17 @@ var CartModel = AbstractModel.extend({
             orderPI = gcPaymentInstrs.next();
             giftCertTotal = giftCertTotal.add(orderPI.getPaymentTransaction().getAmount());
         }
-        
+
         while( allPaymentInstrs.hasNext() )
     	{
     		orderPI = allPaymentInstrs.next();
     		allotmentAmt = allotmentAmt.add( orderPI.getPaymentTransaction().getAmount() );
-    	}	
+    	}
 
         // Calculates the remaining order balance.
         // This is the remaining open order total that must be paid.
         var orderBalance = orderTotal.subtract(giftCertTotal);
-        
+
         //exempt allotment too
     	orderBalance = orderBalance.subtract( allotmentAmt );
 
