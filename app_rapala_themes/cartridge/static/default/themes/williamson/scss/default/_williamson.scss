@@ -8,7 +8,7 @@
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #4396E1;
+    color: $wil-bg-light-blue;
 }
 
 a {
@@ -30,7 +30,7 @@ h1, .h-one-tag {
 
 h1.left-nav-style {
     padding-bottom: 6px;
-    border-bottom: #CCC solid 1px;
+    border-bottom: $wil-light-original-grey solid 1px;
 }
 
 h2.input-style {
@@ -59,26 +59,18 @@ a {
         text-transform: uppercase;
         letter-spacing: 0;
         padding: 5px 28px 5px 10px;
-        border-style: solid;
-        border-width: 1px;
         background-position: 100% 0;
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
-        color: $wil-white !important;
+        color: $white !important;
         background: rgba(35, 90, 166, 1);
         background: linear-gradient(to bottom, rgba(35, 90, 166, 1) 0%, rgba(0, 64, 124, 1) 100%);
-        border-top-color: #1F4D8C;
-        border-right-color: #2359A2;
-        border-bottom-color: #AAC0DD;
-        border-left-color: #2B5FA6;
+        @include btn-border;
         &:hover {
             text-decoration: none;
             background: rgba(0, 64, 124, 1);
             background: linear-gradient(to bottom, rgba(0, 64, 124, 1) 0%, rgba(35, 90, 166, 1) 100%);
-            border-top-color: #397FBE;
-            border-right-color: #4292DC;
-            border-bottom-color: #B7D7F3;
-            border-left-color: #4896DD;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -86,7 +78,7 @@ a {
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #4396E1;
+    color: $wil-bg-light-blue;
 }
 
 p a {
@@ -216,13 +208,13 @@ p a {
                     border-color: $wil-bg-light-blue;
                     transition: none;
                     h2 {
-                        color: $wil-white;
+                        color: $white;
                     }
                     p {
-                        color: $wil-white;
+                        color: $white;
                     }
                     i {
-                        color: $wil-white;
+                        color: $white;
                     }
                 }
             }
@@ -391,7 +383,7 @@ p a {
         #primary {
             .contentboxcontent {
                 h1 {
-                    color: $wil-white;
+                    color: $white;
                     &.search-result {
                         font-family: $font-secondary;
                         font-size: 22px;
@@ -399,7 +391,7 @@ p a {
                         font-variant: normal;
                         font-weight: bold;
                         line-height: 36px;
-                        color: $wil-white;
+                        color: $white;
                     }
                 }
             }
@@ -449,21 +441,13 @@ a.button, button {
     color: white;
     padding: 0 18px 0 18px;
     background-color: $wil-bgblue;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: $wil-diplight-blue;
-    border-right-color: #2359A2;
-    border-bottom-color: #AAC0DD;
-    border-left-color: #2B5FA6;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
-    background: #4396E1;
+    background: $wil-bg-light-blue;
     text-decoration: none;
-    border-top-color: #397FBE;
-    border-right-color: #4292DC;
-    border-bottom-color: #B7D7F3;
-    border-left-color: #4896DD;
+    @include btn-border-hover-color;
     cursor: pointer;
 }
 
@@ -471,10 +455,7 @@ a.button:hover, button:hover {
     a.button:hover, button:hover {
         background: linear-gradient(to bottom, rgba(0, 64, 124, 1) 0%, rgba(35, 90, 166, 1) 100%) !important;
         text-decoration: none;
-        border-top-color: #397FBE;
-        border-right-color: #4292DC;
-        border-bottom-color: #B7D7F3;
-        border-left-color: #4896DD;
+        @include btn-border-hover-color;
         cursor: pointer;
     }
 }
@@ -509,7 +490,7 @@ a.button:hover, button:hover {
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
     background: linear-gradient(to bottom, $wil-bgblue 60%, #00407c 100%);
-    color: #ffffff;
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -535,10 +516,7 @@ a.button:hover, button:hover {
 
 .international-investor-link a {
     color: $wil-bgblue;
-    border-top-color: $wil-diplight-blue;
-    border-right-color: #2359A2;
-    border-bottom-color: #AAC0DD;
-    border-left-color: #2B5FA6;
+    @include btn-border;
     line-height: 10px;
     float: none;
     padding-left: 0px;
@@ -546,11 +524,8 @@ a.button:hover, button:hover {
 }
 
 .international-investor-link a:hover {
-    color: #4396E1;
-    border-top-color: #397FBE;
-    border-right-color: #4292DC;
-    border-bottom-color: #B7D7F3;
-    border-left-color: #4896DD;
+    color: $wil-bg-light-blue;
+    @include btn-border-hover-color;
     padding-left: 0px;
 }
 
@@ -744,7 +719,7 @@ a.button:hover, button:hover {
 }
 
 #footernew .social-icons #fallow-us-on ul li a {
-    color: #fff;
+    color: $white;
 }
 
 #footernew .social-icons #fallow-us-on ul .you-tube a {
@@ -821,7 +796,7 @@ div {
                     width: calc(100% - 50px);
                     height: 40px;
                     line-height: 40px;
-                    color: $wil-white;
+                    color: $white;
                     background-image: none;
                     background: rgba(35, 90, 166, 1);
                     background: linear-gradient(to bottom, rgba(35, 90, 166, 1) 0%, rgba(0, 64, 124, 1) 100%);
@@ -860,7 +835,7 @@ div {
                 .productname {
                     color: $white;
                     @include respond(0, $medium-breakpoint) {
-                        color: $wil-black;
+                        color: $black;
                     }
                 }
             }
@@ -886,12 +861,12 @@ div {
                     .terms-privacy {
                         .terms,
                         .privacy {
-                            color: #fff;
+                            color: $white;
                         }
                     }
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #rapala_insider, #follow_us {
-                            background: #f1f1f1;
+                            background: $wil-light-gray;
                         }
                     }
                 }
@@ -948,7 +923,7 @@ div {
                     font-size: 24px;
                     line-height: 28px;
                     font-variant: normal;
-                    color: $wil-white;
+                    color: $white;
                 }
             }
         }
@@ -958,11 +933,11 @@ div {
             &.filter {
                 span {
                     font-style: normal;
-                    color: $wil-white;
+                    color: $white;
                     font-weight: normal;
                 }
                 .selectedvarval {
-                    color: $wil-white;
+                    color: $white;
                 }
             }
         }
@@ -978,12 +953,12 @@ div {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
+                background-color: $wil-light-gray !important;
                 border-top: 1px solid #d0d0d0;
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $wil-list-black !important;
                 border-radius: 3px;
             }
         }
@@ -991,7 +966,7 @@ div {
     .current {
         a {
             &.filter {
-                color: $wil-white;
+                color: $white;
                 border: 1px solid #105182;
                 background: rgba(35, 90, 166, 1);
                 background: linear-gradient(to bottom, rgba(35, 90, 166, 1) 0%, rgba(0, 64, 124, 1) 100%);
@@ -1032,7 +1007,7 @@ div {
             height: auto !important;
             font-size: 13px;
             a {
-                color: $wil-white !important;
+                color: $white !important;
             }
             .breadcrumb-element {
                 color: $white !important;
@@ -1046,7 +1021,7 @@ div {
             .breadcrumb-element-slash {
                 background: none;
                 &:after {
-                    color: $wil-white !important;
+                    color: $white !important;
                 }
             }
             span {
@@ -1087,11 +1062,11 @@ div {
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #follow_us, #rapala_insider {
                             #linkheading {
-                                color: $wil-black;
+                                color: $black;
                                 a {
-                                    color: $wil-black;
+                                    color: $black;
                                     span {
-                                        color: $wil-black;
+                                        color: $black;
                                     }
                                 }
                             }
@@ -1100,7 +1075,7 @@ div {
                             ul {
                                 li {
                                     a {
-                                        color: $wil-black;
+                                        color: $black;
                                     }
                                 }
                             }
@@ -1116,7 +1091,7 @@ div {
 
 @include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
-        color: #fff;
+        color: $white;
     }
 }
 
@@ -1126,13 +1101,13 @@ div {
             .specificiations {
                 border: none;
                 tbody {
-                    border-bottom: 1px solid #ccc;
+                    border-bottom: 1px solid $wil-light-original-grey;
                     margin-bottom: 2em;
                     display: table;
                     width: 100%;
                     tr {
                         &:nth-child(even) {
-                            background: #fff;
+                            background: $white;
                         }
                         &:nth-child(odd) {
                             background: #DEE6F1;
@@ -1140,9 +1115,9 @@ div {
                         &:first-child {
                             th {
                                 width: 100%;
-                                background: #235aa6;
-                                background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
-                                color: #fff;
+                                background: $wil-bgblue;
+                                background: linear-gradient(to bottom, $wil-bgblue 0%, #00407c 100%);
+                                color: $white;
                                 vertical-align: middle;
                                 border: none;
                                 border-top-left-radius: 3px;
@@ -1274,8 +1249,8 @@ div {
     .content-asset {
         .account-options {
             li {
-                background: $wil-white;
-                box-shadow: #999 0 0 10px;
+                background: $white;
+                box-shadow: $wil-gray 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1293,7 +1268,7 @@ div {
                     background-color: $wil-bg-light-blue;
                     border-color: $wil-bg-light-blue;
                     a, h2, p {
-                        color: $wil-white;
+                        color: $white;
                     }
                 }
             }
@@ -1325,22 +1300,14 @@ div {
     .product-image {
         .quickview {
             background-color: $wil-hov-blue;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $wil-diplight-blue;
-            border-right-color: $wil-bordertwo;
-            border-bottom-color: $wil-borderthree;
-            border-left-color: $wil-borderfour;
+            @include btn-border;
             color: $white;
         }
         .quickview:hover {
             color: white;
             background-color: $wil-bg-light-blue;
             text-decoration: none;
-            border-top-color: $wil-hov-borderone;
-            border-right-color: $wil-hov-bordertwo;
-            border-bottom-color: $wil-hov-borderthree;
-            border-left-color: $wil-hov-borderfour;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1354,21 +1321,12 @@ div {
                         .quickview {
                             color: $white;
                             background-color: $wil-hov-blue;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $wil-diplight-blue;
-                            border-right-color: $wil-bordertwo;
-                            border-bottom-color: $wil-borderthree;
-                            border-left-color: $wil-borderfour;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             background-color: $wil-bg-light-blue;
                             text-decoration: none;
-                            border-top-color: $wil-hov-borderone;
-                            border-right-color: $wil-hov-bordertwo;
-                            border-bottom-color: $wil-hov-borderthree;
-                            border-left-color: $wil-hov-borderfour;
-
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -1384,11 +1342,11 @@ div {
                 .product-tile {
                     .product-name {
                         a {
-                            color: #000;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #4396E1;
+                            color: $wil-bg-light-blue;
                         }
                     }
                 }
@@ -1404,11 +1362,11 @@ div {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $wil-black;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #235aa6;
+                            color: $wil-bgblue;
                         }
                     }
                 }
@@ -1426,7 +1384,7 @@ div {
                         color: $wil-hov-blue;
                     }
                     .product-swatches-all:hover {
-                        color: #235aa6 !important;
+                        color: $wil-bgblue !important;
                         text-decoration: underline;
 
                     }
@@ -1618,9 +1576,9 @@ div {
     }
 
     #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a, .footer-links ul li a, #footernew .social-icons #fallow-us-on ul li a, #footernew .wrapper .footer-main #linkheading, .copyright, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay, #footernew .wrapper .footer-main #linkheading a span, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a span {
-        color: #000;
+        color: $black;
         &:hover {
-            color: #000;
+            color: $black;
         }
     }
     #container {
@@ -1643,9 +1601,9 @@ div {
         thead {
             tr.header {
                 td {
-                    background: #235aa6;
-                    background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
-                    color: #fff;
+                    background: $wil-bgblue;
+                    background: linear-gradient(to bottom, $wil-bgblue 0%, #00407c 100%);
+                    color: $white;
                 }
             }
         }
@@ -1706,7 +1664,7 @@ input {
 .productdetail {
     a {
         &.filter span {
-            color: $wil-white;
+            color: $white;
             font-size: 12px;
             font-weight: normal;
         }
@@ -1718,15 +1676,15 @@ input {
         li {
             a {
                 &:hover {
-                    color: $wil-white;
+                    color: $white;
                     border-color: $wil-bg-light-blue;
                     background-image: url("../images/product-detail-size.jpg");
                 }
             }
             &.selected {
                 a {
-                    color: #ffffff;
-                    border-color: #4396E1;
+                    color: $white;
+                    border-color: $wil-bg-light-blue;
                     background-image: url(../images/product-detail-size.jpg);
                 }
             }
@@ -1742,7 +1700,7 @@ input {
             font-family: $willi-Arial;
             font-size: 12px !important;
             font-weight: normal;
-            color: $wil-white !important;
+            color: $white !important;
             &:hover {
                 background-position: 2px 50%;
                 color: $wil-bg-light-blue !important;
@@ -1753,7 +1711,7 @@ input {
             font-family: $willi-Arial;
             font-size: 12px !important;
             font-weight: normal;
-            color: $wil-white !important;
+            color: $white !important;
         }
     }
 }
@@ -1781,8 +1739,8 @@ input {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #235aa6; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #235aa6 10%, rgba(255, 255, 255, 1) 10%, #235aa6 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $wil-bgblue; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $wil-bgblue 10%, rgba(255, 255, 255, 1) 10%, $wil-bgblue 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1885,11 +1843,11 @@ input {
         #content {
             .productsearchbreadcrumb, .breadcrumb {
                 .breadcrumb-element {
-                    color: #fff;
+                    color: $white;
                     background: none;
                 }
                 .breadcrumb-element-slash:after {
-                    color: #fff;
+                    color: $white;
                 }
                 .breadcrumb-element-slash {
                     background: none;
@@ -1986,14 +1944,14 @@ input {
                     a {
                         &:hover {
                             span {
-                                color: #4396E1;
+                                color: $wil-bg-light-blue;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #4396E1;
+                                color: $wil-bg-light-blue;
                             }
                         }
                     }
@@ -2006,12 +1964,12 @@ input {
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #4396E1;
+        background-color: $wil-bg-light-blue;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -2020,12 +1978,12 @@ input {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #4396E1;
+        background-color: $wil-bg-light-blue;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -2036,12 +1994,12 @@ input {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #4396E1;
+        background-color: $wil-bg-light-blue;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -2055,7 +2013,7 @@ input {
                     span {
                         &.corner-ribbon {
                             background-color: #0093DC;
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }
@@ -2075,5 +2033,5 @@ input {
 }
 
 .productdetail .price .price-sales {
-    color: #235aa6;
+    color: $wil-bgblue;
 }

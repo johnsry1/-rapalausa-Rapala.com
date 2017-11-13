@@ -65,26 +65,18 @@ a {
         letter-spacing: 0;
         color: white;
         padding: 5px 28px 5px 10px;
-        border-style: solid;
-        border-width: 1px;
         background-position: 100% 0;
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
         background: $body-color;
-        background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
-        color: #fff;
-        border-top-color: black;
-        border-right-color: black;
-        border-bottom-color: #9D9D9D;
-        border-left-color: black;
+        background: linear-gradient(to bottom, $body-color 0%, $black 100%);
+        color: $white;
+        @include btn-border;
 
         &:hover {
-            background: #000000;
-            background: linear-gradient(to bottom, #000000 0%, $body-color 100%);
-            border-top-color: #393939;
-            border-right-color: #424242;
-            border-bottom-color: #B7B7B7;
-            border-left-color: #424242;
+            background: $black;
+            background: linear-gradient(to bottom, $black 0%, $body-color 100%);
+            @include btn-border-hover-color;
             text-decoration: none;
         }
     }
@@ -105,7 +97,7 @@ h1.search-result {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a {
     &:hover {
-        color: #666666;
+        color: $ice-dark-black;
     }
 }
 
@@ -117,11 +109,11 @@ h1.search-result {
                     #about {
                         li#linkheading.desktopHide a {
                             span {
-                                color: #b3b3b3;
+                                color: $ice_footer_grey;
                             }
                             &:hover {
                                 font-weight: normal;
-                                color: #b3b3b3;
+                                color: $ice_footer_grey;
                                 text-decoration: underline;
                             }
                         }
@@ -461,23 +453,15 @@ button {
     color: white;
     padding: 0 18px 0 18px;
     background-color: black;
-    border-style: solid;
-    border-width: 1px;
     background-color: black;
-    border-top-color: black;
-    border-right-color: black;
-    border-bottom-color: #9D9D9D;
-    border-left-color: black;
+    @include btn-border;
 }
 
 a.button:hover,
 button:hover {
     text-decoration: none;
-    background: #444;
-    border-top-color: #393939;
-    border-right-color: #424242;
-    border-bottom-color: #B7B7B7;
-    border-left-color: #424242;
+    background: $ice-bg-light-black;
+    @include btn-border-hover-color;
     cursor: pointer;
 }
 
@@ -485,10 +469,7 @@ button:hover {
     a.button:hover, button:hover {
         text-decoration: none;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(51, 51, 51, 1) 100%) !important;
-        border-top-color: #393939;
-        border-right-color: #424242;
-        border-bottom-color: #B7B7B7;
-        border-left-color: #424242;
+        @include btn-border-hover-color;
         cursor: pointer;
     }
 }
@@ -517,12 +498,12 @@ button:hover {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
-    color: #000;
+    color: $black;
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #3b3b3c 0%, #000 60%);
-    color: #ffffff;
+    background: linear-gradient(to bottom, #3b3b3c 0%, $black 60%);
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -534,7 +515,7 @@ button:hover {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #000 60%, #3b3b3c 100%);
+    background: linear-gradient(to bottom, $black 60%, #3b3b3c 100%);
 }
 
 .shop-brand {
@@ -606,7 +587,7 @@ button:hover {
         .account-section {
             .label {
                 .labeltext {
-                    color: #666;
+                    color: $ice-dark-black;
                     float: none;
                     font-size: 12px;
                     font-variant: normal;
@@ -732,7 +713,7 @@ div {
                 .footer-links {
                     .footer-heading {
                         p {
-                            color: #b3b3b3;
+                            color: $ice_footer_grey;
                         }
                     }
                 }
@@ -742,7 +723,7 @@ div {
     .email-signup {
         .email-txt {
             span, a {
-                color: #b3b3b3;
+                color: $ice_footer_grey;
             }
         }
     }
@@ -768,14 +749,14 @@ div {
                 .footer-links {
                     #linkheadding {
                         a {
-                            color: #b3b3b3;
+                            color: $ice_footer_grey;
                             font-size: 12px;
                         }
                     }
                 }
                 .footer-links {
                     #linkheadding {
-                        color: #b3b3b3;
+                        color: $ice_footer_grey;
                         font-size: 12px;
                     }
                 }
@@ -838,7 +819,7 @@ body {
 
 .footer-links ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links ul li a:hover, #footernew .social-icons #fallow-us-on ul li a, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay, #footernew .wrapper .footer-main #linkheading a span {
     font-weight: normal;
-    color: #f2f2f2;
+    color: $iceforce-lightwhite;
 }
 
 #footernew .social-icons #fallow-us-on ul .you-tube a {
@@ -861,7 +842,7 @@ body {
 .copyright {
     clear: both;
     padding: 5px 18px 0 0;
-    color: #b3b3b3;
+    color: $ice_footer_grey;
 }
 
 /* end of footer styles */
@@ -996,7 +977,7 @@ body {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
+                background-color: $ice-light-grey !important;
                 border-top: 1px solid #d0d0d0;
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
@@ -1226,7 +1207,7 @@ body {
     }
 
     #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
-        color: #fff;
+        color: $white;
     }
 }
 
@@ -1258,7 +1239,7 @@ body {
         .account-options {
             li {
                 background: $white;
-                box-shadow: #999 0 0 10px;
+                box-shadow: $ice-gray 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1305,21 +1286,13 @@ body {
     .product-image {
         .quickview {
             background-color: $main-color;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $main-color;
-            border-right-color: $main-color;
-            border-bottom-color: $border-color;
-            border-left-color: $main-color;
+            @include btn-border;
             color: $white;
         }
         .quickview:hover {
             background-color: $ice-bg-light-black;
             text-decoration: none;
-            border-top-color: $border-color-one;
-            border-right-color: $border-color-two;
-            border-bottom-color: $border-color-three;
-            border-left-color: $border-color-four;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1333,20 +1306,12 @@ body {
                         .quickview {
                             color: $white;
                             background-color: $main-color;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $main-color;
-                            border-right-color: $main-color;
-                            border-bottom-color: $border-color;
-                            border-left-color: $main-color;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             text-decoration: none;
                             background-color: $ice-bg-light-black;
-                            border-top-color: $border-color-one;
-                            border-right-color: $border-color-two;
-                            border-bottom-color: $border-color-three;
-                            border-left-color: $border-color-four;
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -1558,8 +1523,8 @@ table {
         thead {
             tr {
                 background: $body-color;
-                background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
-                color: #fff;
+                background: linear-gradient(to bottom, $body-color 0%, $black 100%);
+                color: $white;
             }
         }
         tbody {
@@ -1587,7 +1552,7 @@ table {
         line-height: 24px;
         letter-spacing: 0px;
         .salesprice {
-            color: #666666;
+            color: $ice-dark-black;
             font-size: 15px;
             font-weight: bold;
             letter-spacing: 0;
@@ -1632,13 +1597,15 @@ table {
     }
 }
 
-.variationattributes .swatches li a:hover, .variationattributes .swatches li.selected a, .variationattributes .swatches li.selected a:hover {
-    color: #ffffff;
+.variationattributes .swatches li a:hover,
+.variationattributes .swatches li.selected a,
+.variationattributes .swatches li.selected a:hover {
+    color: $white;
     border-top-color: #dddddd;
-    border-left-color: #dddddd;
     border-right-color: #424242;
+    border-left-color: #dddddd;
     border-bottom-color: #b7b7b7;
-    background-color: #444444;
+    background-color: $ice-bg-light-black;
 }
 
 .variationattributes {
@@ -1656,7 +1623,7 @@ table {
         li {
             a {
                 &:hover {
-                    border-color: #000000;
+                    border-color: $black;
                 }
             }
         }
@@ -1677,7 +1644,7 @@ table {
 .productdetail {
     .price {
         .standardprice {
-            color: #999999;
+            color: $ice-gray;
             font-size: 15px;
         }
     }
@@ -1695,7 +1662,7 @@ table {
     }
     li {
         &.list-active {
-            color: #000;
+            color: $black;
         }
         //list-active
     }
@@ -1734,12 +1701,12 @@ table {
                         .nav-group {
                             li {
                                 &.active {
-                                    background-color: #000;
-                                    border-top: 1px solid #000;
-                                    border-right: 1px solid #000;
-                                    border-bottom: 1px solid #000;
-                                    border-left: 1px solid #000;
-                                    color: #fff;
+                                    background-color: $black;
+                                    border-top: 1px solid $black;
+                                    border-right: 1px solid $black;
+                                    border-bottom: 1px solid $black;
+                                    border-left: 1px solid $black;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1766,12 +1733,12 @@ table {
     #content {
         .nav-group {
             li.active {
-                color: #fff;
-                /*  background-color: #000; */
-                border-top-color: #000;
-                border-right-color: #000;
-                border-bottom-color: #000;
-                border-left-color: #000;
+                color: $white;
+                /*  background-color: $black; */
+                border-top-color: $black;
+                border-right-color: $black;
+                border-bottom-color: $black;
+                border-left-color: $black;
             }
         }
         .customer {
@@ -1849,10 +1816,10 @@ table {
         #content {
             .productsearchbreadcrumb {
                 .breadcrumb-element {
-                    color: #fff;
+                    color: $white;
                 }
                 .breadcrumb-element-slash:after {
-                    color: #fff;
+                    color: $white;
                 }
             }
         }
@@ -1867,7 +1834,7 @@ table {
                     .cell.upshift {
                         &.tabover {
                             a {
-                                color: #fff;
+                                color: $white;
                             }
                         }
                     }
@@ -1958,11 +1925,11 @@ table {
         .breadcrumb {
             background: url(../images/body-background-70.jpg);
             .breadcrumb-element {
-                color: #fff;
+                color: $white;
                 background: none;
             }
             .breadcrumb-element-slash:after {
-                color: #fff;
+                color: $white;
             }
             .breadcrumb-element-slash {
                 background: none;
@@ -1979,14 +1946,14 @@ table {
                     a {
                         &:hover {
                             span {
-                                color: #000;
+                                color: $black;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #000;
+                                color: $black;
                             }
                         }
                     }
@@ -1999,12 +1966,12 @@ table {
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #444444;
+        background-color: $ice-bg-light-black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -2014,12 +1981,12 @@ table {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #444444;
+        background-color: $ice-bg-light-black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -2030,12 +1997,12 @@ table {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #444444;
+        background-color: $ice-bg-light-black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         position: inherit;
@@ -2051,7 +2018,7 @@ table {
                     span {
                         &.corner-ribbon {
                             background-color: #424342;
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }
@@ -2080,8 +2047,8 @@ table {
             tbody {
                 tr:first-child {
                     background: $body-color;
-                    background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
-                    color: #fff;
+                    background: linear-gradient(to bottom, $body-color 0%, $black 100%);
+                    color: $white;
                     &:first-child {
                         border-top-left-radius: 3px;
                     }
@@ -2089,7 +2056,7 @@ table {
                         border-top-right-radius: 3px;
                     }
                     th {
-                        color: #fff;
+                        color: $white;
                         border: none;
                         vertical-align: middle;
                         border: none;
@@ -2126,5 +2093,5 @@ table {
 }
 
 .productdetail .price .price-sales {
-    color: #666666;
+    color: $ice-dark-black;
 }

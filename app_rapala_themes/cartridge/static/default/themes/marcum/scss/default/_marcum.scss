@@ -25,7 +25,7 @@ h1, .h-one-tag {
 }
 
 .pt_productsearchresult #page-background .row.column3 .colspan2.cell4 .contentboxcontent a.searchedfor {
-    color: #ce0d0d;
+    color: $marcum-hov-red;
 }
 
 #container.pt_product-search-noresult {
@@ -70,22 +70,14 @@ a.button, button {
     color: white;
     padding: 0 18px 0 18px;
     background-color: $marcum-bgboxred;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: $marcum-borderone;
-    border-right-color: #C32E33;
-    border-bottom-color: #E9ACAE;
-    border-left-color: #C32E33;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
     cursor: pointer;
     background: red;
     text-decoration: none;
-    border-top-color: #D70101;
-    border-right-color: #F90A0A;
-    border-bottom-color: #FF9D9D;
-    border-left-color: #F90A0A;
+    @include btn-border-hover-color;
 }
 
 .addTo-cart-section {
@@ -93,10 +85,7 @@ a.button:hover, button:hover {
         cursor: pointer;
         background: linear-gradient(top bottom, rgba(170, 0, 3, 1) 0%, rgba(206, 13, 13, 1) 100%) !important;
         text-decoration: none;
-        border-top-color: #D70101;
-        border-right-color: #F90A0A;
-        border-bottom-color: #FF9D9D;
-        border-left-color: #F90A0A;
+        @include btn-border-hover-color;
     }
 }
 
@@ -130,10 +119,10 @@ a.button:hover, button:hover {
                     #about {
                         li#linkheading.desktopHide a {
                             span {
-                                color: #fff;
+                                color: $white;
                             }
                             &:hover {
-                                color: #fff;
+                                color: $white;
                                 text-decoration: underline;
                             }
                         }
@@ -179,13 +168,13 @@ a.button:hover, button:hover {
                     border-color: $marcum-bgboxred;
                     transition: none;
                     h2 {
-                        color: $marcum-white;
+                        color: $white;
                     }
                     p {
-                        color: $marcum-white;
+                        color: $white;
                     }
                     i {
-                        color: $marcum-white;
+                        color: $white;
                     }
                 }
             }
@@ -206,7 +195,7 @@ a.button:hover, button:hover {
                 .label {
                     font-family: $font;
                     font-weight: bold;
-                    color: #333;
+                    color: $night-rider;
                     text-transform: uppercase;
                     font-size: 16px;
                     line-height: 16px;
@@ -274,11 +263,11 @@ a.button:hover, button:hover {
     #main {
         .breadcrumb {
             a {
-                color: $marcum-white;
+                color: $white;
             }
             .breadcrumb-element {
                 &:last-child {
-                    color: $marcum-white;
+                    color: $white;
                 }
             }
         }
@@ -416,27 +405,19 @@ a {
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0;
-        color: $marcum-white !important;
+        color: $white !important;
         padding: 5px 28px 5px 10px;
-        border-style: solid;
-        border-width: 1px;
-        color: $marcum-white;
+        color: $white;
         background: rgba(206, 13, 13, 1);
         background: linear-gradient(to bottom, rgba(206, 13, 13, 1) 0%, rgba(170, 0, 3, 1) 100%);
-        border-top-color: $marcum-borderone;
-        border-right-color: $marcum-bordertwo;
-        border-bottom-color: $marcum-borderthree;
-        border-left-color: $marcum-borderfour;
+        @include btn-border;
         background-position: 100% 0;
         background-repeat: no-repeat;
         &:hover {
             text-decoration: none;
             background: rgba(170, 0, 3, 1);
             background: linear-gradient(to bottom, rgba(170, 0, 3, 1) 0%, rgba(206, 13, 13, 1) 100%);
-            border-top-color: $marcum-hov-borderone;
-            border-right-color: $marcum-hov-bordertwo;
-            border-bottom-color: $marcum-hov-borderthree;
-            border-left-color: $marcum-hov-borderfour;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -457,7 +438,7 @@ p a {
         #primary {
             .contentboxcontent {
                 h1 {
-                    color: $marcum-white;
+                    color: $white;
                     &.search-result {
                         font-family: $font-secondary;
                         font-size: 22px;
@@ -465,7 +446,7 @@ p a {
                         font-variant: normal;
                         font-weight: bold;
                         line-height: 36px;
-                        color: $marcum-white;
+                        color: $white;
                     }
                 }
             }
@@ -518,8 +499,8 @@ p a {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #ce0d0d 60%, #aa0004 100%);
-    color: #fff;
+    background: linear-gradient(to bottom, $marcum-hov-red 60%, #aa0004 100%);
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -531,7 +512,7 @@ p a {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #aa0004 0%, #ce0d0d 60%);
+    background: linear-gradient(to bottom, #aa0004 0%, $marcum-hov-red 60%);
 }
 
 .owl-carousel {
@@ -765,13 +746,8 @@ body {
     background: white url(../images/container-background-70.jpg) 0 0 repeat;
 }
 
-#footernew #footer-brands {
-    //	padding: 50px 16px 20px 17px;
-    //  margin-top: 27px !important;
-}
-
 #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a, .footer-links ul li a, #footernew .social-icons #fallow-us-on ul li a, #footernew .wrapper .footer-main #linkheading, .copyright, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay {
-    color: #fff;
+    color: $white;
 }
 
 #footernew .social-icons #fallow-us-on ul .you-tube a {
@@ -789,7 +765,7 @@ form {
     .label {
         font-family: $font;
         font-weight: bold;
-        color: #333;
+        color: $night-rider;
         font-variant: initial;
         text-transform: uppercase;
         font-size: 16px;
@@ -803,7 +779,7 @@ form {
         .label {
             font-family: $font;
             font-weight: bold !important;
-            color: #333;
+            color: $night-rider;
             font-variant: initial !important;
             text-transform: uppercase;
             font-size: 16px !important;
@@ -821,7 +797,7 @@ div {
                     .label {
                         font-family: $font;
                         font-weight: bold;
-                        color: #333;
+                        color: $night-rider;
                         font-variant: initial;
                         text-transform: uppercase;
                         font-size: 16px;
@@ -845,7 +821,7 @@ div {
                     width: calc(100% - 50px);
                     height: 40px;
                     line-height: 40px;
-                    color: $marcum-white;
+                    color: $white;
                     background-image: none;
                     background: rgba(206, 13, 13, 1);
                     background: linear-gradient(to bottom, rgba(206, 13, 13, 1) 0%, rgba(170, 0, 3, 1) 100%);
@@ -919,11 +895,11 @@ div {
             &.filter {
                 span {
                     font-style: normal;
-                    color: $marcum-white;
+                    color: $white;
                     font-weight: normal;
                 }
                 .selectedvarval {
-                    color: $marcum-white;
+                    color: $white;
                 }
             }
         }
@@ -944,7 +920,7 @@ div {
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $night-rider !important;
                 border-radius: 3px;
             }
         }
@@ -952,7 +928,7 @@ div {
     .current {
         a {
             &.filter {
-                color: $marcum-white;
+                color: $white;
                 background: rgba(206, 13, 13, 1);
                 background: linear-gradient(to bottom, rgba(206, 13, 13, 1) 0%, rgba(170, 0, 3, 1) 100%);
                 &:hover {
@@ -1039,7 +1015,7 @@ div {
         .wrapper {
             .receive-emails {
                 a {
-                    color: $marcum-white;
+                    color: $white;
                 }
             }
             .footer-main {
@@ -1161,7 +1137,7 @@ div {
 
 @include respond(0, $large-breakpoint - 1) {
     #footernew .wrapper .receive-emails a, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
-        color: #fff;
+        color: $white;
     }
 }
 
@@ -1169,7 +1145,7 @@ div {
     #primary.primary-content {
         .errorpage {
             .nohits a:hover {
-                color: $marcum-white;
+                color: $white;
             }
             fieldset.nohitsearch {
                 input.box {
@@ -1200,8 +1176,8 @@ div {
     .content-asset {
         .account-options {
             li {
-                background: $marcum-white;
-                box-shadow: #999 0 0 10px;
+                background: $white;
+                box-shadow: $marcum-gray 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1249,20 +1225,12 @@ div {
     .product-image {
         .quickview {
             background-color: $marcum-redtwo;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $marcum-borderone;
-            border-right-color: $marcum-bordertwo;
-            border-bottom-color: $marcum-borderthree;
-            border-left-color: $marcum-borderfour;
+            @include btn-border;
         }
         .quickview:hover {
             background-color: $marcum-red;
             text-decoration: none;
-            border-top-color: $marcum-hov-borderone;
-            border-right-color: $marcum-hov-bordertwo;
-            border-bottom-color: $marcum-hov-borderthree;
-            border-left-color: $marcum-hov-borderfour;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1275,21 +1243,12 @@ div {
                     .product-image {
                         .quickview {
                             background-color: $marcum-redtwo;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $marcum-borderone;
-                            border-right-color: $marcum-bordertwo;
-                            border-bottom-color: $marcum-borderthree;
-                            border-left-color: $marcum-borderfour;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             background-color: $marcum-red;
                             text-decoration: none;
-                            border-top-color: $marcum-hov-borderone;
-                            border-right-color: $marcum-hov-bordertwo;
-                            border-bottom-color: $marcum-hov-borderthree;
-                            border-left-color: $marcum-hov-borderfour;
-
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -1309,7 +1268,7 @@ div {
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #ce0d0d;
+                            color: $marcum-hov-red;
                         }
                     }
                 }
@@ -1470,7 +1429,7 @@ div {
                         .breadcrumb-element-slash {
                             &:after {
                                 content: "/";
-                                color: #fff;
+                                color: $white;
                                 vertical-align: middle;
                             }
                         }
@@ -1533,7 +1492,7 @@ div {
     a {
         &.filter {
             span {
-                color: $marcum-white;
+                color: $white;
                 font-size: 12px;
                 font-weight: normal;
             }
@@ -1547,7 +1506,7 @@ div {
     a, span {
         font-family: $font-secondary;
         font-size: 11px !important;
-        color: $marcum-white !important;
+        color: $white !important;
         font-weight: bold;
         text-shadow: 2px 3px 5px $marcum-black;
     }
@@ -1592,8 +1551,8 @@ div {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #ce0d0d; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #ce0d0d 10%, rgba(255, 255, 255, 1) 10%, #ce0d0d 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $marcum-hov-red; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $marcum-hov-red 10%, rgba(255, 255, 255, 1) 10%, $marcum-hov-red 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1626,7 +1585,7 @@ div {
                 font-size: 25px;
                 line-height: 30px;
                 font-variant: normal;
-                color: $marcum-white;
+                color: $white;
                 @include respond(0, $medium-breakpoint) {
                     color: $marcum-black;
                 }
@@ -1638,7 +1597,7 @@ div {
 .productdetail {
     .price {
         .salesprice {
-            color: #ce0d0d;
+            color: $marcum-hov-red;
             font-size: 15px;
             font-weight: bold;
             letter-spacing: 0;
@@ -1724,10 +1683,10 @@ div {
         #content {
             .productsearchbreadcrumb {
                 .breadcrumb-element {
-                    color: #fff;
+                    color: $white;
                 }
                 .breadcrumb-element-slash:after {
-                    color: #fff;
+                    color: $white;
                 }
             }
         }
@@ -1780,7 +1739,7 @@ div {
     .label {
         text-transform: uppercase;
         font-weight: bold;
-        color: #333;
+        color: $night-rider;
         font-family: $font;
         font-weight: bold;
         font-size: 16px;
@@ -1816,11 +1775,11 @@ div {
         .breadcrumb {
             background: url(../images/container-background-70.jpg);
             .breadcrumb-element {
-                color: #fff;
+                color: $white;
                 background: none;
             }
             .breadcrumb-element-slash:after {
-                color: #fff;
+                color: $white;
             }
             .breadcrumb-element-slash {
                 background: none;
@@ -1836,7 +1795,7 @@ div {
                 .provideo-spec-link {
                     li {
                         a {
-                            color: #fff;
+                            color: $white;
                             @include respond(0, $medium-breakpoint) {
                                 color: #666;
                             }
@@ -1856,14 +1815,14 @@ div {
                     a {
                         &:hover {
                             span {
-                                color: #C6262C;
+                                color: $marcum-bgboxred;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #C6262C;
+                                color: $marcum-bgboxred;
                             }
                         }
                     }
@@ -1876,12 +1835,12 @@ div {
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #FF0000;
+        background-color: $marcum-bgred;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -1890,12 +1849,12 @@ div {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #FF0000;
+        background-color: $marcum-bgred;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -1906,12 +1865,12 @@ div {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #FF0000;
+        background-color: $marcum-bgred;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -1924,8 +1883,8 @@ div {
                 a {
                     span {
                         &.corner-ribbon {
-                            background-color: #FF0000;
-                            color: #fff;
+                            background-color: $marcum-bgred;
+                            color: $white;
                         }
                     }
                 }
@@ -1945,5 +1904,5 @@ div {
 }
 
 .productdetail .price .price-sales {
-    color: #ce0d0d;
+    color: $marcum-hov-red;
 }

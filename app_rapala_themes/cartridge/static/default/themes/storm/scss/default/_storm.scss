@@ -60,19 +60,14 @@ a.button, button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0;
-    color: #FFF200;
+    color: $storm-bgyellow;
     padding: 0 18px 0 18px;
     background-color: black;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #000002;
-    border-right-color: #222;
-    border-bottom-color: #404040;
-    border-left-color: #000100;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
-    background: #333;
+    background: $storm-clgrey;
     text-decoration: none;
     cursor: pointer;
 }
@@ -252,7 +247,7 @@ h1.search-result {
                     &.form-row-button {
                         button {
                             &.simple {
-                                background-color: $storm-black;
+                                background-color: $black;
                                 color: $storm-bgyellow;
                                 &:hover {
                                     background-color: $storm-clgrey;
@@ -373,7 +368,7 @@ h1.search-result {
                 a {
                     display: inline-block;
                     text-transform: capitalize;
-                    color: $storm-black;
+                    color: $black;
                 }
             }
         }
@@ -393,7 +388,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-    color: #333532;
+    color: $storm-clgrey;
     background-image: url(../images/multi-site-one-cart-bg.png);
     font-weight: normal;
     width: 58px;
@@ -455,7 +450,7 @@ h1.search-result {
 
 #special-offers {
     .promotion-title {
-        color: $storm-black;
+        color: $black;
     }
     ul {
         li {
@@ -479,17 +474,12 @@ a.filter {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0;
-    color: #FFF200 !important;
+    color: $storm-bgyellow !important;
     padding: 5px 28px 5px 10px;
     background-color: black;
-    border-style: solid;
-    border-width: 1px;
     background: rgba(51, 51, 51, 1);
     background: linear-gradient(to bottom, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    border-top-color: #000002;
-    border-right-color: #222;
-    border-bottom-color: #404040;
-    border-left-color: #000100;
+    @include btn-border;
     background-repeat: no-repeat;
     &:hover {
         text-decoration: none;
@@ -517,8 +507,8 @@ a.filter {
                 a {
                     border-color: $storm-bgyellow;
                     background-image: none;
-                    color: #FFF200;
-                    background-color: #000000;
+                    color: $storm-bgyellow;
+                    background-color: $black;
                     border-top-color: #DDDDDD;
                     border-left-color: #DDDDDD;
                     border-right-color: #222222;
@@ -529,7 +519,7 @@ a.filter {
                 &:hover {
                     background-image: none;
                     color: $storm-bgyellow;
-                    background-color: $storm-black;
+                    background-color: $black;
                     border-top-color: #DDDDDD;
                     border-left-color: #DDDDDD;
                     border-right-color: #222222;
@@ -568,8 +558,8 @@ a.filter {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #fef775 0%, #fff200 60%);
-    color: #333532;
+    background: linear-gradient(to bottom, #fef775 0%, $storm-bgyellow 60%);
+    color: $storm-clgrey;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -581,7 +571,7 @@ a.filter {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #fff200 60%, #fef775 100%);
+    background: linear-gradient(to bottom, $storm-bgyellow 60%, #fef775 100%);
 }
 
 .shop-brand {
@@ -596,21 +586,21 @@ a.filter {
 .categorymenusnew {
     a {
         &:hover {
-            color: $storm-black;
+            color: $black;
         }
         .count-products {
-            color: $storm-black;
+            color: $black;
         }
     }
     .category-top-level {
         &.active {
             a {
-                color: $storm-black;
+                color: $black;
                 &:hover {
-                    color: $storm-black;
+                    color: $black;
                 }
                 .count-products {
-                    color: $storm-black;
+                    color: $black;
                 }
             }
         }
@@ -618,18 +608,18 @@ a.filter {
             li {
                 &.active {
                     a {
-                        color: $storm-black;
+                        color: $black;
                         text-decoration: underline;
                         .count-products {
-                            color: $storm-black;
+                            color: $black;
                         }
                     }
                 }
                 a {
                     &:hover {
-                        color: $storm-black;
+                        color: $black;
                         .count-products {
-                            color: $storm-black;
+                            color: $black;
                         }
                     }
                 }
@@ -644,7 +634,7 @@ a.filter {
         .account-section {
             .label {
                 .labeltext {
-                    color: #666;
+                    color: $storm-gray;
                     float: none;
                     font-size: 12px;
                     font-variant: normal;
@@ -655,14 +645,6 @@ a.filter {
                     font-family: $font-secondary;
                     padding: 0;
                     vertical-align: top;
-                }
-            }
-            .returningcustomers {
-                .form-row {
-                    /* margin: 8px 0 16px 1px; */
-                    @include respond(0, $medium-breakpoint) {
-                        /* margin: 0px 0 16px 1px; */
-                    }
                 }
             }
             .custom-checkbox {
@@ -746,7 +728,7 @@ form {
     .label {
         font-family: $font-third;
         font-weight: normal;
-        color: #333;
+        color: $storm-clgrey;
         text-transform: uppercase;
         font-size: 22px;
         line-height: 22px;
@@ -761,7 +743,7 @@ div {
                     .label {
                         font-family: $font-third;
                         font-weight: normal;
-                        color: #333;
+                        color: $storm-clgrey;
                         text-transform: uppercase;
                         font-size: 22px;
                         line-height: 22px;
@@ -794,7 +776,7 @@ div {
                     background: linear-gradient(to bottom, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 1) 100%);
                     transition: inherit;
                     text-transform: inherit;
-                    color: #FFF200;
+                    color: $storm-bgyellow;
                     border: none;
                 }
             }
@@ -888,12 +870,12 @@ div {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
+                background-color: $storm-lightbg !important;
                 border-top: 1px solid #d0d0d0;
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $storm-clgrey !important;
                 border-radius: 3px;
             }
         }
@@ -901,7 +883,7 @@ div {
     .current {
         a {
             &.filter {
-                border: 1px solid $storm-black;
+                border: 1px solid $black;
                 background: rgba(51, 51, 51, 1);
                 background: linear-gradient(to bottom, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 1) 100%);
                 &:hover {
@@ -955,9 +937,9 @@ div {
                 .footer-left-section {
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #rapala_insider, #follow_us {
-                            background-color: #f1f1f1;
+                            background-color: $storm-lightbg;
                             .social-icons {
-                                background-color: #f1f1f1;
+                                background-color: $storm-lightbg;
                             }
                         }
                     }
@@ -974,9 +956,9 @@ div {
             thead {
                 tr.header {
                     td {
-                        background: #333333;
-                        background: linear-gradient(to bottom, #333333 0%, #000000 100%);
-                        color: #FFF200;
+                        background: $storm-clgrey;
+                        background: linear-gradient(to bottom, $storm-clgrey 0%, $black 100%);
+                        color: $storm-bgyellow;
                         border: none;
                         vertical-align: middle;
                         &:first-child {
@@ -1026,9 +1008,9 @@ div {
                     th {
                         &:first-child {
                             width: 100%;
-                            background: #333333;
-                            background: linear-gradient(to bottom, #333333 0%, #000000 100%);
-                            color: #FFF200;
+                            background: $storm-clgrey;
+                            background: linear-gradient(to bottom, $storm-clgrey 0%, $black 100%);
+                            color: $storm-bgyellow;
                             vertical-align: middle;
                             border-top-left-radius: 3px;
                             border-top-right-radius: 3px;
@@ -1186,7 +1168,7 @@ div {
             .contentboxcontent {
                 h1 {
                     &.left-nav-style {
-                        color: $storm-black;
+                        color: $black;
                         font-family: $font-third;
                         font-size: 33px;
                         font-weight: normal;
@@ -1202,14 +1184,9 @@ div {
 .product-tile {
     .product-image {
         .quickview {
-            color: #FFF200;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $storm-borderblackone;
-            border-right-color: $storm-borderblacktwo;
-            border-bottom-color: $storm-borderblackthree;
-            border-left-color: $storm-borderblackfour;
-            background-color: $storm-black;
+            color: $storm-bgyellow;
+            @include btn-border;
+            background-color: $black;
         }
         .quickview:hover {
             background-color: $storm-clgrey;
@@ -1225,14 +1202,9 @@ div {
                 .product-tile {
                     .product-image {
                         .quickview {
-                            color: #FFF200;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $storm-borderblackone;
-                            border-right-color: $storm-borderblacktwo;
-                            border-bottom-color: $storm-borderblackthree;
-                            border-left-color: $storm-borderblackfour;
-                            background-color: $storm-black;
+                            color: $storm-bgyellow;
+                            @include btn-border;
+                            background-color: $black;
                         }
                         .quickview:hover {
                             background-color: $storm-clgrey;
@@ -1250,7 +1222,7 @@ div {
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a:hover,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a:hover {
-    color: #333;
+    color: $storm-clgrey;
 }
 
 .pt_product-search-result {
@@ -1260,7 +1232,7 @@ div {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $storm-black;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
@@ -1283,7 +1255,7 @@ div {
                     }
                     .product-swatches-all:hover {
                         text-decoration: underline;
-                        color: $storm-black !important;
+                        color: $black !important;
                     }
                 }
             }
@@ -1374,7 +1346,7 @@ div {
                             &.readmore {
                                 font-family: $font;
                                 font-size: 13px;
-                                color: $storm-black;
+                                color: $black;
                             }
                         }
                     }
@@ -1387,7 +1359,7 @@ div {
 .pt_customerservice {
     .accordion {
         &.tabover {
-            background: none repeat scroll 0 0 $storm-black;
+            background: none repeat scroll 0 0 $black;
             color: $storm-bgyellow;
         }
     }
@@ -1484,8 +1456,8 @@ div {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #000000; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #000000 10%, rgba(255, 255, 255, 1) 10%, #000000 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $black; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $black 10%, rgba(255, 255, 255, 1) 10%, $black 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1541,7 +1513,7 @@ div {
                                         li {
                                             &.active {
                                                 a {
-                                                    color: $storm-black;
+                                                    color: $black;
                                                 }
                                             }
                                         }
@@ -1568,7 +1540,7 @@ div {
     .label {
         text-transform: uppercase;
         padding-bottom: 2px;
-        color: #333;
+        color: $storm-clgrey;
         font-family: $font-third;
         font-weight: normal;
         font-size: 22px;
@@ -1613,8 +1585,8 @@ div {
                             &.accordion {
                                 &.tabover {
                                     .folder-contentboxcontent {
-                                        background: none repeat scroll 0 0 $storm-black;
-                                        //color: #FFF200;
+                                        background: none repeat scroll 0 0 $black;
+                                        //color: $storm-bgyellow;
                                     }
                                 }
                             }
@@ -1652,14 +1624,14 @@ div {
                     a {
                         &:hover {
                             span {
-                                color: #333;
+                                color: $storm-clgrey;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #333;
+                                color: $storm-clgrey;
                             }
                         }
                     }
@@ -1672,7 +1644,7 @@ div {
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #000000;
+        background-color: $black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1687,7 +1659,7 @@ div {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #000000;
+        background-color: $black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1704,7 +1676,7 @@ div {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #000000;
+        background-color: $black;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1722,7 +1694,7 @@ div {
                 a {
                     span {
                         &.corner-ribbon {
-                            background-color: $storm-black;
+                            background-color: $black;
                             color: $storm-bgyellow;
                         }
                     }
@@ -1745,11 +1717,11 @@ div {
 .productdetail {
     .price {
         .salesprice {
-            color: #666;
+            color: $storm-gray;
         }
     }
 }
 
 .productdetail .price .price-sales {
-    color: #666666;
+    color: $storm-gray;
 }

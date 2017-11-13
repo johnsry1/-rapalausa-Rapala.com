@@ -53,24 +53,16 @@ a {
         letter-spacing: 0;
         color: $white !important;
         padding: 5px 28px 5px 10px;
-        border-style: solid;
-        border-width: 1px;
         background-position: 100% 0;
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
         background: rgba(245, 131, 32, 1);
         background: linear-gradient(to bottom, rgba(245, 131, 32, 1) 0%, rgba(209, 111, 0, 1) 100%);
-        border-top-color: $border-top;
-        border-right-color: $border-right;
-        border-bottom-color: $border-bottom;
-        border-left-color: $border-left;
+        @include btn-border;
         &:hover {
             background: rgba(209, 111, 0, 1);
             background: linear-gradient(to bottom, rgba(209, 111, 0, 1) 0%, rgba(245, 131, 32, 1) 100%);
-            border-top-color: $border-hover-top;
-            border-right-color: $border-hover-right;
-            border-bottom-color: $border-hover-bottom;
-            border-left-color: $border-hover-left;
+            @include btn-border-hover-color;
             text-decoration: none;
         }
         span {
@@ -106,12 +98,7 @@ a.button, button {
     color: white;
     padding: 0 18px 0 18px;
     background-color: $main-color;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: $border-top;
-    border-right-color: $border-right;
-    border-bottom-color: $border-bottom;
-    border-left-color: $border-left;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
@@ -148,7 +135,7 @@ h1.search-result {
             tr {
                 background: $main-color;
                 background: linear-gradient(to bottom, $main-color 0%, #d17000 100%);
-                color: #fff;
+                color: $white;
             }
         }
         tbody {
@@ -270,7 +257,7 @@ h1.search-result {
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
     background: linear-gradient(to bottom, $main-color 60%, #cd6200 100%);
-    color: #ffffff;
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -609,18 +596,12 @@ h1.search-result {
     float: none;
     padding-left: 0px;
     color: $main-color;
-    border-top-color: $border-top;
-    border-right-color: $border-right;
-    border-bottom-color: $border-bottom;
-    border-left-color: $border-left;
+    @include btn-border
 }
 
 .international-investor-link a:hover {
     color: $link-hover-color;
-    border-top-color: $border-hover-top;
-    border-right-color: $border-hover-right;
-    border-bottom-color: $border-hover-bottom;
-    border-left-color: $border-hover-left;
+    @include btn-border-hover-color;
     padding-left: 0px;
 }
 
@@ -865,7 +846,7 @@ form {
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $night-rider !important;
                 border-radius: 3px;
             }
         }
@@ -945,7 +926,7 @@ form {
                     &:first-child {
                         background: $main-color;
                         background: linear-gradient(to bottom, $main-color 0%, #d17000 100%);
-                        color: #fff;
+                        color: $white;
                         th {
                             border-top-left-radius: 3px;
                             border-top-right-radius: 3px;
@@ -1053,7 +1034,7 @@ form {
         .account-options {
             li {
                 background: $white;
-                box-shadow: #999 0 0 10px;
+                box-shadow: $bluefox-gray 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1101,22 +1082,14 @@ form {
     .product-image {
         .quickview {
             background-color: $hover-color;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $border-top;
-            border-right-color: $border-right;
-            border-bottom-color: $border-bottom;
-            border-left-color: $border-left;
+            @include btn-border;
             color: white;
         }
         .quickview:hover {
             color: white;
             background-color: $link-hover-color;
             text-decoration: none;
-            border-top-color: $border-hover-top;
-            border-right-color: $border-hover-right;
-            border-bottom-color: $border-hover-bottom;
-            border-left-color: $border-hover-left;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1130,21 +1103,12 @@ form {
                         .quickview {
                             color: white;
                             background-color: $hover-color;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $border-top;
-                            border-right-color: $border-right;
-                            border-bottom-color: $border-bottom;
-                            border-left-color: $border-left;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             background-color: $link-hover-color;
                             text-decoration: none;
-                            border-top-color: $border-hover-top;
-                            border-right-color: $border-hover-right;
-                            border-bottom-color: $border-hover-bottom;
-                            border-left-color: $border-hover-left;
-
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -1380,7 +1344,7 @@ form {
             font-family: $font-secondary;
             font-size: 15px;
             line-height: 24px;
-            color: #999;
+            color: $bluefox-gray;
         }
         .salesprice {
             font-family: $font-secondary;
@@ -1584,7 +1548,7 @@ form {
         text-transform: uppercase;
         padding-bottom: 2px;
         font-family: $font;
-        color: #333;
+        color: $night-rider;
         font-size: 12px;
         font-weight: bold;
         line-height: 17px;
@@ -1674,7 +1638,7 @@ form {
         font-family: $font;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -1688,7 +1652,7 @@ form {
         font-family: $font;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -1704,7 +1668,7 @@ form {
         font-family: $font;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -1718,7 +1682,7 @@ form {
                     span {
                         &.corner-ribbon {
                             background-color: #005699;
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }

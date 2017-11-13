@@ -1,14 +1,14 @@
 @import url("../css/MyFontsWebfontsKit.css");
 
 a {
-    color: #D2232A;
+    color: $strikemaster-bgred;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #EE060F;
+    color: $strikemaster-bg-light-red;
 }
 
 h1, .h-one-tag {
@@ -20,11 +20,11 @@ h1, .h-one-tag {
 }
 
 .pt_productsearchresult #page-background .row.column3 .colspan2.cell4 .contentboxcontent a.searchedfor {
-    color: #e12626;
+    color: $strike-hov-red;
 }
 
 .categorymenusnew .category-top-level > a:hover .count-products, .categorymenusnew li.active > a .count-products {
-    color: #e12626;
+    color: $strike-hov-red;
 }
 
 #footernew .domainswitch {
@@ -42,7 +42,7 @@ h2.input-style {
     line-height: 14px;
     font-weight: normal;
     padding-bottom: 2px;
-    color: #030303;
+    color: $strike-list-black;
 }
 
 p a {
@@ -50,7 +50,7 @@ p a {
 }
 
 a {
-    color: #D2232A;
+    color: $strikemaster-bgred;
     text-decoration: none;
     &.filter {
         margin: 18px 0 0;
@@ -65,26 +65,18 @@ a {
         font-weight: bold;
         text-transform: uppercase;
         letter-spacing: 0;
-        color: #fff;
+        color: $white;
         padding: 5px 28px 5px 10px;
-        border-style: solid;
-        border-width: 1px;
         background-position: 100% 0;
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
         background: rgba(225, 38, 38, 1);
         background: linear-gradient(to bottom, rgba(225, 38, 38, 1) 0%, rgba(172, 0, 0, 1) 100%);
-        border-top-color: #C3050C;
-        border-right-color: #A8040B;
-        border-bottom-color: #F0272F;
-        border-left-color: #F2444B;
+        @include btn-border-hover;
         &:hover {
             background: rgba(172, 0, 0, 1);
             background: linear-gradient(to bottom, rgba(172, 0, 0, 1) 0%, rgba(225, 38, 38, 1) 100%);
-            border-top-color: #C3050C;
-            border-right-color: #A8040B;
-            border-bottom-color: #F0272F;
-            border-left-color: #F2444B;
+            @include btn-border-hover-color;
             text-decoration: none;
         }
     }
@@ -93,7 +85,7 @@ a {
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #EE060F;
+    color: $strikemaster-bg-light-red;
 }
 
 #content {
@@ -271,7 +263,7 @@ a:hover {
             .address-tile {
                 .mini-address-title {
                     font-family: $font-third;
-                    color: #030303;
+                    color: $strike-list-black;
                     font-size: 14px;
                     font-weight: normal;
                     text-transform: uppercase;
@@ -410,24 +402,15 @@ a:hover {
                     font-weight: bold;
                     text-transform: uppercase;
                     letter-spacing: 0;
-                    color: #030303;
+                    color: $strike-list-black;
                     padding: 0 18px 0 18px;
-                    background: #D2232A;
-                    border-style: solid;
-                    border-width: 1px;
+                    background: $strikemaster-bgred;
                     box-shadow: none;
                     border-radius: 0;
-                    border-top-color: #AC1D22;
-                    border-right-color: #94191E;
-                    border-bottom-color: #D84046;
-                    border-left-color: #DD5A5F;
+                    @include btn-border;
                     &:hover {
-                        background: #EE060F;
+                        background: $strikemaster-bg-light-red;
                         text-decoration: none;
-                        /*border-top-color: #0056AC;
-                        border-right-color: #0064C7;
-                        border-bottom-color: #9DC4EB;
-                        border-left-color: #0064C7;*/
                         cursor: pointer;
                     }
                 }
@@ -450,24 +433,15 @@ a.button, button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0;
-    color: #030303;
+    color: $strike-list-black;
     padding: 0 18px 0 18px;
-    background-color: #D2232A;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #AC1D22;
-    border-right-color: #94191E;
-    border-bottom-color: #D84046;
-    border-left-color: #DD5A5F;
+    background-color: $strikemaster-bgred;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
-    background: #EE060F;
+    background: $strikemaster-bg-light-red;
     text-decoration: none;
-    /*border-top-color: #0056AC;
-    border-right-color: #0064C7;
-    border-bottom-color: #9DC4EB;
-    border-left-color: #0064C7;*/
     cursor: pointer;
 }
 
@@ -520,7 +494,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-    color: #fff;
+    color: $white;
     font-weight: normal;
     width: 58px;
     border-radius: 5px;
@@ -529,7 +503,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-    color: #fff;
+    color: $white;
     font-weight: normal;
     width: 58px;
     border-radius: 5px;
@@ -553,8 +527,8 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #e12626 60%, #ac0000 100%);
-    color: #fff;
+    background: linear-gradient(to bottom, $strike-hov-red 60%, #ac0000 100%);
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -566,7 +540,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #ac0000 0%, #e12626 60%);
+    background: linear-gradient(to bottom, #ac0000 0%, $strike-hov-red 60%);
 }
 
 .shop-brand {
@@ -694,7 +668,7 @@ h1.search-result {
 
 .international-investor-link {
     margin-top: 90px;
-    color: #333333;
+    color: $strike-lgt-grey;
 }
 
 .international-links-footer-product {
@@ -706,12 +680,12 @@ h1.search-result {
     float: none;
     padding-left: 0px;
     letter-spacing: 0;
-    color: #333333;
+    color: $strike-lgt-grey;
 }
 
 .international-investor-link a:hover {
     padding-left: 0px;
-    color: #333333;
+    color: $strike-lgt-grey;
 }
 
 .pt_content-search-result {
@@ -750,7 +724,7 @@ form {
         font-variant: initial;
         font-weight: normal;
         padding-bottom: 2px;
-        color: #030303;
+        color: $strike-list-black;
     }
 }
 
@@ -764,7 +738,7 @@ form {
             font-variant: initial !important;
             font-weight: normal !important;
             padding-bottom: 2px;
-            color: #030303;
+            color: $strike-list-black;
         }
     }
 }
@@ -782,7 +756,7 @@ div {
                         font-variant: initial;
                         font-weight: normal;
                         padding-bottom: 2px;
-                        color: #030303;
+                        color: $strike-list-black;
 
                     }
                 }
@@ -814,7 +788,7 @@ div {
                     width: calc(100% - 50px);
                     height: 40px;
                     line-height: 40px;
-                    color: $strike-white;
+                    color: $white;
                     background-image: none;
                     background: rgba(225, 38, 38, 1);
                     background: linear-gradient(to bottom, rgba(225, 38, 38, 1) 0%, rgba(172, 0, 0, 1) 100%);
@@ -903,11 +877,11 @@ div {
             &.filter {
                 span {
                     font-style: normal;
-                    color: #fff;
+                    color: $white;
                     font-weight: bold;
                 }
                 .selectedvarval {
-                    color: $strike-white;
+                    color: $white;
                 }
             }
         }
@@ -923,12 +897,9 @@ div {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
-                border-top: 1px solid #d0d0d0;
-                border-right: 1px solid #e8e8e8;
-                border-bottom: 1px solid #f8f8f8;
-                border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                background-color: $strike-masterlight !important;
+                @include btn-border-hover;
+                color: $strike-lgt-grey !important;
                 border-radius: 3px;
             }
         }
@@ -936,7 +907,7 @@ div {
     .current {
         a {
             &.filter {
-                color: $strike-white;
+                color: $white;
                 background: rgba(225, 38, 38, 1);
                 background: linear-gradient(to bottom, rgba(225, 38, 38, 1) 0%, rgba(172, 0, 0, 1) 100%);
                 &:hover {
@@ -988,9 +959,9 @@ div {
                 .footer-left-section {
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #rapala_insider, #follow_us {
-                            background-color: #f1f1f1;
+                            background-color: $strike-masterlight;
                             .social-icons {
-                                background-color: #f1f1f1;
+                                background-color: $strike-masterlight;
                             }
                         }
                     }
@@ -1014,9 +985,9 @@ div {
                 }
                 tr {
                     &:first-child {
-                        background: #e12626;
-                        background: linear-gradient(to bottom, #e12626 0%, #ac0000 100%);
-                        color: #fff;
+                        background: $strike-hov-red;
+                        background: linear-gradient(to bottom, $strike-hov-red 0%, #ac0000 100%);
+                        color: $white;
                         th {
                             border-top-left-radius: 3px;
                             border-top-right-radius: 3px;
@@ -1154,8 +1125,8 @@ div {
     .content-asset {
         .account-options {
             li {
-                background: $strike-white;
-                box-shadow: #999 0 0 10px;
+                background: $white;
+                box-shadow: $strike-gray 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1187,7 +1158,7 @@ div {
             .contentboxcontent {
                 h1 {
                     &.left-nav-style {
-                        color: $strike-black;
+                        color: $black;
                         font-weight: normal;
                         font-size: 16px;
                         font-family: $font-third;
@@ -1203,21 +1174,13 @@ div {
     .product-image {
         .quickview {
             background-color: $strikemaster-bgred;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $strikemaster-borderone;
-            border-right-color: $strikemaster-bordertwo;
-            border-bottom-color: $strikemaster-borderthree;
-            border-left-color: $strikemaster-borderfour;
-            color: $strike-black;
+            @include btn-border;
+            color: $black;
         }
         .quickview:hover {
             background-color: $strikemaster-bg-light-red;
             text-decoration: none;
-            border-top-color: $strikemaster-hov-borderone;
-            border-right-color: $strikemaster-hov-bordertwo;
-            border-bottom-color: $strikemaster-hov-borderthree;
-            border-left-color: $strikemaster-hov-borderfour;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1229,22 +1192,14 @@ div {
                 .product-tile {
                     .product-image {
                         .quickview {
-                            color: $strike-black;
+                            color: $black;
                             background-color: $strikemaster-bgred;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $strikemaster-borderone;
-                            border-right-color: $strikemaster-bordertwo;
-                            border-bottom-color: $strikemaster-borderthree;
-                            border-left-color: $strikemaster-borderfour;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             background-color: $strikemaster-bg-light-red;
                             text-decoration: none;
-                            border-top-color: $strikemaster-hov-borderone;
-                            border-right-color: $strikemaster-hov-bordertwo;
-                            border-bottom-color: $strikemaster-hov-borderthree;
-                            border-left-color: $strikemaster-hov-borderfour;
+                            @include btn-border-hover-color;
 
                         }
                     }
@@ -1261,11 +1216,11 @@ div {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $strike-black;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #e12626;
+                            color: $strike-hov-red;
                         }
                     }
                 }
@@ -1341,7 +1296,7 @@ div {
                     }
                     p {
                         font-family: $font;
-                        color: $strike-black;
+                        color: $black;
                         font-size: 13px;
                         a {
                             &.readmore {
@@ -1396,7 +1351,7 @@ div {
         &.tabover {
             background: $strikemaster-bgred;
             h1 {
-                color: $strike-black;
+                color: $black;
                 background: url(../images/arrow-filter-collapse-big.png) 0 0 no-repeat;
             }
         }
@@ -1461,7 +1416,7 @@ div {
     a {
         .filter {
             span {
-                color: #fff;
+                color: $white;
                 font-size: 12px;
                 font-weight: bold;
             }
@@ -1473,7 +1428,7 @@ div {
     a {
         &.filter {
             span {
-                color: #fff;
+                color: $white;
                 font-size: 12px;
                 font-weight: bold;
             }
@@ -1486,9 +1441,9 @@ div {
         thead {
             tr.header {
                 td {
-                    background: #e12626;
-                    background: linear-gradient(to bottom, #e12626 0%, #ac0000 100%);
-                    color: #fff;
+                    background: $strike-hov-red;
+                    background: linear-gradient(to bottom, $strike-hov-red 0%, #ac0000 100%);
+                    color: $white;
                 }
             }
         }
@@ -1516,8 +1471,8 @@ div {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #e12626; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #e12626 10%, rgba(255, 255, 255, 1) 10%, #e12626 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $strike-hov-red; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $strike-hov-red 10%, rgba(255, 255, 255, 1) 10%, $strike-hov-red 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1553,12 +1508,12 @@ div {
                         .nav-group {
                             li {
                                 &.active {
-                                    background-color: #e80000;
+                                    background-color: $strike-red;
                                     border-top: 1px solid #c40000;
                                     border-right: 1px solid #e30000;
                                     border-bottom: 1px solid #f69d9d;
                                     border-left: 1px solid #e30000;
-                                    color: #fff;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1573,14 +1528,14 @@ div {
     li.first-level-no-children {
         a {
             &:hover {
-                color: #D2232A;
+                color: $strikemaster-bgred;
                 text-decoration: none;
             }
         }
     }
     li {
         &.list-active {
-            color: #D2232A;
+            color: $strikemaster-bgred;
         }
         //list-active
     }
@@ -1595,12 +1550,12 @@ div {
                         .nav-group {
                             li {
                                 &.active {
-                                    background-color: #D2232A;
-                                    border-top: 1px solid #D2232A;
-                                    border-right: 1px solid #D2232A;
-                                    border-bottom: 1px solid #D2232A;
-                                    border-left: 1px solid #D2232A;
-                                    color: #fff;
+                                    background-color: $strikemaster-bgred;
+                                    border-top: 1px solid $strikemaster-bgred;
+                                    border-right: 1px solid $strikemaster-bgred;
+                                    border-bottom: 1px solid $strikemaster-bgred;
+                                    border-left: 1px solid $strikemaster-bgred;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1701,7 +1656,7 @@ div {
                 .column.colspan2 {
                     .cell.upshift {
                         &.tabover {
-                            background-color: #D2232A;
+                            background-color: $strikemaster-bgred;
                         }
                     }
                 }
@@ -1738,7 +1693,7 @@ div {
     .label {
         text-transform: uppercase;
         font-family: $font-third;
-        color: #030303;
+        color: $strike-list-black;
         font-size: 14px;
         line-height: 17px;
         font-weight: normal;
@@ -1816,14 +1771,14 @@ div {
                     a {
                         &:hover {
                             span {
-                                color: #D2232A;
+                                color: $strikemaster-bgred;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #D2232A;
+                                color: $strikemaster-bgred;
                             }
                         }
                     }
@@ -1836,12 +1791,12 @@ div {
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #EE060F;
+        background-color: $strikemaster-bg-light-red;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -1851,12 +1806,12 @@ div {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #EE060F;
+        background-color: $strikemaster-bg-light-red;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -1868,12 +1823,12 @@ div {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #EE060F;
+        background-color: $strikemaster-bg-light-red;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -1887,7 +1842,7 @@ div {
                     span {
                         &.corner-ribbon {
                             background-color: #FF0000;
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }
@@ -1908,21 +1863,21 @@ div {
 
 .productdetail a.filter:hover,
 .productdetail a.filter:hover span {
-    color: #fff;
+    color: $white;
 }
 
 .product-price .price .salesprice {
-    color: #e12626 !important;
+    color: $strike-hov-red !important;
 }
 
 .variationattributes .swatches li.selected a {
-    color: #fff;
+    color: $white;
 }
 
 .productdetail .price .price-sales {
-    color: #e12626;
+    color: $strike-hov-red;
 }
 
 .tabover h1 a {
-    color: #000000;
+    color: $black;
 }

@@ -87,9 +87,8 @@ h1.leftnav {
     letter-spacing: 0;
     border-style: solid;
     border-width: 1px;
-    border-color: $sufix-borderdarkgrey;
+    border-color: $sufix-darkgrey;
     text-align: center;
-    /*background: $sufix-bgwhite url("../images/hr-dotted.jpg") 0 9px repeat-x;*/
 }
 
 h1, .h-one-tag {
@@ -118,7 +117,7 @@ h1, .h-one-tag {
 .productdetail {
     .price {
         font-family: $font-secondary;
-        color: #333;
+        color: $sufix-lightblack;
         font-weight: bold;
         font-size: 15px;
         line-height: 24px;
@@ -136,7 +135,7 @@ a {
         border-style: solid;
         border-width: 1px;
         clear: left;
-        color: #333333 !important;
+        color: $sufix-lightblack !important;
         display: block;
         float: left;
         font-family: $font-secondary;
@@ -153,20 +152,20 @@ a {
             background: rgba(232, 217, 0, 1);
             background: linear-gradient(to bottom, rgba(232, 217, 0, 1) 0%, rgba(255, 238, 0, 1) 100%);
             text-decoration: none;
-            color: #999;
+            color: $sufix-gray;
         }
     }
 }
 
 input {
     &.quantityinput {
-        border: 2px solid #FFF000;
-        color: #333;
+        border: 2px solid $sufix-bgyellow;
+        color: $sufix-lightblack;
     }
     .quantity {
         input {
-            border: 2px solid #FFF000;
-            color: #333;
+            border: 2px solid $sufix-bgyellow;
+            color: $sufix-lightblack;
         }
     }
 }
@@ -287,7 +286,7 @@ input {
     margin-left: 324px;
     clear: both;
     width: 423px;
-    color: #666666;
+    color: $sufix-darkgrey;
     font-family: $font;
     letter-spacing: normal;
 }
@@ -565,7 +564,7 @@ input {
                 }
                 span {
                     &.outofstockpdp {
-                        color: #e80000 !important;
+                        color: $sufix-red !important;
                     }
                 }
             }
@@ -580,7 +579,7 @@ input {
 .account-section h1 {
     font-size: 15px;
     margin: 0px;
-    color: $sufix-black;
+    color: $black;
     text-align: center;
     line-height: normal;
     font-variant: normal;
@@ -596,7 +595,7 @@ h1 a:hover {
 }
 
 h2 a:hover {
-    color: $sufix-black;
+    color: $black;
     text-decoration: none;
 }
 
@@ -641,11 +640,11 @@ h5 {
         text-transform: uppercase;
         font-weight: normal;
         font-family: $font-third;
-        color: #666;
+        color: $sufix-darkgrey;
         letter-spacing: 0;
         border-style: solid;
         border-width: 1px 1px 0 1px;
-        border-color: #666;
+        border-color: $sufix-darkgrey;
         text-align: center;
     }
 }
@@ -674,7 +673,7 @@ p {
                     background-color: $sufix-bgyellowlight;
                     border-color: $sufix-bgyellowlight;
                     a, h2, p {
-                        color: $sufix-black;
+                        color: $black;
                     }
                 }
             }
@@ -688,9 +687,7 @@ a {
 
 a.button, button {
     background-color: $sufix-bgyellow;
-    border-color: $sufix-borderyellow $sufix-borderyellowone $sufix-borderyellowtwo;
-    border-style: solid;
-    border-width: 1px;
+    @include btn-border-hover;
     clear: left;
     color: $sufix-lightblack;
     display: block;
@@ -741,7 +738,7 @@ h1.search-result {
                 a {
                     display: inline-block;
                     text-transform: capitalize;
-                    color: $sufix-black;
+                    color: $black;
                     font-weight: bold;
                 }
             }
@@ -787,21 +784,21 @@ h1.search-result {
 .categorymenusnew {
     a {
         &:hover {
-            color: $sufix-black;
+            color: $black;
         }
         .count-products {
-            color: $sufix-black;
+            color: $black;
         }
     }
     .category-top-level {
         &.active {
             a {
-                color: $sufix-black;
+                color: $black;
                 &:hover {
-                    color: $sufix-black;
+                    color: $black;
                 }
                 .count-products {
-                    color: $sufix-black;
+                    color: $black;
                 }
             }
         }
@@ -809,18 +806,18 @@ h1.search-result {
             li {
                 &.active {
                     a {
-                        color: $sufix-black;
+                        color: $black;
                         text-decoration: underline;
                         .count-products {
-                            color: $sufix-black;
+                            color: $black;
                         }
                     }
                 }
                 a {
                     &:hover {
-                        color: $sufix-black;
+                        color: $black;
                         .count-products {
-                            color: $sufix-black;
+                            color: $black;
                         }
                     }
                 }
@@ -892,13 +889,8 @@ h1.search-result {
     .product-image {
         .quickview {
             color: $sufix-lightblack;
-            border-style: solid;
-            border-width: 1px;
             background-color: $sufix-bgyellow;
-            border-top: 1px solid $sufix-borderyellow;
-            border-right: 1px solid $sufix-borderyellowone;
-            border-bottom: 1px solid $sufix-borderyellowtwo;
-            border-left: 1px solid $sufix-borderyellowone;
+            @include btn-border;
         }
         .quickview:hover {
             background-color: $sufix-bgyellowlight;
@@ -915,13 +907,8 @@ h1.search-result {
                     .product-image {
                         .quickview {
                             color: $sufix-lightblack;
-                            border-style: solid;
-                            border-width: 1px;
                             background-color: $sufix-bgyellow;
-                            border-top: 1px solid $sufix-borderyellow;
-                            border-right: 1px solid $sufix-borderyellowone;
-                            border-bottom: 1px solid $sufix-borderyellowtwo;
-                            border-left: 1px solid $sufix-borderyellowone;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             background-color: $sufix-bgyellowlight;
@@ -1019,7 +1006,7 @@ h1.search-result {
         .account-section {
             .label {
                 .labeltext {
-                    color: #666;
+                    color: $sufix-darkgrey;
                     float: none;
                     font-size: 12px;
                     font-variant: normal;
@@ -1217,12 +1204,9 @@ h1.search-result {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
-                border-top: 1px solid #d0d0d0;
-                border-right: 1px solid #e8e8e8;
-                border-bottom: 1px solid #f8f8f8;
-                border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                background-color: $sufix-bglightwhite !important;
+                @include btn-border-hover;
+                color: $sufix-lightblack !important;
                 border-radius: 3px;
             }
         }
@@ -1304,7 +1288,7 @@ h1.search-result {
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a:hover,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a:hover {
-    color: #333;
+    color: $sufix-lightblack;
 }
 
 @include respond(0, $medium-breakpoint) {
@@ -1322,8 +1306,8 @@ h1.search-result {
                 tr {
                     &:first-child {
                         th {
-                            background: #fff000;
-                            background: linear-gradient(to bottom, #fff000 0%, #e8d900 100%);
+                            background: $sufix-bgyellow;
+                            background: linear-gradient(to bottom, $sufix-bgyellow 0%, $sufix-bgyellowmedium 100%);
                             color: #000000;
                             margin: 0;
                             vertical-align: middle;
@@ -1372,7 +1356,7 @@ h1.search-result {
     #container.pt_error #primary.primary-content .errorpage .errorfooter .errorfooterbottom {
         margin-left: 0;
         width: 100%;
-        color: #666666;
+        color: $sufix-darkgrey;
         font-family: $font;
         letter-spacing: normal;
     }
@@ -1480,8 +1464,8 @@ h1.search-result {
     }
     .accordion {
         &.tabover {
-            background: none repeat scroll 0 0 $sufix-borderyellowone;
-            color: #333333;
+            background: none repeat scroll 0 0 $border-right;
+            color: $sufix-lightblack;
         }
     }
 }
@@ -1515,9 +1499,9 @@ h1.search-result {
 
 .product-specifications {
     h2 {
-        background: url("../images/hr-dotted.jpg") repeat-x scroll 0 9px #FFFFFF;
-        border: 1px solid #666;
-        color: #666;
+        background: url("../images/hr-dotted.jpg") repeat-x scroll 0 9px $white;
+        border: 1px solid $sufix-darkgrey;
+        color: $sufix-darkgrey;
         display: block;
         font-family: $font-third;
         font-size: 16px;
@@ -1533,8 +1517,8 @@ h1.search-result {
         thead {
             tr.header {
                 td {
-                    background: #fff000;
-                    background: linear-gradient(to bottom, #fff000 0%, #e8d900 100%);
+                    background: $sufix-bgyellow;
+                    background: linear-gradient(to bottom, $sufix-bgyellow 0%, $sufix-bgyellowmedium 100%);
                     color: #000000;
                 }
             }
@@ -1584,8 +1568,8 @@ h1.search-result {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #fff000; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #fff000 10%, rgba(255, 255, 255, 1) 10%, #fff000 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $sufix-bgyellow; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $sufix-bgyellow 10%, rgba(255, 255, 255, 1) 10%, $sufix-bgyellow 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1641,7 +1625,7 @@ h1.search-result {
                                         li {
                                             &.active {
                                                 a {
-                                                    color: $sufix-black;
+                                                    color: $black;
                                                 }
                                             }
                                         }
@@ -1678,7 +1662,7 @@ h1.search-result {
 .pt_customerservice {
     #content {
         .productsearchbreadcrumb, .breadcrumb {
-            background: #f1f1f1;
+            background: $sufix-bglightwhite;
         }
     }
 }
@@ -1720,14 +1704,14 @@ h1.search-result {
                     .label {
                         font-family: $font-secondary;
                         font-size: 12px;
-                        color: #333;
+                        color: $sufix-lightblack;
                     }
                 }
                 .cc-number {
                     .label {
                         font-family: $font-secondary;
                         font-size: 12px;
-                        color: #333;
+                        color: $sufix-lightblack;
                     }
                 }
                 .cc-exp {
@@ -1737,7 +1721,7 @@ h1.search-result {
                         font-weight: bold;
                         font-family: $font-secondary;
                         font-size: 13px;
-                        color: #666;
+                        color: $sufix-darkgrey;
                         font-style: italic;
                         line-height: 20px;
                     }
@@ -1750,7 +1734,7 @@ h1.search-result {
                         word-wrap: break-word;
                         font-family: $font-secondary;
                         font-size: 12px;
-                        color: #333;
+                        color: $sufix-lightblack;
                     }
                 }
             }
@@ -1789,7 +1773,7 @@ h1.search-result {
                             &.accordion {
                                 &.tabover {
                                     .folder-contentboxcontent {
-                                        background: none repeat scroll 0 0 $sufix-borderyellowone;
+                                        background: none repeat scroll 0 0 $border-right;
                                         color: $sufix-lightblack;
                                     }
                                 }
@@ -1818,14 +1802,14 @@ h1.search-result {
                     a {
                         &:hover {
                             span {
-                                color: #e80000;
+                                color: $sufix-red;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #333;
+                                color: $sufix-lightblack;
                             }
                         }
                     }
@@ -1836,13 +1820,13 @@ h1.search-result {
 }
 
 .price .salesprice {
-    color: #666;
+    color: $sufix-darkgrey;
 }
 
 .small-new {
     &.new-stamp {
         border-radius: 15px;
-        background-color: #FFF000;
+        background-color: $sufix-bgyellow;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1857,7 +1841,7 @@ h1.search-result {
     }
     &.new-stamp-big {
         border-radius: 15px;
-        background-color: #FFF000;
+        background-color: $sufix-bgyellow;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1874,7 +1858,7 @@ h1.search-result {
 .newFlagColorSize, .newPakSizeFlag {
     .new-colors-snipe, .new-sizes-snipe, .new-pak-size {
         border-radius: 15px;
-        background-color: #FFF000;
+        background-color: $sufix-bgyellow;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
@@ -1893,7 +1877,7 @@ h1.search-result {
                     span {
                         &.corner-ribbon {
                             background-color: $sufix-bgyellow;
-                            color: $sufix-black;
+                            color: $black;
                         }
                     }
                 }
@@ -1920,7 +1904,7 @@ h1.search-result {
                     .product-name {
                         a {
                             &:hover {
-                                color: #666;
+                                color: $sufix-darkgrey;
                             }
                         }
                     }
@@ -1931,5 +1915,5 @@ h1.search-result {
 }
 
 .productdetail .price .price-sales {
-    color: #666666;
+    color: $sufix-darkgrey;
 }

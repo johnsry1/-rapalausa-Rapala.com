@@ -3,17 +3,9 @@
 
 /* body */
 body {
-    color: #333;
-    font-family: $font;
-    font-size: 12px;
-    background: white url(../images/container-grid.jpg) 50% 0 repeat-y;
+    color: $trigger-list-black;
     &.js-body {
         background: none;
-    }
-    .js-container-active {
-        .open-menu-wrap {
-            background: white url(../images/container-grid.jpg) 50% -105px repeat-y;
-        }
     }
 }
 
@@ -23,7 +15,7 @@ h1, .h-one-tag {
 
 /* <a> styles */
 a {
-    color: black;
+    color: $black;
     text-decoration: none;
 }
 
@@ -114,12 +106,12 @@ h2.input-style {
 }
 
 a {
-    color: black;
+    color: $black;
     text-decoration: none;
 }
 
 p a {
-    color: black;
+    color: $black;
     font-weight: bold;
 }
 
@@ -185,7 +177,7 @@ h1.search-result {
                     .labeltext {
                         font-family: $font-fifth;
                         font-weight: normal;
-                        color: #333;
+                        color: $trigger-list-black;
                         text-transform: uppercase;
                         font-size: 16px;
                         line-height: 16px;
@@ -420,26 +412,21 @@ a.button, button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0;
-    color: #9DEC00;
+    color: $trigger-bggreen;
     padding: 0 18px 0 18px;
-    background-color: black;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #000002;
-    border-right-color: #222;
-    border-bottom-color: #404040;
-    border-left-color: #000100;
+    background-color: $black;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
-    background: #333;
+    background: $trigger-list-black;
     text-decoration: none;
     cursor: pointer;
 }
 
 .addTo-cart-section {
     a.button:hover, button:hover {
-        background: #333;
+        background: $trigger-list-black;
         text-decoration: none;
         cursor: pointer;
     }
@@ -451,7 +438,7 @@ a.button:hover, button:hover {
 }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-    color: #333;
+    color: $trigger-list-black;
     font-weight: normal;
     width: 58px;
     border-radius: 5px;
@@ -468,12 +455,12 @@ a.button:hover, button:hover {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
-    color: #666;
+    color: $trigger-gray;
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #9FCE65 60%, #7ABB29 100%);
-    color: #333;
+    background: linear-gradient(to bottom, #9FCE65 60%, $trigger-hovgreen 100%);
+    color: $trigger-list-black;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -485,7 +472,7 @@ a.button:hover, button:hover {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #7ABB29 0%, #9FCE65 60%);
+    background: linear-gradient(to bottom, $trigger-hovgreen 0%, #9FCE65 60%);
 }
 
 .pt_storefront {
@@ -567,7 +554,7 @@ a.button:hover, button:hover {
             letter-spacing: 0px;
         }
         .standardprice {
-            color: #999;
+            color: $trigger-graytwo;
             font-weight: bold;
             font-size: 15px;
             line-height: 24px;
@@ -588,7 +575,7 @@ input {
         thead {
             tr {
                 background: #9fce65;
-                background: linear-gradient(to bottom, #9fce65 0%, #7abb29 100%);
+                background: linear-gradient(to bottom, #9fce65 0%, $trigger-hovgreen 100%);
                 color: #000;
             }
         }
@@ -625,20 +612,15 @@ a.filter {
     color: $trigger-black;
     background-image: none;
     background: #9fce65;
-    background: linear-gradient(to bottom, #9fce65 0%, #7abb29 100%);
+    background: linear-gradient(to bottom, #9fce65 0%, $trigger-hovgreen 100%);
     color: #000;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #9fce65;
-    border-right-color: #9fce65;
-    border-bottom-color: #9fce65;
-    border-left-color: #9fce65;
+    @include btn-border-hover;
     background-position: 100% 0;
     background-repeat: no-repeat;
     &:hover {
         text-decoration: none;
-        background: #7abb29;
-        background: linear-gradient(to bottom, #7abb29 0%, #9fce65 100%);
+        background: $trigger-hovgreen;
+        background: linear-gradient(to bottom, $trigger-hovgreen 0%, #9fce65 100%);
     }
 }
 
@@ -741,7 +723,7 @@ a.filter {
         .account-section {
             .label {
                 .labeltext {
-                    color: #666;
+                    color: $trigger-gray;
                     float: none;
                     font-size: 12px;
                     font-variant: normal;
@@ -898,7 +880,7 @@ div {
             font-family: $font-secondary;
         }
         .salesprice {
-            color: #7abb29;
+            color: $trigger-hovgreen;
             font-family: $font-secondary;
         }
     }
@@ -910,7 +892,7 @@ div {
 }
 
 body {
-    color: #333;
+    color: $trigger-list-black;
     font-family: $font;
     font-size: 12px;
     background: white url(../images/container-grid.jpg) 50% 0 repeat-y;
@@ -1009,12 +991,12 @@ body {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
+                background-color: $trigger-lightbg !important;
                 border-top: 1px solid #d0d0d0;
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $trigger-list-black !important;
                 border-radius: 3px;
             }
         }
@@ -1087,7 +1069,7 @@ body {
             tbody {
                 tr:first-child {
                     background: #9fce65;
-                    background: linear-gradient(to bottom, #9fce65 0%, #7abb29 100%);
+                    background: linear-gradient(to bottom, #9fce65 0%, $trigger-hovgreen 100%);
                     color: #000;
                     th {
                         border: none;
@@ -1221,7 +1203,7 @@ body {
         .account-options {
             li {
                 background: $trigger-white;
-                box-shadow: #999 0 0 10px;
+                box-shadow: $trigger-graytwo 0 0 10px;
                 position: relative;
                 h2 {
                     text-align: center;
@@ -1268,12 +1250,7 @@ body {
     .product-image {
         .quickview {
             color: $trigger-bggreen;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $trigger-borderone;
-            border-right-color: $trigger-bordertwo;
-            border-bottom-color: $trigger-borderthree;
-            border-left-color: $trigger-borderfour;
+            @include btn-border;
             background-color: $trigger-black;
         }
         .quickview:hover {
@@ -1291,12 +1268,7 @@ body {
                     .product-image {
                         .quickview {
                             color: $trigger-bggreen;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $trigger-borderone;
-                            border-right-color: $trigger-bordertwo;
-                            border-bottom-color: $trigger-borderthree;
-                            border-left-color: $trigger-borderfour;
+                            @include btn-border;
                             background-color: $trigger-black;
                         }
                         .quickview:hover {
@@ -1322,7 +1294,7 @@ body {
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #7abb29;
+                            color: $trigger-hovgreen;
                         }
                     }
                 }
@@ -1341,7 +1313,7 @@ body {
                     }
                     .product-swatches-all:hover {
                         text-decoration: underline;
-                        color: #7abb29 !important;
+                        color: $trigger-hovgreen !important;
                     }
                 }
             }
@@ -1550,8 +1522,8 @@ table {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #7abb29; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #7abb29 10%, rgba(255, 255, 255, 1) 10%, #7abb29 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $trigger-hovgreen; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $trigger-hovgreen 10%, rgba(255, 255, 255, 1) 10%, $trigger-hovgreen 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1578,11 +1550,11 @@ table {
 }
 
 .price {
-    color: #999;
+    color: $trigger-graytwo;
     margin: 0 auto;
     text-align: left;
     .standardprice {
-        color: #999;
+        color: $trigger-graytwo;
         font-size: 15px;
         font-weight: bold;
         letter-spacing: 0;
@@ -1701,7 +1673,7 @@ table {
     .label {
         text-transform: uppercase;
         padding-bottom: 2px;
-        color: #333;
+        color: $trigger-list-black;
         font-family: $font-fifth;
         font-weight: bold;
         font-size: 16px;
@@ -1757,14 +1729,14 @@ table {
                     a {
                         &:hover {
                             span {
-                                color: #333;
+                                color: $trigger-list-black;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #333;
+                                color: $trigger-list-black;
                             }
                         }
                     }
@@ -1846,7 +1818,7 @@ table {
 }
 
 .productdetail .price .price-sales {
-    color: #7abb29;
+    color: $trigger-hovgreen;
 }
 
 .pt_product-details {

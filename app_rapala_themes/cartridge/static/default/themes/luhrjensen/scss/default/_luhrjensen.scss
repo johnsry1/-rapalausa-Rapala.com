@@ -8,18 +8,12 @@ body {
     }
 }
 
-/* <a> styles */
-a {
-    color: #0078AE;
-    text-decoration: none;
-}
-
 .pt_productsearchresult #page-background .row.column3 .colspan2.cell4 .contentboxcontent a.searchedfor {
-    color: #0069a6;
+    color: $luhr-nav-lightblue;
 }
 
 .categorymenusnew .category-top-level > a:hover .count-products, .categorymenusnew li.active > a .count-products {
-    color: #0069a6;
+    color: $luhr-nav-lightblue;
 }
 
 h1, .h-one-tag {
@@ -39,13 +33,12 @@ h2.input-style {
 }
 
 p a {
-    color: #0078AE;
+    color: $link-color;
     font-weight: bold;
 }
 
-
 a {
-    color: #0078AE;
+    color: $link-color;
     text-decoration: none;
 }
 
@@ -63,35 +56,27 @@ a.button, button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: white;
+    color: $white;
     padding: 0 18px 0 18px;
-    background-color: #0078AE;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #006593;
-    border-right-color: #0075AA;
-    border-bottom-color: #9DCBE0;
-    border-left-color: #0075AA;
+    background-color: $main-color;
+    @include btn-border;
 }
 
 a.button:hover, button:hover {
     cursor: pointer;
-    background-color: #3CF;
+    background-color: $luhr-bg-lightblue;
     text-decoration: none;
-    border-top-color: #2BACD7;
-    border-right-color: #32C7F9;
-    border-bottom-color: #B1EBFF;
-    border-left-color: #32C7F9;
+    @include btn-border-color;
 }
 
 a:hover {
     text-decoration: none;
     cursor: pointer;
-    color: #3CF;
+    color: $luhr-bg-lightblue;
 }
 
 p a {
-    color: #0078AE;
+    color: $main-color;
     font-weight: bold;
 }
 
@@ -120,11 +105,8 @@ h1.search-result {
 
 .pt_customerservice {
     .nav-group li.active {
-        background-color: #0078AE;
-        border-top-color: #006593;
-        border-right-color: #0075AA;
-        border-bottom-color: #9DCBE0;
-        border-left-color: #0075AA;
+        background-color: $main-color;
+        @include btn-border-color;
     }
 }
 
@@ -135,7 +117,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-    color: white;
+    color: $white;
     font-weight: normal;
     background-image: url(../images/multi-site-one-cart-bg.png);
     width: 58px;
@@ -152,12 +134,12 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
-    color: #0078ae;
+    color: $main-color;
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-    background: linear-gradient(to bottom, #0069a6 60%, #004971 100%);
-    color: #fff;
+    background: linear-gradient(to bottom, $luhr-nav-lightblue 60%, #004971 100%);
+    color: $white;
     text-align: center;
     text-decoration: none;
     padding: 7px 0;
@@ -169,7 +151,7 @@ h1.search-result {
 }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-    background: linear-gradient(to bottom, #004971 0%, #0069a6 60%);
+    background: linear-gradient(to bottom, #004971 0%, $luhr-nav-lightblue 60%);
 }
 
 .pt_acc_landing {
@@ -197,13 +179,13 @@ h1.search-result {
                     border-color: $luhr-bg-lightblue;
                     transition: none;
                     h2 {
-                        color: $luhr-white;
+                        color: $white;
                     }
                     p {
-                        color: $luhr-white;
+                        color: $white;
                     }
                     i {
-                        color: $luhr-white;
+                        color: $white;
                     }
                 }
             }
@@ -225,7 +207,7 @@ h1.search-result {
                     .labeltext {
                         font-family: $font-third;
                         font-weight: bold;
-                        color: #333;
+                        color: $night-rider;
                         text-transform: uppercase;
                         font-size: 16px;
                         line-height: 16px;
@@ -250,7 +232,7 @@ h1.search-result {
                     th {
                         font-family: $font-third;
                         font-weight: bold;
-                        color: $luhr-light-black;
+                        color: $night-rider;
                         text-transform: uppercase;
                         font-size: 16px;
                         line-height: 16px;
@@ -259,7 +241,7 @@ h1.search-result {
                         .order-price {
                             .value {
                                 font-family: $font-fourth;
-                                color: $luhr-bgdarkblue;
+                                color: $main-color;
                                 font-weight: bold;
                                 font-style: italic;
                                 font-size: 24px;
@@ -279,7 +261,7 @@ h1.search-result {
             .product-list-item {
                 span {
                     &.price-sales {
-                        color: $luhr-bgdarkblue;
+                        color: $main-color;
                         font-family: $font-fourth;
                         font-weight: bold;
                         font-size: 15px;
@@ -298,8 +280,8 @@ h1.search-result {
                     &.form-row-button {
                         button {
                             &.simple {
-                                background-color: $luhr-bgdarkblue;
-                                color: $luhr-white;
+                                background-color: $main-color;
+                                color: $white;
                                 &:hover {
                                     background-color: $luhr-bg-lightblue;
                                 }
@@ -328,7 +310,7 @@ h1.search-result {
         .address-list {
             .address-tile {
                 .mini-address-title {
-                    color: $luhr-light-black;
+                    color: $night-rider;
                     font-family: $font-third;
                     font-weight: bold;
                     font-size: 16px;
@@ -363,14 +345,14 @@ h1.search-result {
                 font-size: 28px;
                 line-height: 28px;
                 font-weight: bold;
-                color: $luhr-black;
+                color: $body-color;
             }
             .value {
                 font-size: 28px;
                 line-height: 28px;
                 font-family: $font-third;
                 text-transform: uppercase;
-                color: $luhr-black;
+                color: $body-color;
             }
         }
     }
@@ -386,7 +368,7 @@ h1.search-result {
         .label {
             font-family: $font;
             font-weight: bold;
-            color: $luhr-light-black;
+            color: $night-rider;
             font-size: 16px;
             line-height: 16px;
             text-transform: uppercase;
@@ -399,7 +381,7 @@ h1.search-result {
         .line-item {
             .line-item-price {
                 font-family: $font-fourth;
-                color: $luhr-bgdarkblue;
+                color: $main-color;
                 font-weight: bold;
                 font-style: italic;
                 font-size: 24px;
@@ -407,7 +389,7 @@ h1.search-result {
                 .label {
                     font-family: $font;
                     font-weight: bold;
-                    color: $luhr-light-black;
+                    color: $night-rider;
                     font-size: 16px;
                     line-height: 16px;
                     text-transform: uppercase;
@@ -422,7 +404,7 @@ h1.search-result {
     .selected {
         a {
             &.filter {
-                color: $luhr-light-black;
+                color: $night-rider;
             }
         }
     }
@@ -430,7 +412,7 @@ h1.search-result {
         &.filter {
             span {
                 font-style: italic;
-                color: $luhr-white;
+                color: $white;
                 font-weight: normal;
             }
         }
@@ -442,7 +424,7 @@ h1.search-result {
                 a {
                     &.filter {
                         span {
-                            color: $luhr-white;
+                            color: $white;
                         }
                     }
                 }
@@ -482,13 +464,13 @@ h1.search-result {
     }
     .price {
         font-family: $font-secondary;
-        color: $luhr-bgdarkblue;
+        color: $main-color;
         font-weight: bold;
         font-size: 15px;
         line-height: 24px;
         letter-spacing: 0px;
         .salesprice {
-            color: #0069a6;
+            color: $luhr-nav-lightblue;
             font-weight: bold;
             font-size: 15px;
             line-height: 24px;
@@ -499,8 +481,8 @@ h1.search-result {
 
 input {
     &.quantityinput {
-        border: 2px solid $luhr-bgdarkblue;
-        color: $luhr-bgdarkblue;
+        border: 2px solid $main-color;
+        color: $main-color;
     }
 }
 
@@ -516,27 +498,19 @@ a.filter {
     font-style: normal;
     font-weight: bold;
     letter-spacing: 0;
-    color: #fff !important;
+    color: $white !important;
     padding: 5px 28px 5px 10px;
-    border-style: solid;
-    border-width: 1px;
+    @include btn-border;
     background: rgba(53, 147, 191, 1);
     background: linear-gradient(to bottom, rgba(53, 147, 191, 1) 0%, rgba(0, 119, 174, 1) 100%);
-    border-top-color: #006593;
-    border-right-color: #0075AA;
-    border-bottom-color: #9DCBE0;
-    border-left-color: #0075AA;
     background-position: 100% 0;
     background-repeat: no-repeat;
     &:hover {
         text-decoration: none;
         background: rgba(0, 119, 174, 1);
         background: linear-gradient(to bottom, rgba(0, 119, 174, 1) 0%, rgba(53, 147, 191, 1) 100%);
-        border-top-color: #2BACD7;
-        border-right-color: #32C7F9;
-        border-bottom-color: #B1EBFF;
-        border-left-color: #32C7F9;
-        color: #999;
+        @include btn-border-hover-color;
+        color: $luhr-gray;
     }
 }
 
@@ -561,14 +535,14 @@ a.filter {
                 a {
                     border-color: $luhr-bg-lightblue;
                     background-color: $luhr-bg-lightblue;
-                    color: $luhr-white;
+                    color: $white;
                     background-image: none;
                 }
             }
             a {
                 &:hover {
                     background-image: none;
-                    color: $luhr-white;
+                    color: $white;
                     background-color: $luhr-bg-lightblue;
                     border-color: $luhr-bg-lightblue;
                 }
@@ -579,7 +553,7 @@ a.filter {
 
 #special-offers {
     .promotion-title {
-        color: $luhr-black;
+        color: $body-color;
     }
 }
 
@@ -587,7 +561,7 @@ a.filter {
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a:hover,
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a:hover {
-    color: #0078AE;
+    color: $main-color;
 }
 
 #tabs {
@@ -597,14 +571,14 @@ a.filter {
                 a {
                     &:hover {
                         span {
-                            color: $luhr-bgdarkblue;
+                            color: $main-color;
                         }
                     }
                 }
                 &.ui-state-active {
                     a {
                         span {
-                            color: $luhr-bgdarkblue;
+                            color: $main-color;
                         }
                     }
                 }
@@ -788,7 +762,7 @@ form {
     .label {
         font-family: $font-third;
         font-weight: bold;
-        color: #333;
+        color: $night-rider;
         font-size: 16px;
         font-weight: bold;
         line-height: 16px;
@@ -802,7 +776,7 @@ form {
         .label {
             font-family: $font-third;
             font-weight: bold;
-            color: #333;
+            color: $night-rider;
             font-size: 16px !important;
             font-weight: bold !important;
             line-height: 16px !important;
@@ -888,7 +862,7 @@ form {
 
     #container.pt_product-search-noresult {
         .breadcrumb {
-            background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
+            background: $white url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
         }
     }
     .desktop-view {
@@ -925,12 +899,12 @@ form {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
+                background-color: $luhr-lightbg !important;
                 border-top: 1px solid #d0d0d0;
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $night-rider !important;
                 border-radius: 3px;
             }
         }
@@ -958,7 +932,7 @@ form {
     .pt_content-search-result,
     .pt_leftnav-profile {
         .breadcrumb {
-            background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
+            background: $white url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
             height: auto !important;
             font-size: 13px;
             font-family: $font-secondary;
@@ -995,9 +969,9 @@ form {
                 .footer-left-section {
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #rapala_insider, #follow_us {
-                            background-color: #f1f1f1;
+                            background-color: $luhr-lightbg;
                             .social-icons {
-                                background-color: #f1f1f1;
+                                background-color: $luhr-lightbg;
                             }
                         }
                     }
@@ -1022,8 +996,8 @@ form {
                             th {
                                 width: 100%;
                                 background: #3594BF;
-                                background: linear-gradient(to bottom, #3594BF 0%, #0078AE 100%);
-                                color: #fff;
+                                background: linear-gradient(to bottom, #3594BF 0%, $main-color 100%);
+                                color: $white;
                                 vertical-align: middle;
                                 border: none;
                                 border-top-left-radius: 3px;
@@ -1043,7 +1017,7 @@ form {
                             }
                         }
                         &:nth-child(even) {
-                            background: #fff;
+                            background: $white;
                         }
                         &:nth-child(odd) {
                             background: #E2EFF5;
@@ -1130,15 +1104,13 @@ form {
     }
 }
 
-a.button:hover, button:hover {
+a.button:hover,
+button:hover {
     cursor: pointer;
-    background: #3CF;
+    background: $luhr-bg-lightblue;
     text-decoration: none;
-    border-top-color: #2BACD7;
-    border-right-color: #32C7F9;
-    border-bottom-color: #B1EBFF;
-    border-left-color: #32C7F9;
-    color: #FFFFFF;
+    @include btn-border-hover-color;
+    color: $white;
 }
 
 .addTo-cart-section {
@@ -1146,11 +1118,8 @@ a.button:hover, button:hover {
         cursor: pointer;
         background: linear-gradient(to bottom, rgba(0, 119, 174, 1) 0%, rgba(53, 147, 191, 1) 100%) !important;
         text-decoration: none;
-        border-top-color: #2BACD7;
-        border-right-color: #32C7F9;
-        border-bottom-color: #B1EBFF;
-        border-left-color: #32C7F9;
-        color: #FFFFFF;
+        @include btn-border-hover-color;
+        color: $white;
     }
 }
 
@@ -1159,8 +1128,8 @@ a.button:hover, button:hover {
         thead {
             tr {
                 background: #3594BF;
-                background: linear-gradient(to bottom, #3594BF 0%, #0078AE 100%);
-                color: #fff;
+                background: linear-gradient(to bottom, #3594BF 0%, $main-color 100%);
+                color: $white;
             }
         }
         tbody {
@@ -1219,7 +1188,7 @@ a.button:hover, button:hover {
                     background-color: $luhr-bg-lightblue;
                     border-color: $luhr-bg-lightblue;
                     a, h2, p {
-                        color: $luhr-white;
+                        color: $white;
                     }
                 }
             }
@@ -1233,7 +1202,7 @@ a.button:hover, button:hover {
             .contentboxcontent {
                 h1 {
                     &.left-nav-style {
-                        color: $luhr-black;
+                        color: $body-color;
                         font-family: $font-third;
                         font-size: 18px;
                         font-weight: bold;
@@ -1248,23 +1217,15 @@ a.button:hover, button:hover {
     .product-image {
         .quickview {
             font-family: $font;
-            background-color: $luhr-bgdarkblue;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $luhr-borderblueone;
-            border-right-color: $luhr-borderbluetwo;
-            border-bottom-color: $luhr-borderbluethree;
-            border-left-color: $luhr-borderbluefour;
-            color: white;
+            background-color: $main-color;
+            @include btn-border;
+            color: $white;
         }
         .quickview:hover {
-            color: white;
+            color: $white;
             background-color: $luhr-bg-lightblue;
             text-decoration: none;
-            border-top-color: $luhr-borderbluelightone;
-            border-right-color: $luhr-borderbluelighttwo;
-            border-bottom-color: $luhr-borderbluelightthree;
-            border-left-color: $luhr-borderbluelightfour;
+            @include btn-border-hover-color;
         }
     }
 }
@@ -1277,24 +1238,15 @@ a.button:hover, button:hover {
                     .product-image {
                         .quickview {
                             font-family: $font;
-                            background-color: $luhr-bgdarkblue;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $luhr-borderblueone;
-                            border-right-color: $luhr-borderbluetwo;
-                            border-bottom-color: $luhr-borderbluethree;
-                            border-left-color: $luhr-borderbluefour;
-                            color: white;
+                            background-color: $main-color;
+                            @include btn-border;
+                            color: $white;
                         }
                         .quickview:hover {
-                            color: white;
+                            color: $white;
                             background-color: $luhr-bg-lightblue;
                             text-decoration: none;
-                            border-top-color: $luhr-borderbluelightone;
-                            border-right-color: $luhr-borderbluelighttwo;
-                            border-bottom-color: $luhr-borderbluelightthree;
-                            border-left-color: $luhr-borderbluelightfour;
-
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -1310,11 +1262,11 @@ a.button:hover, button:hover {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $luhr-black;
+                            color: $body-color;
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #0069a6;
+                            color: $luhr-nav-lightblue;
                         }
                     }
                 }
@@ -1329,11 +1281,11 @@ a.button:hover, button:hover {
             .search-result-content {
                 .product-tile {
                     .product-swatches-all {
-                        color: $luhr-bgdarkblue;
+                        color: $main-color;
                     }
                     .product-swatches-all:hover {
                         text-decoration: underline;
-                        color: #0069a6 !important;
+                        color: $luhr-nav-lightblue !important;
                     }
                 }
             }
@@ -1413,7 +1365,7 @@ a.button:hover, button:hover {
                             &.active {
                                 a {
                                     span {
-                                        color: $luhr-bgdarkblue;
+                                        color: $main-color;
                                     }
                                 }
                             }
@@ -1425,19 +1377,19 @@ a.button:hover, button:hover {
                 li {
                     a {
                         font-family: $font-third;
-                        color: $luhr-light-black;
+                        color: $night-rider;
                         font-size: 18px;
                         line-height: 18px;
                         font-weight: bold;
                     }
                     p {
                         font-family: $font-third;
-                        color: $luhr-light-black;
+                        color: $night-rider;
                         font-size: 13px;
                         a {
                             &.readmore {
                                 font-family: $font;
-                                color: $luhr-bgdarkblue;
+                                color: $main-color;
                                 &:hover {
                                     color: $luhr-bg-lightblue;
                                 }
@@ -1463,7 +1415,7 @@ a.button:hover, button:hover {
             h1 {
                 background: url(../images/arrow-filter-collapse-big.png) 0 0 no-repeat;
                 a {
-                    color: $luhr-white;
+                    color: $white;
                 }
             }
         }
@@ -1522,8 +1474,8 @@ a.button:hover, button:hover {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #0069a6; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #0069a6 10%, rgba(255, 255, 255, 1) 10%, #0069a6 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $luhr-nav-lightblue; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $luhr-nav-lightblue 10%, rgba(255, 255, 255, 1) 10%, $luhr-nav-lightblue 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1552,7 +1504,7 @@ a.button:hover, button:hover {
 .productdetail {
     .price {
         .standardprice {
-            color: #999;
+            color: $luhr-gray;
             font-size: 15px;
             font-weight: bold;
             letter-spacing: 0;
@@ -1567,7 +1519,7 @@ a.button:hover, button:hover {
             li {
                 a {
                     span {
-                        color: #e80000;
+                        color: $luhr-red;
                     }
                 }
             }
@@ -1582,18 +1534,18 @@ a.button:hover, button:hover {
                 a {
                     &:hover {
                         span {
-                            color: #0078ae;
+                            color: $main-color;
                         }
                     }
                 }
                 &.selected {
                     a {
                         span {
-                            color: #0078ae;
+                            color: $main-color;
                         }
                         &:hover {
                             span {
-                                color: #0078ae;
+                                color: $main-color;
                             }
                         }
                     }
@@ -1608,7 +1560,7 @@ a.button:hover, button:hover {
     li.first-level-no-children {
         a {
             &:hover {
-                color: #0078AE;
+                color: $main-color;
                 text-decoration: none;
             }
         }
@@ -1624,12 +1576,9 @@ a.button:hover, button:hover {
                         .nav-group {
                             li {
                                 &.active {
-                                    background: none repeat scroll 0 0 #3CF;
-                                    border-top: 1px solid #3CF;
-                                    border-right: 1px solid #3CF;
-                                    border-bottom: 1px solid #3CF;
-                                    border-left: 1px solid #3CF;
-                                    color: #fff;
+                                    background: none repeat scroll 0 0 $luhr-bg-lightblue;
+                                    border: 1px solid $luhr-bg-lightblue;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1716,7 +1665,7 @@ a.button:hover, button:hover {
 .pt_customerservice {
     #content {
         .productsearchbreadcrumb, .breadcrumb {
-            background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x;
+            background: $white url(../images/container-background-70.jpg) 50% 0 repeat-x;
         }
     }
 }
@@ -1728,9 +1677,9 @@ a.button:hover, button:hover {
                 .column.colspan2 {
                     .cell.upshift {
                         &.tabover {
-                            background: none repeat scroll 0 0 #3CF;
+                            background: none repeat scroll 0 0 $luhr-bg-lightblue;
                             a {
-                                color: #fff;
+                                color: $white;
                             }
                         }
                     }
@@ -1768,7 +1717,7 @@ a.button:hover, button:hover {
     .label {
         text-transform: uppercase;
         padding-bottom: 2px;
-        color: #333;
+        color: $night-rider;
         font-family: $font-third;
         font-weight: bold;
         font-size: 16px;
@@ -1787,12 +1736,6 @@ a.button:hover, button:hover {
                     font-size: 28px;
                     line-height: 28px;
                 }
-                #CreditCardForm {
-                    .form-row {
-                        .field-wrapper {
-                        }
-                    }
-                }
             }
         }
     }
@@ -1806,14 +1749,14 @@ a.button:hover, button:hover {
                     a {
                         &:hover {
                             span {
-                                color: #0078AE;
+                                color: $main-color;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #0078AE;
+                                color: $main-color;
                             }
                         }
                     }
@@ -1831,7 +1774,7 @@ a.button:hover, button:hover {
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -1846,7 +1789,7 @@ a.button:hover, button:hover {
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #fff;
+        color: $white;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -1863,7 +1806,7 @@ a.button:hover, button:hover {
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #fff;
+        color: $white;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -1877,7 +1820,7 @@ a.button:hover, button:hover {
                     span {
                         &.corner-ribbon {
                             background-color: #00CEFE;
-                            color: #fff;
+                            color: $white;
                         }
                     }
                 }
@@ -1897,5 +1840,5 @@ a.button:hover, button:hover {
 }
 
 .productdetail .price .price-sales {
-    color: #0069a6;
+    color: $luhr-nav-lightblue;
 }
