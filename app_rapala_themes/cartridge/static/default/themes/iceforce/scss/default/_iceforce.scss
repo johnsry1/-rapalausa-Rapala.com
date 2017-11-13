@@ -70,8 +70,8 @@ a {
         background-position: 100% 0;
         background-repeat: no-repeat;
         background-image: url(../images/arrow-filter-expand-big.png);
-        background: #333333;
-        background: linear-gradient(to bottom, #333333 0%, #000000 100%);
+        background: $body-color;
+        background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
         color: #fff;
         border-top-color: black;
         border-right-color: black;
@@ -80,7 +80,7 @@ a {
 
         &:hover {
             background: #000000;
-            background: linear-gradient(to bottom, #000000 0%, #333333 100%);
+            background: linear-gradient(to bottom, #000000 0%, $body-color 100%);
             border-top-color: #393939;
             border-right-color: #424242;
             border-bottom-color: #B7B7B7;
@@ -161,7 +161,7 @@ h1.search-result {
             .product-list-item {
                 span {
                     &.price-sales {
-                        color: $ice-hov-black;
+                        color: $main-color;
                         font-size: 15px;
                     }
                 }
@@ -181,7 +181,7 @@ h1.search-result {
             .address-tile {
                 .mini-address-title {
                     font-family: $font;
-                    color: $ice-light-black;
+                    color: $body-color;
                     text-transform: uppercase;
                     font-size: 12px;
                     line-height: 12px;
@@ -216,7 +216,7 @@ h1.search-result {
                         font-weight: normal;
                         font-size: 25px;
                         line-height: 25px;
-                        color: $ice-bgblack;
+                        color: $main-color;
                         padding: 10px 0;
                     }
                     p {
@@ -225,17 +225,17 @@ h1.search-result {
                     }
                 }
                 &:hover {
-                    background-color: $ice-bgblack;
-                    border-color: $ice-bgblack;
+                    background-color: $main-color;
+                    border-color: $main-color;
                     transition: none;
                     h2 {
-                        color: $ice-white;
+                        color: $white;
                     }
                     p {
-                        color: $ice-white;
+                        color: $white;
                     }
                     i {
-                        color: $ice-white;
+                        color: $white;
                     }
                 }
             }
@@ -247,7 +247,7 @@ h1.search-result {
     #primary {
         #RegistrationForm {
             legend {
-                color: $ice-light-black;
+                color: $body-color;
                 font-family: $font;
                 font-weight: bold;
                 font-size: 12px;
@@ -256,7 +256,7 @@ h1.search-result {
             .form-row {
                 .label {
                     .labeltext {
-                        color: $ice-light-black;
+                        color: $body-color;
                         font-family: $font;
                         font-weight: bold;
                         font-size: 12px;
@@ -285,7 +285,7 @@ h1.search-result {
                 .order-history-table {
                     th {
                         font-family: $font-eight;
-                        color: $ice-bgblack;
+                        color: $main-color;
                         text-transform: uppercase;
                         font-size: 16px;
                         line-height: 16px;
@@ -295,7 +295,7 @@ h1.search-result {
                         .order-price {
                             .value {
                                 font-family: $font-sixth;
-                                color: $ice-bgblack;
+                                color: $main-color;
                                 font-weight: bold;
                                 font-style: italic;
                                 font-size: 30px;
@@ -362,7 +362,7 @@ h1.search-result {
                     &.form-row-button {
                         button {
                             &.simple {
-                                background-color: $ice-hov-black;
+                                background-color: $main-color;
                                 color: $white;
                                 &:hover {
                                     background: $ice-bg-light-black;
@@ -384,7 +384,7 @@ h1.search-result {
                 line-height: 28px;
                 font-weight: bold;
                 font-family: $font-third;
-                color: $ice-light-black;
+                color: $body-color;
                 text-transform: uppercase;
                 font-style: normal;
             }
@@ -393,7 +393,7 @@ h1.search-result {
                 line-height: 28px;
                 font-weight: bold;
                 font-family: $font-third;
-                color: $ice-light-black;
+                color: $body-color;
                 text-transform: uppercase;
                 font-style: normal;
             }
@@ -409,7 +409,7 @@ h1.search-result {
     .line-item-quantity,
     .line-item-price {
         .label {
-            color: $ice-light-black;
+            color: $body-color;
             font-family: $font;
             font-weight: bold;
             font-size: 12px;
@@ -424,13 +424,13 @@ h1.search-result {
         .line-item {
             .line-item-price {
                 font-family: $font-sixth;
-                color: $ice-bgblack;
+                color: $main-color;
                 font-weight: bold;
                 font-style: italic;
                 font-size: 24px;
                 line-height: 24px;
                 .label {
-                    color: $ice-light-black;
+                    color: $body-color;
                     font-family: $font;
                     font-weight: bold;
                     font-size: 12px;
@@ -444,7 +444,8 @@ h1.search-result {
 }
 
 /*buttons*/
-a.button, button {
+a.button,
+button {
     margin: 0;
     display: block;
     clear: left;
@@ -469,7 +470,8 @@ a.button, button {
     border-left-color: black;
 }
 
-a.button:hover, button:hover {
+a.button:hover,
+button:hover {
     text-decoration: none;
     background: #444;
     border-top-color: #393939;
@@ -536,7 +538,7 @@ a.button:hover, button:hover {
 }
 
 .shop-brand {
-    font-family: $ice-original;
+    font-family: $font-third;
     font-size: 22px;
     font-weight: bold;
     font-style: normal;
@@ -547,25 +549,25 @@ a.button:hover, button:hover {
 .categorymenusnew {
     a {
         &:hover {
-            color: $ice-hov-black;
+            color: $main-color;
             .count-products {
-                color: $ice-hov-black;
+                color: $main-color;
             }
         }
     }
     .category-top-level {
         &.active {
             a {
-                color: $ice-hov-black;
+                color: $main-color;
                 &:hover {
-                    color: $ice-hov-black;
+                    color: $main-color;
                     .count-products {
-                        color: $ice-hov-black;
+                        color: $main-color;
                     }
 
                 }
                 .count-products {
-                    color: $ice-hov-black;
+                    color: $main-color;
                 }
             }
             ul {
@@ -578,18 +580,18 @@ a.button:hover, button:hover {
             li {
                 &.active {
                     a {
-                        color: $ice-hov-black;
+                        color: $main-color;
                         text-decoration: underline;
                         .count-products {
-                            color: $ice-hov-black;
+                            color: $main-color;
                         }
                     }
                 }
                 a {
                     &:hover {
-                        color: $ice-hov-black;
+                        color: $main-color;
                         .count-products {
-                            color: $ice-hov-black;
+                            color: $main-color;
                         }
                     }
                 }
@@ -808,7 +810,7 @@ div {
 }
 
 body {
-    color: #333;
+    color: $body-color;
     font-family: $font;
     font-size: 12px;
     background: black url(../images/body-background-70.jpg) 50% 0 repeat;
@@ -873,7 +875,7 @@ body {
                     width: calc(100% - 50px);
                     height: 40px;
                     line-height: 40px;
-                    color: $ice-white;
+                    color: $white;
                     background-image: none;
                     background: rgba(51, 51, 51, 1);
                     background: linear-gradient(to bottom, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 1) 100%);
@@ -974,11 +976,11 @@ body {
             &.filter {
                 span {
                     font-style: normal;
-                    color: $ice-white;
+                    color: $white;
                     font-weight: normal;
                 }
                 .selectedvarval {
-                    color: $ice-white;
+                    color: $white;
                 }
             }
         }
@@ -999,7 +1001,7 @@ body {
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $body-color !important;
                 border-radius: 3px;
             }
         }
@@ -1007,8 +1009,8 @@ body {
     .current {
         a {
             &.filter {
-                color: $ice-white;
-                border: 1px solid $ice-hov-black;
+                color: $white;
+                border: 1px solid $main-color;
                 background: rgba(51, 51, 51, 1);
                 background: linear-gradient(to bottom, rgba(51, 51, 51, 1) 0%, rgba(0, 0, 0, 1) 100%);
                 &:hover {
@@ -1101,19 +1103,19 @@ body {
                     .footer-links {
                         #about, #customer-service, #More-ways-to-shop, #busniness, #follow_us, #rapala_insider {
                             #linkheading {
-                                color: $ice-bgblack;
+                                color: $main-color;
                                 a {
-                                    color: $ice-bgblack;
+                                    color: $main-color;
                                     span {
-                                        color: $ice-bgblack;
+                                        color: $main-color;
                                     }
                                 }
                             }
                             ul {
                                 li {
-                                    color: $ice-bgblack;
+                                    color: $main-color;
                                     a {
-                                        color: $ice-bgblack;
+                                        color: $main-color;
                                     }
                                 }
                             }
@@ -1121,9 +1123,9 @@ body {
                         #about.expanded, #customer-service.expanded, #More-ways-to-shop.expanded, #busniness.expanded, #follow_us.expanded, #rapala_insider.expanded {
                             ul {
                                 li {
-                                    color: $ice-bgblack;
+                                    color: $main-color;
                                     a {
-                                        color: $ice-bgblack;
+                                        color: $main-color;
                                     }
                                 }
                             }
@@ -1236,7 +1238,7 @@ body {
                     background: url("../images/search-full-iceforce.png") no-repeat scroll 0 0 transparent;
                 }
                 button.btn {
-                    background: url("../images/search-full-iceforce.png") no-repeat scroll right top $ice-bgblack;
+                    background: url("../images/search-full-iceforce.png") no-repeat scroll right top $main-color;
                     transition: none;
                     &:hover {
                         background: url("../images/search-full-iceforce.png") no-repeat $ice-bg-light-black;
@@ -1255,7 +1257,7 @@ body {
     .content-asset {
         .account-options {
             li {
-                background: $ice-white;
+                background: $white;
                 box-shadow: #999 0 0 10px;
                 position: relative;
                 h2 {
@@ -1265,16 +1267,16 @@ body {
                     font-size: 25px;
                     font-variant: small-caps;
                     font-weight: normal;
-                    color: $ice-bgblack;
+                    color: $main-color;
                 }
                 p, a {
-                    color: $ice-bgblack;
+                    color: $main-color;
                 }
                 &:hover {
-                    background-color: $ice-bgblack;
-                    border-color: $ice-bgblack;
+                    background-color: $main-color;
+                    border-color: $main-color;
                     a, h2, p {
-                        color: $ice-white;
+                        color: $white;
                     }
                 }
             }
@@ -1288,8 +1290,8 @@ body {
             .contentboxcontent {
                 h1 {
                     &.leftnav {
-                        color: $ice-bgblack;
-                        font-family: $ice-original;
+                        color: $main-color;
+                        font-family: $font-third;
                         font-size: 22px;
                         font-weight: bold;
                     }
@@ -1302,22 +1304,22 @@ body {
 .product-tile {
     .product-image {
         .quickview {
-            background-color: $ice-bgblack;
+            background-color: $main-color;
             border-style: solid;
             border-width: 1px;
-            border-top-color: $ice-bgblack;
-            border-right-color: $ice-bgblack;
-            border-bottom-color: $ice-border;
-            border-left-color: $ice-bgblack;
+            border-top-color: $main-color;
+            border-right-color: $main-color;
+            border-bottom-color: $border-color;
+            border-left-color: $main-color;
             color: $white;
         }
         .quickview:hover {
             background-color: $ice-bg-light-black;
             text-decoration: none;
-            border-top-color: $ice-borderone;
-            border-right-color: $ice-bordertwo;
-            border-bottom-color: $ice-borderthree;
-            border-left-color: $ice-borderfour;
+            border-top-color: $border-color-one;
+            border-right-color: $border-color-two;
+            border-bottom-color: $border-color-three;
+            border-left-color: $border-color-four;
         }
     }
 }
@@ -1330,21 +1332,21 @@ body {
                     .product-image {
                         .quickview {
                             color: $white;
-                            background-color: $ice-bgblack;
+                            background-color: $main-color;
                             border-style: solid;
                             border-width: 1px;
-                            border-top-color: $ice-bgblack;
-                            border-right-color: $ice-bgblack;
-                            border-bottom-color: $ice-border;
-                            border-left-color: $ice-bgblack;
+                            border-top-color: $main-color;
+                            border-right-color: $main-color;
+                            border-bottom-color: $border-color;
+                            border-left-color: $main-color;
                         }
                         .quickview:hover {
                             text-decoration: none;
                             background-color: $ice-bg-light-black;
-                            border-top-color: $ice-borderone;
-                            border-right-color: $ice-bordertwo;
-                            border-bottom-color: $ice-borderthree;
-                            border-left-color: $ice-borderfour;
+                            border-top-color: $border-color-one;
+                            border-right-color: $border-color-two;
+                            border-bottom-color: $border-color-three;
+                            border-left-color: $border-color-four;
                         }
                     }
                 }
@@ -1363,7 +1365,7 @@ body {
                             font-family: $font-secondary;
                             text-decoration: none;
                             font-weight: bold;
-                            color: $ice-bgblack;
+                            color: $main-color;
                         }
                     }
                 }
@@ -1420,7 +1422,7 @@ body {
                             &.active {
                                 a {
                                     span {
-                                        color: $ice-bgblack;
+                                        color: $main-color;
                                     }
                                 }
                             }
@@ -1435,16 +1437,16 @@ body {
                         line-height: 16px;
                         font-weight: normal;
                         font-family: $font;
-                        color: $ice-light-black;
+                        color: $body-color;
                     }
                     p {
                         font-family: $font;
-                        color: $ice-light-black;
+                        color: $body-color;
                         font-size: 13px;
                         a {
                             &.readmore {
                                 font-family: $font;
-                                color: $ice-bgblack;
+                                color: $main-color;
                                 font-weight: bold;
                                 &:hover {
                                     color: $ice-bg-light-black;
@@ -1468,12 +1470,12 @@ body {
     }
     .accordion {
         &.tabover {
-            background-color: $ice-bgblack;
+            background-color: $main-color;
             h1 {
-                color: $ice-white;
+                color: $white;
                 background: url(../images/arrow-filter-collapse-big-6d0100.png) 0 0 no-repeat;
                 a {
-                    color: $ice-white;
+                    color: $white;
                 }
             }
         }
@@ -1539,13 +1541,13 @@ table {
             text-align: left;
             border-top: 1px solid $ice-light-grey;
             font-weight: bold;
-            border-bottom: 1px solid $ice-bgblack;
+            border-bottom: 1px solid $main-color;
             &.col0 {
                 text-align: left;
                 text-transform: none;
                 font-family: $font;
                 font-weight: bold;
-                border-right: 1px solid $ice-light-black;
+                border-right: 1px solid $body-color;
             }
         }
     }
@@ -1555,8 +1557,8 @@ table {
     .specificiations {
         thead {
             tr {
-                background: #333333;
-                background: linear-gradient(to bottom, #333333 0%, #000000 100%);
+                background: $body-color;
+                background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
                 color: #fff;
             }
         }
@@ -1579,7 +1581,7 @@ table {
 .productdetail {
     .price {
         font-family: $font-secondary;
-        color: $ice-bgblack;
+        color: $main-color;
         font-weight: bold;
         font-size: 15px;
         line-height: 24px;
@@ -1596,7 +1598,7 @@ table {
 
 #special-offers {
     .promotion-title {
-        color: $ice-light-black;
+        color: $body-color;
     }
 }
 
@@ -1614,8 +1616,8 @@ table {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #333333; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #333333 10%, rgba(255, 255, 255, 1) 10%, #333333 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $body-color; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $body-color 10%, rgba(255, 255, 255, 1) 10%, $body-color 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1719,9 +1721,9 @@ table {
         }
     }
     #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a, .footer-links ul li a, #footernew .social-icons #fallow-us-on ul li a, #footernew .wrapper .footer-main #linkheading, .copyright, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay, #footernew .wrapper .footer-main #linkheading a span {
-        color: #333;
+        color: $body-color;
         &:hover {
-            color: #333;
+            color: $body-color;
         }
     }
     .pt_customerservice {
@@ -1746,7 +1748,7 @@ table {
                 .column {
                     .contentboxcontent {
                         h1 {
-                            font-family: $ice-original;
+                            font-family: $font-third;
                             font-size: 25px;
                             line-height: 28px;
                         }
@@ -1778,7 +1780,7 @@ table {
                     h1 {
                         font-size: 25px;
                         line-height: 28px;
-                        font-family: $ice-original;
+                        font-family: $font-third;
                     }
                 }
             }
@@ -1800,7 +1802,7 @@ table {
                                         li {
                                             &.active {
                                                 a {
-                                                    color: $ice-bgblack;
+                                                    color: $main-color;
                                                 }
                                             }
                                         }
@@ -1825,7 +1827,7 @@ table {
                             padding: 10.5px 0;
                             font-size: 25px;
                             line-height: 28px;
-                            font-family: $ice-original;
+                            font-family: $font-third;
                         }
                     }
                 }
@@ -1881,7 +1883,7 @@ table {
                         h1 {
                             font-size: 25px;
                             line-height: 28px;
-                            font-family: $ice-original;
+                            font-family: $font-third;
                         }
                         .cellbox {
                             &.accordion {
@@ -1902,7 +1904,7 @@ table {
 .paymentinstruments {
     .label {
         font-family: Arial, Helvetica, sans-serif;
-        color: #333;
+        color: $body-color;
         text-transform: uppercase;
         font-size: 12px;
         line-height: 12px;
@@ -2077,8 +2079,8 @@ table {
             border-bottom: none;
             tbody {
                 tr:first-child {
-                    background: #333333;
-                    background: linear-gradient(to bottom, #333333 0%, #000000 100%);
+                    background: $body-color;
+                    background: linear-gradient(to bottom, $body-color 0%, #000000 100%);
                     color: #fff;
                     &:first-child {
                         border-top-left-radius: 3px;
