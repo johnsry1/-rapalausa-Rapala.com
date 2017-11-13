@@ -57,7 +57,7 @@ function geoIpDefaultCurrency() {
             if (!empty(currencies)) {
                 if (country in currencies) {
                     currency = currencies[country];
-                    if (availableCurrency.indexOf(currency)) {
+                    if (availableCurrency.indexOf(currency) != -1) {
                         session.setCurrency(dw.util.Currency.getCurrency(currency));
                         logMessage += 'Sep up session currency to: ' + currency + '\n';
                     } else {
