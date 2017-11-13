@@ -60,6 +60,9 @@ function geoIpDefaultCurrency() {
                     if (availableCurrency.indexOf(currency)) {
                         session.setCurrency(dw.util.Currency.getCurrency(currency));
                         logMessage += 'Sep up session currency to: ' + currency + '\n';
+                    } else {
+                        session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+                        logMessage += 'Sep up session currency to default : ' + currencies['default'] + '\n';
                     }
                 } else {
                     session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
