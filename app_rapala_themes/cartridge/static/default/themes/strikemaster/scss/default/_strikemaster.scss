@@ -1,27 +1,8 @@
 @import url("../css/MyFontsWebfontsKit.css");
 
-body {
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    background: white url(../images/body-background-70.jpg) 50% 0 no-repeat;
-    &.js-body {
-        background: none;
-    }
-    .js-container-active {
-        .open-menu-wrap {
-            background: white url(../images/body-background-70.jpg) 50% -105px no-repeat;
-        }
-    }
-
-}
-
-/* <a> styles */
 a {
-
     color: #D2232A;
     text-decoration: none;
-
 }
 
 a:hover {
@@ -30,28 +11,8 @@ a:hover {
     color: #EE060F;
 }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-    font-family: 'Eurostile-Bla';
-    font-weight: normal;
-    color: #030303;
-    text-transform: uppercase;
-}
-
 h1, .h-one-tag {
-    font-size: 25px;
-    line-height: 25px;
-    font-weight: bold;
-    letter-spacing: 0;
     margin: 0;
-}
-
-h2 {
-    font-size: 16px;
-    line-height: 16px;
-    letter-spacing: 0;
-    color: #D2232A;
-
 }
 
 .contentboxcontent.account-logs h1 {
@@ -70,32 +31,6 @@ h2 {
     bottom: - 35px;
 }
 
-h3 {
-    font-size: 16px;
-    line-height: 16px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-    "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    color: #333333;
-    font-style: italic;
-    text-transform: none;
-}
-
-h4 {
-    font-size: 24px;
-    line-height: 24px;
-}
-
-h5 {
-    font-size: 18px;
-    line-height: 18px;
-}
-
-h6 {
-    font-size: 16px;
-    line-height: 16px;
-}
-
 h1.left-nav-style {
     padding-bottom: 6px;
     border-bottom: #CCC solid 1px;
@@ -108,27 +43,6 @@ h2.input-style {
     font-weight: normal;
     padding-bottom: 2px;
     color: #030303;
-}
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-    color: black;
-    text-decoration: none;
-}
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-    color: #EE2E24;
-    text-decoration: none;
-}
-
-p {
-    color: #030303;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-    word-spacing: normal;
-    line-height: 18px;
-    padding: 9px 0 9px 0;
-    text-align: left;
 }
 
 p a {
@@ -145,7 +59,7 @@ a {
         float: left;
         width: 184px;
         line-height: 18px;
-        font-family: $strike-lucida;
+        font-family: $font-secondary;
         font-size: 14px;
         font-style: normal;
         font-weight: bold;
@@ -203,7 +117,7 @@ a:hover {
                 }
             }
             legend {
-                font-family: $strike-original;
+                font-family: $font-third;
                 font-weight: normal;
                 .dialog-required {
                     .required-indicator {
@@ -226,7 +140,7 @@ a:hover {
         .stack {
             .form-row {
                 .label {
-                    font-family: 'Eurostile-Bla';
+                    font-family: $font-third;
                     text-transform: uppercase;
                     font-size: 14px;
                     line-height: 14px;
@@ -250,7 +164,7 @@ a:hover {
             .order-history-items {
                 .order-history-table {
                     th {
-                        font-family: $strike-original;
+                        font-family: $font-third;
                         text-transform: uppercase;
                         font-size: 14px;
                         line-height: 14px;
@@ -260,7 +174,7 @@ a:hover {
                     tr {
                         .order-price {
                             .value {
-                                font-family: $strike-Baskerville;
+                                font-family: $font-fourth;
                                 color: $strikemaster-bgred;
                                 font-weight: bold;
                                 font-style: italic;
@@ -283,7 +197,7 @@ a:hover {
                 a {
                     transition: none;
                     h2 {
-                        font-family: $strike-original;
+                        font-family: $font-third;
                         text-transform: uppercase;
                         font-size: 25px;
                         line-height: 25px;
@@ -349,14 +263,14 @@ a:hover {
 .pt_leftnav-addressbook {
     #main {
         .breadcrumb {
-            font-family: $strike-lucida;
+            font-family: $font-secondary;
         }
     }
     #addresses {
         .address-list {
             .address-tile {
                 .mini-address-title {
-                    font-family: $strike-original;
+                    font-family: $font-third;
                     color: #030303;
                     font-size: 14px;
                     font-weight: normal;
@@ -406,7 +320,7 @@ a:hover {
                 font-size: 25px;
                 line-height: 25px;
                 font-weight: bold;
-                font-family: $strike-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $strike-list-black;
                 text-transform: uppercase;
@@ -416,7 +330,7 @@ a:hover {
                 font-size: 25px;
                 line-height: 25px;
                 font-weight: bold;
-                font-family: $strike-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $strike-list-black;
                 text-transform: uppercase;
@@ -435,7 +349,7 @@ a:hover {
     .line-item-price {
         .label {
             color: $strike-list-black;
-            font-family: $strike-original;
+            font-family: $font-third;
             font-weight: normal;
             font-size: 14px;
             line-height: 14px;
@@ -448,7 +362,7 @@ a:hover {
     .line-items {
         .line-item {
             .line-item-price {
-                font-family: $strike-Baskerville;
+                font-family: $font-fourth;
                 color: $strikemaster-bgred;
                 font-weight: bold;
                 font-style: italic;
@@ -456,7 +370,7 @@ a:hover {
                 line-height: 24px;
                 .label {
                     color: $strike-list-black;
-                    font-family: $strike-original;
+                    font-family: $font-third;
                     font-weight: normal;
                     font-size: 14px;
                     line-height: 14px;
@@ -490,8 +404,7 @@ a:hover {
                     width: 129px;
                     height: 30px;
                     line-height: 30px;
-                    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-                    "Trebuchet MS", Helvetica, Arial, sans-serif;
+                    font-family: $font-secondary;
                     font-size: 11px;
                     font-style: normal;
                     font-weight: bold;
@@ -531,8 +444,7 @@ a.button, button {
     float: left;
     height: 28px;
     line-height: 28px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-    "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     font-style: normal;
     font-weight: bold;
@@ -563,16 +475,12 @@ a.button:hover, button:hover {
     a.button:hover, button:hover {
         background: linear-gradient(to bottom, rgba(172, 0, 0, 1) 0%, rgba(225, 38, 38, 1) 100%) !important;
         text-decoration: none;
-        /*border-top-color: #0056AC;
-        border-right-color: #0064C7;
-        border-bottom-color: #9DC4EB;
-        border-left-color: #0064C7;*/
         cursor: pointer;
     }
 }
 
 h1.search-result {
-    font-family: $strike-lucida;
+    font-family: $font-secondary;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -652,7 +560,7 @@ h1.search-result {
     padding: 7px 0;
     height: 17px;
     text-indent: 0;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     border-radius: 0 5px 5px 0;
 }
@@ -663,7 +571,7 @@ h1.search-result {
 
 .shop-brand {
     font-size: 16px;
-    font-family: $strike-original;
+    font-family: $font-third;
     font-weight: normal;
     line-height: 22px;
     padding: 15px 0 5px !important;
@@ -735,7 +643,7 @@ h1.search-result {
                     line-height: normal;
                     text-align: left;
                     width: auto;
-                    font-family: $strike-lucida;
+                    font-family: $font-secondary;
                     padding: 0;
                     vertical-align: top;
                 }
@@ -835,7 +743,7 @@ h1.search-result {
 
 form {
     .label {
-        font-family: 'Eurostile-Bla';
+        font-family: $font-third;
         text-transform: uppercase;
         font-size: 14px;
         line-height: 14px;
@@ -849,7 +757,7 @@ form {
 #vippage-background {
     form {
         .label {
-            font-family: 'Eurostile-Bla';
+            font-family: $font-third;
             text-transform: uppercase !important;
             font-size: 14px !important;
             line-height: 14px;
@@ -867,7 +775,7 @@ div {
             .formfield {
                 .form-row {
                     .label {
-                        font-family: 'Eurostile-Bla';
+                        font-family: $font-third;
                         text-transform: uppercase;
                         font-size: 14px;
                         line-height: 14px;
@@ -920,7 +828,7 @@ div {
                     font-size: 13px !important;
                     font-style: normal;
                     font-weight: normal !important;
-                    font-family: $strike-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
@@ -1252,7 +1160,7 @@ div {
                 h2 {
                     text-align: center;
                     background: none;
-                    font-family: $strike-original;
+                    font-family: $font-third;
                     font-size: 25px;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -1282,7 +1190,7 @@ div {
                         color: $strike-black;
                         font-weight: normal;
                         font-size: 16px;
-                        font-family: $strike-original;
+                        font-family: $font-third;
                         border: none;
                     }
                 }
@@ -1392,7 +1300,7 @@ div {
                     .product-promo {
                         text-align: left;
                         color: $strike-red;
-                        font-family: $strike-lucida;
+                        font-family: $font-secondary;
                         font-size: 10px;
                         padding-top: 3px;
                         font-weight: normal;
@@ -1429,15 +1337,15 @@ div {
                         line-height: 16px;
                         letter-spacing: 0;
                         color: $strikemaster-bgred;
-                        font-family: $strike-original;
+                        font-family: $font-third;
                     }
                     p {
-                        font-family: $strike-Arial;
+                        font-family: $font;
                         color: $strike-black;
                         font-size: 13px;
                         a {
                             &.readmore {
-                                font-family: $strike-Arial;
+                                font-family: $font;
                                 color: $strikemaster-bgred;
                                 font-weight: bold;
                                 &:hover {
@@ -1457,12 +1365,12 @@ div {
         .affiliates, .prostaff {
             h1 {
                 text-align: left;
-                font-family: $strike-original;
+                font-family: $font-third;
                 color: $strike-list-black;
             }
             .pro-detail {
                 h2 {
-                    font-family: $strike-original;
+                    font-family: $font-third;
                     color: $strike-list-black;
                 }
             }
@@ -1526,7 +1434,7 @@ div {
             &:hover {
                 color: $strikemaster-bgred;
                 text-decoration: none;
-                font-family: $strike-Arial;
+                font-family: $font;
             }
         }
     }
@@ -1534,7 +1442,7 @@ div {
 
 .productdetail {
     .price {
-        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+        font-family: $font-secondary;
         color: $strikemaster-bgred;
         font-weight: bold;
         font-size: 15px;
@@ -1701,7 +1609,7 @@ div {
                 .column {
                     .contentboxcontent {
                         h1 {
-                            font-family: $strike-original;
+                            font-family: $font-third;
                             font-size: 18px;
                             line-height: 24px;
                         }
@@ -1721,7 +1629,7 @@ div {
                     h1 {
                         font-size: 18px;
                         line-height: 24px;
-                        font-family: $strike-original;
+                        font-family: $font-third;
                     }
                 }
             }
@@ -1769,7 +1677,7 @@ div {
                             padding: 12.5px 0;
                             font-size: 18px;
                             line-height: 24px;
-                            font-family: $strike-original;
+                            font-family: $font-third;
                         }
                     }
                 }
@@ -1808,7 +1716,7 @@ div {
                         h1 {
                             font-size: 18px;
                             line-height: 24px;
-                            font-family: $strike-original;
+                            font-family: $font-third;
                         }
                         .cellbox {
                             &.accordion {
@@ -1829,7 +1737,7 @@ div {
 .paymentinstruments {
     .label {
         text-transform: uppercase;
-        font-family: 'Eurostile-Bla';
+        font-family: $font-third;
         color: #030303;
         font-size: 14px;
         line-height: 17px;

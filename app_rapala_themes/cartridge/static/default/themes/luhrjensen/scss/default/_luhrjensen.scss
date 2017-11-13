@@ -3,17 +3,8 @@
 
 /* body */
 body {
-    color: black;
-    font-family: "Times New Roman", Times, 'OriginalGaramondBT-Roman', serif;
-    font-size: 13px;
-    background: white url(../images/container-background-70.jpg) 50% 0 repeat-x;
     &.js-body {
         background: none;
-    }
-    .js-container-active {
-        .open-menu-wrap {
-            background: white url(../images/container-background-70.jpg) 50% -105px repeat-x;
-        }
     }
 }
 
@@ -31,53 +22,12 @@ a {
     color: #0069a6;
 }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-    color: black;
-    font-family: "OriginalGaramondBT-Roman", Times New Roman, Times, serif;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
 h1, .h-one-tag {
-    font-size: 28px;
-    line-height: 28px;
-    font-weight: bold;
     margin: 0;
 }
 
-h2 {
-    font-size: 18px;
-    line-height: 18px;
-}
-
-h3 {
-    font-size: 16px;
-    line-height: 16px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    color: #333333;
-    font-style: italic;
-    text-transform: none;
-}
-
-h4 {
-    font-size: 24px;
-    line-height: 24px;
-}
-
-h5 {
-    font-size: 18px;
-    line-height: 18px;
-}
-
-h6 {
-    font-size: 16px;
-    line-height: 16px;
-}
-
 h1.left-nav-style {
-    font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+    font-family: $font-third;
     font-size: 28px;
     line-height: 28px;
     font-weight: bold;
@@ -88,43 +38,11 @@ h2.input-style {
     line-height: 16px;
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-    color: #333333;
-    text-decoration: none;
-}
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-    color: #3CF;
-    text-decoration: none;
-}
-
-/* <p> style */
-p {
-    color: black;
-    font-family: "Times New Roman", Times, 'OriginalGaramondBT-Roman', serif;
-    font-size: 13px;
-    font-weight: normal;
-    word-spacing: normal;
-    line-height: 18px;
-    padding: 9px 0 9px 0;
-    text-align: left;
-}
-
 p a {
     color: #0078AE;
     font-weight: bold;
 }
 
-p {
-    color: black;
-    font-family: "Times New Roman", Times, 'OriginalGaramondBT-Roman', serif;
-    font-size: 13px;
-    font-weight: normal;
-    word-spacing: normal;
-    line-height: 18px;
-    padding: 9px 0 9px 0;
-    text-align: left;
-}
 
 a {
     color: #0078AE;
@@ -139,7 +57,7 @@ a.button, button {
     float: left;
     height: 28px;
     line-height: 28px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     font-style: normal;
     font-weight: bold;
@@ -178,7 +96,7 @@ p a {
 }
 
 h1.search-result {
-    font-family: $luhr-lucida;
+    font-family: $font-secondary;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -245,7 +163,7 @@ h1.search-result {
     padding: 7px 0;
     height: 17px;
     text-indent: 0;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     border-radius: 0 5px 5px 0;
 }
@@ -262,7 +180,7 @@ h1.search-result {
                 a {
                     transition: none;
                     h2 {
-                        font-family: $luhr-Original;
+                        font-family: $font-third;
                         text-transform: uppercase;
                         font-weight: bold;
                         font-size: 28px;
@@ -305,7 +223,7 @@ h1.search-result {
             .form-row {
                 .label {
                     .labeltext {
-                        font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+                        font-family: $font-third;
                         font-weight: bold;
                         color: #333;
                         text-transform: uppercase;
@@ -330,7 +248,7 @@ h1.search-result {
             .order-history-items {
                 .order-history-table {
                     th {
-                        font-family: $luhr-Original;
+                        font-family: $font-third;
                         font-weight: bold;
                         color: $luhr-light-black;
                         text-transform: uppercase;
@@ -340,7 +258,7 @@ h1.search-result {
                     tr {
                         .order-price {
                             .value {
-                                font-family: $luhr-Basker;
+                                font-family: $font-fourth;
                                 color: $luhr-bgdarkblue;
                                 font-weight: bold;
                                 font-style: italic;
@@ -362,7 +280,7 @@ h1.search-result {
                 span {
                     &.price-sales {
                         color: $luhr-bgdarkblue;
-                        font-family: $luhr-Basker;
+                        font-family: $font-fourth;
                         font-weight: bold;
                         font-size: 15px;
                     }
@@ -397,7 +315,7 @@ h1.search-result {
 .pt_leftnav-addressbook {
     #main {
         .breadcrumb {
-            font-family: $luhr-lucida;
+            font-family: $font-secondary;
         }
         #page-background {
             #primary {
@@ -411,7 +329,7 @@ h1.search-result {
             .address-tile {
                 .mini-address-title {
                     color: $luhr-light-black;
-                    font-family: $luhr-Original;
+                    font-family: $font-third;
                     font-weight: bold;
                     font-size: 16px;
                     padding: 4px 0 1px;
@@ -428,7 +346,7 @@ h1.search-result {
                 .address-edit,
                 .address-delete.delete,
                 .address-make-default {
-                    font-family: $luhr-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
@@ -439,7 +357,7 @@ h1.search-result {
     .order-information {
         .order-number {
             .label {
-                font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+                font-family: $font-third;
                 text-transform: uppercase;
                 font-style: normal;
                 font-size: 28px;
@@ -450,7 +368,7 @@ h1.search-result {
             .value {
                 font-size: 28px;
                 line-height: 28px;
-                font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+                font-family: $font-third;
                 text-transform: uppercase;
                 color: $luhr-black;
             }
@@ -466,7 +384,7 @@ h1.search-result {
     .line-item-quantity,
     .line-item-price {
         .label {
-            font-family: $luhr-times;
+            font-family: $font;
             font-weight: bold;
             color: $luhr-light-black;
             font-size: 16px;
@@ -480,14 +398,14 @@ h1.search-result {
     .line-items {
         .line-item {
             .line-item-price {
-                font-family: $luhr-Basker;
+                font-family: $font-fourth;
                 color: $luhr-bgdarkblue;
                 font-weight: bold;
                 font-style: italic;
                 font-size: 24px;
                 line-height: 24px;
                 .label {
-                    font-family: $luhr-times;
+                    font-family: $font;
                     font-weight: bold;
                     color: $luhr-light-black;
                     font-size: 16px;
@@ -557,13 +475,13 @@ h1.search-result {
                     font-size: 13px !important;
                     font-style: normal;
                     font-weight: normal !important;
-                    font-family: $luhr-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
     }
     .price {
-        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+        font-family: $font-secondary;
         color: $luhr-bgdarkblue;
         font-weight: bold;
         font-size: 15px;
@@ -593,7 +511,7 @@ a.filter {
     float: left;
     width: 184px;
     line-height: 18px;
-    font-family: $luhr-lucida;
+    font-family: $font-secondary;
     font-size: 14px;
     font-style: normal;
     font-weight: bold;
@@ -704,7 +622,7 @@ a.filter {
 }
 
 .shop-brand {
-    font-family: $luhr-Original;
+    font-family: $font-third;
     font-size: 18px;
     font-weight: bold;
     width: 210px;
@@ -780,7 +698,7 @@ a.filter {
                     line-height: normal;
                     text-align: left;
                     width: auto;
-                    font-family: $luhr-lucida;
+                    font-family: $font-secondary;
                     padding: 0;
                     vertical-align: top;
                 }
@@ -868,7 +786,7 @@ a.filter {
 
 form {
     .label {
-        font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+        font-family: $font-third;
         font-weight: bold;
         color: #333;
         font-size: 16px;
@@ -882,7 +800,7 @@ form {
 #vippage-background {
     form {
         .label {
-            font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+            font-family: $font-third;
             font-weight: bold;
             color: #333;
             font-size: 16px !important;
@@ -901,7 +819,7 @@ form {
 #container {
     &.pt_account {
         .title {
-            font-family: $luhr-Original !important;
+            font-family: $font-third !important;
         }
     }
 }
@@ -1043,7 +961,7 @@ form {
             background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
             height: auto !important;
             font-size: 13px;
-            font-family: $luhr-lucida;
+            font-family: $font-secondary;
         }
     }
     .pt_product-search-result,
@@ -1052,13 +970,13 @@ form {
             .left-nav-style {
                 font-size: 20px;
                 line-height: 22px;
-                font-family: $luhr-Original;
+                font-family: $font-third;
             }
             h1 {
                 &.leftnav {
                     font-size: 20px;
                     line-height: 22px;
-                    font-family: $luhr-Original;
+                    font-family: $font-third;
                 }
             }
         }
@@ -1292,7 +1210,7 @@ a.button:hover, button:hover {
                 h2 {
                     text-align: center;
                     background: none;
-                    font-family: $luhr-Original;
+                    font-family: $font-third;
                     font-size: 36px;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -1316,7 +1234,7 @@ a.button:hover, button:hover {
                 h1 {
                     &.left-nav-style {
                         color: $luhr-black;
-                        font-family: $luhr-Original;
+                        font-family: $font-third;
                         font-size: 18px;
                         font-weight: bold;
                     }
@@ -1329,7 +1247,7 @@ a.button:hover, button:hover {
 .product-tile {
     .product-image {
         .quickview {
-            font-family: $luhr-times;
+            font-family: $font;
             background-color: $luhr-bgdarkblue;
             border-style: solid;
             border-width: 1px;
@@ -1358,7 +1276,7 @@ a.button:hover, button:hover {
                 .product-tile {
                     .product-image {
                         .quickview {
-                            font-family: $luhr-times;
+                            font-family: $font;
                             background-color: $luhr-bgdarkblue;
                             border-style: solid;
                             border-width: 1px;
@@ -1473,7 +1391,7 @@ a.button:hover, button:hover {
                     .product-promo {
                         text-align: left;
                         color: $luhr-red;
-                        font-family: $luhr-lucida;
+                        font-family: $font-secondary;
                         font-size: 10px;
                         padding-top: 3px;
                         font-weight: normal;
@@ -1506,19 +1424,19 @@ a.button:hover, button:hover {
             .folder-content-list {
                 li {
                     a {
-                        font-family: $luhr-Original;
+                        font-family: $font-third;
                         color: $luhr-light-black;
                         font-size: 18px;
                         line-height: 18px;
                         font-weight: bold;
                     }
                     p {
-                        font-family: $luhr-Original;
+                        font-family: $font-third;
                         color: $luhr-light-black;
                         font-size: 13px;
                         a {
                             &.readmore {
-                                font-family: $luhr-times;
+                                font-family: $font;
                                 color: $luhr-bgdarkblue;
                                 &:hover {
                                     color: $luhr-bg-lightblue;
@@ -1739,7 +1657,7 @@ a.button:hover, button:hover {
                     h1 {
                         font-size: 20px;
                         line-height: 22px;
-                        font-family: $luhr-Gara;
+                        font-family: $font-fifth;
                     }
                 }
             }
@@ -1786,7 +1704,7 @@ a.button:hover, button:hover {
                             padding: 13.5px 0;
                             font-size: 20px;
                             line-height: 22px;
-                            font-family: $luhr-Gara;
+                            font-family: $font-fifth;
                         }
                     }
                 }
@@ -1828,7 +1746,7 @@ a.button:hover, button:hover {
                         h1 {
                             font-size: 20px;
                             line-height: 22px;
-                            font-family: $luhr-Gara;
+                            font-family: $font-fifth;
                         }
                         .cellbox {
                             &.accordion {
@@ -1851,7 +1769,7 @@ a.button:hover, button:hover {
         text-transform: uppercase;
         padding-bottom: 2px;
         color: #333;
-        font-family: 'OriginalGaramondBT-Roman', "Times New Roman", Times, serif;
+        font-family: $font-third;
         font-weight: bold;
         font-size: 16px;
         line-height: 17px;

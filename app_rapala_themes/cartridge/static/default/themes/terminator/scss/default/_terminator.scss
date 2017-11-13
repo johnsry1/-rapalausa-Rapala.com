@@ -1,39 +1,12 @@
 @import url("../css/MyFontsWebfontsKit.css");
 
-/* body */
-body {
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    background: #D8D8D8 url(../images/container-background-70.jpg) 0 0 repeat;
-    &.js-body {
-        background: none;
-    }
-    .js-container-active {
-        .open-menu-wrap {
-            background: #D8D8D8 url(../images/container-background-70.jpg) 0 -105px repeat;
-        }
-    }
-
-}
-
 /* <a> styles */
 a {
-
     color: #0038AA;
     text-decoration: none;
     &:hover {
         color: #0038AA;
         text-decoration: none;
-    }
-}
-
-h1, h2 {
-    a {
-        &:hover {
-            color: #0038AA;
-            text-decoration: none;
-        }
     }
 }
 
@@ -55,25 +28,11 @@ a:hover {
     color: #06C;
 }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-    font-family: 'ReversalEb-Italic', Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    color: #333;
-    text-transform: uppercase;
-}
 
 h1, .h-one-tag {
-    font-size: 25px;
-    line-height: 25px;
     margin: 0;
 }
 
-h2 {
-    font-size: 16px;
-    line-height: 16px;
-
-}
 
 a {
     color: #0038AA;
@@ -85,7 +44,7 @@ a {
         float: left;
         width: 184px;
         line-height: 18px;
-        font-family: $terminator-lucida;
+        font-family: $font-secondary;
         font-size: 14px;
         font-style: normal;
         font-weight: bold;
@@ -130,8 +89,7 @@ a.button, button {
     float: left;
     height: 28px;
     line-height: 28px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-    "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     font-style: normal;
     font-weight: bold;
@@ -170,17 +128,6 @@ a.button:hover, button:hover {
     }
 }
 
-p {
-    color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-    word-spacing: normal;
-    line-height: 18px;
-    padding: 9px 0 9px 0;
-    text-align: left;
-}
-
 p a {
     font-weight: bold;
 }
@@ -203,7 +150,7 @@ p a {
                 a {
                     transition: none;
                     h2 {
-                        font-family: $terminator-original;
+                        font-family: $font-third;
                         font-variant: small-caps;
                         font-weight: normal;
                         font-size: 25px;
@@ -246,7 +193,7 @@ p a {
             .form-row {
                 .label {
                     .labeltext {
-                        font-family: Arial, Helvetica, sans-serif;
+                        font-family: $font;
                         color: #333;
                         text-transform: uppercase;
                         font-size: 12px;
@@ -270,7 +217,7 @@ p a {
             .order-history-items {
                 .order-history-table {
                     th {
-                        font-family: $terminator-Arial;
+                        font-family: $font;
                         color: $terminator-list-black;
                         text-transform: uppercase;
                         font-size: 12px;
@@ -280,7 +227,7 @@ p a {
                     tr {
                         .order-price {
                             .value {
-                                font-family: $terminator-Baskerville;
+                                font-family: $font-third;
                                 color: $terminator-bgblue;
                                 font-weight: bold;
                                 font-style: italic;
@@ -344,7 +291,7 @@ p a {
         .address-list {
             .address-tile {
                 .mini-address-title {
-                    font-family: $terminator-Arial;
+                    font-family: $font;
                     color: $terminator-list-black;
                     font-size: 12px;
                     font-weight: bold;
@@ -373,7 +320,7 @@ p a {
             .label {
                 font-size: 25px;
                 line-height: 25px;
-                font-family: $terminator-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $terminator-list-black;
                 text-transform: uppercase;
@@ -383,7 +330,7 @@ p a {
                 font-style: normal;
                 font-size: 25px;
                 line-height: 25px;
-                font-family: $terminator-original;
+                font-family: $font-third;
                 font-weight: normal;
                 color: $terminator-list-black;
                 text-transform: uppercase;
@@ -401,7 +348,7 @@ p a {
     .line-item-price {
         .label {
             color: $terminator-list-black;
-            font-family: $terminator-Arial;
+            font-family: $font;
             font-weight: bold;
             font-size: 12px;
             line-height: 12px;
@@ -414,7 +361,7 @@ p a {
     .line-items {
         .line-item {
             .line-item-price {
-                font-family: $terminator-Baskerville;
+                font-family: $font-third;
                 color: $terminator-bgblue;
                 font-weight: bold;
                 font-style: italic;
@@ -422,7 +369,7 @@ p a {
                 line-height: 24px;
                 .label {
                     color: $terminator-list-black;
-                    font-family: $terminator-Arial;
+                    font-family: $font;
                     font-weight: bold;
                     font-size: 12px;
                     line-height: 12px;
@@ -435,7 +382,7 @@ p a {
 }
 
 h1.search-result {
-    font-family: $terminator-lucida;
+    font-family: $font-secondary;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -524,7 +471,7 @@ h1.search-result {
     padding: 7px 0;
     height: 17px;
     text-indent: 0;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     border-radius: 0 5px 5px 0;
 }
@@ -543,7 +490,7 @@ h1.search-result {
 
 .shop-brand {
     font-weight: normal;
-    font-family: $terminator-original;
+    font-family: $font-third;
     font-size: 16px;
     line-height: 22px;
     padding: 15px 0 5px !important;
@@ -617,7 +564,7 @@ h1.search-result {
                     line-height: normal;
                     text-align: left;
                     width: auto;
-                    font-family: $terminator-lucida;
+                    font-family: $font-secondary;
                     padding: 0;
                 }
             }
@@ -699,7 +646,7 @@ h1.search-result {
 
 form {
     .label {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: $font;
         color: #333;
         font-variant: initial;
         font-size: 12px;
@@ -710,7 +657,7 @@ form {
 #vippage-background {
     form {
         .label {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: $font;
             color: #333;
             font-variant: initial !important;
             text-transform: uppercase !important;
@@ -727,7 +674,7 @@ div {
             .formfield {
                 .form-row {
                     .label {
-                        font-family: Arial, Helvetica, sans-serif;
+                        font-family: $font;
                         color: #333;
                         font-variant: initial;
                         text-transform: uppercase;
@@ -774,7 +721,7 @@ div {
 
 body {
     color: #333;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: $font;
     font-size: 12px;
     background: #D8D8D8 url(../images/container-background-70.jpg) 0 0 repeat;
 }
@@ -825,7 +772,7 @@ body {
                     font-size: 13px !important;
                     font-style: normal;
                     font-weight: normal !important;
-                    font-family: $terminator-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
@@ -1148,7 +1095,7 @@ body {
                 h2 {
                     text-align: center;
                     background: none;
-                    font-family: $terminator-original;
+                    font-family: $font-third;
                     font-size: 36px;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -1177,7 +1124,7 @@ body {
                     &.left-nav-style {
                         color: $terminator-black;
                         font-weight: normal;
-                        font-family: $terminator-original;
+                        font-family: $font-third;
                         font-size: 16px;
                     }
                 }
@@ -1311,7 +1258,7 @@ body {
                     .product-promo {
                         text-align: left;
                         color: $terminator-red;
-                        font-family: $terminator-lucida;
+                        font-family: $font-secondary;
                         font-style: italic;
                         font-size: 10px;
                         padding-top: 3px;
@@ -1345,19 +1292,19 @@ body {
             .folder-content-list {
                 li {
                     a {
-                        font-family: $terminator-original;
+                        font-family: $font-third;
                         font-size: 16px;
                         line-height: 16px;
                         font-weight: normal;
                         color: $terminator-list-black;
                     }
                     p {
-                        font-family: $terminator-Arial;
+                        font-family: $font;
                         color: $terminator-list-black;
                         font-size: 13px;
                         a {
                             &.readmore {
-                                font-family: $terminator-Arial;
+                                font-family: $font;
                                 color: $terminator-bgblue;
                                 font-weight: bold;
                                 &:hover {
@@ -1405,7 +1352,7 @@ body {
 
 .productdetail {
     .price {
-        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+        font-family: $font-secondary;
         color: $terminator-bgblue;
         font-weight: bold;
         font-size: 15px;
@@ -1570,7 +1517,7 @@ body {
                     h1 {
                         font-size: 20px;
                         line-height: 25px;
-                        font-family: $terminator-original;
+                        font-family: $font-third;
                     }
                 }
             }
@@ -1617,7 +1564,7 @@ body {
                             padding: 12px 0;
                             font-size: 20px;
                             line-height: 25px;
-                            font-family: $terminator-original;
+                            font-family: $font-third;
                         }
                     }
                 }
@@ -1643,7 +1590,7 @@ body {
                         h1 {
                             font-size: 20px;
                             line-height: 25px;
-                            font-family: $terminator-original;
+                            font-family: $font-third;
                         }
                         .cellbox {
                             &.accordion {
@@ -1665,7 +1612,7 @@ body {
     .label {
         text-transform: uppercase;
         padding-bottom: 2px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: $font;
         color: #333;
         font-size: 12px;
         line-height: 17px;

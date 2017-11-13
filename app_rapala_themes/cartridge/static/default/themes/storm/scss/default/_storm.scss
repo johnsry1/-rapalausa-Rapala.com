@@ -2,21 +2,11 @@
 
 /* body */
 body {
-    color: #333;
-    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-    font-size: 13px;
-    background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x;
     &.js-body {
         background: none;
     }
-    .js-container-active {
-        .open-menu-wrap {
-            background: #ffffff url(../images/container-background-70.jpg) 50% -105px repeat-x;
-        }
-    }
 }
 
-/* <a> styles */
 a {
     color: black;
     text-decoration: none;
@@ -25,14 +15,6 @@ a {
 a:hover {
     text-decoration: underline;
     cursor: pointer;
-}
-
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-    color: #333333;
-    font-family: 'KenyanCoffeeRg-Regular';
-    font-weight: normal;
-    text-transform: uppercase;
 }
 
 .pt_product-search-result #page-background .cell.contentbox.upshift, .pt_content-search-result #page-background .cell.contentbox.upshift {
@@ -44,45 +26,11 @@ h1, h2, h4, h5, h6, .h-one-tag {
 }
 
 h1, .h-one-tag {
-    font-size: 40px;
-    line-height: 40px;
     margin: 0;
 }
 
-h2 {
-    font-size: 24px;
-    line-height: 24px;
-
-}
-
-h3 {
-    font-size: 16px;
-    line-height: 16px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-    "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    color: #333333;
-    font-style: italic;
-    text-transform: none;
-}
-
-h4 {
-    font-size: 24px;
-    line-height: 24px;
-}
-
-h5 {
-    font-size: 18px;
-    line-height: 18px;
-}
-
-h6 {
-    font-size: 16px;
-    line-height: 16px;
-}
-
 h1.left-nav-style {
-    font-family: 'KenyanCoffeeRg-Regular';
+    font-family: $font-third;
     font-size: 30px;
     line-height: 30px;
 }
@@ -97,16 +45,6 @@ h2.input-style {
 
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-    color: #333333;
-    text-decoration: none;
-}
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-    color: #FFF200;
-    text-decoration: none;
-}
-
 /*buttons*/
 a.button, button {
     margin: 0;
@@ -116,8 +54,7 @@ a.button, button {
     height: 28px;
     line-height: 28px;
 
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode",
-    "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     font-style: normal;
     font-weight: bold;
@@ -148,18 +85,6 @@ a.button:hover, button:hover {
     }
 }
 
-/* <p> style */
-p {
-    color: #333;
-    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: normal;
-    word-spacing: normal;
-    line-height: 18px;
-    padding: 9px 0 9px 0;
-    text-align: left;
-}
-
 .upshift {
     position: relative;
     top: -64px;
@@ -171,7 +96,7 @@ p a {
 }
 
 h1.search-result {
-    font-family: $storm-lucida;
+    font-family: $font-secondary;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -201,7 +126,7 @@ h1.search-result {
                 a {
                     transition: none;
                     h2 {
-                        font-family: $storm-fontstorm;
+                        font-family: $font-third;
                         font-variant: small-caps;
                         font-weight: normal;
                         font-size: 40px;
@@ -244,7 +169,7 @@ h1.search-result {
             .form-row {
                 .label {
                     .labeltext {
-                        font-family: 'KenyanCoffeeRg-Regular';
+                        font-family: $font-third;
                         font-weight: normal;
                         text-transform: uppercase;
                         font-size: 22px;
@@ -268,7 +193,7 @@ h1.search-result {
             .order-history-items {
                 .order-history-table {
                     th {
-                        font-family: $storm-fontstorm;
+                        font-family: $font-third;
                         font-weight: normal;
                         color: $storm-clgrey;
                         text-transform: uppercase;
@@ -278,7 +203,7 @@ h1.search-result {
                     tr {
                         .order-price {
                             .value {
-                                font-family: $storm-Basker;
+                                font-family: $font-fourth;
                                 color: $storm-clgrey;
                                 font-weight: bold;
                                 font-style: italic;
@@ -289,12 +214,12 @@ h1.search-result {
                         }
                         .order-items {
                             li {
-                                font-family: $storm-avant;
+                                font-family: $font;
                             }
                         }
                         .order-name {
                             .value {
-                                font-family: $storm-avant;
+                                font-family: $font;
                             }
                         }
                     }
@@ -344,7 +269,7 @@ h1.search-result {
 .pt_leftnav-addressbook {
     #main {
         .breadcrumb {
-            font-family: $storm-lucida;
+            font-family: $font-secondary;
         }
         #page-background {
             #primary {
@@ -358,7 +283,7 @@ h1.search-result {
             .address-tile {
                 .mini-address-title {
                     color: $storm-clgrey;
-                    font-family: $storm-fontstorm;
+                    font-family: $font-third;
                     font-weight: normal;
                     font-size: 22px;
                     text-transform: uppercase;
@@ -376,7 +301,7 @@ h1.search-result {
         .order-number {
             .label {
                 color: $storm-clgrey;
-                font-family: $storm-fontstorm;
+                font-family: $font-third;
                 font-weight: normal;
                 text-transform: uppercase;
                 font-style: normal;
@@ -401,7 +326,7 @@ h1.search-result {
     .line-item-quantity,
     .line-item-price {
         .label {
-            font-family: $storm-fontstorm;
+            font-family: $font-third;
             font-weight: normal;
             color: $storm-clgrey;
             font-size: 22px;
@@ -415,14 +340,14 @@ h1.search-result {
     .line-items {
         .line-item {
             .line-item-price {
-                font-family: $storm-Basker;
+                font-family: $font-fourth;
                 color: $storm-clgrey;
                 font-weight: bold;
                 font-style: italic;
                 font-size: 24px;
                 line-height: 24px;
                 .label {
-                    font-family: $storm-fontstorm;
+                    font-family: $font-third;
                     font-weight: normal;
                     color: $storm-clgrey;
                     font-size: 22px;
@@ -520,7 +445,7 @@ h1.search-result {
         }
     }
     .price {
-        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+        font-family: $font-secondary;
         color: $storm-clgrey;
         font-weight: bold;
         font-size: 15px;
@@ -548,7 +473,7 @@ a.filter {
     float: left;
     width: 184px;
     line-height: 18px;
-    font-family: $storm-lucida;
+    font-family: $font-secondary;
     font-size: 14px;
     font-style: normal;
     font-weight: bold;
@@ -619,7 +544,7 @@ a.filter {
     .prodfeature {
         ul {
             li {
-                font-family: $storm-avant;
+                font-family: $font;
                 font-size: 13px;
             }
         }
@@ -650,7 +575,7 @@ a.filter {
     padding: 7px 0;
     height: 17px;
     text-indent: 0;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-family: $font-secondary;
     font-size: 11px;
     border-radius: 0 5px 5px 0;
 }
@@ -661,7 +586,7 @@ a.filter {
 
 .shop-brand {
     .shop-brandtext {
-        font-family: $storm-fontstorm;
+        font-family: $font-third;
         font-size: 33px;
         font-weight: normal;
         line-height: 22px;
@@ -727,7 +652,7 @@ a.filter {
                     line-height: normal;
                     text-align: left;
                     width: auto;
-                    font-family: $storm-lucida;
+                    font-family: $font-secondary;
                     padding: 0;
                     vertical-align: top;
                 }
@@ -819,7 +744,7 @@ a.filter {
 
 form {
     .label {
-        font-family: 'KenyanCoffeeRg-Regular';
+        font-family: $font-third;
         font-weight: normal;
         color: #333;
         text-transform: uppercase;
@@ -834,7 +759,7 @@ div {
             .formfield {
                 .form-row {
                     .label {
-                        font-family: $storm-fontstorm;
+                        font-family: $font-third;
                         font-weight: normal;
                         color: #333;
                         text-transform: uppercase;
@@ -878,7 +803,7 @@ div {
                     font-size: 13px !important;
                     font-style: normal;
                     font-weight: normal !important;
-                    font-family: $storm-lucida;
+                    font-family: $font-secondary;
                 }
             }
         }
@@ -999,7 +924,7 @@ div {
             background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x !important;
             height: auto !important;
             font-size: 13px;
-            font-family: $storm-lucida;
+            font-family: $font-secondary;
         }
     }
     .pt_product-search-result,
@@ -1238,7 +1163,7 @@ div {
                 h2 {
                     text-align: center;
                     background: none;
-                    font-family: $storm-fontstorm;
+                    font-family: $font-third;
                     font-size: 36px;
                     font-variant: small-caps;
                     font-weight: normal;
@@ -1262,7 +1187,7 @@ div {
                 h1 {
                     &.left-nav-style {
                         color: $storm-black;
-                        font-family: $storm-fontstorm;
+                        font-family: $font-third;
                         font-size: 33px;
                         font-weight: normal;
                         margin-top: -38px;
@@ -1416,7 +1341,7 @@ div {
                     .product-promo {
                         text-align: left;
                         color: $storm-red;
-                        font-family: $storm-lucida;
+                        font-family: $font-secondary;
                         font-style: italic;
                         font-size: 10px;
                         padding-top: 3px;
@@ -1435,19 +1360,19 @@ div {
             .folder-content-list {
                 li {
                     a {
-                        font-family: $storm-lucida;
+                        font-family: $font-secondary;
                         color: $storm-gray;
                         &:hover {
                             text-decoration: undeline;
                         }
                     }
                     p {
-                        font-family: $storm-avant;
+                        font-family: $font;
                         color: $storm-gray;
                         font-size: 13px;
                         a {
                             &.readmore {
-                                font-family: $storm-avant;
+                                font-family: $font;
                                 font-size: 13px;
                                 color: $storm-black;
                             }
@@ -1594,7 +1519,7 @@ div {
                     h1 {
                         font-size: 25px;
                         line-height: 30px;
-                        font-family: $storm-fontstorm;
+                        font-family: $font-third;
                     }
                 }
             }
@@ -1644,7 +1569,7 @@ div {
         text-transform: uppercase;
         padding-bottom: 2px;
         color: #333;
-        font-family: KenyanCoffeeRg-Regular;
+        font-family: $font-third;
         font-weight: normal;
         font-size: 22px;
         line-height: 22px;
@@ -1682,7 +1607,7 @@ div {
                         h1 {
                             font-size: 25px;
                             line-height: 30px;
-                            font-family: $storm-fontstorm;
+                            font-family: $font-third;
                         }
                         .cellbox {
                             &.accordion {
