@@ -22,7 +22,7 @@ h1, .h-one-tag {
 .productdetail {
     .price {
         .salesprice {
-            color: #e42213;
+            color: $vmc-gradient1;
             font-size: 15px;
             font-weight: bold;
             letter-spacing: 0;
@@ -57,15 +57,10 @@ a.button, button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0;
-    color: $vmc-white;
+    color: $white;
     padding: 0 17px 0 17px;
     background-color: $vmc-bgred;
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: $vmc-borderone;
-    border-right-color: $vmc-bordertwo;
-    border-bottom-color: $vmc-borderthree;
-    border-left-color: $vmc-borderfour;
+    @include btn-border;
 }
 
 h1 {
@@ -99,7 +94,7 @@ a:hover {
 }
 
 p {
-    color: $vmc-black;
+    color: $black;
     font-family: $font;
     font-size: 12px;
     font-weight: normal;
@@ -299,10 +294,10 @@ form .label {
                         button {
                             &.simple {
                                 background-color: $vmc-red;
-                                color: $vmc-white;
+                                color: $white;
                                 &:hover {
                                     background-color: #D80000;
-                                    color: $vmc-white;
+                                    color: $white;
                                 }
                             }
                         }
@@ -318,7 +313,7 @@ form .label {
         .order-number {
             .label {
                 font-family: $font-third;
-                color: $vmc-black;
+                color: $black;
                 text-transform: uppercase;
                 font-weight: normal;
                 font-size: 28px;
@@ -450,7 +445,7 @@ form .label {
             #minicart {
                 #multi-site-one-cart {
                     span {
-                        color: $vmc-white;
+                        color: $white;
                         font-weight: normal;
                         background-image: url(../images/multi-site-one-cart-bg.png);
                         width: 58px;
@@ -472,7 +467,7 @@ form .label {
     a {
         &.filter {
             span {
-                color: #fff;;
+                color: $white;;
                 font-size: 12px;
                 font-weight: normal;
             }
@@ -492,22 +487,17 @@ a.filter {
     font-style: normal;
     font-weight: bold;
     letter-spacing: 0;
-    color: #fff !important;
+    color: $white !important;
     padding: 5px 28px 5px 10px;
     background: rgba(228, 33, 19, 1);
     background: linear-gradient(to bottom, rgba(228, 33, 19, 1) 0%, rgba(168, 18, 1, 1) 100%);
-    border-style: solid;
-    border-width: 1px;
-    border-top-color: #EE2E24;
-    border-right-color: #EE2E24;
-    border-bottom-color: #EE2E24;
-    border-left-color: #EE2E24;
+    border: 1px solid $vmc-red;
     background-repeat: no-repeat;
     &:hover {
         text-decoration: none;
         background: rgba(168, 18, 1, 1);
         background: linear-gradient(to bottom, rgba(168, 18, 1, 1) 0%, rgba(228, 33, 19, 1) 100%);
-        color: #999;
+        color: $vmc-gray;
     }
 }
 
@@ -529,7 +519,7 @@ a.filter {
             #minicart {
                 a.minicart-checkout-button {
                     background: linear-gradient(to bottom, $vmc-gradient1 60%, $vmc-gradient2 100%);
-                    color: $vmc-white;
+                    color: $white;
                     text-align: center;
                     text-decoration: none;
                     padding: 7px 0;
@@ -550,7 +540,7 @@ a.filter {
             .contentboxcontent {
                 h1 {
                     &.leftnav {
-                        color: $vmc-black;
+                        color: $black;
                         font-family: $font-third;
                         font-size: 29px;
                         float: left;
@@ -565,23 +555,15 @@ a.filter {
 .product-tile {
     .product-image {
         .quickview {
-            color: $vmc-white;
+            color: $white;
             background-color: $vmc-red;
-            border-style: solid;
-            border-width: 1px;
-            border-top-color: $vmc-borderone;
-            border-right-color: $vmc-bordertwo;
-            border-bottom-color: $vmc-borderthree;
-            border-left-color: $vmc-borderfour;
+            @include btn-border;
         }
         .quickview:hover {
             color: $vmc-red1;
             background-color: $vmc-red;
             text-decoration: none;
-            border-top-color: $vmc-borderone;
-            border-right-color: $vmc-bordertwo;
-            border-bottom-color: $vmc-borderthree;
-            border-left-color: $vmc-borderfour;
+            @include btn-border-color;
         }
     }
 }
@@ -593,24 +575,15 @@ a.filter {
                 .product-tile {
                     .product-image {
                         .quickview {
-                            color: $vmc-white;
+                            color: $white;
                             background-color: $vmc-red;
-                            border-style: solid;
-                            border-width: 1px;
-                            border-top-color: $vmc-borderone;
-                            border-right-color: $vmc-bordertwo;
-                            border-bottom-color: $vmc-borderthree;
-                            border-left-color: $vmc-borderfour;
+                            @include btn-border;
                         }
                         .quickview:hover {
                             color: $vmc-red1;
                             background-color: $vmc-red;
                             text-decoration: none;
-                            border-top-color: $vmc-borderone;
-                            border-right-color: $vmc-bordertwo;
-                            border-bottom-color: $vmc-borderthree;
-                            border-left-color: $vmc-borderfour;
-
+                            @include btn-border-hover-color;
                         }
                     }
                 }
@@ -626,16 +599,16 @@ a.filter {
                 .product-tile {
                     .product-swatches-all {
                         &:hover {
-                            color: #e42213 !important;
+                            color: $vmc-gradient1 !important;
                         }
                     }
                     .product-name {
                         a {
-                            color: $vmc-black;
+                            color: $black;
                         }
                         a:hover {
                             text-decoration: none;
-                            color: #e42213;
+                            color: $vmc-gradient1;
                         }
                     }
                 }
@@ -874,7 +847,7 @@ a.filter {
         .specificiations {
             border: none;
             tbody {
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid $vmc-cusservice-color;
                 margin-bottom: 2em;
                 display: table;
                 width: 100%;
@@ -884,9 +857,9 @@ a.filter {
                     }
                     &:first-child {
                         th {
-                            background: #e42213;
-                            background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-                            color: #ffffff;
+                            background: $vmc-gradient1;
+                            background: linear-gradient(to bottom, $vmc-gradient1 0%, $vmc-gradient2 100%);
+                            color: $white;
                             padding: 8px 13.5px;
                             width: 100%;
                             margin: 0;
@@ -900,7 +873,7 @@ a.filter {
                         background: #FFE1DE;
                     }
                     td {
-                        border-right: 1px solid #ccc;
+                        border-right: 1px solid $vmc-cusservice-color;
                         width: 50%;
                         float: left;
                         vertical-align: middle;
@@ -989,11 +962,8 @@ a.filter {
     .future {
         a {
             &.filter {
-                background-color: #f1f1f1 !important;
-                border-top: 1px solid #d0d0d0;
-                border-right: 1px solid #e8e8e8;
-                border-bottom: 1px solid #f8f8f8;
-                border-left: 1px solid #e8e8e8;
+                background-color: $vmc-lightwhite !important;
+                @include btn-border-hover;
                 color: #333 !important;
                 border-radius: 3px;
             }
@@ -1232,8 +1202,8 @@ a.filter {
                                             &.ui-state-active {
                                                 a {
                                                     background-image: none;
-                                                    background: #e42213; /* Old browsers */
-                                                    background: linear-gradient(to bottom, #e42213 10%, rgba(255, 255, 255, 1) 10%, #e42213 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                                                    background: $vmc-gradient1; /* Old browsers */
+                                                    background: linear-gradient(to bottom, $vmc-gradient1 10%, rgba(255, 255, 255, 1) 10%, $vmc-gradient1 10%, rgba(255, 255, 255, 1) 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                                                 }
                                             }
                                         }
@@ -1276,9 +1246,9 @@ a.filter {
             tbody {
                 tr {
                     th {
-                        background: #e42213;
-                        background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-                        color: #ffffff;
+                        background: $vmc-gradient1;
+                        background: linear-gradient(to bottom, $vmc-gradient1 0%, $vmc-gradient2 100%);
+                        color: $white;
                         border: none;
                         vertical-align: middle;
                         &:first-child {
@@ -1290,14 +1260,14 @@ a.filter {
                     }
                     td {
                         &:last-child {
-                            border-right: 1px solid #ccc;
+                            border-right: 1px solid $vmc-cusservice-color;
                         }
                     }
                     &.oddrow {
                         background: #FFE1DE;
                     }
                     &.evenrow {
-                        background: #fff;
+                        background: $white;
                     }
                 }
             }
@@ -1310,9 +1280,9 @@ a.filter {
         .specificiations {
             thead {
                 tr {
-                    background: #e42213;
-                    background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-                    color: #ffffff;
+                    background: $vmc-gradient1;
+                    background: linear-gradient(to bottom, $vmc-gradient1 0%, $vmc-gradient2 100%);
+                    color: $white;
                     border: none;
                     vertical-align: middle;
                     &:first-child {
@@ -1339,7 +1309,7 @@ a.filter {
     li.first-level-no-children {
         a {
             &:hover {
-                color: #EE2E24;
+                color: $vmc-red;
                 text-decoration: none;
             }
         }
@@ -1347,7 +1317,7 @@ a.filter {
     //.first-level-no-children
     li {
         &.list-active {
-            color: #EE2E24;
+            color: $vmc-red;
         }
         //list-active
     }
@@ -1360,7 +1330,7 @@ a.filter {
                 .column.colspan2 {
                     .cell.upshift {
                         &.tabover {
-                            background-color: #EE2E24;
+                            background-color: $vmc-red;
                         }
                     }
                 }
@@ -1375,12 +1345,12 @@ a.filter {
                         .nav-group {
                             li {
                                 &.active {
-                                    background-color: #e80000;
+                                    background-color: $vmc-red2;
                                     border-top: 1px solid #c40000;
                                     border-right: 1px solid #e30000;
                                     border-bottom: 1px solid #f69d9d;
                                     border-left: 1px solid #e30000;
-                                    color: #fff;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1407,7 +1377,7 @@ a.filter {
             li {
                 a {
                     span {
-                        color: #ee2e24;
+                        color: $vmc-red;
                     }
                     &:hover {
                         span {
@@ -1494,7 +1464,7 @@ a.filter {
 .pt_customerservice {
     #content {
         .productsearchbreadcrumb, .breadcrumb {
-            background: #f1f1f1;
+            background: $vmc-lightwhite;
         }
     }
 }
@@ -1604,14 +1574,14 @@ a.filter {
                     a {
                         &:hover {
                             span {
-                                color: #EE2E24;
+                                color: $vmc-red;
                             }
                         }
                     }
                     &.ui-state-active {
                         a {
                             span {
-                                color: #EE2E24;
+                                color: $vmc-red;
                             }
                         }
                     }
@@ -1625,12 +1595,12 @@ a.filter {
     &.new-stamp {
         border-radius: 15px;
         //background-color: #ED2E24;
-        background-color: #E42213;
+        background-color: $vmc-gradient1;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #000;
+        color: $black;
         padding: 1px 5px;
         margin-right: 3px;
         width: auto !important;
@@ -1645,7 +1615,7 @@ a.filter {
         font-family: sans-serif;
         font-weight: normal;
         font-size: 12px;
-        color: #000;
+        color: $black;
         padding: 4px 8px;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.65);
         margin-right: 3px;
@@ -1659,12 +1629,12 @@ a.filter {
         border-radius: 15px;
         // background-color: #ED2E24;
         //changing background as mentioned in doc(RAPR-297)
-        background-color: #E42213;
+        background-color: $vmc-gradient1;
         font-style: italic;
         font-family: sans-serif;
         font-weight: normal;
         font-size: 10px;
-        color: #000;
+        color: $black;
         padding: 1px 5px;
         margin-right: 3px;
     }
@@ -1677,8 +1647,8 @@ a.filter {
                 a {
                     span {
                         &.corner-ribbon {
-                            background-color: #e80000;
-                            color: $vmc-black;
+                            background-color: $vmc-red2;
+                            color: $black;
                         }
                     }
                 }
@@ -1698,5 +1668,5 @@ a.filter {
 }
 
 .productdetail .price .price-sales {
-    color: #e42213;
+    color: $vmc-gradient1;
 }

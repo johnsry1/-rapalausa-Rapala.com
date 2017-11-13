@@ -60,7 +60,7 @@ form .label {
 
 .personal-info {
     .label {
-        color: #333;
+        color: $night-rider;
         display: block;
         float: none;
         font-family: $font-secondary;
@@ -74,11 +74,9 @@ form .label {
 
 button, a.button {
     background-color: $rap-bgred;
-    border-color: $rap-borderone $rap-bordertwo $rap-borderthree;
-    border-style: solid;
-    border-width: 1px;
+    @include btn-border;
     clear: left;
-    color: $rap-white;
+    color: $white;
     cursor: pointer;
     display: block;
     float: left;
@@ -168,13 +166,13 @@ button:hover, a.button:hover {
                     border-color: $rap-red;
                     transition: none;
                     h2 {
-                        color: $rap-white;
+                        color: $white;
                     }
                     p {
-                        color: $rap-white;
+                        color: $white;
                     }
                     i {
-                        color: $rap-white;
+                        color: $white;
                     }
                 }
             }
@@ -192,7 +190,7 @@ button:hover, a.button:hover {
             .form-row {
                 .label {
                     .labeltext {
-                        color: #333;
+                        color: $night-rider;
                         font-family: $font-secondary;
                         font-size: 20px;
                         font-weight: normal;
@@ -293,7 +291,7 @@ button:hover, a.button:hover {
                     font-weight: normal;
                     text-transform: none;
                     font-style: normal;
-                    color: $rap-blackdark;
+                    color: $black;
                 }
             }
         }
@@ -366,10 +364,10 @@ button:hover, a.button:hover {
                         button {
                             &.simple {
                                 background-color: $rap-red;
-                                color: $rap-white;
+                                color: $white;
                                 &:hover {
                                     background-color: $rap-bgredone;
-                                    color: $rap-white;
+                                    color: $white;
                                 }
                             }
                         }
@@ -386,7 +384,7 @@ button:hover, a.button:hover {
 }
 
 .ui-widget-content {
-    background: #fff url(images/ui-bg_glass_75_ffffff_1x400.png) 0 0 repeat-x;
+    background: $white url(images/ui-bg_glass_75_ffffff_1x400.png) 0 0 repeat-x;
     color: #222;
 }
 
@@ -422,7 +420,7 @@ button:hover, a.button:hover {
 #minicart {
     #multi-site-one-cart {
         span {
-            color: $rap-white;
+            color: $white;
             background-image: url(../images/multi-site-one-cart-bg.png);
         }
     }
@@ -491,7 +489,7 @@ button:hover, a.button:hover {
                     margin-top: -38px;
                     font-size: 25px;
                     font-weight: bold;
-                    color: $rap-blackdark;
+                    color: $black;
                 }
                 h1.leftnav {
                     font-size: 22px;
@@ -514,7 +512,7 @@ button:hover, a.button:hover {
                 .product-tile {
                     .product-name {
                         a {
-                            color: $rap-blackdark;
+                            color: $black;
                         }
                         a:hover {
                             color: $rap-red;
@@ -615,11 +613,9 @@ a {
         background: rgba(232, 0, 0, 1);
         background: linear-gradient(to bottom, rgba(232, 0, 0, 1) 0%, rgba(199, 0, 0, 1) 100%);
         background-repeat: no-repeat;
-        border-color: $rap-borderone $rap-bordertwo $rap-borderthree;
-        border-style: solid;
-        border-width: 1px;
+        @include btn-border;
         clear: left;
-        color: #FFFFFF !important;
+        color: $white !important;
         display: block;
         float: left;
         font-family: $font-fourth;
@@ -638,7 +634,7 @@ a {
             background: rgba(199, 0, 0, 1);
             background: linear-gradient(to bottom, rgba(199, 0, 0, 1) 0%, rgba(232, 0, 0, 1) 100%);
             text-decoration: none;
-            color: #999;
+            color: $rap-gray;
         }
     }
 }
@@ -752,7 +748,7 @@ input, .quantity {
                 border-right: 1px solid #e8e8e8;
                 border-bottom: 1px solid #f8f8f8;
                 border-left: 1px solid #e8e8e8;
-                color: #333 !important;
+                color: $night-rider !important;
                 border-radius: 3px;
             }
         }
@@ -921,10 +917,7 @@ input, .quantity {
                             background: url("../images/arrow-333333.png") no-repeat 0 6px transparent;
                             padding-left: 12px;
                             font-family: $font-fourth;
-                            color: $rap-cusservice-color;
-                            a {
-                                /*color: $rap-black;*/
-                            }
+                            color: $rap-light-grey;
                         }
                     }
                 }
@@ -988,7 +981,7 @@ input, .quantity {
                                     line-height: 10px;
                                     margin-top: 19px;
                                     a {
-                                        color: #000;
+                                        color: $black;
                                     }
                                 }
                             }
@@ -1038,7 +1031,7 @@ input, .quantity {
 .productdetail {
     .price {
         .standardprice {
-            color: #999;
+            color: $rap-gray;
             font-size: 15px;
             font-weight: bold;
         }
@@ -1082,17 +1075,17 @@ input, .quantity {
                 tr {
                     background: rgba(232, 0, 0, 1);
                     background: linear-gradient(to bottom, rgba(232, 0, 0, 1) 0%, rgba(199, 0, 0, 1) 100%);
-                    color: $rap-white;
+                    color: $white;
                 }
             }
             tbody {
                 tr {
                     &.evenrow {
                         background: #FDD9D9;
-                        color: $rap-blackdark;
+                        color: $black;
                     }
                     td {
-                        border-right: 1px solid $rap-cusservice-color;
+                        border-right: 1px solid $rap-light-grey;
                     }
                 }
             }
@@ -1117,7 +1110,7 @@ input, .quantity {
             .specificiations {
                 border: none;
                 tbody {
-                    border-bottom: 1px solid #ccc;
+                    border-bottom: 1px solid $rap-light-grey;
                     margin-bottom: 2em;
                     display: table;
                     width: 100%;
@@ -1127,7 +1120,7 @@ input, .quantity {
                                 width: 100%;
                                 background: rgba(232, 0, 0, 1);
                                 background: linear-gradient(to bottom, rgba(232, 0, 0, 1) 0%, rgba(199, 0, 0, 1) 100%);
-                                color: #fff;
+                                color: $white;
                                 vertical-align: middle;
                                 border: none;
                                 border-top-left-radius: 3px;
@@ -1143,11 +1136,11 @@ input, .quantity {
                             min-height: 31px;
                             display: block;
                             &:last-child {
-                                border-right: 1px solid #ccc;
+                                border-right: 1px solid $rap-light-grey;
                             }
                         }
                         &:nth-child(even) {
-                            background: #fff;
+                            background: $white;
                         }
                         &:nth-child(odd) {
                             background: #FDD9D9;
@@ -1165,7 +1158,7 @@ input, .quantity {
         &.first-level-no-children {
             a {
                 &:hover {
-                    color: #333;
+                    color: $night-rider;
                     text-decoration: none;
                 }
             }
@@ -1194,10 +1187,10 @@ input, .quantity {
                 .column.colspan2 {
                     .cell.upshift {
                         &.tabover {
-                            color: #fff;
+                            color: $white;
                             background: none repeat scroll 0 0 $rap-red;
                             a {
-                                color: #fff;
+                                color: $white;
                             }
                         }
                     }
@@ -1215,11 +1208,8 @@ input, .quantity {
                             li {
                                 &.active {
                                     background-color: $rap-red;
-                                    border-top: 1px solid #c40000;
-                                    border-right: 1px solid #e30000;
-                                    border-bottom: 1px solid #f69d9d;
-                                    border-left: 1px solid #e30000;
-                                    color: #fff;
+                                    @include btn-border;
+                                    color: $white;
                                 }
                             }
                         }
@@ -1250,14 +1240,14 @@ input, .quantity {
                     }
                     &:hover {
                         span {
-                            color: #333333;
+                            color: $night-rider;
                         }
                     }
                 }
                 &.selected {
                     a {
                         border-color: $rap-red;
-                        color: $rap-white;
+                        color: $white;
                     }
                 }
             }
@@ -1287,7 +1277,7 @@ input, .quantity {
             .payment-list {
                 .cc-owner {
                     .label {
-                        color: #333;
+                        color: $night-rider;
                         display: block;
                         float: none;
                         font-family: $font-secondary;
@@ -1408,12 +1398,12 @@ input, .quantity {
         background-color: $rap-red;
         h2 {
             a {
-                color: $rap-white;
+                color: $white;
             }
         }
         .release-date {
             a {
-                color: $rap-white;
+                color: $white;
             }
         }
     }
@@ -1431,7 +1421,7 @@ input, .quantity {
                 font-weight: normal;
                 font-variant: small-caps;
                 font-family: $font-secondary;
-                color: #333;
+                color: $night-rider;
             }
         }
     }
@@ -1515,7 +1505,7 @@ input, .quantity {
                     span {
                         &.corner-ribbon {
                             background-color: $rap-red;
-                            color: $rap-white;
+                            color: $white;
                         }
                     }
                 }
@@ -1535,5 +1525,5 @@ input, .quantity {
 }
 
 .productdetail .price .price-sales {
-    color: #e80000;
+    color: $rap-red;
 }
