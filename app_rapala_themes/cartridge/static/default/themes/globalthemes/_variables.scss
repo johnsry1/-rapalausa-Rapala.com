@@ -186,3 +186,19 @@ $label-text-transform: none;
     border-style: solid;
     @include btn-border-hover-color;
 }
+
+// a
+$link-color: $night-rider;
+$link-decoration: none;
+$link-hover-color: $night-rider;
+$link-hover-decoration: underline;
+
+@mixin link {
+    color: $link-color;
+    text-decoration: $link-decoration;
+    cursor: pointer;
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+    }
+}
