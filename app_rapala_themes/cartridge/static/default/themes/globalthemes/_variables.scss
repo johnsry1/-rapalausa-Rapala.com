@@ -202,3 +202,58 @@ $link-hover-decoration: underline;
         text-decoration: $link-hover-decoration;
     }
 }
+
+// a.filter
+$a-filter-bg-image: '';
+$a-filter-bg: rgba(232, 0, 0, 1);
+$a-filter-gradient: linear-gradient(to bottom, rgba(232, 0, 0, 1) 0%, rgba(199, 0, 0, 1) 100%);
+$a-filter-color: $white;
+$a-filter-font-family: $font-fourth;
+$a-filter-font-size: 14px;
+$a-filter-font-weight: bold;
+$a-filter-line-height: 18px;
+$a-filter-margin: 18px 0 0;
+$a-filter-padding: 5px 28px 5px 10px;
+$a-filter-text-transform: uppercase;
+$a-filter-width: 184px;
+$a-filter-hover-bg-image: '';
+$a-filter-hover-bg: rgba(199, 0, 0, 1);
+$a-filter-hover-gradient: linear-gradient(to bottom, rgba(199, 0, 0, 1) 0%, rgba(232, 0, 0, 1) 100%);
+$a-filter-hover-text-decoration: none;
+$a-filter-hover-color: #999;
+
+@mixin a-filter {
+    @if ($a-filter-bg-image) {
+        background-image: $a-filter-bg-image;
+    }
+    background-color: $a-filter-bg;
+    @if ($a-filter-gradient) {
+        background: $a-filter-gradient;
+    }
+    background-repeat: no-repeat;
+    @include btn-border;
+    clear: left;
+    color: $a-filter-color !important;
+    display: block;
+    float: left;
+    font-family: $a-filter-font-family;
+    font-size: $a-filter-font-size;
+    font-style: normal;
+    font-weight: $a-filter-font-weight;
+    letter-spacing: 0;
+    line-height: $a-filter-line-height;
+    margin: $a-filter-margin;
+    padding: $a-filter-padding;
+    text-transform: $a-filter-text-transform;
+    width: $a-filter-width;
+
+    &:hover {
+        background-image: none;
+        background-color: $a-filter-hover-bg;
+        @if ($a-filter-hover-gradient) {
+            background: $a-filter-hover-gradient;
+        }
+        text-decoration: $a-filter-hover-text-decoration;
+        color: $a-filter-hover-color;
+    }
+}
