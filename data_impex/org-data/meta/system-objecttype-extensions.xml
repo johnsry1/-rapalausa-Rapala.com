@@ -6633,6 +6633,19 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
 				<externally-managed-flag>false</externally-managed-flag>
 				<default-value>false</default-value>
 			</attribute-definition>
+            <attribute-definition attribute-id="countriesDefaultCurrency">
+                <display-name xml:lang="x-default">Countries Default Currency</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+			<attribute-definition attribute-id="enableCountryDefaultCurrency">
+				<display-name xml:lang="x-default">Enable Country Default Currency</display-name>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<default-value>false</default-value>
+			</attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="StoreLocator">
@@ -6802,6 +6815,8 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="variantNewSnipeAttributes"/>
                 <attribute attribute-id="allowed_countries"/>
                 <attribute attribute-id="checkTLS"/>
+                <attribute attribute-id="countriesDefaultCurrency"/>
+                <attribute attribute-id="enableCountryDefaultCurrency"/>
             </attribute-group>
             <attribute-group group-id="Listrak">
                 <display-name xml:lang="x-default">Listrak Store Preferences</display-name>

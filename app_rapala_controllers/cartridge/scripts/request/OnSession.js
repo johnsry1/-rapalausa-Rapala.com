@@ -10,6 +10,8 @@
 
 var Status = require('dw/system/Status');
 
+var RapalaHelper = require(dw.web.Resource.msg('scripts.util.rapalahelper.ds', 'require', null));
+
 /**
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
@@ -36,10 +38,52 @@ function getDeviceType() {
     return deviceType;
 }
 
+function geoIpDefaultCurrency() { 
+    var logMessage = '';
+    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
+        logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
+        try {
+            var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
+            
+            var geolocation = request.getGeolocation();
+            if (geolocation == null) {
+                logMessage += 'Geolocation not available, set up default currency from config \n';    
+            }
+            var country = (geolocation != null) ? geolocation.getCountryCode() : 'default';
+            
+            var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
+            var currencies = JSON.parse(json);
+            
+            if (!empty(currencies)) {
+                if (country in currencies) {
+                    currency = currencies[country];
+                    if (availableCurrency.indexOf(currency) != -1) {
+                        session.setCurrency(dw.util.Currency.getCurrency(currency));
+                        logMessage += 'Sep up session currency to: ' + currency + '\n';
+                    } else {
+                        logMessage += 'Currency not allowed by current site : ' + currency + '\n';
+                        session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+                        logMessage += 'Sep up session currency to default : ' + currencies['default'] + '\n';
+                    }
+                } else {
+                    session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+                    logMessage += 'Sep up session currency to default : ' + currencies['default'] + '\n';
+                }
+            } else {
+                logMessage += 'Empty JSON default currency config \n';  
+            }
+            RapalaHelper.getLogger('geoip-default-currency').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+        } catch (e) {
+            RapalaHelper.getLogger('geoip-default-currency').error(RapalaHelper.prepareLogMessage(e));
+        }
+    }
+}
+
 /**
  * The onSession hook function.
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
+    geoIpDefaultCurrency();
     return new Status(Status.OK);
 };
