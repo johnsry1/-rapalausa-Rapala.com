@@ -1,0 +1,422 @@
+//------------------------------------
+//  MIXINS
+//------------------------------------
+
+// A useful mixin to output a list of CSS styles passed in as a map
+//
+// Example:
+//
+//	//set a map variable
+//	$primary-nav: (
+//      padding-top: .2em,
+//      margin-top: .2em,
+//      line-height: 1.3,
+//	);
+//
+//	//now output with the mixin
+//	@include output-styles($primary-nav);
+//
+// Compiles to:
+//
+//	//Outputted CSS:
+//	.primary-nav {
+//      padding-top: .2em;
+//      margin-top: .2em;
+//      line-height: 1.3;
+//	}
+//
+@mixin output-styles($map) {
+    @each $property, $value in $map {
+        #{$property}: $value;
+    }
+}
+
+//
+// Generated a media query based on the given option
+// Possible options:
+//      print - styles only apply to printing
+//      small-down - styles only apply to viewports smaller than 480px
+//      small - styles only apply to viewports between 320px and 480px
+//      medium-down - styles only apply to viewports smaller than 768px
+//      medium - styles only apply to viewports between 480px and 767px
+//      medium-up - styles only apply to viewports 480px and above
+//      large-down - styles only apply to viewports smaller than 959px
+//      large - styles only apply to viewports between 768px and 959px
+//      large-up - styles only apply to viewports 768px and above
+//      desktop - styles only apply to viewports 960px and above
+//      [min-width] - number value (with units) is applied as the min-width for a custom media query
+//      [min-width], [max-width] - values (with units) are applied as min-width & max-width for a custom mediaquery
+
+@mixin respond($media, $max: null) {
+    @if $media == "print" {
+        @media only print {
+            @content;
+        }
+    } @else if $media == "small-down" {
+        @media only screen and (max-width: $medium-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "small" {
+        @media only screen and (min-width: $small-breakpoint) and (max-width: $medium-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "medium-down" {
+        @media only screen and (max-width: $large-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "medium" {
+        @media only screen and (min-width: $medium-breakpoint) and (max-width: $large-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "medium-up" {
+        @media only screen and (min-width: $medium-breakpoint) {
+            @content;
+        }
+    } @else if $media == "large-down" {
+        @media only screen and (max-width: $medium-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "large" {
+        @media only screen and (min-width: $large-breakpoint) and (max-width: $desktop-breakpoint - 1) {
+            @content;
+        }
+    } @else if $media == "large-up" {
+        @media only screen and (min-width: $large-breakpoint) {
+            @content;
+        }
+    } @else if $media == "desktop" {
+        @media only screen and (min-width: $desktop-breakpoint) {
+            @content;
+        }
+    } @else if type-of($media) == number and $max == null {
+        @media only screen and (min-width: $media) {
+            @content;
+        }
+    } @else if type-of($media) == number and type-of($max) == number {
+        @media only screen and (min-width: $media) and (max-width: $max) {
+            @content;
+        }
+    }
+}
+
+@mixin gradient($start-color, $end-color, $orientation) {
+    background: $start-color;
+    @if $orientation == vertical {
+        // vertical
+        background: linear-gradient(to bottom, $start-color 0%, $end-color 100%);
+    } @else if $orientation == horizontal {
+        // horizontal
+        background: linear-gradient(to right, $start-color 0%, $end-color 100%);
+    } @else {
+        // radial
+        background: radial-gradient(ellipse at center, $start-color 0%, $end-color 100%);
+    }
+}
+
+// Line Height Sizer
+// ex:  @include line-height(14px);  //sets a line height size in rems with a fallback in pxs
+
+@mixin line-height($size) {
+    line-height: $size;
+    @if unit($size) == "px" {
+        line-height: rem($size);
+    }
+}
+
+// Font Sizer
+// ex: @include font-size(14px);  //sets a font size in rems with a fallback in pxs
+// ex2: @include font-size(14px, $breakpoint: $medium-breakpoint);  //sets a scaling font size in vw's with a fixed fallback in pxs
+
+@mixin font-size($size: null, $lineheight: null, $breakpoint: null) {
+    @if $size != "" and $size != null {
+        @if $breakpoint == null {
+            font-size: $size;
+            font-size: rem($size);
+        } @else {
+            // Get a font size in VWs that will match the given pixel font-size in the given viewport.
+            font-size: $size;
+            font-size: calculateVw($size, $breakpoint);
+        }
+        @if $lineheight != "" and $lineheight != null and unit($size) == unit($lineheight) {
+            $calculated-line-height: (strip-units($lineheight) / strip-units($size)) * 1em;
+            @include line-height($calculated-line-height);
+        }
+    }
+}
+
+//
+// Standard Font Families
+//
+
+// usage examples
+// ex1: @include font-light();
+// ex2: @include font-light(16px);
+// ex3: @include font-light(14px, 22px);
+
+@mixin font-light($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-light;
+    font-weight: $font-wt-light;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+// usage examples
+// ex1: @include font-reg();
+// ex2: @include font-reg(16px);
+// ex3: @include font-reg(14px, 22px);
+
+@mixin font-reg($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-regular;
+    font-weight: $font-wt-regular;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+// Font Style Mixin
+// usage examples
+// ex1: @include font-italic();
+// ex2: @include font-italic(16px);
+// ex3: @include font-italic(14px, 22px);
+
+@mixin font-italic($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-regular-italic;
+    font-style: $font-style-italic;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+
+// usage examples
+// ex1: @include font-semibold();
+// ex2: @include font-semibold(16px);
+// ex3: @include font-semibold(14px, 22px);
+
+@mixin font-semibold($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-semibold;
+    font-weight: $font-wt-semibold;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+@mixin font-medium($fontsize: "", $lineheight: "", $letterspacing: null) {
+    @include font-semibold($fontsize, $lineheight, $letterspacing);
+}
+
+// usage examples
+// ex1: @include font-bold();
+// ex2: @include font-bold(16px);
+// ex3: @include font-bold(14px, 22px);
+
+@mixin font-bold($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-bold;
+    font-weight: $font-wt-bold;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+// usage examples
+// ex1: @include font-black();
+// ex2: @include font-black(16px);
+// ex3: @include font-black(14px, 22px);
+
+@mixin font-black($fontsize: "", $lineheight: "", $letterspacing: null) {
+    font-family: $sans-serif-black;
+    font-weight: $font-wt-black;
+    @if $letterspacing != "" {
+        letter-spacing: $letterspacing;
+    }
+    @include font-size($fontsize, $lineheight);
+}
+
+// usage examples
+// ex1: @include font-secondary-reg();
+// ex2: @include font-secondary-reg(16px);
+// ex3: @include font-secondary-reg(14px, 22px);
+
+@mixin font-secondary-reg($fontsize: "", $lineheight: "", $letterspacing: normal) {
+    font-family: $sans-serif-secondary;
+    font-weight: $font-wt-regular;
+    letter-spacing: $letterspacing;
+    @include font-size($fontsize, $lineheight);
+}
+
+// usage examples
+// ex1: @include font-secondary-bold();
+// ex2: @include font-secondary-bold(16px);
+// ex3: @include font-secondary-bold(14px, 22px);
+
+@mixin font-secondary-bold($fontsize: "", $lineheight: "", $letterspacing: normal) {
+    font-family: $sans-serif-secondary;
+    font-weight: $font-wt-bold;
+    letter-spacing: $letterspacing;
+    @include font-size($fontsize, $lineheight);
+}
+
+// usage examples
+// ex1: @include font(bold);
+// ex2: @include font(reg, 16px);
+// ex3: @include font(semibold, 14px, 22px);
+
+@mixin font($font, $fontsize: "", $lineheight: "") {
+    @if $font == "thin" {
+        @include font-thin($fontsize, $lineheight);
+    }
+    @if $font == "light" {
+        @include font-light($fontsize, $lineheight);
+    }
+    @if $font == "reg" or $font == "regular" {
+        @include font-reg($fontsize, $lineheight);
+    }
+    @if $font == "italic" {
+        @include font-italic($fontsize, $lineheight);
+    }
+    @if $font == "semibold" {
+        @include font-semibold($fontsize, $lineheight);
+    }
+    @if $font == "bold" {
+        @include font-bold($fontsize, $lineheight);
+    }
+    @if $font == "black" {
+        @include font-black($fontsize, $lineheight);
+    }
+    @if $font == "secondary" or $font == "secondary-reg" {
+        @include font-secondary-reg($fontsize, $lineheight);
+    }
+    @if $font == "secondary-bold" {
+        @include font-secondary-bold($fontsize, $lineheight);
+    }
+    @if $font == "" {
+        @include font-reg($fontsize, $lineheight);
+    }
+}
+
+// usage examples
+// ex1: @include font(bold);
+// ex2: @include font(reg, 16px);
+// ex3: @include font(semibold, 14px, 22px);
+
+@mixin font-secondary($font, $fontsize: "", $lineheight: "") {
+    @if $font == "reg" or $font == "regular" {
+        @include font-secondary-reg($fontsize, $lineheight);
+    }
+    @if $font == "bold" {
+        @include font-secondary-bold($fontsize, $lineheight);
+    }
+}
+
+
+// Inner page content width
+//---------------------------------------
+
+@mixin content-width() {
+    box-sizing: border-box;
+    margin: auto;
+    width: 100%;
+    max-width: $max-content-breakpoint;
+    padding-left: rem(20px);
+    padding-right: rem(20px);
+    @include respond(large-up) {
+        padding-left: rem(40px);
+        padding-right: rem(40px);
+    }
+    /* To remove fluidity in viewports, uncomment this block.
+    @include respond(medium-up) {
+        width: $medium-breakpoint - $content-width-gutters*2;
+    }
+    @include respond(large-up) {
+        width: $large-breakpoint - $content-width-gutters*2;
+    }
+    @include respond(desktop) {
+        width: $desktop-breakpoint - $content-width-gutters*2;
+    }
+    */
+}
+
+// Apply full-bleed width to a content-width page by including this mixin
+@mixin override-content-width() {
+    width: 100%;
+    max-width: 100%;
+}
+
+//Remove the default gutters in a content-width page by including this mixin
+@mixin override-content-width-gutters() {
+    width: 100%;
+}
+
+// Clearfix
+//---------------------------------------
+
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// Visually Hidden Elements
+//---------------------------------------
+
+@mixin visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Menu - Base Styles
+//---------------------------------------
+
+@mixin menu() {
+    float: left;
+    margin: 0;
+    padding: 0;
+    li {
+        float: left;
+        list-style: none outside none !important;
+    }
+}
+
+// Full-Bleed (using VW's)
+//---------------------------------------
+
+@mixin full-bleed-width() {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc((100vw - 100%) / -2);
+}
+
+// can be applied to elements that already receive the full-bleed styling to override within a particular viewport
+@mixin override-full-bleed() {
+    width: auto;
+    max-width: 0;
+    margin-left: initial;
+}
+
+
+// Override a button's height (including borders). Optionally change the side paddings.
+// ex1: @include setButtonHeight(50px);
+// ex2: @include setButtonHeight(50px, 35px);
+//---------------------------------------
+
+@mixin setButtonHeight ($height: null, $sides: $btn-side-padding) {
+    @if ($height and unit($height) == "px") {
+        line-height: 1em; // this value allows the math below to work...
+        padding: rem(($height - $btn-border-width * 2 - $btn-font-size) / 2) $sides;
+        min-height: rem($height);
+    }
+}

@@ -10,6 +10,7 @@ module.exports = function (gb) {
         var sass = require('gulp-sass'),
             sourcemaps = require('gulp-sourcemaps'),
             prefix = require('gulp-autoprefixer'),
+            plumber = require('gulp-plumber'),
             promises = [];
 
         //compile the style main style sheet from the source Sass
@@ -17,6 +18,7 @@ module.exports = function (gb) {
 
             var deferred = gb.Q.defer(),
                 stream = gb.gulp.src(options.scssPath + '/[^_]*.s+(a|c)ss')
+                    .pipe(plumber())
                     .pipe(sourcemaps.init())
                     .pipe(sass())
                     .pipe(prefix({
