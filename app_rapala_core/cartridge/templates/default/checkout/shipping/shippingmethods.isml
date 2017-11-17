@@ -106,7 +106,8 @@
 																	
 																	<span class="standard-shipping standardshipping"><isprint value="${shippingCost.baseShipping}"/></span>
 																	<span class="discount-shipping discountshipping">
-																		<isif condition="${shippingCost.baseShippingAdjusted == 0}"> 
+																		<isif condition="${shippingCost.baseShippingAdjusted == 0}">
+																			${Resource.msg('global.freeshipping', 'locale', null)} 
 																		<iselse/>
 																			<isprint value="${shippingCost.baseShippingAdjusted}"/>
 																		</isif>
