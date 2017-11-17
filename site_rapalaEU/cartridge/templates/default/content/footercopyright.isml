@@ -1,0 +1,17 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isif condition="${pdict.Content != null}">
+	<isif condition="${'body' in pdict.Content.custom && pdict.Content.custom.body != null}">
+		<iscomment>don't remove or rename DIV and Marker, necessary for mark and editing, no css attributes defined</iscomment>
+		<div class="content-asset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
+			<isscript>
+				var content = pdict.Content.custom.body.source;
+				if (content.indexOf('_currentDatePlaceholder_') != -1) {
+					content = content.replace('_currentDatePlaceholder_', dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString());
+				}
+			</isscript>
+			<isprint value="${content}" encoding="off"/>
+		</div> <!-- End content-asset -->
+	<iselse/>
+		${Resource.msg('global.nocontent','locale',null)}
+	</isif>
+</isif>
