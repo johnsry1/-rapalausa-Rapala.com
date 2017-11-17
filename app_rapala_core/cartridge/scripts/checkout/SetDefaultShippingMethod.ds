@@ -23,6 +23,10 @@ function setShippingMethod( basket, city, postalCode )
 	if(shipment.getShippingMethod() == null) {
 		var countryCode = "";
 		var stateCode = ""; 
+		if (dw.system.Site.getCurrent().ID == 'rapala') {
+			countryCode = "US";
+			stateCode = "NY";
+		} 
 
 		// Construct an address from request parameters.
 		var addressObj = new Object();
