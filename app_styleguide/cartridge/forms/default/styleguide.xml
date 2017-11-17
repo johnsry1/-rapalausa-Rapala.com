@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	
+	<field formid="exampleinput" label="isinputfield type=text" type="string" mandatory="false"/>
+	
+	<field formid="examplerequired" label="isinputfield type=text" type="string" mandatory="true" />
+	
+	<field formid="examplecaption" label="isinputfield type=text" description="Optional caption text in form definition" type="string" mandatory="false"/>
+	
+	<field formid="examplepassword" label="isinputfield type=password" type="string" mandatory="true"
+		min-length="8"
+		max-length="255"
+		range-error="resource.8_255characters" />
+	
+	<field formid="examplephone" label="isinputfield type=phone" type="string" mandatory="false" min-length="10" max-length="14"/>
+	
+	<field formid="exampleemail" label="isinputfield type=email" type="string" mandatory="false" min-length="6" />
+	
+	<field formid="exampleselectbox" label="Select Box: isinputfield type=select" type="string" mandatory="false">
+		<options>
+			<option optionid="optionid1" value="1" label="Select Option 1"/>
+			<option optionid="optionid2" value="2" label="Select Option 2"/>
+		</options>	
+	</field>
+	
+	<field formid="examplecheckbox" label="Checkox: isinputfield type=checkbox" type="boolean" mandatory="false" />
+	<field formid="examplecheckbox2" label="Checkox with caption below" type="boolean" mandatory="false" />
+	
+	<field formid="exampleradios" label="Radio Buttons: isinputfield type=radio" type="string" default-value="2" mandatory="false">
+		<options>
+			<option label="Option 1" value="1" />
+			<option label="Option 2" value="2" />
+			<option label="Option 3" value="3" />
+		</options>
+	</field>
+	
+	<field formid="exampleradios2" label="Radio Buttons with class=&quot;options-inline&quot;" type="string" mandatory="false">
+		<options>
+			<option label="Option 1" value="1" />
+			<option label="Option 2" value="2" />
+			<option label="Option 3" value="3" />
+		</options>
+	</field>
+	
+	<field formid="exampletextarea" label="isinputfield type=textarea" type="string" mandatory="false"/>
+	
+	<action formid="send" valid-form="true"/>
+	
+</form>

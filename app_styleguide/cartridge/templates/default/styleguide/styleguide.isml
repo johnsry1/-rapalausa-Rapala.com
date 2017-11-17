@@ -1,0 +1,1669 @@
+<!--- TEMPLATENAME: styleguide.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+
+<isdecorate template="styleguide/components/pt_styleguide">
+    <isinclude template="util/modules"/>
+
+    <isscript>
+        var help = {
+            label: Resource.msg('billing.linkcvn', 'checkout', null),
+            cid: 'help-telephone'
+        };
+    </isscript>
+
+    <h1>Rapala Style Guide</h1>
+
+    <h3 class="section-title">Color Pallette</h3>
+    <div class="color-grid responsive-grid">
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$red (${"#"}d80000)</div>
+            <div class="color-use">Primary, Buttons</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$black (${"#"}000)</div>
+            <div class="color-use">Dark Primary, Top most navigation text</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$night-rider (${"#"}333)</div>
+            <div class="color-use">Social Icon backgounds</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$greyish-brown (${"#"}4d4d4d)</div>
+            <div class="color-use">Secondary Navigation background, some lines and active slider dot</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$pinkish-grey (${"#"}ccc)</div>
+            <div class="color-use">Lines</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$silver (${"#"}bbbdbf)</div>
+            <div class="color-use">Tab borders, forms outlines</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$silver-two (${"#"}e6e7e8)</div>
+            <div class="color-use">Light form background</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$concrete (${"#"}f2f2f2)</div>
+            <div class="color-use">Inactive Brand tab background</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$kermit-green (${"#"}52a300)</div>
+            <div class="color-use">Checkout Button</div>
+        </div>
+
+        <div class="grid-col color">
+            <div class="color-block"></div>
+            <div class="color-name">$white (${"#"}fff)</div>
+            <div class="color-use">Background Color for PDP, product boxes</div>
+        </div>
+    </div>
+
+    <h3 class="section-title">TYPEFACES</h3>
+    <div class="fonts style-section">
+        <div class="roboto">
+            <div class="responsive-grid">
+                <div class="responsive-grid">
+                    <div class="grid-col"><h1>Roboto Regular</h1></div>
+                    <div class="grid-col usage">
+                        @include font-reg;
+                        <br />
+                        .font-reg
+                    </div>
+                </div>
+                <div class="responsive-grid">
+                    <div class="grid-col"><h1>Roboto Bold</h1></div>
+                    <div class="grid-col usage">
+                        @include font-bold;
+                        <br />
+                        .font-bold
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="franklin">
+            <div class="responsive-grid">
+                <div class="grid-col"><h1>Franklin Gothic Extra Condensed</h1></div>
+                <div class="grid-col usage">
+                    @include font-secondary-reg;
+                    <br />
+                    .font-secondary-reg
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col"><h1>ITC Franklin Gothic Demi Condensed</h1></div>
+                <div class="grid-col usage">
+                    @include font-secondary-bold;
+                    <br />
+                    .font-secondary-bold
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col"><h1>ITC Franklin Gothic Medium Condensed</h1></div>
+                <div class="grid-col usage">
+                    @include font-secondary-medium;
+                    <br />
+                    .font-secondary-medium
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Typography</h3>
+    <div class="typography">
+        <div class="style-section">
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>H1 / Product Carousel Heading</h4>
+                </div>
+                <div class="grid-col">
+                    <h1>Header 1</h1>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 30px <br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 20px <br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include h1;<br>
+                        .h1, h1
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>h2</h4>
+                </div>
+                <div class="grid-col">
+                    <h2>Header 2</h2>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 20px <br>
+                    font-face: ITC Franklin Gothic Demi Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 16px <br>
+                    font-face: ITC Franklin Gothic Demi Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include h2;<br>
+                        .h2, h2
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>h3</h4>
+                </div>
+                <div class="grid-col">
+                    <h3>Header 3</h3>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 15px <br>
+                    font-face: ITC Franklin Gothic Medium Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 15px <br>
+                    font-face: ITC Franklin Gothic Medium Condensed
+
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include h3;<br>
+                        .h3, h3
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>h4</h4>
+                </div>
+                <div class="grid-col">
+                    <h4>Header 4</h4>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Bold
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Bold
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include h4;<br>
+                        .h4, h4
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Homepage content slots</h3>
+    <div class="body-text">
+        <div class="style-section">
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Main Feature / Hero Slot</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="hero-title red">Hero</div>
+                    <div class="hero-title black">Hero</div>
+                    <div class="hero-title white">Hero</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 60px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 34px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include hero-title;<br>
+                        .hero-title
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Visual Category Navigation Slot</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="visual-category red">Visual Category</div>
+                    <div class="visual-category black">Visual Category</div>
+                    <div class="visual-category white">Visual Category</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 30px<br>
+                    font-face: Franklin Gothic Medium
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 24px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include visual-category;<br>
+                        .visual-category
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Carousel Headings</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="carousel-heading red">Carousel</div>
+                    <div class="carousel-heading black">Carousel</div>
+                    <div class="carousel-heading white">Carousel</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 60px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 34px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include carousel-heading;<br>
+                        .carousel-heading
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Two / Three Up Slot Headings</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="hero-subtitle red">Three Up Slot Headings</div>
+                    <div class="hero-subtitle black">Three Up Slot Headings</div>
+                    <div class="hero-subtitle white">Three Up Slot Headings</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 30px<br>
+                    font-face: Franklin Gothic Medium
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000, ${'#'}000, ${'#'}FFF<br>
+                    font-size: 24px<br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include hero-subtitle;<br>
+                        .hero-subtitle
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">BODY TEXT & LABELS</h3>
+    <div class="body-text">
+        <div class="style-section">
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Name</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="pdp-name">product name</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 24px <br>
+                    font-face: Franklin Gothic Extra Condensed
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 20px <br>
+                    font-face: Roboto Regular <br>
+                    letter-spacing: 0.025em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-name;<br>
+                        .pdp-name
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Description</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="pdp-description">Jeg spiser en banan med chokolade p. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade p.</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-description;<br>
+                        .pdp-description
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Attribute Title (Color, availability etc.)</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="product-attr-title">Availability</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}bbbdbf <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}bbbdbf <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include product-attr-title;<br>
+                        @include product-availability;<br>
+                        .product-attr-title <br>
+                        .product-availability
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Attribute Name (Color, availability etc.)</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="product-attr-name">In Stock</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include product-attr-name;<br>
+                        .product-attr-name
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Price</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="product-price pricing">
+                        <div class="price">
+                            <span class="price-sales">$9,99</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 18px <br>
+                    font-face: Roboto Bold <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 18px <br>
+                    font-face: Roboto Bold <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-price;
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Sale Price</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="price">
+                        <span class="price-standard">$15.50</span>
+                        <span class="price-sales">$10.50</span>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}bbbdbf, ${'#'}000000<br>
+                    font-size: 18px<br>
+                    font-face: Roboto Bold<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}bbbdbf, ${'#'}000000<br>
+                    font-size: 18px<br>
+                    font-face: Roboto  Bold<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-price;<br>
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Sale message</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="pdp-message">Sale message</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Bold
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Bold
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-message;<br>
+                        .pdp-message
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Accordian title</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="pdp-accordion-title">Accordion Title</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    none
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000<br>
+                    font-size: 20px<br>
+                    font-face: Roboto Regular<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-accordion-title;<br>
+                        .pdp-accordion-title
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Category Browse: Refinement Attribute Title (Color, Size)</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="clp-refinement-title">Refinement Title</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Regular<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Regular<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include clp-refinement-title;<br>
+                        .clp-refinement-title
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>PDP: Promo Messaging 2</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="pdp-promo">Buy One Get One</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}e80000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Regular<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}e80000<br>
+                    font-size: 13px<br>
+                    font-face: Roboto Regular<br>
+                    line-height: 20px<br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include pdp-promo;<br>
+                        .pdp-promo
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Form Captions</h4>
+                </div>
+                <div class="grid-col">
+                    <div class="form-caption">Form Caption</div>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include form-caption;<br>
+                        .form-caption
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Paragraph & Lists</h3>
+    <div class="body-text">
+        <div class="style-section">
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Paragraphs</h4>
+                </div>
+                <div class="grid-col">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    letter-spacing: 0em <br>
+                    line-height: 20px
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    letter-spacing: 0em <br>
+                    line-height: 20px
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include p;<br>
+                        .p, p
+                    </div>
+                </div>
+            </div>
+            <div class="responsive-grid">
+                <div class="grid-col">
+                    <h4>Unordered List</h4>
+                </div>
+                <div class="grid-col ul-example">
+                    <ul>
+                        <li>Gold-tone finish</li>
+                        <li>Fishhook attachment</li>
+                        <li>Drop: 3"H.</li>
+                        <li>Pom: 1"D. </li>
+                    </ul>
+                </div>
+                <div class="grid-col">
+                    <h4>Desktop:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <h4>Mobile:</h4>
+                    color: ${'#'}000000 <br>
+                    font-size: 13px <br>
+                    font-face: Roboto Regular <br>
+                    line-height: 20px <br>
+                    letter-spacing: 0 em
+                </div>
+                <div class="grid-col">
+                    <div class="usage">
+                        @include ul;<br>
+                        ul
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Link Styles</h3>
+    <div class="links">
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>Main Navigation</h4></div>
+            <div class="grid-col">
+                <div class="m-nav">
+                    <a class="main-nav" href="${'#'}">Main Navigation Link</a>
+                </div>
+            </div>
+            <div class="grid-col">
+                <h4>Desktop, Mobile:</h4>
+                color: ${'#'}ffffff <br>
+                font-size: 13px <br>
+                font-face: Roboto Regular <br>
+                line-height: 20px <br>
+                letter-spacing: 0.025 em <br>
+                text-transform: Uppercase <br>
+                background color: ${'#'}4b4b4b
+
+                <h4>Hover State:</h4>
+                Grayed out link color: ${'#'}000000 <br>
+                background color: ${'#'}bbbdbf
+            </div>
+            <div class="grid-col">
+                <div class="usage">
+                    @include main-nav; <br>
+                    .main-nav
+                </div>
+            </div>
+        </div>
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>Text Links (Standalone, Inline Paragraph)</h4></div>
+            <div class="grid-col">
+                <p><a href="${'#'}">Paragraph Link</a></p>
+            </div>
+            <div class="grid-col">
+                <h4>Desktop, Mobile:</h4>
+                (Underline) <br>
+                color: ${'#'}000000 <br>
+                font-size: 13px <br>
+                font-face: Roboto Regular <br>
+                letter-spacing: 0em <br>
+                line-height: 20px
+
+                <h4>Hover State:</h4>
+                No underline
+            </div>
+            <div class="grid-col">
+                <div class="usage">
+                    @include link; <br>
+                    p a, .link
+                </div>
+            </div>
+        </div>
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>Footer Links</h4></div>
+            <div class="grid-col">
+                <a href="${'#'}" class="footer-link">Footer Links</a>
+            </div>
+            <div class="grid-col">
+                <h4>Desktop, Mobile:</h4>
+                color: ${'#'}000000 <br>
+                font-size: 13px <br>
+                font-face: Roboto Regular <br>
+                letter-spacing: 0em <br>
+                line-height: 20px
+
+                <h4>Hover State:</h4>
+                Underline
+            </div>
+            <div class="grid-col">
+                <div class="usage">
+                    @include footer-link; <br>
+                    .footer-link
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Buttons</h3>
+    <div class="button-grid responsive-grid">
+        <div class="button-style grid-col">
+            <button>submit</button><br/>
+            <button disabled="disabled">submit</button>
+        </div>
+        <div class="grid-col">
+            <div class="button-description">
+                button-height: 40px <br>
+                button-color: bbbdbf <br>
+                rounded corner radius: 5px <br>
+                side-padding/width: 30px or variable based on width of column <br>
+                font-face: Roboto Regular <br>
+                font-size: 14px <br>
+                text transform: uppercase <br>
+                font-color: 000000 <br>
+                <br>
+                Hover:
+                hover-color: e6e7e8 <br>
+                outline color: bbbdbf
+            </div>
+        </div>
+    </div>
+    <div class="button-grid responsive-grid">
+        <div class="button-style grid-col">
+            <button class="big">add to my cart</button><br/>
+            <button class="big">Secure Checkout</button><br/>
+            <button class="big" disabled="disabled">Disabled Button</button><br/>
+        </div>
+        <div class="grid-col">
+            <div class="button-description">
+                button-height: 40px <br>
+                button-color: 52a300 <br>
+                rounded corner radius: 5px <br>
+                side-padding/width: 40px or variable based on width of column <br>
+                font-face: Roboto Regular <br>
+                font-size: 14px <br>
+                text transform: uppercase <br>
+                font-color: 000000
+                <br><br>
+                Hover:<br>
+                hover-color: 61c000
+            </div>
+        </div>
+    </div>
+    <div class="button-grid responsive-grid">
+        <div class="button-style grid-col">
+            <a class="quickview" href="${'#'}">Quick View</a>
+        </div>
+        <div class="grid-col">
+            <div class="button-description">
+                button-height: 30px <br>
+                button-color: bbbdbf <br>
+                rounded corner radius: 5px <br>
+                side-padding/width: 40px or variable based on width of column <br>
+                font-face: Roboto Regular <br>
+                font-size: 14px <br>
+                text transform: uppercase <br>
+                font-color: 000000
+                <br><br>
+                Hover:<br>
+                hover-color: e6e7e8 <br>
+                outline color: 4d4d4d
+            </div>
+        </div>
+    </div>
+    <div class="button-grid responsive-grid">
+        <div class="button-style grid-col">
+            <a class="pdp-detail-link" href="${'#'}">03 <span>NEW</span></a>
+        </div>
+        <div class="grid-col">
+            <div class="button-description">
+                button-height: 30px
+                button-color: bbbdbf
+                side-padding/width: 20px or variable based on width of column
+                font-face: Roboto Bold
+                font-size: 14px
+                text transform: uppercase
+                font-color: 000000, e80000
+                <br><br>
+                Hover:<br>
+                button-height: 30px
+                button-color: bbbdbf
+                side-padding/width: 20px or variable based on width of column
+                font-face: Roboto Bold
+                font-size: 14px
+                text transform: uppercase
+                font-color: 000000, e80000
+            </div>
+        </div>
+    </div>
+    <div class="button-grid responsive-grid">
+        <div class="button-style grid-col">
+            <span class="product-tag small-new new-stamp-big">New Sizes</span>
+        </div>
+        <div class="grid-col">
+            <div class="button-description">
+                button-height: 20px
+                button-color: e80000
+                side-padding/width: 10px or variable based on width of column
+                font-face: Roboto regular
+                font-size: 13px
+                font-color: ffffff
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Forms</h3>
+    <div class="forms responsive-grid">
+        <form>
+            <fieldset>
+                <div class="grid-col">
+                    <h4>INPUT FIELDS</h4>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleinput}" type="input" fieldclass="custom-field-class" placeholder="Place Holder Text"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplerequired}" type="input" placeholder="Focus/unfocus field to see error state" /><!-- Required status must be defined in form xml (madatory="true") -->
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecaption}" type="input" /><!-- this caption is defined in form xml -->
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplepassword}" type="password" caption="Optional caption text in markup"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleemail}" type="email" placeholder="See touch keyboard in mobile" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplephone}" type="phone"  help="${help}" placeholder="See touch keyboard in mobile" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampletextarea}" type="textarea"/>
+                </div>
+            </fieldset>
+
+            <h3>DROPDOWNS</h3>
+            <fieldset>
+                <div class="grid-col">
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleselectbox}" type="select" />
+                </div>
+                <div class="grid-col">
+                    <div class="form-row selectbox">
+                        <label for="select-st"><span>Select Box: isinputfield type=select</span></label>
+                        <div class="field-wrapper">
+                            <div class="select-style">
+                                <select name="select-st" id="select-st" class="required">
+                                    <option value="">Please Select Your Size</option>
+                                    <option value="Size 1">Size 1</option>
+                                    <option value="Size 2">Size 2</option>
+                                    <option value="Size 3">Size 3</option>
+                                    <option value="Size 4">Size 4</option>
+                                    <option value="Size 5">Size 5</option>
+                                    <option value="Size 6">Size 6</option>
+                                    <option value="Size 7">Size 7</option>
+                                    <option value="Size 8">Size 8</option>
+                                    <option value="Size 9">Size 9</option>
+                                    <option value="Size 10">Size 10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <h3>CHECK BOXES / RADIOS</h3>
+            <fieldset>
+                <div class="grid-col">
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox}" type="checkbox" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox2}" type="checkbox" caption="optional caption for checkbox" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio" rowclass="options-inline"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio"/>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <h3 class="section-title">LOGOS</h3>
+    <div class="logos style-section">
+        <div class="logo-col">
+            <img src="${URLUtils.staticURL('images/logo.svg')}" alt="Logo" />
+        </div>
+    </div>
+
+    <h3 class="section-title">Iconography</h3>
+    <div class="icons">
+        <h3>SVG Sprite Icons</h3>
+
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>Carousel Navigator</h4>
+                <issvghelper icon="arrow" />
+                <div class="style-spec">
+                    <h4>Desktop:</h4>
+                    height: 44px <br>
+                    width: 44px
+                    <h4>Mobile:</h4>
+                    height: 33px <br>
+                    width: 33px
+                </div>
+                <br>
+                <div class="usage">
+                    arrow
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Account</h4>
+                <issvghelper icon="user" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 20px <br>
+                    width: 19px
+                </div>
+                <br>
+                <div class="usage">
+                    user
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Shopping cart</h4>
+                <issvghelper icon="cart" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 23px <br>
+                    width: 21px
+                </div>
+                <br>
+                <div class="usage">
+                    cart
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>Search</h4>
+                <issvghelper icon="search" />
+                <div class="style-spec">
+                    <h4>Desktop:</h4>
+                    height: 13px <br>
+                    width: 14px
+                    <h4>Mobile:</h4>
+                    height: 15px <br>
+                    width: 16px
+                </div>
+                <br>
+                <div class="usage">
+                    search
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Remove</h4>
+                <issvghelper icon="remove" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 13px <br>
+                    width: 13px
+                </div>
+                <br>
+                <div class="usage">
+                    remove
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Remove Large</h4>
+                <issvghelper icon="remove" extraclasses="large" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 22px <br>
+                    width: 22px
+                </div>
+                <br>
+                <div class="usage">
+                    remove.large
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Email</h4>
+                <issvghelper icon="email" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 12px <br>
+                    width: 15px
+                </div>
+                <br>
+                <div class="usage">
+                    email
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Review Star</h4>
+                <issvghelper icon="star-fill" />
+                <issvghelper icon="star" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 12px <br>
+                    width: 11px <br>
+                    dark star <br>
+                    color: ${'#'}2E3236 100% <br>
+                    light star <br>
+                    color: ${'#'}2E3236 20%
+                </div>
+                <br>
+                <div class="usage">
+                    star-fill <br>
+                    star
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>MOBILE SEARCH  TOGGLE</h4>
+                <issvghelper icon="search-mobile" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 26px <br>
+                    width: 24px
+                </div>
+                <br>
+                <div class="usage">
+                    search-mobile
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>Label In stock</h4>
+                <issvghelper icon="in-stock" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 10px <br>
+                    width: 13px
+                </div>
+                <br>
+                <div class="usage">
+                    in-stock
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>low stock</h4>
+                <issvghelper icon="low-stock" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 16px <br>
+                    width: 16px
+                </div>
+                <br>
+                <div class="usage">
+                    low-stock
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>not available</h4>
+                <issvghelper icon="not-available" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 12px <br>
+                    width: 12px
+                </div>
+                <br>
+                <div class="usage">
+                    not-available
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>safe & secure</h4>
+                <issvghelper icon="secure" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 30px <br>
+                    width: 27px
+                </div>
+                <br>
+                <div class="usage">
+                    secure
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Free shipping</h4>
+                <issvghelper icon="free-sheeping" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 30px <br>
+                    width: 32px
+                </div>
+                <br>
+                <div class="usage">
+                    free-sheeping
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>returns</h4>
+                <issvghelper icon="returns" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 30px <br>
+                    width: 27px
+                </div>
+                <br>
+                <div class="usage">
+                    returns
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>satisfaction</h4>
+                <issvghelper icon="satisfaction" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 30px <br>
+                    width: 23px
+                </div>
+                <br>
+                <div class="usage">
+                    satisfaction
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>pinterest</h4>
+                <issvghelper icon="pinterest" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 24px
+                </div>
+                <br>
+                <div class="usage">
+                    pinterest
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>facebook</h4>
+                <issvghelper icon="facebook" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 24px
+                </div>
+                <br>
+                <div class="usage">
+                    pinterest
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>instagram</h4>
+                <issvghelper icon="instagram" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 27px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    instagram
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>twitter</h4>
+                <issvghelper icon="twitter" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 24px
+                </div>
+                <br>
+                <div class="usage">
+                    twitter
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>youtube</h4>
+                <issvghelper icon="youtube" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 27px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    youtube
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>CANADA</h4>
+                <issvghelper icon="flag-icon-canada" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    flag-icon-canada
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>United States</h4>
+                <issvghelper icon="flag-icon-usa" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    flag-icon-usa
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>United Kindgom</h4>
+                <issvghelper icon="flag-icon-uk" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    flag-icon-uk
+                </div>
+            </div>
+            <div class="icon-col">
+                <h4>Rest of world</h4>
+                <issvghelper icon="flag-icon-world" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 25px <br>
+                    width: 25px
+                </div>
+                <br>
+                <div class="usage">
+                    flag-icon-world
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>MENU</h4>
+                <issvghelper icon="menu-icon" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 18px <br>
+                    width: 24px
+                </div>
+                <br>
+                <div class="usage">
+                    menu-icon
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <div class="icon-col">
+                <h4>STARBURST</h4>
+                <issvghelper icon="badge-new" />
+                <div class="style-spec">
+                    <h4>Desktop, Mobile:</h4>
+                    height: 45px <br>
+                    width: 45px
+                </div>
+                <br>
+                <div class="usage">
+                    badge-new
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Tabs</h3>
+    <div class="tabs-block">
+        <div class="tabs">
+            <div class="tab">
+                <input type="radio" name="css-tabs" id="tab-1" checked="" class="tab-switch">
+                <label for="tab-1" class="tab-label">Description</label>
+                <div class="tab-content">
+                    <div class="tab-info">
+                        <h3>Some Facts About the Product:</h3>
+                        Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
+                        tilbage i havnen.
+                    </div>
+                    <div class="tab-video">
+                        <h3>Watch the Video!</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                <label for="tab-2" class="tab-label">INSTRUCTIONS</label>
+                <div class="tab-content">
+                    <h3>Some Facts About the Product:</h3>
+                    Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!
+                    Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
+                    tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
+                    tilbage i havnen.
+                </div>
+            </div>
+            <div class="tab">
+                <input type="radio" name="css-tabs" id="tab-3" class="tab-switch">
+                <label for="tab-3" class="tab-label">Product Details</label>
+                <div class="tab-content">
+                    <h3>Some Facts About the Product:</h3>
+                    <p>Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!
+                    Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!</p>
+                    <p>Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
+                        tilbage i havnen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Tooltip</h3>
+    <div class="tooltip-section responsive-grid">
+        <div class="grid-col">
+            <isinputfield formfield="${pdict.CurrentForms.styleguide.examplephone}" type="phone" help="${help}" placeholder="See touch keyboard in mobile" />
+            <br>
+            height: variable <br>
+            width: variable <br>
+            border: 1px ${'#'}F2F2F2 <br>
+            padding: 12px;
+        </div>
+    </div>
+
+    <h3 class="section-title">SWATCH & SIZE SELECTION</h3>
+    <div class="swatches-block">
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>PDP COLOR SWATCHES</h4></div>
+            <div class="grid-col">
+                <div class="pdp-main">
+                    <div class="product-variations">
+                        <div class="attribute">
+                            <div class="value">
+                                <ul class="swatches color">
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=JJ169XX" title="Select Color: Black" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg" alt="Black">
+                                        </a>
+                                    </li>
+                                    <li class="selectable selected">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=" title="Select Color: Icy Mint" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg" alt="Icy Mint">
+                                        </a>
+                                    </li>
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=JJI15XX" title="Select Color: White" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg" alt="White">
+                                        </a>
+                                    </li>
+                                    <li class="unselectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=" title="Select Color: Icy Mint" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg" alt="Icy Mint">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col">
+                box size: <br>
+                52px x 52px<br><br>
+                active:<br>
+                border: 1px ${'#'}2E3236<br>
+                padding inside: 3px
+            </div>
+        </div>
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>CATEGORY BROWSE & PRODUCT TILE COLORS</h4></div>
+            <div class="grid-col">
+                <div class="grid-tile">
+                    <div class="product-tile">
+                        <div class="product-swatches">
+                            <ul class="swatch-list">
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ169XX" class="swatch " title="Long Sleeve V-Neck Top, Black">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Black, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Black</span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ8UTXX" class="swatch selected" title="Long Sleeve V-Neck Top, Icy Mint">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Icy Mint, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Icy Mint</span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJI15XX" class="swatch " title="Long Sleeve V-Neck Top, White">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, White, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">White</span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ169XX" class="swatch " title="Long Sleeve V-Neck Top, Black">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Black, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Black</span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ8UTXX" class="swatch" title="Long Sleeve V-Neck Top, Icy Mint">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Icy Mint, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Icy Mint</span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJI15XX" class="swatch " title="Long Sleeve V-Neck Top, White">
+                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, White, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
+                                        <span class="ui-tooltip"><span class="ui-tooltip-content">White</span></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col">
+                box size: <br>
+                15px x 15px<br><br>
+                active:<br>
+                border: 1px ${'#'}2E3236<br>
+                padding inside: 2px
+            </div>
+        </div>
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>CATEGORY BROWSE & PRODUCT TILE COLORS</h4></div>
+            <div class="grid-col">
+                <div class="pdp-main">
+                    <div class="product-variations">
+                        <div class="attribute">
+                            <div class="value">
+                                <ul class="swatches size">
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9SM&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: S" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            S
+                                        </a>
+                                    </li>
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9MD&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: M" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            M
+                                        </a>
+                                    </li>
+                                    <li class="selectable selected">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: L" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            L
+                                        </a>
+                                    </li>
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9XL&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: XL" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            XL
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col">
+                box size: <br>
+                15px x 15px<br><br>
+                active:<br>
+                border: 1px ${'#'}2E3236<br>
+                padding inside: 2px
+            </div>
+        </div>
+        <div class="responsive-grid">
+            <div class="grid-col"><h4>GENERAL TERM</h4></div>
+            <div class="grid-col">
+                <div class="pdp-main">
+                    <div class="product-variations">
+                        <div class="attribute">
+                            <div class="value">
+                                <ul class="swatches">
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9SM&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: S" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            ADULT
+                                        </a>
+                                    </li>
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9MD&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: M" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            BABY
+                                        </a>
+                                    </li>
+                                    <li class="selectable selected">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: L" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            MAN
+                                        </a>
+                                    </li>
+                                    <li class="selectable">
+                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9XL&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: XL" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
+                                            WOMEN
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-col">
+                box size: <br>
+                15px x 15px<br><br>
+                active:<br>
+                border: 1px ${'#'}2E3236<br>
+                padding inside: 2px
+            </div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Dialogs</h3>
+    <div class="dialogs style-section">
+
+        <button id="dialog-example">Dialog Example</button>
+
+        <div id="dialog-message" title="H3 Heading">
+            <h4>H4 Heading Harmonia Bold 15px</h4>
+            <p>Paragraph. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+
+    </div>
+
+    <h3 class="section-title">Heros Banners</h3>
+    <div class="hero-banner style-section">
+
+        <div class="hero">
+            <h2 class="subheading">Hero Banner with 100% width</h2>
+        </div>
+        <p class="style-spec">Defaults to 100% width. Do not implicitly define this in the stylesheet, or it may override full-bleed styles (see below).</p>
+
+        <div class="hero full-bleed-width">
+            <h2 class="subheading">Hero Banner with Full-Bleed Width</h2>
+        </div>
+        <p class="style-spec">CSS Hack to break a div out of a bounding container, as long as it is centered in the page (left/right margins and paddings are equal).</p>
+        <p class="style-spec">In ISML: &nbsp; class="full-bleed-width"<p>
+        <p class="style-spec">In SCSS: &nbsp; @extend %full-bleed-width<p>
+        <p class="style-spec">In SCSS: &nbsp; @include full-bleed-width()<p>
+    </div>
+
+    <h3 class="section-title">Fluid Grids</h3>
+    <p>As needed, custom page styling should extend the fluid grid system developed for this site.  This Style Guide also utilizes this system.</p>
+    <p><a href="${URLUtils.url('StyleGuide-Grids')}">Please see fluid grid examples here</a>.</p>
+</isdecorate>
