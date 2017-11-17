@@ -403,10 +403,17 @@ ProductUtils.getPricing = function (item) {
     var priceModel = item.getPriceModel();
     var standardPrice = null;
 
-    if ((!priceModel.getPrice().available) || (!Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode()))) {
+    /**
+     * According to multiple currency change we remove second verification for default site currency
+     * NOTE: (old if statement was)
+     * 
+     * if ((!priceModel.getPrice().available) || (!Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode())))
+     */
+    if (!priceModel.getPrice().available) {
         standardPrice = Money.NOT_AVAILABLE;
     } else if (('listPriceDefault' in Site.current.preferences.custom) && Site.current.preferences.custom.listPriceDefault) {
-        standardPrice = priceModel.getPriceBookPrice(Site.current.preferences.custom.listPriceDefault);
+        var currencyPriceBookId = session.getCurrency().getCurrencyCode().toLowerCase() + Site.current.preferences.custom.listPriceDefault;
+        standardPrice = priceModel.getPriceBookPrice(currencyPriceBookId);
     } else {
         standardPrice = priceModel.getPriceBookPrice('list-prices');
     }
