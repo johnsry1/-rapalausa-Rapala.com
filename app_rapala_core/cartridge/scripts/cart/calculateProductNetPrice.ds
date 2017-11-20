@@ -24,7 +24,8 @@ function prodNetPrice(basket)
 		var productShippingModel : ProductShippingModel = ShippingMgr.getProductShippingModel(pli.product);
 		if(!pli.isBonusProductLineItem() || !pli.isGift() ) {
 			if(('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)){
-				netPrice = netPrice.add(PriceModel.getPriceBookPrice(dw.system.Site.current.preferences.custom.listPriceDefault).multiply(pli.quantityValue));
+				var currencyPriceBookId = session.getCurrency().getCurrencyCode().toLowerCase() + dw.system.Site.current.preferences.custom.listPriceDefault;
+				netPrice = netPrice.add(PriceModel.getPriceBookPrice(currencyPriceBookId).multiply(pli.quantityValue));
 			}
 			else
 			{

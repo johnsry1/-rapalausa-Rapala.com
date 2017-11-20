@@ -19,6 +19,6 @@
 			standardPrice: $100.00
 			}
 </iscomment>
-{"salePrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.salePrice.value), dw.system.Site.getCurrent().getCurrencyCode())}"/>",
-"standardPrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.standardPrice.value), dw.system.Site.getCurrent().getCurrencyCode())}"/>"
+{"salePrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.salePrice.value), session.getCurrency().getCurrencyCode())}"/>",
+"standardPrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.standardPrice.value), session.getCurrency().getCurrencyCode())}"/>"
 }

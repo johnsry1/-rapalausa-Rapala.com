@@ -6417,11 +6417,12 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
             </attribute-definition>
             <attribute-definition attribute-id="listPriceDefault">
                 <display-name xml:lang="x-default">Default List Price Book ID</display-name>
-                <type>string</type>
+				<description xml:lang="x-default">This attribute should store only 'part' of default price book id. Full stucture has created in next example: current site currency + THIS attribute value. Ex. : eur-list-prices , where 'eur' site currency value and '-list-prices' this attribute value</description>
+				<type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
-                <default-value>usd-list-prices</default-value>
+                <default-value>-list-prices</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="nonCloseoutLowQtyThreshold">
                 <display-name xml:lang="x-default">Non Closeout Low Quantity Threshold</display-name>
