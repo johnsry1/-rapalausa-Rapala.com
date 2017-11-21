@@ -3,5 +3,14 @@ var dynamicForm = require('~/cartridge/scripts/common/dynamicForm');
 var fields = dynamicForm.getFields(pdict.formobject, pdict.formdata);
 </isscript>
 <isloop items="${fields}" var="field">
+    <isif condition="${field.formfield.formId == 'state'}">
+        <div id="state-container">
+    </isif>
+
 	<isinputfield formfield="${field.formfield}" type="${field.type}" dynamicname="${field.dynamicname}" attributes="${field.attributes}" help="${field.help}" rowclass="${field.rowclass}" fieldclass="${field.fieldClass}" required="${field.required}" requiredtext="${field.requiredMsg}"/>
+	
+	<isif condition="${field.formfield.formId == 'state'}">
+        </div>
+    </isif> 
+	
 </isloop>
