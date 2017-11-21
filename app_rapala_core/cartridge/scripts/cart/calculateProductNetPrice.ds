@@ -14,8 +14,8 @@ importPackage( dw.util );
 function prodNetPrice(basket)
 {
 	var basket= basket;
-	var netPrice : Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode());
-	var surcharge : Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode());
+	var netPrice : Money = new dw.value.Money(0.0, session.currency.currencyCode);
+	var surcharge : Money = new dw.value.Money(0.0, session.currency.currencyCode);
 	var apli : Iterator = basket.getAllProductLineItems().iterator();
 	var priceValues : List = new ArrayList();
 	while(apli.hasNext()){

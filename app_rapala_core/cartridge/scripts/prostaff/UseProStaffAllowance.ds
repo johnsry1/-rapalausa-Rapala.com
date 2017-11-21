@@ -11,7 +11,7 @@ function checkAllotmentPayment( customer, basket )
    //var customer: Customer = args.Customer;
    var allotmentExpired : Boolean = true;
    //var basket : Basket = args.Basket;
-   var currencyCode : String = Site.getCurrent().getCurrencyCode();
+   var currencyCode : String = session.currency.currencyCode;
    var orderTotal : Money = new Money(0.0, currencyCode);
    var cardAmount : Money = new Money(0.0, currencyCode);
    var paymentInstr : PaymentInstrument; 
@@ -43,7 +43,7 @@ function checkAllotmentPayment( customer, basket )
 				   			orderTotal = basket.getAdjustedMerchandizeTotalPrice(true).add(basket.giftCertificateTotalPrice);
 				   		}
 				   		if(orderTotal.available && orderTotal.value > allowanceBalance){
-				   			orderTotal = orderTotal.subtract(new Money(allowanceBalance,Site.getCurrent().getCurrencyCode()));
+				   			orderTotal = orderTotal.subtract(new Money(allowanceBalance,session.currency.currencyCode));
 				   			cardAmount = orderTotal;
 				   			session.custom.isProStaffAllotmentused = true;
 				   			session.custom.amountUsedFromProStaffAllowance = allowanceBalance;
