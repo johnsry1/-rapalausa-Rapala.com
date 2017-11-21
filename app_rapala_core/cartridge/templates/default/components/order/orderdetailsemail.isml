@@ -282,7 +282,7 @@
 																				var shippingExclDiscounts : dw.value.Money = Order.shippingTotalPrice.subtract(surcharge);
 																				var shippingInclDiscounts : dw.value.Money = Order.getAdjustedShippingTotalPrice().subtract(surcharge);
 																				var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
-																				var ordertotalsaving : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode());
+																				var ordertotalsaving : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
 																				if(prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice))
 																				{
 																				 ordertotalsaving=ordertotalsaving.add(prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)));
