@@ -26,6 +26,13 @@ var Status = require('dw/system/Status');
  * @param {object} basket The basket to be calculated
  */
 exports.calculate = function (basket) {
+    
+    /**
+     * Update Basket currency if doesn't match session currency
+     */
+    if (basket.currencyCode != session.currency.currencyCode) {
+        basket.updateCurrency();
+    }
     // ===================================================
     // =====   CALCULATE PRODUCT LINE ITEM PRICES    =====
     // ===================================================
