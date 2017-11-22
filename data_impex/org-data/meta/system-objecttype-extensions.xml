@@ -6503,6 +6503,13 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+			<attribute-definition attribute-id="enableUPS">
+				<display-name xml:lang="x-default">Enable UPS logic</display-name>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<default-value>false</default-value>
+			</attribute-definition>
             <attribute-definition attribute-id="upsaccessLicenseNumber">
                 <display-name xml:lang="x-default">upsAccessLicenseNumber</display-name>
                 <type>string</type>
@@ -6898,7 +6905,8 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
             </attribute-group>
             <attribute-group group-id="UPS">
                 <display-name xml:lang="x-default">UPS Configuration</display-name>
-                <attribute attribute-id="upsaddressValidationURL"/>
+				<attribute attribute-id="enableUPS"/>                
+				<attribute attribute-id="upsaddressValidationURL"/>
                 <attribute attribute-id="upsuserID"/>
                 <attribute attribute-id="upspassword"/>
                 <attribute attribute-id="upsaccessLicenseNumber"/>
