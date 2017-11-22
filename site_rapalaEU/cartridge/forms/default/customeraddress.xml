@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<field formid="addressid" label="customeraddress.addressid.label" type="string" mandatory="true" binding="ID" max-length="20"
+		missing-error="customeraddress.addressid.missing-error"
+		value-error="customeraddress.addressid.value-error"/>
+	<field formid="title" label="resource.title" type="string" mandatory="false" binding="title" max-length="30" missing-error="address.title.missing" range-error="address.field.invalid">
+		<options>
+            <option optionid=""     label="resource.select"     value=""/>
+			<option optionid="mr" label="resource.title.Mr" value="Mr"/>
+			<option optionid="mrs" label="resource.title.Mrs" value="Mrs"/>
+			<option optionid="ms" label="resource.title.Ms" value="Ms"/>
+		</options>
+	</field>
+	<field formid="firstname" label="profile.firstname" type="string" mandatory="true" binding="firstName" max-length="50"
+		missing-error="customeraddress.firstname.missing-error"/>
+	<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"
+		missing-error="customeraddress.lastname.missing-error"/>
+	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50"
+		description="customeraddress.address1.description"
+		missing-error="resource.addresserror"/>
+	<field formid="address2" label="resource.address2" type="string" mandatory="false" binding="address2" max-length="50"
+		description="customeraddress.address2.description" />
+	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50"
+		missing-error="customeraddress.city.missing-error"/>
+
+	<!-- use global state list -->
+	<include formid="states" name="states"/>
+
+	<!--  postal code -->
+	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
+		missing-error="resource.errorzip"/>
+
+	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
+		missing-error="customeraddress.country.missing-error">
+		<options>
+            <option optionid=""     label="resource.select"     value=""/>
+            <option optionid="AT"   label="country.austria" value="AT"/>
+            <option optionid="BE"   label="country.belgium" value="BE"/>
+            <option optionid="BG"   label="country.bulgaria"    value="BG"/>
+            <option optionid="HR"   label="country.croatia" value="HR"/>
+            <option optionid="CY"   label="country.cyprus"  value="CY"/>
+            <option optionid="CZ"   label="country.czechrepublic"  value="CZ"/>
+            <option optionid="DK"   label="country.denmark" value="DK"/>
+            <option optionid="EE"   label="country.estonia" value="EE"/>
+            <option optionid="FI"   label="country.finland" value="FI"/>
+            <option optionid="FR"   label="country.france"  value="FR"/>
+            <option optionid="DE"   label="country.germany" value="DE"/>
+            <option optionid="GR"   label="country.greece"  value="GR"/>
+            <option optionid="HU"   label="country.hungary" value="HU"/>
+            <option optionid="IE"   label="country.ireland" value="IE"/>
+            <option optionid="IT"   label="country.italy"   value="IT"/>
+            <option optionid="LV"   label="country.latvia"  value="LV"/>
+            <option optionid="LT"   label="country.lithuania"   value="LT"/>
+            <option optionid="LU"   label="country.luxembourg"  value="LU"/>
+            <option optionid="MT"   label="country.malta"   value="MT"/>
+            <option optionid="NL"   label="country.netherlands" value="NL"/>
+            <option optionid="PL"   label="country.poland"  value="PL"/>
+            <option optionid="PT"   label="country.portugal"    value="PT"/>
+            <option optionid="RO"   label="country.romania" value="RO"/>
+            <option optionid="SK"   label="country.slovakia"    value="SK"/>
+            <option optionid="SI"   label="country.slovenia"    value="SI"/>
+            <option optionid="ES"   label="country.spain"   value="ES"/>
+            <option optionid="SE"   label="country.sweden"  value="SE"/>
+            <option optionid="GB"   label="country.unitedkingdom"  value="GB"/>
+        </options>
+	</field>
+	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" mandatory="true" binding="phone" max-length="20"/>
+	
+	<!-- PREVAIL - Email field is contained in separate form group to enable binding to customer profile -->
+	<group formid="email">
+		<field formid="emailAddress" label="profile.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" binding="email" max-length="50" missing-error="forms.address.email.invalid" range-error="forms.address.email.invalid" parse-error="forms.address.email.invalid" value-error="forms.address.email.invalid"/>
+	</group>
+	
+	<!-- all possible actions performed on an address -->
+	<action formid="cancel" valid-form="false"/>
+	<action formid="remove" valid-form="false"/>
+	<action formid="edit" valid-form="true"/>
+	<action formid="confirm" valid-form="true"/>
+	<action formid="create" valid-form="true"/>
+</form>

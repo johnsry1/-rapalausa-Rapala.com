@@ -414,8 +414,19 @@ var util = {
      * @param {String} countrySelect The selected country
      */
     updateStateOptions: function (form) { 
-        var $form = $(form),
-            $container = $('#state-container'),
+        var $form = $(form);
+        //Country should be pre-selected based on geoip info
+        if ($form.find('select[id$="_country"]').val().length == 0) {
+            if (window.User.geolocation != undefined) {
+                var countryCode = window.User.geolocation.countryCode;
+                if (Countries[countryCode] != undefined) {
+                    $form.find('select[id$="_country"]').val(window.User.geolocation.countryCode);
+                }
+            }
+
+        }
+        var $container = $('#state-container'),
+            $phoneContainer = $('#phone-container'),
             url = '',
             options = {},
             $country = $form.find('select[id$="_country"]'),
@@ -427,6 +438,7 @@ var util = {
             $postalLabel = ($postalField.length > 0) ? $form.find('#' + $postalField[0].id).parents('.form-row').find('.labeltext') : undefined,
             $cityField = $country.data('cityField') ? $country.data('cityField') : $form.find('input[name$="_city"]'),
             $cityLabel = ($cityField.length > 0) ? $form.find('#' + $cityField[0].id).parents('.form-row').find('.labeltext') : undefined;
+            
         if ($country.length === 0 || !country) {
             if ($postalLabel) {
                 country = Countries.default;
@@ -444,7 +456,7 @@ var util = {
                 };
                 $.ajax(options).done(function (response) {
                     if (options.target) {
-                        $(options.target).empty().html(response);
+                        $($container).empty().html(response);
                     }
                 });
             }
@@ -459,7 +471,7 @@ var util = {
                 $.ajax(options).done(function (response) {
                     // success
                     if (options.target) {
-                        $(options.target).empty().html(response);
+                        $($container).empty().html(response);
 
                         var arrHtml = [],
                             $stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
@@ -504,6 +516,21 @@ var util = {
                     $cityLabel.html(country.cityLabel);
                 }
             }
+        }
+        
+        if ($phoneContainer.length != 0) {
+            url = this.appendParamsToUrl(Urls.getPhoneHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
+            options = {
+                url: url,
+                type: 'GET',
+                target: $phoneContainer
+            };
+            $.ajax(options).done(function (response) {
+                if (options.target) {
+                    $($phoneContainer).empty().html(response);
+                }
+            });
+            
         }
     }    
 };

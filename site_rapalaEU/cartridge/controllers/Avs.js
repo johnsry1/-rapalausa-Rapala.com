@@ -64,6 +64,7 @@ function getStateHtml() {
 }
 
 function getPhoneHtml() {
+    var type = request.httpParameterMap.fieldType.value;
     var formID = request.httpParameterMap.formID.value;
     var countryValue = request.httpParameterMap.country.value;
     var formField = 'profile.address.phone';
@@ -75,24 +76,16 @@ function getPhoneHtml() {
         if (formID === 'dwfrm_billing') {
             formField = 'billing.billingAddress.addressFields.phone';
             formFieldAdditional = 'phone' + countryValue;
-            //formAddressName = 'billing.billingAddress.addressFields.phone';
         } else if (formID === 'dwfrm_singleshipping_shippingAddress') {
             formField = 'singleshipping.shippingAddress.addressFields.phone';
             formFieldAdditional = 'phone' + countryValue;
-            //formAddressName = 'singleshipping.shippingAddress.addressFields.states';
         }
-
-        /*
-        if (!empty(formAddressName)) {
-            var formObject = app.getForm(formAddressName);
-            var stateFieldAdditional = formObject.object[formFieldAdditional];
-        }
-        */
     }
     var phoneField = app.getForm(formField);
     
     var fieldObject = {
-            formfield: phoneField.object
+            formfield: phoneField.object,
+            type: type
         };
 
     app.getView({
