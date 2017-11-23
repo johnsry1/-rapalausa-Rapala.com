@@ -27,7 +27,7 @@ $h3-line-height: 1;
 $h3-text-transform: none;
 $h3-color: $black;
 
-$h4-font: 'Roboto';
+$h4-font: $font;
 $h4-font-size: 13px;
 $h4-font-weight: bold;
 $h4-font-style: normal;
@@ -36,7 +36,7 @@ $h4-line-height: 1;
 $h4-text-transform: none;
 $h4-color: $black;
 
-$h5-font: 'Roboto';
+$h5-font: $font;
 $h5-font-size: 13px;
 $h5-font-weight: bold;
 $h5-font-style: normal;
@@ -45,7 +45,7 @@ $h5-line-height: 1;
 $h5-text-transform: none;
 $h5-color: $black;
 
-$h6-font: 'Roboto';
+$h6-font: $font;
 $h6-font-size: 13px;
 $h6-font-weight: bold;
 $h6-font-style: normal;
@@ -218,7 +218,7 @@ $pdp-name-text-transform: capitalize;
 $pdp-description-font-size: 13px;
 $pdp-description-letter-spacing: normal;
 $pdp-description-line-height: 20px;
-$pdp-description-font-family: 'Roboto';
+$pdp-description-font-family: $font;
 @mixin pdp-description {
     @include font-size($pdp-description-font-size);
     @include line-height($pdp-description-line-height);
@@ -227,14 +227,18 @@ $pdp-description-font-family: 'Roboto';
 }
 
 $product-attr-title-font-size: 13px;
+$product-attr-title-font-weight: normal;
+$product-attr-title-font-style: normal;
 $product-attr-title-letter-spacing: normal;
 $product-attr-title-line-height: 20px;
-$product-attr-title-font-family: 'Roboto';
+$product-attr-title-font-family: $font;
 $product-attr-title-color: $silver;
 @mixin product-attr-title {
     @include font-size($product-attr-title-font-size);
     @include line-height($product-attr-title-line-height);
     font-family: $product-attr-title-font-family;
+    font-weight: $product-attr-title-font-weight;
+    font-style: $product-attr-title-font-style;
     letter-spacing: $product-attr-title-letter-spacing;
     color: $product-attr-title-color;
 }
@@ -242,23 +246,10 @@ $product-attr-title-color: $silver;
     @include product-attr-title;
 }
 
-$product-attr-title-font-size: 13px;
-$product-attr-title-letter-spacing: normal;
-$product-attr-title-line-height: 20px;
-$product-attr-title-font-family: 'Roboto';
-$product-attr-title-color: $silver;
-@mixin product-attr-title {
-    @include font-size($product-attr-title-font-size);
-    @include line-height($product-attr-title-line-height);
-    font-family: $product-attr-title-font-family;
-    letter-spacing: $product-attr-title-letter-spacing;
-    color: $product-attr-title-color;
-}
-
 $product-attr-name-font-size: 13px;
 $product-attr-name-letter-spacing: normal;
 $product-attr-name-line-height: 20px;
-$product-attr-name-font-family: 'Roboto';
+$product-attr-name-font-family: $font;
 $product-attr-name-color: $black;
 @mixin product-attr-name {
     @include font-size($product-attr-name-font-size);
@@ -271,7 +262,7 @@ $product-attr-name-color: $black;
 $pdp-price-font-size: 18px;
 $pdp-price-letter-spacing: normal;
 $pdp-price-line-height: 20px;
-$pdp-price-font-family: 'Roboto';
+$pdp-price-font-family: $font;
 $pdp-price-font-weight: bold;
 $pdp-price-color: $black;
 $pdp-price-sale-color: $silver;
@@ -296,7 +287,7 @@ $pdp-price-sale-color: $silver;
 $pdp-message-font-size: 13px;
 $pdp-message-letter-spacing: normal;
 $pdp-message-line-height: 1;
-$pdp-message-font-family: 'Roboto';
+$pdp-message-font-family: $font;
 $pdp-message-font-weight: bold;
 $pdp-message-color: $red-two;
 @mixin pdp-message {
@@ -311,7 +302,7 @@ $pdp-message-color: $red-two;
 $pdp-accordion-title-font-size: 20px;
 $pdp-accordion-title-letter-spacing: normal;
 $pdp-accordion-title-line-height: 1;
-$pdp-accordion-title-font-family: 'Roboto';
+$pdp-accordion-title-font-family: $font;
 $pdp-accordion-title-font-weight: normal;
 $pdp-accordion-title-color: $black;
 @mixin pdp-accordion-title {
@@ -326,7 +317,7 @@ $pdp-accordion-title-color: $black;
 $clp-refinement-title-font-size: 13px;
 $clp-refinement-title-letter-spacing: normal;
 $clp-refinement-title-line-height: 20px;
-$clp-refinement-title-font-family: 'Roboto';
+$clp-refinement-title-font-family: $font;
 $clp-refinement-title-font-weight: normal;
 $clp-refinement-title-color: $black;
 @mixin clp-refinement-title {
@@ -341,7 +332,7 @@ $clp-refinement-title-color: $black;
 $pdp-promo-font-size: 13px;
 $pdp-promo-letter-spacing: normal;
 $pdp-promo-line-height: 20px;
-$pdp-promo-font-family: 'Roboto';
+$pdp-promo-font-family: $font;
 $pdp-promo-font-weight: normal;
 $pdp-promo-color: $red-two;
 @mixin pdp-promo {
@@ -356,7 +347,7 @@ $pdp-promo-color: $red-two;
 $form-caption-font-size: 13px;
 $form-caption-letter-spacing: normal;
 $form-caption-line-height: 20px;
-$form-caption-font-family: 'Roboto';
+$form-caption-font-family: $font;
 $form-caption-font-weight: normal;
 $form-caption-color: $black;
 @mixin form-caption {
@@ -368,10 +359,36 @@ $form-caption-color: $black;
     color: $form-caption-color;
 }
 
+$form-label-font-family: $font;
+$form-label-font-size: 13px;
+$form-label-font-weight: normal;
+$form-label-color: $black;
+$form-label-text-transform: none;
+$form-label-border: none;
+$form-label-padding: 0 0 3px 0;
+$form-label-line-height: 16px;
+$form-label-margin: 0 0 9px 0;
+$form-label-letter-spacing: 0;
+$form-label-font-variant: none;
+
+@mixin label {
+    margin: $form-label-margin;
+    color: $form-label-color;
+    font-family: $form-label-font-family;
+    @include font-size($form-label-font-size);
+    @include line-height($form-label-line-height);
+    font-weight: $form-label-font-weight;
+    font-variant: $form-label-font-variant;
+    text-transform: $form-label-text-transform;
+    letter-spacing: $form-label-letter-spacing;
+    border: $form-label-border;
+    float: left;
+}
+
 $p-font-size: 13px;
 $p-letter-spacing: normal;
 $p-line-height: 20px;
-$p-font-family: 'Roboto';
+$p-font-family: $font;
 $p-font-weight: normal;
 $p-color: $black;
 @mixin p {
@@ -386,7 +403,7 @@ $p-color: $black;
 $ul-font-size: 13px;
 $ul-letter-spacing: normal;
 $ul-line-height: 26px;
-$ul-font-family: 'Roboto';
+$ul-font-family: $font;
 $ul-font-weight: normal;
 $ul-color: $black;
 $ul-list-style: disc;
@@ -405,7 +422,7 @@ $ul-list-style: disc;
 $main-nav-font-size: 13px;
 $main-nav-letter-spacing: normal;
 $main-nav-line-height: 20px;
-$main-nav-font-family: 'Roboto';
+$main-nav-font-family: $font;
 $main-nav-font-weight: normal;
 $main-nav-color: $white;
 $main-nav-padding: 22px 33px;
@@ -437,7 +454,7 @@ $main-nav-hover-bg: $silver;
 $link-font-size: 13px;
 $link-letter-spacing: normal;
 $link-line-height: 20px;
-$link-font-family: 'Roboto';
+$link-font-family: $font;
 $link-font-weight: normal;
 $link-color: $red-two;
 $link-text-decoration: underline;
@@ -460,7 +477,7 @@ $link-hover-color: $sangria;
 $footer-link-font-size: 13px;
 $footer-link-letter-spacing: normal;
 $footer-link-line-height: 20px;
-$footer-link-font-family: 'Roboto';
+$footer-link-font-family: $font;
 $footer-link-font-weight: normal;
 $footer-link-color: $black;
 $footer-link-text-decoration: none;
@@ -480,11 +497,12 @@ $footer-link-hover-color: $black;
     }
 }
 
+$button-min-width: 140px;
 $button-height: 40px;
 $button-font-size: 14px;
 $button-letter-spacing: normal;
 $button-line-height: 40px;
-$button-font-family: 'Roboto';
+$button-font-family: $font;
 $button-font-weight: normal;
 $button-color: $black;
 $button-text-transform: uppercase;
@@ -497,12 +515,14 @@ $button-hover-text-decoration: none;
 $button-hover-color: $black;
 $button-hover-bg: $silver-two;
 $button-hover-border: 1px solid $silver;
+$button-disabled-bg: $silver-two;
+$button-disabled-color: $silver;
 
 $button-big-height: 40px;
 $button-big-font-size: 14px;
 $button-big-letter-spacing: normal;
 $button-big-line-height: 40px;
-$button-big-font-family: 'Roboto';
+$button-big-font-family: $font;
 $button-big-font-weight: normal;
 $button-big-color: $white;
 $button-big-text-transform: uppercase;
@@ -554,6 +574,7 @@ $button-big-hover-border: 1px solid $limeade;
         border: $button-border;
         border-radius: $button-border-radius;
         transition: all 0.3s;
+        min-width: rem($button-min-width);
         &:hover {
             color: $button-hover-color;
             text-decoration: $button-hover-text-decoration;
@@ -561,13 +582,19 @@ $button-big-hover-border: 1px solid $limeade;
             border: $button-hover-border;
         }
     }
+    &.disabled {
+        opacity: 1;
+        background: $button-disabled-bg;
+        border: none;
+        color: $button-disabled-color;
+    }
 }
 
 $quickview-height: 30px;
 $quickview-font-size: 14px;
 $quickview-letter-spacing: normal;
 $quickview-line-height: 30px;
-$quickview-font-family: 'Roboto';
+$quickview-font-family: $font;
 $quickview-font-weight: normal;
 $quickview-color: $black;
 $quickview-text-transform: uppercase;
@@ -607,51 +634,51 @@ $quickview-hover-border: 1px solid $greyish-brown;
     }
 }
 
-$pdp-detail-link-height: 30px;
-$pdp-detail-link-font-size: 14px;
-$pdp-detail-link-letter-spacing: normal;
-$pdp-detail-link-line-height: 30px;
-$pdp-detail-link-font-family: 'Roboto';
-$pdp-detail-link-font-weight: bold;
-$pdp-detail-link-color: $black;
-$pdp-detail-link-text-transform: uppercase;
-$pdp-detail-link-text-decoration: none;
-$pdp-detail-link-padding: 0 20px;
-$pdp-detail-link-bg: $silver;
-$pdp-detail-link-border: 1px solid $silver;
-$pdp-detail-link-border-radius: 0;
-$pdp-detail-link-inner-color: $red-two;
-$pdp-detail-link-hover-text-decoration: none;
-$pdp-detail-link-hover-color: $black;
-$pdp-detail-link-hover-bg: $silver-two;
-$pdp-detail-link-hover-border: 1px solid $greyish-brown;
-@mixin pdp-detail-link {
+$swatch-attr-height: 30px;
+$swatch-attr-font-size: 14px;
+$swatch-attr-letter-spacing: normal;
+$swatch-attr-line-height: 30px;
+$swatch-attr-font-family: $font;
+$swatch-attr-font-weight: bold;
+$swatch-attr-color: $black;
+$swatch-attr-text-transform: uppercase;
+$swatch-attr-text-decoration: none;
+$swatch-attr-padding: 0 20px;
+$swatch-attr-bg: $silver;
+$swatch-attr-border: 1px solid $silver;
+$swatch-attr-border-radius: 0;
+$swatch-attr-inner-color: $red-two;
+$swatch-attr-hover-text-decoration: none;
+$swatch-attr-hover-color: $black;
+$swatch-attr-hover-bg: $silver-two;
+$swatch-attr-hover-border: 1px solid $greyish-brown;
+@mixin swatch-attr {
     display: inline-block;
     text-align: center;
-    height: $pdp-detail-link-height;
-    @include font-size($pdp-detail-link-font-size);
-    @include line-height($pdp-detail-link-line-height);
-    font-weight: $pdp-detail-link-font-weight;
-    font-family: $pdp-detail-link-font-family;
-    letter-spacing: $pdp-detail-link-letter-spacing;
-    color: $pdp-detail-link-color;
-    text-decoration: $pdp-detail-link-text-decoration;
-    text-transform: $pdp-detail-link-text-transform;
-    padding: $pdp-detail-link-padding;
-    background: $pdp-detail-link-bg;
-    border: $pdp-detail-link-border;
-    border-radius: $pdp-detail-link-border-radius;
+    height: $swatch-attr-height;
+    @include font-size($swatch-attr-font-size);
+    @include line-height($swatch-attr-line-height);
+    font-weight: $swatch-attr-font-weight;
+    font-family: $swatch-attr-font-family;
+    letter-spacing: $swatch-attr-letter-spacing;
+    color: $swatch-attr-color;
+    text-decoration: $swatch-attr-text-decoration;
+    text-transform: $swatch-attr-text-transform;
+    padding: $swatch-attr-padding;
+    background: $swatch-attr-bg;
+    border: $swatch-attr-border;
+    border-radius: $swatch-attr-border-radius;
     transition: all 0.3s;
     span {
-        color: $pdp-detail-link-inner-color;
+        color: $swatch-attr-inner-color;
     }
     &:hover {
-        color: $pdp-detail-link-hover-color;
-        text-decoration: $pdp-detail-link-hover-text-decoration;
-        background: $pdp-detail-link-hover-bg;
-        border: $pdp-detail-link-hover-border;
+        color: $swatch-attr-hover-color;
+        text-decoration: $swatch-attr-hover-text-decoration;
+        background: $swatch-attr-hover-bg;
+        border: $swatch-attr-hover-border;
         span {
-            color: $pdp-detail-link-inner-color;
+            color: $swatch-attr-inner-color;
         }
     }
 }
@@ -660,7 +687,7 @@ $product-tag-height: 20px;
 $product-tag-font-size: 13px;
 $product-tag-letter-spacing: normal;
 $product-tag-line-height: 20px;
-$product-tag-font-family: 'Roboto';
+$product-tag-font-family: $font;
 $product-tag-font-weight: normal;
 $product-tag-color: $white;
 $product-tag-text-transform: capitalize;
@@ -685,6 +712,27 @@ $product-tag-border-radius: 10px;
     background: $product-tag-bg;
     border: $product-tag-border;
     border-radius: $product-tag-border-radius;
+}
+
+$tooltip-font-family: $font;
+$tooltip-font-size: 13px;
+$tooltip-font-weight: normal;
+$tooltip-line-height: 30px;
+$tooltip-text-decoration: underline;
+$tooltip-color: $black;
+$tooltip-hover-color: $black;
+$tooltip-hover-text-decoration: none;
+@mixin tooltip {
+    @include font-size($tooltip-font-size);
+    @include line-height($tooltip-line-height);
+    font-weight: $tooltip-font-weight;
+    font-family: $tooltip-font-family;
+    color: $tooltip-color;
+    text-decoration: $tooltip-text-decoration;
+    &:hover {
+        color: $tooltip-hover-color;
+        text-decoration: $tooltip-hover-text-decoration;
+    }
 }
 
 h1,
@@ -812,6 +860,10 @@ button,
     @include product-tag;
 }
 
-.pdp-detail-link {
-    @include pdp-detail-link;
+.swatch-attr {
+    @include swatch-attr;
+}
+
+.tooltip {
+    @include tooltip;
 }

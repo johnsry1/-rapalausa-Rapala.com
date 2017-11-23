@@ -13,6 +13,8 @@ var inputElements = [
 ];
 var inputElementTypes = [
 	'text',
+    'phone',
+    'tel', //same as phone
 	'password',
 	'checkbox',
 	'hidden',
@@ -61,6 +63,9 @@ module.exports = function (pdict) {
 	if (type === 'input') {
 		element = type;
 		type = 'text';
+    } else if (type === 'phone') {
+        type = 'tel';
+        element = 'input';
 	// if a specific input type is specified, use that
 	} else if (inputElementTypes.indexOf(type) !== -1) {
 		element = 'input';
@@ -142,19 +147,19 @@ module.exports = function (pdict) {
 		rowClass += ' error';
 	}
 
-	// label
-	label = '<div class = "label" for="' + name + '">';
-	if (required) {
-		label += '<span class="requiredindicator">&#42; </span>';
-	}
-	label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
-	label += '</div>';
+    // label
+    label = '<label class="label" for="' + name + '">';
+    label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+    if (required) {
+        label += '<span class="requiredindicator">&#42; </span>';
+    }
+    label += '</label>';
 
 	var options = [];
 	// input
 	switch (element) {
 		case 'select':
-			input = '<select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+            input = '<div class="select-style"><select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			// interate over pdict.formfield.options, append to the options array
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
@@ -174,7 +179,7 @@ module.exports = function (pdict) {
 				options.push('<option class="select-option" label="' + label + '" value="' + value + '" ' + selected + '>' + displayValue + '</option>');
 			});
 			input += options.join('');
-			input += '</select>';
+            input += '</select></div>';
 			break;
 		case 'input':
 			var checked = '';
@@ -186,6 +191,8 @@ module.exports = function (pdict) {
 				if (pdict.formfield.checked) {
 					checked = 'checked="checked"';
 				}
+                var after = label;
+                label = '';
 			}
 			if (type === 'hidden') {
 				inputClass = '';
@@ -193,11 +200,11 @@ module.exports = function (pdict) {
 			if(type === 'password'){
                 inputClass = inputClass+' textinputpw';
 			}
-			if (type === 'checkbox') {
-				input = '<div class="checkbox"><input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/></div>';
-			} else { 
-				input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
-			}
+            if (type === 'checkbox') {
+                input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + after;
+            } else {
+                input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
+            }
 			break;
 		case 'textarea':
 			input = '<textarea class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
@@ -206,17 +213,21 @@ module.exports = function (pdict) {
 			break;
 		// treat radio as its own element, as each option is an input element
 		case 'radio':
-			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
-				var option = pdict.formfield.options[optionKey];
-				var value = option.value;
-				var checked = '';
-				if (option.checked) {
-					checked = 'checked="checked"';
-				}
-				options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + Resource.msg(option.label, 'forms', null));
-			});
-			input += options.join('');
-			break;
+            Object.keys(pdict.formfield.options).forEach(function (optionKey) {
+                var option = pdict.formfield.options[optionKey];
+                var value = option.value;
+                var checked = '';
+                var optionLabel = Resource.msg(option.label, 'forms', null);
+                var optionId = id;
+                if (option.checked) {
+                    checked = 'checked="checked"';
+                }
+                optionId += '_' + optionKey;
+                optionLabel = '<label for="' + optionId + '">' + optionLabel + '</label>';
+                options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + optionLabel);
+            });
+            input += options.join('');
+            break;
 	}
 
 	// caption - error message or description
@@ -261,6 +272,7 @@ module.exports = function (pdict) {
 		input: input,
 		caption: caption,
 		help: help,
-		labelAfter: labelAfter
+		labelAfter: labelAfter,
+        type: type
 	};
 };

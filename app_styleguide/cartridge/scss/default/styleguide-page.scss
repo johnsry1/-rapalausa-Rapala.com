@@ -11,10 +11,11 @@
 @import "global/fonts";
 @import "global/variables";
 
+@import "global/iconography";
 @import "global/typography";
-
-$border-color: $concrete;
-$border: 1px solid $border-color;
+@import "global/jqueryui";
+@import "global/forms";
+@import "global/product/product";
 
 $box-bg: $white-smoke;
 $box-drk-bg: $dim-gray;
@@ -24,6 +25,14 @@ $box-drk-bg: $dim-gray;
 //
 body {
     background: $white;
+}
+
+#wrapper {
+    width: rem(1280px);
+}
+
+.second-form {
+    width: 400px;
 }
 
 // Basic Styles
@@ -319,23 +328,16 @@ body {
 }
 
 // Iconography
-.icons {
-    .logos {
-        @include clearfix();
-        margin: 0 auto 30px;
-        .logo-col {
-            padding: 20px 40px 10px;
-            &:nth-child(2) {
-                img {
-                    width: 93px;
-                }
-            }
-            @include respond(medium-up) {
-                float: left;
-            }
-        }
+.logos {
+    @include clearfix();
+    margin: 0 auto 30px;
+    .logo-col {
+        padding: 20px 40px 10px;
+        float: left;
     }
+}
 
+.icons {
     .svg-icons {
         .icon-col {
             margin: 20px;

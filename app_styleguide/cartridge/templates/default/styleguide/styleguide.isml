@@ -2,6 +2,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
 <isdecorate template="styleguide/components/pt_styleguide">
+
     <isinclude template="util/modules"/>
 
     <isscript>
@@ -947,720 +948,213 @@
 
     <h3 class="section-title">Forms</h3>
     <div class="forms responsive-grid">
-        <form>
-            <fieldset>
-                <div class="grid-col">
-                    <h4>INPUT FIELDS</h4>
+        <form action="" class="form-horizontal">
+            <form class="">
+                <fieldset>
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleinput}" type="input" fieldclass="custom-field-class" placeholder="Place Holder Text"/>
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplerequired}" type="input" placeholder="Focus/unfocus field to see error state" /><!-- Required status must be defined in form xml (madatory="true") -->
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecaption}" type="input" /><!-- this caption is defined in form xml -->
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplepassword}" type="password" caption="Optional caption text in markup"/>
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleemail}" type="email" placeholder="See touch keyboard in mobile" />
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplephone}" type="phone"  help="${help}" placeholder="See touch keyboard in mobile" />
-                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampletextarea}" type="textarea"/>
-                </div>
-            </fieldset>
-
-            <h3>DROPDOWNS</h3>
-            <fieldset>
-                <div class="grid-col">
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleselectbox}" type="select" />
-                </div>
-                <div class="grid-col">
-                    <div class="form-row selectbox">
-                        <label for="select-st"><span>Select Box: isinputfield type=select</span></label>
-                        <div class="field-wrapper">
-                            <div class="select-style">
-                                <select name="select-st" id="select-st" class="required">
-                                    <option value="">Please Select Your Size</option>
-                                    <option value="Size 1">Size 1</option>
-                                    <option value="Size 2">Size 2</option>
-                                    <option value="Size 3">Size 3</option>
-                                    <option value="Size 4">Size 4</option>
-                                    <option value="Size 5">Size 5</option>
-                                    <option value="Size 6">Size 6</option>
-                                    <option value="Size 7">Size 7</option>
-                                    <option value="Size 8">Size 8</option>
-                                    <option value="Size 9">Size 9</option>
-                                    <option value="Size 10">Size 10</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <h3>CHECK BOXES / RADIOS</h3>
-            <fieldset>
-                <div class="grid-col">
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampletextarea}" type="textarea"/>
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox}" type="checkbox" />
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox2}" type="checkbox" caption="optional caption for checkbox" />
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio" rowclass="options-inline"/>
                     <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio"/>
-                </div>
-            </fieldset>
+                    <div class="form-row form-row-button">
+                        <button type="submit">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
         </form>
+        <br><br>
+        <div class="second-form">
+            <form class="">
+                <fieldset>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleinput}" type="input" fieldclass="custom-field-class" placeholder="Place Holder Text"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplerequired}" type="input" placeholder="Focus/unfocus field to see error state" /><!-- Required status must be defined in form xml (madatory="true") -->
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecaption}" type="input" /><!-- this caption is defined in form xml -->
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplepassword}" type="password" caption="Optional caption text in markup"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleemail}" type="email" placeholder="See touch keyboard in mobile" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplephone}" type="phone"  help="${help}" placeholder="See touch keyboard in mobile" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleselectbox}" type="select" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampletextarea}" type="textarea"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox}" type="checkbox" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.examplecheckbox2}" type="checkbox" caption="optional caption for checkbox" />
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio" rowclass="options-inline"/>
+                    <isinputfield formfield="${pdict.CurrentForms.styleguide.exampleradios}" type="radio"/>
+                    <div class="form-row form-row-button">
+                        <button type="submit">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 
     <h3 class="section-title">LOGOS</h3>
     <div class="logos style-section">
         <div class="logo-col">
-            <img src="${URLUtils.staticURL('images/logo.svg')}" alt="Logo" />
+            <img src="${URLUtils.staticURL('images/rapala.png')}" alt="Logo" />
+        </div>
+        <div class="logo-col">
+            <img src="${URLUtils.staticURL('images/bluefox.png')}" alt="Logo" />
+        </div>
+        <div class="logo-col">
+            <img src="${URLUtils.staticURL('images/storm.png')}" alt="Logo" />
+        </div>
+        <div class="logo-col">
+            <img src="${URLUtils.staticURL('images/sufix.png')}" alt="Logo" />
+        </div>
+        <div class="logo-col">
+            <img src="${URLUtils.staticURL('images/williamson.png')}" alt="Logo" />
         </div>
     </div>
 
     <h3 class="section-title">Iconography</h3>
     <div class="icons">
         <h3>SVG Sprite Icons</h3>
-
+        <br>
         <div class="svg-icons">
+            <h4>Mobile Header</h4>
             <div class="icon-col">
-                <h4>Carousel Navigator</h4>
-                <issvghelper icon="arrow" />
-                <div class="style-spec">
-                    <h4>Desktop:</h4>
-                    height: 44px <br>
-                    width: 44px
-                    <h4>Mobile:</h4>
-                    height: 33px <br>
-                    width: 33px
+                <issvghelper icon="menu" />
+                <br>
+                <div class="usage">
+                    menu
                 </div>
+            </div>
+            <div class="icon-col">
+                <issvghelper icon="search-icon" />
+                <br>
+                <div class="usage">
+                    search-icon
+                </div>
+            </div>
+            <div class="icon-col">
+                <issvghelper icon="shopping-cart" />
+                <br>
+                <div class="usage">
+                    shopping-cart
+                </div>
+            </div>
+            <div class="icon-col">
+                <issvghelper icon="user" />
+                <br>
+                <div class="usage">
+                    user
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <h4>Desktop Header</h4>
+            <div class="icon-col">
+                <issvghelper icon="search-icon" />
+                <br>
+                <div class="usage">
+                    search-icon
+                </div>
+            </div>
+            <div class="icon-col">
+                <issvghelper icon="shopping-cart" />
+                <br>
+                <div class="usage">
+                    shopping-cart
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <h4>Close</h4>
+            <div class="icon-col">
+                <issvghelper icon="close" />
+                <br>
+                <div class="usage">
+                    close
+                </div>
+            </div>
+            <div class="icon-col">
+                <issvghelper icon="close" extraclasses="small" />
+                <br>
+                <div class="usage">
+                    close.small
+                </div>
+            </div>
+        </div>
+        <div class="svg-icons">
+            <h4>Carousel Arrows</h4>
+            <div class="icon-col">
+                <issvghelper icon="arrow" />
                 <br>
                 <div class="usage">
                     arrow
                 </div>
             </div>
             <div class="icon-col">
-                <h4>Account</h4>
-                <issvghelper icon="user" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 20px <br>
-                    width: 19px
-                </div>
+                <issvghelper icon="arrow" extraclasses="right" />
                 <br>
                 <div class="usage">
-                    user
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Shopping cart</h4>
-                <issvghelper icon="cart" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 23px <br>
-                    width: 21px
-                </div>
-                <br>
-                <div class="usage">
-                    cart
+                    arrow.right
                 </div>
             </div>
         </div>
         <div class="svg-icons">
+            <h4>Carousel Dots</h4>
             <div class="icon-col">
-                <h4>Search</h4>
-                <issvghelper icon="search" />
-                <div class="style-spec">
-                    <h4>Desktop:</h4>
-                    height: 13px <br>
-                    width: 14px
-                    <h4>Mobile:</h4>
-                    height: 15px <br>
-                    width: 16px
-                </div>
+                <issvghelper icon="dot" />
                 <br>
                 <div class="usage">
-                    search
+                    dot
                 </div>
             </div>
             <div class="icon-col">
-                <h4>Remove</h4>
-                <issvghelper icon="remove" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 13px <br>
-                    width: 13px
-                </div>
+                <issvghelper icon="dot" extraclasses="active" />
                 <br>
                 <div class="usage">
-                    remove
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Remove Large</h4>
-                <issvghelper icon="remove" extraclasses="large" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 22px <br>
-                    width: 22px
-                </div>
-                <br>
-                <div class="usage">
-                    remove.large
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Email</h4>
-                <issvghelper icon="email" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 12px <br>
-                    width: 15px
-                </div>
-                <br>
-                <div class="usage">
-                    email
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Review Star</h4>
-                <issvghelper icon="star-fill" />
-                <issvghelper icon="star" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 12px <br>
-                    width: 11px <br>
-                    dark star <br>
-                    color: ${'#'}2E3236 100% <br>
-                    light star <br>
-                    color: ${'#'}2E3236 20%
-                </div>
-                <br>
-                <div class="usage">
-                    star-fill <br>
-                    star
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>MOBILE SEARCH  TOGGLE</h4>
-                <issvghelper icon="search-mobile" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 26px <br>
-                    width: 24px
-                </div>
-                <br>
-                <div class="usage">
-                    search-mobile
+                    dot.active
                 </div>
             </div>
         </div>
         <div class="svg-icons">
+            <h4>Social Icons Footer (Desktop)</h4>
             <div class="icon-col">
-                <h4>Label In stock</h4>
-                <issvghelper icon="in-stock" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 10px <br>
-                    width: 13px
-                </div>
-                <br>
-                <div class="usage">
-                    in-stock
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>low stock</h4>
-                <issvghelper icon="low-stock" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 16px <br>
-                    width: 16px
-                </div>
-                <br>
-                <div class="usage">
-                    low-stock
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>not available</h4>
-                <issvghelper icon="not-available" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 12px <br>
-                    width: 12px
-                </div>
-                <br>
-                <div class="usage">
-                    not-available
-                </div>
-            </div>
-        </div>
-        <div class="svg-icons">
-            <div class="icon-col">
-                <h4>safe & secure</h4>
-                <issvghelper icon="secure" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 30px <br>
-                    width: 27px
-                </div>
-                <br>
-                <div class="usage">
-                    secure
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Free shipping</h4>
-                <issvghelper icon="free-sheeping" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 30px <br>
-                    width: 32px
-                </div>
-                <br>
-                <div class="usage">
-                    free-sheeping
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>returns</h4>
-                <issvghelper icon="returns" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 30px <br>
-                    width: 27px
-                </div>
-                <br>
-                <div class="usage">
-                    returns
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>satisfaction</h4>
-                <issvghelper icon="satisfaction" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 30px <br>
-                    width: 23px
-                </div>
-                <br>
-                <div class="usage">
-                    satisfaction
-                </div>
-            </div>
-        </div>
-        <div class="svg-icons">
-            <div class="icon-col">
-                <h4>pinterest</h4>
-                <issvghelper icon="pinterest" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 24px
-                </div>
-                <br>
-                <div class="usage">
-                    pinterest
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>facebook</h4>
                 <issvghelper icon="facebook" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 24px
-                </div>
                 <br>
                 <div class="usage">
-                    pinterest
+                    facebook
                 </div>
             </div>
             <div class="icon-col">
-                <h4>instagram</h4>
                 <issvghelper icon="instagram" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 27px <br>
-                    width: 25px
-                </div>
                 <br>
                 <div class="usage">
                     instagram
                 </div>
             </div>
             <div class="icon-col">
-                <h4>twitter</h4>
-                <issvghelper icon="twitter" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 24px
-                </div>
-                <br>
-                <div class="usage">
-                    twitter
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>youtube</h4>
                 <issvghelper icon="youtube" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 27px <br>
-                    width: 25px
-                </div>
                 <br>
                 <div class="usage">
                     youtube
                 </div>
             </div>
-        </div>
-        <div class="svg-icons">
             <div class="icon-col">
-                <h4>CANADA</h4>
-                <issvghelper icon="flag-icon-canada" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 25px
-                </div>
+                <issvghelper icon="blog" />
                 <br>
                 <div class="usage">
-                    flag-icon-canada
+                    blog
                 </div>
-            </div>
-            <div class="icon-col">
-                <h4>United States</h4>
-                <issvghelper icon="flag-icon-usa" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 25px
-                </div>
-                <br>
-                <div class="usage">
-                    flag-icon-usa
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>United Kindgom</h4>
-                <issvghelper icon="flag-icon-uk" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 25px
-                </div>
-                <br>
-                <div class="usage">
-                    flag-icon-uk
-                </div>
-            </div>
-            <div class="icon-col">
-                <h4>Rest of world</h4>
-                <issvghelper icon="flag-icon-world" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 25px <br>
-                    width: 25px
-                </div>
-                <br>
-                <div class="usage">
-                    flag-icon-world
-                </div>
-            </div>
-        </div>
-        <div class="svg-icons">
-            <div class="icon-col">
-                <h4>MENU</h4>
-                <issvghelper icon="menu-icon" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 18px <br>
-                    width: 24px
-                </div>
-                <br>
-                <div class="usage">
-                    menu-icon
-                </div>
-            </div>
-        </div>
-        <div class="svg-icons">
-            <div class="icon-col">
-                <h4>STARBURST</h4>
-                <issvghelper icon="badge-new" />
-                <div class="style-spec">
-                    <h4>Desktop, Mobile:</h4>
-                    height: 45px <br>
-                    width: 45px
-                </div>
-                <br>
-                <div class="usage">
-                    badge-new
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3 class="section-title">Tabs</h3>
-    <div class="tabs-block">
-        <div class="tabs">
-            <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-1" checked="" class="tab-switch">
-                <label for="tab-1" class="tab-label">Description</label>
-                <div class="tab-content">
-                    <div class="tab-info">
-                        <h3>Some Facts About the Product:</h3>
-                        Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
-                        tilbage i havnen.
-                    </div>
-                    <div class="tab-video">
-                        <h3>Watch the Video!</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
-                <label for="tab-2" class="tab-label">INSTRUCTIONS</label>
-                <div class="tab-content">
-                    <h3>Some Facts About the Product:</h3>
-                    Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!
-                    Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
-                    tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
-                    tilbage i havnen.
-                </div>
-            </div>
-            <div class="tab">
-                <input type="radio" name="css-tabs" id="tab-3" class="tab-switch">
-                <label for="tab-3" class="tab-label">Product Details</label>
-                <div class="tab-content">
-                    <h3>Some Facts About the Product:</h3>
-                    <p>Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!
-                    Pair this with a great Salesforce Commerce Cloud Store bottom and Salesforce Commerce Cloud Store jewelry for a perfect look!</p>
-                    <p>Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen. Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og tilbage i havnen.Jeg spiser en banan med chokolade på. En isvaffel koster mange penge, men smager godt. Skibe transporterer vare frem og
-                        tilbage i havnen.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3 class="section-title">Tooltip</h3>
-    <div class="tooltip-section responsive-grid">
-        <div class="grid-col">
-            <isinputfield formfield="${pdict.CurrentForms.styleguide.examplephone}" type="phone" help="${help}" placeholder="See touch keyboard in mobile" />
-            <br>
-            height: variable <br>
-            width: variable <br>
-            border: 1px ${'#'}F2F2F2 <br>
-            padding: 12px;
-        </div>
-    </div>
-
-    <h3 class="section-title">SWATCH & SIZE SELECTION</h3>
-    <div class="swatches-block">
-        <div class="responsive-grid">
-            <div class="grid-col"><h4>PDP COLOR SWATCHES</h4></div>
-            <div class="grid-col">
-                <div class="pdp-main">
-                    <div class="product-variations">
-                        <div class="attribute">
-                            <div class="value">
-                                <ul class="swatches color">
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=JJ169XX" title="Select Color: Black" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg" alt="Black">
-                                        </a>
-                                    </li>
-                                    <li class="selectable selected">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=" title="Select Color: Icy Mint" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg" alt="Icy Mint">
-                                        </a>
-                                    </li>
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=JJI15XX" title="Select Color: White" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg" alt="White">
-                                        </a>
-                                    </li>
-                                    <li class="unselectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25519358&amp;dwvar_25519358_color=" title="Select Color: Icy Mint" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            <img src="/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg" alt="Icy Mint">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                box size: <br>
-                52px x 52px<br><br>
-                active:<br>
-                border: 1px ${'#'}2E3236<br>
-                padding inside: 3px
-            </div>
-        </div>
-        <div class="responsive-grid">
-            <div class="grid-col"><h4>CATEGORY BROWSE & PRODUCT TILE COLORS</h4></div>
-            <div class="grid-col">
-                <div class="grid-tile">
-                    <div class="product-tile">
-                        <div class="product-swatches">
-                            <ul class="swatch-list">
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ169XX" class="swatch " title="Long Sleeve V-Neck Top, Black">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Black, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Black</span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ8UTXX" class="swatch selected" title="Long Sleeve V-Neck Top, Icy Mint">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Icy Mint, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Icy Mint</span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJI15XX" class="swatch " title="Long Sleeve V-Neck Top, White">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, White, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">White</span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ169XX" class="swatch " title="Long Sleeve V-Neck Top, Black">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dw733fd1ca/images/swatch/PG.10217073.JJ169XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Black, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Black</span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJ8UTXX" class="swatch" title="Long Sleeve V-Neck Top, Icy Mint">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwfffb98b9/images/swatch/PG.10217073.JJ8UTXX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, Icy Mint, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">Icy Mint</span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://dev02-na01-spinrite.demandware.net/s/yarnspirations/25519358.html?dwvar_25519358_color=JJI15XX" class="swatch " title="Long Sleeve V-Neck Top, White">
-                                        <img class="swatch-image" src="http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/-/Sites-apparel-catalog/default/dwda87f499/images/swatch/PG.10217073.JJI15XX.CP.jpg?sw=20&amp;sh=20&amp;sm=fit" alt="Long Sleeve V-Neck Top, White, swatch" data-thumb="{&quot;src&quot;:&quot;http://sits-pod54-pod55.demandware.net/dw/image/v2/BBZD_S02/on/demandware.static/Sites-yarnspirations-Site/-/default/dw58d197fa/images/noimagelarge.png?sw=113&amp;sh=113&amp;sm=fit&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}">
-                                        <span class="ui-tooltip"><span class="ui-tooltip-content">White</span></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                box size: <br>
-                15px x 15px<br><br>
-                active:<br>
-                border: 1px ${'#'}2E3236<br>
-                padding inside: 2px
-            </div>
-        </div>
-        <div class="responsive-grid">
-            <div class="grid-col"><h4>CATEGORY BROWSE & PRODUCT TILE COLORS</h4></div>
-            <div class="grid-col">
-                <div class="pdp-main">
-                    <div class="product-variations">
-                        <div class="attribute">
-                            <div class="value">
-                                <ul class="swatches size">
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9SM&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: S" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            S
-                                        </a>
-                                    </li>
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9MD&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: M" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            M
-                                        </a>
-                                    </li>
-                                    <li class="selectable selected">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: L" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            L
-                                        </a>
-                                    </li>
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9XL&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: XL" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            XL
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                box size: <br>
-                15px x 15px<br><br>
-                active:<br>
-                border: 1px ${'#'}2E3236<br>
-                padding inside: 2px
-            </div>
-        </div>
-        <div class="responsive-grid">
-            <div class="grid-col"><h4>GENERAL TERM</h4></div>
-            <div class="grid-col">
-                <div class="pdp-main">
-                    <div class="product-variations">
-                        <div class="attribute">
-                            <div class="value">
-                                <ul class="swatches">
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9SM&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: S" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            ADULT
-                                        </a>
-                                    </li>
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9MD&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: M" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            BABY
-                                        </a>
-                                    </li>
-                                    <li class="selectable selected">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: L" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            MAN
-                                        </a>
-                                    </li>
-                                    <li class="selectable">
-                                        <a class="swatchanchor" href="http://dev02-na01-spinrite.demandware.net/on/demandware.store/Sites-yarnspirations-Site/default/Product-Variation?pid=25591535&amp;dwvar_25591535_size=9XL&amp;dwvar_25591535_color=JJ2DHXX" title="Select Size: XL" data-lgimg="{&quot;url&quot;:{},&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;hires&quot;:&quot;&quot;}&quot;}"><!-- dwMarker="link" dwPipelineTitle="Product-Variation (app_storefront_controllers)" dwIsController="true" dwPipelineURL="http://localhost:60606/target=/app_storefront_controllers/cartridge/controllers/Product.js&amp;start=Variation" -->
-                                            WOMEN
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-col">
-                box size: <br>
-                15px x 15px<br><br>
-                active:<br>
-                border: 1px ${'#'}2E3236<br>
-                padding inside: 2px
             </div>
         </div>
     </div>
 
     <h3 class="section-title">Dialogs</h3>
     <div class="dialogs style-section">
-
         <button id="dialog-example">Dialog Example</button>
 
-        <div id="dialog-message" title="H3 Heading">
-            <h4>H4 Heading Harmonia Bold 15px</h4>
-            <p>Paragraph. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div id="dialog-message" title="Modal Heading">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
         </div>
-
-    </div>
-
-    <h3 class="section-title">Heros Banners</h3>
-    <div class="hero-banner style-section">
-
-        <div class="hero">
-            <h2 class="subheading">Hero Banner with 100% width</h2>
-        </div>
-        <p class="style-spec">Defaults to 100% width. Do not implicitly define this in the stylesheet, or it may override full-bleed styles (see below).</p>
-
-        <div class="hero full-bleed-width">
-            <h2 class="subheading">Hero Banner with Full-Bleed Width</h2>
-        </div>
-        <p class="style-spec">CSS Hack to break a div out of a bounding container, as long as it is centered in the page (left/right margins and paddings are equal).</p>
-        <p class="style-spec">In ISML: &nbsp; class="full-bleed-width"<p>
-        <p class="style-spec">In SCSS: &nbsp; @extend %full-bleed-width<p>
-        <p class="style-spec">In SCSS: &nbsp; @include full-bleed-width()<p>
     </div>
 
     <h3 class="section-title">Fluid Grids</h3>

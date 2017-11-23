@@ -1,0 +1,163 @@
+// a.filter
+$a-filter-not-active-bg: $silver-two;
+$a-filter-opened-section-border: 1px solid $night-rider;
+$a-filter-border-radius: 0;
+$a-filter-bg: $silver;
+$a-filter-color: $black;
+$a-filter-font-family: $font;
+$a-filter-font-size: 16px;
+$a-filter-font-weight: normal;
+$a-filter-height: 40px;
+$a-filter-line-height: 40px;
+$a-filter-margin: 18px 0 0;
+$a-filter-padding: 0 28px 0 12px;
+$a-filter-text-transform: normal;
+$a-filter-width: 184px;
+$a-filter-hover-bg: $silver;
+$a-filter-hover-text-decoration: none;
+$a-filter-hover-color: $black;
+
+// Swatches
+$swatch-border-color: $border-color;
+$swatch-active-border-color: $red-two;
+
+@mixin a-filter {
+    background: $a-filter-bg;
+    clear: left;
+    color: $a-filter-color !important;
+    display: block;
+    float: left;
+    font-family: $a-filter-font-family;
+    font-size: $a-filter-font-size;
+    font-style: normal;
+    font-weight: $a-filter-font-weight;
+    letter-spacing: 0;
+    line-height: $a-filter-line-height;
+    margin: $a-filter-margin;
+    padding: $a-filter-padding;
+    text-transform: $a-filter-text-transform;
+    width: $a-filter-width;
+    height: $a-filter-height;
+
+    &:hover {
+        background-color: $a-filter-hover-bg;
+        text-decoration: $a-filter-hover-text-decoration;
+        color: $a-filter-hover-color;
+    }
+}
+
+a.filter {
+    @include a-filter;
+    span {
+        font-family: $a-filter-font-family;
+        font-size: $a-filter-font-size;
+        font-weight: $a-filter-font-weight;
+    }
+}
+
+.productdetail {
+    a.filter {
+        border-radius: $a-filter-border-radius;
+        border: $a-filter-opened-section-border;
+        span {
+            font-family: $a-filter-font-family;
+            font-size: $a-filter-font-size;
+            font-weight: $a-filter-font-weight !important;
+            font-style: normal;
+            color: $a-filter-color;
+        }
+    }
+    .selected a.filter,
+    .future a.filter {
+        border: none;
+        background: $a-filter-not-active-bg;
+        border-radius: $a-filter-border-radius;
+    }
+    .optionwrapper {
+        border: $a-filter-opened-section-border;
+        border-top: none;
+    }
+}
+
+// Swatches
+.variationattributes {
+    .color li {
+        &.selected {
+            a {
+                border-color: $swatch-active-border-color;
+            }
+        }
+        a {
+            border-color: $swatch-border-color;
+        }
+    }
+    .swatches.Size li {
+        border: none;
+        height: auto;
+        a {
+            @include swatch-attr;
+        }
+    }
+}
+
+#pdpMain .addTo-cart-section input.quantityinput {
+    width: rem(50px);
+    height: rem(40px);
+    margin: 0 rem(10px) 0 0;
+    border: $border;
+}
+
+.pdp-main .product-add-to-cart button {
+    @include button('big');
+    width: calc(100% - #{rem(60px)});
+    &.disabled {
+        opacity: 1;
+        background-color: $button-disabled-bg;
+    }
+}
+
+a.add-to-wishlist {
+    float: right;
+    margin: 0;
+    @include font-size(13px);
+    font-family: $font;
+    color: $silver;
+}
+
+.productdetail {
+    .addtocartbar .addtocart .quantity .label {
+        @include product-attr-title;
+        font-weight: $product-attr-title-font-weight !important;
+        font-size: $product-attr-title-font-size !important;
+    }
+    .label {
+        @include product-attr-title;
+        font-weight: $product-attr-title-font-weight !important;
+        font-size: $product-attr-title-font-size !important;
+    }
+    .availability,
+    .productid {
+        .value {
+            @include product-attr-name;
+            .in-stock,
+            .in-stock {
+                color: $product-attr-name-color;
+            }
+        }
+    }
+}
+
+.pdp-tablet-content .mobile-pricing {
+    @include respond(desktop) {
+        margin: rem(7px) 0 rem(10px);
+    }
+}
+
+#content .cell.productdetailcolumn.productinfo.contentbox {
+    padding: rem(20px);
+}
+
+.variationattributes {
+    margin-top: 0;
+}
+
