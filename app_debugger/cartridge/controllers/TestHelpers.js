@@ -47,8 +47,12 @@ function getTestCart1() {
 
 /**
  * Displays the order confirmation page for a given order
+ * Guest Checkout
  * Accepts URL param 'order'
  * Ex. TestHelpers-GetTestOrderConfirmation?order=00000001
+ * Registered User Checkout
+ * Accepts 'order', 'user', 'password'
+ * Ex. TestHelpers-GetTestOrderConfirmation?order=00000001&user=john@smith.com&password=123456
  * This is useful for styling the Order Confirmation page
  */
 function getTestOrderConfirmation() {
@@ -58,16 +62,13 @@ function getTestOrderConfirmation() {
     var orders = OrderMgr.searchOrders('orderNo={0}', 'creationDate desc', orderNo);
     var order = orders.next();
 
-    // start user profile authentication dependencies
     if (session.customerAuthenticated) {
-      //if user has been previously authenticated, log them out.
       Customer.logout();
     }
     var user = "",
       password = "";
 
     if(request.httpParameterMap.user != "" && request.httpParameterMap.password != "" ) {
-      //log user in if params offered
       user = request.httpParameterMap.user.stringValue
       password = request.httpParameterMap.password.stringValue
 
