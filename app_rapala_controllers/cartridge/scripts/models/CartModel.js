@@ -54,6 +54,23 @@ var CartModel = AbstractModel.extend({
         return paypalErrorValue;
     },
 
+     * Deletes all the Discontinued products .
+     *
+     * @transactional
+     * @alias module:models/CartModel~CartModel/removeDiscontinuedProducts
+     * product line items for.
+     */
+    removeDiscontinuedProducts: function () {
+    	var cart = this;
+        var plis = cart.getProductLineItems();
+
+        for (var i = 0; i < plis.length; i++) {
+            var pli = plis[i];
+            if (empty(pli.product)) {
+            		cart.removeProductLineItem(pli);
+            }
+        }
+    },
 
     addProductToCart: function () {
         var cart = this;
