@@ -710,6 +710,8 @@
         .disabled {
             cursor: default;
             opacity: .5;
+            -ms-filter: "alpha(opacity=50)";
+            filter: alpha(opacity=50);
             -khtml-opacity: .5;
             -moz-opacity: .5;
             input {
@@ -844,6 +846,8 @@
         &.non-selectable {
             cursor: default;
             opacity: .5;
+            -ms-filter: "alpha(opacity=50)";
+            filter: alpha(opacity=50);
             -khtml-opacity: .5;
             -moz-opacity: .5;
         }
@@ -853,6 +857,8 @@
             &.filter {
                 cursor: default;
                 opacity: .5;
+                -ms-filter: "alpha(opacity=50)";
+                filter: alpha(opacity=50);
                 -khtml-opacity: .5;
                 -moz-opacity: .5;
             }
@@ -2609,6 +2615,8 @@ a {
                         border-radius: 2px;
                         cursor: pointer;
                         box-shadow: none;
+                        filter: initial;
+                        -webkit-filter: initial;
                         background: #fff;
                     }
                     .alternate-image {
@@ -2680,6 +2688,8 @@ a {
                         border-radius: 2px;
                         cursor: pointer;
                         box-shadow: none;
+                        filter: initial;
+                        -webkit-filter: initial;
                         opacity: 0;
                     }
                 }
@@ -3046,6 +3056,7 @@ a {
                 background: -o-linear-gradient(top, #f1f1f1 0, #dbdbdb 100%);
                 background: -ms-linear-gradient(top, #f1f1f1 0, #dbdbdb 100%);
                 background: linear-gradient(to bottom, #f1f1f1 0, #dbdbdb 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1", endColorstr="#dbdbdb", GradientType=0);
                 color: #000;
                 border: 1px solid #cdcfcf;
                 border-radius: 3px;
