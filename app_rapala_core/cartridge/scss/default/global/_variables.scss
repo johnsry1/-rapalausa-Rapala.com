@@ -1,0 +1,276 @@
+//--------------------------------
+//  VIEWPORTS
+//--------------------------------
+$small-breakpoint: 320px;
+$medium-breakpoint: 480px;
+$large-breakpoint: 768px;
+$desktop-breakpoint: 960px;
+$max-content-breakpoint: 1280px;
+$xxlg-content-breakpoint: 1440px;
+
+// mixins
+%clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+
+// colors
+// names taken from http://www.color-blindness.com/color-name-hue/
+$black: #000;
+$black-light: #1a1a1a;
+$dark-black: #360;
+$light-grey: #e5e5e5;
+$light-green: #52a300;
+$bright-green: #360;
+$whitish-grey: #dfdfdf;
+$cerulean: #00629b;
+$charcoal: #424242;
+$citrus: #84bd00;
+$payment-settingddd: #ddd;
+$dark-gray: #aaa;
+$dim-gray: #666;
+$greyy-selected-row: #ddd;
+$gainsboro: #e0e0e0;
+$light-red: #f00;
+$islamic-green: #019328;
+$lightgreynew: #b3b3b3;
+$night-rider: #333;
+$nobel: #999;
+$rain-forest: #64772d;
+$sangria: #900;
+$stark-white: #cebdb3;
+$teal: #008578;
+$tutu: #faeded;
+$light-purple-clr: #dce2ce;
+$very-light-gray: #ccc;
+$white-smoke: #efefef;
+$lightgrey: #e6e6e6;
+$white: #fff;
+$gray: #d5d5d5;
+$veryLightclr: #dce2ce;
+$bringer-clr: #4f7009;
+$dark-red: #d80000;
+$lightl-grey: #dbdbdb;
+$red: #e80000;
+$reddish: #e42213;
+$darker-red: #c40000;
+$slighgt-darker-red: #e30000;
+$shaded-light-grey: #d0d0d0;
+$slight-pink: #f69d9d;
+$tints-of-cloud: #c8beb3;
+$tints-of-feta: #dce2ce;
+$dark-green: #360;
+$shadow-green: #a5ba8b;
+$shade-black: #1a1a1a;
+$shade-lightwhite: #f1f1f1;
+$shade-grey: #f2f2f2;
+$shade-alternate-clr: #cfcfcf;
+$shaded-grey: #eee;
+$shaded-veryLight-grey: #e8e8e8;
+$shadeddeep-veryLight-grey: #f8f8f8;
+$shade-with-dark-grey: #c1c1c1;
+$darkest-red: #9b0000;
+$mixed-grey: #5c5c5c;
+$light-pink: #facccc;
+$shadow-light-grey: #999;
+$bip-brown: #af0b11;
+$white-grey: #f5f5f5;
+$light-blue: #d7d7d7;
+$green-dip-color: #a5ba8b;
+$light-grn-color: #66af22;
+$subcat-grey-color: #808080;
+$vip-chk-btn: #478e00;
+$ligther-blue: #0069a6;
+$lighter-green: #70a525;
+$lighter-orange: #f58220;
+$lightest-blue: #015bca;
+$lightest-blue-two: #235aa6;
+$lightest-red: #e12626;
+$lightest-red-two: #ce0d0d;
+$light-pink: #ffe1e1;
+$green-pdp: #008000;
+$price-red-clr: #e62617;
+$grey: #808080;
+$img-border-thumbnil: #8f979d;
+$darker-gray: #cdcfcf;
+$search-gradient: #ededed;
+$swatch-types: black #000, beige #f5f5dc, blue blue, purple purple, red red, brown #783201, green green, grey #8f979d, pink #fe249a, orange orange, white #fff, yellow #ff0, navy navy;
+$banner-shadow: #c6c6c6;
+$homebanner-shadow: #acacac;
+$account-icon-grey: #a9a9a9;
+$orderconfirm-grey: #282828;
+// fonts
+$sans-serif: Arial, sans-serif;
+$sans-serif-alt: Lato, sans-serif;
+$serif: Crete Round, serif;
+
+// background //
+$bg-dark-red: $dark-red;
+$dropdown-border: $black-light;
+$bg-white: #fff;
+$bg-lighter-white: #f2f2f2;
+$bg-greydim: #ecedee;
+$bg-greydark: #adafb1;
+
+$bg-greydimr: #f1f1f1;
+$bg-greydarkr: #dbdbdb;
+$bg-lightbrown: #e0dbd5;
+$bg-darkbrown: #333;
+$error: #fcc;
+$loginfail-errormessage: #c1272d;
+$veryLight-graycolor: #fcfcfc;
+$bg-lightgrey: #e6e6e6;
+$dip-gray-clr: #777;
+$lightColor-gray: #d6d6d6;
+$login-tooltips-star: #333;
+$dip-red: #e80000;
+$light-pink-bg: $light-pink;
+$bip-brown-bg: $bip-brown;
+$white-grey-bg: $white-grey;
+$light-blue-bg: $light-blue;
+$congrats-msg: $green-dip-color;
+$access-code: $light-grn-color;
+$nosearch-bredcrumb-bg: #c9bfb3;
+$bg-red: $red;
+$bg-greynew: #d2cfcb;
+$lightpure-red: #d70000;
+$bg-lightwhite: $shade-lightwhite;
+$bg-loghtgreyminicart: #d8d8d8;
+$orderconfirm-grey-btn: #525252;
+
+// border colors //
+$border-slight-pink: $slight-pink;
+$border-redlighter: $slighgt-darker-red;
+$border-very-light-gray: #ccc;
+$success-green: #4f7009;
+$sucess-light-green: #dce2ce;
+$border-white: #fff;
+$border-lightgrey: #e6e6e6;
+$border-lightblack: #555;
+$border-lightblackone: #5b5b5b;
+$border-lightblacktwo: #c1c1c1;
+$corfirmMsg: $bringer-clr;
+$nosearch-bredcrumb-border: #968f87;
+$border-darkgrey: $darker-gray;
+$product-promo-color: $dip-red;
+$border-nobel: #999;
+$border-orderconfirm: #e1e1e1;
+
+// Global variables
+$features-details-desc: "Times New Roman", Times, Garamond, serif;
+$video-description: "Times New Roman", TimesNewRoman, times, serif;
+$vip-password-font: "Lucida Grande", "Trebuchet MS", Helvetica, Arial, sans-serif;
+$search-suggestion-font-family: Helvetica, Arial, sans-serif;
+$account-login-tooltip: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+$my-account-section: Artcraft, "Artcraft URW", "Times New Roman", Times, Serif;
+$Artcraft-font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+$global-font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+$password-reset-font: Verdana, Arial, sans-serif;
+$global-arialfont-family: Arial, Helvetica, sans-serif;
+$bankgothic: "bankgothicbold", Helvetica, Arial, sans-serif;
+$express-font: express, Helvetica Neue, Helvetica, sans-serif;
+$lucida-font-family: $global-font-family;
+$global-static-link-color: $night-rider;
+$global-hover-link-color: $red;
+$global-change-region-bgcolor: $white;
+$global-hover-button-color: $dark-red;
+$global-button-bg-color: $red;
+$global-button-border-top-color: $darker-red;
+$global-button-border-right-color: $slighgt-darker-red;
+$global-button-border-bottom-color: $slight-pink;
+$global-button-border-left-color: $darker-red;
+$even-bg-color: $white;
+$error-bg-color: $error;
+$body-bg-color: $tints-of-cloud;
+$logo-border-color: $dim-gray;
+$user-info-static-color: $dim-gray;
+$user-info-hover-color: $night-rider;
+$user-info-color: $night-rider;
+$guest-welcomemessage-color: $night-rider;
+$congrats-message-bg-color: $tints-of-feta;
+$congrats-message-color: $dark-green;
+$congrats-message-border-color: $shadow-green;
+$country-region-text-hover-color: $shade-black;
+$country-region-text-static-color: $dim-gray;
+$country-region-bg-static-color: $shade-grey;
+$country-region-bg-hover-color: $white;
+$country-region-border-color: $white;
+$domainswitch-header-bg-color: $white;
+$domainswitch-header-border-color: $very-light-gray;
+$minicarttotal-bg-color: $shade-grey;
+$minicart-checkout-button-bg-color: $red;
+$minicart-checkout-button-text-color: $white;
+$minicart-button-text-color: $red;
+$minicart-button-glb-text-color: $black;
+$multi-site-one-cart-bg-color: $red;
+$minicarttotal-global-bg-color: $shaded-grey;
+$minicarttotal-global-border-color: $shade-with-dark-grey;
+$minicart-button-static-top-color: $red;
+$my-account-grey: #666;
+$minicart-button-static-bottom-color: $darkest-red;
+$minicart-button-hover-top-color: $darkest-red;
+$minicart-button-hover-bottom-color: $red;
+$mobile-menu-text-color: $night-rider;
+$header-login-star: $login-tooltips-star;
+$lightgrey-bg: $border-lightgrey;
+$requiredindicator: $dip-red;
+$button-bg-color: $dark-red;
+$rapala-menu-level-two: $red;
+$vmc-menu-level-two: $reddish;
+$suffix-menu-level-two: $black;
+$storm-menu-level-two: $black;
+$luhrjensen-menu-level-two: $ligther-blue;
+$triggerx-menu-level-two: $lighter-green;
+$bluefox-menu-level-two: $lighter-orange;
+$terminator-menu-level-two: $lightest-blue;
+$williamson-menu-level-two: $lightest-blue-two;
+$strikemaster-menu-level-two: $lightest-red;
+$marcum-menu-level-two: $lightest-red-two;
+$menulist-border-color: $dim-gray;
+$menulist-text-color: $black;
+$menulist-level-two-text-color: $dim-gray;
+// flag-icon-css
+$flag-icon-css-path: "../lib/flag-icon-css/flags";
+
+// left nav in category landing page
+$category-top-level: $black;
+$category-top-level-active: $red;
+$count-products: $grey;
+
+// mobile menu variables
+$mobile-menu-text-color: $night-rider;
+$mobile-menu-sale-text-color: $red;
+$nav-brand-active-bg-color: $shade-lightwhite;
+$site-suggestion-section-border-color: $darker-gray;
+$site-suggestion-section-bg-color: $white;
+$mobile-main-menu-heading-border-color: $very-light-gray;
+$js-active-sub-menu-bg-color: $white;
+$mega-categorymenu-bg-color: $white;
+// global classes
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.menu {
+    float: left;
+    margin: 0;
+    padding: 0;
+    li {
+        float: left;
+        list-style: none outside none !important;
+    }
+}

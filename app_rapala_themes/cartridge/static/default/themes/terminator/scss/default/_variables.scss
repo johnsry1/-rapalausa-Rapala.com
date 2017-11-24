@@ -1,34 +1,141 @@
-$terminator-bgblue:#0038AA;
-$terminator-bg-light-blue:#06C;
-$terminator-hov-blue:#015bca;
-$terminator-hov-grey:#4d4d4d;
-$terminator-list-black:#333;
-$terminator-white:#ffffff;
+$terminator-bgblue: #0038AA;
+$terminator-bg-light-blue: #06C;
+$terminator-hov-blue: #015bca;
+$terminator-hov-grey: #4d4d4d;
+$terminator-list-black: #333;
 $terminator-black: #000;
 $terminator-gray: #999;
 $terminator-red: #E80000;
-$terminator-blue:#015bca;
-$terminator-light-blue:#D8E1EA;
+$terminator-blue: #015bca;
+$terminator-light-blue: #D8E1EA;
 $terminator-cusservice-color: #ccc;
 $terminator-light-grey: #333;
+
+$terminator-table-row: $terminator-blue;
+$terminator-altrnate-row: $terminator-light-blue;
+
 // font-family //
+$terminator-Arial: Arial, Helvetica, sans-serif;
+$terminator-lucida: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+$terminator-original: 'ReversalEb-Italic', Arial, Helvetica, sans-serif;
+$terminator-Baskerville: Baskerville, "Times New Roman", Times, serif;
+
+//---------------------------------
+// Overwrite Global variables
+//---------------------------------
+
+// Fonts
+$font: $terminator-Arial;
+$font-secondary: $terminator-lucida;
+$font-third: $terminator-original;
+$font-fourth: $terminator-Baskerville;
+$body-font-size: 12px;
+$body-line-height: 21px;
+$body-letter-spacing: 0;
+
+// Main Colors
+$body-color: $night-rider;
+$main-color: $terminator-bgblue;
+$body-background: #D8D8D8 url(../images/container-background-70.jpg) 0 0 repeat;
+$open-menu-bg: #D8D8D8 url(../images/container-background-70.jpg) 0 -105px repeat;
 
 // border color //
+$border-top: #002F8F;
+$border-right: #0037A6;
+$border-bottom: #9DB3DE;
+$border-left: #0037A6;
 
-$terminator-borderone: #002F8F;
-$terminator-bordertwo: #0037A6;
-$terminator-borderthree: #9DB3DE;
-$terminator-borderfour: #0037A6;
+$border-hover-top: #0056AC;
+$border-hover-right: #0064C7;
+$border-hover-bottom: #9DC4EB;
+$border-hover-left: #0064C7;
 
-$terminator-hov-borderone: #0056AC;
-$terminator-hov-bordertwo: #0064C7;
-$terminator-hov-borderthree: #9DC4EB;
-$terminator-hov-borderfour: #0064C7;
+// Label
+$label-color: $body-color;
+$label-font: $font;
+$label-font-style: normal;
+$label-weight: bold;
+$label-font-size: $body-font-size;
+$label-line-height: 12px;
+$label-text-transform: none;
 
-$terminator-table-row:$terminator-blue;
-$terminator-altrnate-row:$terminator-light-blue;
+// H1-h6
+$header-font: $font-third;
+$header-link-color: $body-color;
+$header-link-hover-color: $terminator-bgblue;
+$header-link-decoration: none;
 
-$terminator-lucida: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS", Helvetica,Arial,sans-serif;
-$terminator-original:'ReversalEb-Italic',Arial,Helvetica,sans-serif;
-$terminator-Arial:Arial,Helvetica,sans-serif;
-$terminator-Baskerville: Baskerville,"Times New Roman",Times,serif;
+$h1-font: $header-font;
+$h1-font-size: 25px;
+$h1-font-weight: normal;
+$h1-font-style: normal;
+$h1-line-height: 25px;
+$h1-text-transform: uppercase;
+$h1-color: $night-rider;
+
+$h2-font: $header-font;
+$h2-font-size: 16px;
+$h2-font-weight: normal;
+$h2-font-style: normal;
+$h2-line-height: 16px;
+$h2-text-transform: uppercase;
+$h2-color: $night-rider;
+
+$h3-font: $font;
+$h3-font-size: 1.15em;
+$h3-font-weight: bold;
+$h3-font-style: normal;
+$h3-line-height: normal;
+$h3-text-transform: none;
+$h3-color: $night-rider;
+
+$h4-font: $header-font;
+$h4-font-size: 12px;
+$h4-font-weight: normal;
+$h4-font-style: normal;
+$h4-line-height: normal;
+$h4-text-transform: uppercase;
+$h4-color: $night-rider;
+
+$h5-font: $header-font;
+$h5-font-size: 12px;
+$h5-font-weight: normal;
+$h5-font-style: normal;
+$h5-line-height: normal;
+$h5-text-transform: uppercase;
+$h5-color: $night-rider;
+
+$h6-font: $header-font;
+$h6-font-size: 12px;
+$h6-font-weight: normal;
+$h6-font-style: normal;
+$h6-line-height: normal;
+$h6-text-transform: uppercase;
+$h6-color: $night-rider;
+
+// p
+$p-color: $night-rider;
+$p-font-family: $font;
+$p-font-size: 12px;
+$p-font-weight: normal;
+$p-word-spacing: normal;
+$p-line-height: 18px;
+$p-padding: 9px 0;
+$p-text-align: left;
+
+$link-color: $terminator-bgblue;
+$link-decoration: none;
+$link-hover-color: $terminator-bg-light-blue;
+$link-hover-decoration: none;
+
+// a-filter
+$a-filter-font-family: $font-secondary;
+$a-filter-bg: rgba(1, 91, 202, 1);
+$a-filter-gradient: linear-gradient(to bottom, rgba(1, 91, 202, 1) 0%, rgba(16, 83, 142, 1) 100%);
+$a-filter-bg-image: '';
+$a-filter-hover-bg: rgba(16, 83, 142, 1);
+$a-filter-hover-gradient: linear-gradient(to bottom, rgba(16, 83, 142, 1) 0%, rgba(1, 91, 202, 1) 100%);
+$a-filter-hover-color: $white;
+//---------------------------------
+// End Off Overwrite Global variables
+//---------------------------------
