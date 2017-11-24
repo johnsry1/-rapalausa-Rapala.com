@@ -1,83 +1,3 @@
-$h1-font: 'FranklinGothicStd-ExtraCond';
-$h1-font-size: 30px;
-$h1-font-size-mobile: 20px;
-$h1-font-weight: bold;
-$h1-font-variant: normal;
-$h1-font-style: normal;
-$h1-line-height: 1;
-$h1-text-transform: none;
-$h1-color: $black;
-
-$h2-font: 'FranklinGothicStd-ExtraCond';
-$h2-font-size: 20px;
-$h2-font-size-mobile: 16px;
-$h2-font-weight: bold;
-$h2-font-variant: normal;
-$h2-font-style: normal;
-$h2-line-height: 1;
-$h2-text-transform: none;
-$h2-color: $black;
-
-$h3-font: 'ITCFranklinGothicStd-MdCd';
-$h3-font-size: 15px;
-$h3-font-weight: bold;
-$h3-font-style: normal;
-$h3-font-variant: normal;
-$h3-line-height: 1;
-$h3-text-transform: none;
-$h3-color: $black;
-
-$h4-font: $font;
-$h4-font-size: 13px;
-$h4-font-weight: bold;
-$h4-font-style: normal;
-$h4-font-variant: normal;
-$h4-line-height: 1;
-$h4-text-transform: none;
-$h4-color: $black;
-
-$h5-font: $font;
-$h5-font-size: 13px;
-$h5-font-weight: bold;
-$h5-font-style: normal;
-$h5-font-variant: normal;
-$h5-line-height: 1;
-$h5-text-transform: none;
-$h5-color: $black;
-
-$h6-font: $font;
-$h6-font-size: 13px;
-$h6-font-weight: bold;
-$h6-font-style: normal;
-$h6-font-variant: normal;
-$h6-line-height: 1;
-$h6-text-transform: none;
-$h6-color: $black;
-
-$hero-title-font-size: 60px;
-$hero-title-font-size-mobile: 34px;
-$hero-title-line-height: 1;
-$hero-title-font-family: 'Franklin Gothic Extra Condensed';
-$hero-title-text-transform: capitalize;
-
-$visual-category-font-size: 30px;
-$visual-category-font-size-mobile: 24px;
-$visual-category-line-height: 1;
-$visual-category-font-family: 'FranklinGothicStd-ExtraCond';
-$visual-category-text-transform: capitalize;
-
-$carousel-heading-font-size: 60px;
-$carousel-heading-font-size-mobile: 34px;
-$carousel-heading-line-height: 1;
-$carousel-heading-font-family: 'FranklinGothicStd-ExtraCond';
-$carousel-heading-text-transform: capitalize;
-
-$hero-subtitle-font-size: 30px;
-$hero-subtitle-font-size-mobile: 24px;
-$hero-subtitle-line-height: 1;
-$hero-subtitle-font-family: 'FranklinGothicStd-ExtraCond';
-$hero-subtitle-text-transform: capitalize;
-
 @mixin h1 {
     font-family: $h1-font;
     font-size: $h1-font-size;
@@ -195,13 +115,6 @@ $hero-subtitle-text-transform: capitalize;
     }
 }
 
-$pdp-name-font-size: 24px;
-$pdp-name-font-size-mobile: 20px;
-$pdp-name-letter-spacing: normal;
-$pdp-name-letter-spacing-mobile: 0.025em;
-$pdp-name-line-height: 1;
-$pdp-name-font-family: 'FranklinGothicStd-ExtraCond';
-$pdp-name-text-transform: capitalize;
 @mixin pdp-name {
     @include font-size($pdp-name-font-size-mobile);
     font-family: $pdp-name-font-family;
@@ -215,10 +128,6 @@ $pdp-name-text-transform: capitalize;
     }
 }
 
-$pdp-description-font-size: 13px;
-$pdp-description-letter-spacing: normal;
-$pdp-description-line-height: 20px;
-$pdp-description-font-family: $font;
 @mixin pdp-description {
     @include font-size($pdp-description-font-size);
     @include line-height($pdp-description-line-height);
@@ -226,13 +135,6 @@ $pdp-description-font-family: $font;
     letter-spacing: $pdp-description-letter-spacing;
 }
 
-$product-attr-title-font-size: 13px;
-$product-attr-title-font-weight: normal;
-$product-attr-title-font-style: normal;
-$product-attr-title-letter-spacing: normal;
-$product-attr-title-line-height: 20px;
-$product-attr-title-font-family: $font;
-$product-attr-title-color: $silver;
 @mixin product-attr-title {
     @include font-size($product-attr-title-font-size);
     @include line-height($product-attr-title-line-height);
@@ -246,11 +148,6 @@ $product-attr-title-color: $silver;
     @include product-attr-title;
 }
 
-$product-attr-name-font-size: 13px;
-$product-attr-name-letter-spacing: normal;
-$product-attr-name-line-height: 20px;
-$product-attr-name-font-family: $font;
-$product-attr-name-color: $black;
 @mixin product-attr-name {
     @include font-size($product-attr-name-font-size);
     @include line-height($product-attr-name-line-height);
@@ -259,13 +156,6 @@ $product-attr-name-color: $black;
     color: $product-attr-name-color;
 }
 
-$pdp-price-font-size: 18px;
-$pdp-price-letter-spacing: normal;
-$pdp-price-line-height: 20px;
-$pdp-price-font-family: $font;
-$pdp-price-font-weight: bold;
-$pdp-price-color: $black;
-$pdp-price-sale-color: $silver;
 @mixin pdp-price {
     .price-standard,
     .price-sales {
@@ -284,12 +174,6 @@ $pdp-price-sale-color: $silver;
     }
 }
 
-$pdp-message-font-size: 13px;
-$pdp-message-letter-spacing: normal;
-$pdp-message-line-height: 1;
-$pdp-message-font-family: $font;
-$pdp-message-font-weight: bold;
-$pdp-message-color: $red-two;
 @mixin pdp-message {
     @include font-size($pdp-message-font-size);
     font-weight: $pdp-message-font-weight;
@@ -299,12 +183,6 @@ $pdp-message-color: $red-two;
     color: $pdp-message-color;
 }
 
-$pdp-accordion-title-font-size: 20px;
-$pdp-accordion-title-letter-spacing: normal;
-$pdp-accordion-title-line-height: 1;
-$pdp-accordion-title-font-family: $font;
-$pdp-accordion-title-font-weight: normal;
-$pdp-accordion-title-color: $black;
 @mixin pdp-accordion-title {
     @include font-size($pdp-accordion-title-font-size);
     font-weight: $pdp-accordion-title-font-weight;
@@ -314,12 +192,6 @@ $pdp-accordion-title-color: $black;
     color: $pdp-accordion-title-color;
 }
 
-$clp-refinement-title-font-size: 13px;
-$clp-refinement-title-letter-spacing: normal;
-$clp-refinement-title-line-height: 20px;
-$clp-refinement-title-font-family: $font;
-$clp-refinement-title-font-weight: normal;
-$clp-refinement-title-color: $black;
 @mixin clp-refinement-title {
     @include font-size($clp-refinement-title-font-size);
     @include line-height($clp-refinement-title-line-height);
@@ -329,12 +201,6 @@ $clp-refinement-title-color: $black;
     color: $clp-refinement-title-color;
 }
 
-$pdp-promo-font-size: 13px;
-$pdp-promo-letter-spacing: normal;
-$pdp-promo-line-height: 20px;
-$pdp-promo-font-family: $font;
-$pdp-promo-font-weight: normal;
-$pdp-promo-color: $red-two;
 @mixin pdp-promo {
     @include font-size($pdp-promo-font-size);
     @include line-height($pdp-promo-line-height);
@@ -344,12 +210,6 @@ $pdp-promo-color: $red-two;
     color: $pdp-promo-color;
 }
 
-$form-caption-font-size: 13px;
-$form-caption-letter-spacing: normal;
-$form-caption-line-height: 20px;
-$form-caption-font-family: $font;
-$form-caption-font-weight: normal;
-$form-caption-color: $black;
 @mixin form-caption {
     @include font-size($form-caption-font-size);
     @include line-height($form-caption-line-height);
@@ -358,18 +218,6 @@ $form-caption-color: $black;
     letter-spacing: $form-caption-letter-spacing;
     color: $form-caption-color;
 }
-
-$form-label-font-family: $font;
-$form-label-font-size: 13px;
-$form-label-font-weight: normal;
-$form-label-color: $black;
-$form-label-text-transform: none;
-$form-label-border: none;
-$form-label-padding: 0 0 3px 0;
-$form-label-line-height: 16px;
-$form-label-margin: 0 0 9px 0;
-$form-label-letter-spacing: 0;
-$form-label-font-variant: none;
 
 @mixin label {
     margin: $form-label-margin;
@@ -385,12 +233,6 @@ $form-label-font-variant: none;
     float: left;
 }
 
-$p-font-size: 13px;
-$p-letter-spacing: normal;
-$p-line-height: 20px;
-$p-font-family: $font;
-$p-font-weight: normal;
-$p-color: $black;
 @mixin p {
     @include font-size($p-font-size);
     @include line-height($p-line-height);
@@ -400,13 +242,6 @@ $p-color: $black;
     color: $p-color;
 }
 
-$ul-font-size: 13px;
-$ul-letter-spacing: normal;
-$ul-line-height: 26px;
-$ul-font-family: $font;
-$ul-font-weight: normal;
-$ul-color: $black;
-$ul-list-style: disc;
 @mixin ul {
     @include font-size($ul-font-size);
     @include line-height($ul-line-height);
@@ -419,19 +254,6 @@ $ul-list-style: disc;
     }
 }
 
-$main-nav-font-size: 13px;
-$main-nav-letter-spacing: normal;
-$main-nav-line-height: 20px;
-$main-nav-font-family: $font;
-$main-nav-font-weight: normal;
-$main-nav-color: $white;
-$main-nav-padding: 22px 33px;
-$main-nav-text-transform: uppercase;
-$main-nav-bg: $tundora;
-$main-nav-text-decoration: none;
-$main-nav-hover-text-decoration: none;
-$main-nav-hover-color: $black;
-$main-nav-hover-bg: $silver;
 @mixin main-nav {
     @include font-size($main-nav-font-size);
     @include line-height($main-nav-line-height);
@@ -451,15 +273,6 @@ $main-nav-hover-bg: $silver;
     }
 }
 
-$link-font-size: 13px;
-$link-letter-spacing: normal;
-$link-line-height: 20px;
-$link-font-family: $font;
-$link-font-weight: normal;
-$link-color: $red-two;
-$link-text-decoration: underline;
-$link-hover-text-decoration: underline;
-$link-hover-color: $sangria;
 @mixin link {
     @include font-size($link-font-size);
     @include line-height($link-line-height);
@@ -474,15 +287,6 @@ $link-hover-color: $sangria;
     }
 }
 
-$footer-link-font-size: 13px;
-$footer-link-letter-spacing: normal;
-$footer-link-line-height: 20px;
-$footer-link-font-family: $font;
-$footer-link-font-weight: normal;
-$footer-link-color: $black;
-$footer-link-text-decoration: none;
-$footer-link-hover-text-decoration: underline;
-$footer-link-hover-color: $black;
 @mixin footer-link {
     @include font-size($footer-link-font-size);
     @include line-height($footer-link-line-height);
@@ -496,45 +300,6 @@ $footer-link-hover-color: $black;
         text-decoration: $footer-link-hover-text-decoration;
     }
 }
-
-$button-min-width: 140px;
-$button-height: 40px;
-$button-font-size: 14px;
-$button-letter-spacing: normal;
-$button-line-height: 40px;
-$button-font-family: $font;
-$button-font-weight: normal;
-$button-color: $black;
-$button-text-transform: uppercase;
-$button-text-decoration: none;
-$button-padding: 0 30px;
-$button-bg: $silver;
-$button-border-radius: 5px;
-$button-border: 1px solid $silver;
-$button-hover-text-decoration: none;
-$button-hover-color: $black;
-$button-hover-bg: $silver-two;
-$button-hover-border: 1px solid $silver;
-$button-disabled-bg: $silver-two;
-$button-disabled-color: $silver;
-
-$button-big-height: 40px;
-$button-big-font-size: 14px;
-$button-big-letter-spacing: normal;
-$button-big-line-height: 40px;
-$button-big-font-family: $font;
-$button-big-font-weight: normal;
-$button-big-color: $white;
-$button-big-text-transform: uppercase;
-$button-big-text-decoration: none;
-$button-big-padding: 0 30px;
-$button-big-bg: $kermit-green;
-$button-big-border-radius: 5px;
-$button-big-border: 1px solid $kermit-green;
-$button-big-hover-text-decoration: none;
-$button-big-hover-color: $white;
-$button-big-hover-bg: $limeade;
-$button-big-hover-border: 1px solid $limeade;
 
 @mixin button($type: '') {
     @if ($type == 'big') {
@@ -590,24 +355,6 @@ $button-big-hover-border: 1px solid $limeade;
     }
 }
 
-$quickview-height: 30px;
-$quickview-font-size: 14px;
-$quickview-letter-spacing: normal;
-$quickview-line-height: 30px;
-$quickview-font-family: $font;
-$quickview-font-weight: normal;
-$quickview-color: $black;
-$quickview-text-transform: uppercase;
-$quickview-text-decoration: none;
-$quickview-padding: 0 40px;
-$quickview-bg: $silver;
-$quickview-min-width: 210px;
-$quickview-border: 1px solid $silver;
-$quickview-border-radius: 5px;
-$quickview-hover-text-decoration: none;
-$quickview-hover-color: $black;
-$quickview-hover-bg: $silver-two;
-$quickview-hover-border: 1px solid $greyish-brown;
 @mixin quickview {
     display: inline-block;
     text-align: center;
@@ -634,24 +381,6 @@ $quickview-hover-border: 1px solid $greyish-brown;
     }
 }
 
-$swatch-attr-height: 30px;
-$swatch-attr-font-size: 14px;
-$swatch-attr-letter-spacing: normal;
-$swatch-attr-line-height: 30px;
-$swatch-attr-font-family: $font;
-$swatch-attr-font-weight: bold;
-$swatch-attr-color: $black;
-$swatch-attr-text-transform: uppercase;
-$swatch-attr-text-decoration: none;
-$swatch-attr-padding: 0 20px;
-$swatch-attr-bg: $silver;
-$swatch-attr-border: 1px solid $silver;
-$swatch-attr-border-radius: 0;
-$swatch-attr-inner-color: $red-two;
-$swatch-attr-hover-text-decoration: none;
-$swatch-attr-hover-color: $black;
-$swatch-attr-hover-bg: $silver-two;
-$swatch-attr-hover-border: 1px solid $greyish-brown;
 @mixin swatch-attr {
     display: inline-block;
     text-align: center;
@@ -683,19 +412,6 @@ $swatch-attr-hover-border: 1px solid $greyish-brown;
     }
 }
 
-$product-tag-height: 20px;
-$product-tag-font-size: 13px;
-$product-tag-letter-spacing: normal;
-$product-tag-line-height: 20px;
-$product-tag-font-family: $font;
-$product-tag-font-weight: normal;
-$product-tag-color: $white;
-$product-tag-text-transform: capitalize;
-$product-tag-text-decoration: none;
-$product-tag-padding: 0 10px;
-$product-tag-bg: $red-two;
-$product-tag-border: none;
-$product-tag-border-radius: 10px;
 @mixin product-tag {
     display: inline-block;
     text-align: center;
@@ -714,14 +430,6 @@ $product-tag-border-radius: 10px;
     border-radius: $product-tag-border-radius;
 }
 
-$tooltip-font-family: $font;
-$tooltip-font-size: 13px;
-$tooltip-font-weight: normal;
-$tooltip-line-height: 30px;
-$tooltip-text-decoration: underline;
-$tooltip-color: $black;
-$tooltip-hover-color: $black;
-$tooltip-hover-text-decoration: none;
 @mixin tooltip {
     @include font-size($tooltip-font-size);
     @include line-height($tooltip-line-height);
