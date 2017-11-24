@@ -115,6 +115,26 @@ module.exports = function (gb, task) {
             dataDeployDelay: (typeof options.dataDeployDelay !== 'undefined') ? options.dataDeployDelay : 2000
         };
 
+        console.log("Overwrite Release: " + gb.deployment.overwriteRelease);
+        console.log("User: " + gb.deployment.user);
+        //console.log("Password: " + gb.deployment.password.);
+        console.log("Instance Root: " + gb.deployment.instanceRoot);
+        console.log("Instances: " + gb.deployment.instances);
+        console.log("Activation Instances: " + gb.deployment.activationInstances);
+        console.log("importInstances: " + gb.deployment.importInstances);
+        console.log("uploadPath: " + gb.deployment.uploadPath);
+        console.log("twoFactor: " + gb.deployment.twoFactor);
+        console.log("twoFactorp12: " + gb.deployment.twoFactorp12);
+        console.log("twoFactorPassword: " + gb.deployment.twoFactorPassword);
+        console.log("archiveName: " + gb.deployment.archiveName);
+        console.log("archiveFilenames: " + gb.deployment.archiveFilenames);
+        console.log("archivePath: " + gb.deployment.archivePath);
+        console.log("cartridgeSuffix: " + gb.deployment.cartridgeSuffix);
+        console.log("siteDataFolderName: " + gb.deployment.siteDataFolderName);
+        console.log("cartridges: " + gb.deployment.cartridges);
+        console.log("dataDeployDelay: " + gb.deployment.dataDeployDelay);
+
+
     });
 
 };

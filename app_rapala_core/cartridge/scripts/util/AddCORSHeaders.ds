@@ -13,7 +13,7 @@ function execute (args) {
 	// requests should only be same-origin (e.g. https -> https)
 	// or, in the case of CORS, http -> https only
 	// https -> http should never happen
-	response.setHttpHeader(dw.system.Response.ACCESS_CONTROL_ALLOW_ORIGIN, "http://" + host);
+	response.setHttpHeader(dw.system.Response.ACCESS_CONTROL_ALLOW_ORIGIN, "https://" + host);
 	//allow session cookies to be passed
 	response.setHttpHeader(dw.system.Response.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 

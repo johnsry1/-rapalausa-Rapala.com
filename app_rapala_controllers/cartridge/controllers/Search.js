@@ -135,7 +135,7 @@ function show() {
                 }
 
                 app.getView({
-                    Location: URLUtils.http('Product-Show', 'pid', productID,'oneresult',true)
+                    Location: URLUtils.https('Product-Show', 'pid', productID,'oneresult',true)
                 }).render('util/redirect');
 
             }

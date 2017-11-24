@@ -21,7 +21,7 @@
 	   	<isset name="imgName" value="new-pak-size" scope="page"/>
 		<isif condition="${!empty(p_email)}">
 			<isset name="imgName" value="/images/new-pak-size.jpg" scope="page"/>   
-			<img class="new pak"  src="${URLUtils.httpStatic(imgName)}" alt="${Resource.msg('global.newpaksize','locale',null)}" ></img>
+			<img class="new pak"  src="${URLUtils.httpsStatic(imgName)}" alt="${Resource.msg('global.newpaksize','locale',null)}" ></img>
 		<iselse/>
 			<span class="${imgName}">
 				<isif condition="${!empty(pdict.p_imagecheckout)}">

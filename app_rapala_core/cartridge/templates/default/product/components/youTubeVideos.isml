@@ -37,7 +37,7 @@
     		<h2><isprint value="${videos[0].title}"/></h2>
     	</div>
         <div id="pdpVideoTabPlayer">
-           <iframe width="462" height="270" src="${'http://www.youtube.com/embed/' + videos[0].id + '?rel=0'}" frameborder="0">
+           <iframe width="462" height="270" src="${'https://www.youtube.com/embed/' + videos[0].id + '?rel=0'}" frameborder="0">
             </iframe>
         </div>
         <div id="pdpVideoDescription" class="videoDescription">
@@ -60,7 +60,7 @@
                		<isset name="selectedString" value="${''}" scope="page" />
                </isif>
 	           <li class="youtube-list-video">
-	               <a rel="${video.id}" href="${"http://www.youtube.com/?v="+  video.id}">
+	               <a rel="${video.id}" href='${"https://www.youtube.com/?v="+  video.id}'>
 	                   <isif condition="${video.img != ''}">
 	                       <img class="videothumbnail contentbox" src="${URLUtils.imageURL(URLUtils.CONTEXT_LIBRARY,'rapala',video.img, null)}" alt="${video.title}"/><br/>
 	                   </isif>
@@ -90,7 +90,7 @@
                 jQuery('.productdetail .yt_slidedeck li').removeClass('selected');
                 $this.parent().addClass('selected');
                 jQuery('${"#"}pdpVideoTitle h2').html($this.find('.title').text());
-                jQuery('${"#"}pdpVideoTabPlayer iframe').attr('src','http://www.youtube.com/embed/' + $this.attr('rel') + '?rel=0');
+                jQuery('${"#"}pdpVideoTabPlayer iframe').attr('src','https://www.youtube.com/embed/' + $this.attr('rel') + '?rel=0');
 				jQuery('${"#"}pdpVideoDescription').html($this.find('.description').text());
             }
         });

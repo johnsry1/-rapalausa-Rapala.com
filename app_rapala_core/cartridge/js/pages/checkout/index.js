@@ -71,7 +71,7 @@ exports.init = function () {
 
     $('.pt_checkout .textinput, .pt_checkout .custom-select-wrap, .pt_checkout .textinputpw').bind('keyup blur', function () {
         if (jQuery('.New-shipping-authentication-detail').find('input[name$=\'_ProcessWay\']').val() == 2) {
-            var errordiv = '<div class=\'error loginerror\'>' + app.resources.checkout_login_error + '</div>';
+            var errordiv = '<div class=\'error loginerror\'>' + Resources.checkout_login_error + '</div>';
             if ($('.shippinglogindetails').is(':visible') || !$('.checkoutshipping form[id$="_login"]').valid()) {
                 if ($('.checkout .loginerror').length > 0) {
                     $('.checkout .loginerror').remove();

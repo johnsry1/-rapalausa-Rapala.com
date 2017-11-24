@@ -88,7 +88,7 @@
 					<span class="notifications-summery"><isprint value="${Resource.msg('checkout.limitation','checkout',null)}" encoding="off" /></span>
 			 </isif>
 			 
-			 	<isset name="itemUrl" value="${empty(productLineItem.categoryID) ? URLUtils.http('Product-Show','pid', productLineItem.productID) : URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" scope="page"/>
+			 	<isset name="itemUrl" value="${empty(productLineItem.categoryID) ? URLUtils.https('Product-Show','pid', productLineItem.productID) : URLUtils.https('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" scope="page"/>
 				<div class="minibrandcolumn">
 					<isset name="LineItemCtnr" value="${pdict.p_lineitemctnr}" scope="page"/>
 					<div class="brand">

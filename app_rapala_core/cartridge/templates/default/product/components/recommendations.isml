@@ -40,7 +40,7 @@
 							<div class="product-tile tooltip">
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">
-									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}">
+									<a href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}">
 										 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('imageTransformationService') == 'DIS' || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}">
 										 	<isset name="imageObjDesktop" value="${new ProductImage('recommendationsDesktop',pdict.Product,0)}" scope="page"/>
 										 	<isset name="imageObjIPad" value="${new ProductImage('recommendationsIPad',pdict.Product,0)}" scope="page"/>
@@ -58,7 +58,7 @@
 									</a>
 								</div>
 								<div class="product-name">
-									<a href="${URLUtils.http('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('global.goto.label', 'locale', null, pName)}"><isprint value="${pName}"/></a>
+									<a href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('global.goto.label', 'locale', null, pName)}"><isprint value="${pName}"/></a>
 								</div>
 								<isinclude template="product/components/pricing.isml"/>
 								<div class="tooltip-content" data-layout="medium">

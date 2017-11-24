@@ -67,7 +67,7 @@ var Filters = {
     /** Action must be accessed via HTTPS */
     https: function () {return request.isHttpSecure();},
     /** Action must be accessed via HTTP */
-    http: function () {return !this.https();},
+    http: function () {return request.isHttpSecure();},
     /** Action must be accessed via a GET request */
     get: function () {return request.httpMethod === 'GET';},
     /** Action must be accessed via a POST request */

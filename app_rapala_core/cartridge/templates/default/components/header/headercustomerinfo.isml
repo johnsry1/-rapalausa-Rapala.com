@@ -117,14 +117,14 @@
 							</isif>
 						    <isset name="brand" value="${session.custom.currentSite}" scope="page" />
 						    <isset name="brand" value="${brand+'-contact-us'}" scope="page" />
-						    <a class="emailHeaderLeftPreferences" href="${URLUtils.http('Page-Show','cid','email-preference-center','fdid',brand)+'&email='+pdict.CurrentCustomer.profile.email}">
+						    <a class="emailHeaderLeftPreferences" href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid',brand)+'&email='+pdict.CurrentCustomer.profile.email}">
 						    	<isprint value="${Resource.msg('global.EmailPreferences','locale',null)}"/>
 						    </a>
 					    </li>
 					    <li><a href="${URLUtils.https('Wishlist-Show')}"><isprint value="${Resource.msg('global.Wishlist','locale',null)}"/></a></li>
 					    <li><a href="${URLUtils.https('Order-History')}"><isprint value="${Resource.msg('global.OrderHistory','locale',null)}"/></a></li>
-					    <li><a href="${URLUtils.http('Page-Show','cid','customer-tracking-my-order')}"><isprint value="${Resource.msg('global.Track','locale',null)}"/></a></li>
-					    <li><a href="${URLUtils.http('Page-Show','cid','customer-return-faqs')}"><isprint value="${Resource.msg('global.Return','locale',null)}"/></a></li>
+					    <li><a href="${URLUtils.https('Page-Show','cid','customer-tracking-my-order')}"><isprint value="${Resource.msg('global.Track','locale',null)}"/></a></li>
+					    <li><a href="${URLUtils.https('Page-Show','cid','customer-return-faqs')}"><isprint value="${Resource.msg('global.Return','locale',null)}"/></a></li>
 					    <li><a href="${URLUtils.https('Address-List')}"><isprint value="${Resource.msg('global.AddressBook','locale',null)}"/></a></li>
 					    <li><a href="${URLUtils.https('PaymentInstruments-List')}"><isprint value="${Resource.msg('global.paymentsettings','locale',null)}"/></a></li>
 					    <li class="logsout"><a href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a></li>
@@ -178,14 +178,14 @@
 			        <li class="dividers pipe first">&nbsp;|</li></isif>
 		        <li class="ui-email">
 			       <isif condition="${pdict.CurrentCustomer.authenticated}"> 
-						<a href="${URLUtils.http('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+						<a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
 					<iselse/>
 					  <a href="${URLUtils.https('Page-Show','cid','email-preference-center')}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
 			        </isif>
 		        </li>
 		        <li class="dividers pipe">|</li>
 		        <li class="ui-storelocator">
-		        	<a href="${URLUtils.http('Stores-Find')}" >
+		        	<a href="${URLUtils.https('Stores-Find')}" >
 		        	<isprint value="${Resource.msg('header.storelocator','locale',null)}"/></a>
 		        </li>
 		        <li class="dividers pipe">|</li>

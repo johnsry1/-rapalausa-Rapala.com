@@ -116,7 +116,7 @@ ltkProduct.prototype.getImageURL = function(image) {
 	if (!empty(image))
 	{ 
 		if (empty(this.useAbsoluteImageURLs) || this.useAbsoluteImageURLs == true)
-			imageurl = image.httpURL;
+			imageurl = image.httpsURL;
 		else
 			imageurl = image.URL;
 	}
@@ -133,7 +133,7 @@ ltkProduct.prototype.getProductURL = function(product) {
 	if (!empty(product.ID))
 	{
 		if (empty(this.useAbsoluteProductURLs) || this.useAbsoluteProductURLs == true)
-			linkurl = URLUtils.http('Product-Show', 'pid', product.ID);
+			linkurl = URLUtils.https('Product-Show', 'pid', product.ID);
 		else
 			linkurl = URLUtils.url('Product-Show', 'pid', product.ID);
 	}

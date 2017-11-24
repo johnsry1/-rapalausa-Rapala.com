@@ -28,7 +28,7 @@
 	    
 		<isif condition="${!empty(p_email)}">
 			<isset name="imgName" value="/images/new-stamp.png" scope="page"/>
-			<img class="new" src="${URLUtils.httpStatic(imgName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+			<img class="new" src="${URLUtils.httpsStatic(imgName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
 		<iselse>
 			<span class=" small-new ${imgName}">
 				<isif condition="${!empty(pdict.p_imagecheckout)}">

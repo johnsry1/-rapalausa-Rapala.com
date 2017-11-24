@@ -4,7 +4,7 @@
 		<isloop items="${SubSubcategoryHit.getOnlineProducts().iterator()}" var="ProductHit" status="subcatloopstatus">
 			<isif condition="${!empty(SubSubcategoryHit.getOnlineProducts().iterator())}">
 			<isset name="Product" value="${ProductHit}" scope="page"/>
-						<isset name="productUrl" value="${URLUtils.http('Product-Show', 'pid', Product.ID)}" scope="page"/>
+						<isset name="productUrl" value="${URLUtils.https('Product-Show', 'pid', Product.ID)}" scope="page"/>
 					    <iscomment>append the paging parameters to the product URL</iscomment>
 						<isset name="productUrl" value="${productUrl.append('start', starting)}" scope="page"/>
 						<iscomment>append the search query parameters to the product URL</iscomment>

@@ -17,7 +17,7 @@
 						<div class="producttile item">
 							<div class="analytics capture-product-id"><isprint value="${recProduct.ID}"/></div>
 							<div class="product-image recommendation_image">
-								<a class="thumb-link" href="${URLUtils.http('Product-Show','pid', recProduct.ID)}">	
+								<a class="thumb-link" href="${URLUtils.https('Product-Show','pid', recProduct.ID)}">	
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 									    <isset name="imageObjDesktop" value="${new ProductImage('minicartDesktop',recProduct,0,'minicart')}" scope="page"/>
 									    <isset name="imageObjIPad" value="${new ProductImage('minicartIPad',recProduct,0,'minicart')}" scope="page"/>
@@ -30,7 +30,7 @@
 							</div>
 							<div class="cartrecommads_cont">
 								<div class="product-name">
-									<a class="cart-recommendationName" href="${URLUtils.http('Product-Show','pid',recProduct.ID)}" title="${pName}"><isprint value="${pName}" encoding="off" /></a>
+									<a class="cart-recommendationName" href="${URLUtils.https('Product-Show','pid',recProduct.ID)}" title="${pName}"><isprint value="${pName}" encoding="off" /></a>
 								</div>
 								<iscomment>
 								StandardPrice:  quantity-one unit price from the configured list price book.

@@ -28,7 +28,7 @@ var CategoryModel = AbstractModel.extend(
          */
         getUrl: function () {
             var category = this.object;
-            var url = dw.web.URLUtils.http('Search-Show', 'cgid', category.getID());
+            var url = dw.web.URLUtils.https('Search-Show', 'cgid', category.getID());
 
             return url;
         },

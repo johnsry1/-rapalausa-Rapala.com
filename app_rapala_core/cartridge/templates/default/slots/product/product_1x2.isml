@@ -10,12 +10,12 @@
 		
 			<div class="product-listing-image">
 				<isif condition="${!empty(pdict.Product.getImage('large',0))}">
-					<a title="${product.name}"  href="${URLUtils.http('Product-Show','pid', product.ID)}"><img src="${product.getImage('large',0).getURL()}" alt="${product.name}" /></a>
+					<a title="${product.name}"  href="${URLUtils.https('Product-Show','pid', product.ID)}"><img src="${product.getImage('large',0).getURL()}" alt="${product.name}" /></a>
 				</isif>
 			</div>
 			
 			<div class="product-listing-details">
-				<h3><a title="${product.name}"  href="${URLUtils.http('Product-Show','pid', product.ID)}"><isprint value="${product.name}"/></a></h3>
+				<h3><a title="${product.name}"  href="${URLUtils.https('Product-Show','pid', product.ID)}"><isprint value="${product.name}"/></a></h3>
 				<isinclude template="product/components/pricing"/>
 			</div>
 			

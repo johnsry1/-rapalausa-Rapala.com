@@ -24,7 +24,7 @@ var minicart = {
         this.$el = $('#minicart');
         this.$content = this.$el.find('.minicartcontent');
         jQuery('.minicarticon-cont').on('mouseover touchstart', function () {
-            if (minicart.isShow()) {
+            if (!minicart.isShow()) {
                 minicart.hoverSlide();
             }
             $('.Custom-tooltip, .cvc_tooltip, .ordergothrough_tooltip').each(function () {
@@ -360,7 +360,7 @@ var minicart = {
                     minicart.close();
                     minicart.init();
                     $('.rapala_device .minicart-button').removeClass('clicked');
-                } else if (minicarttotal > 0 && cartPageLength == 0) {
+                } else if (minicarttotal > 0) {
                     $('.rapala_device .minicart-button').trigger('click');
                 }
             }

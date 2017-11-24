@@ -15,7 +15,7 @@ var rapalainsider = {
             jQuery(document.body).append('<div id=\'dialogcontainer123\' class=\'vipinsider-container\'></div>');
         }
         jQuery.each(jQuery('form:not(.suppress)'), function () {
-            jQuery(this).validate(settings);
+            jQuery(this).validate(validator.settings);
         });
 
         var $vipinsider = $('.vipinsider-container');

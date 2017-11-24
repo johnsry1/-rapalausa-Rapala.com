@@ -8,7 +8,7 @@ var util = require('../../util'),
     progress = require('../../progress'),
     ajax = require('../../ajax');
 
-var Product = function (response) {
+var product = function (response) {
     // product private data
 
     // product json data
@@ -255,7 +255,7 @@ var Product = function (response) {
         jQuery(thisProduct.containerId + ' .quantityinput:last').keyup(function () {
             var val = null;
             try {
-                val = parseInt(jQuery(thisProduct.containerId + ' .quantityinput:last').val());
+                val = parseInt(jQuery(thisProduct.containerId + ' .quantityinput:last').val(), 10);
             } catch (e) {
                 val = null;
             }
@@ -766,7 +766,7 @@ var Product = function (response) {
                         /**
                          * Show MagicZoom data - added by lgelberg 9/14/11
                          */
-                        var zoomimageurl = (thisVal.images.original.length > 0) ? thisVal.images.original[0].url : app.noimageUrl;
+                        var zoomimageurl = (thisVal.images.original.length > 0) ? thisVal.images.original[0].url : '';
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[i].url);
                         jQuery('.MagicZoom').attr('href', zoomimageurl);
                         $('body').find('.MagicZoom img').attr('src', zoomimageurl);
@@ -2170,7 +2170,7 @@ var quickviewShow = function (options) {
             util.hiddenData();
             var ProductCache = null;
             var producJson = $('#QuickViewDialog .productjson').data('productjson');
-            ProductCache = Product(producJson);
+            ProductCache = product(producJson);
             ProductCache.show({containerId: 'pdpMain', append: false, source: options.source});
             addToCart.init();
             $('body').find('.quantityinput').off('keydown').on('keydown', function (e) {
@@ -2187,7 +2187,7 @@ var pdpEvents = {
         util.hiddenData();
         var producJson = $('body').find('.productjson').data('productjson');
         var sourceValue = $('body').find('.http-source').val();
-        ProductCache = Product(producJson);
+        ProductCache = product(producJson);
         ProductCache.show({containerId: 'pdpMain', append: false, source: sourceValue});
         $('#tabs').find('a[href="#pdpTab1"]').trigger('click');
         //var getDataOption = $('.product-primary-image').find('a').attr('data-options');

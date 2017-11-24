@@ -127,7 +127,17 @@ ProductListModel.get = function (parameter) {
     } else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new ProductListModel(obj);
+    var productList = new ProductListModel(obj);
+    // Remove discontinued products if products are exist in wish list
+    var plis = productList.object.items;
+
+    for (var i = 0; i < plis.length; i++) {
+        var pli = plis[i];
+        if (empty(pli.product)) {
+        	productList.removeItem(pli);
+        }
+    }
+    return productList;
 };
 
 /**

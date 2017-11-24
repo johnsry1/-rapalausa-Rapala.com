@@ -54,13 +54,13 @@
              if(EntryStore.key.stateCode   != null) qAttr += EntryStore.key.stateCode + ", ";
              if(EntryStore.key.countryCode != null) qAttr += EntryStore.key.countryCode;
 
-             var glink = "http://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
+             var glink = "https://maps.google.com/maps?hl=en&f=q&q=" + encodeURI(qAttr);
          </isscript>
          "map":"${glink}",
          <isscript>
           	var websiteUrl = EntryStore.key.custom.website;
           	if(websiteUrl != null && websiteUrl.indexOf("http") < 0) {
-          		websiteUrl = "http://" + websiteUrl;
+          		websiteUrl = "https://" + websiteUrl;
           	}
           </isscript>
          "website":"<isprint value="${websiteUrl}"/>"

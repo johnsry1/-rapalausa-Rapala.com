@@ -39,14 +39,14 @@
 				<isif condition="${productlink!=null && !productlink=='false'}">
 					<isprint value="${productLineItem.lineItemText}"  encoding="off"/>
 				<iselse>
-					<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
+					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
 				</iselse>
 				</isif>
 			<iselse/>
 				<isif condition="${productlink!=null && !productlink}">
 					<isprint value="${productLineItem.lineItemText}"  encoding="off"/>
 				<iselse>
-					<a href="${URLUtils.http('Product-Show','pid', productLineItem.productID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
+					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
 				</iselse>
 				</isif>
 			</isif>

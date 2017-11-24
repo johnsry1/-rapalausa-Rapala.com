@@ -27,10 +27,10 @@ FieldMapper.getField = function(product : dw.catalog.Product, field : String, fo
 			if(img == null){
 				return "";
 			}
-			return img.httpURL;
+			return img.httpsURL;
 		}
 		if(field == "url"){
-			return dw.web.URLUtils.http('Product-Show','pid',product.ID);
+			return dw.web.URLUtils.https('Product-Show','pid',product.ID);
 		}
 		if(field == "price"){
 			return dw.util.StringUtils.formatMoney(product.priceModel.price);

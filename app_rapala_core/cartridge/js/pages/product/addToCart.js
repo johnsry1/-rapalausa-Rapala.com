@@ -19,7 +19,7 @@ var addAllToCart = function (e) {
     }
 
     var $productForms = $('#product-set-list').find('form').toArray();
-    TPromise.all(_.map($productForms, addItemToCart))
+    TPromise.all(_.map($productForms, addToCart))
         .then(function (responses) {
             dialog.close();
             // show the final response only, which would include all the other items
@@ -158,14 +158,15 @@ var addToCart = {
         var url = Urls.addProduct;
 
         // add the product
-        if ($('#container').hasClass('pt_cart') && $('.addTo-cart-section').find('.recommendation_cart').length == 0) {
+        //Looks the below commented code is not required and this is stopping not able add variation product from quick view in cart page.
+        /* if ($('#container').hasClass('pt_cart') && $('.addTo-cart-section').find('.recommendation_cart').length == 0) {
             var plItemId = $('input.line-itemid').val();
             var params = {
                 updateQty: 'true',
                 lineItemId: plItemId
             };
             url = util.appendParamsToUrl(Urls.editLineItem, params);
-        }
+        } */
 
         $.ajax({
             type: 'POST',

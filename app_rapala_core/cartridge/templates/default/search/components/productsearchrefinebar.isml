@@ -69,7 +69,7 @@
 										<isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
 											
 												<input type="radio" name="css-tabs" id="contenttab" class="contenttab">	
-												<a href="${URLUtils.http('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab-link"><label for="tab-2" class="contenttab">Content</label></a>
+												<a href="${URLUtils.https('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab-link"><label for="tab-2" class="contenttab">Content</label></a>
 										</isif>
 									</div>
 								</div>
@@ -88,9 +88,9 @@
 						<isif condition="${pdict.ProductSearchResult.isRefinedByAttribute(RefinementDefinition.attributeID)}">
 							<div class="clear-refinement">
 								<isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 && !empty(pdict.ProductSearchResult.searchPhrase)}">
-									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.http('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 								<iselseif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 &&!empty(pdict.CurrentHttpParameterMap.cgid.value)}">
-									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.http('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 								</isif>
 							</div>
 						</isif>
@@ -192,9 +192,9 @@
 						<isif condition="${pdict.ProductSearchResult.refinedByPrice}">
 							<div class="clear-refinement">
 								<isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 && !empty(pdict.ProductSearchResult.searchPhrase)}">
-									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.http('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 								<iselseif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 &&!empty(pdict.CurrentHttpParameterMap.cgid.value)}">
-									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.http('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+									<a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
 								</isif>
 							</div>
 						</isif>
