@@ -100,21 +100,6 @@ function gridSyncheight() {
     $('.tiles-container .product-tile').syncHeight();
 }
 
-function updateGrid() {
-    if (util.readCookie('selectedOption') && window.location.hash.length == 0 && window.location.href.indexOf('srule=') == -1 && $('.sortitem-blk').is(':visible')) {
-        window.location.hash = 'srule=' + util.readCookie('selectedOption');
-    }
-
-    if (window.location.hash) {
-        var url = window.location.href;
-        if ((url.indexOf('?') != -1) && (url.indexOf('#') != -1)) {
-            url = url.replace('#', '&');
-        } else if (url.indexOf('?') == -1) {
-            url = url.replace('#', '?');
-        }
-        updateProductListing(url);
-    }
-}
 
 function owlcarousel() {
     setTimeout(function () {
@@ -283,7 +268,6 @@ var searchRefinment = {
  * <p>sorting changes</p>
  */
 function initializeEvents() {
-    updateGrid();
     owlcarousel();
     gridSyncheight();
     productTile.init();
