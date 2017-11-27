@@ -23,7 +23,7 @@
 	<isinclude template="search/pt_productsearchresult_UI"/>
 
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
-		<link rel="canonical" href="${URLUtils.url('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+		<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
 	</isif>
 
 	<iscomment>Add  template-specific header information here.</iscomment>

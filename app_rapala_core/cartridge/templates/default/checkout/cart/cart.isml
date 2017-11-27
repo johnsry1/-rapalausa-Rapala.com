@@ -1200,8 +1200,11 @@
 												<span class="label post-couponcode">Have a Promo Code?</span>
 												 <div class="promo-sec bottom-promo-section">
 												 <span class="input-sec">
-													<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" placeholder="${Resource.msg('cart.entercouponcode','checkout',null)}" />
-							
+												 	<isif condition="${!empty(pdict.CouponStatus.couponCodeValue)}">
+														<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" value="${pdict.CouponStatus.couponCodeValue}" />
+													<iselse/>
+														<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" placeholder="${Resource.msg('cart.entercouponcode','checkout',null)}" />
+													</isif>
 													<button type="submit"  value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon" class="gray-button cartcoupon-apply">
 														<isprint value="${Resource.msg('global.apply','locale',null)}"/>
 													</button>
@@ -1229,7 +1232,7 @@
 																</div>
 															<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='NO_APPLICABLE_PROMOTION'}">
 																<div class="error">
-																	<isprint value="${Resource.msg('global.NO_APPLICABLE_PROMOTION','locale', null)}"/>
+																	<isprint value="${Resource.msg('billingcoupon.commonerror', 'forms', null)}"/>
 																</div>
 															<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='CUSTOMER_REDEMPTION_LIMIT_EXCEEDED'}">
 																<div class="error">
@@ -1238,8 +1241,13 @@
 															<iselseif condition="${pdict.CouponStatusCode != null && pdict.CouponStatusCode.error}">
 																<div class="error">
 															   	<span class="coupon-code-error"><isprint value="${Resource.msgf('cart.' + pdict.CouponStatusCode.code,'checkout', null, pdict.CurrentForms.cart.couponCode.htmlValue)}"/></span>
-														    	 </div>
+														    	 </div>	
+														    <iselseif condition="${empty(pdict.CouponStatus.code) && pdict.CouponStatus.error}">	
+														    	<div class="error">
+																	<isprint value="${Resource.msg('billingcoupon.commonerror', 'forms', null)}"/>
+																</div>												    
 															</isif>
+															
 													<iselseif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error && pdict.CouponStatus.code=='PROMO_NOT_APPLICABLE'}">
 														<div class="error">
 															<isprint value="${Resource.msg('billingcoupon.couponused','forms', null)}"/>

@@ -357,8 +357,6 @@ var couponMenthods = {
         $.get(url, function (data) {
             couponMenthods.updateSummary();
             couponMenthods.updatecartsummary();
-            jQuery('#couponentry .redemption').html(data);
-
             var giftCertificates = jQuery(data).filter('#giftCertificateData').text();
             if (giftCertificates != 'undefined' && giftCertificates.length > 0) {
                 var giftCertificatedata = giftCertificates.split('|');
