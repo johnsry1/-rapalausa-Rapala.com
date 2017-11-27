@@ -81,7 +81,16 @@ SearchModel.initializeProductSearchModel = function (httpParameterMap) {
         productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
     }
 
-    var sortingRule = httpParameterMap.srule.submitted ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
+    var sortingRule;
+    if(httpParameterMap.srule.submitted) {
+    	sortingRule = CatalogMgr.getSortingRule(httpParameterMap.srule.value);
+    } else {
+    	if(!empty(request.getHttpCookies()) && !empty(request.getHttpCookies().selectedOption)) {
+    		sortingRule = CatalogMgr.getSortingRule(request.getHttpCookies().selectedOption.value);
+    	} else {
+    		sortingRule = null;
+    	}
+    }
     if (sortingRule) {
         productSearchModel.setSortingRule(sortingRule);
     }
