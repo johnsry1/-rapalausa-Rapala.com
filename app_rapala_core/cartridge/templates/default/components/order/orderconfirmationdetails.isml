@@ -257,8 +257,8 @@
 											</span>
 										</div>
 									</div>
-									<isset name="giftCertTotal" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
-									<isset name="allotmentAmt" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+									<isset name="giftCertTotal" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
+									<isset name="allotmentAmt" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 									<isset name="gcPaymentInstrs" value="${Order.getGiftCertificatePaymentInstruments()}" scope="page"/>
 									<isloop items="${gcPaymentInstrs}" var="gcPI">
 										<isset name="giftCertTotal" value="${giftCertTotal.add( gcPI.getPaymentTransaction().getAmount() )}" scope="page"/>
@@ -269,7 +269,7 @@
 											<isset name="allotmentAmt" value="${allotmentAmt.add(allPI.getPaymentTransaction().getAmount())}" scope="page"/>
 										</isif>
 									</isloop>
-									<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+									<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 									<isif condition="${pdict.prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}">
 										<isset name="ordertotalsaving" value="${ordertotalsaving.add(pdict.prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)))}" scope="page"/>
 									</isif>

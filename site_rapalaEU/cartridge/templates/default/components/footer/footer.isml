@@ -1,0 +1,249 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>
+	This is the footer for all pages. Be careful caching it if it contains
+	user dependent information. Cache its elements instead if necessary (do not forget
+	to change the isinclude into a pipeline include for that).
+</iscomment>
+<isinclude template="util/modules"/>
+<isscript>
+var currRequest : dw.system.Request = pdict.CurrentRequest;
+        var httpUserAgent : String = currRequest.httpUserAgent.toLowerCase();
+        var agentID = "desktop";
+        if(httpUserAgent.indexOf("iphone") > -1 || httpUserAgent.indexOf("android") > -1 || httpUserAgent.indexOf("ipad") > -1 ){
+                agentID = "device";
+        }
+</isscript>
+
+<div id="footernew">
+		<div class="wrapper">
+			<div class="row">
+				<div class="column1">
+					<div class="wrapper">
+								<a id="footerhiddenid" style="display: none;">${session.custom.currentSite}</a>
+									<ul id="footer-brands">
+
+										<!-- Rapala : id=1 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandrapala') != null) && (dw.system.Site.current.preferences.custom.activebrandrapala == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('rapala');" class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('footertab.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('rapala');" class="rapala" href="http://www.rapala.com/" title="${Resource.msg('footertab.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
+										</isif>
+										
+										<!-- VMC : id=6 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('vmc'); " class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('footertab.vmc','common',null)}">${Resource.msg('account.VMC Hooks','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('vmc'); " class="vmc" href="http://www.vmchooks.com/" title="${Resource.msg('footertab.vmc','common',null)}" target="_blank">${Resource.msg('account.VMC Hooks','account',null)}</a></li>
+										</isif>
+										
+										<!-- STORM : id=4 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstorm') != null) && (dw.system.Site.current.preferences.custom.activebrandstorm == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('storm');" class="storm" href="${URLUtils.https('Home-Show','id','4')}" title="${Resource.msg('footertab.storm','common',null)}">${Resource.msg('account.Storm','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('storm');" class="storm" href="http://www.stormlures.com/" title="${Resource.msg('footertab.storm','common',null)}" target="_blank">${Resource.msg('account.Storm','account',null)}</a></li>
+										</isif>
+										
+										<!-- LUHR-JENSEN : id=5 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandluhrjensen') != null) && (dw.system.Site.current.preferences.custom.activebrandluhrjensen == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('luhrjensen'); " class="luhrjensen" href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('footertab.luhrjensen','common',null)}">${Resource.msg('account.Luhr-Jensen','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('luhrjensen'); " class="luhrjensen" href="http://www.luhrjensen.com/" title="${Resource.msg('footertab.luhrjensen','common',null)}" target="_blank">${Resource.msg('account.Luhr-Jensen','account',null)}</a></li>
+										</isif>
+										
+										<!-- SUFIX : id=2 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandsufix') != null) && (dw.system.Site.current.preferences.custom.activebrandsufix == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('sufix'); " class="sufix" href="${URLUtils.https('Home-Show','id','2')}" title="${Resource.msg('footertab.sufix','common',null)}">${Resource.msg('account.Sufix','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('sufix'); " class="sufix" href="http://www.sufix.com/" title="${Resource.msg('footertab.sufix','common',null)}">${Resource.msg('account.Sufix','account',null)}</a></li>
+										</isif>
+										
+										<!-- BLUEFOX : id=8 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandbluefox') != null) && (dw.system.Site.current.preferences.custom.activebrandbluefox == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('bluefox'); " class="bluefox" href="${URLUtils.https('Home-Show','id','8')}" title="${Resource.msg('footertab.bluefox','common',null)}">${Resource.msg('account.Blue Fox','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('bluefox'); " class="bluefox" href="http://www.bluefox.com/" title="${Resource.msg('footertab.bluefox','common',null)}" target="_blank">${Resource.msg('account.Blue Fox','account',null)}</a></li>
+										</isif>
+										
+										<!-- TERMINATOR : id=7 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandterminator') != null) && (dw.system.Site.current.preferences.custom.activebrandterminator == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('terminator'); " class="terminator" href="${URLUtils.https('Home-Show','id','7')}" title="${Resource.msg('footertab.terminator','common',null)}">${Resource.msg('account.Terminator','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('terminator');" class="terminator" href="http://www.terminatorlures.com/" title="${Resource.msg('footertab.terminator','common',null)}" target="_blank">${Resource.msg('account.Terminator','account',null)}</a></li>
+										</isif>
+										
+										<!-- WILLIAMSON : id=9 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandwilliamson') != null) && (dw.system.Site.current.preferences.custom.activebrandwilliamson == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('williamson'); " class="williamson" href="${URLUtils.https('Home-Show','id','9')}" title="${Resource.msg('footertab.williamson','common',null)}">${Resource.msg('account.Williamson','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('williamson'); " class="williamson" href="http://www.williamsonlures.com/" title="${Resource.msg('footertab.williamson','common',null)}" target="_blank">${Resource.msg('account.Williamson','account',null)}</a></li>
+										</isif>
+										
+										<!-- TRIGGER X : id=3 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandtriggerx') != null) && (dw.system.Site.current.preferences.custom.activebrandtriggerx == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('triggerx');" class="triggerx" href="${URLUtils.https('Home-Show','id','3')}" title="${Resource.msg('footertab.triggerx','common',null)}">${Resource.msg('account.Trigger X','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('triggerx'); " class="triggerx" href="http://www.triggerx.com/" title="${Resource.msg('footertab.triggerx','common',null)}" target="_blank">${Resource.msg('account.Trigger X','account',null)}</a></li>
+										</isif>
+										<!-- Marcum : id=10 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarcum') != null) && (dw.system.Site.current.preferences.custom.activebrandmarcum == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('marcum'); " class="marcum" href="${URLUtils.https('Home-Show','id','10')}" title="${Resource.msg('footertab.marcum','common',null)}">${Resource.msg('account.Marcum','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('marcum'); " class="marcum" href="http://www.marcumtech.com/" title="${Resource.msg('footertab.marcum','common',null)}" target="_blank">${Resource.msg('account.Marcum','account',null)}</a></li>
+										</isif>
+										<!-- Strike Master : id=10 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstrikemaster') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('strikemaster'); " class="strikemaster" href="${URLUtils.https('Home-Show','id','11')}" title="${Resource.msg('footertab.strikemaster','common',null)}">${Resource.msg('account.Trigger X','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('strikemaster'); " class="strikemaster" href="http://www.strikemaster.com/" title="${Resource.msg('footertab.strikemaster','common',null)}" target="_blank">${Resource.msg('account.Trigger X','account',null)}</a></li>
+										</isif>
+										<iscomment>
+										<!-- Otter : id=21 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandotter') != null) && (dw.system.Site.current.preferences.custom.activebrandotter == true)}">
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('otter'); " class="otter" href="${URLUtils.https('Home-Show','id','21')}" title="${Resource.msg('footertab.otter','common',null)}">${Resource.msg('account.Otter','account',null)}</a></li>
+										<iselse>
+											<li><a onclick="googleAnalyticsEvents.brandSwitch('otter');" class="otter" href="http://www.otteroutdoors.com/" title="${Resource.msg('footertab.otter','common',null)}" target="_blank">${Resource.msg('account.Otter','account',null)}</a></li>
+										</isif>
+										 </iscomment>
+										<!-- Ice Force : id=20 -->
+										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandiceforce') != null) && (dw.system.Site.current.preferences.custom.activebrandiceforce == true)}">
+											<li class="last"><a onclick="googleAnalyticsEvents.brandSwitch('iceforce'); " class="iceforce" href="${URLUtils.https('Home-Show','id','20')}" title="${Resource.msg('footertab.iceforce','common',null)}">${Resource.msg('account.Ice Force','account',null)}</a></li>
+										<iselse>
+											<li class="last"><a onclick="googleAnalyticsEvents.brandSwitch('iceforce'); " class="iceforce" href="http://www.rapala.com/" title="${Resource.msg('footertab.iceforce','common',null)}" target="_blank">${Resource.msg('account.Ice Force','account',null)}</a></li>
+										</isif>
+										
+							        </ul>
+							<!--  below footer -->
+					
+								<div class="footer-main">
+
+												<!--  Repsonsive -->
+							<div class="footer-right-section mobileHide">
+								
+								<div>
+								<div class="email-signup handle-non-us">
+							       <isscript>
+										var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
+										var nameField = dw.system.Site.current.preferences.custom['cmname'];
+										var emailField = dw.system.Site.current.preferences.custom['cmemail'];
+										var stateField = dw.system.Site.current.preferences.custom['cmstate'];
+										var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
+										
+										if(session.custom.currentSite == 'iceforce') {
+											formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
+											nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
+											emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
+											stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
+											zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
+											var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
+										}
+									</isscript>
+									<div class="emailSignup">
+										<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
+										<input type="hidden" name="ltkSubscriptionCode" value="footer" />
+										<input type="hidden" name="source" value="miniform" />
+										<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+										<fieldset id="emailfooter">
+											<div class="pseudo_self_label">
+												<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
+												<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
+											</div>
+										</fieldset>
+										</form>
+									</div>
+									<div class="receive-emails">
+										 <a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our 12 brands (details)</a>
+									</div>
+									<div class="email-txt">
+										<span>Receive emails from our 12 brands (details)</span>
+										<span class="Custom-tooltip tooltip-footer"> 
+											${Resource.msg('global.whatwilliget','locale',null)}
+											<div class="tooltip-body" style="display:none">
+												<div class="tooltipcontainer">
+													<iscontentasset aid="footer-signup-tooltip"/>
+												</div>
+											</div>
+										</span>
+										<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
+									</div>
+							 	</div>
+							</div>
+					   <!---  below footer --->
+						</div><!--  footer right -->
+													<!-- Responsive -->
+								<div class="footer-left-section">
+									<isscript>
+										var footerContent = dw.content.ContentMgr.getContent(session.custom.currentSite + "-footer-links");
+									</isscript>
+									<iscontentasset aid="footer-links"/>
+								</div>
+								<div class="footer-right-section desktopHide">
+								
+								<div>
+								<div class="email-signup handle-non-us"> 
+							       <isscript>
+										var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
+										var nameField = dw.system.Site.current.preferences.custom['cmname'];
+										var emailField = dw.system.Site.current.preferences.custom['cmemail'];
+										var stateField = dw.system.Site.current.preferences.custom['cmstate'];
+										var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
+										
+										if(session.custom.currentSite == 'iceforce') {
+											formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
+											nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
+											emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
+											stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
+											zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
+											var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
+										}
+									</isscript>
+									<div class="emailSignup">
+										<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
+											<input type="hidden" name="ltkSubscriptionCode" value="footer" />
+											<input type="hidden" name="source" value="miniform" />
+											<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+											<fieldset id="emailfooter">
+												<div class="pseudo_self_label">
+												<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
+												<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+									<div class="email-txt">
+										<span class="Custom-tooltip tooltip-footer"> 
+											${Resource.msg('global.whatwilliget','locale',null)}
+											<div class="tooltip-body" style="display:none">
+												<div class="tooltipcontainer">
+													<iscontentasset aid="footer-signup-tooltip"/>
+												</div>
+											</div>
+										</span>
+										<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
+									</div>
+							 	</div>
+								
+								  <div class="social-icons">
+										<iscontentasset aid="follow_us_on"/>
+								  </div>
+							</div>
+					   <!---  below footer --->
+						</div><!--  footer right -->
+						<div>
+							<iscontentasset aid="footer-copyright"/>
+						</div>
+				</div>
+				</div>							
+				</div>
+			</div>
+		</div>	
+</div><!--- END: footer --->
+
+<iscomment>
+	Customer registration can happen everywhere in the page flow. As special tag in the pdict
+	is indicating it. So we have to check on every page, if we have to report this event for
+	the reporting engine.
+</iscomment>
+<isinclude template="util/reporting/ReportUserRegistration.isml"/>
+<isinclude template="components/footer/footer_UI"/>
+
+<isinclude url="${URLUtils.url('ltkInclude-Start')}"/>

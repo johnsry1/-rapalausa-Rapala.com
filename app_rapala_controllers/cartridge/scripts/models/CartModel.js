@@ -53,7 +53,7 @@ var CartModel = AbstractModel.extend({
     getVar : function(){
         return paypalErrorValue;
     },
-    /**
+
      * Deletes all the Discontinued products .
      *
      * @transactional
