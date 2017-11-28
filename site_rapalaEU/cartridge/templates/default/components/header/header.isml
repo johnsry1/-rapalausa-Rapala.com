@@ -1,14 +1,14 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
 <div id="alert-message">
-	<div class="non-usa-alert hide">	
-		<p><img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/><isprint value="${Resource.msg('global.nonusaalert.message','locale',null)}" encoding="off"> <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a></p>	
+	<div class="non-usa-alert hide">
+		<p><img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/><isprint value="${Resource.msg('global.nonusaalert.message','locale',null)}" encoding="off"> <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a></p>
 	</div>
 </div>
 
 <div class="browser-compatibility-alert hide">
-	<p><isprint value="${Resource.msg('tlsalert.increased','locale',null)}" encoding="off" /></p> 
-	<p><isprint value="${Resource.msg('tlsalert.detected','locale',null)}" encoding="off" /><span class="browser_version"></span> 
+	<p><isprint value="${Resource.msg('tlsalert.increased','locale',null)}" encoding="off" /></p>
+	<p><isprint value="${Resource.msg('tlsalert.detected','locale',null)}" encoding="off" /><span class="browser_version"></span>
 	<span><isprint value="${Resource.msg('tlsalert.outdated','locale',null)}" encoding="off" /></span></p>
 	<p>${Resource.msg('tlsalert.chrome','locale',null)}<a href="https://www.google.com/chrome/browser/desktop/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.google.com/chrome/answer/95414?hl=en">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
 	<p>${Resource.msg('tlsalert.firefox','locale',null)}<a href="https://www.mozilla.org/en-US/firefox/new/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.mozilla.org/en-US/kb/update-firefox-latest-version">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
@@ -31,41 +31,39 @@
 						</button>
 						<isset name="brand" value="${0}" scope="page" />
 						<isif condition="${'rapala' == session.custom.currentSite}">
-						<isset name="brand" value="${1}" scope="page" />									
+						<isset name="brand" value="${1}" scope="page" />
 							<iselseif condition="${'sufix' == session.custom.currentSite}">
-						<isset name="brand" value="${2}" scope="page" />			
+						<isset name="brand" value="${2}" scope="page" />
 							<iselseif condition="${'triggerx' == session.custom.currentSite}">
-						<isset name="brand" value="${3}" scope="page" />			
+						<isset name="brand" value="${3}" scope="page" />
 							<iselseif condition="${'storm' == session.custom.currentSite}">
-						<isset name="brand" value="${4}" scope="page" />			
+						<isset name="brand" value="${4}" scope="page" />
 							<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-						<isset name="brand" value="${5}" scope="page" />			
+						<isset name="brand" value="${5}" scope="page" />
 							<iselseif condition="${'vmc' == session.custom.currentSite}">
-						<isset name="brand" value="${6}" scope="page" />			
+						<isset name="brand" value="${6}" scope="page" />
 							<iselseif condition="${'terminator' == session.custom.currentSite}">
-						<isset name="brand" value="${7}" scope="page" />			
+						<isset name="brand" value="${7}" scope="page" />
 							<iselseif condition="${'bluefox' == session.custom.currentSite}">
-						<isset name="brand" value="${8}" scope="page" />			
+						<isset name="brand" value="${8}" scope="page" />
 							<iselseif condition="${'williamson' == session.custom.currentSite}">
-						<isset name="brand" value="${9}" scope="page" />			
+						<isset name="brand" value="${9}" scope="page" />
 							<iselseif condition="${'marcum' == session.custom.currentSite}">
-						<isset name="brand" value="${10}" scope="page" />			
+						<isset name="brand" value="${10}" scope="page" />
 							<iselseif condition="${'strikemaster' == session.custom.currentSite}">
-						<isset name="brand" value="${11}" scope="page" />			
+						<isset name="brand" value="${11}" scope="page" />
 							<iselseif condition="${'iceforce' == session.custom.currentSite}">
-						<isset name="brand" value="${20}" scope="page" />																	
+						<isset name="brand" value="${20}" scope="page" />
 						</isif>
-						
+
 						<div class="logo mobileHide ${session.custom.currentSite}">
 							<a href="${URLUtils.https('Home-Show','id',brand.toString())}" ></a>
-							<a href="${URLUtils.https('Page-Show','cid','shop-by-brand')}" class="shop-by-brand"><span class="logo-border">RESPECTED<br /><span>Rapala Brands</span></span></a>
 						</div>
-						
+
 						<div class="logo desktopHide">
 							<a href="${URLUtils.https('Home-Show','id',1)}" ></a>
-							<a href="${URLUtils.https('Page-Show','cid','shop-by-brand')}" class="shop-by-brand"><span class="logo-border">RESPECTED<br /><span>Rapala Brands</span></span></a>
 						</div>
-						
+
 						<div class="headercustomerinfo">
 							<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
 							<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
@@ -73,10 +71,11 @@
 	    					<div id="minicart" class="minicart">
 	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    					</div><!-- END:minicart -->
+
 	    				</div>
 					</div><!-- END: cell -->
 				</div>
-			</div>	
+			</div>
 		</div><!-- END: wrapper -->
 		<isinclude template="components/header/brandlist">
 		<div class="banner_prostaff">
@@ -117,8 +116,8 @@
 								<iselseif condition="${'otter' == session.custom.currentSite}">
 									<isslot id="brand_otter_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 								</isif>
-							</div> 
-							
+							</div>
+
 						</div><!-- END: cell -->
 					</div><!-- END: column -->
 				</div><!-- END: row column1 -->
