@@ -171,7 +171,7 @@ form .label {
 }
 
 .maxelement {
-    color: #e80000;
+    color: $red;
     width: 100%;
     display: inline-block;
     &.hide {
@@ -191,7 +191,7 @@ a.button {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #fff;
+    color: $white;
     padding: 0 18px 0 18px;
     background-color: $global-button-bg-color;
     border-top: 1px solid $global-button-border-top-color;
@@ -232,7 +232,7 @@ a.button {
     &.pipe {
         margin-left: -5px;
         margin-right: -5px;
-        color: #333;
+        color: $night-rider;
     }
 }
 
@@ -250,9 +250,9 @@ a.button {
             @include respond(0, $desktop-breakpoint - 1) {
                 margin-top: 0;
                 margin-bottom: 15px;
-                background: none repeat scroll 0 0 #f5f5f5;
-                border: 1px solid #d9d9d9;
-                color: #999;
+                background: none repeat scroll 0 0 $white-grey;
+                border: 1px solid $alto3;
+                color: $nobel;
             }
             @include respond($desktop-breakpoint - 1, $desktop-breakpoint - 1) {
                 margin-bottom: 10px;
@@ -265,12 +265,12 @@ a.button {
         }
         .prostaff-allowance-balance {
             @include respond(0, $desktop-breakpoint - 1) {
-                color: #999;
+                color: $nobel;
             }
         }
         .allowance-amount {
             @include respond(0, $desktop-breakpoint - 1) {
-                color: #999;
+                color: $nobel;
             }
         }
     }
@@ -286,23 +286,23 @@ a.button {
         right: 0;
     }
     .allotment-label {
-        background: none repeat scroll 0 0 #f5f5f5;
+        background: none repeat scroll 0 0 $white-grey;
         border-radius: 3px;
         float: right;
         font-family: $lucida-font-family;
         margin-bottom: 6px;
         margin-right: 0;
         margin-top: 6px;
-        border: 1px solid #d9d9d9;
+        border: 1px solid $alto3;
         padding: 3px 0;
         font-size: 0;
-        color: #999;
+        color: $nobel;
         @include respond(0, $desktop-breakpoint - 1) {
             padding: 5px 0;
             margin: 0;
             background: none;
             border: none;
-            color: #333;
+            color: $night-rider;
         }
         @include respond(0, $large-breakpoint - 1) {
             float: none;
@@ -313,30 +313,30 @@ a.button {
     }
     .prostaff-allowance-balance {
         background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-        color: #999;
+        color: $nobel;
         font-size: 12px;
         margin-left: 0;
         padding: 6px 4px 6px 11px;
         @include respond(0, $desktop-breakpoint - 1) {
-            color: #333;
+            color: $night-rider;
         }
     }
     .allowance-amount {
         background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-        color: #999;
+        color: $nobel;
         font-size: 12px;
         font-weight: normal;
         padding: 6px 10px 6px 0;
         @include respond(0, $desktop-breakpoint - 1) {
-            color: #333;
+            color: $night-rider;
         }
     }
 }
 
 .formfieldtooltip {
-    color: #808080;
+    color: $grey;
     .tooltip {
-        color: #666 !important;
+        color: $dim-gray !important;
         text-decoration: none !important;
         .detailMsg {
             text-decoration: underline;
@@ -360,7 +360,7 @@ a.button {
     .banner_prostaff {
         position: fixed;
         top: 71px;
-        background: #4d4d4d;
+        background: $tundora4;
         z-index: -1;
         left: 0;
         .handle-non-us-vh {
@@ -373,7 +373,7 @@ a.button {
         left: 0;
         width: 100%;
         height: 100%;
-        background: #4d4d4d;
+        background: $tundora4;
         opacity: 0.6;
         z-index: 9999;
     }
@@ -394,7 +394,7 @@ a.button {
                 &.column1 {
                     /*position: fixed;*/
                     //z-index: 111;
-                    background: #FFF;
+                    background: $white;
                 }
             }
         }
@@ -446,7 +446,7 @@ table {
 }
 
 #page {
-    background-color: #FFFFFF;
+    background-color: $white;
 }
 
 .row,
@@ -646,9 +646,9 @@ table {
     background: 0;
     &:after {
         border-radius: 0;
-        box-shadow: 0px 16px 10px #c2c2c2;
-        -webkit-box-shadow: 0px 16px 10px #c2c2c2;
-        -moz-box-shadow: 0px 16px 10px #c2c2c2;
+        box-shadow: 0px 16px 10px $silver4;
+        -webkit-box-shadow: 0px 16px 10px $silver4;
+        -moz-box-shadow: 0px 16px 10px $silver4;
         content: '';
         bottom: 50px;
         left: 0em;
@@ -679,7 +679,7 @@ table {
                 width: 50%;
                 top: 50%;
                 max-width: 300px;
-                background: #777;
+                background: $dip-gray-clr;
                 box-shadow: 3px 25px 10px rgba(198, 198, 198, 0.5);
                 -webkit-box-shadow: 3px 25px 10px rgba(198, 198, 198, 0.5);
                 -moz-box-shadow: 3px 25px 10px rgba(198, 198, 198, 0.5);
@@ -967,19 +967,19 @@ span.logerror {
 }
 
 .greybutton {
-    background: $veryLight-graycolor;
-    background: -moz-linear-gradient(top, #fcfcfc 0, #d9d9d9 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(100%, #d9d9d9));
-    background: -webkit-linear-gradient(top, #fcfcfc 0, #d9d9d9 100%);
-    background: -o-linear-gradient(top, #fcfcfc 0, #d9d9d9 100%);
-    background: -ms-linear-gradient(top, #fcfcfc 0, #d9d9d9 100%);
-    background: linear-gradient(to bottom, #fcfcfc 0, #d9d9d9 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#d9d9d9', GradientType=0);
+    background: $very-light-graycolor;
+    background: -moz-linear-gradient(top, $very-light-graycolor 0, $alto3 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $very-light-graycolor), color-stop(100%, $alto3));
+    background: -webkit-linear-gradient(top, $very-light-graycolor 0, $alto3 100%);
+    background: -o-linear-gradient(top, $very-light-graycolor 0, $alto3 100%);
+    background: -ms-linear-gradient(top, $very-light-graycolor 0, $alto3 100%);
+    background: linear-gradient(to bottom, $very-light-graycolor 0, $alto3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$very-light-graycolor', endColorstr='$alto3', GradientType=0);
     height: 21px;
     line-height: 13px;
     padding: 0 6px;
-    border-width: 1px solid #e9e9e9;
-    border-color: #e9e9e9 #b7b7b7 #acacac #e4e4e4;
+    border-width: 1px solid $mercury2;
+    border-color: $mercury2 $nobel3 $silver-chalice7 $mercury3;
     font-size: 12px;
     text-transform: capitalize;
     font-weight: normal;
@@ -988,9 +988,9 @@ span.logerror {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px #fff;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px #fff;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px $white;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px $white;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px $white;
 }
 
 .formfield {
@@ -1237,8 +1237,8 @@ button.search-button, a.search-button {
         margin: 0;
         border-width: 0 0 1px 0;
         border-style: solid;
-        border-color: #f5e0a9;
-        background-color: #ffc;
+        border-color: $sandwisp;
+        background-color: $cream;
         p {
             padding: 0;
             font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
@@ -1246,13 +1246,13 @@ button.search-button, a.search-button {
             font-weight: bold;
             font-size: 10px;
             line-height: 18px;
-            color: #000;
+            color: $black;
             width: 100%;
             padding-top: 12px;
             padding-bottom: 12px;
             margin: 0 auto;
             a {
-                color: #000;
+                color: $black;
                 text-decoration: underline;
                 font-style: italic;
                 &:hover {
@@ -1274,7 +1274,7 @@ button.search-button, a.search-button {
 #message {
     &.success {
         padding: 5px 18px 5px 36px;
-        color: #360;
+        color: $dark-black;
         border-color: $success-green;
         background-color: $sucess-light-green;
         background-image: url(../images/icon-thumbs-up.png);
@@ -1286,9 +1286,9 @@ button.search-button, a.search-button {
     overflow: hidden;
     box-sizing: border-box;
     p {
-        background-color: #900;
+        background-color: $sangria;
         width: 100%;
-        color: #fff;
+        color: $white;
         font-size: 12px;
         font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', "Trebuchet MS", Helvetica, Arial, sans-serif;
         line-height: 1em;
@@ -1299,7 +1299,7 @@ button.search-button, a.search-button {
         text-align: left;
     }
     a {
-        color: #000;
+        color: $black;
         padding-left: 20px;
         font-weight: bold;
         text-decoration: underline;
@@ -1309,7 +1309,7 @@ button.search-button, a.search-button {
         cursor: auto;
         &:hover {
             text-decoration: underline;
-            color: #000;
+            color: $black;
         }
     }
 }
