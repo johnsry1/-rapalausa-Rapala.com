@@ -101,7 +101,7 @@ function isVIP(currentCustomer){
 }
 
 function isAllotmentOnly(basket){
-	var allotmentAmount : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
 	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
 	var flageallotmentcover : Boolean = false;
 	var iterTemp : Iterator = allPaymentInstrs.iterator();
@@ -120,7 +120,7 @@ function isAllotmentOnly(basket){
 	return flageallotmentcover;
 }
 function getAllotmentAmount(basket){
-	var allotmentAmount : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
 	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
 	var flageallotmentcover : Boolean = false;
 	var iterTemp : Iterator = allPaymentInstrs.iterator();
@@ -139,8 +139,8 @@ function getAllotmentAmount(basket){
 	return allotmentAmount.value;
 }
 function getRemainingOrderBalance(basket){
-	var giftCertTotal : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
-	var allotmentAmount : Money = new Money(0.0, Site.getCurrent().getCurrencyCode());
+	var giftCertTotal : Money = new Money(0.0, session.currency.currencyCode);
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
 	var gcPaymentInstrs : Collection = basket.getGiftCertificatePaymentInstruments();
 	var iter : Iterator = gcPaymentInstrs.iterator();
 	var orderPI : dw.order.OrderPaymentInstrument = null;		
