@@ -1,0 +1,450 @@
+// Local Site Variables and Font Families (site-specific)
+
+// Globally shared components and styles (organization-level)
+//-----------------------------------------------------------
+// global framework and elements
+@import "../../../../app_rapala_core/cartridge/scss/default/global/functions";
+@import "../../../../app_rapala_core/cartridge/scss/default/global/mixins";
+@import "../../../../app_rapala_core/cartridge/scss/default/global/variables";
+@import "global/responsivegrids/responsive_grids";
+
+@import "global/fonts";
+@import "global/variables";
+
+@import "global/iconography";
+@import "global/typography";
+@import "global/jqueryui";
+@import "global/forms";
+@import "global/product/product";
+@import "global/nav";
+
+$box-bg: $white-smoke;
+$box-drk-bg: $dim-gray;
+
+//
+// Styleguide Styles
+//
+body {
+    background: $white;
+}
+
+#wrapper {
+    width: rem(1280px);
+}
+
+.second-form {
+    width: 400px;
+}
+
+// Basic Styles
+.section-title {
+    padding-top: 10px;
+    margin: 35px auto 25px;
+    color: $black;
+}
+
+.ul-example {
+    ul {
+        @include ul;
+    }
+}
+
+.pagination-block {
+    .pagination {
+        float: none !important;
+    }
+}
+
+.tooltip-section {
+    @include clearfix();
+
+    .product-tile {
+        text-align: left !important;
+    }
+    .product-swatches {
+        float: none !important;
+    }
+}
+
+.style-section {
+    margin-bottom: 50px;
+    padding: 0 30px;
+}
+
+.desktop-only {
+    @include respond(large-down) {
+        display: none;
+    }
+}
+
+.desktop-tablet {
+    @include respond(small) {
+        display: none;
+    }
+}
+
+.tablet-only {
+    @include respond(desktop) {
+        display: none;
+    }
+
+    @include respond(small) {
+        display: none;
+    }
+}
+
+.tablet-mobile {
+    @include respond(desktop) {
+        display: none;
+    }
+}
+
+.mobile-only {
+    @include respond(large-up) {
+        display: none;
+    }
+}
+
+// Colors
+.color-grid {
+    max-width: $max-content-breakpoint;
+    @include clearfix();
+
+    @include column-respond((0: 1, 480px: 2, 550px: 3, 620px: 4, 768px: 6, gutter: 20px));
+
+    // Set the list of color blocks in order of how they should appear in the style guide.
+    $colorlist: (
+            $red,
+            $black,
+            $night-rider,
+            $greyish-brown,
+            $pinkish-grey,
+            $silver,
+            $silver-two,
+            $concrete,
+            $kermit-green,
+            $white
+    );
+
+    @for $i from 1 through length($colorlist) {
+        $c: nth($colorlist, $i);
+        .color:nth-child(#{$i}) .color-block {
+            background-color: $c;
+            &::before {
+                content: "#{$c}";
+                @if lightness($c) > 85 {
+                    color: #555;
+                }
+            }
+            @if lightness($c) > lightness($border-color) {
+                outline: $border;
+                outline-offset: -1px;
+            }
+        }
+    }
+}
+
+.color {
+    .color-block {
+        width: 100%;
+        height: 145px;
+        margin-bottom: 5px;
+        position: relative;
+        &::before {
+            position: absolute;
+            top: 42%;
+            width: 100%;
+            text-align: center;
+            color: $white;
+            font-family: Arial;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 20px;
+        }
+    }
+    .color-name {
+        margin-bottom: 10px;
+    }
+    .color-use {
+        margin-bottom: 10px;
+    }
+}
+
+// Typographies
+.fonts,
+.links {
+    h1 {
+        @include respond(mobile) {
+            font-size: 5.9vw;
+        }
+    }
+}
+
+.fonts,
+.forms,
+.typography,
+.body-text,
+.links,
+.swatches-block {
+    .responsive-grid {
+        max-width: $max-content-breakpoint;
+    }
+}
+
+.links {
+    .responsive-grid {
+        @include clearfix();
+        @include column-respond((0: 4, gutter: 20px));
+    }
+}
+
+.swatches-block {
+    .responsive-grid {
+        @include clearfix();
+    }
+    .product-swatches {
+        float: none !important;
+    }
+}
+
+.fonts {
+    .responsive-grid {
+        @include clearfix();
+        @include column-respond((0: 2, gutter: 20px));
+    }
+    .roboto {
+        .responsive-grid {
+            &:nth-child(1) {
+                h1 {
+                    @include font-reg;
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(2) {
+                h1 {
+                    @include font-bold;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+    .franklin {
+        .responsive-grid {
+            &:nth-child(1) {
+                h1 {
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(2) {
+                h1 {
+                    text-transform: capitalize;
+                }
+            }
+            &:nth-child(2) {
+                h1 {
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+.typography,
+.body-text,
+.links {
+    .responsive-grid {
+        border-bottom: 1px solid $concrete;
+        padding-bottom: rem(20px);
+        margin-bottom: rem(20px);
+    }
+}
+
+.typography,
+.body-text {
+    .responsive-grid {
+        @include clearfix();
+        @include column-respond((0: 5, gutter: 15px));
+    }
+}
+
+.usage {
+    font-size: 14px;
+    text-align: left;
+}
+
+.tabs-block {
+    min-height: 300px;
+}
+
+//Paragraphs
+.paragraph-grid {
+    @include clearfix();
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+//Lists
+.list-grid {
+    @include clearfix();
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+// Buttons
+.button-grid {
+    @include clearfix();
+    @include column-respond((0: 2, gutter: 15px));
+    margin-bottom: 20px;
+}
+
+.button-style {
+    width: 90%;
+    button:not(.button-text),
+    .button {
+        margin-bottom: 1em;
+        //control visibility of default vs hover styles
+        &:hover + br + a + br + button + br + .button-description,
+        &:hover + br + button + br + .button-description {
+            .default-spec {
+                display: none;
+            }
+            .hover-spec {
+                display: block;
+            }
+        }
+    }
+    .hover-spec {
+        display: none;
+    }
+}
+
+// Forms
+.forms {
+    @include clearfix();
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+// Iconography
+.logos {
+    @include clearfix();
+    margin: 0 auto 30px;
+    .logo-col {
+        padding: 20px 40px 10px;
+        float: left;
+    }
+}
+
+.icons {
+    .svg-icons {
+        .icon-col {
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+// Heros
+.hero-banner {
+    .hero {
+        height: 10em;
+        padding: 2em 0;
+        text-indent: 4em;
+        background-color: $box-drk-bg;
+        h2 {
+            color: $white;
+        }
+    }
+}
+
+.hero-typography {
+    .hero {
+        margin-top: 40px;
+    }
+}
+
+.grid-list li {
+    margin: 0;
+}
+
+//////////////////////////
+// Fluid Grid Page Styles
+/////////////////////////
+
+.expand-toggle {
+    .toggle {
+        cursor: pointer;
+        &::after {
+            content: "\2795";
+            display: inline;
+            margin-left: 1em;
+            opacity: 0.5;
+        }
+    }
+    &.expanded {
+        .toggle::after {
+            content: "\2796";
+        }
+    }
+}
+
+.code-snippet {
+    position: relative;
+    padding: 10px;
+    background-color: $box-bg;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    tab-size: 4;
+    &.expandable {
+        max-height: 3.25em;
+        overflow: hidden;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            display: block;
+            width: 100%;
+            height: 1em;
+            @include gradient(rgba($box-bg, 0), $box-bg, vertical);
+            border-bottom: solid $box-bg 3px;
+        }
+        .expanded & {
+            max-height: none;
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.example-grid-3 {
+    .grid-col {
+        background-color: $box-bg;
+    }
+}
+
+.example-grid-4 {
+    background-color: $box-bg;
+    padding: 3px;
+    box-sizing: border-box;
+    .grid-col {
+        background-color: $white;
+        margin-bottom: 3px;
+    }
+}
+
+.example-grid-5 {
+    .grid-col {
+        padding-bottom: 6px;
+    }
+}
+
+.example-grid-6 {
+    .grid-col {
+        margin-bottom: 2em;
+    }
+}

@@ -1,0 +1,13 @@
+/**
+ * SVG Content Type Helper
+ *
+ * Sets the response's content type to image/svg+xml to properly output SVG from a pipeline
+ */
+importPackage( dw.system );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	response.setHttpHeader(dw.system.Response.CONTENT_TYPE, "image/svg+xml");
+
+	return PIPELET_NEXT;
+}

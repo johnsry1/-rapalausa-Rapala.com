@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+	<field formid="exampleinput" label="Name" type="string" mandatory="false"/>
+	<field formid="examplerequired" label="Field" type="string" mandatory="true" />
+	<field formid="examplecaption" label="Description" description="Optional caption text in form definition" type="string" mandatory="false"/>
+
+	<field formid="examplepassword" label="Password" type="string" mandatory="true"
+		min-length="8"
+		max-length="255"
+		range-error="resource.8_255characters" />
+
+	<field formid="examplephone" label="Phone" type="string" mandatory="false" min-length="10" max-length="14"/>
+	<field formid="exampleemail" label="Email" type="string" mandatory="false" min-length="6" />
+
+	<field formid="exampleselectbox" label="Selectbox" type="string" mandatory="false">
+		<options>
+			<option optionid="optionid1" value="1" label="Select Option 1"/>
+			<option optionid="optionid2" value="2" label="Select Option 2"/>
+		</options>
+	</field>
+
+	<field formid="examplecheckbox" label="Checkox one" type="boolean" mandatory="false" />
+	<field formid="examplecheckbox2" label="Checkox second" type="boolean" mandatory="false" />
+
+	<field formid="exampleradios" label="Radio Buttons" type="string" default-value="2" mandatory="false">
+		<options>
+			<option label="Option 1" value="1" />
+			<option label="Option 2" value="2" />
+			<option label="Option 3" value="3" />
+		</options>
+	</field>
+
+	<field formid="exampleradios2" label="Radio Buttons inline" type="string" mandatory="false">
+		<options>
+			<option label="Option 1" value="1" />
+			<option label="Option 2" value="2" />
+			<option label="Option 3" value="3" />
+		</options>
+	</field>
+
+	<field formid="exampletextarea" label="Textarea" type="string" mandatory="false"/>
+
+	<action formid="send" valid-form="true"/>
+
+</form>

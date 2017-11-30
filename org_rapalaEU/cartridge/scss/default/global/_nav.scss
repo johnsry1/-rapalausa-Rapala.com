@@ -1,0 +1,39 @@
+#headerwrapper {
+    #brand-tabs-header {
+        ul li .sub-category-section-1,
+        ul li .mobile-main-menu-heading,
+        .floatright.site-suggestion-section {
+            @include respond(0, $desktop-breakpoint - 1) {
+                background: $mobile-nav-bg;
+            }
+        }
+
+        .floatright.site-suggestion-section {
+            @include respond(0, $desktop-breakpoint - 1) {
+                padding: rem(20px);
+            }
+        }
+    }
+}
+
+.sitesearch {
+    form.simplesearch {
+        input.simplesearchinput {
+            @include respond(0, $desktop-breakpoint - 1) {
+                height: rem($mobile-search-height);
+            }
+        }
+    }
+}
+
+.sitesearch  {
+    form.simplesearch {
+        button.search-button {
+            min-width: inherit;
+            background: url("../images/svg-icons/search.svg") no-repeat center;
+            background-size: 17px;
+            top: 1px;
+            right: 7px;
+        }
+    }
+}
