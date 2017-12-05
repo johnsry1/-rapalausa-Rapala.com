@@ -190,6 +190,8 @@ exports.init = function () {
     updateShippingMethodList();
 
     $('.continue-checkout-button .continue-checkout').on('click', function () {
+        var $content = $('.primary-content');
+        progress.show($content);
         var form = $(this).closest('form[id$="_shippingAddress"]');
         if ($('.state-blk select').valid() == 0) {
             if (!$('.state-blk.custom-select').hasClass('blured')) {
@@ -206,6 +208,7 @@ exports.init = function () {
             $('.guestemail').blur();
         }
         if (!form.valid()) {
+            progress.hide();
             if (jQuery('.shipping-address-field-section').hasClass('hide')) {
                 $('select[name$=singleshipping_addressList]').val('');
                 $('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');
