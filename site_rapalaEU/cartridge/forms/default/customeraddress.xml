@@ -15,21 +15,6 @@
 		missing-error="customeraddress.firstname.missing-error"/>
 	<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"
 		missing-error="customeraddress.lastname.missing-error"/>
-	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50"
-		description="customeraddress.address1.description"
-		missing-error="resource.addresserror"/>
-	<field formid="address2" label="resource.address2" type="string" mandatory="false" binding="address2" max-length="50"
-		description="customeraddress.address2.description" />
-	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50"
-		missing-error="customeraddress.city.missing-error"/>
-
-	<!-- use global state list -->
-	<include formid="states" name="states"/>
-
-	<!--  postal code -->
-	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
-		missing-error="resource.errorzip"/>
-
 	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
 		missing-error="customeraddress.country.missing-error">
 		<options>
@@ -64,6 +49,22 @@
             <option optionid="GB"   label="country.unitedkingdom"  value="GB"/>
         </options>
 	</field>
+	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50"
+		description="customeraddress.address1.description"
+		missing-error="resource.addresserror"/>
+	<field formid="address2" label="resource.address2" type="string" mandatory="false" binding="address2" max-length="50"
+		description="customeraddress.address2.description" />
+	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50"
+		missing-error="customeraddress.city.missing-error"/>
+
+	<!-- use global state list -->
+	<include formid="states" name="states"/>
+
+	<!--  postal code -->
+	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
+		missing-error="resource.errorzip"/>
+
+
 	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" mandatory="true" binding="phone" max-length="20"/>
 	
 	<!-- PREVAIL - Email field is contained in separate form group to enable binding to customer profile -->

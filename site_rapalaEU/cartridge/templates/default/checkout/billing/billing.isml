@@ -70,13 +70,14 @@
 													</isloop>
 												<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
 													<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
+													<div><isprint value="${address.title}" /></div>
 													<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
 													<div><isprint value="${address.address1}"/></div>
 													<isif condition="${!empty(address.address2)}">
 														<div><isprint value="${address.address2}"/></div>
 													</isif>
 													<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
-													<iscomment><div><isprint value="${address.countryCode}"/></div></iscomment>
+													<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
 													<isif condition="${!empty(address.phone)}">
 														<div><isprint value="${address.phone}"/></div>
 													</isif>
@@ -204,11 +205,13 @@
 					
 							</isif>
 							<div class="selected-shipping-address">
+								<isprint value="${shippingAddr.title}"/><br/>
 								<isprint value="${shippingAddr.firstName}"/>
 								<isprint value="${shippingAddr.lastName}"/><br/>
 								<isprint value="${shippingAddr.address1}"/> 
 								<isprint value="${shippingAddr.address2}"/><br/>
 								<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
+								<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/>
 								<isprint value="${shippingAddr.phone}"/>
 							</div>
 							<input type="hidden" value="${shippingAddr.stateCode}" class="shipping-state"/>
