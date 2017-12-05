@@ -100,6 +100,19 @@
 			</isif>
 			
 			
-	 	</isloop>
-	 	</div>
+		</isloop>
+		<div class="menulist">
+			<span class="sub-category-section-1">
+				<isif condition="${pdict.CurrentCustomer.isAuthenticated()}">
+					<a class="level-1" href="${URLUtils.https('Login-Logout')}">
+						${Resource.msg('global.logout','locale',null)}
+					</a>
+				<iselse>
+					<a class="level-1" href="${URLUtils.https('Login-Show')}">
+						${Resource.msg('global.login.create.account','locale',null)}
+					</a>
+				</isif>
+		 	</span>
+		</div>
+	</div>
 </isif>
