@@ -8,53 +8,17 @@
         <start-node call-mode="private" name="ValidateAddress" secure="false"/>
         <node-display x="2" y="1"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
       <node>
-        <decision-node condition-key="CurrentHttpParameterMap.bypassDAV &amp;&amp; CurrentHttpParameterMap.bypassDAV.value=='false'" condition-operator="expr"/>
+        <decision-node condition-key="dw.system.Site.getCurrent().getCustomPreferenceValue('enableUPS')" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
-              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
-                <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="ups/UPS.ds"/>
-                <key-binding alias="Loggy" key="ScriptLog"/>
-                <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields" key="CustomerAddressForm"/>
-                <key-binding alias="AddressList" key="AddressList"/>
-                <key-binding alias="MultiAddressCheck" key="IsMultiAddress"/>
-                <key-binding alias="UPSErrorCode" key="UPSErrorCode"/>
-                <key-binding alias="UPSErrorMessage" key="UPSErrorMessage"/>
-                <key-binding alias="RequestAddress" key="RequestAddress"/>
-                <key-binding alias="IsExactAddress" key="IsExactAddress"/>
-              </pipelet-node>
+              <decision-node condition-key="CurrentHttpParameterMap.bypassDAV &amp;&amp; CurrentHttpParameterMap.bypassDAV.value=='false'" condition-operator="expr"/>
               <node-display x="0" y="1"/>
-              <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="./+1">
-                  <transition-display>
-                    <bend-point relative-to="source" x="2" y="0"/>
-                  </transition-display>
-                </transition>
-              </branch>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <decision-node condition-key="MultiAddressCheck=='true'" condition-operator="expr"/>
-              <node-display x="0" y="1"/>
-              <branch basename="b3" source-connector="yes">
+              <branch basename="b2" source-connector="yes">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="source" x="0" y="1"/>
@@ -62,9 +26,37 @@
                 </transition>
                 <segment>
                   <node>
-                    <decision-node condition-key="IsExactAddress" condition-operator="expr"/>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <config-property key="OnError" value="PIPELET_ERROR"/>
+                      <config-property key="ScriptFile" value="ups/UPS.ds"/>
+                      <key-binding alias="Loggy" key="ScriptLog"/>
+                      <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields" key="CustomerAddressForm"/>
+                      <key-binding alias="AddressList" key="AddressList"/>
+                      <key-binding alias="MultiAddressCheck" key="IsMultiAddress"/>
+                      <key-binding alias="UPSErrorCode" key="UPSErrorCode"/>
+                      <key-binding alias="UPSErrorMessage" key="UPSErrorMessage"/>
+                      <key-binding alias="RequestAddress" key="RequestAddress"/>
+                      <key-binding alias="IsExactAddress" key="IsExactAddress"/>
+                    </pipelet-node>
                     <node-display x="0" y="1"/>
-                    <branch basename="b2" source-connector="yes">
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in1" target-path="./+1">
+                        <transition-display>
+                          <bend-point relative-to="source" x="2" y="0"/>
+                        </transition-display>
+                      </transition>
+                    </branch>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <decision-node condition-key="MultiAddressCheck=='true'" condition-operator="expr"/>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b3" source-connector="yes">
                       <transition target-connector="in">
                         <transition-display>
                           <bend-point relative-to="source" x="0" y="1"/>
@@ -72,47 +64,63 @@
                       </transition>
                       <segment>
                         <node>
-                          <end-node name="success"/>
+                          <decision-node condition-key="IsExactAddress" condition-operator="expr"/>
                           <node-display x="0" y="1"/>
+                          <branch basename="b2" source-connector="yes">
+                            <transition target-connector="in">
+                              <transition-display>
+                                <bend-point relative-to="source" x="0" y="1"/>
+                              </transition-display>
+                            </transition>
+                            <segment>
+                              <node>
+                                <end-node name="success"/>
+                                <node-display x="0" y="1"/>
+                              </node>
+                            </segment>
+                          </branch>
                         </node>
+                        <transition target-connector="in2" target-path="../+2"/>
                       </segment>
                     </branch>
                   </node>
-                  <transition target-connector="in2" target-path="../+2"/>
+                  <transition target-connector="in2" target-path="./+1"/>
+                </segment>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="1" y="0"/>
+                  </node>
+                  <transition target-connector="in1" target-path="./+1"/>
+                </segment>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display x="0" y="1"/>
+                  </node>
                 </segment>
               </branch>
             </node>
-            <transition target-connector="in2" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="1" y="0"/>
-            </node>
-            <transition target-connector="in1" target-path="./+1"/>
-          </segment>
-          <segment>
-            <node>
-              <join-node/>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition/>
-            <node>
-              <end-node name="error"/>
-              <node-display x="0" y="1"/>
-            </node>
+            <transition target-connector="in1" target-path="../+1"/>
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="4" y="0"/>
-          <bend-point relative-to="target" x="0" y="-2"/>
-        </transition-display>
-      </simple-transition>
+      <transition target-connector="in2" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="2" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <end-node name="success"/>
-        <node-display x="2" y="4"/>
+        <node-display x="0" y="4"/>
       </node>
     </segment>
   </branch>

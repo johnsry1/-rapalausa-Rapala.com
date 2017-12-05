@@ -1,0 +1,42 @@
+.product-specifications {
+    .specificiations {
+        border-radius: $table-border-radius;
+        border-collapse: $table-border-collapse;
+        thead {
+            tr,
+            tr.header {
+                td {
+                    border: $table-border;
+                    padding: $table-head-padding;
+                    background: $table-head-bg;
+                    font-family: $table-head-font-family !important;
+                    @include font-size($table-head-font-size);
+                    line-height: $table-head-line-height;
+                    font-weight: $table-head-font-weight !important;
+                }
+            }
+        }
+        tbody {
+            tr {
+                &:nth-child(even) {
+                    td {
+                        background: $table-even-bg;
+                    }
+                }
+                &:nth-child(odd) {
+                    td {
+                        background: $table-odd-bg;
+                    }
+                }
+                td {
+                    padding: $table-padding;
+                    border: $table-border;
+                    font-family: $table-font-family;
+                    @include font-size($table-font-size);
+                    line-height: $table-line-height;
+                    font-weight: $table-font-weight;
+                }
+            }
+        }
+    }
+}
