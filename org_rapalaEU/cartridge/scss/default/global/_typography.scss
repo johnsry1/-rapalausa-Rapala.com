@@ -1,22 +1,28 @@
 @mixin h1 {
     font-family: $h1-font;
-    font-size: $h1-font-size;
+    font-size: $h1-font-size-mobile;
     font-weight: $h1-font-weight;
     font-style: $h1-font-style;
     font-variant: $h1-font-variant;
     line-height: $h1-line-height;
     text-transform: $h1-text-transform;
     color: $h1-color;
+    @include respond(large-up) {
+        font-size: $h1-font-size;
+    }
 }
 @mixin h2 {
     font-family: $h2-font;
-    font-size: $h2-font-size;
+    font-size: $h2-font-size-mobile;
     font-weight: $h2-font-weight;
     font-style: $h2-font-style;
     font-variant: $h2-font-variant;
     line-height: $h2-line-height;
     text-transform: $h2-text-transform;
     color: $h2-color;
+    @include respond(large-up) {
+        font-size: $h2-font-size;
+    }
 }
 @mixin h3 {
     font-family: $h3-font;
