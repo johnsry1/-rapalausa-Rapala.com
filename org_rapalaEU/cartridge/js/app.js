@@ -511,7 +511,6 @@ function initializeEvents() {
     });
 
 }
-
 /**
  * @private
  * @function
@@ -525,7 +524,13 @@ function initializeDom() {
     }
     // load js specific styles//
     util.limitCharacters();
+
+    // Make sure that the SVGs work properly in older browsers
+    /*eslint-disable */
+    svg4everybody();
+    /*eslint-enable */
 }
+
 
 var pages = {
     account: require('./pages/account'),
@@ -598,7 +603,7 @@ var app = {
         headerinit.init();
         searchplaceholder.init();
         tagmanager.init(window.pageContext.ns);
-        
+
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;
