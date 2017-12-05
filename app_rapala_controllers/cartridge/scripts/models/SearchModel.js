@@ -115,7 +115,15 @@ SearchModel.initializeContentSearchModel = function (httpParameterMap) {
     if (httpParameterMap.fdid.submitted) {
         contentSearchModel.setFolderID(httpParameterMap.fdid.value);
     }
+    
     return contentSearchModel;
+};
+
+SearchModel.isBlogArticleSearch = function (httpParameterMap) { 
+    if (httpParameterMap.id.submitted && (httpParameterMap.id.stringValue.toLowerCase() === 'author' || httpParameterMap.id.stringValue.toLowerCase() === 'skill_level')) {
+        return true;
+    }
+    return false;
 };
 
 module.exports = SearchModel;

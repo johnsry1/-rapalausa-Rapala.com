@@ -54,7 +54,7 @@ var CartModel = AbstractModel.extend({
         return paypalErrorValue;
     },
 
-     * Deletes all the Discontinued products .
+     /* Deletes all the Discontinued products .
      *
      * @transactional
      * @alias module:models/CartModel~CartModel/removeDiscontinuedProducts
