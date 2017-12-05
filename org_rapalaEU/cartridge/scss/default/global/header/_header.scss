@@ -10,22 +10,30 @@ body {
     @include respond($desktop-breakpoint - 1) {
         background: none;
     }
-    #brand-tabs-header {
-        ul li .sub-category-section-1,
-        ul li .mobile-main-menu-heading,
-        .floatright.site-suggestion-section {
-            @include respond(desktop-down) {
-                background: $mobile-nav-bg;
-            }
-        }
-
-        .floatright.site-suggestion-section {
-            @include respond(desktop-down) {
-                padding: rem(20px);
-            }
-        }
-    }
     #header {
+        #brand-tabs-header {
+            @include respond(desktop) {
+                height: auto;
+            }
+            ul li .sub-category-section-1,
+            ul li .mobile-main-menu-heading,
+            .floatright.site-suggestion-section {
+                @include respond(desktop-down) {
+                    background: $mobile-nav-bg;
+                }
+            }
+
+            .floatright.site-suggestion-section {
+                @include respond(desktop-down) {
+                    padding: rem(20px);
+                }
+            }
+        }
+        ul {
+            @include respond(desktop) {
+                float: none;
+            }
+        }
         .menu-toggle {
             @include respond(desktop-down) {
                 min-width: inherit;
@@ -37,6 +45,12 @@ body {
                 @include respond(desktop-down) {
                     display: none;
                 }
+            }
+        }
+        .banner_prostaff {
+            @include respond(desktop) {
+                margin-top: rem(35px);
+                margin-bottom: rem(20px);
             }
         }
         .magnifier-icon {
@@ -176,6 +190,28 @@ body {
                         span.username {
                             padding-right: rem(15px);
                         }
+                    }
+                }
+            }
+        }
+        .wrapper.handle-non-us-vh {
+            .row.column1 {
+                @include respond(desktop) {
+                    padding: 0;
+                    margin: 0;
+                }
+                .cell {
+                    padding: 0;
+                }
+                .headerbanner {
+                    margin: rem(15px) 0 0 0;
+                    height: auto;
+                    p {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    img {
+                        vertical-align: top;
                     }
                 }
             }

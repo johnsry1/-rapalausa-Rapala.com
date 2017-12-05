@@ -63,7 +63,7 @@ var searchsuggest = {
         $searchField.blur(function () {
             var temp = $searchField.val();
             if ($.trim(temp) == '') {
-                $searchField.val('Search Entire Site...');
+                $searchField.val(Resources.SIMPLE_SEARCH);
             }
 
         });
