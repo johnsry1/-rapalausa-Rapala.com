@@ -1,5 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
+<isinclude template="util/modules"/>
+
 <div id="alert-message">
 	<div class="non-usa-alert hide">
 		<p><img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/><isprint value="${Resource.msg('global.nonusaalert.message','locale',null)}" encoding="off"> <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a></p>
@@ -26,7 +28,7 @@
 				<div class="column">
 					<div id="topcell" class="cell">
 						<button class="menu-toggle mobileHide">
-							<span class="menu-icon"><a><span></span></a></span>
+                            <issvghelper icon="menu"/>
 							<span class="menu-text">Menu</span>
 						</button>
 						<isset name="brand" value="${0}" scope="page" />
@@ -71,7 +73,21 @@
 	    					<div id="minicart" class="minicart">
 	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    					</div><!-- END:minicart -->
-
+                            <div class="change-region">
+                                <span class="change-regionnew currency-selector">
+                                    <a>${session.getCurrency().getSymbol()}</a>
+                                    <div class="domainswitch-header">
+                                        <div class="top_arrow"></div>
+                                        <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
+                                        <isloop items="${availableCurrencies}" var="currency">
+                                            <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
+                                            <ul>
+                                                <li><a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}"><isprint value="${currency}"/> ${currencyObj.getSymbol()}</a></li>
+                                            </ul>
+                                        </isloop>
+                                     </div>
+                                </span>
+                            </div>
 	    				</div>
 					</div><!-- END: cell -->
 				</div>

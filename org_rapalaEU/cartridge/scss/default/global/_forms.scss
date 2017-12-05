@@ -1,3 +1,22 @@
+@mixin form-input {
+    width: $form-field-width;
+    box-shadow: $form-field-box-shadow;
+    height: $form-field-height;
+    margin: $form-field-margin;
+    padding: $form-field-padding;
+    float: left;
+    display: block;
+    overflow: hidden;
+    line-height: initial;
+    box-sizing: border-box;
+    border: $form-field-border;
+    border-radius: $form-field-border-radius;
+    background: $form-field-bg;
+    font-size: $form-field-font-size;
+    color: $form-field-color;
+    font-family: $form-field-font-family;
+}
+
 .form-horizontal {
     .form-row {
         & > label,
@@ -74,20 +93,7 @@ form:not(.form-horizontal) {
     input[type="password"],
     input[type="date"],
     textarea {
-        width: $form-field-width;
-        box-shadow: $form-field-box-shadow;
-        height: $form-field-height;
-        margin: $form-field-margin;
-        padding: $form-field-padding;
-        float: left;
-        display: block;
-        overflow: hidden;
-        line-height: initial;
-        box-sizing: border-box;
-        border: $form-field-border;
-        border-radius: $form-field-border-radius;
-        background: $form-field-bg;
-        font-size: $form-field-font-size;
+        @include form-input;
     }
     textarea {
         max-width: 100%;

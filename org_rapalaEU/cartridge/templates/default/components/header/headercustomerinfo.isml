@@ -1,4 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
 
 	<isscript>
 		var links, title;
@@ -46,6 +47,15 @@
 		}
 	</isscript>
 
+<div class="ui-email">
+    <isif condition="${pdict.CurrentCustomer.authenticated}">
+        <a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+    <iselse/>
+        <a href="${URLUtils.https('Page-Show','cid','email-preference-center')}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+    </isif>
+</div>
+
+<isif condition="${pdict.CurrentCustomer.authenticated}">
     <div id="user">
         <isif condition="${pdict.CurrentCustomer.registered}">
             <span class="loggeduser">
@@ -103,106 +113,54 @@
         </div>
         <isif condition="${pdict.CurrentCustomer.registered}"><div class="headermask"></div></isif>
     </div>
-    <a href="javascript:void(0);"class="magnifier-icon mobile-view">
-        <span>search icon</span>
-    </a>
+</isif>
+
+<isif condition="${!pdict.CurrentCustomer.authenticated}">
     <div id="userinfo">
         <ul>
-                <li class="ui-login <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
-                    <div class="login-value mobile-view">
-                        <isif condition = "${pdict.CurrentCustomer.authenticated}">
-                            <isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
-                            <isif condition="${!empty(badgeText) && badgeText!=null}">
-                                <isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini','BT',badgeText)}"/>
-                            </isif>
+            <li class="ui-login <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
+                <div class="login-value mobile-view">
+                    <isif condition = "${pdict.CurrentCustomer.authenticated}">
+                        <isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
+                        <isif condition="${!empty(badgeText) && badgeText!=null}">
+                            <isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini','BT',badgeText)}"/>
                         </isif>
-                    </div>
-                    <isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
-                        <div class="sign-up-blk">
-                            <a href="${URLUtils.https('Account-Show')}"
-                     class="userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
-                        </div>
-                        <div class="header-sign-in accountcontent">
-                            <isinclude template="components/header/headersignin"/>
-                        </div>
-                        <div class="header-create accountcontent">
-                            <isinclude template="components/header/headercreateaccount"/>
-                        </div>
-                        <div class="header-forgot-pwd accountcontent">
-                            <isinclude template="components/header/headerlostpassword"/>
-                        </div>
-                        <div class="confirmationcontainer forgotmsg"  style="display:none;">
-                            <div class="top_arrow"></div>
-                            <div id="message" class="reset-success-email"><isprint value="${Resource.msg('passwordreset.sent','account',null)}"/><br><isprint value="${Resource.msg('passwordreset.sent2','account',null)}"/></div>
-                        </div>
-                        <div class="headermask" style="display: none;"></div>
-                    <iselse/>
-                        <div class="signedin">
-                            &nbsp;<a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
-                        </div>
                     </isif>
-                </li>
+                </div>
                 <isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
-                <li class="dividers pipe signin">|</li></isif>
-                 <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">
-                <li class="dividers pipe first">&nbsp;|</li></isif>
-            <li class="ui-email">
-               <isif condition="${pdict.CurrentCustomer.authenticated}">
-                    <a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
-                <iselse/>
-                  <a href="${URLUtils.https('Page-Show','cid','email-preference-center')}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+                    <div class="sign-up-blk">
+                        <a href="${URLUtils.https('Account-Show')}" class="userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
+                            <issvghelper icon="user"/>
+                            <span>
+                                <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="header-sign-in accountcontent">
+                        <isinclude template="components/header/headersignin"/>
+                    </div>
+                    <div class="header-create accountcontent">
+                        <isinclude template="components/header/headercreateaccount"/>
+                    </div>
+                    <div class="header-forgot-pwd accountcontent">
+                        <isinclude template="components/header/headerlostpassword"/>
+                    </div>
+                    <div class="confirmationcontainer forgotmsg"  style="display:none;">
+                        <div class="top_arrow"></div>
+                        <div id="message" class="reset-success-email"><isprint value="${Resource.msg('passwordreset.sent','account',null)}"/><br><isprint value="${Resource.msg('passwordreset.sent2','account',null)}"/></div>
+                    </div>
+                    <div class="headermask" style="display: none;"></div>
+                <iselse />
+                    <div class="signedin">
+                        &nbsp;<a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
+                    </div>
                 </isif>
-            </li>
-            <li class="dividers pipe">|</li>
-            <li class="ui-storelocator">
-                <a href="${URLUtils.https('Stores-Find')}" >
-                <isprint value="${Resource.msg('header.storelocator','locale',null)}"/></a>
-            </li>
-            <li class="dividers pipe">|</li>
-            <li class="ui-customer">
-                <a href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}" ><isprint value="${Resource.msg('header.customerservice','locale',null)}"/></a>
             </li>
          </ul>
     </div>
-    <span class="change-regionnew">
-        <isif condition="${session.custom.currentSite == 'iceforce'}">
-            <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
-                <img src="${URLUtils.staticURL('/images/flag.png')}" alt="${Resource.msg('global.changefooter','locale',null)}"/>
-            </a>
-        <iselse>
-            <a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}">
-                <img src="${URLUtils.staticURL('/images/flag.png')}" alt="${Resource.msg('global.changefooter','locale',null)}"/>
-            </a>
-        </iselse>
-        </isif>
-        <div class="domainswitch-header">
-            <div class="top_arrow"></div>
-            <ul>
-                <isif condition="${session.custom.currentSite != 'strikemaster'}">
-                    <isif condition="${session.custom.currentSite == 'iceforce'}">
-                        <li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
-                    <iselse>
-                        <li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
-                    </isif>
-                </isif>
-                <isif condition="${session.custom.currentSite == 'iceforce'}" >
-                    <li><a href="http://rapalavmc.com/"><isprint value="${Resource.msg('global.investorsfooter','locale',null)}"/></a></li>
-                <iselse>
-                    <li><a href="${dw.system.Site.current.preferences.custom['investorsLink']}"><isprint value="${Resource.msg('global.investorsfooter','locale',null)}"/></a></li>
-                </isif>
-            </ul>
-         </div>
-    </span>
-    <span class="change-regionnew currency-selector">
-        <a>${session.getCurrency()} ${session.getCurrency().getSymbol()}</a>
-        <div class="domainswitch-header">
-            <div class="top_arrow"></div>
-            <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
-            <isloop items="${availableCurrencies}" var="currency">
-                <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
-                <ul>
-                    <li><a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}"><isprint value="${currency}"/> ${currencyObj.getSymbol()}</a></li>
-                </ul>
-            </isloop>
-         </div>
-    </span>
+</isif>
+
+<a href="javascript:void(0);"class="magnifier-icon mobile-view">
+    <issvghelper icon="search"/>
+    <span>search icon</span>
+</a>

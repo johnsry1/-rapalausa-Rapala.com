@@ -255,6 +255,7 @@
 }
 
 @mixin main-nav {
+    display: inline-block;
     @include font-size($main-nav-font-size);
     @include line-height($main-nav-line-height);
     font-weight: $main-nav-font-weight;
@@ -265,6 +266,9 @@
     text-decoration: $main-nav-text-decoration;
     padding: $main-nav-padding;
     background: $main-nav-bg;
+    height: $main-nav-height;
+    width: auto;
+    box-sizing: border-box;
     transition: all 0.3s;
     &:hover {
         color: $main-nav-hover-color;
@@ -316,6 +320,7 @@
         background: $button-big-bg;
         border: $button-big-border;
         border-radius: $button-big-border-radius;
+        box-shadow: $button-big-box-shadow;
         width: 100%;
         transition: all 0.3s;
         &:hover {
@@ -323,6 +328,7 @@
             text-decoration: $button-big-hover-text-decoration;
             background: $button-big-hover-bg;
             border: $button-big-hover-border;
+            box-shadow: $button-big-hover-box-shadow;
         }
     } @else  {
         height: $button-height;
@@ -340,11 +346,13 @@
         border-radius: $button-border-radius;
         transition: all 0.3s;
         min-width: rem($button-min-width);
+        box-shadow: $button-box-shadow;
         &:hover {
             color: $button-hover-color;
             text-decoration: $button-hover-text-decoration;
             background: $button-hover-bg;
             border: $button-hover-border;
+            box-shadow: $button-hover-box-shadow;
         }
     }
     &.disabled {

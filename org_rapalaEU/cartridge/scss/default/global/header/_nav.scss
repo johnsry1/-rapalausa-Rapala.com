@@ -1,0 +1,266 @@
+#headerwrapper {
+    #brand-tabs-header {
+        & > ul {
+            & > li {
+                &.odd,
+                &.even {
+                    @include respond(desktop) {
+                        width: rem(90px);
+                        height: rem(35px);
+                    }
+                    &.active {
+                        @include respond(desktop) {
+                            margin-top: rem(-9px);
+                            width: rem(90px);
+                            height: rem(45px);
+                        }
+                        &:hover {
+                            @include respond(desktop) {
+                                width: rem(90px);
+                                height: rem(45px);
+                            }
+                            .mobile-main-menu-heading {
+                                & > a {
+                                    @include respond(desktop) {
+                                        width: rem(90px);
+                                        height: rem(45px);
+                                    }
+                                }
+                                img {
+                                    &.color {
+                                        @include respond(desktop) {
+                                            display: inline-block;
+                                        }
+                                    }
+                                    &.grayscale {
+                                        @include respond(desktop) {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .mobile-main-menu-heading {
+                            & > a {
+                                @include respond(desktop) {
+                                    width: rem(90px);
+                                    height: rem(45px);
+                                    background-color: $white;
+                                    border: solid 1px $greyish-brown;
+                                }
+                            }
+                            img {
+                                &.color {
+                                    @include respond(desktop) {
+                                        display: inline-block;
+                                        margin-top: rem(5px);
+                                    }
+                                }
+                                &.grayscale {
+                                    @include respond(desktop) {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                        .megamenu-drop {
+                            @include respond(desktop) {
+                                display: block !important;
+                                position: absolute;
+                                top: rem(35px);
+                                min-height: inherit;
+                            }
+                            .megamenudrop {
+                                @include respond(desktop) {
+                                    font-size: 0;
+                                    display: block !important;
+                                    float: none;
+                                    background: $greyish-brown;
+                                    height: rem(35px);
+                                    width: calc(100vw);
+                                    margin-left: calc((100vw - 100%) / -2);
+                                    padding: 0;
+                                    padding-left: calc((100vw - 100%) / 2);
+                                }
+                            }
+                            .mega-categorymenu {
+                                @include respond(desktop) {
+                                    box-shadow: none;
+                                    margin: 0;
+                                    float: none;
+                                }
+                            }
+                            .mega-menu {
+                                @include respond(desktop) {
+                                    float: none;
+                                }
+                            }
+                            .menulist {
+                                @include respond(desktop) {
+                                    width: auto !important;
+                                    height: auto !important;
+                                    float: left;
+                                    border: none;
+                                    box-shadow: none;
+                                }
+                            }
+                            .sub-category-section {
+                                @include respond(desktop) {
+                                    display: none;
+                                }
+                                a {
+                                    @include respond(desktop) {
+                                        @include font-size(13px);
+                                        @include line-height(20px);
+                                        color: $main-nav-subcategory-color;
+                                        white-space: nowrap;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:hover {
+                        @include respond(desktop) {
+                            width: rem(90px);
+                            height: rem(35px);
+                        }
+                        .mobile-main-menu-heading {
+                            & > a {
+                                @include respond(desktop) {
+                                    width: rem(90px);
+                                    height: rem(35px);
+                                }
+                            }
+                            img {
+                                &.color {
+                                    @include respond(desktop) {
+                                        display: inline-block;
+                                    }
+                                }
+                                &.grayscale {
+                                    @include respond(desktop) {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    i {
+                        @include respond(desktop) {
+                            display: none;
+                        }
+                    }
+                    .mobile-main-menu-heading {
+                        & > a {
+                            @include respond(desktop) {
+                                display: table-cell;
+                                background: $concrete;
+                                text-indent: 0;
+                                width: rem(90px);
+                                height: rem(35px);
+                                text-align: center;
+                                border: $border-secondary;
+                                border-radius: 5px 5px 0 0;
+                                box-sizing: border-box;
+                            }
+                        }
+                        span {
+                            @include respond(desktop) {
+                                display: none;
+                            }
+                        }
+                        img {
+                            display: none;
+                            @include respond(desktop) {
+                                display: inline-block;
+                                max-width: rem(75px);
+                                vertical-align: middle;
+                                &.color {
+                                    display: none;
+                                }
+                                &.grayscale {
+                                    display: inline-block;
+                                    opacity: 0.6;
+                                }
+                            }
+                        }
+                    }
+                }
+                .mega_subcategory {
+                    @include respond(desktop) {
+                        display: inline-block;
+                        position: relative;
+                    }
+                    &:hover {
+                        .level-1 {
+                            @include respond(desktop) {
+                                background: $main-nav-hover-bg;
+                                color: $main-nav-hover-color;
+                                border-left: $border;
+                                border-right: $border;
+                                box-sizing: border-box;
+                            }
+                        }
+                        .sub-category-section {
+                            @include respond(desktop) {
+                                display: block !important;
+                                position: absolute;
+                                top: rem(35px);
+                                background-color: $main-nav-hover-bg;
+                                border: $border;
+                                border-top: none;
+                                padding: rem(20px) rem(20px) rem(20px) rem(12px);
+                                min-width: rem(170px);
+                            }
+                        }
+                    }
+                    &:last-child {
+                        .sub-category-section-1:after {
+                            display: none;
+                        }
+                    }
+                }
+                .sub-category-section-1 {
+                    @include respond(desktop) {
+                        display: block;
+                        width: auto;
+                        float: none;
+                    }
+                    &::after {
+                        @include respond(desktop) {
+                            content: '';
+                            display: inline-block;
+                            width: 2px;
+                            height: 13px;
+                            background: black;
+                            position: relative;
+                            top: 2px;
+                        }
+                    }
+                    & > a {
+                        @include respond(desktop) {
+                            @include main-nav;
+                            border-left: 1px solid transparent;
+                            border-right: 1px solid transparent;
+                        }
+                    }
+                }
+            }
+        }
+        .megamenu-drop {
+            @include respond(desktop) {
+                top: rem(36px);
+            }
+        }
+    }
+}
+#headerwrapper {
+    #header {
+        #brand-tabs-header {
+            @include respond(desktop) {
+                padding: 0;
+                margin-top: rem(24px);
+            }
+        }
+    }
+}

@@ -43,87 +43,7 @@ var megamenu = {
         }, 300);
 
     },
-    megamenuEvent: function ($con) {
-        if ($con == null) {
-            $con = $('#brand-tabs-header > ul > li .megamenudrop');
-        }
-        $con.each(function () {
-            var maxlength = 24;
-            var $mega = $(this);
-            //var textlinklength = $(this).find('> a').length;
-            var divlength = 4;
-            if ($(this).attr('id') == 'rapala') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'vmc') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'luhrjensen') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'sufix') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'storm') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'triggerx') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'bluefox') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'terminator') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'williamson') {
-                divlength = 4;
-            } else if ($(this).attr('id') == 'strikemaster') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'marcum') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'otter') {
-                divlength = 6;
-            } else if ($(this).attr('id') == 'iceforce') {
-                divlength = 4;
-            }
-            //var intial = 0;
-            var end = maxlength;
-            var datalist = '';
-            var brandlist = $(this).find('.brand-assets').clone();
-            var containerwidth = $('.megamenu-drop .wrapper').width() / divlength + 'px';
-            var lasttext = '';
-            var prev = '';
-            //var next = '';
-            $mega.find('.brand-assets').remove();
-
-            for (var i = 1; i <= divlength; i++) {
-                $mega.append('<div class="menulist menulist-' + i + '" style="width:' + containerwidth + '"></div>');
-                $mega.find('.mega_subcategory').each(function () {
-                    if ($(this).find('a.level-1').eq(0).hasClass('column-' + i)) {
-                        datalist = $(this).html();
-                        $mega.find('.menulist-' + i).append(datalist);
-                    }
-                });
-                if (i == divlength) {
-                    $mega.find('.menulist-' + i).append(brandlist);
-                }
-            }
-
-            $mega.find('.menulist').each(function ($i) {
-                $i = $i + 1;
-                if ($(this).find('> a').length > maxlength) {
-                    end = $(this).find('> a').length;
-                    if (end > maxlength) {
-                        datalist = $(this).find('> a').slice(maxlength, end).clone();
-                        if ($mega.find('.menulist-' + ($i + 1)).length != 0) {
-                            $mega.find('.menulist-' + ($i + 1)).prepend(datalist);
-                        }
-                    }
-                }
-                if ($i != 1) {
-                    if ($mega.find('.menulist-' + $i + '> a').eq(0).hasClass('level-2')) {
-                        prev = $i - 1;
-                        lasttext = $mega.find('.menulist-' + prev + '> a.level-1').last().attr('hreflang');
-                        $mega.find('.menulist-' + $i).prepend('<div class="level-continue">' + lasttext + ', Continued</div>');
-                    }
-                }
-                $(this).find('> a').slice(maxlength, end).remove();
-            });
-            $mega.find('.mega_subcategory').remove();
-        });
+    megamenuEvent: function () {
         /* Click event for brands to see sub menus in mobile */
         $('#brand-tabs-header > ul > li .mobile-main-menu-heading').on('click', function (e) {
             if ($(window).width() <= 959) {
@@ -151,21 +71,6 @@ var megamenu = {
                     }
                 });
 
-            } else if ($(window).width() > 959 && $(window).width() < 1025) {
-                var deviceAgent = navigator.userAgent.toLowerCase(),
-                    deviceType = deviceAgent.match(/(iphone|ipod|ipad|android|blackBerry)/);
-                if (deviceType[0] == 'iphone' || deviceType[0] == 'ipad') {
-                    /*$(".mobile-main-menu-heading > a").removeClass("selected");
-                    if(!$(this).hasClass('selected')) {
-                        e.preventDefault();
-                        megamenu.megamenuEvent();
-                        $(this).addClass('selected');
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }*/
-                }
             }
         });
         /* Click event for to see all the brands in mobile */
@@ -240,55 +145,7 @@ var megamenu = {
             }
         });
 
-        // Mega menu events for window width greater than 959
-        $('#brand-tabs-header > ul > li').mouseenter(function () {
-            var $id = $(this).find('.mobile-main-menu-heading > a').attr('class');
-            var $this = $(this);
-
-            if ($(window).width() > 959) {
-                $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseenter');
-                $this.siblings('li').find('.megamenudrop, .megamenu-drop').hide();
-                $('.accountcontent').hide();
-                clearTimeout(megamenu.globalTimer);
-                //megamenu.globalTimer == 0;
-                $('#brand-tabs-header li').removeClass('current');
-                if ($this.find('.megamenudrop').find('a').length != 0) {
-                    $this.find('.megamenudrop').show();
-                    $this.find('.megamenu-drop').show();
-                    //$('.megamenudrop[id="'+ $id +'"]').closest('.mega-menu').find('.mask').css('left',$(this).offset().left);
-                    //$('.megamenudrop[id="'+ $id +'"]').closest('.mega-menu').find('.mask').attr('href',$(this).find('a').attr('href'));
-                }
-                var containerwidth = $('.megamenu-drop .wrapper').width() / $('#' + $id + ' .menulist').length;
-                containerwidth = containerwidth - 21;
-                $('#' + $id + ' .menulist').removeAttr('style');
-                $('#' + $id + ' .menulist').width(containerwidth);
-                megamenu.syncheight($('#' + $id + '.megamenudrop .menulist'));
-
-                $(this).addClass('current');
-                if (!$(this).hasClass('active')) {
-                    $('#brand-tabs-header li.active').addClass('inactive');
-                } else {
-                    $(this).removeClass('inactive');
-                }
-                $('.brand-tabs-header-mask').show();
-            }
-        }).mouseleave(function () {
-
-            if ($(window).width() > 959) {
-                $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseout');
-                /*var deviceAgent = navigator.userAgent.toLowerCase(),
-                deviceType = deviceAgent.match(/(iphone|ipod|ipad|android|blackBerry)/);
-                if(deviceType[0] == "iphone" || deviceType[0] == "ipad"){
-                    var $this = $(this);
-                    $this.find(".mobile-main-menu-heading > a").removeClass('selected');
-                }*/
-            }
-        });
-
         /** single click redirecting of megamenu categories*/
-        /*$('.rapala_device .menulist a').mouseenter(function(){
-            window.location.href = $(this).attr('href');
-        });*/
         $('#brand-tabs-header').mouseleave(function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
@@ -307,17 +164,6 @@ var megamenu = {
                 $(this).hide();
             }
         });
-
-        /*$(".rapala_device #brand-tabs-header a").click(function(e){
-            e.preventDefault();
-            if($(this).hasClass('selected')){
-                $(this).removeClass('selected');
-                window.location.href = $(this).attr('href');
-            }else{
-                $(this).closest("li").siblings().find("a").removeClass('selected');
-                $(this).addClass('selected');
-            }
-        });*/
     },
     syncheight: function ($sel) {
         var current = 0;
