@@ -362,11 +362,15 @@
             box-shadow: $button-hover-box-shadow;
         }
     }
+    &[disabled],
     &.disabled {
         opacity: 1;
         background: $button-disabled-bg;
         border: none;
         color: $button-disabled-color;
+        &:hover {
+            background: $button-disabled-bg;
+        }
     }
 }
 
