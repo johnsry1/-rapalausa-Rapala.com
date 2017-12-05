@@ -324,7 +324,7 @@ footer {
     }
     .emailSignup {
         background: none repeat scroll 0 0 $bg-white;
-        border: 1px solid #e6e6e6;
+        border: 1px solid $lightgrey;
         box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
         -moz-box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
         -webkit-box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
@@ -354,6 +354,7 @@ footer {
             background: -webkit-linear-gradient(to bottom, $bg-greydim 60%, $bg-greydark 100%);
             background: -ms-linear-gradient(to bottom, $bg-greydim 60%, $bg-greydark 100%);
             background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, $bg-greydim), color-stop(100%, $bg-greydark));
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$bg-greydim', endColorstr='$bg-greydark', GradientType=0);
             height: 26px;
             right: -1px;
             top: -1px;
@@ -394,7 +395,8 @@ footer {
             background: -webkit-linear-gradient(to bottom, $bg-greydark 0%, $bg-greydim 60%);
             background: -ms-linear-gradient(to bottom, $bg-greydark 0%, $bg-greydim 60%);
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $bg-greydark), color-stop(60%, $bg-greydim));
-            color: #333;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$bg-greydark', endColorstr='$bg-greydim', GradientType=0);
+            color: $night-rider;
             height: 26px;
             right: -1px;
             top: -1px;
@@ -598,11 +600,11 @@ footer {
                             margin-top: 19px;
                             a {
                                 span {
-                                    color: #000;
+                                    color: $black;
                                 }
                                 &:hover {
                                     text-decoration: underline;
-                                    color: #1a1a1a;
+                                    color: $black-light;
                                 }
                             }
                         }
