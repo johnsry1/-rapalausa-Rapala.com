@@ -100,6 +100,9 @@ exports.init = function () {
         $('input[name$=\'_addressFields_city\']').val('');
         $('input[name$=\'_addressFields_postal\']').val('');
         $('input[name$=\'_addressFields_phone\']').val('');
+        $('input[name$=\'_addressFields_states_state\']').val('');
+        uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_title\']')[0], '');
+        uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_country\']')[0], '');
         uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_states_state\']')[0], '');
         uievents.changeFormSelection(jQuery('select.address-select')[0], '');
         $('.shipping-address-field-section').removeClass('hide');
@@ -119,6 +122,8 @@ exports.init = function () {
         $('.shipping-address-field-section .form-row').find('input').removeClass('errorclient');
         uievents.customFields();
         uievents.synccheckoutH();
+        var $form = $('.address');
+        util.updateStateOptions($form);
     });
     $('.edit-address-field .edit-billing-button').bind('click', function () {
         var $form = $('.address');

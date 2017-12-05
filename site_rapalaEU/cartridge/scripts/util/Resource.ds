@@ -260,7 +260,7 @@ ResourceHelper.getUrls = function(pageContext) {
         billing                     : URLUtils.url('COBilling-Start').toString(),
         setSessionCurrency          : URLUtils.url('Currency-SetSessionCurrency').toString(),
         addEditAddress              : URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
-        cookieHint                  : URLUtils.url('Page-Show', 'cid', 'cookie_hint').toString(),
+        cookieHint                  : URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString(),
         rateLimiterReset            : URLUtils.url('RateLimiter-HideCaptcha').toString(),
         loadingSmallImg 			: URLUtils.staticURL('/images/loading-small.gif').toString(),
         sendToFriend				: URLUtils.https('SendToFriend-Start').toString(),
@@ -286,10 +286,7 @@ ResourceHelper.getUrls = function(pageContext) {
         marcumlogo					: URLUtils.staticURL('/images/logo-marcum.jpg').toString(),
         strikemasterlogo			: URLUtils.staticURL('/images/logo-strikemaster.jpg').toString(),
         internationalHomeShow		: URLUtils.url('Home-Show').toString(),
-
-        //Dymanic address update url
-        getStateHtml                : URLUtils.url('Avs-GetStateHtml').toString(),
-        getPhoneHtml                : URLUtils.url('Avs-GetPhoneHtml').toString()
+                
     };
     return urls;
 }
