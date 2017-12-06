@@ -2,7 +2,7 @@
 <script type="text/javascript">
 	// Setup the jQuery UI Style Guide tabs
 	$('.tabs').tabs();
-	
+
 	// Setup the jQuery UI Style Guide tooltips
 	$(document).tooltip({
 		items: '.tooltip',
@@ -11,19 +11,19 @@
 			return $(this).find('.tooltip-content').html();
 		}
 	});
-	
+
 	// Setup the jQuery UI Style Guide dialog
 	$('#dialog-message').dialog({
 		autoOpen: false,
 		resizable: false,
 		modal: true,
-		width: '720px'
+		width: '500px'
 	});
-	
+
 	$('#dialog-example').on('click', function () {
 		$('#dialog-message').dialog('open');
 	});
-	
+
 	$('.expand-toggle .toggle').on('click', function () {
 		$(this).parent('.expand-toggle').toggleClass('expanded');
 	});

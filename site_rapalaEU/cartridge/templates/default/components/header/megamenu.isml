@@ -1,0 +1,105 @@
+<isinclude template="util/modules"/>
+
+<iscache type="relative" hour="24"/>
+
+<iscomment>
+	This template displays a 3-level category tree as top navigation.
+	Only categories marked with showInMenu are shown.
+</iscomment>
+
+<isscript>
+	importScript( "util/ViewHelpers.ds" );
+</isscript>
+<isset name="topLevelCategory" value="${getTopLevelCategory()}" scope="page"/>
+<isif condition="${topLevelCategory != null}">
+		<div class="mega-menu">
+		<a class="mask" href="#">&nbsp;</a>
+		<isset name="I" value="0" scope="page" />
+		<isloop items="${getSubcategoriesInMenuForCategory(topLevelCategory)}" var="topCat">
+			<isscript>
+				++I;
+		 	</isscript>
+			<isif condition="${topCat.getID() == 'rapala' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+				<div class="megamenudrop" id="rapala">
+					<isinclude template="components/header/allbrandsmegamenu"/>	
+				</div>
+			</isif>
+			<isif condition="${topCat.getID() == 'storm' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="storm">
+				<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div>
+			</isif>
+			
+			
+			<isif condition="${topCat.getID() == 'strikemaster' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="strikemaster">	
+				<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div><!--End of StrikeMaster menu -->	
+			</isif>
+			
+
+		    <isif condition="${topCat.getID() == 'sufix' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+		    <div class="megamenudrop" id="sufix">
+				<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div>
+			</isif>
+			
+		    <isif condition="${topCat.getID() == 'terminator' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+		    <div class="megamenudrop" id="terminator">
+				<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div>
+			</isif>
+														
+			
+			<isif condition="${topCat.getID() == 'marcum' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="marcum">
+				<isinclude template="components/header/allbrandsmegamenu"/> 
+			</div>		
+			</isif>
+												
+
+			<isif condition="${topCat.getID() == 'vmc' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="vmc">
+			<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div>
+			</isif>
+			
+			
+			<isif condition="${topCat.getID() == 'williamson' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="williamson">
+			<isinclude template="components/header/allbrandsmegamenu"/>	
+			</div>
+			</isif>
+			
+			
+			<isif condition="${topCat.getID() == 'bluefox' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="bluefox">
+			<isinclude template="components/header/allbrandsmegamenu"/>
+			</div>
+			</isif>
+			
+
+			<isif condition="${topCat.getID() == 'iceforce' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+				<div class="megamenudrop" id="iceforce">
+				<isinclude template="components/header/allbrandsmegamenu"/>
+			 </div><!--End of ICE FORCE menu -->
+			</isif>
+			
+			
+			 <isif condition="${topCat.getID() == 'luhrjensen' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			 <div class="megamenudrop" id="luhrjensen">
+			 <isinclude template="components/header/allbrandsmegamenu"/>
+			 </div>
+			 </isif>
+			
+			
+			<isif condition="${topCat.getID() == 'triggerx' && topCat.getID() == pdict.CurrentHttpParameterMap.brand}">
+			<div class="megamenudrop" id="triggerx">
+			<isinclude template="components/header/allbrandsmegamenu"/>
+			</div>
+			</isif>
+			
+			
+	 	</isloop>
+	 	</div>
+</isif>
