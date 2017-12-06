@@ -59,9 +59,9 @@
         </li>
         <li>
             <isif condition="${pdict.CurrentCustomer.authenticated}">
-                <a class="mobile-account-link" href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a>
+                <a class="mobile-account-link login-logout" href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a>
              <iselse/>
-                <a class="mobile-account-link" href="${URLUtils.https('Account-Show')}"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
+                <a class="mobile-account-link login-logout" href="${URLUtils.https('Account-Show')}"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
             </isif>
         </li>
     </ul>
