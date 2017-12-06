@@ -29,6 +29,7 @@
 					<div id="topcell" class="cell">
 						<button class="menu-toggle mobileHide">
                             <issvghelper icon="menu"/>
+                            <issvghelper icon="close"/>
 							<span class="menu-text">Menu</span>
 						</button>
 						<isset name="brand" value="${0}" scope="page" />
@@ -74,6 +75,11 @@
 	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    					</div><!-- END:minicart -->
                             <div class="change-region">
+                                <div class="currency-flag">
+                                    <span>
+                                        <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-eu.png')}" alt="${session.getCurrency().getSymbol()}">
+                                    </span>
+                                </div>
                                 <span class="change-regionnew currency-selector">
                                     <a>${session.getCurrency().getSymbol()}</a>
                                     <div class="domainswitch-header">

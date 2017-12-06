@@ -13,7 +13,7 @@ body {
     #header {
         #brand-tabs-header {
             @include respond(desktop) {
-                height: auto;
+                height: rem(70px);
             }
             ul li .sub-category-section-1,
             ul li .mobile-main-menu-heading,
@@ -21,11 +21,24 @@ body {
                 @include respond(desktop-down) {
                     background: $mobile-nav-bg;
                 }
+                &.js-active-sub-menu {
+                    @include respond(desktop-down) {
+                        background: $white;
+                    }
+                }
             }
 
             .floatright.site-suggestion-section {
                 @include respond(desktop-down) {
                     padding: rem(20px);
+                }
+                &:after {
+                    display: none;
+                }
+            }
+            ul.mobile-view {
+                @include respond(desktop) {
+                    display: none;
                 }
             }
         }
@@ -40,6 +53,10 @@ body {
                 margin: rem(23px) rem(20px) rem(20px) rem(10px);
                 width: rem(30px);
                 height: rem(21px);
+                border-radius: 0 !important;
+            }
+            .close {
+                display: none;
             }
             .menu-text {
                 @include respond(desktop-down) {
@@ -49,7 +66,7 @@ body {
         }
         .banner_prostaff {
             @include respond(desktop) {
-                margin-top: rem(35px);
+                margin-top: 0;
                 margin-bottom: rem(20px);
             }
         }
@@ -62,12 +79,15 @@ body {
                 height: rem(36px);
                 text-align: center;
                 text-indent: 0;
-                margin-left: rem(10px);
+                margin-left: rem(20px);
                 .icon {
                     width: rem(20px);
                     height: rem(20px);
                     margin-top: rem(7px);
                 }
+            }
+            @include respond(medium-down) {
+                margin-left: rem(10px);
             }
             span {
                 display: none;
@@ -120,13 +140,32 @@ body {
                         vertical-align: top;
                     }
                 }
+                .currency-flag {
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: rem(5px);
+                    span {
+                        display: table-cell;
+                    }
+                    img {
+                        display: inline-block;
+                        width: rem(29px);
+                        height: rem(19px);
+                        vertical-align: middle;
+                    }
+                }
                 .change-regionnew {
                     @include respond(desktop) {
                         width: auto;
                         padding: 0 rem(15px) 0 0;
                         margin: 0;
                         background-position: right center;
-                        img {
+                    }
+                    a {
+                        @include font-size(12px);
+                    }
+                    img {
+                        @include respond(desktop) {
                             vertical-align: middle;
                         }
                     }

@@ -36,6 +36,35 @@
 			</isif>
 		</isloop>
 	</ul>
+    <ul class="mobile-view mobile-account-menu">
+        <li>
+            <a href="${'#'}" class="with-subcategory mobile-account-link">
+                ${Resource.msg('global.changecurrency','locale',null)} ${session.getCurrency()} ${session.getCurrency().getSymbol()}
+            </a>
+            <div class="mobile-account-submenu">
+                <div class="change-region">
+                    <span class="change-regionnew currency-selector">
+                        <div class="domainswitch-header">
+                            <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
+                            <isloop items="${availableCurrencies}" var="currency">
+                                <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
+                                <ul>
+                                    <li><a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}"><isprint value="${currency}"/> ${currencyObj.getSymbol()}</a></li>
+                                </ul>
+                            </isloop>
+                         </div>
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <isif condition="${pdict.CurrentCustomer.authenticated}">
+                <a class="mobile-account-link" href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a>
+             <iselse/>
+                <a class="mobile-account-link" href="${URLUtils.https('Account-Show')}"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
+            </isif>
+        </li>
+    </ul>
 </div>
 
 
