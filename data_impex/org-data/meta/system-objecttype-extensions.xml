@@ -8394,6 +8394,13 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
 				<externally-managed-flag>false</externally-managed-flag>
 				<default-value>false</default-value>
 			</attribute-definition>
+			<attribute-definition attribute-id="enableBrandTheme">
+				<display-name xml:lang="x-default">Enable Brand Theme</display-name>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<default-value>false</default-value>
+			</attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="StoreLocator">
@@ -8651,6 +8658,10 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="upspassword"/>
                 <attribute attribute-id="upsaccessLicenseNumber"/>
             </attribute-group>
+            <attribute-group group-id="ActiveBrands">
+                <display-name xml:lang="x-default">Active Brands</display-name>
+				<attribute attribute-id="enableBrandTheme"/>                
+            </attribute-group>
             <attribute-group group-id="Cart_Recommendations">
                 <display-name xml:lang="x-default">Cart Recommendations Product ID List</display-name>
                 <attribute attribute-id="cart_recommendations_group_01"/>
@@ -8715,13 +8726,6 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="KniveZip"/>
                 <attribute attribute-id="otterrestrictedZipcode"/>
                 <attribute attribute-id="restrictedProduct"/>
-            </attribute-group>
-            <attribute-group group-id="upsconfiguration">
-                <display-name xml:lang="x-default">UPS Configuration</display-name>
-                <attribute attribute-id="upsaddressValidationURL"/>
-                <attribute attribute-id="upspassword"/>
-                <attribute attribute-id="upsaccessLicenseNumber"/>
-                <attribute attribute-id="upsuserID"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
