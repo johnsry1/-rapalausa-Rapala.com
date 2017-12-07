@@ -34,7 +34,9 @@ exports.init = function () {
                 $('input[name$=\'_addressFields_city\']').val('');
                 $('input[name$=\'_addressFields_postal\']').val('');
                 $('input[name$=\'_addressFields_phone\']').val('');
-                uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_states_state\']')[0], '');
+                $('input[name$=\'_addressFields_states_state\']').val('');
+                uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_title\']')[0], '');
+                uievents.changeFormSelection(jQuery('select[name$=\'_addressFields_country\']')[0], '');
                 uievents.changeFormSelection(jQuery('select.address-select')[0], '');
                 $('.shipping-address-field-section').removeClass('hide');
                 $('.selected-shipping-address, .new-address-field, .edit-address-field').addClass('hide');
@@ -59,7 +61,12 @@ exports.init = function () {
         if (selectedAddress.address2 == null) {
             selectedAddress.address2 = '';
         }
-        $('.selected-shipping-address').append(selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.phone);
+        selectedAddress.title = selectedAddress.title != null ? selectedAddress.title : '';
+        selectedAddress.stateCode = selectedAddress.stateCode != null ? selectedAddress.stateCode : '';
+        selectedAddress.postalCode = selectedAddress.postalCode != null ? selectedAddress.postalCode : '';
+        selectedAddress.phone = selectedAddress.phone != null ? selectedAddress.phone : '';
+        
+        $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.countryDisplayValue + '<br/>' + selectedAddress.phone);
         if ($('.checkout').hasClass('billingsection')) {
             var editAddressObject = {
                 firstName: selectedAddress.firstName,
@@ -69,7 +76,8 @@ exports.init = function () {
                 postalCode: selectedAddress.postalCode,
                 city: selectedAddress.city,
                 stateCode: selectedAddress.stateCode,
-                countryCode: 'US',
+                countryCode: selectedAddress.countryCode,
+                countryDisplayValue: selectedAddress.countryDisplayValue,
                 phone: selectedAddress.phone
             };
             $('.new-address-field').addClass('hide');

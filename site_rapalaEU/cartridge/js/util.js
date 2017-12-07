@@ -244,7 +244,7 @@ var util = {
 
     fillAddressFields: function (address, $form) {
         for (var field in address) {
-            if (field === 'ID' || field === 'UUID' || field === 'key') {
+            if (field === 'ID' || field === 'UUID' || field === 'key' || field === 'countryDisplayValue') {
                 continue;
             }
             // if the key in address object ends with 'Code', remove that suffix
@@ -416,7 +416,7 @@ var util = {
     updateStateOptions: function (form) { 
         var $form = $(form);
         //Country should be pre-selected based on geoip info
-        if ($form.find('select[id$="_country"]').val().length == 0) {
+        if ($form.find('select[id$="_country"]').val() != null && $form.find('select[id$="_country"]').val().length == 0) {
             if (window.User.geolocation != undefined) {
                 var countryCode = window.User.geolocation.countryCode;
                 if (Countries[countryCode] != undefined) {
