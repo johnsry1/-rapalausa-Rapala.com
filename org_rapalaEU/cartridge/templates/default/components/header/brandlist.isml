@@ -49,7 +49,11 @@
                             <isloop items="${availableCurrencies}" var="currency">
                                 <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
                                 <ul>
-                                    <li><a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}"><isprint value="${currency}"/> ${currencyObj.getSymbol()}</a></li>
+                                    <li>
+                                        <a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}">
+                                            ${Resource.msg('global.changeto','locale',null)} <isprint value="${currency}"/> ${currencyObj.getSymbol()}
+                                        </a>
+                                    </li>
                                 </ul>
                             </isloop>
                          </div>
