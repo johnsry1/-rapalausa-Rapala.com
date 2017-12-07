@@ -81,7 +81,7 @@ exports.init = function () {
                 phone: selectedAddress.phone
             };
             $('.new-address-field').addClass('hide');
-            $('.edit-address-field').attr('data-address', editAddressObject);
+            $('.edit-address-field').attr('data-address', JSON.stringify(editAddressObject));
             $('.selected-shipping-address, .edit-address-field').removeClass('hide');
         } else {
             $('.selected-shipping-address, .new-address-field').removeClass('hide');

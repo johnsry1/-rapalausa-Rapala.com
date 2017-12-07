@@ -518,7 +518,7 @@ var util = {
             }
         }
         
-        if ($phoneContainer.length != 0) {
+        if ($phoneContainer.length != 0) { 
             url = this.appendParamsToUrl(Urls.getPhoneHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
             options = {
                 url: url,
