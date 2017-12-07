@@ -1,15 +1,9 @@
 'use strict';
 
-var naPhone = /^\(?([2-9][0-8][0-9])\)?[\-\. ]?([2-9][0-9]{2})[\-\. ]?([0-9]{4})(\s*x[0-9]+)?$/;
 var regex = {
     phone: {
-        us: naPhone,
-        ca: naPhone,
-        fr: /^0[1-6]{1}(([0-9]{2}){4})|((\s[0-9]{2}){4})|((-[0-9]{2}){4})$/,
-        it: /^(([0-9]{2,4})([-\s\/]{0,1})([0-9]{4,8}))?$/,
-        jp: /^(0\d{1,4}- ?)?\d{1,4}-\d{4}$/,
-        cn: /.*/,
-        gb: /^((\(?0\d{4}\)?\s?\d{3}\s?\d{3})|(\(?0\d{3}\)?\s?\d{3}\s?\d{4})|(\(?0\d{2}\)?\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/
+        gb: /^[0-9]{9,16}$/,
+        default: /^[0-9]{6,20}$/
     },
     postal: {
         gb: /^[A-Z]((\d{1,2})|(\d[A-Z])|([A-Z]\d([\dA-Z])?)) \d[A-Z]{2}$/i,
@@ -273,84 +267,42 @@ var validatePostal = function(value, el) {
 };
 
 /**
- * Add phone validation method to $ validation plugin. Text
- * fields must have 'phone' css class to be validated as phone
- * phoneUS is copied from
- * http://docs.$.com/Plugins/Validation/CustomMethods/phoneUS
+ * @function
+ * @description Validates a given phone number against the countries phone regex
+ * @param {String} value The phone number which will be validated
+ * @param {String} el The input field
  */
-$.validator
-    .addMethod(
-        'phone',
-        function (phoneNumber, element) {
-            if ($(element).hasClass('stopKeypress')) {
-                return true;
-            } else {
-                // find out the country code
-                var data = $(element).data('data');
-                var country = (data && data.country && data.country != '') ? data.country : 'US'; // default to US phone
-                // validation
-
-                // preserve this instance
-                var that = this;
-
-                // country specific phone validation handlers
-                //var phoneUS, phoneCA;
-
-                var phone = function () {
-                    phoneNumber = phoneNumber.replace(/\s+/g, '');
-                    return that.optional(element) || phoneNumber.length > 9 && phoneNumber.match(/^(\d{10}|\d{3}(-\d{3})(-\d{4})$|^\d{3}(\s\d{3})?(\s\d{4})?)$/);
-                };
-                //phoneUS = phoneCA;
-                //window.eval('var phoneHandler = (typeof phone' + country + ' != \'undefined\') ? phone' + country + ': null;');
-
-                // call the country specific phone validation
-                // handler
-                return country === 'US' || country === 'CA' ? phone() : true;
-            }
-        }, Resources.INVALID_PHONE);
-
-$.validator.addMethod('phoneCDUS', function (phoneNumber, element) {
-    if ($(element).hasClass('stopKeypress')) {
-        return true;
-    } else {
-        phoneNumber = phoneNumber.replace(/\s+/g, '');
-        return this.optional(element) || phoneNumber.length > 9 && phoneNumber
-            .match(/^\(?[\d]{3}\)?[\s-]?[\d]{3}[\s-]?[\d]{4}$/);
-    }
-}, 'Please specify a valid phone number');
-
-$.validator.addMethod('phone', function (phoneNumber, element) {
-    if ($(element).hasClass('stopKeypress')) {
-        return true;
-    } else {
-        phoneNumber = phoneNumber.replace(/\s+/g, '');
-        return this.optional(element) || phoneNumber.length > 9 && phoneNumber
-            .match(/^\(?[\d]{3}\)?[\s-]?[\d]{3}[\s-]?[\d]{4}$/);
-    }
-}, 'Please specify a valid phone number');
-
-$.validator.addMethod('phoneUK', function (phoneNumber, element) {
-    if ($(element).hasClass('stopKeypress')) {
-        return true;
-    } else {
-        return this.optional(element) || phoneNumber.length > 9 && phoneNumber
-            .match(/^(\(?(0|\+44)[1-9]{1}\d{1,4}?\)?\s?\d{3,4}\s?\d{3,4})$/);
-    }
-}, 'Please specify a valid phone number');
-
-$.validator.addMethod('postal', validatePostal, Resources.INVALID_ZIP);
-/*
-$.validator.addMethod('postal', function (value, element) {
-    if ($(element).hasClass('stopKeypress')) {
-        return true;
-    } else {
-        if (value == '') {
-            return true;
+var validatePhone = function (value, el) {
+    var country = $(el).closest('form').find('.country');
+    if (country.length === 0 || country.val().length === 0 || !regex.phone[country.val().toLowerCase()]) {
+        if (country.val() == null || !regex.phone[country.val().toLowerCase()]) {
+            var rgxDefault = regex.phone.default;
+            var isOptionalDefault = this.optional(el);
+            var isValidDefault = rgxDefault.test($.trim(value));
+            return isOptionalDefault || isValidDefault;
         }
-        return (/^\d{5}((-\d{4})|(\d{4}))?$/).test(value);
+        return true;
     }
-}, 'Please enter your 5 or 9 digit Zip Code with or without a hyphen');
-*/
+
+    var rgx = regex.phone[country.val().toLowerCase()];
+    var isOptional = this.optional(el);
+    var isValid = rgx.test($.trim(value));
+
+    return isOptional || isValid;
+};
+
+/**
+ * Add phone validation method to jQuery validation plugin.
+ * Text fields must have 'phone' css class to be validated as phone
+ */
+$.validator.addMethod('phone', validatePhone, Resources.INVALID_PHONE);
+
+/**
+ * Add postal validation method to jQuery validation plugin.
+ * Text fields must have 'postal' css class to be validated as postal
+ */
+$.validator.addMethod('postal', validatePostal, Resources.INVALID_ZIP);
+
 $.validator.addMethod('zipCodeCustom', function (value, element) {
     if ($(element).hasClass('stopKeypress')) {
         return true;
@@ -360,7 +312,7 @@ $.validator.addMethod('zipCodeCustom', function (value, element) {
         }
         return (/^\d{5}((-\d{4})|(\d{4}))?$/).test(value);
     }
-}, '- Please enter a valid ZipCode');
+}, '- Please enter a valid ZipCode'); 
 
 $.validator.addMethod('phoneCustom', function (phoneNumber, element) {
     if ($(element).hasClass('stopKeypress')) {
@@ -1013,7 +965,6 @@ var validator = {
         $('form:not(.suppress)').each(function () {
             $(this).validate(self.settings);
         });
-        validator.phoneValidation();
     },
     initForm: function (f) {
         $(f).validate(this.settings);
