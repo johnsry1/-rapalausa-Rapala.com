@@ -36,6 +36,7 @@ var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkS
 function initAddressForm(cart) {
 
     if (app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value === true) {
+        app.getForm('billing').object.billingAddress.addressFields.title.value = app.getForm('singleshipping').object.shippingAddress.addressFields.title.value;
         app.getForm('billing').object.billingAddress.addressFields.firstName.value = app.getForm('singleshipping').object.shippingAddress.addressFields.firstName.value;
         app.getForm('billing').object.billingAddress.addressFields.lastName.value = app.getForm('singleshipping').object.shippingAddress.addressFields.lastName.value;
         app.getForm('billing').object.billingAddress.addressFields.address1.value = app.getForm('singleshipping').object.shippingAddress.addressFields.address1.value;
