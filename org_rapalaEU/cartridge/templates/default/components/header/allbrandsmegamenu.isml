@@ -17,6 +17,11 @@
 
         <span class="sub-category-section-1 ${('showInMenu' in secondLevel.custom) && secondLevel.custom.showInMenu.valueOf() ? '' : 'mobileHide'}">
             <isset name="columnNo" value="${positionEntry.key.substr(0,positionEntry.key.length-1)}" scope="page" />
+
+            <isif condition="${(secondLevel.getSubCategories().getLength()>0)}">
+                <span class="sub-cat-drop-down">sub-cat-drop-down</span>
+            </isif>
+
             <isif condition="${('redirectingToPdp' in secondLevel.custom) && secondLevel.custom.redirectingToPdp.valueOf()}">
                 <isset name="brand" value="${secondLevel.getParent()}" scope="page" />
                 <a href="${URLUtils.https('Product-Show', 'pid', secondLevel.custom.redirectToPdp,'brandname',brand.ID)}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">saeffw
@@ -28,10 +33,6 @@
                         <isprint value="${secondLevel.getDisplayName()}"/>
                     </a>
                 </isif>
-            </isif>
-
-            <isif condition="${(secondLevel.getSubCategories().getLength()>0)}">
-                <span class="sub-cat-drop-down">sub-cat-drop-down</span>
             </isif>
 
             <div class="sub-category-section sub-category-section-2">

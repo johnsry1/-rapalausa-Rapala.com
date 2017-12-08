@@ -1,9 +1,5 @@
 'use strict';
 
-var $main = $('#main'),
-    $footer = $('#footernew'),
-    $banner = $('.banner_prostaff');
-
 var megamenu = {
     globalTimer: 0,
     init: function () {
@@ -15,26 +11,24 @@ var megamenu = {
         // To make default menu based on the brand active
         $('#brand-tabs-header > ul > li.active .mobile-main-menu-heading').trigger('click');
         $('#container').addClass('js-container-active');
-        $('.menu-toggle').addClass('js-menu-toggle');
+        $('#header').addClass('js-menu-toggle');
         $('.menu-open-shadow').remove();
-        $main.wrap('<div class=\'open-menu-wrap\'></div>');
+        //$main.wrap('<div class=\'open-menu-wrap\'></div>');
         $('body').addClass('js-body');
-        $('.open-menu-wrap').prepend($banner);
-        $('.open-menu-wrap').append($footer).prepend('<a href=\'javascript:void(0);\' class=\'menu-open-shadow\'></a>');
+        //$('.open-menu-wrap').append($footer).prepend('<a href=\'javascript:void(0);\' class=\'menu-open-shadow\'></a>');
         //$("#main, #footernew").prepend("<div class='menu-open-shadow'></div>")
-        $('#container, .open-menu-wrap').animate({marginLeft: '280px'}, 300);
+        //$('#container, .open-menu-wrap').animate({marginLeft: '280px'}, 300);
         $('#brand-tabs-header').wrap('<div class=\'brand-active\'></div>');
         $('.brand-active').animate({left: '0'}, 300);
         $('.banner_prostaff').animate({left: '280px'}, 300);
         $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseenter');
     },
     close: function () {
-        $('#container, .open-menu-wrap').animate({marginLeft: '0'}, 300);
+       //$('#container, .open-menu-wrap').animate({marginLeft: '0'}, 300);
         $('.banner_prostaff').animate({left: '0'}, 300);
         $('#container').removeClass('js-container-active');
         $('body').removeClass('js-body');
         $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseout');
-        $('#main, #footernew').unwrap();
         $('.magnifier-icon').removeClass('js-magnifier-icon-active');
         $('.menu-toggle').removeClass('js-menu-toggle');
         $('#brand-tabs-header').unwrap();
@@ -143,6 +137,11 @@ var megamenu = {
                     }
                 }
             }
+        });
+
+        $('.mobile-account-menu .with-subcategory').on('click', function() {
+            $(this).toggleClass('active');
+            $(this).next('.mobile-account-submenu').slideToggle();
         });
 
         /** single click redirecting of megamenu categories*/

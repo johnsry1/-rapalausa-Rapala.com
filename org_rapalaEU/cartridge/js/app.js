@@ -386,6 +386,9 @@ function initializeEvents() {
                 $('#main, #footernew').unwrap();
                 $('#brand-tabs-header').unwrap();
             }
+            // Disable mobile nav
+            $('.sub-category-section-2').slideUp();
+            $('.sub-category-section-1').removeClass('js-active-sub-menu');
             //megamenu.init();
         }
     });

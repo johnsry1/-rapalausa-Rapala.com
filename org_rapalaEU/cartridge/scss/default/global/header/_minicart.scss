@@ -29,7 +29,7 @@
                         @include respond(desktop-down) {
                             width: rem(21px);
                             height: rem(17px);
-                            margin-top: rem(3px);
+                            margin-top: rem(7px);
                         }
                     }
                     span {
@@ -62,30 +62,32 @@
                         border-radius: 0 $button-border-radius $button-border-radius 0;
                         border: $border-secondary;
                     }
+
+                    .minicarticon-cont {
+                        @include respond(desktop-down) {
+                            padding: 0;
+
+                        }
+                        .cart-icon {
+                            @include respond(desktop) {
+                                background: url("../images/svg-icons/shopping-cart.svg") no-repeat center;
+                                margin: 0 rem(10px);
+                                height: rem(30px);
+                            }
+                        }
+                        .cart-value {
+                            font-family: $font;
+                            font-weight: normal;
+                            @include font-size(12px);
+                            @include line-height(28px);
+                            text-transform: none;
+                            color: $night-rider;
+                            padding: 0 rem(10px) 0 0;
+                        }
+                    }
+
                 }
             }
         }
-    }
-}
-
-.minicarticon-cont {
-    @include respond(desktop-down) {
-        padding: 0;
-    }
-    .cart-icon {
-        @include respond(desktop) {
-            background: url("../images/svg-icons/shopping-cart.svg") no-repeat center;
-            margin: 0 rem(10px);
-            height: rem(30px);
-        }
-    }
-    .cart-value {
-        font-family: $font;
-        font-weight: normal;
-        @include font-size(12px);
-        @include line-height(28px);
-        text-transform: none;
-        color: $night-rider;
-        padding: 0 rem(10px) 0 0;
     }
 }
