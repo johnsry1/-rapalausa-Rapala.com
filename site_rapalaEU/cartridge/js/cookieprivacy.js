@@ -34,4 +34,17 @@ module.exports = function () {
             document.cookie = 'dw_cookies_accepted=1; path=/';
         }
     }
+    
+    if (document.cookie.indexOf('dw_alert_message') > 0) {
+        $('#alert-message').hide();    
+    }
+    
+    $('#close-non-us-alert').on('click', function(e) {
+        e.preventDefault(); 
+        $('#alert-message').hide();
+        if (document.cookie.indexOf('dw_alert_message') < 0) {
+            document.cookie = 'dw_alert_message=1; path=/';
+        }
+    });
+
 };
