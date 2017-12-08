@@ -1,0 +1,467 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isset name="DecoratorTemplate" value="checkout/pt_checkout" scope="page"/>
+<isdecorate template="${DecoratorTemplate}">
+	<isinclude template="util/modules"/>
+
+	<iscomment>
+		This template visualizes the billing step of both checkout scenarios.
+		It provides selecting a payment method, entering gift certificates and
+		specifying a separate billing address.
+		Depending on the checkout scenario (single or multi shipping) it is
+		either the second or third checkout step.
+	</iscomment>
+
+	<iscomment>Report this checkout step</iscomment>
+	<isreportcheckout checkoutstep="4" checkoutname="${'Billing'}"/>
+
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
+		<ischeckouttabs  position="header" checkoutpage="billing"/>
+	</isif>
+	<isif condition="${!empty(pdict.BillingError)}">
+		<div class="error-form">
+			<isprint value="${pdict.BillingError}"/>
+		</div>
+	<iselse>
+		<div class="error-form" style="display:none;"></div>
+	</isif>
+	<isif condition="${!empty(pdict.ppalError)}">
+		<isset name="paypalErr" value="${pdict.ppalError}" scope="page"/>
+	</isif>
+	<div class="contentbox checkout_cont">
+		<div class="contentboxcontent">
+			<div class="checkout billingsection">
+				
+				<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+					checkout progress indicator
+				 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+				<isif condition="${!pdict.CurrentForms.multishipping.entered.value}">
+					<ischeckoutprogressindicator step="2" multishipping="false" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
+				<iselse/>
+					<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
+				</isif>
+				
+				<div class="checkoutbilling">
+					<isset name="Shipments" value="${pdict.Basket.shipments}" scope="page"/>
+					<isif condition="${!empty(Shipments)}">
+						<iscomment>render a box per shipment</iscomment>
+						<isset name="shipmentCount" value="${0}" scope="page"/>
+						<div class="minishipments greater-than-767">
+							<isloop items="${Shipments}" var="shipment" status="loopstate">
+								<isif condition="${(shipment.giftCertificateLineItems.size() > 0 && shipment.shippingAddress == null) || shipment.shippingAddress != null}">
+									<isset name="shipmentCount" value="${shipmentCount+1}" scope="page"/>
+									<div class="minishipment">
+										<iscomment>omit the shipment name, if there is just one shipment</iscomment>
+										<isif condition="${Shipments.size() > 1 && pdict.Basket.productLineItems.size() > 0}"><div class="name">Shipment ${'#' + shipmentCount}</div></isif>
+										
+										<div class="details">
+										
+											<iscomment>
+												render the detail section depending on whether this is a physical shipment with products
+												(shipped to an address) or if this is a gift certificate (send via email)
+											</iscomment>
+											<div class="shipping-address">
+													<isprint value="${Resource.msg('global.shippingaddress','locale',null)}"/>
+											</div>
+											<div class="billingpageShippingaddress">
+												<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
+													<isloop items="${shipment.giftCertificateLineItems}" var="giftCertLI">
+														<div><isprint value="${giftCertLI.recipientName}"/></div>
+														<div>(<ismask p_string="${giftCertLI.recipientEmail}" p_maskchars="${6}"/>)</div>
+													</isloop>
+												<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
+													<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
+													<div><isprint value="${address.title}" /></div>
+													<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
+													<div><isprint value="${address.address1}"/></div>
+													<isif condition="${!empty(address.address2)}">
+														<div><isprint value="${address.address2}"/></div>
+													</isif>
+													<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
+													<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
+													<isif condition="${!empty(address.phone)}">
+														<div><isprint value="${address.phone}"/></div>
+													</isif>
+												<div class="hidden-shipping-address hide">${address.firstName}|${address.lastName}|${address.address1}|<isif condition="${!empty(address.address2)}">${address.address2}|<iselse/>|</isif>${address.city}|${address.stateCode}|${address.postalCode}|${address.phone}|${pdict.CurrentForms.billing.billingAddress.email.emailAddress.value}|${pdict.CurrentForms.billing.billingAddress.addressid.value}</div>
+												</isif>
+												
+											</div>
+										</div>
+										<div class="shippingMethodDetails">
+											<h2 class="input-style"><isprint value="${Resource.msg('singleshipping.shippingmethodheader','checkout',null)}"/></h2>
+											<div class="shippingmethod-block">
+												<span class="shippingmethodName"><isprint value="${shipment.shippingMethod.displayName}"/></span>
+												<span class="shippingPrice">
+													<isif condition="${shipment.adjustedShippingTotalNetPrice.value != shipment.shippingTotalNetPrice.value}" > 
+														<span class="standard-shipping standardshipping"><isprint value="${shipment.shippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
+														 <span class="discount-shipping discountshipping">
+															 <isif condition="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge) > 0}">
+																 <isprint value="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge)}"/>
+															 <iselse>
+															 	<isprint value="${Resource.msg('global.free','locale',null)}"/>
+															 </isif>
+														 </span>
+													<iselse/>
+														<span><isprint value="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
+													</isif>
+													<isif condition="${pdict.surcharge.value > 0}"><span class="shippingsurcharge"> + <isprint value="${pdict.surcharge.value}"/> <isprint value="${Resource.msg('singleshipping.surcharge','checkout',null)}"/></span></isif>
+												</span>
+											</div>
+										</div>
+									</div>
+								</isif>
+							</isloop>
+						</div>
+						<div class="billing_address_action">
+							<div class="less-than-767 go-back-shipping">
+								<span class="custom-achor-link">
+									<span class="arrow-size left-arrow">&nbsp;</span>
+									<a href="${URLUtils.https('COShipping-Start','billingreturn','true','editbilling','true')}"><isprint value="${Resource.msg('global.editshippingaddress','locale',null)}"/></a>
+								</span>
+							</div>
+							<div class="editshippingaddress billingbutton first greater-than-767">
+								<span class="arrow-size left-arrow">&nbsp;</span>
+								<a href="${URLUtils.https('COShipping-Start','billingreturn','true','editbilling','true')}"><isprint value="${Resource.msg('global.editshippingaddress','locale',null)}"/></a>
+							</div>
+							<div class="editshippingaddress billingbutton last greater-than-767">
+								<span class="arrow-size left-arrow">&nbsp;</span>
+								<a href="${URLUtils.https('COShipping-Start','editbilling','true')}"><isprint value="${Resource.msg('global.editshippingmethod','locale',null)}"/></a>
+							</div>
+						</div>
+						<hr class="hrdottedline authentication-detail-hrdottedline" align="center">
+					</isif>
+					<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.billing.htmlName}" class="checkout-billing address form-horizontal">
+						<input type="hidden" name="ltkSubscriptionCode" value="checkout" />
+						<input type="hidden" name="source" value="checkout" />
+						<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+						<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+							billing address
+						 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+						<fieldset>
+							<legend>
+								<isprint value="${Resource.msg('billing.addressheader','checkout',null)}"/>
+								<iscomment><div class="dialog-required"> <span class="required-indicator">&#8226; <em><isprint value="${Resource.msg('global.requiredfield','locale',null)}"/></em></span></div></iscomment>
+							</legend>
+							<isscript>
+								var customAttr = {
+									checked : "checked"
+								};
+							</isscript>
+							<iscomment>billing address area</iscomment>
+							<isscript>
+                              var shipaddr = {
+                              		 title : (address.title != null) ? address.title : '',
+                                     firstName : address.firstName,
+                                     lastName : address.lastName,
+                                     address1 : address.address1,
+                                     address2 : (address.address2 != null)? address.address2 : '',
+                                     postalCode : (address.postalCode != null) ? address.postalCode : '',
+                                     city : (address.city != null) ? address.city : '',
+                                     stateCode : (address.stateCode != null) ? address.stateCode : '',
+                                     countryCode : address.countryCode,
+                                     countryDisplayValue : Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null),
+                                     phone : (address.phone != null) ? address.phone : '' 
+                              }
+                       		</isscript>
+							<div class="custom-checkbox" data-address="${JSON.stringify(shipaddr)}">
+                                <isif condition="${!empty(pdict.CurrentForms.billing.billingAddress.sameasshippingaddress) && pdict.CurrentForms.billing.billingAddress.sameasshippingaddress.value}">
+	                                <div class="custom-link active"></div>
+	                                <div class="checkbox">
+	                                	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.sameasshippingaddress}"  type="checkbox" attributes="${customAttr}"/>
+	                               	</div>
+								<iselse/>
+	                                <div class="custom-link"></div>
+	                                <div class="checkbox">
+	                                	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.sameasshippingaddress}"  type="checkbox"/>
+	                                </div>
+                                  </isif>
+                          	</div>
+							<isinputfield formfield="${pdict.CurrentForms.billing.paypalval.paypalprocessed}" fieldClass="paypalprocessed" type="hidden"/>
+								
+							<iscomment>hidden input with action to trigger for the address form</iscomment>
+							<input type="hidden" name="${pdict.CurrentForms.billing.save.htmlName}" value="true" />
+							
+							<isset name="shippingAddr" value="${address}" scope="page"/>
+							<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
+							<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
+								<div class="select-address addresslist form-row custom-select">
+										<iscomment>	
+											<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
+												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
+											</label>
+										</iscomment>
+										<isscript>
+											importScript("site_rapalaEU:cart/CartUtils.ds");
+											var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
+										</isscript>
+										<iscomment>Start JIRA PREV-46:Checkout_Billing page: Not displaying the selected saved address in the 'Select an Address' drop down. Added p_form attribute </iscomment>
+										<div class="field-wrapper">
+											<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" p_form="billing" />
+										</div>
+										<iscomment>End JIRA PREV-46  </iscomment>
+									<iscomment> 
+										<div class="form-row form-row-button">
+											<button id="address-select-go-button" name="${pdict.CurrentForms.billing.selectAddress.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
+										</div>
+									</iscomment>
+								</div>
+					
+							</isif>
+							<div class="selected-shipping-address">
+								<isprint value="${shippingAddr.title}"/><br/>
+								<isprint value="${shippingAddr.firstName}"/>
+								<isprint value="${shippingAddr.lastName}"/><br/>
+								<isprint value="${shippingAddr.address1}"/> 
+								<isprint value="${shippingAddr.address2}"/><br/>
+								<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
+								<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/>
+								<isprint value="${shippingAddr.phone}"/>
+							</div>
+							<input type="hidden" value="${shippingAddr.stateCode}" class="shipping-state"/>
+							<isscript>
+								var currentCountry = require('site_rapalaEU/cartridge/scripts/util/Countries').getCurrent(pdict);
+							</isscript>
+							<div class="shipping-address-field-section billing-address-fields hide">
+								<isif condition="${pdict.CurrentCustomer.authenticated}">
+									 <div class="formfield form-row-50 form-row-left addressid"  >
+									 	<isscript>
+									 		var addressCustAttr = {
+												placeholder : 'ex. Home, Work (optional)'
+											};
+									 	</isscript>
+								    	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressid}" rowClass=" " type="input" value="true" attributes="${addressCustAttr}"/>
+								    	<a class="Custom-tooltip tooltip">
+											<img class="tooltip-shipping-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
+											<div class="tooltip-body" style="display:none">
+												<div class="tooltipcontainer Nick">
+													<span class="NickName"><b><isprint value="${Resource.msg('global.tooltipNicknameheader','locale',null)}"/></b></span>
+													<hr>
+														<div class="NickContent">
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent1','locale',null)}"/></br>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent2','locale',null)}"/></br>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent3','locale',null)}"/></br>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent4','locale',null)}"/>
+														</div>
+												</div>
+											</div>
+										</a>
+								    	<div class="clear"><!-- FLOAT CLEAR --></div>
+								    </div><!-- END: addressid -->
+							  </isif>
+								<isdynamicform formobject="${pdict.CurrentForms.billing.billingAddress.addressFields}" formdata="${currentCountry.dynamicForms.addressDetails}"/>
+							</div>
+							<div class="addressform">
+								<div class="edit-address-field hide">
+								 	<button class="edit-billing-button billingbutton" type="button" value="new-address-field"><span><isprint value="${Resource.msg('billinginfo.editaddress','checkout',null)}"/></span></button>
+								</div>
+								<div class="new-address-field">
+							    	<button class="new-address-button"  type="button"   value="new-address-field" data-address= '{UID : "",ID: "",key: "",addressid: "",firstName: "",lastName: "",address1: "",address2: "",postalCode: "",city: "",stateCode: "",countryCode: "",phone: "",type: "",displayValue: ""}'>
+							    		<span><isprint value="${Resource.msg('billinginfo.addaddress','checkout',null)}"/></span>
+							    	</button>
+							    </div>
+						    </div>
+							<isif condition="${pdict.CurrentCustomer.authenticated}">
+								<div class="formfield  email-field hide">
+                               		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left"/>
+								</div>
+							<iselse/>
+								<div class="formfield email-field">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+									<div class="whyemail-address">
+										<a class="Custom-tooltip">
+											<span class="whyemail-address-tooltip"><isprint value="${Resource.msg('global.whyrequired','locale',null)}"/> </span>
+											<div class="tooltip-body" style="display:none">
+												<div class="tooltipcontainer">
+													<isprint value="${Resource.msg('global.whyemailrequired','locale',null)}"/>
+												</div>
+											</div>
+										</a>
+									</div>
+								</div>
+								
+                               </isif>
+					
+							<iscomment>provide option to add address to address book if customer is authenticated</iscomment>
+							<isif condition="${pdict.CurrentCustomer.authenticated}">
+								<div class="custom-checkbox hide">
+									<div class="custom-link"></div>
+									<div class="checkbox">
+										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox"/>
+									</div
+								</div>
+							</isif>
+							<iscomment><div class="custom-checkbox">
+								<div class="custom-link"></div>
+								<div class="checkbox">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox"/>
+								</div>
+							</div>
+							<div class="form-caption">
+								<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
+							</div></iscomment>
+					
+						</fieldset>
+					
+						<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+							payment methods
+						 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+					
+					
+						<iscomment>payment method area</iscomment>
+						<div id="paymentmethodform" class="paymentmethodform">
+							<isinclude template="checkout/billing/paymentmethods"/>
+						</div>
+						<isbonusdiscountlineitem p_alert_text="${Resource.msg('billing.bonusproductalert','checkout',null)}" p_discount_line_item="${pdict.BonusDiscountLineItem}"/>
+					
+						<isset name="billingFormSubmitButtonID" value="billingSubmitButton" scope="page"/>
+						<isinclude template="paypal/expressbilling"/>
+						
+					 	<isif condition="${!flageallotmentcover}">
+						   	<div class="cardnotworking">
+								<a class="Custom-tooltip">
+									<span class="cardnotworking-tooltip"><isprint value="${Resource.msg('global.creditcardnotworking','locale',null)}"/></span>
+									<div class="tooltip-body" style="display:none">
+										<div class="tooltipcontainer">
+											<b><isprint value="${Resource.msg('global.creditcardnotworkingheader','locale',null)}"/></b>
+											<hr>
+											<span><isprint value="${Resource.msg('global.creditcardnotworkingbody','locale',null)}"/></span>
+											<ul>
+												<li><isprint value="${Resource.msg('global.creditcardnotworkingcontent1','locale',null)}"/></li>
+												<li><isprint value="${Resource.msg('global.creditcardnotworkingcontent2','locale',null)}"/></li>
+												<li><isprint value="${Resource.msg('global.creditcardnotworkingcontent3','locale',null)}"/></li>
+												<iscomment><li>${Resource.msg('global.creditcardnotworkingcontent4','locale',null)}</li></iscomment>
+												<li><isprint value="${Resource.msg('global.creditcardnotworkingcontent5','locale',null)}"/></li>
+											</ul>
+										</div>
+									</div>
+								</a>
+							</div>
+						</isif>
+						
+						<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+							VIP check
+						 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
+						 <isif condition ="${knifeAvailable == true || isAssignedToVIP}">
+						   	<fieldset>
+								<div class="clear"></div>
+								<hr class="hrdottedline authentication-detail-hrdottedline">		
+								<div class="purchase-title">  <isprint value="${Resource.msg('global.purchasetitle','locale',null)}"/></div>
+							   	
+							   		<div class="formfield addressoptions knife">
+							   			<isif condition="${knifeAvailable == true}">
+								   			<div class="name age-verify"><isprint value="${Resource.msg('global.knivelabel','locale',null)}"/></div>
+								   			<div class="custom-checkbox">
+				    							<div class="custom-link agecheck-link"></div>
+				    							<div class="checkbox">
+							 						<isinputfield formfield="${pdict.CurrentForms.agecheck.ischeck}" fieldClass="agecheck"  type="checkbox" />
+							 					</div>
+							 					<div class="knife-info-section">
+							    					<div class="agecheck_message"><span class="requiredindicator">*</span><isprint value="${Resource.msg('global.knivemsg','locale',null)}"/></div>
+							    					<div class="agecheck-order"><isprint value="${Resource.msg('global.kniveorder','locale',null)}"/></div><br/>
+							    					<div class="editorder-details">
+											    		<a class="edit-order" href="${URLUtils.url('Cart-Show')}"><span class="bold"><isprint value="${Resource.msg('global.editmyorder','locale',null)}"/></span></a>
+										    			<a class="terms-use" href="${URLUtils.url('Page-Show','cid','customer-terms-conditions')}"><span class="bold"><isprint value="${Resource.msg('global.termsofuse','locale',null)}"/></span></a><!-- END: label -->
+											    	</div>
+										    	</div>
+				    						</div>
+			    						 	
+								    	</isif>
+								    	<isif condition="${isAssignedToVIP}">
+											<div class="vip-terms">
+											<div class="name age-verify"><isprint value="${Resource.msg('global.viplabel','locale',null)}"/></div>
+												<div class="custom-checkbox">
+								    				<div class="custom-link"></div>
+							    					<div class="checkbox">
+										  				<isinputfield formfield="${pdict.CurrentForms.agecheck.isvip}" xhtmlclass="vipcheck"  type="checkbox" />
+										  			</div>
+										  			<div class="vip-message"><span class="requiredindicator">*</span><isprint value="${Resource.msg('global.vipterms','locale',null)}"/><a class="vip-click" href="${URLUtils.url('Page-Show','cid','customer-terms-conditions-vip')}" target="_blank"><span class="bold"><isprint value="${Resource.msg('global.viptermsandconditions','locale',null)}"/></span></a><isprint value="${Resource.msg('global.vipterms2','locale',null)}"/></div>
+												</div>
+											</div>
+										</isif>
+							   		</div>
+						    		<div class="clear"></div>
+						    	
+						    	
+							</fieldset>
+					   	</isif>
+					  
+						<div class="column new-summery-cart mobile-view">
+							<hr class="hrdottedline authentication-detail-hrdottedline">
+							<isinclude template="checkout/minisummary"/>
+						</div>
+						<hr class="hrdottedline authentication-detail-hrdottedline">	
+						<div class="side-note">
+							<div class="side-note-section">
+								<isprint value="${Resource.msg('billinginfo.orderplaced','checkout',null)}"/>
+							</div>
+						</div>
+						<div class="form-row form-row-button form-actions">
+							<div class="ipad-handling">
+								<div class="singleshipping_error hide"><isprint value="${Resource.msg('billinginfo.addresserror','checkout',null)}"/></div>
+								<div class="continue-checkout-button">
+									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
+											<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
+									<iselse/>
+											<button class="button-fancy-large continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
+									</isif>
+									<div class="cart-payment-buttons">
+										<div class="trust-marks-imgs">
+											<span class="payment-trust-imgs pci-secured-payment-icon"></span>
+											<span class="payment-trust-imgs smcs-payment-icon"></span>
+										</div>
+									</div>
+								</div>
+								
+								<div class="ordergothrough-tooltip">
+									<a class="ordergothrough_tooltip Custom-tooltip"><isprint value="${Resource.msg('global.didmyordergothrough','locale',null)}"/>
+										<img src ="${URLUtils.staticURL('/images/responsive-icons/tooltip.svg')}" /> 
+										<div class="tooltip-body" style="display:none">
+											<div class="tooltipcontainer">
+												<b><isprint value="${Resource.msg('global.ordergothrough-header','locale',null)}"/></b>
+													<hr>
+														<span><isprint value="${Resource.msg('global.ordergothrough-cont','locale',null)}"/></span><br>
+														<span class="Troubleshooting-Tips"><isprint value="${Resource.msg('global.ordergothrough-subheader','locale',null)}"/>:</span>
+														<ul>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont1new','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont2new','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont3new','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont4new','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont5','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont6','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont7','locale',null)}"/></li>
+														</ul> 
+											</div>
+										</div>  
+									</a>
+								</div>
+							</div>
+							
+						</div>
+					
+						<iscomment>Address validation-UPS we might add</iscomment>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<isscript>
+	importScript("site_rapalaEU:util/ViewHelpers.ds");
+	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
+	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
+	var json = JSON.stringify(countries);
+</isscript>
+<script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
+
+<iscomment>Google Analytics-Goals Funnels</iscomment>
+
+<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
+<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
+	<script>
+		//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
+		ga('send' ,'pageview', '/billing-info');
+		//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
+		//ga('send' ,'pageview', '/checkout_MultiPage/billing.html');
+	</script>
+</isif>
+</isdecorate>
