@@ -337,6 +337,30 @@
             border: $button-big-hover-border;
             box-shadow: $button-big-hover-box-shadow;
         }
+    } @else if ($type == 'promo') {
+        height: $button-promo-height;
+        @include font-size($button-promo-font-size);
+        @include line-height($button-promo-line-height);
+        font-weight: $button-promo-font-weight;
+        font-family: $button-promo-font-family;
+        letter-spacing: $button-promo-letter-spacing;
+        color: $button-promo-color;
+        text-decoration: $button-promo-text-decoration;
+        text-transform: $button-promo-text-transform;
+        padding: $button-promo-padding;
+        background: $button-promo-bg;
+        border: $button-promo-border;
+        border-radius: $button-promo-border-radius;
+        transition: all 0.3s;
+        min-width: rem($button-promo-min-width);
+        box-shadow: $button-promo-box-shadow;
+        &:hover {
+            color: $button-promo-hover-color;
+            text-decoration: $button-promo-hover-text-decoration;
+            background: $button-promo-hover-bg;
+            border: $button-promo-hover-border;
+            box-shadow: $button-promo-hover-box-shadow;
+        }
     } @else  {
         height: $button-height;
         @include font-size($button-font-size);
@@ -597,10 +621,14 @@ p a,
 }
 
 button,
-.button {
+.button,
+a.button {
     @include button;
     &.big {
         @include button('big');
+    }
+    &.promo {
+        @include button('promo');
     }
 }
 
