@@ -22,10 +22,10 @@ var countries = require('./countries'),
     tls = require('./tls'),
     tagmanager = require('./tagmanager');
 
-// if jQuery has not been loaded, load from google cdn
-if (!window.jQuery) {
+// if $ has not been loaded, load from google cdn
+if (!window.$) {
     var s = document.createElement('script');
-    s.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+    s.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/$/1.7.1/$.min.js');
     s.setAttribute('type', 'text/javascript');
     document.getElementsByTagName('head')[0].appendChild(s);
 }
@@ -34,7 +34,7 @@ require('./jquery-ext')();
 require('./cookieprivacy')();
 require('./captcha')();
 
-var $ = window.jQuery;
+var $ = window.$;
 
 function resetPasswordEvents() {
     $('body').find('.PasswordResetDialog .field-wrapper input').off('change').on('click change', function () {
@@ -62,7 +62,7 @@ function resetPasswordEvents() {
     // Attach keypress handler to input box.  Submit form if user presses 'enter' key.
     $('body').find('.PasswordResetDialog input.resetold').keypress(function (e) {
         if (e.which == 13) {
-            //jQuery('#sendBtn').click();
+            //$('#sendBtn').click();
             return false;
         }
         return true;
@@ -211,6 +211,34 @@ function initializeEvents() {
     }, function () {
         $('.domainswitch').hide();
     });
+
+    // Footer copyright year
+    $('.copyright-year').html(new Date().getFullYear());
+
+    // Footer Brands carousel
+    $('#footer-brands').owlCarousel({
+        items: 5,
+        slideBy: 1,
+        margin: 0,
+        navRewind: false,
+        rewind: false,
+        nav: true,
+        dots: false,
+        navigation: false,
+        autoWidth: true,
+        responsive: {
+            0: {
+                items: 3
+            },
+            767: {
+                items: 2
+            },
+            1023: {
+                items: 5
+            }
+        }
+    });
+
     $('.domainswitch').hover(function () {
         $(this).show();
     }, function () {
@@ -218,70 +246,41 @@ function initializeEvents() {
     });
     $('div.pseudo_self_label').each(
         function () {
-            var $this = jQuery(this);
-            var $input = $this
-                .children('input[type="text"]');
+            var $this = $(this);
+            var $input = $this.children('input[type="text"]');
             $input.data('toggle', $input.val());
             //used to add a class to placeholder for styling
             if ($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()) {
                 $('.emailinput.emailfooter').addClass('footerplace');
             }
-            /**
-             * if(jQuery.trim($input.val()) != "") {
-                 * $input.data('toggle').hide(); } else
-             *if($input.data('toggle') &&
-             * $input.data('toggle').size() >= 1) {
-                 * $input.val($input.data('toggle')); }
-             */
-            $input
-                .blur(function () {
-                    var $this = jQuery(this);
-                    if (jQuery
-                            .trim($this.val()) == '') {
-                        // $this.data('toggle').show();
-                        $this
-                            .val($this
-                                .data('toggle'));
-                        //used to add a class to placeholder for styling
-                        if ($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()) {
-                            $('.emailinput.emailfooter').addClass('footerplace');
-                        }
 
+            $input.blur(function () {
+                var $this = $(this);
+                if ($.trim($this.val()) == '') {
+                    $this.val($this.data('toggle'));
+                    if ($('.emailinput.emailfooter').attr('data-placeholder') == $input.val()) {
+                        $('.emailinput.emailfooter').addClass('footerplace');
                     }
-                });
-            $input
-                .focus(function () {
-                    $('.emailinput.emailfooter').removeClass('footerplace');
-                    var $this = jQuery(this);
-                    if ($this.data('toggle') && (jQuery
-                            .trim($this
-                                .val()) == jQuery
-                            .trim($this
-                                .data('toggle')))) {
-                        // $this.data('toggle').show();
+                }
+            });
+
+            $input.focus(function () {
+                $('.emailinput.emailfooter').removeClass('footerplace');
+                var $this = $(this);
+                if ($this.data('toggle') && ($.trim($this.val()) == $.trim($this.data('toggle')))) {
+                    $this.val('');
+                }
+            });
+
+            $this.parents('form').submit(function () {
+                var $this = $(this);
+                $this.find('div.pseudo_self_label input').each(function () {
+                    var $this = $(this);
+                    if ($this.data('toggle') && $this.data('toggle') == $this.val()) {
                         $this.val('');
                     }
                 });
-            $this
-                .parents('form')
-                .submit(
-                    function () {
-                        var $this = jQuery(this);
-                        $this
-                            .find(
-                                'div.pseudo_self_label input')
-                            .each(
-                                function () {
-                                    var $this = jQuery(this);
-                                    if ($this
-                                            .data('toggle') && $this
-                                            .data('toggle') == $this
-                                            .val()) {
-                                        $this
-                                            .val('');
-                                    }
-                                });
-                    });
+            });
         });
 
     //
@@ -631,10 +630,10 @@ var app = {
     };
 })();
 
-jQuery(function () {
-    jQuery('.accordion')
+$(function () {
+    $('.accordion')
         .hover(function () {
-            var $this = jQuery(this);
+            var $this = $(this);
             if ($this.hasClass('highlight')) {
                 $this.addClass('contentbox');
             } else {
@@ -642,10 +641,10 @@ jQuery(function () {
             }
         },
             function () {
-                jQuery(this).removeClass('tabover').addClass('contentbox');
+                $(this).removeClass('tabover').addClass('contentbox');
             }
         ).click(function () {
-            var $this = jQuery(this);
+            var $this = $(this);
             if ($this.find('.expandcontent').length > 0) {
                 $this.find('h1').toggleClass('downarrow').next().toggle('fast');
                 $this.toggleClass('highlight').toggleClass('tabover').toggleClass('contentbox');

@@ -193,15 +193,15 @@ var headerEvents = {
             $(this).parent('.user-info').toggleClass('active');
         });
         $('.change-regionnew').mouseenter(function () {
-            $('.domainswitch-header').show();
+            $(this).find('.domainswitch-header').show();
             $('.headermask').show();
         });
         $('.change-region').mouseenter(function () {
-            jQuery('.domainswitch').show();
+            $('.domainswitch').show();
             $('.region_overlay').show();
         });
         $('.region_overlay').mouseenter(function () {
-            jQuery('.domainswitch').hide();
+            $('.domainswitch').hide();
             $(this).hide();
         });
         $('button').on('click', function () {
@@ -260,7 +260,7 @@ var headerEvents = {
             $('.user-info').show();
             $('.headermask').show();
         });
-        jQuery(window).bind('message', function (e) {
+        $(window).bind('message', function (e) {
             var str;
             e = e.originalEvent;
             if (e.origin.indexOf(document.location.host) === -1) {
@@ -290,7 +290,7 @@ var headerEvents = {
                 $('.accountcontent .loading').remove();
             }
         });
-        jQuery('.signin-button').click(function (e) {
+        $('.signin-button').click(function (e) {
             e.preventDefault();
             var realForm = $(this).closest('form');
             if (!realForm.valid()) {
@@ -360,7 +360,7 @@ var headerEvents = {
             });
             return false;
         });
-        jQuery(window).bind('message', function (e) {
+        $(window).bind('message', function (e) {
             var str;
             e = e.originalEvent;
             if (e.origin.indexOf(document.location.host) === -1) {
@@ -409,7 +409,7 @@ var headerEvents = {
             }
         });
 
-        jQuery('.create-account').unbind('click').click(function (e) {
+        $('.create-account').unbind('click').click(function (e) {
             e.preventDefault();
             var realForm = $(this).closest('form');
             if (!realForm.valid()) {
@@ -464,7 +464,7 @@ var headerEvents = {
                 var fName = $('.loggeduser > a span.username span.first_name').eq(0);
                 var Lname = $('.headercustomerinfo > .second_name');
 
-                jQuery.each(firstnameWords, function (i, v) {
+                $.each(firstnameWords, function (i, v) {
                     textlength = textlength == 0 ? textlength + v.length : textlength + v.length + 1;
                     if (i == 0 && v.length > limit) {
                         fName.text(v.substr(0, 16) + '...');
