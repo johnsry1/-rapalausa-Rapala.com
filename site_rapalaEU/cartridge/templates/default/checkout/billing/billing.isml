@@ -149,15 +149,17 @@
 							<iscomment>billing address area</iscomment>
 							<isscript>
                               var shipaddr = {
+                              		 title : (address.title != null) ? address.title : '',
                                      firstName : address.firstName,
                                      lastName : address.lastName,
                                      address1 : address.address1,
                                      address2 : (address.address2 != null)? address.address2 : '',
-                                     postalCode : address.postalCode,
-                                     city : address.city,
-                                     stateCode : address.postalCode,
-                                     countryCode : "US",
-                                     phone : address.phone
+                                     postalCode : (address.postalCode != null) ? address.postalCode : '',
+                                     city : (address.city != null) ? address.city : '',
+                                     stateCode : (address.stateCode != null) ? address.stateCode : '',
+                                     countryCode : address.countryCode,
+                                     countryDisplayValue : Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null),
+                                     phone : (address.phone != null) ? address.phone : '' 
                               }
                        		</isscript>
 							<div class="custom-checkbox" data-address="${JSON.stringify(shipaddr)}">
@@ -188,7 +190,7 @@
 											</label>
 										</iscomment>
 										<isscript>
-											importScript("app_rapala_core:cart/CartUtils.ds");
+											importScript("site_rapalaEU:cart/CartUtils.ds");
 											var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
 										</isscript>
 										<iscomment>Start JIRA PREV-46:Checkout_Billing page: Not displaying the selected saved address in the 'Select an Address' drop down. Added p_form attribute </iscomment>

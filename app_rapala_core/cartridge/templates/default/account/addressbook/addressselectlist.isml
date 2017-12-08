@@ -28,6 +28,11 @@
 				
 				selected="selected";
 			}
+			address.title = address.title != null ? address.title : '';
+        	address.stateCode = address.stateCode != null ? address.stateCode : '';
+        	address.postalCode = address.postalCode != null ? address.postalCode : '';
+        	address.phone = address.phone != null ? address.phone : '';
+			
 		</isscript>
 		<isif condition="${previous_addresses.indexOf(aid) < 0}">
 			<option value="${aid}" ${selected == "selected" ? "selected='selected'" : ""} data-address='<isprint value="${JSON.stringify(address).replace("'","^")}" encoding="off"/>'>
