@@ -416,7 +416,7 @@ var util = {
     updateStateOptions: function (form) { 
         var $form = $(form);
         //Country should be pre-selected based on geoip info
-        if ($form.find('select[id$="_country"]').val().length == 0) {
+        if ($form.find('select[id$="_country"]').val() != null && $form.find('select[id$="_country"]').val().length == 0) {
             if (window.User.geolocation != undefined) {
                 var countryCode = window.User.geolocation.countryCode;
                 if (Countries[countryCode] != undefined) {
@@ -518,7 +518,7 @@ var util = {
             }
         }
         
-        if ($phoneContainer.length != 0) {
+        if ($phoneContainer.length != 0) { 
             url = this.appendParamsToUrl(Urls.getPhoneHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
             options = {
                 url: url,
