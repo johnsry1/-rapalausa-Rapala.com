@@ -25,7 +25,7 @@ var requiredSettings = {
 var settings = {
     errorClass: 'errorclient',
     errorElement: 'span',
-    focusInvalid: false,
+    focusInvalid: true,
     onkeyup: function (element) {
         if (!this.checkable(element)) {
             $(element).addClass('stopKeypress');
