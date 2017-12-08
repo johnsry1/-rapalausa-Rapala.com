@@ -169,6 +169,7 @@ function handleShippingSettings(cart) {
         defaultShipment = cart.getDefaultShipment();
         shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
+        shippingAddress.setTitle(session.forms.singleshipping.shippingAddress.addressFields.title.value);
         shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
         shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
         shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
@@ -262,16 +263,13 @@ function singleShipping() {
             
             var stateVerification = startStateVerification();
             var shippingmethod = session.forms.singleshipping.shippingAddress.shippingMethodID.value;
-            if(stateVerification){
+            if (stateVerification) {
             	response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification));
             	app.getView({ShipLimit : stateVerification}).render('checkout/shipping/singleshipping');
-            }
-            else if(shippingmethod == null){
+            } else if (shippingmethod == null) {
                 response.redirect(URLUtils.https('COShipping-Start','ShipLimit',true));
                 app.getView({ShipLimit : true}).render('checkout/shipping/singleshipping');
-            }
-            
-            else{
+            } else {
             	//UPS validation code
                 var DAVResult = validateDAV(cart);
                 if (DAVResult.endNodeName !== 'success') {
