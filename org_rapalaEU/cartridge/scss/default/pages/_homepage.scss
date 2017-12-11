@@ -8,7 +8,7 @@
 }
 
 #slideshow.cell {
-    margin: 0 0 rem(60px);
+    margin: 0 0 rem(60px) !important;
     padding: 0;
     height: auto;
     .owl-carousel.owl-theme {
@@ -75,6 +75,15 @@
             position: static;
             margin: 0;
             width: 100%;
+            float: none;
+            overflow: hidden;
+        }
+        .column.cell3 {
+            .cell.downshift {
+                @include respond(desktop-down) {
+                    padding: 0 rem(10px);
+                }
+            }
         }
     }
 }
@@ -119,7 +128,11 @@
 
 .homepage-promotion {
     clear: both;
-    margin-top: rem(35px);
+    padding: 0 rem(10px);
+    @include respond(desktop) {
+        margin-top: rem(15px);
+        padding: 0;
+    }
     .block {
         position: relative;
         img {
@@ -143,7 +156,12 @@
         &.left-bottom {
             .info {
                 left: rem(30px);
+                left: rem(30px);
                 bottom: rem(30px);
+                bottom: rem(30px);
+                @include respond(desktop) {
+
+                }
             }
         }
         &.right-bottom {
