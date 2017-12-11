@@ -1,0 +1,110 @@
+/**
+ * Update inventory import to export DW inventory table list,
+ * to exclude inventory records with allocation = 0.
+ *
+ * @input sourceInventoryFile : String original downloaded catalog
+ * @output outFilePath : String  Name of the local file
+ */
+
+importPackage( dw.io );
+importPackage( dw.net );
+importPackage( dw.system );
+importPackage( dw.util );
+
+function execute( args : PipelineDictionary ) : Number
+{
+	
+	var fileNameIn : String = args.sourceInventoryFile;
+	var filePath = fileNameIn.split('/');
+	var targetFilePath : File = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + filePath[0] + File.SEPARATOR + 'temp-' + filePath[1]);
+	//File.IMPEX + File.SEPARATOR + 'src' + File.SEPARATOR
+	
+	try {
+		//var sourceFilePath : String = File.IMPEX + File.SEPARATOR + 'src' + File.SEPARATOR + args.sourceInventoryFile;
+		var sourceFilePath : File = new File(File.IMPEX + File.SEPARATOR + 'src' + File.SEPARATOR + fileNameIn);
+		var target : File = new File(targetFilePath.fullPath);
+		var writer : FileReader = new FileWriter(target);
+		
+		var file : File = new dw.io.File(sourceFilePath.fullPath);
+		var reader : FileReader = new dw.io.FileReader(file, "UTF-8");
+		if (65279 !== reader.read(1).charCodeAt(0)) {
+			reader.close(); // No BOM, restart
+			reader = new dw.io.FileReader(file);
+		}
+
+		var xmlReader : XMLStreamReader = new dw.io.XMLStreamReader(reader);
+		var xmlWriter : XMLIndentingStreamWriter = new XMLIndentingStreamWriter(writer);
+		xmlWriter.writeStartDocument("UTF-8", "1.0");
+		
+		var localElementName : String = '';
+		var headersToEnter = ['records'];
+		var openedHeader, eventType;
+		var nodeElement : XML = '<inventory xmlns="http://www.demandware.com/xml/impex/inventory/2007-05-31">';
+		xmlWriter.writeRaw(nodeElement);
+		xmlWriter.writeRaw('<inventory-list>');
+		
+		
+		while (xmlReader.hasNext()){
+			eventType = xmlReader.next();
+			if (eventType == XMLStreamConstants.START_ELEMENT){
+				localElementName = xmlReader.getLocalName();
+				
+				if(localElementName == 'record') {
+					nodeElement = xmlReader.readXMLObject();
+					var allocation = getChildElement(nodeElement, 'allocation');
+					if (allocation > 0) {
+						xmlWriter.writeRaw(nodeElement);
+					}
+				}
+				if(localElementName == 'header') {
+					xmlWriter.writeRaw(xmlReader.getXMLObject().toXMLString());
+				}
+				
+				// opening of elements that needs to be copied
+				if (headersToEnter.indexOf(localElementName) >= 0) {
+					openedHeader = localElementName;
+					xmlWriter.writeRaw('<' + localElementName + '>');
+					continue;
+				}
+				// write everything inside of opened element
+				if (openedHeader) {
+					//xmlWriter.writeRaw(xmlReader.getXMLObject().toXMLString());
+				}
+				continue;
+			}
+			if (eventType == XMLStreamConstants.END_ELEMENT){
+				localElementName = xmlReader.getLocalName();
+				// close headers
+				if (localElementName == openedHeader) {
+					xmlWriter.writeRaw('</' + openedHeader + '>');
+					openedHeader = '';
+				}
+			}
+		}
+		xmlWriter.writeRaw('</inventory-list>');
+		xmlWriter.writeRaw('</inventory>');
+		xmlWriter.writeEndDocument();
+		
+		xmlWriter.close();
+		xmlReader.close();
+		reader.close();
+		targetFilePath.renameTo(sourceFilePath);
+		//Logger.error('\nTotal records count=' + tt + '\nnot zero records = ' + zz + '\nrecords count with zero allocation = ' + (tt-zz));
+	} catch(e){
+		var error = e;
+		Logger.error("inventory pre processing error: " + error.message );
+		return PIPELET_ERROR;
+	}
+	
+	Logger.info("File for exclude inventory records generated sucessfully");
+	return PIPELET_NEXT;
+}
+
+function getChildElement(nodeElement, key) : XML {
+	for each (var searchElement : XML in nodeElement.children()) {
+		if (searchElement.localName() == key) {
+			return searchElement;
+		}
+	}
+	return null;
+}

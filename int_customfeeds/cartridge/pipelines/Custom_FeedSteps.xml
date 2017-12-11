@@ -187,7 +187,7 @@
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="feeds/DownloadFeed.ds"/>
-          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="Logger" key="ScriptLog"/>
           <key-binding alias="File" key="File"/>
           <key-binding alias="TechnicalError" key="TechnicalError"/>
           <key-binding alias="RemoteFileURL" key="RemoteFileURL"/>
@@ -1761,28 +1761,12 @@
                                                     </segment>
                                                   </branch>
                                                 </node>
-                                                <simple-transition>
-                                                  <transition-display>
-                                                    <bend-point relative-to="source" x="1" y="0"/>
-                                                  </transition-display>
-                                                </simple-transition>
+                                                <simple-transition/>
                                                 <node>
-                                                  <pipelet-node pipelet-name="ImportInventoryLists" pipelet-set-identifier="bc_api">
-                                                    <key-binding alias="File" key="ImportFile"/>
-                                                    <key-binding alias="Task['import-mode']" key="ImportMode"/>
-                                                    <key-binding alias="null" key="ErrorCode"/>
-                                                    <key-binding alias="null" key="ErrorMsg"/>
-                                                    <key-binding alias="null" key="LogFileName"/>
-                                                    <key-binding alias="ImportStatus" key="Status"/>
-                                                  </pipelet-node>
+                                                  <call-node start-name-ref="Custom_FeedSteps-ImportInventoryExcludeZeroRecords"/>
                                                   <node-display orientation="horizontal" x="1" y="0"/>
                                                   <branch basename="b3" source-connector="error">
-                                                    <transition target-connector="in1" target-path="../../../../../../../b3.7">
-                                                      <transition-display>
-                                                        <bend-point relative-to="source" x="0" y="1"/>
-                                                        <bend-point relative-to="target" x="-1" y="-1"/>
-                                                      </transition-display>
-                                                    </transition>
+                                                    <transition target-connector="in1" target-path="../../../../../../../b3.7"/>
                                                   </branch>
                                                 </node>
                                                 <transition target-connector="in1" target-path="../../../../../../../+7"/>
@@ -2322,7 +2306,81 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
+  <branch basename="ImportInventoryExcludeZeroRecords">
+    <segment>
+      <node>
+        <start-node call-mode="private" name="ImportInventoryExcludeZeroRecords" secure="false"/>
+        <node-display x="16" y="18"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="ImportInventoryExcludeZeroRecords.ds"/>
+          <key-binding alias="null" key="ScriptLog"/>
+          <key-binding alias="File" key="sourceInventoryFile"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="error"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <pipelet-node pipelet-name="ImportInventoryLists" pipelet-set-identifier="bc_api">
+          <key-binding alias="File" key="ImportFile"/>
+          <key-binding alias="Task['import-mode']" key="ImportMode"/>
+          <key-binding alias="null" key="ErrorCode"/>
+          <key-binding alias="null" key="ErrorMsg"/>
+          <key-binding alias="null" key="LogFileName"/>
+          <key-binding alias="ImportStatus" key="Status"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b3" source-connector="error">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <end-node name="error"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <end-node/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_19">
     <segment>
       <node>
         <text-node>
