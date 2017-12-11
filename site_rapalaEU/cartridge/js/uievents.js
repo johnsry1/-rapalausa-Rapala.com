@@ -68,7 +68,7 @@ var uievents = {
                 if ($(this).is('[name$=_sameasshippingaddress]')) {
                     var selectedAddress = $(this).closest('.custom-checkbox').data('address');
                     $('.selected-shipping-address').empty();
-                    $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + + selectedAddress.countryDisplayValue + '<br/>' +selectedAddress.phone);
+                    $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.countryDisplayValue + '<br/>' +selectedAddress.phone);
                     util.fillAddressFields(selectedAddress, $form);
                     $('.edit-address-field').addClass('hide');
                     $('.selected-shipping-address, .new-address-field').removeClass('hide');
