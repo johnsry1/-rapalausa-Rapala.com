@@ -8529,11 +8529,20 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <min-length>0</min-length>
                 <default-value>blog</default-value>
             </attribute-definition>
+			<attribute-definition attribute-id="enableBrandFolderRedirect">
+				<display-name xml:lang="x-default">Enable Brand Folder Redirect</display-name>
+                <description xml:lang="x-default">If set to 'true' to every folder request will be added corresponding brand ID value like parameter. Url's for folder will be broken. If you are using 'blog' logic please set to 'false'.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<default-value>false</default-value>
+			</attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Blog">
                 <display-name xml:lang="x-default">Blog</display-name>
                 <attribute attribute-id="blogRootFolder"/>
+                <attribute attribute-id="enableBrandFolderRedirect"/>
             </attribute-group>
             <attribute-group group-id="StoreLocator">
                 <display-name xml:lang="x-default">Store Locator</display-name>

@@ -276,7 +276,7 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	      	}
 			
 	    }
-		else if (!http.get("fdid").empty && !empty(dw.content.ContentMgr.getFolder(http.get("fdid").stringValue) && dw.system.Site.getCurrent().ID == 'rapala') ) 
+		else if (!http.get("fdid").empty && !empty(dw.content.ContentMgr.getFolder(http.get("fdid").stringValue) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandFolderRedirect')) ) 
 	    {
 	    	
 	    	var host : String = request.getHttpHost();
@@ -314,7 +314,7 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 			
 	    	
 	    	}else{
-	    		if (dw.system.Site.getCurrent().ID == 'rapala') {
+	    		if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandFolderRedirect')) {
 		    	switch(session.custom.currentSite){
 				case 'rapala' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
 				break;

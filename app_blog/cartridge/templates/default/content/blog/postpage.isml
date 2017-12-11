@@ -50,7 +50,11 @@
 						<a id="more-posts-link" href="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}">
 							<isprint value="${Resource.msg('blog.moreposts', 'blog', null)}" />
 						</a>
-						<div id="more-posts-container"></div>
+						<div id="more-posts-container">
+							<div id="additional-posts" style="display:none">
+								<isinclude url="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}"/>
+							</div>
+						</div>
 					</isif>
 				</div>
 		</div><!-- END: primary -->

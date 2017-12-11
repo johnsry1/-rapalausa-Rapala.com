@@ -527,7 +527,7 @@ function initializeDom() {
 
     // Make sure that the SVGs work properly in older browsers
     /*eslint-disable */
-    svg4everybody();
+    //svg4everybody();
     /*eslint-enable */
 }
 
@@ -544,7 +544,8 @@ var pages = {
     wishlist: require('./pages/wishlist'),
     rapalainsider: require('./pages/rapalainsider'),
     storelocator: require('./pages/storelocator'),
-    international: require('./pages/international')
+    international: require('./pages/international'),
+    blog: require('./pages/blog')
 };
 
 var app = {
