@@ -9,12 +9,9 @@ parent.postMessage('<isprint value="${JSON.stringify(pdict.Message).replace("'",
 </head>
 <body>
 </body></html>
-<isscript>
-	var locale = 'en_US';
-</isscript>
 <isif condition="${pdict.Message.process != null || pdict.Message.process === 'create-account'}">
-<isinclude url="${URLUtils.url('ReportingEvent-Start',
-				'ID', 				'AccountOpen',
-				'TotalUserCount', 	 StringUtils.formatNumber(dw.customer.CustomerMgr.registeredCustomerCount, '#,##0', locale)
-				)}"/>
+	<isinclude url="${URLUtils.https('ReportingEvent-Start',
+					'ID', 				'AccountOpen',
+					'TotalUserCount', 	 StringUtils.formatNumber(dw.customer.CustomerMgr.registeredCustomerCount, '#,##0', 'en_US')
+					)}"/>
 </isif>
