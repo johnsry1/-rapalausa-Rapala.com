@@ -68,7 +68,7 @@ var uievents = {
                 if ($(this).is('[name$=_sameasshippingaddress]')) {
                     var selectedAddress = $(this).closest('.custom-checkbox').data('address');
                     $('.selected-shipping-address').empty();
-                    $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + + selectedAddress.countryDisplayValue + '<br/>' +selectedAddress.phone);
+                    $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.countryDisplayValue + '<br/>' +selectedAddress.phone);
                     util.fillAddressFields(selectedAddress, $form);
                     $('.edit-address-field').addClass('hide');
                     $('.selected-shipping-address, .new-address-field').removeClass('hide');
@@ -332,20 +332,22 @@ var uievents = {
         });
         $('body').on('keypress keyup', 'input[id$="_addressid"],input[id$="_addressFields_firstName"],input[id$="_addressFields_lastName"],input[id$="_addressFields_address1"],input[id$="_addressFields_address2"],input[id$="_addressFields_city"],input[id$="_addressFields_phone"],input[id$="_addressFields_postal"],input[id$="_contactus_phone"]', function (e) {
             var keycode = e.keyCode ? e.keyCode : e.which;
-            var maxlength = $(this).attr('maxlength');
+            var maxlength = $(this).attr('maxlength'); 
             var maxlmsg = 'This field is limited to ' + maxlength + ' characters.';
+            /*
             if (jQuery(this).hasClass('phone') || jQuery(this).hasClass('phoneCDUS')) {
                 maxlength = 14;
                 $(this).attr('maxlength', maxlength);
                 maxlmsg = 'This field is limited to 10 numbers.';
             }
-
+            
             if (jQuery(this).hasClass('postal')) {
                 maxlength = 10;
                 $(this).attr('maxlength', maxlength);
                 maxlmsg = 'This field is limited to 9 numbers.';
             }
-            if (keycode != 86) {
+            */
+            if (keycode != 86) { 
                 var maxElement = '<div class=\'maxelement hide\'>' + maxlmsg + '</div>';
                 if (($(this).val().length >= maxlength) && (keycode != 9)) {
                     if ($(this).closest('.field-wrapper').find('span.errorclient').length != 0) {

@@ -169,7 +169,6 @@ function handleShippingSettings(cart) {
         defaultShipment = cart.getDefaultShipment();
         shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
-        shippingAddress.setTitle(session.forms.singleshipping.shippingAddress.addressFields.title.value);
         shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
         shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
         shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
@@ -665,3 +664,5 @@ exports.EmptyCart = guard.ensure(['https'], emptyCart);
  * Local methods
  */
 exports.PrepareShipments = prepareShipments;
+exports.StartStateVerification = startStateVerification;
+exports.ValidateDAV = validateDAV;
