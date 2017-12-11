@@ -664,3 +664,5 @@ exports.EmptyCart = guard.ensure(['https'], emptyCart);
  * Local methods
  */
 exports.PrepareShipments = prepareShipments;
+exports.StartStateVerification = startStateVerification;
+exports.ValidateDAV = validateDAV;
