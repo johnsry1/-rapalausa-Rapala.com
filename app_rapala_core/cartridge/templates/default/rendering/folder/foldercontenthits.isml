@@ -25,7 +25,7 @@
 					<h1 class="search-result"><isprint value="${Resource.msg('searchrefinebar.searchresultsheader','search',null)}" /></h1>
 				</isif>
 			</isif>
-			<isif condition="${pdict.ProductSearchResult.category.displayName!=null}"> 
+			<isif condition="${pdict.ProductSearchResult.category !=null || pdict.ProductSearchResult.category.displayName!=null}"> 
 			<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}" /></h1> 
 			</isif>
 			
