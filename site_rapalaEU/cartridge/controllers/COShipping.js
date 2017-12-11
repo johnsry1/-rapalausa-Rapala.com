@@ -17,8 +17,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 var Pipelet = require('dw/system/Pipelet');
 /* Script Modules */
-var app 		= require('~/cartridge/scripts/app');
-var guard 		= require('~/cartridge/scripts/guard');
+var app = require('app_rapala_controllers/cartridge/scripts/app');
+var guard = require('app_rapala_controllers/cartridge/scripts/guard');
 var Customer 	= app.getModel('Customer');
 
 /**
@@ -141,7 +141,7 @@ function start() {
     if (cart.getProductLineItems().size() === 0) {
         app.getController('COBilling').Start();
     } else {
-        pageMeta = require('~/cartridge/scripts/meta');
+        pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
         pageMeta.update({
             pageTitle: Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'Rapala Checkout')
         });
@@ -169,15 +169,17 @@ function handleShippingSettings(cart) {
         defaultShipment = cart.getDefaultShipment();
         shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
+        var subbmittedAddressFileds = request.httpParameterMap.getParameterMap('dwfrm_singleshipping_shippingAddress_addressFields_');
+        shippingAddress.setTitle(subbmittedAddressFileds.isParameterSubmitted('title') ? subbmittedAddressFileds.get('title').value : '');
         shippingAddress.setFirstName(session.forms.singleshipping.shippingAddress.addressFields.firstName.value);
         shippingAddress.setLastName(session.forms.singleshipping.shippingAddress.addressFields.lastName.value);
         shippingAddress.setAddress1(session.forms.singleshipping.shippingAddress.addressFields.address1.value);
         shippingAddress.setAddress2(session.forms.singleshipping.shippingAddress.addressFields.address2.value);
         shippingAddress.setCity(session.forms.singleshipping.shippingAddress.addressFields.city.value);
-        shippingAddress.setPostalCode(session.forms.singleshipping.shippingAddress.addressFields.postal.value);
-        shippingAddress.setStateCode(session.forms.singleshipping.shippingAddress.addressFields.states.state.value);
+        shippingAddress.setPostalCode(subbmittedAddressFileds.isParameterSubmitted('postal') ? subbmittedAddressFileds.get('postal').value : '');
+        shippingAddress.setStateCode(subbmittedAddressFileds.isParameterSubmitted('states_state') ? subbmittedAddressFileds.get('states_state').value : '');
         shippingAddress.setCountryCode(session.forms.singleshipping.shippingAddress.addressFields.country.value);
-        shippingAddress.setPhone(session.forms.singleshipping.shippingAddress.addressFields.phone.value);
+        shippingAddress.setPhone(subbmittedAddressFileds.isParameterSubmitted('phone') ? subbmittedAddressFileds.get('phone').value : '');
         defaultShipment.setGift(session.forms.singleshipping.shippingAddress.isGift.value);
         defaultShipment.setGiftMessage(session.forms.singleshipping.shippingAddress.giftMessage.value);
 
@@ -306,7 +308,7 @@ function singleShipping() {
         selectAddress: function () {
             updateAddressDetails(app.getModel('Cart').get());
 
-            var pageMeta = require('~/cartridge/scripts/meta');
+            var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
             pageMeta.update({
                 pageTitle: Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'Rapala Checkout')
             });
