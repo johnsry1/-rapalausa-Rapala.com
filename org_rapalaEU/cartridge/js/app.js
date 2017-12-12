@@ -527,7 +527,7 @@ function initializeDom() {
 
     // Make sure that the SVGs work properly in older browsers
     /*eslint-disable */
-    //svg4everybody();
+    svg4everybody();
     /*eslint-enable */
 }
 
