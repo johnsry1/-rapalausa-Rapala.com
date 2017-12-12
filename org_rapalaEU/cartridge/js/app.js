@@ -546,7 +546,8 @@ var pages = {
     wishlist: require('./pages/wishlist'),
     rapalainsider: require('./pages/rapalainsider'),
     storelocator: require('./pages/storelocator'),
-    international: require('./pages/international')
+    international: require('./pages/international'),
+    blog: require('./pages/blog')
 };
 
 var app = {

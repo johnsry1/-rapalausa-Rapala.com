@@ -1,0 +1,28 @@
+<!--- TEMPLATENAME: navigation_left.isml --->
+<div class="blog-nav">
+	<ul class="blog-nav-level-1 blog-nav-level">
+		<isloop items="${rootBlogFolder.getOnlineSubFolders()}" var="levelOneFolder" status="loopstatus">
+			<li <isif condition="${levelOneFolder.subFolders.length > 0}"> class="toggle-blog" aria-expanded="false"</isif>>
+				<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelOneFolder.ID)}">
+					<isprint value="${levelOneFolder.displayName}"/>
+				</a>
+				<isif condition="${levelOneFolder.subFolders.length > 0}">
+					<span class="arrow-light-container">
+				</isif>
+				<isif condition="${levelOneFolder.subFolders.length > 0}">
+					<ul class="blog-nav-level-2 blog-nav-level">
+						<div class="sub-folders-two" style="margin-left: 20px">
+						<isloop items="${levelOneFolder.subFolders}" var="levelTwoFolder"/>
+							<li class="active">
+								<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelTwoFolder.ID)}">
+									<isprint value="${levelTwoFolder.displayName}"/>
+								</a>
+							</li>
+						</isloop>
+						</div>
+					</ul>
+				</isif>
+			</li>
+		</isloop>
+	</ul>
+</div>

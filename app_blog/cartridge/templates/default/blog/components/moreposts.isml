@@ -1,0 +1,33 @@
+<!--- TEMPLATENAME: moreposts.isml --->
+<isinclude template="util/modules"/>
+<div>
+	<isloop items="${pdict.MorePosts}" var="asset" status="loopstatus">
+		<isif condition="${loopstatus.count > 8}">
+			<isbreak>
+		</isif>
+		<isif condition="${asset.online && 'body' in asset.custom && asset.custom.body != null}">
+					
+			<div class='blog-post <isif condition="${loopstatus.even}">left<iselseif condition="${loopstatus.odd}">right</isif>' style="border: 3px solid #fff;margin-left: 20px">
+				<div class="blog-post-image">
+					<img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
+				</div>
+						
+				<div class="blog-post-title">
+					<isprint value="${asset.name}"/>
+				</div>
+						
+				<div class="blog-post-introtext">
+					<isprint value="${asset.custom.intro_text}" />
+				</div>
+					
+				<a href="${URLUtils.url('Page-Show', 'cid', asset.ID)}">
+					<isif condition="${!empty(asset.custom.cta_text)}">
+						<isprint value="${asset.custom.cta_text}"/>
+					<iselse>
+						<isprint value="${Resource.msg('blog.readmore', 'blog', null)}"/>
+					</isif>
+				</a>
+			</div>
+		</isif>
+	</isloop>
+</div>

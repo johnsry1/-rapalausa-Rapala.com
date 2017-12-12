@@ -1,0 +1,63 @@
+<!--- TEMPLATENAME: postpage.isml --->
+<isinclude template="util/modules"/>
+
+<head>
+	<isinclude template="components/header/htmlhead"/>
+</head>
+<isscript>
+	var content = pdict.Content;
+	var currentBlogFolder = content.getClassificationFolder();
+	var parentBlogFolder = currentBlogFolder.parent;
+</isscript>
+<isdecorate template="blog/pt_blog">
+	<body>
+	<div id="container">
+		<div id="primary" class="primary-content">
+				<isinclude template="blog/components/breadcrumbs"/>
+				
+				<div class="blog-post-title">
+					<isprint value="${content.name}" />
+				</div>
+				
+				<isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+				<isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+				<isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+				
+				<div class="blog-post-author">
+					<isif condition="${content.custom.author != null && !empty(content.custom.author)}">
+						<a href="${URLUtils.url('Search-Show', 'q', content.custom.author, 'id', 'author')}">
+							<isprint value="${content.custom.author}" />
+						</a>
+					</isif>
+				</div>
+
+				<div class="blog-post-skilllevel">
+					<isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
+						<a href="${URLUtils.url('Search-Show', 'q', content.custom.skill_level, 'id', 'skill_level')}">
+							<isprint value="${content.custom.skill_level}" />
+						</a>
+					</isif>
+				</div>
+				
+				<div class="blog-post-date">
+					<isprint value="${content.custom.blog_date}" />
+				</div>
+				<div class="blog-pos-html">
+					<isprint value="${content.custom.body}" encoding="off"/>
+				</div>
+				<div class="more-posts">
+					<isif condition="${content.custom.additional_posts != null && !empty(content.custom.additional_posts)}">
+						<a id="more-posts-link" href="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}">
+							<isprint value="${Resource.msg('blog.moreposts', 'blog', null)}" />
+						</a>
+						<div id="more-posts-container">
+							<div id="additional-posts" style="display:none">
+								<isinclude url="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}"/>
+							</div>
+						</div>
+					</isif>
+				</div>
+		</div><!-- END: primary -->
+	</div><!-- END: container -->
+	</body>
+</isdecorate>

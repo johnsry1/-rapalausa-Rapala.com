@@ -601,6 +601,33 @@
             </attribute-definition>
         </system-attribute-definitions>
         <custom-attribute-definitions>
+            <attribute-definition attribute-id="additional_posts">
+                <display-name xml:lang="x-default">Additional Posts</display-name>
+                <description xml:lang="x-default">Comma delimited list of ContentIDs that will appear below post.</description>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="author">
+                <display-name xml:lang="x-default">Author</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="blog_date">
+                <display-name xml:lang="x-default">Date</display-name>
+                <type>datetime</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
             <attribute-definition attribute-id="body">
                 <display-name xml:lang="x-default">Body</display-name>
                 <type>html</type>
@@ -608,6 +635,15 @@
                 <site-specific-flag>false</site-specific-flag>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="cta_text">
+                <display-name xml:lang="x-default">CTA Text</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="customCSSFile">
                 <display-name xml:lang="x-default">Custom CSS File</display-name>
@@ -618,9 +654,67 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="display_video_hero">
+                <display-name xml:lang="x-default">Display Video Hero</display-name>
+                <description xml:lang="x-default">Renders a "play video" icon over the hero image</description>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="img_hero_feature">
+                <display-name xml:lang="x-default">Hero Image</display-name>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="img_small_post_feature">
+                <display-name xml:lang="x-default">Small Post Image</display-name>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="img_sub_hero_feature">
+                <display-name xml:lang="x-default">Sub Hero Image</display-name>
+                <type>image</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="intro_text">
+                <display-name xml:lang="x-default">Intro Text</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="showInMainMenu">
                 <display-name xml:lang="x-default">Show in Main Menu</display-name>
                 <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="skill_level">
+                <display-name xml:lang="x-default">Skill Level</display-name>
+                <type>string</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="weight">
+                <display-name xml:lang="x-default">Weight</display-name>
+                <type>int</type>
+                <localizable-flag>false</localizable-flag>
                 <site-specific-flag>false</site-specific-flag>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -657,6 +751,20 @@
             <attribute-group group-id="Content">
                 <display-name xml:lang="x-default">Content</display-name>
                 <attribute attribute-id="body"/>
+            </attribute-group>
+            <attribute-group group-id="Blog">
+                <display-name xml:lang="x-default">Blog</display-name>
+                <attribute attribute-id="img_small_post_feature"/>
+                <attribute attribute-id="display_video_hero"/>
+                <attribute attribute-id="img_sub_hero_feature"/>
+                <attribute attribute-id="skill_level"/>
+                <attribute attribute-id="weight"/>
+                <attribute attribute-id="author"/>
+                <attribute attribute-id="cta_text"/>
+                <attribute attribute-id="intro_text"/>
+                <attribute attribute-id="blog_date"/>
+                <attribute attribute-id="img_hero_feature"/>
+                <attribute attribute-id="additional_posts"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
@@ -1022,6 +1130,14 @@
             </attribute-definition>
         </system-attribute-definitions>
         <custom-attribute-definitions>
+            <attribute-definition attribute-id="content_search_term">
+                <display-name xml:lang="x-default">Content Search Term</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="csColumnNumber">
                 <display-name xml:lang="x-default">Customer Service Column Number</display-name>
                 <type>enum-of-int</type>
@@ -1109,6 +1225,10 @@
             <attribute-group group-id="CustomerService">
                 <display-name xml:lang="x-default">Customer Service</display-name>
                 <attribute attribute-id="csColumnNumber"/>
+            </attribute-group>
+            <attribute-group group-id="Blog">
+                <display-name xml:lang="x-default">Blog</display-name>
+                <attribute attribute-id="content_search_term"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
@@ -8401,8 +8521,29 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
 				<externally-managed-flag>false</externally-managed-flag>
 				<default-value>false</default-value>
 			</attribute-definition>
+            <attribute-definition attribute-id="blogRootFolder">
+                <display-name xml:lang="x-default">Blog Root Folder ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>blog</default-value>
+            </attribute-definition>
+			<attribute-definition attribute-id="enableBrandFolderRedirect">
+				<display-name xml:lang="x-default">Enable Brand Folder Redirect</display-name>
+                <description xml:lang="x-default">If set to 'true' to every folder request will be added corresponding brand ID value like parameter. Url's for folder will be broken. If you are using 'blog' logic please set to 'false'.</description>
+				<type>boolean</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+				<default-value>false</default-value>
+			</attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
+            <attribute-group group-id="Blog">
+                <display-name xml:lang="x-default">Blog</display-name>
+                <attribute attribute-id="blogRootFolder"/>
+                <attribute attribute-id="enableBrandFolderRedirect"/>
+            </attribute-group>
             <attribute-group group-id="StoreLocator">
                 <display-name xml:lang="x-default">Store Locator</display-name>
                 <attribute attribute-id="googleAPIKey"/>
@@ -8500,7 +8641,7 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
             </attribute-group>
             <attribute-group group-id="ActiveBrands">
                 <display-name xml:lang="x-default">Active Brands</display-name>
-				<attribute attribute-id="enableBrandTheme"/>                
+                <attribute attribute-id="enableBrandTheme"/>
                 <attribute attribute-id="activebrandrapala"/>
                 <attribute attribute-id="activebrandsufix"/>
                 <attribute attribute-id="activebrandtriggerx"/>
