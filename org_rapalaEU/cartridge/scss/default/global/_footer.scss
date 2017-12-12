@@ -44,6 +44,10 @@ $footer-bg-mobile: $concrete;
             a {
                 width: rem(80px);
                 height: rem(40px);
+                @include respond(desktop) {
+                    width: rem(80px);
+                    height: rem(40px);
+                }
                 opacity: 0.3;
                 &:hover {
                     opacity: 1;
@@ -370,8 +374,9 @@ $footer-bg-mobile: $concrete;
         .emailSignup {
             border: none;
             box-shadow: none;
-            width: auto;
+            width: 100%;
             height: auto;
+            float: none;
 
             button {
                 @include button;
@@ -388,6 +393,7 @@ $footer-bg-mobile: $concrete;
                 color: $black;
             }
             form.email-subscribe {
+                float: none;
                 input.emailinput {
                     @include form-input;
                     position: static;
@@ -414,6 +420,13 @@ $footer-bg-mobile: $concrete;
 .footer-copyright {
     text-align: center;
     padding: rem(14px) 0;
+    @include font-size(13px);
+    color: $greyish-brown;
+}
+
+.cookie-footer {
+    clear: both;
+    margin: rem(14px) 0 0;
     @include font-size(13px);
     color: $greyish-brown;
 }
