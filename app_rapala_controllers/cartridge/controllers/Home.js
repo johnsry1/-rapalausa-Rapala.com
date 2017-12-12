@@ -165,6 +165,12 @@ function footerChangeRegion() {
 function includeCheckOutHeaderCustomerInfo() {
     app.getView().render('components/header/checkoutheadercustomerinfo');
 }
+/**.
+ * This is for displaying megamenu login for nav menu.
+ */
+function includeMegamenuCustomerInfo() {
+    app.getView().render('components/header/megamenu_account_show');
+}
 /*
  * Export the publicly available controller methods
  */
@@ -220,3 +226,6 @@ exports.FooterChangeRegion = guard.ensure(['get'], footerChangeRegion);
 /** Renders checkoutheadercustomerinfo.isml
 * @see module:controllers/Home~includeCheckOutHeaderCustomerInfo */
 exports.IncludeCheckOutHeaderCustomerInfo = guard.ensure(['get'], includeCheckOutHeaderCustomerInfo);
+/** Renders login/logout
+* @see module:controllers/Home~includeMegamenuCustomerInfo */
+exports.IncludeMegamenuCustomerInfo = guard.ensure(['get'], includeMegamenuCustomerInfo);

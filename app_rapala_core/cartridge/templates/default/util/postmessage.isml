@@ -4,6 +4,14 @@
 <head><meta charset="utf-8"><title>postMessage</title>
 <script>try {
 parent.postMessage('<isprint value="${JSON.stringify(pdict.Message).replace("'","\\'")}" encoding="off"/>','*');
-} catch(e) {alert(e)};</script>
+} catch(e) {alert(e)};
+</script>
 </head>
-<body></body></html>
+<body>
+</body></html>
+<isif condition="${pdict.Message.process != null || pdict.Message.process === 'create-account'}">
+	<isinclude url="${URLUtils.https('ReportingEvent-Start',
+					'ID', 				'AccountOpen',
+					'TotalUserCount', 	 StringUtils.formatNumber(dw.customer.CustomerMgr.registeredCustomerCount, '#,##0', 'en_US')
+					)}"/>
+</isif>
