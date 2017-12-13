@@ -122,8 +122,6 @@ exports.init = function () {
         $('.shipping-address-field-section .form-row').find('input').removeClass('errorclient');
         uievents.customFields();
         uievents.synccheckoutH();
-        var $form = $('.address');
-        util.updateStateOptions($form);
     });
     $('.edit-address-field .edit-billing-button').bind('click', function () {
         var $form = $('.address');

@@ -28,6 +28,168 @@ var ltkSendSca = require('int_listrak_controllers/cartridge/controllers/ltkSendS
 var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
 
 /**
+ * Initializes the address form. If the customer chose "use as billing
+ * address" option on the single shipping page the form is prepopulated with the shipping
+ * address, otherwise it prepopulates with the billing address that was already set.
+ * If neither address is available, it prepopulates with the default address of the authenticated customer.
+ */
+function initAddressForm(cart) {
+
+    if (app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value === true) {
+        app.getForm('billing').object.billingAddress.addressFields.title.value = app.getForm('singleshipping').object.shippingAddress.addressFields.title.value;
+        app.getForm('billing').object.billingAddress.addressFields.firstName.value = app.getForm('singleshipping').object.shippingAddress.addressFields.firstName.value;
+        app.getForm('billing').object.billingAddress.addressFields.lastName.value = app.getForm('singleshipping').object.shippingAddress.addressFields.lastName.value;
+        app.getForm('billing').object.billingAddress.addressFields.address1.value = app.getForm('singleshipping').object.shippingAddress.addressFields.address1.value;
+        app.getForm('billing').object.billingAddress.addressFields.address2.value = app.getForm('singleshipping').object.shippingAddress.addressFields.address2.value;
+        app.getForm('billing').object.billingAddress.addressFields.city.value = app.getForm('singleshipping').object.shippingAddress.addressFields.city.value;
+        app.getForm('billing').object.billingAddress.addressFields.postal.value = app.getForm('singleshipping').object.shippingAddress.addressFields.postal.value;
+        app.getForm('billing').object.billingAddress.addressFields.phone.value = app.getForm('singleshipping').object.shippingAddress.addressFields.phone.value;
+        app.getForm('billing').object.billingAddress.addressFields.states.state.value = app.getForm('singleshipping').object.shippingAddress.addressFields.states.state.value;
+        app.getForm('billing').object.billingAddress.addressFields.country.value = app.getForm('singleshipping').object.shippingAddress.addressFields.country.value;
+        app.getForm('billing').object.billingAddress.addressFields.phone.value = app.getForm('singleshipping').object.shippingAddress.addressFields.phone.value;
+        app.getForm('billing').object.billingAddress.sameasshippingaddress.value = app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value
+        
+    } else if (cart.getBillingAddress() !== null) {
+         app.getForm('billing').object.billingAddress.sameasshippingaddress.value = false;
+        app.getForm('billing.billingAddress.addressFields').copyFrom(cart.getBillingAddress());
+        app.getForm('billing.billingAddress.addressFields.states').copyFrom(cart.getBillingAddress());
+    } else if (customer.authenticated && customer.profile.addressBook.preferredAddress !== null) {
+        app.getForm('billing').object.billingAddress.sameasshippingaddress.value = false;
+        app.getForm('billing.billingAddress.addressFields').copyFrom(customer.profile.addressBook.preferredAddress);
+        app.getForm('billing.billingAddress.addressFields.states').copyFrom(customer.profile.addressBook.preferredAddress);
+    }
+}
+
+/**
+ * Initializes the email address form field. If there is already a customer
+ * email set at the basket, that email address is used. If the
+ * current customer is authenticated the email address of the customer's profile
+ * is used.
+ */
+function initEmailAddress(cart) {
+    if (cart.getCustomerEmail() !== null) {
+        app.getForm('billing').object.billingAddress.email.emailAddress.value = cart.getCustomerEmail();
+    } else if (customer.authenticated && customer.profile.email !== null) {
+        app.getForm('billing').object.billingAddress.email.emailAddress.value = customer.profile.email;
+    }
+}
+
+/**
+ * Initializes the credit card list by determining the saved customer payment methods for the current locale.
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @return {object} JSON object with members ApplicablePaymentMethods and ApplicableCreditCards.
+ */
+function initCreditCardList(cart) {
+    var paymentAmount = cart.getNonGiftCertificateAmount();
+    var countryCode;
+    var applicablePaymentMethods;
+    var applicablePaymentCards;
+    var applicableCreditCards;
+
+    countryCode = Countries.getCurrent({
+        CurrentRequest: {
+            locale: request.locale
+        }
+    }).countryCode;
+
+    applicablePaymentMethods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, paymentAmount.value);
+    applicablePaymentCards = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(customer, countryCode, paymentAmount.value);
+
+    app.getForm('billing').object.paymentMethods.creditCard.type.setOptions(applicablePaymentCards.iterator());
+
+    applicableCreditCards = null;
+
+    if (customer.authenticated) {
+        var profile = app.getModel('Profile').get();
+        if (profile) {
+            applicableCreditCards = profile.validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
+        }
+    }
+
+
+    return {
+        ApplicablePaymentMethods: applicablePaymentMethods,
+        ApplicableCreditCards: applicableCreditCards
+    };
+}
+
+/**
+ * Updates cart calculation and page information and renders the billing page.
+ * @transactional
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @param {object} params - (optional) if passed, added to view properties so they can be accessed in the template.
+ */
+function start(cart, params) {
+
+    app.getController('COShipping').PrepareShipments();
+    
+    var addrid = session.forms.singleshipping.shippingAddress.addressid.value;
+    app.getForm('billing.billingAddress').setValue('addressid',addrid);
+    Transaction.wrap(function () {
+        cart.calculate();
+    });
+    if(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value == "PayPal" && app.getForm('billing.paypalval').object.paypalprocessed.value == 'true'){
+        var paymentInstruments = cart.object.getPaymentInstruments("PayPal");
+        for each(var paymentInstrument in paymentInstruments){
+            Transaction.wrap(function(){
+                paymentInstrument.custom.paypalToken = request.httpParameterMap.token;
+                paymentInstrument.custom.paypalPayerID = request.httpParameterMap.PayerID;
+            });
+        }
+    }
+    if(customer.authenticated){
+        var allotmentOnly = require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(cart.object);
+        if(allotmentOnly){
+            app.getForm('billing.paymentMethods').setValue('selectedPaymentMethodID','ALLOTMENT');
+        }
+    }
+    
+    var pageMeta = require('~/cartridge/scripts/meta');
+    pageMeta.update({
+        pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
+    });
+
+    require('app_rapala_controllers/cartridge/controllers/COBilling.js').ReturnToForm(cart, params);
+}
+
+
+/**
+ * Starting point for billing. After a successful shipping setup, both COShipping
+ * and COShippingMultiple call this function.
+ */
+function publicStart() {
+    var cart = app.getModel('Cart').get();
+
+    if(!empty(request.httpParameterMap.PayerID) && request.httpParameterMap.PayerID.value != null){
+         app.getForm('billing.paypalval').setValue('paypalprocessed', 'true');
+    }
+    if (cart) {
+
+        // Initializes all forms of the billing page including: - address form - email address - coupon form
+        initAddressForm(cart);
+        initEmailAddress(cart);
+
+        var creditCardList = initCreditCardList(cart);
+        var applicablePaymentMethods = creditCardList.ApplicablePaymentMethods;
+
+        var billingForm = app.getForm('billing').object;
+        var paymentMethods = billingForm.paymentMethods;
+        if (paymentMethods.valid) {
+            paymentMethods.selectedPaymentMethodID.setOptions(applicablePaymentMethods.iterator());
+        } else {
+            paymentMethods.clearFormElement();
+        }
+
+        app.getForm('billing.couponCode').clear();
+        app.getForm('billing.giftCertCode').clear();
+
+        require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards});
+    } else {
+        app.getController('Cart').Show();
+    }
+}
+
+/**
  * Gets or creates a billing address and copies it to the billingaddress form. Also sets the customer email address
  * to the value in the billingAddress form.
  * @transaction
@@ -166,7 +328,7 @@ function billing() {
 */
 /** Starting point for billing.
  * @see module:controllers/COBilling~publicStart */
-exports.Start = require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start;
+exports.Start = guard.ensure(['https'], publicStart);
 /** Redeems gift certificates.
  * @see module:controllers/COBilling~redeemGiftCertificateJson */
 exports.RedeemGiftCertificateJson = require('app_rapala_controllers/cartridge/controllers/COBilling.js').RedeemGiftCertificateJson;
