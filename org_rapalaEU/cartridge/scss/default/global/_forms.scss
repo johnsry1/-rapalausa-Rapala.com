@@ -17,6 +17,19 @@
     font-family: $form-field-font-family;
 }
 
+@mixin form-error {
+    display: block;
+    background-color: transparent !important;
+    color: $font-error-color;
+    clear: both;
+    position: static;
+    font-size: $font-error-font-size;
+    line-height: $font-error-line-height;
+    font-family: $font-error-font-family;
+    font-weight: $font-error-font-weight;
+    text-align: left;
+}
+
 .form-horizontal {
     .form-row {
         & > label,
@@ -117,6 +130,8 @@ input[type="checkbox"],
 input[type="radio"] {
     opacity: 0;
     position: absolute;
+    margin: 0;
+    padding: 0;
     &:focus + label::before {
         border: $form-checkbox-hover-border;
     }
@@ -207,4 +222,9 @@ input[type="radio"] {
     label {
         display: none;
     }
+}
+
+span.errorclient,
+div.errorclient {
+    @include form-error;
 }
