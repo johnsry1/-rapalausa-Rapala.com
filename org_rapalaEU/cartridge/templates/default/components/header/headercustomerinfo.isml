@@ -58,6 +58,12 @@
 <isif condition="${pdict.CurrentCustomer.authenticated}">
     <div id="user">
         <isif condition="${pdict.CurrentCustomer.registered}">
+            <a href="${URLUtils.https('Account-Show')}" class="mobile-only userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
+                <issvghelper icon="user"/>
+                <span>
+                    <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
+                </span>
+            </a>
             <span class="loggeduser">
                 <isif condition="${pdict.CurrentCustomer.authenticated}">
                 <span class="welcomemessage"><isprint value="${Resource.msg('headercustomerinfo.guestwelcome','locale',null)}" /> </span>
@@ -152,7 +158,7 @@
                     <div class="headermask" style="display: none;"></div>
                 <iselse/>
                     <div class="signedin">
-                        &nbsp;<a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
+                        <a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
                     </div>
                 </isif>
             </li>

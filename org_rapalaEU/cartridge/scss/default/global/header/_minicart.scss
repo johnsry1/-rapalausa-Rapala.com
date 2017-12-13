@@ -25,6 +25,9 @@
                         height: rem(36px);
                         text-align: center;
                     }
+                    &.active {
+                        background: none;
+                    }
                     .icon {
                         @include respond(desktop-down) {
                             width: rem(21px);
@@ -76,13 +79,16 @@
                             }
                         }
                         .cart-value {
-                            font-family: $font;
-                            font-weight: normal;
-                            @include font-size(12px);
-                            @include line-height(28px);
-                            text-transform: none;
-                            color: $night-rider;
-                            padding: 0 rem(10px) 0 0;
+                            display: none;
+                            @include respond(desktop) {
+                                font-family: $font;
+                                font-weight: normal;
+                                @include font-size(12px);
+                                @include line-height(28px);
+                                text-transform: none;
+                                color: $night-rider;
+                                padding: 0 rem(10px) 0 0;
+                            }
                         }
                     }
 

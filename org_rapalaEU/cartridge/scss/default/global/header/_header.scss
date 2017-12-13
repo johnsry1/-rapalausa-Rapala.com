@@ -178,6 +178,40 @@ body {
                 li {
                     height: auto;
                 }
+                #user {
+                    @include respond(desktop-down) {
+                        display: block;
+                    }
+                    .loggeduser,
+                    .congrats-message,
+                    .user-info,
+                    .user-info {
+                        @include respond(desktop-down) {
+                            display: none;
+                        }
+                    }
+                    .userlogin {
+                        display: block;
+                        width: rem(36px);
+                        height: rem(36px);
+                        border: 1px solid $black;
+                        border-radius: 50%;
+                        text-align: center;
+                        text-indent: 0;
+                        @include respond(desktop) {
+                            display: none;
+                        }
+                        span {
+                            display: none;
+                        }
+                        .icon {
+                            margin-top: rem(7px);
+                            @include respond(desktop) {
+                                display: none;
+                            }
+                        }
+                    }
+                }
                 #userinfo {
                     li {
                         font-family: $font;
