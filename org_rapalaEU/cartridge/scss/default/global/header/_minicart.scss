@@ -32,7 +32,7 @@
                         @include respond(desktop-down) {
                             width: rem(21px);
                             height: rem(17px);
-                            margin-top: rem(7px);
+                            margin-top: rem(10px);
                         }
                     }
                     span {
@@ -79,14 +79,15 @@
                             }
                         }
                         .cart-value {
-                            display: none;
-                            @include respond(desktop) {
-                                font-family: $font;
-                                font-weight: normal;
-                                @include font-size(12px);
-                                @include line-height(28px);
-                                text-transform: none;
-                                color: $night-rider;
+                            font-family: $font;
+                            font-weight: normal;
+                            @include font-size(12px);
+                            @include line-height(28px);
+                            text-transform: none;
+                            color: $night-rider;
+                            padding: 2px 0 0;
+                            right: inherit;
+                            @include respond(dekstop) {
                                 padding: 0 rem(10px) 0 0;
                             }
                         }
