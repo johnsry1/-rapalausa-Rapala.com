@@ -911,11 +911,14 @@ exports.init = function () {
         $('.expirationdate.error').show();
     }
     $('.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
+        var $content = $('.primary-content');
+        progress.show($content);
         var errorcount = 0;
         if (!($('#PaymentMethod_CREDIT_CARD').is(':visible'))) {
             $('.paymentform .textinput, .paymentform select').removeClass('required');
         }
         if (!jQuery('form[id$="_billing"]').valid()) {
+            progress.hide();
             jQuery('.state-blk select').trigger('blur');
             if (jQuery('.billing-address-fields').hasClass('hide')) {
                 $('select[name$=billing_addressList]').val('');
@@ -932,6 +935,7 @@ exports.init = function () {
         }
         if ($('#PaymentMethod_CREDIT_CARD').is(':visible')) {
             if (!$('form[id$="dwfrm_billing"]').valid()) {
+                progress.hide();
                 $('.expirationdate select').trigger('blur');
 
                 if ($('.vip-terms .custom-link').is(':visible') && !$('input[name$="_isvip"]').is(':checked')) {
@@ -998,6 +1002,7 @@ exports.init = function () {
                  }*/
         }
         if (errorcount > 0) {
+            progress.hide();
             $('.singleshipping_error').show();
             return false;
         }
