@@ -117,9 +117,9 @@
 		<div class="mini-cart-totals">
 			<div class="mini-cart-subtotals">
 				<span class="label">${Resource.msg('order.ordersummary.ordersubtotal','order',null)}</span>
-						
-				<isif condition="${pdict.prodNetPrice != null && pdict.prodNetPrice > pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(pdict.Basket.giftCertificateTotalPrice)}"> 
-					
+
+				<isif condition="${pdict.prodNetPrice != null && pdict.prodNetPrice > pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(pdict.Basket.giftCertificateTotalPrice)}">
+
 					<span class="value"><strike><span class="ordersubtotal-strike"><isprint value="${pdict.prodNetPrice}"/> </span></strike>&nbsp;<isprint value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(pdict.Basket.giftCertificateTotalPrice)}"/></span>
 					<span class="label discount Productsavings">(<isprint value="${Resource.msg('ordersummary.Productsavings','order',null)}"/> <isprint value="${pdict.prodNetPrice.subtract(pdict.Basket.getAdjustedMerchandizeTotalPrice(false).add(pdict.Basket.giftCertificateTotalPrice))}"/>)</span>
 				<iselse/>
@@ -135,6 +135,7 @@
 				<a class="mini-cart-link-checkout" href="${URLUtils.https('COShipping-MiniCheckOut')}" title="${Resource.msg('minicart.directcheckout','checkout',null)}"><span>${Resource.msg('minicart.securecheckout','checkout',null)}</span></a>
 			</div>
 		</div>
+		<img class="minicartbanner-paypal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
 		<div class="statictax">${Resource.msg('ordersummary.taxtext','checkout',null)}</div>
 		<div class="minicartbanner">
 			<div>
@@ -147,7 +148,6 @@
 				<isslot id="global-minicart" description="This is the global banner within the minicart, directly above the View Cart/Checkout link." context="global" />
 			</div>
 		</div><!-- END: minicartbanner -->
-		<img class="minicartbanner-paypal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/pp-acceptance-small.png" alt="Buy now with PayPal" />
 	</div>
 
 </isif>
