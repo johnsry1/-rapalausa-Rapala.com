@@ -1,0 +1,162 @@
+.pt_product-search-result {
+    #content {
+        #page-background {
+            background: none;
+            padding: 0;
+        }
+    }
+}
+
+.shop-brand {
+    @include h1;
+}
+
+
+.pt_product-search-result {
+    #page-background {
+        #primary {
+            p {
+                font-family: $font;
+            }
+            .contentboxcontent {
+                h1.search-result,
+                h1 {
+                    @include h1;
+                }
+            }
+            .search-top {
+                .searchresultsheader {
+                    background: $background;
+                    .pagination {
+                        .toggle-grid {
+                            p,
+                            i,
+                            i.active,
+                            span {
+                                font-family: $font;
+                            }
+                        }
+                    }
+                    .results-hits {
+                        font-family: $font;
+                    }
+                    .sortitem-blk {
+                        select {
+                            font-family: $font;
+                        }
+                    }
+                }
+            }
+            .search-result-content {
+                div.subcat-header {
+                    background: $background;
+                    h2 {
+                        font-family: $font;
+                    }
+                }
+                .product-tile {
+                    .product-image {
+                        .quickview {
+                            @include quickview;
+                        }
+                    }
+                    .product-name {
+                        a {
+                            font-family: $font;
+                        }
+                    }
+                    .product-pricing {
+                        .product-sales-price {
+                            font-family: $font;
+                        }
+                    }
+                }
+            }
+            .search-blk {
+                .resultstext,
+                a {
+                    font-family: $font;
+                }
+            }
+        }
+        .row.column3 {
+            .column {
+                .cell {
+                    .contentboxcontent {
+                        box-shadow: none;
+                        border: $border;
+                        font-family: $font;
+                        background: $background;
+                        h2 {
+                            border: $border;
+                            font-family: $font;
+                            background: $background-secondary;
+                            &:after {
+                                border-color: $background-secondary transparent transparent;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .cell.contentbox.upshift {
+            box-shadow: none;
+        }
+    }
+    .searchrefinements {
+        .refinement {
+            .filter {
+                font-family: $font;
+            }
+            ul {
+                li {
+                    &.selected {
+                        a {
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
+                            background-size: 18px;
+                        }
+                    }
+                    a {
+                        background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat center left;
+                        background-size: 18px;
+                        &:hover {
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
+                            background-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.subcat-header {
+    a {
+        font-family: $font;
+    }
+}
+
+.categorymenusnew {
+    a {
+        font-family: $font;
+    }
+    .category-top-level.active {
+        & > a {
+            font-family: $font;
+        }
+        ul {
+            a {
+                font-family: $font;
+            }
+        }
+    }
+}
+
+.refinement {
+    .clear-refinement {
+        a {
+            font-family: $font;
+        }
+    }
+}
+
