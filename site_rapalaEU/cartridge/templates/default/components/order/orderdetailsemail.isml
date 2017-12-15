@@ -154,7 +154,18 @@
 	                 											<font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
 	                 												<div style=" margin-left: 5px; margin-top: 10px;">
 																		<div style="font-size: 15px; color: #333; font-weight: bold; text-transform:uppercase;">Ship To:</div>  
-																		<div style="font-size: 11px; color: #333;font-weight: bold; margin-top: 10px;"><isprint value="${Order.shipments[0].shippingAddress.firstName}"/> <isprint value="${Order.shipments[0].shippingAddress.lastName}"/><br/><isprint value="${Order.shipments[0].shippingAddress.address1}"/> <isprint value="${Order.shipments[0].shippingAddress.address2}"/><br/><isprint value="${Order.shipments[0].shippingAddress.city}"/>, <isprint value="${Order.shipments[0].shippingAddress.stateCode}"/> <isprint value="${Order.shipments[0].shippingAddress.postalCode}"/><br /> USA<br/><isprint value="${Order.shipments[0].shippingAddress.phone}"/></div>
+																		<div style="font-size: 11px; color: #333;font-weight: bold; margin-top: 10px;">
+																			<isprint value="${Order.shipments[0].shippingAddress.title}"/> 
+																			<isprint value="${Order.shipments[0].shippingAddress.firstName}"/> 
+																			<isprint value="${Order.shipments[0].shippingAddress.lastName}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.address1}"/> 
+																			<isprint value="${Order.shipments[0].shippingAddress.address2}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.city}"/>, 
+																			<isprint value="${Order.shipments[0].shippingAddress.stateCode}"/> 
+																			<isprint value="${Order.shipments[0].shippingAddress.postalCode}"/><br /> 
+																			<isprint value="${Resource.msg(('country.' + Order.shipments[0].shippingAddress.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.phone}"/>
+																		</div>
 				                     									<div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;">Method:<br/><span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;"><isprint value="${Order.shipments[0].shippingMethod.displayName}"/></div>
 		                           	 									<div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;">Status:<br/>
 		                                									<span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;">
@@ -182,7 +193,18 @@
 	                       										<font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
 	                       											<div style="  margin-left: 5px; margin-top: 10px;">
 							 											<div style="font-size: 15px; color: #333; font-weight: bold; text-transform:uppercase;">Bill To:</div> 
-																		<div style="font-size: 11px; color: #333; font-weight: bold; margin-top: 10px;"><isprint value="${Order.billingAddress.firstName}"/> <isprint value="${Order.billingAddress.lastName}"/><br/><isprint value="${Order.billingAddress.address1}"/> <isprint value="${Order.billingAddress.address2}"/><br/><isprint value="${Order.billingAddress.city}"/>, <isprint value="${Order.billingAddress.stateCode}"/> <isprint value="${Order.billingAddress.postalCode}"/> <br />USA <br/><isprint value="${Order.billingAddress.phone}"/></div>
+																		<div style="font-size: 11px; color: #333; font-weight: bold; margin-top: 10px;">
+																			<isprint value="${Order.billingAddress.title}"/> 
+																			<isprint value="${Order.billingAddress.firstName}"/> 
+																			<isprint value="${Order.billingAddress.lastName}"/><br/>
+																			<isprint value="${Order.billingAddress.address1}"/> 
+																			<isprint value="${Order.billingAddress.address2}"/><br/>
+																			<isprint value="${Order.billingAddress.city}"/>, 
+																			<isprint value="${Order.billingAddress.stateCode}"/> 
+																			<isprint value="${Order.billingAddress.postalCode}"/> <br />
+																			<isprint value="${Resource.msg(('country.' + Order.billingAddress.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+																			<isprint value="${Order.billingAddress.phone}"/>
+																		</div>
 																		<div style="line-height:15px; padding:0px 0 0 0px; text-align: left; margin-top: 10px;"><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif"> <span style="font-size: 11px; color: #999; font-weight: bold; font-style: italic;">Payment Method:</span><br/></font></div>
 																		<iscomment>Render Credit Card</iscomment>
 																		<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)}" var="paymentInstr" status="piloopstate">
@@ -535,7 +557,7 @@
 																																<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 																																<div class="price">
 																																	<div class="discountprice">
-																																		<div class="standardprice" style="text-decoration: line-through;color: #999999;">$<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
+																																		<div class="standardprice" style="text-decoration: line-through;color: #999999;">${session.currency.getSymbol()}<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
 																																	</div>
 																																</div>
 																															</isif>
