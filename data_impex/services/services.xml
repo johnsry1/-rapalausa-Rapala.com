@@ -36,6 +36,46 @@
         <password masked="true">********</password>
     </service-credential>
 
+    <service-credential service-credential-id="Adyen">
+        <url>https://pal-test.adyen.com/pal/adapter/httppost</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Adyen.Methods">
+        <url>https://test.adyen.com/hpp/directory.shtml</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Adyen.Send.Authorize">
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Adyen.Send.Authorize.3D">
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise3d</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-credential service-credential-id="Adyen.Send.Authorize.3D.noencrypt">
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise</url>
+        <user-id/>
+        <password/>
+    </service-credential>
+
+    <service-profile service-profile-id="Adyen">
+        <timeout-millis>2000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+    
     <service-profile service-profile-id="ListrakWebServicesProfile">
         <timeout-millis>3000</timeout-millis>
         <rate-limit-enabled>false</rate-limit-enabled>
@@ -106,4 +146,103 @@
         <credential-id>UPS</credential-id>
     </service>
 
+    <service service-id="adyen.http.payment.3dsecure.LyonsSiteGenesis">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Send.Authorize.3D</credential-id>
+    </service>
+
+    <service service-id="adyen.http.payment.3dsecure.SiteGenesisGlobal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyenGlobal</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Send.Authorize.3D</credential-id>
+    </service>
+
+    <service service-id="adyen.http.payment.methods.SiteGenesis">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Methods</credential-id>
+    </service>
+
+    <service service-id="adyen.http.payment.methods.SiteGenesisGlobal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyenGlobal</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Methods</credential-id>
+    </service>
+
+    <service service-id="adyen.http.payment.send.SiteGenesis">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Send.Authorize</credential-id>
+    </service>
+
+    <service service-id="adyen.http.payment.send.SiteGenesisGlobal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyenGlobal</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen.Send.Authorize</credential-id>
+    </service>
+
+    <service service-id="adyen.payment.methods.SiteGenesis">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen</credential-id>
+    </service>
+
+    <service service-id="adyen.payment.methods.SiteGenesisGlobal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyenGlobal</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen</credential-id>
+    </service>
+
+    <service service-id="adyen.payment.send.SiteGenesis">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen</credential-id>
+    </service>
+
+    <service service-id="adyen.payment.send.SiteGenesisGlobal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyenGlobal</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>Adyen</profile-id>
+        <credential-id>Adyen</credential-id>
+    </service>
 </services>
