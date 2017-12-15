@@ -1,311 +1,367 @@
 {
-
-    "sites" : [
-        {
-            "name": "Rapala Core",
-            "publicJavascript": "./app_rapala_core",
-            "brands": [
-                "bluefox",
-                "iceforce",
-                "luhrjensen",
-                "marcum",
-                "rapala",
-                "storm",
-                "strikemaster",
-                "sufix",
-                "terminator",
-                "triggerx",
-                "vmc",
-                "williamson"
-            ],
-            "cartridges": [
-            	"./org_rapala_redesign",
-            	"./site_rapalaEU",
-                "./app_storelocator",
-                "./app_csstool",
-                "./app_cms",
-                "./int_commissionjunctionproductfeed",
-                "./app_cssuite",
-                "./app_disbestpractice",
-                "./app_rapala_controllers",
-                "./app_rapala_core",
-                "./app_rapala_insider_vip",
-                "./app_rapala_pipelines",
-                "./app_rapala_themes",
-                "./app_debugger",
-                "./app_blog",
-                "./bc_common",
-                "./bc_integrationframework",
-                "./bc_library",
-                "./bc_orderguard",
-                "./bm_contentcopytool",
-                "./bm_customfeeds",
-                "./bm_integrationframework",
-                "./bm_listrak",
-                "./bm_tools",
-                "./buildsuite_cs",
-                "./int_browseratest",
-                "./int_customfeeds",
-                "./int_dataloader",
-                "./int_googleanalytics",
-                "./int_googlefeed",
-                "./int_googletags",
-                "./int_listrak_controllers",
-                "./int_paypal",
-                "./int_storelocator",
-                "./int_ups",
-                "./test_console"
-
-            ],
-            "javascriptPluginPaths": [
-                "../app_rapala_core/cartridge/static/default/lib/jquery/ui/jquery-ui.min.js",
-                "../org_rapala_redesign/cartridge/static/default/lib/svg4everybody.js",
-                "../org_rapala_redesign/cartridge/static/default/lib/picturefill.min.js",
-                "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.jcarousel.min.js",
-                "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.validate.min.js",
-                "../app_rapala_core/cartridge/static/default/lib/jquery/tooltip/jquery.tooltipster.min.js",
-                "../app_rapala_core/cartridge/static/default/lib/owl-carousel/owl.carousel.js",
-                "../app_rapala_core/cartridge/static/default/lib/selectbox/jquery.selectbox-0.2.js",
-                "../app_rapala_core/cartridge/static/default/lib/jquery/scrollbar/tinyscrollbar.js",
-                "../app_rapala_core/cartridge/static/default/lib/slimscroll/jquery.slimscroll.js",
-                "../app_rapala_core/cartridge/static/default/lib/zoomer/magiczoomplus.js"
-            ]
-        }
-    ],
-
-    "deployment" : {
-        "instanceRoot": ".main.rapala.demandware.net",
-        "siteDataFolderName": "core",
-        "dataDeployDelay": 2000,
-        "dataBundles" : {
-            "core-data": [
-                "core"
-            ],
-            "merch-data": [
-                "merch-data"
-            ],
-            "org-data": [
-                "org-data"
-            ],
-            "core-merch-data": [
-                "merch-data",
-                "core"
-            ],
-            "core-org-data": [
-                "org-data",
-                "core"
-            ],
-            "core-merch-org-data": [
-                "org-data",
-                "merch-data",
-                "core"
-            ],
-            "dev02": [
-                "env-dev02"
-            ],
-            "dev06": [
-                "env-dev06"
-            ],
-            "dev08": [
-                "env-dev08"
-            ],
-            "dev09": [
-                "env-dev09"
-            ],
-            "dev10": [
-                "env-dev10"
-            ],
-            "dev11": [
-                "env-dev11"
-            ]
-        }
-    },
-
-    "tasks" : {
-        "styles": {
-            "taskName": "build-styles",
-            "subModules": [
-                "/lib/styles/get-style-directories",
-                "/lib/styles/sass-lint",
-                "/lib/styles/sass"
-            ],
-            "subTasks": [
-                "get-style-directories",
-                "sass"
-            ]
-        },
-        "client-javascript": {
-            "taskName": "build-client-js",
-            "subModules": [
-                "/lib/client-js/get-paths-client-js",
-                "/lib/client-js/eslint-client-js",
-                "/lib/client-js/build-temp-client-js",
-                "/lib/client-js/client-js",
-                "/lib/client-js/delete-temp-client-js"
-            ],
-            "subTasks": [
-                "get-paths-client-js",
-                "eslint-client-js",
-                "build-temp-client-js",
-                "client-js",
-                "delete-temp-client-js"
-            ]
-        },
-        "watchers": {
-            "taskName": "build-watchers",
-            "subModules": [
-                "/lib/styles/get-style-directories",
-                "/lib/client-js/get-paths-client-js",
-                "/lib/svg/get-svg-sprite-projects",
-                "/lib/watchers/watcher"
-            ],
-            "subTasks": [
-                "get-style-directories",
-                "get-paths-client-js",
-                "get-svg-sprite-projects",
-                "watcher"
-            ]
-        },
-        "server-javascript": {
-            "taskName": "server-js",
-            "subModules": [
-                "/lib/server-js/eslint-server-js"
-            ],
-            "subTasks": [
-                "eslint-server-js"
-            ],
-            "lintDirectories": [
-                "../app_lyonscg/cartridge/scripts/**/*.js",
-                "../app_lyonscg/cartridge/controllers/**/*.js"
-            ]
-        },
-        "builder-javascript": {
-            "taskName": "builder-js",
-            "subModules": [
-                "/lib/builder-js/eslint-builder-js"
-            ],
-            "subTasks": [
-                "eslint-builder-js"
-            ]
-        },
-        "combine-plugins-javascript": {
-            "taskName": "combine-plugins-js",
-            "subModules": [
-                "/lib/client-js/combine-plugin-js"
-            ],
-            "subTasks": [
-                "combine-plugin-js"
-            ]
-        },
-        "svg": {
-            "taskName": "build-svg",
-            "subModules": [
-                "/lib/svg/get-svg-sprite-projects",
-                "/lib/svg/combine-svg"
-            ],
-            "subTasks": [
-                "get-svg-sprite-projects",
-                "combine-svg"
-            ]
-        },
-        "deploy": {
-            "taskName": "run-deploy",
-            "subModules": [
-                "/lib/client-js/combine-plugin-js",
-                "/lib/svg/get-svg-sprite-projects",
-                "/lib/svg/combine-svg",
-                "/lib/styles/get-style-directories",
-                "/lib/styles/sass-lint",
-                "/lib/styles/sass",
-                "/lib/styles/minify",
-                "/lib/styles/bless",
-                "/lib/client-js/get-paths-client-js",
-                "/lib/client-js/eslint-client-js",
-                "/lib/client-js/build-temp-client-js",
-                "/lib/client-js/client-js",
-                "/lib/client-js/delete-temp-client-js",
-                "/lib/client-js/uglify-client-js",
-                "/lib/deploy/init-deployment",
-                "/lib/deploy/copy-cartridges",
-                "/lib/deploy/update-cartridge-properties",
-                "/lib/deploy/update-cartridge-references",
-                "/lib/deploy/zip-files",
-                "/lib/deploy/make-directories",
-                "/lib/deploy/webdav-upload",
-                "/lib/deploy/cleanup-code",
-                "/lib/deploy/unzip-files",
-                "/lib/deploy/activate-code"
-            ],
-            "subTasks": [
-                "combine-plugin-js",
-                "get-svg-sprite-projects",
-                "combine-svg",
-                "get-style-directories",
-                "sass",
-                "minify",
-                "bless",
-                "get-paths-client-js",
-                "eslint-client-js",
-                "build-temp-client-js",
-                "client-js",
-                "delete-temp-client-js",
-                "uglify-client-js",
-                "init-deployment",
-                "copy-cartridges",
-                "update-cartridge-properties",
-                "update-cartridge-references",
-                "zip-files",
-                "webdav-upload",
-                "cleanup-code",
-                "unzip-files",
-                "activate-code"
-            ],
-            "styleDependencies": [
-                "combine-svg"
-            ],
-            "deployDependencies": [
-                "bless",
-                "delete-temp-client-js"
-            ],
-            "uploadDependencies": [
-                "webdav-delete",
-                "make-directories",
-                "zip-files"
-            ]
-        },
-        "deploy-data": {
-            "taskName": "run-deploy-data",
-            "subModules": [
-                "/lib/deploy/init-deployment",
-                "/lib/data/zip-data-files",
-                "/lib/deploy/webdav-upload",
-                "/lib/data/import-data",
-                "/lib/data/cleanup-data"
-            ],
-            "subTasks": [
-                "init-deployment",
-                "webdav-upload",
-                "import-data",
-                "cleanup-data"
-            ],
-            "uploadDependencies": [
-                "webdav-delete-data",
-                "zip-data-files"
-            ]
-        },
-        "system-objects-report": {
-            "taskName": "run-system-objects-report",
-            "subModules": [
-                "/lib/deploy/init-deployment",
-                "/lib/data/sysobj-report",
-                "/lib/data/system-objects-report",
-                "/lib/util/xml-reporting-util"
-            ],
-            "subTasks": [
-                "init-deployment",
-                "system-objects-report"
-            ]
-        }
-    }
-
+   "sites":[
+      {
+         "name":"Rapala EU",
+         "publicJavascript":"./site_RapalaEU",
+         "brands":[
+            "bluefox",
+            "iceforce",
+            "luhrjensen",
+            "marcum",
+            "rapala",
+            "storm",
+            "strikemaster",
+            "sufix",
+            "terminator",
+            "triggerx",
+            "vmc",
+            "williamson"
+         ],
+         "cartridges":[
+            "./org_rapala_redesign",
+            "./site_rapalaEU",
+            "./app_storelocator",
+            "./app_csstool",
+            "./app_cms",
+            "./int_commissionjunctionproductfeed",
+            "./app_cssuite",
+            "./app_disbestpractice",
+            "./app_rapala_controllers",
+            "./app_rapala_core",
+            "./app_rapala_insider_vip",
+            "./app_rapala_pipelines",
+            "./app_rapala_themes",
+            "./app_debugger",
+            "./app_blog",
+            "./bc_common",
+            "./bc_integrationframework",
+            "./bc_library",
+            "./bc_orderguard",
+            "./bm_contentcopytool",
+            "./bm_customfeeds",
+            "./bm_integrationframework",
+            "./bm_listrak",
+            "./bm_tools",
+            "./buildsuite_cs",
+            "./int_browseratest",
+            "./int_customfeeds",
+            "./int_dataloader",
+            "./int_googleanalytics",
+            "./int_googlefeed",
+            "./int_googletags",
+            "./int_listrak_controllers",
+            "./int_paypal",
+            "./int_storelocator",
+            "./int_ups",
+            "./test_console"
+         ],
+         "javascriptPluginPaths":[
+            "../app_rapala_core/cartridge/static/default/lib/jquery/ui/jquery-ui.min.js",
+            "../org_rapala_redesign/cartridge/static/default/lib/svg4everybody.js",
+            "../org_rapala_redesign/cartridge/static/default/lib/picturefill.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.jcarousel.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.validate.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/tooltip/jquery.tooltipster.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/owl-carousel/owl.carousel.js",
+            "../app_rapala_core/cartridge/static/default/lib/selectbox/jquery.selectbox-0.2.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/scrollbar/tinyscrollbar.js",
+            "../app_rapala_core/cartridge/static/default/lib/slimscroll/jquery.slimscroll.js",
+            "../app_rapala_core/cartridge/static/default/lib/zoomer/magiczoomplus.js"
+         ]
+      },
+      {
+         "name":"Rapala US",
+         "publicJavascript":"./app_rapala_core",
+         "brands":[
+            "bluefox",
+            "iceforce",
+            "luhrjensen",
+            "marcum",
+            "rapala",
+            "storm",
+            "strikemaster",
+            "sufix",
+            "terminator",
+            "triggerx",
+            "vmc",
+            "williamson"
+         ],
+         "cartridges":[
+            "./app_csstool",
+            "./app_cms",
+            "./int_commissionjunctionproductfeed",
+            "./app_cssuite",
+            "./app_disbestpractice",
+            "./app_rapala_controllers",
+            "./app_rapala_core",
+            "./app_rapala_insider_vip",
+            "./app_rapala_pipelines",
+            "./app_rapala_themes",
+            "./bc_common",
+            "./bc_integrationframework",
+            "./bc_library",
+            "./bc_orderguard",
+            "./bm_contentcopytool",
+            "./bm_customfeeds",
+            "./bm_integrationframework",
+            "./bm_listrak",
+            "./bm_tools",
+            "./buildsuite_cs",
+            "./int_browseratest",
+            "./int_customfeeds",
+            "./int_dataloader",
+            "./int_googleanalytics",
+            "./int_googlefeed",
+            "./int_listrak_controllers",
+            "./int_paypal",
+            "./int_storelocator",
+            "./int_ups",
+            "./test_console"
+         ],
+         "javascriptPluginPaths":[
+            "../app_rapala_core/cartridge/static/default/lib/jquery/ui/jquery-ui.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.jcarousel.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/jquery.validate.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/tooltip/jquery.tooltipster.min.js",
+            "../app_rapala_core/cartridge/static/default/lib/owl-carousel/owl.carousel.js",
+            "../app_rapala_core/cartridge/static/default/lib/selectbox/jquery.selectbox-0.2.js",
+            "../app_rapala_core/cartridge/static/default/lib/jquery/scrollbar/tinyscrollbar.js",
+            "../app_rapala_core/cartridge/static/default/lib/slimscroll/jquery.slimscroll.js",
+            "../app_rapala_core/cartridge/static/default/lib/zoomer/magiczoomplus.js"
+         ]
+      }
+   ],
+   "deployment":{
+      "instanceRoot":".main.rapala.demandware.net",
+      "siteDataFolderName":"core",
+      "dataDeployDelay":2000,
+      "dataBundles":{
+         "core-data":[
+            "core"
+         ],
+         "merch-data":[
+            "merch-data"
+         ],
+         "org-data":[
+            "org-data"
+         ],
+         "core-merch-data":[
+            "merch-data",
+            "core"
+         ],
+         "core-org-data":[
+            "org-data",
+            "core"
+         ],
+         "core-merch-org-data":[
+            "org-data",
+            "merch-data",
+            "core"
+         ],
+         "dev02":[
+            "env-dev02"
+         ],
+         "dev06":[
+            "env-dev06"
+         ],
+         "dev08":[
+            "env-dev08"
+         ],
+         "dev09":[
+            "env-dev09"
+         ],
+         "dev10":[
+            "env-dev10"
+         ],
+         "dev11":[
+            "env-dev11"
+         ]
+      }
+   },
+   "tasks":{
+      "styles":{
+         "taskName":"build-styles",
+         "subModules":[
+            "/lib/styles/get-style-directories",
+            "/lib/styles/sass-lint",
+            "/lib/styles/sass"
+         ],
+         "subTasks":[
+            "get-style-directories",
+            "sass"
+         ]
+      },
+      "client-javascript":{
+         "taskName":"build-client-js",
+         "subModules":[
+            "/lib/client-js/get-paths-client-js",
+            "/lib/client-js/eslint-client-js",
+            "/lib/client-js/build-temp-client-js",
+            "/lib/client-js/client-js",
+            "/lib/client-js/delete-temp-client-js"
+         ],
+         "subTasks":[
+            "get-paths-client-js",
+            "eslint-client-js",
+            "build-temp-client-js",
+            "client-js",
+            "delete-temp-client-js"
+         ]
+      },
+      "watchers":{
+         "taskName":"build-watchers",
+         "subModules":[
+            "/lib/styles/get-style-directories",
+            "/lib/client-js/get-paths-client-js",
+            "/lib/svg/get-svg-sprite-projects",
+            "/lib/watchers/watcher"
+         ],
+         "subTasks":[
+            "get-style-directories",
+            "get-paths-client-js",
+            "get-svg-sprite-projects",
+            "watcher"
+         ]
+      },
+      "server-javascript":{
+         "taskName":"server-js",
+         "subModules":[
+            "/lib/server-js/eslint-server-js"
+         ],
+         "subTasks":[
+            "eslint-server-js"
+         ],
+         "lintDirectories":[
+            "../app_lyonscg/cartridge/scripts/**/*.js",
+            "../app_lyonscg/cartridge/controllers/**/*.js"
+         ]
+      },
+      "builder-javascript":{
+         "taskName":"builder-js",
+         "subModules":[
+            "/lib/builder-js/eslint-builder-js"
+         ],
+         "subTasks":[
+            "eslint-builder-js"
+         ]
+      },
+      "combine-plugins-javascript":{
+         "taskName":"combine-plugins-js",
+         "subModules":[
+            "/lib/client-js/combine-plugin-js"
+         ],
+         "subTasks":[
+            "combine-plugin-js"
+         ]
+      },
+      "svg":{
+         "taskName":"build-svg",
+         "subModules":[
+            "/lib/svg/get-svg-sprite-projects",
+            "/lib/svg/combine-svg"
+         ],
+         "subTasks":[
+            "get-svg-sprite-projects",
+            "combine-svg"
+         ]
+      },
+      "deploy":{
+         "taskName":"run-deploy",
+         "subModules":[
+            "/lib/client-js/combine-plugin-js",
+            "/lib/svg/get-svg-sprite-projects",
+            "/lib/svg/combine-svg",
+            "/lib/styles/get-style-directories",
+            "/lib/styles/sass-lint",
+            "/lib/styles/sass",
+            "/lib/styles/minify",
+            "/lib/styles/bless",
+            "/lib/client-js/get-paths-client-js",
+            "/lib/client-js/eslint-client-js",
+            "/lib/client-js/build-temp-client-js",
+            "/lib/client-js/client-js",
+            "/lib/client-js/delete-temp-client-js",
+            "/lib/client-js/uglify-client-js",
+            "/lib/deploy/init-deployment",
+            "/lib/deploy/copy-cartridges",
+            "/lib/deploy/update-cartridge-properties",
+            "/lib/deploy/update-cartridge-references",
+            "/lib/deploy/zip-files",
+            "/lib/deploy/make-directories",
+            "/lib/deploy/webdav-upload",
+            "/lib/deploy/cleanup-code",
+            "/lib/deploy/unzip-files",
+            "/lib/deploy/activate-code"
+         ],
+         "subTasks":[
+            "combine-plugin-js",
+            "get-svg-sprite-projects",
+            "combine-svg",
+            "get-style-directories",
+            "sass",
+            "minify",
+            "bless",
+            "get-paths-client-js",
+            "eslint-client-js",
+            "build-temp-client-js",
+            "client-js",
+            "delete-temp-client-js",
+            "uglify-client-js",
+            "init-deployment",
+            "copy-cartridges",
+            "update-cartridge-properties",
+            "update-cartridge-references",
+            "zip-files",
+            "webdav-upload",
+            "cleanup-code",
+            "unzip-files",
+            "activate-code"
+         ],
+         "styleDependencies":[
+            "combine-svg"
+         ],
+         "deployDependencies":[
+            "bless",
+            "delete-temp-client-js"
+         ],
+         "uploadDependencies":[
+            "webdav-delete",
+            "make-directories",
+            "zip-files"
+         ]
+      },
+      "deploy-data":{
+         "taskName":"run-deploy-data",
+         "subModules":[
+            "/lib/deploy/init-deployment",
+            "/lib/data/zip-data-files",
+            "/lib/deploy/webdav-upload",
+            "/lib/data/import-data",
+            "/lib/data/cleanup-data"
+         ],
+         "subTasks":[
+            "init-deployment",
+            "webdav-upload",
+            "import-data",
+            "cleanup-data"
+         ],
+         "uploadDependencies":[
+            "webdav-delete-data",
+            "zip-data-files"
+         ]
+      },
+      "system-objects-report":{
+         "taskName":"run-system-objects-report",
+         "subModules":[
+            "/lib/deploy/init-deployment",
+            "/lib/data/sysobj-report",
+            "/lib/data/system-objects-report",
+            "/lib/util/xml-reporting-util"
+         ],
+         "subTasks":[
+            "init-deployment",
+            "system-objects-report"
+         ]
+      }
+   }
 }
