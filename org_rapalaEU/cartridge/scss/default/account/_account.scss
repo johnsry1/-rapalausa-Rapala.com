@@ -1,3 +1,43 @@
+#container.pt_product-search-noresult {
+    #primary.primary-content.contentbox {
+        box-shadow: none;
+        .shopping {
+            .bybrand,
+            .propicks,
+            .bestsellers,
+            .customerservices {
+                a {
+                    @include button;
+                }
+            }
+        }
+        .nohits {
+            h1 {
+                @include h1;
+            }
+            .no-hits-search {
+                button {
+                    min-width: inherit;
+                    padding: 0;
+                }
+            }
+            .section-header {
+                p {
+                    font-family: $font;
+                }
+            }
+            .no-hits-help {
+                h2 {
+                    @include h2;
+                }
+                .disc-outside {
+                    @include ul;
+                }
+            }
+        }
+    }
+}
+
 div.returningcustomers {
     .custom_signin {
         .formfield {
