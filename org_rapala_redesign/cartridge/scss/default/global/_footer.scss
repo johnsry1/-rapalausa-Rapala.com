@@ -1,0 +1,441 @@
+$footer-bg: $silver-two;
+$footer-bg-mobile: $concrete;
+
+.pt_storefront {
+    #footernew {
+        top: 0;
+    }
+}
+
+#footernew {
+    padding: 0;
+    height: auto;
+    background: none;
+    position: static;
+
+    #footer-brands {
+        display: block !important;
+        margin: rem(36px) 0 rem(45px);
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        @include respond(desktop) {
+            margin: rem(40px) 0 rem(35px);
+        }
+        .owl-stage {
+            margin: 0 auto;
+        }
+        .owl-nav {
+            .disabled {
+                @include respond(large-up) {
+                    display: none !important;
+                }
+            }
+        }
+        li {
+            margin: 0 rem(7px);
+            float: left;
+            @include respond(large-up) {
+                margin: 0 rem(20px);
+            }
+            @include respond(desktop) {
+                margin: 0 rem(40px);
+            }
+            a {
+                width: rem(70px);
+                height: rem(23px);
+                @include respond(desktop) {
+                    width: rem(80px);
+                    height: rem(40px);
+                }
+                opacity: 0.3;
+                &:hover {
+                    opacity: 1;
+                }
+                &.rapala {
+                    width: rem(70px);
+                    background: url("../images/brands/rapala_bw.png") no-repeat center;
+                    background-size: contain;
+                    @include respond(desktop) {
+                        width: rem(80px);
+                    }
+                    &:hover {
+                        background: url("../images/brands/rapala.png") no-repeat center;
+                        background-size: contain;
+                    }
+                }
+                &.sufix {
+                    width: rem(70px);
+                    background: url("../images/brands/sufix_bw.png") no-repeat center;
+                    background-size: contain;
+                    &:hover {
+                        background: url("../images/brands/sufix.png") no-repeat center;
+                        background-size: contain;
+                    }
+                }
+                &.storm {
+                    width: rem(70px);
+                    background: url("../images/brands/storm_bw.png") no-repeat center;
+                    background-size: contain;
+                    @include respond(desktop) {
+                        width: rem(81px);
+                    }
+                    &:hover {
+                        background: url("../images/brands/storm.png") no-repeat center;
+                        background-size: contain;
+                    }
+                }
+                &.bluefox {
+                    width: rem(70px);
+                    background: url("../images/brands/bluefox_bw.png") no-repeat center;
+                    background-size: contain;
+                    &:hover {
+                        background: url("../images/brands/bluefox.png") no-repeat center;
+                        background-size: contain;
+                    }
+                }
+                &.williamson {
+                    width: rem(70px);
+                    background: url("../images/brands/williamson_bw.png") no-repeat center;
+                    background-size: contain;
+                    @include respond(desktop) {
+                        width: rem(48px);
+                    }
+                    &:hover {
+                        background: url("../images/brands/williamson.png") no-repeat center;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+    }
+
+    .wrapper {
+        .footer-main {
+            width: 100%;
+            margin: 0;
+            padding: rem(20px) rem(10px) rem(30px);
+            background: $footer-bg-mobile;
+            float: none;
+            clear: both;
+            box-sizing: border-box;
+            @include respond(desktop) {
+                width: 100vw;
+                padding: rem(38px) calc((100vw - 100%) / 2) rem(30px);
+                margin: 0 calc((100vw - 100%) / -2);
+                background: $footer-bg;
+            }
+
+            .footer-left-section {
+                .footer-links {
+                    padding: 0;
+                    #about {
+                        width: rem(100px);
+                    }
+                    #customer-service {
+                        width: auto;
+                        padding-right: rem(70px);
+                    }
+                    #More-ways-to-shop {
+                        padding-right: rem(70px);
+                    }
+                    #busniness {
+                        width: rem(150px);
+                    }
+                    #about,
+                    #customer-service,
+                    #More-ways-to-shop,
+                    #busniness,
+                    #rapala_insider,
+                    #follow_us {
+                        @include respond(desktop-down) {
+                            background: $footer-bg-mobile;
+                            border-bottom: $border;
+                            padding: 0;
+                            margin: 0;
+                            box-sizing: border-box;
+                        }
+                        &.expanded {
+                            ul {
+                                li {
+                                    padding: 0 0 rem(10px) rem(20px);
+                                    a {
+                                        @include footer-link;
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+                        a,
+                        span {
+                            @include respond(deskto-down) {
+                                font-family: $font;
+                                @include font-size(20px);
+                                line-height: 1.0;
+                                text-align: left;
+                                color: $greyish-brown;
+                            }
+                        }
+                    }
+                    #busniness {
+                        @include respond(desktop-down) {
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+            .footer-right-section {
+                float: none;
+                @include respond(desktop) {
+                    width: rem(240px);
+                    margin: 0;
+                    display: block;
+                    float: right;
+                }
+            }
+            #linkheading {
+                font-family: $font;
+                @include font-size(14px);
+                font-weight: bold;
+                line-height: 1.0;
+                text-align: left;
+                color: $greyish-brown;
+                @include respond(desktop) {
+                    @include font-size(13px);
+                    @include line-height(20px);
+                    font-weight: bold;
+                    color: $night-rider;
+                }
+                a,
+                span {
+                    font-family: $font;
+                    @include font-size(20px);
+                    font-weight: normal;
+                    line-height: 1.0;
+                    text-align: left;
+                    color: $greyish-brown;
+                    @include respond(desktop) {
+                        @include font-size(13px);
+                        @include line-height(20px);
+                        font-weight: bold;
+                        color: $night-rider;
+                    }
+                }
+            }
+        }
+        .email-signup {
+            @include respond(desktop-down) {
+                width: calc(100% - #{rem(20px)});
+            }
+            .emailSignup {
+                @include respond(desktop-down) {
+                    height: auto;
+                    width: 100%;
+                }
+                input.emailinput {
+                    @include form-input;
+                    width: calc(100% - #{rem(92px)}) !important;
+                }
+                button {
+                    @include button;
+                    width: rem(92px);
+                    height: rem(30px);
+                    font: $font;
+                    @include font-size(12px);
+                    @include line-height(30px);
+                    padding: 0;
+                    min-width: inherit;
+                    border-radius: 0 3px 3px 0 !important;
+                    text-transform: uppercase;
+                    color: $black;
+                }
+            }
+        }
+    }
+
+    .change-region {
+        float: none;
+        padding: 0 0 5px 0 !important;
+        span.change-region-footer {
+            .country {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            img {
+                display: inline-block;
+                vertical-align: middle;
+                position: static;
+                margin-left: 7px;
+            }
+        }
+    }
+
+    .change-regionnew {
+        position: relative;
+        z-index: 99;
+        & > a {
+            padding-bottom: rem(10px);
+        }
+    }
+
+    .domainswitch-header {
+        display: none;
+        margin-left: rem(10px);
+        margin-top: rem(10px);
+        position: relative;
+        z-index: 99;
+        @include respond(desktop) {
+            margin: 0;
+            background: $domainswitch-header-bg-color;
+            width: rem(131px);
+            top: rem(25px);
+            padding: 0;
+            border: 1px solid $domainswitch-header-border-color;
+            position: absolute;
+            left: 0;
+            height: auto;
+        }
+        .top_arrow {
+            @include respond(desktop-down) {
+                display: none;
+            }
+            left: 62px;
+        }
+        ul {
+            width: 100%;
+            li {
+                color: $country-region-text-static-color;
+                height: 28px;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                @include respond(desktop) {
+                    text-align: center;
+                    background: none repeat scroll 0 0 $country-region-bg-static-color;
+                    border-top: 1px solid $country-region-border-color;
+                    float: left;
+                }
+                &:hover {
+                    color: $dim-gray;
+                    @include respond(desktop) {
+                        background: none repeat scroll 0 0 $country-region-bg-hover-color;
+                        height: 28px;
+                        padding: 0;
+                    }
+                    a {
+                        color: $country-region-text-hover-color;
+                        text-decoration: none;
+                        width: 100%;
+                        float: left;
+                    }
+                }
+                a {
+                    margin: 0;
+                    padding: 0;
+                    color: $country-region-text-static-color;
+                    font-weight: normal;
+                    font-size: 11px;
+                    line-height: 29px;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .email-signup {
+        margin: 0;
+        width: auto;
+        height: auto;
+    }
+
+    .social-icons {
+        margin-top: 10px !important;
+        @include respond(desktop) {
+            margin-top: rem(30px) !important;
+        }
+        #fallow-us-on {
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    &:not(last-child) {
+                        margin-right: rem(10px);
+                    }
+                    a {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-right-section {
+        .email-signup {
+            display: none;
+            @include respond(desktop) {
+                display: block;
+            }
+        }
+        .emailSignup {
+            border: none;
+            box-shadow: none;
+            width: 100%;
+            height: auto;
+            float: none;
+
+            button {
+                @include button;
+                position: static;
+                width: rem(72px);
+                height: rem(30px);
+                font: $font;
+                @include font-size(12px);
+                @include line-height(30px);
+                padding: 0;
+                min-width: inherit;
+                border-radius: 0 3px 3px 0 !important;
+                text-transform: none;
+                color: $black;
+            }
+            form.email-subscribe {
+                float: none;
+                input.emailinput {
+                    @include form-input;
+                    position: static;
+                    width: rem(168px);
+                    height: rem(30px);
+                    @include line-height(30px);
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+.footer-links {
+    ul {
+        li {
+            a {
+                @include footer-link;
+            }
+        }
+    }
+}
+
+.footer-copyright {
+    text-align: center;
+    padding: rem(14px) 0;
+    @include font-size(13px);
+    color: $greyish-brown;
+}
+
+.cookie-footer {
+    clear: both;
+    margin: rem(14px) 0 0;
+    @include font-size(13px);
+    color: $greyish-brown;
+}

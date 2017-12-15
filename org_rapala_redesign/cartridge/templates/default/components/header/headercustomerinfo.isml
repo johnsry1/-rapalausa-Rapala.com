@@ -1,0 +1,172 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
+
+	<isscript>
+		var links, title;
+		// User has session, but not authenticated
+		if (customer.registered && !customer.authenticated) {
+			title = Resource.msg('global.accountlink', 'locale', null);
+			links = [{
+				href: URLUtils.https('Account-Show'),
+				title: Resource.msg('global.accountlink', 'locale', null)
+			}, {
+				href: URLUtils.https('Login-Logout'),
+				title: Resource.msg('global.logout', 'locale', null),
+				class: 'user-logout buttonstyle'
+			}];
+		// User has session and is validated
+		} else if (customer.registered) {
+			title = Resource.msgf('global.user.name', 'locale', null, customer.profile.firstName, customer.profile.lastName);
+			links = [{
+				href: URLUtils.https('Account-Show'),
+				title: Resource.msg('global.accountlink', 'locale', null)
+			}, {
+				href: URLUtils.https('Order-History'),
+				title: Resource.msg('global.link.orders', 'locale', null)
+			}, {
+				href: URLUtils.https('Wishlist-Show'),
+				title: Resource.msg('global.header.wishlistlink', 'locale', null)
+			}, {
+				href: URLUtils.https('GiftRegistry-Start'),
+				title: Resource.msg('global.header.registrylink', 'locale', null)
+			}, {
+				href: URLUtils.https('Login-Logout'),
+				title: Resource.msg('global.logout', 'locale', null),
+				class: 'user-logout buttonstyle'
+			}];
+		// user has no session
+		} else {
+			title = Resource.msg('global.login', 'locale', null) + ' /  ' + Resource.msg('global.register', 'locale', null);
+			links = [{
+				href: URLUtils.https('Account-Show'),
+				title: Resource.msg('global.login', 'locale', null)
+			}, {
+				href: URLUtils.https('Account-StartRegister'),
+				title: Resource.msg('global.register', 'locale', null)
+			}];
+		}
+	</isscript>
+
+<div class="ui-email">
+    <isif condition="${pdict.CurrentCustomer.authenticated}">
+        <a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+    <iselse/>
+        <a href="${URLUtils.https('Page-Show','cid','email-preference-center')}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
+    </isif>
+</div>
+
+<isif condition="${pdict.CurrentCustomer.authenticated}">
+    <div id="user">
+        <isif condition="${pdict.CurrentCustomer.registered}">
+            <a href="${URLUtils.https('Account-Show')}" class="mobile-only userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
+                <issvghelper icon="user"/>
+                <span>
+                    <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
+                </span>
+            </a>
+            <span class="loggeduser">
+                <isif condition="${pdict.CurrentCustomer.authenticated}">
+                <span class="welcomemessage"><isprint value="${Resource.msg('headercustomerinfo.guestwelcome','locale',null)}" /> </span>
+                 <a href="javascript:void(0)" class="username" onclick="googleAnalyticsEvents.loginCustomer();">
+                  <isif condition = "${pdict.CurrentCustomer.authenticated}">
+                    <isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
+                    <isif condition="${!empty(badgeText) && badgeText!=null}">
+                        <isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini','BT',badgeText)}"/>
+                    </isif>
+                </isif>
+                  <span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span></a>
+                </isif>
+
+                 <isif condition="${!pdict.CurrentCustomer.authenticated}">
+                  <span class="welcomebackmessage"><isprint value="${Resource.msg('headercustomerinfo.welcomeback','locale',null)}" /></span>
+                  <span class="unauthenticated"><a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName}" href="${URLUtils.https('Account-Show','LocationURL',pdict.LoactionURL)}" class="userlogin">
+                    <isprint value="${pdict.CurrentCustomer.profile.firstName}"/></a></span>
+                 </isif>
+
+             </span>
+        <iselse>
+            <span class="guest-welcomemessage"><isprint value="${Resource.msg('headercustomerinfo.guestwelcome1','locale',null)}"/></span>
+        </isif>
+        <div class="congrats-message accountcontent">
+            <div class="top_arrow"></div>
+            <img src="${URLUtils.staticURL('/images/header-success.png')}"/>&nbsp;<isprint value="${Resource.msg('account.congrats','account',null)}"/> <isif condition="${pdict.CurrentCustomer.profile != null}"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></isif><isprint value="${Resource.msg('account.success','account',null)}"/>
+            <span class="account-info"> <isprint value="${Resource.msg('account.settings','account',null)}"/> </span>
+        </div>
+        <div class="user-info accountcontent">
+            <div class="top_arrow"></div>
+            <isif condition="${pdict.CurrentCustomer.authenticated}">
+                <ul class="user-profile">
+                    <li class="first-child"><a href="${URLUtils.https('Account-EditProfile')}"><isprint value="${Resource.msg('global.Profile','locale',null)}"/></a></li>
+                    <li>
+                        <isif condition="${pdict.CurrentCustomer.profile != null}">
+                            <input type="hidden"  class="emailHeaderLeft" value="${pdict.CurrentCustomer.profile.email}">
+                        </isif>
+                        <isset name="brand" value="${session.custom.currentSite}" scope="page" />
+                        <isset name="brand" value="${brand+'-contact-us'}" scope="page" />
+                        <a class="emailHeaderLeftPreferences" href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid',brand)+'&email='+pdict.CurrentCustomer.profile.email}">
+                            <isprint value="${Resource.msg('global.EmailPreferences','locale',null)}"/>
+                        </a>
+                    </li>
+                    <li><a href="${URLUtils.https('Wishlist-Show')}"><isprint value="${Resource.msg('global.Wishlist','locale',null)}"/></a></li>
+                    <li><a href="${URLUtils.https('Order-History')}"><isprint value="${Resource.msg('global.OrderHistory','locale',null)}"/></a></li>
+                    <li><a href="${URLUtils.https('Page-Show','cid','customer-tracking-my-order')}"><isprint value="${Resource.msg('global.Track','locale',null)}"/></a></li>
+                    <li><a href="${URLUtils.https('Page-Show','cid','customer-return-faqs')}"><isprint value="${Resource.msg('global.Return','locale',null)}"/></a></li>
+                    <li><a href="${URLUtils.https('Address-List')}"><isprint value="${Resource.msg('global.AddressBook','locale',null)}"/></a></li>
+                    <li><a href="${URLUtils.https('PaymentInstruments-List')}"><isprint value="${Resource.msg('global.paymentsettings','locale',null)}"/></a></li>
+                    <li class="logsout"><a href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a></li>
+                </ul>
+            </isif>
+        </div>
+        <isif condition="${pdict.CurrentCustomer.registered}"><div class="headermask"></div></isif>
+    </div>
+</isif>
+
+<isif condition="${!pdict.CurrentCustomer.authenticated}">
+    <div id="userinfo">
+        <ul>
+            <li class="ui-login <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
+                <div class="login-value mobile-view">
+                    <isif condition = "${pdict.CurrentCustomer.authenticated}">
+                        <isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
+                        <isif condition="${!empty(badgeText) && badgeText!=null}">
+                            <isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini','BT',badgeText)}"/>
+                        </isif>
+                    </isif>
+                </div>
+                <isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
+                    <div class="sign-up-blk">
+                        <a href="${URLUtils.https('Account-Show')}" class="userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
+                            <issvghelper icon="user"/>
+                            <span>
+                                <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="header-sign-in accountcontent">
+                        <isinclude template="components/header/headersignin"/>
+                    </div>
+                    <div class="header-create accountcontent">
+                        <isinclude template="components/header/headercreateaccount"/>
+                    </div>
+                    <div class="header-forgot-pwd accountcontent">
+                        <isinclude template="components/header/headerlostpassword"/>
+                    </div>
+                    <div class="confirmationcontainer forgotmsg"  style="display:none;">
+                        <div class="top_arrow"></div>
+                        <div id="message" class="reset-success-email"><isprint value="${Resource.msg('passwordreset.sent','account',null)}"/><br><isprint value="${Resource.msg('passwordreset.sent2','account',null)}"/></div>
+                    </div>
+                    <div class="headermask" style="display: none;"></div>
+                <iselse/>
+                    <div class="signedin">
+                        <a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
+                    </div>
+                </isif>
+            </li>
+         </ul>
+    </div>
+</isif>
+
+<a href="javascript:void(0);"class="magnifier-icon mobile-view">
+    <issvghelper icon="search"/>
+    <span>search icon</span>
+</a>

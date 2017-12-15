@@ -1,0 +1,107 @@
+#container.pt_product-search-noresult {
+    #primary.primary-content.contentbox {
+        box-shadow: none;
+        .shopping {
+            .bybrand,
+            .propicks,
+            .bestsellers,
+            .customerservices {
+                a {
+                    @include button;
+                }
+            }
+        }
+        .nohits {
+            h1 {
+                @include h1;
+            }
+            .no-hits-search {
+                button {
+                    min-width: inherit;
+                    padding: 0;
+                }
+            }
+            .section-header {
+                p {
+                    font-family: $font;
+                }
+            }
+            .no-hits-help {
+                h2 {
+                    @include h2;
+                }
+                .disc-outside {
+                    @include ul;
+                }
+            }
+        }
+    }
+}
+
+div.returningcustomers {
+    .custom_signin {
+        .formfield {
+            .form-row {
+                margin: $form-row-margin;
+                .label {
+                    @include label;
+                    .requiredindicator {
+                        float: none;
+                        color: $required-color;
+                        position: static;
+                        display: inline-block;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        .forgot-password {
+            width: auto;
+        }
+        .formactions {
+            .signin-button {
+                @include button;
+            }
+        }
+    }
+}
+
+.header-sign-in {
+    box-shadow: none;
+}
+
+#header {
+    #userinfo {
+        .header-forgot-pwd {
+            box-shadow: none;
+            text-align: left;
+            .forgot-email {
+                @include label;
+                padding: 0;
+            }
+            .requiredindicator {
+                float: none;
+                color: $required-color;
+                position: static;
+                display: inline-block;
+                padding: 0;
+            }
+            .passwordreset {
+                p {
+                    font-family: $font;
+                }
+            }
+            .lost_btn {
+                float: right;
+                .send.greybutton {
+                    @include button;
+                }
+            }
+            .back-link {
+                a {
+                    color: $black;;
+                }
+            }
+        }
+    }
+}

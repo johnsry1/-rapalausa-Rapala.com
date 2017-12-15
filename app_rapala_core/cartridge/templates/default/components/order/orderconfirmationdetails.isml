@@ -252,7 +252,7 @@
 												<iselseif condition="${Order.defaultShipment.shippingAddress == null && (pdict.stateCode == null || pdict.stateCode =='')}">
 													<i><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></i>
 												<iselse/>
-													$0.00
+													${session.currency.getSymbol()}0.00
 												</isif>
 											</span>
 										</div>
@@ -510,7 +510,7 @@
 										<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 										<div class="price">
 											<div class="discountprice">
-												<div class="standardprice">$<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
+												<div class="standardprice">${session.currency.getSymbol()}<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
 											</div>
 											</div>
 										</isif>

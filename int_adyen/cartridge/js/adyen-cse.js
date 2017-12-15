@@ -13,7 +13,7 @@ function pad ( number ) {
  */
 function initializeBillingEvents() {
 	
-	$('#billing-submit').on('click', function (e) {
+	$('.adyen-place-order-button').on('click', function (e) {
 		var radioVal = $('.payment-method-options').find(':checked').val();
 		if ('CREDIT_CARD' == radioVal){
 	    	e.preventDefault();

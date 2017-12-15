@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+
 var cardregex = {
     mastercard: /^5[1-5][0-9]{2,14}$/,
     visa: /^4[0-9]{3,15}$/,
@@ -252,14 +253,18 @@ var util = {
             $form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);
             // update the state fields
             if (field === 'countryCode') {
-                $form.find('[name$="country"]').trigger('change');
-                // retrigger state selection after country has changed
-                // this results in duplication of the state code, but is a necessary evil
-                // for now because sometimes countryCode comes after stateCode
-                $form.find('[name$="state"]').val(address.stateCode);
+                this.updateStateOptions($form, function() {
+                    // this results in duplication of the state code, but is a necessary evil
+                    // for now because we reload phone, postal code, state code block
+                    $form.find('[name$="state"]').val(address.stateCode);
+                    $form.find('[name$="phone"]').val(address.phone);
+                    $form.find('[name$="postalCode"]').val(address.postalCode);
+                });
+                //$form.find('[name$="country"]').trigger('change');
             }
         }
     },
+    
     /**
      * @function
      * @description Updates the number of the remaining character
@@ -413,7 +418,7 @@ var util = {
      * @description Updates the states options to a given country
      * @param {String} countrySelect The selected country
      */
-    updateStateOptions: function (form) { 
+    updateStateOptions: function (form, callback) { 
         var $form = $(form);
         //Country should be pre-selected based on geoip info
         if ($form.find('select[id$="_country"]').val() != null && $form.find('select[id$="_country"]').val().length == 0) {
@@ -457,6 +462,9 @@ var util = {
                 $.ajax(options).done(function (response) {
                     if (options.target) {
                         $($container).empty().html(response);
+                        if (callback != undefined) {
+                            callback();
+                        }
                     }
                 });
             }
@@ -505,6 +513,9 @@ var util = {
                         } else {
                             $stateField[0].selectedIndex = 0;
                         }
+                        if (callback != undefined) {
+                            callback();
+                        }
                     }
                 });
             } else {
@@ -528,6 +539,9 @@ var util = {
             $.ajax(options).done(function (response) {
                 if (options.target) {
                     $($phoneContainer).empty().html(response);
+                    if (callback != undefined) {
+                        callback();
+                    }
                 }
             });
             

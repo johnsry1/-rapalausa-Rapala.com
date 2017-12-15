@@ -1,0 +1,39 @@
+.owl-carousel.owl-theme {
+    margin: 0 rem(10px);
+    .owl-stage-outer {
+        margin: 0 rem(40px);
+        @include respond(desktop) {
+            margin: 0 rem(45px);
+        }
+    }
+    .owl-nav {
+        margin: 0;
+        .owl-prev,
+        .owl-next {
+            position: absolute;
+            top: 50%;
+            margin: rem(-13px) 0 0;
+            text-indent: -99999px;
+            overflow: hidden;
+            padding: 0;
+            width: rem(15px);
+            height: rem(25px);
+            background: url("../images/svg-icons/arrow.svg") no-repeat center;
+            &:hover {
+                background: url("../images/svg-icons/arrow.svg") no-repeat center;
+                opacity: 1;
+            }
+            &.disabled {
+                background: url("../images/svg-icons/arrow.svg") no-repeat center;
+                opacity: 0.4;
+            }
+        }
+        .owl-prev {
+            left: rem(10px);
+        }
+        .owl-next {
+            right: rem(10px);
+            transform: rotate(180deg);
+        }
+    }
+}

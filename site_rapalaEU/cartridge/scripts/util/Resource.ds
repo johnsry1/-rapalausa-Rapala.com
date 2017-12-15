@@ -6,6 +6,8 @@ var Currency = require('dw/util/Currency');
 var Site = require('dw/system/Site');
 var ContentMgr = require('dw/content/ContentMgr');
 var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
+/* Script Modules */
+var AdyenHelper = require ("int_adyen/cartridge/scripts/util/AdyenHelper");s
 
 function ResourceHelper() {}
 /**
@@ -178,7 +180,9 @@ ResourceHelper.getResources = function(pageContext) {
 	    GA_ACTION_REMOVEPROMOTION       : Resource.msg('gAnalytics.events.removepromotion','events',null),
 	    GA_CATEGORY_PDPVIEW             : Resource.msg('gAnalytics.events.pdpview','events',null),
 	    GA_ACTION_PDPVIEW               : Resource.msg('gAnalytics.events.quickview','events',null),
-	    GA_CATEGORY_BRAND				: Resource.msg('gAnalytics.events.brand', 'events', null)
+	    GA_CATEGORY_BRAND				: Resource.msg('gAnalytics.events.brand', 'events', null),
+		
+		ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null)
     };
 
     // additional resources
@@ -301,7 +305,9 @@ ResourceHelper.getPreferences = function(pageContext) {
         LISTING_REFINE_SORT: true,
         STORE_PICKUP: Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
-        CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS')
+        CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS'),
+		ADYEN_CSE_ENABLED : AdyenHelper.getAdyenCseEnabled(),
+		ADYEN_CSE_JS_PUBLIC_KEY : AdyenHelper.getAdyenCseJsPublicKey()
     };
 }
 /**

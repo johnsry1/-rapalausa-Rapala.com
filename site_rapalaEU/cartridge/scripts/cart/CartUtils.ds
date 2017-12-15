@@ -26,6 +26,8 @@ CartUtils.getAddressList = function(basket, currentCustomer, includeLineItems) {
             firstName: addy.firstName,
             lastName: addy.lastName,
             address1: addy.address1,
+			suite: addy.suite, // Added for Adyen AVS support
+			streetName: addy.custom.streetName, // Added for Adyen AVS support
             address2: addy.address2,
             postalCode: addy.postalCode,
             city: addy.city,
