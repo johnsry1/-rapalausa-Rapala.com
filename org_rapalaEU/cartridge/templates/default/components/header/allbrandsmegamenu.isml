@@ -39,6 +39,11 @@
                 <div class="sub-category-section-3">
                     <isinclude template="components/header/allbrandssubmegamenu"/>
                 </div>
+                <isif condition="${secondLevel.custom.catBannerID}">
+                    <div class="nav-banner">
+                        <iscontentasset aid="${secondLevel.custom.catBannerID}"/>
+                    </div>
+                </isif>
             </div>
         </span>
     </div>

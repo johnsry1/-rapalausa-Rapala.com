@@ -224,7 +224,7 @@ module.exports = function (pdict) {
                 }
                 optionId += '_' + optionKey;
                 optionLabel = '<label for="' + optionId + '">' + optionLabel + '</label>';
-                options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + optionLabel);
+                options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + optionId + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + optionLabel);
             });
             input += options.join('');
             break;

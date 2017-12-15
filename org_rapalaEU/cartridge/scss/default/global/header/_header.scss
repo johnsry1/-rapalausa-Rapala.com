@@ -146,8 +146,8 @@ body {
                     }
                     img {
                         display: inline-block;
-                        width: rem(29px);
-                        height: rem(19px);
+                        width: rem(30px);
+                        height: rem(20px);
                         vertical-align: middle;
                     }
                 }
@@ -177,6 +177,40 @@ body {
                 ul,
                 li {
                     height: auto;
+                }
+                #user {
+                    @include respond(desktop-down) {
+                        display: block;
+                    }
+                    .loggeduser,
+                    .congrats-message,
+                    .user-info,
+                    .user-info {
+                        @include respond(desktop-down) {
+                            display: none;
+                        }
+                    }
+                    .userlogin {
+                        display: block;
+                        width: rem(36px);
+                        height: rem(36px);
+                        border: 1px solid $black;
+                        border-radius: 50%;
+                        text-align: center;
+                        text-indent: 0;
+                        @include respond(desktop) {
+                            display: none;
+                        }
+                        span {
+                            display: none;
+                        }
+                        .icon {
+                            margin-top: rem(7px);
+                            @include respond(desktop) {
+                                display: none;
+                            }
+                        }
+                    }
                 }
                 #userinfo {
                     li {
@@ -273,6 +307,10 @@ body {
             background-size: 17px;
             top: 1px;
             right: 7px;
+            &:hover {
+                background: url("../images/svg-icons/search.svg") no-repeat center;
+                background-size: 17px;
+            }
         }
     }
 }

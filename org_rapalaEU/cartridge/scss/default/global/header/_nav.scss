@@ -180,6 +180,18 @@ body.js-body {
                                         white-space: nowrap;
                                     }
                                 }
+                                .nav-banner {
+                                    display: none;
+                                    @include respond(desktop) {
+                                        display: block;
+                                        float: left;
+                                        margin-left: rem(20px);
+                                    }
+                                    p {
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                }
                             }
                         }
                     }
@@ -272,7 +284,6 @@ body.js-body {
                 .mega_subcategory {
                     @include respond(desktop) {
                         display: inline-block;
-                        position: relative;
                     }
                     &:hover {
                         .level-1 {
@@ -352,6 +363,9 @@ body.js-body {
                 .sub-category-section-3 {
                     @include respond(desktop-down) {
                         padding-bottom: rem(15px);
+                    }
+                    @include respond(desktop) {
+                        float: left;
                     }
                 }
                 a.level-2 {

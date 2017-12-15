@@ -1,9 +1,14 @@
-#container.pt_account .floatright.site-suggestion-section {
-
+.pt_storefront,
+#container.pt_account {
+    .floatright.site-suggestion-section {
+        @include respond(desktop) {
+            right: rem(-4px);
+        }
+    }
 }
 .floatright.site-suggestion-section {
     @include respond(desktop) {
-        right: 0;
+        right: rem(-4px);
         top: rem(85px);
     }
 }
