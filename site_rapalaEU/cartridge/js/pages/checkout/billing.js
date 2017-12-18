@@ -8,7 +8,7 @@ var ajax = require('../../ajax'),
     validator = require('../../validator'),
     //giftcard = require('../../giftcard'),
     util = require('../../util'),
-    adyenCse = require('./adyen-cse');
+    adyenCse = require('../../adyen-cse');
 
 /**
  * @function
@@ -566,7 +566,7 @@ function updatePaymentType(selectedPayType, test) {
         $('input[name="issuerId"]').removeAttr('checked');
     }
     $('input[value=' + selectedPayType + ']').prop('checked','checked');
-    formPrepare.validateForm();
+    uievents.synccheckoutH();
 }
 
 /**

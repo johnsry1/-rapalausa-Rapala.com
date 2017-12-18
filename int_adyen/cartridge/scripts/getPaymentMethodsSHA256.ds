@@ -46,7 +46,7 @@ function getMethods (basket : dw.order.Basket) {
         return PIPELET_ERROR;
     }
     if (allowedMethods == "null" || allowedMethods == null) {
-        args.allowedMethods = "";
+        allowedMethods = "";
     }
 
     var currencyCode: String = basket.currencyCode;
@@ -107,6 +107,7 @@ function getMethods (basket : dw.order.Basket) {
 		Logger.error("Adyen: Call error code" +  callResult.getError().toString() + " Error => ResponseStatus: " + callResult.getStatus()  + " | ResponseErrorText: " +  callResult.getErrorMessage() + " | ResponseText: " + callResult.getMsg());
 		return PIPELET_ERROR;
 	}
+
    	resultObject = callResult.object;
 	
     return JSON.parse(resultObject.text);
