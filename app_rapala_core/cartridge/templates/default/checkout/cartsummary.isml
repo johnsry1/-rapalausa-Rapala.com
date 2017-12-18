@@ -529,11 +529,11 @@
 								<td class="cart-summary-quantitycolumn col3">1</td>
 								<td class="itemtotalcolumn coupontotal col4">
 									<isif condition="${FormCoupon.object.applied}">
-										<isloop items="${FormCoupon.object.priceAdjustments}" var="Promo" status="couponcount" >							
-											 <isif condition="${FormCoupon.object.getPromotion().getPromotionClass() == dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT}"	>				
+										<isloop items="${FormCoupon.object.priceAdjustments}" var="PriceAdjustment" status="couponcount" >	
+											 <isif condition="${PriceAdjustment.promotion && PriceAdjustment.promotion.promotionClass == dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT}">
 												<isif condition="${couponcount.count==1}"><div class="discount_amount discount_amount-prod"><isprint value="${Resource.msg('global.applied','locale',null)}"/></div></isif>
 											<iselse/>
-												<isif condition="${couponcount.count==1}"><div class="discount_amount"><isprint value="${Promo.price}"/></div></isif>
+												<isif condition="${couponcount.count==1}"><div class="discount_amount"><isprint value="${PriceAdjustment.price}"/></div></isif>
 											</isif>	
 										</isloop>	
 									</isif>

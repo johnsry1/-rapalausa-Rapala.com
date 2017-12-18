@@ -14,7 +14,13 @@
 	var pagingModel = pdict.ProductPagingModel;
 	var psr = pdict.ProductSearchResult;
 	var searchPhrase = psr.getSearchPhrase();
-	var suggestedSearchPhrase = psr.getSuggestedSearchPhrase();
+	var suggestedSearchPhrase = '';
+	
+	var suggestedSearchPhraseList = psr.getSearchPhraseSuggestions();
+	if(suggestedSearchPhraseList && suggestedSearchPhraseList.suggestedPhrases && suggestedSearchPhraseList.suggestedPhrases.hasNext()){
+		suggestedSearchPhrase = suggestedSearchPhraseList.suggestedPhrases.next().phrase;
+	}
+	
 	var searchPhraseURL = URLUtils.url('Search-Show', 'q', searchPhrase);
 	var suggestedSearchPhraseURL = suggestedSearchPhrase ? URLUtils.url('Search-Show', 'q', suggestedSearchPhrase) : '';
 	var resultsText = Resource.msg('searchbreadcrumbs.resultstext', 'search', null);

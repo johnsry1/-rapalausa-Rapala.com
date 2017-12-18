@@ -20,7 +20,15 @@
 		</p>
 		
 		<iscomment>render a link to execute the search with an alternative suggested search phrase</iscomment>
-		<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
+		<isscript>
+			var suggestedSearchPhrase = '';
+	
+			var suggestedSearchPhraseList = psr.getSearchPhraseSuggestions();
+			if(suggestedSearchPhraseList && suggestedSearchPhraseList.suggestedPhrases && suggestedSearchPhraseList.suggestedPhrases.hasNext()){
+				suggestedSearchPhrase = suggestedSearchPhraseList.suggestedPhrases.next().phrase;
+			}
+		 </isscript>
+		<isif condition="${!empty(suggestedSearchPhrase)}">
 			<p class="suggested-term">
 				<isprint value="${Resource.msg('search.nohits.didyoumean','search',null)}" />
 				<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}"><isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/></a>

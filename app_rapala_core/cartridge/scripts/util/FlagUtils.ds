@@ -11,12 +11,12 @@
 importPackage( dw.system );
 importPackage( dw.catalog );
 
-var rightNow : Date = dw.util.DateUtils.nowForSite();
+var rightNow : Date = dw.util.Calendar().getTime();
 
 function showNewFlag(product:Product) : Boolean
 {
 	var showNew : boolean;
-	var rightNow = dw.util.DateUtils.nowForSite();
+	var rightNow = dw.util.Calendar().getTime();
 	showNew = false;
 	
 	if(!product.variant) {
