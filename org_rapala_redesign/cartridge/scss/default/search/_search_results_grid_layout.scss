@@ -45,6 +45,18 @@
                             font-family: $font;
                         }
                     }
+                    li {
+                        font-family: $font;
+                        &.current-page {
+                            font-family: $font;
+                            a {
+                                font-family: $font;
+                            }
+                        }
+                        a {
+                            font-family: $font;
+                        }
+                    }
                 }
             }
             .search-result-content {
@@ -105,8 +117,9 @@
     }
     .searchrefinements {
         .refinement {
+
             .filter {
-                font-family: $font;
+                @include clp-refinement-title;
             }
             ul {
                 li {
