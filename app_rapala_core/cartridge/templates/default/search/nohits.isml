@@ -22,7 +22,7 @@
 		<iscomment>render a link to execute the search with an alternative suggested search phrase</iscomment>
 		<isscript>
 			var suggestedSearchPhrase = '';
-	
+			var psr = pdict.ProductSearchResult;
 			var suggestedSearchPhraseList = psr.getSearchPhraseSuggestions();
 			if(suggestedSearchPhraseList && suggestedSearchPhraseList.suggestedPhrases && suggestedSearchPhraseList.suggestedPhrases.hasNext()){
 				suggestedSearchPhrase = suggestedSearchPhraseList.suggestedPhrases.next().phrase;

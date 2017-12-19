@@ -276,8 +276,8 @@
 					</td>
 				</tr>
 			</isif>
-			<isset name="giftCertTotal" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
-			<isset name="allotmentAmt" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			<isset name="giftCertTotal" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
+			<isset name="allotmentAmt" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
 			<isset name="gcPaymentInstrs" value="${LineItemCtnr.getGiftCertificatePaymentInstruments()}" scope="page"/>
 			<isset name="creditapplied" value="false" scope="page"/>
 			<isloop items="${gcPaymentInstrs}" var="gcPI">
@@ -292,7 +292,7 @@
 			<isif condition="${allotmentAmt>0 || giftCertTotal>0}">
 				<isset name="creditapplied" value="true" scope="page"/>
 			</isif>
-			<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
 			<isif condition="${pdict.prodNetPrice > LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)}">
 				<isset name="ordertotalsaving" value="${ordertotalsaving.add(pdict.prodNetPrice.subtract(LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)))}" scope="page"/>
 			</isif>
