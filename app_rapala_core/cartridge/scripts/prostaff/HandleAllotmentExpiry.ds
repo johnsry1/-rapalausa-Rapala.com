@@ -12,7 +12,7 @@ function handleAllotmentExp( customer, basket )
 	   //var customer: Customer = args.Customer;
 	   var allotmentExpired : Boolean = true;
 	   //var basket : Basket = args.Basket;
-	   var currencyCode : String = Site.getCurrent().getCurrencyCode();
+	   var currencyCode : String = Site.getCurrent().getDefaultCurrency();
 	   var paymentInstr : PaymentInstrument; 
 	   var today : Date = new Date();
 	   if(!empty(customer.profile) && !empty(customer.profile.custom) && !empty(customer.profile.custom.allotmentExpires)){
