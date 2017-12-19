@@ -1,7 +1,6 @@
 #content {
     .contentbox {
         box-shadow: none;
-        border: $border;
     }
 }
 
@@ -31,12 +30,21 @@
     .price {
         @include pdp-price;
     }
-}
-
-.product-detail {
-    .price {
-        .price-sales {
-            @include pdp-price;
+    #youTubeVideos {
+        .leftcol {
+            .videoDescription {
+                @include pdp-description;
+            }
+            .videoTitle {
+                h2 {
+                    @include h2;
+                }
+            }
+        }
+        .rightcol {
+            h2 {
+                @include h2;
+            }
         }
     }
 }
@@ -66,6 +74,18 @@
                     @include pdp-name;
                 }
             }
+        }
+    }
+}
+
+.onlyMobile-hide {
+    font-family: $font;
+}
+
+#tabs {
+    .mobile-tabs-section {
+        .tabsHeader {
+            @include pdp-accordion-title;
         }
     }
 }
