@@ -60,7 +60,7 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/images/favicon.ico')}" rel="shortcut icon" />
 <iselse>
 	<link href="${URLUtils.staticURL('/themes/rapala/images/favicon.ico')}" rel="shortcut icon" />
-</isif>	
+</isif>
 
 <iscomment>include all meta tags</iscomment>
 <iscomment>
@@ -92,12 +92,14 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 <!--- BEGIN CSS files to merge.(source_path=app_rapala_core/cartridge/static/default;targetfile=css/allinone.css) --->
 <link href="${URLUtils.staticURL('/lib/jquery/ui/jquery-ui.min.css')}" type="text/css" rel="stylesheet" />
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/styleguide.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.min.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.theme.default.min.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.theme.green.min.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/animate.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/zoomer/magiczoomplus.css')}" type="text/css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/98304bcc-4984-4e56-b46d-d25c85c339a9.css"/>
 
 <!--- END CSS files to merge. --->
 
@@ -115,10 +117,8 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 <![endif]-->
 
 <script src="${URLUtils.staticURL('/js/googleAnalyticsEvents.js')}"></script>
-<iscomment>ALWAYS LOAD RAPALA THEME STYLESHEETS</iscomment>
-<link href="${URLUtils.staticURL('/themes/rapala/css/rapala.css')}" type="text/css" rel="stylesheet"/>
 
 <isinclude template="components/header/htmlhead_UI"/>
 
-<iscomment>Gather device-aware scripts</iscomment>    
+<iscomment>Gather device-aware scripts</iscomment>
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>

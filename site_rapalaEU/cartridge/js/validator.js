@@ -73,7 +73,10 @@ var settings = {
         }
     },
     errorPlacement: function (error, element) {
-        if ($(element).hasClass('errorclient')) {
+        var $selectStyle = error.parent('.select-style');
+        if ($selectStyle.length) {
+            $selectStyle.after(error);
+        } else if ($(element).hasClass('errorclient')) {
             $(element).closest('.form-row').addClass('inputlabel');
             $(element).closest('.formfield').addClass('inputlabel');
             $(element).closest('.formfield').find('.label span').addClass('inputlabel');
@@ -312,7 +315,7 @@ $.validator.addMethod('zipCodeCustom', function (value, element) {
         }
         return (/^\d{5}((-\d{4})|(\d{4}))?$/).test(value);
     }
-}, '- Please enter a valid ZipCode'); 
+}, '- Please enter a valid ZipCode');
 
 $.validator.addMethod('phoneCustom', function (phoneNumber, element) {
     if ($(element).hasClass('stopKeypress')) {
