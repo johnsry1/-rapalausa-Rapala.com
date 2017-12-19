@@ -18,8 +18,8 @@ var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var app = require('~/cartridge/scripts/app');
-var guard = require('~/cartridge/scripts/guard');
+var app = require('app_rapala_controllers/cartridge/scripts/app');
+var guard = require('app_rapala_controllers/cartridge/scripts/guard');
 var ltkSendOrder = require('int_listrak_controllers/cartridge/controllers/ltkSendOrder.js');
 
 var Cart = app.getModel('Cart');
@@ -98,10 +98,10 @@ function start() {
 
     if (cart) {
 
-        var COShipping = app.getController('COShipping');
+        var COShipping = require('site_rapalaEU/cartridge/controllers/COShipping.js');
 
         // Clean shipments.
-        COShipping.PrepareShipments(cart);
+        app.getController('COShipping').PrepareShipments(cart);
 
         // Make sure there is a valid shipping address, accounting for gift certificates that do not have one.
         if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() === null) {
@@ -119,7 +119,7 @@ function start() {
             cart.calculate();
         });
 
-        var COBilling = app.getController('COBilling');
+        var COBilling = require('site_rapalaEU/cartridge/controllers/COBilling.js');
 
         Transaction.wrap(function () {
             if (!COBilling.ValidatePayment(cart)) {
@@ -341,7 +341,7 @@ function submitPaymentJSON() {
             }
         }
 
-        if (app.getController('COBilling').HandlePaymentSelection('cart').error || handlePayments().error) {
+        if (require('site_rapalaEU/cartridge/controllers/COBilling.js').HandlePaymentSelection('cart').error || handlePayments().error) {
             app.getView().render('checkout/components/faults');
             return;
         } else {
@@ -364,10 +364,10 @@ function submit() {
     if (order.object && request.httpParameterMap.order_token.stringValue === order.getOrderToken()) {
         orderPlacementStatus = submitImpl(order);
         if (!orderPlacementStatus.error) {
-            return app.getController('COSummary').ShowConfirmation(order);
+            return require('site_rapalaEU/cartridge/controllers/COSummary.js').ShowConfirmation(order);
         }
     }
-    app.getController('COSummary').Start();
+    require('site_rapalaEU/cartridge/controllers/COSummary.js').Start();
 }
 
 

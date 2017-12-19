@@ -116,47 +116,6 @@ function initCreditCardList(cart) {
 }
 
 /**
- * Updates cart calculation and page information and renders the billing page.
- * @transactional
- * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
- * @param {object} params - (optional) if passed, added to view properties so they can be accessed in the template.
- */
-/*
-function start(cart, params) {
-
-    app.getController('COShipping').PrepareShipments();
-    
-    var addrid = session.forms.singleshipping.shippingAddress.addressid.value;
-    app.getForm('billing.billingAddress').setValue('addressid',addrid);
-    Transaction.wrap(function () {
-        cart.calculate();
-    });
-    if(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value == "PayPal" && app.getForm('billing.paypalval').object.paypalprocessed.value == 'true'){
-        var paymentInstruments = cart.object.getPaymentInstruments("PayPal");
-        for each(var paymentInstrument in paymentInstruments){
-            Transaction.wrap(function(){
-                paymentInstrument.custom.paypalToken = request.httpParameterMap.token;
-                paymentInstrument.custom.paypalPayerID = request.httpParameterMap.PayerID;
-            });
-        }
-    }
-    if(customer.authenticated){
-        var allotmentOnly = require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(cart.object);
-        if(allotmentOnly){
-            app.getForm('billing.paymentMethods').setValue('selectedPaymentMethodID','ALLOTMENT');
-        }
-    }
-    
-    var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update({
-        pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
-    });
-
-    require('app_rapala_controllers/cartridge/controllers/COBilling.js').ReturnToForm(cart, params);
-}
-*/
-
-/**
  * Starting point for billing. After a successful shipping setup, both COShipping
  * and COShippingMultiple call this function.
  */
@@ -186,9 +145,9 @@ function publicStart() {
         app.getForm('billing.couponCode').clear();
         app.getForm('billing.giftCertCode').clear();
 
-        var AdyenHppPaymentMethods = AdyenController.GetPaymentMethods(cart);
+//        var AdyenHppPaymentMethods = AdyenController.GetPaymentMethods(cart);
 //        start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards, AdyenHppPaymentMethods : AdyenHppPaymentMethods});
-        require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards, AdyenHppPaymentMethods : AdyenHppPaymentMethods});
+        require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards, AdyenHppPaymentMethods : []});
     } else {
         app.getController('Cart').Show();
     }
@@ -272,7 +231,7 @@ function billing() {
         },
         save: function () {
             var cart = app.getModel('Cart').get();
-
+            
             /****************PREVAIL Address verification Integration*
             var DAVResult = validateDAV();
             if (DAVResult && DAVResult.endNodeName !== 'success') {
@@ -315,9 +274,7 @@ function billing() {
                 ltkSignupEmail.Signup();
                 ltkSendSca.SendSCA();
 
-                // A successful billing page will jump to the next checkout step.
-                //app.getController('COSummary').Start();
-                app.getController('COSummary').Submit();
+                require('site_rapalaEU/cartridge/controllers/COSummary.js').Submit();
                 return;
             }
         },

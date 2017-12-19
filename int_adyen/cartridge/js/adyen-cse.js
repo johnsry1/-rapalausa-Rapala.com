@@ -44,7 +44,8 @@ function initializeBillingEvents() {
             } else {
                 $('.form-data-error').html('');
                 $('#dwfrm_billing_paymentMethods_creditCard_encrypteddata').val(postData['adyen-encrypted-data']);
-                $('#billing-submit-hidden').trigger('click');
+                
+                $('.adyen-place-order-hidden-button').trigger('click');
             }
         }
     });

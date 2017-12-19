@@ -398,15 +398,18 @@
 							<div class="ipad-handling">
 								<div class="singleshipping_error hide"><isprint value="${Resource.msg('billinginfo.addresserror','checkout',null)}"/></div>
 								<div class="continue-checkout-button">
+									<isscript>
+										var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
+									</isscript>
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
-											<isif condition="${(pdict.AdyenHelper && pdict.AdyenHelper.getAdyenCseEnabled()) || pdict.AdyenCseEnabled === true}">
+											<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
 												<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn adyen-place-order-button" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 												<button class="button-fancy-large adyen-place-order-hidden-button" type="submit" id="${billingFormSubmitButtonID}" style="display:none" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 											<iselse/>
 												<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 											</isif>		
 									<iselse/>
-											<isif condition="${(pdict.AdyenHelper && pdict.AdyenHelper.getAdyenCseEnabled()) || pdict.AdyenCseEnabled === true}">
+											<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
 												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-button" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
 												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-hidden-button" id="${billingFormSubmitButtonID}" style="display:none" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
 											<iselse/>

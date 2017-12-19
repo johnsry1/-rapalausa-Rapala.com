@@ -15,8 +15,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var app = require('~/cartridge/scripts/app');
-var guard = require('~/cartridge/scripts/guard');
+var app = require('app_rapala_controllers/cartridge/scripts/app');
+var guard = require('app_rapala_controllers/cartridge/scripts/guard');
 
 var Cart = app.getModel('Cart');
 
@@ -31,7 +31,7 @@ function start() {
     // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
     // instrument totals according to redeemed gift certificates or additional discounts granted through coupon
     // redemptions on this page.
-    var COBilling = app.getController('COBilling');
+    var COBilling = require('site_rapalaEU/cartridge/controllers/COBilling.js');
     if (!COBilling.ValidatePayment(cart)) {
         COBilling.Start();
         return;
@@ -47,7 +47,7 @@ function start() {
             }
         });
 
-        var pageMeta = require('~/cartridge/scripts/meta');
+        var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
         pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'Rapala Checkout')});
         app.getView({
             Basket: cart.object
@@ -63,10 +63,10 @@ function submit() {
     // Calls the COPlaceOrder controller that does the place order action and any payment authorization.
     // COPlaceOrder returns a JSON object with an order_created key and a boolean value if the order was created successfully.
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
-    var placeOrderResult = app.getController('COPlaceOrder').Start();
+    var placeOrderResult = require('site_rapalaEU/cartridge/controllers/COPlaceOrder.js').Start();
     if (placeOrderResult.error) {
         var cart = Cart.get();
-        var COBilling = app.getController('COBilling');
+        var COBilling = require('site_rapalaEU/cartridge/controllers/COBilling.js');
         COBilling.ReturnToBIlling(placeOrderResult.error);
     } else if (placeOrderResult.order_created) {
         if (placeOrderResult.Order.paymentInstrument.paymentMethod == "Adyen") {
@@ -102,7 +102,7 @@ function showConfirmation(order) {
 
     var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
     
-    var pageMeta = require('~/cartridge/scripts/meta');
+    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
     pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
     app.getView({
         Order: order,
