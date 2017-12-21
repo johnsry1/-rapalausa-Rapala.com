@@ -1,0 +1,27 @@
+/**
+ * @description iterate over the content search posts array, find the current post and return object with previous and next post id that used
+ *	on post page navigation
+ * @param {ContentSearchResult} dw/content/ContentSearchModel content search model object 
+ * @param {currentPost} dw/content/Content current content asset id(current post)
+ * @return {object} country the object containing the country's settings
+ */
+function getPaginationPosts(ContentSearchResult, currentPost) {
+	var returnObject = {
+		prev: null,
+		next: null
+	};
+	var postsList = ContentSearchResult.getContent().asList();	
+	for (var i = 0; i < postsList.length; i++) {
+		var _post = postsList[i];
+		if (_post.ID === currentPost.ID) {
+			returnObject = {
+				prev: (i != 0) ? postsList[i-1] : null,
+				next: (i != postsList.length - 1) ? postsList[i+1] : null
+			}
+		}
+	}
+	
+	return returnObject;
+}
+
+exports.getPaginationPosts = getPaginationPosts;

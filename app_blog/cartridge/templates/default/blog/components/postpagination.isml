@@ -1,0 +1,41 @@
+<!--- TEMPLATENAME: postpagination.isml --->
+<isscript>
+	var postPagination;
+	var searchedFolder = (pdict.ContentSearchResult.folder != null && !empty(pdict.ContentSearchResult.folder.ID)) ? pdict.ContentSearchResult.folder.ID : '';
+	var contentFolder = pdict.Content.getClassificationFolder();
+	try {
+		postPagination = require('app_blog/cartridge/scripts/blog/Utils.ds').getPaginationPosts(pdict.ContentSearchResult, pdict.Content);
+	} catch (e) {
+		//just debug exception
+		var debug = e;
+	}
+</isscript>
+<div class="post-pagination">
+	<isif condition="${postPagination.prev != null && postPagination.prev instanceof dw.content.Content}">
+		<isif condition="${searchedFolder != null && !empty(searchedFolder)}">
+			<a href="${URLUtils.url('Page-Show', 'cid', postPagination.prev.ID, 'fdid', pdict.ContentSearchResult.folder.ID)}">
+				${Resource.msg('blog.postpage.prev', 'blog', null)}
+			</a>
+		<iselseif condition="${!empty(pdict.ContentSearchResult.searchPhrase)}">
+			<a href="${URLUtils.url('Page-Show', 'cid', postPagination.prev.ID, 'q', pdict.ContentSearchResult.searchPhrase, 'id', pdict.searchedID)}">
+				${Resource.msg('blog.postpage.prev', 'blog', null)}
+			</a>
+		</isif>
+	</isif>
+	<isif condition="${pdict.ContentSearchResult.folder != null && !empty(pdict.ContentSearchResult.folder.ID)}">
+		<isprint value="${pdict.ContentSearchResult.folder.displayName}" />
+	<iselse>
+		<isprint value="${contentFolder.displayName}" />
+	</isif>
+	<isif condition="${postPagination.next != null && postPagination.next instanceof dw.content.Content}">
+		<isif condition="${searchedFolder != null && !empty(searchedFolder)}">
+			<a href="${URLUtils.url('Page-Show', 'cid', postPagination.next.ID, 'fdid', pdict.ContentSearchResult.folder.ID)}">
+				${Resource.msg('blog.postpage.next', 'blog', null)}
+			</a>
+		<iselseif condition="${!empty(pdict.ContentSearchResult.searchPhrase)}">
+			<a href="${URLUtils.url('Page-Show', 'cid', postPagination.next.ID, 'q', pdict.ContentSearchResult.searchPhrase, 'id', pdict.searchedID)}">
+				${Resource.msg('blog.postpage.next', 'blog', null)}
+			</a>
+		</isif>
+	</isif>
+</div>

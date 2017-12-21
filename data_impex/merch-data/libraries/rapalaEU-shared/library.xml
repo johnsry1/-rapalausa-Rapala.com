@@ -736,24 +736,7 @@
       </custom-attributes>
   </folder>
 
-  <folder folder-id="luhrjensen-corporate">
-      <display-name xml:lang="x-default">Corporate</display-name>
-      <online-flag>true</online-flag>
-      <template>/content/folder/csfolder.isml</template>
-      <parent>luhrjensen-customer-service</parent>
-      <position>10.0</position>
-      <page-attributes>
-          <page-title xml:lang="x-default">Corporate</page-title>
-          <page-description xml:lang="x-default">Corporate</page-description>
-          <page-keywords xml:lang="x-default">Corporate</page-keywords>
-      </page-attributes>
-      <custom-attributes>
-          <custom-attribute attribute-id="csColumnNumber">3</custom-attribute>
-          <custom-attribute attribute-id="expandable">true</custom-attribute>
-          <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-          <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-      </custom-attributes>
-  </folder>
+  
 
   <folder folder-id="luhrjensen-dealers-repair-centers">
       <display-name xml:lang="x-default">Dealer Locator / Store Finder</display-name>
@@ -793,7 +776,24 @@
       </custom-attributes>
   </folder>
 
-  <folder folder-id="luhrjensen-legal">
+  <folder folder-id="luhrjensen-corporate">
+      <display-name xml:lang="x-default">Corporate</display-name>
+      <online-flag>true</online-flag>
+      <template>/content/folder/csfolder.isml</template>
+      <parent>luhrjensen-customer-service</parent>
+      <position>10.0</position>
+      <page-attributes>
+          <page-title xml:lang="x-default">Corporate</page-title>
+          <page-description xml:lang="x-default">Corporate</page-description>
+          <page-keywords xml:lang="x-default">Corporate</page-keywords>
+      </page-attributes>
+      <custom-attributes>
+          <custom-attribute attribute-id="csColumnNumber">3</custom-attribute>
+          <custom-attribute attribute-id="expandable">true</custom-attribute>
+          <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+          <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+      </custom-attributes>
+  </folder><folder folder-id="luhrjensen-legal">
       <display-name xml:lang="x-default">Legal</display-name>
       <online-flag>true</online-flag>
       <template>/content/folder/csfolder.isml</template>
@@ -4569,7 +4569,105 @@
           <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
       </custom-attributes>
   </folder>
+    <folder folder-id="blog">
+        <display-name xml:lang="x-default">Blog</display-name>
+        <online-flag>true</online-flag>
+        <template>content/blog/landingpage.isml</template>
+        <parent>root</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
 
+    <folder folder-id="fishing-guides">
+        <display-name xml:lang="x-default">Fishing Guides</display-name>
+        <online-flag>true</online-flag>
+        <parent>blog</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+
+    <folder folder-id="how-to">
+        <display-name xml:lang="x-default">How To...</display-name>
+        <online-flag>true</online-flag>
+        <parent>blog</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+
+    <folder folder-id="latest-news">
+        <display-name xml:lang="x-default">Latest News</display-name>
+        <online-flag>true</online-flag>
+        <template>content/blog/landingpage.isml</template>
+        <parent>blog</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+
+    <folder folder-id="videos">
+        <display-name xml:lang="x-default">Videos</display-name>
+        <online-flag>true</online-flag>
+        <template>content/blog/landingpage</template>
+        <parent>blog</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+ 
+     <folder folder-id="catch-brown-trout">
+        <display-name xml:lang="x-default">Catch Brown Trout</display-name>
+        <online-flag>true</online-flag>
+        <parent>how-to</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+    
+    <folder folder-id="tie-lures">
+        <display-name xml:lang="x-default">Tie Lures</display-name>
+        <online-flag>true</online-flag>
+        <parent>how-to</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+
+    <folder folder-id="use-an-ice-augur">
+        <display-name xml:lang="x-default">Use an Ice Augur</display-name>
+        <online-flag>true</online-flag>
+        <parent>how-to</parent>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="expandable">false</custom-attribute>
+            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </folder>
+    
   <content content-id="2014-rebate-triggerx-buy2-get1-rebate">
       <display-name xml:lang="x-default">TriggerX Aggression Buy 2 Get 1 Rebate</display-name>
       <online-flag>false</online-flag>
@@ -45803,104 +45901,7 @@ dateFormat: "us"&#13;
 		</custom-attributes>
 	</content>
 
-    <folder folder-id="blog">
-        <display-name xml:lang="x-default">Blog</display-name>
-        <online-flag>true</online-flag>
-        <template>content/blog/landingpage.isml</template>
-        <parent>root</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
 
-    <folder folder-id="fishing-guides">
-        <display-name xml:lang="x-default">Fishing Guides</display-name>
-        <online-flag>true</online-flag>
-        <parent>blog</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
-
-    <folder folder-id="how-to">
-        <display-name xml:lang="x-default">How To...</display-name>
-        <online-flag>true</online-flag>
-        <parent>blog</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
-
-    <folder folder-id="latest-news">
-        <display-name xml:lang="x-default">Latest News</display-name>
-        <online-flag>true</online-flag>
-        <template>content/blog/landingpage.isml</template>
-        <parent>blog</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
-
-    <folder folder-id="videos">
-        <display-name xml:lang="x-default">Videos</display-name>
-        <online-flag>true</online-flag>
-        <template>content/blog/landingpage</template>
-        <parent>blog</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
- 
-     <folder folder-id="catch-brown-trout">
-        <display-name xml:lang="x-default">Catch Brown Trout</display-name>
-        <online-flag>true</online-flag>
-        <parent>how-to</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
-    
-    <folder folder-id="tie-lures">
-        <display-name xml:lang="x-default">Tie Lures</display-name>
-        <online-flag>true</online-flag>
-        <parent>how-to</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
-
-    <folder folder-id="use-an-ice-augur">
-        <display-name xml:lang="x-default">Use an Ice Augur</display-name>
-        <online-flag>true</online-flag>
-        <parent>how-to</parent>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="expandable">false</custom-attribute>
-            <custom-attribute attribute-id="leftNavRoot">false</custom-attribute>
-            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
-        </custom-attributes>
-    </folder>
     
     <content content-id="tie-post-1">
         <display-name xml:lang="x-default">Post 1</display-name>

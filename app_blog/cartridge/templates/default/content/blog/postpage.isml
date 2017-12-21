@@ -15,6 +15,8 @@
 		<div id="primary" class="primary-content">
 				<isinclude template="blog/components/breadcrumbs"/>
 				
+				<isinclude template="blog/components/postpagination"/>
+				
 				<div class="blog-post-title">
 					<isprint value="${content.name}" />
 				</div>
@@ -40,7 +42,11 @@
 				</div>
 				
 				<div class="blog-post-date">
-					<isprint value="${content.custom.blog_date}" />
+					<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
+						<isprint value="${content.custom.blog_date}" />
+					<iselse>
+						<isprint value="${content.creationDate}" />
+					</isif>
 				</div>
 				<div class="blog-pos-html">
 					<isprint value="${content.custom.body}" encoding="off"/>
