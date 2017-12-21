@@ -1,0 +1,22 @@
+<isscript>
+	var pli = pdict.product,
+		imageurl = pdict.imageurl,
+		prodID = pli.productID.toLowerCase(),
+		vids = pli.product.getMasterProduct().getVariants(),
+		newImgurl = imageurl.getURL().toString(),
+		classselector = pdict.classselector;
+
+	/*  get the default image URL - this is based on color, not size
+		get the variant IDs and find the selected variant ID in the image URL
+		replace that variant ID in the image URL with the actual size variant ID
+	*/
+	for( var i = 0; i < vids.length; i++ ) {
+		if(newImgurl.indexOf(vids[i].ID.toLowerCase())>-1 ) {
+			var ab = vids[i].ID.toLowerCase()+'.',
+				regExInput = new RegExp(ab, 'g'),
+				newerImgurl = newImgurl.replace(regExInput, prodID+'.');
+		}
+	}
+</isscript>
+<img src="${newerImgurl ? newerImgurl : imageurl.getURL()}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}"
+	<isif condition="${classselector && !empty(classselector)}">class="${classselector}"</isif>/>
