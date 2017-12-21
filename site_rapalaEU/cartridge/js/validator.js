@@ -73,10 +73,9 @@ var settings = {
         }
     },
     errorPlacement: function (error, element) {
-        var $selectStyle = error.parent('.select-style');
-        if ($selectStyle.length) {
-            $selectStyle.after(error);
-        } else if ($(element).hasClass('errorclient')) {
+        var $selectStyle = $(element).parent('.select-style');
+
+        if ($(element).hasClass('errorclient')) {
             $(element).closest('.form-row').addClass('inputlabel');
             $(element).closest('.formfield').addClass('inputlabel');
             $(element).closest('.formfield').find('.label span').addClass('inputlabel');
@@ -110,6 +109,8 @@ var settings = {
                 } else {
                     if ($(element).hasClass('custom-select-wrap')) {
                         $(element).closest('.field-wrapper').after(error);
+                    } else if ($selectStyle.length) {
+                        $selectStyle.after(error);
                     } else {
                         $(element).after(error);
                     }

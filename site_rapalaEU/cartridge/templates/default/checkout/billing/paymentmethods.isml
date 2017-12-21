@@ -57,7 +57,7 @@
 			<isset name="allotmentAmount" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getAllotmentAmount(pdict.Basket)}" scope="page"/>
 			<isif condition="${gcApplicable == 'true' && isAssignedToVIP && !flageallotmentcover}">
 				<isif condition="${gcApplicable == 'true' && pdict.OrderTotal > 0}">
-	
+
 					<iscomment>only provide gift certificate redemption, if the basket doesn't contain any gift certificates</iscomment>
 					<isif condition="${pdict.Basket.giftCertificateLineItems.size() == 0}">
 						<div id="giftcertentry" class="giftcertform">
@@ -101,7 +101,7 @@
 												</a></iscomment>
 											</div>
 										</isloop>
-			
+
 										<isif condition="${pdict.Basket.totalGrossPrice!=null && pdict.Basket.totalGrossPrice.value-pdict.gcPITotal<=0}">
 											<isset name="OrderTotal" value="${pdict.Basket.totalGrossPrice.value-pdict.gcPITotal}" scope="pdict"/>
 										</isif>
@@ -128,13 +128,13 @@
 <input type="hidden" value="${allotmentAmount}" class="allotmentAmount"/>
 <isset name="flageallotmentcover" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
 <isif condition="${pdict.OrderTotal > 0 && remainingBalance > 0}">
-	
+
 			<div id="paymentmethods"class="payment-method-options form-indent">
 				<div class="paymentmethods_cont">
 					<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
-		
+
 						<iscomment>Ignore GIFT_CERTIFICATE method, GCs are handled separately before other payment methods.
-						<isif condition="${ paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) || 
+						<isif condition="${ paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) ||
 						                    paymentMethodType.value.equals('PayPal') && !dw.system.Site.getCurrent().getCustomPreferenceValue('isPayPalPaymentEnabled')">
 						                    <iscontinue/>
 						</isif>
@@ -142,17 +142,17 @@
 						</iscomment>
 						<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) || paymentMethodType.value.equals("ALLOTMENT")}"><iscontinue/></isif>
 						<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
-						<div class='toggle <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}"> active</isif>'> 
+						<div class='toggle <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}"> active</isif>'>
 							<div class="form-row label-inline">
-								
+
 								<label for="is-${radioID}" class="<isif condition="${radioID== 'PayPal'}"> paypaltoggle</isif>">
 									<span class="toggle-label"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/></span>
 									<div class="card-typ-image">
-										<isif condition="${radioID == 'CREDIT_CARD'}"> 
-											<img src="${URLUtils.staticURL('/images/tab_credit.png')}"  alt="" title="" /> 
+										<isif condition="${radioID == 'CREDIT_CARD'}">
+											<img src="${URLUtils.staticURL('/images/tab_credit.png')}"  alt="" title="" />
 										</isif>
-										<isif condition="${radioID== 'PayPal'}"> 
-											<img src="${URLUtils.staticURL('/images/tab_paypal2.png')}"  alt="" title="" /> 
+										<isif condition="${radioID== 'PayPal'}">
+											<img src="${URLUtils.staticURL('/images/tab_paypal2.png')}"  alt="" title="" />
 										</isif>
 									</div>
 									<div class="field-wrapper">
@@ -160,34 +160,34 @@
 									</div>
 								</label>
 							</div>
-							
+
 							<isif condition="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage()}">
 								<img alt="paypal" src="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage().getAbsURL()}">
 							</isif>
-						</div> 
+						</div>
 					</isloop>
 				</div>
-				<iscomment> 
+				<iscomment>
 					<div class="form-row form-row-button">
 						<button id="payment-select-go" name="${pdict.CurrentForms.billing.paymentSelect.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 					</div>
 				</iscomment>
-		
+
 				<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
 					<div class="billing-error"><isprint value="${Resource.msg('billing.missingprocessorerror','checkout',null)}"/></div>
 				</isif>
-		
+
 				<iscomment>
 					Credit card block
 					--------------------------------------------------------------
 				</iscomment>
-				
+
 				<iscomment>JIRA PREV-135 : Disabled Credit Card in BM is displaying in the application. Added condition dw.order.PaymentMgr.getPaymentMethod....</iscomment>
 				<div id="PaymentMethod_CREDIT_CARD" class="payment-method paymentform creditcardpayment <isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).isActive() && (empty(pdict.selectedPaymentID) || pdict.selectedPaymentID=='CREDIT_CARD')}">payment-method-expanded</isif>"  data-method="CREDIT_CARD">
 					<div class="payment-mobile-handling">
 					<iscomment>display select box with stored credit cards if customer is authenticated</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated && !empty(pdict.ApplicableCreditCards)}">
-		
+
 						<div class="formfield form-row-50 selected-saved-payment-info">
 							<div class="form-row custom-select creditcardlist">
 								<div class="label">
@@ -196,22 +196,24 @@
 								<iscomment>Start JIRA PREV-33:Shipping page: Not displaying the selected Address details, in the "Select an Address" drop down.Added <isset> <isscript> </iscomment>
 								<isset name="cardForm" value="${pdict.CurrentForms.billing.paymentMethods.creditCard}" scope="page"/>
 									<div class="field-wrapper">
-										 <select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="creditCardList" class="input-select custom-select-wrap credit-card-list">
-											<option value="" selected="selected"><isprint value="${Resource.msg('billing.creditcardlistselect','checkout',null)}"/></option>
-											<isloop items="${pdict.ApplicableCreditCards}" var="creditCardInstr">
-											   	<isscript>
-													var selected="";
-													if(	creditCardInstr.maskedCreditCardNumber == cardForm.number.htmlValue &&
-													    creditCardInstr.creditCardExpirationMonth == cardForm.expiration.month.value &&
-														creditCardInstr.creditCardExpirationYear == cardForm.expiration.year.value &&
-														creditCardInstr.creditCardType == cardForm.type.value &&
-														creditCardInstr.creditCardHolder == cardForm.owner.value){
-														selected="selected";
-													}
-												</isscript>
-												<option ${selected == "selected" ? "selected='selected'" : ""} value="${creditCardInstr.UUID}">(<isprint value="${creditCardInstr.creditCardType}"/>) <isprint value="${creditCardInstr.maskedCreditCardNumber}"/> - ${Resource.msg('billing.creditcardlistexp','checkout',null)} <isprint value="${creditCardInstr.creditCardExpirationMonth}" formatter="00" />.<isprint value="${creditCardInstr.creditCardExpirationYear}" formatter="0000" /></option>
-											</isloop>
-										</select>
+                                        <div class="select-style">
+                                            <select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="creditCardList" class="input-select custom-select-wrap credit-card-list">
+                                                <option value="" selected="selected"><isprint value="${Resource.msg('billing.creditcardlistselect','checkout',null)}"/></option>
+                                                <isloop items="${pdict.ApplicableCreditCards}" var="creditCardInstr">
+                                                    <isscript>
+                                                        var selected="";
+                                                        if(	creditCardInstr.maskedCreditCardNumber == cardForm.number.htmlValue &&
+                                                        creditCardInstr.creditCardExpirationMonth == cardForm.expiration.month.value &&
+                                                        creditCardInstr.creditCardExpirationYear == cardForm.expiration.year.value &&
+                                                        creditCardInstr.creditCardType == cardForm.type.value &&
+                                                        creditCardInstr.creditCardHolder == cardForm.owner.value){
+                                                        selected="selected";
+                                                        }
+                                                    </isscript>
+                                                    <option ${selected == "selected" ? "selected='selected'" : ""} value="${creditCardInstr.UUID}">(<isprint value="${creditCardInstr.creditCardType}"/>) <isprint value="${creditCardInstr.maskedCreditCardNumber}"/> - ${Resource.msg('billing.creditcardlistexp','checkout',null)} <isprint value="${creditCardInstr.creditCardExpirationMonth}" formatter="00" />.<isprint value="${creditCardInstr.creditCardExpirationYear}" formatter="0000" /></option>
+                                                </isloop>
+                                            </select>
+                                        </div>
 									</div>
 								<iscomment>End JIRA PREV-33 </iscomment>
 							</div>
@@ -230,7 +232,7 @@
 								</a>
 							</isloop>
 						</iscomment>
-		
+
 					</isif>
 					<div class="formfield form-row-50">
 						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" fieldClass="creditcard_name" requiredtext="${Resource.msg('forms.billing.nameoncard.missing','forms',null)}"/>
@@ -240,11 +242,11 @@
 					</div>
 					<div class="formfield form-row-50">
 						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" dynamicname="true" rowClass="cardnumber" fieldClass="creditCard-number" requiredtext="${Resource.msg('forms.billing.cardnumber.missing','forms',null)}"/>
-						<div class="cardtypeimg"> 
+						<div class="cardtypeimg">
 				    	   <div class="Visa">  <img class="paymentimgs" src="${URLUtils.staticURL('/images/visa.png')}"/> </div>
 				    	    <div class="Amex"><img class="paymentimgs rightborder" src="${URLUtils.staticURL('/images/amex.png')}" /></div>
 				    	    <div class="MasterCard"><img class="paymentimgs" src="${URLUtils.staticURL('/images/mastercard.png')}" /></div>
-				    	    <div class="Discover"><img class="paymentimgs" src="${URLUtils.staticURL('/images/discover.png')}" alt="${Resource.msg('global.delete','locale',null)}" /></div>    
+				    	    <div class="Discover"><img class="paymentimgs" src="${URLUtils.staticURL('/images/discover.png')}" alt="${Resource.msg('global.delete','locale',null)}" /></div>
 				    	</div>
 					</div>
 					<div class="formfield form-row-50 expirationdate">
@@ -252,7 +254,7 @@
 							<span class="required-indicator">&#x2A;</span>
 							<span class="labeltext"><isprint value="${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}"/></span>
 						</label>
-						
+
 						<isscript>
 							var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 						</isscript>
@@ -296,10 +298,10 @@
 					                    </div>
 					                 </a>
 					             </span>
-					 			
+
 					   </div>
 					<isif condition="${pdict.CurrentCustomer.authenticated}">
-						<div class="formfield form-row-50 form-row-left SaveCard"> 
+						<div class="formfield form-row-50 form-row-left SaveCard">
 							<div class="custom-checkbox">
 								<div class="custom-link active"></div>
 								<div class="checkbox">
@@ -308,7 +310,7 @@
 							</div>
 						</div>
 					</isif>
-						
+
 				</div>
 			</div>
 				<iscomment>
@@ -322,11 +324,11 @@
 						<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
 								<div class="error-paypal-heading"><p><isprint value="${Resource.msg('billinginfo.paypalnotauthorized','checkout',null)}"/></p></div>
 						</isif>
-						<div class="paypalimg <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmargin-paypalimg</isif>">		  
+						<div class="paypalimg <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmargin-paypalimg</isif>">
 							<input type="hidden" name="paypalpayment" value="true"/>
 							<button name="${pdict.CurrentForms.billing.paypallogin.htmlName}" type="submit"  value="${Resource.msg('global.continue','locale',null)}" class="continuecheckout-paypallogin <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmoegin</isif>"><span>${Resource.msg('global.continue','locale',null)}</span></button>
 						</div>
-						
+
 						<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
 							<isscript>
 								if(paypalErr.indexOf(':') != -1)
@@ -351,18 +353,18 @@
 					        <div class="paypalmsg error-paypal-discription"><p><isprint value="${discription}"/></p></div>
 					        <div class="paypalmsg error-paypal-code "><p><a href="https://www.paypal.com/us/weapps/helpcenter/helphub//home/?action=callus#">Visit PayPal Customer Service</a> or Call PayPal directly: 888-221-1161</p><p>(Please Reference Error Code: ${code})</div>
 							<div class="error-paypal"><p>If you think you have recieved this message in error please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> Credit Card</span></p></div>
-							 
+
 							 <isscript>
 					                  paypalErr = "";
 					       	</isscript>
 						<iselse/>
 							<div class="paypalmsg general-msg "><isprint value="${Resource.msg('billing.paypal','checkout',null)}"/></div>
-						</isif>						
+						</isif>
 					<iselse/>
 						<div class="paypalimg paypal-login-success">
 							<button class="continuecheckout-paypallogin"  type="submit" name="${pdict.CurrentForms.billing.paypallogin.htmlName}" disabled="disabled" value="${Resource.msg('global.continue','locale',null)}"><span><isprint value="${Resource.msg('global.continue','locale',null)}"/></span></button>
 							<img class="greater-than-767" src="${URLUtils.staticURL('/images/check-mark.PNG')}" style="width:35px;height: 30px;"></img>
-						</div>	
+						</div>
 						<div class="paypalmsg success-paypal">
 							<div class="less-than-767">
 								<p>Your PayPal Authorization has been confirmed.
@@ -390,7 +392,7 @@
 				</div>
 			</div>
 <iselse/>
-	
+
 		<isset name="remainingBalance" value="${pdict.Basket.totalGrossPrice.value}" scope="page"/>
 		<isif condition="${allotmentAmount > 0}">
 			<isset name="remainingBalance" value="${remainingBalance-allotmentAmount}" scope="page"/>
@@ -404,7 +406,7 @@
 		<div class="giftcertused merchantcover">
 			<isif condition="${pdict.gcPITotal>0}"><p class='first-para'><isprint value="${Resource.msg('billing.giftcertnomethod','checkout',null)}"/></p><iselse/><p class="first-para"><isprint value="${Resource.msg('billing.zerobalance','checkout',null)}"/></p></isif>
 		</div>
-	
+
 </isif>
 </fieldset>
 <iscomment>
