@@ -92,7 +92,7 @@ function getSpecificationChart( thisProduct : Product )
 			var columnValueAttributesCount = 0;
 			var splitIdx = 0;
 			var tabularClassName = [];
-			var pToday = dw.util.DateUtils.nowForSite();
+			var pToday = dw.util.Calendar().getTime();
 			for (splitIdx = 0; splitIdx < finalSpecArray.length; splitIdx += 1) {
 				if (splitIdx % 2 === 0) {
 					// COLUMN HEADER : 0th, 2nd, 4th ... even position values will be column names
