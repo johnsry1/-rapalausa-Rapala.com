@@ -7,7 +7,7 @@
         background: $white;
         box-shadow: none;
         border-bottom: $border;
-        @include respond(desktop-down) {
+        @include respond(medium-down) {
             background: $white !important;
             box-shadow: none !important;
             border-bottom: $border !important;
@@ -16,20 +16,20 @@
     }
     #headerwrapper {
         #header {
-            @include respond(desktop-down) {
+            @include respond(medium-down) {
                 box-shadow: none !important;
             }
             .row.column1 {
-                @include respond(desktop) {
+                @include respond(large-up) {
                     margin: 0;
                 }
                 .headercustomerinfo {
                     #user {
-                        @include respond(desktop-down) {
+                        @include respond(medium-down) {
                             width: auto;
                             @include line-height(33px);
                         }
-                        @include respond(desktop) {
+                        @include respond(large-up) {
                             float: left;
                         }
                     }
@@ -39,7 +39,7 @@
                         }
                         .arrow-size.right-arrow {
                             margin-top: rem(11px) !important;
-                            @include respond(desktop-down) {
+                            @include respond(medium-down) {
                                 margin-top: 14px !important;
                             }
                         }
@@ -51,11 +51,11 @@
                     #topcell {
                         .headercustomerinfo.newcheckout-headercustomerinfo {
                             #userinfo {
-                                @include respond(desktop-down) {
+                                @include respond(medium-down) {
                                     margin-top: 0 !important;
                                 }
                                 a {
-                                    @include respond(desktop-down) {
+                                    @include respond(medium-down) {
                                         padding-top: 0 !important;
                                     }
                                 }
@@ -67,7 +67,7 @@
         }
     }
     .pt_orderconf-guest {
-        @include respond(desktop) {
+        @include respond(large-up) {
             float: left !important;
         }
     }
@@ -92,7 +92,7 @@
 .pt_checkout {
     #content {
         .contentbox.checkout_cont {
-            @include respond(desktop-down) {
+            @include respond(medium-down) {
                 border: none;
             }
         }
@@ -117,14 +117,14 @@
             }
             .form-row,
             .field-wrapper {
-                @include respond(desktop-down) {
+                @include respond(medium-down) {
                     float: none;
                     width: 100%;
                 }
             }
             .form-row-type-checkbox {
                 .label {
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         float: none;
                         width: 100% !important;
                         padding: 0;
@@ -148,7 +148,7 @@
                     border: none;
                     background: none;
                     height: rem(30px);
-                    @include respond(desktop) {
+                    @include respond(large-up) {
                         margin-left: 12px;
                     }
                 }
@@ -194,7 +194,7 @@
             }
         }
         .label {
-            @include respond(desktop) {
+            @include respond(large-up) {
                 margin-bottom: rem(5px);
                 line-height: rem(15px) !important;
             }
@@ -219,23 +219,23 @@
                 }
             }
             .checkbox {
-                @include respond(desktop-down) {
+                @include respond(medium-down) {
                     float: none;
                     width: 100%;
                 }
             }
             .form-row-50 {
                 &.zip {
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         float: none !important;
                         margin-left: 0 !important;
                     }
-                    @include respond(desktop) {
+                    @include respond(large-up) {
                         width: rem(134px);
                     }
                     .field-wrapper {
                         input[type="text"] {
-                            @include respond(desktop) {
+                            @include respond(large-up) {
                                 width: 100%;
                             }
                         }
@@ -268,7 +268,7 @@
                     @include button('big');
                     min-width: inherit;
                     box-sizing: border-box;
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         width: 100% !important;
                     }
                     span {
@@ -317,7 +317,7 @@
                 }
             }
             .expirationdate-field-wrapper {
-                @include respond(desktop-down) {
+                @include respond(medium-down) {
                     margin-left: 0 !important;
                 }
             }
@@ -325,13 +325,13 @@
             .form-caption {
                 margin-left: 0;
                 &.year {
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         margin-left: rem(5px);
                         float: left;
                     }
                 }
                 &.month {
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         margin-right: rem(5px);
                         float: left;
                     }
@@ -343,7 +343,7 @@
                 input[type="password"],
                 input[type="date"],
                 textarea {
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         border: $form-field-border !important;
                     }
                 }
@@ -354,12 +354,12 @@
                     @include label;
                     margin-bottom: 0;
                     width: 100%;
-                    @include respond(desktop-down) {
+                    @include respond(medium-down) {
                         margin-left: 0;
                         padding-left: 0;
                         line-height: 20px;
                     }
-                    @include respond(desktop) {
+                    @include respond(large-up) {
                         margin-bottom: rem(5px);
                         line-height: rem(15px) !important;
                     }
@@ -429,7 +429,7 @@
             padding-left: 0;
         }
         .email-field {
-            @include respond(desktop) {
+            @include respond(large-up) {
                 max-width: rem(287px);
                 margin-bottom: rem(25px);
             }
@@ -472,7 +472,7 @@
                 color: $form-field-color !important;
             }
             .required-indicator {
-                @include respond(desktop-down) {
+                @include respond(medium-down) {
                     display: none;
                 }
             }
@@ -480,12 +480,12 @@
         .label {
             @include label;
             margin-bottom: 0;
-            @include respond(desktop-down) {
+            @include respond(medium-down) {
                 margin-left: 0;
                 padding-left: 0;
                 line-height: 20px;
             }
-            @include respond(desktop) {
+            @include respond(large-up) {
                 line-height: rem(30px) !important;
             }
             .labeltext {
@@ -495,7 +495,7 @@
         .required-indicator,
         .requiredindicator {
             margin-left: 3px !important;
-            @include respond(desktop) {
+            @include respond(large-up) {
                 float: right;
             }
         }
@@ -616,7 +616,7 @@
 
 .pt_orderconfirmation {
     #page-background {
-        @include respond(desktop-down) {
+        @include respond(medium-down) {
             box-shadow: none;
         }
     }

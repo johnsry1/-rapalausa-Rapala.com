@@ -105,3 +105,227 @@ div.returningcustomers {
         }
     }
 }
+
+#container.pt_account {
+    .breadcrumb {
+        background: none;
+        box-shadow: none;
+    }
+    #primary.primary-content {
+        .account-section {
+            .custom-checkbox {
+                .custom-link {
+                    display: none !important;
+                }
+            }
+            .upshift {
+                .contentboxcontent.account-logs {
+                    h1 {
+                        font-family: $font;
+                    }
+                    .form-indent {
+                        margin-left: 0;
+                    }
+                }
+            }
+            .label {
+                @include label;
+                margin-bottom: 0;
+                width: 100%;
+                @include respond(medium-down) {
+                    margin-left: 0;
+                    padding-left: 0;
+                    line-height: 20px;
+                }
+                @include respond(large-up) {
+                    margin-bottom: rem(5px);
+                    line-height: rem(15px) !important;
+                }
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+            }
+            .returningcustomers {
+                button {
+                    @include button('big');
+                }
+            }
+            .createan-account {
+                .contentboxcontent.new-register {
+                    h1 {
+                        font-family: $font;
+                    }
+                    .registration {
+                        .formactions {
+                            button {
+                                @include button('big');
+                            }
+                        }
+                        .custom-checkbox {
+                            .form-row {
+                                margin: 0;
+                            }
+                        }
+                        .create_Agree {
+                            p {
+                                @include p;
+                            }
+                        }
+                    }
+                    .custom-checkbox {
+                        label {
+                            font-family: $form-label-font-family;
+                            font-size: $form-label-font-size;
+                            color: $form-label-color;
+                            @include respond(medium-down) {
+                                margin: 0;
+                                width: 100%;
+                            }
+                            .labeltext {
+                                @include respond(medium-down) {
+                                    margin-left: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.rapala_benefits {
+    ul {
+        li {
+            font-family: $ul-font-family;
+        }
+    }
+}
+
+#container.pt_account {
+    .floatright.site-suggestion-section {
+
+    }
+}
+
+.ui-dialog.PasswordResetDialog.ui-widget-content {
+    .ui-widget-header {
+        border-bottom: none;
+    }
+    .passwordreset {
+        h1 {
+            @include h2;
+            font-family: $font-third;
+        }
+        p {
+            font-family: $font;
+        }
+    }
+    .formactions {
+        button {
+            @include button('big');
+        }
+    }
+    .form-row {
+        .requiredindicator {
+            float: none;
+            color: $required-color;
+            margin-left: rem(3px);
+        }
+    }
+}
+
+.pt_wish-list,
+.pt_leftnav-addressbook,
+.pt_order,
+.pt_leftnav-payment,
+.pt_leftnav-profile,
+.pt_acc_landing {
+    #main {
+        #page-background #secondary {
+            h2 {
+                @include clp-refinement-title;
+            }
+        }
+        .breadcrumb {
+            box-shadow: none;
+        }
+    }
+
+}
+
+ul.common-nav {
+    font-family: $font;
+    li {
+        font-style: normal;
+    }
+}
+
+.pt_leftnav-profile {
+    #primary {
+        #RegistrationForm {
+            .form-row {
+                .label {
+                    @include respond(medium-down) {
+                        line-height: 16px;
+                        padding-bottom: 0;
+                        margin-bottom: 9px;
+                    }
+                    .labeltext {
+                        font-family: inherit;
+                        font-weight: inherit;
+                        text-transform: inherit;
+                    }
+                }
+                .field-wrapper {
+                    @include respond(medium-down) {
+                        padding: 0;
+                        width: 100%;
+                    }
+                    .textinput {
+                        @include form-input;
+                    }
+                }
+                .form-caption {
+                    margin-top: 0;
+                }
+            }
+            .form-row.form-indent {
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                .field-wrapper {
+                    max-width: rem(380px);
+                }
+                .label {
+                    width: 100%;
+                    float: none;
+                    text-align: left;
+                    .labeltext {
+                        font-family: inherit;
+                        font-style: inherit;
+                        font-weight: inherit;
+                        color: inherit;
+                        float: none !important;
+                    }
+                }
+            }
+            .form-row.form-row-button {
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                button {
+                    @include button('big');
+                    @include respond(large-up) {
+                        width: auto;
+                    }
+                }
+            }
+            .create_Agree {
+                font-family: $font;
+            }
+        }
+    }
+}
