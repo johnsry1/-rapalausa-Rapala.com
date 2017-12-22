@@ -26,6 +26,8 @@ var app = require('app_rapala_controllers/cartridge/scripts/app');
 var guard = require('app_rapala_controllers/cartridge/scripts/guard');
 var ltkSendSca = require('int_listrak_controllers/cartridge/controllers/ltkSendSca.js');
 var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
+var AdyenController = require("int_adyen_controllers/cartridge/controllers/Adyen");
+var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
 
 /**
  * Initializes the address form. If the customer chose "use as billing
@@ -114,46 +116,6 @@ function initCreditCardList(cart) {
 }
 
 /**
- * Updates cart calculation and page information and renders the billing page.
- * @transactional
- * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
- * @param {object} params - (optional) if passed, added to view properties so they can be accessed in the template.
- */
-function start(cart, params) {
-
-    app.getController('COShipping').PrepareShipments();
-    
-    var addrid = session.forms.singleshipping.shippingAddress.addressid.value;
-    app.getForm('billing.billingAddress').setValue('addressid',addrid);
-    Transaction.wrap(function () {
-        cart.calculate();
-    });
-    if(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value == "PayPal" && app.getForm('billing.paypalval').object.paypalprocessed.value == 'true'){
-        var paymentInstruments = cart.object.getPaymentInstruments("PayPal");
-        for each(var paymentInstrument in paymentInstruments){
-            Transaction.wrap(function(){
-                paymentInstrument.custom.paypalToken = request.httpParameterMap.token;
-                paymentInstrument.custom.paypalPayerID = request.httpParameterMap.PayerID;
-            });
-        }
-    }
-    if(customer.authenticated){
-        var allotmentOnly = require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(cart.object);
-        if(allotmentOnly){
-            app.getForm('billing.paymentMethods').setValue('selectedPaymentMethodID','ALLOTMENT');
-        }
-    }
-    
-    var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update({
-        pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
-    });
-
-    require('app_rapala_controllers/cartridge/controllers/COBilling.js').ReturnToForm(cart, params);
-}
-
-
-/**
  * Starting point for billing. After a successful shipping setup, both COShipping
  * and COShippingMultiple call this function.
  */
@@ -183,7 +145,9 @@ function publicStart() {
         app.getForm('billing.couponCode').clear();
         app.getForm('billing.giftCertCode').clear();
 
-        require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards});
+//        var AdyenHppPaymentMethods = AdyenController.GetPaymentMethods(cart);
+//        start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards, AdyenHppPaymentMethods : AdyenHppPaymentMethods});
+        require('app_rapala_controllers/cartridge/controllers/COBilling.js').Start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards, AdyenHppPaymentMethods : []});
     } else {
         app.getController('Cart').Show();
     }
@@ -267,7 +231,7 @@ function billing() {
         },
         save: function () {
             var cart = app.getModel('Cart').get();
-
+            
             /****************PREVAIL Address verification Integration*
             var DAVResult = validateDAV();
             if (DAVResult && DAVResult.endNodeName !== 'success') {
@@ -310,9 +274,7 @@ function billing() {
                 ltkSignupEmail.Signup();
                 ltkSendSca.SendSCA();
 
-                // A successful billing page will jump to the next checkout step.
-                //app.getController('COSummary').Start();
-                app.getController('COSummary').Submit();
+                require('site_rapalaEU/cartridge/controllers/COSummary.js').Submit();
                 return;
             }
         },
@@ -321,6 +283,43 @@ function billing() {
             return;
         }
     });
+}
+
+
+/**
+ * Revalidates existing payment instruments in later checkout steps.
+ *
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @return {Boolean} true if existing payment instruments are valid, false if not.
+ */
+function validatePayment(cart) {
+    var paymentAmount, countryCode, invalidPaymentInstruments, result;
+    if (AdyenHelper.getAdyenCseEnabled()) {
+        return true;
+    }
+    if (app.getForm('billing').object.fulfilled.value) {
+        paymentAmount = cart.getNonGiftCertificateAmount();
+        countryCode = Countries.getCurrent({
+            CurrentRequest: {
+                locale: request.locale
+            }
+        }).countryCode;
+
+        invalidPaymentInstruments = cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value).InvalidPaymentInstruments;
+
+        //PREVAIL - Added transaction.
+        Transaction.wrap(function () {
+            if (!invalidPaymentInstruments && cart.calculatePaymentTransactionTotal()) {
+                result = true;
+            } else {
+                app.getForm('billing').object.fulfilled.value = false;
+                result = false;
+            }
+        });
+    } else {
+        result = false;
+    }
+    return result;
 }
 
 /*
@@ -368,7 +367,7 @@ exports.EditBillingAddress = require('app_rapala_controllers/cartridge/controlle
 exports.SaveCreditCard = require('app_rapala_controllers/cartridge/controllers/COBilling.js').SaveCreditCard;
 /** Revalidates existing payment instruments in later checkout steps.
  * @see module:controllers/COBilling~validatePayment */
-exports.ValidatePayment = require('app_rapala_controllers/cartridge/controllers/COBilling.js').ValidatePayment;
+exports.ValidatePayment = validatePayment;
 /** Handles the selection of the payment method and performs payment method specific validation and verification upon the entered form fields.
  * @see module:controllers/COBilling~handlePaymentSelection */
 exports.HandlePaymentSelection = require('app_rapala_controllers/cartridge/controllers/COBilling.js').HandlePaymentSelection;

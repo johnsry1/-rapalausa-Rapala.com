@@ -80,4 +80,38 @@
         </preferences>
     </payment-processor>
 
+    <payment-processor processor-id="ADYEN_CREDIT">
+        <description>adyen credit card payment procesor</description>
+        <preferences>
+            <all-instances/>
+            <development/>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
+    <payment-processor processor-id="Adyen">
+        <description>redirect to Adyen payment page</description>
+        <preferences>
+            <all-instances/>
+            <development>
+                <preference preference-id="AdyenPaymentMethodsServicePrefix">adyen.http.payment.methods</preference>
+                <preference preference-id="AdyenPaymentSendServicePrefix">adyen.http.payment.send</preference>
+                <preference preference-id="Adyen_PaymentSelection">one</preference>
+                <preference preference-id="Adyen_allowedMethods">mc,visa,amex,maestrouk,solo,ideal,elv,paypal,sepadirectdebit,bankTransfer_IBAN</preference>
+                <preference preference-id="Adyen_recurringType">ONECLICK</preference>
+                <preference preference-id="Adyen_enableAVS">false</preference>
+                <preference preference-id="AdyenNotificationDelayMinutes">1</preference>
+                <preference preference-id="Adyen_HMACkey">373D8C678CE8895A2C2FC67A2A625967A5E0233BA882B70F7BE8FB162D661595</preference>
+                <preference preference-id="Adyen_skinCode">tQvp5MMX</preference>
+                <preference preference-id="Adyen_Mode">TEST</preference>
+                <preference preference-id="Adyen_Debug">true</preference>
+                <preference preference-id="Adyen_directoryLookup">true</preference>
+                <preference preference-id="Adyen_merchantCode">LyonsCOM</preference>
+            </development>
+            <staging/>
+            <production/>
+        </preferences>
+    </payment-processor>
+
 </payment-processors>

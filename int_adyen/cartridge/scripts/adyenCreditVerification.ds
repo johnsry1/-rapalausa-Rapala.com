@@ -1,0 +1,240 @@
+/**
+* Passes on credit card details to Adyen using the Adyen PAL adapter
+* Receives a response and sets the order status accordingly
+* created on 23dec2014
+*
+* @input Order : dw.order.Order
+* @input Amount : dw.value.Money The amount to authorize
+* @input PaymentInstrument : dw.order.PaymentInstrument 
+* @input CurrentSession : dw.system.Session
+* @input CurrentRequest : dw.system.Request
+* @input CreditCardForm : dw.web.Form
+*
+* @output Decision : String 
+* @output PaymentStatus : String
+* @output AuthorizationCode :  String
+* @output AuthorizationAmount : String
+* @output PaRequest : String 
+* @output PspReference : String 
+* @output MD : String
+* @output ResultCode : String
+* @output IssuerUrl : String
+* @output AVSResultCode : String
+* 
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.rpc );
+importPackage( dw.util );
+importPackage( dw.value);
+importPackage( dw.net); 
+importPackage( dw.crypto );
+importPackage( dw.svc );
+importScript('libs/libAdyen.ds');
+
+//script include
+var AdyenHelper = require ("int_adyen/cartridge/scripts/util/AdyenHelper");
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var result = verify(args);
+	if (result == PIPELET_ERROR){
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}
+
+function verify( args : PipelineDictionary ) : Number {
+	
+	var VERSION : String = "4";
+	var MERCHANTACCOUNT : String = Site.getCurrent().getCustomPreferenceValue("Adyen_merchantCode");
+
+	if (MERCHANTACCOUNT == null) {
+		Logger.getLogger("Adyen").fatal("MERCHANTACCOUNT not set.");  
+		return PIPELET_ERROR;
+	}  
+	
+	try	{
+		var msg : String;
+		var order = args.Order;
+		
+		if (order == null) {
+			Logger.getLogger("Adyen").fatal("No order {0} present.");
+			return PIPELET_ERROR;  
+		}
+		
+		var myAmount = AdyenHelper.getCurrencyValueForApi(args.Amount); //args.Amount * 100;	
+		var orderNo = order.currentOrderNo;	
+		var a = Math.floor(Math.random()*10000);
+		var c : Object = args.PaymentInstrument;
+		var card : Object = args.CreditCardForm.object;
+		var cardnr : String = card.number.value;
+		var cardcvc : String = card.cvn.value;
+
+		if (AdyenHelper.getAdyenCseEnabled()) {
+			var encryptedData : String = card.encrypteddata.value;
+			
+			if (empty(encryptedData)) {
+				return PIPELET_ERROR;
+			}
+		}
+		
+		var currentRequest : Request = (args.CurrentRequest)? args.CurrentRequest : request;
+		var acceptHeader : String = currentRequest.httpHeaders.get("accept") + currentRequest.httpHeaders.get("accept-encoding");
+		var userAgent : String = currentRequest.httpUserAgent;
+		var shopperIp = currentRequest.getHttpRemoteAddress();
+		if (shopperIp == null) { shopperIp = ''; }
+
+		
+		
+		var encryptedDataObj : Object;
+		var billingAddress : Object;
+		var card : Object;
+		var jsonObjNew :JSON = {};
+		if (AdyenHelper.getAdyenCseEnabled()) {
+			jsonObjNew.additionalData = {
+				"card.encrypted.json": encryptedData	
+			};	
+		} else {
+			jsonObjNew.card = {
+			    "number": cardnr,
+			    "expiryMonth": c.creditCardExpirationMonth,
+			    "expiryYear": c.creditCardExpirationYear,
+			    "cvc": cardcvc,
+			    "holderName": c.creditCardHolder
+			};
+		}
+		
+		if (AdyenHelper.getAdyenAVSEnabled()) {
+			var billingAddr : OrderAddress = args.Order.getBillingAddress();
+			jsonObjNew.billingAddress = {
+				"city": billingAddr.city,
+				"country": billingAddr.countryCode.value,
+				"houseNumberOrName": billingAddr.suite,
+				"postalCode": billingAddr.postalCode,
+				"stateOrProvince": billingAddr.stateCode,
+				"street": billingAddr.custom.streetName
+			};
+		};
+		
+		jsonObjNew.amount = {
+						"currency": args.Amount.currencyCode,
+					    "value": myAmount
+					};
+		jsonObjNew.merchantAccount = MERCHANTACCOUNT;
+		jsonObjNew.reference = orderNo;
+		jsonObjNew.shopperEmail = order.customerEmail;
+		jsonObjNew.shopperIP = shopperIp;
+		jsonObjNew.browserInfo = {
+			"acceptHeader": acceptHeader,
+		    "userAgent": userAgent
+		};
+		
+		var callResult = null;
+		var service = AdyenHelper.getService(AdyenHelper.SERVICE.SEND);
+		if (service == null) {
+			return PIPELET_ERROR;
+		}
+		var a = service.getConfiguration();
+		var resultObject = null;
+		
+		service.addHeader("Content-type","application/json"); 
+		service.addHeader("charset", "UTF-8");
+		callResult = service.call(JSON.stringify(jsonObjNew));
+		
+		if (callResult.isOk() == false){
+			Logger.error("Adyen: Call error code" +  callResult.getError().toString() + " Error => ResponseStatus: " + callResult.getStatus()  + " | ResponseErrorText: " +  callResult.getErrorMessage() + " | ResponseText: " + callResult.getMsg());
+			return PIPELET_ERROR;
+		}
+		   	
+		resultObject = callResult.object;
+		
+		var resultObj : Object = { // build the result object
+				statusCode: resultObject.getStatusCode(),
+				statusMessage: resultObject.getStatusMessage(),
+				text: resultObject.getText(),
+				errorText: resultObject.getErrorText(),
+				timeout: resultObject.getTimeout()
+			}
+				
+		var resultText : String = resultObj.text;
+		if (resultText == null) { return PIPELET_ERROR; }
+		
+		// build the response object
+		var responseObj = JSON.parse(resultText);
+		
+		// assign default values for the script output variables
+		args.PaRequest = '';  
+		args.MD = '';		 
+		args.IssuerUrl = ''; 
+		args.ResultCode = '';
+		args.AuthorizationCode = '';
+		args.PspReference = '';
+		args.PaymentStatus = "?";
+		args.AuthorizationAmount = '';
+		args.Decision = '';
+		
+		// return the AVS result code
+		args.AVSResultCode = (!empty(responseObj.avsResultRaw) ? responseObj.avsResultRaw : '');
+		
+		// if the card is enrolled in the 3-D Secure programme the response should contain these 4 fields
+		if ('paRequest' in responseObj) { args.PaRequest = responseObj.paRequest; } // paRequest  
+		if ('md' in responseObj) { args.MD = responseObj.md; } // md
+		if ('issuerUrl' in responseObj) { args.IssuerUrl = responseObj.issuerUrl; } // issuerUrl 
+		args.ResultCode = responseObj.resultCode; // resultCode
+		
+		args.AuthorizationCode = responseObj.authCode;
+		args.PspReference = responseObj.pspReference;
+		args.PaymentStatus = resultObj.errorText;
+		args.AuthorizationAmount = args.Amount.getValue().toFixed(2);
+		args.Decision = "ERROR";
+		
+		var resultCode = args.ResultCode;
+		
+		if (resultCode.indexOf("Authorised") != -1 || resultCode.indexOf("RedirectShopper") != -1) {
+			args.Decision = "ACCEPT";
+			args.PaymentStatus = resultCode;
+			
+			// if 3D Secure is used, the statuses will be updated later
+			if (!('issuerUrl' in responseObj)) {
+				order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
+				order.setExportStatus(Order.EXPORT_STATUS_READY);
+			}
+			
+			Logger.getLogger("Adyen").info ("Payment result: Authorised");
+			Logger.getLogger("Adyen").info ("Decision: " + args.Decision);
+			
+			if (args.AuthorizationCode == '' && args.MD == '') { // if is not 3DSecure
+				Logger.getLogger("Adyen").debug("Adyen: " + resultObj.statusCode + " Error => " + resultObj.statusMessage + " | " + resultObj.errorText);	
+			}
+		}
+		else  {
+			args.PaymentStatus = "Refused";
+			args.Decision = "REFUSED";
+			
+			order.setPaymentStatus(Order.PAYMENT_STATUS_NOTPAID);
+			order.setExportStatus(Order.EXPORT_STATUS_NOTEXPORTED);
+				
+			Logger.getLogger("Adyen").info ("Payment result: Refused");
+		}
+				
+		args.AuthorizationCode = args.PaymentStatus;
+	}
+		catch (e) {
+			var error = e;
+			if (e instanceof Fault) {
+			   	Logger.getLogger("Adyen").debug("Adyen: Fault Actor " + e.message + " caused fault [code: '" + e.faultCode + "'] == Error ==> (" + e.faultString + " == Details ==> " + e.faultDetail + ")");
+			}
+			else {
+				Logger.getLogger("Adyen").fatal("Adyen: " + error.toString() + " in " + error.fileName + ":" + error.lineNumber);
+			}	
+			return PIPELET_ERROR;
+	}
+
+   	return args;
+}
+
+module.exports = {
+	'execute': execute,
+	'verify': verify
+}
