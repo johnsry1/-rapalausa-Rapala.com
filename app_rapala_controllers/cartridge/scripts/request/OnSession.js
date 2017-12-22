@@ -50,6 +50,7 @@ function geoIpDefaultCurrency() {
                 logMessage += 'Geolocation not available, set up default currency from config \n';    
             }
             var country = (geolocation != null) ? geolocation.getCountryCode() : 'default';
+            logMessage += 'Geolocation country: ' + country + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
             
             var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
             var currencies = JSON.parse(json);
