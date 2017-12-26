@@ -320,29 +320,29 @@
 }
 
 @mixin button($type: '') {
-    @if ($type == 'big') {
-        height: $button-big-height;
-        @include font-size($button-big-font-size);
-        @include line-height($button-big-line-height);
-        font-weight: $button-big-font-weight;
-        font-family: $button-big-font-family;
-        letter-spacing: $button-big-letter-spacing;
-        color: $button-big-color;
-        text-decoration: $button-big-text-decoration;
-        text-transform: $button-big-text-transform;
-        padding: $button-big-padding;
-        background: $button-big-bg;
-        border: $button-big-border;
-        border-radius: $button-big-border-radius;
-        box-shadow: $button-big-box-shadow;
+    @if ($type == 'submit') {
+        height: $button-submit-height;
+        @include font-size($button-submit-font-size);
+        @include line-height($button-submit-line-height);
+        font-weight: $button-submit-font-weight;
+        font-family: $button-submit-font-family;
+        letter-spacing: $button-submit-letter-spacing;
+        color: $button-submit-color;
+        text-decoration: $button-submit-text-decoration;
+        text-transform: $button-submit-text-transform;
+        padding: $button-submit-padding;
+        background: $button-submit-bg;
+        border: $button-submit-border;
+        border-radius: $button-submit-border-radius;
+        box-shadow: $button-submit-box-shadow;
         width: 100%;
         transition: all 0.3s;
         &:hover {
-            color: $button-big-hover-color;
-            text-decoration: $button-big-hover-text-decoration;
-            background: $button-big-hover-bg;
-            border: $button-big-hover-border;
-            box-shadow: $button-big-hover-box-shadow;
+            color: $button-submit-hover-color;
+            text-decoration: $button-submit-hover-text-decoration;
+            background: $button-submit-hover-bg;
+            border: $button-submit-hover-border;
+            box-shadow: $button-submit-hover-box-shadow;
         }
     } @else if ($type == 'promo') {
         height: $button-promo-height;
@@ -633,7 +633,7 @@ button,
 a.button {
     @include button;
     &.big {
-        @include button('big');
+        @include button('submit');
     }
     &.promo {
         @include button('promo');
