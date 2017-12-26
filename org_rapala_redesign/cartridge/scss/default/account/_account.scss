@@ -105,7 +105,6 @@ div.returningcustomers {
         }
     }
 }
-
 #container.pt_account {
     .breadcrumb {
         background: none;
@@ -113,6 +112,13 @@ div.returningcustomers {
     }
     #primary.primary-content {
         .account-section {
+            .cell.checkoutloginsignin {
+                box-shadow: none !important;
+                font-family: $font !important;
+                @include respond(medium-up) {
+                    border: $border;
+                }
+            }
             .custom-checkbox {
                 .custom-link {
                     display: none !important;
@@ -148,12 +154,18 @@ div.returningcustomers {
                 }
             }
             .returningcustomers {
-                button {
-                    @include button('big');
+                .formactions {
+                    button.signinbtn {
+                        @include button('big');
+                    }
                 }
             }
             .createan-account {
                 .contentboxcontent.new-register {
+                    box-shadow: none;
+                    @include respond(medium-up) {
+                        border: $border;
+                    }
                     h1 {
                         font-family: $font;
                     }
@@ -325,6 +337,139 @@ ul.common-nav {
             }
             .create_Agree {
                 font-family: $font;
+            }
+        }
+    }
+}
+
+.pt_leftnav-addressbook {
+    #addresses {
+        .address-list {
+            .address-tile.default {
+                h3 {
+                    font-family: $font;
+                }
+            }
+        }
+    }
+}
+
+.ui-dialog.addressadd,
+.ui-dialog.payment-settings {
+    background: $white;
+    .ui-dialog-titlebar.ui-widget-header {
+        height: auto;
+        border-radius: 0;
+        border-bottom: none;
+        padding: 0;
+        .ui-dialog-titlebar-close {
+            right: 0;
+            top: 0;
+        }
+    }
+    .dialog-required {
+        float: right;
+        font-size: 13px;
+        line-height: 30px;
+        padding: 0;
+        margin: -50px 0 0;
+    }
+    h1,
+    .ui-dialog h2 {
+        @include h2;
+        font-family: $font-third;
+        font-style: normal;
+    }
+    .dialog-content h1 {
+        float: left;
+        border-bottom: $border;
+        width: 100%;
+        margin: rem(25px) 0 rem(30px);
+        padding: 0 0 7px;
+        @include respond(medium-up) {
+            margin-top: 0;
+        }
+    }
+    #dialog-container {
+        .form-horizontal {
+            @include respond(large-up) {
+                margin: 20px auto;
+                width: rem(500px);
+                overflow: hidden;
+            }
+            .form-row {
+                .label {
+                    margin: 0 0 9px 0;
+                    text-align: left;
+                    width: 100%;
+                    @include respond(large-up) {
+                        text-align: right;
+                        width: rem($form-horizontal-label-width);
+                        @include line-height($form-horizontal-label-height);
+                    }
+                    .labeltext {
+                        text-transform: inherit;
+                        font-variant: inherit;
+                    }
+                    .requiredindicator {
+                        font-family: $font;
+                        color: $required-color;
+                        margin-left: rem(3px);
+                    }
+                }
+                .field-wrapper {
+                    width: 100% !important;
+                    padding-left: 0;
+                    @include respond(large-up) {
+                        width: rem($form-horizontal-field-width) !important;
+                        padding-left: rem($form-horizontal-field-padding);
+                        margin-bottom: 0;
+                    }
+                    input,
+                    .textinput {
+                        @include form-input;
+                        margin: $form-field-margin;
+                        box-shadow: none;
+                    }
+                    .input-select {
+                        height: $form-field-height - $form-field-border-width * 2;
+                        border-radius: 0;
+                        box-shadow: none;
+                        &.errorclient {
+                            background: $white;
+                            border: none;
+                            margin-left: 0;
+                            font-size: $form-field-font-size;
+                            font-family: $form-field-font-family;
+                            line-height: 30px;
+                        }
+                    }
+                    span.errorclient,
+                    div.errorclient {
+                        font-size: $font-error-font-size;
+                    }
+                }
+                .form-caption {
+                    margin-left: 0;
+                    @include font-size(13px);
+                    @include respond(large-up) {
+                        margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
+                    }
+                }
+            }
+            .form-row-button {
+                button {
+                    @include respond(small-down) {
+                        min-width: inherit;
+                        padding: 0;
+                        width: calc(50% - #{rem(5px)});
+                    }
+                    &:last-child {
+                        @include respond(small-down) {
+                            margin-right: 0;
+                        }
+                    }
+                }
             }
         }
     }
