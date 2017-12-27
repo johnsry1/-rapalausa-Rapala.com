@@ -479,7 +479,7 @@
 																						                            </div>
 																												</isif>       
 		                                  																		<isif condition="${productLineItem.product != null && productLineItem.product.isVariant()}">
-				                            																		<isloop items="${productLineItem.product.variationModel.attributeDefinitions}" var="VA">
+				                            																		<isloop items="${productLineItem.product.variationModel.productVariationAttributes}" var="VA">
 																														<isset name="SelectedVariationValue" value="${productLineItem.product.variationModel.getSelectedValue(VA)}" scope="page"/>	
 																					                               	  <div>
 																						                                	<font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif"> <span style="font-size: 10px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic;">${VA.displayName}:</span> <span style="font-size: 10px; color: rgb(51, 51, 51); font-weight: bold;">
