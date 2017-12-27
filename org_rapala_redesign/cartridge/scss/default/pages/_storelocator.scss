@@ -1,8 +1,171 @@
+.pt_store-locator-details {
+    .breadcrumb {
+        font-size: 13px;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+        @include respond(0, $desktop-breakpoint - 1) {
+            padding: 10px;
+        }
+        .wrapper {
+            .cell {
+                margin: 9px 18px;
+                padding: 0;
+                @include respond(0, $desktop-breakpoint - 1) {
+                    margin: 0;
+                }
+                ul {
+                    line-height: 20px;
+                    .breadcrumb-element {
+                        margin: 0 0 0 5px;
+                        padding: 0 0 0 0.9px;
+                        color: $bg-darkbrown;
+                        font-size: 13px;
+                        height: 18px;
+                        line-height: 20px;
+                        float: left;
+                        @include respond(0, $desktop-breakpoint - 1) {
+                            float: none;
+                        }
+                        &:first-child {
+                            margin: 0;
+                            padding: 0;
+                        }
+                        &:last-child {
+                            font-weight: normal;
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .breadcrumb-element-slash {
+                        display: block;
+                        height: 20px;
+                        line-height: 20px;
+                        float: left;
+                        padding: 0 2px;
+                        margin-left: 5px;
+                        background: url("../images/arrow-333333.png") center center no-repeat;
+                        &:after {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.search-bar {
+    overflow: hidden;
+}
 .store-search-form {
     max-width: rem(460px);
     .form-row-button {
         button {
             @include button('submit');
         }
+    }
+}
+#map-canvas {
+    float: right;
+    background: none;
+    background-color: $white;
+    height: 680px;
+    margin-bottom: 3rem;
+    width: 58%;
+}
+.store-locator {
+    clear: both;
+    margin-top: rem(20px);
+    .stores-wrapper {
+        float: left;
+        width: 40%;
+    }
+    .stores-header {
+        @include h2;
+    }
+}
+.stores-container {
+    margin-top: rem(15px);
+    .store {
+        border-bottom: $border;
+        margin-bottom: rem(15px);
+        padding-bottom: rem(15px);
+        overflow: hidden;
+        &:last-child {
+            border-bottom: none;
+        }
+        & > div {
+            width: calc(100% - #{47px});
+            float: right;
+            @include font-size(13px);
+            @include line-height(18px);
+        }
+        .storenumber {
+            float: left;
+            width: rem(27px);
+            height: rem(32px);
+            @include line-height(25px);
+            background: url("../images/marker.png") no-repeat center;
+            @include font-size(10px);
+            text-align: center;
+            a {
+                color: $white;
+            }
+        }
+        .storename {
+            @include h3;
+            margin-bottom: rem(7px);
+        }
+        .directions {
+            @include h3;
+            margin-top: rem(7px);
+        }
+    }
+}
+.storedetails {
+    @include respond(large-up) {
+        margin-top: rem(20px);
+    }
+    h1 {
+        @include respond(desktop-down) {
+            padding: 0 rem(10px);
+        }
+    }
+    .back {
+        @include font-size(13px);
+        margin: rem(10px);
+        padding: 0;
+        float: none;
+        @include respond(large-up) {
+            float: right;
+            margin: 0;
+        }
+    }
+    .leftStore {
+        @include font-size(13px);
+        @include line-height(18px);
+        margin: rem(10px) 0 rem(20px);
+        padding: 0 rem(10px);
+
+        @include respond(large-up) {
+            box-sizing: border-box;
+            float: left;
+            margin: 0 2% 0 0;
+            width: 33%;
+        }
+        @include respond(desktop) {
+            padding: 0;
+        }
+    }
+    .rightStore {
+        @include respond(large-up) {
+            float: right;
+            width: 65%;
+        }
+    }
+    #map-canvas {
+        width: 100%;
     }
 }

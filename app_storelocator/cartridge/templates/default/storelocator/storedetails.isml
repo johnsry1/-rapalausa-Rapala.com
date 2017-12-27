@@ -1,33 +1,12 @@
 <isdecorate template="storelocator/pt_storelocatordetails">
     <div class="storedetails" id="storedetails-wrapper">
+        <a href="${URLUtils.url('Stores-Find')}" class="back large-only">${Resource.msg('storelocator.storedetails.back','storelocator',null)}</a>
         <h1>${pdict.Store.name}
             <isif condition="${pdict.Store.custom.storeSecondaryName != null}">
                 <span>(<isprint value="${pdict.Store.custom.storeSecondaryName}"/>)</span>
             </isif>
         </h1>
         <div id="leftStore" class="leftStore">
-            <div id="googleMap">
-                <isscript>
-                    var address = '';
-
-                    if (pdict.Store.latitude != '' && pdict.Store.longitude != '') {
-                        address = pdict.Store.latitude + ', ' + pdict.Store.longitude;
-                    } else if (pdict.Store.name) {
-                        address = pdict.Store.name;
-                    }
-                </isscript>
-                <input type="hidden" id="address" value="${address}" />
-                <input type="hidden" id="distance" value="30" />
-                <input type="hidden" id="storeId" value="${pdict.Store.ID}" />
-                <div id="map-canvas" class="clearfix"></div>
-            </div>
-            <isif condition="${pdict.Store.image != null}">
-                <div id="storeImage" class="storeImage">
-                     <img src="${pdict.Store.image.getURL()}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
-                </div>
-            </isif>
-        </div>
-        <div id="rightStore" class="rightStore">
             <div id="storeAddress" class="storeAddress line">
                 <div class="address">
                     <div>
@@ -50,13 +29,16 @@
             </div>
             <isif condition="${pdict.Store.phone != null}">
                 <div id="storePhone" class="storePhone line">
-                    <h2 class="label">${Resource.msg('storelocator.storedetails.phone','storelocator',null)}</h2>
                     <isprint value="${pdict.Store.phone}"/>
+                </div>
+            </isif>
+            <isif condition="${pdict.Store.custom.website != null}">
+                <div id="website" class="website line">
+                    <a href="${pdict.Store.custom.website}"><isprint value="${pdict.Store.custom.website}"/></a>
                 </div>
             </isif>
             <isif condition="${pdict.Store.email != null}">
                 <div id="storeEmail" class="storeEmail line">
-                    <h2 class="label">${Resource.msg('storelocator.storedetails.email','storelocator',null)}</h2>
                     <a href="mailto:${pdict.Store.email}" class="email"><isprint value="${pdict.Store.email}"/></a>
                 </div>
             </isif>
@@ -68,13 +50,13 @@
                         storeHours = dw.util.StringUtils.decodeString( storeHours, dw.util.StringUtils.ENCODE_TYPE_HTML );
                         storeHours = dw.util.StringUtils.decodeString( storeHours, dw.util.StringUtils.ENCODE_TYPE_HTML );
                     </isscript>
-                    <h2>${Resource.msg('storelocator.storedetails.hours','storelocator',null)}</h2>
+                    <div>${Resource.msg('storelocator.storedetails.hours','storelocator',null)}</div>
                     <isprint value="${storeHours}" encoding="off"/>
                 </div>
             </isif>
             <isif condition="${pdict.Store.custom.storeDetails != null}">
                 <div id="storeDetails" class="storeDetails line">
-                    <h2>${Resource.msg('storelocator.storedetails.storeDetails','storelocator',null)}</h2>
+                    <div>${Resource.msg('storelocator.storedetails.storeDetails','storelocator',null)}</div>
                     <isif condition="${pdict.Store.custom.storeType != null}">
                         <div class="storeType">
                             <isprint value="${pdict.Store.custom.storeType}" encoding="off"/>
@@ -89,8 +71,30 @@
             </isif>
             <isif condition="${pdict.Store.storeEvents!=null && pdict.Store.storeEvents.getMarkup() != null}">
                 <div id="storeEvents" itemscope itemtype="http://schema.org/SaleEvent">
-                    <h2>${Resource.msg('storelocator.storedetails.events','storelocator',null)}</h2>
+                    <div>${Resource.msg('storelocator.storedetails.events','storelocator',null)}</div>
                     <isprint value="${pdict.Store.storeEvents.getMarkup()}" encoding="off"/>
+                </div>
+            </isif>
+        </div>
+        <div id="rightStore" class="rightStore">
+            <div id="googleMap">
+                <isscript>
+                    var address = '';
+
+                    if (pdict.Store.latitude != '' && pdict.Store.longitude != '') {
+                    address = pdict.Store.latitude + ', ' + pdict.Store.longitude;
+                    } else if (pdict.Store.name) {
+                    address = pdict.Store.name;
+                    }
+                </isscript>
+                <input type="hidden" id="address" value="${address}" />
+                <input type="hidden" id="distance" value="30" />
+                <input type="hidden" id="storeId" value="${pdict.Store.ID}" />
+                <div id="map-canvas" class="clearfix"></div>
+            </div>
+            <isif condition="${pdict.Store.image != null}">
+                <div id="storeImage" class="storeImage">
+                    <img src="${pdict.Store.image.getURL()}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
                 </div>
             </isif>
         </div>
