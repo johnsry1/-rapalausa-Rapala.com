@@ -1,3 +1,9 @@
+.pt_store-locator,
+.pt_customerservice {
+    .breadcrumb {
+        box-shadow: none !important;
+    }
+}
 .pt_store-locator-details {
     .breadcrumb {
         font-size: 13px;
@@ -55,12 +61,25 @@
         }
     }
 }
-
+.store-locator-header {
+    background: none;
+    padding: 0;
+    margin: rem(10px);
+    @include font-size(13px);
+    font-style: normal;
+    @include respond(large-up) {
+        margin: 0;
+    }
+}
 .search-bar {
     overflow: hidden;
 }
 .store-search-form {
-    max-width: rem(460px);
+    padding: 0 rem(10px);
+    @include respond(large-up) {
+        max-width: rem(460px);
+        padding: 0;
+    }
     .form-row-button {
         button {
             @include button('submit');
@@ -68,19 +87,26 @@
     }
 }
 #map-canvas {
-    float: right;
-    background: none;
-    background-color: $white;
-    height: 680px;
-    margin-bottom: 3rem;
-    width: 58%;
+    display: none;
+    @include respond(large-up) {
+        display: block;
+        background: $white;
+        margin-bottom: 3rem;
+        float: right;
+        height: rem(450px);
+        width: 48%;
+    }
 }
 .store-locator {
     clear: both;
     margin-top: rem(20px);
     .stores-wrapper {
-        float: left;
-        width: 40%;
+        padding: 0 10px;
+        @include respond(large-up) {
+            float: left;
+            width: 50%;
+            padding: 0;
+        }
     }
     .stores-header {
         @include h2;
@@ -93,14 +119,10 @@
         margin-bottom: rem(15px);
         padding-bottom: rem(15px);
         overflow: hidden;
+        @include font-size(13px);
+        @include line-height(18px);
         &:last-child {
             border-bottom: none;
-        }
-        & > div {
-            width: calc(100% - #{47px});
-            float: right;
-            @include font-size(13px);
-            @include line-height(18px);
         }
         .storenumber {
             float: left;
@@ -114,13 +136,58 @@
                 color: $white;
             }
         }
+        .store-info {
+            float: right;
+            margin-left: rem(10px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                float: left;
+                width: rem(140px);
+                word-break: break-all;
+            }
+            @include respond(desktop) {
+                margin-left: rem(20px);
+                width: rem(160px);
+            }
+        }
+        .store-links {
+            float: right;
+            margin: rem(10px) 0 rem(10px) rem(20px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                width: auto;
+                float: left;
+            }
+            @include respond(desktop) {
+                margin: 0 0 0 rem(30px);
+            }
+            .details,
+            .directions {
+                @include respond(medium-down) {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: rem(15px);
+                }
+            }
+            .directions {
+                margin-right: 0;
+            }
+        }
+        .distance {
+            float: right;
+            margin-left: rem(20px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                float: left;
+                width: auto;
+            }
+            @include respond(desktop) {
+                margin-left: rem(30px);
+            }
+        }
         .storename {
             @include h3;
             margin-bottom: rem(7px);
-        }
-        .directions {
-            @include h3;
-            margin-top: rem(7px);
         }
     }
 }
