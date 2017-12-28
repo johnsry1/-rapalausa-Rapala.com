@@ -49,21 +49,15 @@
     </service-credential>
 
     <service-credential service-credential-id="Adyen.Send.Authorize">
-        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise</url>
-        <user-id/>
-        <password/>
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/authorise</url>
+        <user-id>ws_724260@Company.RapalaVMC</user-id>
+        <password encrypted="true" encryption-type="common.export">IdsSIqqrmz5NKgXzPj30Yi7gGmNepitdAsVlUyDma/J24H+S7WKZiFrkQN3lZEN26h+Fuw7xJKBRhL5B5IDlvQ==</password>
     </service-credential>
 
     <service-credential service-credential-id="Adyen.Send.Authorize.3D">
-        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise3d</url>
-        <user-id/>
-        <password/>
-    </service-credential>
-
-    <service-credential service-credential-id="Adyen.Send.Authorize.3D.noencrypt">
-        <url>https://pal-test.adyen.com/pal/servlet/Payment/v18/authorise</url>
-        <user-id/>
-        <password/>
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise3d</url>
+        <user-id>ws_724260@Company.RapalaVMC</user-id>
+        <password encrypted="true" encryption-type="common.export">B5wRdT3m1gTK044T1hu0+y7gGmNepitdAsVlUyDma/JLXMU4tfg9rPJ7COJeSc3xIahQWU5+WmxJmNgvznTNVQ==</password>
     </service-credential>
 
     <service-profile service-profile-id="Adyen">
@@ -149,8 +143,8 @@
     <service service-id="adyen.http.payment.3dsecure.rapalaEU">
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
-        <log-prefix>adyen</log-prefix>
-        <comm-log-enabled>false</comm-log-enabled>
+        <log-prefix>adyen-3d</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
         <credential-id>Adyen.Send.Authorize.3D</credential-id>
@@ -160,7 +154,7 @@
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
-        <comm-log-enabled>false</comm-log-enabled>
+        <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
         <credential-id>Adyen.Methods</credential-id>
@@ -180,7 +174,7 @@
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
-        <comm-log-enabled>false</comm-log-enabled>
+        <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
         <credential-id>Adyen</credential-id>
@@ -190,7 +184,7 @@
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
-        <comm-log-enabled>false</comm-log-enabled>
+        <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
         <credential-id>Adyen</credential-id>

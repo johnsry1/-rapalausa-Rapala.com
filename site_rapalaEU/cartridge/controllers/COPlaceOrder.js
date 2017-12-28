@@ -386,3 +386,4 @@ exports.Submit = guard.ensure(['https'], submit);
  * Local methods
  */
 exports.Start = start;
+exports.submitImpl = submitImpl;

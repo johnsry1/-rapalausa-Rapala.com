@@ -19,9 +19,8 @@ function initializeBillingEvents() {
             e.preventDefault();
             var currentDate = new Date();
             var dateField = currentDate.getUTCFullYear() + '-' + pad(currentDate.getUTCMonth() + 1) + '-' + pad(currentDate.getUTCDate()) + 'T' + pad(currentDate.getUTCHours()) + ':' + pad(currentDate.getUTCMinutes()) + ':' + pad(currentDate.getUTCSeconds()) + '.'
-            + (currentDate.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) + 'Z';
+            + (currentDate.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) + '+01:00';
 
-            //var $creditCard = $('[data-method="CREDIT_CARD"]');
             // the public key
             var key = SitePreferences.ADYEN_CSE_JS_PUBLIC_KEY;
 

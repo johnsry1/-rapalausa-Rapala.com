@@ -330,7 +330,7 @@ function authorizeWithForm()
 	clearCustomSessionFields();
 	
 	Transaction.begin();
-	result = adyen3DVerification.verify({
+	var result = adyen3DVerification.verify({
 		Order: order,
 		Amount: paymentInstrument.paymentTransaction.amount,
 		PaymentInstrument: paymentInstrument,
@@ -345,7 +345,7 @@ function authorizeWithForm()
     	Transaction.wrap(function () {
 			OrderMgr.failOrder(order);
 		});
-		app.getController('COSummary').Start({
+    	require('site_rapalaEU/cartridge/controllers/COSummary.js').Start({
             PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
         });
 		return;
@@ -357,9 +357,12 @@ function authorizeWithForm()
 	paymentInstrument.paymentTransaction.transactionID = result.RequestToken;
     Transaction.commit();
 	
-	OrderModel.submit(order);
-	clearForms();
-	app.getController('COSummary').ShowConfirmation(order);
+    var orderPlacementStatus = require('site_rapalaEU/cartridge/controllers/COPlaceOrder.js').submitImpl(order);
+    if (!orderPlacementStatus.error) {
+    	require('site_rapalaEU/cartridge/controllers/COSummary.js').ShowConfirmation(orderPlacementStatus.Order);
+    } else {
+        require('site_rapalaEU/cartridge/controllers/COSummary.js').Start();
+    }
 }
 
 /**
