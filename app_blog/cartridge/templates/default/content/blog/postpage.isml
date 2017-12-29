@@ -20,6 +20,13 @@
 				<div class="blog-post-title">
 					<isprint value="${content.name}" />
 				</div>
+				<div class="blog-post-date">
+					<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
+						<isprint value="${content.custom.blog_date}" />
+					<iselse>
+						<isprint value="${content.creationDate}" />
+					</isif>
+				</div>
 				
 				<isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
 				<isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
