@@ -222,10 +222,6 @@ var product = function (response) {
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
-                // close the quick view when user clicks A2C.
-                if ($('#QuickViewDialog').length > 0) {
-                    $('#QuickViewDialog').dialog('close');
-                }
                 // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
                 // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
                 var event = jQuery.Event('AddToCart');
