@@ -59,10 +59,22 @@
                     background: none;
                     border-bottom: $border;
                     td.quantitycolumndetails {
+                        text-transform: none;
                         ul {
                             li {
                                 @include respond(desktop-down) {
                                     @include product-attr-name;
+                                }
+                            }
+                        }
+                    }
+                }
+                td.brandcolumn {
+                    table {
+                        tr {
+                            td.product-image {
+                                .small-new.new-stamp {
+                                    @include product-tag;
                                 }
                             }
                         }
@@ -88,9 +100,23 @@
                             @include product-attr-name;
                         }
                     }
+                    .price {
+                        .discountprice {
+                            @include pdp-price;
+                        }
+                    }
                     .pricenodiscount {
                         .salesprice {
                             @include pdp-price;
+                        }
+                    }
+                    .value.freegift {
+                        @include pdp-price;
+                        strike {
+                            @include pdp-price;
+                            color: $pdp-price-sale-color;
+                        }
+                        .salesprice {
                             font-style: normal;
                         }
                     }
@@ -126,9 +152,39 @@
                     }
                 }
                 td.itemtotalcolumn {
-                    .price-total {
+                    .price-total,
+                    .price-adjusted-total {
                         @include pdp-price;
+                    }
+                    .promo-adjustment {
+                        @include pdp-promo;
+                        margin-bottom: rem(7px);
+                    }
+                    .bonus-item {
+                        @include pdp-message;
+                        text-transform: none;
                         font-style: normal;
+                    }
+                }
+                tr.rowcoupons {
+                    background: none;
+                    border-bottom: $border;
+                    td.promotion {
+                        .coupon_code {
+                            font-family: $font;
+                        }
+                        .discount {
+                            span {
+                                font-family: $font;
+                            }
+                        }
+                    }
+                    td.itemtotalcolumn {
+                        .bonus-item {
+                            @include pdp-message;
+                            text-transform: none;
+                            font-style: normal;
+                        }
                     }
                 }
             }
@@ -209,6 +265,32 @@
                         .label {
                             font-family: $font;
                         }
+                        .promo-sec {
+                            .input-sec {
+                                input.couponinput {
+                                    @include form-input;
+                                    box-shadow: none;
+                                    margin: 0 5px 0 0;
+                                    width: calc(100% - #{rem(85px)});
+                                }
+                                .gray-button {
+                                    @include button;
+                                    padding: 0;
+                                    min-width: inherit;
+                                    height: rem($form-field-height);
+                                    @include line-height($form-field-height);
+                                    width: rem(80px);
+                                }
+                                .error {
+                                    @include form-error;
+                                }
+                            }
+                            .apply-code-message {
+                                a {
+                                    font-family: $font;
+                                }
+                            }
+                        }
                     }
                     .cart-order-totals {
                         .order-totals-table {
@@ -269,6 +351,32 @@
                                     width: 90%;
                                     margin-top: rem(5px);
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+            .cart-empty {
+                .cart-header {
+                    .formcheckout {
+                        button.new-continuecheckout.disabled,
+                        button.new-continuecheckout.disabled:hover {
+                            @include button('submit');
+                            background: $button-disabled-bg !important;
+                            span {
+                                line-height: inherit;
+                                text-transform: none;
+                                font-size: inherit;
+                                color: inherit;
+                                text-decoration: none;
+                                display: inline-block;
+                                background: none;
+                                width: 100%;
+                                font-weight: inherit;
+                                font-family: inherit;
+                                letter-spacing: normal;
+                                padding: 0;
+                                height: inherit;
                             }
                         }
                     }
