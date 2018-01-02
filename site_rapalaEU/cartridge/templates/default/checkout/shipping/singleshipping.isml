@@ -29,7 +29,7 @@
 <isscript>
 	importScript("site_rapalaEU:/cart/CartUtils.ds");
 	var productListAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, true);
-	
+
 	var customAttributes = {
 		checked : "checked"
 	};
@@ -49,10 +49,10 @@
 									<a href="javascript:void(0);" class="go-as-guest-checkout"><isprint value="${Resource.msg('global.guestcheckout','locale',null)}"/></a>
 								</div>
 							</div>
-							
-							<form action="${URLUtils.https('COShipping-ShippingLogin')}" method="post" id="${pdict.CurrentForms.login.htmlName}"  class="shippinglogin <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">invalid </isif>">		
+
+							<form action="${URLUtils.https('COShipping-ShippingLogin')}" method="post" id="${pdict.CurrentForms.login.htmlName}"  class="shippinglogin <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">invalid </isif>">
 								<fieldset>
-						
+
 										<input type="text" name="first-hidden" class="first-hidden"/>
 										<div class="formfield username account-email err <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
 											<isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">
@@ -62,10 +62,10 @@
 											    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" rowclass=" form-row-50 username" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 											</iselse>
 											</isif>
-											
+
 											<div class="clear"><!-- FLOAT CLEAR --></div>
 										</div>
-										
+
 										<div class="formfield password <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
 											<isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">
 												<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password errorclient" rowClass="inputlabel form-row-50 password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
@@ -74,7 +74,7 @@
 											 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowclass=" form-row-50 password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
 											 </iselse>
 											</isif>
-											
+
 											<div class="clear"><!-- FLOAT CLEAR --></div>
 										</div>
 										<div class="formactions">
@@ -86,8 +86,8 @@
 							</form>
 						</div>
 				</isif>
-			
-							<isif condition="${pdict.CurrentHttpParameterMap.ShipLimit.value && !empty(pdict.CurrentHttpParameterMap.ShipLimit.value)}"> 
+
+							<isif condition="${pdict.CurrentHttpParameterMap.ShipLimit.value && !empty(pdict.CurrentHttpParameterMap.ShipLimit.value)}">
 								<div class="state-shipping-valid-dialog hide">
 									<h1><isprint value="${Resource.msg('shippinginfo.shiplimit','checkout',null)}"/></h1>
 									<div class="notification" id="message">
@@ -100,7 +100,7 @@
 													<div class="custom-table-head first"><isprint value="${Resource.msg('minicart.items','checkout',null)}"/></div>
 													<div class="custom-table-head second"><isprint value="${Resource.msg('shippinginfo.shiplimit','checkout',null)}"/></div>
 												</div>
-											</div>	
+											</div>
 											<div class="custom-table bordertable" border="1">
 												<div class="custom-table-row">
 													<div class="custom-table-data first"><isprint value="${Resource.msg('singleshipping.notificationrow1','checkout',null)}"/></div>
@@ -154,7 +154,7 @@
 									<div class="shipping-address">
 										<isprint value="${Resource.msg('singleshipping.enteraddress','checkout',null)}"/>
 									</div>
-								
+
 									<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')}">
 										<isscript>
@@ -185,16 +185,18 @@
 									<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 									<isinputfield type="hidden" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.selectedaddress}" />
 										<div class="select-address addresslist form-row custom-select">
-											<iscomment> 
+											<iscomment>
 											<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
 												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
 											</label>
 											</iscomment>
 											<div class="field-wrapper">
 												<iscomment>JIRA PREV-33:Shipping page: Not displaying the selected Address details, in the "Select an Address" drop down. Added p_form attribute</iscomment>
-												<isaddressselectlist p_listId="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" p_form="shipping"/>
+                                                <div class="select-style">
+                                                    <isaddressselectlist p_listId="${pdict.CurrentForms.singleshipping.addressList.htmlName}" p_listaddresses="${productListAddresses}" p_form="shipping"/>
+                                                </div>
 											</div>
-											
+
 										</div>
 									</isif>
 									<isif condition="${pdict.CurrentCustomer.authenticated}">
@@ -221,10 +223,10 @@
 										<div class="shipping-address-field-section">
 									<iselseif condition="${pdict.CurrentCustomer.authenticated && productListAddresses.size() > 0}">
 										<div class="shipping-address-field-section  hide">
-										
+
 									</isif>
-									
-							
+
+
 										<isif condition="${pdict.CurrentCustomer.authenticated}">
 											 <div class="formfield form-row-50 form-row-left addressid"  >
 											 	<isscript>
@@ -257,10 +259,10 @@
 									<isif condition="${pdict.CurrentCustomer.authenticated}">
 										<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addToAddressBook}" type="checkbox"/>
 									</isif></iscomment>
-				
+
 									<iscomment>Use address for Billing Address
 									<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.useAsBillingAddress}" type="checkbox"/></iscomment>
-									
+
 									<iscomment><isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.byPassUPS}" type="input" fieldClass="bypassUPS hide"/></iscomment>
 									<div class="formfield addressoptions hide">
 										<div class="value">
@@ -317,8 +319,8 @@
 							<iselse/>
 								<isset name="instoreShipmentsExists" value="${false}" scope="page"/>
 							</isif>
-				
-				
+
+
 							<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp') && instoreShipmentsExists}">
 								<div class="form-row form-row-button instore-continue-button form-actions">
 							<iselse/>
@@ -339,21 +341,21 @@
 										</div>
 									</div>
 								</div>
-				
+
 							<iscomment>Entry point for Multi-Shipping (disabled on purpose)</iscomment>
 							<isif condition="${pdict.Basket.productLineItems.size() > 1 && false}">
 								<div class="ship-to-multiple">
 									<isprint value="${Resource.msg('singleshipping.multiple','checkout',null)}"/> <a href="${URLUtils.https('COShippingMultiple-Start')}"><isprint value="${Resource.msg('global.yes','locale',null)}"/></a>
 								</div>
 							</isif>
-				
+
 							<input type="hidden" name="${pdict.CurrentForms.singleshipping.secureKeyHtmlName}" value="${pdict.CurrentForms.singleshipping.secureKeyValue}"/>
-				
+
 						</fieldset>
-				
+
 						<iscomment>Address validation</iscomment>
 				    	<input type="hidden" class="bypassDAV hide" name="bypassDAV" value="false"/>
-				
+
 					</form>
 				<isscript>
 					importScript("site_rapalaEU:util/ViewHelpers.ds");
@@ -362,10 +364,10 @@
 					var json = JSON.stringify(countries);
 				</isscript>
 				<script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
-				
+
 				<iscomment>UPS address validation</iscomment>
 				<isinclude template="ups/addressvalidationdialog" />
-				
+
 				<iscomment>EVENT TRACKING FOR LOGIN </iscomment>
 				<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
 				<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
@@ -373,18 +375,18 @@
 				       <isgaEvents	ga_data="${pdict.CurrentCustomer.profile.email}" ga_category="${Resource.msg('gAnalytics.events.accessinfo','events',null)}" ga_evnet="${Resource.msg('gAnalytics.events.login','events',null)}" />
 				  	</isif>
 				</isif>
-				
+
 				<iscomment>Google Analytics-Goals Funnels</iscomment>
 				<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
 					<script>
 						//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
 						ga('send' ,'pageview', '/shipping-info');
-				
+
 						//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
 						//ga('send' ,'pageview', '/checkout_MultiPage/shipping.html');
-					</script>				
+					</script>
 				</isif>
-				
+
 				<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
 					<ischeckouttabs  position="footer" checkoutpage="shipping"/>
 				</isif>

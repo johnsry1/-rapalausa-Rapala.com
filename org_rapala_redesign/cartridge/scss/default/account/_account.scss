@@ -105,3 +105,372 @@ div.returningcustomers {
         }
     }
 }
+#container.pt_account {
+    .breadcrumb {
+        background: none;
+        box-shadow: none;
+    }
+    #primary.primary-content {
+        .account-section {
+            .cell.checkoutloginsignin {
+                box-shadow: none !important;
+                font-family: $font !important;
+                @include respond(medium-up) {
+                    border: $border;
+                }
+            }
+            .custom-checkbox {
+                .custom-link {
+                    display: none !important;
+                }
+            }
+            .upshift {
+                .contentboxcontent.account-logs {
+                    h1 {
+                        font-family: $font;
+                    }
+                    .form-indent {
+                        margin-left: 0;
+                    }
+                }
+            }
+            .label {
+                @include label;
+                margin-bottom: 0;
+                width: 100%;
+                @include respond(medium-down) {
+                    margin-left: 0;
+                    padding-left: 0;
+                    line-height: 20px;
+                }
+                @include respond(large-up) {
+                    margin-bottom: rem(5px);
+                    line-height: rem(15px) !important;
+                }
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+            }
+            .returningcustomers {
+                .formactions {
+                    button.signinbtn {
+                        @include button('submit');
+                    }
+                }
+            }
+            .createan-account {
+                .contentboxcontent.new-register {
+                    box-shadow: none;
+                    @include respond(medium-up) {
+                        border: $border;
+                    }
+                    h1 {
+                        font-family: $font;
+                    }
+                    .registration {
+                        .formactions {
+                            button {
+                                @include button('submit');
+                            }
+                        }
+                        .custom-checkbox {
+                            .form-row {
+                                margin: 0;
+                            }
+                        }
+                        .create_Agree {
+                            p {
+                                @include p;
+                            }
+                        }
+                    }
+                    .custom-checkbox {
+                        label {
+                            font-family: $form-label-font-family;
+                            font-size: $form-label-font-size;
+                            color: $form-label-color;
+                            @include respond(medium-down) {
+                                margin: 0;
+                                width: 100%;
+                            }
+                            .labeltext {
+                                @include respond(medium-down) {
+                                    margin-left: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.rapala_benefits {
+    ul {
+        li {
+            font-family: $ul-font-family;
+        }
+    }
+}
+
+#container.pt_account {
+    .floatright.site-suggestion-section {
+
+    }
+}
+
+.ui-dialog.PasswordResetDialog.ui-widget-content {
+    .ui-widget-header {
+        border-bottom: none;
+    }
+    .passwordreset {
+        h1 {
+            @include h2;
+            font-family: $font-third;
+        }
+        p {
+            font-family: $font;
+        }
+    }
+    .formactions {
+        button {
+            @include button('submit');
+        }
+    }
+    .form-row {
+        .requiredindicator {
+            float: none;
+            color: $required-color;
+            margin-left: rem(3px);
+        }
+    }
+}
+
+.pt_wish-list,
+.pt_leftnav-addressbook,
+.pt_order,
+.pt_leftnav-payment,
+.pt_leftnav-profile,
+.pt_acc_landing {
+    #main {
+        #page-background #secondary {
+            h2 {
+                @include clp-refinement-title;
+            }
+        }
+        .breadcrumb {
+            box-shadow: none;
+        }
+    }
+
+}
+
+ul.common-nav {
+    font-family: $font;
+    li {
+        font-style: normal;
+    }
+}
+
+.pt_leftnav-profile {
+    #primary {
+        #RegistrationForm {
+            .form-row {
+                .label {
+                    @include respond(medium-down) {
+                        line-height: 16px;
+                        padding-bottom: 0;
+                        margin-bottom: 9px;
+                    }
+                    .labeltext {
+                        font-family: inherit;
+                        font-weight: inherit;
+                        text-transform: inherit;
+                    }
+                }
+                .field-wrapper {
+                    @include respond(medium-down) {
+                        padding: 0;
+                        width: 100%;
+                    }
+                    .textinput {
+                        @include form-input;
+                    }
+                }
+                .form-caption {
+                    margin-top: 0;
+                }
+            }
+            .form-row.form-indent {
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                .field-wrapper {
+                    max-width: rem(380px);
+                }
+                .label {
+                    width: 100%;
+                    float: none;
+                    text-align: left;
+                    .labeltext {
+                        font-family: inherit;
+                        font-style: inherit;
+                        font-weight: inherit;
+                        color: inherit;
+                        float: none !important;
+                    }
+                }
+            }
+            .form-row.form-row-button {
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                button {
+                    @include button('submit');
+                    @include respond(large-up) {
+                        width: auto;
+                    }
+                }
+            }
+            .create_Agree {
+                font-family: $font;
+            }
+        }
+    }
+}
+
+.pt_leftnav-addressbook {
+    #addresses {
+        .address-list {
+            .address-tile.default {
+                h3 {
+                    font-family: $font;
+                }
+            }
+        }
+    }
+}
+
+.ui-dialog.addressadd,
+.ui-dialog.payment-settings {
+    background: $white;
+    .ui-dialog-titlebar.ui-widget-header {
+        height: auto;
+        border-radius: 0;
+        border-bottom: none;
+        padding: 0;
+        .ui-dialog-titlebar-close {
+            right: 0;
+            top: 0;
+        }
+    }
+    .dialog-required {
+        float: right;
+        font-size: 13px;
+        line-height: 30px;
+        padding: 0;
+        margin: -50px 0 0;
+    }
+    h1,
+    .ui-dialog h2 {
+        @include h2;
+        font-family: $font-third;
+        font-style: normal;
+    }
+    .dialog-content h1 {
+        float: left;
+        border-bottom: $border;
+        width: 100%;
+        margin: rem(25px) 0 rem(30px);
+        padding: 0 0 7px;
+        @include respond(medium-up) {
+            margin-top: 0;
+        }
+    }
+    #dialog-container {
+        .form-horizontal {
+            @include respond(large-up) {
+                margin: 20px auto;
+                width: rem(500px);
+                overflow: hidden;
+            }
+            .form-row {
+                .label {
+                    margin: 0 0 9px 0;
+                    text-align: left;
+                    width: 100%;
+                    @include respond(large-up) {
+                        text-align: right;
+                        width: rem($form-horizontal-label-width);
+                        @include line-height($form-horizontal-label-height);
+                    }
+                    .labeltext {
+                        text-transform: inherit;
+                        font-variant: inherit;
+                    }
+                    .requiredindicator {
+                        font-family: $font;
+                        color: $required-color;
+                        margin-left: rem(3px);
+                    }
+                }
+                .field-wrapper {
+                    width: 100% !important;
+                    padding-left: 0;
+                    @include respond(large-up) {
+                        width: rem($form-horizontal-field-width) !important;
+                        padding-left: rem($form-horizontal-field-padding);
+                        margin-bottom: 0;
+                    }
+                    input,
+                    .textinput {
+                        @include form-input;
+                        margin: $form-field-margin;
+                        box-shadow: none;
+                    }
+                    .input-select {
+                        height: $form-field-height - $form-field-border-width * 2;
+                        border-radius: 0;
+                        box-shadow: none;
+                        &.errorclient {
+                            background: $white;
+                            border: none;
+                            margin-left: 0;
+                            font-size: $form-field-font-size;
+                            font-family: $form-field-font-family;
+                            line-height: 30px;
+                        }
+                    }
+                    span.errorclient,
+                    div.errorclient {
+                        font-size: $font-error-font-size;
+                    }
+                }
+                .form-caption {
+                    margin-left: 0;
+                    @include font-size(13px);
+                    @include respond(large-up) {
+                        margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
+                    }
+                }
+            }
+            .form-row-button {
+                button {
+                    @include respond(small-down) {
+                        min-width: inherit;
+                        padding: 0;
+                        width: calc(50% - #{rem(5px)});
+                    }
+                    &:last-child {
+                        @include respond(small-down) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

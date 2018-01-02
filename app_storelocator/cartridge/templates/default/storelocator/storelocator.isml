@@ -7,21 +7,25 @@
         <isslot id="store-locator-slot" description="Just above the search fields on the store locator page. Viewable at resolutions of 1200px or greater." context="global" />
     </div>
     <div class="search-bar">
-        <form id="store-search-form">
+        <form id="store-search-form" class="store-search-form">
             <fieldset>
                 <div class="form-row address-field">
-                    <label for="address">${Resource.msg('storelocator.searchbar.address','storelocator',null)}</label>
-                    <input type="text" name="address" id="address" value="" />
+                    <label class="label" for="address">${Resource.msg('storelocator.searchbar.address','storelocator',null)}</label>
+                    <div class="field-wrapper">
+                        <input type="text" name="address" id="address" value="" class="textinput" />
+                    </div>
                 </div>
                 <div class="form-row distance-select">
-                    <label for="distance">${Resource.msg('storelocator.searchbar.radius','storelocator',null)}</label>
-                    <div class="select-wrapper">
-                        <select id="distance" name="distance" unselectable="on">
-                            <option value="15" selected="selected">15 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                            <option value="30">30 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                            <option value="50">50 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                            <option value="999999">999999</option>
-                        </select>
+                    <label class="label" for="distance">${Resource.msg('storelocator.searchbar.radius','storelocator',null)}</label>
+                    <div class="field-wrapper">
+                        <div class="select-style">
+                            <select id="distance" name="distance" unselectable="on">
+                                <option value="15" selected="selected">15 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
+                                <option value="30">30 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
+                                <option value="50">50 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
+                                <option value="999999">999999</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row form-row-button locator-submit">

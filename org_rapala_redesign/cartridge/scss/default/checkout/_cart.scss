@@ -1,0 +1,286 @@
+.item-list {
+    tr {
+        border-bottom: $border;
+    }
+}
+
+.pt_cart {
+    .upshift.cell.contentbox {
+        .contentboxcontent {
+            .cart-header {
+                h1.mycartheader {
+                    @include h1;
+                }
+                .items-content {
+                    .count,
+                    .order-total,
+                    .total-savings {
+                        font-family: $font;
+                    }
+                }
+                .cart-action-checkout {
+                    @include respond(desktop-down) {
+                        padding: rem(10px);
+                        box-sizing: border-box;
+                    }
+                    .button-fancy-large {
+                        @include button('submit');
+                        min-width: inherit;
+                        box-sizing: border-box;
+                        span {
+                            line-height: inherit;
+                            text-transform: none;
+                            font-size: inherit;
+                            color: inherit;
+                            text-decoration: none;
+                            display: inline-block;
+                            background: none;
+                            width: 100%;
+                            font-weight: inherit;
+                            font-family: inherit;
+                            letter-spacing: normal;
+                            padding: 0;
+                            height: inherit;
+                        }
+                    }
+                }
+            }
+            table#cart-table {
+                thead {
+                    tr {
+                        th {
+                            h2 {
+                                font-family: $font;
+                            }
+                        }
+                    }
+                }
+                tr.cart-row {
+                    background: none;
+                    border-bottom: $border;
+                    td.quantitycolumndetails {
+                        ul {
+                            li {
+                                @include respond(desktop-down) {
+                                    @include product-attr-name;
+                                }
+                            }
+                        }
+                    }
+                }
+                td.detailscolumn {
+                    .product-list-item {
+                        .name {
+                            a {
+                                font-family: $font;
+                            }
+                        }
+                        .label {
+                            @include respond(desktop-down) {
+                                @include product-attr-title;
+                            }
+                            @include product-attr-title;
+                        }
+                        .value {
+                            @include respond(desktop-down) {
+                                @include product-attr-name;
+                            }
+                            @include product-attr-name;
+                        }
+                    }
+                    .pricenodiscount {
+                        .salesprice {
+                            @include pdp-price;
+                            font-style: normal;
+                        }
+                    }
+                }
+                td.quantitycolumn {
+                    input {
+                        @include form-input;
+                        width: rem(70px);
+                    }
+                    button.update {
+                        @include button;
+                        padding: 0;
+                        min-width: inherit;
+                    }
+                    .item-user-actions {
+                        button {
+                            border: none;
+                            min-width: inherit;
+                            &:hover {
+                                border: none;
+                            }
+                        }
+                    }
+                }
+                td.itemtotalcolumn.cartactions {
+                    .item-edit-details {
+                        a {
+                            @include button;
+                            padding: 0;
+                            min-width: inherit;
+                            text-transform: none;
+                        }
+                    }
+                }
+                td.itemtotalcolumn {
+                    .price-total {
+                        @include pdp-price;
+                        font-style: normal;
+                    }
+                }
+            }
+            .cart-footer {
+                .cart-footer-left {
+                    border-right: $border;
+                    .recommendations.cross-sell {
+                        font-family: $font;
+                        border: $border;
+                        .owl-carousel.owl-theme {
+                            .owl-stage-outer {
+                                margin: 0;
+                            }
+                        }
+                        .owl-carousel {
+                            padding-top:  rem(30px);
+                            padding-bottom: rem(20px);
+                            .owl-nav {
+                                margin: 0;
+                                .owl-prev,
+                                .owl-next {
+                                    position: absolute;
+                                    top: 50%;
+                                    margin: rem(-13px) 0 0;
+                                    text-indent: -99999px;
+                                    overflow: hidden;
+                                    padding: 0;
+                                    width: rem(15px);
+                                    height: rem(25px);
+                                    background: url("../images/svg-icons/arrow.svg") no-repeat center;
+                                    &:hover {
+                                        background: $white url("../images/svg-icons/arrow.svg") no-repeat center;
+                                        opacity: 1;
+                                    }
+                                    &.disabled {
+                                        background: $white url("../images/svg-icons/arrow.svg") no-repeat center;
+                                        opacity: 0.4;
+                                    }
+                                }
+                                .owl-prev {
+                                    left: rem(3px);
+                                }
+                                .owl-next {
+                                    right: rem(3px);
+                                    transform: rotate(180deg);
+                                }
+                            }
+                        }
+                        .cart-recommendations-heading {
+                            background: $background;
+                        }
+                        .search-result-items {
+                            .producttile {
+                                .cartrecommendetionprice {
+                                    .price {
+                                        .price-sales {
+                                            font-family: $pdp-price-font-family;
+                                            font-weight: $pdp-price-font-weight;
+                                            letter-spacing: $pdp-price-letter-spacing;
+                                            color: $pdp-price-color;
+                                            font-style: normal;
+                                        }
+                                        .price-standart {
+                                            font-family: $pdp-price-font-family;
+                                            font-weight: $pdp-price-font-weight;
+                                            letter-spacing: $pdp-price-letter-spacing;
+                                            color: $pdp-price-sale-color;
+                                            font-style: normal;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .cart-footer-right {
+                    #couponentry {
+                        .label {
+                            font-family: $font;
+                        }
+                    }
+                    .cart-order-totals {
+                        .order-totals-table {
+                            td {
+                                span.label {
+                                    @include product-attr-title;
+                                }
+                                span.value {
+                                    @include product-attr-name;
+                                }
+                            }
+                        }
+                    }
+                }
+                .brands-messaging {
+                    .brandslothead1 {
+                        p,
+                        a {
+                            font-family: $font;
+                        }
+                    }
+                }
+            }
+            .cart-paymentbuttons {
+                padding-top: rem(20px);
+            }
+            .actions {
+                form {
+                    button {
+                        @include button('submit');
+                        min-width: inherit;
+                        box-sizing: border-box;
+                        span {
+                            line-height: inherit;
+                            text-transform: none;
+                            font-size: inherit;
+                            color: inherit;
+                            text-decoration: none;
+                            display: inline-block;
+                            background: none;
+                            width: 100%;
+                            font-weight: inherit;
+                            font-family: inherit;
+                            letter-spacing: normal;
+                            padding: 0;
+                            height: inherit;
+                        }
+                    }
+                }
+            }
+            .cart-footer {
+                .cart-footer-left {
+                    .recommendations.cross-sell {
+                        .search-result-items {
+                            .producttile {
+                                .quickview {
+                                    @include quickview;
+                                    width: 90%;
+                                    margin-top: rem(5px);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.in-stock-msg,
+.is-in-stock,
+[data-status="store-in-stock"] {
+    @include product-attr-name;
+    font-style: normal;
+    font-weight: normal;
+}

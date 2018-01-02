@@ -45,6 +45,18 @@
                             font-family: $font;
                         }
                     }
+                    li {
+                        font-family: $font;
+                        &.current-page {
+                            font-family: $font;
+                            a {
+                                font-family: $font;
+                            }
+                        }
+                        a {
+                            font-family: $font;
+                        }
+                    }
                 }
             }
             .search-result-content {
@@ -60,6 +72,11 @@
                             @include quickview;
                         }
                     }
+                    .product-swatches {
+                        a.product-swatches-all {
+                            font-family: $font;
+                        }
+                    }
                     .product-name {
                         a {
                             font-family: $font;
@@ -67,7 +84,16 @@
                     }
                     .product-pricing {
                         .product-sales-price {
-                            font-family: $font;
+                            font-family: $pdp-price-font-family;
+                            font-weight: $pdp-price-font-weight;
+                            letter-spacing: $pdp-price-letter-spacing;
+                            color: $pdp-price-color;
+                        }
+                        .product-standard-price {
+                            font-family: $pdp-price-font-family;
+                            font-weight: $pdp-price-font-weight;
+                            letter-spacing: $pdp-price-letter-spacing;
+                            color: $pdp-price-sale-color;
                         }
                     }
                 }
@@ -105,8 +131,9 @@
     }
     .searchrefinements {
         .refinement {
+
             .filter {
-                font-family: $font;
+                @include clp-refinement-title;
             }
             ul {
                 li {
@@ -160,3 +187,10 @@
     }
 }
 
+.refinements {
+    .contentbox {
+        & > div {
+            border: $border;
+        }
+    }
+}
