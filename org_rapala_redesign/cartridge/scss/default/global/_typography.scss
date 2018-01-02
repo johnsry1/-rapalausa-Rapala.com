@@ -169,21 +169,26 @@
     @include line-height($pdp-price-line-height);
     font-family: $pdp-price-font-family;
     font-weight: $pdp-price-font-weight;
+    font-style: $pdp-price-font-style;
     letter-spacing: $pdp-price-letter-spacing;
     color: $pdp-price-color;
     .standardprice,
-    .salesprice {
+    .salesprice,
+    .price-standard,
+    .price-sales {
         @include font-size($pdp-price-font-size);
         @include line-height($pdp-price-line-height);
         font-family: $pdp-price-font-family;
         font-weight: $pdp-price-font-weight;
         letter-spacing: $pdp-price-letter-spacing;
     }
-    .standardprice {
+    .standardprice,
+    .price-standard {
         color: $pdp-price-sale-color;
         text-decoration: line-through;
     }
-    .salesprice {
+    .salesprice,
+    .price-sales {
         color: $pdp-price-color;
     }
 }
@@ -220,6 +225,7 @@
     @include line-height($pdp-promo-line-height);
     font-weight: $pdp-promo-font-weight;
     font-family: $pdp-promo-font-family;
+    font-style: $pdp-promo-font-style;
     letter-spacing: $pdp-promo-letter-spacing;
     color: $pdp-promo-color;
 }

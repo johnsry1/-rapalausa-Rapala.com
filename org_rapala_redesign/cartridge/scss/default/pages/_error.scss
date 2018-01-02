@@ -1,0 +1,61 @@
+#content .contentbox,
+.contentbox {
+    box-shadow: none;
+}
+
+#container.pt_error {
+    #primary.primary-content {
+        .errorpage {
+            fieldset.nohitsearch {
+                input.box {
+                    @include form-input;
+                    background: none;
+                    width: rem(200px);
+                    @include respond(desktop-down) {
+                        width: calc(100% - #{rem(85px)});
+                    }
+                }
+                button.btn {
+                    @include button;
+                    text-indent: 0;
+                    margin: 0 0 0 rem(5px);
+                    min-width: inherit;
+                    width: auto;
+                    height: rem($form-field-height);
+                    @include line-height($form-field-height);
+                    @include respond(desktop-down) {
+                        float: none;
+                        width: rem(80px);
+                    }
+                }
+            }
+            fieldset.nohitsearch {
+                @include respond(desktop-down) {
+                    border: none;
+                    box-shadow: none;
+                    width: 100%;
+                }
+            }
+            .nohits {
+                a.button {
+                    min-width: inherit;
+                    width: auto;
+                    padding: $button-submit-padding;
+                    @include font-size($button-submit-font-size);
+                    @include line-height($button-submit-line-height);
+                    box-sizing: border-box;
+                    @include respond(desktop-down) {
+                        width: 100%;
+                    }
+                }
+            }
+            .errorfooter {
+                .errorfooterbottom {
+                    @include respond(large-up) {
+                        margin-left: rem(270px);
+                    }
+                }
+            }
+        }
+    }
+}
