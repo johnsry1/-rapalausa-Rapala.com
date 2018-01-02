@@ -30,7 +30,7 @@
 	<div class="contentbox checkout_cont">
 		<div class="contentboxcontent">
 			<div class="checkout billingsection">
-				
+
 				<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					checkout progress indicator
 				 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
@@ -39,7 +39,7 @@
 				<iselse/>
 					<ischeckoutprogressindicator step="3" multishipping="true" rendershipping="${pdict.Basket.productLineItems.size() == 0 ? 'false' : 'true'}"/>
 				</isif>
-				
+
 				<div class="checkoutbilling">
 					<isset name="Shipments" value="${pdict.Basket.shipments}" scope="page"/>
 					<isif condition="${!empty(Shipments)}">
@@ -52,9 +52,9 @@
 									<div class="minishipment">
 										<iscomment>omit the shipment name, if there is just one shipment</iscomment>
 										<isif condition="${Shipments.size() > 1 && pdict.Basket.productLineItems.size() > 0}"><div class="name">Shipment ${'#' + shipmentCount}</div></isif>
-										
+
 										<div class="details">
-										
+
 											<iscomment>
 												render the detail section depending on whether this is a physical shipment with products
 												(shipped to an address) or if this is a gift certificate (send via email)
@@ -83,7 +83,7 @@
 													</isif>
 												<div class="hidden-shipping-address hide">${address.firstName}|${address.lastName}|${address.address1}|<isif condition="${!empty(address.address2)}">${address.address2}|<iselse/>|</isif>${address.city}|${address.stateCode}|${address.postalCode}|${address.phone}|${pdict.CurrentForms.billing.billingAddress.email.emailAddress.value}|${pdict.CurrentForms.billing.billingAddress.addressid.value}</div>
 												</isif>
-												
+
 											</div>
 										</div>
 										<div class="shippingMethodDetails">
@@ -91,7 +91,7 @@
 											<div class="shippingmethod-block">
 												<span class="shippingmethodName"><isprint value="${shipment.shippingMethod.displayName}"/></span>
 												<span class="shippingPrice">
-													<isif condition="${shipment.adjustedShippingTotalNetPrice.value != shipment.shippingTotalNetPrice.value}" > 
+													<isif condition="${shipment.adjustedShippingTotalNetPrice.value != shipment.shippingTotalNetPrice.value}" >
 														<span class="standard-shipping standardshipping"><isprint value="${shipment.shippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
 														 <span class="discount-shipping discountshipping">
 															 <isif condition="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge) > 0}">
@@ -159,7 +159,7 @@
                                      stateCode : (address.stateCode != null) ? address.stateCode : '',
                                      countryCode : address.countryCode,
                                      countryDisplayValue : Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null),
-                                     phone : (address.phone != null) ? address.phone : '' 
+                                     phone : (address.phone != null) ? address.phone : ''
                               }
                        		</isscript>
 							<div class="custom-checkbox" data-address="${JSON.stringify(shipaddr)}">
@@ -176,15 +176,15 @@
                                   </isif>
                           	</div>
 							<isinputfield formfield="${pdict.CurrentForms.billing.paypalval.paypalprocessed}" fieldClass="paypalprocessed" type="hidden"/>
-								
+
 							<iscomment>hidden input with action to trigger for the address form</iscomment>
 							<input type="hidden" name="${pdict.CurrentForms.billing.save.htmlName}" value="true" />
-							
+
 							<isset name="shippingAddr" value="${address}" scope="page"/>
 							<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
 							<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 								<div class="select-address addresslist form-row custom-select">
-										<iscomment>	
+										<iscomment>
 											<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
 												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
 											</label>
@@ -195,22 +195,24 @@
 										</isscript>
 										<iscomment>Start JIRA PREV-46:Checkout_Billing page: Not displaying the selected saved address in the 'Select an Address' drop down. Added p_form attribute </iscomment>
 										<div class="field-wrapper">
-											<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" p_form="billing" />
+                                            <div class="select-style">
+                                                <isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" p_form="billing" />
+                                            </div>
 										</div>
 										<iscomment>End JIRA PREV-46  </iscomment>
-									<iscomment> 
+									<iscomment>
 										<div class="form-row form-row-button">
 											<button id="address-select-go-button" name="${pdict.CurrentForms.billing.selectAddress.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
 										</div>
 									</iscomment>
 								</div>
-					
+
 							</isif>
 							<div class="selected-shipping-address">
 								<isprint value="${shippingAddr.title}"/><br/>
 								<isprint value="${shippingAddr.firstName}"/>
 								<isprint value="${shippingAddr.lastName}"/><br/>
-								<isprint value="${shippingAddr.address1}"/> 
+								<isprint value="${shippingAddr.address1}"/>
 								<isprint value="${shippingAddr.address2}"/><br/>
 								<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
 								<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/>
@@ -277,9 +279,9 @@
 										</a>
 									</div>
 								</div>
-								
+
                                </isif>
-					
+
 							<iscomment>provide option to add address to address book if customer is authenticated</iscomment>
 							<isif condition="${pdict.CurrentCustomer.authenticated}">
 								<div class="custom-checkbox hide">
@@ -298,23 +300,23 @@
 							<div class="form-caption">
 								<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
 							</div></iscomment>
-					
+
 						</fieldset>
-					
+
 						<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 							payment methods
 						 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
-					
-					
+
+
 						<iscomment>payment method area</iscomment>
 						<div id="paymentmethodform" class="paymentmethodform">
 							<isinclude template="checkout/billing/paymentmethods"/>
 						</div>
 						<isbonusdiscountlineitem p_alert_text="${Resource.msg('billing.bonusproductalert','checkout',null)}" p_discount_line_item="${pdict.BonusDiscountLineItem}"/>
-					
+
 						<isset name="billingFormSubmitButtonID" value="billingSubmitButton" scope="page"/>
 						<isinclude template="paypal/expressbilling"/>
-						
+
 					 	<isif condition="${!flageallotmentcover}">
 						   	<div class="cardnotworking">
 								<a class="Custom-tooltip">
@@ -336,16 +338,16 @@
 								</a>
 							</div>
 						</isif>
-						
+
 						<iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 							VIP check
 						 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 						 <isif condition ="${knifeAvailable == true || isAssignedToVIP}">
 						   	<fieldset>
 								<div class="clear"></div>
-								<hr class="hrdottedline authentication-detail-hrdottedline">		
+								<hr class="hrdottedline authentication-detail-hrdottedline">
 								<div class="purchase-title">  <isprint value="${Resource.msg('global.purchasetitle','locale',null)}"/></div>
-							   	
+
 							   		<div class="formfield addressoptions knife">
 							   			<isif condition="${knifeAvailable == true}">
 								   			<div class="name age-verify"><isprint value="${Resource.msg('global.knivelabel','locale',null)}"/></div>
@@ -363,7 +365,7 @@
 											    	</div>
 										    	</div>
 				    						</div>
-			    						 	
+
 								    	</isif>
 								    	<isif condition="${isAssignedToVIP}">
 											<div class="vip-terms">
@@ -379,16 +381,16 @@
 										</isif>
 							   		</div>
 						    		<div class="clear"></div>
-						    	
-						    	
+
+
 							</fieldset>
 					   	</isif>
-					  
+
 						<div class="column new-summery-cart mobile-view">
 							<hr class="hrdottedline authentication-detail-hrdottedline">
 							<isinclude template="checkout/minisummary"/>
 						</div>
-						<hr class="hrdottedline authentication-detail-hrdottedline">	
+						<hr class="hrdottedline authentication-detail-hrdottedline">
 						<div class="side-note">
 							<div class="side-note-section">
 								<isprint value="${Resource.msg('billinginfo.orderplaced','checkout',null)}"/>
@@ -433,10 +435,10 @@
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="ordergothrough-tooltip">
 									<a class="ordergothrough_tooltip Custom-tooltip"><isprint value="${Resource.msg('global.didmyordergothrough','locale',null)}"/>
-										<img src ="${URLUtils.staticURL('/images/responsive-icons/tooltip.svg')}" /> 
+										<img src ="${URLUtils.staticURL('/images/responsive-icons/tooltip.svg')}" />
 										<div class="tooltip-body" style="display:none">
 											<div class="tooltipcontainer">
 												<b><isprint value="${Resource.msg('global.ordergothrough-header','locale',null)}"/></b>
@@ -451,15 +453,15 @@
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont5','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont6','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont7','locale',null)}"/></li>
-														</ul> 
+														</ul>
 											</div>
-										</div>  
+										</div>
 									</a>
 								</div>
 							</div>
-							
+
 						</div>
-					
+
 						<iscomment>Address validation-UPS we might add</iscomment>
 					</form>
 				</div>

@@ -146,7 +146,6 @@ function show() {
         } else if (isBlogArticleSearch) {
             var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
             contentPagingModel.setPageSize(16);
-            var test = contentSearchModel.getContent().asList();
             if (params.start.submitted) {
                 contentPagingModel.setStart(params.start.intValue);
             }

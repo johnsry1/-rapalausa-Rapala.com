@@ -73,6 +73,8 @@ var settings = {
         }
     },
     errorPlacement: function (error, element) {
+        var $selectStyle = $(element).parent('.select-style');
+
         if ($(element).hasClass('errorclient')) {
             $(element).closest('.form-row').addClass('inputlabel');
             $(element).closest('.formfield').addClass('inputlabel');
@@ -107,6 +109,8 @@ var settings = {
                 } else {
                     if ($(element).hasClass('custom-select-wrap')) {
                         $(element).closest('.field-wrapper').after(error);
+                    } else if ($selectStyle.length) {
+                        $selectStyle.after(error);
                     } else {
                         $(element).after(error);
                     }
@@ -312,7 +316,7 @@ $.validator.addMethod('zipCodeCustom', function (value, element) {
         }
         return (/^\d{5}((-\d{4})|(\d{4}))?$/).test(value);
     }
-}, '- Please enter a valid ZipCode'); 
+}, '- Please enter a valid ZipCode');
 
 $.validator.addMethod('phoneCustom', function (phoneNumber, element) {
     if ($(element).hasClass('stopKeypress')) {

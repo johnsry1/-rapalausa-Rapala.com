@@ -30,6 +30,31 @@
     text-align: left;
 }
 
+::-webkit-input-placeholder {
+    font-style: normal;
+    font-size: $form-field-font-size;
+    color: $silver;
+    font-family: $form-field-font-family;
+}
+::-moz-placeholder {
+    font-style: normal;
+    font-size: $form-field-font-size;
+    color: $silver;
+    font-family: $form-field-font-family;
+}
+:-ms-input-placeholder {
+    font-style: normal;
+    font-size: $form-field-font-size;
+    color: $silver;
+    font-family: $form-field-font-family;
+}
+:-moz-placeholder {
+    font-style: normal;
+    font-size: $form-field-font-size;
+    color: $silver;
+    font-family: $form-field-font-family;
+}
+
 .form-horizontal {
     .form-row {
         & > label,
@@ -120,10 +145,16 @@ form:not(.form-horizontal) {
     border: 1px solid $red !important;
 }
 
-.requiredindicator {
+.requiredindicator,
+.required-indicator,
+.dialog-required {
     float: none;
     color: $required-color;
     margin-left: rem(3px);
+}
+.dialog-required em {
+    color: $required-color;
+    text-transform: capitalize;
 }
 
 input[type="checkbox"],
@@ -208,6 +239,9 @@ input[type="radio"] {
     select {
         border: 0;
         background: $trans;
+        font-size: $form-field-font-size;
+        font-family: $form-field-font-family;
+        color: $form-field-color;
         padding: 2px 0 2px 10px;
         height: $form-field-height - $form-field-border-width * 2;
         margin: 0;
@@ -222,9 +256,16 @@ input[type="radio"] {
     label {
         display: none;
     }
+    & + .errorclient {
+        margin-top: rem(2px);
+    }
 }
 
 span.errorclient,
 div.errorclient {
     @include form-error;
+}
+
+.clearbutton {
+    top: -1px;
 }

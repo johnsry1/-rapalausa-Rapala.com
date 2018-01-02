@@ -10,7 +10,7 @@
 /*global google */
 /*eslint block-scoped-var: 0 */
 
-var MarkerWithLabel = require('./marker-with-label'); 
+var MarkerWithLabel = require('./marker-with-label');
 
 var StoreLocator = {
     // configuration parameters and required object instances
@@ -218,27 +218,38 @@ var StoreLocator = {
             var encodedAddress = encodeURIComponent(formattedAddress);
 
             if (!noLocation) {
-                // build the store info HTML for right column
-                var storeinfo = '<div class="store" id="' + store + '">';
-                if (thisLoc && stores[store].latitude && stores[store].longitude) { //calculate distance from search location
-                    storeLatLng = new google.maps.LatLng(stores[store].latitude, stores[store].longitude);
-                    distance    = google.maps.geometry.spherical.computeDistanceBetween(thisLoc, storeLatLng, 3959).toFixed(1);
-                    storeinfo += '<div class="distance">' + distance + ' ' + $('#distanceunitpref').val() + ' away</div>';
-                }
-
                 var secondaryName = stores[store].storeSecondaryName;
+
                 if (secondaryName !== '') {
                     secondaryName = '(' + secondaryName + ')';
                 }
 
+                // build the store info HTML for right column
+                var storeinfo = '<div class="store" id="' + store + '">';
                 storeinfo += '<div class="storenumber"><a href="javascript:void(0)">' + storeCount + '</a></div> ';
+                storeinfo += '<div class="store-info">';
                 storeinfo += '<div class="storename"><a href="' + this.storeurl + store + '"><span class="primaryName">' + stores[store].name + '</span> <span class="secondaryName">' + secondaryName + '</span></a></div>';
                 storeinfo += '<div class="address1">' + stores[store].address1 + '</div>';
                 storeinfo += '<div class="address2">' + stores[store].address2 + '</div>';
                 storeinfo += '<div class="cityStateZip">' + stores[store].city + ', ' + stores[store].stateCode + ' ' + stores[store].postalCode + '</div>';
                 storeinfo += '<div class="phone">' + stores[store].phone + '</div>';
+
+                if (stores[store].website) {
+                    storeinfo += '<div class="website"><a href="' + stores[store].website + '">' + stores[store].website + '</a></div>';
+                }
+
                 storeinfo += '<div class="hours">' + stores[store].storeHours + '</div>';
+                storeinfo += '</div>';
+                storeinfo += '<div class="store-links">';
+                storeinfo += '<div class="details"><a href="\' + this.storeurl + store + \'" class="detailslink">' + Resources.STORE_DETAILS + '</a></div>';
                 storeinfo += '<div class="directions"><a href="https://maps.google.com/maps?daddr=' + encodedAddress + '" class="directionslink" target="_blank">' + Resources.STORE_DIRECTIONS + '</a></div>';
+                storeinfo += '</div>';
+
+                if (thisLoc && stores[store].latitude && stores[store].longitude) { //calculate distance from search location
+                    storeLatLng = new google.maps.LatLng(stores[store].latitude, stores[store].longitude);
+                    distance    = google.maps.geometry.spherical.computeDistanceBetween(thisLoc, storeLatLng, 3959).toFixed(1);
+                    storeinfo += '<div class="distance">' + distance + ' ' + $('#distanceunitpref').val() + ' away</div>';
+                }
                 storeinfo += '</div>';
                 $('#stores .stores-container').append(storeinfo);
             }
