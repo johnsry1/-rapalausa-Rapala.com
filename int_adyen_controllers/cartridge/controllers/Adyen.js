@@ -345,7 +345,7 @@ function authorizeWithForm()
     	Transaction.wrap(function () {
 			OrderMgr.failOrder(order);
 		});
-    	require('site_rapalaEU/cartridge/controllers/COSummary.js').Start({
+    	require('*/cartridge/controllers/COSummary.js').Start({
             PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
         });
 		return;
@@ -357,11 +357,11 @@ function authorizeWithForm()
 	paymentInstrument.paymentTransaction.transactionID = result.RequestToken;
     Transaction.commit();
 	
-    var orderPlacementStatus = require('site_rapalaEU/cartridge/controllers/COPlaceOrder.js').submitImpl(order);
+    var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').submitImpl(order);
     if (!orderPlacementStatus.error) {
-    	require('site_rapalaEU/cartridge/controllers/COSummary.js').ShowConfirmation(orderPlacementStatus.Order);
+    	require('*/cartridge/controllers/COSummary.js').ShowConfirmation(orderPlacementStatus.Order);
     } else {
-        require('site_rapalaEU/cartridge/controllers/COSummary.js').Start();
+        require('*/cartridge/controllers/COSummary.js').Start();
     }
 }
 
