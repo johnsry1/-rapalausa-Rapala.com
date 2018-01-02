@@ -22,7 +22,7 @@ function calculateNonGiftCertificateAmount( lineItemCtnr : LineItemCtnr )
 {
 	// the total redemption amount of all gift certificate payment instruments in the basket
 	var giftCertTotal : Money = new Money( 0.0, lineItemCtnr.currencyCode );
-	var allotmentAmount : Money = new Money( 0.0, basket.currencyCode );
+	var allotmentAmount : Money = new Money( 0.0, lineItemCtnr.currencyCode );
 	
 	// get the list of all gift certificate payment instruments 
 	var gcPaymentInstrs : Collection = lineItemCtnr.getGiftCertificatePaymentInstruments();
@@ -43,7 +43,7 @@ function calculateNonGiftCertificateAmount( lineItemCtnr : LineItemCtnr )
 	// this is the remaining open order total which has to be paid
 	var amountOpen : Money = orderTotal.subtract( giftCertTotal );
 	
-	var allotmentPIList : Collection = basket.getPaymentInstruments("ALLOTMENT");
+	var allotmentPIList : Collection = lineItemCtnr.getPaymentInstruments("ALLOTMENT");
 	var iterTemp : Iterator = allotmentPIList.iterator();
 	while( iterTemp.hasNext() )
 	{

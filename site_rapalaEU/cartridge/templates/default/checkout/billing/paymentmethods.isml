@@ -58,6 +58,7 @@
 			<isif condition="${gcApplicable == 'true' && isAssignedToVIP && !flageallotmentcover}">
 				<isif condition="${gcApplicable == 'true' && pdict.OrderTotal > 0}">
 
+
 					<iscomment>only provide gift certificate redemption, if the basket doesn't contain any gift certificates</iscomment>
 					<isif condition="${pdict.Basket.giftCertificateLineItems.size() == 0}">
 						<div id="giftcertentry" class="giftcertform">
@@ -128,62 +129,62 @@
 <input type="hidden" value="${allotmentAmount}" class="allotmentAmount"/>
 <isset name="flageallotmentcover" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
 <isif condition="${pdict.OrderTotal > 0 && remainingBalance > 0}">
+	<div id="paymentmethods"class="payment-method-options form-indent">
+		<div class="paymentmethods_cont">
+			<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
+				<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) || paymentMethodType.value.equals("ALLOTMENT")}">
+					<iscontinue/>
+				</isif>
+				
+				<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
+				<div class='toggle <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}"> active</isif>'>
+					<div class="form-row label-inline">
+						<label for="is-${radioID}" class="<isif condition="${radioID== 'PayPal'}"> paypaltoggle</isif>">
+						<span class="toggle-label"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/></span>
+							<div class="card-typ-image">
+								<isif condition="${radioID == 'CREDIT_CARD'}">
+									<img src="${URLUtils.staticURL('/images/tab_credit.png')}"  alt="" title="" />
+								</isif>
 
-			<div id="paymentmethods"class="payment-method-options form-indent">
-				<div class="paymentmethods_cont">
-					<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
+								<isif condition="${radioID== 'PayPal'}">
+									<img src="${URLUtils.staticURL('/images/tab_paypal2.png')}"  alt="" title="" />
+								</isif>
 
-						<iscomment>Ignore GIFT_CERTIFICATE method, GCs are handled separately before other payment methods.
-						<isif condition="${ paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) ||
-						                    paymentMethodType.value.equals('PayPal') && !dw.system.Site.getCurrent().getCustomPreferenceValue('isPayPalPaymentEnabled')">
-						                    <iscontinue/>
-						</isif>
-						replaced this condition with below for now
-						</iscomment>
-						<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) || paymentMethodType.value.equals("ALLOTMENT")}"><iscontinue/></isif>
-						<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
-						<div class='toggle <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}"> active</isif>'>
-							<div class="form-row label-inline">
-
-								<label for="is-${radioID}" class="<isif condition="${radioID== 'PayPal'}"> paypaltoggle</isif>">
-									<span class="toggle-label"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/></span>
-									<div class="card-typ-image">
-										<isif condition="${radioID == 'CREDIT_CARD'}">
-											<img src="${URLUtils.staticURL('/images/tab_credit.png')}"  alt="" title="" />
-										</isif>
-										<isif condition="${radioID== 'PayPal'}">
-											<img src="${URLUtils.staticURL('/images/tab_paypal2.png')}"  alt="" title="" />
-										</isif>
-									</div>
-									<div class="field-wrapper">
-										<input id="is-${radioID}" type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> <isif condition="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value == 'true'}">disabled="true"</isif> />
-									</div>
-								</label>
 							</div>
 
-							<isif condition="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage()}">
-								<img alt="paypal" src="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage().getAbsURL()}">
-							</isif>
-						</div>
-					</isloop>
-				</div>
-				<iscomment>
-					<div class="form-row form-row-button">
-						<button id="payment-select-go" name="${pdict.CurrentForms.billing.paymentSelect.htmlName}" type="submit" value="Go" class="simple-submit">Select</button>
+							<div class="field-wrapper">
+								<input id="is-${radioID}" type="radio" class="input-radio" name="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlName}" value="${paymentMethodType.htmlValue}" <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}">checked="checked"</isif> <isif condition="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value == 'true'}">disabled="true"</isif> />
+							</div>
+						</label>
 					</div>
-				</iscomment>
 
-				<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
-					<div class="billing-error"><isprint value="${Resource.msg('billing.missingprocessorerror','checkout',null)}"/></div>
-				</isif>
+					<isif condition="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage()}">
+						<img alt="paypal" src="${dw.order.PaymentMgr.getPaymentMethod(paymentMethodType.optionId).getImage().getAbsURL()}">
+					</isif>
+				</div>
+			</isloop>
+		</div>
+		
+		<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
+			<div class="billing-error"><isprint value="${Resource.msg('billing.missingprocessorerror','checkout',null)}"/></div>
+		</isif>
 
-				<iscomment>
-					Credit card block
-					--------------------------------------------------------------
-				</iscomment>
+		<iscomment>
+			Credit card block
+			--------------------------------------------------------------
+		</iscomment>
 
-				<iscomment>JIRA PREV-135 : Disabled Credit Card in BM is displaying in the application. Added condition dw.order.PaymentMgr.getPaymentMethod....</iscomment>
-				<div id="PaymentMethod_CREDIT_CARD" class="payment-method paymentform creditcardpayment <isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).isActive() && (empty(pdict.selectedPaymentID) || pdict.selectedPaymentID=='CREDIT_CARD')}">payment-method-expanded</isif>"  data-method="CREDIT_CARD">
+		<iscomment>JIRA PREV-135 : Disabled Credit Card in BM is displaying in the application. Added condition dw.order.PaymentMgr.getPaymentMethod....</iscomment>
+			<div id="PaymentMethod_CREDIT_CARD" class="payment-method paymentform creditcardpayment <isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).isActive() && (empty(pdict.selectedPaymentID) || pdict.selectedPaymentID=='CREDIT_CARD')}">payment-method-expanded</isif>"  data-method="CREDIT_CARD">
+				<isscript>
+					var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
+				</isscript>
+				<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
+					<script src="${AdyenHelper.getCSEJsUrl()}" type="text/javascript"></script>
+					<isinclude template="checkout/billing/adyenpaymentfields"/>
+					<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.encrypteddata}" type="hidden"/>
+				<iselse/>
+				
 					<div class="payment-mobile-handling">
 					<iscomment>display select box with stored credit cards if customer is authenticated</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated && !empty(pdict.ApplicableCreditCards)}">
@@ -313,73 +314,83 @@
 
 				</div>
 			</div>
-				<iscomment>
-					Custom processor
-					--------------------------------------------------------------
-				</iscomment>
-				<input type="hidden" value="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value}" name="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value}" fieldClass="paypalprocessed"/>
-				<div class="payment-method paymentform paypal<isif condition="${!empty(pdict.selectedPaymentID) && pdict.selectedPaymentID=='PayPal'}"> payment-method-expanded</isif>" data-method="Custom">
-					<!-- Your custom payment method implementation goes here. -->
-					<isif condition="${!pdict.CurrentForms.billing.paypalval.paypalprocessed.value}">
-						<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
-								<div class="error-paypal-heading"><p><isprint value="${Resource.msg('billinginfo.paypalnotauthorized','checkout',null)}"/></p></div>
-						</isif>
-						<div class="paypalimg <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmargin-paypalimg</isif>">
-							<input type="hidden" name="paypalpayment" value="true"/>
-							<button name="${pdict.CurrentForms.billing.paypallogin.htmlName}" type="submit"  value="${Resource.msg('global.continue','locale',null)}" class="continuecheckout-paypallogin <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmoegin</isif>"><span>${Resource.msg('global.continue','locale',null)}</span></button>
-						</div>
+		</isif>
 
-						<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
-							<isscript>
-								if(paypalErr.indexOf(':') != -1)
-									{
-										var Errors =  paypalErr.split(';');
-										var length = Errors.length;
-										var discription =Errors[length-1];
-										var code = Errors[0];
-									}
-									else if(paypalErr.indexOf('(') != -1){
-										var discription = paypalErr.split('(')[0];
-										var code = paypalErr.split('(')[1].substring(0,5);
-									}
-									else{
-										var Errors =  paypalErr.split(';');
-										var length = Errors.length;
-										var discription =Errors[length-1];
-										var code = Errors[0];
-									}
-					       </isscript>
-					       	<iscomment><div class="paypalmsg error-paypal less-than-767">Your PayPal payment has not been authorized. Please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> credit card</span></div></iscomment>
-					        <div class="paypalmsg error-paypal-discription"><p><isprint value="${discription}"/></p></div>
-					        <div class="paypalmsg error-paypal-code "><p><a href="https://www.paypal.com/us/weapps/helpcenter/helphub//home/?action=callus#">Visit PayPal Customer Service</a> or Call PayPal directly: 888-221-1161</p><p>(Please Reference Error Code: ${code})</div>
-							<div class="error-paypal"><p>If you think you have recieved this message in error please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> Credit Card</span></p></div>
+		<iscomment>
+			Custom processor
+			--------------------------------------------------------------
+		</iscomment>
 
-							 <isscript>
-					                  paypalErr = "";
-					       	</isscript>
-						<iselse/>
-							<div class="paypalmsg general-msg "><isprint value="${Resource.msg('billing.paypal','checkout',null)}"/></div>
-						</isif>
-					<iselse/>
-						<div class="paypalimg paypal-login-success">
-							<button class="continuecheckout-paypallogin"  type="submit" name="${pdict.CurrentForms.billing.paypallogin.htmlName}" disabled="disabled" value="${Resource.msg('global.continue','locale',null)}"><span><isprint value="${Resource.msg('global.continue','locale',null)}"/></span></button>
-							<img class="greater-than-767" src="${URLUtils.staticURL('/images/check-mark.PNG')}" style="width:35px;height: 30px;"></img>
-						</div>
-						<div class="paypalmsg success-paypal">
-							<div class="less-than-767">
-								<p>Your PayPal Authorization has been confirmed.
-								 Click the "Submit My Order" button below to finalize your payment
-							 	& process your order.</p>
-						 	</div>
-						 	<div class="greater-than-767">
-								<p>Your PayPal Authorization has been confirmed.</p>
-									 <p>Click the "Submit My Order" button below to finalize your payment</p>
-								 	<p>& process your order.</p>
-							</div>
-						 </div>
-					</isif>
+		<input type="hidden" value="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value}" name="${pdict.CurrentForms.billing.paypalval.paypalprocessed.value}" fieldClass="paypalprocessed"/>
+		<div class="payment-method paymentform paypal<isif condition="${!empty(pdict.selectedPaymentID) && pdict.selectedPaymentID=='PayPal'}"> payment-method-expanded</isif>" data-method="Custom">
+			<!-- Your custom payment method implementation goes here. -->
+			<isif condition="${!pdict.CurrentForms.billing.paypalval.paypalprocessed.value}">
+				<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
+					<div class="error-paypal-heading"><p><isprint value="${Resource.msg('billinginfo.paypalnotauthorized','checkout',null)}"/></p></div>
+				</isif>
+		
+				<div class="paypalimg <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmargin-paypalimg</isif>">
+					<input type="hidden" name="paypalpayment" value="true"/>
+					<button name="${pdict.CurrentForms.billing.paypallogin.htmlName}" type="submit"  value="${Resource.msg('global.continue','locale',null)}" class="continuecheckout-paypallogin <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmoegin</isif>"><span>${Resource.msg('global.continue','locale',null)}</span></button>
 				</div>
-			</div>
+
+				<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
+					<isscript>
+						if(paypalErr.indexOf(':') != -1)
+							{
+								var Errors =  paypalErr.split(';');
+								var length = Errors.length;
+								var discription =Errors[length-1];
+								var code = Errors[0];
+							}
+							else if(paypalErr.indexOf('(') != -1){
+								var discription = paypalErr.split('(')[0];
+								var code = paypalErr.split('(')[1].substring(0,5);
+							}
+							else{
+								var Errors =  paypalErr.split(';');
+								var length = Errors.length;
+								var discription =Errors[length-1];
+								var code = Errors[0];
+							}
+			       </isscript>
+		
+			       	<iscomment>
+			       		<div class="paypalmsg error-paypal less-than-767">Your PayPal payment has not been authorized. Please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> credit card</span></div>
+			       	</iscomment>
+					 
+					<div class="paypalmsg error-paypal-discription"><p><isprint value="${discription}"/></p></div>
+					<div class="paypalmsg error-paypal-code "><p><a href="https://www.paypal.com/us/weapps/helpcenter/helphub//home/?action=callus#">Visit PayPal Customer Service</a> or Call PayPal directly: 888-221-1161</p><p>(Please Reference Error Code: ${code})</div>
+					<div class="error-paypal"><p>If you think you have recieved this message in error please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> Credit Card</span></p></div>
+
+					<isscript>
+						paypalErr = "";
+					</isscript>
+				<iselse/>
+					<div class="paypalmsg general-msg "><isprint value="${Resource.msg('billing.paypal','checkout',null)}"/></div>
+				</isif>
+			<iselse/>
+				<div class="paypalimg paypal-login-success">
+					<button class="continuecheckout-paypallogin"  type="submit" name="${pdict.CurrentForms.billing.paypallogin.htmlName}" disabled="disabled" value="${Resource.msg('global.continue','locale',null)}"><span><isprint value="${Resource.msg('global.continue','locale',null)}"/></span></button>
+					<img class="greater-than-767" src="${URLUtils.staticURL('/images/check-mark.PNG')}" style="width:35px;height: 30px;"></img>
+				</div>
+			
+				<div class="paypalmsg success-paypal">
+					<div class="less-than-767">
+						<p>Your PayPal Authorization has been confirmed.
+						 Click the "Submit My Order" button below to finalize your payment
+					 	& process your order.</p>
+				 	</div>
+			
+				 	<div class="greater-than-767">
+						<p>Your PayPal Authorization has been confirmed.</p>
+						<p>Click the "Submit My Order" button below to finalize your payment</p>
+					 	<p>& process your order.</p>
+					</div>
+				</div>
+			</isif>
+		</div>
+	</div>
 <iselseif condition="${flageallotmentcover}">
 			<input id="is-ALLOTMENT" type="radio" class="input-radio hide" value="ALLOTMENT" checked="checked" />
 			<div class="giftcertused allotmentcover">
@@ -392,7 +403,6 @@
 				</div>
 			</div>
 <iselse/>
-
 		<isset name="remainingBalance" value="${pdict.Basket.totalGrossPrice.value}" scope="page"/>
 		<isif condition="${allotmentAmount > 0}">
 			<isset name="remainingBalance" value="${remainingBalance-allotmentAmount}" scope="page"/>
@@ -408,6 +418,7 @@
 		</div>
 
 </isif>
+
 </fieldset>
 <iscomment>
 	<div class="giftcertused merchantcover">
