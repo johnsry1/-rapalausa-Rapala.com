@@ -39,6 +39,7 @@ function validateProductCategory(basket : Basket, singleShippingForm) {
 	var shipState : String = singleShippingForm.object.shippingAddress.addressFields.states.state.htmlValue;
 	var shipcity : String = singleShippingForm.object.shippingAddress.addressFields.city.htmlValue;
 	var shipzip	: String = singleShippingForm.object.shippingAddress.addressFields.postal.htmlValue;
+	var shipcountry : String = singleShippingForm.object.shippingAddress.addressFields.country.htmlValue;
 	var productLIs : Iterator  = basket.getProductLineItems().iterator();
 	while(productLIs.hasNext()){
 		var isKnife : boolean = false;
@@ -52,7 +53,9 @@ function validateProductCategory(basket : Basket, singleShippingForm) {
 		if(isKnife){
 			var knivestateList : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('knivestates'));
 			var Kniveziplist : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('KniveZip'));
-			if(!empty(knivestateList) && knivestateList.contains(shipState) || Kniveziplist.contains(shipzip) || knivestateList.contains(shipcity.toLocaleLowerCase())) {
+			var knifecountrylist : ArrayList = new ArrayList(Site.getCurrent().getCustomPreferenceValue('knifeCountry'));
+			if(!empty(knivestateList) && knivestateList.contains(shipState) || Kniveziplist.contains(shipzip) || knivestateList.contains(shipcity.toLocaleLowerCase()) || 
+				(!empty(knifecountrylist) && knifecountrylist.contains(shipcountry))) {
 				IskniveState = true;
 			}
 		}
