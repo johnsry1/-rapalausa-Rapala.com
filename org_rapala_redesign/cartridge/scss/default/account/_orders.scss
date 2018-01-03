@@ -64,3 +64,189 @@
         }
     }
 }
+
+.orderdetails {
+    .order-information {
+        @include respond(medium-down) {
+            margin-left: rem(10px);
+            margin-right: rem(10px);
+        }
+        margin-bottom: rem(15px);
+        h1 {
+            @include respond(medium-down) {
+                margin-left: 0 !important;
+            }
+        }
+        .label {
+            @include product-attr-title;
+            margin-right: rem(3px);
+        }
+        .value {
+            @include product-attr-name;
+        }
+        .order-status {
+            .label {
+                @include product-attr-title;
+                margin-right: rem(3px);
+            }
+        }
+    }
+    .order-payment-instruments,
+    .order-payment-summary,
+    .order-billing {
+        @include respond(medium-down) {
+            margin-left: rem(10px);
+            margin-right: rem(10px);
+            margin-bottom: rem(10px);
+        }
+        @include product-attr-name;
+        & > .label {
+            @include h3;
+        }
+    }
+    .order-payment-instruments {
+        @include respond(large-up) {
+            width: 45%;
+        }
+        .payment-type {
+            @include product-attr-name;
+        }
+        .cc-owner,
+        .cc-type,
+        .cc-number {
+            .label,
+            label {
+                @include product-attr-name;
+            }
+        }
+        .payment-amount {
+            .label {
+                @include product-attr-title;
+                color: $product-attr-title-color !important;
+                font-size: $product-attr-title-font-size !important;
+                margin-right: rem(3px);
+            }
+            .value {
+                @include product-attr-name;
+            }
+        }
+    }
+    .order-payment-summary {
+        @include respond(large-up) {
+            width: 55%;
+        }
+        .order-detail-summary {
+            .order-totals-table {
+                td {
+                    &:last-child {
+                        @include respond(medium-down) {
+                            text-align: right;
+                        }
+                    }
+                    @include respond(medium-down) {
+                        padding-right: 0 !important;
+                    }
+                }
+                .order-subtotal,
+                .ordersurcharges,
+                .order-shipping {
+                    .label {
+                        @include product-attr-title;
+                    }
+                    .value {
+                        @include product-attr-name;
+                    }
+                }
+                .order-total {
+                    .miniright {
+                        .value {
+                            font-style: normal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .order-billing {
+        @include respond(large-up) {
+            margin-top: rem(15px);
+        }
+        .mini-address-name,
+        .mini-address-location address {
+            @include product-attr-name;
+        }
+    }
+    .order-shipments {
+        h2 {
+            @include respond(medium-down) {
+                margin-left: rem(10px);
+                margin-right: rem(10px);
+            }
+        }
+        .order-shipment-table {
+            background: $background;
+            border: $border;
+            border-radius: 0;
+            .shipping-status,
+            .shipping-method {
+                .label {
+                    @include product-attr-title;
+                }
+                .value {
+                    @include product-attr-name;
+                }
+            }
+            .order-shipment-details {
+                .order-shipment-address {
+                    & > .label {
+                        @include h3;
+                    }
+                    .summarybox {
+                        .name {
+                            .address {
+                                @include product-attr-name;
+                            }
+                        }
+                    }
+                }
+            }
+            .line-items {
+                .line-item {
+                    .line-item-details,
+                    .line-item-quantity,
+                    .line-item-price {
+                        @include product-attr-name;
+                        font-size: $product-attr-name-font-size;
+                        line-height: $product-attr-name-line-height;
+                        & > .label {
+                            @include h3;
+                        }
+                    }
+                    .line-item-price {
+                        font-size: $product-attr-name-font-size !important;
+                        line-height: $product-attr-name-line-height !important;
+                    }
+                    .line-item-details {
+                        .product-list-item {
+                            .name {
+                                a {
+                                    @include product-attr-name;
+                                }
+                            }
+                            .attribute,
+                            .sku {
+                                .label {
+                                    @include product-attr-title;
+                                    margin-right: rem(3px);
+                                }
+                                .value {
+                                    @include product-attr-name;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
