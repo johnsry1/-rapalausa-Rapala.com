@@ -25,6 +25,11 @@ function giftMessageBox() {
 function updateSummary() {
     var $summary = $('#secondary .new-summery-cart');
     // indicate progress
+    $(function (){
+        if (navigator.userAgent.match(/Trident\/7\./)) {
+            $summary.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+        }
+    });
     progress.show($summary);
     var stateValue = $('body').find('select[id$="_addressFields_states_state"]').val();
     var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
@@ -107,6 +112,11 @@ function updateShippingMethodList() {
     if (!$shippingMethodList || $shippingMethodList.length === 0) {
         return;
     }
+    $(function (){
+        if (navigator.userAgent.match(/Trident\/7\./)) {
+            $('#shipping-method-list').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+        }
+    });
     var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
     ajax.getJson({
@@ -191,6 +201,11 @@ exports.init = function () {
 
     $('.continue-checkout-button .continue-checkout').on('click', function () {
         var $content = $('.primary-content');
+        $(function (){
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $content.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+            }
+        });
         progress.show($content);
         var form = $(this).closest('form[id$="_shippingAddress"]');
         if ($('.state-blk select').valid() == 0) {
