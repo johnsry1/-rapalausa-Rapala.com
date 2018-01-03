@@ -1,4 +1,4 @@
-
+<isinclude template="util/modules" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -449,7 +449,7 @@
 																																<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'cart')}" scope="page"/>
 																																<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>
 																																<isset name="imageObjIPhone" value="${new ProductImage('cartIPhone',productLineItem.product, 0,'cart')}" scope="page"/>
-																																<img src="${imageObjDesktop.getURL()}"	alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}"/>
+																																<iscartimages product="${productLineItem}" imageurl="${imageObjDesktop}"/>
 																															<iselse/>
 																																<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 																															   		<img src="${productLineItem.product.getImage('small',0).getURL()}"	alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}" />

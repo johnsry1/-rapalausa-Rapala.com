@@ -11,8 +11,8 @@
     <field formid="number" label="creditcard.number" type="string" mandatory="true" masked="4" max-length="16"
 	    binding="creditCardNumber"
 	    missing-error="creditcard.numbermissingerror" description="creditcard.numberexample" value-error="creditcard.numbervalueerror"/>
-	    
-	<group formid="expiration"> 
+
+	<group formid="expiration">
 		<!-- field for credit card expiration month -->
 	    <field formid="month" label="resource.month.credit" type="integer" mandatory="true" binding="creditCardExpirationMonth"
 	      	missing-error="creditcard.monthmissingerror" value-error="creditcard.yearvalueerror">
@@ -32,10 +32,10 @@
 	            <option label="month.december"  value="12"/>
 	        </options>
 	    </field>
-	
-		<!-- 
-			field for credit card expiration year; 
-			a value error (credit card is expired is only displayed for this field) 
+
+		<!--
+			field for credit card expiration year;
+			a value error (credit card is expired is only displayed for this field)
 		-->
 	    <field formid="year" label="resource.year-credit" type="integer" mandatory="true" binding="creditCardExpirationYear"
 	      	missing-error="creditcard.yearmissingerror">
@@ -66,7 +66,7 @@
 	<!-- JIRA PREV-76 : In payment section CVV field does not accept more than 4 digits and Alphanumeric values. Added max-length="4" -->
     <field formid="cvn" label="creditcard.cvnlabel" type="string" mandatory="true" masked="0"
      	missing-error="creditcard.cvnmissingerror" value-error="creditcard.cvnrangeerror" max-length="4"/>
- 
+
 	<!-- optional flags -->
 	<field formid="saveCard" label="creditcard.savecard" type="boolean" mandatory="false" default-value="true" />
 

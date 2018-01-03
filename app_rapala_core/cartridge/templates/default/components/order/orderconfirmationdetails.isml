@@ -1,6 +1,6 @@
 <!--- TEMPLATENAME: orderconfirmationdetails.isml --->
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-
+<isinclude template="util/modules"/>
 <iscomment>
 	Displays order details, such as order number, creation date, payment information,
 	order totals and information for each contained shipment.
@@ -395,9 +395,9 @@
 													<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'cart')}" scope="page"/>
 													<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>
 													<isset name="imageObjIPhone" value="${new ProductImage('cartIPhone',productLineItem.product, 0,'cart')}" scope="page"/>
-													<img src="${imageObjDesktop.getURL()}"	alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}" class="desktop-only"/>
-													<img src="${imageObjIPad.getURL()}"	alt="${imageObjIPad.getAlt()}" title="${imageObjIPad.getTitle()}" class="ipad-only"/>
-													<img src="${imageObjIPhone.getURL()}"	alt="${imageObjIPhone.getAlt()}" title="${imageObjIPhone.getTitle()}" class="iphone-only"/> 
+													<iscartimages product="${lineItem}" imageurl="${imageObjDesktop}" classselector="desktop-only"/>
+													<iscartimages product="${lineItem}" imageurl="${imageObjIPad}" classselector="ipad-only"/>
+													<iscartimages product="${lineItem}" imageurl="${imageObjIPhone}" classselector="iphone-only"/>
 												<iselse/>
 													<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 												   		<img src="${productLineItem.product.getImage('small',0).getURL()}"	alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}" />
