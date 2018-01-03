@@ -10,7 +10,7 @@
 
 var Status = require('dw/system/Status');
 
-var RapalaHelper = require(dw.web.Resource.msg('scripts.util.rapalahelper.ds', 'require', null));
+var RapalaHelper = require('*/cartridge/scripts/util/RapalaHelper')
 
 /**
  * Gets the device type of the current user.
