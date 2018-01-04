@@ -1,0 +1,66 @@
+.pt_order {
+    h1 {
+        @include respond(desktop-down) {
+            margin-left: rem(10px);
+            margin-right: rem(10px);
+        }
+    }
+    .search-result-options {
+        @include respond(desktop-down) {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .search-result-items {
+        li {
+            .order-history-header {
+                background: $background;
+                border-top: $border;
+                .label {
+                    @include product-attr-title;
+                    margin-right: rem(3px);
+                }
+                .value {
+                    @include product-attr-name;
+                }
+                button {
+                    padding: 0 rem(10px);
+                    min-width: inherit;
+                }
+            }
+            .order-history-items {
+                .order-history-table {
+                    .order-items {
+                        ul {
+                            @include ul;
+                            li {
+                                font-family: $font;
+                                @include font-size($ul-font-size);
+                                @include line-height($ul-line-height);
+                            }
+                        }
+                    }
+                    .order-shipped-to {
+                        @include font-size(13px);
+                    }
+                    .value {
+                        @include product-attr-name;
+                    }
+                }
+            }
+        }
+    }
+    .order-country {
+        clear: both;
+        &.top {
+            margin-top: rem(10px);
+        }
+        .label {
+            @include product-attr-title;
+            margin-right: rem(3px);
+        }
+        .value {
+            @include product-attr-name;
+        }
+    }
+}
