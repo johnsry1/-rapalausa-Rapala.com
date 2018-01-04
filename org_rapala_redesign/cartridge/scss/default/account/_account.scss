@@ -256,22 +256,26 @@ div.returningcustomers {
 .pt_leftnav-profile,
 .pt_acc_landing {
     #main {
-        #page-background #secondary {
-            h2 {
-                @include clp-refinement-title;
+        #page-background {
+            #secondary {
+                h2 {
+                    @include clp-refinement-title;
+                }
             }
         }
         .breadcrumb {
             box-shadow: none;
         }
     }
-
 }
 
 ul.common-nav {
     font-family: $font;
     li {
+        @include font-size(13px);
         font-style: normal;
+        font-weight: normal;
+        background-position: 0 7px;
     }
 }
 
@@ -345,9 +349,21 @@ ul.common-nav {
 .pt_leftnav-addressbook {
     #addresses {
         .address-list {
-            .address-tile.default {
-                h3 {
-                    font-family: $font;
+            .address-tile {
+                &.default {
+                    h3 {
+                        font-family: $font;
+                        font-style: normal;
+                    }
+                }
+                .mini-address-title:first-child {
+                    @include h3;
+                }
+                .mini-address-title ~ .mini-address-title {
+                    display: inline-block;
+                }
+                .mini-address-name {
+                    display: inline-block;
                 }
             }
         }
@@ -473,4 +489,8 @@ ul.common-nav {
             }
         }
     }
+}
+
+.account-no-address {
+    clear: both;
 }
