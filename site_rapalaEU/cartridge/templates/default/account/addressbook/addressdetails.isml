@@ -26,7 +26,7 @@
 			</isif>
 
 			<isscript>
-				var currentCountry = require('/cartridge/scripts/util/Countries').getCurrent(pdict);
+				var currentCountry = require('site_rapalaEU/cartridge/scripts/util/Countries').getCurrent(pdict);
 			</isscript>
 			currentCountry : ${currentCountry.countryCode}
 			<isdynamicform formobject="${pdict.CurrentForms.profile.address}"  formdata="${currentCountry.dynamicForms.customerAddressDetails}"/>
@@ -52,7 +52,7 @@
 
 	</form>
 <isscript>
-	importScript("/cartridge/scripts/util/ViewHelpers.ds");
+	importScript("site_rapalaEU:util/ViewHelpers.ds");
 	var addressForm = pdict.CurrentForms.profile.address;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);

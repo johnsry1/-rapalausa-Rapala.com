@@ -51,10 +51,10 @@
 			<isset name="gcPITotal" value="${0}" scope="pdict"/>
 			<isset name="OrderTotal" value="${pdict.Basket.totalGrossPrice.value}" scope="pdict"/>
 			<iscomment>PREVAIL-Added pdict.OrderTotal > 0 to handle coupon codes as well.</iscomment>
-			<isset name="isAssignedToVIP" value="${require('*/cartridge/scripts/util/UtilityHelpers.ds').isVIP(pdict.CurrentCustomer)}" scope="page"/>
-			<isset name="flageallotmentcover" value="${require('*/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
-			<isset name="knifeAvailable" value="${require('*/cartridge/scripts/util/UtilityHelpers.ds').isKnifeAvailable(pdict.Basket)}" scope="page"/>
-			<isset name="allotmentAmount" value="${require('*/cartridge/scripts/util/UtilityHelpers.ds').getAllotmentAmount(pdict.Basket)}" scope="page"/>
+			<isset name="isAssignedToVIP" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isVIP(pdict.CurrentCustomer)}" scope="page"/>
+			<isset name="flageallotmentcover" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
+			<isset name="knifeAvailable" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isKnifeAvailable(pdict.Basket)}" scope="page"/>
+			<isset name="allotmentAmount" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getAllotmentAmount(pdict.Basket)}" scope="page"/>
 			<isif condition="${gcApplicable == 'true' && isAssignedToVIP && !flageallotmentcover}">
 				<isif condition="${gcApplicable == 'true' && pdict.OrderTotal > 0}">
 
@@ -257,7 +257,7 @@
 						</label>
 
 						<isscript>
-							var currentCountry = require('*/cartridge/scripts/util/Countries').getCurrent(pdict);
+							var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 						</isscript>
 						<div class="expirationdate-field-wrapper">
 							<isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/>
