@@ -190,7 +190,7 @@
 											</label>
 										</iscomment>
 										<isscript>
-											importScript("*/cartridge/scripts/cart/CartUtils.ds");
+											importScript("/cartridge/scripts/cart/CartUtils.ds");
 											var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
 										</isscript>
 										<iscomment>Start JIRA PREV-46:Checkout_Billing page: Not displaying the selected saved address in the 'Select an Address' drop down. Added p_form attribute </iscomment>
@@ -471,7 +471,7 @@
 
 
 <isscript>
-	importScript("*/cartridge/scripts/util/ViewHelpers.ds");
+	importScript("/cartridge/scripts/util/ViewHelpers.ds");
 	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
