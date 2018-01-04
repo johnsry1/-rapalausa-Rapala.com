@@ -15,8 +15,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 var Cart = app.getModel('Cart');
 
@@ -47,7 +47,7 @@ function start() {
             }
         });
 
-        var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+        var pageMeta = require('*/cartridge/scripts/meta');
         pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'Rapala Checkout')});
         app.getView({
             Basket: cart.object
@@ -100,9 +100,9 @@ function showConfirmation(order) {
     app.getForm('profile.login.passwordconfirm').clear();
     app.getForm('profile.login.password').clear();
 
-    var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
+    var priceVals = require('*/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
     
-    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
     app.getView({
         Order: order,

@@ -7,9 +7,9 @@ var Site = require('dw/system/Site');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
-var Cart = require('app_rapala_controllers/cartridge/scripts/models/CartModel');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
+var Cart = require('*/cartridge/scripts/models/CartModel');
 
 /**
  * Creates a Adyen payment instrument for the given basket
@@ -39,7 +39,7 @@ function Handle(args) {
 
         var creditCardStatus = paymentCard.verify(expirationMonth, expirationYear, cardNumber, cardSecurityCode);
         if (creditCardStatus.error) {
-            var invalidatePaymentCardFormElements = require('app_rapala_core/cartridge/scripts/checkout/InvalidatePaymentCardFormElements');
+            var invalidatePaymentCardFormElements = require('*/cartridge/scripts/checkout/InvalidatePaymentCardFormElements');
             // original second parameter was: session.forms.billing.paymentMethods.creditCard
             invalidatePaymentCardFormElements.invalidatePaymentCardForm(creditCardStatus, creditCardForm);
 

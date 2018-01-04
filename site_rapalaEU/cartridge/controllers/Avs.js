@@ -12,8 +12,8 @@ var Locale = require('dw/util/Locale');
 var Resource = require('dw/web/Resource');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 
 /**

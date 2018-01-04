@@ -19,11 +19,11 @@ var Status = require('dw/system/Status');
 var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
-var Countries = require('app_rapala_core/cartridge/scripts/util/Countries');
+var Countries = require('*/cartridge/scripts/util/Countries');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 var ltkSendSca = require('int_listrak_controllers/cartridge/controllers/ltkSendSca.js');
 var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
 var AdyenController = require("int_adyen_controllers/cartridge/controllers/Adyen");
@@ -241,7 +241,7 @@ function billing() {
             
             if(customer.authenticated && 'iceforce' != session.custom.currentSite){
         	    Transaction.wrap(function () {
-        	    	require('app_rapala_core/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
+        	    	require('*/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });
             }
             if (!require('app_rapala_controllers/cartridge/controllers/COBilling.js').ResetPaymentForms() || !require('app_rapala_controllers/cartridge/controllers/COBilling.js').ValidateBilling() || !handleBillingAddress(cart))// Performs validation steps, based upon the entered billing address

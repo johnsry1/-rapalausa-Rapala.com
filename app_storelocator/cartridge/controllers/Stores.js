@@ -14,8 +14,8 @@ var Site = require('dw/system/Site');
 var Logger = require('dw/system/Logger');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 var isSearched;
 /**
@@ -32,7 +32,7 @@ function find() {
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
 
-    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     app.getView('StoreLocator', {isSearched: isSearched}).render('storelocator/storelocator');
@@ -55,7 +55,7 @@ function findStores() {
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
 
-    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     var storeLocatorForm = app.getForm('storelocator');
@@ -123,7 +123,7 @@ function getNearestStores() {
     isSearched = true;
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
-    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     var countrycode = request.httpParameterMap.countryCode.value;
@@ -158,7 +158,7 @@ function details() {
     var storeID = request.httpParameterMap.StoreID.value;
     var store = dw.catalog.StoreMgr.getStore(storeID);
 
-    var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     pageMeta.update(store);
 
     app.getView({Store: store})

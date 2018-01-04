@@ -5,7 +5,7 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
+var app = require('*/cartridge/scripts/app');
 
 /**
  * Creates a Adyen payment instrument for the given basket
