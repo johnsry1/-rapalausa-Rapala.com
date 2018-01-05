@@ -46,6 +46,7 @@
                 }
             }
             table#cart-table {
+                font-family: $font;
                 thead {
                     tr {
                         th {
@@ -159,6 +160,9 @@
                     .promo-adjustment {
                         @include pdp-promo;
                         margin-bottom: rem(7px);
+                        @include respond(desktop-down) {
+                            @include font-size($pdp-promo-font-size);
+                        }
                     }
                     .bonus-item {
                         @include pdp-message;
@@ -266,12 +270,19 @@
                             font-family: $font;
                         }
                         .promo-sec {
+                            margin-top: rem(10px);
+
                             .input-sec {
                                 input.couponinput {
                                     @include form-input;
+                                    font-style: normal !important;
                                     box-shadow: none;
                                     margin: 0 5px 0 0;
                                     width: calc(100% - #{rem(85px)});
+                                    &.inputlabel {
+                                        background: $error-bg-color;
+                                        border: $error-border;
+                                    }
                                 }
                                 .gray-button {
                                     @include button;
@@ -288,6 +299,15 @@
                             .apply-code-message {
                                 a {
                                     font-family: $font;
+                                }
+                            }
+                        }
+                        .applycoupon {
+                            .input-sec {
+                                .gray-button {
+                                    @include respond(desktop-down) {
+                                        margin-top: 0;
+                                    }
                                 }
                             }
                         }
@@ -391,4 +411,24 @@
     @include product-attr-name;
     font-style: normal;
     font-weight: normal;
+}
+
+.cart-promo {
+    background: none;
+    & > div {
+        margin: rem(5px) 0;
+        @include respond(desktop-down) {
+            margin-left: rem(10px);
+            margin-right: rem(10px);
+        }
+    }
+    .label {
+        @include product-attr-title;
+        margin-right: rem(3px);
+        margin-bottom: 0;
+    }
+    .value {
+        @include product-attr-name;
+        margin-bottom: 0;
+    }
 }
