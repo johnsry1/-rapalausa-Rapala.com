@@ -1,6 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
-<isif condition="${rootBlogFolder.ID === currentBlogFolder.ID}">
+<isif condition="${rootBlogFolder != null && rootBlogFolder.ID === currentBlogFolder.ID}">
 	<isbreadcrumbs 
 		bcurl1="${URLUtils.url('Home-Show')}"
 		bctext1="${Resource.msg('blog.sitename','blog',null)}"
