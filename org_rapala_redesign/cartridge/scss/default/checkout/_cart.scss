@@ -5,6 +5,12 @@
 }
 
 .pt_cart {
+    #main {
+        .breadcrumb {
+            box-shadow: none;
+            font-family: $font;
+        }
+    }
     .upshift.cell.contentbox {
         .contentboxcontent {
             .cart-header {
@@ -160,9 +166,7 @@
                     .promo-adjustment {
                         @include pdp-promo;
                         margin-bottom: rem(7px);
-                        @include respond(desktop-down) {
-                            @include font-size($pdp-promo-font-size);
-                        }
+                        font-size: $pdp-promo-font-size !important;
                     }
                     .bonus-item {
                         @include pdp-message;
@@ -271,7 +275,6 @@
                         }
                         .promo-sec {
                             margin-top: rem(10px);
-
                             .input-sec {
                                 input.couponinput {
                                     @include form-input;
@@ -292,13 +295,17 @@
                                     @include line-height($form-field-height);
                                     width: rem(80px);
                                 }
-                                .error {
-                                    @include form-error;
-                                }
+                            }
+                            .error {
+                                @include form-error;
+                                margin-top: rem(5px);
                             }
                             .apply-code-message {
                                 a {
                                     font-family: $font;
+                                    font-style: normal !important;
+                                    padding-top: rem(5px);
+                                    margin-top: 0 !important;
                                 }
                             }
                         }
