@@ -47,25 +47,33 @@
 				</isif>
 				
 				<isloop items="${pdict.ContentSearchResult.getContent()}" var="asset" status="loopstatus">
-					<isif condition="${asset.online}">
+					<isif condition="${asset != null && asset.online}">
 						<div class='blog-post <isif condition="${loopstatus.first}"> first <iselseif condition="${loopstatus.even}"> <isif condition="${loopstatus.count == 2}">left-subhero <iselse> left  </isif> <iselseif condition="${loopstatus.odd}"> <isif condition="${loopstatus.count == 3}">right-subhero <iselse> right </isif></isif>' style="border: 3px solid #fff;margin-left: 20px">
 						<div class="blog-post-image">
 							<isif condition="${loopstatus.count > 9}">
 								<isbreak>
 							</isif>
-							<isif condition="${loopstatus.first}"> 
-								<img src="${asset.custom.img_hero_feature.getURL()}"  alt="" title="" />	 
+							<isif condition="${loopstatus.first}">
+								<isif condition="${asset.custom.img_hero_feature != null}">
+									<img src="${asset.custom.img_hero_feature.getURL()}"  alt="" title="" />	 
+								</isif> 
 							<iselseif condition="${loopstatus.even && loopstatus.count == 2}">
 								<iscomment>Sub Hero left post block</iscomment>
-								<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+								<isif condition="${asset.custom.img_sub_hero_feature != null}">
+									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+								</isif> 
 							<iselseif condition="${loopstatus.odd && loopstatus.count == 3}">	
 								<iscomment>Sub Hero right post block</iscomment>
-								<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+								<isif condition="${asset.custom.img_sub_hero_feature != null}">
+									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+								</isif> 
 							<iselse> 
 								<isif condition="${loopstatus.count == 4}">
 									<isslot id="blog-landing-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
 								</isif>
-								<img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
+								<isif condition="${asset.custom.img_small_post_feature != null}">
+									<img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
+								</isif> 
 							</isif>
 						</div>
 						
@@ -75,15 +83,15 @@
 						</div>
 
 						<div class="blog-post-date">
-							<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
-								<isprint value="${content.custom.blog_date}" />
+							<isif condition="${asset.custom.blog_date != null && !empty(asset.custom.blog_date)}">
+								<isprint value="${asset.custom.blog_date}" />
 							<iselse>
-								<isprint value="${content.creationDate}" />
+								<isprint value="${asset.creationDate}" />
 							</isif>
 						</div>
 						
 						<div class="blog-post-introtext">
-							<isif condition="${asset.custom.intro_text.length > 225}">
+							<isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
 								<isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
 							<iselse>
 								<isprint value="${asset.custom.intro_text}" />
