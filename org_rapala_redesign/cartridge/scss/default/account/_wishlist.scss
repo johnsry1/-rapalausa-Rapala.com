@@ -77,6 +77,11 @@
                 span.price-sales {
                     @include product-attr-name;
                 }
+                .price-standard {
+                    float: none;
+                    font-weight: normal;
+                    @include font-size($product-attr-name-font-size);
+                }
             }
             a {
                 @include product-attr-name;
@@ -114,6 +119,24 @@
                     .label {
                         @include respond(large-up) {
                             width: rem(100px);
+                        }
+                    }
+                }
+                &.option-toggle-public {
+                    .form-row-type-checkbox {
+                        margin-left: 0;
+                        .field-wrapper {
+                            padding-left: 0;
+                        }
+                        input {
+                            margin: 0;
+                        }
+                        .label {
+                            width: 100%;
+                            float: none;
+                            .labeltext {
+                                float: none;
+                            }
                         }
                     }
                 }

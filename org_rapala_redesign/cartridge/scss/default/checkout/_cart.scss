@@ -29,10 +29,20 @@
                         padding: rem(10px);
                         box-sizing: border-box;
                     }
+                    @include respond(large-up) {
+                        min-width: rem(350px);
+                    }
                     .button-fancy-large {
                         @include button('submit');
+                        text-transform: uppercase;
+                        background: $button-submit-bg;
+                        border: $button-submit-border;
                         min-width: inherit;
                         box-sizing: border-box;
+                        &:hover {
+                            background: $button-submit-hover-bg;
+                            border: $button-submit-hover-border;
+                        }
                         span {
                             line-height: inherit;
                             text-transform: none;
@@ -211,6 +221,9 @@
                             text-transform: none;
                             font-style: normal;
                         }
+                        button.applied {
+                            min-width: inherit;
+                        }
                     }
                 }
             }
@@ -364,11 +377,25 @@
                 padding-top: rem(20px);
             }
             .actions {
+                .cart-actions {
+                    form {
+                        @include respond(large-up) {
+                            width: rem(350px);
+                        }
+                        .button-fancy-large {
+                            text-transform: uppercase;
+                            @include respond(large-up) {
+                                width: rem(350px);
+                            }
+                        }
+                    }
+                }
                 form {
                     button {
                         @include button('submit');
                         min-width: inherit;
                         box-sizing: border-box;
+                        padding: 0;
                         span {
                             line-height: inherit;
                             text-transform: none;
