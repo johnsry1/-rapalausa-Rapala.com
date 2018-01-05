@@ -18,8 +18,8 @@ var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 var ltkSendOrder = require('int_listrak_controllers/cartridge/controllers/ltkSendOrder.js');
 
 var Cart = app.getModel('Cart');
@@ -43,7 +43,7 @@ function handlePayments(order) {
     if (order.getTotalNetPrice() !== 0.00) {
 
         var paymentInstruments = order.getPaymentInstruments();
-        paymentInstruments = require('app_rapala_core/cartridge/scripts/checkout/FlipPaymentInstruments.ds').flipPI(paymentInstruments);
+        paymentInstruments = require('*/cartridge/scripts/checkout/FlipPaymentInstruments.ds').flipPI(paymentInstruments);
         if (paymentInstruments.length === 0) {
             return {
                 missingPaymentInfo: true
@@ -159,7 +159,7 @@ function start() {
         } else {
         	 //set knife confirmation
             Transaction.wrap(function () {
-            	require('app_rapala_core/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
+            	require('*/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
             });
             var skipSubmitOrder : Boolean = false;
             
@@ -258,9 +258,9 @@ function submitImpl(order) {
         
         //update customer allotment amount
         if(customer.authenticated){
-        	require('app_rapala_core/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
+        	require('*/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
 	    	if('iceforce' != session.custom.currentSite && session.custom.isProStaffAllotmentused){
-	    		require('app_rapala_core/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
+	    		require('*/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
 	    	}
 	    } else {
 	    	var randomnum = new dw.crypto.SecureRandom();

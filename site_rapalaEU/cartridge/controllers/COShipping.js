@@ -17,8 +17,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 var Pipelet = require('dw/system/Pipelet');
 /* Script Modules */
-var app = require('app_rapala_controllers/cartridge/scripts/app');
-var guard = require('app_rapala_controllers/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 var Customer 	= app.getModel('Customer');
 
 /**
@@ -123,7 +123,7 @@ function singleShipping() {
         selectAddress: function () {
             require('app_rapala_controllers/cartridge/controllers/COShipping.js').UpdateAddressDetails(app.getModel('Cart').get());
 
-            var pageMeta = require('app_rapala_controllers/cartridge/scripts/meta');
+            var pageMeta = require('*/cartridge/scripts/meta');
             pageMeta.update({
                 pageTitle: Resource.msg('singleshipping.meta.pagetitle', 'checkout', 'Rapala Checkout')
             });
