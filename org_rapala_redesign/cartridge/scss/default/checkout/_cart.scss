@@ -62,6 +62,24 @@
                         }
                     }
                 }
+                tr.cart-promo {
+                    background: none;
+                    td {
+                        padding-top: rem(10px);
+                        padding-bottom: rem(10px);
+                        font-family: $font;
+                        font-style: normal;
+                        &.bonus-item-details {
+                            @include product-attr-name;
+                            .tooltip {
+                                float: none;
+                            }
+                        }
+                        .select-bonus {
+                            @include font-size(13px);
+                        }
+                    }
+                }
                 tr.cart-row {
                     background: none;
                     border-bottom: $border;
@@ -427,7 +445,7 @@
     font-weight: normal;
 }
 
-.cart-promo {
+div.cart-promo {
     background: none;
     & > div {
         margin: rem(5px) 0;
