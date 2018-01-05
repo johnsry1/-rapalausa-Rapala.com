@@ -31,3 +31,149 @@
         }
     }
 }
+
+.wishlist-search {
+    .form-row {
+        margin: 0;
+        .label {
+            @include font-size($form-label-font-size);
+            padding-bottom: 0;
+        }
+    }
+}
+
+.wishlist-search {
+    overflow: hidden;
+}
+
+.wishlist-shipping-address {
+    margin-top: rem(15px);
+    overflow: hidden;
+    clear: both;
+    .form-row {
+        label {
+            width: rem(170px);
+            padding-bottom: 0;
+        }
+    }
+}
+
+.pt_wish-list#container {
+    #main {
+        .item-details {
+            .product-list-item {
+                @include font-size(13px);
+                .name {
+                    a {
+                        font-family: $font;
+                    }
+                }
+                span.label {
+                    @include product-attr-title;
+                }
+                span.value {
+                    @include product-attr-name;
+                }
+                span.price-sales {
+                    @include product-attr-name;
+                }
+            }
+            a {
+                @include product-attr-name;
+            }
+        }
+        .item-dashboard {
+            .form-row {
+                &.option-date-added {
+                    label,
+                    .labeltext {
+                        @include product-attr-title;
+                        width: auto;
+                        float: left;
+                    }
+                    .field-wrapper {
+                        width: auto;
+                        float: left;
+                    }
+                    .value {
+                        @include product-attr-name;
+                    }
+                }
+                &.option-quantity-desired {
+                    .field-wrapper {
+                        width: rem(45px);
+                        @include respond(large-up) {
+                            width: rem(80px);
+                        }
+                        input {
+                            text-align: center;
+                        }
+                    }
+                }
+                &.option-priority {
+                    .label {
+                        @include respond(large-up) {
+                            width: rem(100px);
+                        }
+                    }
+                }
+                label {
+                    display: inline-block;
+                    @include label;
+                    @include line-height($form-field-height);
+                    padding-bottom: 0;
+                    margin-right: rem(5px);
+                    @include respond(large-up) {
+                        width: rem(100px);
+                        margin-right: 0;
+                    }
+                    .labeltext {
+                        color: inherit;
+                        font-style: inherit;
+                        font-size: inherit;
+                        font-weight: inherit;
+                        text-align: inherit;
+                        font-variant: inherit;
+                        font-family: inherit;
+                        line-height: inherit;
+                    }
+                }
+                .field-wrapper {
+                    display: inline-block;
+                    width: auto;
+                }
+            }
+            .option-update {
+                text-align: center;
+                button {
+                    color: $black;
+                    margin: 0 rem(5px);
+                    min-width: inherit;
+                    padding: 0;
+                    border: none;
+                    background: none;
+                    &:hover {
+                        border: none;
+                        background: none;
+                    }
+                }
+            }
+            .option-add-to-cart {
+                label {
+                    @include label;
+                    margin-right: rem(5px);
+                    @include line-height($form-field-height);
+                    padding-bottom: 0;
+                }
+                button {
+                    @include line-height(32px);
+                    height: rem(32px);
+                    margin: 0;
+                }
+            }
+            select {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
