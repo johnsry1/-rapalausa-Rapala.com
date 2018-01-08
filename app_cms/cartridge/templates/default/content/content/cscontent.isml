@@ -44,11 +44,11 @@
 	app.util.clearDynamicCSS();
 
 	<isloop items="${folderCustomCSS}" var="folder">
-		app.util.loadCSSFile("${folder.custom.customCSSFile.url}");
+		app.util.loadCSSFile("${folder.custom.customCSSFile.getURL()}");
 	</isloop>
 
 	<isif condition="${('customCSSFile' in pdict.Content.custom) && !empty(pdict.Content.custom.customCSSFile)}">
-		app.util.loadCSSFile("${pdict.Content.custom.customCSSFile.url}");
+		app.util.loadCSSFile("${pdict.Content.custom.customCSSFile.getURL()}");
 	</isif>
 /* ]]> */</script>
 
