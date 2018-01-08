@@ -19,6 +19,11 @@ var couponMenthods = {
     updateSummary: function () {
         var $summary = $('#secondary .new-summery-cart');
         // indicate progress
+        $(function (){
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $summary.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+            }
+        });
         progress.show($summary);
         var stateValue = $('body').find('.shipping-state').val();
         var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
@@ -912,6 +917,11 @@ exports.init = function () {
     }
     $('.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
         var $content = $('.primary-content');
+        $(function (){
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $content.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+            }
+        });
         progress.show($content);
         var errorcount = 0;
         if (!($('#PaymentMethod_CREDIT_CARD').is(':visible'))) {

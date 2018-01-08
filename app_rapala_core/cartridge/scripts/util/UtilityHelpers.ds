@@ -12,7 +12,7 @@ function getAvailability( product: Product ){
 	if(product.isMaster()){
 		var variants: dw.util.Collection =product.getVariants();
 		var variantIter : dw.util.Iterator = variants.iterator();
-		while(variantIter.hasNext()){ 
+		while(variantIter.hasNext()){
 			var variant : dw.catalog.Variant = variantIter.next();
 			if(variant.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
 		  		count = count+1;
@@ -40,7 +40,7 @@ function recommendationDisplay( productSearchResult: ProductSearchResult ){
 					display = true;
 					}
 				}
-			}	
+			}
 		}
 	return display;
 }
@@ -58,12 +58,12 @@ function getBadgeText(currentCustomer,currentForms){
 			isVIP = true;
 			ccg = customerGrp;
 			break;
-		} 
-		
+		}
+
 		if(!isVIP && customerGrp.getID().indexOf('ProStaff') != -1){
 			isProStaff=true;
 			ccg = customerGrp
-		} 
+		}
 		if(!isProStaff && customerGrp.getID().indexOf('employee') != -1){
 			ccg = customerGrp
 		}
@@ -95,7 +95,7 @@ function isVIP(currentCustomer){
 	for(var k=0; k < cglist.length; k++){
 		if(cglist[k].ID == 'VIP'){
 			isAssignedToVIP = true;
-		}							
+		}
 	}
 	return isAssignedToVIP;
 }
@@ -143,7 +143,7 @@ function getRemainingOrderBalance(basket){
 	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
 	var gcPaymentInstrs : Collection = basket.getGiftCertificatePaymentInstruments();
 	var iter : Iterator = gcPaymentInstrs.iterator();
-	var orderPI : dw.order.OrderPaymentInstrument = null;		
+	var orderPI : dw.order.OrderPaymentInstrument = null;
 	while( iter.hasNext() )
 	{
 		orderPI = iter.next();
@@ -153,7 +153,7 @@ function getRemainingOrderBalance(basket){
 	var remainingOrderBalance : Money = basket.totalGrossPrice;
 	var flageallotmentcover : Boolean = false;
 	if(giftCertTotal > 0){
-		remainingOrderBalance = remainingOrderBalance.subtract( giftCertTotal);		
+		remainingOrderBalance = remainingOrderBalance.subtract( giftCertTotal);
 	}
 	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
 	var iterTemp : Iterator = allPaymentInstrs.iterator();
@@ -171,7 +171,7 @@ function getRemainingOrderBalance(basket){
 		remainingOrderBalance = remainingOrderBalance.subtract( allotmentAmount );
 	}
 	remainingOrderBalance = remainingOrderBalance.value;
-	
+
 	return remainingOrderBalance;
 }
 
@@ -187,7 +187,7 @@ function isKnifeAvailable(basket){
 		}
 	}
 	return knifeAvailable;
-}	
+}
 module.exports={
 	getAvailability : getAvailability,
 	recommendationDisplay : recommendationDisplay,

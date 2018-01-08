@@ -2,7 +2,7 @@
 <isinclude template="util/modules"/>
 <isloop items="${pdict.Basket.couponLineItems}" var="couponLineItems" >
 		<div class="discount-success">
-			<span class="submitedcoupon"> ${couponLineItems.couponCode}&nbsp;${couponLineItems.promotion.name}</span> 
+			<span class="submitedcoupon"> ${couponLineItems.couponCode}&nbsp;<isloop items="${couponLineItems.priceAdjustments}" var="Promo" status="loopstate">${Promo.lineItemText}</isloop></span> 
 			<button value=${couponLineItems.couponCode} class="remove-cop">Remove</button>
 		</div>
 		<div class="clear"><!-- FLOAT CLEAR --></div>
