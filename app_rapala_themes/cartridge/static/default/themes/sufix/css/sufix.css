@@ -1,16 +1,167 @@
 @import url("//hello.myfonts.net/count/2c6f11");
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
+body {
+  color: #666;
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 13px;
+  background: #fff; }
+
+body.js-body {
+  background: none; }
+
+body .js-container-active .open-menu-wrap {
+  background: ""; }
+
+h1,
+.h-one-tag {
+  font-family: "BaskervilleBT-Roman";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: none;
+  color: #666; }
+
+h2 {
+  font-family: "BaskervilleBT-Roman";
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 13px;
+  text-transform: none;
+  color: #666; }
+
+h3 {
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 1.15em;
+  font-weight: bold;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #666; }
+
+h4 {
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #666; }
+
+h5 {
+  font-family: "BaskervilleBT-Roman";
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 12px;
+  text-transform: none;
+  color: #666; }
+
+h6 {
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #666; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #666;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #333;
+    text-decoration: none; }
+
+p {
+  color: #666;
+  font-family: Garamond, "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 20px;
+  padding: 0 0 16px 0;
+  text-align: left; }
+
 a {
-  color: #333333; }
+  color: #333;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #333;
+    text-decoration: underline; }
+
+a.filter {
+  background-image: "";
+  background-color: #ffee00;
+  background: linear-gradient(to bottom, #ffee00 0%, #e8d900 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #D7CA00;
+  border-right-color: #F9EA00;
+  border-bottom-color: #FFF89D;
+  border-left-color: #F9EA00;
+  clear: left;
+  color: #333 !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #e8d900;
+    background: linear-gradient(to bottom, #e8d900 0%, #ffee00 100%);
+    text-decoration: none;
+    color: #999; }
+
+a {
+  color: #333; }
 
 /***********************************************/
 /* PAGE STRUCTURE CSS                          */
 /***********************************************/
-body {
-  background-color: #ffffff;
-  color: #666666;
-  font-family: Garamond, "Times New Roman", Times, serif;
-  font-size: 13px; }
-
 /* @import must be at top of file, otherwise CSS will not work */
 @font-face {
   font-family: "BaskervilleBT-Roman";
@@ -24,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
 
 form .label {
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   font-size: 12px;
   text-transform: uppercase;
   border: none;
@@ -33,13 +184,13 @@ form .label {
   line-height: 16px;
   margin: 0;
   letter-spacing: 0px; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     form .label {
       line-height: 12px; } }
 
 div .returningcustomers .custom_signin .formfield .form-row .label {
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   font-size: 12px;
   text-transform: uppercase;
   border: none;
@@ -48,7 +199,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   line-height: 16px;
   margin: 0;
   letter-spacing: 0px; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     div .returningcustomers .custom_signin .formfield .form-row .label {
       line-height: 12px; } }
 
@@ -67,22 +218,16 @@ h1.leftnav {
   text-transform: uppercase;
   font-weight: normal;
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   letter-spacing: 0;
   border-style: solid;
   border-width: 1px;
-  border-color: #666666;
-  text-align: center;
-  /*background: $sufix-bgwhite url("../images/hr-dotted.jpg") 0 9px repeat-x;*/ }
+  border-color: #666;
+  text-align: center; }
 
 h1, .h-one-tag {
   display: block;
   padding: 46px 18px 36px 18px;
-  font-size: 24px;
-  line-height: 24px;
-  font-weight: normal;
-  font-family: "BaskervilleBT-Roman";
-  color: #666666;
   letter-spacing: 0;
   margin: 0; }
   h1.subheader, .h-one-tag.subheader {
@@ -93,55 +238,21 @@ h1, .h-one-tag {
     text-transform: uppercase;
     font-weight: normal;
     font-family: "BaskervilleBT-Roman";
-    color: #666666;
+    color: #666;
     letter-spacing: 0;
     border-style: solid;
     border-width: 0 1px 1px 1px;
-    border-color: #666666;
+    border-color: #666;
     text-align: center;
     background: white url(../images/hr-dotted.jpg) 0 0 repeat-x; }
 
 .productdetail .price {
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   color: #333;
   font-weight: bold;
   font-size: 15px;
   line-height: 24px;
   letter-spacing: 0px; }
-
-a.filter {
-  background: #ffee00;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffee00), color-stop(100%, #e8d900));
-  background: -webkit-linear-gradient(top, #ffee00 0%, #e8d900 100%);
-  background: linear-gradient(to bottom, #ffee00 0%, #e8d900 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffee00', endColorstr='#e8d900', GradientType=0 );
-  background-position: 100% 0;
-  background-repeat: no-repeat;
-  border-color: #D7CA00 #F9EA00 #FFF89D;
-  border-style: solid;
-  border-width: 1px;
-  clear: left;
-  color: #333333 !important;
-  display: block;
-  float: left;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  letter-spacing: 0;
-  line-height: 18px;
-  margin: 18px 0 0;
-  padding: 5px 28px 5px 10px;
-  text-transform: uppercase;
-  width: 184px; }
-  a.filter:hover {
-    background: #e8d900;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #e8d900), color-stop(100%, #ffee00));
-    background: -webkit-linear-gradient(top, #e8d900 0%, #ffee00 100%);
-    background: linear-gradient(to bottom, #e8d900 0%, #ffee00 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8d900', endColorstr='#ffee00', GradientType=0 );
-    text-decoration: none;
-    color: #999; }
 
 input.quantityinput {
   border: 2px solid #FFF000;
@@ -185,10 +296,8 @@ input .quantity input {
   text-align: left; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "BaskervilleBT-Roman";
@@ -203,22 +312,21 @@ input .quantity input {
   .pt_acc_landing .content-asset .account-options li:hover {
     background: #FFE600;
     border-color: #FFE600;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
-      color: #333333; }
+      color: #333; }
     .pt_acc_landing .content-asset .account-options li:hover p {
-      color: #333333; }
+      color: #333; }
     .pt_acc_landing .content-asset .account-options li:hover i {
-      color: #333333; }
+      color: #333; }
 
 #container.pt_error #primary.primary-content .errorpage .errorfooter .errorfooterbottom {
   font-size: 1.19em;
   margin-left: 324px;
   clear: both;
   width: 423px;
-  color: #666666;
-  font-family: Garamond,"Times New Roman",Times,serif;
+  color: #666;
+  font-family: Garamond, "Times New Roman", Times, serif;
   letter-spacing: normal; }
 
 #container.pt_error #primary.primary-content .errorpage #message {
@@ -238,14 +346,14 @@ input .quantity input {
 
 .pt_order .search-result-items li .order-history-items .order-history-table th {
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   font-size: 12px;
   text-transform: uppercase;
   font-weight: normal; }
 
 .pt_order .search-result-items li .order-history-items .order-history-table tr .order-price .value {
   font-family: Baskerville, "Times New Roman", Times, serif;
-  color: #333333;
+  color: #333;
   font-weight: bold;
   font-style: italic;
   font-size: 24px;
@@ -260,7 +368,7 @@ input .quantity input {
 
 .pt_leftnav-addressbook #addresses .address-list .address-tile .mini-address-title {
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   font-size: 12px;
   text-transform: uppercase;
   border: none;
@@ -282,10 +390,10 @@ input .quantity input {
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
   background: #FFF000;
-  color: #333333; }
+  color: #333; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background: #FFE600;
-    color: #333333; }
+    color: #333; }
 
 .ui-dialog.addressadd #dialog-container h1 {
   background: none;
@@ -299,7 +407,7 @@ input .quantity input {
   text-transform: uppercase;
   font-weight: normal;
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   font-style: normal; }
 
 .orderdetails .order-information .order-number .value {
@@ -316,11 +424,11 @@ input .quantity input {
   font-size: 14px;
   line-height: 14px;
   font-weight: normal;
-  color: #333333; }
+  color: #333; }
 
 .orderdetails .line-items .line-item .line-item-price {
   font-family: Baskerville, "Times New Roman", Times, serif;
-  color: #333333;
+  color: #333;
   font-weight: bold;
   font-style: italic;
   font-size: 24px;
@@ -331,12 +439,12 @@ input .quantity input {
     font-size: 14px;
     line-height: 14px;
     font-weight: normal;
-    color: #333333;
+    color: #333;
     font-style: normal; }
 
 .productdetail a.filter span {
   font-style: italic;
-  color: #333333;
+  color: #333;
   font-weight: bold; }
 
 .productdetail .addtocartbar {
@@ -347,11 +455,11 @@ input .quantity input {
     padding-bottom: 0; }
 
 .featuredesc .prodfeature ul li {
-  color: #222222; }
+  color: #222; }
 
 .variationattributes .color li a:hover {
   border-color: #FFF000;
-  color: #333333; }
+  color: #333; }
 
 .variationattributes .swatches li.selected a {
   background-image: none;
@@ -366,7 +474,7 @@ input .quantity input {
   color: #000; }
 
 .variationattributes .swatches li a span.outofstockpdp {
-  color: #e80000 !important; }
+  color: #E80000 !important; }
 
 .viploginsignin.cell.contentbox.upshift h1.subheader {
   display: block; }
@@ -374,7 +482,7 @@ input .quantity input {
 .account-section h1 {
   font-size: 15px;
   margin: 0px;
-  color: #000000;
+  color: #000;
   text-align: center;
   line-height: normal;
   font-variant: normal;
@@ -384,11 +492,11 @@ input .quantity input {
   background: none; }
 
 h1 a:hover {
-  color: #333333;
+  color: #333;
   text-decoration: none; }
 
 h2 a:hover {
-  color: #000000;
+  color: #000;
   text-decoration: none; }
 
 h2 {
@@ -398,7 +506,7 @@ h2 {
   line-height: 13px;
   font-weight: normal;
   font-family: "Times New Roman", Times, serif;
-  color: #333333;
+  color: #333;
   letter-spacing: 0;
   text-align: left;
   background: url(../images/hr-dotted.jpg) 0 100% repeat-x;
@@ -417,7 +525,7 @@ h5 {
   text-transform: uppercase;
   font-weight: normal;
   font-family: "BaskervilleBT-Roman";
-  color: #666666;
+  color: #666;
   letter-spacing: 0;
   border: none;
   text-align: left; }
@@ -429,7 +537,7 @@ h5 {
     line-height: 12px;
     text-transform: uppercase;
     font-weight: normal;
-    font-family: 'BaskervilleBT-Roman';
+    font-family: "BaskervilleBT-Roman";
     color: #666;
     letter-spacing: 0;
     border-style: solid;
@@ -441,8 +549,8 @@ p {
   text-align: justify;
   line-height: 20px;
   padding: 0 0 16px 0;
-  font-family: Garamond, Times New Roman, Times, serif;
-  color: #666666; }
+  font-family: Garamond, "Times New Roman", Times, serif;
+  color: #666; }
 
 .pt_account.acc_landing .content-asset .account-options li h2 {
   text-align: center;
@@ -456,18 +564,21 @@ p {
   background-color: #FFE600;
   border-color: #FFE600; }
   .pt_account.acc_landing .content-asset .account-options li:hover a, .pt_account.acc_landing .content-asset .account-options li:hover h2, .pt_account.acc_landing .content-asset .account-options li:hover p {
-    color: #000000; }
+    color: #000; }
 
 a {
-  color: #333333; }
+  color: #333; }
 
 a.button, button {
   background-color: #FFF000;
-  border-color: #D7CA00 #F9EA00 #FFF89D;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
+  border-top-color: #d0d0d0;
+  border-right-color: #e8e8e8;
+  border-bottom-color: #f8f8f8;
+  border-left-color: #e8e8e8;
   clear: left;
-  color: #333333;
+  color: #333;
   display: block;
   float: left;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
@@ -486,8 +597,6 @@ a.button:hover, button:hover {
   text-decoration: none; }
 
 .addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e8d900), color-stop(100%, #ffee00)) !important;
-  background: -webkit-linear-gradient(top, #e8d900 0%, #ffee00 100%) !important;
   background: linear-gradient(to bottom, #e8d900 0%, #ffee00 100%) !important;
   text-decoration: none; }
 
@@ -500,13 +609,13 @@ h1.search-result {
   line-height: 36px; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.search-result {
-  color: #666666;
+  color: #666;
   margin: -49px 0 15px 0; }
 
 .pt_product-search-result #page-background #primary .search-blk a {
   display: inline-block;
   text-transform: capitalize;
-  color: #000000;
+  color: #000;
   font-weight: bold; }
 
 #header div.logo {
@@ -514,7 +623,7 @@ h1.search-result {
   width: 126px;
   height: 32px;
   padding-right: 25px; }
-  @media screen and (max-width: 959px) {
+  @media only screen and (min-width: 0) and (max-width: 959px) {
     #header div.logo {
       padding-right: 0px; } }
 
@@ -529,9 +638,6 @@ h1.search-result {
   background-image: url(../images/multi-site-one-cart-bg.png);
   width: 58px;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
   text-transform: capitalize;
   color: #333532; }
 
@@ -543,51 +649,44 @@ h1.search-result {
   padding: 15px 0 5px 0 !important; }
 
 .categorymenusnew a:hover {
-  color: #000000; }
+  color: #000; }
 
 .categorymenusnew a .count-products {
-  color: #000000; }
+  color: #000; }
 
 .categorymenusnew .category-top-level.active a {
-  color: #000000; }
+  color: #000; }
   .categorymenusnew .category-top-level.active a:hover {
-    color: #000000; }
+    color: #000; }
   .categorymenusnew .category-top-level.active a .count-products {
-    color: #000000; }
+    color: #000; }
 
 .categorymenusnew .category-top-level .category-top-level2 li.active a {
-  color: #000000;
+  color: #000;
   text-decoration: underline; }
   .categorymenusnew .category-top-level .category-top-level2 li.active a .count-products {
-    color: #000000; }
+    color: #000; }
 
 .categorymenusnew .category-top-level .category-top-level2 li a:hover {
-  color: #000000; }
+  color: #000; }
   .categorymenusnew .category-top-level .category-top-level2 li a:hover .count-products {
-    color: #000000; }
+    color: #000; }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart {
   background: url(../images/multi-site-one-cart-bg-right.png) 100% 0 no-repeat transparent; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #FFF000 60%, #e8d900 100%);
   background: linear-gradient(to bottom, #FFF000 60%, #e8d900 100%);
-  background: -webkit-linear-gradient(to bottom, #FFF000 60%, #e8d900 100%);
-  background: -ms-linear-gradient(to bottom, #FFF000 60%, #e8d900 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #FFF000), color-stop(100%, #e8d900));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$sufix-bgyellow', endColorstr='$sufix-bgyellowmedium',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$sufix-bgyellow', endColorstr='$sufix-bgyellowmedium', GradientType=0);
   color: #333532;
   text-align: center;
   text-decoration: none;
   padding: 7px 0;
   height: 17px;
   text-indent: 0;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.leftnav {
   margin-bottom: 15px;
@@ -604,28 +703,28 @@ h1.search-result {
   margin-top: -38px; }
 
 .product-tile .product-image .quickview {
-  color: #333333;
-  border-style: solid;
-  border-width: 1px;
+  color: #333;
   background-color: #FFF000;
-  border-top: 1px solid #D7CA00;
-  border-right: 1px solid #F9EA00;
-  border-bottom: 1px solid #FFF89D;
-  border-left: 1px solid #F9EA00; }
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #D7CA00;
+  border-right-color: #F9EA00;
+  border-bottom-color: #FFF89D;
+  border-left-color: #F9EA00; }
 
 .product-tile .product-image .quickview:hover {
   background-color: #FFE600;
   text-decoration: none; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
-  color: #333333;
-  border-style: solid;
-  border-width: 1px;
+  color: #333;
   background-color: #FFF000;
-  border-top: 1px solid #D7CA00;
-  border-right: 1px solid #F9EA00;
-  border-bottom: 1px solid #FFF89D;
-  border-left: 1px solid #F9EA00; }
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #D7CA00;
+  border-right-color: #F9EA00;
+  border-bottom-color: #FFF89D;
+  border-left-color: #F9EA00; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview:hover {
   background-color: #FFE600;
@@ -644,12 +743,8 @@ h1.search-result {
   margin: 0 5px 0 10px; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-  background: -webkit-linear-gradient(top, #e8d900 0%, #FFF000 60%);
   background: linear-gradient(to bottom, #e8d900 0%, #FFF000 60%);
-  background: -webkit-linear-gradient(to bottom, #e8d900 0%, #FFF000 60%);
-  background: -ms-linear-gradient(to bottom, #e8d900 0%, #FFF000 60%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e8d900), color-stop(60%, #FFF000));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$sufix-bgyellowmedium', endColorstr='$sufix-bgyellow',GradientType=0 ); }
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$sufix-bgyellowmedium', endColorstr='$sufix-bgyellow', GradientType=0); }
 
 .international-links-container {
   font-size: 13px; }
@@ -718,16 +813,16 @@ h1.search-result {
   border: none;
   background: none;
   text-align: left; }
-  @media screen and (max-width: 959px) {
+  @media only screen and (min-width: 0) and (max-width: 959px) {
     #container.pt_product-search-noresult #primary.primary-content .nohits h1 {
       text-align: center; } }
-  @media screen and (max-width: 959px) {
+  @media only screen and (min-width: 0) and (max-width: 959px) {
     #container.pt_product-search-noresult #primary.primary-content .nohits h1 .section-header p {
       text-align: center; } }
 
 #container.pt_product-search-noresult #primary.primary-content .nohits .no-hits-help h2 {
   background: none; }
-  @media screen and (max-width: 959px) {
+  @media only screen and (min-width: 0) and (max-width: 959px) {
     #container.pt_product-search-noresult #primary.primary-content .nohits .no-hits-help h2 {
       text-align: center; } }
 
@@ -741,11 +836,8 @@ h1.search-result {
   line-height: 40px;
   background-image: none;
   background: #ffee00;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffee00), color-stop(100%, #e8d900));
-  background: -webkit-linear-gradient(top, #ffee00 0%, #e8d900 100%);
   background: linear-gradient(to bottom, #ffee00 0%, #e8d900 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffee00', endColorstr='#e8d900', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee00', endColorstr='#e8d900', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   color: #000;
@@ -757,7 +849,7 @@ h1.search-result {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1,
   #vippage-background h1.subheader, #vippage-background .h-one-tag.subheader {
@@ -791,29 +883,27 @@ h1.search-result {
   .productdetail .price .salesprice {
     font-style: bold !important;
     font-size: 15px !important;
-    color: #666666 !important; }
+    color: #666 !important; }
   .selected a.filter,
   .future a.filter {
     background-color: #f1f1f1 !important;
-    border-top: 1px solid #d0d0d0;
-    border-right: 1px solid #e8e8e8;
-    border-bottom: 1px solid #f8f8f8;
-    border-left: 1px solid #e8e8e8;
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #d0d0d0;
+    border-right-color: #e8e8e8;
+    border-bottom-color: #f8f8f8;
+    border-left-color: #e8e8e8;
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
     border: 1px solid #D6BC00;
     background: #ffee00;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffee00), color-stop(100%, #e8d900));
-    background: -webkit-linear-gradient(top, #ffee00 0%, #e8d900 100%);
     background: linear-gradient(to bottom, #ffee00 0%, #e8d900 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffee00', endColorstr='#e8d900', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee00', endColorstr='#e8d900', GradientType=0); }
     .current a.filter:hover {
       background: #e8d900;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #e8d900), color-stop(100%, #ffee00));
-      background: -webkit-linear-gradient(top, #e8d900 0%, #ffee00 100%);
       background: linear-gradient(to bottom, #e8d900 0%, #ffee00 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8d900', endColorstr='#ffee00', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e8d900', endColorstr='#ffee00', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -864,7 +954,7 @@ h1.search-result {
 .pdp-main #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.active a:hover {
   color: #333; }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .product-specifications .specificiations {
     border-bottom: none; }
     .product-specifications .specificiations tbody {
@@ -875,10 +965,8 @@ h1.search-result {
       .product-specifications .specificiations tbody:last-child {
         margin-bottom: 0; }
       .product-specifications .specificiations tbody tr:first-child th {
-        background: #fff000;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #fff000), color-stop(100%, #e8d900));
-        background: -webkit-linear-gradient(top, #fff000 0%, #e8d900 100%);
-        background: linear-gradient(to bottom, #fff000 0%, #e8d900 100%);
+        background: #FFF000;
+        background: linear-gradient(to bottom, #FFF000 0%, #e8d900 100%);
         color: #000000;
         margin: 0;
         vertical-align: middle;
@@ -907,8 +995,8 @@ h1.search-result {
   #container.pt_error #primary.primary-content .errorpage .errorfooter .errorfooterbottom {
     margin-left: 0;
     width: 100%;
-    color: #666666;
-    font-family: Garamond,"Times New Roman",Times,serif;
+    color: #666;
+    font-family: Garamond, "Times New Roman", Times, serif;
     letter-spacing: normal; }
   #container.pt_error #primary.primary-content .errorpage .errorfooter .errorfooterbottom .content-asset {
     font-size: 14px; }
@@ -935,14 +1023,14 @@ h1.search-result {
 
 .pt_content-search-result #page-background #primary .folder-content-list li a {
   font-family: "BaskervilleBT-Roman";
-  color: #666666; }
+  color: #666; }
 
 .pt_content-search-result #page-background #primary .folder-content-list li p {
-  font-family: Garamond, Times New Roman, Times, serif;
-  color: #666666; }
+  font-family: Garamond, "Times New Roman", Times, serif;
+  color: #666; }
   .pt_content-search-result #page-background #primary .folder-content-list li p a.readmore {
-    font-family: Garamond, Times New Roman, Times, serif;
-    color: #333333; }
+    font-family: Garamond, "Times New Roman", Times, serif;
+    color: #333; }
 
 .pt_customerservice .cell-header h1 {
   background: white url("../images/hr-dotted.jpg") 0 9px repeat-x;
@@ -959,23 +1047,23 @@ h1.search-result {
 
 .pt_customerservice .accordion.tabover {
   background: none repeat scroll 0 0 #F9EA00;
-  color: #333333; }
+  color: #333; }
 
 #headerwrapper #header .row.column1 .headercustomerinfo .change-regionnew {
   padding: 9px 12px 8px 0; }
 
 .productdetail .product-specifications .header td {
-  font-family: times New Roman;
+  font-family: "Times New Roman", Times, serif;
   font-style: italic;
   font-weight: normal;
   border: 0px; }
 
 .product-specifications h2 {
-  background: url("../images/hr-dotted.jpg") repeat-x scroll 0 9px #FFFFFF;
+  background: url("../images/hr-dotted.jpg") repeat-x scroll 0 9px #fff;
   border: 1px solid #666;
   color: #666;
   display: block;
-  font-family: 'BaskervilleBT-Roman';
+  font-family: "BaskervilleBT-Roman";
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 0;
@@ -986,10 +1074,8 @@ h1.search-result {
   float: left; }
 
 .product-specifications .specificiations thead tr.header td {
-  background: #fff000;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #fff000), color-stop(100%, #e8d900));
-  background: -webkit-linear-gradient(top, #fff000 0%, #e8d900 100%);
-  background: linear-gradient(to bottom, #fff000 0%, #e8d900 100%);
+  background: #FFF000;
+  background: linear-gradient(to bottom, #FFF000 0%, #e8d900 100%);
   color: #000000; }
 
 .product-specifications .specificiations tbody tr.evenrow {
@@ -1003,14 +1089,11 @@ h1.search-result {
 
 .pt_product-details .productdetail .wrapper ~ #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a {
   background-image: none;
-  background: #fff000;
+  background: #FFF000;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #fff000 10%, white 10%, #fff000 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #fff000 10%, white 10%, #fff000 10%, white 10%);
+  background: linear-gradient(to bottom, #FFF000 10%, white 10%, #FFF000 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -1026,7 +1109,7 @@ h1.search-result {
 .pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group {
   padding: 0; }
   .pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group li.first-level .second-level li.active a {
-    color: #000000; }
+    color: #000; }
 
 .pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent h2.left-nav-style {
   padding: 12.5px 0;
@@ -1038,22 +1121,22 @@ h1.search-result {
   background: #f1f1f1; }
 
 .pt_customerservice .style-cservice .column.colspan2 .cell-header .content-asset .customer-content ul.unordered-list {
-  color: #666666; }
+  color: #666; }
 
 .paymentslist .paymentinstruments .creditcard .payment-list .cc-owner .label {
-  font-family: 'BaskervilleBT-Roman';
+  font-family: "BaskervilleBT-Roman";
   letter-spacing: 0;
   text-transform: uppercase;
   font-size: 16px;
   line-height: 16px; }
 
 .paymentslist .paymentinstruments .creditcard .payment-list .cc-type .label {
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode","Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: #333; }
 
 .paymentslist .paymentinstruments .creditcard .payment-list .cc-number .label {
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode","Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: #333; }
 
@@ -1061,7 +1144,7 @@ h1.search-result {
   float: left;
   font-variant: normal;
   font-weight: bold;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode","Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 13px;
   color: #666;
   font-style: italic;
@@ -1074,11 +1157,11 @@ h1.search-result {
   font-weight: bold;
   text-align: right;
   word-wrap: break-word;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode","Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: #333; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_cart #main .breadcrumb {
     background: #fff; }
   .pt_error #footernew .wrapper .footer-main {
@@ -1089,13 +1172,13 @@ h1.search-result {
     font-family: "BaskervilleBT-Roman"; }
   .pt_customerservice #content .style-cservice .column.colspan2 .cellbox.accordion.tabover .folder-contentboxcontent {
     background: none repeat scroll 0 0 #F9EA00;
-    color: #333333; } }
+    color: #333; } }
 
 .pt_customerservice .site-map h2.left-nav-style {
   border-bottom: none; }
 
 .tab-sec #tabs ul.ui-tabs-nav li a:hover span {
-  color: #e80000; }
+  color: #E80000; }
 
 .tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a span {
   color: #333; }
@@ -1145,13 +1228,15 @@ h1.search-result {
 
 .variationattributes .color ul li a span.corner-ribbon {
   background-color: #FFF000;
-  color: #000000; }
+  color: #000; }
 
 .productdetail #special-offers ul li {
-  color: #666666; }
+  color: #666; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a:hover {
   color: #666; }
 
 .productdetail .price .price-sales {
-  color: #666666; }
+  color: #666; }
+
+/*# sourceMappingURL=sufix.css.map */

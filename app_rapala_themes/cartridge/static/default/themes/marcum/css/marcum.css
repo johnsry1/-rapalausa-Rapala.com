@@ -1,71 +1,177 @@
-/* @import must be at top of file, otherwise CSS will not work */
 @import url("../css/MyFontsWebfontsKit.css");
-/* body */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
 body {
-  color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  color: #000;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-size: 13px;
   background: white url(../images/container-background-70.jpg) 0 0 repeat; }
-  body.js-body {
-    background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: white url(../images/container-background-70.jpg) 0 -105px repeat; }
 
-/* <a> styles */
-a {
-  color: #C6262C;
-  text-decoration: none; }
+body.js-body {
+  background: none; }
 
-a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: red; }
+body .js-container-active .open-menu-wrap {
+  background: white url(../images/container-background-70.jpg) 0 -105px repeat; }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-  font-family: 'SteelfishEb-Regular', Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  color: #333;
-  text-transform: uppercase; }
-
-h1, .h-one-tag {
+h1,
+.h-one-tag {
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
   font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
   line-height: 48px;
-  margin: 0; }
+  text-transform: uppercase;
+  color: #333; }
 
 h2 {
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
   font-size: 25px;
-  line-height: 30px; }
+  font-weight: normal;
+  font-style: normal;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #333; }
 
 h3 {
-  font-size: 16px;
-  line-height: 16px;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
   font-weight: bold;
-  color: #C6262C;
   font-style: italic;
-  text-transform: none; }
+  line-height: 16px;
+  text-transform: none;
+  color: #C6262C; }
+
+h4 {
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #333; }
+
+h5 {
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #333; }
+
+h6 {
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #333; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #000;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #C6262C;
+    text-decoration: none; }
+
+p {
+  color: #000;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 18px;
+  padding: 9px 0;
+  text-align: left; }
+
+a {
+  color: #C6262C;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #fff;
+    text-decoration: none; }
+
+a.filter {
+  background-image: "";
+  background-color: #ce0d0d;
+  background: linear-gradient(to bottom, #ce0d0d 0%, #aa0003 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #A72126;
+  border-right-color: #C32E33;
+  border-bottom-color: #E9ACAE;
+  border-left-color: #C32E33;
+  clear: left;
+  color: #fff !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #aa0003;
+    background: linear-gradient(to bottom, #aa0003 0%, #ce0d0d 100%);
+    text-decoration: none;
+    color: #fff; }
+
+/* @import must be at top of file, otherwise CSS will not work */
+/* body */
+body.js-body {
+  background: none; }
+
+h1, .h-one-tag {
+  margin: 0; }
 
 .pt_productsearchresult #page-background .row.column3 .colspan2.cell4 .contentboxcontent a.searchedfor {
   color: #ce0d0d; }
 
 #container.pt_product-search-noresult .breadcrumb {
-  color: #ffffff; }
-
-h4 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h5 {
-  font-size: 18px;
-  line-height: 18px; }
-
-h6 {
-  font-size: 16px;
-  line-height: 16px; }
+  color: #fff; }
 
 h1.left-nav-style {
-  font-family: 'SteelfishEb-Regular', Arial, Helvetica, sans-serif;
+  font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
   font-size: 40px;
   line-height: 36px; }
 
@@ -81,25 +187,6 @@ h2.input-style, .order-head h2 {
   font-weight: bold;
   padding-bottom: 2px; }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #333;
-  text-decoration: none; }
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #C6262C;
-  text-decoration: none; }
-
-/* <p> style */
-p {
-  color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  word-spacing: normal;
-  line-height: 18px;
-  padding: 9px 0 9px 0;
-  text-align: left; }
-
 /*buttons*/
 a.button, button {
   display: block;
@@ -107,7 +194,7 @@ a.button, button {
   float: left;
   height: 28px;
   line-height: 28px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode","Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: bold;
@@ -116,8 +203,8 @@ a.button, button {
   color: white;
   padding: 0 18px 0 18px;
   background-color: #C6262C;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #A72126;
   border-right-color: #C32E33;
   border-bottom-color: #E9ACAE;
@@ -134,9 +221,7 @@ a.button:hover, button:hover {
 
 .addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
   cursor: pointer;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #aa0003), color-stop(100%, #ce0d0d)) !important;
-  background: -webkit-linear-gradient(top, #aa0003 0%, #ce0d0d 100%) !important;
-  background: linear-gradient(to bottom, #aa0003 0%, #ce0d0d 100%) !important;
+  background: linear-gradient(top bottom, #aa0003 0%, #ce0d0d 100%) !important;
   text-decoration: none;
   border-top-color: #D70101;
   border-right-color: #F90A0A;
@@ -145,7 +230,7 @@ a.button:hover, button:hover {
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
   background-color: #C6262C;
-  color: #ffffff; }
+  color: #fff; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background: #E80000; }
 
@@ -160,10 +245,8 @@ a.button:hover, button:hover {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
@@ -177,21 +260,20 @@ a.button:hover, button:hover {
   .pt_acc_landing .content-asset .account-options li:hover {
     background-color: #C6262C;
     border-color: #C6262C;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
-      color: #FFFFFF; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover p {
-      color: #FFFFFF; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover i {
-      color: #FFFFFF; }
+      color: #fff; }
 
 .pt_store-locator .storelocator h1 {
   text-transform: uppercase;
   font-vairant: normal; }
 
 .pt_store-locator .storelocatorzipsearch .stack .form-row .label {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   color: #333;
   text-transform: uppercase;
@@ -223,10 +305,10 @@ a.button:hover, button:hover {
   font-size: 15px; }
 
 .pt_leftnav-addressbook #main .breadcrumb a {
-  color: #FFFFFF; }
+  color: #fff; }
 
 .pt_leftnav-addressbook #main .breadcrumb .breadcrumb-element:last-child {
-  color: #FFFFFF; }
+  color: #fff; }
 
 .pt_leftnav-addressbook #addresses .address-list .address-tile .mini-address-title {
   color: #333;
@@ -307,7 +389,7 @@ p a {
 
 p {
   color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   word-spacing: normal;
@@ -315,61 +397,12 @@ p {
   padding: 9px 0 9px 0;
   text-align: left; }
 
-a {
-  color: #C6262C;
-  text-decoration: none; }
-  a.filter {
-    margin: 18px 0 0;
-    display: block;
-    clear: left;
-    float: left;
-    width: 184px;
-    line-height: 18px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    color: #FFFFFF !important;
-    padding: 5px 28px 5px 10px;
-    border-style: solid;
-    border-width: 1px;
-    color: #FFFFFF;
-    background: #ce0d0d;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ce0d0d), color-stop(100%, #aa0003));
-    background: -webkit-linear-gradient(top, #ce0d0d 0%, #aa0003 100%);
-    background: linear-gradient(to bottom, #ce0d0d 0%, #aa0003 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce0d0d', endColorstr='#aa0003', GradientType=0 );
-    border-top-color: #A72126;
-    border-right-color: #C32E33;
-    border-bottom-color: #E9ACAE;
-    border-left-color: #C32E33;
-    background-position: 100% 0;
-    background-repeat: no-repeat; }
-    a.filter:hover {
-      text-decoration: none;
-      background: #aa0003;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #aa0003), color-stop(100%, #ce0d0d));
-      background: -webkit-linear-gradient(top, #aa0003 0%, #ce0d0d 100%);
-      background: linear-gradient(to bottom, #aa0003 0%, #ce0d0d 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa0003', endColorstr='#ce0d0d', GradientType=0 );
-      border-top-color: #D70101;
-      border-right-color: #F90A0A;
-      border-bottom-color: #FF9D9D;
-      border-left-color: #F90A0A; }
-
-a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: white; }
-
 p a {
   color: #C6262C;
   font-weight: bold; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1 {
-  color: #FFFFFF; }
+  color: #fff; }
   .pt_product-search-result #page-background #primary .contentboxcontent h1.search-result {
     font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 22px;
@@ -377,7 +410,7 @@ p a {
     font-variant: normal;
     font-weight: bold;
     line-height: 36px;
-    color: #FFFFFF; }
+    color: #fff; }
 
 .pt_product-search-result #page-background #primary .search-blk a {
   display: inline-block;
@@ -396,9 +429,6 @@ p a {
   font-weight: normal;
   width: 58px;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
   text-transform: capitalize;
   background-image: url(../images/multi-site-one-cart-bg.png); }
 
@@ -413,32 +443,21 @@ p a {
   color: #C6262C; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #ce0d0d 60%, #aa0004 100%);
   background: linear-gradient(to bottom, #ce0d0d 60%, #aa0004 100%);
-  background: -webkit-linear-gradient(to bottom, #ce0d0d 60%, #aa0004 100%);
-  background: -ms-linear-gradient(to bottom, #ce0d0d 60%, #aa0004 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #ce0d0d), color-stop(100%, #aa0004));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce0d0d', endColorstr='#aa0004',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0d0d', endColorstr='#aa0004', GradientType=0);
   color: #fff;
   text-align: center;
   text-decoration: none;
   padding: 7px 0;
   height: 17px;
   text-indent: 0;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-  background: -webkit-linear-gradient(top, #aa0004 0%, #ce0d0d 60%);
   background: linear-gradient(to bottom, #aa0004 0%, #ce0d0d 60%);
-  background: -webkit-linear-gradient(to bottom, #aa0004 0%, #ce0d0d 60%);
-  background: -ms-linear-gradient(to bottom, #aa0004 0%, #ce0d0d 60%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #aa0004), color-stop(60%, #ce0d0d));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa0004', endColorstr='#ce0d0d',GradientType=0 ); }
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa0004', endColorstr='#ce0d0d', GradientType=0); }
 
 .owl-carousel .owl-dot span {
   background-image: url(../images/slideshow-counter.png); }
@@ -513,7 +532,7 @@ p a {
 
 #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
   /* margin: 8px 0 16px 1px; */ }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
       /* margin: 0px 0 16px 1px; */ } }
 
@@ -581,7 +600,7 @@ p a {
 
 body {
   color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-size: 13px;
   background: white url(../images/container-background-70.jpg) 0 0 repeat; }
 
@@ -595,10 +614,10 @@ body {
 .footer-links ul li a, .footer-links ul li a:hover {
   font-weight: normal;
   color: #f2f2f2;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif; }
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
 form .label {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   color: #333;
   font-variant: initial;
@@ -608,7 +627,7 @@ form .label {
   padding-bottom: 2px; }
 
 #vippage-background form .label {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold !important;
   color: #333;
   font-variant: initial !important;
@@ -618,7 +637,7 @@ form .label {
   padding-bottom: 2px; }
 
 div .returningcustomers .custom_signin .formfield .form-row .label {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   color: #333;
   font-variant: initial;
@@ -633,14 +652,11 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   width: calc(100% - 50px);
   height: 40px;
   line-height: 40px;
-  color: #FFFFFF;
+  color: #fff;
   background-image: none;
   background: #ce0d0d;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #ce0d0d), color-stop(100%, #aa0003));
-  background: -webkit-linear-gradient(top, #ce0d0d 0%, #aa0003 100%);
   background: linear-gradient(to bottom, #ce0d0d 0%, #aa0003 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce0d0d', endColorstr='#aa0003', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0d0d', endColorstr='#aa0003', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   border: none; }
@@ -651,7 +667,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1 {
     font-size: 25px;
@@ -673,10 +689,10 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     display: none !important; }
   .productdetail a.filter span {
     font-style: normal;
-    color: #FFFFFF;
+    color: #fff;
     font-weight: normal; }
   .productdetail a.filter .selectedvarval {
-    color: #FFFFFF; }
+    color: #fff; }
   .productdetail .price .salesprice {
     font-style: bold !important;
     font-size: 15px !important;
@@ -691,18 +707,14 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
-    color: #FFFFFF;
+    color: #fff;
     background: #ce0d0d;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ce0d0d), color-stop(100%, #aa0003));
-    background: -webkit-linear-gradient(top, #ce0d0d 0%, #aa0003 100%);
     background: linear-gradient(to bottom, #ce0d0d 0%, #aa0003 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ce0d0d', endColorstr='#aa0003', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0d0d', endColorstr='#aa0003', GradientType=0); }
     .current a.filter:hover {
       background: #aa0003;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #aa0003), color-stop(100%, #ce0d0d));
-      background: -webkit-linear-gradient(top, #aa0003 0%, #ce0d0d 100%);
       background: linear-gradient(to bottom, #aa0003 0%, #ce0d0d 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa0003', endColorstr='#ce0d0d', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa0003', endColorstr='#ce0d0d', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -721,7 +733,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb a,
     .pt_content-search-result .breadcrumb a,
     .pt_leftnav-profile .breadcrumb a {
-      color: #ffffff !important; }
+      color: #fff !important; }
     .pt_wish-list .breadcrumb .breadcrumb-element,
     .pt_leftnav-addressbook .breadcrumb .breadcrumb-element,
     .pt_order .breadcrumb .breadcrumb-element,
@@ -730,7 +742,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb .breadcrumb-element,
     .pt_content-search-result .breadcrumb .breadcrumb-element,
     .pt_leftnav-profile .breadcrumb .breadcrumb-element {
-      color: #ffffff !important; }
+      color: #fff !important; }
       .pt_wish-list .breadcrumb .breadcrumb-element:after,
       .pt_leftnav-addressbook .breadcrumb .breadcrumb-element:after,
       .pt_order .breadcrumb .breadcrumb-element:after,
@@ -739,7 +751,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       .pt_product-search-result .breadcrumb .breadcrumb-element:after,
       .pt_content-search-result .breadcrumb .breadcrumb-element:after,
       .pt_leftnav-profile .breadcrumb .breadcrumb-element:after {
-        color: #ffffff; }
+        color: #fff; }
       .pt_wish-list .breadcrumb .breadcrumb-element:last-element,
       .pt_leftnav-addressbook .breadcrumb .breadcrumb-element:last-element,
       .pt_order .breadcrumb .breadcrumb-element:last-element,
@@ -757,7 +769,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb .breadcrumb-element-slash:after,
     .pt_content-search-result .breadcrumb .breadcrumb-element-slash:after,
     .pt_leftnav-profile .breadcrumb .breadcrumb-element-slash:after {
-      color: #ffffff !important; }
+      color: #fff !important; }
     .pt_wish-list .breadcrumb span,
     .pt_leftnav-addressbook .breadcrumb span,
     .pt_order .breadcrumb span,
@@ -766,7 +778,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb span,
     .pt_content-search-result .breadcrumb span,
     .pt_leftnav-profile .breadcrumb span {
-      color: #ffffff; }
+      color: #fff; }
       .pt_wish-list .breadcrumb span.breadcrumb-element-slash,
       .pt_leftnav-addressbook .breadcrumb span.breadcrumb-element-slash,
       .pt_order .breadcrumb span.breadcrumb-element-slash,
@@ -794,15 +806,12 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   #footernew {
     background: none; }
     #footernew .wrapper .receive-emails a {
-      color: #FFFFFF; }
+      color: #fff; }
     #footernew .wrapper .footer-main {
       background-image: none;
       margin: 0;
       width: 100%;
-      box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -moz-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -webkit-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -ms-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868; }
+      box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; }
       #footernew .wrapper .footer-main .footer-left-section .footer-links #about #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #customer-service #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #follow_us #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #rapala_insider #linkheading {
         color: #000; }
         #footernew .wrapper .footer-main .footer-left-section .footer-links #about #linkheading a, #footernew .wrapper .footer-main .footer-left-section .footer-links #customer-service #linkheading a, #footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop #linkheading a, #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness #linkheading a, #footernew .wrapper .footer-main .footer-left-section .footer-links #follow_us #linkheading a, #footernew .wrapper .footer-main .footer-left-section .footer-links #rapala_insider #linkheading a {
@@ -812,7 +821,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       #footernew .wrapper .footer-main .footer-left-section .footer-links #about.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #customer-service.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #follow_us.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #rapala_insider.expanded ul li a {
         color: #000; } }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   #container.pt_account #primary #footernew {
     top: 0 !important; }
   #container.pt_account #primary.primary-content .account-section h1.title {
@@ -830,14 +839,14 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     min-height: 40px; }
   #vippage-background #page .vip-signup-top1 {
     /* h1{
-			 	font-size:36px;
-			 	line-height:36px;
-			 	}  */ }
+                     font-size:36px;
+                     line-height:36px;
+                     }  */ }
   #vippage-background #page .contentbox .contentboxcontent {
     /* h1{
-				 	font-size:25px !important;
-				 	line-height:27px !important;
-				 	} */ }
+                         font-size:25px !important;
+                         line-height:27px !important;
+                         } */ }
   #RegistrationForm .label span.labeltext {
     font-size: 12px !important;
     line-height: 12px; }
@@ -845,31 +854,29 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     font-size: 12px !important;
     line-height: 12px; } }
 
-@media screen and (max-width: 767px) {
+@media only screen and (min-width: 0) and (max-width: 767px) {
   #footernew .wrapper .receive-emails a, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
     color: #fff; } }
 
 #container.pt_error #primary.primary-content .errorpage .nohits a:hover {
-  color: #FFFFFF; }
+  color: #fff; }
 
 #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch input.box {
   background: url("../images/search-marcum.png") no-repeat scroll 0 0 transparent; }
 
 #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn {
   background: url("../images/search-marcum.png") no-repeat scroll right top #ff0000;
-  -webkit-transition: none;
   transition: none; }
   #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn:hover {
     background: url("../images/search-marcum.png") no-repeat #ff0000;
     background-position: -202px -28px;
-    -webkit-transition: none;
     transition: none; }
 
 #container.pt_error #primary.primary-content .errorpage .errorfooter .errorfooterbottom .content-asset div {
   font-size: 14.3px; }
 
 .pt_account.acc_landing .content-asset .account-options li {
-  background: #FFFFFF;
+  background: #fff;
   box-shadow: #999 0 0 10px;
   position: relative; }
   .pt_account.acc_landing .content-asset .account-options li h2 {
@@ -889,7 +896,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       color: #333; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.left-nav-style {
-  color: #ffffff;
+  color: #fff;
   font-weight: normal;
   font-size: 32px;
   font-family: "SteelfishEb-Regular", Arial, Helvetica, sans-serif;
@@ -897,8 +904,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .product-tile .product-image .quickview {
   background-color: #C6262C;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #A72126;
   border-right-color: #C32E33;
   border-bottom-color: #E9ACAE;
@@ -914,8 +921,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
   background-color: #C6262C;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #A72126;
   border-right-color: #C32E33;
   border-bottom-color: #E9ACAE;
@@ -980,16 +987,16 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 #headerwrapper #header .row.column1 .headercustomerinfo .change-regionnew {
   padding: 9px 12px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .breadcrumb-element-slash:after {
     content: '/';
-    color: #ffffff; }
+    color: #fff; }
   .pt_cart #main .breadcrumb {
-    color: #ffffff; }
+    color: #fff; }
     .pt_cart #main .breadcrumb .breadcrumb-element, .pt_cart #main .breadcrumb .breadcrumb-element-slash {
-      color: #ffffff; }
+      color: #fff; }
     .pt_cart #main .breadcrumb .breadcrumb-element-slash {
-      color: #ffffff; }
+      color: #fff; }
   #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a, .footer-links ul li a, #footernew .social-icons #fallow-us-on ul li a, #footernew .wrapper .footer-main #linkheading, .copyright, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay {
     color: #000; }
     #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p:hover, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading:hover, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a:hover, .footer-links ul li a:hover, #footernew .social-icons #fallow-us-on ul li a:hover, #footernew .wrapper .footer-main #linkheading:hover, .copyright:hover, #footernew .email-txt .tooltip-footer:hover, #footernew .email-txt .applay:hover {
@@ -1004,12 +1011,12 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 #footernew .change-region {
   padding: 5px 18px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #headerwrapper #header div.logo {
     margin: 21px 0; } }
 
 .productdetail .price {
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   color: #C6262C;
   font-weight: bold;
   font-size: 15px;
@@ -1020,7 +1027,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   color: #333; }
 
 .productdetail a.filter span {
-  color: #FFFFFF;
+  color: #fff;
   font-size: 12px;
   font-weight: normal; }
 
@@ -1030,7 +1037,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   .breadcrumb ul a, .breadcrumb ul span {
     font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 11px !important;
-    color: #FFFFFF !important;
+    color: #fff !important;
     font-weight: bold;
     text-shadow: 2px 3px 5px #000; }
 
@@ -1045,12 +1052,9 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   background-image: none;
   background: #ce0d0d;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #ce0d0d 10%, white 10%, #ce0d0d 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #ce0d0d 10%, white 10%, #ce0d0d 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -1062,8 +1066,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   font-size: 25px;
   line-height: 30px;
   font-variant: normal;
-  color: #FFFFFF; }
-  @media screen and (max-width: 480px) {
+  color: #fff; }
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     .pt_product-details .pdp-main .pdpmain-content .productname {
       color: #000; } }
 
@@ -1093,7 +1097,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 .pt_customerservice #content .productsearchbreadcrumb {
   background: url(../images/container-background-70.jpg); }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .productsearchbreadcrumb .breadcrumb-element {
     color: #fff; }
   .pt_customerservice #content .productsearchbreadcrumb .breadcrumb-element-slash:after {
@@ -1101,7 +1105,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   #content .homepage .column.cell3 .cell.downshift h2 {
     line-height: 30px; } }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .style-cservice .column.colspan2 h1 {
     font-size: 25px;
     line-height: 30px;
@@ -1138,7 +1142,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .pt_product-details .pdp-main .wrapper .pdpmain-content .provideo-spec-link li a {
   color: #fff; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     .pt_product-details .pdp-main .wrapper .pdpmain-content .provideo-spec-link li a {
       color: #666; } }
 
@@ -1150,7 +1154,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .small-new.new-stamp {
   border-radius: 15px;
-  background-color: #FF0000;
+  background-color: #ff0000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -1164,7 +1168,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .small-new.new-stamp-big {
   border-radius: 15px;
-  background-color: #FF0000;
+  background-color: #ff0000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -1177,7 +1181,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .newFlagColorSize .new-colors-snipe, .newFlagColorSize .new-sizes-snipe, .newFlagColorSize .new-pak-size, .newPakSizeFlag .new-colors-snipe, .newPakSizeFlag .new-sizes-snipe, .newPakSizeFlag .new-pak-size {
   border-radius: 15px;
-  background-color: #FF0000;
+  background-color: #ff0000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -1187,7 +1191,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   margin-right: 3px; }
 
 .variationattributes .color ul li a span.corner-ribbon {
-  background-color: #FF0000;
+  background-color: #ff0000;
   color: #fff; }
 
 .productdetail #special-offers ul li {
@@ -1195,3 +1199,5 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .productdetail .price .price-sales {
   color: #ce0d0d; }
+
+/*# sourceMappingURL=marcum.css.map */

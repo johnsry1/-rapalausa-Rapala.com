@@ -1,30 +1,164 @@
 @import url("../css/MyFontsWebfontsKit.css");
-/* body */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
 body {
   color: #333;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-size: 13px;
-  background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x; }
-  body.js-body {
-    background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: #ffffff url(../images/container-background-70.jpg) 50% -105px repeat-x; }
+  background: #fff url(../images/container-background-70.jpg) 50% 0 repeat-x; }
 
-/* <a> styles */
-a {
-  color: black;
-  text-decoration: none; }
+body.js-body {
+  background: none; }
 
-a:hover {
-  text-decoration: underline;
-  cursor: pointer; }
+body .js-container-active .open-menu-wrap {
+  background: #fff url(../images/container-background-70.jpg) 50% -105px repeat-x; }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-  color: #333333;
-  font-family: 'KenyanCoffeeRg-Regular';
+h1,
+.h-one-tag {
+  font-family: "KenyanCoffeeRg-Regular";
+  font-size: 40px;
   font-weight: normal;
-  text-transform: uppercase; }
+  font-style: normal;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #333; }
+
+h2 {
+  font-family: "KenyanCoffeeRg-Regular";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #333; }
+
+h3 {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 16px;
+  text-transform: none;
+  color: #333; }
+
+h4 {
+  font-family: "KenyanCoffeeRg-Regular";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #333; }
+
+h5 {
+  font-family: "KenyanCoffeeRg-Regular";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #333; }
+
+h6 {
+  font-family: "KenyanCoffeeRg-Regular";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #333; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #333;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #FFF200;
+    text-decoration: none; }
+
+p {
+  color: #333;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 18px;
+  padding: 9px 0;
+  text-align: left; }
+
+a {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #000;
+    text-decoration: none; }
+
+a.filter {
+  background-image: "";
+  background-color: #333333;
+  background: linear-gradient(to bottom, #333333 0%, black 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #000002;
+  border-right-color: #222;
+  border-bottom-color: #404040;
+  border-left-color: #000100;
+  clear: left;
+  color: #FFF200 !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: black;
+    background: linear-gradient(to bottom, black 0%, #333333 100%);
+    text-decoration: none;
+    color: #FFF200; }
+
+/* body */
+body.js-body {
+  background: none; }
 
 .pt_product-search-result #page-background .cell.contentbox.upshift, .pt_content-search-result #page-background .cell.contentbox.upshift {
   top: -54px; }
@@ -33,37 +167,10 @@ h1, h2, h4, h5, h6, .h-one-tag {
   margin: -43px 0 15px 0; }
 
 h1, .h-one-tag {
-  font-size: 40px;
-  line-height: 40px;
   margin: 0; }
 
-h2 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h3 {
-  font-size: 16px;
-  line-height: 16px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  color: #333333;
-  font-style: italic;
-  text-transform: none; }
-
-h4 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h5 {
-  font-size: 18px;
-  line-height: 18px; }
-
-h6 {
-  font-size: 16px;
-  line-height: 16px; }
-
 h1.left-nav-style {
-  font-family: 'KenyanCoffeeRg-Regular';
+  font-family: "KenyanCoffeeRg-Regular";
   font-size: 30px;
   line-height: 30px; }
 
@@ -73,14 +180,6 @@ h1.left-nav-style {
 h2.input-style {
   font-size: 22px;
   line-height: 22px; }
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #333333;
-  text-decoration: none; }
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #FFF200;
-  text-decoration: none; }
 
 /*buttons*/
 a.button, button {
@@ -99,8 +198,8 @@ a.button, button {
   color: #FFF200;
   padding: 0 18px 0 18px;
   background-color: black;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #000002;
   border-right-color: #222;
   border-bottom-color: #404040;
@@ -112,22 +211,9 @@ a.button:hover, button:hover {
   cursor: pointer; }
 
 .addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, black), color-stop(100%, #333333)) !important;
-  background: -webkit-linear-gradient(top, black 0%, #333333 100%) !important;
   background: linear-gradient(to bottom, black 0%, #333333 100%) !important;
   text-decoration: none;
   cursor: pointer; }
-
-/* <p> style */
-p {
-  color: #333;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  word-spacing: normal;
-  line-height: 18px;
-  padding: 9px 0 9px 0;
-  text-align: left; }
 
 .upshift {
   position: relative;
@@ -149,10 +235,8 @@ h1.search-result {
   font-weight: normal; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "KenyanCoffeeRg-Regular";
@@ -166,7 +250,6 @@ h1.search-result {
     background-color: #333;
     color: #FFF200 !important;
     border-color: #333;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
       color: #FFF200; }
@@ -180,7 +263,7 @@ h1.search-result {
   font-vairant: normal; }
 
 .pt_store-locator .storelocatorzipsearch .stack .form-row .label .labeltext {
-  font-family: 'KenyanCoffeeRg-Regular';
+  font-family: "KenyanCoffeeRg-Regular";
   font-weight: normal;
   text-transform: uppercase;
   font-size: 22px;
@@ -220,7 +303,7 @@ h1.search-result {
   font-size: 15px; }
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
-  background-color: #000000;
+  background-color: #000;
   color: #FFF200; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background-color: #333; }
@@ -285,7 +368,7 @@ h1.search-result {
 .pt_product-search-result #page-background #primary .search-blk a {
   display: inline-block;
   text-transform: capitalize;
-  color: #000000; }
+  color: #000; }
 
 #header div.logo {
   float: left;
@@ -298,14 +381,11 @@ h1.search-result {
   background-position: right top; }
 
 #headerwrapper #header .row.column1 #minicart #multi-site-one-cart span {
-  color: #333532;
+  color: #333;
   background-image: url(../images/multi-site-one-cart-bg.png);
   font-weight: normal;
   width: 58px;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
   text-transform: capitalize; }
 
 .productdetail .selected a.filter {
@@ -329,53 +409,17 @@ h1.search-result {
     padding-bottom: 0; }
 
 .productdetail .price {
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   color: #333;
   font-weight: bold;
   font-size: 15px;
   line-height: 24px; }
 
 #special-offers .promotion-title {
-  color: #000000; }
+  color: #000; }
 
 #special-offers ul li a {
   font-weight: bold; }
-
-a.filter {
-  margin: 18px 0 0;
-  display: block;
-  clear: left;
-  float: left;
-  width: 184px;
-  line-height: 18px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0;
-  color: #FFF200 !important;
-  padding: 5px 28px 5px 10px;
-  background-color: black;
-  border-style: solid;
-  border-width: 1px;
-  background: #333333;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #333333), color-stop(100%, black));
-  background: -webkit-linear-gradient(top, #333333 0%, black 100%);
-  background: linear-gradient(to bottom, #333333 0%, black 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#000000', GradientType=0 );
-  border-top-color: #000002;
-  border-right-color: #222;
-  border-bottom-color: #404040;
-  border-left-color: #000100;
-  background-repeat: no-repeat; }
-  a.filter:hover {
-    text-decoration: none;
-    background: black;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, black), color-stop(100%, #333333));
-    background: -webkit-linear-gradient(top, black 0%, #333333 100%);
-    background: linear-gradient(to bottom, black 0%, #333333 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#333333', GradientType=0 ); }
 
 .variationattributes .color li a:hover {
   border-color: #FFF200; }
@@ -384,7 +428,7 @@ a.filter {
   border-color: #FFF200;
   background-image: none;
   color: #FFF200;
-  background-color: #000000;
+  background-color: #000;
   border-top-color: #DDDDDD;
   border-left-color: #DDDDDD;
   border-right-color: #222222;
@@ -393,7 +437,7 @@ a.filter {
 .variationattributes .swatches li a:hover {
   background-image: none;
   color: #FFF200;
-  background-color: #000000;
+  background-color: #000;
   border-top-color: #DDDDDD;
   border-left-color: #DDDDDD;
   border-right-color: #222222;
@@ -414,32 +458,21 @@ a.filter {
   margin: 0 5px 0 10px; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #fef775 0%, #fff200 60%);
-  background: linear-gradient(to bottom, #fef775 0%, #fff200 60%);
-  background: -webkit-linear-gradient(to bottom, #fef775 0%, #fff200 60%);
-  background: -ms-linear-gradient(to bottom, #fef775 0%, #fff200 60%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fef775), color-stop(60%, #fff200));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fef775', endColorstr='#fff200',GradientType=0 );
-  color: #333532;
+  background: linear-gradient(to bottom, #fef775 0%, #FFF200 60%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fef775', endColorstr='#fff200', GradientType=0);
+  color: #333;
   text-align: center;
   text-decoration: none;
   padding: 7px 0;
   height: 17px;
   text-indent: 0;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-  background: -webkit-linear-gradient(top, #fff200 60%, #fef775 100%);
-  background: linear-gradient(to bottom, #fff200 60%, #fef775 100%);
-  background: -webkit-linear-gradient(to bottom, #fff200 60%, #fef775 100%);
-  background: -ms-linear-gradient(to bottom, #fff200 60%, #fef775 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #fff200), color-stop(100%, #fef775));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff200', endColorstr='#fef775',GradientType=0 ); }
+  background: linear-gradient(to bottom, #FFF200 60%, #fef775 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff200', endColorstr='#fef775', GradientType=0); }
 
 .shop-brand .shop-brandtext {
   font-family: "KenyanCoffeeRg-Regular";
@@ -448,28 +481,28 @@ a.filter {
   line-height: 22px; }
 
 .categorymenusnew a:hover {
-  color: #000000; }
+  color: #000; }
 
 .categorymenusnew a .count-products {
-  color: #000000; }
+  color: #000; }
 
 .categorymenusnew .category-top-level.active a {
-  color: #000000; }
+  color: #000; }
   .categorymenusnew .category-top-level.active a:hover {
-    color: #000000; }
+    color: #000; }
   .categorymenusnew .category-top-level.active a .count-products {
-    color: #000000; }
+    color: #000; }
 
 .categorymenusnew .category-top-level .category-top-level2 li.active a {
-  color: #000000;
+  color: #000;
   text-decoration: underline; }
   .categorymenusnew .category-top-level .category-top-level2 li.active a .count-products {
-    color: #000000; }
+    color: #000; }
 
 .categorymenusnew .category-top-level .category-top-level2 li a:hover {
-  color: #000000; }
+  color: #000; }
   .categorymenusnew .category-top-level .category-top-level2 li a:hover .count-products {
-    color: #000000; }
+    color: #000; }
 
 /* start of styles for my account page */
 #container.pt_account #primary.primary-content .account-section .label .labeltext {
@@ -484,12 +517,6 @@ a.filter {
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   padding: 0;
   vertical-align: top; }
-
-#container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
-  /* margin: 8px 0 16px 1px; */ }
-  @media screen and (max-width: 480px) {
-    #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
-      /* margin: 0px 0 16px 1px; */ } }
 
 #container.pt_account #primary.primary-content .account-section .custom-checkbox {
   float: left;
@@ -541,7 +568,7 @@ a.filter {
     margin-top: 12px; }
 
 form .label {
-  font-family: 'KenyanCoffeeRg-Regular';
+  font-family: "KenyanCoffeeRg-Regular";
   font-weight: normal;
   color: #333;
   text-transform: uppercase;
@@ -569,11 +596,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   line-height: 40px;
   background-image: none;
   background: #333333;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #333333), color-stop(100%, black));
-  background: -webkit-linear-gradient(top, #333333 0%, black 100%);
   background: linear-gradient(to bottom, #333333 0%, black 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#000000', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#000000', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   color: #FFF200;
@@ -585,7 +609,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1 {
     font-size: 25px;
@@ -625,18 +649,14 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
-    border: 1px solid #000000;
+    border: 1px solid #000;
     background: #333333;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #333333), color-stop(100%, black));
-    background: -webkit-linear-gradient(top, #333333 0%, black 100%);
     background: linear-gradient(to bottom, #333333 0%, black 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#000000', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#000000', GradientType=0); }
     .current a.filter:hover {
       background: black;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, black), color-stop(100%, #333333));
-      background: -webkit-linear-gradient(top, black 0%, #333333 100%);
       background: linear-gradient(to bottom, black 0%, #333333 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#333333', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#333333', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -673,10 +693,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 .product-specifications table.specificiations {
   word-wrap: break-word; }
   .product-specifications table.specificiations thead tr.header td {
-    background: #333333;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #333333), color-stop(100%, #000000));
-    background: -webkit-linear-gradient(top, #333333 0%, #000000 100%);
-    background: linear-gradient(to bottom, #333333 0%, #000000 100%);
+    background: #333;
+    background: linear-gradient(to bottom, #333 0%, #000 100%);
     color: #FFF200;
     border: none;
     vertical-align: middle; }
@@ -691,7 +709,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   .product-specifications table.specificiations tbody tr.evenrow {
     background: #E1E1E1; }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .product-specifications .specificiations {
     border-bottom: none; }
     .product-specifications .specificiations tbody {
@@ -705,10 +723,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
         background: #E1E1E1; }
       .product-specifications .specificiations tbody tr th:first-child {
         width: 100%;
-        background: #333333;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #333333), color-stop(100%, #000000));
-        background: -webkit-linear-gradient(top, #333333 0%, #000000 100%);
-        background: linear-gradient(to bottom, #333333 0%, #000000 100%);
+        background: #333;
+        background: linear-gradient(to bottom, #333 0%, #000 100%);
         color: #FFF200;
         vertical-align: middle;
         border-top-left-radius: 3px;
@@ -738,16 +754,16 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     width: 100%;
     margin: 20px 0 20px;
     min-height: 40px; }
-  /*#vippage-background{ 
-		#page {
-		 .vip-signup-top1{ 
-			 h1{
-			 	font-size:25px !important;
-			 	line-height:27px !important;
-			 	} 
-			 }
-	 	}
-	}*/
+  /*#vippage-background{
+        #page {
+         .vip-signup-top1{
+             h1{
+                 font-size:25px !important;
+                 line-height:27px !important;
+                 }
+             }
+         }
+    }*/
   #vippage-background #page .contentbox .contentboxcontent h1 {
     font-size: 25px !important;
     line-height: 27px !important; }
@@ -784,7 +800,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     color: #FFF200; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.left-nav-style {
-  color: #000000;
+  color: #000;
   font-family: "KenyanCoffeeRg-Regular";
   font-size: 33px;
   font-weight: normal;
@@ -793,13 +809,13 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .product-tile .product-image .quickview {
   color: #FFF200;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #000002;
   border-right-color: #222;
   border-bottom-color: #404040;
   border-left-color: #000100;
-  background-color: #000000; }
+  background-color: #000; }
 
 .product-tile .product-image .quickview:hover {
   background-color: #333;
@@ -807,13 +823,13 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
   color: #FFF200;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #000002;
   border-right-color: #222;
   border-bottom-color: #404040;
   border-left-color: #000100;
-  background-color: #000000; }
+  background-color: #000; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview:hover {
   background-color: #333;
@@ -826,7 +842,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   color: #333; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a {
-  color: #000000; }
+  color: #000; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a:hover {
   text-decoration: none;
@@ -837,7 +853,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all:hover {
   text-decoration: underline;
-  color: #000000 !important; }
+  color: #000 !important; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-pricing .product-sales-price {
   color: #999;
@@ -877,10 +893,10 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   .pt_content-search-result #page-background #primary .folder-content-list li p a.readmore {
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
     font-size: 13px;
-    color: #000000; }
+    color: #000; }
 
 .pt_customerservice .accordion.tabover {
-  background: none repeat scroll 0 0 #000000;
+  background: none repeat scroll 0 0 #000;
   color: #FFF200; }
 
 .registration .custom_signup .form-row .field-wrapper .textinput {
@@ -889,7 +905,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 #headerwrapper #header .row.column1 .headercustomerinfo .change-regionnew {
   padding: 9px 12px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_product-search-result #page-background .cell.contentbox.upshift, .pt_content-search-result #page-background .cell.contentbox.upshift {
     top: 0; }
   #container.pt_product-search-noresult .breadcrumb {
@@ -902,20 +918,17 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 #footernew .change-region {
   padding: 5px 18px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #headerwrapper #header div.logo {
     margin: 21px 0; } }
 
 .pt_product-details .productdetail .wrapper ~ #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a {
   background-image: none;
-  background: #000000;
+  background: #000;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #000000 10%, white 10%, #000000 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #000000 10%, white 10%, #000000 10%, white 10%);
+  background: linear-gradient(to bottom, #000 10%, white 10%, #000 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -931,7 +944,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 .pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group {
   padding: 0; }
   .pt_customerservice .style-cservice .column .contentbox .left-nav-top .contentboxcontent .nav-group li.first-level .second-level li.active a {
-    color: #000000; }
+    color: #000; }
 
 .pt_customerservice #content .productsearchbreadcrumb, .pt_customerservice #content .breadcrumb {
   background: #ffffff url(../images/container-background-70.jpg) 50% 0 repeat-x; }
@@ -940,7 +953,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   text-transform: uppercase;
   padding-bottom: 2px;
   color: #333;
-  font-family: KenyanCoffeeRg-Regular;
+  font-family: "KenyanCoffeeRg-Regular";
   font-weight: normal;
   font-size: 22px;
   line-height: 22px; }
@@ -952,13 +965,13 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   font-size: 40px;
   line-height: 40px; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .style-cservice .column.colspan2 h1 {
     font-size: 25px;
     line-height: 30px;
     font-family: "KenyanCoffeeRg-Regular"; }
   .pt_customerservice #content .style-cservice .column.colspan2 .cellbox.accordion.tabover .folder-contentboxcontent {
-    background: none repeat scroll 0 0 #000000; } }
+    background: none repeat scroll 0 0 #000; } }
 
 .pt_customerservice .site-map ul li.first-level ul li a:hover {
   color: #999; }
@@ -971,7 +984,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .small-new.new-stamp {
   border-radius: 15px;
-  background-color: #000000;
+  background-color: #000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -986,7 +999,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .small-new.new-stamp-big {
   border-radius: 15px;
-  background-color: #000000;
+  background-color: #000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -1000,7 +1013,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .newFlagColorSize .new-colors-snipe, .newFlagColorSize .new-sizes-snipe, .newFlagColorSize .new-pak-size, .newPakSizeFlag .new-colors-snipe, .newPakSizeFlag .new-sizes-snipe, .newPakSizeFlag .new-pak-size {
   border-radius: 15px;
-  background-color: #000000;
+  background-color: #000;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -1010,7 +1023,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   margin-right: 3px; }
 
 .variationattributes .color ul li a span.corner-ribbon {
-  background-color: #000000;
+  background-color: #000;
   color: #FFF200; }
 
 .productdetail #special-offers ul li {
@@ -1020,4 +1033,6 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   color: #666; }
 
 .productdetail .price .price-sales {
-  color: #666666; }
+  color: #666; }
+
+/*# sourceMappingURL=storm.css.map */

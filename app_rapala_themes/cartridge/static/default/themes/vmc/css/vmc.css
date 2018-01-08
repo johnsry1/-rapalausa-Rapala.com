@@ -1,50 +1,168 @@
+@import url("../css/MyFontsWebfontsKit.css");
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
 /* fontcolor */
 /* background */
-/* border-color */
 /* font-family */
-@import url("../css/MyFontsWebfontsKit.css");
-/* body */
 body {
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   background: #fff url(../images/container-background-70.jpg) 50% 0 no-repeat; }
-  body.js-body {
-    background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: #fff url(../images/container-background-70.jpg) 50% -105px no-repeat; }
 
-/* <a> styles */
-a {
-  color: #EE2E24;
+body.js-body {
+  background: none; }
+
+body .js-container-active .open-menu-wrap {
+  background: #fff url(../images/container-background-70.jpg) 50% -105px no-repeat; }
+
+h1,
+.h-one-tag {
+  font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #000; }
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000; }
+
+h3 {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 16px;
+  text-transform: none;
+  color: #333; }
+
+h4 {
+  font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #000; }
+
+h5 {
+  font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #000; }
+
+h6 {
+  font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #000; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #000;
   text-decoration: none; }
-
-a:hover {
-  text-decoration: underline;
-  cursor: pointer; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #EE2E24;
+    text-decoration: none; }
 
 p {
-  color: black;
+  color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: normal;
   word-spacing: normal;
   line-height: 18px;
-  padding: 9px 0 9px 0; }
+  padding: 9px 0;
+  text-align: left; }
 
-/* H1-H6 */
-h1, h4, h5, h6, .h-one-tag {
-  font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
-  color: #000;
+a {
+  color: #EE2E24;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #EE2E24;
+    text-decoration: underline; }
+
+a.filter {
+  background-image: "";
+  background-color: #e42113;
+  background: linear-gradient(to bottom, #e42113 0%, #a81201 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #C3261E;
+  border-right-color: #A82019;
+  border-bottom-color: #F04A41;
+  border-left-color: #F2625B;
+  clear: left;
+  color: #fff !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
   text-transform: uppercase;
-  font-weight: normal; }
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #a81201;
+    background: linear-gradient(to bottom, #a81201 0%, #e42113 100%);
+    text-decoration: none;
+    color: #999; }
 
 h1 a, h4 a, h5 a, h6 a {
   font-weight: normal; }
 
 h1, .h-one-tag {
-  font-size: 28px;
-  line-height: 28px;
   margin: 0; }
 
 .productdetail .price .salesprice {
@@ -54,32 +172,6 @@ h1, .h-one-tag {
   letter-spacing: 0;
   line-height: 24px; }
 
-h2 {
-  font-size: 18px;
-  line-height: 18px;
-  font-family: Arial, Helvetica, sans-serif; }
-
-h3 {
-  font-size: 16px;
-  line-height: 16px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  color: #333333;
-  font-style: italic;
-  text-transform: none; }
-
-h4 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h5 {
-  font-size: 18px;
-  line-height: 18px; }
-
-h6 {
-  font-size: 16px;
-  line-height: 16px; }
-
 h1.left-nav-style {
   font-size: 28px;
   line-height: 28px; }
@@ -87,14 +179,6 @@ h1.left-nav-style {
 h2.input-style {
   font-size: 14px;
   line-height: 16px; }
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #000;
-  text-decoration: none; }
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #EE2E24;
-  text-decoration: none; }
 
 /*buttons*/
 a.button, button {
@@ -113,8 +197,8 @@ a.button, button {
   color: #fff;
   padding: 0 17px 0 17px;
   background-color: #EE2E24;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #C3261E;
   border-right-color: #A82019;
   border-bottom-color: #F04A41;
@@ -131,8 +215,6 @@ a.button:hover, button:hover {
 .addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
   text-decoration: none;
   cursor: pointer;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #a81201), color-stop(100%, #e42113)) !important;
-  background: -webkit-linear-gradient(top, #a81201 0%, #e42113 100%) !important;
   background: linear-gradient(to bottom, #a81201 0%, #e42113 100%) !important; }
 
 a {
@@ -166,13 +248,13 @@ h1.search-result {
 
 form .label {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  color: #333333;
+  color: #333;
   text-transform: uppercase;
   font-size: 14px;
   line-height: 16px;
   font-weight: bold;
   padding-bottom: 2px; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     form .label {
       line-height: 12px; } }
 
@@ -181,13 +263,13 @@ form .label {
 
 #vippage-background form .label {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  color: #333333 !important;
+  color: #333 !important;
   text-transform: uppercase;
   font-size: 14px !important;
   line-height: 16px !important;
   font-weight: bold !important;
   padding-bottom: 2px; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     #vippage-background form .label {
       line-height: 12px; } }
 
@@ -196,10 +278,8 @@ form .label {
   font-vairant: normal; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "SerpentineD-Bol", Arial, Helvetica, sans-serif;
@@ -211,7 +291,6 @@ form .label {
   .pt_acc_landing .content-asset .account-options li:hover {
     background: #EE2E24;
     border-color: #EE2E24;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
       color: #6D0100; }
@@ -224,7 +303,7 @@ form .label {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif; }
 
 .pt_leftnav-profile #primary #RegistrationForm .form-row .label .labeltext {
-  color: #333333;
+  color: #333;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   font-size: 14px;
@@ -235,7 +314,7 @@ form .label {
 
 .pt_order .search-result-items li .order-history-items .order-history-table th {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  color: #333333;
+  color: #333;
   text-transform: uppercase;
   font-size: 14px;
   line-height: 16px;
@@ -254,7 +333,7 @@ form .label {
   font-size: 15px; }
 
 .pt_leftnav-addressbook #addresses .address-list .address-tile .mini-address-title {
-  color: #333333;
+  color: #333;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   font-size: 14px;
@@ -285,7 +364,7 @@ form .label {
 .orderdetails .line-item-details .label,
 .orderdetails .line-item-quantity .label,
 .orderdetails .line-item-price .label {
-  color: #333333;
+  color: #333;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   font-weight: bold;
   font-size: 14px;
@@ -301,7 +380,7 @@ form .label {
   line-height: 24px;
   letter-spacing: 0px; }
   .orderdetails .line-items .line-item .line-item-price .label {
-    color: #333333;
+    color: #333;
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
     font-weight: bold;
     font-size: 14px;
@@ -315,11 +394,8 @@ form .label {
   line-height: 40px;
   background-image: none;
   background: #e42113;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42113), color-stop(100%, #a81201));
-  background: -webkit-linear-gradient(top, #e42113 0%, #a81201 100%);
   background: linear-gradient(to bottom, #e42113 0%, #a81201 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e42113', endColorstr='#a81201', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e42113', endColorstr='#a81201', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   border: none; }
@@ -357,10 +433,7 @@ form .label {
   font-weight: normal;
   background-image: url(../images/multi-site-one-cart-bg.png);
   width: 58px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px; }
+  border-radius: 5px; }
 
 #special-offers .promotion-title {
   color: #333; }
@@ -371,50 +444,14 @@ form .label {
   font-weight: normal; }
 
 a.filter {
-  margin: 18px 0 0;
-  display: block;
-  clear: left;
-  float: left;
-  width: 184px;
-  line-height: 18px;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  letter-spacing: 0;
-  color: #fff !important;
-  padding: 5px 28px 5px 10px;
-  background: #e42113;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42113), color-stop(100%, #a81201));
-  background: -webkit-linear-gradient(top, #e42113 0%, #a81201 100%);
-  background: linear-gradient(to bottom, #e42113 0%, #a81201 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e42113', endColorstr='#a81201', GradientType=0 );
-  border-style: solid;
-  border-width: 1px;
-  border-top-color: #EE2E24;
-  border-right-color: #EE2E24;
-  border-bottom-color: #EE2E24;
-  border-left-color: #EE2E24;
-  background-repeat: no-repeat; }
-  a.filter:hover {
-    text-decoration: none;
-    background: #a81201;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #a81201), color-stop(100%, #e42113));
-    background: -webkit-linear-gradient(top, #a81201 0%, #e42113 100%);
-    background: linear-gradient(to bottom, #a81201 0%, #e42113 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a81201', endColorstr='#e42113', GradientType=0 );
-    color: #999; }
+  border: 1px solid #EE2E24; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
   color: #e80000; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #e42213 60%, #a81101 100%);
   background: linear-gradient(to bottom, #e42213 60%, #a81101 100%);
-  background: -webkit-linear-gradient(to bottom, #e42213 60%, #a81101 100%);
-  background: -ms-linear-gradient(to bottom, #e42213 60%, #a81101 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #e42213), color-stop(100%, #a81101));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$vmc-gradient1', endColorstr='$vmc-gradient2',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$vmc-gradient1', endColorstr='$vmc-gradient2', GradientType=0);
   color: #fff;
   text-align: center;
   text-decoration: none;
@@ -423,10 +460,7 @@ a.filter {
   text-indent: 0;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.leftnav {
   color: #000;
@@ -438,8 +472,8 @@ a.filter {
 .product-tile .product-image .quickview {
   color: #fff;
   background-color: #EE2E24;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #C3261E;
   border-right-color: #A82019;
   border-bottom-color: #F04A41;
@@ -457,8 +491,8 @@ a.filter {
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
   color: #fff;
   background-color: #EE2E24;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #C3261E;
   border-right-color: #A82019;
   border-bottom-color: #F04A41;
@@ -468,10 +502,10 @@ a.filter {
   color: #6D0100;
   background-color: #EE2E24;
   text-decoration: none;
-  border-top-color: #C3261E;
-  border-right-color: #A82019;
-  border-bottom-color: #F04A41;
-  border-left-color: #F2625B; }
+  border-top-color: #d0d0d0;
+  border-right-color: #e8e8e8;
+  border-bottom-color: #f8f8f8;
+  border-left-color: #e8e8e8; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all:hover {
   color: #e42213 !important; }
@@ -590,7 +624,7 @@ a.filter {
 .pt_content-search-result #page-background #primary .resultshits h2 {
   text-transform: none; }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   #container.pt_account #primary.primary-content .account-section h1.title {
     line-height: 27px; }
   #container.pt_account #primary.primary-content .account-section .createan-account {
@@ -608,10 +642,8 @@ a.filter {
         background: #FFE1DE; }
       .product-specifications.iphone-view .specificiations tbody tr:first-child th {
         background: #e42213;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42213), color-stop(100%, #a81101));
-        background: -webkit-linear-gradient(top, #e42213 0%, #a81101 100%);
         background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-        color: #ffffff;
+        color: #fff;
         padding: 8px 13.5px;
         width: 100%;
         margin: 0;
@@ -631,7 +663,7 @@ a.filter {
         min-height: 31px;
         display: block; } }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1 {
     font-size: 25px;
@@ -656,7 +688,7 @@ a.filter {
     line-height: 27px;
     font-variant: normal; }
   .productdetail .price {
-    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif; }
+    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
     .productdetail .price .salesprice {
       font-style: bold;
       font-size: 15px !important;
@@ -664,25 +696,23 @@ a.filter {
   .selected a.filter,
   .future a.filter {
     background-color: #f1f1f1 !important;
-    border-top: 1px solid #d0d0d0;
-    border-right: 1px solid #e8e8e8;
-    border-bottom: 1px solid #f8f8f8;
-    border-left: 1px solid #e8e8e8;
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #d0d0d0;
+    border-right-color: #e8e8e8;
+    border-bottom-color: #f8f8f8;
+    border-left-color: #e8e8e8;
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
     border: 1px solid #9E0000;
     background: #e42113;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42113), color-stop(100%, #a81201));
-    background: -webkit-linear-gradient(top, #e42113 0%, #a81201 100%);
     background: linear-gradient(to bottom, #e42113 0%, #a81201 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e42113', endColorstr='#a81201', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e42113', endColorstr='#a81201', GradientType=0); }
     .current a.filter:hover {
       background: #a81201;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #a81201), color-stop(100%, #e42113));
-      background: -webkit-linear-gradient(top, #a81201 0%, #e42113 100%);
       background: linear-gradient(to bottom, #a81201 0%, #e42113 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a81201', endColorstr='#e42113', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a81201', endColorstr='#e42113', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -728,7 +758,7 @@ a.filter {
     line-height: 27px;
     font-weight: normal; } }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .vmc-background .logo {
     background: url(../images/VMC-logo_mobile-bar.svg) no-repeat center transparent;
     float: left;
@@ -791,7 +821,7 @@ a.filter {
 #footernew .change-region {
   padding: 6px 18px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_cart #main .breadcrumb {
     background: #f1f1f1; }
   #headerwrapper #header div.logo {
@@ -801,12 +831,9 @@ a.filter {
   background-image: none;
   background: #e42213;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #e42213 10%, white 10%, #e42213 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #e42213 10%, white 10%, #e42213 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -819,7 +846,7 @@ a.filter {
   margin: 0 2em 1em 0;
   width: 302px;
   vertical-align: top; }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     .specTable-wrapper {
       width: 100%; } }
   .specTable-wrapper:last-child {
@@ -828,10 +855,8 @@ a.filter {
     word-wrap: break-word; }
     .specTable-wrapper table.specificiations tbody tr th {
       background: #e42213;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42213), color-stop(100%, #a81101));
-      background: -webkit-linear-gradient(top, #e42213 0%, #a81101 100%);
       background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-      color: #ffffff;
+      color: #fff;
       border: none;
       vertical-align: middle; }
       .specTable-wrapper table.specificiations tbody tr th:first-child {
@@ -847,10 +872,8 @@ a.filter {
 
 .product-specifications.desk-tab-view .specificiations thead tr {
   background: #e42213;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e42213), color-stop(100%, #a81101));
-  background: -webkit-linear-gradient(top, #e42213 0%, #a81101 100%);
   background: linear-gradient(to bottom, #e42213 0%, #a81101 100%);
-  color: #ffffff;
+  color: #fff;
   border: none;
   vertical-align: middle; }
   .product-specifications.desk-tab-view .specificiations thead tr:first-child {
@@ -869,7 +892,7 @@ a.filter {
 .nav-group li.list-active {
   color: #EE2E24; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .column3.about-us .column.colspan2 .cell.upshift.tabover {
     background-color: #EE2E24; }
   .pt_customerservice #content .column3.about-us .contentbox.secondbox .left-content .nav-group li.active {
@@ -885,7 +908,7 @@ a.filter {
     line-height: 27px; } }
 
 .variationattributes .swatches ul li a span {
-  color: #ee2e24; }
+  color: #EE2E24; }
 
 .variationattributes .swatches ul li a:hover span {
   color: #300907; }
@@ -930,7 +953,7 @@ a.filter {
   font-size: 27px;
   line-height: 28px; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .style-cservice .column.colspan2 h1 {
     font-size: 25px;
     line-height: 27px;
@@ -949,7 +972,7 @@ a.filter {
 
 .small-new.new-stamp {
   border-radius: 15px;
-  background-color: #E42213;
+  background-color: #e42213;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -978,7 +1001,7 @@ a.filter {
 
 .newFlagColorSize .new-colors-snipe, .newFlagColorSize .new-sizes-snipe, .newFlagColorSize .new-pak-size, .newPakSizeFlag .new-colors-snipe, .newPakSizeFlag .new-sizes-snipe, .newPakSizeFlag .new-pak-size {
   border-radius: 15px;
-  background-color: #E42213;
+  background-color: #e42213;
   font-style: italic;
   font-family: sans-serif;
   font-weight: normal;
@@ -996,3 +1019,5 @@ a.filter {
 
 .productdetail .price .price-sales {
   color: #e42213; }
+
+/*# sourceMappingURL=vmc.css.map */

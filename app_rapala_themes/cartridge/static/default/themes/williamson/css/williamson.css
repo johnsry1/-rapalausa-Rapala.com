@@ -1,26 +1,163 @@
 @import url("https://fast.fonts.com/cssapi/cbb4354c-180c-4070-8d88-4a145ac73007.css");
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
 body {
   color: #333;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   background: #040B1E url(../images/body-background-70.jpg) 50% 0 no-repeat; }
-  body.js-body {
-    background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: #040B1E url(../images/body-background-70.jpg) 50% -105px no-repeat; }
 
-#container {
-  background: transparent; }
+body.js-body {
+  background: none; }
 
-/* <a> styles */
-a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: #4396E1; }
+body .js-container-active .open-menu-wrap {
+  background: #040B1E url(../images/body-background-70.jpg) 50% -105px no-repeat; }
+
+h1,
+.h-one-tag {
+  font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 38px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 38px;
+  text-transform: uppercase;
+  color: #333; }
+
+h2 {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #333; }
+
+h3 {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 16px;
+  text-transform: none;
+  color: #333; }
+
+h4 {
+  font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #333; }
+
+h5 {
+  font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #333; }
+
+h6 {
+  font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #333; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #333;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #235AA6;
+    text-decoration: none; }
+
+p {
+  color: #333;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 18px;
+  padding: 9px 0;
+  text-align: left; }
 
 a {
   color: #235AA6;
-  text-decoration: none; }
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #4396E1;
+    text-decoration: none; }
+
+a.filter {
+  background-image: url(../images/arrow-filter-expand-big.png);
+  background-color: #235aa6;
+  background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #4396E1;
+  border-right-color: #2359A2;
+  border-bottom-color: #AAC0DD;
+  border-left-color: #2B5FA6;
+  clear: left;
+  color: #fff !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #00407c;
+    background: linear-gradient(to bottom, #00407c 0%, #235aa6 100%);
+    text-decoration: none;
+    color: #fff; }
+
+#container {
+  background: transparent; }
 
 .categorymenusnew .category-top-level > a:hover .count-products, .categorymenusnew li.active > a .count-products {
   color: #235AA6; }
@@ -28,45 +165,8 @@ a {
 .pt_productsearchresult #page-background .row.column3 .colspan2.cell4 .contentboxcontent a.searchedfor {
   color: #235AA6; }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-  font-family: "Europa W00 Bold","Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial,  sans-serif;
-  font-weight: normal;
-  color: #333;
-  text-transform: uppercase; }
-
 h1, .h-one-tag {
-  font-size: 38px;
-  line-height: 38px;
-  letter-spacing: 0;
   margin: 0; }
-
-h2 {
-  font-size: 18px;
-  line-height: 18px;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  font-weight: bold; }
-
-h3 {
-  font-size: 16px;
-  line-height: 16px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  color: #333333;
-  font-style: italic;
-  text-transform: none; }
-
-h4 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h5 {
-  font-size: 18px;
-  line-height: 18px; }
-
-h6 {
-  font-size: 16px;
-  line-height: 16px; }
 
 h1.left-nav-style {
   padding-bottom: 6px;
@@ -80,77 +180,46 @@ h2.input-style {
   font-weight: bold;
   padding-bottom: 2px; }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #333;
-  text-decoration: none; }
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #235AA6;
-  text-decoration: none; }
-
-p {
-  color: #333;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  word-spacing: normal;
+a.filter {
+  margin: 18px 0 0;
+  display: block;
+  clear: left;
+  float: left;
+  width: 184px;
   line-height: 18px;
-  padding: 9px 0 9px 0; }
-
-a {
-  color: #235AA6;
-  text-decoration: none; }
-  a.filter {
-    margin: 18px 0 0;
-    display: block;
-    clear: left;
-    float: left;
-    width: 184px;
-    line-height: 18px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    padding: 5px 28px 5px 10px;
-    border-style: solid;
-    border-width: 1px;
-    background-position: 100% 0;
-    background-repeat: no-repeat;
-    background-image: url(../images/arrow-filter-expand-big.png);
-    color: #ffffff !important;
-    background: #235aa6;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #235aa6), color-stop(100%, #00407c));
-    background: -webkit-linear-gradient(top, #235aa6 0%, #00407c 100%);
-    background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#235aa6', endColorstr='#00407c', GradientType=0 );
-    border-top-color: #1F4D8C;
-    border-right-color: #2359A2;
-    border-bottom-color: #AAC0DD;
-    border-left-color: #2B5FA6; }
-    a.filter:hover {
-      text-decoration: none;
-      background: #00407c;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #00407c), color-stop(100%, #235aa6));
-      background: -webkit-linear-gradient(top, #00407c 0%, #235aa6 100%);
-      background: linear-gradient(to bottom, #00407c 0%, #235aa6 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00407c', endColorstr='#235aa6', GradientType=0 );
-      border-top-color: #397FBE;
-      border-right-color: #4292DC;
-      border-bottom-color: #B7D7F3;
-      border-left-color: #4896DD; }
-
-a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: #4396E1; }
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  padding: 5px 28px 5px 10px;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  background-image: url(../images/arrow-filter-expand-big.png);
+  color: #fff !important;
+  background: #235aa6;
+  background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #4396E1;
+  border-right-color: #2359A2;
+  border-bottom-color: #AAC0DD;
+  border-left-color: #2B5FA6; }
+  a.filter:hover {
+    text-decoration: none;
+    background: #00407c;
+    background: linear-gradient(to bottom, #00407c 0%, #235aa6 100%);
+    border-top-color: #397FBE;
+    border-right-color: #4292DC;
+    border-bottom-color: #B7D7F3;
+    border-left-color: #4896DD; }
 
 p a {
   font-weight: bold; }
 
 #container.pt_product-search-noresult .breadcrumb {
-  color: #ffffff; }
+  color: #fff; }
 
 #footernew .wrapper .footer-main .footer-left-section .footer-links #about li#linkheading.desktopHide a span {
   color: #b3b3b3; }
@@ -162,7 +231,7 @@ p a {
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
   background-color: #235AA6;
-  color: #ffffff; }
+  color: #fff; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background: #4396E1; }
 
@@ -185,10 +254,8 @@ p a {
   font-size: 15px; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
@@ -202,22 +269,21 @@ p a {
   .pt_acc_landing .content-asset .account-options li:hover {
     background-color: #4396E1;
     border-color: #4396E1;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover p {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover i {
-      color: #ffffff; }
+      color: #fff; }
 
 .pt_leftnav-addressbook #main .breadcrumb .breadcrumb-element:last-child {
-  color: #ffffff; }
+  color: #fff; }
 
 .pt_leftnav-addressbook #main .breadcrumb .breadcrumb-element span.breadcrumb-element-slash {
   background: none; }
   .pt_leftnav-addressbook #main .breadcrumb .breadcrumb-element span.breadcrumb-element-slash:after {
-    color: #ffffff; }
+    color: #fff; }
 
 .pt_leftnav-addressbook #addresses .address-list .address-tile .mini-address-title {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
@@ -302,7 +368,7 @@ p a {
     font-style: normal; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1 {
-  color: #ffffff; }
+  color: #fff; }
   .pt_product-search-result #page-background #primary .contentboxcontent h1.search-result {
     font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-size: 22px;
@@ -310,7 +376,7 @@ p a {
     font-variant: normal;
     font-weight: bold;
     line-height: 36px;
-    color: #ffffff; }
+    color: #fff; }
 
 .pt_product-search-result #page-background #primary .search-blk a {
   display: inline-block;
@@ -339,9 +405,9 @@ a.button, button {
   color: white;
   padding: 0 18px 0 18px;
   background-color: #235AA6;
-  border-style: solid;
   border-width: 1px;
-  border-top-color: #1F4D8C;
+  border-style: solid;
+  border-top-color: #4396E1;
   border-right-color: #2359A2;
   border-bottom-color: #AAC0DD;
   border-left-color: #2B5FA6; }
@@ -356,8 +422,6 @@ a.button:hover, button:hover {
   cursor: pointer; }
 
 .addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #00407c), color-stop(100%, #235aa6)) !important;
-  background: -webkit-linear-gradient(top, #00407c 0%, #235aa6 100%) !important;
   background: linear-gradient(to bottom, #00407c 0%, #235aa6 100%) !important;
   text-decoration: none;
   border-top-color: #397FBE;
@@ -376,9 +440,6 @@ a.button:hover, button:hover {
   font-weight: normal;
   width: 58px;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
   text-transform: capitalize;
   background-image: url(../images/multi-site-one-cart-bg.png); }
 
@@ -394,32 +455,21 @@ a.button:hover, button:hover {
   text-decoration: underline; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #235AA6 60%, #00407c 100%);
   background: linear-gradient(to bottom, #235AA6 60%, #00407c 100%);
-  background: -webkit-linear-gradient(to bottom, #235AA6 60%, #00407c 100%);
-  background: -ms-linear-gradient(to bottom, #235AA6 60%, #00407c 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #235AA6), color-stop(100%, #00407c));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$wil-bgblue', endColorstr='#00407c',GradientType=0 );
-  color: #ffffff;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$wil-bgblue', endColorstr='#00407c', GradientType=0);
+  color: #fff;
   text-align: center;
   text-decoration: none;
   padding: 7px 0;
   height: 17px;
   text-indent: 0;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-  background: -webkit-linear-gradient(top, #00407c 0%, #235AA6 60%);
   background: linear-gradient(to bottom, #00407c 0%, #235AA6 60%);
-  background: -webkit-linear-gradient(to bottom, #00407c 0%, #235AA6 60%);
-  background: -ms-linear-gradient(to bottom, #00407c 0%, #235AA6 60%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00407c), color-stop(60%, #235AA6));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00407c', endColorstr='$wil-bgblue',GradientType=0 ); }
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00407c', endColorstr='$wil-bgblue', GradientType=0); }
 
 .international-links-container {
   font-size: 12px; }
@@ -430,7 +480,9 @@ a.button:hover, button:hover {
 
 .international-investor-link a {
   color: #235AA6;
-  border-top-color: #1F4D8C;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #4396E1;
   border-right-color: #2359A2;
   border-bottom-color: #AAC0DD;
   border-left-color: #2B5FA6;
@@ -496,7 +548,7 @@ a.button:hover, button:hover {
 
 #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
   /* margin: 8px 0 16px 1px; */ }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
       /* margin: 0px 0 16px 1px; */ } }
 
@@ -538,12 +590,6 @@ a.button:hover, button:hover {
   background-position: 50% 0; }
   .pt_product-details #footernew #footer-brands {
     margin-top: 0; }
-
-body {
-  color: #333;
-  font-family: Arial,Helvetica,sans-serif;
-  font-size: 12px;
-  background: #040B1E url(../images/body-background-70.jpg) 50% 0 no-repeat; }
 
 .pt_storefront #footernew {
   top: -132px; }
@@ -599,7 +645,7 @@ form .label {
   font-weight: bold; }
 
 #vippage-background form .label {
-  font-variant: initial  !important;
+  font-variant: initial !important;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
   text-transform: uppercase !important;
   font-size: 14px !important;
@@ -621,14 +667,11 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   width: calc(100% - 50px);
   height: 40px;
   line-height: 40px;
-  color: #ffffff;
+  color: #fff;
   background-image: none;
   background: #235aa6;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #235aa6), color-stop(100%, #00407c));
-  background: -webkit-linear-gradient(top, #235aa6 0%, #00407c 100%);
   background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#235aa6', endColorstr='#00407c', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#235aa6', endColorstr='#00407c', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   border: none; }
@@ -639,17 +682,17 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-@media screen and (min-width: 481px) {
+@media only screen and (min-width: 481px) {
   .pt_product-details #content .pdp-main .pdpmain-content .provideo-spec-link li.specChart-link a {
-    color: #ffffff; } }
+    color: #fff; } }
 
 .pt_product-details #content .pdp-main .pdpmain-content .productname {
-  color: #ffffff; }
-  @media screen and (max-width: 480px) {
+  color: #fff; }
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     .pt_product-details #content .pdp-main .pdpmain-content .productname {
       color: #000; } }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1 {
     font-size: 24px;
@@ -659,7 +702,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
     color: #fff; }
   #footernew .wrapper .footer-main .footer-left-section .footer-links #about, #footernew .wrapper .footer-main .footer-left-section .footer-links #customer-service, #footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop, #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness, #footernew .wrapper .footer-main .footer-left-section .footer-links #rapala_insider, #footernew .wrapper .footer-main .footer-left-section .footer-links #follow_us {
-    background: #f1f1f1; }
+    background: #F1F1F1; }
   .pt_wish-list #main #page-background #primary h1,
   .pt_leftnav-addressbook #main #page-background #primary h1,
   .pt_order #main #page-background #primary h1,
@@ -680,20 +723,20 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     font-size: 24px;
     line-height: 28px;
     font-variant: normal;
-    color: #ffffff; }
+    color: #fff; }
   .productdetail a.filter span {
     font-style: normal;
-    color: #ffffff;
+    color: #fff;
     font-weight: normal; }
   .productdetail a.filter .selectedvarval {
-    color: #ffffff; }
+    color: #fff; }
   .productdetail .price .salesprice {
     font-style: bold !important;
     font-size: 15px !important;
     color: #235aa6 !important; }
   .selected a.filter,
   .future a.filter {
-    background-color: #f1f1f1 !important;
+    background-color: #F1F1F1 !important;
     border-top: 1px solid #d0d0d0;
     border-right: 1px solid #e8e8e8;
     border-bottom: 1px solid #f8f8f8;
@@ -701,19 +744,15 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
-    color: #ffffff;
+    color: #fff;
     border: 1px solid #105182;
     background: #235aa6;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #235aa6), color-stop(100%, #00407c));
-    background: -webkit-linear-gradient(top, #235aa6 0%, #00407c 100%);
     background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#235aa6', endColorstr='#00407c', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#235aa6', endColorstr='#00407c', GradientType=0); }
     .current a.filter:hover {
       background: #00407c;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #00407c), color-stop(100%, #235aa6));
-      background: -webkit-linear-gradient(top, #00407c 0%, #235aa6 100%);
       background: linear-gradient(to bottom, #00407c 0%, #235aa6 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00407c', endColorstr='#235aa6', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00407c', endColorstr='#235aa6', GradientType=0); }
   .pt_product-search-result .contentboxcontent .left-nav-style,
   .pt_content-search-result .contentboxcontent .left-nav-style {
     font-size: 25px;
@@ -741,7 +780,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb a,
     .pt_content-search-result .breadcrumb a,
     .pt_leftnav-profile .breadcrumb a {
-      color: #ffffff !important; }
+      color: #fff !important; }
     .pt_wish-list .breadcrumb .breadcrumb-element,
     .pt_leftnav-addressbook .breadcrumb .breadcrumb-element,
     .pt_order .breadcrumb .breadcrumb-element,
@@ -750,7 +789,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb .breadcrumb-element,
     .pt_content-search-result .breadcrumb .breadcrumb-element,
     .pt_leftnav-profile .breadcrumb .breadcrumb-element {
-      color: #ffffff !important; }
+      color: #fff !important; }
       .pt_wish-list .breadcrumb .breadcrumb-element:after,
       .pt_leftnav-addressbook .breadcrumb .breadcrumb-element:after,
       .pt_order .breadcrumb .breadcrumb-element:after,
@@ -759,7 +798,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       .pt_product-search-result .breadcrumb .breadcrumb-element:after,
       .pt_content-search-result .breadcrumb .breadcrumb-element:after,
       .pt_leftnav-profile .breadcrumb .breadcrumb-element:after {
-        color: #ffffff !important; }
+        color: #fff !important; }
       .pt_wish-list .breadcrumb .breadcrumb-element:last-element,
       .pt_leftnav-addressbook .breadcrumb .breadcrumb-element:last-element,
       .pt_order .breadcrumb .breadcrumb-element:last-element,
@@ -786,7 +825,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       .pt_product-search-result .breadcrumb .breadcrumb-element-slash:after,
       .pt_content-search-result .breadcrumb .breadcrumb-element-slash:after,
       .pt_leftnav-profile .breadcrumb .breadcrumb-element-slash:after {
-        color: #ffffff !important; }
+        color: #fff !important; }
     .pt_wish-list .breadcrumb span,
     .pt_leftnav-addressbook .breadcrumb span,
     .pt_order .breadcrumb span,
@@ -795,7 +834,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     .pt_product-search-result .breadcrumb span,
     .pt_content-search-result .breadcrumb span,
     .pt_leftnav-profile .breadcrumb span {
-      color: #ffffff; }
+      color: #fff; }
   .pt_wish-list .breadcrumb span.breadcrumb-element-slash,
   .pt_leftnav-addressbook .breadcrumb span.breadcrumb-element-slash,
   .pt_order .breadcrumb span.breadcrumb-element-slash,
@@ -805,7 +844,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     background: none;
     top: 0 !important; }
     #footernew .wrapper .receive-emails a {
-      color: #ffffff; }
+      color: #fff; }
     #footernew .wrapper .footer-main {
       background-image: none;
       margin: 0;
@@ -819,15 +858,15 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
       #footernew .wrapper .footer-main .footer-left-section .footer-links #about.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #customer-service.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #busniness.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #follow_us.expanded ul li a, #footernew .wrapper .footer-main .footer-left-section .footer-links #rapala_insider.expanded ul li a {
         color: #000; } }
 
-@media screen and (max-width: 767px) {
+@media only screen and (min-width: 0) and (max-width: 767px) {
   #footernew .wrapper .footer-main .footer-left-section .terms-privacy .terms, #footernew .wrapper .footer-main .footer-left-section .terms-privacy .privacy {
     color: #fff; } }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .product-specifications.iphone-view .specificiations {
     border: none; }
     .product-specifications.iphone-view .specificiations tbody {
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #CCC;
       margin-bottom: 2em;
       display: table;
       width: 100%; }
@@ -837,10 +876,8 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
         background: #DEE6F1; }
       .product-specifications.iphone-view .specificiations tbody tr:first-child th {
         width: 100%;
-        background: #235aa6;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #235aa6), color-stop(100%, #00407c));
-        background: -webkit-linear-gradient(top, #235aa6 0%, #00407c 100%);
-        background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
+        background: #235AA6;
+        background: linear-gradient(to bottom, #235AA6 0%, #00407c 100%);
         color: #fff;
         vertical-align: middle;
         border: none;
@@ -872,14 +909,14 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     min-height: 40px; }
   #vippage-background #page .vip-signup-top1 {
     /* h1{
-			 	font-size:36px;
-			 	line-height:36px;
-			 	} */ }
+                     font-size:36px;
+                     line-height:36px;
+                     } */ }
   #vippage-background #page .contentbox .contentboxcontent {
     /* h1{
-				 	font-size:25px !important;
-				 	line-height:27px !important;
-				 	} */ }
+                         font-size:25px !important;
+                         line-height:27px !important;
+                         } */ }
   #RegistrationForm .label span.labeltext {
     font-size: 12px !important;
     line-height: 12px; }
@@ -895,7 +932,6 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn {
   background: url("../images/search-full-williamson.png") no-repeat scroll right top #235AA6;
-  -webkit-transition: none;
   transition: none; }
   #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn:hover {
     background: url("../images/search-full-williamson.png") no-repeat #4396E1;
@@ -905,7 +941,7 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   top: 0 !important; }
 
 .pt_account.acc_landing .content-asset .account-options li {
-  background: #ffffff;
+  background: #fff;
   box-shadow: #999 0 0 10px;
   position: relative; }
   .pt_account.acc_landing .content-asset .account-options li h2 {
@@ -922,10 +958,10 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     background-color: #4396E1;
     border-color: #4396E1; }
     .pt_account.acc_landing .content-asset .account-options li:hover a, .pt_account.acc_landing .content-asset .account-options li:hover h2, .pt_account.acc_landing .content-asset .account-options li:hover p {
-      color: #ffffff; }
+      color: #fff; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.left-nav-style {
-  color: #ffffff;
+  color: #fff;
   font-weight: normal;
   margin-bottom: 0;
   font-family: "Europa W00 Bold", "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
@@ -935,13 +971,13 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .product-tile .product-image .quickview {
   background-color: #235aa6;
-  border-style: solid;
   border-width: 1px;
-  border-top-color: #1F4D8C;
+  border-style: solid;
+  border-top-color: #4396E1;
   border-right-color: #2359A2;
   border-bottom-color: #AAC0DD;
   border-left-color: #2B5FA6;
-  color: #ffffff; }
+  color: #fff; }
 
 .product-tile .product-image .quickview:hover {
   color: white;
@@ -953,11 +989,11 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
   border-left-color: #4896DD; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
-  color: #ffffff;
+  color: #fff;
   background-color: #235aa6;
-  border-style: solid;
   border-width: 1px;
-  border-top-color: #1F4D8C;
+  border-style: solid;
+  border-top-color: #4396E1;
   border-right-color: #2359A2;
   border-bottom-color: #AAC0DD;
   border-left-color: #2B5FA6; }
@@ -982,13 +1018,13 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a:hover {
   text-decoration: none;
-  color: #235aa6; }
+  color: #235AA6; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all {
   color: #235aa6; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all:hover {
-  color: #235aa6 !important;
+  color: #235AA6 !important;
   text-decoration: underline; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-pricing .product-sales-price {
@@ -1059,16 +1095,16 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
 #headerwrapper #header .row.column1 .headercustomerinfo .change-regionnew {
   padding: 9px 12px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .breadcrumb-element-slash:after {
     content: '/';
-    color: #ffffff !important; }
+    color: #fff !important; }
   .pt_cart #main .breadcrumb {
-    color: #ffffff; }
+    color: #fff; }
     .pt_cart #main .breadcrumb .breadcrumb-element, .pt_cart #main .breadcrumb .breadcrumb-element-slash {
-      color: #ffffff; }
+      color: #fff; }
     .pt_cart #main .breadcrumb .breadcrumb-element-slash {
-      color: #ffffff; }
+      color: #fff; }
   #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a, .footer-links ul li a, #footernew .social-icons #fallow-us-on ul li a, #footernew .wrapper .footer-main #linkheading, .copyright, #footernew .email-txt .tooltip-footer, #footernew .email-txt .applay, #footernew .wrapper .footer-main #linkheading a span, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a span {
     color: #000; }
     #footernew .wrapper .footer-main .footer-left-section .footer-links .footer-heading p:hover, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading:hover, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a:hover, .footer-links ul li a:hover, #footernew .social-icons #fallow-us-on ul li a:hover, #footernew .wrapper .footer-main #linkheading:hover, .copyright:hover, #footernew .email-txt .tooltip-footer:hover, #footernew .email-txt .applay:hover, #footernew .wrapper .footer-main #linkheading a span:hover, #footernew .wrapper .footer-main .footer-left-section .footer-links #linkheading a span:hover {
@@ -1077,21 +1113,19 @@ div .returningcustomers .custom_signin .formfield .form-row .label {
     margin: 0px; } }
 
 .product-specifications .specificiations thead tr.header td {
-  background: #235aa6;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #235aa6), color-stop(100%, #00407c));
-  background: -webkit-linear-gradient(top, #235aa6 0%, #00407c 100%);
-  background: linear-gradient(to bottom, #235aa6 0%, #00407c 100%);
+  background: #235AA6;
+  background: linear-gradient(to bottom, #235AA6 0%, #00407c 100%);
   color: #fff; }
 
 .product-specifications .specificiations tbody tr.evenrow {
   background: #DEE6F1; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #headerwrapper #header div.logo {
     margin: 20.5px 0; } }
 
 .productdetail .price {
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   color: #235AA6;
   font-weight: bold;
   font-size: 15px;
@@ -1119,17 +1153,17 @@ input.quantityinput, input .quantity input {
   text-align: center; }
 
 .productdetail a.filter span {
-  color: #ffffff;
+  color: #fff;
   font-size: 12px;
   font-weight: normal; }
 
 .variationattributes .swatches li a:hover {
-  color: #ffffff;
+  color: #fff;
   border-color: #4396E1;
   background-image: url("../images/product-detail-size.jpg"); }
 
 .variationattributes .swatches li.selected a {
-  color: #ffffff;
+  color: #fff;
   border-color: #4396E1;
   background-image: url(../images/product-detail-size.jpg); }
 
@@ -1140,7 +1174,7 @@ input.quantityinput, input .quantity input {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px !important;
     font-weight: normal;
-    color: #ffffff !important; }
+    color: #fff !important; }
     .breadcrumb ul a:hover {
       background-position: 2px 50%;
       color: #4396E1 !important;
@@ -1149,7 +1183,7 @@ input.quantityinput, input .quantity input {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px !important;
     font-weight: normal;
-    color: #ffffff !important; }
+    color: #fff !important; }
 
 .breadcrumb span.breadcrumb-element-slash {
   padding: 0 2px;
@@ -1157,14 +1191,11 @@ input.quantityinput, input .quantity input {
 
 .pt_product-details .productdetail .wrapper ~ #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a {
   background-image: none;
-  background: #235aa6;
+  background: #235AA6;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #235aa6 10%, white 10%, #235aa6 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #235aa6 10%, white 10%, #235aa6 10%, white 10%);
+  background: linear-gradient(to bottom, #235AA6 10%, white 10%, #235AA6 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -1191,7 +1222,7 @@ input.quantityinput, input .quantity input {
 .pt_customerservice #content .productsearchbreadcrumb, .pt_customerservice #content .breadcrumb {
   background: url(../images/body-background-70.jpg); }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .productsearchbreadcrumb .breadcrumb-element, .pt_customerservice #content .breadcrumb .breadcrumb-element {
     color: #fff;
     background: none; }
@@ -1200,7 +1231,7 @@ input.quantityinput, input .quantity input {
   .pt_customerservice #content .productsearchbreadcrumb .breadcrumb-element-slash, .pt_customerservice #content .breadcrumb .breadcrumb-element-slash {
     background: none; } }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .style-cservice .column.colspan2 h1 {
     font-size: 24px;
     line-height: 28px;
@@ -1279,4 +1310,6 @@ input.quantityinput, input .quantity input {
   color: #235aa6; }
 
 .productdetail .price .price-sales {
-  color: #235aa6; }
+  color: #235AA6; }
+
+/*# sourceMappingURL=williamson.css.map */

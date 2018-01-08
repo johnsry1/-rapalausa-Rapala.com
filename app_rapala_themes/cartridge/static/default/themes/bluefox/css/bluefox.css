@@ -1,13 +1,163 @@
 @import url("https://fast.fonts.com/cssapi/e1d62d77-1f31-4ff7-9f89-bfd805e66f34.css");
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
 body {
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   background: #dbe9f4 url(../images/body-background-70.jpg) 50% 0 repeat-x; }
-  body.js-body {
-    background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: #dbe9f4 url(../images/body-background-70.jpg) 50% -105px repeat-x; }
+
+body.js-body {
+  background: none; }
+
+body .js-container-active .open-menu-wrap {
+  background: #dbe9f4 url(../images/body-background-70.jpg) 50% -105px repeat-x; }
+
+h1,
+.h-one-tag {
+  font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
+  font-size: 25px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #333; }
+
+h2 {
+  font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #333; }
+
+h3 {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 16px;
+  text-transform: none;
+  color: #333; }
+
+h4 {
+  font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #333; }
+
+h5 {
+  font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #333; }
+
+h6 {
+  font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #333; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #333;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #F58220;
+    text-decoration: none; }
+
+p {
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 18px;
+  padding: 9px 0;
+  text-align: left; }
+
+a {
+  color: #F58220;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #F93;
+    text-decoration: none; }
+
+a.filter {
+  background-image: url(../images/arrow-filter-expand-big.png);
+  background-color: #f58320;
+  background: linear-gradient(to bottom, #f58320 0%, #d16f00 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #CF6F1C;
+  border-right-color: #EF8020;
+  border-bottom-color: #FBCFA9;
+  border-left-color: #F08428;
+  clear: left;
+  color: #fff !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #d16f00;
+    background: linear-gradient(to bottom, #d16f00 0%, #f58320 100%);
+    text-decoration: none;
+    color: #fff; }
+
+body.js-body {
+  background: none; }
 
 #container {
   background: transparent; }
@@ -15,42 +165,8 @@ body {
 #container.pt_product-search-noresult #footernew {
   top: 0 !important; }
 
-/* H1-H6 */
-h1, h2, h4, h5, h6, .h-one-tag {
-  font-family: 'ITCLubalinGraphW01-Demi', 'LubalGraph Bd BT', Rockwell, serif;
-  font-weight: normal;
-  color: #333;
-  text-transform: uppercase; }
-
 h1, .h-one-tag {
-  font-size: 25px;
-  line-height: 25px;
   margin: 0; }
-
-h2 {
-  font-size: 16px;
-  line-height: 16px; }
-
-h3 {
-  font-size: 16px;
-  line-height: 16px;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  color: #333333;
-  font-style: italic;
-  text-transform: none; }
-
-h4 {
-  font-size: 24px;
-  line-height: 24px; }
-
-h5 {
-  font-size: 18px;
-  line-height: 18px; }
-
-h6 {
-  font-size: 16px;
-  line-height: 16px; }
 
 h1.left-nav-style {
   padding-bottom: 6px;
@@ -64,78 +180,12 @@ h2.input-style {
   font-weight: bold;
   padding-bottom: 2px; }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #333;
-  text-decoration: none; }
-
-h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #F58220;
-  text-decoration: none; }
-
-p {
-  color: #333;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+a.filter span {
+  font-style: italic;
   font-weight: normal;
-  word-spacing: normal;
-  line-height: 18px;
-  padding: 9px 0 9px 0;
-  text-align: left; }
-
-a {
-  color: #F58220;
-  text-decoration: none; }
-  a.filter {
-    margin: 18px 0 0;
-    display: block;
-    clear: left;
-    float: left;
-    width: 184px;
-    line-height: 18px;
-    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    color: #ffffff !important;
-    padding: 5px 28px 5px 10px;
-    border-style: solid;
-    border-width: 1px;
-    background-position: 100% 0;
-    background-repeat: no-repeat;
-    background-image: url(../images/arrow-filter-expand-big.png);
-    background: #f58320;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58320), color-stop(100%, #d16f00));
-    background: -webkit-linear-gradient(top, #f58320 0%, #d16f00 100%);
-    background: linear-gradient(to bottom, #f58320 0%, #d16f00 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58320', endColorstr='#d16f00', GradientType=0 );
-    border-top-color: #CF6F1C;
-    border-right-color: #EF8020;
-    border-bottom-color: #FBCFA9;
-    border-left-color: #F08428; }
-    a.filter:hover {
-      background: #d16f00;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #d16f00), color-stop(100%, #f58320));
-      background: -webkit-linear-gradient(top, #d16f00 0%, #f58320 100%);
-      background: linear-gradient(to bottom, #d16f00 0%, #f58320 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d16f00', endColorstr='#f58320', GradientType=0 );
-      border-top-color: #D7812C;
-      border-right-color: #F99533;
-      border-bottom-color: #FFD8B1;
-      border-left-color: #F9993A;
-      text-decoration: none; }
-    a.filter span {
-      font-style: italic;
-      font-weight: normal;
-      text-transform: none;
-      letter-spacing: 0px;
-      font-size: 11px; }
-
-a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  color: #F93; }
+  text-transform: none;
+  letter-spacing: 0px;
+  font-size: 11px; }
 
 /*buttons*/
 a.button, button {
@@ -154,8 +204,8 @@ a.button, button {
   color: white;
   padding: 0 18px 0 18px;
   background-color: #F58220;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #CF6F1C;
   border-right-color: #EF8020;
   border-bottom-color: #FBCFA9;
@@ -164,21 +214,12 @@ a.button, button {
 a.button:hover, button:hover {
   background: #F93;
   text-decoration: none;
-  /*border-top-color: #0056AC;
-	border-right-color: #0064C7;
-	border-bottom-color: #9DC4EB;
-	border-left-color: #0064C7;*/
   cursor: pointer; }
 
-.addTo-cart-section a.button:hover, .addTo-cart-section button:hover {
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #d16f00), color-stop(100%, #f58320)) !important;
-  background: -webkit-linear-gradient(top, #d16f00 0%, #f58320 100%) !important;
+.addTo-cart-section a.button:hover,
+.addTo-cart-section button:hover {
   background: linear-gradient(to bottom, #d16f00 0%, #f58320 100%) !important;
   text-decoration: none;
-  /*border-top-color: #0056AC;
-	border-right-color: #0064C7;
-	border-bottom-color: #9DC4EB;
-	border-left-color: #0064C7;*/
   cursor: pointer; }
 
 p a {
@@ -193,20 +234,16 @@ h1.search-result {
   line-height: 36px; }
 
 .product-specifications .specificiations thead tr {
-  background: #f58220;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58220), color-stop(100%, #d17000));
-  background: -webkit-linear-gradient(top, #f58220 0%, #d17000 100%);
-  background: linear-gradient(to bottom, #f58220 0%, #d17000 100%);
+  background: #F58220;
+  background: linear-gradient(to bottom, #F58220 0%, #d17000 100%);
   color: #fff; }
 
 .product-specifications .specificiations tbody tr.evenrow {
   background: #FEECDE; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-family: "ITCLubalinGraphW01-Demi", "LubalGraph Bd BT", Rockwell, serif;
@@ -220,14 +257,13 @@ h1.search-result {
   .pt_acc_landing .content-asset .account-options li:hover {
     background-color: #F58220;
     border-color: #F58220;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover p {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover i {
-      color: #ffffff; }
+      color: #fff; }
 
 .pt_store-locator .storelocator h1 {
   text-transform: uppercase;
@@ -257,9 +293,6 @@ h1.search-result {
   font-weight: normal;
   width: 58px;
   border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -ms-border-radius: 5px;
   text-transform: capitalize;
   background-image: url(../images/multi-site-one-cart-bg.png); }
 
@@ -271,35 +304,24 @@ h1.search-result {
   margin: 0 5px 0 10px; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
-  color: #f58220; }
+  color: #F58220; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button {
-  background: -webkit-linear-gradient(top, #f58220 60%, #cd6200 100%);
-  background: linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-  background: -webkit-linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-  background: -ms-linear-gradient(to bottom, #f58220 60%, #cd6200 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, #f58220), color-stop(100%, #cd6200));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58220', endColorstr='#cd6200',GradientType=0 );
-  color: #ffffff;
+  background: linear-gradient(to bottom, #F58220 60%, #cd6200 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58220', endColorstr='#cd6200', GradientType=0);
+  color: #fff;
   text-align: center;
   text-decoration: none;
   padding: 7px 0;
   height: 17px;
   text-indent: 0;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-size: 11px;
-  border-radius: 0 5px 5px 0;
-  -moz-border-radius: 0 5px 5px 0;
-  -webkit-border-radius: 0 5px 5px 0;
-  -ms-border-radius: 0 5px 5px 0; }
+  border-radius: 0 5px 5px 0; }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-checkout-button:hover {
-  background: -webkit-linear-gradient(top, #cd6200 0%, #f58220 60%);
-  background: linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-  background: -webkit-linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-  background: -ms-linear-gradient(to bottom, #cd6200 0%, #f58220 60%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cd6200), color-stop(60%, #f58220));
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd6200', endColorstr='#f58220',GradientType=0 ); }
+  background: linear-gradient(to bottom, #cd6200 0%, #F58220 60%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cd6200', endColorstr='#f58220', GradientType=0); }
 
 .owl-carousel .owl-dot span {
   background-image: url(../images/slideshow-counter.png); }
@@ -312,36 +334,36 @@ h1.search-result {
   padding: 15px 0 5px 0 !important; }
 
 .categorymenusnew a:hover {
-  color: #f58220;
+  color: #F58220;
   text-decoration: underline; }
 
 .categorymenusnew .category-top-level a:hover {
-  color: #f58220; }
+  color: #F58220; }
   .categorymenusnew .category-top-level a:hover .count-products {
-    color: #f58220; }
+    color: #F58220; }
 
 .categorymenusnew .category-top-level.active a {
-  color: #f58220; }
+  color: #F58220; }
   .categorymenusnew .category-top-level.active a:hover {
-    color: #f58220; }
+    color: #F58220; }
     .categorymenusnew .category-top-level.active a:hover .count-products {
-      color: #f58220; }
+      color: #F58220; }
   .categorymenusnew .category-top-level.active a .count-products {
-    color: #f58220; }
+    color: #F58220; }
 
 .categorymenusnew .category-top-level.active ul .count-products {
   color: #4d4d4d; }
 
 .categorymenusnew .category-top-level .category-top-level2 li.active a {
-  color: #f58220;
+  color: #F58220;
   text-decoration: underline; }
   .categorymenusnew .category-top-level .category-top-level2 li.active a .count-products {
-    color: #f58220; }
+    color: #F58220; }
 
 .categorymenusnew .category-top-level .category-top-level2 li a:hover {
-  color: #f58220; }
+  color: #F58220; }
   .categorymenusnew .category-top-level .category-top-level2 li a:hover .count-products {
-    color: #f58220; }
+    color: #F58220; }
 
 .pt_wish-list #main .item-details .product-list-item span.price-sales {
   color: #F58220;
@@ -349,7 +371,7 @@ h1.search-result {
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
   background-color: #F58220;
-  color: #ffffff; }
+  color: #fff; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background: #F93; }
 
@@ -452,7 +474,7 @@ h1.search-result {
 
 #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
   /* margin: 8px 0 16px 1px; */ }
-  @media screen and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     #container.pt_account #primary.primary-content .account-section .returningcustomers .form-row {
       /* margin: 0px 0 16px 1px; */ } }
 
@@ -489,6 +511,8 @@ h1.search-result {
   float: none;
   padding-left: 0px;
   color: #F58220;
+  border-width: 1px;
+  border-style: solid;
   border-top-color: #CF6F1C;
   border-right-color: #EF8020;
   border-bottom-color: #FBCFA9;
@@ -550,12 +574,6 @@ form .label {
 .copyright {
   padding: 5px 18px 0 0; }
 
-body {
-  color: #333;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  background: #dbe9f4 url(../images/body-background-70.jpg) 50% 0 repeat-x; }
-
 #footernew #footer-brands {
   clear: both;
   margin: 27px auto 0px auto;
@@ -583,14 +601,11 @@ body {
   background-image: none;
   height: 40px;
   line-height: 40px;
-  color: #ffffff;
+  color: #fff;
   background-image: none;
   background: #f58320;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58320), color-stop(100%, #d16f00));
-  background: -webkit-linear-gradient(top, #f58320 0%, #d16f00 100%);
   background: linear-gradient(to bottom, #f58320 0%, #d16f00 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58320', endColorstr='#d16f00', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58320', endColorstr='#d16f00', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   border: none; }
@@ -601,7 +616,7 @@ body {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background .disign-header-title,
   #vippage-background h1 {
     font-size: 20px;
@@ -630,10 +645,10 @@ body {
     font-variant: normal; }
   .productdetail a.filter span {
     font-style: normal;
-    color: #ffffff;
+    color: #fff;
     font-weight: normal; }
   .productdetail a.filter .selectedvarval {
-    color: #ffffff; }
+    color: #fff; }
   .productdetail .price .salesprice {
     font-style: bold !important;
     font-size: 15px !important;
@@ -648,19 +663,15 @@ body {
     color: #333 !important;
     border-radius: 3px; }
   .current a.filter {
-    color: #ffffff;
+    color: #fff;
     border: 1px solid #cc6600;
     background: #f58320;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58320), color-stop(100%, #d16f00));
-    background: -webkit-linear-gradient(top, #f58320 0%, #d16f00 100%);
     background: linear-gradient(to bottom, #f58320 0%, #d16f00 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58320', endColorstr='#d16f00', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f58320', endColorstr='#d16f00', GradientType=0); }
     .current a.filter:hover {
       background: #d16f00;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #d16f00), color-stop(100%, #f58320));
-      background: -webkit-linear-gradient(top, #d16f00 0%, #f58320 100%);
       background: linear-gradient(to bottom, #d16f00 0%, #f58320 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d16f00', endColorstr='#f58320', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d16f00', endColorstr='#f58320', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -687,12 +698,9 @@ body {
       background-image: none;
       margin: 0;
       width: 100%;
-      box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -moz-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -webkit-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -ms-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868; } }
+      box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; } }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .product-specifications .specificiations {
     border-bottom: none; }
     .product-specifications .specificiations tbody {
@@ -703,10 +711,8 @@ body {
       .product-specifications .specificiations tbody:last-child {
         margin-bottom: 0; }
       .product-specifications .specificiations tbody tr:first-child {
-        background: #f58220;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #f58220), color-stop(100%, #d17000));
-        background: -webkit-linear-gradient(top, #f58220 0%, #d17000 100%);
-        background: linear-gradient(to bottom, #f58220 0%, #d17000 100%);
+        background: #F58220;
+        background: linear-gradient(to bottom, #F58220 0%, #d17000 100%);
         color: #fff; }
         .product-specifications .specificiations tbody tr:first-child th {
           border-top-left-radius: 3px;
@@ -746,7 +752,7 @@ body {
     margin: 20px 0 20px;
     min-height: 40px; } }
 
-@media screen and (max-width: 767px) {
+@media only screen and (min-width: 0) and (max-width: 767px) {
   #footernew .wrapper .footer-main {
     margin: 0px; } }
 
@@ -755,19 +761,17 @@ body {
 
 #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn {
   background: url("../images/search-full-bluefox.png") no-repeat scroll right top #F58220;
-  -webkit-transition: none;
   transition: none; }
   #container.pt_error #primary.primary-content .errorpage fieldset.nohitsearch button.btn:hover {
     background: url("../images/search-full-bluefox.png") no-repeat #F93;
     background-position: -202px -28px;
-    -webkit-transition: none;
     transition: none; }
 
 #container.pt_error #footernew {
   top: 0 !important; }
 
 .pt_account.acc_landing .content-asset .account-options li {
-  background: #ffffff;
+  background: #fff;
   box-shadow: #999 0 0 10px;
   position: relative; }
   .pt_account.acc_landing .content-asset .account-options li h2 {
@@ -784,7 +788,7 @@ body {
     background-color: #F58220;
     border-color: #F58220; }
     .pt_account.acc_landing .content-asset .account-options li:hover a, .pt_account.acc_landing .content-asset .account-options li:hover h2, .pt_account.acc_landing .content-asset .account-options li:hover p {
-      color: #ffffff; }
+      color: #fff; }
 
 .pt_product-search-result #page-background #primary .contentboxcontent h1.left-nav-style {
   color: #000;
@@ -794,9 +798,9 @@ body {
   border: none; }
 
 .product-tile .product-image .quickview {
-  background-color: #f58220;
-  border-style: solid;
+  background-color: #F58220;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #CF6F1C;
   border-right-color: #EF8020;
   border-bottom-color: #FBCFA9;
@@ -814,9 +818,9 @@ body {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-image .quickview {
   color: white;
-  background-color: #f58220;
-  border-style: solid;
+  background-color: #F58220;
   border-width: 1px;
+  border-style: solid;
   border-top-color: #CF6F1C;
   border-right-color: #EF8020;
   border-bottom-color: #FBCFA9;
@@ -835,13 +839,13 @@ body {
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-name a:hover {
   text-decoration: none;
-  color: #f58220; }
+  color: #F58220; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all {
-  color: #f58220; }
+  color: #F58220; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all:hover {
-  color: #f58220 !important;
+  color: #F58220 !important;
   text-decoration: underline; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-pricing .product-sales-price {
@@ -919,13 +923,13 @@ body {
 #footernew .change-region {
   padding: 6px 18px 8px 0; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #headerwrapper #header div.logo {
     margin: 29px 0; } }
 
 .productdetail .price {
-  color: #f58220;
-  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif;
+  color: #F58220;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 15px;
   line-height: 24px;
@@ -942,19 +946,19 @@ body {
   color: #333; }
 
 .productdetail a.filter span {
-  color: #ffffff;
+  color: #fff;
   font-size: 12px;
   font-weight: normal; }
 
 .variationattributes .swatches li a {
   background-image: url("../images/product-detail-size.jpg"); }
   .variationattributes .swatches li a:hover {
-    color: #ffffff;
-    border-color: #f58220; }
+    color: #fff;
+    border-color: #F58220; }
 
 .variationattributes .swatches li.selected a {
-  color: #ffffff;
-  border-color: #f58220; }
+  color: #fff;
+  border-color: #F58220; }
 
 .breadcrumb ul a:hover {
   background-position: 2px 50%;
@@ -963,14 +967,11 @@ body {
 
 .pt_product-details .productdetail .wrapper ~ #page-background .product-info.column.tab-sec #tabs ul.ui-tabs-nav li.ui-state-active a {
   background-image: none;
-  background: #f58220;
+  background: #F58220;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #f58220 10%, white 10%, #f58220 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #f58220 10%, white 10%, #f58220 10%, white 10%);
+  background: linear-gradient(to bottom, #F58220 10%, white 10%, #F58220 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e80000', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e80000', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
 .quickview .ui-dialog-titlebar-close .ui-icon {
@@ -997,7 +998,7 @@ body {
 .pt_customerservice #content .productsearchbreadcrumb, .pt_customerservice #content .breadcrumb {
   background: url(../images/body-background-70.jpg); }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   .pt_customerservice #content .style-cservice .column.colspan2 h1 {
     font-size: 20px;
     line-height: 25px;
@@ -1039,9 +1040,9 @@ body {
 
 .small-new.new-stamp {
   border-radius: 15px;
-  background-color: #f58220;
+  background-color: #F58220;
   font-style: italic;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 10px;
   color: #fff;
@@ -1053,9 +1054,9 @@ body {
 
 .small-new.new-stamp-big {
   border-radius: 15px;
-  background-color: #f58220;
+  background-color: #F58220;
   font-style: italic;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 12px;
   color: #fff;
@@ -1066,9 +1067,9 @@ body {
 
 .newFlagColorSize .new-colors-snipe, .newFlagColorSize .new-sizes-snipe, .newFlagColorSize .new-pak-size, .newPakSizeFlag .new-colors-snipe, .newPakSizeFlag .new-sizes-snipe, .newPakSizeFlag .new-pak-size {
   border-radius: 15px;
-  background-color: #f58220;
+  background-color: #F58220;
   font-style: italic;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-size: 10px;
   color: #fff;
@@ -1083,9 +1084,11 @@ body {
   color: #F58220; }
 
 .productdetail .price .price-sales {
-  color: #f58220; }
+  color: #F58220; }
 
 .pt_product-details #footernew {
   background-position: 50% 0px; }
   .pt_product-details #footernew #footer-brands {
     margin-top: 0; }
+
+/*# sourceMappingURL=bluefox.css.map */

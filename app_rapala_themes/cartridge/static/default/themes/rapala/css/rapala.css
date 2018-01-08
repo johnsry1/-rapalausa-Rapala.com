@@ -1,49 +1,187 @@
 @import url("../css/MyFontsWebfontsKit.css");
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.menu {
+  float: left;
+  margin: 0;
+  padding: 0; }
+  .menu li {
+    float: left;
+    list-style: none outside none !important; }
+
+body {
+  color: #333;
+  font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 16px;
+  background: #c8beb3 url(../images/body-background-70.jpg); }
+
+body.js-body {
+  background: none; }
+
+body .js-container-active .open-menu-wrap {
+  background: #c8beb3 url(../images/body-background-70.jpg) repeat; }
+
+h1,
+.h-one-tag {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 36px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 36px;
+  text-transform: none;
+  color: #333; }
+
+h2 {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 20px;
+  text-transform: none;
+  color: #333; }
+
+h3 {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 1.15em;
+  font-weight: normal;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #333; }
+
+h4 {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #333; }
+
+h5 {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #333; }
+
+h6 {
+  font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: normal;
+  text-transform: none;
+  color: #333; }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
+  text-decoration: none; }
+  h1 a:hover,
+  h2 a:hover,
+  h3 a:hover,
+  h4 a:hover,
+  h5 a:hover,
+  h6 a:hover {
+    color: #E80000;
+    text-decoration: none; }
+
+p {
+  color: #333;
+  font-family: "Times New Roman", Times, Garamond, serif;
+  font-size: 13px;
+  font-weight: normal;
+  word-spacing: normal;
+  line-height: 18px;
+  padding: 0 0 18px 0;
+  text-align: left; }
+
 a {
-  color: #E80000; }
+  color: #333;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover {
+    color: #333;
+    text-decoration: underline; }
+
+a.filter {
+  background-image: "";
+  background-color: #e80000;
+  background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
+  background-repeat: no-repeat;
+  border-width: 1px;
+  border-style: solid;
+  border-top-color: #C40000;
+  border-right-color: #E30000;
+  border-bottom-color: #F69D9D;
+  border-left-color: #E30000;
+  clear: left;
+  color: #fff !important;
+  display: block;
+  float: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin: 18px 0 0;
+  padding: 5px 28px 5px 10px;
+  text-transform: uppercase;
+  width: 184px; }
+  a.filter:hover {
+    background-image: none;
+    background-color: #c70000;
+    background: linear-gradient(to bottom, #c70000 0%, #e80000 100%);
+    text-decoration: none;
+    color: #999; }
 
 /***********************************************/
 /* PAGE STRUCTURE CSS                          */
 /***********************************************/
 body {
-  background-image: url(../images/body-background-70.jpg);
-  background-repeat: repeat;
-  background-color: #c8beb3;
-  text-align: left; }
+  text-align: left;
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
   body.js-body {
     background: none; }
-  body .js-container-active .open-menu-wrap {
-    background: #c8beb3 url(../images/body-background-70.jpg) repeat; }
 
 h1, h2, h3, h4, h5, h6, .h-one-tag {
-  color: #333333;
-  font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
-  font-variant: small-caps;
-  font-weight: normal; }
+  font-variant: small-caps; }
 
 h1, .h-one-tag {
-  font-size: 36px;
-  line-height: 36px;
   font-variant: small-caps;
   margin: 0; }
 
-h2 {
-  font-size: 20px;
-  line-height: 20px;
-  font-variant: small-caps;
-  text-transform: inherit; }
-  h2.left-nav-style {
-    padding-bottom: 6px;
-    border-bottom: #ccc solid 1px; }
+h2.left-nav-style {
+  padding-bottom: 6px;
+  border-bottom: #ccc solid 1px; }
 
-a {
-  color: #E80000; }
-  a.filter span {
-    font-size: 11px;
-    font-style: italic;
-    font-weight: normal;
-    letter-spacing: 0;
-    text-transform: none; }
+a.filter span {
+  font-size: 11px;
+  font-style: italic;
+  font-weight: normal;
+  letter-spacing: 0;
+  text-transform: none; }
 
 .selectedvarval {
   color: #E80000; }
@@ -51,8 +189,8 @@ a {
 form .label {
   font-variant: small-caps;
   font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
-  color: #333333; }
-  @media screen and (max-width: 480px) {
+  color: #333; }
+  @media only screen and (min-width: 0) and (max-width: 480px) {
     form .label {
       line-height: 12px; } }
 
@@ -69,11 +207,14 @@ form .label {
 
 button, a.button {
   background-color: #E80000;
-  border-color: #C40000 #E30000 #F69D9D;
-  border-style: solid;
   border-width: 1px;
+  border-style: solid;
+  border-top-color: #C40000;
+  border-right-color: #E30000;
+  border-bottom-color: #F69D9D;
+  border-left-color: #E30000;
   clear: left;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
   display: block;
   float: left;
@@ -92,8 +233,6 @@ button:hover, a.button:hover {
   text-decoration: none; }
 
 .addTo-cart-section button:hover, .addTo-cart-section a.button:hover {
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #c70000), color-stop(100%, #e80000)) !important;
-  background: -webkit-linear-gradient(top, #c70000 0%, #e80000 100%) !important;
   background: linear-gradient(to bottom, #c70000 0%, #e80000 100%) !important;
   text-decoration: none; }
 
@@ -101,7 +240,7 @@ button:hover, a.button:hover {
   background-image: url(../images/container-background-80.jpg);
   background-position: 50% 0;
   background-repeat: repeat-x; }
-  @media screen and (min-width: 960px) {
+  @media only screen and (min-width: 960px) {
     #container {
       min-height: 544px; } }
 
@@ -111,7 +250,7 @@ button:hover, a.button:hover {
   width: 100%; }
 
 .returningcustomers .label {
-  color: #333333;
+  color: #333;
   display: block;
   float: none;
   font-size: 20px;
@@ -128,11 +267,9 @@ button:hover, a.button:hover {
   top: -100px; }
 
 .pt_acc_landing .content-asset .account-options li {
-  -webkit-transition: none;
   transition: none; }
   .pt_acc_landing .content-asset .account-options li a {
     padding: 8px;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li a h2 {
       font-size: 36px;
@@ -145,14 +282,13 @@ button:hover, a.button:hover {
   .pt_acc_landing .content-asset .account-options li:hover {
     background: #E80000;
     border-color: #E80000;
-    -webkit-transition: none;
     transition: none; }
     .pt_acc_landing .content-asset .account-options li:hover h2 {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover p {
-      color: #ffffff; }
+      color: #fff; }
     .pt_acc_landing .content-asset .account-options li:hover i {
-      color: #ffffff; }
+      color: #fff; }
 
 .pt_leftnav-profile #primary #RegistrationForm legend {
   font-family: Artcraft, "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
@@ -174,7 +310,7 @@ button:hover, a.button:hover {
 .pt_order .search-result-items li .order-history-items .order-history-table th {
   font-variant: small-caps;
   font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
-  color: #333333;
+  color: #333;
   font-weight: normal;
   font-size: 12px; }
 
@@ -186,7 +322,7 @@ button:hover, a.button:hover {
   font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif; }
 
 .orderdetails .order-information .order-number .label {
-  color: #333333;
+  color: #333;
   font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
   font-variant: small-caps;
   font-weight: normal;
@@ -248,7 +384,7 @@ button:hover, a.button:hover {
   text-transform: none; }
 
 .pt_leftnav-addressbook #addresses .address-list .address-tile .mini-address-title {
-  color: #333333;
+  color: #333;
   display: block;
   float: none;
   font-family: "ArtcraftURW-Reg", "Times New Roman", Times, Serif;
@@ -259,10 +395,10 @@ button:hover, a.button:hover {
 
 .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple {
   background-color: #E80000;
-  color: #ffffff; }
+  color: #fff; }
   .ui-dialog.addressadd #dialog-container .form-horizontal .form-row.form-row-button button.simple:hover {
     background-color: #D80000;
-    color: #ffffff; }
+    color: #fff; }
 
 .ui-corner-all {
   border-radius: 4px; }
@@ -293,7 +429,7 @@ button:hover, a.button:hover {
   background-image: url(../images/multi-site-one-cart-bg-right.png); }
 
 #minicart #multi-site-one-cart span {
-  color: #ffffff;
+  color: #fff;
   background-image: url(../images/multi-site-one-cart-bg.png); }
 
 #headerwrapper #header .row.column1 #minicart a.minicart-button {
@@ -339,7 +475,7 @@ button:hover, a.button:hover {
   text-decoration: none; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all {
-  color: #333333; }
+  color: #333; }
 
 .pt_product-search-result #page-background #primary .search-result-content .product-tile .product-swatches-all:hover {
   color: #E80000 !important; }
@@ -369,11 +505,8 @@ button:hover, a.button:hover {
   line-height: 40px;
   background-image: none;
   background: #e80000;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #c70000));
-  background: -webkit-linear-gradient(top, #e80000 0%, #c70000 100%);
   background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#c70000', GradientType=0 );
-  -webkit-transition: inherit;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$rap-red', endColorstr='#c70000', GradientType=0);
   transition: inherit;
   text-transform: inherit;
   border: none; }
@@ -384,45 +517,11 @@ button:hover, a.button:hover {
   font-weight: normal !important;
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
-a.filter {
-  background: #e80000;
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #c70000));
-  background: -webkit-linear-gradient(top, #e80000 0%, #c70000 100%);
-  background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#c70000', GradientType=0 );
-  background-repeat: no-repeat;
-  border-color: #C40000 #E30000 #F69D9D;
-  border-style: solid;
-  border-width: 1px;
-  clear: left;
-  color: #FFFFFF !important;
-  display: block;
-  float: left;
-  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  letter-spacing: 0;
-  line-height: 18px;
-  margin: 18px 0 0;
-  padding: 5px 28px 5px 10px;
-  text-transform: uppercase;
-  width: 184px; }
-  a.filter:hover {
-    background-image: none;
-    background: #c70000;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #c70000), color-stop(100%, #e80000));
-    background: -webkit-linear-gradient(top, #c70000 0%, #e80000 100%);
-    background: linear-gradient(to bottom, #c70000 0%, #e80000 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c70000', endColorstr='$rap-red', GradientType=0 );
-    text-decoration: none;
-    color: #999; }
-
 input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   border: 2px solid #E80000;
   color: #E80000; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #container.pt_account #primary.primary-content .account-section h1.title {
     font-family: "ArtcraftURW-Bol";
     font-weight: 400; }
@@ -450,7 +549,7 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
     line-height: 27px;
     font-variant: normal; }
   .productdetail .price {
-    font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS",Helvetica,Arial,sans-serif; }
+    font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
     .productdetail .price .salesprice {
       font-style: bold !important;
       font-size: 15px !important;
@@ -467,16 +566,12 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   .current a.filter {
     border: 1px solid #9E0000;
     background: #e80000;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #c70000));
-    background: -webkit-linear-gradient(top, #e80000 0%, #c70000 100%);
     background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#c70000', GradientType=0 ); }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$rap-red', endColorstr='#c70000', GradientType=0); }
     .current a.filter:hover {
       background: #c70000;
-      background: -webkit-gradient(left top, left bottom, color-stop(0%, #c70000), color-stop(100%, #e80000));
-      background: -webkit-linear-gradient(top, #c70000 0%, #e80000 100%);
       background: linear-gradient(to bottom, #c70000 0%, #e80000 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c70000', endColorstr='$rap-red', GradientType=0 ); }
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c70000', endColorstr='$rap-red', GradientType=0); }
   .pt_wish-list .breadcrumb,
   .pt_leftnav-addressbook .breadcrumb,
   .pt_order .breadcrumb,
@@ -508,12 +603,9 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
       background-image: none;
       margin: 0;
       width: 100%;
-      box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -moz-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -webkit-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868;
-      -ms-box-shadow: inset  0  8px 8px -8px #696868,inset  0 -8px 8px -8px #696868; } }
+      box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868; } }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .mobile-view li {
     display: block; }
   .rapala-background .logo {
@@ -560,12 +652,12 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
     padding-right: 20px;
     width: 200px;
     background: none; }
-    @media screen and (max-width: 959px) {
+    @media only screen and (min-width: 0) and (max-width: 959px) {
       .pt_customerservice .site-map ul li.first-level {
         width: 50%;
         box-sizing: border-box;
         padding: 0; } }
-  @media screen and (max-width: 959px) and (max-width: 480px) {
+  @media only screen and (min-width: 0) and (max-width: 959px) and (min-width: 0) and (max-width: 480px) {
     .pt_customerservice .site-map ul li.first-level {
       width: 100%; } }
     .pt_customerservice .site-map ul li.first-level ul {
@@ -575,8 +667,6 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
         padding-left: 12px;
         font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
         color: #ccc; }
-        .pt_customerservice .site-map ul li.first-level ul li a {
-          /*color: $rap-black;*/ }
   .pt_customerservice .site-map h2 {
     font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
     font-variant: normal;
@@ -633,22 +723,17 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   background-image: none;
   background: #E80000;
   /* Old browsers */
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #E80000 10%, white 10%, #E80000 10%, white 10%);
-  /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #E80000 10%, white 10%, #E80000 10%, white 10%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#ffffff',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$rap-red', endColorstr='#ffffff', GradientType=0);
   /* IE6-9 */ }
 
-@media screen and (min-width: 481px) {
+@media only screen and (min-width: 481px) {
   .product-specifications .specificiations thead tr {
     background: #e80000;
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #c70000));
-    background: -webkit-linear-gradient(top, #e80000 0%, #c70000 100%);
     background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#c70000', GradientType=0 );
-    color: #ffffff; }
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$rap-red', endColorstr='#c70000', GradientType=0);
+    color: #fff; }
   .product-specifications .specificiations tbody tr.evenrow {
     background: #FDD9D9;
     color: #000; }
@@ -660,7 +745,7 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   .quickview .ui-dialog-titlebar-close .ui-icon:hover {
     background-position: 0 -34px; }
 
-@media screen and (max-width: 480px) {
+@media only screen and (min-width: 0) and (max-width: 480px) {
   .product-specifications.iphone-view .specificiations {
     border: none; }
     .product-specifications.iphone-view .specificiations tbody {
@@ -671,10 +756,7 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
       .product-specifications.iphone-view .specificiations tbody tr:first-child th {
         width: 100%;
         background: #e80000;
-        background: -webkit-gradient(left top, left bottom, color-stop(0%, #e80000), color-stop(100%, #c70000));
-        background: -webkit-linear-gradient(top, #e80000 0%, #c70000 100%);
         background: linear-gradient(to bottom, #e80000 0%, #c70000 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$rap-red', endColorstr='#c70000', GradientType=0 );
         color: #fff;
         vertical-align: middle;
         border: none;
@@ -703,7 +785,7 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
 .nav-group li.list-active {
   color: #5c5c5c; }
 
-@media screen and (max-width: 959px) {
+@media only screen and (min-width: 0) and (max-width: 959px) {
   #vippage-background h1, #vippage-background .labeltext, #vippage-background h2 {
     text-transform: none;
     font-family: "ArtcraftURW-Bol";
@@ -715,10 +797,12 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
       color: #fff; }
   .pt_customerservice #content .column3.about-us .contentbox.secondbox .left-content .nav-group li.active {
     background-color: #E80000;
-    border-top: 1px solid #c40000;
-    border-right: 1px solid #e30000;
-    border-bottom: 1px solid #f69d9d;
-    border-left: 1px solid #e30000;
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: #C40000;
+    border-right-color: #E30000;
+    border-bottom-color: #F69D9D;
+    border-left-color: #E30000;
     color: #fff; }
   .pt_customerservice #content .column3.about-us .column .contentboxcontent h1 {
     font-family: "ArtcraftURW-Bol";
@@ -729,11 +813,11 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   color: #E80000; }
 
 .variationattributes .swatches ul li a:hover span {
-  color: #333333; }
+  color: #333; }
 
 .variationattributes .swatches ul li.selected a {
   border-color: #E80000;
-  color: #ffffff; }
+  color: #fff; }
 
 .pt_customerservice #content .customer .cell .contentboxcontent h1 {
   font-size: 25px;
@@ -758,7 +842,7 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
   font-variant: normal;
   font-weight: bold;
   font-style: italic;
-  font-family: 'Lucida Grande','Lucida Sans','Lucida Sans Unicode','Trebuchet MS',Helvetica,Arial,sans-serif; }
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif; }
 
 .paymentslist .paymentinstruments .creditcard .payment-list .cc-exp label {
   padding-left: 5px;
@@ -797,9 +881,9 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
 .press-release:hover {
   background-color: #E80000; }
   .press-release:hover h2 a {
-    color: #ffffff; }
+    color: #fff; }
   .press-release:hover .release-date a {
-    color: #ffffff; }
+    color: #fff; }
 
 .storelocator .zipsearchactions .stack .label {
   text-align: left;
@@ -859,10 +943,12 @@ input.quantityinput, input input, .quantity.quantityinput, .quantity input {
 
 .variationattributes .color ul li a span.corner-ribbon {
   background-color: #E80000;
-  color: #ffffff; }
+  color: #fff; }
 
 .productdetail #special-offers ul li {
   color: #E80000; }
 
 .productdetail .price .price-sales {
-  color: #e80000; }
+  color: #E80000; }
+
+/*# sourceMappingURL=rapala.css.map */
