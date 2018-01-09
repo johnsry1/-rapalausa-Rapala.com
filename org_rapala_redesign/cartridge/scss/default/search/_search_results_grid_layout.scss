@@ -137,18 +137,24 @@
             }
             ul {
                 li {
+                    margin: rem(5px) 0;
                     &.selected {
                         a {
                             background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            background-size: 18px;
+                            @include line-height(18px);
+                            height: rem(18px);
                         }
                     }
                     a {
+                        display: block;
                         background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat center left;
-                        background-size: 18px;
+                        @include line-height(18px);
+                        height: rem(18px);
+
                         &:hover {
                             background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            background-size: 18px;
+                            @include line-height(18px);
+                            height: rem(18px);
                         }
                     }
                 }
