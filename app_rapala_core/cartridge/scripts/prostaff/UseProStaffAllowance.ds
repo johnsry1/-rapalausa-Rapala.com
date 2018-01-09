@@ -1,5 +1,5 @@
 /**
-* 
+*
 */
 importPackage( dw.system );
 importPackage( dw.customer );
@@ -14,7 +14,7 @@ function checkAllotmentPayment( customer, basket )
    var currencyCode : String = session.currency.currencyCode;
    var orderTotal : Money = new Money(0.0, currencyCode);
    var cardAmount : Money = new Money(0.0, currencyCode);
-   var paymentInstr : PaymentInstrument; 
+   var paymentInstr : PaymentInstrument;
    session.custom.isProStaffAllotmentused = null;
    session.custom.amountUsedFromProStaffAllowance = null;
    var today : Date = new Date();
@@ -23,7 +23,7 @@ function checkAllotmentPayment( customer, basket )
 	 	 var test = basket.getPaymentInstruments();
 		 if(!empty(customer.profile.custom.allotmentExpires)){
 		  if(allowanceBalance > 0.01){
-			  try{ 
+			  try{
 				   if(today.getFullYear() < customer.profile.custom.allotmentExpires.getFullYear()){
 							allotmentExpired = false;
 				   }
@@ -55,13 +55,13 @@ function checkAllotmentPayment( customer, basket )
 				   		if(session.custom.isProStaffAllotmentused && session.custom.amountUsedFromProStaffAllowance > 0){
 							removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
 							removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("CREDIT_CARD").getName());
-							paymentInstr = basket.createPaymentInstrument(PaymentMgr.getPaymentMethod("ALLOTMENT").getName(), new Money(session.custom.amountUsedFromProStaffAllowance,currencyCode));	   		
+							paymentInstr = basket.createPaymentInstrument(PaymentMgr.getPaymentMethod("ALLOTMENT").getName(), new Money(session.custom.amountUsedFromProStaffAllowance,currencyCode));
 				   		}
 				   }else{
 				   		session.custom.isProStaffAllotmentused = false;
 				   		session.custom.amountUsedFromProStaffAllowance = new Money(0.0, currencyCode);
 				   		removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
-						removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("CREDIT_CARD").getName());	   			   		
+						removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("CREDIT_CARD").getName());
 				   }
 				   return orderTotal;
 			  }

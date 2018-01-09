@@ -1,5 +1,5 @@
 /**
-*  
+*
 */
 importPackage( dw.system );
 importPackage( dw.customer );
@@ -13,7 +13,7 @@ function handleAllotmentExp( customer, basket )
 	   var allotmentExpired : Boolean = true;
 	   //var basket : Basket = args.Basket;
 	   var currencyCode : String = session.currency.currencyCode;
-	   var paymentInstr : PaymentInstrument; 
+	   var paymentInstr : PaymentInstrument;
 	   var today : Date = new Date();
 	   if(!empty(customer.profile) && !empty(customer.profile.custom) && !empty(customer.profile.custom.allotmentExpires)){
 		   if(today.getFullYear() < customer.profile.custom.allotmentExpires.getFullYear()){
@@ -32,7 +32,7 @@ function handleAllotmentExp( customer, basket )
 	   if(allotmentExpired){
 	   		session.custom.isProStaffAllotmentused = false;
 	   		session.custom.amountUsedFromProStaffAllowance = new Money(0.0, currencyCode);
-	   		removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());	   				   			   		
+	   		removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
 	   }else{
 	   		if(!empty(customer.profile.custom)){
 	 	 		var allowanceBalance : Number = customer.profile.custom.allotment;
@@ -41,7 +41,7 @@ function handleAllotmentExp( customer, basket )
 	   				return false;
 	   			}
 	  	 	}
-	   }	   
+	   }
 	   return true;
   }
   catch(e){

@@ -1577,13 +1577,17 @@ ul.product-availability-list {
                                     white-space: nowrap;
                                     span {
                                         float: left;
-                                    }
-                                    span.Custom-tooltip {
-                                        background: url("../images/responsive-icons/tooltip.svg") 0 0 cover no-repeat;
-                                        height: 11px;
-                                        width: 12px;
-                                        margin-left: 2px;
-                                        margin-top: 3px;
+                                        &.Custom-tooltip {
+                                            background: url("../images/responsive-icons/tooltip.svg") no-repeat 0 0;
+                                            height: 11px;
+                                            width: 11px;
+                                            margin-left: 5px;
+                                            margin-top: 4px;
+                                            background-size: cover;
+                                            text-decoration: none;
+                                            color: #999;
+                                            display: inline-block;
+                                        }
                                     }
                                 }
                                 span.value,
@@ -1881,8 +1885,16 @@ ul.product-availability-list {
                 float: right;
                 padding-top: 7px;
                 clear: both;
+                .trustmarksimgs {
+                    width: 300px;
+                }
+                .paymenttrustimgs-paypal {
+                    float: right;
+                    height: 30px;
+                    padding: 8px 0 8px 10px;
+                }
                 .paymenttrustimgs {
-                    float: left;
+                    float: right;
                     height: 30px;
                     padding: 0;
                     width: 77px;

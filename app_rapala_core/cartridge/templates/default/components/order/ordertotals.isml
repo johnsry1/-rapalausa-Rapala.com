@@ -35,7 +35,7 @@
 							:
 						</span>
 					</td>
-				
+
 					<td>
 						<span class="value">
 							<div>
@@ -84,14 +84,14 @@
 			</isif></iscomment>
 
 			<iscomment>render each single shipment or shipping total</iscomment>
-			
+
 			<isset name="surcharge" value="${pdict.surcharge}" scope="page"/>
 			<isset name="shippingExclDiscounts" value="${LineItemCtnr.shippingTotalPrice}" scope="page"/>
 			<isset name="ShipingChargewithoutsurcharge" value="${shippingExclDiscounts.subtract(surcharge)}" scope="page"/>
 			<isset name="shippingExclDiscounts" value="${LineItemCtnr.shippingTotalPrice.subtract(surcharge)}" scope="page"/>
 			<isset name="shippingInclDiscounts" value="${LineItemCtnr.getAdjustedShippingTotalPrice().subtract(surcharge)}" scope="page"/>
 			<isset name="shippingDiscount" value="${shippingExclDiscounts.subtract( shippingInclDiscounts )}" scope="page"/>
-			
+
 			<isif condition="${pdict.p_showshipmentinfo}">
 				<iscomment>the url to edit shipping depends on the checkout scenario</iscomment>
 				<isset name="editUrl" value="${URLUtils.https('COShipping-Start')}" scope="page"/>
@@ -107,12 +107,12 @@
 									<a href="${editUrl}" title="${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}"><isprint value="${Resource.msg('order.ordersummary.ordershipping.edit','order',null)}"/></a>
 								</isif></iscomment>
 								<span class="label"><span><isprint value="${Resource.msg('ordersummary.ordershippingShipping','order',null)}"/></span>
-								<span class="Custom-tooltip "> 
+								<span class="Custom-tooltip ">
 									<div class="tooltip-body" style="display:none">
 										<div class="tooltipcontainer">
 											<b><isprint value="${Resource.msg('ordersummary.shippingchargetooltipheading','order',null)}"/></b><hr>
-											<isloop items="${pdict.CurrentForms.cart.shipments}" var="ShippingMethod">								
-												<isif condition="${ShippingMethod.object.shippingMethod.getID()=='ground' || ShippingMethod.object.shippingMethod.getID()=='next-day-air' ||ShippingMethod.object.shippingMethod.getID()=='second-day-air'}"> 
+											<isloop items="${pdict.CurrentForms.cart.shipments}" var="ShippingMethod">
+												<isif condition="${ShippingMethod.object.shippingMethod.getID()=='ground' || ShippingMethod.object.shippingMethod.getID()=='next-day-air' ||ShippingMethod.object.shippingMethod.getID()=='second-day-air'}">
 													<isprint value="${ShippingMethod.object.shippingMethod.getDisplayName()}" />
 													<isprint value="${ShippingMethod.object.shippingMethod.getDescription()}" />
 												</isif>
@@ -130,7 +130,7 @@
 										<span class="discountedordershippingcharge">
 											<isif condition="${shippingInclDiscounts == 0}">
 												<span class="value">FREE</span>
-											<iselse>								
+											<iselse>
 												<span class="value"><isprint value="${shippingInclDiscounts}"/></span>
 											</isif>
 										</span>
@@ -147,7 +147,7 @@
 							<td>
 								<span  class="label">
 									<span><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></span>
-									<span class="Custom-tooltip "> 
+									<span class="Custom-tooltip ">
 										<div class="tooltip-body" style="display:none">
 											<div class="tooltipcontainer">
 											<b><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></b><hr>
@@ -166,12 +166,12 @@
 				<tr class="order-shipping">
 					<td>
 						<span class="label"><span><isprint value="${Resource.msg('ordersummary.ordershippingShipping','order',null)}"/></span>
-						<span class="Custom-tooltip "> 
+						<span class="Custom-tooltip ">
 							<div class="tooltip-body" style="display:none">
 								<div class="tooltipcontainer">
 									<b><isprint value="${Resource.msg('ordersummary.shippingchargetooltipheading','order',null)}"/></b><hr>
-									<isloop items="${pdict.CurrentForms.cart.shipments}" var="ShippingMethod">								
-										<isif condition="${ShippingMethod.object.shippingMethod.getID()=='ground' || ShippingMethod.object.shippingMethod.getID()=='next-day-air' ||ShippingMethod.object.shippingMethod.getID()=='second-day-air'}"> 
+									<isloop items="${pdict.CurrentForms.cart.shipments}" var="ShippingMethod">
+										<isif condition="${ShippingMethod.object.shippingMethod.getID()=='ground' || ShippingMethod.object.shippingMethod.getID()=='next-day-air' ||ShippingMethod.object.shippingMethod.getID()=='second-day-air'}">
 											<isprint value="${ShippingMethod.object.shippingMethod.getDisplayName()}" />
 											<isprint value="${ShippingMethod.object.shippingMethod.getDescription()}" />
 										</isif>
@@ -189,7 +189,7 @@
 								<span class="discountedordershippingcharge">
 									<isif condition="${shippingInclDiscounts == 0}">
 										<span class="value">FREE</span>
-									<iselse>								
+									<iselse>
 										<span class="value"><isprint value="${shippingInclDiscounts}"/></span>
 									</isif>
 								</span>
@@ -202,23 +202,23 @@
 						</isif>
 						<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}"><span class="label discount yousaved">(${Resource.msg('ordersummary.yousaved','order',null)} <isprint value="${shippingDiscount}"/>)</span></isif>
 					</td>
-					<tr class="ordershipping ordersurcharges">
-						<td>
-							<span  class="label">
-								<span><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></span>
-								<span class="Custom-tooltip "> 
-									<div class="tooltip-body" style="display:none">
-										<div class="tooltipcontainer">
-										<b><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></b><hr>
-											<isprint value="${Resource.msg('ordersummary.shippingsurchargetooltip','order',null)}"/>
-										</div>
+				</tr>
+				<tr class="ordershipping ordersurcharges">
+					<td>
+						<span  class="label">
+							<span><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></span>
+							<span class="Custom-tooltip ">
+								<div class="tooltip-body" style="display:none">
+									<div class="tooltipcontainer">
+									<b><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></b><hr>
+										<isprint value="${Resource.msg('ordersummary.shippingsurchargetooltip','order',null)}"/>
 									</div>
-								</span>
-								:
+								</div>
 							</span>
-						</td>
-						<td><span class="value"><isif condition="${LineItemCtnr.shippingTotalPrice.available && ShipingChargewithoutsurcharge!=0}"><isprint value="${surcharge}"/><iselse/>${Resource.msg('ordersummary.tobecalculated','order',null)}<!--  ELSE: Show as Empty --></isif></span></td>
-					</tr>
+							:
+						</span>
+					</td>
+					<td><span class="value"><isif condition="${LineItemCtnr.shippingTotalPrice.available && ShipingChargewithoutsurcharge!=0}"><isprint value="${surcharge}"/><iselse/>${Resource.msg('ordersummary.tobecalculated','order',null)}<!--  ELSE: Show as Empty --></isif></span></td>
 				</tr>
 			</isif>
 
@@ -248,7 +248,7 @@
 					<td>
 						<span class="label">
 							<span><isprint value="${Resource.msg('ordersummary.estordertax','order',null)}"/></span>
-							<span class="Custom-tooltip "> 
+							<span class="Custom-tooltip ">
 								<div class="tooltip-body" style="display:none">
 									<div class="tooltipcontainer">
 									<b><isprint value="${Resource.msg('ordersummary.estimatedsalestax','order',null)}"/></b><hr>
@@ -265,7 +265,7 @@
 								</span>
 							<iselseif condition="${LineItemCtnr.totalTax.available && LineItemCtnr.totalTax.value == 0.00 && (pdict.stateCode == null || pdict.stateCode !='')}">
 								<span class="total-tax-value">
-									$0.00 
+									$0.00
 								</span>
 							<iselseif condition="${LineItemCtnr.defaultShipment.shippingAddress == null && (pdict.stateCode == null || pdict.stateCode =='')}">
 								<span class="value"><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></span>
@@ -305,14 +305,14 @@
 					<isif condition="${LineItemCtnr.totalGrossPrice.available}">
 					 	<isset name="orderTotal" value="${LineItemCtnr.totalGrossPrice}" scope="page"/>
 					<iselse/>
-						<isset name="orderTotal" value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(true)}" scope="page"/>			
+						<isset name="orderTotal" value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(true)}" scope="page"/>
 					</isif>
-			
+
 					<td><span class="label-total label-total-remaining"><i><isprint value="${pdict.p_totallabel}"/></i></span></td>
 					<td class="miniright"><span class="value"><isprint value="${orderTotal}"/></span></td>
 				</tr>
 			</isif>
-			
+
 			<iscomment>Allotment</iscomment>
 			<isif condition="${allotmentAmt > 0}">
 				<tr class="allotment">
@@ -320,7 +320,7 @@
 					<td><span class="value">- <isprint value="${allotmentAmt}"/></span></td>
 				</tr>
 			</isif>
-			
+
 			<iscomment>Gift Card entry</iscomment>
 			<isif condition="${giftCertTotal > 0}">
 				<tr class="giftcardtotals">
@@ -328,18 +328,18 @@
 					<td><span class="value">- <isprint value="${giftCertTotal}"/></span></td>
 				</tr>
 			</isif>
-			
+
 			<tr class="order-total <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
 				<isif condition="${LineItemCtnr.totalGrossPrice.available}">
 				 	<isset name="orderTotalValue" value="${LineItemCtnr.totalGrossPrice.subtract(giftCertTotal)}" scope="page"/>
-				 	<isif condition="${allotmentAmt > 0}">			 		
+				 	<isif condition="${allotmentAmt > 0}">
 						<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
 					</isif>
 				<iselse/>
 					<isset name="orderTotalValue" value="${LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).subtract(giftCertTotal)}" scope="page"/>
-					<isif condition="${allotmentAmt > 0}">	
+					<isif condition="${allotmentAmt > 0}">
 						<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
-					</isif>				
+					</isif>
 				</isif>
 				<td><span class="label-total <isif condition="${creditapplied == 'true'}">label-total-remaining</isif>"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></td>
 				<td class="miniright"><span class="value"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></td>
