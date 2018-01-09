@@ -13,6 +13,22 @@
     }
     .upshift.cell.contentbox {
         .contentboxcontent {
+            .top-promo-section {
+                .promo-sec {
+                    @include respond(medium-down) {
+                        margin-top: rem(10px) !important;
+                    }
+                    .couponinput {
+                        margin: 0 5px 0 0 !important;
+                        width: calc(100% - #{rem(85px)}) !important;
+                    }
+                    .cartcoupon-apply {
+                        height: rem($form-field-height) !important;
+                        @include line-height($form-field-height);
+                        width: rem(80px) !important;
+                    }
+                }
+            }
             .cart-header {
                 h1.mycartheader {
                     @include h1;
@@ -45,7 +61,7 @@
                         }
                         span {
                             line-height: inherit;
-                            text-transform: none;
+                            text-transform: inherit;
                             font-size: inherit;
                             color: inherit;
                             text-decoration: none;
@@ -384,6 +400,11 @@
                         }
                         .button-fancy-large {
                             text-transform: uppercase;
+                            span {
+                                text-transform: inherit;
+                                width: inherit;
+                                height: inherit;
+                            }
                             @include respond(large-up) {
                                 width: rem(350px);
                             }
