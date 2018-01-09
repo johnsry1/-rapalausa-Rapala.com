@@ -46,6 +46,13 @@
                     .value {
                         @include product-attr-name;
                     }
+                    tr {
+                        .order-price {
+                            .value {
+                                font-size: rem(13px) !important;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -225,8 +232,14 @@
                     .line-item-price {
                         font-size: $product-attr-name-font-size !important;
                         line-height: $product-attr-name-line-height !important;
+                        @include respond(medium-down) {
+                            width: 20%;
+                        }
                     }
                     .line-item-details {
+                        @include respond(medium-down) {
+                            width: 64%;
+                        }
                         .product-list-item {
                             .name {
                                 a {
