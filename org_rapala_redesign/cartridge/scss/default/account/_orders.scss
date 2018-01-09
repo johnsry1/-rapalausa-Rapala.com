@@ -9,6 +9,23 @@
         @include respond(desktop-down) {
             padding: 0;
             margin: 0;
+            text-align: center;
+        }
+        .pagination {
+            @include respond(medium-down) {
+                float: none;
+                margin: 0 rem(10px) rem(10px);
+                overflow: hidden;
+            }
+            li {
+                @include respond(medium-down) {
+                    display: inline-block;
+                    width: rem(30px);
+                    height: rem(30px);
+                    @include line-height(25px);
+                    padding: 0;
+                }
+            }
         }
     }
     .search-result-items {
@@ -18,6 +35,8 @@
                 border-top: $border;
                 .label {
                     @include product-attr-title;
+                    font-size: rem($product-attr-title-font-size) !important;
+                    font-weight: $product-attr-title-font-weight !important;
                     margin-right: rem(3px);
                 }
                 .value {
