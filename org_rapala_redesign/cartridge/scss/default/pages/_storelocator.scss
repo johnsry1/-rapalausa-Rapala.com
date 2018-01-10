@@ -4,6 +4,19 @@
         box-shadow: none !important;
     }
 }
+.pt_store-locator {
+    .primary-content {
+        @include respond(desktop-down) {
+            padding-left: rem(10px);
+            padding-right: rem(10px);
+            box-sizing: border-box;
+        }
+        @include respond(medium-down) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
 .pt_store-locator-details {
     .breadcrumb {
         font-size: 13px;
@@ -99,6 +112,7 @@
 }
 .store-locator {
     clear: both;
+    overflow: hidden;
     margin-top: rem(20px);
     .stores-wrapper {
         padding: 0 10px;
@@ -227,9 +241,16 @@
         }
     }
     .rightStore {
+        box-sizing: border-box;
         @include respond(large-up) {
             float: right;
             width: 65%;
+        }
+        @include respond(desktop-down) {
+            padding-right: rem(10px);
+        }
+        @include respond(medium-down) {
+            padding-right: 0;
         }
     }
     #map-canvas {
