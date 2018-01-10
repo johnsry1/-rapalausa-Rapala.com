@@ -239,3 +239,31 @@
         }
     }
 }
+#container.pt_product-search-noresult {
+    #primary.primary-content {
+        .nohits {
+            .no-hits-help {
+                .content-asset {
+                    ul {
+                        @include respond(desktop-down) {
+                            text-align: left;
+                            margin: 10px auto 0;
+                            display: block;
+                            width: rem(230px);
+                        }
+                        li {
+                            @include respond(desktop-down) {
+                                @include font-size($ul-font-size);
+                                @include line-height($ul-line-height);
+                                font-weight: $ul-font-weight;
+                                font-family: $ul-font-family;
+                                letter-spacing: $ul-letter-spacing;
+                                color: $ul-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
