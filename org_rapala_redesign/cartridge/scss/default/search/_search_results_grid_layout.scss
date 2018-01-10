@@ -11,9 +11,12 @@
     @include h1;
 }
 
-
-.pt_product-search-result {
+.pt_product-search-result,
+.pt_content-search-result {
     #page-background {
+        .breadcrumb {
+            box-shadow: none;
+        }
         #primary {
             p {
                 font-family: $font;
@@ -130,25 +133,55 @@
         }
     }
     .searchrefinements {
+        #tabs {
+            .product,
+            .content {
+                input[type="radio"] {
+                    & + a::before {
+                        content: "";
+                        background: $form-checkbox-bg; // should not be $trans
+                        border: $form-checkbox-border;
+                        display:  inline-block;
+                        vertical-align: text-bottom;
+                        width: $form-checkbox-size;
+                        height: $form-checkbox-size;
+                        margin-right: 8px;
+                        text-align: center;
+                        transition: background-color, border-color 0.3s;
+                        border-radius: 50%;
+                    }
+                }
+                input[type="radio"] {
+                    &:checked + a::before {
+                        background: $form-radio-checked-bg;
+                        background-size: 8px;
+                        border: $form-radio-checked-border;
+                    }
+                }
+                label {
+                    padding-left: 0;
+                    float: none;
+                    display: inline-block;
+                }
+            }
+        }
         .refinement {
-
             .filter {
                 @include clp-refinement-title;
             }
             ul {
                 li {
+                    margin: rem(5px) 0;
                     &.selected {
                         a {
-                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            background-size: 18px;
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat left 3px;
                         }
                     }
                     a {
-                        background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat center left;
-                        background-size: 18px;
+                        display: block;
+                        background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat left 3px;
                         &:hover {
-                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            background-size: 18px;
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat left 3px;
                         }
                     }
                 }
@@ -187,10 +220,50 @@
     }
 }
 
-.refinements {
-    .contentbox {
-        & > div {
-            border: $border;
+.pt_content-search-result {
+    #page-background {
+        #primary {
+            .folder-content-list {
+                font-family: $font;
+                li {
+                    a {
+                        @include h3;
+                    }
+                    p {
+                        a.readmore {
+                            @include link;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#container.pt_product-search-noresult {
+    #primary.primary-content {
+        .nohits {
+            .no-hits-help {
+                .content-asset {
+                    ul {
+                        @include respond(desktop-down) {
+                            text-align: left;
+                            margin: 10px auto 0;
+                            display: block;
+                            width: rem(230px);
+                        }
+                        li {
+                            @include respond(desktop-down) {
+                                @include font-size($ul-font-size);
+                                @include line-height($ul-line-height);
+                                font-weight: $ul-font-weight;
+                                font-family: $ul-font-family;
+                                letter-spacing: $ul-letter-spacing;
+                                color: $ul-color;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

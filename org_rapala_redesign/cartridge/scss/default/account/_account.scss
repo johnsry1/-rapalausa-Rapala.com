@@ -8,6 +8,9 @@
             .customerservices {
                 a {
                     @include button;
+                    @include respond(desktop-down) {
+                        box-sizing: border-box;
+                    }
                 }
             }
         }
@@ -138,6 +141,14 @@ div.returningcustomers {
                             border: $form-field-border;
                         }
                     }
+                    .textinput {
+                        float: none;
+                    }
+                    span.errorclient,
+                    div.errorclient {
+                        @include form-error;
+                        margin-top: rem(3px);
+                    }
                 }
             }
             .label {
@@ -170,6 +181,12 @@ div.returningcustomers {
                 input {
                     border-radius: $form-field-border-radius;
                     border: $form-field-border;
+                    float: none;
+                }
+                span.errorclient,
+                div.errorclient {
+                    @include form-error;
+                    margin-top: rem(3px);
                 }
                 .contentboxcontent.new-register {
                     box-shadow: none;

@@ -39,6 +39,22 @@
 							<span class="value"><isprint value="${order.object.orderNo}" /></span>
 						</div>
 
+                        <div class="order-country top">
+                            <span class="label">
+                                ${Resource.msg('order.history.shippingcountry','order',null)}:
+                            </span>
+                            <span class="value">
+                                <isprint value="${Resource.msg(('country.' + order.object.shipments[0].shippingAddress.countryCode).toLowerCase(), 'forms', null)}"/>
+                            </span>
+                        </div>
+                        <div class="order-country">
+                            <span class="label">
+                                ${Resource.msg('order.history.billingcountry','order',null)}:
+                            </span>
+                            <span class="value">
+                                <isprint value="${Resource.msg(('country.' + order.object.billingAddress.countryCode).toLowerCase(), 'forms', null)}"/>
+                            </span>
+                        </div>
 					</div>
 
 					<div class="order-history-items">
@@ -72,22 +88,6 @@
 											<span class="value">${theGiftCert.recipientEmail}</span>
 										<iselse/>
 											<span class="value"><isprint value="${Shipment.shippingAddress.fullName}" /></span>
-                                            <div class="order-country top">
-                                                <span class="label">
-                                                    ${Resource.msg('order.history.shippingcountry','order',null)}:
-                                                </span>
-                                                <span class="value">
-                                                    <isprint value="${Resource.msg(('country.' + Shipment.shippingAddress.countryCode).toLowerCase(), 'forms', null)}"/>
-                                                </span>
-                                            </div>
-                                            <div class="order-country">
-                                                <span class="label">
-                                                    ${Resource.msg('order.history.billingcountry','order',null)}:
-                                                </span>
-                                                <span class="value">
-                                                    <isprint value="${Resource.msg(('country.' + order.object.billingAddress.countryCode).toLowerCase(), 'forms', null)}"/>
-                                                </span>
-                                            </div>
 										</isif>
 
 									</td>

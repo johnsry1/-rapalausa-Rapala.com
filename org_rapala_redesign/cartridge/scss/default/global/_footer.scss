@@ -158,7 +158,10 @@ $footer-bg-mobile: $concrete;
                         &.expanded {
                             ul {
                                 li {
-                                    padding: 0 0 rem(10px) rem(20px);
+                                    padding: 0;
+                                    @include respond(medium-down) {
+                                        padding: 0 0 rem(10px) rem(20px);
+                                    }
                                     a {
                                         @include footer-link;
                                         padding: 0;
