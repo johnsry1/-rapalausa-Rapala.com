@@ -11,7 +11,7 @@
 		get the variant IDs and find the selected variant ID in the image URL
 		replace that variant ID in the image URL with the actual size variant ID
 	*/
-	if (vids > 0) {
+	if (vids.length > 0) {
 		for( var i = 0; i < vids.length; i++ ) {
 			if(newImgurl.indexOf(vids[i].ID.toLowerCase())>-1 ) {
 				var ab = vids[i].ID.toLowerCase()+'.',
