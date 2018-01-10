@@ -178,7 +178,7 @@ var minicart = {
         // show the item
         this.$content.slideDown('slow');
         // after a time out automatically close it
-        timer.start(6000, this.close.bind(this));
+        timer.start(3000, this.close.bind(this));
 
         if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
             return;
