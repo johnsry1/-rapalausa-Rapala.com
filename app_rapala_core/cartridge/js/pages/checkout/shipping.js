@@ -5,9 +5,8 @@ var ajax = require('../../ajax'),
     tooltip = require('../../tooltip'),
     util = require('../../util'),
     dialog = require('../../dialog'),
-    uievents = require('../../uievents');
-
-//var shippingMethods;
+    uievents = require('../../uievents'),
+    $submitButton = $('button.continue-checkout');
 
 /**
  * @function
@@ -20,16 +19,23 @@ function giftMessageBox() {
 
 /**
  * @function
+ * @description shows the spinning icon on the Continue To Billing button for IE11
+ */
+function updateButtonIE() {
+    // indicate progress
+    $submitButton.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+}
+
+/**
+ * @function
  * @description updates the order summary based on a possibly recalculated basket after a shipping promotion has been applied
  */
 function updateSummary() {
     var $summary = $('#secondary .new-summery-cart');
     // indicate progress
-    $(function (){
-        if (navigator.userAgent.match(/Trident\/7\./)) {
-            $summary.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
-        }
-    });
+    if (navigator.userAgent.match(/Trident\/7\./)) {
+        updateButtonIE();
+    }
     progress.show($summary);
     var stateValue = $('body').find('select[id$="_addressFields_states_state"]').val();
     var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
@@ -41,6 +47,20 @@ function updateSummary() {
         $summary.find('.order-totals-table .order-shipping .label a').hide();
         uievents.synccheckoutH();
     });
+}
+
+/**
+ * @function
+ * @description shows the spinning icon on the Continue To Billing button
+ */
+function updateButton() {
+    // indicate progress
+    $(function (){
+        if (navigator.userAgent.match(/Trident\/7\./)) {
+            $submitButton.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+        }
+    });
+    progress.show($submitButton);
 }
 
 /**
@@ -79,6 +99,7 @@ function selectShippingMethod(shippingMethodID) {
         url: url,
         callback: function (data) {
             updateSummary();
+            updateButton();
             uievents.synccheckoutH();
             if (!data || !data.shippingMethodID) {
                 window.alert('Couldn\'t select shipping method.');
@@ -112,11 +133,10 @@ function updateShippingMethodList() {
     if (!$shippingMethodList || $shippingMethodList.length === 0) {
         return;
     }
-    $(function (){
-        if (navigator.userAgent.match(/Trident\/7\./)) {
-            $('#shipping-method-list').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
-        }
-    });
+
+    if (navigator.userAgent.match(/Trident\/7\./)) {
+        updateButtonIE();
+    }
     var url = getShippingMethodURL(Urls.shippingMethodsJSON);
 
     ajax.getJson({
@@ -136,7 +156,7 @@ function updateShippingMethodList() {
             //shippingMethods = data;
             // indicate progress
             progress.show($shippingMethodList);
-
+            updateButton();
             // load the shipping method form
             var smlUrl = getShippingMethodURL(Urls.shippingMethodsList);
             $shippingMethodList.load(smlUrl, function () {
@@ -157,6 +177,11 @@ function updateShippingMethodList() {
                 if ($shippingMethodList.find('.input-radio:checked').length === 0) {
                     $shippingMethodList.find('.input-radio:first').prop('checked', 'checked');
                 }
+                $(function (){
+                    if (navigator.userAgent.match(/Trident\/7\./)) {
+                        $('button.continue-checkout .loader').remove();
+                    }
+                });
             });
         }
     });
@@ -200,13 +225,8 @@ exports.init = function () {
     updateShippingMethodList();
 
     $('.continue-checkout-button .continue-checkout').on('click', function () {
-        var $content = $('.primary-content');
-        $(function (){
-            if (navigator.userAgent.match(/Trident\/7\./)) {
-                $content.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
-            }
-        });
-        progress.show($content);
+
+        updateButton();
         var form = $(this).closest('form[id$="_shippingAddress"]');
         if ($('.state-blk select').valid() == 0) {
             if (!$('.state-blk.custom-select').hasClass('blured')) {
