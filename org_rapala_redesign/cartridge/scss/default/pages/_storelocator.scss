@@ -2,6 +2,7 @@
 .pt_customerservice {
     .breadcrumb {
         box-shadow: none !important;
+        font-family: $font !important;
     }
 }
 .pt_store-locator-details {
@@ -225,6 +226,12 @@
         @include respond(desktop) {
             padding: 0;
         }
+        h1 {
+            @include respond(medium-down) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
     }
     .rightStore {
         @include respond(large-up) {
@@ -235,5 +242,12 @@
     #map-canvas {
         width: 100%;
         display: block;
+    }
+}
+.storeImage {
+    img {
+        width: 100%;
+        height: auto;
+        vertical-align: top;
     }
 }
