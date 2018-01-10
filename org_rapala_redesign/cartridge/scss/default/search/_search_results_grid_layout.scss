@@ -11,8 +11,8 @@
     @include h1;
 }
 
-
-.pt_product-search-result {
+.pt_product-search-result,
+.pt_content-search-result {
     #page-background {
         #primary {
             p {
@@ -130,6 +130,38 @@
         }
     }
     .searchrefinements {
+        #tabs {
+            .product,
+            .content {
+                input[type="radio"] {
+                    & + a::before {
+                        content: "";
+                        background: $form-checkbox-bg; // should not be $trans
+                        border: $form-checkbox-border;
+                        display:  inline-block;
+                        vertical-align: text-bottom;
+                        width: $form-checkbox-size;
+                        height: $form-checkbox-size;
+                        margin-right: 8px;
+                        text-align: center;
+                        transition: background-color, border-color 0.3s;
+                        border-radius: 50%;
+                    }
+                }
+                input[type="radio"] {
+                    &:checked + a::before {
+                        background: $form-radio-checked-bg;
+                        background-size: 8px;
+                        border: $form-radio-checked-border;
+                    }
+                }
+                label {
+                    padding-left: 0;
+                    float: none;
+                    display: inline-block;
+                }
+            }
+        }
         .refinement {
             .filter {
                 @include clp-refinement-title;
@@ -139,21 +171,14 @@
                     margin: rem(5px) 0;
                     &.selected {
                         a {
-                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            @include line-height(18px);
-                            height: rem(18px);
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat left 3px;
                         }
                     }
                     a {
                         display: block;
-                        background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat center left;
-                        @include line-height(18px);
-                        height: rem(18px);
-
+                        background: url("../images/svg-icons/checkmark-not-selected.svg") no-repeat left 3px;
                         &:hover {
-                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat center left;
-                            @include line-height(18px);
-                            height: rem(18px);
+                            background: url("../images/svg-icons/checkmark-selected.svg") no-repeat left 3px;
                         }
                     }
                 }
@@ -196,6 +221,26 @@
     .contentbox {
         & > div {
             border: $border;
+        }
+    }
+}
+
+.pt_content-search-result {
+    #page-background {
+        #primary {
+            .folder-content-list {
+                font-family: $font;
+                li {
+                    a {
+                        @include h3;
+                    }
+                    p {
+                        a.readmore {
+                            @include link;
+                        }
+                    }
+                }
+            }
         }
     }
 }
