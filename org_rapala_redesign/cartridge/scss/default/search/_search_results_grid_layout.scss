@@ -34,8 +34,21 @@
                 }
             }
             .search-top {
+                &.bottom {
+                    .searchresultsheader {
+                        .results-hits {
+                            font-family: $font;
+                            @include respond(desktop-down) {
+                                top: rem(9px);
+                            }
+                        }
+                    }
+                }
                 .searchresultsheader {
                     background: $background;
+                    .results-hits {
+                        font-family: $font;
+                     }
                     .pagination {
                         .toggle-grid {
                             p,
@@ -45,9 +58,25 @@
                                 font-family: $font;
                             }
                         }
-                    }
-                    .results-hits {
-                        font-family: $font;
+                        ul {
+                            @include respond(desktop-down) {
+                                background: none;
+                            }
+                            li {
+                                &.current-page {
+                                    @include respond(desktop-down) {
+                                        padding: 0;
+                                    }
+                                }
+                                a {
+                                    @include respond(desktop-down) {
+                                        padding: 0;
+                                        width: 40px;
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
                     }
                     .sortitem-blk {
                         select {
