@@ -36,6 +36,7 @@
             .search-top {
                 &.bottom {
                     .searchresultsheader {
+                        background: $background;
                         .results-hits {
                             font-family: $font;
                             @include respond(desktop-down) {
@@ -45,7 +46,6 @@
                     }
                 }
                 .searchresultsheader {
-                    background: $background;
                     .results-hits {
                         font-family: $font;
                      }
@@ -89,6 +89,13 @@
                             width: rem(111px) !important;
                             background-position: 99px 65% !important;
                             font-family: $font;
+                        }
+                        .sort-by {
+                            label {
+                                @include respond(large-down) {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                     li {
@@ -164,6 +171,11 @@
                 a {
                     font-family: $font;
                 }
+            }
+        }
+        #secondary {
+            .column {
+                box-shadow: none;
             }
         }
         .row.column3 {
@@ -335,5 +347,25 @@
                 }
             }
         }
+    }
+}
+.mobile-sort-by-content.tabletView .sort-byOption,
+.sortby-button.js-sort-active,
+.mobile-filter-by.js-filter-active {
+    @include respond(desktop-down) {
+        box-shadow: none;
+    }
+}
+.mobile-filter-by.js-filter-active {
+    background: $background;
+    span.active {
+        @include respond(desktop-down) {
+            background: $background;
+        }
+    }
+}
+#someid.column {
+    @include respond(desktop-down) {
+        border: none !important;
     }
 }
