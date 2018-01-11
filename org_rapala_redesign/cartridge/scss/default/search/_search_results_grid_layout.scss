@@ -77,6 +77,20 @@
                 }
             }
             .search-result-content {
+                &.wide-tiles {
+                    .search-result-items {
+                        .grid-tile {
+                            .product-tile {
+                                .product-image {
+                                    #quickviewbutton {
+                                        top: 74%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 div.subcat-header {
                     background: $background;
                     h2 {
@@ -87,6 +101,7 @@
                     .product-image {
                         .quickview {
                             @include quickview;
+                            height: $quickview-height !important;
                         }
                     }
                     .product-swatches {
