@@ -16,6 +16,12 @@
     #page-background {
         .breadcrumb {
             box-shadow: none;
+            .breadcrumb-element {
+                a {
+                    display: inline-block;
+                    float: none;
+                }
+            }
         }
         #primary {
             p {
@@ -136,7 +142,18 @@
         #tabs {
             .product,
             .content {
+                @include respond(desktop-down) {
+                    padding-left: 0;
+                }
+                a {
+                    @include respond(desktop-down) {
+                        float: none;
+                    }
+                }
                 input[type="radio"] {
+                    @include respond(desktop-down) {
+                        margin: 0;
+                    }
                     & + a::before {
                         content: "";
                         background: $form-checkbox-bg; // should not be $trans
@@ -159,6 +176,7 @@
                     }
                 }
                 label {
+                    margin-left: 0;
                     padding-left: 0;
                     float: none;
                     display: inline-block;
