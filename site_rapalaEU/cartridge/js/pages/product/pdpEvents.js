@@ -493,7 +493,7 @@ var product = function (response) {
                 avMessage = avMessage + '<span class=\'in-stock\'>' + $.validator.format(Resources['QTY_' + avStatus], ats) + '</span>';
             }
             // display backorder/preorder availability
-            avMessage = avMessage + getInStockDateMsg(thisProduct);
+            avMessage = avMessage + '. ' + getInStockDateMsg(thisProduct);
         } else if (val > inStockLevel && avStatus !== Constants.AVAIL_STATUS_NOT_AVAILABLE) {
 
             avMessage = '';
