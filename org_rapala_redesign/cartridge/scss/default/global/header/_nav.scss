@@ -305,17 +305,15 @@ body.js-body {
                                 border-top: none;
                                 padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                 min-width: rem(170px);
-                                width: 100%;
-                                left: 0;
-                                text-align: center;
+                                left: 50%;
+                                transform: translateX(-50%);
                             }
                         }
                     }
                     &:first-child {
                         .sub-category-section {
-                            @include respond(desktop) {
-                                text-align: left !important;
-                            }
+                            left: 0 !important;
+                            transform: translate(0) !important;
                         }
                     }
                     &:last-child {
@@ -329,6 +327,7 @@ body.js-body {
                         display: block;
                         width: auto;
                         float: none;
+                        position: relative;
                     }
                     &::after {
                         @include respond(desktop) {
@@ -365,9 +364,8 @@ body.js-body {
                                     border-top: none;
                                     padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                     min-width: rem(170px);
-                                    width: 100%;
-                                    left: 0;
-                                    text-align: center;
+                                    left: 50%;
+                                    transform: translateX(-50%);
                                 }
                             }
                         }
@@ -378,8 +376,7 @@ body.js-body {
                         padding-bottom: rem(15px);
                     }
                     @include respond(desktop) {
-                        display: inline-block;
-                        text-align: left;
+                        float: left;
                     }
                 }
                 a.level-2 {
