@@ -284,23 +284,13 @@ function initializeEvents() {
         });
 
     //
-    $('body').on('submit', '#customercontactus', function (e) {
+    $('body').on('submit', '#customercontactus', function (e) { 
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
-            // set the action
-            /*
-            $('<input/>').attr({
-                name: $form.attr('action'),
-                type: 'hidden'
-            }).appendTo($form);
-            */
             // serialize the form and get the post url
             var data = $form.serialize();
             var url = $form.attr('action');
-            //url = Urls.contactUsSubmit;
-            var applyName = $form.find('#sendBtn').attr('name');
-            // make sure the server knows this is an ajax request
             if (data.indexOf('ajax') === -1) {
                 data += '&format=ajax';
             }
@@ -308,8 +298,7 @@ function initializeEvents() {
             $.ajax({
                 url: url,
                 type: 'POST',
-                //dataType: 'html',
-                data: data + '&' + applyName + '=x'
+                data: data
             }).done(function (response) {
                 $('.column.colspan2').empty().html(response);
             });

@@ -100,27 +100,27 @@
                         <tr>
                           <td>&nbsp;</td>
                           <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
-                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.name','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${pdict.CurrentForms.contactus.firstname.value}"/> <isprint value="${pdict.CurrentForms.contactus.lastname.value}"/></span></font></td>
+                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.name','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${dw.util.StringUtils.stringToHtml(pdict.CurrentForms.contactus.firstname.value)}"/> <isprint value="${dw.util.StringUtils.stringToHtml(pdict.CurrentForms.contactus.lastname.value)}"/></span></font></td>
                           <td>&nbsp;</td>
                         </tr>
 
                         <tr>
                           <td>&nbsp;</td>
                           <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
-                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.email','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${pdict.CurrentForms.contactus.email.value}"/></span></font></td>
+                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.email','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${dw.util.StringUtils.stringToHtml(pdict.CurrentForms.contactus.email.value)}"/></span></font></td>
                           <td>&nbsp;</td>
                         </tr>
                         <tr>
                           <td>&nbsp;</td>
 
                           <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
-                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.phonenumber','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${pdict.CurrentForms.contactus.phone.value}"/></span></font></td>
+                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.phonenumber','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${dw.util.StringUtils.stringToHtml(pdict.CurrentForms.contactus.phone.value)}"/></span></font></td>
                           <td>&nbsp;</td>
                         </tr>
                         <tr>
                           <td>&nbsp;</td>
                           <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
-                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.ordernumber','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${pdict.CurrentForms.contactus.ordernumber.value}"/></span></font></td>
+                          <span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">${Resource.msg('contactus.ordernumber','email',null)}</span><span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${dw.util.StringUtils.stringToHtml(pdict.CurrentForms.contactus.ordernumber.value)}"/></span></font></td>
 
                           <td>&nbsp;</td>
                         </tr>
@@ -162,7 +162,7 @@
                           <td>&nbsp;</td>
                           <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
 
-                          <span style="color:#333333; font-weight:bold; font-size:12px;"><isprint value="${pdict.CurrentForms.contactus.country.value}"/></span></font></td>
+                          <span style="color:#333333; font-weight:bold; font-size:12px;"><isprint value="${Resource.msg(('country.'+pdict.CurrentForms.contactus.country.value).toLowerCase(), 'forms', null)}"/></span></font></td>
                           <td>&nbsp;</td>
                         </tr>
                         <tr>
@@ -182,7 +182,7 @@
                            <td>&nbsp;</td>
                            <td><font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif">
                            <isloop iterator="${pdict.contactuscomment.iterator()}" var="commentstring" status="status"> 
-                          	<span style="color:#333333; font-weight:bold; font-size:12px; margin:0; padding:0; line-height:0px;"><isprint value="${commentstring}" /><br/><div></div></span>
+                          	<span style="color:#333333; font-weight:bold; font-size:12px; margin:0; padding:0; line-height:0px;"><isprint value="${dw.util.StringUtils.stringToHtml(commentstring)}" /><br/><div></div></span>
                            </isloop>
                            </font> </td>
                            <td>&nbsp;</td>

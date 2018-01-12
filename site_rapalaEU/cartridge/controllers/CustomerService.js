@@ -179,5 +179,5 @@ exports.Dealer = guard.ensure(['post', 'http'], dealer);
 /** @see module:controllers/CustomerService~DealerLocator */
 exports.DealerLocator = guard.ensure(['post', 'http'], dealerLocator);
 
-exports.ContactUsStart = guard.ensure(['post', 'http'], contactUsStart);
+exports.ContactUsStart = guard.ensure(['post'], contactUsStart);
 
