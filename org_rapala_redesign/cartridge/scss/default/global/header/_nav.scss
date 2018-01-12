@@ -312,8 +312,10 @@ body.js-body {
                     }
                     &:first-child {
                         .sub-category-section {
-                            left: 0 !important;
-                            transform: translate(0) !important;
+                            @include respond(desktop) {
+                                left: 0 !important;
+                                transform: translate(0) !important;
+                            }
                         }
                     }
                     &:last-child {
