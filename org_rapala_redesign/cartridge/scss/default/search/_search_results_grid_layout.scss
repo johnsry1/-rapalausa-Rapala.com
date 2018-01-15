@@ -16,6 +16,12 @@
     #page-background {
         .breadcrumb {
             box-shadow: none;
+            .breadcrumb-element {
+                a {
+                    display: inline-block;
+                    float: none;
+                }
+            }
         }
         #primary {
             p {
@@ -28,8 +34,21 @@
                 }
             }
             .search-top {
+                &.bottom {
+                    .searchresultsheader {
+                        background: $background;
+                        .results-hits {
+                            font-family: $font;
+                            @include respond(desktop-down) {
+                                top: rem(9px);
+                            }
+                        }
+                    }
+                }
                 .searchresultsheader {
-                    background: $background;
+                    .results-hits {
+                        font-family: $font;
+                     }
                     .pagination {
                         .toggle-grid {
                             p,
@@ -39,13 +58,44 @@
                                 font-family: $font;
                             }
                         }
-                    }
-                    .results-hits {
-                        font-family: $font;
+                        ul {
+                            @include respond(desktop-down) {
+                                background: none;
+                            }
+                            li {
+                                &.current-page {
+                                    @include respond(desktop-down) {
+                                        padding: 0;
+                                    }
+                                }
+                                a {
+                                    @include respond(desktop-down) {
+                                        padding: 0;
+                                        width: 40px;
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
                     }
                     .sortitem-blk {
                         select {
                             font-family: $font;
+                        }
+                        select#grid-paging-header {
+                            width: rem(113px) !important;
+                        }
+                        .items-per-page {
+                            width: rem(111px) !important;
+                            background-position: 99px 65% !important;
+                            font-family: $font;
+                        }
+                        .sort-by {
+                            label {
+                                @include respond(large-down) {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                     li {
@@ -63,6 +113,20 @@
                 }
             }
             .search-result-content {
+                &.wide-tiles {
+                    .search-result-items {
+                        .grid-tile {
+                            .product-tile {
+                                .product-image {
+                                    #quickviewbutton {
+                                        top: 74%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
                 div.subcat-header {
                     background: $background;
                     h2 {
@@ -73,6 +137,7 @@
                     .product-image {
                         .quickview {
                             @include quickview;
+                            height: $quickview-height !important;
                         }
                     }
                     .product-swatches {
@@ -108,6 +173,11 @@
                 }
             }
         }
+        #secondary {
+            .column {
+                box-shadow: none;
+            }
+        }
         .row.column3 {
             .column {
                 .cell {
@@ -136,7 +206,18 @@
         #tabs {
             .product,
             .content {
+                @include respond(desktop-down) {
+                    padding-left: 0;
+                }
+                a {
+                    @include respond(desktop-down) {
+                        float: none;
+                    }
+                }
                 input[type="radio"] {
+                    @include respond(desktop-down) {
+                        margin: 0;
+                    }
                     & + a::before {
                         content: "";
                         background: $form-checkbox-bg; // should not be $trans
@@ -159,6 +240,7 @@
                     }
                 }
                 label {
+                    margin-left: 0;
                     padding-left: 0;
                     float: none;
                     display: inline-block;
@@ -265,5 +347,25 @@
                 }
             }
         }
+    }
+}
+.mobile-sort-by-content.tabletView .sort-byOption,
+.sortby-button.js-sort-active,
+.mobile-filter-by.js-filter-active {
+    @include respond(desktop-down) {
+        box-shadow: none;
+    }
+}
+.mobile-filter-by.js-filter-active {
+    background: $background;
+    span.active {
+        @include respond(desktop-down) {
+            background: $background;
+        }
+    }
+}
+#someid.column {
+    @include respond(desktop-down) {
+        border: none !important;
     }
 }

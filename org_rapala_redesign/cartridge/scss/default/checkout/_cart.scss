@@ -111,10 +111,21 @@
                     border-bottom: $border;
                     td.quantitycolumndetails {
                         text-transform: none;
+                        padding-right: rem(20px);
                         ul {
                             li {
                                 @include respond(desktop-down) {
                                     @include product-attr-name;
+                                }
+                            }
+                        }
+                        ul.product-availability-list {
+                            .on-order,
+                            .not-available {
+                                @include product-attr-title;
+                                color: $pdp-message-color;
+                                @include respond(desktop-down) {
+                                    color: $pdp-message-color;
                                 }
                             }
                         }
@@ -510,5 +521,13 @@ div.cart-promo {
     .value {
         @include product-attr-name;
         margin-bottom: 0;
+    }
+}
+
+ul.product-availability-list {
+    .on-order,
+    .not-available {
+        @include product-attr-title;
+        color: $pdp-message-color;
     }
 }
