@@ -312,11 +312,6 @@ function initializeEvents() {
                 dataType: 'html',
                 data: data
             }).done(function (response) {
-                if (navigator.userAgent.match(/(\(iPod|\(iPhone|\(iPad)/)) {
-                    window.setTimeout(function() {
-                        window.scrollTo(0, 0);
-                    }, 0);
-                }
                 $('.column.colspan2').empty().html(response);
             });
         }
