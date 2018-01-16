@@ -305,6 +305,16 @@ body.js-body {
                                 border-top: none;
                                 padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                 min-width: rem(170px);
+                                left: 50%;
+                                transform: translateX(-50%);
+                            }
+                        }
+                    }
+                    &:first-child {
+                        .sub-category-section {
+                            @include respond(desktop) {
+                                left: 0 !important;
+                                transform: translate(0) !important;
                             }
                         }
                     }
@@ -319,6 +329,7 @@ body.js-body {
                         display: block;
                         width: auto;
                         float: none;
+                        position: relative;
                     }
                     &::after {
                         @include respond(desktop) {
@@ -355,6 +366,8 @@ body.js-body {
                                     border-top: none;
                                     padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                     min-width: rem(170px);
+                                    left: 50%;
+                                    transform: translateX(-50%);
                                 }
                             }
                         }

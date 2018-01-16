@@ -45,7 +45,8 @@ a.filter {
             border-color: $swatch-border-color;
         }
     }
-    .swatches.Size {
+    .swatches.Size,
+    .swatches.size {
         li {
             border: none;
             height: auto;
@@ -107,6 +108,12 @@ a.add-to-wishlist {
     }
     .availability,
     .productid {
+        .label {
+            @include product-attr-title;
+            font-weight: $product-attr-title-font-weight !important;
+            font-size: $product-attr-title-font-size !important;
+            margin-right: rem(3px);
+        }
         .value {
             @include product-attr-name;
             .in-stock,

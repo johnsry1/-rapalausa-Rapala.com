@@ -164,7 +164,50 @@ $footer-bg-mobile: $concrete;
                                     }
                                     a {
                                         @include footer-link;
+                                        @include respond(large-down) {
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                            .domainswitch-header {
+                                ul {
+                                    width: 100%;
+                                    li {
+                                        color: $country-region-text-static-color;
+                                        height: 28px;
                                         padding: 0;
+                                        margin: 0;
+                                        width: 100%;
+                                        @include respond(desktop) {
+                                            text-align: center;
+                                            background: none repeat scroll 0 0 $country-region-bg-static-color;
+                                            border-top: 1px solid $country-region-border-color;
+                                            float: left;
+                                        }
+                                        &:hover {
+                                            color: $dim-gray;
+                                            @include respond(desktop) {
+                                                background: none repeat scroll 0 0 $country-region-bg-hover-color;
+                                                height: 28px;
+                                                padding: 0;
+                                            }
+                                            a {
+                                                color: $country-region-text-hover-color;
+                                                text-decoration: none;
+                                                width: 100%;
+                                                float: left;
+                                            }
+                                        }
+                                        a {
+                                            margin: 0;
+                                            padding: 0;
+                                            color: $country-region-text-static-color;
+                                            font-weight: normal;
+                                            font-size: 11px;
+                                            line-height: 29px;
+                                            text-decoration: none;
+                                        }
                                     }
                                 }
                             }
