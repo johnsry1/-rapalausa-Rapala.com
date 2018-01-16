@@ -1,0 +1,79 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+	<isscript>
+		var pageContext={
+			title: 'Content Search Results',
+			type: 'search',
+			ns: 'search'
+		};
+	</isscript>
+	<isinclude template="util/modules"/>
+
+	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="search/pt_contentsearchresult_UI"/>
+
+	<iscomment>Add template-specific header information here.</iscomment>
+
+</head>
+
+<body>
+	<isinclude template="components/googletagmanager"/>
+
+	<div id="container" class="pt_content-search-result">
+
+		<isinclude template="components/header/header"/>
+
+		<div id="main" role="main" class="page-content clearfix">
+			<div id="content">
+				<div id="page-background" class="downshift">
+					<div id="page">
+						<div class="wrapper">
+							<isinclude template="components/browsertoolscheck"/>
+						<div class="mobileHide">	<isinclude template="search/components/productsearchbreadcrumbs"/></div>
+							<div class="searchresult-contentHeader mobileHide">
+								<isif condition="${'rapala' == session.custom.currentSite}">
+									<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+										<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+									</isif>
+								<iselse/>
+									<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+										<h1 class="leftnav">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+									</isif>
+								</isif>
+								<span class="count">${pdict.ContentPagingModel.count} <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>
+							</div>
+							<div class="content">
+							<a class="mobile-filter-by mobileHide">
+								filter by
+								<span class="active"></span>
+							</a>
+							<div id="secondary" class="refinements contentsecondary searchResult-refinement visible-hidden">
+ 									<div class="mobileHide"><isinclude template="search/components/productsearchrefinebar"/></div>		
+ 									<div class="desktopHide"><isinclude template="search/components/contentsearchrefinebar"/></div>				
+ 							</div>
+				
+							<div id="primary" class="primary-content">
+								<isreplace/>
+							</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<isinclude template="components/footer/footer"/>
+
+		<isinclude template="search/pt_contentsearchresult_VARS"/>
+
+	</div>
+
+</body>
+</html>
