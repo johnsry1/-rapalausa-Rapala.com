@@ -175,7 +175,8 @@
                 }
                 .order-subtotal,
                 .ordersurcharges,
-                .order-shipping {
+                .order-shipping,
+                .ordershipping.vatamount {
                     .label {
                         @include product-attr-title;
                     }
@@ -184,9 +185,13 @@
                     }
                 }
                 .order-total {
+                    .label-total {
+                        font-family: $font;
+                    }
                     .miniright {
                         .value {
                             font-style: normal;
+                            font-family: $font;
                         }
                     }
                 }

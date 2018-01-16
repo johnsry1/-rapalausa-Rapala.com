@@ -218,6 +218,12 @@
                     float: none !important;
                 }
             }
+            .paymentform.creditcardpayment {
+                .clearbutton {
+                    right: 0;
+
+                }
+            }
         }
     }
     .checkout-header-center {
@@ -455,6 +461,11 @@
         }
     }
     .billingsection {
+        .shipping-address-field-section .billing-address-fields {
+            @include respond(large-up) {
+                margin-left: rem(10px);
+            }
+        }
         .addressform {
             .new-address-field,
             .edit-address-field {
@@ -492,6 +503,7 @@
             @include respond(large-up) {
                 max-width: rem(287px);
                 margin-bottom: rem(25px);
+                clear: both;
             }
             .form-row {
                 float: none !important;
