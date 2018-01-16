@@ -8,7 +8,6 @@
 
 /* API Includes */
 var Status = require('dw/system/Status');
-var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -20,12 +19,6 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
     app.getView('CustomerService').render('content/customerservice');
-}
-/**
- * Renders the customer service recaptcha.
- */
-function recaptcha() {
-    app.getView('CustomerService').render('recaptcha/module');
 }
 
 /**
@@ -101,27 +94,15 @@ function submit() {
    
 }
 */
+
 /*
  * fetching data from session and setting to contactus form
  */
 function contactUsStart() {
+	
 	var contactUsForm = app.getForm('contactus');
-	
-	//read recaptcha response from page
-	var recaptchaResponse = request.httpParameterMap.get('g-recaptcha-response').getStringValue();
-	var ip = request.getHttpRemoteAddress();
-	
-	//validation recaptcha
-	var RecaptchaCheck = require('app_rapala_core/cartridge/scripts/recaptcha/ReCaptchaCheck.ds').recaptchaHelper(recaptchaResponse, ip);
-	if(!RecaptchaCheck) {
-		var r = require('~/cartridge/scripts/util/Response');
-		r.renderJSON({
-			RecaptchaError: true
-		});
-		return;
-	}
 	var Email = app.getModel('Email');
-    var emailTo = dw.system.Site.current.preferences.custom.csrRapalaDefaultMailId; 
+	var emailTo=dw.system.Site.current.preferences.custom.csrRapalaDefaultMailId; 
 	var frommail=session.forms.contactus.email.htmlValue;
 	var comment = session.forms.contactus.comment.htmlValue.split("\n");
         var emailStatus;
@@ -184,8 +165,6 @@ function dealerLocator() {
  */
 /** @see module:controllers/CustomerService~show */
 exports.Show = guard.ensure(['get'], show);
-/** @see module:controllers/CustomerService~recaptcha */
-exports.Recaptcha = guard.ensure(['get'], recaptcha);
 /** @see module:controllers/CustomerService~leftNav */
 exports.LeftNav = guard.ensure(['get'], leftNav);
 /** @see module:controllers/CustomerService~contactUs */
@@ -198,3 +177,4 @@ exports.Dealer = guard.ensure(['post', 'http'], dealer);
 exports.DealerLocator = guard.ensure(['post', 'http'], dealerLocator);
 
 exports.ContactUsStart = guard.ensure(['post', 'http'], contactUsStart);
+
