@@ -697,14 +697,37 @@
                             }
                         }
                         .thankyoumessage {
+                            h1 {
+                                @include h1;
+                            }
+                            .orderdate {
+                                .value {
+                                    font-family: $font;
+                                }
+                            }
+                            .ordernumber {
+                                .label {
+                                    @include product-attr-title;
+                                }
+                                .value {
+                                    @include product-attr-name;
+                                }
+                            }
                             .order-content {
                                 .impo-things {
                                     font-family: $font;
                                     background: $background;
                                     border: $border;
-                                    ul,
-                                    li {
-                                        font-family: $font;
+                                    h2 {
+                                        @include h2;
+                                    }
+                                    ul {
+                                        li {
+                                            font-family: $font;
+                                            span {
+                                                font-family: $font;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -730,6 +753,20 @@
                                             address,
                                             .label.paymenttype {
                                                 font-family: $font !important;
+                                            }
+                                        }
+                                        .label.paymenttype {
+                                            font-family: $font;
+                                            color: $black;
+                                            @include font-size(13px);
+                                        }
+                                        .paymentamount {
+                                            .label {
+                                                @include product-attr-title;
+                                                margin-right: rem(3px);
+                                            }
+                                            .value {
+                                                @include product-attr-name;
                                             }
                                         }
                                     }

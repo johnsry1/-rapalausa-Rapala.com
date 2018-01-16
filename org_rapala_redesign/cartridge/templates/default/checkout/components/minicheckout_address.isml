@@ -7,8 +7,11 @@
 </iscomment>
 
 <div class="address">
-	<div><isprint value="${ShippingAddress.title}"/></div>
-	<div><isprint value="${pdict.p_address.firstName}"/> <isprint value="${pdict.p_address.lastName}"/></div>
+	<div>
+        <isprint value="${ShippingAddress.title}"/>
+        <isprint value="${pdict.p_address.firstName}"/>
+        <isprint value="${pdict.p_address.lastName}"/>
+    </div>
 	<div><isprint value="${pdict.p_address.address1}"/></div>
 	<isif condition="${!empty(pdict.p_address.address2)}">
 		<div><isprint value="${pdict.p_address.address2}"/></div>
