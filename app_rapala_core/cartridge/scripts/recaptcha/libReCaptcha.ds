@@ -16,8 +16,8 @@ function ReCaptcha() {
 ReCaptcha.prototype.getHTML = function() : String {
 	var html : String = '';
 	if (!this.RECAPTCHA_ENABLED) return html;
-	html += "<script src='//www.google.com/recaptcha/api.js'></script>";
-	html += '<div class="g-recaptcha form-row pass-note" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
+	html += "<script src='//www.google.com/recaptcha/api.js?onload=onloadCallback'></script>";
+	html += '<div class="g-recaptcha form-row pass-note" data-callback="onReCaptchaSuccess" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
 	return html;
 }
 
@@ -30,8 +30,8 @@ ReCaptcha.prototype.getHTML = function() : String {
 ReCaptcha.prototype.getHTMLSecure = function() : String {
 	var html : String = '';
 	if (!this.RECAPTCHA_ENABLED) return html;
-	html += "<script src='//www.google.com/recaptcha/api.js'></script>";
-	html += '<div class="g-recaptcha form-row pass-note" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
+	html += "<script src='//www.google.com/recaptcha/api.js?onload=onloadCallback'></script>";
+	html += '<div class="g-recaptcha form-row pass-note"data-callback="onReCaptchaSuccess" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
 	return html;
 }
 
