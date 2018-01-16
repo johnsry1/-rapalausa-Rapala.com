@@ -5,8 +5,9 @@
 <subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/></isif></subject>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <style type="text/css">
-body {color:black;font-family: Arial, Verdana, Helvetica, sans-serif;font-size:1.0em;}
+body {color:black;font-family:Roboto,arial;;font-size:1.0em;}
 .label {font-weight:bold;}
 .product .name a {font-size:1.2em;font-weight:bold; color:#333333;}
 .product .price .standardprice {float:left;margin-right:5px;text-decoration:line-through;}
@@ -66,7 +67,7 @@ ul li.onorder {color:red;}
 		            <td><isprint value="${pdict.ProductList.eventCity}"/>, <isprint value="${pdict.ProductList.eventState}"/></td>
 		         </tr>
 		    </table>
-		    
+
 		<iselseif condition="${pdict.ProductList.type == dw.customer.ProductList.TYPE_WISH_LIST}">
 			<table>
 		         <tr>

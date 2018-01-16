@@ -3,7 +3,7 @@
 <iscomment>The "subject" tag contains the mail subject and can contain dynamic information, like the order number.</iscomment>
 <iscomment><subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/><isprint value="${Resource.msg('order.orderconfirmation-email.001','order',null)}" encoding="off"/> (<isprint value="${pdict.Order.orderNo}"/>)</isif></subject>
 
-	The "to" tag contains the email address of the recipient, the "from" tag the email address of the sender. 
+	The "to" tag contains the email address of the recipient, the "from" tag the email address of the sender.
 	Each tag is to be specified max. once. Multiple email address can be separated by "," (see RFC2822).
 
 <to>${pdict.Order.customerEmail}</to>
@@ -12,6 +12,7 @@
 <head>
 
 <isinclude template="util/modules"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 </head>
 <body>
 	<isinclude template="components/googletagmanager"/>
@@ -22,12 +23,12 @@
 			<center>
 				<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
 					<iscomment><tr>
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
+						<td style="font-size:12px;font-family:Roboto,arial;padding:20px 10px;vertical-align:top;">
 							<a href="${URLUtils.httpsHome()}" title="${Resource.msg('global.storename','locale',null)}">
 								<img src="${URLUtils.httpsStatic('/images/logo.gif')}" alt="${Resource.msg('global.storename','locale',null)}" style="border:none;"/>
 							</a>
 						</td>
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
+						<td style="font-size:12px;font-family:Roboto,arial;padding:20px 10px;vertical-align:top;">
 							<strong>${Resource.msg('global.storename','locale',null)}</strong><br />
 							${Resource.msg('order.orderconfirmation-email.storeaddress','order',null)}<br />
 							${Resource.msg('order.orderconfirmation-email.storelocation','order',null)}<br />
@@ -36,14 +37,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
-						
+						<td colspan="2" style="font-size:12px;font-family:Roboto,arial;padding:20px 10px;vertical-align:top;">
+
 							<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
 								<tr>
-									<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('confirmation.thankyou','checkout',null)}</th>
+									<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:Roboto,arial;text-align:left;">${Resource.msg('confirmation.thankyou','checkout',null)}</th>
 								</tr>
 								<tr>
-									<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
+									<td style="font-size:12px;font-family:Roboto,arial;padding:20px 10px;vertical-align:top;">
 										<p>${Resource.msg('confirmation.message','checkout',null)}</p>
 										<p>${Resource.msg('confirmation.contact','checkout',null)}</p>
 									</td>
@@ -53,16 +54,16 @@
 						</td>
 					</tr></iscomment>
 					<tr>
-						<td style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;" colspan="2">
+						<td style="font-size:12px;font-family:Roboto,arial;padding:20px 10px;vertical-align:top;" colspan="2">
 							<isemailorderdetails order="${pdict.Order}"/>
 						</td>
 					</tr>
-				</table>						
+				</table>
 			</center>
 		</td>
 	</tr>
-</table>	
-					
+</table>
+
 
 </body>
 </html>
