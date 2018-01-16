@@ -709,6 +709,7 @@
                             }
                         }
                         .thankyoumessage {
+                            box-shadow: none !important;
                             h1 {
                                 @include h1;
                             }
@@ -852,6 +853,9 @@
         }
     }
     .ordershipments {
+        @include respond(medium-down) {
+            padding: 0 rem(10px);
+        }
         .ordershipment {
             .ordershipmenttable {
                 thead {
