@@ -91,6 +91,7 @@ function selectShippingMethod(shippingMethodID) {
     if (!shippingMethodID) {
         return;
     }
+    updateButton();
     // attempt to set shipping method
     var url = getShippingMethodURL(Urls.selectShippingMethodsList, {
         shippingMethodID: shippingMethodID
@@ -99,7 +100,7 @@ function selectShippingMethod(shippingMethodID) {
         url: url,
         callback: function (data) {
             updateSummary();
-            updateButton();
+            $('button.continue-checkout .loader').remove();
             uievents.synccheckoutH();
             if (!data || !data.shippingMethodID) {
                 window.alert('Couldn\'t select shipping method.');
