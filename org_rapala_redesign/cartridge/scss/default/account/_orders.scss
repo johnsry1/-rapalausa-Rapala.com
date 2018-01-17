@@ -22,7 +22,7 @@
                     display: inline-block;
                     width: rem(30px);
                     height: rem(30px);
-                    @include line-height(25px);
+                    @include line-height(30px);
                     padding: 0;
                 }
             }
@@ -175,7 +175,8 @@
                 }
                 .order-subtotal,
                 .ordersurcharges,
-                .order-shipping {
+                .order-shipping,
+                .ordershipping.vatamount {
                     .label {
                         @include product-attr-title;
                     }
@@ -184,9 +185,13 @@
                     }
                 }
                 .order-total {
+                    .label-total {
+                        font-family: $font;
+                    }
                     .miniright {
                         .value {
                             font-style: normal;
+                            font-family: $font;
                         }
                     }
                 }
@@ -200,6 +205,14 @@
         .mini-address-name,
         .mini-address-location address {
             @include product-attr-name;
+        }
+        .paymentamount {
+            .label {
+                @include product-attr-title;
+            }
+            .value {
+                @include product-attr-name;
+            }
         }
     }
     .order-shipments {

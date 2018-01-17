@@ -70,8 +70,7 @@
 													</isloop>
 												<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
 													<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
-													<div><isprint value="${address.title}" /></div>
-													<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
+													<div><isprint value="${address.title}" /> <isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
 													<div><isprint value="${address.address1}"/></div>
 													<isif condition="${!empty(address.address2)}">
 														<div><isprint value="${address.address2}"/></div>
@@ -209,7 +208,7 @@
 
 							</isif>
 							<div class="selected-shipping-address">
-								<isprint value="${shippingAddr.title}"/><br/>
+								<isprint value="${shippingAddr.title}"/>
 								<isprint value="${shippingAddr.firstName}"/>
 								<isprint value="${shippingAddr.lastName}"/><br/>
 								<isprint value="${shippingAddr.address1}"/>
@@ -409,17 +408,17 @@
 												<button class="button-fancy-large adyen-place-order-hidden-button" type="submit" id="${billingFormSubmitButtonID}" style="display:none" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 											<iselse/>
 												<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-											</isif>		
+											</isif>
 									<iselse/>
 											<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
 												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-button" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
 												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-hidden-button" id="${billingFormSubmitButtonID}" style="display:none" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
 											<iselse/>
 												<button class="button-fancy-large continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
-											</isif>		
+											</isif>
 									</isif>
-									
-									<iscomment> Adyen goes here 
+
+									<iscomment> Adyen goes here
 									<isif condition="${(pdict.AdyenHelper && pdict.AdyenHelper.getAdyenCseEnabled()) || pdict.AdyenCseEnabled === true}">
 										<button class="button-fancy-large" type="hidden" id="billing-submit-hidden" style="display:none" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 										<button class="button-fancy-large" type="submit" id="billing-submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
@@ -427,7 +426,7 @@
 										<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 									</isif>
 									</iscomment>
-									
+
 									<div class="cart-payment-buttons">
 										<div class="trust-marks-imgs">
 											<span class="payment-trust-imgs pci-secured-payment-icon"></span>

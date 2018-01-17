@@ -52,13 +52,13 @@
 	<!-- use global state list -->
 	<include formid="states" name="states"/>
 
+    <!-- phone is mandatory for shipping addresses -->
+    <field formid="phone" label="profile.phone" type="string" mandatory="false" binding="phone" max-length="20" missing-error="address.phone.missing" range-error="address.field.invalid"/>
+
 	<!--  postal code -->
 	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" max-length="10" binding="postalCode"
 		missing-error="resource.errorzip"/>
 
-
-	<!-- phone is mandatory for shipping addresses -->
-	<field formid="phone" label="profile.phone" type="string" mandatory="false" binding="phone" max-length="20" missing-error="address.phone.missing" range-error="address.field.invalid"/>
 
 	<!-- actions provided by the edit shipping address dialog -->
 	<action formid="apply" valid-form="true"/>
