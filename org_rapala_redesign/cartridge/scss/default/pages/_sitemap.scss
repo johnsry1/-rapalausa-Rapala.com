@@ -1,0 +1,35 @@
+.pt_customerservice {
+    #content {
+        .breadcrumb {
+            background: none;
+        }
+    }
+    .site-map {
+        @include respond(desktop-down) {
+            padding: 0 rem(10px);
+        }
+        h2 {
+            @include h2;
+            &.left-nav-style {
+                border-bottom: none;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+        }
+        ul {
+            li.first-level {
+                ul {
+                    padding-left: rem(15px);
+                    li {
+                        padding-left: 0;
+                        margin-left: 0;
+                        list-style: $ul-list-style;
+                        background: none;
+                        font-family: $font;
+                    }
+                }
+            }
+        }
+    }
+}
+
