@@ -15,13 +15,17 @@
 		<isset name="name" value="${pdict.Product.name}" scope="page" />
 		<isif condition="${name.indexOf('&reg;') >= 0}">
 			<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
-		<iselseif condition="${name.indexOf('®') >= 0}">
+		</isif>
+		<isif condition="${name.indexOf('®') >= 0}">
 			<isset name="name" value="${name.replace('®','<sup>&reg;</sup>','g')}" scope="page" />
-		<iselseif condition="${name.indexOf('&trade;') >= 0}">
+		</isif>
+		<isif condition="${name.indexOf('&trade;') >= 0}">
 			<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
-		<iselseif condition="${name.indexOf('&#8482;') >= 0}">
+		</isif>
+		<isif condition="${name.indexOf('&#8482;') >= 0}">
 			<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
-		<iselseif condition="${name.indexOf('™') >= 0}">
+		</isif>
+		<isif condition="${name.indexOf('™') >= 0}">
 			<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
 		</isif>
 		<isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/><isprint value="${name}" encoding="off" />
@@ -61,13 +65,17 @@
 			<isset name="name" value="${pdict.Product.name}" scope="page" />
 			<isif condition="${name.indexOf('&reg;') >= 0}">
 				<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
-			<iselseif condition="${name.indexOf('®') >= 0}">
+			</isif>
+			<isif condition="${name.indexOf('®') >= 0}">
 				<isset name="name" value="${name.replace('®','<sup>&reg;</sup>','g')}" scope="page" />
-			<iselseif condition="${name.indexOf('&trade;') >= 0}">
+			</isif>
+			<isif condition="${name.indexOf('&trade;') >= 0}">
 				<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
-			<iselseif condition="${name.indexOf('&#8482;') >= 0}">
+			</isif>
+			<isif condition="${name.indexOf('&#8482;') >= 0}">
 				<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
-			<iselseif condition="${name.indexOf('™') >= 0}">
+			</isif>
+			<isif condition="${name.indexOf('™') >= 0}">
 				<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
 			</isif>
 			<isprint value="${name}" encoding="off" /><isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/>
