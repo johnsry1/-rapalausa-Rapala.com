@@ -354,12 +354,18 @@ ul.common-nav {
                     @include respond(medium-down) {
                         line-height: 16px;
                         padding-bottom: 0;
-                        margin-bottom: 9px;
+                        margin-bottom: 5px;
+                        text-align: left;
+                        width: 100%;
+                        float: none;
                     }
                     .labeltext {
                         font-family: inherit;
                         font-weight: inherit;
                         text-transform: inherit;
+                        @include respond(medium-down) {
+                            margin-left: 0;
+                        }
                     }
                 }
                 .field-wrapper {
@@ -373,9 +379,20 @@ ul.common-nav {
                 }
                 .form-caption {
                     margin-top: 0;
+                    @include form-caption;
+                    @include respond(medium-down) {
+                        margin-left: 0;
+                    }
+                    &.error-message {
+                        @include form-error;
+                        @include respond(large-up) {
+                            margin-top: -5px;
+                        }
+                    }
                 }
             }
             .form-row.form-indent {
+                margin-left: 0 !important;
                 @include respond(large-up) {
                     margin-left: 29% !important;
                 }
@@ -396,18 +413,32 @@ ul.common-nav {
                 }
             }
             .form-row.form-row-button {
+                margin-left: 0 !important;
                 @include respond(large-up) {
                     margin-left: 29% !important;
                 }
                 button {
                     @include button('submit');
+                    width: auto;
                     @include respond(large-up) {
                         width: auto;
                     }
                 }
             }
+            .charlimit {
+                margin-left: 0 !important;
+                font-family: $font;
+                padding: 0;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+            }
             .create_Agree {
                 font-family: $font;
+                margin-left: 0 !important;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
             }
         }
     }
