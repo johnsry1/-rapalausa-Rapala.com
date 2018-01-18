@@ -340,14 +340,28 @@ body {
                     padding: 0;
                 }
                 .headerbanner {
-                    margin: rem(15px) 0 0 0;
+                    margin: rem(15px) 0 rem(10px) 0;
                     height: auto;
+                    box-sizing: border-box;
+                    @include respond(desktop-down) {
+                        padding-left: rem(20px) !important;
+                        padding-right: rem(20px) !important;
+                        margin-bottom: rem(10px) !important;
+                    }
+                    @include respond(medium-down) {
+                        padding-left: rem(10px) !important;
+                        padding-right: rem(10px) !important;
+                    }
                     p {
                         margin: 0;
                         padding: 0;
                     }
                     img {
                         vertical-align: top;
+                        @include respond(medium-down) {
+                            width: 100%;
+                            height: auto;
+                        }
                     }
                 }
             }
