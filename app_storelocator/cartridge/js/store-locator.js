@@ -241,7 +241,7 @@ var StoreLocator = {
                 storeinfo += '<div class="hours">' + stores[store].storeHours + '</div>';
                 storeinfo += '</div>';
                 storeinfo += '<div class="store-links">';
-                storeinfo += '<div class="details"><a href="\' + this.storeurl + store + \'" class="detailslink">' + Resources.STORE_DETAILS + '</a></div>';
+                storeinfo += '<div class="details"><a href="' + this.storeurl + store + '" class="detailslink">' + Resources.STORE_DETAILS + '</a></div>';
                 storeinfo += '<div class="directions"><a href="https://maps.google.com/maps?daddr=' + encodedAddress + '" class="directionslink" target="_blank">' + Resources.STORE_DIRECTIONS + '</a></div>';
                 storeinfo += '</div>';
 

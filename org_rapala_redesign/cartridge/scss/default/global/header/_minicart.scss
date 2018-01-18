@@ -133,6 +133,29 @@
             font-family: $font;
             border-bottom: $border;
             background: none;
+            &.notification-mini-cart {
+                .notifications-summery {
+                    margin: 0 rem(5px);
+                    width: calc(100% - #{rem(10px)});
+                    box-sizing: border-box;
+                }
+            }
+            .product-availability-list {
+                font-family: $font !important;
+                width: 100%;
+                margin: rem(3px) 0;
+                .on-order {
+                    float: none !important;
+                    padding: 0 !important;
+                    font-size: 12px !important;
+                    line-height: rem(14px) !important;
+                }
+            }
+            .minipricecolumn {
+                .totalprice.cartitemtotalprice {
+                    padding-right: 0 !important;
+                }
+            }
             .miniitemcolumn {
                 .newFlag {
                     .small-new.new-stamp {
@@ -158,6 +181,9 @@
         font-family: $font;
         border-top: $border;
         .mini-cart-subtotals {
+            width: 100%;
+            padding-left: rem(20px);
+            box-sizing: border-box;
             .label,
             .value {
                 font-family: $font;
@@ -172,7 +198,7 @@
                 box-sizing: border-box;
                 span {
                     line-height: inherit;
-                    text-transform: none;
+                    text-transform: inherit;
                     font-size: inherit;
                     color: inherit;
                     text-decoration: none;

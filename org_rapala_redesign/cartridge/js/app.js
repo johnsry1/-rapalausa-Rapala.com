@@ -33,6 +33,7 @@ if (!window.$) {
 require('./jquery-ext')();
 require('./cookieprivacy')();
 require('./captcha')();
+require('picturefill');
 
 var $ = window.$;
 

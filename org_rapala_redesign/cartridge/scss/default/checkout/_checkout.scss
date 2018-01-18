@@ -91,6 +91,62 @@
             vertical-align: middle;
         }
     }
+    #paymentmethods {
+        .payment-method {
+            label {
+                margin-right: rem(10px);
+                @include respond(medium-down) {
+                    text-align: left !important;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+            .expirationdate {
+                margin-bottom: rem(7px);
+                clear: both;
+                overflow: hidden;
+                @include respond(large-up) {
+                    width: rem(300px);
+                    margin-left: rem(125px);
+                }
+                .form-row {
+                    margin: 0;
+                }
+                .label {
+                    line-height: rem(15px) !important;
+                    float: none;
+                    text-align: left;
+                    display: block;
+                    position: static;
+                    margin: 0 0 rem(5px);
+                    .requiredindicator {
+                        float: none !important;
+                    }
+                }
+                .field-wrapper {
+                    float: none;
+                    width: 100%;
+                    display: block;
+                }
+                .month,
+                .year {
+                    width: 50% !important;
+                    margin: 0 !important;
+                    box-sizing: border-box;
+                    .textinput {
+                        width: 100% !important;
+                        float: none;
+                    }
+                }
+                .month {
+                    padding-right: rem(5px);
+                }
+                .year {
+                    padding-left: rem(5px);
+                }
+            }
+        }
+    }
 }
 
 .pt_checkout {
@@ -160,6 +216,12 @@
             .SaveCard {
                 .labeltext {
                     float: none !important;
+                }
+            }
+            .paymentform.creditcardpayment {
+                .clearbutton {
+                    right: 0;
+
                 }
             }
         }
@@ -277,7 +339,7 @@
                     }
                     span {
                         line-height: inherit;
-                        text-transform: none;
+                        text-transform: inherit;
                         font-size: inherit;
                         color: inherit;
                         text-decoration: none;
@@ -399,6 +461,11 @@
         }
     }
     .billingsection {
+        .shipping-address-field-section .billing-address-fields {
+            @include respond(large-up) {
+                margin-left: rem(10px);
+            }
+        }
         .addressform {
             .new-address-field,
             .edit-address-field {
@@ -436,6 +503,7 @@
             @include respond(large-up) {
                 max-width: rem(287px);
                 margin-bottom: rem(25px);
+                clear: both;
             }
             .form-row {
                 float: none !important;
@@ -641,14 +709,38 @@
                             }
                         }
                         .thankyoumessage {
+                            box-shadow: none !important;
+                            h1 {
+                                @include h1;
+                            }
+                            .orderdate {
+                                .value {
+                                    font-family: $font;
+                                }
+                            }
+                            .ordernumber {
+                                .label {
+                                    @include product-attr-title;
+                                }
+                                .value {
+                                    @include product-attr-name;
+                                }
+                            }
                             .order-content {
                                 .impo-things {
                                     font-family: $font;
                                     background: $background;
                                     border: $border;
-                                    ul,
-                                    li {
-                                        font-family: $font;
+                                    h2 {
+                                        @include h2;
+                                    }
+                                    ul {
+                                        li {
+                                            font-family: $font;
+                                            span {
+                                                font-family: $font;
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -674,6 +766,20 @@
                                             address,
                                             .label.paymenttype {
                                                 font-family: $font !important;
+                                            }
+                                        }
+                                        .label.paymenttype {
+                                            font-family: $font;
+                                            color: $black;
+                                            @include font-size(13px);
+                                        }
+                                        .paymentamount {
+                                            .label {
+                                                @include product-attr-title;
+                                                margin-right: rem(3px);
+                                            }
+                                            .value {
+                                                @include product-attr-name;
                                             }
                                         }
                                     }
@@ -747,6 +853,9 @@
         }
     }
     .ordershipments {
+        @include respond(medium-down) {
+            padding: 0 rem(10px);
+        }
         .ordershipment {
             .ordershipmenttable {
                 thead {

@@ -1,0 +1,232 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
+
+<isscript>
+	var StringHelpers = require('~/cartridge/scripts/util/StringHelpers');
+</isscript>
+
+<iscomment>NOTE: Removes Refinements if NO Products are found</iscomment>
+<isif condition="${pdict.ProductSearchResult}">
+
+    <iscomment>Fetches refinement options for easier handling in the template</iscomment>
+    <isset name="Refinements" value="${pdict.ProductSearchResult.refinements}" scope="page"/>
+
+    <iscomment>Process refinement options based on configured refinement definitions</iscomment>
+    <isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0}">
+        <h2 class="visually-hidden">${Resource.msg('searchrefinebar.refineresults','search',null)}</h2>
+        <iscomment>If we have a category context, we build a path from the root to the category</iscomment>
+        <isscript>
+            var cat = pdict.ProductSearchResult.category;
+            var path = new dw.util.ArrayList();
+            while (cat && cat.parent) {
+                if (!cat.online) {
+                    cat = cat.parent;
+                    continue;
+                }
+                path.addAt(0, cat);
+                cat = cat.parent;
+            }
+        </isscript>
+        <iscomment>Navigation header based on browsing vs. keyword search</iscomment>
+
+        <div class="column" id="someid">
+            <div class="cell contentbox upshift searchResulthide">
+                <div>
+                  <isif condition="${pdict.ProductSearchResult.categorySearch && pdict.ProductSearchResult.category.ID !='root'}">
+                      <div class="shop-brand">
+                           <span class="shop-brandtext">
+                               ${Resource.msg('global.shop','locale',null)} <isprint value="${path.get(0).displayName}"/>
+                           </span>
+                      </div>
+                  <iselse/>
+                      <iscomment>
+                            <div class="shop-brand">
+                                <span class="shop-brandtext">
+                                        ${Resource.msg('searchrefinebar.searchresults','search',null)}
+                                </span>
+                           </div>
+                      </iscomment>
+                  </isif>
+
+                  <iscomment>this is used to render left navigation menu </iscomment>
+                  <isif condition="${pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) &&  pdict.ProductSearchResult.category != null}">
+                    <isinclude url="${URLUtils.url('Home-LeftNav','currentSite',session.custom.currentSite, 'cgid',pdict.ProductSearchResult.category.ID)}"/>
+                  </isif>
+                </div>
+            </div>
+            <div class="cell contentbox upshift">
+                <div class="contentboxcontent">
+                    <div id="searchrefinements" class="searchrefinements">
+                        <h2>${Resource.msg('searchrefinebar.searchresults','search',null)}</h2>
+                        <isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+                            <div id="tabs">
+                                <div class="product">
+                                    <input type="radio" name="css-tabs" id="producttab" checked="checked" class="producttab">
+                                    <a href="${pdict.ProductSearchResult.url('Search-Show')}"   name="" id="producttab-link"><label for="tab-1" class="producttab">Products</label></a>
+                                </div>
+                                <div class="content">
+                                    <isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
+                                        <input type="radio" name="css-tabs" id="contenttab" class="contenttab">
+                                        <a href="${URLUtils.https('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab-link"><label for="tab-2" class="contenttab">Content</label></a>
+                                    </isif>
+                                </div>
+                            </div>
+                        </isif>
+
+                        <isloop items="${Refinements.refinementDefinitions}" var="RefinementDefinition" status="refinementsLoopState">
+                            <div class="refinement-${RefinementDefinition.attributeID} navgroup refinement <isif condition="${RefinementDefinition.isCategoryRefinement()}"> category-refinement</isif>">
+                                <iscomment>ATTRIBUTE REFINEMENTS</iscomment>
+                                <isif condition="${RefinementDefinition.isAttributeRefinement()}">
+                                    <h3 class="filter">
+                                        <isprint value="${RefinementDefinition.getDisplayName()}"/>
+                                        <span class="icon"></span>
+                                    </h3>
+                                    <isif condition="${pdict.ProductSearchResult.isRefinedByAttribute(RefinementDefinition.attributeID)}">
+                                        <div class="clear-refinement">
+                                            <isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 && !empty(pdict.ProductSearchResult.searchPhrase)}">
+                                                <a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+                                            <iselseif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 &&!empty(pdict.CurrentHttpParameterMap.cgid.value)}">
+                                                <a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+                                            </isif>
+                                        </div>
+                                    </isif>
+
+                                    <iscomment>Special handling for color and size refinement selection</iscomment>
+                                    <isif condition="${RefinementDefinition.attributeID.equals('refinementColor') || RefinementDefinition.attributeID.equals('size')}">
+                                        <div class="refineattributes">
+                                            <div>
+                                                <div class="js-scrollbar">
+                                                    <iscomment>
+                                                        <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+                                                    </iscomment>
+                                                     <div class="viewport">
+                                                         <div class="overview">
+                                                            <ul class="clearfix swatches ${RefinementDefinition.getAttributeID()}">
+                                                                <iscomment>render the actual swatches</iscomment>
+                                                                <isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
+
+                                                                    <isset name="swatchID" value="${'swatch-' + StringHelpers.cleanupID(RefinementValue.getDisplayValue())}" scope="page"/>
+                                                                    <isif condition="${RefinementDefinition.attributeID.equals('refinementColor') && !empty(RefinementValue.getPresentationID())}">
+                                                                        <isset name="swatchID" value="${'swatch-' + StringHelpers.cleanupID(RefinementValue.getPresentationID())}" scope="page"/>
+                                                                    </isif>
+
+                                                                    <isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
+                                                                        <li class="selected ${swatchID}">
+                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.selected.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                                <isprint value="${RefinementValue.getDisplayValue()}"><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    <iselseif condition="${RefinementValue.hitCount == 0}">
+                                                                        <li class="unselectable ${swatchID}">
+                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" title="${Resource.msgf('global.refinement.unselectable.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                                <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    <iselse/>
+                                                                        <li class="${swatchID}">
+                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                                <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </isif>
+
+                                                                </isloop>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <iselse/>
+                                        <iscomment>Default handling of all other attribute refinements (depending on whether there are more than the configured cutoff)</iscomment>
+                                        <div class="refineattributes">
+                                            <div>
+                                                <div <isif condition="${Refinements.getAllRefinementValues(RefinementDefinition).size() > RefinementDefinition.cutoffThreshold}">class="scrollable"</isif>>
+                                                    <div class="js-scrollbar">
+                                                        <iscomment>
+                                                            <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+                                                        </iscomment>
+                                                        <div class="viewport">
+                                                            <div class="overview">
+                                                                <ul>
+                                                                    <iscomment>render the refinement values as simple list</iscomment>
+                                                                    <isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
+                                                                        <isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
+                                                                            <li class="selected">
+                                                                                <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+                                                                                    ${Resource.msg('refinement.' + RefinementDefinition.attributeID + '.' + RefinementValue.getDisplayValue(), 'locale', RefinementValue.getDisplayValue())}<span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        <iselse/>
+                                                                            <li>
+                                                                                <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+                                                                                    <isprint value="${Resource.msg('refinement.' + RefinementDefinition.attributeID + '.' + RefinementValue.getDisplayValue(), 'locale', RefinementValue.getDisplayValue())}" encoding="off"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </isif>
+                                                                    </isloop>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </isif>
+                                </isif>
+                                <!-- PRICE REFINEMENTS -->
+                                <isif condition="${RefinementDefinition.isPriceRefinement()}">
+                        <h3 class="filter">
+                            <isprint value="${RefinementDefinition.getDisplayName()}"/>
+                            <span class="icon"></span>
+                        </h3>
+
+                        <isif condition="${pdict.ProductSearchResult.refinedByPrice}">
+                            <div class="clear-refinement">
+                                <isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 && !empty(pdict.ProductSearchResult.searchPhrase)}">
+                                    <a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'q', pdict.ProductSearchResult.searchPhrase)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+                                <iselseif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0 &&!empty(pdict.CurrentHttpParameterMap.cgid.value)}">
+                                    <a title="${Resource.msg('search.productsearchrefinebar.showallopt','search',null)}" href="${URLUtils.https('Search-Show', 'cgid', pdict.CurrentHttpParameterMap.cgid.value)}">${Resource.msg('searchrefinebar.clearselection','search',null)}</a>
+                                </isif>
+                            </div>
+                        </isif>
+
+                        <div class="refineattributes">
+                            <div class="pricerefinement">
+                                <ul>
+                                    <isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
+                                        <isif condition="${pdict.ProductSearchResult.isRefinedByPriceRange(RefinementValue.valueFrom,RefinementValue.valueTo)}">
+                                            <li class="selected">
+                                                <a class="refinement-link" title="${Resource.msg('global.remove','locale',null)} ${RefinementValue.getDisplayValue()}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'))}">
+                                                    <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                </a>
+                                            </li>
+                                        <iselse/>
+                                            <li>
+                                                <a class="refinement-link" title="${Resource.msg('global.pricerefinement.label.prefix','locale',null)} ${RefinementValue.getDisplayValue()}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefinePrice('Search-Show',RefinementValue.getValueFrom(),RefinementValue.getValueTo()))}">
+                                                    <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
+                                                </a>
+                                            </li>
+                                        </isif>
+                                    </isloop>
+                                </ul>
+                            </div>
+                        </div>
+                    </isif>
+                            </div>
+                        </isloop>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktop desktopHide">
+                <div class="leftnav_bottomfirst contentAsset-new cell contentbox upshift">
+                    <isslot id="leftnav_bottomfirst" description="Banner for Leftnav bottom top" context="global" />
+                </div>
+                <div class="leftnav_bottomlast contentAsset-new cell contentbox upshift">
+                    <isslot id="leftnav_bottomlast" description="Banner for Leftnav bottom last" context="global" />
+                </div>
+            </div>
+        </div>
+    </isif>
+</isif>

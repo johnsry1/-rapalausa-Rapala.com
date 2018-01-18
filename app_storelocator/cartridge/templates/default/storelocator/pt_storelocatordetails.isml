@@ -9,15 +9,27 @@
     <isinclude template="components/header/htmlhead"/>
 </head>
 <body>
-    <div id="wrapper" class="pt_store-locator-details">
-        <isinclude url="${URLUtils.url('Home-IncludeHeader')}"/>
-        <div id="main" role="main" class="clearfix">
-            <isinclude template="components/browsertoolscheck"/>
-            <div class="breadcrumbs-wrapper clearfix">
-                <isbreadcrumbs bcurl1="${URLUtils.url('Stores-Find')}" bctext1="${Resource.msg('storelocator.header','storelocator',null)}" bctext2="${pdict.Store.name}"/>
-            </div>
-            <div id="" class="">
-                <isreplace/>
+    <div id="container" class="pt_store-locator-details">
+        <isinclude template="components/header/header"/>
+
+        <div id="main" role="main" class="primary-focus clearfix">
+            <div id="content">
+                <div id="page-background">
+                    <div id="page">
+                        <div class="wrapper">
+                            <isinclude template="components/browsertoolscheck"/>
+                            <div class="breadcrumbs-wrapper clearfix">
+                                <isbreadcrumbs bcurl1="${URLUtils.url('Stores-Find')}" bctext1="${Resource.msg('storelocator.header','storelocator',null)}" bctext2="${pdict.Store.name}"/>
+                            </div>
+
+                            <div id="primary" class="">
+                                <div class="storelocator-detail">
+                                    <isreplace/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="//www.google.com/jsapi?key=${dw.system.Site.getCurrent().getCustomPreferenceValue('googleAPIKey')}" type="text/javascript"></script>

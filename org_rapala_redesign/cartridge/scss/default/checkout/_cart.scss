@@ -5,8 +5,30 @@
 }
 
 .pt_cart {
+    #main {
+        .breadcrumb {
+            box-shadow: none;
+            font-family: $font;
+        }
+    }
     .upshift.cell.contentbox {
         .contentboxcontent {
+            .top-promo-section {
+                .promo-sec {
+                    @include respond(medium-down) {
+                        margin-top: rem(10px) !important;
+                    }
+                    .couponinput {
+                        margin: 0 5px 0 0 !important;
+                        width: calc(100% - #{rem(85px)}) !important;
+                    }
+                    .cartcoupon-apply {
+                        height: rem($form-field-height) !important;
+                        @include line-height($form-field-height);
+                        width: rem(80px) !important;
+                    }
+                }
+            }
             .cart-header {
                 h1.mycartheader {
                     @include h1;
@@ -23,13 +45,23 @@
                         padding: rem(10px);
                         box-sizing: border-box;
                     }
+                    @include respond(large-up) {
+                        min-width: rem(350px);
+                    }
                     .button-fancy-large {
                         @include button('submit');
+                        text-transform: uppercase;
+                        background: $button-submit-bg;
+                        border: $button-submit-border;
                         min-width: inherit;
                         box-sizing: border-box;
+                        &:hover {
+                            background: $button-submit-hover-bg;
+                            border: $button-submit-hover-border;
+                        }
                         span {
                             line-height: inherit;
-                            text-transform: none;
+                            text-transform: inherit;
                             font-size: inherit;
                             color: inherit;
                             text-decoration: none;
@@ -46,6 +78,7 @@
                 }
             }
             table#cart-table {
+                font-family: $font;
                 thead {
                     tr {
                         th {
@@ -55,15 +88,44 @@
                         }
                     }
                 }
+                tr.cart-promo {
+                    background: none;
+                    td {
+                        padding-top: rem(10px);
+                        padding-bottom: rem(10px);
+                        font-family: $font;
+                        font-style: normal;
+                        &.bonus-item-details {
+                            @include product-attr-name;
+                            .tooltip {
+                                float: none;
+                            }
+                        }
+                        .select-bonus {
+                            @include font-size(13px);
+                        }
+                    }
+                }
                 tr.cart-row {
                     background: none;
                     border-bottom: $border;
                     td.quantitycolumndetails {
                         text-transform: none;
+                        padding-right: rem(20px);
                         ul {
                             li {
                                 @include respond(desktop-down) {
                                     @include product-attr-name;
+                                }
+                            }
+                        }
+                        ul.product-availability-list {
+                            .on-order,
+                            .not-available {
+                                @include product-attr-title;
+                                color: $pdp-message-color;
+                                @include respond(desktop-down) {
+                                    color: $pdp-message-color;
                                 }
                             }
                         }
@@ -159,6 +221,7 @@
                     .promo-adjustment {
                         @include pdp-promo;
                         margin-bottom: rem(7px);
+                        font-size: $pdp-promo-font-size !important;
                     }
                     .bonus-item {
                         @include pdp-message;
@@ -184,6 +247,9 @@
                             @include pdp-message;
                             text-transform: none;
                             font-style: normal;
+                        }
+                        button.applied {
+                            min-width: inherit;
                         }
                     }
                 }
@@ -266,12 +332,18 @@
                             font-family: $font;
                         }
                         .promo-sec {
+                            margin-top: rem(10px);
                             .input-sec {
                                 input.couponinput {
                                     @include form-input;
+                                    font-style: normal !important;
                                     box-shadow: none;
                                     margin: 0 5px 0 0;
                                     width: calc(100% - #{rem(85px)});
+                                    &.inputlabel {
+                                        background: $error-bg-color;
+                                        border: $error-border;
+                                    }
                                 }
                                 .gray-button {
                                     @include button;
@@ -281,19 +353,33 @@
                                     @include line-height($form-field-height);
                                     width: rem(80px);
                                 }
-                                .error {
-                                    @include form-error;
-                                }
+                            }
+                            .error {
+                                @include form-error;
+                                margin-top: rem(5px);
                             }
                             .apply-code-message {
                                 a {
                                     font-family: $font;
+                                    font-style: normal !important;
+                                    padding-top: rem(5px);
+                                    margin-top: 0 !important;
+                                }
+                            }
+                        }
+                        .applycoupon {
+                            .input-sec {
+                                .gray-button {
+                                    @include respond(desktop-down) {
+                                        margin-top: 0;
+                                    }
                                 }
                             }
                         }
                     }
                     .cart-order-totals {
                         .order-totals-table {
+                            font-family: $font;
                             td {
                                 span.label {
                                     @include product-attr-title;
@@ -318,14 +404,33 @@
                 padding-top: rem(20px);
             }
             .actions {
+                .cart-actions {
+                    form {
+                        @include respond(large-up) {
+                            width: rem(350px);
+                        }
+                        .button-fancy-large {
+                            text-transform: uppercase;
+                            span {
+                                text-transform: inherit;
+                                width: inherit;
+                                height: inherit;
+                            }
+                            @include respond(large-up) {
+                                width: rem(350px);
+                            }
+                        }
+                    }
+                }
                 form {
                     button {
                         @include button('submit');
                         min-width: inherit;
                         box-sizing: border-box;
+                        padding: 0;
                         span {
                             line-height: inherit;
-                            text-transform: none;
+                            text-transform: inherit;
                             font-size: inherit;
                             color: inherit;
                             text-decoration: none;
@@ -365,7 +470,7 @@
                             background: $button-disabled-bg !important;
                             span {
                                 line-height: inherit;
-                                text-transform: none;
+                                text-transform: inherit;
                                 font-size: inherit;
                                 color: inherit;
                                 text-decoration: none;
@@ -382,6 +487,12 @@
                     }
                 }
             }
+            .cart-promo.cart-promo-approaching {
+                @include pdp-promo;
+                .orderpromotionmsg {
+                    @include pdp-promo;
+                }
+            }
         }
     }
 }
@@ -391,4 +502,33 @@
     @include product-attr-name;
     font-style: normal;
     font-weight: normal;
+}
+
+div.cart-promo,
+td.cart-promo {
+    background: none;
+    & > div {
+        margin: rem(5px) 0;
+        @include respond(desktop-down) {
+            margin-left: rem(10px);
+            margin-right: rem(10px);
+        }
+    }
+    .label {
+        @include product-attr-title;
+        margin-right: rem(3px);
+        margin-bottom: 0;
+    }
+    .value {
+        @include product-attr-name;
+        margin-bottom: 0;
+    }
+}
+
+ul.product-availability-list {
+    .on-order,
+    .not-available {
+        @include product-attr-title;
+        color: $pdp-message-color;
+    }
 }

@@ -9,6 +9,23 @@
         @include respond(desktop-down) {
             padding: 0;
             margin: 0;
+            text-align: center;
+        }
+        .pagination {
+            @include respond(medium-down) {
+                float: none;
+                margin: 0 rem(10px) rem(10px);
+                overflow: hidden;
+            }
+            li {
+                @include respond(medium-down) {
+                    display: inline-block;
+                    width: rem(30px);
+                    height: rem(30px);
+                    @include line-height(30px);
+                    padding: 0;
+                }
+            }
         }
     }
     .search-result-items {
@@ -18,6 +35,8 @@
                 border-top: $border;
                 .label {
                     @include product-attr-title;
+                    font-size: rem($product-attr-title-font-size) !important;
+                    font-weight: $product-attr-title-font-weight !important;
                     margin-right: rem(3px);
                 }
                 .value {
@@ -45,6 +64,13 @@
                     }
                     .value {
                         @include product-attr-name;
+                    }
+                    tr {
+                        .order-price {
+                            .value {
+                                font-size: rem(13px) !important;
+                            }
+                        }
                     }
                 }
             }
@@ -149,7 +175,8 @@
                 }
                 .order-subtotal,
                 .ordersurcharges,
-                .order-shipping {
+                .order-shipping,
+                .ordershipping.vatamount {
                     .label {
                         @include product-attr-title;
                     }
@@ -158,9 +185,13 @@
                     }
                 }
                 .order-total {
+                    .label-total {
+                        font-family: $font;
+                    }
                     .miniright {
                         .value {
                             font-style: normal;
+                            font-family: $font;
                         }
                     }
                 }
@@ -174,6 +205,14 @@
         .mini-address-name,
         .mini-address-location address {
             @include product-attr-name;
+        }
+        .paymentamount {
+            .label {
+                @include product-attr-title;
+            }
+            .value {
+                @include product-attr-name;
+            }
         }
     }
     .order-shipments {
@@ -225,8 +264,14 @@
                     .line-item-price {
                         font-size: $product-attr-name-font-size !important;
                         line-height: $product-attr-name-line-height !important;
+                        @include respond(medium-down) {
+                            width: 20%;
+                        }
                     }
                     .line-item-details {
+                        @include respond(medium-down) {
+                            width: 64%;
+                        }
                         .product-list-item {
                             .name {
                                 a {

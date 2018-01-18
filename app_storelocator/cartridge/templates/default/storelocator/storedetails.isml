@@ -1,12 +1,17 @@
 <isdecorate template="storelocator/pt_storelocatordetails">
     <div class="storedetails" id="storedetails-wrapper">
         <a href="${URLUtils.url('Stores-Find')}" class="back large-only">${Resource.msg('storelocator.storedetails.back','storelocator',null)}</a>
-        <h1>${pdict.Store.name}
-            <isif condition="${pdict.Store.custom.storeSecondaryName != null}">
-                <span>(<isprint value="${pdict.Store.custom.storeSecondaryName}"/>)</span>
-            </isif>
-        </h1>
         <div id="leftStore" class="leftStore">
+            <isif condition="${pdict.Store.image != null}">
+                <div id="storeImage" class="storeImage">
+                    <img src="${pdict.Store.image.getURL()}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
+                </div>
+            </isif>
+            <h1>${pdict.Store.name}
+                <isif condition="${pdict.Store.custom.storeSecondaryName != null}">
+                    <span>(<isprint value="${pdict.Store.custom.storeSecondaryName}"/>)</span>
+                </isif>
+            </h1>
             <div id="storeAddress" class="storeAddress line">
                 <div class="address">
                     <div>
@@ -92,11 +97,6 @@
                 <input type="hidden" id="storeId" value="${pdict.Store.ID}" />
                 <div id="map-canvas" class="clearfix"></div>
             </div>
-            <isif condition="${pdict.Store.image != null}">
-                <div id="storeImage" class="storeImage">
-                    <img src="${pdict.Store.image.getURL()}" title="${pdict.Store.name}" alt="${pdict.Store.name}" />
-                </div>
-            </isif>
         </div>
     </div><!--  ::END:: storelocator -->
 </isdecorate>

@@ -2,6 +2,20 @@
 .pt_customerservice {
     .breadcrumb {
         box-shadow: none !important;
+        font-family: $font !important;
+    }
+}
+.pt_store-locator {
+    .storelocator {
+        @include respond(desktop-down) {
+            padding-left: rem(10px);
+            padding-right: rem(10px);
+            box-sizing: border-box;
+        }
+        @include respond(medium-down) {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 }
 .pt_store-locator-details {
@@ -99,6 +113,7 @@
 }
 .store-locator {
     clear: both;
+    overflow: hidden;
     margin-top: rem(20px);
     .stores-wrapper {
         padding: 0 10px;
@@ -196,7 +211,7 @@
         margin-top: rem(20px);
     }
     h1 {
-        @include respond(desktop-down) {
+        @include respond(medium-down) {
             padding: 0 rem(10px);
         }
     }
@@ -208,6 +223,9 @@
         @include respond(large-up) {
             float: right;
             margin: 0;
+        }
+        @include respond(desktop-down) {
+            margin-right: rem(10px);
         }
     }
     .leftStore {
@@ -225,15 +243,36 @@
         @include respond(desktop) {
             padding: 0;
         }
+        h1 {
+            @include respond(medium-down) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
     }
     .rightStore {
+        box-sizing: border-box;
         @include respond(large-up) {
             float: right;
             width: 65%;
+        }
+        @include respond(desktop-down) {
+            padding-right: rem(10px);
+        }
+        @include respond(medium-down) {
+            padding-right: 0;
         }
     }
     #map-canvas {
         width: 100%;
         display: block;
+    }
+}
+.storeImage {
+    margin-bottom: rem(15px);
+    img {
+        width: 100%;
+        height: auto;
+        vertical-align: top;
     }
 }
