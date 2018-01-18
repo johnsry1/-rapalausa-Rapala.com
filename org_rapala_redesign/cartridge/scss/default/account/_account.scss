@@ -420,7 +420,7 @@ ul.common-nav {
         font-size: 13px;
         line-height: 30px;
         padding: 0;
-        margin: -50px 0 0;
+        margin: rem(-20px) 0 0;
     }
     h1,
     .ui-dialog h2 {
@@ -439,6 +439,7 @@ ul.common-nav {
         }
     }
     #dialog-container {
+        padding: 0.875rem 1.25rem 1.25rem;
         .form-horizontal {
             @include respond(large-up) {
                 margin: 20px auto;
@@ -525,4 +526,201 @@ ul.common-nav {
 
 .account-no-address {
     clear: both;
+}
+
+.creditcardform {
+    #CreditCardForm {
+        .form-row.form-row-button {
+            button.cancel-button {
+                border-top: none;
+            }
+        }
+        .form-label-text {
+            float: none;
+            text-align: left;
+            width: 100%;
+            max-width: inherit;
+            @include respond(large-up) {
+                text-align: right;
+                width: 7.1875rem;
+                @include line-height(30px);
+                height: rem(30px);
+                float: left;
+            }
+            .label {
+                float: none;
+
+                .labeltext {
+                    text-transform: none;
+                }
+                .requiredindicator {
+                    @include respond(large-up) {
+                        float: right;
+                    }
+                }
+            }
+        }
+        .form-row.month.custom-select,
+        .form-row.year.custom-select {
+            margin: 0;
+            width: 48%;
+            max-width: none;
+            @include respond(large-up) {
+                width: rem(150px);
+            }
+            .field-wrapper {
+                width: 100% !important;
+            }
+        }
+        .form-row.year.custom-select {
+            @include respond(medium-down) {
+                margin-left: 4% !important;
+            }
+        }
+        .form-row {
+            .label {
+                margin: 0 0 9px 0;
+                padding-bottom: 0 !important;
+                text-align: left;
+                width: 100%;
+                @include respond(large-up) {
+                    text-align: right;
+                    width: rem($form-horizontal-label-width);
+                    @include line-height($form-horizontal-label-height);
+                }
+                .labeltext {
+                    text-transform: inherit !important;
+                    font-variant: inherit;
+                }
+                .requiredindicator {
+                    font-family: $font;
+                    color: $required-color;
+                    margin-left: rem(3px);
+                }
+            }
+            .field-wrapper {
+                width: 100% !important;
+                padding-left: 0 !important;
+                @include respond(large-up) {
+                    width: rem($form-horizontal-field-width) !important;
+                    padding-left: rem($form-horizontal-field-padding) !important;
+                    margin-bottom: 0;
+                }
+                input,
+                .textinput {
+                    @include form-input;
+                    margin: $form-field-margin;
+                    box-shadow: none;
+                }
+                .input-select {
+                    height: $form-field-height - $form-field-border-width * 2;
+                    border-radius: 0;
+                    box-shadow: none;
+                    &.errorclient {
+                        background: $white;
+                        border: none;
+                        margin-left: 0;
+                        font-size: $form-field-font-size;
+                        font-family: $form-field-font-family;
+                        line-height: 30px;
+                    }
+                }
+                span.errorclient,
+                div.errorclient {
+                    font-size: $font-error-font-size;
+                }
+                .input-select {
+                    width: 120% !important;
+                    width: calc(100% + 32px) !important;
+                }
+            }
+            .form-caption {
+                margin-left: 0;
+                @include font-size(13px);
+                @include respond(large-up) {
+                    margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include respond(small-down) {
+                    min-width: inherit;
+                    padding: 0;
+                    width: calc(50% - #{rem(5px)});
+                    margin-right: rem(5px) !important;
+                }
+                &:last-child {
+                    @include respond(small-down) {
+                        margin-right: 0;
+                    }
+                }
+                &.cancel-button {
+                    background: $white !important;
+                    border: $button-border !important;
+                    @include respond(small-down) {
+                        margin-right: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.paymentslist {
+    .paymentinstruments {
+        .creditcard {
+            .payment-list {
+                .actions {
+                    .button-text.delete {
+                        @include link;
+                        background: none;
+                        border: none;
+                        color: $black;
+                        display: inline-block;
+                        float: left;
+                        padding: 0;
+                        text-transform: none;
+                        text-decoration: none;
+                        margin: rem(9px) 0 0 0;
+                        @include line-height(20px);
+                        height: rem(20px);
+                        min-width: inherit;
+                        width: auto;
+                        &:hover {
+                            text-decoration: underline;
+                            color: $black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.pt_leftnav-payment {
+    .paymentslist {
+        .paymentinstruments {
+            .creditcard {
+                .payment-list {
+                    .cc-owner {
+                        .label {
+                            @include product-attr-name;
+                        }
+                    }
+                    label,
+                    .label {
+                        @include product-attr-name;
+                    }
+                    .cc-exp {
+                        .label {
+                            @include product-attr-title;
+                        }
+                        label {
+                            @include product-attr-name;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
