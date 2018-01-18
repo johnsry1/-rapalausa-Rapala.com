@@ -7,6 +7,13 @@
     #primary.primary-content {
         .errorpage {
             fieldset.nohitsearch {
+                width: auto;
+                height: auto;
+                button.btn {
+                    margin: 0 !important;
+                    float: left !important;
+                    border-radius: 0 $button-border-radius $button-border-radius 0 !important;
+                }
                 input.box {
                     @include form-input;
                     background: none;
@@ -51,8 +58,43 @@
             }
             .errorfooter {
                 .errorfooterbottom {
-                    @include respond(large-up) {
-                        margin-left: rem(270px);
+                    padding-top: 0;
+                    @include respond(desktop) {
+                        margin-left: 16.875rem;
+                    }
+                }
+            }
+        }
+        .contentboxcontent {
+            .nohits {
+                .no-hits-search.mobileHide {
+                    @include respond(desktop-down) {
+                        box-shadow: none;
+                        border: none;
+                        height: auto;
+                        margin-bottom: 0;
+                    }
+                    input {
+                        @include respond(desktop-down) {
+                            @include form-input;
+                            width: calc(100% - #{rem(60px)});
+                            border-right: none;
+                        }
+                    }
+                    button {
+                        @include respond(desktop-down) {
+                            @include button;
+                            min-width: inherit;
+                            padding: 0;
+                            width: rem(60px);
+                            height: rem(30px);
+                            @include line-height(30px);
+                            background: url(../images/no-search-results_icon.png) no-repeat scroll center;
+                            border-radius: 0 $button-border-radius $button-border-radius 0 !important;
+                            &:hover {
+                                background: url(../images/no-search-results_icon.png) no-repeat scroll center;
+                            }
+                        }
                     }
                 }
             }
