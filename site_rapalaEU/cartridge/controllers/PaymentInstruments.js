@@ -15,8 +15,8 @@ var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var app = require('~/cartridge/scripts/app');
-var guard = require('~/cartridge/scripts/guard');
+var app = require('*/cartridge/scripts/app');
+var guard = require('*/cartridge/scripts/guard');
 
 var AdyenHelper = require('int_adyen/cartridge/scripts/util/AdyenHelper');
 
@@ -35,7 +35,7 @@ function list() {
 
     var wallet = customer.getProfile().getWallet();
     var paymentInstruments = wallet.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
-    var pageMeta = require('~/cartridge/scripts/meta');
+    var pageMeta = require('*/cartridge/scripts/meta');
     var paymentForm = app.getForm('paymentinstruments');
 
     paymentForm.clear();
