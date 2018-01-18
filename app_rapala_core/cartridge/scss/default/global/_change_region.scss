@@ -1,0 +1,184 @@
+div {
+    &.international-links-background-wrapper {
+        float: left;
+        width: 100%;
+        @include respond(0, $medium-breakpoint) {
+            background-image: none;
+            width: 100%;
+            min-width: 100%;
+        }
+        .international-links-container {
+            width: 772px;
+            margin: 0 auto;
+            padding-top: 200px;
+            @include respond(0, $medium-breakpoint) {
+                width: 100%;
+                float: left;
+                padding-top: 0;
+            }
+            .international-links-body {
+                span {
+                    color: $global-change-region-bgcolor;
+                    font-family: $global-font-family;
+                    font-weight: bold;
+                    @include respond(0, $medium-breakpoint) {
+                        font-size: 12px;
+                    }
+                }
+                ul {
+                    padding: 0 100px;
+                    margin: 0;
+                    zoom: 1;
+                    @include respond(0, $medium-breakpoint) {
+                        padding: 0;
+                        text-align: center;
+                    }
+                    li {
+                        float: left;
+                        display: inline;
+                        width: 190px;
+                        line-height: 30px;
+                        @include respond(0, $medium-breakpoint) {
+                            display: block;
+                            width: 100%;
+                        }
+                        a {
+                            @include respond(0, $medium-breakpoint) {
+                                width: 121px;
+                                margin: 0 auto;
+                                text-align: left;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+                background: transparent url(../images/change-region/international-links-background-repeat-y.png) repeat-y center top;
+                float: left;
+                width: 100%;
+                @include respond(0, $medium-breakpoint) {
+                    background-size: auto 100%;
+                }
+                .international-links-header {
+                    height: 54px;
+                    padding: 0 100px;
+                    line-height: 54px;
+                    background: transparent url(../images/change-region/international-links-header-background.png) no-repeat center top;
+                    @include respond(0, $medium-breakpoint) {
+                        padding: 0;
+                        text-align: center;
+                        background-size: auto 121%;
+                    }
+                    a {
+                        font-size: 14px;
+                        @include respond(0, $medium-breakpoint) {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .international-links-action {
+                    padding: 0 100px;
+                    line-height: 45px;
+                    text-transform: uppercase;
+                    @include respond(0, $medium-breakpoint) {
+                        padding: 0;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.international-links-body {
+    a {
+        color: $global-change-region-bgcolor;
+        font-family: $global-font-family;
+        font-weight: bold;
+        @include respond(0, $medium-breakpoint) {
+            font-size: 12px;
+        }
+        img {
+            margin: 0 8px 0 0;
+            vertical-align: middle;
+            width: 18px;
+            height: 13px;
+        }
+    }
+}
+
+.international-links-footer {
+    height: 400px;
+    background: transparent url(../images/change-region/international-links-footer-background.png) no-repeat center top;
+    float: left;
+    width: 100%;
+    @include respond(0, $medium-breakpoint) {
+        background-size: 122% 10%;
+        height: 100%;
+    }
+}
+
+.international-links-footer-info {
+    float: left;
+    margin-top: 60px;
+    margin-left: 70px;
+    width: 702px;
+    @include respond(0, $medium-breakpoint) {
+        width: 100%;
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-top: 24px;
+    }
+}
+
+.international-links-footer-product {
+    float: right;
+    @include respond(0, $medium-breakpoint) {
+        display: none;
+    }
+}
+
+.international-links-footer-product img {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: -60px;
+    right: 0;
+}
+
+.international-investor-link {
+    padding: 0 70px 4px 0;
+    height: 15px;
+    font-family: $global-font-family;
+    font-size: 11px;
+    @include respond(0, $medium-breakpoint) {
+        padding: 0;
+    }
+    a {
+        &:hover {
+            color: #333;
+            padding-left: 7px;
+            text-decoration: underline;
+        }
+    }
+}
+
+.international-investor-link .content-asset {
+    display: inline;
+}
+
+.international-investor-link a {
+    float: right;
+    line-height: 15px;
+    color: $global-static-link-color;
+    font-family: $global-font-family;
+    font-size: 11px;
+    font-weight: bold;
+    font-style: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 9px;
+}

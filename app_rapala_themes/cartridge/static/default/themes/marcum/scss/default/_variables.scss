@@ -1,32 +1,131 @@
-$marcum-bgred:#ff0000;
-$marcum-white:#FFFFFF;
-$white:#ffffff;
-$marcum-hov-red:#ce0d0d;
-$marcum-hov-grey:#4d4d4d;
-$marcum-bgboxred:#C6262C;
-$marcum-list-black:#333;
+$marcum-bgred: #ff0000;
+$white: #fff;
+$marcum-hov-red: #ce0d0d;
+$marcum-hov-grey: #4d4d4d;
+$marcum-bgboxred: #C6262C;
+$marcum-list-black: #333;
 $marcum-red: #f00;
 $marcum-redtwo: #C6262C;
 $marcum-black: #000;
 $marcum-gray: #999;
 $marcum-red: #E80000;
-$marcum-footerheading:#1a1a1a;
+$marcum-footerheading: #1a1a1a;
 // font-family //
 
-// border color //
-$marcum-borderone: #A72126;
-$marcum-bordertwo: #C32E33;
-$marcum-borderthree: #E9ACAE;
-$marcum-borderfour: #C32E33;
-
-
-$marcum-hov-borderone: #D70101;
-$marcum-hov-bordertwo: #F90A0A;
-$marcum-hov-borderthree: #FF9D9D;
-$marcum-hov-borderfour: #F90A0A;
-
-$marcum-arial: Arial, Helvetica, sans-serif;
-$marcum-lucida: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Trebuchet MS", Helvetica,Arial,sans-serif;
-$marcum-original:'SteelfishEb-Regular', Arial, Helvetica, sans-serif;
-$marcum-Avant:"Avant Garde", Avantgarde, "Century Gothic", CenturyGothic,"AppleGothic", Arial, sans-serif;
+$marcum-Avant: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", Arial, sans-serif;
+$marcum-lucida: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+$marcum-original: 'SteelfishEb-Regular', Arial, Helvetica, sans-serif;
 $marcum-Baskerville: Baskerville, "Times New Roman", Times, serif;
+$marcum-arial: Arial, Helvetica, sans-serif;
+
+//---------------------------------
+// Overwrite Global variables
+//---------------------------------
+
+// Fonts
+$font: $marcum-Avant;
+$font-secondary: $marcum-lucida;
+$font-third: $marcum-original;
+$font-fourth: $marcum-Baskerville;
+$font-fifth: $marcum-arial;
+$body-font-size: 13px;
+$body-line-height: 21px;
+$body-letter-spacing: 0;
+
+// Main Colors
+$body-color: $marcum-black;
+$main-color: $marcum-bgboxred;
+$body-background: white url(../images/container-background-70.jpg) 0 0 repeat;
+$open-menu-bg: white url(../images/container-background-70.jpg) 0 -105px repeat;
+
+// border color //
+$border-top: #A72126;
+$border-right: #C32E33;
+$border-bottom: #E9ACAE;
+$border-left: #C32E33;
+
+$border-hover-top: #D70101;
+$border-hover-right: #F90A0A;
+$border-hover-bottom: #FF9D9D;
+$border-hover-left: #F90A0A;
+
+// H1-h6
+$header-font: $font-third;
+$header-link-color: $body-color;
+$header-link-hover-color: $marcum-bgboxred;
+$header-link-decoration: none;
+
+$h1-font: $header-font;
+$h1-font-size: 48px;
+$h1-font-weight: normal;
+$h1-font-style: normal;
+$h1-line-height: 48px;
+$h1-text-transform: uppercase;
+$h1-color: $marcum-list-black;
+
+$h2-font: $header-font;
+$h2-font-size: 25px;
+$h2-font-weight: normal;
+$h2-font-style: normal;
+$h2-line-height: 30px;
+$h2-text-transform: uppercase;
+$h2-color: $marcum-list-black;
+
+$h3-font: $font-secondary;
+$h3-font-size: 16px;
+$h3-font-weight: bold;
+$h3-font-style: italic;
+$h3-line-height: 16px;
+$h3-text-transform: none;
+$h3-color: $marcum-bgboxred;
+
+$h4-font: $header-font;
+$h4-font-size: 24px;
+$h4-font-weight: normal;
+$h4-font-style: normal;
+$h4-line-height: 24px;
+$h4-text-transform: uppercase;
+$h4-color: $marcum-list-black;
+
+$h5-font: $header-font;
+$h5-font-size: 18px;
+$h5-font-weight: normal;
+$h5-font-style: normal;
+$h5-line-height: 18px;
+$h5-text-transform: uppercase;
+$h5-color: $marcum-list-black;
+
+$h6-font: $header-font;
+$h6-font-size: 16px;
+$h6-font-weight: normal;
+$h6-font-style: normal;
+$h6-line-height: 16px;
+$h6-text-transform: uppercase;
+$h6-color: $marcum-list-black;
+
+// p
+$p-color: $marcum-black;
+$p-font-family: $font;
+$p-font-size: 13px;
+$p-font-weight: normal;
+$p-word-spacing: normal;
+$p-line-height: 18px;
+$p-padding: 9px 0;
+$p-text-align: left;
+
+$link-color: $marcum-bgboxred;
+$link-decoration: none;
+$link-hover-color: $white;
+$link-hover-decoration: none;
+
+// a-filter
+$a-filter-font-family: $font-secondary;
+$a-filter-bg: rgba(206, 13, 13, 1);
+$a-filter-gradient: linear-gradient(to bottom, rgba(206, 13, 13, 1) 0%, rgba(170, 0, 3, 1) 100%);
+$a-filter-bg-image: '';
+$a-filter-hover-bg: rgba(170, 0, 3, 1);
+$a-filter-hover-gradient: linear-gradient(to bottom, rgba(170, 0, 3, 1) 0%, rgba(206, 13, 13, 1) 100%);
+$a-filter-hover-color: $white;
+//---------------------------------
+// End Off Overwrite Global variables
+//---------------------------------

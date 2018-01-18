@@ -45,7 +45,12 @@
 	var pagingModel = pdict.ProductPagingModel;
 	var psr = pdict.ProductSearchResult;
 	var searchPhrase = psr.getSearchPhrase();
-	var suggestedSearchPhrase = psr.getSuggestedSearchPhrase();
+	var suggestedSearchPhrase = '';
+	
+	var suggestedSearchPhraseList = psr.getSearchPhraseSuggestions();
+	if(suggestedSearchPhraseList && suggestedSearchPhraseList.suggestedPhrases && suggestedSearchPhraseList.suggestedPhrases.hasNext()){
+		suggestedSearchPhrase = suggestedSearchPhraseList.suggestedPhrases.next().phrase;
+	}
 	var searchPhraseURL = URLUtils.url('Search-Show', 'q', searchPhrase);
 	var suggestedSearchPhraseURL = suggestedSearchPhrase ? URLUtils.url('Search-Show', 'q', suggestedSearchPhrase) : '';
 	var resultsText = Resource.msg('searchbreadcrumbs.resultstext.responsive', 'search', null);
@@ -59,11 +64,13 @@
 	var category = psr.getCategory();
 	var categories = new ArrayList();
 	var cat = category;
-	while (cat.parent) {
-		if (cat.online) {
-			categories.addAt(0, cat);
+	if(cat) {
+		while (cat.parent) {
+			if (cat.online) {
+				categories.addAt(0, cat);
+			}
+			cat = cat.parent;
 		}
-		cat = cat.parent;
 	}
 </isscript> 
 

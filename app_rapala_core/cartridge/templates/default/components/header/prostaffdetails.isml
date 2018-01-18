@@ -3,9 +3,9 @@
 		<div class="allotment-label">
 			<iscache type="relative" minute="0" varyby="price_promotion"/>
 			<isif condition="${pdict.AllotmentExpired == true}">
-				<span class="prostaff-allowance-balance"><isprint value="${Resource.msg('global.allowancebalance','locale',null)}"/></span><span class="allowance-amount"><isprint value="${new dw.value.Money(0.0,dw.system.Site.getCurrent().currencyCode)}"/></span>
+				<span class="prostaff-allowance-balance"><isprint value="${Resource.msg('global.allowancebalance','locale',null)}"/></span><span class="allowance-amount"><isprint value="${new dw.value.Money(0.0,dw.system.Site.getCurrent().getDefaultCurrency())}"/></span>
 			<iselse>
-				<span class="prostaff-allowance-balance"><isprint value="${Resource.msg('global.allowancebalance','locale',null)}"/></span><span class="allowance-amount"><isprint value="${new dw.value.Money(pdict.AllowanceBalance,dw.system.Site.getCurrent().currencyCode)}"/></span>
+				<span class="prostaff-allowance-balance"><isprint value="${Resource.msg('global.allowancebalance','locale',null)}"/></span><span class="allowance-amount"><isprint value="${new dw.value.Money(pdict.AllowanceBalance,dw.system.Site.getCurrent().getDefaultCurrency())}"/></span>
 			</isif>
 		</div>
 	</div>

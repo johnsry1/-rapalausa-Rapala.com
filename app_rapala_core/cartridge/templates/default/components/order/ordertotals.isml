@@ -202,23 +202,23 @@
 						</isif>
 						<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}"><span class="label discount yousaved">(${Resource.msg('ordersummary.yousaved','order',null)} <isprint value="${shippingDiscount}"/>)</span></isif>
 					</td>
-					<tr class="ordershipping ordersurcharges">
-						<td>
-							<span  class="label">
-								<span><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></span>
-								<span class="Custom-tooltip "> 
-									<div class="tooltip-body" style="display:none">
-										<div class="tooltipcontainer">
-										<b><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></b><hr>
-											<isprint value="${Resource.msg('ordersummary.shippingsurchargetooltip','order',null)}"/>
-										</div>
+				</tr>
+				<tr class="ordershipping ordersurcharges">
+					<td>
+						<span  class="label">
+							<span><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></span>
+							<span class="Custom-tooltip ">
+								<div class="tooltip-body" style="display:none">
+									<div class="tooltipcontainer">
+									<b><isprint value="${Resource.msg('ordersummary.ordershippingSurcharges','order',null)}"/></b><hr>
+										<isprint value="${Resource.msg('ordersummary.shippingsurchargetooltip','order',null)}"/>
 									</div>
-								</span>
-								:
+								</div>
 							</span>
-						</td>
-						<td><span class="value"><isif condition="${LineItemCtnr.shippingTotalPrice.available && ShipingChargewithoutsurcharge!=0}"><isprint value="${surcharge}"/><iselse/>${Resource.msg('ordersummary.tobecalculated','order',null)}<!--  ELSE: Show as Empty --></isif></span></td>
-					</tr>
+							:
+						</span>
+					</td>
+					<td><span class="value"><isif condition="${LineItemCtnr.shippingTotalPrice.available && ShipingChargewithoutsurcharge!=0}"><isprint value="${surcharge}"/><iselse/>${Resource.msg('ordersummary.tobecalculated','order',null)}<!--  ELSE: Show as Empty --></isif></span></td>
 				</tr>
 			</isif>
 
@@ -276,8 +276,8 @@
 					</td>
 				</tr>
 			</isif>
-			<isset name="giftCertTotal" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
-			<isset name="allotmentAmt" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			<isset name="giftCertTotal" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
+			<isset name="allotmentAmt" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
 			<isset name="gcPaymentInstrs" value="${LineItemCtnr.getGiftCertificatePaymentInstruments()}" scope="page"/>
 			<isset name="creditapplied" value="false" scope="page"/>
 			<isloop items="${gcPaymentInstrs}" var="gcPI">
@@ -292,7 +292,7 @@
 			<isif condition="${allotmentAmt>0 || giftCertTotal>0}">
 				<isset name="creditapplied" value="true" scope="page"/>
 			</isif>
-			<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode())}" scope="page"/>
+			<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency())}" scope="page"/>
 			<isif condition="${pdict.prodNetPrice > LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)}">
 				<isset name="ordertotalsaving" value="${ordertotalsaving.add(pdict.prodNetPrice.subtract(LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).add(LineItemCtnr.giftCertificateTotalPrice)))}" scope="page"/>
 			</isif>

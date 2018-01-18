@@ -1,4 +1,4 @@
-
+<isinclude template="util/modules" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -282,7 +282,7 @@
 																				var shippingExclDiscounts : dw.value.Money = Order.shippingTotalPrice.subtract(surcharge);
 																				var shippingInclDiscounts : dw.value.Money = Order.getAdjustedShippingTotalPrice().subtract(surcharge);
 																				var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
-																				var ordertotalsaving : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getCurrencyCode());
+																				var ordertotalsaving : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency());
 																				if(prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice))
 																				{
 																				 ordertotalsaving=ordertotalsaving.add(prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)));
@@ -449,7 +449,7 @@
 																																<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'cart')}" scope="page"/>
 																																<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>
 																																<isset name="imageObjIPhone" value="${new ProductImage('cartIPhone',productLineItem.product, 0,'cart')}" scope="page"/>
-																																<img src="${imageObjDesktop.getURL()}"	alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}"/>
+																																<iscartimages product="${productLineItem}" imageurl="${imageObjDesktop}"/>
 																															<iselse/>
 																																<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
 																															   		<img src="${productLineItem.product.getImage('small',0).getURL()}"	alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}" />
@@ -479,7 +479,7 @@
 																						                            </div>
 																												</isif>       
 		                                  																		<isif condition="${productLineItem.product != null && productLineItem.product.isVariant()}">
-				                            																		<isloop items="${productLineItem.product.variationModel.attributeDefinitions}" var="VA">
+				                            																		<isloop items="${productLineItem.product.variationModel.productVariationAttributes}" var="VA">
 																														<isset name="SelectedVariationValue" value="${productLineItem.product.variationModel.getSelectedValue(VA)}" scope="page"/>	
 																					                               	  <div>
 																						                                	<font face="Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif"> <span style="font-size: 10px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic;">${VA.displayName}:</span> <span style="font-size: 10px; color: rgb(51, 51, 51); font-weight: bold;">

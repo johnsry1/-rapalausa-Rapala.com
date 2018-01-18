@@ -19,6 +19,11 @@ var couponMenthods = {
     updateSummary: function () {
         var $summary = $('#secondary .new-summery-cart');
         // indicate progress
+        $(function (){
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $summary.append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+            }
+        });
         progress.show($summary);
         var stateValue = $('body').find('.shipping-state').val();
         var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
@@ -911,11 +916,24 @@ exports.init = function () {
         $('.expirationdate.error').show();
     }
     $('.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
+        $(function (){
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $('.continuecheckout.place-order-btn').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+            }
+        });
+        var $checkoutButton = $('.continuecheckout.place-order-btn');
+        progress.show($checkoutButton);
         var errorcount = 0;
         if (!($('#PaymentMethod_CREDIT_CARD').is(':visible'))) {
             $('.paymentform .textinput, .paymentform select').removeClass('required');
         }
         if (!jQuery('form[id$="_billing"]').valid()) {
+            progress.hide();
+            $(function (){
+                if (navigator.userAgent.match(/Trident\/7\./)) {
+                    $('.continuecheckout.place-order-btn .loader').remove();
+                }
+            })
             jQuery('.state-blk select').trigger('blur');
             if (jQuery('.billing-address-fields').hasClass('hide')) {
                 $('select[name$=billing_addressList]').val('');
@@ -932,6 +950,7 @@ exports.init = function () {
         }
         if ($('#PaymentMethod_CREDIT_CARD').is(':visible')) {
             if (!$('form[id$="dwfrm_billing"]').valid()) {
+                progress.hide();
                 $('.expirationdate select').trigger('blur');
 
                 if ($('.vip-terms .custom-link').is(':visible') && !$('input[name$="_isvip"]').is(':checked')) {
@@ -998,6 +1017,7 @@ exports.init = function () {
                  }*/
         }
         if (errorcount > 0) {
+            progress.hide();
             $('.singleshipping_error').show();
             return false;
         }

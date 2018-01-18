@@ -1,0 +1,226 @@
+.congrats-message {
+    width: 266px;
+    padding: 5px 11px;
+    background: $congrats-message-bg-color;
+    border: 2px solid $congrats-message-border-color;
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    color: $congrats-message-color;
+    min-height: 93px;
+    line-height: 18px;
+    font-size: 13px;
+    top: 28px;
+
+    .top_arrow {
+        background: url("../images/confirmationarrow.png") no-repeat right bottom transparent;
+        left: 104px;
+        width: 17px;
+    }
+}
+
+#user {
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    font-family: $lucida-font-family;
+    font-size: 10px;
+    color: $user-info-color;
+    padding: 0 0 0 9px;
+
+    .guest-welcomemessage {
+        color: $guest-welcomemessage-color;
+        margin-left: 10px;
+    }
+}
+
+#headerwrapper {
+    #header {
+        .row {
+            &.column1 {
+                .headercustomerinfo {
+                    width: auto;
+                    float: right;
+                    margin: 18px 0 15px 0;
+                    @include respond(0, $desktop-breakpoint - 1) {
+                        margin: 16px 5px 15px 0;
+                        .second_name {
+                            display: none;
+                        }
+                    }
+
+                    @include respond($desktop-breakpoint) {
+                        position: relative;
+                        width: calc(100% - 220px);
+                        float: left;
+                        padding: 0 0 0 7px;
+                        margin: 0;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        box-sizing: border-box;
+                    }
+                    #user {
+                        padding: 0 0 0 5px;
+                        background: 0;
+
+                        @include respond(0, $desktop-breakpoint - 1) {
+                            display: none;
+                        }
+                    }
+                    #userinfo {
+                        float: left;
+                        width: auto;
+                        margin: 0;
+                        .dividers {
+                            &.pipe {
+                                margin: 0;
+                                padding: 0;
+                                &.signin {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
+                        }
+                        .ui-login {
+                            width: 44px;
+                            padding-left: 4px;
+                            padding-right: 1px;
+                            &.active {
+                                display: none;
+                            }
+                            .login-value {
+                                float: right;
+                                width: auto;
+                                line-height: 30px;
+                                padding: 0 10px;
+                                text-transform: uppercase;
+                                font-weight: bold;
+                                font-size: 11px;
+                                span.mobileHide {
+                                    text-transform: capitalize;
+                                }
+                                @include respond(0, $desktop-breakpoint - 1) {
+                                    position: absolute;
+                                    padding: 0;
+                                    top: -23px;
+                                    text-indent: 0;
+                                    text-align: center;
+                                    width: 100%;
+                                }
+                            }
+                            @include respond(0, $desktop-breakpoint - 1) {
+                                display: inline-block;
+                                background: url("../images/responsive-icons/profile-icon-static.svg") no-repeat;
+                                width: 36px;
+                                height: 37px;
+                                text-indent: -9999px;
+                                padding: 0;
+                                margin: 0 0 0 20px;
+
+                                &.active {
+                                    display: block;
+                                    background: url("../images/responsive-icons/profile-icon-active.svg") no-repeat;
+                                    position: relative;
+                                }
+                            }
+                            @include respond(0, $medium-breakpoint) {
+                                margin: 0 0 0 10px;
+                            }
+                            .userlogin {
+                                &.signin {
+                                    display: block;
+                                    @include respond($desktop-breakpoint) {
+                                        background: url("../images/drop_arrow.png") no-repeat scroll 33px 14px rgba(0, 0, 0, 0);
+                                        display: block;
+                                        float: left;
+                                        padding: 0;
+                                        width: 40px;
+                                        font-style: normal !important;
+                                        color: $user-info-color !important;
+                                    }
+                                }
+                            }
+                        }
+                        li {
+                            font-family: $lucida-font-family;
+                            padding: 0 5px;
+
+                            @include respond(0, $desktop-breakpoint - 1) {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#header {
+    #userinfo {
+        li {
+            a {
+                display: inline-block;
+                float: none;
+                height: 30px;
+                line-height: 30px;
+                color: $user-info-static-color;
+                @include respond(0, $desktop-breakpoint - 1) {
+                    height: auto;
+                }
+                &.forgot_create {
+                    display: inline-block;
+                    height: auto;
+                    color: $black;
+                    text-decoration: underline;
+                    line-height: normal;
+                    line-height: normal;
+                }
+
+                &:hover {
+                    background-position: 2px 50%;
+                    text-decoration: none;
+                    color: $user-info-hover-color;
+                }
+                &.clearbutton {
+                    &:hover {
+                        background-position: 10px 50%;
+                    }
+                }
+            }
+            .signedin {
+                height: 100%;
+                .userloggedin {
+                    &.signedin {
+                        display: block;
+                        margin-top: -18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.headercustomerinfo {
+    position: relative;
+}
+
+.loggeduser {
+    a {
+        &:hover {
+            .user-info {
+                display: block;
+            }
+        }
+    }
+}
+
+.change-regionnew {
+    &:hover {
+        .domainswitch-header {
+            display: block;
+        }
+    }
+}
