@@ -36,28 +36,34 @@
         <password masked="true">********</password>
     </service-credential>
 
-    <service-credential service-credential-id="Adyen">
-        <url>https://pal-test.adyen.com/pal/adapter/httppost</url>
-        <user-id/>
-        <password/>
-    </service-credential>
-
-    <service-credential service-credential-id="Adyen.Methods">
-        <url>https://test.adyen.com/hpp/directory.shtml</url>
-        <user-id/>
-        <password/>
-    </service-credential>
-
-    <service-credential service-credential-id="Adyen.Send.Authorize">
-        <url>https://pal-test.adyen.com/pal/servlet/Payment/authorise</url>
+    <service-credential service-credential-id="AdyenPayment">
+        <url>https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise</url>
         <user-id>ws_724260@Company.RapalaVMC</user-id>
-        <password encrypted="true" encryption-type="common.export">IdsSIqqrmz5NKgXzPj30Yi7gGmNepitdAsVlUyDma/J24H+S7WKZiFrkQN3lZEN26h+Fuw7xJKBRhL5B5IDlvQ==</password>
+        <password encrypted="true" encryption-type="common.export">JxLAtx9xphs/HV4JdFDn6C7gGmNepitdAsVlUyDma/LHIzExBFRRvqj1u2KlPyAm32PoKxeGI2Qyx18GPGJuCA==</password>
     </service-credential>
 
-    <service-credential service-credential-id="Adyen.Send.Authorize.3D">
+    <service-credential service-credential-id="AdyenPayment3DSecure">
         <url>https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise3d</url>
         <user-id>ws_724260@Company.RapalaVMC</user-id>
-        <password encrypted="true" encryption-type="common.export">B5wRdT3m1gTK044T1hu0+y7gGmNepitdAsVlUyDma/JLXMU4tfg9rPJ7COJeSc3xIahQWU5+WmxJmNgvznTNVQ==</password>
+        <password encrypted="true" encryption-type="common.export">LAdG8OYb3F7psziTymRLYC7gGmNepitdAsVlUyDma/LP1H9X/wcNJXeUKcFC1Ihu6/vXFfP+7kWzgKkmuK8OlQ==</password>
+    </service-credential>
+
+    <service-credential service-credential-id="AdyenPaymentMethods">
+        <url>https://test.adyen.com/hpp/directory.shtml</url>
+        <user-id>ws_724260@Company.RapalaVMC</user-id>
+        <password encrypted="true" encryption-type="common.export">4jDdHulcZukrVyI89dPvYRodlGY2ejPR5RPgXqChgaI=</password>
+    </service-credential>
+
+    <service-credential service-credential-id="AdyenRecurring">
+        <url>https://pal-test.adyen.com/pal/servlet/Recurring/v25/listRecurringDetails</url>
+        <user-id>ws_724260@Company.RapalaVMC</user-id>
+        <password encrypted="true" encryption-type="common.export">zDQ+1ECHjdLDVtXnH1MkAy7gGmNepitdAsVlUyDma/L4Ft/sswZk9wkr1x31qZKD0XW1zFkhHaHiphzlPQgH1w==</password>
+    </service-credential>
+
+    <service-credential service-credential-id="AdyenRecurringDisable">
+        <url>https://pal-test.adyen.com/pal/servlet/Recurring/v25/disable</url>
+        <user-id>ws_724260@Company.RapalaVMC</user-id>
+        <password encrypted="true" encryption-type="common.export">7K5Uu5At0iSvLRNr670cfi7gGmNepitdAsVlUyDma/KG5amDELVgN+JtZeORMIf5q/mqlOVvBNzk3yrIfji9Ig==</password>
     </service-credential>
 
     <service-profile service-profile-id="Adyen">
@@ -69,7 +75,7 @@
         <cb-calls>0</cb-calls>
         <cb-millis>0</cb-millis>
     </service-profile>
-    
+        
     <service-profile service-profile-id="ListrakWebServicesProfile">
         <timeout-millis>3000</timeout-millis>
         <rate-limit-enabled>false</rate-limit-enabled>
@@ -140,54 +146,54 @@
         <credential-id>UPS</credential-id>
     </service>
 
-    <service service-id="adyen.http.payment.3dsecure.rapalaEU">
-        <service-type>HTTP</service-type>
-        <enabled>true</enabled>
-        <log-prefix>adyen-3d</log-prefix>
-        <comm-log-enabled>true</comm-log-enabled>
-        <mock-mode-enabled>false</mock-mode-enabled>
-        <profile-id>Adyen</profile-id>
-        <credential-id>Adyen.Send.Authorize.3D</credential-id>
-    </service>
-
-    <service service-id="adyen.http.payment.methods.rapalaEU">
+    <service service-id="AdyenPayment">
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
-        <credential-id>Adyen.Methods</credential-id>
+        <credential-id>AdyenPayment</credential-id>
     </service>
 
-    <service service-id="adyen.http.payment.send.rapalaEU">
-        <service-type>HTTP</service-type>
-        <enabled>true</enabled>
-        <log-prefix>adyen</log-prefix>
-        <comm-log-enabled>false</comm-log-enabled>
-        <mock-mode-enabled>false</mock-mode-enabled>
-        <profile-id>Adyen</profile-id>
-        <credential-id>Adyen.Send.Authorize</credential-id>
-    </service>
-
-    <service service-id="adyen.payment.methods.rapalaEU">
+    <service service-id="AdyenPayment3DSecure">
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
-        <credential-id>Adyen</credential-id>
+        <credential-id>AdyenPayment3DSecure</credential-id>
     </service>
 
-    <service service-id="adyen.payment.send.rapalaEU">
+    <service service-id="AdyenPaymentMethods">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id/>
+        <credential-id>AdyenPaymentMethods</credential-id>
+    </service>
+
+    <service service-id="AdyenRecurring">
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
         <log-prefix>adyen</log-prefix>
         <comm-log-enabled>true</comm-log-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>Adyen</profile-id>
-        <credential-id>Adyen</credential-id>
+        <credential-id>AdyenRecurring</credential-id>
+    </service>
+
+    <service service-id="AdyenRecurringDisable">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>adyen</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id/>
+        <credential-id>AdyenRecurringDisable</credential-id>
     </service>
 
 </services>
