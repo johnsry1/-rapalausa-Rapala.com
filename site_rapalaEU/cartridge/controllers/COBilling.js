@@ -131,6 +131,9 @@ function publicStart() {
         initAddressForm(cart);
         initEmailAddress(cart);
 
+        // Get the Saved Cards from Adyen to get latest saved cards
+        require('int_adyen/cartridge/scripts/UpdateSavedCards').updateSavedCards({CurrentCustomer : customer});
+
         var creditCardList = initCreditCardList(cart);
         var applicablePaymentMethods = creditCardList.ApplicablePaymentMethods;
 
@@ -322,6 +325,54 @@ function validatePayment(cart) {
     return result;
 }
 
+/**
+ * Attempts to save the used credit card in the customer payment instruments.
+ * The logic replaces an old saved credit card with the same masked credit card
+ * number of the same card type with the new credit card. This ensures creating
+ * only unique cards as well as replacing expired cards.
+ * @transactional
+ * @return {Boolean} true if credit card is successfully saved.
+ */
+function saveCreditCard() {
+    if (AdyenHelper.getAdyenRecurringPaymentsEnabled()) {
+        //   saved   credit   cards   are   handling   in   COPlaceOrder   and   Login   for   Adyen   -   saved cards   are   synced   with   Adyen   ListRecurringDetails   API   call
+        return true;
+    } else {
+        
+        var i, creditCards, newCreditCard;
+    
+        if (customer.authenticated && app.getForm('billing').object.paymentMethods.creditCard.saveCard.value) {
+            creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
+    
+            Transaction.wrap(function () {
+                newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
+    
+                    //copy the credit card details to the payment instrument
+                    newCreditCard.setCreditCardHolder(app.getForm('billing').object.paymentMethods.creditCard.owner.value);
+                    newCreditCard.setCreditCardNumber(app.getForm('billing').object.paymentMethods.creditCard.number.value);
+                    newCreditCard.setCreditCardExpirationMonth(app.getForm('billing').object.paymentMethods.creditCard.expiration.month.value);
+                    newCreditCard.setCreditCardExpirationYear(app.getForm('billing').object.paymentMethods.creditCard.expiration.year.value);
+                    newCreditCard.setCreditCardType(app.getForm('billing').object.paymentMethods.creditCard.type.value);
+    
+                for (i = 0; i < creditCards.length; i++) {
+                    var creditcard = creditCards[i];
+    
+                    if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
+    
+                       /* if (dw.system.Site.getCurrent().getCustomPreferenceValue('CCPaymentService').toString() === 'AUTHORIZE_NET') {
+                            newCreditCard.custom.cim_payment_profile_id = creditcard.custom.cim_payment_profile_id;
+                            newCreditCard.custom.cim_customer_profile_id = creditcard.custom.cim_customer_profile_id;
+                        }*/
+    
+                        customer.getProfile().getWallet().removePaymentInstrument(creditcard);
+                    }
+                }
+            });
+    
+    }
+    return true;
+    }
+}
 /*
 * Web exposed methods
 */
@@ -364,7 +415,7 @@ exports.EditBillingAddress = require('app_rapala_controllers/cartridge/controlle
  */
 /** Saves the credit card used in the billing form in the customer payment instruments.
  * @see module:controllers/COBilling~saveCreditCard */
-exports.SaveCreditCard = require('app_rapala_controllers/cartridge/controllers/COBilling.js').SaveCreditCard;
+exports.SaveCreditCard = saveCreditCard;
 /** Revalidates existing payment instruments in later checkout steps.
  * @see module:controllers/COBilling~validatePayment */
 exports.ValidatePayment = validatePayment;

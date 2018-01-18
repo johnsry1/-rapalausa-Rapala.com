@@ -6,8 +6,6 @@ var Currency = require('dw/util/Currency');
 var Site = require('dw/system/Site');
 var ContentMgr = require('dw/content/ContentMgr');
 var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
-/* Script Modules */
-var AdyenHelper = require ("*/cartridge/scripts/util/AdyenHelper");
 
 function ResourceHelper() {}
 /**
@@ -308,9 +306,7 @@ ResourceHelper.getPreferences = function(pageContext) {
         LISTING_REFINE_SORT: true,
         STORE_PICKUP: Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
-        CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS'),
-        ADYEN_CSE_ENABLED : AdyenHelper.getAdyenCseEnabled(),
-		ADYEN_CSE_JS_PUBLIC_KEY : AdyenHelper.getAdyenCseJsPublicKey()
+        CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS')
     };
 }
 /**

@@ -5,7 +5,8 @@ var giftcert = require('../giftcert'),
     util = require('../util'),
     dialog = require('../dialog'),
     page = require('../page'),
-    validator = require('../validator');
+    validator = require('../validator'),
+    adyenCse = require('./checkout/adyen-cse');
 
 /**
  * @function
@@ -266,6 +267,9 @@ function initializePaymentForm() {
         e.preventDefault();
         dialog.close();
     });
+    if (SitePreferences.ADYEN_CSE_ENABLED) {                 
+        adyenCse.initAccount();
+    }
 
 }
 

@@ -8,7 +8,7 @@ var ajax = require('../../ajax'),
     validator = require('../../validator'),
     //giftcard = require('../../giftcard'),
     util = require('../../util'),
-    adyenCse = require('../../adyen-cse');
+    adyenCse = require('./adyen-cse');
 
 /**
  * @function
@@ -535,28 +535,29 @@ var couponMenthods = {
 function setCCFields(data) {
 
     var $creditCard = $('[data-method="CREDIT_CARD"]');
-    $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('change');
-    $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('blur');
+    $creditCard.find('input[id$="creditCard_owner"]').val(data.holder).trigger('change');
+    $creditCard.find('input[id$="creditCard_owner"]').val(data.holder).trigger('blur');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('change');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('blur');
-    $creditCard.find('input[name*="_creditCard_number"]').val(data.maskedNumber).trigger('change');
-    $creditCard.find('input[name*="_creditCard_number"]').val(data.maskedNumber).trigger('blur');
-    $creditCard.find('[name$="_expiration_month"]').val(data.expirationMonth).trigger('change');
+    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('change');
+    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('blur');
+    $creditCard.find('[id*="_expiration_month"]').val(data.expirationMonth).trigger('change');
     var date = new Date();
     var currentYear = date.getFullYear();
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').change();
+        $creditCard.find('[id$="_year"]').val('').change();
     } else {
-        $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
+        $creditCard.find('[id$="_year"]').val(data.expirationYear).trigger('change');
     }
-    $creditCard.find('[name$="_expiration_month"]').val(data.expirationMonth).trigger('blur');
+    $creditCard.find('[id$="_expiration_month"]').val(data.expirationMonth).trigger('blur');
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').blur();
+        $creditCard.find('[id$="_year"]').val('').blur();
     } else {
-        $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('blur');
+        $creditCard.find('[id$="_year"]').val(data.expirationYear).trigger('blur');
     }
-    $creditCard.find('input[name$="_cvn"]').val('').trigger('change');
-    $creditCard.find('input[name$="_cvn"]').val('').trigger('blur');
+    $creditCard.find('input[id$="_cvn"]').val('').trigger('change');
+    $creditCard.find('input[id$="_cvn"]').val('').trigger('blur');
+    $creditCard.find('[name$="creditCard_selectedCardID"]').val(data.selectedCardID).trigger('change');
     uievents.synccheckoutH();
 }
 
@@ -575,6 +576,20 @@ function updatePaymentType(selectedPayType, test) {
     uievents.synccheckoutH();
 }
 
+/**
+ * @function
+ * @description Adyen - Initializes the visibility of HPP fields
+ */
+/*
+function initializeHPPFields () {
+    if($('[name="brandCode"]:checked').hasClass('openInvoice')) {
+        $('.additionalfield').hide().find('input').val('');
+        $('.additionalfield.' + $('.checkout-billing').find('select.country').val()).show();
+    } else {
+        $('.additionalfield').hide().find('input').val('');
+    }
+}
+*/
 /**
  * @function
  * @description Updates the credit card form with the attributes of a given card
@@ -619,6 +634,36 @@ function updatePaymentMethod(paymentMethodID) {
     //formPrepare.validateForm();
 }
 
+/**
+ * @function
+ * @description Changes the payment type or issuerId of the selected payment method
+ * @param {String, Boolean} value of payment type or issuerId and a test value to see which one it is, to which the payment type or issuerId should be changed to
+ */
+/*
+function updatePaymentType(selectedPayType, test) {
+    if(!test) {
+        $('input[name="brandCode"]').removeAttr('checked');
+    } else {
+        $('input[name="issuerId"]').removeAttr('checked');
+    }
+    $('input[value=' + selectedPayType + ']').prop('checked', 'checked');
+    formPrepare.validateForm();
+}
+*/
+/**
+ * @function
+ * @description Adyen - Initializes the visibility of HPP fields
+ */
+/*
+function initializeHPPFields () {
+	if($('[name="brandCode"]:checked').hasClass('openInvoice')) {
+		$('.additionalfield').hide().find('input').val('');
+		$('.additionalfield.' + $('.checkout-billing').find('select.country').val()).show();
+	} else {
+		$('.additionalfield').hide().find('input').val('');
+	}
+}
+*/
 /**
  * @function
  * @description loads billing address, Gift Certificates, Coupon and Payment methods
@@ -699,7 +744,8 @@ exports.init = function () {
             updatePaymentMethod($(this).val()); //set payment type of Adyen to the first one
             updatePaymentType((selectedPayType) ? selectedPayType : $payType[0].value, false);
         } else {
-            $payType.removeAttr('checked'); $issuerId.removeAttr('checked');
+            $payType.removeAttr('checked');
+            $issuerId.removeAttr('checked');
         }
         if ($(this).is(':checked')) {
             $(this).closest('.toggle').siblings('.toggle').removeClass('active');
@@ -716,6 +762,7 @@ exports.init = function () {
         uievents.synccheckoutH();
     });
 
+    // Adyen - Click event for payment methods
     $payType.on('click', function () {
         updatePaymentType($(this).val(), false);
         //if the payment type contains issuerId fields, expand form with the values
@@ -726,6 +773,7 @@ exports.init = function () {
             $issuer.hide();
             $('input[name="issuerId"]').removeAttr('checked');
         }
+        //initializeHPPFields();
     });
 
     $issuerId.on('click', function () {
@@ -1074,4 +1122,15 @@ exports.init = function () {
     if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initBilling();
     }
+
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var initYear = currentYear - 100;
+    $('.openinvoiceInput input[name$="_dob"]').datepicker({
+        showOn: 'focus',
+        yearRange: initYear + ':' + currentYear,
+        changeYear: true,
+        dateFormat: 'yyyy-mm-dd'
+    });
+
 };
