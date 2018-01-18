@@ -529,28 +529,28 @@ var couponMenthods = {
 function setCCFields(data) {
 
     var $creditCard = $('[data-method="CREDIT_CARD"]');
-    $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('change');
-    $creditCard.find('input[name$="creditCard_owner"]').val(data.holder).trigger('blur');
+    $creditCard.find('input[id$="creditCard_owner"]').val(data.holder).trigger('change');
+    $creditCard.find('input[id$="creditCard_owner"]').val(data.holder).trigger('blur');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('change');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('blur');
-    $creditCard.find('input[name*="_creditCard_number"]').val(data.maskedNumber).trigger('change');
-    $creditCard.find('input[name*="_creditCard_number"]').val(data.maskedNumber).trigger('blur');
-    $creditCard.find('[name$="_expiration_month"]').val(data.expirationMonth).trigger('change');
+    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('change');
+    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('blur');
+    $creditCard.find('[id*="_expiration_month"]').val(data.expirationMonth).trigger('change');
     var date = new Date();
     var currentYear = date.getFullYear();
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').change();
+        $creditCard.find('[id$="_year"]').val('').change();
     } else {
-        $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
+        $creditCard.find('[id$="_year"]').val(data.expirationYear).trigger('change');
     }
-    $creditCard.find('[name$="_expiration_month"]').val(data.expirationMonth).trigger('blur');
+    $creditCard.find('[id$="_expiration_month"]').val(data.expirationMonth).trigger('blur');
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').blur();
+        $creditCard.find('[id$="_year"]').val('').blur();
     } else {
-        $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('blur');
+        $creditCard.find('[id$="_year"]').val(data.expirationYear).trigger('blur');
     }
-    $creditCard.find('input[name$="_cvn"]').val('').trigger('change');
-    $creditCard.find('input[name$="_cvn"]').val('').trigger('blur');
+    $creditCard.find('input[id$="_cvn"]').val('').trigger('change');
+    $creditCard.find('input[id$="_cvn"]').val('').trigger('blur');
     $creditCard.find('[name$="creditCard_selectedCardID"]').val(data.selectedCardID).trigger('change');
     uievents.synccheckoutH();
 }
