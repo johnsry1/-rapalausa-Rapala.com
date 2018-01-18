@@ -48,6 +48,17 @@ div.returningcustomers {
                 margin: $form-row-margin;
                 .label {
                     @include label;
+                    margin-bottom: 0;
+                    .labeltext {
+                        color: inherit;
+                        letter-spacing: inherit;
+                        font-weight: normal;
+                        text-transform: inherit;
+                        font-family: inherit;
+                        font-variant: inherit;
+                        font-size: inherit;
+                        vertical-align: inherit;
+                    }
                     .requiredindicator {
                         float: none;
                         color: $required-color;
@@ -55,6 +66,10 @@ div.returningcustomers {
                         display: inline-block;
                         padding: 0;
                     }
+                }
+                span.errorclient,
+                div.errorclient {
+                    margin-top: rem(3px);
                 }
             }
         }
@@ -64,6 +79,16 @@ div.returningcustomers {
         .formactions {
             .signin-button {
                 @include button;
+                span {
+                    text-transform: inherit;
+                    color: inherit;
+                }
+                &:hover {
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                }
             }
         }
     }
@@ -98,6 +123,16 @@ div.returningcustomers {
                 float: right;
                 .send.greybutton {
                     @include button;
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                    &:hover {
+                        span {
+                            text-transform: inherit;
+                            color: inherit;
+                        }
+                    }
                 }
             }
             .back-link {
@@ -721,6 +756,99 @@ ul.common-nav {
                     }
                 }
             }
+        }
+    }
+}
+
+.registration {
+    .custom_signup {
+        box-shadow: none;
+        border: $border;
+        .form-row {
+            .label {
+                .labeltext {
+                    @include label;
+                    margin: 0;
+                    float: none;
+                }
+                .requiredindicator {
+                    float: none;
+                    color: $required-color;
+                    margin-left: rem(3px);
+                    position: static;
+                    padding: 0;
+                    display: inline;
+                }
+            }
+            .field-wrapper {
+                span.errorclient {
+                    @include form-error;
+                }
+                .textinput {
+                    @include form-input
+                }
+            }
+        }
+        .emailsignupcheckbox {
+            .custom-checkbox {
+                .label {
+                    width: 100%;
+                    float: none;
+                    .labeltext {
+                        @include label;
+                        width: calc(100% - 35px);
+                        float: none;
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        .custom-checkbox {
+            .custom-link.active {
+                display: none;
+            }
+        }
+        .registration {
+            .custom_signup {
+                .create_Agree p {
+                    font-family: $font;
+                }
+            }
+        }
+        .create-account-btn {
+            .register-button.create-account {
+                @include button;
+                width: auto;
+                span {
+                    color: inherit;
+                    text-transform: inherit;
+                }
+                &:hover {
+                    @include font-size($button-font-size);
+                    @include line-height($button-line-height);
+                    height: $button-height;
+                    width: auto;
+                    color: $button-hover-color;
+                    text-decoration: $button-hover-text-decoration;
+                    background: $button-hover-bg;
+                    border: $button-hover-border;
+                    box-shadow: $button-hover-box-shadow;
+                    span {
+                        color: inherit;
+                        text-transform: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+.sample_header_text {
+    font-family: $font;
+}
+.sample_mail {
+    .sample_text {
+        p {
+            @include p;
         }
     }
 }
