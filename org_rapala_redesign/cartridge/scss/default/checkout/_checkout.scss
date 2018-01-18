@@ -193,6 +193,7 @@
             }
             .shippinglogindetails,
             .shippinglogindetails {
+                font-family: $font;
                 button {
                     @include button('submit');
                     padding: 0;
@@ -208,8 +209,9 @@
                     border: none;
                     background: none;
                     height: rem(30px);
+                    margin-left: 0;
                     @include respond(large-up) {
-                        margin-left: 12px;
+                        margin-left: 10px;
                     }
                 }
             }
@@ -501,6 +503,11 @@
                     width: auto;
                 }
             }
+        }
+    }
+    .shipping-address-field-section {
+        @include respond(large-up) {
+            margin: 0 rem(10px);
         }
     }
     .billingsection {
