@@ -8812,6 +8812,24 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <min-length>0</min-length>
                 <field-length>0</field-length>
             </attribute-definition>	
+            <attribute-definition attribute-id="Adyen_enableAVS">
+                <display-name xml:lang="x-default">Enable AVS</display-name>
+                <description xml:lang="x-default">Enable AVS support. Requires Street Name and House Number fields to be sent to Adyen. The result code is returned by the service and should be handled separately</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="Adyen_address1Delimiter">
+                <display-name xml:lang="x-default">Delimiter for parts of Address1 field</display-name>
+                <description xml:lang="x-default">When AVS is enabled, Suite No and Street Name fields are used on the storefront instead of Address1 field. Address1 field is used behind the scenes as well, and it is populated automatically by concatenation of Suite No and Street Name values. The delimiter for parts of Address1 field can be defined here.&#13;
+If empty value is specified, space will be used as a delimiter.</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Adyen">
@@ -8831,6 +8849,8 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <attribute attribute-id="AdyenRecurringPaymentsEnabled"/>
                 <attribute attribute-id="Adyen_Open_Invoice_Whitelist"/>
                 <attribute attribute-id="AdyenRatePayID"/>
+                <attribute attribute-id="Adyen_enableAVS"/>
+                <attribute attribute-id="Adyen_address1Delimiter"/>
             </attribute-group>
             <attribute-group group-id="Blog">
                 <display-name xml:lang="x-default">Blog</display-name>

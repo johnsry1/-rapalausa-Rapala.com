@@ -176,15 +176,10 @@
 
 		<iscomment>JIRA PREV-135 : Disabled Credit Card in BM is displaying in the application. Added condition dw.order.PaymentMgr.getPaymentMethod....</iscomment>
 			<div id="PaymentMethod_CREDIT_CARD" class="payment-method paymentform creditcardpayment <isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_CREDIT_CARD).isActive() && (empty(pdict.selectedPaymentID) || pdict.selectedPaymentID=='CREDIT_CARD')}">payment-method-expanded</isif>"  data-method="CREDIT_CARD">
-				<isscript>
-					var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
-				</isscript>
-				<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
-					<script src="${AdyenHelper.getCSEJsUrl()}" type="text/javascript"></script>
-					<isinclude template="checkout/billing/adyenpaymentfields"/>
-					<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.encrypteddata}" type="hidden"/>
-				<iselse/>
-				
+					<isscript>
+						var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
+					</isscript>
+					<isset name="AdyenCseEnabled" value="${AdyenHelper.getAdyenCseEnabled()}" scope="page" />
 					<div class="payment-mobile-handling">
 					<iscomment>display select box with stored credit cards if customer is authenticated</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated && !empty(pdict.ApplicableCreditCards)}">
@@ -198,7 +193,11 @@
 								<isset name="cardForm" value="${pdict.CurrentForms.billing.paymentMethods.creditCard}" scope="page"/>
 									<div class="field-wrapper">
                                         <div class="select-style">
-                                            <select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="creditCardList" class="input-select custom-select-wrap credit-card-list">
+											<isif condition="${AdyenCseEnabled}">
+												<select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="adyenCreditCardList" class="input-select custom-select-wrap credit-card-list">
+											<iselse/>
+												<select name="${pdict.CurrentForms.billing.paymentMethods.creditCardList.htmlName}" id="creditCardList" class="input-select custom-select-wrap credit-card-list">
+											</isif>
                                                 <option value="" selected="selected"><isprint value="${Resource.msg('billing.creditcardlistselect','checkout',null)}"/></option>
                                                 <isloop items="${pdict.ApplicableCreditCards}" var="creditCardInstr">
                                                     <isscript>
@@ -235,86 +234,92 @@
 						</iscomment>
 
 					</isif>
-					<div class="formfield form-row-50">
-						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" fieldClass="creditcard_name" requiredtext="${Resource.msg('forms.billing.nameoncard.missing','forms',null)}"/>
-					</div>
-					<div class="formfield form-row-50 creditCard-type">
-						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select" rowClass="custom-select" fieldClass="custom-select-wrap select-creditCard-type"/>
-					</div>
-					<div class="formfield form-row-50">
-						<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" dynamicname="true" rowClass="cardnumber" fieldClass="creditCard-number" requiredtext="${Resource.msg('forms.billing.cardnumber.missing','forms',null)}"/>
-						<div class="cardtypeimg">
-				    	   <div class="Visa">  <img class="paymentimgs" src="${URLUtils.staticURL('/images/visa.png')}"/> </div>
-				    	    <div class="Amex"><img class="paymentimgs rightborder" src="${URLUtils.staticURL('/images/amex.png')}" /></div>
-				    	    <div class="MasterCard"><img class="paymentimgs" src="${URLUtils.staticURL('/images/mastercard.png')}" /></div>
-				    	    <div class="Discover"><img class="paymentimgs" src="${URLUtils.staticURL('/images/discover.png')}" alt="${Resource.msg('global.delete','locale',null)}" /></div>
-				    	</div>
-					</div>
-					<div class="formfield form-row-50 expirationdate">
-						<label class="label">
-							<span class="required-indicator">&#x2A;</span>
-							<span class="labeltext"><isprint value="${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}"/></span>
-						</label>
 
+					<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
+						<script src="${AdyenHelper.getCSEJsUrl()}" type="text/javascript"></script>
+						<isinclude template="checkout/billing/adyenpaymentmethods"/>
+					<iselse/>
+				
+						<div class="formfield form-row-50">
+							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" fieldClass="creditcard_name" requiredtext="${Resource.msg('forms.billing.nameoncard.missing','forms',null)}"/>
+						</div>
+						<div class="formfield form-row-50 creditCard-type">
+							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select" rowClass="custom-select" fieldClass="custom-select-wrap select-creditCard-type"/>
+						</div>
+						<div class="formfield form-row-50">
+							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" dynamicname="true" rowClass="cardnumber" fieldClass="creditCard-number" requiredtext="${Resource.msg('forms.billing.cardnumber.missing','forms',null)}"/>
+							<div class="cardtypeimg">
+					    	   <div class="Visa">  <img class="paymentimgs" src="${URLUtils.staticURL('/images/visa.png')}"/> </div>
+					    	    <div class="Amex"><img class="paymentimgs rightborder" src="${URLUtils.staticURL('/images/amex.png')}" /></div>
+					    	    <div class="MasterCard"><img class="paymentimgs" src="${URLUtils.staticURL('/images/mastercard.png')}" /></div>
+					    	    <div class="Discover"><img class="paymentimgs" src="${URLUtils.staticURL('/images/discover.png')}" alt="${Resource.msg('global.delete','locale',null)}" /></div>
+					    	</div>
+						</div>
+						<div class="formfield form-row-50 expirationdate">
+							<label class="label">
+								<span class="required-indicator">&#x2A;</span>
+								<span class="labeltext"><isprint value="${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}"/></span>
+							</label>
+	
+							<isscript>
+								var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
+							</isscript>
+							<div class="expirationdate-field-wrapper">
+								<isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/>
+								<div class="expirationdate error"><isprint value="${Resource.msg('forms.billing.paymentexpiredate.missing','forms',null)}"/></div>
+		                        <div class="expirationdatevalid error"><isprint value="${Resource.msg('forms.billing.paymentvalidexpiredate.missing','forms',null)}"/></div>
+							</div>
+							<iscomment>
+							<div class="month">
+								<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.month}" type="select" label="false" rowClass="custom-select" fieldClass="custom-select-wrap monthselect"/>
+							</div>
+							<div class="year">
+								<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.year}" type="select"  label="false" rowClass="custom-select" fieldClass="custom-select-wrap yearselect "/>
+							</div>
+							</iscomment>
+						</div>
 						<isscript>
-							var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
+							var help = {
+								label: Resource.msg('billing.linkcvn', 'checkout', null),
+								cid: 'checkout-security-code'
+							};
 						</isscript>
-						<div class="expirationdate-field-wrapper">
-							<isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/>
-							<div class="expirationdate error"><isprint value="${Resource.msg('forms.billing.paymentexpiredate.missing','forms',null)}"/></div>
-	                        <div class="expirationdatevalid error"><isprint value="${Resource.msg('forms.billing.paymentvalidexpiredate.missing','forms',null)}"/></div>
-						</div>
-						<iscomment>
-						<div class="month">
-							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.month}" type="select" label="false" rowClass="custom-select" fieldClass="custom-select-wrap monthselect"/>
-						</div>
-						<div class="year">
-							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.year}" type="select"  label="false" rowClass="custom-select" fieldClass="custom-select-wrap yearselect "/>
-						</div>
-						</iscomment>
-					</div>
-					<isscript>
-						var help = {
-							label: Resource.msg('billing.linkcvn', 'checkout', null),
-							cid: 'checkout-security-code'
-						};
-					</isscript>
-					 		<div class="formfield form-row-50 cardcvn">
-					 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" fieldClass="creditcard_cvn" dynamicname="true" requiredtext="${Resource.msg('forms.billing.securitycode.missing','forms',null)}"/>
-					 			<span class="formfieldtooltip">
-					                 <a class="cvc_tooltip tooltip">
-					                     <img class="billingtooltip-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
-					                    <div class="tooltip-cvc tooltip-content hide">
-					                        <div class="tooltipcontainer">
-					                            <b><i><isprint value="${Resource.msg('global.tooltipccsecurityheader','locale',null)}"/></i></b>
-					                            <hr>
-					                            <span><isprint value="${Resource.msg('global.tooltipccsecuritycontent','locale',null)}"/></span>
-					                            <iscomment><span class="visa-card-image"></span></iscomment>
-					                            <div style="width:100%; height:130px; float: left;padding-top: 10px;">
-					                               	<img class="tooltip-shipping-promotion" src="${URLUtils.staticURL('/images/visa-cards.png')}" style="width: 100%"/>
-					                               	<span style="float:left;padding-left: 5px; width: 50%;">Visa, MasterCard, Discover</span>
-					                               	<span style="float:right;width:44%;">American Express</span>
-					                            </div>
-					                        </div>
-					                    </div>
-					                 </a>
-					             </span>
-
-					   </div>
-					<isif condition="${pdict.CurrentCustomer.authenticated}">
-						<div class="formfield form-row-50 form-row-left SaveCard">
-							<div class="custom-checkbox">
-								<div class="custom-link active"></div>
-								<div class="checkbox">
-									<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox"/>
+						 		<div class="formfield form-row-50 cardcvn">
+						 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" fieldClass="creditcard_cvn" dynamicname="true" requiredtext="${Resource.msg('forms.billing.securitycode.missing','forms',null)}"/>
+						 			<span class="formfieldtooltip">
+						                 <a class="cvc_tooltip tooltip">
+						                     <img class="billingtooltip-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
+						                    <div class="tooltip-cvc tooltip-content hide">
+						                        <div class="tooltipcontainer">
+						                            <b><i><isprint value="${Resource.msg('global.tooltipccsecurityheader','locale',null)}"/></i></b>
+						                            <hr>
+						                            <span><isprint value="${Resource.msg('global.tooltipccsecuritycontent','locale',null)}"/></span>
+						                            <iscomment><span class="visa-card-image"></span></iscomment>
+						                            <div style="width:100%; height:130px; float: left;padding-top: 10px;">
+						                               	<img class="tooltip-shipping-promotion" src="${URLUtils.staticURL('/images/visa-cards.png')}" style="width: 100%"/>
+						                               	<span style="float:left;padding-left: 5px; width: 50%;">Visa, MasterCard, Discover</span>
+						                               	<span style="float:right;width:44%;">American Express</span>
+						                            </div>
+						                        </div>
+						                    </div>
+						                 </a>
+						             </span>
+	
+						   </div>
+						<isif condition="${pdict.CurrentCustomer.authenticated}">
+							<div class="formfield form-row-50 form-row-left SaveCard">
+								<div class="custom-checkbox">
+									<div class="custom-link active"></div>
+									<div class="checkbox">
+										<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox"/>
+									</div>
 								</div>
 							</div>
-						</div>
-					</isif>
+						</isif>
+				</isif>
 
 				</div>
 			</div>
-		</isif>
 
 		<iscomment>
 			Custom processor
