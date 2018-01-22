@@ -55,7 +55,9 @@
 						{
 							categoryTmp = dw.catalog.CatalogMgr.getCategory(pdict.CurrentHttpParameterMap.cgid.stringValue);
 							// check if category is assigned to product
-							if(categoryTmp != null && (pdict.Product.isAssignedToCategory(categoryTmp) ? true : pdict.Product.variationModel.master != null ? pdict.Product.variationModel.master.isAssignedToCategory(categoryTmp) : false) )
+							// previus if statement categoryTmp != null && (pdict.Product.isAssignedToCategory(categoryTmp) ? true : pdict.Product.variationModel.master != null ? pdict.Product.variationModel.master.isAssignedToCategory(categoryTmp) : false);
+							// edited to categoryTmp != null to get beradcrumbs from pdict cgid if product doesnt issigned to parent category
+							if(categoryTmp != null)
 							{
 								category = categoryTmp;
 							}
