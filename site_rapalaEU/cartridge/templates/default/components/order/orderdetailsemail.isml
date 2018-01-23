@@ -396,8 +396,8 @@
 																	</tr>
 	                        										<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
 	                          										<tr>
-	                            										<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;">Est. Sales Tax: </span> </font></td>
-	                           											<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #333;"><isprint value="${Order.totalTax}"/></span></font></td>
+	                            										<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;"><isprint value="${Resource.msg('ordersummary.ordervattax','order',null)}"/> </span> </font></td>
+	                           											<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #333;">${session.currency.getSymbol()} <isprint value="${Order.adjustedMerchandizeTotalTax & Order.adjustedShippingTotalTax}"/></span></font></td>
 	                         										</tr>
 							 										<tr>  <td colspan="3" height="2" style="border-bottom:1px solid #ccc">&nbsp;</td>  </tr>
 	                          										<tr>

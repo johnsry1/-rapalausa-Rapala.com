@@ -231,8 +231,8 @@
 										</div>
 									<iscomment>tax amount</iscomment>
 									<div class="custom-table-row ordersalestax">
-										<div class="custom-table-data first"><span class="label"><isprint value="${Resource.msg('ordersummary.estordertax','order',null)}"/>
-										 </span>
+										<div class="custom-table-data first">
+                                            <span class="label"><isprint value="${Resource.msg('ordersummary.ordervattax','order',null)}"/></span>
 										 	<span class="Custom-tooltip">
 													<div class="tooltip-body" style="display:none">
 														<div class="tooltipcontainer">
@@ -245,15 +245,7 @@
 										</div>
 										<div class="custom-table-data last">
 											<span class="value-sales">
-												<isif condition="${Order.totalTax.available && Order.totalTax != 0}">
-													<isprint value="${Order.totalTax}"/>
-												<iselseif condition="${Order.totalTax == 0 && (pdict.stateCode =='MN' || pdict.stateCode =='AR')}">
-													<i><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></i>
-												<iselseif condition="${Order.defaultShipment.shippingAddress == null && (pdict.stateCode == null || pdict.stateCode =='')}">
-													<i><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></i>
-												<iselse/>
-													${session.currency.getSymbol()}0.00
-												</isif>
+												${session.currency.getSymbol()} <isprint value="${Order.adjustedMerchandizeTotalTax & Order.adjustedShippingTotalTax}"/>
 											</span>
 										</div>
 									</div>
