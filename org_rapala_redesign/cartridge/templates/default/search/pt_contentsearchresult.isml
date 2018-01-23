@@ -29,29 +29,51 @@
 
 		<isinclude template="components/header/header"/>
 
-		<div id="main" role="main" class="page-content clearfix">
-			<div id="content">
-				<div id="page-background" class="downshift">
-					<div id="page">
-						<div class="wrapper">
-                            <div class="row column3 3">
-                                <isinclude template="components/browsertoolscheck"/>
+        <div id="main" role="main" class="page-content clearfix">
+            <div id="content">
+                <div id="page-background" class="downshift">
+                    <div id="page">
+                        <div class="wrapper">
+                            <isinclude template="components/browsertoolscheck"/>
+                            <div class="mobileHide">
+                                <isinclude template="search/components/productsearchbreadcrumbs"/>
+                            </div>
+                            <div class="searchresult-contentHeader mobileHide">
+                                <isif condition="${'rapala' == session.custom.currentSite}">
+                                    <isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+                                        <h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+                                    </isif>
+                                    <iselse/>
+                                    <isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
+                                        <h1 class="leftnav">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
+                                    </isif>
+                                </isif>
+                                <span class="count">${pdict.ContentPagingModel.count} <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>
+                            </div>
 
-                                <div class="mobileHide">
-                                    <isinclude template="search/components/productsearchbreadcrumbs"/>
+                            <div class="content">
+                                <isset name="Refinements" value="${pdict.ProductSearchResult.refinements}" scope="page"/>
+                                <isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0}">
+                                    <a class="mobile-filter-by mobileHide">
+                                        filter by
+                                        <span class="active"></span>
+                                    </a>
+                                </isif>
+
+                                <div id="secondary" class="refinements contentsecondary searchResult-refinement visible-hidden">
+                                    <div class="mobileHide"><isinclude template="search/components/productsearchrefinebar"/></div>
+                                    <div class="desktopHide"><isinclude template="search/components/contentsearchrefinebar"/></div>
                                 </div>
 
-                                <div class="content">
-                                    <div id="primary" class="primary-content">
-                                        <isreplace/>
-                                    </div>
+                                <div id="primary" class="primary-content">
+                                    <isreplace/>
                                 </div>
                             </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 		<isinclude template="components/footer/footer"/>
 
