@@ -208,15 +208,6 @@ exports.init = function () {
         });
         progress.show($content);
         var form = $(this).closest('form[id$="_shippingAddress"]');
-        if ($('.state-blk select').valid() == 0) {
-            if (!$('.state-blk.custom-select').hasClass('blured')) {
-                $('.state-blk.custom-select').addClass('customselect-error');
-                //$('.state-blk .stateerror').show();
-            }
-        } else {
-            //$('.state-blk  .stateerror').hide();
-            $('.state-blk.custom-select').removeClass('customselect-error');
-        }
 
         if (!$('.checkoutasguestbutton').is(':visible')) {
             $('.guestemailcon').blur();
