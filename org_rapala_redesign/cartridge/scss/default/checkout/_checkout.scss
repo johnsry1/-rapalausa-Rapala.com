@@ -407,6 +407,34 @@
                     }
                 }
             }
+            .formfield.email-field {
+                @include respond(small-down) {
+                    margin-bottom: rem(20px);
+                }
+                .whyemail-address {
+                    @include respond(small-down) {
+                        position: static;
+                        width: 100% !important;
+                    }
+                    @include respond(medium-down) {
+                        float: none !important;
+                        width: 48%;
+                    }
+                    .Custom-tooltip {
+                        @include tooltip;
+                        @include line-height(15px);
+                        float: right !important;
+                        top: inherit !important;
+                        background: none !important;
+                        text-indent: 0 !important;
+                        width: auto !important;
+                        height: auto !important;
+                        @include respond(medium-up) {
+                            margin: rem(-30px) rem(-12px) 0 0 !important;
+                        }
+                    }
+                }
+            }
         }
         .shipping-ordermessage-process {
             font-family: $font;
