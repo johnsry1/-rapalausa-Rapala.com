@@ -91,6 +91,7 @@ function selectShippingMethod(shippingMethodID) {
     if (!shippingMethodID) {
         return;
     }
+
     // attempt to set shipping method
     var url = getShippingMethodURL(Urls.selectShippingMethodsList, {
         shippingMethodID: shippingMethodID
@@ -99,7 +100,7 @@ function selectShippingMethod(shippingMethodID) {
         url: url,
         callback: function (data) {
             updateSummary();
-            updateButton();
+            $('button.continue-checkout .loader').remove();
             uievents.synccheckoutH();
             if (!data || !data.shippingMethodID) {
                 window.alert('Couldn\'t select shipping method.');
@@ -163,6 +164,7 @@ function updateShippingMethodList() {
                 $shippingMethodList.fadeIn('fast');
                 // rebind the radio buttons onclick function to a handler.
                 $shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
+                    updateButton();
                     $('.shipping-methods .shipping-method .value .custom-link ').removeClass('active');
                     $(this).closest('.custom-link').addClass('active');
                     selectShippingMethod($(this).val());
