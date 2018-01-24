@@ -43,7 +43,7 @@
 	<isif condition="${psr && searchPhrase}">
 		<span class="breadcrumb-element breadcrumb-result-text">
 			${resultsText}&nbsp;<a href="${searchPhraseURL}" title="${searchPhrase}"> &quot;${searchPhrase}&quot;</a>
-			<isif condition="${suggestedSearchPhrase}">
+			<isif condition="${suggestedSearchPhrase !== ''}">
 				- ${Resource.msg('searchbreadcrumbs.showresults', 'search', null)} &quot;<a href="${suggestedSearchPhraseURL}" title="${suggestedSearchPhrase}">${suggestedSearchPhrase}</a>&quot;
 			</isif>
 		</span>
@@ -61,7 +61,7 @@
 				<isset name="catLinkUrl" value="${ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', psr.searchPhrase), cat.ID)}" scope="page"/>
 			</isif>
 			<a class="breadcrumb-element" href="${catLinkUrl}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}"> <isif condition="${loopstate.first}"> ${Resource.msg('global.breadcrumbs.home','locale',null)}<iselse> ${cat.displayName} </iselse></isif></a>
-		<isif condition="${!loopstate.last}"><span class="breadcrumb-element-slash">  </span>  </isif> 
+		<isif condition="${!loopstate.last}"><span class="breadcrumb-element-slash">  </span>  </isif>
 		</isloop>
 
 	</isif>
