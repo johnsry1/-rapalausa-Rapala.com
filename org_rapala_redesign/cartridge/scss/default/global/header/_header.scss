@@ -330,17 +330,21 @@ body {
                 }
             }
         }
-        .wrapper.handle-non-us-vh {
+        .wrapper {
+            &.handle-non-us-vh {
+                .row.column1 {
+                    @include respond(desktop) {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .cell {
+                        padding: 0;
+                    }
+                }
+            }
             .row.column1 {
-                @include respond(desktop) {
-                    padding: 0;
-                    margin: 0;
-                }
-                .cell {
-                    padding: 0;
-                }
                 .headerbanner {
-                    margin: rem(15px) 0 rem(10px) 0;
+                    margin: rem(15px) 0 rem(10px) 0 !important;
                     height: auto;
                     box-sizing: border-box;
                     @include respond(desktop-down) {
