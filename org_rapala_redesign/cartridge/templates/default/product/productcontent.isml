@@ -1,10 +1,10 @@
 <isif condition="${!isQuickView}">
 	<div class="productcachejson hide" >
-		<isset name="productcachejson" value="${require('app_rapala_core/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+		<isset name="productcachejson" value="${require('*/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
 	</div>
 <iselse/>
 	<div class="productcacheQuickviewjson hide" >
-		<isset name="productcachejson" value="${require('app_rapala_core/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+		<isset name="productcachejson" value="${require('*/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
     </div>
 </isif>
 
@@ -12,7 +12,7 @@
 <input type="hidden" value="${pdict.CurrentHttpParameterMap.source.stringValue}" class="http-source"/>
 <isif condition="${pdict.resetAttributes}">
 	<isscript>
-		var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
+		var ProductUtils = require('*/cartridge/scripts/product/ProductUtils.js');
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
 		var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ["source", "uuid", "Quantity"]);
 		if (qs && qs.length>0) { url+="&"+qs; }
@@ -291,7 +291,7 @@
 
 	<iscomment><div class="product-actions">
 		<isscript>
-			var Url = require('app_rapala_core/cartridge/scripts/util/Url');
+			var Url = require('*/cartridge/scripts/util/Url');
 			pdict.url = Url.getCurrent(pdict);
 			pdict.title = pdict.Product.name;
 		</isscript>
