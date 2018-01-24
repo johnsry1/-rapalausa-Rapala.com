@@ -720,21 +720,32 @@
 }
 
 .new-summery-cart {
+    .checkoutordertotals {
+        .ordertotals {
+            table.ordertotalstable,
+            table.order-totals-table {
+                .label {
+                    @include product-attr-title;
+                }
+                .value {
+                    @include product-attr-name;
+                }
+                td {
+                    span.label-total {
+                        font-family: $font !important;
+                    }
+                }
+                .order-total {
+                    .value {
+                        font-family: $font !important;
+                    }
+                }
+            }
+        }
+    }
     .checkoutminisummary {
         .section-header {
             font-family: $font;
-        }
-    }
-}
-
-.new-summery-cart .checkoutordertotals .ordertotals {
-    table.ordertotalstable,
-    table.order-totals-table {
-        .label {
-            @include product-attr-title;
-        }
-        .value {
-            @include product-attr-name;
         }
     }
 }
