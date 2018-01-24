@@ -193,6 +193,7 @@
             }
             .shippinglogindetails,
             .shippinglogindetails {
+                font-family: $font;
                 button {
                     @include button('submit');
                     padding: 0;
@@ -208,8 +209,9 @@
                     border: none;
                     background: none;
                     height: rem(30px);
+                    margin-left: 0;
                     @include respond(large-up) {
-                        margin-left: 12px;
+                        margin-left: 10px;
                     }
                 }
             }
@@ -222,6 +224,49 @@
                 .clearbutton {
                     right: 0;
 
+                }
+            }
+        }
+        #couponsform {
+            .formfield.couponcode {
+                @include respond(medium-down) {
+                    float: none;
+                }
+            }
+            input.textinput {
+                @include form-input;
+                font-style: normal;
+            }
+            #couponentry {
+                .form-row-type-text {
+                    @include respond(medium-down) {
+                        float: left;
+                        width: auto;
+                    }
+                }
+                button {
+                    @include button;
+                    height: rem($form-field-height);
+                    @include line-height($form-field-height);
+                    min-width: inherit;
+                    @include respond(medium-down) {
+                        padding: 0
+                    }
+                }
+            }
+            .discount-success {
+                button.remove-cop {
+                    background: url(../images/RemoveBlack10.png) no-repeat scroll 0 1px transparent !important;
+                    color: $black !important;
+                    font-size: 12px !important;
+                    border: medium none !important;
+                    padding: 0 !important;
+                    height: 14px !important;
+                    line-height: 0 !important;
+                    width: 80px !important;
+                    margin: 0 10px !important;
+                    font-weight: bold !important;
+                    margin-top: 5px !important;
                 }
             }
         }
@@ -458,6 +503,11 @@
                     width: auto;
                 }
             }
+        }
+    }
+    .shipping-address-field-section {
+        @include respond(large-up) {
+            margin: 0 rem(10px);
         }
     }
     .billingsection {
@@ -897,5 +947,9 @@
 .reviewcontent,
 #address-valid-dialog .addresses-section .left-pane h2,
 #address-valid-dialog .addresses-section .right-pane h2 {
+    font-family: $font;
+}
+
+.summary-carttable {
     font-family: $font;
 }
