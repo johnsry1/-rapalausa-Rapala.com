@@ -50,6 +50,17 @@ a.filter {
         li {
             border: none;
             height: auto;
+            &.selected {
+                a.swatchanchor {
+                    color: $swatch-attr-hover-color;
+                    text-decoration: $swatch-attr-hover-text-decoration;
+                    background: $swatch-attr-hover-bg;
+                    border: $swatch-attr-hover-border;
+                    span {
+                        color: $swatch-attr-inner-color;
+                    }
+                }
+            }
             a {
                 @include swatch-attr;
             }
