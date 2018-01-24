@@ -1233,12 +1233,13 @@ button.search-button, a.search-button {
 #alert-message {
     .non-usa-alert {
         width: 100%;
-        padding: 0;
+        padding: 0 45px;
         margin: 0;
         border-width: 0 0 1px 0;
         border-style: solid;
         border-color: $sandwisp;
         background-color: $cream;
+        box-sizing: border-box;
         p {
             padding: 0;
             font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
@@ -1267,6 +1268,23 @@ button.search-button, a.search-button {
                 top: 4px;
                 padding-right: 10px;
             }
+        }
+    }
+    #close-non-us-alert {
+        position: absolute;
+        display: block;
+        text-indent: -9999px;
+        overflow: hidden;
+        width: rem(32px);
+        height: rem(32px);
+        top: rem(10px);
+        right: rem(10px);
+        background: url(http://demandware.edgesuite.net/aagv_prd/on/demandware.static/Sites-rapala-Site/-/default/v1367314469087/themes/iceforce/images/close-button.png) no-repeat top center;
+        @include respond(desktop) {
+            right: calc((100vw - 996px) / 2);
+        }
+        &:hover {
+            background-position: center -34px;
         }
     }
 }
