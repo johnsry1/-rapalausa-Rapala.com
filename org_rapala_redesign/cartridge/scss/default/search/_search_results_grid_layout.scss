@@ -313,6 +313,9 @@
         #primary {
             .folder-content-list {
                 font-family: $font;
+                @include respond(medium-down) {
+                    margin-top: rem(10px);
+                }
                 li {
                     a {
                         @include h3;
@@ -322,6 +325,16 @@
                             @include link;
                         }
                     }
+                }
+            }
+        }
+        #secondary {
+            .column {
+                .contentboxcontent {
+                    box-shadow: none;
+                    border: $border !important;
+                    font-family: $font;
+                    background: $background;
                 }
             }
         }
