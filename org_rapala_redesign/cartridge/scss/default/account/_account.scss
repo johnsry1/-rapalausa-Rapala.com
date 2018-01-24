@@ -883,3 +883,33 @@ ul.common-nav {
         }
     }
 }
+.pt_customerservice {
+    form {
+        .formfields {
+            select {
+                height: $form-field-height - $form-field-border-width * 2;
+                border: none;
+                margin: 0;
+            }
+            .formfield.textbox {
+                textarea.textbox {
+                    width: 100% !important;
+                    border-radius: $form-field-border-radius;
+                    border: $form-field-border;
+                }
+            }
+            .formfield {
+                .char-count.contact-us {
+                    width: 100%;
+                }
+            }
+        }
+        .form-row-button {
+            margin-top: rem(20px);
+            button {
+                @include button(submit);
+                width: auto;
+            }
+        }
+    }
+}
