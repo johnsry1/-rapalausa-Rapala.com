@@ -183,8 +183,8 @@ body.js-body {
                                 .nav-banner {
                                     display: none;
                                     @include respond(desktop) {
-                                        display: block;
-                                        float: left;
+                                        display: inline-block;
+                                        vertical-align: top;
                                         margin-left: rem(20px);
                                     }
                                     p {
@@ -307,6 +307,7 @@ body.js-body {
                                 min-width: rem(170px);
                                 left: 50%;
                                 transform: translateX(-50%);
+                                white-space: nowrap;
                             }
                         }
                     }
@@ -368,6 +369,7 @@ body.js-body {
                                     min-width: rem(170px);
                                     left: 50%;
                                     transform: translateX(-50%);
+                                    white-space: nowrap;
                                 }
                             }
                         }
@@ -378,7 +380,8 @@ body.js-body {
                         padding-bottom: rem(15px);
                     }
                     @include respond(desktop) {
-                        float: left;
+                        display: inline-block;
+                        vertical-align: top;
                     }
                 }
                 a.level-2 {
