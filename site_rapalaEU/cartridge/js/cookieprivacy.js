@@ -13,13 +13,23 @@ module.exports = function () {
     if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
         // check for privacy policy page
         if ($('.privacy-policy').length === 0) {
-            var $container = $('.cookie-footer'); 
+            var $container = $('.cookie-footer');
+            var $close = $('<a href="#" id="cookie-close" class="cookie-close"></a>');
+            $container.append('<div class="cookie-footer-inner"></div>');
+            $container.append($close);
+
             ajax.load({
                 url: Urls.cookieHint,
                 method: 'GET',
-                target: $container
+                target: $container.find('.cookie-footer-inner')
             });
-            enableCookies();
+
+            $close.on('click', function (e) {
+                e.preventDefault();
+
+                $container.html('');
+                enableCookies();
+            })
         }
     } else {
         // Otherwise, we don't need to show the asset, just enable the cookies
@@ -34,13 +44,13 @@ module.exports = function () {
             document.cookie = 'dw_cookies_accepted=1; path=/';
         }
     }
-    
+
     if (document.cookie.indexOf('dw_alert_message') > 0) {
-        $('#alert-message').hide();    
+        $('#alert-message').hide();
     }
-    
+
     $('#close-non-us-alert').on('click', function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
         $('#alert-message').hide();
         if (document.cookie.indexOf('dw_alert_message') < 0) {
             document.cookie = 'dw_alert_message=1; path=/';
