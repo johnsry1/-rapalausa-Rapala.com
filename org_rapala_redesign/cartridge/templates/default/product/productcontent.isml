@@ -1,10 +1,10 @@
 <isif condition="${!isQuickView}">
 	<div class="productcachejson hide" >
-		<isset name="productcachejson" value="${require('~/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+		<isset name="productcachejson" value="${require('app_rapala_core/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
 	</div>
 <iselse/>
 	<div class="productcacheQuickviewjson hide" >
-		<isset name="productcachejson" value="${require('~/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+		<isset name="productcachejson" value="${require('app_rapala_core/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
     </div>
 </isif>
 
