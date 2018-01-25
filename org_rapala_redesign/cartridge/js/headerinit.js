@@ -382,13 +382,12 @@ var headerEvents = {
                 }
                 $.ajax({
                     dataType: 'html',
-                    url: document.location.toString(),
+                    url: Urls.customerHeader,
                     success: function (data) {
                         progress.hide();
                         $('.headermask').removeClass('no-hide').hide();
                         $('.header-sign-in.accountcontent').remove();
-                        $('.headercustomerinfo #user').html($(data).find('#user').html());
-                        $('#userinfo').html($(data).find('#userinfo').html());
+                        $('.headercustomerinfo #userinfo').html(data);
                         headerEvents.accountContPos($('.headercustomerinfo .loggeduser a'), $('.congrats-message.accountcontent'));
                         $('.congrats-message').fadeIn(400).show().delay(3000).fadeOut(400);
                         headerEvents.initializeEvent();

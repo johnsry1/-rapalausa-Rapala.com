@@ -94,5 +94,17 @@ function getPhoneHtml() {
     }).render('checkout/address/phone');   
 }
 
+/**
+ * Renders registered customer information.
+ *
+ * This is designed as a remote include as it represents dynamic session information and must not be
+ * cached.
+ */
+function includeOnlyRegisteredCustomerHeaderInfo() {
+    app.getView().render('components/header/registeredheadercustomerinfo');
+}
+
+
+exports.IncludeRegisteredHeaderCustomerInfo = guard.ensure(['get'], includeOnlyRegisteredCustomerHeaderInfo);
 exports.GetPhoneHtml = guard.all(getPhoneHtml);
 exports.GetStateHtml = guard.all(getStateHtml);
