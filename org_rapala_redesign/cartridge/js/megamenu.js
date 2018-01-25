@@ -3,6 +3,10 @@
 var megamenu = {
     globalTimer: 0,
     init: function () {
+        if ($('#brand-tabs-header > ul > li.active').length == 0) {
+            $('#brand-tabs-header > ul > li:first-child').addClass('active');
+        }
+
         megamenu.megamenuEvent();
     },
     open: function () {
