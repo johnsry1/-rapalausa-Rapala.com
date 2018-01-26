@@ -117,7 +117,6 @@ body.js-body {
                                 &.color {
                                     @include respond(desktop) {
                                         display: inline-block;
-                                        margin-top: rem(5px);
                                     }
                                 }
                                 &.grayscale {
@@ -154,6 +153,7 @@ body.js-body {
                                 }
                             }
                             .mega-menu {
+                                font-family: $font !important;
                                 @include respond(desktop) {
                                     float: none;
                                 }
@@ -175,7 +175,7 @@ body.js-body {
                                 a {
                                     @include respond(desktop) {
                                         @include font-size(13px);
-                                        @include line-height(20px);
+                                        @include line-height(24px);
                                         color: $main-nav-subcategory-color;
                                         white-space: nowrap;
                                     }
@@ -272,6 +272,8 @@ body.js-body {
                                 border: $border-secondary;
                                 border-radius: 5px 5px 0 0;
                                 box-sizing: border-box;
+                                vertical-align: middle;
+                                float: none;
                             }
                         }
                         span {
