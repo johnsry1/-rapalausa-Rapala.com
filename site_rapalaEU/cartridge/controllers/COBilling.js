@@ -180,6 +180,12 @@ function handleBillingAddress(cart) {
         billingAddress.setPostalCode(subbmittedAddressFileds.isParameterSubmitted('postal') ? subbmittedAddressFileds.get('postal').value : '');
         billingAddress.setStateCode(subbmittedAddressFileds.isParameterSubmitted('states_state') ? subbmittedAddressFileds.get('states_state').value : '');
         billingAddress.setPhone(subbmittedAddressFileds.isParameterSubmitted('phone') ? subbmittedAddressFileds.get('phone').value : '');
+        
+        if (dw.system.Site.getCurrent().getCustomPreferenceValue("Adyen_enableAVS")) {
+            billingAddress.setSuite(subbmittedAddressFileds.isParameterSubmitted('suite') ? subbmittedAddressFileds.get('suite').value : '');
+            billingAddress.custom.streetName = subbmittedAddressFileds.isParameterSubmitted('streetName') ? subbmittedAddressFileds.get('streetName').value : '';
+            billingAddress.setAddress1( billingAddress.suite + (!empty(dw.system.Site.getCurrent().getCustomPreferenceValue("Adyen_address1Delimiter")) ? dw.system.Site.getCurrent().getCustomPreferenceValue("Adyen_address1Delimiter") : " ") + billingAddress.custom.streetName);
+        }
 
 
         cart.setCustomerEmail(app.getForm('billing').object.billingAddress.email.emailAddress.value);
