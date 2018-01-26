@@ -481,7 +481,40 @@ $footer-bg-mobile: $concrete;
 
 .cookie-footer {
     clear: both;
-    margin: rem(14px) 0 0;
-    @include font-size(13px);
-    color: $greyish-brown;
+    position: relative;
+    .cookie-footer-inner {
+        margin: rem(20px) rem(10px) 0;
+        @include font-size(13px);
+        color: $greyish-brown;
+        border: $border;
+        padding: rem(10px) rem(35px) rem(10px) rem(10px);
+        @include respond(large-up) {
+            margin-left: rem(20px);
+            margin-right: rem(20px);
+            padding: rem(20px);
+        }
+        @include respond(desktop) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .cookie-close {
+        display: block;
+        position: absolute;
+        right: rem(20px);
+        top: rem(10px);
+        width: rem(15px);
+        height: rem(15px);
+        background: url("../images/svg-icons/close.svg") center no-repeat;
+        @include respond(large-up) {
+            right: rem(30px);
+        }
+        @include respond(desktop) {
+            right: rem(10px);
+        }
+    }
 }

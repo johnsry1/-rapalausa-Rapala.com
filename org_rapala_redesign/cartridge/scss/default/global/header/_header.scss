@@ -409,3 +409,29 @@ body {
         font-family: $font;
     }
 }
+
+#alert-message {
+    .non-usa-alert {
+        box-sizing: border-box;
+        padding: 0 rem(35px);
+        p {
+            @include p;
+        }
+    }
+    #close-non-us-alert {
+        position: absolute;
+        display: block;
+        width: rem(15px);
+        height: rem(15px);
+        top: rem(10px);
+        right: rem(10px);
+        @include respond(desktop) {
+            right: calc((100vw - 996px) / 2);
+        }
+        span {
+            display: block;
+            text-indent: -9999px;
+            overflow: hidden;
+        }
+    }
+}
