@@ -19,6 +19,7 @@ var countries = require('./countries'),
     headerinit = require('./headerinit'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
+    quickviewAsset = require('./quickview-asset'),
     tls = require('./tls');
 
 // if jQuery has not been loaded, load from google cdn
@@ -596,6 +597,7 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
+        quickviewAsset.init();
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;
