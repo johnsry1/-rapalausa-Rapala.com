@@ -1224,6 +1224,10 @@ var product = function (response) {
                     // enable add to cart button
                     this.enableA2CButton();
                     jQuery(this).trigger('AddtoCartEnabled');
+                    if ($('#Quantity').val() < 1) {
+                        $('addtocartbutton:last').prop('disabled', true);
+                        $('.addtocart').addClass('disabled');
+                    }
                 } else if (this.selectedVar.earlyBirdMessage != '') {
                     this.showItemNo();
                     //this.hideAvailability();
@@ -2194,6 +2198,22 @@ var pdpEvents = {
         $('body').find('.quantityinput').on('keydown', function (e) {
             if (e.keyCode == 13) {
                 e.preventDefault();
+            }
+        });
+        $('#Quantity').keyup(function(e) {
+            var key = e.charCode || e.keyCode || 0;
+            if (key < 48 || key > 58) {
+                $('.addtocartbutton:last').prop('disabled', true);
+                $('.addtocart, .addtocartbutton').addClass('disabled');
+                return false;
+            } else {
+                if ($(this).val() < 1) {
+                    $('addtocartbutton:last').prop('disabled', true);
+                    $('.addtocart').addClass('disabled');
+                } else {
+                    $('.addtocartbutton:last').prop('disabled', false);
+                    $('.addtocart, .addtocartbutton').removeClass('disabled');
+                }
             }
         });
         $(document).on('click', '.youtube-list-video a', function () {
