@@ -1,17 +1,26 @@
 <!--- TEMPLATENAME: navigation_left.isml --->
-<div class="blog-nav">
+<isinclude template="util/modules"/>
+
+<div class="blog-nav-show" id="blog-nav-show">
+    ${Resource.msg('blog.exploreblog','blog',null)}
+    <issvghelper icon="arrow"/>
+</div>
+<div class="blog-nav" id="blog-left-nav">
 	<ul class="blog-nav-level-1 blog-nav-level">
 		<isloop items="${rootBlogFolder.getOnlineSubFolders()}" var="levelOneFolder" status="loopstatus">
 			<li <isif condition="${levelOneFolder.subFolders.length > 0}"> class="toggle-blog" aria-expanded="false"</isif>>
+                <isif condition="${levelOneFolder.subFolders.length > 0}">
+                    <span class="arrow-light-container">
+                        <issvghelper icon="plus"/>
+                        <issvghelper icon="minus"/>
+                    </span>
+                </isif>
 				<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelOneFolder.ID)}">
 					<isprint value="${levelOneFolder.displayName}"/>
 				</a>
 				<isif condition="${levelOneFolder.subFolders.length > 0}">
-					<span class="arrow-light-container">
-				</isif>
-				<isif condition="${levelOneFolder.subFolders.length > 0}">
 					<ul class="blog-nav-level-2 blog-nav-level">
-						<div class="sub-folders-two" style="margin-left: 20px">
+						<div class="sub-folders-two">
 						<isloop items="${levelOneFolder.subFolders}" var="levelTwoFolder"/>
 							<li class="active">
 								<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelTwoFolder.ID)}">

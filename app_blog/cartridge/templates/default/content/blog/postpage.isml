@@ -10,14 +10,13 @@
 	var currentBlogFolder = content.getClassificationFolder();
 	var parentBlogFolder = currentBlogFolder.parent;
 </isscript>
-<isdecorate template="blog/pt_blog">
-	<body>
+<isdecorate template="blog/pt_blogpost">
 	<div id="container">
 		<div id="primary" class="primary-content">
 				<isinclude template="blog/components/breadcrumbs"/>
-				
+
 				<isinclude template="blog/components/postpagination"/>
-				
+
 				<div class="blog-post-title">
 					<isprint value="${content.name}" />
 				</div>
@@ -28,11 +27,11 @@
 						<isprint value="${content.creationDate}" />
 					</isif>
 				</div>
-				
+
 				<isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
 				<isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
 				<isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-				
+
 				<div class="blog-post-author">
 					<isif condition="${content.custom.author != null && !empty(content.custom.author)}">
 						<a href="${URLUtils.url('Search-Show', 'q', content.custom.author, 'id', 'author')}">
@@ -48,7 +47,7 @@
 						</a>
 					</isif>
 				</div>
-				
+
 				<div class="blog-post-date">
 					<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
 						<isprint value="${content.custom.blog_date}" />
@@ -73,5 +72,4 @@
 				</div>
 		</div><!-- END: primary -->
 	</div><!-- END: container -->
-	</body>
 </isdecorate>
