@@ -8,8 +8,10 @@
 
 <fieldset>
 	<hr class="hrdottedline authentication-detail-hrdottedline">
-	<isif condition="${pdict.CurrentHttpParameterMap.PlaceOrderError.value != null || pdict.PlaceOrderError == true}">
-		<div id="error-message" class="invalidCreditcard"></div>
+	<isif condition="${pdict.CurrentHttpParameterMap.PlaceOrderError.value != null || pdict.PlaceOrderError.error == true}">
+		<div id="error-message" class="invalidCreditcard">
+			<isprint value="${pdict.PlaceOrderError.erroeMessage}"/>
+		</div>
 	</isif>
 	<input type="hidden" name="${pdict.CurrentForms.billing.secureKeyHtmlName}" value="${pdict.CurrentForms.billing.secureKeyValue}"/>
 

@@ -17,6 +17,7 @@ var guard = require('*/cartridge/scripts/guard');
 var AdyenHelper = require('int_adyen/cartridge/scripts/util/AdyenHelper');
 
 var OrderModel = app.getModel('Order');
+var Cart = app.getModel('Cart');
 
 /**
  * Controller for all storefront processes.
@@ -368,14 +369,15 @@ function cancelOrRefund() {
 function authorizeWithForm()
 {
 	var	adyen3DVerification = require('int_adyen/cartridge/scripts/adyen3DVerification'), result,
-	order = session.custom.order,
 	paymentInstrument = session.custom.paymentInstrument,
 	adyenResponse  = session.custom.adyenResponse;
-	clearCustomSessionFields();
 	
+	
+    var OrderObj = OrderMgr.getOrder(session.custom.orderNo);
+
 	Transaction.begin();
 	result = adyen3DVerification.verify({
-		Order: order,
+		Order: OrderObj,
 		Amount: paymentInstrument.paymentTransaction.amount,
 		PaymentInstrument: paymentInstrument,
 		CurrentSession: session,
@@ -386,20 +388,20 @@ function authorizeWithForm()
 	
     if (result.error || result.Decision != 'ACCEPT') {
     	Transaction.rollback();
-    	Transaction.wrap(function () {
-			OrderMgr.failOrder(order);
-		});
-    	require('*/cartridge/controllers/COSummary.js').Start({
-    	    PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')});
+        var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').FailImpl(OrderObj, result.PaymentStatus);
+        var COBilling = require('*/cartridge/controllers/COBilling.js');
+        COBilling.ReturnToBIlling({error: true, errorMessage: result.PaymentStatus});
+        clearCustomSessionFields();
 		return;
     }
+    clearCustomSessionFields();
     
 	order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
 	order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
 	paymentInstrument.paymentTransaction.transactionID = result.RequestToken;
     Transaction.commit();
 	
-    var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').submitImpl(order);
+    var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').submitImpl(OrderObj);
     if (!orderPlacementStatus.error) {
         require('*/cartridge/controllers/COSummary.js').ShowConfirmation(orderPlacementStatus.Order);
     } else {
