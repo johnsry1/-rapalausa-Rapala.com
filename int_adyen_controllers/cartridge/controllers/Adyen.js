@@ -396,8 +396,8 @@ function authorizeWithForm()
     }
     clearCustomSessionFields();
     
-	order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
-	order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
+    OrderObj.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
+    OrderObj.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
 	paymentInstrument.paymentTransaction.transactionID = result.RequestToken;
     Transaction.commit();
 	
