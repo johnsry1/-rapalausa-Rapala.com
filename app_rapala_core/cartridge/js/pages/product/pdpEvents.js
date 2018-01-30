@@ -2204,7 +2204,7 @@ var pdpEvents = {
         });
         $('#Quantity').keyup(function(e) {
             var key = e.charCode || e.keyCode || 0;
-            if (key < 48 || key > 58) {
+            if (key < 48 || key > 58 && $('#Quantity').val() < 1) {
                 $('.addtocartbutton:last').prop('disabled', true);
                 $('.addtocart, .addtocartbutton').addClass('disabled');
                 return false;
@@ -2248,10 +2248,12 @@ var pdpEvents = {
             }
         });
         $('#add-to-cart').bind('click', function () {
-            $('.addedto-cartoverlay').addClass('added-overlay');
-            setTimeout(function () {
-                $('.addedto-cartoverlay').removeClass('added-overlay');
-            }, 2000);
+            if ($('#Quantity').val() > 0) {
+                $('.addedto-cartoverlay').addClass('added-overlay');
+                setTimeout(function () {
+                    $('.addedto-cartoverlay').removeClass('added-overlay');
+                }, 2000);
+            }
         });
         $('#QuickViewDialog .product-primary-image').find('.product-image').click(function () {
             return false;
