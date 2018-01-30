@@ -2,6 +2,7 @@
 'use strict';
 
 var util = require('../../util'),
+    progress = require('../../progress'),
     ajax = require('../../ajax');
 
 function pad ( number ) {
@@ -51,6 +52,7 @@ function initializeBillingEvents() {
 
             if (encryptedDataValue === false) {
 	        		$('.form-data-error').html(Resources.ADYEN_CC_VALIDATE);
+	                progress.hide();
 	        } else {
 		        	$('.form-data-error').html('');
 		        	encryptedData.val(encryptedDataValue);
