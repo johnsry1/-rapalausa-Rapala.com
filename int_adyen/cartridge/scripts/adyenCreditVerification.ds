@@ -141,7 +141,12 @@ function verify(args) {
 
         if (AdyenHelper.getAdyenRecurringPaymentsEnabled() && !empty(paymentInstrument.getCreditCardToken()) && !empty(customerID)) {
             jsonObject['selectedRecurringDetailReference'] = paymentInstrument.getCreditCardToken();
+            jsonObject['recurring'] =  { 
+            	'contract' : AdyenHelper.getAdyenRecurringType()
+            }
         }
+        
+        jsonObject["shopperInteraction"] = "Ecommerce";
 
         // assign default values for the script output variables
         args.PaRequest = '';
