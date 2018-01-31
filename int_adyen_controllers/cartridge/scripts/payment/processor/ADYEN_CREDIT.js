@@ -119,7 +119,7 @@ function Authorize(args) {
 
     if (result.IssuerUrl != '') {
         Transaction.commit();
-        session.custom.order = order;
+        session.custom.orderNo = order.orderNo
         session.custom.paymentInstrument = paymentInstrument;
         return {
             authorized: true,

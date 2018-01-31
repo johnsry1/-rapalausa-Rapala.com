@@ -370,6 +370,26 @@ function submit() {
     require('site_rapalaEU/cartridge/controllers/COSummary.js').Start();
 }
 
+function failImpl(order, errorMessage) {
+    var orderstatus;
+    orderstatus = Transaction.wrap(function(){
+        if (order instanceof dw.order.Order) {
+            return OrderMgr.failOrder(order);
+        } else {
+            return OrderMgr.failOrder(order.object);
+        }
+    });
+    if (order != null) {
+        Transaction.wrap(function(){
+            order.addNote("Order fail note", errorMessage);
+        });
+    }
+    if (!empty(orderstatus) && !orderstatus.isError()) {
+        return {error: false};
+    }
+    return {error: true, errorMessage : errorMessage};
+}
+
 
 /*
  * Module exports
@@ -382,6 +402,7 @@ function submit() {
 exports.SubmitPaymentJSON = guard.ensure(['https'], submitPaymentJSON);
 /** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.Submit = guard.ensure(['https'], submit);
+exports.FailImpl = failImpl;
 /*
  * Local methods
  */
