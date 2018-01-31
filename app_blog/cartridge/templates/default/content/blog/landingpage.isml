@@ -37,27 +37,27 @@
                     <isif condition="${loopstatus.first}">
                         <isif condition="${asset.custom.img_hero_feature != null}">
                             <div class="blog-post-image">
-                                <img src="${asset.custom.img_hero_feature.getURL()}"  alt="" title="" />
+                                <img src="${asset.custom.img_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
                             </div>
                         </isif>
                     <iselseif condition="${loopstatus.even && loopstatus.count == 2}">
                         <iscomment>Sub Hero left post block</iscomment>
                         <isif condition="${asset.custom.img_sub_hero_feature != null}">
                             <div class="blog-post-image">
-                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
                             </div>
                         </isif>
                     <iselseif condition="${loopstatus.odd && loopstatus.count == 3}">
                         <iscomment>Sub Hero right post block</iscomment>
                         <isif condition="${asset.custom.img_sub_hero_feature != null}">
                             <div class="blog-post-image">
-                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
+                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
                             </div>
                         </isif>
                     <iselse>
                         <isif condition="${asset.custom.img_small_post_feature != null}">
                             <div class="blog-post-image">
-                                <img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
+                                <img src="${asset.custom.img_small_post_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
                             </div>
                         </isif>
                     </isif>

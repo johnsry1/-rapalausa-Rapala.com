@@ -1,3 +1,15 @@
+.pt_blog,
+.pt_blogpost {
+    .breadcrumb {
+        @include font-size(13px);
+        margin-bottom: rem(25px);
+        padding: 0 rem(10px);
+        @include respond(large-up) {
+            padding: 0 rem(20px);
+        }
+    }
+}
+
 .pt_blog {
     #secondary.nav {
         border: none;
@@ -29,13 +41,42 @@
             padding: 0;
         }
     }
-    .breadcrumb {
-        @include font-size(13px);
-        margin-bottom: rem(25px);
-        padding: 0 rem(10px);
+}
+.pt_blogpost {
+    .blog-post-title {
+        text-align: center;
+    }
+    .blog-post-info {
+        text-align: center;
+        margin: rem(15px) rem(20px);
         @include respond(large-up) {
-            padding: 0 rem(20px);
+            margin: 0 0 rem(20px) 0;
         }
+        .blog-post-author,
+        .blog-post-skilllevel,
+        .blog-post-date {
+            margin: rem(5px) 0;
+            @include respond(large-up) {
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 rem(15px);
+            }
+        }
+    }
+    .blog-post-author {
+        @include h3;
+    }
+    .blog-post-skilllevel {
+        a {
+            @include font-size(12px);
+            font-weight: bold;
+            color: $silver;
+            text-transform: uppercase;
+        }
+    }
+    .blog-post-date {
+        @include font-size(12px);
+        color: $silver;
     }
 }
 .blog-nav-top {
@@ -60,6 +101,67 @@
             &:last-child {
                 border-right: 0;
             }
+        }
+    }
+}
+.blog-post-pagination {
+    border-top: $border-secondary;
+    border-bottom: $border-secondary;
+    padding: rem(10px) 0;
+    margin: 0 0 rem(20px) 0;
+    text-align: center;
+    vertical-align: middle;
+    a {
+        display: inline-block;
+        text-transform: uppercase;
+        font-family: $font-fourth;
+        @include font-size(14px);
+        line-height: 1.2;
+        text-transform: uppercase;
+        color: black;
+        padding: 0 rem(20px);
+        border-right: 1px solid $black;
+        @include respond(large-up) {
+            padding: 0 rem(30px);
+        }
+        &:last-child {
+            border-right: 0;
+        }
+        &:hover {
+            span {
+                text-decoration: none;
+            }
+        }
+        &.blog-post-prev {
+            padding-left: 0;
+            .arrow-bold {
+                transform: rotate(180deg);
+                margin-right: rem(7px);
+            }
+        }
+        &.blog-post-next {
+            padding-right: 0;
+            .arrow-bold {
+                margin-left: rem(7px);
+            }
+        }
+        span {
+            text-decoration: underline;
+        }
+    }
+    .arrow-bold {
+        width: rem(9px);
+        height: rem(15px);
+        margin-top: rem(-3px);
+    }
+    .blog-post-title {
+        display: inline-block;
+        @include h2;
+        text-transform: uppercase;
+        padding: 0 rem(20px);
+        border-right: 1px solid $black;
+        @include respond(large-up) {
+            padding: 0 rem(40px);
         }
     }
 }
@@ -345,5 +447,188 @@
     clear: both;
     h2 {
         display: none;
+    }
+}
+.blog-article {
+    margin-top: rem(20px);
+    padding: 0 rem(10px);
+    @include respond(large-up) {
+        padding: 0;
+    }
+     .blog-post-image {
+         margin-bottom: rem(20px);
+         text-align: center;
+         @include respond(large-up) {
+             margin-bottom: rem(30px);
+         }
+         img {
+             @include respond(medium-down) {
+                 width: 100%;
+                 height: auto;
+             }
+         }
+     }
+    .blog-post-html {
+        margin: rem(20px) 0;
+        @include font-size(12px);
+        line-height: 1.54;
+        @include respond(large-up) {
+            width: rem(700px);
+            margin: rem(30px) auto;
+        }
+    }
+    .blog-post-slots {
+        clear: both;
+        margin: rem(30px) 0;
+        @include respond(large-up) {
+            width: rem(710px);
+            margin: rem(30px) auto;
+        }
+        h2 {
+            display: none;
+        }
+    }
+}
+.blog-post-info-bottom {
+    border-top: 1px solid $silver;
+    border-bottom: 1px solid $silver;
+    padding: rem(10px) 0;
+    margin-bottom: rem(40px);
+    text-align: center;
+    @include respond(large-up) {
+        overflow: hidden;
+        margin-bottom: rem(20px);
+        text-align: left;
+        border-color: $black;
+    }
+    .blog-post-author,
+    .blog-post-skilllevel,
+    .blog-post-date {
+        margin: rem(5px) 0;
+        @include respond(large-up) {
+            display: inline-block;
+            vertical-align: top;
+            padding: rem(9px) 0;
+            margin: 0 rem(15px);
+        }
+    }
+    .blog-post-author {
+        margin-bottom: rem(14px);
+        @include respond(large-up) {
+            margin-bottom: 0;
+        }
+    }
+    .blog-post-social-asset {
+        vertical-align: top;
+        margin: rem(15px) 0 0;
+        @include respond(large-up) {
+            float: right;
+            margin-top: 0;
+            margin-right: rem(50px);
+        }
+        span.blog-post-social-title {
+            @include font-size(12px);
+            @include line-height(30px);
+            font-weight: bold;
+            color: $greyish-brown;
+            display: inline-block;
+        }
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: inline-block;
+            vertical-align: top;
+        }
+        li {
+            margin-left: rem(4px);
+            @include respond(large-up) {
+                margin-left: rem(7px);
+            }
+        }
+        .icon {
+            width: rem(30px);
+            height: rem(30px);
+        }
+    }
+}
+.blog-more-posts {
+    clear: both;
+    padding: 0 rem(10px);
+    @include respond(large-up) {
+        width: rem(710px);
+        margin: rem(30px) auto;
+        padding: 0;
+    }
+    h2.blog-more-posts-title {
+        text-align: center;
+        @include h1;
+        font-size: $h1-font-size;
+    }
+    .blog-more-posts-container {
+        overflow: hidden;
+        margin-top: rem(25px);
+    }
+    .blog-more-post {
+        overflow: hidden;
+        margin-bottom: rem(20px);
+        box-sizing: border-box;
+        @include respond(large-up) {
+            margin-bottom: rem(40px);
+            width: calc(50% - #{rem(13px)});
+            display: inline-block;
+            vertical-align: top;
+        }
+        &.left {
+            @include respond(large-up) {
+                margin-right: rem(10px);
+            }
+        }
+        &.right {
+            @include respond(large-up) {
+                margin-left: rem(10px);
+            }
+        }
+        .blog-more-post-image {
+            width: rem(108px);
+            float: left;
+            margin-right: rem(14px);
+            @include respond(large-up) {
+
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .blog-more-post-title {
+            margin-bottom: rem(7px);
+            @include font-size($h2-font-size);
+        }
+        .blog-more-post-image + .blog-more-post-body {
+            float: right;
+            width: calc(100% - #{rem(122px)});
+        }
+        .blog-more-post-introtext {
+            @include font-size(12px);
+            line-height: 1.75;
+        }
+        .blog-more-post-bottom {
+            overflow: hidden;
+            margin-top: rem(20px);
+            .blog-post-skill-level {
+                float: left;
+            }
+            .blog-more-post-button-wrapper {
+                float: right;
+                a {
+                    text-decoration: underline;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
     }
 }
