@@ -2,7 +2,7 @@
 	var pli = pdict.product,
 		imageurl = pdict.imageurl,
 		prodID = pli.productID.toLowerCase(),
-		vids = pli.product.getMasterProduct().getVariants(),
+		vids = pli.product.isVariant() ? pli.product.getMasterProduct().getVariants() : 0,
 		newImgurl = imageurl.getURL().toString(),
         newerImgurl = '';
 
@@ -10,11 +10,13 @@
 		get the variant IDs and find the selected variant ID in the image URL
 		replace that variant ID in the image URL with the actual size variant ID
 	*/
-	for( var i = 0; i < vids.length; i++ ) {
-		if(newImgurl.indexOf(vids[i].ID.toLowerCase())>-1 ) {
-			var ab = vids[i].ID.toLowerCase()+'.',
-				regExInput = new RegExp(ab, 'g'),
-				newerImgurl = newImgurl.replace(regExInput, prodID+'.');
+	if (vids.length > 0) {
+		for( var i = 0; i < vids.length; i++ ) {
+			if(newImgurl.indexOf(vids[i].ID.toLowerCase())>-1 ) {
+				var ab = vids[i].ID.toLowerCase()+'.',
+					regExInput = new RegExp(ab, 'g'),
+					newerImgurl = newImgurl.replace(regExInput, prodID+'.');
+			}
 		}
 	}
 </isscript>

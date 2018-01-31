@@ -421,6 +421,26 @@ function youTubeVideos() {
 function formatPrices(){
 	app.getView().render('util/formatprices');
 }
+function guidesAndManuals(){
+	var sourceFile = request.httpParameterMap.source.stringValue;
+	if(empty(sourceFile)) {
+		response.setStatus(410);
+		app.getView().render('error/notfound');
+		return;
+	}
+	var isDesktop = session.custom.device == 'desktop'? true : false;
+	var urlPrefix = dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null, '/');
+	var pdfUrl = urlPrefix + sourceFile;
+	if (isDesktop) {
+		var title = dw.crypto.Encoding.fromURI(sourceFile).split('/').reverse()[0];
+		app.getView({
+			title: title,
+			source: pdfUrl
+		}).render('product/components/downloadPDF');
+	} else {
+		response.redirect(pdfUrl);
+	}
+}
 /*
  * Web exposed methods
  */
@@ -429,7 +449,11 @@ function formatPrices(){
  * @see module:controllers/Product~show
  */
 exports.Show = guard.ensure(['get'], show);
-
+/**
+ * Renders the product manuals.
+ * @see module:controllers/Product~guidesAndManuals
+ */
+exports.GuidesAndManuals = guard.ensure(['get'], guidesAndManuals);
 /**
  * Renders the product detail page within the context of a category.
  * @see module:controllers/Product~showInCategory

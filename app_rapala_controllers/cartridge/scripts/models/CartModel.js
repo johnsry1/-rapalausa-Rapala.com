@@ -62,13 +62,15 @@ var CartModel = AbstractModel.extend({
      * product line items for.
      */
     removeDiscontinuedProducts: function () {
-    	var cart = this;
+    	    var cart = this;
         var plis = cart.getProductLineItems();
 
         for (var i = 0; i < plis.length; i++) {
             var pli = plis[i];
             if (empty(pli.product)) {
-            		cart.removeProductLineItem(pli);
+            	    Transaction.wrap(function () {
+            		    cart.removeProductLineItem(pli);
+            	    });
             }
         }
     },
