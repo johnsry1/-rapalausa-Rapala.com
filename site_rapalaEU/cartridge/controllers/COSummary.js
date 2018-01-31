@@ -67,7 +67,7 @@ function submit() {
     if (placeOrderResult.error) {
         var cart = Cart.get();
         var COBilling = require('site_rapalaEU/cartridge/controllers/COBilling.js');
-        COBilling.ReturnToBIlling(placeOrderResult.error);
+        COBilling.ReturnToBIlling(placeOrderResult);
     } else if (placeOrderResult.order_created) {
         if (placeOrderResult.Order.paymentInstrument.paymentMethod == "Adyen") {
             AdyenController.Redirect(placeOrderResult.Order);

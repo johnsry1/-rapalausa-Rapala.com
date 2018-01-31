@@ -69,7 +69,8 @@ function handlePayments(order) {
 
                 if (authorizationResult.not_supported || authorizationResult.error) {
                     return {
-                        error: true
+                        error: true,
+                        errorMessage : authorizationResult.PlaceOrderError != null ? authorizationResult.PlaceOrderError : ''
                     };
                 }
                 if (PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor().ID === 'ADYEN_CREDIT' && authorizationResult.authorized3d === true) {
@@ -174,7 +175,7 @@ function start() {
                     OrderMgr.failOrder(order);
                     return {
                         error: true,
-                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+                        errorMessage: handlePaymentsResult.errorMessage != null && !empty(handlePaymentsResult.errorMessage) ? handlePaymentsResult.errorMessage : new Status(Status.ERROR, 'confirm.error.technical')
                     };
                 });
 
