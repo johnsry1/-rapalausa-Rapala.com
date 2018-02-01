@@ -303,7 +303,8 @@ function miniCart() {
     var cart = app.getModel('Cart').get();
     //get Product net price & surcharge price
     if(cart != null){
-    var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart);
+        	cart.removeDiscontinuedProducts();
+        var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart);
     }
 	ltkSendSca.SendSCA();
     app.getView({

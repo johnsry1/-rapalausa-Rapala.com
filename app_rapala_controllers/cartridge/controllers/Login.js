@@ -90,6 +90,10 @@ function getTargetUrl () {
         return URLUtils.https('Account-Show');
     }
 }
+function getDeviceType () {
+    var session = session.custom;
+    return true;
+}
 
 /**
  * Form handler for the login form. Handles the following actions:
@@ -137,11 +141,17 @@ function handleLoginForm () {
             	app.getController('Account').SetPriceBookFromCustomerGroups(customerGroups);
             }
             RateLimiter.hideCaptcha();
-
+            var session = request.getSession();
+            if(session.custom && (session.custom.device == 'mobile' || session.custom.device == 'tablet')) {
+            		if(session.custom.lastUrlBeforeLogin) {
+            			response.redirect(session.custom.lastUrlBeforeLogin);
+            			delete session.custom.lastUrlBeforeLogin;
+            			return;
+            		}
+            }
             // In case of successful login
             // Redirects to the original controller that triggered the login process.
             response.redirect(getTargetUrl());
-
             return;
         },
         register: function () {

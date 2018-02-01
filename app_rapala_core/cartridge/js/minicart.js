@@ -454,7 +454,9 @@ var minicart = {
                 .delay(1500).fadeOut(400);
             // fire the BonusDiscountLineItemCheck event so we can check
             // if there is a bonus discount line item
+            /*eslint-disable */
             jQuery(document).trigger(jQuery.Event('BonusDiscountLineItemCheck'));
+            /*eslint-enable */
         };
 
         // handles add to cart error

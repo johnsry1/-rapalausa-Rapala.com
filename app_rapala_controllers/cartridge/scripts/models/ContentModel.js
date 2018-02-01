@@ -112,7 +112,7 @@ ContentModel.get = function (parameter) {
     } else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return (obj !== null) ? new ContentModel(obj) : null;
+    return (obj !== null && obj.onlineFlag == true) ? new ContentModel(obj) : null;
 };
 
 /** The content class */

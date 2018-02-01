@@ -25,7 +25,7 @@ var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkS
  */
 function show() {
     var accountHomeAsset, pageMeta, Content;
-
+    session.custom.lastUrlBeforeLogin = session.clickStream.last.referer;
     //Content = app.getModel('Content');
     //accountHomeAsset = Content.get('myaccount-home');
 

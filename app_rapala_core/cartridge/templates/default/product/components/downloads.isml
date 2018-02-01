@@ -40,7 +40,7 @@
 		    </isif>
 	        <isif condition="${download != null}">
 	            <li class="index${(downloadStatus.index % 5).toString()}">
-	                <a href="${urlPrefix + download.URL}" title="${download.title}">
+	                <a class="pdflink" href="${dw.web.URLUtils.http('Product-GuidesAndManuals', 'source', download.URL)}" title="${download.title}">
 	                    <isif condition="${download.img != null}">
 	                        <img class="videothumbnail contentbox" src="${urlPrefix + download.img}"/><br/>
 	                    </isif>

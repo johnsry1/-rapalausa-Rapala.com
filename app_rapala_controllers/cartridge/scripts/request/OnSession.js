@@ -30,6 +30,8 @@ function getDeviceType() {
     } else if (httpUserAgent.indexOf(androidDevice) > -1) {
         if (httpUserAgent.toLowerCase().indexOf('mobile') > -1) {
             deviceType = 'mobile';
+        } else {
+        		deviceType = 'tablet';
         }
     } else if (httpUserAgent.indexOf(iPadDevice) > -1) {
         deviceType = 'tablet';

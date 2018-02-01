@@ -20,7 +20,8 @@ var countries = require('./countries'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
     tls = require('./tls'),
-    tagmanager = require('./tagmanager');
+    tagmanager = require('./tagmanager'),
+    quickviewAsset = require('./quickview-asset');
 
 // if jQuery has not been loaded, load from google cdn
 if (!window.jQuery) {
@@ -599,7 +600,8 @@ var app = {
         headerinit.init();
         searchplaceholder.init();
         tagmanager.init(window.pageContext.ns);
-        
+        quickviewAsset.init();
+
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;
