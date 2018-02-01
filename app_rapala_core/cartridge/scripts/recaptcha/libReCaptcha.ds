@@ -1,0 +1,68 @@
+/*
+ * Create a new instance of the ReCaptcha class
+ */
+function ReCaptcha() {
+	var currentSite : dw.system.Site = dw.system.Site.getCurrent();
+	this.RECAPTCHA_ENABLED = currentSite.getCustomPreferenceValue("reCaptchaEnabled");
+	this.RECAPTCHA_PUBLIC_KEY  = currentSite.getCustomPreferenceValue("reCaptchaPublicKey");
+	this.RECAPTCHA_PRIVATE_KEY = currentSite.getCustomPreferenceValue("reCaptchaPrivateKey");
+}
+
+
+/*
+ * Gets the HTML
+ * This is called from the browser, and the resulting reCAPTCHA HTML widget
+ */
+ReCaptcha.prototype.getHTML = function() : String {
+	var html : String = '';
+	if (!this.RECAPTCHA_ENABLED) return html;
+	html += "<script src='//www.google.com/recaptcha/api.js'></script>";
+	html += '<div class="g-recaptcha form-row pass-note" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
+	return html;
+}
+
+
+/*
+ * Gets the secure challenge HTML (javascript and non-javascript version).
+ * This is called from the browser, and the resulting reCAPTCHA HTML widget
+ * is embedded within the HTML form it was called from.
+ */
+ReCaptcha.prototype.getHTMLSecure = function() : String {
+	var html : String = '';
+	if (!this.RECAPTCHA_ENABLED) return html;
+	html += "<script src='//www.google.com/recaptcha/api.js'></script>";
+	html += '<div class="g-recaptcha form-row pass-note" data-sitekey="' + this.RECAPTCHA_PUBLIC_KEY + '"></div>';
+	return html;
+}
+
+
+/*
+ * Calls an HTTP POST function to verify if the user's guess was correct
+ */
+ReCaptcha.prototype.checkAnswer = function(response : String, remoteip : String) : Object {
+	if (!this.RECAPTCHA_ENABLED) return {isValid: true};
+	var postData : String = "";
+	postData += ("secret=" + encodeURIComponent(this.RECAPTCHA_PRIVATE_KEY));
+	postData += ("&response="  + encodeURIComponent(response));
+	postData += ("&remoteip="  + encodeURIComponent(remoteip));
+	
+	var httpClient : dw.net.HTTPClient = new dw.net.HTTPClient();
+	httpClient.open("POST", "https://www.google.com/recaptcha/api/siteverify");
+	httpClient.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+	httpClient.setRequestHeader("User-agent", "ReCaptcha/Demandware");
+	httpClient.send(postData);
+	
+	if (httpClient.statusCode == 200) {
+	var postResponse = JSON.parse(httpClient.text);
+		return {
+		isValid    : postResponse.success,
+		statusCode : httpClient.statusCode
+	    	};
+	}
+	else {
+        throw {
+            name    : "HTTPClientError",
+            message : "StatusCode: " + httpClient.statusCode + ", StatusMessage: " + httpClient.statusMessage
+        };
+	}
+}

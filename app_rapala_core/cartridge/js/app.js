@@ -287,6 +287,11 @@ function initializeEvents() {
     //
     $('body').on('submit', '#customercontactus', function (e) {
         e.preventDefault();
+        var res = $('#g-recaptcha-response').val();
+        if (res == '' || res == undefined || res.length == 0) {
+            $('.recaprcha-error').removeClass('hide');
+            return false;
+        }
         var $form = $(this);
         if ($form.valid()) {
             // set the action
