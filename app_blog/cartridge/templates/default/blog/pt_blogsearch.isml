@@ -6,6 +6,7 @@
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+
     <isscript>
         var pageContext = {
             title: 'Blog',
@@ -16,11 +17,12 @@
 
     <isinclude template="components/header/htmlhead"/>
     <isinclude template="blog/pt_blog_UI"/>
+
 </head>
 <body>
     <isinclude template="components/googletagmanager"/>
 
-    <div id="container"  class="pt_blog">
+    <div id="container"  class="pt_blogpost">
         <isinclude template="components/header/header"/>
 
         <div id="main" role="main" class="page-content clearfix">
@@ -30,13 +32,7 @@
                         <div class="wrapper">
                             <isinclude template="blog/components/breadcrumbs"/>
 
-                            <isinclude template="blog/components/navigation_top"/>
-
-                            <div id="secondary" class="nav">
-                                <isinclude template="blog/components/navigation_left"/>
-                            </div>
-
-                            <div id="primary" class="primary-content content">
+                            <div id="primary" class="content">
                                 <isreplace/>
                             </div>
                         </div>
@@ -48,6 +44,6 @@
         <isinclude template="components/browsertoolscheck"/>
         <isinclude template="components/footer/footer"/>
         <isinclude template="blog/pt_blog_VARS"/>
-    </div>
+    </div><!--  /wrapper -->
 </body>
 </html>

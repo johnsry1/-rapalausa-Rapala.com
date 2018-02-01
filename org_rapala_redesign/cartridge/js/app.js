@@ -237,6 +237,33 @@ function initializeEvents() {
         }
     });
 
+    $('#horizontal-carousel').owlCarousel({
+        items: 4,
+        slideBy: 4,
+        nav: true,
+        loop: false,
+        dots: true,
+        autoWidth: true,
+        margin: 20,
+        responsive: {
+            0: {
+                items: 2,
+                slideBy: 2,
+                nav: false
+            },
+            567: {
+                items: 3,
+                slideBy: 3,
+                nav: false
+            },
+            768: {
+                items: 4,
+                slideBy: 4,
+                nav: true
+            }
+        }
+    });
+
     $('.domainswitch').hover(function () {
         $(this).show();
     }, function () {

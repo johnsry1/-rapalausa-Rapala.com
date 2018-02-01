@@ -1,123 +1,114 @@
 <!--- TEMPLATENAME: landingpage.isml --->
 <isinclude template="util/modules"/>
 
-<head>
-	<isinclude template="components/header/htmlhead"/>
-</head>
 <isscript>
-	var rootBlogFolder;	
-	var currentBlogFolder = pdict.ContentSearchResult.folder;
-	
-	if (currentBlogFolder.ID === 'blog') {
-		rootBlogFolder = currentBlogFolder;
-	} else {
-		parentBlogFolder = currentBlogFolder.parent;
-	}
-	
-	if (rootBlogFolder == null) {
-		rootBlogFolder = dw.content.ContentMgr.getFolder('blog');
-	}
+    var rootBlogFolder;
+    var currentBlogFolder = pdict.ContentSearchResult.folder;
+
+    if (currentBlogFolder.ID === 'blog') {
+        rootBlogFolder = currentBlogFolder;
+    } else {
+        parentBlogFolder = currentBlogFolder.parent;
+    }
+
+    if (rootBlogFolder == null) {
+        rootBlogFolder = dw.content.ContentMgr.getFolder('blog');
+    }
 </isscript>
+
 <isdecorate template="blog/pt_blog">
-	<body>
-	<div id="container">
-		<div id="secondary" class="nav blog-nav">
-			<isinclude template="blog/components/navigation_left"/>
-		</div>
-		<div id="primary" class="primary-content">
-				<iscomment>
-					<isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-					<isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-					<isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-				</iscomment>
-				<isinclude template="blog/components/breadcrumbs"/>
-		
-				<isif condition="${rootBlogFolder != null && rootBlogFolder.online}">
-					<isscript>
-						    var levelOneFolders = rootBlogFolder.getOnlineSubFolders();
-					</isscript>
-					<isloop items="${levelOneFolders}" var="levelOneFolder" status="loopstatus">
-						<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelOneFolder.ID)}">
-							<isprint value="${levelOneFolder.displayName}" />
-						</a>
-						<isif condition="${!loopstatus.last}">
-							${Resource.msg('blog.folder.separator', 'blog', null)}
-						</isif>			
-					</isloop>
-				</isif>
-				
-				<isloop items="${pdict.ContentSearchResult.getContent()}" var="asset" status="loopstatus">
-					<isif condition="${asset != null && asset.online}">
-						<div class='blog-post <isif condition="${loopstatus.first}"> first <iselseif condition="${loopstatus.even}"> <isif condition="${loopstatus.count == 2}">left-subhero <iselse> left  </isif> <iselseif condition="${loopstatus.odd}"> <isif condition="${loopstatus.count == 3}">right-subhero <iselse> right </isif></isif>' style="border: 3px solid #fff;margin-left: 20px">
-						<div class="blog-post-image">
-							<isif condition="${loopstatus.count > 9}">
-								<isbreak>
-							</isif>
-							<isif condition="${loopstatus.first}">
-								<isif condition="${asset.custom.img_hero_feature != null}">
-									<img src="${asset.custom.img_hero_feature.getURL()}"  alt="" title="" />	 
-								</isif> 
-							<iselseif condition="${loopstatus.even && loopstatus.count == 2}">
-								<iscomment>Sub Hero left post block</iscomment>
-								<isif condition="${asset.custom.img_sub_hero_feature != null}">
-									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
-								</isif> 
-							<iselseif condition="${loopstatus.odd && loopstatus.count == 3}">	
-								<iscomment>Sub Hero right post block</iscomment>
-								<isif condition="${asset.custom.img_sub_hero_feature != null}">
-									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
-								</isif> 
-							<iselse> 
-								<isif condition="${loopstatus.count == 4}">
-									<isslot id="blog-landing-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-								</isif>
-								<isif condition="${asset.custom.img_small_post_feature != null}">
-									<img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
-								</isif> 
-							</isif>
-						</div>
-						
-						
-						<div class="blog-post-title">
-							<isprint value="${asset.name}"/>
-						</div>
+    <div class="blog-landing">
+        <iscomment>
+            <isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+            <isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+            <isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+        </iscomment>
 
-						<div class="blog-post-date">
-							<isif condition="${asset.custom.blog_date != null && !empty(asset.custom.blog_date)}">
-								<isprint value="${asset.custom.blog_date}" />
-							<iselse>
-								<isprint value="${asset.creationDate}" />
-							</isif>
-						</div>
-						
-						<div class="blog-post-introtext">
-							<isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
-								<isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
-							<iselse>
-								<isprint value="${asset.custom.intro_text}" />
-							</isif>
-						</div>
+        <isloop items="${pdict.ContentSearchResult.getContent()}" var="asset" status="loopstatus">
+            <isif condition="${asset != null && asset.online}">
+                <isif condition="${loopstatus.count > 9}">
+                    <isbreak>
+                </isif>
 
-						<div class="blog-post-author">
-							<isprint value="${asset.custom.author}" />
-						</div>
+                <div class='blog-post <isif condition="${loopstatus.first}">first <iselseif condition="${loopstatus.even}"> <isif condition="${loopstatus.count == 2}">left-subhero <iselse> left  </isif> <iselseif condition="${loopstatus.odd}"> <isif condition="${loopstatus.count == 3}">right-subhero <iselse> right </isif></isif>'>
+                    <isif condition="${loopstatus.count > 3}">
+                        <h2 class="blog-post-title"><isprint value="${asset.name}"/></h2>
+                    </isif>
+                    <isif condition="${loopstatus.first}">
+                        <isif condition="${asset.custom.img_hero_feature != null}">
+                            <div class="blog-post-image">
+                                <img src="${asset.custom.img_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
+                            </div>
+                        </isif>
+                    <iselseif condition="${loopstatus.even && loopstatus.count == 2}">
+                        <iscomment>Sub Hero left post block</iscomment>
+                        <isif condition="${asset.custom.img_sub_hero_feature != null}">
+                            <div class="blog-post-image">
+                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
+                            </div>
+                        </isif>
+                    <iselseif condition="${loopstatus.odd && loopstatus.count == 3}">
+                        <iscomment>Sub Hero right post block</iscomment>
+                        <isif condition="${asset.custom.img_sub_hero_feature != null}">
+                            <div class="blog-post-image">
+                                <img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
+                            </div>
+                        </isif>
+                    <iselse>
+                        <isif condition="${asset.custom.img_small_post_feature != null}">
+                            <div class="blog-post-image">
+                                <img src="${asset.custom.img_small_post_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
+                            </div>
+                        </isif>
+                    </isif>
 
-						<div class="blog-post-skill-level">
-							<isprint value="${asset.custom.skill_level}" />
-						</div>
-					
-						<a href="${URLUtils.url('Page-Show', 'cid', asset.ID, 'fdid', currentBlogFolder.ID)}">
-							<isif condition="${!empty(asset.custom.cta_text)}">
-								<isprint value="${asset.custom.cta_text}"/>
-							<iselse>
-								<isprint value="${Resource.msg('blog.viewpost', 'blog', null)}"/>
-							</isif>
-						</a>
-						</div>
-					</isif>
-				</isloop>
-				<isslot id="blog-landing-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-		</div><!-- END: primary -->
-	</div><!-- END: container -->
-	</body>
+                    <div class="blog-body">
+                        <isif condition="${loopstatus.count <= 3}">
+                            <h2 class="blog-post-title">
+                                <isprint value="${asset.name}"/>
+                            </h2>
+                        </isif>
+
+                        <isif condition="${content.custom.intro_text != null && !empty(content.custom.intro_text)}">
+                            <div class="blog-post-introtext">
+                                <isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
+                                    <isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
+                                <iselse>
+                                    <isprint value="${asset.custom.intro_text}" />
+                                </isif>
+                            </div>
+                        </isif>
+
+                        <div class="blog-post-bottom">
+                            <isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
+                                <div class="blog-post-skill-level">
+                                    <isprint value="${asset.custom.skill_level}" />
+                                </div>
+                            </isif>
+
+                            <div class="blog-button-wrapper">
+                                <a href="${URLUtils.url('Page-Show', 'cid', asset.ID, 'fdid', currentBlogFolder.ID)}">
+                                    <isif condition="${!empty(asset.custom.cta_text)}">
+                                        <isprint value="${asset.custom.cta_text}"/>
+                                    <iselse>
+                                        <isprint value="${Resource.msg('blog.viewpost', 'blog', null)}"/>
+                                    </isif>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <isif condition="${loopstatus.count == 3}">
+                    <div class="blog-landing-top">
+                        <isslot id="blog-landing-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+                    </div>
+                </isif>
+            </isif>
+        </isloop>
+
+        <div class="blog-landing-bottom">
+            <isslot id="blog-landing-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+        </div>
+    </div><!-- END: container -->
 </isdecorate>

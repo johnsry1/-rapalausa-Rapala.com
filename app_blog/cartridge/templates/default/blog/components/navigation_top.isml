@@ -1,0 +1,12 @@
+<isif condition="${rootBlogFolder != null && rootBlogFolder.online}">
+    <isscript>
+        var levelOneFolders = rootBlogFolder.getOnlineSubFolders();
+    </isscript>
+    <div class="blog-nav-top">
+        <isloop items="${levelOneFolders}" var="levelOneFolder" status="loopstatus">
+            <a href="${URLUtils.url('Search-ShowContent', 'fdid', levelOneFolder.ID)}">
+                <isprint value="${levelOneFolder.displayName}" />
+            </a>
+        </isloop>
+    </div>
+</isif>
