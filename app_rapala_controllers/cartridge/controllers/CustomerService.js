@@ -108,17 +108,20 @@ function contactUsStart() {
 	var contactUsForm = app.getForm('contactus');
 	
 	//read recaptcha response from page
-	var recaptchaResponse = request.httpParameterMap.get('g-recaptcha-response').getStringValue();
-	var ip = request.getHttpRemoteAddress();
-	
-	//validation recaptcha
-	var RecaptchaCheck = require('app_rapala_core/cartridge/scripts/recaptcha/ReCaptchaCheck.ds').recaptchaHelper(recaptchaResponse, ip);
-	if(!RecaptchaCheck) {
-		var r = require('~/cartridge/scripts/util/Response');
-		r.renderJSON({
-			RecaptchaError: true
-		});
-		return;
+	var RECAPTCHA_ENABLED = dw.system.Site.getCurrent().getCustomPreferenceValue("reCaptchaEnabled");
+	if (RECAPTCHA_ENABLED) {
+		var recaptchaResponse = request.httpParameterMap.get('g-recaptcha-response').getStringValue();
+		var ip = request.getHttpRemoteAddress();
+		
+		//validation recaptcha
+		var RecaptchaCheck = require('app_rapala_core/cartridge/scripts/recaptcha/ReCaptchaCheck.ds').recaptchaHelper(recaptchaResponse, ip);
+		if(!RecaptchaCheck) {
+			var r = require('~/cartridge/scripts/util/Response');
+			r.renderJSON({
+				RecaptchaError: true
+			});
+			return;
+		}
 	}
 	var Email = app.getModel('Email');
     var emailTo = dw.system.Site.current.preferences.custom.csrRapalaDefaultMailId; 
