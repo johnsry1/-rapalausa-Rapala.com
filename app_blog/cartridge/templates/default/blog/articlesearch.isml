@@ -1,91 +1,80 @@
 <!--- TEMPLATENAME: articlesearch.isml --->
 <isinclude template="util/modules"/>
 
-<head>
-	<isinclude template="components/header/htmlhead"/>
-</head>
-<isdecorate template="blog/pt_blog">
-	<body>
-	<div id="container">
-		<div id="secondary" class="nav blog-nav">
-		</div>
-		<div id="primary" class="primary-content">
-		<isif condition="${!pdict.ContentPagingModel.empty}">
-			<div class="blog-posts-by">
-				<h1>${Resource.msgf('blog.postsby', 'blog', null, pdict.searchedValue)}</h1>
-			</div>
-			<iscomment>sorting and hits info <ispaginginformation pagingmodel="${pdict.ContentPagingModel}"/>
-			<ispaginginformation pagingmodel="${pdict.ContentPagingModel}" pageurl="${pdict.ContentSearchResult.url('Search-Show')}"/>
-			<ispaginginformation pagingmodel="${pdict.ContentPagingModel}"/></iscomment>
-			<div class="content-pagination-section">
-			
-			
-			<iscomment>pagination</iscomment>
-			<isset name="pagurl" value="${dw.web.URLUtils.url('Search-Show', 'id', pdict.searchedID)}" scope="page" />
-			<ispagingbar pageurl="${pdict.ContentSearchResult.url(pagurl)}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="true"/>
-			</div>
+<isdecorate template="blog/pt_blogsearch">
+    <div class="blog-search-resultes">
+        <isif condition="${!pdict.ContentPagingModel.empty}">
+            <div class="blog-posts-by">
+                <h1>${Resource.msgf('blog.postsby', 'blog', null, pdict.searchedValue)}</h1>
+            </div>
 
-			<iscomment>calculated correct index position to separate the result columns</iscomment>
-			<isscript>
-				var count = pdict.ContentPagingModel.end + 1;
-				var cutIndex = Math.ceil( count / 2 ) - 1;
-				var endIndex = cutIndex + (cutIndex + 1);
-			</isscript>
-			
-			<iscomment>render the results as two column layout</iscomment>
-			<ul class="folder-content-list">
-				<isloop items="${pdict.ContentPagingModel.pageElements}" var="asset" status="loopstatus" end="${endIndex}">
-					
-					<li>
-						<iscomment>append the search parameters to the article URL</iscomment>
-						<isset name="articleURL" value="${pdict.ContentSearchResult.url( URLUtils.url('Page-Show','cid', asset.ID, 'id', pdict.searchedID) )}" scope="page"/>
-						
-						<div class='blog-post <isif condition="${loopstatus.first}"> first <iselseif condition="${loopstatus.even}"> <isif condition="${loopstatus.count == 2}">left-subhero <iselse> left  </isif> <iselseif condition="${loopstatus.odd}"> <isif condition="${loopstatus.count == 3}">right-subhero <iselse> right </isif></isif>' style="border: 3px solid #fff;margin-left: 20px">
-							<div class="blog-post-image">
-								<isif condition="${loopstatus.first}"> 
-									<img src="${asset.custom.img_hero_feature.getURL()}"  alt="" title="" />	 
-								<iselseif condition="${loopstatus.even && loopstatus.count == 2}">
-									<iscomment>Sub Hero left post block</iscomment>
-									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
-								<iselseif condition="${loopstatus.odd && loopstatus.count == 3}">	
-									<iscomment>Sub Hero right post block</iscomment>
-									<img src="${asset.custom.img_sub_hero_feature.getURL()}"  alt="" title="" />
-								<iselse> 
-									<isif condition="${loopstatus.count == 4}">
-										<isslot id="blog-landing-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-									</isif>
-									<img src="${asset.custom.img_small_post_feature.getURL()}"  alt="" title="" />
-								</isif>
-							</div>
-							<a class="content-title" href="${articleURL}">
-								<isprint value="${asset.name}"/>
-							</a>
-							
-							<p>
-								<isprint value="${asset.description}"/>
-								<a href="${articleURL}" class="readmore">
-									<isprint value="${Resource.msg('rendering.foldercontenthits.readmore','rendering',null)}" />
-								</a>
-							</p>
-						</div>
-					</li>
-					
-				</isloop>
-			</ul>
-			
-			<iscomment>sorting and hits info</iscomment>
-			<ispaginginformation pagingmodel="${pdict.ContentPagingModel}" pageurl="${pdict.ContentSearchResult.url('Search-Show')}"/>
-			
-			<iscomment>pagination
-			<ispagingbar pageurl="${pdict.ContentSearchResult.url('Search-Show')}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="false"/></iscomment>
-				<div class="search-result-options search-top bottom">
-		        	<div class="searchresultsheader">
-						<ispagingbar pageurl="${pdict.ContentSearchResult.url('Search-Show')}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="false"/>
-				    </div>		
-				</div>
-			
-		</isif>		
-		</div><!-- END: primary -->
-	</div><!-- END: container -->
-	</body>
-</isdecorate>		
+            <iscomment>sorting and hits info <ispaginginformation pagingmodel="${pdict.ContentPagingModel}"/>
+            <ispaginginformation pagingmodel="${pdict.ContentPagingModel}" pageurl="${pdict.ContentSearchResult.url('Search-Show')}"/>
+            <ispaginginformation pagingmodel="${pdict.ContentPagingModel}"/></iscomment>
+
+            <div class="content-pagination-section">
+                <iscomment>pagination</iscomment>
+                <isset name="pagurl" value="${dw.web.URLUtils.url('Search-Show', 'id', pdict.searchedID)}" scope="page" />
+                <ispagingbar pageurl="${pdict.ContentSearchResult.url(pagurl)}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="true"/>
+            </div>
+
+            <iscomment>calculated correct index position to separate the result columns</iscomment>
+            <isscript>
+                var count = pdict.ContentPagingModel.end + 1;
+                var cutIndex = Math.ceil( count / 2 ) - 1;
+                var endIndex = cutIndex + (cutIndex + 1);
+            </isscript>
+
+            <iscomment>render the results as two column layout</iscomment>
+            <div class="blog-content-list blog-landing">
+                <isloop items="${pdict.ContentPagingModel.pageElements}" var="asset" status="loopstatus" end="${endIndex}">
+                    <iscomment>append the search parameters to the article URL</iscomment>
+                    <isset name="articleURL" value="${pdict.ContentSearchResult.url( URLUtils.url('Page-Show','cid', asset.ID, 'id', pdict.searchedID) )}" scope="page"/>
+
+                    <div class='blog-post <isif condition="${loopstatus.even}"> right <iselse> left </isif>'>
+                        <h2 class="blog-post-title">
+                            <a class="content-title" href="${articleURL}"><isprint value="${asset.name}"/></a>
+                        </h2>
+
+                        <isif condition="${asset.custom.img_small_post_feature != null && !empty(asset.custom.img_small_post_feature)}">
+                            <div class="blog-post-image">
+                                <img src="${asset.custom.img_small_post_feature.getURL()}"  alt="${asset.name}" title="${asset.name}" />
+                            </div>
+                        </isif>
+
+                        <div class="blog-body">
+                            <isif condition="${asset.custom.intro_text != null && !empty(asset.custom.intro_text)}">
+                                <div class="blog-post-introtext">
+                                    <isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
+                                        <isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
+                                    <iselse>
+                                        <isprint value="${asset.custom.intro_text}" />
+                                    </isif>
+                                </div>
+                            </isif>
+
+                            <div class="blog-post-bottom">
+                                <div class="blog-button-wrapper">
+                                    <a href="${articleURL}" class="readmore">
+                                        <isprint value="${Resource.msg('rendering.foldercontenthits.readmore','rendering',null)}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </isloop>
+            </div>
+
+            <iscomment>sorting and hits info</iscomment>
+            <ispaginginformation pagingmodel="${pdict.ContentPagingModel}" pageurl="${pdict.ContentSearchResult.url('Search-Show')}"/>
+
+            <iscomment>pagination
+            <ispagingbar pageurl="${pdict.ContentSearchResult.url('Search-Show')}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="false"/></iscomment>
+            <div class="search-result-options search-top bottom">
+                <div class="searchresultsheader">
+                    <ispagingbar pageurl="${pdict.ContentSearchResult.url('Search-Show')}"  pagingmodel="${pdict.ContentPagingModel}" iscontent="true" show="false"/>
+                </div>
+            </div>
+        </isif>
+    </div>
+</isdecorate>

@@ -69,18 +69,22 @@
                             </h2>
                         </isif>
 
-                        <div class="blog-post-introtext">
-                            <isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
-                                <isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
-                            <iselse>
-                                <isprint value="${asset.custom.intro_text}" />
-                            </isif>
-                        </div>
+                        <isif condition="${content.custom.intro_text != null && !empty(content.custom.intro_text)}">
+                            <div class="blog-post-introtext">
+                                <isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
+                                    <isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
+                                <iselse>
+                                    <isprint value="${asset.custom.intro_text}" />
+                                </isif>
+                            </div>
+                        </isif>
 
                         <div class="blog-post-bottom">
-                            <div class="blog-post-skill-level">
-                                <isprint value="${asset.custom.skill_level}" />
-                            </div>
+                            <isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
+                                <div class="blog-post-skill-level">
+                                    <isprint value="${asset.custom.skill_level}" />
+                                </div>
+                            </isif>
 
                             <div class="blog-button-wrapper">
                                 <a href="${URLUtils.url('Page-Show', 'cid', asset.ID, 'fdid', currentBlogFolder.ID)}">

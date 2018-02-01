@@ -1,27 +1,25 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isinclude template="util/modules"/>
+
 <isif condition="${rootBlogFolder != null && rootBlogFolder.ID === currentBlogFolder.ID}">
-	<isbreadcrumbs 
+	<isbreadcrumbs
 		bcurl1="${URLUtils.url('Home-Show')}"
 		bctext1="${Resource.msg('blog.sitename','blog',null)}"
-		bcurl2="${URLUtils.url('Search-ShowContent', 'fdid', rootBlogFolder.ID)}"
 		bctext2="${rootBlogFolder.displayName}"/>
-<iselseif condition="${content != null}" >		
-	<isbreadcrumbs 
+<iselseif condition="${content != null}" >
+	<isbreadcrumbs
 		bcurl1="${URLUtils.url('Home-Show')}"
 		bctext1="${Resource.msg('blog.sitename','blog',null)}"
 		bcurl2="${URLUtils.url('Search-ShowContent', 'fdid', parentBlogFolder.ID)}"
 		bctext2="${parentBlogFolder.displayName}"
 		bcurl3="${URLUtils.url('Search-ShowContent', 'fdid', currentBlogFolder.ID)}"
 		bctext3="${currentBlogFolder.displayName}"
-		bcurl4="${URLUtils.url('Page-Show', 'cid', content.ID)}"
 		bctext4="${content.name}"/>
-<iselse>		
-	<isbreadcrumbs 
+<iselse>
+	<isbreadcrumbs
 		bcurl1="${URLUtils.url('Home-Show')}"
 		bctext1="${Resource.msg('blog.sitename','blog',null)}"
 		bcurl2="${URLUtils.url('Search-ShowContent', 'fdid', parentBlogFolder.ID)}"
 		bctext2="${parentBlogFolder.displayName}"
-		bcurl3="${URLUtils.url('Search-ShowContent', 'fdid', currentBlogFolder.ID)}"
 		bctext3="${currentBlogFolder.displayName}"/>
 </isif>

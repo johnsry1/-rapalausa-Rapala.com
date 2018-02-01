@@ -636,6 +636,35 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="body_lower">
+                <display-name xml:lang="x-default">Body Lower</display-name>
+                <type>html</type>
+                <localizable-flag>true</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="display_content_slot_bottom">
+                <display-name xml:lang="x-default">Display Content Slot Bottom</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="display_content_slot_middle">
+                <display-name xml:lang="x-default">Display Content Slot Middle</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="display_content_slot_top">
+                <display-name xml:lang="x-default">Display Content Slot Top</display-name>
+                <type>boolean</type>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
             <attribute-definition attribute-id="cta_text">
                 <display-name xml:lang="x-default">CTA Text</display-name>
                 <type>string</type>
@@ -765,6 +794,10 @@
                 <attribute attribute-id="blog_date"/>
                 <attribute attribute-id="img_hero_feature"/>
                 <attribute attribute-id="additional_posts"/>
+                <attribute attribute-id="display_content_slot_bottom"/>
+                <attribute attribute-id="display_content_slot_top"/>
+                <attribute attribute-id="display_content_slot_middle"/>
+                <attribute attribute-id="body_lower"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
@@ -1752,7 +1785,7 @@ directpayment for PayPal Direct Payment and Payments Pro</description>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
-            </attribute-definition>     
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Listrak">
@@ -1776,7 +1809,7 @@ directpayment for PayPal Direct Payment and Payments Pro</description>
                 <attribute attribute-id="Adyen_eventCode"/>
                 <attribute attribute-id="Adyen_paymentMethod"/>
                 <attribute attribute-id="Adyen_value"/>
-            </attribute-group>           
+            </attribute-group>
         </group-definitions>
     </type-extension>
 
@@ -3859,7 +3892,7 @@ directpayment for PayPal Direct Payment and Payments Pro</description>
             </attribute-group>
         </group-definitions>
     </type-extension>
-    
+
     <type-extension type-id="PaymentCard">
         <system-attribute-definitions>
             <attribute-definition attribute-id="UUID">
@@ -6685,7 +6718,7 @@ Test (lb. / kg.)|testLb,testKg|Diameter (in. / mm.)|diameterInches,diameterMM|Mo
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
-            </attribute-definition>   
+            </attribute-definition>
         </custom-attribute-definitions>
     </type-extension>
 
@@ -8811,7 +8844,7 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
                 <field-length>0</field-length>
-            </attribute-definition>	
+            </attribute-definition>
             <attribute-definition attribute-id="Adyen_enableAVS">
                 <display-name xml:lang="x-default">Enable AVS</display-name>
                 <description xml:lang="x-default">Enable AVS support. Requires Street Name and House Number fields to be sent to Adyen. The result code is returned by the service and should be handled separately</description>
@@ -8836,7 +8869,7 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <display-name xml:lang="x-default">Adyen Account Settings</display-name>
                 <attribute attribute-id="Adyen_merchantCode"/>
                 <attribute attribute-id="Adyen_skinCode"/>
-                <attribute attribute-id="Adyen_HMACkey"/>          
+                <attribute attribute-id="Adyen_HMACkey"/>
                 <attribute attribute-id="Adyen_Mode"/>
                 <attribute attribute-id="Adyen_Debug"/>
                 <attribute attribute-id="AdyenCseEnabled"/>
@@ -9107,7 +9140,7 @@ If empty value is specified, space will be used as a delimiter.</description>
             </attribute-group>
             <attribute-group group-id="UPS">
                 <display-name xml:lang="x-default">UPS Configuration</display-name>
-				<attribute attribute-id="enableUPS"/>                
+				<attribute attribute-id="enableUPS"/>
 				<attribute attribute-id="upsaddressValidationURL"/>
                 <attribute attribute-id="upsuserID"/>
                 <attribute attribute-id="upspassword"/>
