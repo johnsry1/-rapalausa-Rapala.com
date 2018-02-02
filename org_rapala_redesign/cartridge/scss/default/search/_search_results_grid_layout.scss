@@ -24,6 +24,14 @@
             }
         }
         #primary {
+            .bannerslot {
+                & > div {
+                    margin-bottom: rem(20px);
+                }
+                p {
+                    float: none;
+                }
+            }
             p {
                 @include p;
             }
@@ -68,7 +76,19 @@
                                         padding: 0;
                                     }
                                 }
+                                .first-last,
+                                .last-last {
+                                    background: none;
+                                }
+                                .first-last {
+                                    &.inactive a {
+                                        @include respond(desktop-down) {
+                                            background-position: -1px 4px;
+                                        }
+                                    }
+                                }
                                 a {
+                                    font-family: $font;
                                     @include respond(desktop-down) {
                                         padding: 0;
                                         width: 40px;
