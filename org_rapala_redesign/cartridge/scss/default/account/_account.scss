@@ -324,10 +324,33 @@ div.returningcustomers {
     .ui-widget-header {
         border-bottom: none;
     }
+    .ui-widget-content {
+        .confirmationcontainer.resetpassword {
+            h1 {
+                @include h2;
+                font-family: $font-third;
+            }
+            #message.reset-success-email {
+                @include p;
+            }
+        }
+        .confirmationcontainer {
+            .actions {
+                button.confirmBtn {
+                    @include button(submit);
+                    width: 100%;
+                }
+            }
+        }
+    }
     .passwordreset {
         h1 {
             @include h2;
             font-family: $font-third;
+            span {
+                float: none;
+                width: auto;
+            }
         }
         p {
             font-family: $font;
@@ -338,11 +361,38 @@ div.returningcustomers {
             @include button('submit');
         }
     }
-    .form-row {
-        .requiredindicator {
-            float: none;
-            color: $required-color;
-            margin-left: rem(3px);
+    .formfield.passwordemail {
+        .form-row.required {
+            .textinput {
+                @include form-input;
+                &.errorclient {
+                    background: $error-bg-color !important;
+                    border: 1px solid $red !important;
+                }
+            }
+            .label {
+                @include label;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit;
+                    text-transform: inherit;
+                    font-variant: inherit;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+            span.errorclient {
+                @include form-error;
+            }
+            .requiredindicator {
+                font-family: $font;
+                float: none;
+                color: $required-color;
+                margin-left: rem(3px);
+            }
         }
     }
 }
@@ -941,6 +991,39 @@ ul.common-nav {
                 @include button(submit);
                 width: auto;
             }
+        }
+    }
+}
+
+.pt_acc_landing {
+    #NewPasswordForm {
+        max-width: rem(400px);
+        .form-row {
+            margin: $form-row-margin;
+            .label {
+                @include label;
+                padding: 0;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit !important;
+                    text-transform: inherit;
+                    font-variant: inherit !important;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include button(submit);
+            }
+        }
+        .form-row.inputlabel .label span,
+        .formfield.inputlabel .label span {
+            color: $label-color;
         }
     }
 }
