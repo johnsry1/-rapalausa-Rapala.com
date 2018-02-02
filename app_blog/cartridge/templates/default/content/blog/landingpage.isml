@@ -69,7 +69,7 @@
                             </h2>
                         </isif>
 
-                        <isif condition="${content.custom.intro_text != null && !empty(content.custom.intro_text)}">
+                        <isif condition="${asset.custom.intro_text != null && !empty(asset.custom.intro_text)}">
                             <div class="blog-post-introtext">
                                 <isif condition="${asset.custom.intro_text != null && asset.custom.intro_text.length > 225}">
                                     <isprint value="${asset.custom.intro_text.substring(0, 225)}"/>${Resource.msg('blog.introtext.length', 'blog', null)}
