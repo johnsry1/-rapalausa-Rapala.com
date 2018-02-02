@@ -68,7 +68,8 @@ div.returningcustomers {
                     }
                 }
                 span.errorclient,
-                div.errorclient {
+                div.errorclient,
+                span.existing_register {
                     margin-top: rem(3px);
                 }
             }
@@ -150,6 +151,19 @@ div.returningcustomers {
     }
     #primary.primary-content {
         .account-section {
+            .requiredindicator {
+                color: $required-color;
+            }
+            .custom-checkbox.custom {
+                @include respond(large-down) {
+                    text-align: left;
+                }
+                .label {
+                    span.labeltext {
+                        color: inherit;
+                    }
+                }
+            }
             .cell.checkoutloginsignin {
                 box-shadow: none !important;
                 font-family: $font !important;
@@ -180,7 +194,8 @@ div.returningcustomers {
                         float: none;
                     }
                     span.errorclient,
-                    div.errorclient {
+                    div.errorclient,
+                    span.existing_register {
                         @include form-error;
                         margin-top: rem(3px);
                     }
@@ -211,6 +226,12 @@ div.returningcustomers {
                         @include button('submit');
                     }
                 }
+                .resetpwd {
+                    font-family: $font;
+                    @include respond(large-down) {
+                        font-family: $font;
+                    }
+                }
             }
             .createan-account {
                 input {
@@ -219,9 +240,13 @@ div.returningcustomers {
                     float: none;
                 }
                 span.errorclient,
-                div.errorclient {
+                div.errorclient,
+                span.existing_register {
                     @include form-error;
                     margin-top: rem(3px);
+                }
+                span.existing_register {
+                    margin-top: rem(5px);
                 }
                 .contentboxcontent.new-register {
                     box-shadow: none;
@@ -232,7 +257,12 @@ div.returningcustomers {
                         font-family: $font;
                     }
                     .registration {
+                        form {
+                            overflow: hidden;
+                        }
                         .formactions {
+                            float: none;
+                            width: 100%;
                             button {
                                 @include button('submit');
                             }
@@ -259,8 +289,16 @@ div.returningcustomers {
                             }
                             .labeltext {
                                 @include respond(medium-down) {
-                                    margin-left: 0;
+                                    margin-left: 0 !important;
+                                    color: $form-label-color !important;
                                 }
+                            }
+                        }
+                    }
+                    .signupfor-email {
+                        input[type="checkbox"] + label {
+                            &::before {
+                                float: left;
                             }
                         }
                     }
@@ -268,6 +306,18 @@ div.returningcustomers {
                         font-family: $font;
                         @include font-size($link-font-size);
                         margin-left: 0;
+                    }
+                    .formactions {
+                        button {
+                            @include button('submit');
+                            width: 100%;
+                        }
+                    }
+                }
+                .rapala_benefits {
+                    clear: both;
+                    @include respond(large-up) {
+                        margin-top: rem(15px);
                     }
                 }
             }
@@ -293,10 +343,33 @@ div.returningcustomers {
     .ui-widget-header {
         border-bottom: none;
     }
+    .ui-widget-content {
+        .confirmationcontainer.resetpassword {
+            h1 {
+                @include h2;
+                font-family: $font-third;
+            }
+            #message.reset-success-email {
+                @include p;
+            }
+        }
+        .confirmationcontainer {
+            .actions {
+                button.confirmBtn {
+                    @include button(submit);
+                    width: 100%;
+                }
+            }
+        }
+    }
     .passwordreset {
         h1 {
             @include h2;
             font-family: $font-third;
+            span {
+                float: none;
+                width: auto;
+            }
         }
         p {
             font-family: $font;
@@ -307,11 +380,38 @@ div.returningcustomers {
             @include button('submit');
         }
     }
-    .form-row {
-        .requiredindicator {
-            float: none;
-            color: $required-color;
-            margin-left: rem(3px);
+    .formfield.passwordemail {
+        .form-row.required {
+            .textinput {
+                @include form-input;
+                &.errorclient {
+                    background: $error-bg-color !important;
+                    border: 1px solid $red !important;
+                }
+            }
+            .label {
+                @include label;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit;
+                    text-transform: inherit;
+                    font-variant: inherit;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+            span.errorclient {
+                @include form-error;
+            }
+            .requiredindicator {
+                font-family: $font;
+                float: none;
+                color: $required-color;
+                margin-left: rem(3px);
+            }
         }
     }
 }
@@ -909,6 +1009,49 @@ ul.common-nav {
             button {
                 @include button(submit);
                 width: auto;
+            }
+        }
+    }
+}
+
+.pt_acc_landing {
+    #NewPasswordForm {
+        max-width: rem(400px);
+        .form-row {
+            margin: $form-row-margin;
+            .label {
+                @include label;
+                padding: 0;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit !important;
+                    text-transform: inherit;
+                    font-variant: inherit !important;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include button(submit);
+            }
+        }
+        .form-row.inputlabel .label span,
+        .formfield.inputlabel .label span {
+            color: $form-label-color;
+        }
+    }
+}
+
+#container.pt_error {
+    #primary.primary-content {
+        .contentboxcontent {
+            @include respond(desktop-down) {
+                margin-bottom: 0;
             }
         }
     }
