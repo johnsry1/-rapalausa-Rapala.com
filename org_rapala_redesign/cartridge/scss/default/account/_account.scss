@@ -151,6 +151,19 @@ div.returningcustomers {
     }
     #primary.primary-content {
         .account-section {
+            .requiredindicator {
+                color: $required-color;
+            }
+            .custom-checkbox.custom {
+                @include respond(large-down) {
+                    text-align: left;
+                }
+                .label {
+                    span.labeltext {
+                        color: inherit;
+                    }
+                }
+            }
             .cell.checkoutloginsignin {
                 box-shadow: none !important;
                 font-family: $font !important;
@@ -211,6 +224,12 @@ div.returningcustomers {
                 .formactions {
                     button.signinbtn {
                         @include button('submit');
+                    }
+                }
+                .resetpwd {
+                    font-family: $font;
+                    @include respond(large-down) {
+                        font-family: $font;
                     }
                 }
             }
