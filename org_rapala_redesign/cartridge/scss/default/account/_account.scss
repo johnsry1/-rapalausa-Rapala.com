@@ -68,7 +68,8 @@ div.returningcustomers {
                     }
                 }
                 span.errorclient,
-                div.errorclient {
+                div.errorclient,
+                span.existing_register {
                     margin-top: rem(3px);
                 }
             }
@@ -180,7 +181,8 @@ div.returningcustomers {
                         float: none;
                     }
                     span.errorclient,
-                    div.errorclient {
+                    div.errorclient,
+                    span.existing_register {
                         @include form-error;
                         margin-top: rem(3px);
                     }
@@ -219,9 +221,13 @@ div.returningcustomers {
                     float: none;
                 }
                 span.errorclient,
-                div.errorclient {
+                div.errorclient,
+                span.existing_register {
                     @include form-error;
                     margin-top: rem(3px);
+                }
+                span.existing_register {
+                    margin-top: rem(5px);
                 }
                 .contentboxcontent.new-register {
                     box-shadow: none;
@@ -232,7 +238,12 @@ div.returningcustomers {
                         font-family: $font;
                     }
                     .registration {
+                        form {
+                            overflow: hidden;
+                        }
                         .formactions {
+                            float: none;
+                            width: 100%;
                             button {
                                 @include button('submit');
                             }
@@ -259,8 +270,16 @@ div.returningcustomers {
                             }
                             .labeltext {
                                 @include respond(medium-down) {
-                                    margin-left: 0;
+                                    margin-left: 0 !important;
+                                    color: $form-label-color !important;
                                 }
+                            }
+                        }
+                    }
+                    .signupfor-email {
+                        input[type="checkbox"] + label {
+                            &::before {
+                                float: left;
                             }
                         }
                     }
@@ -268,6 +287,18 @@ div.returningcustomers {
                         font-family: $font;
                         @include font-size($link-font-size);
                         margin-left: 0;
+                    }
+                    .formactions {
+                        button {
+                            @include button('submit');
+                            width: 100%;
+                        }
+                    }
+                }
+                .rapala_benefits {
+                    clear: both;
+                    @include respond(large-up) {
+                        margin-top: rem(15px);
                     }
                 }
             }
