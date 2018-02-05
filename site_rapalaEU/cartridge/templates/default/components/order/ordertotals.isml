@@ -175,7 +175,15 @@
 									:
 								</span>
 							</td>
-							<td><span class="value">${session.currency.getSymbol()} <isprint value="${LineItemCtnr.adjustedMerchandizeTotalTax & LineItemCtnr.adjustedShippingTotalTax}"/></span></td>
+							<td>
+                                <span class="value">
+                                    <isif condition="${LineItemCtnr.totalTax.available}">
+                                        s <isprint value="${LineItemCtnr.totalTax}"/>
+                                    <iselse/>
+                                        s ${Resource.msg('global.symbol.dash','locale',null)}
+                                    </isif>
+                                </span>
+                            </td>
 						</tr>
 					</isif>
 				</isloop>
@@ -252,7 +260,15 @@
 							:
 						</span>
 					</td>
-					<td><span class="value">${session.currency.getSymbol()} <isprint value="${LineItemCtnr.adjustedMerchandizeTotalTax & LineItemCtnr.adjustedShippingTotalTax}"/></span></td>
+					<td>
+                        <span class="value">
+                            <isif condition="${LineItemCtnr.totalTax.available}">
+							    <isprint value="${LineItemCtnr.totalTax}"/>
+                            <iselse/>
+                                ${Resource.msg('global.symbol.dash','locale',null)}
+						    </isif>
+                        </span>
+                    </td>
 				</tr>
 			</isif>
 
