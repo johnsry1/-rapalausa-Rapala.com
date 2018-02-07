@@ -916,13 +916,12 @@ exports.init = function () {
         $('.expirationdate.error').show();
     }
     $('.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
-        $(function (){
-            if (navigator.userAgent.match(/Trident\/7\./)) {
-                $('.continuecheckout.place-order-btn').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
-            }
-        });
         var $checkoutButton = $('.continuecheckout.place-order-btn');
-        progress.show($checkoutButton);
+        if (navigator.userAgent.match(/Trident\/7\./)) {
+            $('.continuecheckout.place-order-btn').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
+        } else {
+            progress.show($checkoutButton);
+        }
         var errorcount = 0;
         if (!($('#PaymentMethod_CREDIT_CARD').is(':visible'))) {
             $('.paymentform .textinput, .paymentform select').removeClass('required');
