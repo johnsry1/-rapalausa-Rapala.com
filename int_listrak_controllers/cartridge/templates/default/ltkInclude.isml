@@ -9,10 +9,10 @@
 <isinclude template="includes/ltkEmailCapture.isml"/>
 <isinclude template="includes/ltkActivityTracking.isml"/>
 
-<isif condition="${pdict.Currentsession.privacy.SendSCA == true}" >
+<isif condition="${pdict.CurrentSession.privacy.SendSCA == true}" >
 	<isinclude url="${URLUtils.url('ltkSendSca-RenderSca')}"/>
 </isif>
 
-<isif condition="${pdict.Currentsession.privacy.SendOrder == true}">	
-	<iscomponent pipeline="ltkSendOrder-Send" OrderNumber="${pdict.Currentsession.privacy.OrderNumber}" Email="${pdict.Currentsession.privacy.Email}" PostalCode="${pdict.Currentsession.privacy.PostalCode}" />
+<isif condition="${pdict.CurrentSession.privacy.SendOrder == true}">	
+	<iscomponent pipeline="ltkSendOrder-Send" OrderNumber="${pdict.CurrentSession.privacy.OrderNumber}" Email="${pdict.CurrentSession.privacy.Email}" PostalCode="${pdict.CurrentSession.privacy.PostalCode}" />
 </isif>

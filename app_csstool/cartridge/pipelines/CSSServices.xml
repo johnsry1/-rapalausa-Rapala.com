@@ -166,7 +166,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="(('CSSPromotionCode' in Currentsession.privacy) &amp;&amp; !empty(Currentsession.privacy.CSSPromotionCode))" condition-operator="expr"/>
+        <decision-node condition-key="(('CSSPromotionCode' in CurrentSession.privacy) &amp;&amp; !empty(CurrentSession.privacy.CSSPromotionCode))" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in" transaction-control="begin">
@@ -178,7 +178,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
             <node>
               <pipelet-node pipelet-name="AddCouponToBasket2" pipelet-set-identifier="bc_api">
                 <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="Currentsession.privacy.CSSPromotionCode" key="CouponCode"/>
+                <key-binding alias="CurrentSession.privacy.CSSPromotionCode" key="CouponCode"/>
                 <key-binding alias="CouponStatus" key="Status"/>
                 <key-binding alias="CouponLineItem" key="CouponLineItem"/>
               </pipelet-node>
@@ -225,7 +225,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
                 <key-binding alias="null" key="To_8"/>
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
-                <key-binding alias="delete Currentsession.privacy.CSSPromotionCode" key="From_1"/>
+                <key-binding alias="delete CurrentSession.privacy.CSSPromotionCode" key="From_1"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
             </node>
@@ -270,7 +270,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
       </node>
       <simple-transition/>
       <node>
-        <decision-node condition-key="(('CSSReturnExchangeDiscount' in Currentsession.privacy) &amp;&amp;  !empty(Currentsession.privacy.CSSReturnExchangeDiscount))" condition-operator="expr"/>
+        <decision-node condition-key="(('CSSReturnExchangeDiscount' in CurrentSession.privacy) &amp;&amp;  !empty(CurrentSession.privacy.CSSReturnExchangeDiscount))" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in" transaction-control="begin"/>
@@ -302,7 +302,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
                 <config-property key="ScriptFile" value="returnexchange/processCSSDiscount.ds"/>
                 <key-binding alias="ScriptLog" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
-                <key-binding alias="Currentsession.privacy.CSSReturnExchangeDiscount" key="DiscountAmount"/>
+                <key-binding alias="CurrentSession.privacy.CSSReturnExchangeDiscount" key="DiscountAmount"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b3" source-connector="error">
@@ -480,7 +480,7 @@ When the coupon is added to the cart it is removed from the session, therefore i
               <pipelet-node pipelet-name="Eval" pipelet-set-identifier="bc_api">
                 <config-property key="OnError" value="null"/>
                 <config-property key="Transactional" value="true"/>
-                <config-property key="Expression" value="'CSSReturnExchangeDiscount' in Currentsession.privacy ? delete  Currentsession.privacy.CSSReturnExchangeDiscount : &quot;&quot;"/>
+                <config-property key="Expression" value="'CSSReturnExchangeDiscount' in CurrentSession.privacy ? delete  CurrentSession.privacy.CSSReturnExchangeDiscount : &quot;&quot;"/>
                 <key-binding alias="Result" key="Result"/>
               </pipelet-node>
               <node-display x="0" y="2"/>

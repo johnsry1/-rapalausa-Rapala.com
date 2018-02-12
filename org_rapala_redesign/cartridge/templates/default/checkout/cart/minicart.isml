@@ -159,6 +159,6 @@
 </isif>
 <isbonusdiscountlineitem p_alert_text="${Resource.msg('product.bonusproductalert','product',null)}" p_discount_line_item="${pdict.BonusDiscountLineItem}"/>
 
-<isif condition="${pdict.Currentsession.privacy.SendSCA == true && pdict.Currentsession.privacy.SCAFormat == 'ajax'}" >
+<isif condition="${pdict.CurrentSession.privacy.SendSCA == true && pdict.CurrentSession.privacy.SCAFormat == 'ajax'}" >
 	<isinclude url="${URLUtils.url('ltkSendSca-RenderSca')}"/>
 </isif>

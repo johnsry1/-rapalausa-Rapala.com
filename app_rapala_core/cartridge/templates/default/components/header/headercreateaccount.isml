@@ -12,7 +12,7 @@
 				</isscript>
 				<div class="custom_signup">
 				<div class="top_arrow"></div>
-				<isif condition="${!pdict.Currentsession.customer.externallyAuthenticated}">
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<div class="formfield formfield_name floatleft create_text" >
 							<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.firstname}" type="input" requiredtext="${Resource.msg('forms.address.firstname.missing','forms',null)}"/>
 					</div><!-- END: firstname -->
@@ -30,7 +30,7 @@
 					</div><!-- END: lastname -->
 				</isif>
 				
-				<isif condition="${!pdict.Currentsession.customer.externallyAuthenticated}">
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
 					<div class="formfield  formfield_email first floatleft create_text"  >
 						<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.email}" fieldClass= "accountemail guestemail" type="input" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 					</div><!-- END: email -->
