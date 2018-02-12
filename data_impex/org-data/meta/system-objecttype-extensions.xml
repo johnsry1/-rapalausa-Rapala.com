@@ -5811,8 +5811,25 @@ Test (lb. / kg.)|testLb,testKg|Diameter (in. / mm.)|diameterInches,diameterMM|Mo
                 <min-length>0</min-length>
                 <field-length>0</field-length>
             </attribute-definition>
+            <attribute-definition attribute-id="shippingLimitations">
+                <display-name xml:lang="x-default">Shipping Limitations</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <site-specific-flag>false</site-specific-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <visible-flag>false</visible-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <order-required-flag>false</order-required-flag>
+                <externally-defined-flag>false</externally-defined-flag>
+                <field-length>0</field-length>
+            </attribute-definition>
+            
         </custom-attribute-definitions>
         <group-definitions>
+            <attribute-group group-id="ShippingLimitations">
+                <display-name xml:lang="x-default">Shipping Limitations Settings</display-name>
+                <attribute attribute-id="shippingLimitations"/>
+            </attribute-group>
             <attribute-group group-id="ExternalSearch">
                 <display-name xml:lang="x-default">Search Engine Optimization Support</display-name>
                 <attribute attribute-id="pageTitle" system="true"/>
@@ -8911,6 +8928,13 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <min-length>0</min-length>
                 <field-length>0</field-length>
             </attribute-definition>
+            <attribute-definition attribute-id="shippingLimitations">
+                <display-name xml:lang="x-default">Shipping Limitations</display-name>
+                <type>text</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="Adyen">
@@ -9259,6 +9283,7 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <attribute attribute-id="knifeCountry"/>
                 <attribute attribute-id="otterrestrictedZipcode"/>
                 <attribute attribute-id="restrictedProduct"/>
+                <attribute attribute-id="shippingLimitations"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

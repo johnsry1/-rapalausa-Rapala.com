@@ -83,7 +83,61 @@ function validateProductCategory(basket : Basket, singleShippingForm) {
 	
 }
 
+/**
+*	Return boolean flag that will allow ship product to shipping address or not. 
+*	If any error occur Ship Limit will be restricted.
+*/
+function validateProductCategoryJSON (basket : Basket, singleShippingForm) {
+	
+	try {
+		if (!empty(dw.system.Site.getCurrent().getCustomPreferenceValue('shippingLimitations'))) {
+			var limitationsJSON = JSON.parse(dw.system.Site.getCurrent().getCustomPreferenceValue('shippingLimitations'));
+		    var basket : Basket = basket; 
+			var shipState : String = singleShippingForm.object.shippingAddress.addressFields.states.state.htmlValue;
+			var shipcity : String = singleShippingForm.object.shippingAddress.addressFields.city.htmlValue;
+			var shipzip	: String = singleShippingForm.object.shippingAddress.addressFields.postal.htmlValue;
+			var shipcountry : String = singleShippingForm.object.shippingAddress.addressFields.country.htmlValue;
+			var productLIs : Iterator  = basket.getProductLineItems().iterator();
+			while (productLIs.hasNext()){
+				var pli : ProductLineItem = productLIs.next();
+				var product = pli.getProduct();
+				var productAttributes = new ArrayList(product.custom.shippingLimitations);
+				
+				var isKnife = productAttributes.contains('knife');
+				var isLead = productAttributes.contains('lead');
+
+				if (isKnife) {
+					var knivestateList = new ArrayList(limitationsJSON['knife']['state']);
+					var Kniveziplist = new ArrayList(limitationsJSON['knife']['postalCode']);
+					var knifecountrylist = new ArrayList(limitationsJSON['knife']['country']);
+					if (!empty(knivestateList) && knivestateList.contains(shipState) || Kniveziplist.contains(shipzip) || knivestateList.contains(shipcity.toLocaleLowerCase()) || 
+						(!empty(knifecountrylist) && knifecountrylist.contains(shipcountry))) {
+						return true;
+					}
+				}
+				
+				if (isLead) {
+					var countryList = new ArrayList(limitationsJSON['lead']['country']);
+					if (!empty(countryList) && countryList.contains(shipcountry.toUpperCase())) {
+						return {
+							limit: true,
+							message: limitationsJSON['lead']['reason']
+						};	
+					}
+				}
+			}
+			return false;
+		} else {
+			return true;
+		}
+	} catch (e) {
+		dw.system.Logger.error(e.message);
+		return true;
+	}
+}
+
 
 module.exports = {
-    validateProductCategory : validateProductCategory
+    validateProductCategory : validateProductCategory,
+    validateProductCategoryJSON : validateProductCategoryJSON
 };

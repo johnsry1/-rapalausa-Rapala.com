@@ -91,37 +91,45 @@
 								<div class="state-shipping-valid-dialog hide">
 									<h1><isprint value="${Resource.msg('shippinginfo.shiplimit','checkout',null)}"/></h1>
 									<div class="notification" id="message">
-										<isprint value="${Resource.msg('singleshipping.notification','checkout',null)}"/>
+										<isif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('ShipMessage') && !empty(pdict.CurrentHttpParameterMap.ShipMessage)}">
+											<isprint value="${pdict.CurrentHttpParameterMap.ShipMessage}"/>
+										<iselse>
+											<isprint value="${Resource.msg('singleshipping.notification','checkout',null)}"/>
+										</isif>
 									</div>
-									<p><isprint value="${Resource.msg('singleshipping.notification1','checkout',null)}"/></p>
-									<div class="state-table">
-											<div class="custom-table" border="0">
-												<div class="custom-table-row">
-													<div class="custom-table-head first"><isprint value="${Resource.msg('minicart.items','checkout',null)}"/></div>
-													<div class="custom-table-head second"><isprint value="${Resource.msg('shippinginfo.shiplimit','checkout',null)}"/></div>
+									<isif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('ShipMessage') && !empty(pdict.CurrentHttpParameterMap.ShipMessage)}">
+										<iscomment> Leave empty </iscomment>
+									<iselse>
+										<p><isprint value="${Resource.msg('singleshipping.notification1','checkout',null)}"/></p>
+										<div class="state-table">
+												<div class="custom-table" border="0">
+													<div class="custom-table-row">
+														<div class="custom-table-head first"><isprint value="${Resource.msg('minicart.items','checkout',null)}"/></div>
+														<div class="custom-table-head second"><isprint value="${Resource.msg('shippinginfo.shiplimit','checkout',null)}"/></div>
+													</div>
 												</div>
-											</div>
-											<div class="custom-table bordertable" border="1">
-												<div class="custom-table-row">
-													<div class="custom-table-data first"><isprint value="${Resource.msg('singleshipping.notificationrow1','checkout',null)}"/></div>
-													<div class="custom-table-data second"><isprint value="${Resource.msg('singleshipping.notificationcol1','checkout',null)}"/></div>
+												<div class="custom-table bordertable" border="1">
+													<div class="custom-table-row">
+														<div class="custom-table-data first"><isprint value="${Resource.msg('singleshipping.notificationrow1','checkout',null)}"/></div>
+														<div class="custom-table-data second"><isprint value="${Resource.msg('singleshipping.notificationcol1','checkout',null)}"/></div>
+													</div>
+													<iscomment>
+													<div class="custom-table-row">
+														<div class="custom-table-data first">All Otter Sheds & Shelters</div>
+														<div class="custom-table-data second">Rapala.com can only ship this item to MN, WI, IL, IA, SD and Select Areas of ND (including 58401, 58402, 58405, 58501 thru 58507, 58601, 58602, 58482, 58554 and zip codes beginning with 580xx, 581xx, 582xx). Allow 7-14 business days for delivery. Ground shipping only.</div>
+													</div>
+													 </iscomment>
+													<div class="custom-table-row">
+														<div class="custom-table-data first"><isprint value="${Resource.msg('shippinginfo.knives','checkout',null)}"></div>
+														<div class="custom-table-data second"><isprint value="${Resource.msg('shippinginfo.shiplimitnj','checkout',null)}"/></div>
+													</div>
+													<div class="custom-table-row">
+														<div class="custom-table-data first"><isprint value="${Resource.msg('shippinginfo.filletknife','checkout',null)}"/></div>
+														<div class="custom-table-data second"><isprint value="${Resource.msg('shippinginfo.shiplimitny','checkout',null)}"/></div>
+													</div>
 												</div>
-												<iscomment>
-												<div class="custom-table-row">
-													<div class="custom-table-data first">All Otter Sheds & Shelters</div>
-													<div class="custom-table-data second">Rapala.com can only ship this item to MN, WI, IL, IA, SD and Select Areas of ND (including 58401, 58402, 58405, 58501 thru 58507, 58601, 58602, 58482, 58554 and zip codes beginning with 580xx, 581xx, 582xx). Allow 7-14 business days for delivery. Ground shipping only.</div>
-												</div>
-												 </iscomment>
-												<div class="custom-table-row">
-													<div class="custom-table-data first"><isprint value="${Resource.msg('shippinginfo.knives','checkout',null)}"></div>
-													<div class="custom-table-data second"><isprint value="${Resource.msg('shippinginfo.shiplimitnj','checkout',null)}"/></div>
-												</div>
-												<div class="custom-table-row">
-													<div class="custom-table-data first"><isprint value="${Resource.msg('shippinginfo.filletknife','checkout',null)}"/></div>
-													<div class="custom-table-data second"><isprint value="${Resource.msg('shippinginfo.shiplimitny','checkout',null)}"/></div>
-												</div>
-											</div>
-									</div>
+										</div>
+									</isif>
 									<div class="state-valid-buttons">
 										<a href="${URLUtils.https('Cart-Show')}" title="EDIT MY ORDER" class="button edit-my-order"><isprint value="${Resource.msg('summary.edit','checkout',null)}"/></a>
 										<a title="CHANGE SHIPPING ADDRESS" id="change-shipping-address-button" class=" button change-shipping-address-button dialog-close"><isprint value="${Resource.msg('shippinginfo.editaddress','checkout',null)}"/></a>
