@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<isif condition="${pdict.Currentsession.privacyer.anonymous || pdict.Currentsession.privacyer.externallyAuthenticated}">
+<isif condition="${pdict.Currentsession.customer.anonymous || pdict.Currentsession.customer.externallyAuthenticated}">
 	<p>${Resource.msg('global.or', 'locale', null)}</p>
-	<isif condition="${pdict.Currentsession.privacyer.anonymous}">
+	<isif condition="${pdict.Currentsession.customer.anonymous}">
 		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheader','account',"")}</p>
 	<iselse/>
 		<p>${Resource.msgf('account.login.logininclude.oauthcustomersheaderreturning','account',"")}</p>
@@ -14,7 +14,7 @@
 	<form action="${URLUtils.httpsContinue()}" method="post" class="clearfix" id="${pdict.CurrentForms.oauthlogin.htmlName}">
 		<fieldset>
 
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('GooglePlus' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('GooglePlus' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GooglePlus login"
 				class="oAuthIcon"
 				id='GooglePlus'
@@ -22,7 +22,7 @@
 			 	src="${URLUtils.staticURL('/images/Google.png')}"
 			 	/>
 			</isif>
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('LinkedIn' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('LinkedIn' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="LinkedIn login"
 				 class="oAuthIcon"
 				 id='LinkedIn'
@@ -30,7 +30,7 @@
 			 	 src="${URLUtils.staticURL('/images/LinkedIn.png')}"
 				 />
 			</isif>
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('Microsoft' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('Microsoft' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Microsoft login"
 				 class="oAuthIcon"
 				 id='Microsoft'
@@ -39,7 +39,7 @@
 				 />
 			</isif>
 
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('Facebook' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('Facebook' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="Facebook login"
 				 class="oAuthIcon"
 				 id='Facebook'
@@ -48,7 +48,7 @@
 				 />
 			</isif>
 
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('GitHub' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('GitHub' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="GitHub login"
 				 class="oAuthIcon"
 				 id='GitHub'
@@ -57,7 +57,7 @@
 				 />
 			</isif>
 
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('SinaWeibo' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('SinaWeibo' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="SinaWeibo login"
 				 class="oAuthIcon"
 				 id='SinaWeibo'
@@ -66,7 +66,7 @@
 				 />
 			</isif>
 
-			<isif condition="${pdict.Currentsession.privacyer.anonymous || (pdict.Currentsession.privacyer.externallyAuthenticated && ('VKontakte' == pdict.Currentsession.privacyer.profile.credentials.authenticationProviderID))}">
+			<isif condition="${pdict.Currentsession.customer.anonymous || (pdict.Currentsession.customer.externallyAuthenticated && ('VKontakte' == pdict.Currentsession.customer.profile.credentials.authenticationProviderID))}">
 			<input type="image" alt="VKontakte login"
 				 class="oAuthIcon"
 				 id='VKontakte'

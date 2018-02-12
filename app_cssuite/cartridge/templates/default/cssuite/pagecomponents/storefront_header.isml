@@ -5,8 +5,8 @@
 <isif condition="${pdict.CurrentSession.userAuthenticated}">
 
 	<div style="clear: both;">
-		<font color="black" style="font-size:14px;">Agent: <b><isprint value="${pdict.CurrentSession.userName}"></b> logged in as  
-	        <isif condition="${pdict.Currentsession.privacyerAuthenticated}">
+		<font color="black" style="font-size:14px;">Agent: <b><isprint value="${pdict.CurrentSession.userName}"></b> logged in as
+	        <isif condition="${pdict.Currentsession.customerAuthenticated}">
 	              customer: <b><isprint value="${pdict.CurrentUser.profile.firstName}" /> <isprint value="${pdict.CurrentUser.profile.lastName}" /></b>
 	        <iselse>
 	            an <b>Unregistered User</b>
@@ -14,7 +14,7 @@
 	     </font>
 	     <button class="cssuite close-oob-session" style="font: inherit; border: inherit;">Close Window</button>
 	</div>
-	
+
 	<script type="text/javascript">
 	<!--
 		//initialize app

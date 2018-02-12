@@ -35,7 +35,7 @@
 					</isif>
 					<div class="dialog-required"> <span class="required-indicator">&#8727; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				<isif condition="${!pdict.Currentsession.privacyer.externallyAuthenticated}">
+				<isif condition="${!pdict.Currentsession.customer.externallyAuthenticated}">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"  requiredtext="${Resource.msg('validate.required','forms',null)}"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"  requiredtext="${Resource.msg('validate.required','forms',null)}"/>
 				<iselse/>
@@ -46,7 +46,7 @@
 
 			<fieldset>
 
-				<isif condition="${!pdict.Currentsession.privacyer.externallyAuthenticated}">			
+				<isif condition="${!pdict.Currentsession.customer.externallyAuthenticated}">			
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" requiredtext="${Resource.msg('validate.required','forms',null)}"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"  requiredtext="${Resource.msg('validate.required','forms',null)}"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true" attributes="${autocomplete_attributes}" requiredtext="${Resource.msg('validate.required','forms',null)}"/>
@@ -87,7 +87,7 @@
 						${Resource.msg('account.user.registration.changepassword','account',null)}
 						<div class="dialog-required"> <span class="required-indicator">&#8727; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 					</legend>
-					<isif condition="${!pdict.Currentsession.privacyer.externallyAuthenticated}">			
+					<isif condition="${!pdict.Currentsession.customer.externallyAuthenticated}">			
 	
 						<isinputfield formfield="${pdict.CurrentForms.profile.login.currentpassword}" type="password" dynamicname="true" attributes="${autocomplete_attributes}" requiredtext="${Resource.msg('validate.required','forms',null)}" />
 						

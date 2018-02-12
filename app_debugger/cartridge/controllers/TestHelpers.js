@@ -62,7 +62,7 @@ function getTestOrderConfirmation() {
     var orders = OrderMgr.searchOrders('orderNo={0}', 'creationDate desc', orderNo);
     var order = orders.next();
 
-    if (session.privacyerAuthenticated) {
+    if (session.customerAuthenticated) {
       Customer.logout();
     }
     var user = "",
