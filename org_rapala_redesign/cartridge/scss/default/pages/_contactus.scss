@@ -26,11 +26,14 @@ form {
             .contentbox.secondbox {
                 .left-content {
                     .nav-group {
+                        border: 0;
                         li {
                             font-family: $font;
                             height: auto;
                             line-height: 46px;
-                            border: $border;
+                            @include respond(desktop) {
+                                border: $border;
+                            }
                             &.list-active {
                                 ul {
                                     li {
@@ -237,14 +240,17 @@ form {
         }
         .column {
             .contentbox.cell {
-                margin-left: 0 !important;
+                @include respond(desktop) {
+                    margin-left: 0 !important;
+                }
                 .contentboxcontent {
-                    margin: 0;
-                    padding: 0;
+                    margin: 35px;
+                    padding: 1px;
                 }
                 h1 {
-                    margin: 0;
+                    margin: 10px 0;
                     padding: 0;
+                    padding-left: 36px;
                 }
                 .left-nav-top {
                     background: $background;
@@ -343,6 +349,22 @@ form {
                             }
                         }
                     }
+                }
+            }
+            &.colspan2 {
+                .cell {
+                    @include respond(desktop) {
+                        margin-left: 18px !important;
+                        border: $border;
+                   }
+                    a {
+                        font-family: $font;
+                    }
+                   &.tabover {
+                       @include respond(desktop) {
+                           border: $error-border;
+                       }
+                   }
                 }
             }
         }
