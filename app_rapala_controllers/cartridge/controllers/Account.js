@@ -25,7 +25,7 @@ var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkS
  */
 function show() {
     var accountHomeAsset, pageMeta, Content;
-    session.custom.lastUrlBeforeLogin = session.clickStream.last.referer;
+    session.privacy.lastUrlBeforeLogin = session.clickStream.last.referer;
     //Content = app.getModel('Content');
     //accountHomeAsset = Content.get('myaccount-home');
 
@@ -403,9 +403,9 @@ function registrationForm() {
             } else {
             	ltkSignupEmail.Signup();
                 app.getForm('profile').clear();
-                target = session.custom.TargetLocation;
+                target = session.privacy.TargetLocation;
                 if (target) {
-                    delete session.custom.TargetLocation;
+                    delete session.privacy.TargetLocation;
                     //@TODO make sure only path, no hosts are allowed as redirect target
                     dw.system.Logger.info('Redirecting to "{0}" after successful login', target);
                     response.redirect(target);

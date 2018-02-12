@@ -15,7 +15,7 @@ var guard = require('~/cartridge/scripts/guard');
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
     require('~/cartridge/scripts/meta').update(rootFolder);
-    if(session.custom.homeSplash){
+    if(session.privacy.homeSplash){
     	app.getController('Home').ChangeRegion();
     }else{
     	app.getView().render('content/home/homepageinclude');
@@ -66,7 +66,7 @@ function errorNotFound() {
  * TODO As we want to have a responsive layout, do we really need the below?
  */
 function mobileSite() {
-    session.custom.device = 'mobile';
+    session.privacy.device = 'mobile';
     app.getView().render('components/changelayout');
 }
 
@@ -75,7 +75,7 @@ function mobileSite() {
  * @FIXME remove - not responsive - maybe replace with a CSS class forcing the layout.
  */
 function fullSite() {
-    session.custom.device = 'fullsite';
+    session.privacy.device = 'fullsite';
     app.getView().render('components/changelayout');
 }
 
@@ -114,9 +114,9 @@ function changeRegionURL(){
  */
 function internationalOptions(){
 	
-	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
+	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
+	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
 	
 	app.getView({
 		intlBrandCountryLink : internationalBrandLink,
@@ -129,8 +129,8 @@ function internationalOptions(){
  * Renders the homepage when the session is new
  */
 function page(){
-	if(session.custom.currentSite != null){
-		var siteFolder = require('dw/content/ContentMgr').getFolder(session.custom.currentSite);
+	if(session.privacy.currentSite != null){
+		var siteFolder = require('dw/content/ContentMgr').getFolder(session.privacy.currentSite);
 		var pageMeta = require('~/cartridge/scripts/meta');
 		pageMeta.update(siteFolder);
 	}

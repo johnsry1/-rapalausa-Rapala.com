@@ -86,7 +86,7 @@ function geoIpDefaultCurrency() {
  * The onSession hook function.
  */
 exports.onSession = function () {
-    session.custom.device = getDeviceType();
+    session.privacy.device = getDeviceType();
     geoIpDefaultCurrency();
     return new Status(Status.OK);
 };

@@ -48,10 +48,10 @@
 					}
 				}
 				var defaultContext = folderPaths.get(pdict.Content.classificationFolder);
-				if(defaultContext == session.custom.currentSite) {
+				if(defaultContext == session.privacy.currentSite) {
 					containingFolder = pdict.Content.classificationFolder;
-				} else if(folderPaths.containsKey(session.custom.currentSite)) {
-					containingFolder = folderPaths.get(session.custom.currentSite);
+				} else if(folderPaths.containsKey(session.privacy.currentSite)) {
+					containingFolder = folderPaths.get(session.privacy.currentSite);
 				} else if(folderPaths.containsKey('global')) {
 					containingFolder = folderPaths.get('global');
 				} else {
@@ -116,7 +116,7 @@
 			</isscript>
 			<isif condition="${!empty(rootfolder)}">
 			<div class="cell contentbox upshift">
-				<isinclude url="${URLUtils.url('LeftNav-Show','currentSite',session.custom.currentSite,'rootfdid',rootfolder.ID,'cid',pdict.Content.ID)}"/>
+				<isinclude url="${URLUtils.url('LeftNav-Show','currentSite',session.privacy.currentSite,'rootfdid',rootfolder.ID,'cid',pdict.Content.ID)}"/>
 			</div><!-- END: cell -->
 			</isif>
 			</isif>

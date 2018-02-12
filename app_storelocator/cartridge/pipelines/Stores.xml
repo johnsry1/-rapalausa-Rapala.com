@@ -147,7 +147,7 @@
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="location" key="From_0"/>
-                <key-binding alias="CurrentSession.custom.PreferredLocation" key="To_0"/>
+                <key-binding alias="Currentsession.privacy.PreferredLocation" key="To_0"/>
                 <key-binding alias="null" key="From_1"/>
                 <key-binding alias="null" key="To_1"/>
                 <key-binding alias="null" key="From_2"/>
@@ -251,7 +251,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Sets session.custom.storeID with the nearest store on Session</description>
+          <description>Sets session.privacy.storeID with the nearest store on Session</description>
         </text-node>
         <node-display x="10" y="1"/>
       </node>
@@ -269,7 +269,7 @@
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="empty(CurrentSession.custom.storeID)" condition-operator="expr"/>
+        <decision-node condition-key="empty(Currentsession.privacy.storeID)" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in">
@@ -438,7 +438,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="storelocator/GetStore.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
-          <key-binding alias="CurrentSession.custom.storeID" key="StoreID"/>
+          <key-binding alias="Currentsession.privacy.storeID" key="StoreID"/>
           <key-binding alias="Store" key="Store"/>
         </pipelet-node>
         <node-display x="0" y="1"/>

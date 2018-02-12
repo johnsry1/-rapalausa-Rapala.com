@@ -325,8 +325,8 @@ ResourceHelper.getSessionAttributes = function(pageContext) {
 ResourceHelper.getUserSettings = function(pageContext) {
     var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
     return {
-        zip: session.custom.zipcode == "null" ? null : session.custom.zipcode,
-        storeId: session.custom.storeId == "null" ? null : session.custom.storeId,
+        zip: session.privacy.zipcode == "null" ? null : session.privacy.zipcode,
+        storeId: session.privacy.storeId == "null" ? null : session.privacy.storeId,
         geolocation : (!empty(request.geolocation)) ? {
             city            : request.geolocation.city,
             countryCode     : request.geolocation.countryCode,

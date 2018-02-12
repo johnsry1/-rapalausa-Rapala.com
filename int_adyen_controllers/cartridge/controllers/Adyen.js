@@ -30,7 +30,7 @@ var Cart = app.getModel('Cart');
  */
 function notify() {
     var	checkAuth = require('int_adyen/cartridge/scripts/checkNotificationAuth');
-	
+
     var status = checkAuth.check(request);
     if (!status) {
     	app.getView().render('error');
@@ -50,7 +50,7 @@ function notify() {
 function redirect(order) {
 	var	adyenVerificationSHA256 = require('int_adyen/cartridge/scripts/adyenRedirectVerificationSHA256'),
 	result;
-	
+
 	Transaction.wrap(function () {
 		result = adyenVerificationSHA256.verify({
 			'Order': order,
@@ -58,14 +58,14 @@ function redirect(order) {
 			'CurrentSession' : session,
 			'CurrentUser' : customer,
 			'PaymentInstrument' : order.paymentInstrument,
-			'brandCode': session.custom.brandCode,
+			'brandCode': session.privacy.brandCode,
 			'issuerId' : request.httpParameterMap.issuerId.value,
 			'dob' : session.forms.adyPaydata.dob.value,
 			'gender' : session.forms.adyPaydata.gender.value,
 			'houseNumber' : session.forms.adyPaydata.houseNumber.value,
 			'houseExtension' : session.forms.adyPaydata.houseExtension.value,
 			'personalNumber' : session.forms.adyPaydata.personalNumber.value,
-			'ratePayFingerprint' : session.custom.ratePayFingerprint,
+			'ratePayFingerprint' : session.privacy.ratePayFingerprint,
 			'adyenFingerprint' : session.forms.adyPaydata.adyenFingerprint.value
 		});
 	});
@@ -73,7 +73,7 @@ function redirect(order) {
 		app.getView().render('error');
     	return {};
 	}
-	
+
 	var pdict = {
 		'merchantSig' :	result.merchantSig,
 		'Amount100' : result.Amount100,
@@ -103,7 +103,7 @@ function showConfirmation() {
 			});
 		}
 	}
-	
+
 	/*	AUTHORISED: The payment authorisation was successfully completed.
 		REFUSED: The payment was refused. Payment authorisation was unsuccessful.
 		CANCELLED: The payment was cancelled by the shopper before completion, or the shopper returned to the merchant's site before completing the transaction.
@@ -124,26 +124,26 @@ function showConfirmation() {
 			'merchantReturnData': ((request.httpParameterMap.get("merchantReturnData")) ? request.httpParameterMap.get("merchantReturnData").getStringValue() : null),
 			'reason': ((request.httpParameterMap.get("reason")) ? request.httpParameterMap.get("reason").getStringValue() : null),
 			'additionalData.acquirerReference': ((request.httpParameterMap.get("additionalData.acquirerReference")) ? request.httpParameterMap.get("additionalData.acquirerReference").getStringValue() : null)
-			
+
     	});
     	if (!authorized) {
     		app.getController('Error').Start();
     		return {};
     	}
 	}
-	
+
 	if (!order) {
 		app.getController('Error').Start();
 		return {};
 	}
-	
+
 	//AUTHORISED: The payment authorisation was successfully completed.
 	if (request.httpParameterMap.authResult.value == 'AUTHORISED' || request.httpParameterMap.authResult.value == 'PENDING') {
 		pendingPayment(order);
 		app.getController('COSummary').ShowConfirmation(order);
 		return {};
 	}
-	
+
 	if (order.status != dw.order.Order.ORDER_STATUS_CREATED) {
 		// If the same order is tried to be cancelled more than one time, show Error page to user
 		if (request.httpParameterMap.authResult.value == 'CANCELLED') {
@@ -154,7 +154,7 @@ function showConfirmation() {
 		}
 		return {};
 	}
-	
+
 	// Handle Cancelled or Refused payments
 	cancelledPayment(order);
 	refusedPayment(order);
@@ -162,10 +162,10 @@ function showConfirmation() {
 	Transaction.wrap(function () {
 		OrderMgr.failOrder(order);
 	});
-	
+
 	// should be assingned by previous calls or not
 	var errorStatus = new dw.system.Status(dw.system.Status.ERROR, "confirm.error.declined");
-	
+
 	app.getController('COSummary').Start({
             PlaceOrderError: errorStatus
         });
@@ -216,7 +216,7 @@ function afterpay() {
    		app.getView().render('afterpayerror');
    		return {};
    	}
-   	
+
    	var	buildOpenInvoiceResponse = require('int_adyen/cartridge/scripts/buildOpenInvoiceResponse');
    	var invoiceResponse = buildOpenInvoiceResponse.getInvoiceResponse(order);
    	app.getView({OpenInvoiceResponse:invoiceResponse}).render('afterpay');
@@ -232,7 +232,7 @@ function refusedPayment(order) {
 		Transaction.wrap(function () {
 			adyenHppRefusedPayment.handle(request.httpParameterMap, order);
 		});
-    	
+
 	}
 	return '';
 }
@@ -272,28 +272,28 @@ function pendingPayment(order) {
 function capture(args) {
 	var order = args.Order;
 	var orderNo = args.OrderNo;
-	
+
 	if (!order) {
 		// Checking order data against values from parameters
 		order = OrderMgr.getOrder(orderNo);
-		if (!order || order.getBillingAddress().getPostalCode() !=  session.custom.pc.toString() 
-			|| order.getBillingAddress().getPhone() !=  session.custom.pn.toString() 
-			|| order.getCustomerNo() != session.custom.cn.toString() 
-			|| order.getCustomerEmail() != session.custom.ce.toString()) {
+		if (!order || order.getBillingAddress().getPostalCode() !=  session.privacy.pc.toString()
+			|| order.getBillingAddress().getPhone() !=  session.privacy.pn.toString()
+			|| order.getCustomerNo() != session.privacy.cn.toString()
+			|| order.getCustomerEmail() != session.privacy.ce.toString()) {
 			return {error: true};
 		}
 	}
 
-	
+
 	var	adyenCapture = require('int_adyen/cartridge/scripts/adyenCapture'), result;
     Transaction.wrap(function () {
 		result = adyenCapture.capture(order);
 	});
-	
+
 	if (result === PIPELET_ERROR) {
 		return {error: true};
 	}
-	
+
     return {sucess: true};
 }
 
@@ -304,28 +304,28 @@ function capture(args) {
 function cancel() {
     var order = args.Order;
 	var orderNo = args.OrderNo;
-	
+
 	if (!order) {
 		// Checking order data against values from parameters
 		order = OrderMgr.getOrder(orderNo);
-		if (!order || order.getBillingAddress().getPostalCode() !=  session.custom.pc.toString() 
-			|| order.getBillingAddress().getPhone() !=  session.custom.pn.toString() 
-			|| order.getCustomerNo() != session.custom.cn.toString() 
-			|| order.getCustomerEmail() != session.custom.ce.toString()) {
+		if (!order || order.getBillingAddress().getPostalCode() !=  session.privacy.pc.toString()
+			|| order.getBillingAddress().getPhone() !=  session.privacy.pn.toString()
+			|| order.getCustomerNo() != session.privacy.cn.toString()
+			|| order.getCustomerEmail() != session.privacy.ce.toString()) {
 			return {error: true};
 		}
 	}
 
-	
+
 	var	adyenCancel = require('int_adyen/cartridge/scripts/adyenCancel'), result;
     Transaction.wrap(function () {
 		result = adyenCancel.cancel(order);
 	});
-	
+
 	if (result === PIPELET_ERROR) {
 		return {error: true};
 	}
-	
+
     return {sucess: true};
 }
 
@@ -336,44 +336,44 @@ function cancel() {
 function cancelOrRefund() {
     var order = args.Order;
 	var orderNo = args.OrderNo;
-	
+
 	if (!order) {
 		// Checking order data against values from parameters
 		order = OrderMgr.getOrder(orderNo);
-		if (!order || order.getBillingAddress().getPostalCode() !=  session.custom.pc.toString() 
-			|| order.getBillingAddress().getPhone() !=  session.custom.pn.toString() 
-			|| order.getCustomerNo() != session.custom.cn.toString() 
-			|| order.getCustomerEmail() != session.custom.ce.toString()) {
+		if (!order || order.getBillingAddress().getPostalCode() !=  session.privacy.pc.toString()
+			|| order.getBillingAddress().getPhone() !=  session.privacy.pn.toString()
+			|| order.getCustomerNo() != session.privacy.cn.toString()
+			|| order.getCustomerEmail() != session.privacy.ce.toString()) {
 			return {error: true};
 		}
 	}
 
-	
+
 	var	adyenCapture = require('int_adyen/cartridge/scripts/adyenCapture'), result;
     Transaction.wrap(function () {
 		result = adyenCapture.capture(order);
 	});
-	
+
 	if (result === PIPELET_ERROR) {
 		return {error: true};
 	}
-	
+
     return {sucess: true};
 }
 
 /**
- * Make second call to 3d verification system to complete authorization 
- * 
+ * Make second call to 3d verification system to complete authorization
+ *
  * @returns redering template or error
  */
 function authorizeWithForm()
 {
 	var	adyen3DVerification = require('int_adyen/cartridge/scripts/adyen3DVerification'), result,
-	paymentInstrument = session.custom.paymentInstrument,
-	adyenResponse  = session.custom.adyenResponse;
-	
-	
-    var OrderObj = OrderMgr.getOrder(session.custom.orderNo);
+	paymentInstrument = session.privacy.paymentInstrument,
+	adyenResponse  = session.privacy.adyenResponse;
+
+
+    var OrderObj = OrderMgr.getOrder(session.privacy.orderNo);
 
 	Transaction.begin();
 	result = adyen3DVerification.verify({
@@ -385,22 +385,23 @@ function authorizeWithForm()
 		MD: adyenResponse.MD,
 		PaResponse: adyenResponse.PaRes
 	});
-	
+
     if (result.error || result.Decision != 'ACCEPT') {
     	Transaction.rollback();
         var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').FailImpl(OrderObj, result.PaymentStatus);
         var COBilling = require('*/cartridge/controllers/COBilling.js');
+        //app.getController('Cart').Show();
         COBilling.ReturnToBIlling({error: true, errorMessage: result.PaymentStatus});
         clearCustomSessionFields();
 		return;
     }
     clearCustomSessionFields();
-    
+
     OrderObj.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
     OrderObj.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
 	paymentInstrument.paymentTransaction.transactionID = result.RequestToken;
     Transaction.commit();
-	
+
     var orderPlacementStatus = require('*/cartridge/controllers/COPlaceOrder.js').submitImpl(OrderObj);
     if (!orderPlacementStatus.error) {
         require('*/cartridge/controllers/COSummary.js').ShowConfirmation(orderPlacementStatus.Order);
@@ -411,7 +412,7 @@ function authorizeWithForm()
 
 /**
  * Close IFrame where was 3d secure form
- * 
+ *
  * @returns template
  */
 function closeIFrame() {
@@ -419,34 +420,34 @@ function closeIFrame() {
 			MD : request.httpParameterMap.get("MD").stringValue,
 			PaRes : request.httpParameterMap.get("PaRes").stringValue
 	}
-	session.custom.adyenResponse = adyenResponse;
+	session.privacy.adyenResponse = adyenResponse;
     app.getView({
         ContinueURL: URLUtils.https('Adyen-AuthorizeWithForm')
     }).render('adyenpaymentredirect');
 }
 
 /**
- * Clear system session data 
+ * Clear system session data
  */
 function clearForms() {
     // Clears all forms used in the checkout process.
     session.forms.singleshipping.clearFormElement();
     session.forms.multishipping.clearFormElement();
     session.forms.billing.clearFormElement();
-    
+
     clearCustomSessionFields();
 }
 
 /**
- * Clear custom session data 
+ * Clear custom session data
  */
 function clearCustomSessionFields() {
 	// Clears all fields used in the 3d secure payment.
-    session.custom.adyenResponse = null;
-    session.custom.paymentInstrument = null;
-    session.custom.order = null;
-    session.custom.adyenBrandCode = null;
-    session.custom.adyenIssuerID = null;
+    session.privacy.adyenResponse = null;
+    session.privacy.paymentInstrument = null;
+    session.privacy.order = null;
+    session.privacy.adyenBrandCode = null;
+    session.privacy.adyenIssuerID = null;
 }
 
 exports.AuthorizeWithForm = guard.ensure(['https', 'post'], authorizeWithForm);

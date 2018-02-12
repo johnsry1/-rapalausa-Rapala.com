@@ -18,7 +18,7 @@ function send()
 	var orderJSON = "";
 	var scaJSON = "";
 
-    var orderNumber = session.custom.OrderNumber;
+    var orderNumber = session.privacy.OrderNumber;
     var order = OrderMgr.getOrder(orderNumber);
     
 	/* If we have an order, prepare the data into an object we can consume. */
@@ -58,13 +58,13 @@ function start(order)
 {
 	/* Set the flag to denote that order info should be sent.
 	 * Set the order number so we can retrieve it from other pipelines. */
-	session.custom.SendOrder = true;		
-	session.custom.OrderNumber = order.orderNo;
+	session.privacy.SendOrder = true;		
+	session.privacy.OrderNumber = order.orderNo;
 }
 
 function clearFlag() {
-	session.custom.SendOrder = false;
-	session.custom.OrderNumber = null;
+	session.privacy.SendOrder = false;
+	session.privacy.OrderNumber = null;
 }
 exports.Clear = clearFlag;
 exports.Clear.public = true;

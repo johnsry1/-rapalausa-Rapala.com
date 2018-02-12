@@ -428,7 +428,7 @@ function guidesAndManuals(){
 		app.getView().render('error/notfound');
 		return;
 	}
-	var isDesktop = session.custom.device == 'desktop'? true : false;
+	var isDesktop = session.privacy.device == 'desktop'? true : false;
 	var urlPrefix = dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null, '/');
 	var pdfUrl = urlPrefix + sourceFile;
 	if (isDesktop) {

@@ -50,7 +50,7 @@ function initAddressForm(cart) {
         app.getForm('billing').object.billingAddress.addressFields.country.value = app.getForm('singleshipping').object.shippingAddress.addressFields.country.value;
         app.getForm('billing').object.billingAddress.addressFields.phone.value = app.getForm('singleshipping').object.shippingAddress.addressFields.phone.value;
         app.getForm('billing').object.billingAddress.sameasshippingaddress.value = app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value
-        
+
     } else if (cart.getBillingAddress() !== null) {
          app.getForm('billing').object.billingAddress.sameasshippingaddress.value = false;
         app.getForm('billing.billingAddress.addressFields').copyFrom(cart.getBillingAddress());
@@ -174,13 +174,13 @@ function handleBillingAddress(cart) {
 
         app.getForm('billing.billingAddress.addressFields').copyTo(billingAddress);
         app.getForm('billing.billingAddress.addressFields.states').copyTo(billingAddress);
-        
+
         var subbmittedAddressFileds = request.httpParameterMap.getParameterMap('dwfrm_billing_billingAddress_addressFields_');
         billingAddress.setTitle(subbmittedAddressFileds.isParameterSubmitted('title') ? subbmittedAddressFileds.get('title').value : '');
         billingAddress.setPostalCode(subbmittedAddressFileds.isParameterSubmitted('postal') ? subbmittedAddressFileds.get('postal').value : '');
         billingAddress.setStateCode(subbmittedAddressFileds.isParameterSubmitted('states_state') ? subbmittedAddressFileds.get('states_state').value : '');
         billingAddress.setPhone(subbmittedAddressFileds.isParameterSubmitted('phone') ? subbmittedAddressFileds.get('phone').value : '');
-        
+
         if (dw.system.Site.getCurrent().getCustomPreferenceValue("Adyen_enableAVS")) {
             billingAddress.setSuite(subbmittedAddressFileds.isParameterSubmitted('suite') ? subbmittedAddressFileds.get('suite').value : '');
             billingAddress.custom.streetName = subbmittedAddressFileds.isParameterSubmitted('streetName') ? subbmittedAddressFileds.get('streetName').value : '';
@@ -240,15 +240,15 @@ function billing() {
         },
         save: function () {
             var cart = app.getModel('Cart').get();
-            
+
             /****************PREVAIL Address verification Integration*
             var DAVResult = validateDAV();
             if (DAVResult && DAVResult.endNodeName !== 'success') {
                 returnToForm(cart, DAVResult.params);
                 return;
             }*********************/
-            
-            if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+
+            if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
         	    Transaction.wrap(function () {
         	    	require('*/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });
@@ -265,7 +265,7 @@ function billing() {
 	                    require('app_rapala_controllers/cartridge/controllers/COBilling.js').ReturnToForm(cart);
 	                    return;
 	                }
-	
+
 	                /**********************PREVAIL - PayPal Integration**************************/
 	                if (handlePaymentSelectionResult.redirectUrl) {
 	                    response.redirect(handlePaymentSelectionResult.redirectUrl);
@@ -279,7 +279,7 @@ function billing() {
 
                 // Mark step as fulfilled
                 app.getForm('billing').object.fulfilled.value = true;
-                
+
                 ltkSignupEmail.Signup();
                 ltkSendSca.SendSCA();
 
@@ -344,37 +344,37 @@ function saveCreditCard() {
         //   saved   credit   cards   are   handling   in   COPlaceOrder   and   Login   for   Adyen   -   saved cards   are   synced   with   Adyen   ListRecurringDetails   API   call
         return true;
     } else {
-        
+
         var i, creditCards, newCreditCard;
-    
+
         if (customer.authenticated && app.getForm('billing').object.paymentMethods.creditCard.saveCard.value) {
             creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-    
+
             Transaction.wrap(function () {
                 newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
-    
+
                     //copy the credit card details to the payment instrument
                     newCreditCard.setCreditCardHolder(app.getForm('billing').object.paymentMethods.creditCard.owner.value);
                     newCreditCard.setCreditCardNumber(app.getForm('billing').object.paymentMethods.creditCard.number.value);
                     newCreditCard.setCreditCardExpirationMonth(app.getForm('billing').object.paymentMethods.creditCard.expiration.month.value);
                     newCreditCard.setCreditCardExpirationYear(app.getForm('billing').object.paymentMethods.creditCard.expiration.year.value);
                     newCreditCard.setCreditCardType(app.getForm('billing').object.paymentMethods.creditCard.type.value);
-    
+
                 for (i = 0; i < creditCards.length; i++) {
                     var creditcard = creditCards[i];
-    
+
                     if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
-    
+
                        /* if (dw.system.Site.getCurrent().getCustomPreferenceValue('CCPaymentService').toString() === 'AUTHORIZE_NET') {
                             newCreditCard.custom.cim_payment_profile_id = creditcard.custom.cim_payment_profile_id;
                             newCreditCard.custom.cim_customer_profile_id = creditcard.custom.cim_customer_profile_id;
                         }*/
-    
+
                         customer.getProfile().getWallet().removePaymentInstrument(creditcard);
                     }
                 }
             });
-    
+
     }
     return true;
     }

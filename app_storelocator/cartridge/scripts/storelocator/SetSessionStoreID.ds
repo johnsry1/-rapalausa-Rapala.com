@@ -10,7 +10,7 @@ importPackage(dw.util);
 function execute(args : PipelineDictionary) : Number {
 
     var nearestStore = !empty(args.NearestStores) ? args.NearestStores.keySet()[0].ID : "";
-    session.custom.storeID = nearestStore;
+    session.privacy.storeID = nearestStore;
 
 
     return PIPELET_NEXT;

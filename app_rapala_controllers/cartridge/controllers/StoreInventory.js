@@ -36,8 +36,8 @@ function setStore() {
 
     cart.removeEmptyShipments();
 
-    if (empty(session.custom.storeId) && !empty(parameterMap.storeid.value)) {
-        session.custom.storeId = parameterMap.storeid.value;
+    if (empty(session.privacy.storeId) && !empty(parameterMap.storeid.value)) {
+        session.privacy.storeId = parameterMap.storeid.value;
     }
 
     r.renderJSON({
@@ -53,9 +53,9 @@ function setStore() {
  * @TODO - Is this outdated?
  */
 function showSelectedStoreCore() {
-    session.custom.storeId = request.httpParameterMap.storeId.value;
+    session.privacy.storeId = request.httpParameterMap.storeId.value;
 
-    if ((session.custom.zipcode !== null) && (session.custom.storeId !== null)) {
+    if ((session.privacy.zipcode !== null) && (session.privacy.storeId !== null)) {
         app.getView().render('storelocator/storepickup/coreshowselectedstore');
         return;
     }
@@ -70,7 +70,7 @@ function showSelectedStoreCore() {
  * {@link module:controllers/StoreInventory~showZipCode|showZipCode} function.
  */
 function showSetStore(stores, storeAvailabilityMap) {
-    if (session.custom.zipcode !== null) {
+    if (session.privacy.zipcode !== null) {
         // TODO Stores and storeAvailabilityMap expected?
         app.getView({
             Stores: stores,
@@ -94,7 +94,7 @@ function showZipCode() {
  * product is available for in-store pickup.
  */
 function showAvailableStores() {
-    session.custom.zipcode = request.httpParameterMap.zipCode.value;
+    session.privacy.zipcode = request.httpParameterMap.zipCode.value;
 
     var stores = lookupByZipCode().Stores;
 
@@ -116,7 +116,7 @@ function showAvailableStores() {
  * {@link module:controllers/StoreInventory~showAvailableStores|showAvailableStores} function.
  */
 function cartSetZipCodeCore() {
-    if (session.custom.zipcode !== null) {
+    if (session.privacy.zipcode !== null) {
         showAvailableStores();
     } else {
         setZipCodeCore();
@@ -154,8 +154,8 @@ function setStoreCore() {
 
     cart.removeEmptyShipments();
 
-    if (empty(session.custom.storeId) && !empty(parameterMap.storeid.value)) {
-        session.custom.storeId = parameterMap.storeid.value;
+    if (empty(session.privacy.storeId) && !empty(parameterMap.storeid.value)) {
+        session.privacy.storeId = parameterMap.storeid.value;
     }
 
     CartController.Show();
@@ -223,7 +223,7 @@ function inventory() {
  * Sets the preferred store for the session.
  */
 function setPreferredStore() {
-    session.custom.storeId = request.httpParameterMap.storeId.value;
+    session.privacy.storeId = request.httpParameterMap.storeId.value;
 
     getPreferredStore();
 }
@@ -234,7 +234,7 @@ function setPreferredStore() {
 function getPreferredStore() {
     let r = require('~/cartridge/scripts/util/Response');
     r.renderJSON([{
-        storeId: session.custom.storeId
+        storeId: session.privacy.storeId
     }]);
 }
 
@@ -242,7 +242,7 @@ function getPreferredStore() {
  * Sets the users zip code for at the session.
  */
 function setZipCode() {
-    session.custom.zipcode = request.httpParameterMap.zipCode.value;
+    session.privacy.zipcode = request.httpParameterMap.zipCode.value;
 
     getZipCode();
 }
@@ -253,7 +253,7 @@ function setZipCode() {
 function getZipCode() {
     let r = require('~/cartridge/scripts/util/Response');
     r.renderJSON([{
-        zip: session.custom.zipcode
+        zip: session.privacy.zipcode
     }]);
 }
 
@@ -272,7 +272,7 @@ function lookupByZipCode() {
         'mi',
         Number(dw.system.Site.getCurrent().getCustomPreferenceValue('storeLookupMaxDistance').value));
 
-    session.custom.zipcode = request.httpParameterMap.zipCode.value;
+    session.privacy.zipcode = request.httpParameterMap.zipCode.value;
 
     return {
         Stores: nearestStores.keySet(),

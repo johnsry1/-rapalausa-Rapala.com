@@ -6,7 +6,7 @@
 	<ul class="clearfix">
 		<isloop items = "${dw.system.Site.current.getCustomPreferenceValue('brandtaborder')}" var="brandtab" status="status" >
 			<isif condition="${dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) != null && dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) == true}">
-				<li class="<isif condition="${status.odd}">odd<iselse/>even</isif><isif condition = "${brandtab.split('|')[0] == session.custom.currentSite}"> active</isif>">
+				<li class="<isif condition="${status.odd}">odd<iselse/>even</isif><isif condition = "${brandtab.split('|')[0] == session.privacy.currentSite}"> active</isif>">
 					<span class="mobile-main-menu-heading">
 					    <isset name="cat_name" value="${brandtab.split('|')[0]}" scope="page" />
                         <isset name="brandImageUrl" value="${'/images/brands/' + cat_name + '.png'}" scope="page"/>

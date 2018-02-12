@@ -1,10 +1,10 @@
 <isscript>
-if (empty(pdict.CurrentSession.customer.profile)) {
+if (empty(pdict.Currentsession.privacyer.profile)) {
 	var custName = 'Unregistered User';
-} else if (empty(pdict.CurrentSession.customer.profile.firstName) || empty(pdict.CurrentSession.customer.profile.lastName)) {
-	var custName = pdict.CurrentSession.customer.profile.credentials.login;
+} else if (empty(pdict.Currentsession.privacyer.profile.firstName) || empty(pdict.Currentsession.privacyer.profile.lastName)) {
+	var custName = pdict.Currentsession.privacyer.profile.credentials.login;
 } else {
-	var custName = pdict.CurrentSession.customer.profile.firstName + ' ' + pdict.CurrentSession.customer.profile.lastName;
+	var custName = pdict.Currentsession.privacyer.profile.firstName + ' ' + pdict.Currentsession.privacyer.profile.lastName;
 }
 </isscript>
 <!---<p>

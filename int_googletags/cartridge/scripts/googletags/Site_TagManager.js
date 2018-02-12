@@ -11,7 +11,7 @@ const Site_TagManager = require('./Org_TagManager');
 Site_TagManager.getGlobalData = function () {
 
     /** @type {Customer} */
-    const customer = session.customer;
+    const customer = session.privacyer;
 
     /** @type {String} */
     const httpLocale = request.httpLocale;

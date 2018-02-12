@@ -55,7 +55,7 @@ function handlePayments(order) {
         var handlePaymentTransaction = function () {
             paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
         };
-        
+
         for (var i = 0; i < paymentInstruments.length; i++) {
             var paymentInstrument = paymentInstruments[i];
 
@@ -163,13 +163,13 @@ function start() {
             	require('*/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
             });
             var skipSubmitOrder : Boolean = false;
-            
+
             var handlePaymentsResult = handlePayments(order);
-            
-            if (!empty(handlePaymentsResult.view)) { 
-                skipSubmitOrder = true; 
+
+            if (!empty(handlePaymentsResult.view)) {
+                skipSubmitOrder = true;
             }
-            
+
             if (handlePaymentsResult.error) {
                 return Transaction.wrap(function () {
                     OrderMgr.failOrder(order);
@@ -256,11 +256,11 @@ function submitImpl(order) {
     Transaction.wrap(function () {
         order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
         order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
-        
+
         //update customer allotment amount
         if(customer.authenticated){
         	require('*/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
-	    	if('iceforce' != session.custom.currentSite && session.custom.isProStaffAllotmentused){
+	    	if('iceforce' != session.privacy.currentSite && session.privacy.isProStaffAllotmentused){
 	    		require('*/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
 	    	}
 	    } else {

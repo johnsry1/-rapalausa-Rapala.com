@@ -17,9 +17,9 @@
 	
 	try {
 		/* Perform activity/page/product browse logging. */
-		var sessionSku = '${pdict.CurrentSession.custom.ProdBrowse}';
-		var sessionCategory = '${pdict.CurrentSession.custom.Category}';
-		var sessionQuickViewSkus = '${pdict.CurrentSession.custom.QuickViewSkus}';		
+		var sessionSku = '${pdict.Currentsession.privacy.ProdBrowse}';
+		var sessionCategory = '${pdict.Currentsession.privacy.Category}';
+		var sessionQuickViewSkus = '${pdict.Currentsession.privacy.QuickViewSkus}';		
 		
 		/* Iterate through any quickviews and add them as product browses. */
 		if (sessionQuickViewSkus != null && sessionQuickViewSkus != "null" && sessionQuickViewSkus.length > 0)

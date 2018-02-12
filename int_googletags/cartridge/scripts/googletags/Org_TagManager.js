@@ -216,7 +216,7 @@ const Org_TagManager = {
     getGlobalData: function () {
 
         /** @type {Customer} */
-        const customer = session.customer;
+        const customer = session.privacyer;
 
         /** @type {Object} */
         let customerObject = {};

@@ -8,10 +8,10 @@
 
 <iselse/>
 
-	<isif condition="${empty(pdict.CurrentSession.custom.device)
-		|| pdict.CurrentSession.custom.device == 'mobile'
-		|| pdict.CurrentSession.custom.device == 'tablet'
-		|| pdict.CurrentSession.custom.device == 'desktop'}">
+	<isif condition="${empty(pdict.Currentsession.privacy.device)
+		|| pdict.Currentsession.privacy.device == 'mobile'
+		|| pdict.Currentsession.privacy.device == 'tablet'
+		|| pdict.Currentsession.privacy.device == 'desktop'}">
 		<isset name="siteUrl" value="${URLUtils.url('Home-FullSite')}" scope="page"/>
 
 		<script type="text/javascript">

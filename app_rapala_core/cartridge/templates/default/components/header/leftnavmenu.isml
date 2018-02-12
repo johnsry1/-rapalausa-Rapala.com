@@ -10,31 +10,31 @@
        importScript( "common/GetCount.ds" );
        importScript( "common/GetCategoryprods.ds" );
 </isscript>
-<isif condition="${session.custom.currentSite == 'rapala'}"> 
+<isif condition="${session.privacy.currentSite == 'rapala'}"> 
     <isset name="ID" value="1" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'vmc'}" >
+<iselseif condition="${session.privacy.currentSite == 'vmc'}" >
         <isset name="ID" value="6" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'luhrjensen'}" >
+<iselseif condition="${session.privacy.currentSite == 'luhrjensen'}" >
         <isset name="ID" value="5" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'storm'}" >
+<iselseif condition="${session.privacy.currentSite == 'storm'}" >
         <isset name="ID" value="4" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'sufix'}" >
+<iselseif condition="${session.privacy.currentSite == 'sufix'}" >
         <isset name="ID" value="2" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'bluefox'}" >
+<iselseif condition="${session.privacy.currentSite == 'bluefox'}" >
         <isset name="ID" value="8" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'terminator'}" >
+<iselseif condition="${session.privacy.currentSite == 'terminator'}" >
         <isset name="ID" value="7" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'williamson'}" >
+<iselseif condition="${session.privacy.currentSite == 'williamson'}" >
         <isset name="ID" value="9" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'triggerx'}" >
+<iselseif condition="${session.privacy.currentSite == 'triggerx'}" >
         <isset name="ID" value="3" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'marcum'}" >
+<iselseif condition="${session.privacy.currentSite == 'marcum'}" >
         <isset name="ID" value="10" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'strikemaster'}" >
+<iselseif condition="${session.privacy.currentSite == 'strikemaster'}" >
         <isset name="ID" value="11" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'otter'}" >
+<iselseif condition="${session.privacy.currentSite == 'otter'}" >
         <isset name="ID" value="21" scope="page" />
-<iselseif condition="${session.custom.currentSite == 'iceforce'}" >
+<iselseif condition="${session.privacy.currentSite == 'iceforce'}" >
         <isset name="ID" value="20" scope="page" />
 </isif>
 <isset name="root" value="${getTopLevelCategory()}" scope="page"/>
@@ -42,7 +42,7 @@
        <div class="categorymenusnew">
        <ul>
        <isloop items="${getSubcategoriesInMenuForCategory(root)}" var="topCat">  <!--- Loop over Brands --->
-      	 <isif condition="${topCat.getID() == session.custom.currentSite}">
+      	 <isif condition="${topCat.getID() == session.privacy.currentSite}">
       	 	 
       	 	 <isset name="getsecondLevel" value="${getSubcategoriesInMenuForCategory(topCat)}" scope="page" />
       	 	 <isloop items="${getsecondLevel}" var="secondLevel">

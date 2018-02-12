@@ -170,7 +170,7 @@ function execute( args : PipelineDictionary) : Number {
 		if (CSSCredentials != "") {
 			args.CSSUser = StringUtils.trim(CSSCredentials.split("|")[0]);
 			args.CSSPword = StringUtils.trim(CSSCredentials.split("|")[1]);
-			session.custom.overrideAgentID = args.CSSUser;
+			session.privacy.overrideAgentID = args.CSSUser;
 		}
 		// override using the ICAAdmin
 		if (ICAAdminUser != "" && ICAAdminPassword != "") {

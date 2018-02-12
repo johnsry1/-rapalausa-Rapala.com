@@ -13,7 +13,7 @@ function _ActivityTracker()
         if (typeof Sku == "string") {
             Sku = Sku.trim();
             if (Sku.length > 0) {
-                session.custom.ProdBrowse = Sku;             
+                session.privacy.ProdBrowse = Sku;             
             }
         }
     };
@@ -23,12 +23,12 @@ function _ActivityTracker()
 		if (typeof Sku == "string") {
             Sku = Sku.trim();
             if (Sku.length > 0) {
-            	var quickViews = session.custom.QuickViewSkus;
+            	var quickViews = session.privacy.QuickViewSkus;
             	
             	if (quickViews != null && quickViews.length > 0)
-            		session.custom.QuickViewSkus = quickViews + ',' + Sku;
+            		session.privacy.QuickViewSkus = quickViews + ',' + Sku;
             	else 
-            		session.custom.QuickViewSkus = Sku;           
+            		session.privacy.QuickViewSkus = Sku;           
             }
         }
 	};	

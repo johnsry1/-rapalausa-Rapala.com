@@ -30,8 +30,8 @@ function handleAllotmentExp( customer, basket )
 		   }
 	   }
 	   if(allotmentExpired){
-	   		session.custom.isProStaffAllotmentused = false;
-	   		session.custom.amountUsedFromProStaffAllowance = new Money(0.0, currencyCode);
+	   		session.privacy.isProStaffAllotmentused = false;
+	   		session.privacy.amountUsedFromProStaffAllowance = new Money(0.0, currencyCode);
 	   		removeExistingPaymentInstruments( basket,  PaymentMgr.getPaymentMethod("ALLOTMENT").getName());
 	   }else{
 	   		if(!empty(customer.profile.custom)){

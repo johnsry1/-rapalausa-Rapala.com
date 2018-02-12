@@ -195,12 +195,12 @@ function setGeoLocation() {
 /**
  * Sets the session store id.
  *
- * Sets session.custom.storeID with the nearest store on Session.
+ * Sets session.privacy.storeID with the nearest store on Session.
  * Renders true.
  */
 function setSessionStoreID() {
 
-    if (empty(session.custom.storeID)) {
+    if (empty(session.privacy.storeID)) {
         if (!empty(request.geolocation) && !empty(request.geolocation.latitude) && !empty(request.geolocation.longitude)) {
             args.latitude = request.geolocation.latitude;
             args.longitude = request.geolocation.longitude;
@@ -217,12 +217,12 @@ function setSessionStoreID() {
             	stores = SystemObjectMgr.querySystemObjects('Store', 'countryCode = {0}', 'countryCode desc', countryCode);
             }
             if (stores!=null) {
-            	session.custom.storeID = stores.keySet()[0].ID;
+            	session.privacy.storeID = stores.keySet()[0].ID;
 	        } else {
-	        	session.custom.storeID = '';
+	        	session.privacy.storeID = '';
 	        }
         } else {
-        	session.custom.storeID = '';
+        	session.privacy.storeID = '';
         }
     }
     return true;

@@ -68,11 +68,11 @@ function start() {
  */
 function showLoginForm() {
     var loginForm = app.getForm('login');
-    session.custom.TargetLocation = URLUtils.https('COShipping-Start').toString();
+    session.privacy.TargetLocation = URLUtils.https('COShipping-Start').toString();
 
-    session.custom.TargetLocation = URLUtils.https('COShipping-Start').toString();
+    session.privacy.TargetLocation = URLUtils.https('COShipping-Start').toString();
     //JIRA PREV-549 : Click on Login button after entering invalid data in Intermediate login page navigating to blank page
-    session.custom.LoginType = 'checkout';
+    session.privacy.LoginType = 'checkout';
 
     loginForm.handleAction({
         login: function () {

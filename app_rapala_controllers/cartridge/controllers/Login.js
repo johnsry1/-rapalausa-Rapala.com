@@ -46,7 +46,7 @@ function show() {
 
     // Save return URL in session.
     if (request.httpParameterMap.original.submitted) {
-        session.custom.TargetLocation = request.httpParameterMap.original.value;
+        session.privacy.TargetLocation = request.httpParameterMap.original.value;
     }
 
     var existing = false;
@@ -80,9 +80,9 @@ function show() {
  * or {@link module:controllers/Account~Show|Account controller Show function} in case of failure.
  */
 function getTargetUrl () {
-    if (session.custom.TargetLocation) {
-        var target = session.custom.TargetLocation;
-        delete session.custom.TargetLocation;
+    if (session.privacy.TargetLocation) {
+        var target = session.privacy.TargetLocation;
+        delete session.privacy.TargetLocation;
         //@TODO make sure only path, no hosts are allowed as redirect target
         dw.system.Logger.info('Redirecting to "{0}" after successful login', target);
         return decodeURI(target);
@@ -91,7 +91,7 @@ function getTargetUrl () {
     }
 }
 function getDeviceType () {
-    var session = session.custom;
+    var session = session.privacy;
     return true;
 }
 
@@ -110,8 +110,8 @@ function getDeviceType () {
 function handleLoginForm () {
     var loginForm = app.getForm('login');
 
-    var loginType = session.custom.LoginType;
-    delete session.custom.LoginType;
+    var loginType = session.privacy.LoginType;
+    delete session.privacy.LoginType;
 
     loginForm.handleAction({
         login: function () {
@@ -142,10 +142,10 @@ function handleLoginForm () {
             }
             RateLimiter.hideCaptcha();
             var session = request.getSession();
-            if(session.custom && (session.custom.device == 'mobile' || session.custom.device == 'tablet')) {
-            		if(session.custom.lastUrlBeforeLogin) {
-            			response.redirect(session.custom.lastUrlBeforeLogin);
-            			delete session.custom.lastUrlBeforeLogin;
+            if(session.privacy && (session.privacy.device == 'mobile' || session.privacy.device == 'tablet')) {
+            		if(session.privacy.lastUrlBeforeLogin) {
+            			response.redirect(session.privacy.lastUrlBeforeLogin);
+            			delete session.privacy.lastUrlBeforeLogin;
             			return;
             		}
             }
@@ -265,7 +265,7 @@ function handleOAuthLoginForm() {
     oauthLoginForm.handleAction({
         login: function () {
             if (request.httpParameterMap.OAuthProvider.stringValue) {
-                session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
+                session.privacy.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
 
                 var OAuthProviderID = request.httpParameterMap.OAuthProvider.stringValue;
                 var initiateOAuthLoginResult = OAuthLoginFlowMgr.initiateOAuthLogin(OAuthProviderID);
@@ -350,8 +350,8 @@ function handleOAuthReentry() {
     }
 
     //whether to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin)
-    var rememberMe = session.custom.RememberMe;
-    delete session.custom.RememberMe;
+    var rememberMe = session.privacy.RememberMe;
+    delete session.privacy.RememberMe;
 
     // LinkedIn returns XML.
     var extProfile = {};

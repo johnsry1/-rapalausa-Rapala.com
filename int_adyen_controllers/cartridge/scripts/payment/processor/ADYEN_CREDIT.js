@@ -119,8 +119,8 @@ function Authorize(args) {
 
     if (result.IssuerUrl != '') {
         Transaction.commit();
-        session.custom.orderNo = order.orderNo
-        session.custom.paymentInstrument = paymentInstrument;
+        session.privacy.orderNo = order.orderNo
+        session.privacy.paymentInstrument = paymentInstrument;
         return {
             authorized: true,
             authorized3d: true,

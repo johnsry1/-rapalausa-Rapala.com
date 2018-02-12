@@ -226,13 +226,13 @@ function createShippingAddress( referenceAddress : CustomerAddress )
 	address.UUID = UUIDUtils.createUUID();
 
 	// get all addresses from session dictionary
-	var addresses : Collection = session.custom.shippingAddresses;
+	var addresses : Collection = session.privacy.shippingAddresses;
 
 	// create an empty array, if no collection was found in session dictionary
 	if( addresses == null )
 	{
 		addresses = new ArrayList();
-		session.custom.shippingAddresses = addresses;
+		session.privacy.shippingAddresses = addresses;
 	}
 
 	// add the address to the collection
@@ -257,7 +257,7 @@ function findShippingAddress( uuid : String )
 	}
 
 	// get all addresses from session dictionary
-	var addresses : Collection = session.custom.shippingAddresses;
+	var addresses : Collection = session.privacy.shippingAddresses;
 
 	// check if there are addresses at all
 	if( addresses == null || addresses.size() == 0 )
@@ -289,7 +289,7 @@ function removeShippingAddress( shippingAddress : Object )
 	}
 
 	// get all addresses from session dictionary
-	var addresses : Collection = session.custom.shippingAddresses;
+	var addresses : Collection = session.privacy.shippingAddresses;
 
 	// check if there are addresses at all
 	if( addresses == null || addresses.size() == 0 )

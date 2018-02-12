@@ -79,7 +79,7 @@ function start() {
         app.getController('Cart').Show();
         return;
     }
-    if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+    if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
 	    Transaction.wrap(function () {
 	    	var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
 	    	 if(request.httpParameterMap.billingreturn.value != 'true'){

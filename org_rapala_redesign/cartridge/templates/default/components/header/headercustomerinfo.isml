@@ -101,7 +101,7 @@
                         <isif condition="${pdict.CurrentCustomer.profile != null}">
                             <input type="hidden"  class="emailHeaderLeft" value="${pdict.CurrentCustomer.profile.email}">
                         </isif>
-                        <isset name="brand" value="${session.custom.currentSite}" scope="page" />
+                        <isset name="brand" value="${session.privacy.currentSite}" scope="page" />
                         <isset name="brand" value="${brand+'-contact-us'}" scope="page" />
                         <a class="emailHeaderLeftPreferences" href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid',brand)+'&email='+pdict.CurrentCustomer.profile.email}">
                             <isprint value="${Resource.msg('global.EmailPreferences','locale',null)}"/>

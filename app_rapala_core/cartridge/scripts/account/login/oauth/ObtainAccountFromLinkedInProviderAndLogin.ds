@@ -18,8 +18,8 @@ function execute( pdict : PipelineDictionary ) : Number
 	Logger.debug(THIS_SCRIPT + "pdict.ResponseText: " + pdict.ResponseText);
 	if (null!=pdict.ResponseText) {
 		//wheather to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
-		var rememberMe : Boolean = session.custom['RememberMe'];
-		delete session.custom['RememberMe'];
+		var rememberMe : Boolean = session.privacy['RememberMe'];
+		delete session.privacy['RememberMe'];
 		
 		// vvvvvvvvv Custom XML parsing part starts here: vvvvvvvvv
 		var extProfile : XML;

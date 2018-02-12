@@ -19,9 +19,9 @@
 		<isscript>
 			var attributes = new dw.util.ArrayList();
 			if (session != null && 'custom' in session) {
-			    for (var key in session.custom) {
-			        if (session.custom.hasOwnProperty(key)) {
-			            attributes.add({'name' : key, 'value' : session.custom[key]})
+			    for (var key in session.privacy) {
+			        if (session.privacy.hasOwnProperty(key)) {
+			            attributes.add({'name' : key, 'value' : session.privacy[key]})
 			        }
 			    }
 		    }

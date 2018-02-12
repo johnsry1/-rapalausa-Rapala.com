@@ -3,8 +3,8 @@ var Site = require('dw/system/Site');
 var ltk = require('int_listrak_controllers/cartridge/scripts/objects/ltk.js');
 
 function clear() {
-    session.custom.ProdBrowse = '';
-    session.custom.QuickViewSkus = '';
+    session.privacy.ProdBrowse = '';
+    session.privacy.QuickViewSkus = '';
 }
 exports.ClearTracker = clear;
 exports.ClearTracker.public = true;

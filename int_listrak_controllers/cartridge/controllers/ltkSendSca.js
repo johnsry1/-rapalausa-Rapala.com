@@ -16,14 +16,14 @@ exports.SendSCA = function sendSca()
 	{
 	    var params = request.httpParameterMap;
 	    var format = params.format.stringValue == null ? '' : params.format.stringValue.toLowerCase();
-	    session.custom.SCAFormat = format;
-		session.custom.SendSCA = true;
+	    session.privacy.SCAFormat = format;
+		session.privacy.SendSCA = true;
 	}
 }
 
 function clearFlag() {
-	session.custom.SendSCA = false;
-	session.custom.SCAFormat = '';
+	session.privacy.SendSCA = false;
+	session.privacy.SCAFormat = '';
 }
 exports.ClearFlag = clearFlag;
 exports.ClearFlag.public = true;

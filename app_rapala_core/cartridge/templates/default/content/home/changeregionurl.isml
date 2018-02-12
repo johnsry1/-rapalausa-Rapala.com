@@ -6,8 +6,8 @@
 			<div style="display:none;" class="domainswitch">
 			<div class="top_arrow"></div>
 				<ul>
-					<isif condition="${session.custom.currentSite != 'strikemaster'}">
-						<isif condition="${session.custom.currentSite == 'iceforce'}">
+					<isif condition="${session.privacy.currentSite != 'strikemaster'}">
+						<isif condition="${session.privacy.currentSite == 'iceforce'}">
 							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
 						<iselse>
 							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>	

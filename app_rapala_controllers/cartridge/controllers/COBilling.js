@@ -47,7 +47,7 @@ function initAddressForm(cart) {
         app.getForm('billing').object.billingAddress.addressFields.country.value = app.getForm('singleshipping').object.shippingAddress.addressFields.country.value;
         app.getForm('billing').object.billingAddress.addressFields.phone.value = app.getForm('singleshipping').object.shippingAddress.addressFields.phone.value;
         app.getForm('billing').object.billingAddress.sameasshippingaddress.value = app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value
-        
+
     } else if (cart.getBillingAddress() !== null) {
     	 app.getForm('billing').object.billingAddress.sameasshippingaddress.value = false;
         app.getForm('billing.billingAddress.addressFields').copyFrom(cart.getBillingAddress());
@@ -86,8 +86,8 @@ function returnToForm(cart, params) {
 	var ppalError = null;
 	if(cart.getVar()!=null){
 		ppalError = cart.getVar();
-	} 
-	
+	}
+
     // if the payment method is set to gift certificate get the gift certificate code from the form
     //PREVAIL - Modified below block to fix deprecated API
     if (!empty(cart.getPaymentInstruments()) &&
@@ -101,7 +101,7 @@ function returnToForm(cart, params) {
         pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
     });
     var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart.object);
-    
+
     if (params && ppalError == null) {
         app.getView(require('~/cartridge/scripts/object').extend(params, {
             Basket: cart.object,
@@ -111,7 +111,7 @@ function returnToForm(cart, params) {
             ContinueURL: URLUtils.https('COBilling-Billing')
         })).render('checkout/billing/billing');
     }else {
-    	var creditCardList = initCreditCardList(cart); 
+    	var creditCardList = initCreditCardList(cart);
         app.getView({
             Basket: cart.object,
             ppalError : ppalError,
@@ -132,7 +132,7 @@ function returnToForm(cart, params) {
 function start(cart, params) {
 
     app.getController('COShipping').PrepareShipments();
-    
+
     var addrid = session.forms.singleshipping.shippingAddress.addressid.value;
     app.getForm('billing.billingAddress').setValue('addressid',addrid);
     Transaction.wrap(function () {
@@ -153,7 +153,7 @@ function start(cart, params) {
 			app.getForm('billing.paymentMethods').setValue('selectedPaymentMethodID','ALLOTMENT');
 		}
     }
-	
+
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({
         pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
@@ -589,8 +589,8 @@ function billing() {
                 returnToForm(cart, DAVResult.params);
                 return;
             }*********************/
-            
-            if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+
+            if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
         	    Transaction.wrap(function () {
         	    	require('app_rapala_core/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });
@@ -607,7 +607,7 @@ function billing() {
 	                    returnToForm(cart);
 	                    return;
 	                }
-	
+
 	                /**********************PREVAIL - PayPal Integration**************************/
 	                if (handlePaymentSelectionResult.redirectUrl) {
 	                    response.redirect(handlePaymentSelectionResult.redirectUrl);
@@ -621,7 +621,7 @@ function billing() {
 
                 // Mark step as fulfilled
                 app.getForm('billing').object.fulfilled.value = true;
-                
+
                 ltkSignupEmail.Signup();
                 ltkSendSca.SendSCA();
 
@@ -703,15 +703,15 @@ function updateSummary() {
     Transaction.wrap(function () {
         cart.calculate();
     });
-    
-    if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+
+    if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
 	    Transaction.wrap(function () {
 	    	var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
 	    });
     }
   //get Product net price & surcharge price
     var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart.object);
-    
+
     app.getView({
         checkoutstep: 4,
         Basket: cart.object,
@@ -944,7 +944,7 @@ function updateCartSummary(){
     session.forms.cart.shipments.copyFrom(cart.object.shipments);
     // Refreshes coupons.
     session.forms.cart.coupons.copyFrom(cart.object.couponLineItems);
-    
+
     app.getView({
     	Basket : cart.object
     }).render('checkout/cartsummary');
@@ -958,13 +958,13 @@ function updatePaymentForms(validPaymentInstruments, paymentAmount){
         }
     }).countryCode;
 	app.getForm('billing.billingAddress.addressFields').setValue('country',countryCode);
-	  
+
 	applicablePaymentMethods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, paymentAmount.value);
 	applicablePaymentCards = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(customer, countryCode, paymentAmount.value);
-	
+
 	app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.setOptions(applicablePaymentMethods.iterator());
 	app.getForm('billing').object.paymentMethods.creditCard.type.setOptions(applicablePaymentCards.iterator());
-	
+
 	for each(var pi in validPaymentInstruments){
 		if(pi.paymentMethod == PaymentInstrument.METHOD_CREDIT_CARD){
 			app.getForm('billing').object.paymentMethods.creditCard.number.value = pi.creditCardNumber;
@@ -977,24 +977,24 @@ function updatePaymentForms(validPaymentInstruments, paymentAmount){
 }
 
 function refreshPaymentMethods(){
-	
+
 	var cart = app.getModel('Cart').get();
-	
+
 	var paymentAmount =  cart.getNonGiftCertificateAmount();
 	countryCode = Countries.getCurrent({
         CurrentRequest: {
             locale: request.locale
         }
     }).countryCode;
-	
+
 	app.getForm('billing.paymentMethods.creditCard').clear();
-	
+
 	var validPaymentInstruments = cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value);
-	
+
 	updatePaymentForms(validPaymentInstruments.ValidPaymentInstruments, paymentAmount);
-	
+
 	if(customer.authenticated){
-		
+
 		validPaymentInstruments = cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value);
 	}
 	var applicableCreditCards = initCreditCardList(cart).ApplicableCreditCards;
@@ -1008,7 +1008,7 @@ function removeCoupon(){
 	 var cart = app.getModel('Cart').get();
 	 Transaction.wrap(function () {
 	 var removeCouponLine = require('app_rapala_core/cartridge/scripts/checkout/GetCouponLine.ds').getCouponLineItem(cart.object,request.httpParameterMap.couponCode.value);
-        
+
 	 cart.object.removeCouponLineItem(removeCouponLine);
      cart.calculate();
      /*
@@ -1023,7 +1023,7 @@ function removeCoupon(){
      }
 	 cart.calculate();
 	 });
-	 
+
 }
 
 function getOrderTotalJson(){
@@ -1047,7 +1047,7 @@ function clearCCForm(){
     Transaction.wrap(function(){
            require('app_rapala_core/cartridge/scripts/checkout/RemoveCCPaymentInstruments.ds').removeCreditCardPI(cart.object);
     });
-    
+
     let responseUtils = require('~/cartridge/scripts/util/Response');
 
  responseUtils.renderJSON({
@@ -1065,7 +1065,7 @@ function returnToBIlling(placeOrderError){
 
 	        var creditCardList = initCreditCardList(cart);
 	        var applicablePaymentMethods = creditCardList.ApplicablePaymentMethods;
-	        
+
 	        var billingForm = app.getForm('billing').object;
 	        var paymentMethods = billingForm.paymentMethods;
 	        if (paymentMethods.valid) {

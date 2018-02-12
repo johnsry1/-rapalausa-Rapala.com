@@ -26,12 +26,12 @@ function execute( args : PipelineDictionary ) : Number
 	var THIS_SCRIPT : String = 'PreInitiateOAuthLogin.ds: provider Id' + providerId + ": ";
 
 	tmp = args['CurrentHttpParameterMap']['rememberme'];
-	session.custom['RememberMe'] = null==tmp?false:tmp.booleanValue;
+	session.privacy['RememberMe'] = null==tmp?false:tmp.booleanValue;
 
-	session.custom['ContinuationURL'] = URLUtils.continueURL().toString();
+	session.privacy['ContinuationURL'] = URLUtils.continueURL().toString();
 
-	Logger.debug(THIS_SCRIPT + "Placed in session.custom: RememberMe: " 
-		+ session.custom['RememberMe'] + ", ContinuationURL:" +  session.custom['ContinuationURL']);
+	Logger.debug(THIS_SCRIPT + "Placed in session.privacy: RememberMe: " 
+		+ session.privacy['RememberMe'] + ", ContinuationURL:" +  session.privacy['ContinuationURL']);
 
     return PIPELET_NEXT;
 }

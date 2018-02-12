@@ -247,12 +247,12 @@
 						Adyen integration
 						Set the brandcode and issuerId in session for when user hits the back button on Adyen hpp
 					</iscomment>
-					<isif condition="${!empty(pdict.CurrentHttpParameterMap.brandCode.value) || !empty(session.custom.brandCode)}">
-						<isset name="brandCode"	value="${!empty(pdict.CurrentHttpParameterMap.brandCode.value) ? pdict.CurrentHttpParameterMap.brandCode.value : session.custom.brandCode}" scope="session"/>
-						<input type="hidden" name="brandCode" value="${session.custom.brandCode}" />
-							<isif condition="${!empty(pdict.CurrentHttpParameterMap.issuerId.value)	|| !empty(session.custom.issuerId)}">
-								<isset name="issuerId" value="${!empty(pdict.CurrentHttpParameterMap.issuerId.value) ? pdict.CurrentHttpParameterMap.issuerId.value : session.custom.issuerId}"	scope="session"/>
-								<input type="hidden" name="issuerId" value="${session.custom.issuerId}"/>
+					<isif condition="${!empty(pdict.CurrentHttpParameterMap.brandCode.value) || !empty(session.privacy.brandCode)}">
+						<isset name="brandCode"	value="${!empty(pdict.CurrentHttpParameterMap.brandCode.value) ? pdict.CurrentHttpParameterMap.brandCode.value : session.privacy.brandCode}" scope="session"/>
+						<input type="hidden" name="brandCode" value="${session.privacy.brandCode}" />
+							<isif condition="${!empty(pdict.CurrentHttpParameterMap.issuerId.value)	|| !empty(session.privacy.issuerId)}">
+								<isset name="issuerId" value="${!empty(pdict.CurrentHttpParameterMap.issuerId.value) ? pdict.CurrentHttpParameterMap.issuerId.value : session.privacy.issuerId}"	scope="session"/>
+								<input type="hidden" name="issuerId" value="${session.privacy.issuerId}"/>
 							</isif>
 					</isif>
 			    </fieldset>
