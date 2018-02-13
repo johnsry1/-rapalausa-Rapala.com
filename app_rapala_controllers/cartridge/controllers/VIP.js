@@ -234,6 +234,7 @@ function flwSignUp() {
 function flwLoginRedirect(){
 
 	app.getView({
+    	isTriggered: true,
     	ContinueURL: URLUtils.https('VIP-FLWContinueLogIn')
     	}).render('vip/flwaccountlogin');
 
