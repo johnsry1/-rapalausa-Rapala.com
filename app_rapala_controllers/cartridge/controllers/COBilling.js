@@ -590,7 +590,7 @@ function billing() {
                 return;
             }*********************/
 
-            if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+            if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
         	    Transaction.wrap(function () {
         	    	require('app_rapala_core/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });
@@ -704,7 +704,7 @@ function updateSummary() {
         cart.calculate();
     });
 
-    if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+    if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
 	    Transaction.wrap(function () {
 	    	var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
 	    });

@@ -248,7 +248,7 @@ function billing() {
                 return;
             }*********************/
 
-            if(customer.authenticated && 'iceforce' != session.custom.currentSite){
+            if(customer.authenticated && 'iceforce' != session.privacy.currentSite){
         	    Transaction.wrap(function () {
         	    	require('*/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });

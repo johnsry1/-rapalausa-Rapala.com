@@ -37,8 +37,8 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>FAVICON ICON: (website icon, a page icon or an urlicon) 16x16 pixel image icon for website
 <link href="${URLUtils.staticURL('/images/rapala.png')}" rel="shortcut icon" /></iscomment>
-<isif condition="${!empty(session.custom.currentSite)}">
-	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/images/favicon.ico')}" rel="shortcut icon" />
+<isif condition="${!empty(session.privacy.currentSite)}">
+	<link href="${URLUtils.staticURL('/themes/' + session.privacy.currentSite + '/images/favicon.ico')}" rel="shortcut icon" />
 <iselse>
 	<link href="${URLUtils.staticURL('/themes/rapala/images/favicon.ico')}" rel="shortcut icon" />
 </isif>	
@@ -120,8 +120,8 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 
 <iscomment>THEME STYLESHEETS</iscomment>
 
-<isif condition="${!empty(session.custom.currentSite)}">
-	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/css/' + session.custom.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
+<isif condition="${!empty(session.privacy.currentSite)}">
+	<link href="${URLUtils.staticURL('/themes/' + session.privacy.currentSite + '/css/' + session.privacy.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
 <iselse>
 	<link href="${URLUtils.staticURL('/themes/rapala/css/rapala.css')}" type="text/css" rel="stylesheet"/>
 </isif>

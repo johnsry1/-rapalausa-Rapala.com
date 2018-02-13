@@ -2,7 +2,7 @@
 <iscache type="relative" hour="24"/>
 <isinclude template="util/modules"/>
 	<isscript>
-		var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.custom.currentSite);
+		var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.privacy.currentSite);
 	</isscript>
  	<isif condition="${aboutUsFolder != null && aboutUsFolder.online}">
 		<isloop items="${aboutUsFolder.onlineSubFolders}" var="subFolder">

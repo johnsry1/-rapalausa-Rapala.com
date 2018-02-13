@@ -8,7 +8,7 @@
 			<div class="column">
 				<div class="cell">
 					<ul>
-					<isset name="site" value="${session.custom.currentSite}" scope="page" />
+					<isset name="site" value="${session.privacy.currentSite}" scope="page" />
 	
 					<isif condition="${'rapala' == site}">
 						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','1')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
@@ -42,7 +42,7 @@
 					</iscomment>
 					<isscript>
 						var category : dw.catalog.Category = null;
-						var currentSite : String = session.custom.currentSite;
+						var currentSite : String = session.privacy.currentSite;
 				
 						// get category from search context
 						if( !empty(pdict.ProductSearchResult) )

@@ -260,7 +260,7 @@ function submitImpl(order) {
         //update customer allotment amount
         if(customer.authenticated){
         	require('*/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
-	    	if('iceforce' != session.custom.currentSite && session.privacy.isProStaffAllotmentused){
+	    	if('iceforce' != session.privacy.currentSite && session.privacy.isProStaffAllotmentused){
 	    		require('*/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
 	    	}
 	    } else {

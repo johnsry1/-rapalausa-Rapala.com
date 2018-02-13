@@ -15,7 +15,7 @@
 				<isloop items="${slotcontent.content}" var="product" begin="0" end="9">
 				 <div class="product-tile item" ${recommendername} id="${product.UUID}" data-itemid="${product.ID}">
 					<isobject object="${product}" view="recommendation">
-						<isinclude url="${URLUtils.url('Product-HitTile','pid', product.ID,'showswatches', 'false','showpricing', 'true','showpromotion', 'true','currentBrand',session.custom.currentSite,'recommendername', slotcontent.custom['__RecommenderName'], 'isRecommendation', true)}"/>
+						<isinclude url="${URLUtils.url('Product-HitTile','pid', product.ID,'showswatches', 'false','showpricing', 'true','showpromotion', 'true','currentBrand',session.privacy.currentSite,'recommendername', slotcontent.custom['__RecommenderName'], 'isRecommendation', true)}"/>
 					</isobject>
 				 </div>		
 				</isloop>

@@ -1,7 +1,7 @@
 <div class="logincustomers">
 
 
-	<isif condition="${'sufix' == session.custom.currentSite}">
+	<isif condition="${'sufix' == session.privacy.currentSite}">
 		<h5 class="subheader" style="background-color: #fff;">${Resource.msg('logininclude.customersubheader','account',null)}</h5>
 	 	<h1 class="subheader"><isprint value="${Resource.msg('logininclude.customersheader','vip',null)}" encoding="off"></isprint></h1>
 		<p><isprint value = "${Resource.msg('logininclude.registered','vip',null)}" encoding = "off"></p>
@@ -49,7 +49,7 @@
 				<div class="vipformfieldaddtoemail clear">
 					<input type="hidden" name="ltkSubscriptionCode" value="flwviplogin" />
 					<input type="hidden" name="source" value="flwviplogin" />
-					<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+					<input type="hidden" name="brand" value="${session.privacy.currentSite}" />
 					<input type="hidden" name="customer_group" value="true" />
 					<div class="custom-checkbox custom">
 						<div class="custom-link active"></div>

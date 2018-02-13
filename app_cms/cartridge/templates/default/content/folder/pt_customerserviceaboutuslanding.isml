@@ -19,7 +19,7 @@
 	
 		<div class="wrapper">
 		<isscript>
-			var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.custom.currentSite);
+			var aboutUsFolder : Folder = dw.content.ContentMgr.getFolder("about-" + session.privacy.currentSite);
 		</isscript>
   		<isif condition="${aboutUsFolder != null && aboutUsFolder.online}">
 		<div class="row column3 about-us">
@@ -31,14 +31,14 @@
 				</div>
 			</div>
 			 <div class="cell contentbox upshift desktop-view ">
-				 <isinclude url="${URLUtils.url('AboutUs-LeftNav','currentSite',session.custom.currentSite)}"/>
+				 <isinclude url="${URLUtils.url('AboutUs-LeftNav','currentSite',session.privacy.currentSite)}"/>
 			</div><!-- END: cell -->
 		</div><!-- END: column -->
 			<div class="column colspan2">
 			    		<isreplace/>
 			</div>
 			 <div class="cell contentbox upshift secondbox mobile-view ">
-				 <isinclude url="${URLUtils.url('AboutUs-LeftNav','currentSite',session.custom.currentSite)}"/>
+				 <isinclude url="${URLUtils.url('AboutUs-LeftNav','currentSite',session.privacy.currentSite)}"/>
 			</div><!-- END: cell -->
 			</div><!-- END: row column3 -->
 			</isif>

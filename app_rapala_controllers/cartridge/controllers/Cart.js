@@ -237,7 +237,7 @@ function submitForm() {
         if (formResult.dontRedirect) {
         	var customer = app.getModel('Customer').get().object;
             Transaction.wrap(function () {
-                if (customer.authenticated && 'iceforce' != session.custom.currentSite){
+                if (customer.authenticated && 'iceforce' != session.privacy.currentSite){
                 	var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,formResult.cart.object);
                 }
             var removeInvalidCart = require('app_rapala_core/cartridge/scripts/cart/CartCouponError.ds').removeInvalidCart(cart.object);
