@@ -46,7 +46,7 @@ function execute(pdict : PipelineDictionary) : Number {
 
 function setSiteContext(http : CurrentHttpParameterMap) {
 	
-	var currentSite : String = session.privacy.currentSite;
+	var currentSite : String = session.custom.currentSite;
 	var homeSplash : Boolean = false;
 	
 	//this section used for swithching the brand for PDP redirect scenarios
@@ -284,7 +284,7 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	    	
 	    	if(host.indexOf('Page-Show') > -1 || path.indexOf('Page-Show') > -1){
 	    		
-	    	switch(session.privacy.currentSite){
+	    	switch(session.custom.currentSite){
 				case 'rapala' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','1'));
 				break;
 				case 'sufix' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','2'));
@@ -315,7 +315,7 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	    	
 	    	}else{
 	    		if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandFolderRedirect')) {
-		    	switch(session.privacy.currentSite){
+		    	switch(session.custom.currentSite){
 				case 'rapala' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
 				break;
 				case 'sufix' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','2'));
@@ -427,7 +427,7 @@ function setSiteContext(http : CurrentHttpParameterMap) {
     	//   	homeSplash = false;
     //}
     
-    if(currentSite != session.privacy.currentSite) {
+    if(currentSite != session.custom.currentSite) {
     	session.getCustom().currentSite = currentSite;
     }
     

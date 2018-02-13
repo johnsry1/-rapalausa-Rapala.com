@@ -2,31 +2,31 @@
        This template fetches current site and navigates to brand specific change region page
 </iscomment>
 
-<isif condition="${session.privacy.currentSite == 'rapala'}">
+<isif condition="${session.custom.currentSite == 'rapala'}">
     <isset name="ID" value="1" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'vmc'}" >
+<iselseif condition="${session.custom.currentSite == 'vmc'}" >
         <isset name="ID" value="6" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'luhrjensen'}" >
+<iselseif condition="${session.custom.currentSite == 'luhrjensen'}" >
         <isset name="ID" value="5" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'storm'}" >
+<iselseif condition="${session.custom.currentSite == 'storm'}" >
         <isset name="ID" value="4" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'sufix'}" >
+<iselseif condition="${session.custom.currentSite == 'sufix'}" >
         <isset name="ID" value="2" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'bluefox'}" >
+<iselseif condition="${session.custom.currentSite == 'bluefox'}" >
         <isset name="ID" value="8" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'terminator'}" >
+<iselseif condition="${session.custom.currentSite == 'terminator'}" >
         <isset name="ID" value="7" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'williamson'}" >
+<iselseif condition="${session.custom.currentSite == 'williamson'}" >
         <isset name="ID" value="9" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'triggerx'}" >
+<iselseif condition="${session.custom.currentSite == 'triggerx'}" >
         <isset name="ID" value="3" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'marcum'}" >
+<iselseif condition="${session.custom.currentSite == 'marcum'}" >
         <isset name="ID" value="10" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'strikemaster'}" >
+<iselseif condition="${session.custom.currentSite == 'strikemaster'}" >
         <isset name="ID" value="11" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'otter'}" >
+<iselseif condition="${session.custom.currentSite == 'otter'}" >
         <isset name="ID" value="21" scope="page" />
-<iselseif condition="${session.privacy.currentSite == 'iceforce'}" >
+<iselseif condition="${session.custom.currentSite == 'iceforce'}" >
         <isset name="ID" value="20" scope="page" />
 <else>
     <iscomment>Fallback if no site is selected.  Primarily needed to Test Helper purposes. </iscomment>
@@ -34,8 +34,8 @@
 </isif>
 
 <span class="change-region-footer">
-<isif condition="${session.privacy.currentSite != 'strikemaster'}">
-	<isif condition="${session.privacy.currentSite == 'iceforce'}">
+<isif condition="${session.custom.currentSite != 'strikemaster'}">
+	<isif condition="${session.custom.currentSite == 'iceforce'}">
 		<a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
 	<iselse>
 		<a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id',ID)}">

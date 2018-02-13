@@ -47,7 +47,7 @@
 	</isscript>
 
 		<span class="change-regionnew">
-			<isif condition="${session.privacy.currentSite == 'iceforce'}">
+			<isif condition="${session.custom.currentSite == 'iceforce'}">
 				<a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
 					<img src="${URLUtils.staticURL('/images/flag.png')}" alt="${Resource.msg('global.changefooter','locale',null)}"/>
 				</a>
@@ -60,14 +60,14 @@
 			<div class="domainswitch-header">
 				<div class="top_arrow"></div>
 				<ul>
-					<isif condition="${session.privacy.currentSite != 'strikemaster'}">
-						<isif condition="${session.privacy.currentSite == 'iceforce'}">
+					<isif condition="${session.custom.currentSite != 'strikemaster'}">
+						<isif condition="${session.custom.currentSite == 'iceforce'}">
 							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
 						<iselse>
 							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>	
 						</isif>
 					</isif>
-					<isif condition="${session.privacy.currentSite == 'iceforce'}" >
+					<isif condition="${session.custom.currentSite == 'iceforce'}" >
 						<li><a href="http://rapalavmc.com/"><isprint value="${Resource.msg('global.investorsfooter','locale',null)}"/></a></li>
 					<iselse>
 						<li><a href="${dw.system.Site.current.preferences.custom['investorsLink']}"><isprint value="${Resource.msg('global.investorsfooter','locale',null)}"/></a></li>
@@ -115,7 +115,7 @@
 						    <isif condition="${pdict.CurrentCustomer.profile != null}">
 							    <input type="hidden"  class="emailHeaderLeft" value="${pdict.CurrentCustomer.profile.email}">
 							</isif>
-						    <isset name="brand" value="${session.privacy.currentSite}" scope="page" />
+						    <isset name="brand" value="${session.custom.currentSite}" scope="page" />
 						    <isset name="brand" value="${brand+'-contact-us'}" scope="page" />
 						    <a class="emailHeaderLeftPreferences" href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid',brand)+'&email='+pdict.CurrentCustomer.profile.email}">
 						    	<isprint value="${Resource.msg('global.EmailPreferences','locale',null)}"/>

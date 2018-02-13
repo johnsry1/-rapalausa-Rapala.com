@@ -117,8 +117,8 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 <!-- End Facebook Pixel Code -->
 
 <iscomment>THEME STYLESHEETS</iscomment>
-<isif condition="${!empty(session.privacy.currentSite) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandTheme')}">
-	<link href="${URLUtils.staticURL('/themes/' + session.privacy.currentSite + '/css/' + session.privacy.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
+<isif condition="${!empty(session.custom.currentSite) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandTheme')}">
+	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/css/' + session.custom.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
 </isif>
 
 <iscomment>geo ip code </iscomment>

@@ -12,29 +12,29 @@
 <div class="generalerror cell contentbox upshift notfound">
 	<div class="">
 	<isset name="searchTextBoxValue" value="" scope="page"/>
-<isif condition="${session.privacy.currentSite == 'rapala'}">
+<isif condition="${session.custom.currentSite == 'rapala'}">
 		<isset name="searchTextBoxValue" value="Search Rapala" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'sufix'}">
+	<iselseif condition="${session.custom.currentSite == 'sufix'}">
 		<isset name="searchTextBoxValue" value="Search Sufix" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'triggerx'}">
+	<iselseif condition="${session.custom.currentSite == 'triggerx'}">
 		<isset name="searchTextBoxValue" value="Search Triggerx" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'storm'}">
+	<iselseif condition="${session.custom.currentSite == 'storm'}">
 		<isset name="searchTextBoxValue" value="Search Storm" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'luhrjensen'}">
+	<iselseif condition="${session.custom.currentSite == 'luhrjensen'}">
 		<isset name="searchTextBoxValue" value="Search Luhrjensen" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'vmc'}">
+	<iselseif condition="${session.custom.currentSite == 'vmc'}">
 		<isset name="searchTextBoxValue" value="Search VMC" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'terminator'}">
+	<iselseif condition="${session.custom.currentSite == 'terminator'}">
 		<isset name="searchTextBoxValue" value="Search Terminator" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'bluefox'}">
+	<iselseif condition="${session.custom.currentSite == 'bluefox'}">
 		<isset name="searchTextBoxValue" value="Search BlueFox" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'williamson'}">
+	<iselseif condition="${session.custom.currentSite == 'williamson'}">
 		<isset name="searchTextBoxValue" value="Search Williamson" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'marcum'}">
+	<iselseif condition="${session.custom.currentSite == 'marcum'}">
 		<isset name="searchTextBoxValue" value="Search Marcum" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'strikemaster'}">
+	<iselseif condition="${session.custom.currentSite == 'strikemaster'}">
 		<isset name="searchTextBoxValue" value="Search StrikeMaster" scope="page"/>
-	<iselseif condition="${session.privacy.currentSite == 'otter'}">
+	<iselseif condition="${session.custom.currentSite == 'otter'}">
 		<isset name="searchTextBoxValue" value="Search Otter" scope="page"/>
 	<iselse>
 		<isset name="searchTextBoxValue" value="" scope="page"/>
@@ -42,7 +42,7 @@
 		<div class="contentboxcontent">
 	<isslot id="error-banner." description="Banner for error pages" context="global"/>
 	<div class="errorpage">
-		<isif condition="${'sufix' == session.privacy.currentSite}">
+		<isif condition="${'sufix' == session.custom.currentSite}">
 			<h5 class="subheader">An Error Occurred</h5>
 	 		<h1 class="subheader">${Resource.msg('nohits.errorlabel','search',null)}</h1>
 			<iselse/>

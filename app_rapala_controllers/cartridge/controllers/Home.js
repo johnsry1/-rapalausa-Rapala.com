@@ -114,9 +114,9 @@ function changeRegionURL(){
  */
 function internationalOptions(){
 	
-	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
-	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
-	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.privacy.currentSite);
+	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
 	
 	app.getView({
 		intlBrandCountryLink : internationalBrandLink,
@@ -129,8 +129,8 @@ function internationalOptions(){
  * Renders the homepage when the session is new
  */
 function page(){
-	if(session.privacy.currentSite != null){
-		var siteFolder = require('dw/content/ContentMgr').getFolder(session.privacy.currentSite);
+	if(session.custom.currentSite != null){
+		var siteFolder = require('dw/content/ContentMgr').getFolder(session.custom.currentSite);
 		var pageMeta = require('~/cartridge/scripts/meta');
 		pageMeta.update(siteFolder);
 	}

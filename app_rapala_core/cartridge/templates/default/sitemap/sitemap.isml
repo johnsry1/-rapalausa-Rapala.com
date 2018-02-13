@@ -14,7 +14,7 @@
 	
 		<isloop items="${dw.catalog.CatalogMgr.getSiteCatalog().getRoot().getOnlineSubCategories().iterator()}" var="topCategory" status="loopstatus">
 		<div class="site-map">
-		<isif condition="${'rapala' == session.privacy.currentSite}">
+		<isif condition="${'rapala' == session.custom.currentSite}">
 		<isif condition="${topCategory.displayName == 'Rapala'}">
 			<isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 				<ul>
@@ -41,7 +41,7 @@
 			</isif>
 			<div class="clear"></div>
 		</isif>
-		<iselseif condition="${'sufix' == session.privacy.currentSite}">
+		<iselseif condition="${'sufix' == session.custom.currentSite}">
 		<isif condition="${topCategory.displayName == 'Sufix'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -65,7 +65,7 @@
 			</isif>
 			<div class="clear"></div>
 		 </isif>
-		 <iselseif condition="${'triggerx' == session.privacy.currentSite}">
+		 <iselseif condition="${'triggerx' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Trigger X'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -90,7 +90,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'storm' == session.privacy.currentSite}">
+		 <iselseif condition="${'storm' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Storm'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -115,7 +115,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'luhrjensen' == session.privacy.currentSite}">
+		 <iselseif condition="${'luhrjensen' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Luhr-Jensen'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -143,7 +143,7 @@
 			</isif>
 			<div class="clear"></div>
 		 </isif>
-		 <iselseif condition="${'marcum' == session.privacy.currentSite}">
+		 <iselseif condition="${'marcum' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'MarCum'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -172,7 +172,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'vmc' == session.privacy.currentSite}">
+		 <iselseif condition="${'vmc' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'VMC'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -201,7 +201,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'terminator' == session.privacy.currentSite}">
+		 <iselseif condition="${'terminator' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Terminator'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -230,7 +230,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'strikemaster' == session.privacy.currentSite}">
+		 <iselseif condition="${'strikemaster' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'StrikeMaster'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -259,7 +259,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		 <iselseif condition="${'bluefox' == session.privacy.currentSite}">
+		 <iselseif condition="${'bluefox' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Blue Fox'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -288,7 +288,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		  <iselseif condition="${'williamson' == session.privacy.currentSite}">
+		  <iselseif condition="${'williamson' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Williamson'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -320,7 +320,7 @@
 			<div class="clear"></div>
 		 </isif>
 		 
-		<iselseif condition="${'otter' == session.privacy.currentSite}">
+		<iselseif condition="${'otter' == session.custom.currentSite}">
 		 <isif condition="${topCategory.displayName == 'Otter'}">
 		   <isif condition="${topCategory.getOnlineSubCategories().iterator().hasNext()}">
 		      <ul>
@@ -362,9 +362,9 @@
 				
 					<ul>
 						<li class="first-level">
-						    <isif condition="${'rapala' == session.privacy.currentSite}">
+						    <isif condition="${'rapala' == session.custom.currentSite}">
 							<h2>Rapala Brands</h2>
-							<iselseif condition="${'sufix' == session.privacy.currentSite}">
+							<iselseif condition="${'sufix' == session.custom.currentSite}">
 							<h2> Respected Rapala Brands</h2>
 							<iselse>
 								<h2  class="left-nav-style"> Respected Rapala Brands</h2><br>
@@ -385,9 +385,9 @@
 							</ul>
 						</li>
 							
-							<isif condition="${'triggerx' == session.privacy.currentSite}">
+							<isif condition="${'triggerx' == session.custom.currentSite}">
 								<iscontentasset aid="my-account-sitemap-triggerx"/>
-							<iselseif condition="${'iceforce' == session.privacy.currentSite}">
+							<iselseif condition="${'iceforce' == session.custom.currentSite}">
 							<iselse>
 								<iscontentasset aid="my-account-sitemap"/>
 							</isif>

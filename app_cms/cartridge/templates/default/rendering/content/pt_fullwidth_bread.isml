@@ -53,10 +53,10 @@
 					folderPaths.put(firstFolder,context);
 				}
 				var defaultContext = folderPaths.get(pdict.Content.classificationFolder);
-				if(defaultContext == session.privacy.currentSite) {
+				if(defaultContext == session.custom.currentSite) {
 					containingFolder = pdict.Content.classificationFolder;
-				} else if(folderPaths.containsKey(session.privacy.currentSite)) {
-					containingFolder = folderPaths.get(session.privacy.currentSite);
+				} else if(folderPaths.containsKey(session.custom.currentSite)) {
+					containingFolder = folderPaths.get(session.custom.currentSite);
 				} else if(folderPaths.containsKey('global')) {
 					containingFolder = folderPaths.get('global');
 				} else {

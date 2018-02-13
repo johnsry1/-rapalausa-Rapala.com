@@ -56,8 +56,8 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 
 <iscomment>FAVICON ICON: (website icon, a page icon or an urlicon) 16x16 pixel image icon for website
 <link href="${URLUtils.staticURL('/images/rapala.png')}" rel="shortcut icon" /></iscomment>
-<isif condition="${!empty(session.privacy.currentSite)}">
-	<link href="${URLUtils.staticURL('/themes/' + session.privacy.currentSite + '/images/favicon.ico')}" rel="shortcut icon" />
+<isif condition="${!empty(session.custom.currentSite)}">
+	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/images/favicon.ico')}" rel="shortcut icon" />
 <iselse>
 	<link href="${URLUtils.staticURL('/themes/rapala/images/favicon.ico')}" rel="shortcut icon" />
 </isif>

@@ -21,7 +21,7 @@
             <div class="column1">
                 <div class="footer-inner">
                     <div class="cookie-footer"></div>
-                    <a id="footerhiddenid" style="display: none;">${session.privacy.currentSite}</a>
+                    <a id="footerhiddenid" style="display: none;">${session.custom.currentSite}</a>
                     <ul id="footer-brands">
                         <!-- Rapala : id=1 -->
                         <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandrapala') != null) && (dw.system.Site.current.preferences.custom.activebrandrapala == true)}">
@@ -97,7 +97,7 @@
                                         var stateField = dw.system.Site.current.preferences.custom['cmstate'];
                                         var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
 
-                                        if(session.privacy.currentSite == 'iceforce') {
+                                        if(session.custom.currentSite == 'iceforce') {
                                         formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
                                         nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
                                         emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
@@ -110,7 +110,7 @@
                                         <form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
                                             <input type="hidden" name="ltkSubscriptionCode" value="footer" />
                                             <input type="hidden" name="source" value="miniform" />
-                                            <input type="hidden" name="brand" value="${session.privacy.currentSite}" />
+                                            <input type="hidden" name="brand" value="${session.custom.currentSite}" />
                                             <fieldset id="emailfooter">
                                                 <div class="pseudo_self_label">
                                                     <input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="footer-left-section">
                             <isscript>
-                                var footerContent = dw.content.ContentMgr.getContent(session.privacy.currentSite + "-footer-links");
+                                var footerContent = dw.content.ContentMgr.getContent(session.custom.currentSite + "-footer-links");
                             </isscript>
                             <iscontentasset aid="footer-links"/>
                         </div>
@@ -138,7 +138,7 @@
                                         var stateField = dw.system.Site.current.preferences.custom['cmstate'];
                                         var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
 
-                                        if (session.privacy.currentSite == 'iceforce') {
+                                        if (session.custom.currentSite == 'iceforce') {
                                             formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
                                             nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
                                             emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
@@ -151,7 +151,7 @@
                                         <form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
                                             <input type="hidden" name="ltkSubscriptionCode" value="footer" />
                                             <input type="hidden" name="source" value="miniform" />
-                                            <input type="hidden" name="brand" value="${session.privacy.currentSite}" />
+                                            <input type="hidden" name="brand" value="${session.custom.currentSite}" />
                                             <fieldset id="emailfooter">
                                                 <div class="pseudo_self_label">
                                                     <input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>

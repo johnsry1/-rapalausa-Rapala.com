@@ -230,7 +230,7 @@ function submitImpl(order) {
         //update customer allotment amount
         if(customer.authenticated){
         	require('app_rapala_core/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
-	    	if('iceforce' != session.privacy.currentSite && session.privacy.isProStaffAllotmentused){
+	    	if('iceforce' != session.custom.currentSite && session.privacy.isProStaffAllotmentused){
 	    		require('app_rapala_core/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
 	    	}
 	    } else {

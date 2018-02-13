@@ -46,7 +46,7 @@ var CartView = View.extend({
             	require('app_rapala_core/cartridge/scripts/checkout/SetDefaultShippingMethod.ds').setShippingMethod(cart, '', '');
             	
             	//var customer = app.getModel('Customer').get().object;
-    		    if (customer.authenticated && 'iceforce' != session.privacy.currentSite){
+    		    if (customer.authenticated && 'iceforce' != session.custom.currentSite){
     		    	var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart);
     		    }
             });

@@ -15,7 +15,7 @@
 					<div class="contentboxcontent mobileHide">
 					<isinclude template="search/components/productsearchbreadcrumbs"/>
 
-						<isif condition="${'rapala' == session.privacy.currentSite}">
+						<isif condition="${'rapala' == session.custom.currentSite}">
 							<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
 								<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
 							</isif>
@@ -136,7 +136,7 @@
 						<div id="primary" class="primary-content">
 							<div class="column colspan2 cell4">
 								<div class="contentboxcontent desktopHide">
-									<isif condition="${'rapala' == session.privacy.currentSite}">
+									<isif condition="${'rapala' == session.custom.currentSite}">
 										<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
 											<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
 										</isif>
@@ -147,9 +147,9 @@
 									</isif>
 								</div>
 								<div class="contentboxcontent desktopHide">
-									<isif condition="${'rapala' == session.privacy.currentSite && pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category) }">
+									<isif condition="${'rapala' == session.custom.currentSite && pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category) }">
 										<h1 class="leftnav"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
-									<iselseif condition="${'marcum' == session.privacy.currentSite || 'storm' == session.privacy.currentSite || 'triggerx' == session.privacy.currentSite || 'luhrjensen' == session.privacy.currentSite || 'terminator' == session.privacy.currentSite || 'bluefox' == session.privacy.currentSite || 'williamson' == session.privacy.currentSite || 'strikemaster' == session.privacy.currentSite || 'otter' == session.privacy.currentSite &&  pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
+									<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite &&  pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
 										<h1 class="left-nav-style"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
 									<iselse>
 									<isif condition="${ pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">

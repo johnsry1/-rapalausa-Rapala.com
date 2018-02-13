@@ -11,7 +11,7 @@ var guard = require('app_rapala_controllers/cartridge/scripts/guard');
 var URLUtils = require('dw/web/URLUtils');
 
 function show() {
-	var currentSite : String = session.privacy.currentSite;
+	var currentSite : String = session.custom.currentSite;
 
 	switch(currentSite){
 
