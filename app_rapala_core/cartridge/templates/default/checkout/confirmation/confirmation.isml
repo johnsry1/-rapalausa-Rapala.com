@@ -117,8 +117,8 @@
 			<isloop items="${shipments.getProductLineItems()}" var="pli">
 				<isset name ="productID" value="${empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'"}" scope="page"/>
 				ga("ecommerce:addItem", {
-					  "id":"<isprint value="${pdict.Order.orderNo}"/>", 
-					  "name":"<isprint value="${pli.product.name}" encoding="on"/>",   
+					  "id":"<isprint value="${pdict.Order.orderNo}"/>",
+					  "name":"<isproductname productname="${pli.product.name}"/>",
 					  "sku":"<isprint value="${pli.product.ID}" encoding="on"/>",
 					  <isif condition="${!empty(pli.product.classificationCategory)}">
 					  "category": "<isprint value="${pli.product.classificationCategory.displayName}" encoding="on"/>",
