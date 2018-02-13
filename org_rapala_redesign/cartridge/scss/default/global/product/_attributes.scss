@@ -68,6 +68,23 @@ a.filter {
     }
 }
 
+.desktop-device {
+    .variationattributes {
+        .swatches.Size,
+        .swatches.size {
+            a:hover {
+                color: $swatch-attr-hover-color;
+                text-decoration: $swatch-attr-hover-text-decoration;
+                background: $swatch-attr-hover-bg;
+                border: $swatch-attr-hover-border;
+                span {
+                    color: $swatch-attr-inner-color;
+                }
+            }
+        }
+    }
+}
+
 #pdpMain {
     .addTo-cart-section {
         input.quantityinput {
@@ -88,7 +105,7 @@ a.filter {
 }
 
 .pdp-main {
-    .product-add-to-cart  {
+    .product-add-to-cart {
         button {
             @include button('submit');
             width: calc(100% - #{rem(60px)});
