@@ -283,10 +283,10 @@ ProductUtils.getImagesDetails = function (item, pvm) {
 	    for each(var variant in item.getVariants()){
 	           if(variant.custom.variantImage != null){
 	                  varid = variant.getID();
-                    if(dw.Site.current.ID == 'rapala') {
+                    if(dw.system.Site.current.ID == 'rapala') {
   	                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
   	                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
-                    } else if (dw.Site.current.ID == 'rapalaEU') {
+                    } else if (dw.system.Site.current.ID == 'rapalaEU') {
                       variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master");
                       zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master");
                     }
@@ -406,7 +406,7 @@ ProductUtils.getPricing = function (item) {
     /**
      * According to multiple currency change we remove second verification for default site currency
      * NOTE: (old if statement was)
-     * 
+     *
      * if ((!priceModel.getPrice().available) || (!Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode())))
      */
     if (!priceModel.getPrice().available) {
