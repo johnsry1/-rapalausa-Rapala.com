@@ -41,23 +41,27 @@
                     @include font-size($table-head-font-size);
                     line-height: $table-head-line-height;
                     font-weight: $table-head-font-weight !important;
-                    @include respond(small-down) {
-                        width: 100%;
-                        border-right: none;
-                    }
                 }
                 td {
-                    &:last-child {
-                        @include respond(small-down) {
-                            border-right: $table-border;
-                        }
-                    }
                     padding: $table-padding;
                     border: $table-border;
                     font-family: $table-font-family;
                     @include font-size($table-font-size);
                     line-height: $table-line-height;
                     font-weight: $table-font-weight;
+                }
+            }
+        }
+    }
+    &.iphone-view {
+        tbody {
+            tr {
+                td {
+                    &:last-child {
+                        @include respond(small-down) {
+                            border-right: $table-border;
+                        }
+                    }
                     @include respond(small-down) {
                         width: 50%;
                         float: left;
@@ -66,6 +70,12 @@
                         border-right: none;
                         border-left: $table-border;
                     }
+                }
+                th {
+                @include respond(small-down) {
+                    width: 100%;
+                    border-right: none;
+                }
                 }
             }
         }
