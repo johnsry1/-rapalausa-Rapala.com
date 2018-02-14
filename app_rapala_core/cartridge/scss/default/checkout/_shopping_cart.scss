@@ -1301,6 +1301,7 @@ ul.product-availability-list {
                 position: relative;
                 margin: 0;
                 .cart-footer-left {
+                    border-right: 1px solid #ccc;
                     float: left;
                     padding: 0 30px 0 0;
                     width: 477px;
@@ -1891,9 +1892,9 @@ ul.product-availability-list {
                         width: 300px;
                     }
                     .secure-payment-icons {
-                        float: none;
-                        @include respond ($desktop-breakpoint) {
-                         float: right;
+                        float: right;
+                        @include respond (0, $large-breakpoint) {
+                            float:none;
                         }
                     }
                     .payment-trust-imgs {
