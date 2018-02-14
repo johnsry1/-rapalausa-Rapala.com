@@ -116,9 +116,25 @@
 		<isloop items="${pdict.Order.getShipments()}" var="shipments">
 			<isloop items="${shipments.getProductLineItems()}" var="pli">
 				<isset name ="productID" value="${empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'"}" scope="page"/>
+				<isset name="name" value="${pli.product.name}" scope="page" />
+				<isif condition="${name.indexOf('&reg;') >= 0}">
+					<isset name="name" value="${name.replace('&reg;','','g')}" scope="page" />
+				</isif>
+				<isif condition="${name.indexOf('®') >= 0}">
+					<isset name="name" value="${name.replace('®','','g')}" scope="page" />
+				</isif>
+				<isif condition="${name.indexOf('&trade;') >= 0}">
+					<isset name="name" value="${name.replace('&trade;','','g')}" scope="page" />
+				</isif>
+				<isif condition="${name.indexOf('&#8482;') >= 0}">
+					<isset name="name" value="${name.replace('&#8482;','','g')}" scope="page" />
+				</isif>
+				<isif condition="${name.indexOf('™') >= 0}">
+					<isset name="name" value="${name.replace('™','','g')}" scope="page" />
+				</isif>
 				ga("ecommerce:addItem", {
 					  "id":"<isprint value="${pdict.Order.orderNo}"/>", 
-					  "name":"<isprint value="${pli.product.name}" encoding="on"/>",   
+					  "name":"<isprint value="${name}" encoding="on"/>",   
 					  "sku":"<isprint value="${pli.product.ID}" encoding="on"/>",
 					  <isif condition="${!empty(pli.product.classificationCategory)}">
 					  "category": "<isprint value="${pli.product.classificationCategory.displayName}" encoding="on"/>",
