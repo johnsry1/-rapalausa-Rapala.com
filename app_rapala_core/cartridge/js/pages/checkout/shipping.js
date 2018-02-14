@@ -229,6 +229,7 @@ exports.init = function () {
     $('.continue-checkout-button .continue-checkout').on('click', function () {
 
         updateButton();
+        updateButtonIE();
         var form = $(this).closest('form[id$="_shippingAddress"]');
         if ($('.state-blk select').valid() == 0) {
             if (!$('.state-blk.custom-select').hasClass('blured')) {
@@ -246,6 +247,9 @@ exports.init = function () {
         }
         if (!form.valid()) {
             progress.hide();
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $('button.continue-checkout .loader').remove();
+            }
             if (jQuery('.shipping-address-field-section').hasClass('hide')) {
                 $('select[name$=singleshipping_addressList]').val('');
                 $('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');
