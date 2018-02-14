@@ -31,10 +31,9 @@ function signUp() {
 	        app.getForm('profile').clear();
 		}
         app.getView({
-         	isTriggered: true,
         	ContinueURL: URLUtils.https('VIP-ContinueLogIn')
         	}).render('vip/accountlogin');
-
+        
 	} else {
 		var httpsUrl = require('app_rapala_core/cartridge/scripts/account/RedirectingToHttps.ds').getHttpsUrl(request);
 		if(!empty(httpsUrl) && httpsUrl != null){
@@ -47,7 +46,7 @@ function signUp() {
  * Reidirects in case of Error in continueLogin
  */
 function loginRedirect(){
-
+	
 	app.getView({
     	ContinueURL: URLUtils.https('VIP-ContinueLogIn')
     	}).render('vip/accountlogin');
@@ -94,17 +93,17 @@ function continueLogIn() {
 					app.getForm('vip.numberexists').invalidate();
 					loginRedirect();
 				}
-
-
-
-
+				
+	           
+				
+				
 			}
 		});
 	} else if(register.object.submitted){
 		app.getForm('profile').handleAction({
 			confirm: function () {
 				var VIPCardNumber, email, emailConfirm, password, passwordConfirm, rememberme, Customer, profileValidation,customerExist;
-
+				
 				VIPCardNumber = app.getForm('profile.customer.number').value();
 				email = app.getForm('profile.customer.email').value();
 				emailConfirm = app.getForm('profile.customer.emailconfirm').value();
@@ -113,18 +112,18 @@ function continueLogIn() {
 			        app.getForm('profile.customer.emailconfirm').invalidate();
 			        profileValidation = false;
 			    }
-
+				
 				password = app.getForm('profile.login.password').value();
 				passwordConfirm = app.getForm('profile.login.passwordconfirm').value();
 				if (password !== passwordConfirm) {
 			        app.getForm('profile.login.passwordconfirm').invalidate();
 			        profileValidation = false;
 			    }
-
+				
 				rememberme = false;
-
+				
 				Customer = app.getModel('Customer');
-
+				
 				var VIPCard = require('app_rapala_core/cartridge/scripts/vip/GetVIPCard.ds').getVIPCard(VIPCardNumber,"VIPCard");
 				if(VIPCard!=null){
 					if(!empty(VIPCard.custom.redeemingCustomer)){
@@ -140,7 +139,7 @@ function continueLogIn() {
 			        	if(customerExist){
 		            		response.redirect(URLUtils.https('VIP-SignUp','existing', true));
 		            	}
-
+						
 						if (profileValidation) {
 					        profileValidation = Customer.createAccount(email, password, app.getForm('profile'));
 					        var vipRedeem = app.getController('VIP').Redeem(VIPCard)
@@ -168,11 +167,11 @@ function continueLogIn() {
  * redeems the VIP Card.
  */
 function redeem(VIPCard) {
-
+	
 	var Customer, orderNo, vipGCEmail,Email;
 	Customer = app.getModel('Customer').get();
 	Email = app.getModel('Email');
-
+	
 	Transaction.begin();
 	if(!empty(VIPCard.custom.amount)){
 		orderNo = dw.order.OrderMgr.createOrderNo();
@@ -180,12 +179,12 @@ function redeem(VIPCard) {
 		vipGiftCertificate.setOrderNo(orderNo);
 		vipGiftCertificate.setRecipientEmail(Customer.object.profile.email);
 		vipGiftCertificate.setSenderName("Rapala Customer Service");
-
+		
 		vipGCEmail = Email.get('mail/giftcert', vipGiftCertificate.getRecipientEmail());
 		vipGCEmail.setSubject("Your Rapala.com Merchandise Credit");
 		vipGCEmail.setFrom("noreply@rapala.com");
 		vipGCEmail.send({ GiftCertificate : vipGiftCertificate });
-
+		
 	}
 		var redeemed = require('app_rapala_core/cartridge/scripts/vip/RedeemVIPCards.ds').redeemVIPCard( VIPCard, Customer.object );
 		if(redeemed){
@@ -193,7 +192,7 @@ function redeem(VIPCard) {
 			if(vipCustomer == null || empty(vipCustomer)){
 				Transaction.rollback();
 				return false;
-			}
+			} 
 		}else {
 			Transaction.rollback();
 			return false;
@@ -214,12 +213,11 @@ function flwSignUp() {
 	        app.getForm('login').clear();
 	        app.getForm('profile').clear();
 		}
-
+        
         app.getView({
-            isTriggered: true,
         	ContinueURL: URLUtils.https('VIP-FLWContinueLogIn')
         	}).render('vip/flwaccountlogin');
-
+        
 	} else {
 		var httpsUrl = require('app_rapala_core/cartridge/scripts/account/RedirectingToHttps.ds').getHttpsUrl(request);
 		if(!empty(httpsUrl) && httpsUrl != null){
@@ -232,15 +230,14 @@ function flwSignUp() {
  * Reidirects in case of Error in flwContinueLogIn
  */
 function flwLoginRedirect(){
-
+	
 	app.getView({
-    	isTriggered: true,
     	ContinueURL: URLUtils.https('VIP-FLWContinueLogIn')
     	}).render('vip/flwaccountlogin');
 
 }
 
-function flwContinueLogIn() {
+function flwContinueLogIn() { 
 	var login = app.getForm('login.login');
 	var register = app.getForm('profile.confirm');
 	if(login.object.submitted){
@@ -285,7 +282,7 @@ function flwContinueLogIn() {
 		app.getForm('profile').handleAction({
 			confirm: function () {
 				var VIPCardNumber, email, emailConfirm, password, passwordConfirm, rememberme, Customer, profileValidation,customerExist;
-
+				
 				VIPCardNumber = app.getForm('profile.customer.numberflw').value();
 				email = app.getForm('profile.customer.email').value();
 				emailConfirm = app.getForm('profile.customer.emailconfirm').value();
@@ -294,18 +291,18 @@ function flwContinueLogIn() {
 			        app.getForm('profile.customer.emailconfirm').invalidate();
 			        profileValidation = false;
 			    }
-
+				
 				password = app.getForm('profile.login.password').value();
 				passwordConfirm = app.getForm('profile.login.passwordconfirm').value();
 				if (password !== passwordConfirm) {
 			        app.getForm('profile.login.passwordconfirm').invalidate();
 			        profileValidation = false;
 			    }
-
+				
 				rememberme = false;
-
+				
 				Customer = app.getModel('Customer');
-
+				
 				var VIPCard = require('app_rapala_core/cartridge/scripts/vip/GetVIPCard.ds').getVIPCard(VIPCardNumber,"VIPCard2");
 				if(VIPCard!=null){
 					if(!empty(VIPCard.custom.shutoff) && VIPCard.custom.shutoff){
@@ -348,11 +345,11 @@ function flwContinueLogIn() {
  * redeems FLW VIP Card
  */
 function flwRedeem(VIPCard) {
-
+	
 	var Customer, orderNo, vipGCEmail, Email;
 	Customer = app.getModel('Customer').get();
 	Email = app.getModel('Email');
-
+	
 	Transaction.begin();
 		orderNo = dw.order.OrderMgr.createOrderNo();
 		/*var flwVIPGiftCertificate : dw.order.GiftCertificate = dw.order.GiftCertificateMgr.createGiftCertificate(new Number(0.0));
@@ -367,21 +364,21 @@ function flwRedeem(VIPCard) {
 			FirstName : Customer.object.profile.firstName,
 			SenderName : "Rapala Customer Service"
 		});
-
+		
 		var flwVIPGiftCertificate : dw.order.GiftCertificate = flwVIPGiftCertificateResult.GiftCertificate;*/
-
+		
 		vipGCEmail = Email.get('mail/giftcert2', Customer.object.profile.email);
 		vipGCEmail.setSubject("VIP Membership Confirmed");
 		vipGCEmail.setFrom("noreply@rapala.com");
 		vipGCEmail.send({});
-
+		
 		var redeemed = require('app_rapala_core/cartridge/scripts/vip/RedeemVIPFLW.ds').redeemVIPFLWCard( VIPCard, Customer.object );
 		if(redeemed){
 			var vipCustomer = require('app_rapala_core/cartridge/scripts/vip/AssignCustomerToCustomerGroups.ds').assignCustomerToCG( Customer.object, VIPCard.custom.groups );
 			if(vipCustomer == null || empty(vipCustomer)){
 				Transaction.rollback();
 				return false;
-			}
+			} 
 		}else {
 			Transaction.rollback();
 			return false;
