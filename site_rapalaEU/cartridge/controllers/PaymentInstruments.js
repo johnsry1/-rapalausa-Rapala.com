@@ -82,7 +82,7 @@ function handlePaymentForm() {
     paymentForm.handleAction({
         create: function () {
             var createResult = create();
-            if (('error' in createResult && createResult.error) || !createResult) {
+            if ((typeof createResult === 'object' && createResult.error) || !createResult) {
                 var paymentForm = app.getForm('paymentinstruments');
                 paymentForm.clear();
                 app.getView({
