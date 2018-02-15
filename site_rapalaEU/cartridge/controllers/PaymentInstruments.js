@@ -81,11 +81,16 @@ function handlePaymentForm() {
     var paymentForm = app.getForm('paymentinstruments');
     paymentForm.handleAction({
         create: function () {
-            if (!create()) {
-                add(false);
+            var createResult = create();
+            if (('error' in createResult && createResult.error) || !createResult) {
+                var paymentForm = app.getForm('paymentinstruments');
+                paymentForm.clear();
+                app.getView({
+                    AdyenErrorMessage: 'message' in createResult && !empty(createResult.message) ? createResult.message : '',
+                    ContinueURL: URLUtils.https('PaymentInstruments-PaymentForm')
+                }).render('account/payment/paymentinstrumentdetails');
                 return;
             } else {
-            	
                response.redirect(URLUtils.https('PaymentInstruments-List'));
             }
         },
@@ -120,7 +125,7 @@ function save(params) {
  * form is cleared.
  *
  * @transaction
- * @return {boolean} true if the credit card can be verified, false otherwise
+ * @return {boolean or Object} true if the credit card can be verified, false otherwise. Object will return if error occur on Adyen side
  */
 function create() {
 	 var success=false;
@@ -140,7 +145,7 @@ function create() {
         });
         
         if (createRecurringPaymentAccountResult.error) {
-            return false;
+            return createRecurringPaymentAccountResult;
         }
         var pspReference = 'PspReference' in createRecurringPaymentAccountResult && !empty(createRecurringPaymentAccountResult.PspReference) ? createRecurringPaymentAccountResult.PspReference : '';
         var tokenID = 'TokenID' in createRecurringPaymentAccountResult && !empty(createRecurringPaymentAccountResult.TokenID) ? createRecurringPaymentAccountResult.TokenID : '';

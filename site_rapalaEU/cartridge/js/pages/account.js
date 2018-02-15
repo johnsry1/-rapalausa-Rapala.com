@@ -221,6 +221,7 @@ function initAddressEvents() {
  * @description Binds the events of the payment methods list (delete card)
  */
 function initPaymentEvents() {
+    /*
     $('.add-card').on('click', function (e) {
         e.preventDefault();
         dialog.open({
@@ -231,8 +232,13 @@ function initPaymentEvents() {
                 open: initializePaymentForm
             }
         });
-    });
-
+    }); 
+    */
+    
+    if (SitePreferences.ADYEN_CSE_ENABLED) {             
+        adyenCse.initAccount();
+    }
+    
     var paymentList = $('.payment-list');
     if (paymentList.length === 0) {
         return;
@@ -261,6 +267,7 @@ function initPaymentEvents() {
     });
 }
 
+/*
 function initializePaymentForm() {
 
     $('#CreditCardForm').on('click', '.cancel-button', function (e) {
@@ -272,7 +279,7 @@ function initializePaymentForm() {
     }
 
 }
-
+*/
 /**
  * @private
  * @function

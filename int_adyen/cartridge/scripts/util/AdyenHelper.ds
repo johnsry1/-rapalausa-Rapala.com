@@ -294,7 +294,8 @@ var __AdyenHelper : Object = {
 
         if (createRecurringPaymentResult === PIPELET_ERROR || createRecurringPaymentResult.Decision == 'ERROR') {
             return {
-                error: true
+                error: true,
+                message: createRecurringPaymentResult.AdyenOriginErrorMessage
             };
         }
 

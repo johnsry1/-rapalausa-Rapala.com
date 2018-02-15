@@ -6,6 +6,7 @@
 * @output Decision : String
 * @output PspReference : String
 * @output AdyenErrorMessage : String
+* @output AdyenOriginErrorMessage : String
 */
 
 /* API Includes */
@@ -99,6 +100,7 @@ function createRecurringPayment(args) {
                 errorMessage += ' (' + responseObj.refusalReason + ')';
             }
             args.AdyenErrorMessage = errorMessage;
+            args.AdyenOriginErrorMessage = ('refusalReason' in responseObj && !empty(responseObj.refusalReason)) ? responseObj.refusalReason : '';
         }
     } catch (e) {
         Logger.getLogger('Adyen').fatal('Adyen: ' + e.toString() + ' in ' + e.fileName + ':' + e.lineNumber);
