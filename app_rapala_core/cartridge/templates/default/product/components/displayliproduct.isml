@@ -1,4 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
 <div class="product-list-item">
 <iscomment>
 	Creates a div rendering a product and product line item information.
@@ -21,7 +22,7 @@
 	<span class="not-available">
 		<iscomment>${Resource.msg('cart.removeditem','checkout',null)}</iscomment>
 	</span>
-	<div class="name"><isprint value="${productLineItem.productName}" encoding="off" /></div>
+	<div class="name"><isproductname productname="${productLineItem.productName}"/></div>
 <iselse/>
 	<div class="name">
 		<a href="javascript:void(0);">
@@ -32,21 +33,21 @@
 				URLUtils.url api returns relative url!!
 			</iscomment>
 			<isif condition="${productLineItem.product.isVariant() && !(productLineItem.product.getMasterProduct().isSearchable())}">
-				<isprint value="${productLineItem.lineItemText}"  encoding="off" />
+				<isproductname productname="${productLineItem.lineItemText}"/>
 			<iselseif condition="${!productLineItem.product.isSearchable()}">
-				<isprint value="${productLineItem.lineItemText}"  encoding="off" />
+				<isproductname productname="${productLineItem.lineItemText}"/>
 			<iselseif condition="${productLineItem.categoryID != null}">
 				<isif condition="${productlink!=null && !productlink=='false'}">
-					<isprint value="${productLineItem.lineItemText}"  encoding="off"/>
+					<isproductname productname="${productLineItem.lineItemText}"/>
 				<iselse>
-					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
+					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID, 'cgid', productLineItem.categoryID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isproductname productname="${productLineItem.lineItemText}"/></a>
 				</iselse>
 				</isif>
 			<iselse/>
 				<isif condition="${productlink!=null && !productlink}">
-					<isprint value="${productLineItem.lineItemText}"  encoding="off"/>
+					<isproductname productname="${productLineItem.lineItemText}"/>
 				<iselse>
-					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isprint value="${productLineItem.lineItemText}"  encoding="off"/></a>
+					<a href="${URLUtils.https('Product-Show','pid', productLineItem.productID)}" title="<isprint value="${productLineItem.lineItemText}" encoding="off"/>"><isproductname productname="${productLineItem.lineItemText}"/></a>
 				</iselse>
 				</isif>
 			</isif>

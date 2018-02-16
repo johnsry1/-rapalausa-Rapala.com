@@ -1,4 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
 <iscomment>Start JIRA PREV-66:Incorrect price displayed for the product set when options are selected for multiple individual products.</iscomment>
 <iscomment>Start JIRA PREV-55:Inventory message is not displaying for the individual product within the product set.</iscomment>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('imageTransformationService') == 'DIS' || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}">
@@ -36,7 +37,7 @@
 	<div class="product-set-details">
 		<h1 class="product-name">
 			<a class="item-name" href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('product.label','product',null, pdict.Product.name)}">
-				<isprint value="${pdict.Product.name}"/>
+				<isproductname productname="${pdict.Product.name}"/>
 			</a>
 		</h1>
 		

@@ -3,7 +3,7 @@
 		importScript("app_disbestpractice:product/ProductImageSO.ds");
 	</isscript>
 </isif>
-
+<isinclude template="util/modules"/>
 <isif condition="${!empty(pdict.RecommendetionList)}">
 	<div class="recommendations cross-sell">
 		<isif condition="${pdict.RecommendetionList.size() > 0}">		
@@ -30,7 +30,7 @@
 							</div>
 							<div class="cartrecommads_cont">
 								<div class="product-name">
-									<a class="cart-recommendationName" href="${URLUtils.https('Product-Show','pid',recProduct.ID)}" title="${pName}"><isprint value="${pName}" encoding="off" /></a>
+									<a class="cart-recommendationName" href="${URLUtils.https('Product-Show','pid',recProduct.ID)}" title="${pName}"><isproductname productname="${pName}"/></a>
 								</div>
 								<iscomment>
 								StandardPrice:  quantity-one unit price from the configured list price book.
