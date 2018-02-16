@@ -241,6 +241,14 @@ body {
                         display: inline-block;
                     }
                 }
+                .ui-email {
+                    a {
+                        @include respond($desktop-breakpoint) {
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
                 ul,
                 li {
                     height: auto;
@@ -315,6 +323,11 @@ body {
                                 @include respond(desktop) {
                                     display: none;
                                 }
+                            }
+                        }
+                        .header-create {
+                            .custom-link {
+                                display: none;
                             }
                         }
                     }

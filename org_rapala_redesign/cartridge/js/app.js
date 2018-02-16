@@ -633,6 +633,9 @@ var app = {
         }
         initializeEvents();
         require('./browsera').init();
+        if (!util.isMobile()) {
+            $('body').addClass('desktop-device');
+        }
     }
 };
 

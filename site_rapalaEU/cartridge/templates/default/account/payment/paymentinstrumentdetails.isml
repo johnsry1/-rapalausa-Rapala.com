@@ -18,6 +18,11 @@
 	</isif>
 
 	<form id="CreditCardForm" name="CreditCardForm" action="${URLUtils.httpsContinue()}" class="form-horizontal" method="post" id="newcreditcard">
+		<isif condition="${pdict.AdyenErrorMessage != null && !empty(pdict.AdyenErrorMessage)}">
+			<div class="error">
+				<isprint value="${pdict.AdyenErrorMessage}" encoding="off"/>
+			</div>
+		</isif>
 		<fieldset>
 			<isscript>
 				var ownerAttributes = {

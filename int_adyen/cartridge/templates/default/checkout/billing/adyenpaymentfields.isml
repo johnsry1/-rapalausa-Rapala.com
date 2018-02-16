@@ -92,3 +92,14 @@
 	</div>
 	<div class="form-caption"></div>
 </div>
+
+<isif condition="${pdict.CurrentCustomer.authenticated}">
+	<div class="formfield form-row-50 form-row-left SaveCard">
+		<div class="custom-checkbox">
+			<div class="custom-link active"></div>
+			<div class="checkbox">
+				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox"/>
+			</div>
+		</div>
+	</div>
+</isif>
