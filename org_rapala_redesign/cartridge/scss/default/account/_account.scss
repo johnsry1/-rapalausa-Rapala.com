@@ -138,7 +138,7 @@ div.returningcustomers {
             }
             .back-link {
                 a {
-                    color: $black;;
+                    color: $black;
                 }
             }
         }
@@ -1019,6 +1019,27 @@ ul.common-nav {
             button {
                 @include button(submit);
                 width: auto;
+            }
+        }
+    }
+    .site-map {
+        h2 {
+            font-family: $global-font-family;
+        }
+        ul {
+            li {
+                &.first-level {
+                    ul {
+                        li {
+                            margin-bottom: 18px;
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            a {
+                                color: $bg-darkbrown;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
