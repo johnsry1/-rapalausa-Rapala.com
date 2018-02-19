@@ -48,6 +48,17 @@ div.returningcustomers {
                 margin: $form-row-margin;
                 .label {
                     @include label;
+                    margin-bottom: 0;
+                    .labeltext {
+                        color: inherit;
+                        letter-spacing: inherit;
+                        font-weight: normal;
+                        text-transform: inherit;
+                        font-family: inherit;
+                        font-variant: inherit;
+                        font-size: inherit;
+                        vertical-align: inherit;
+                    }
                     .requiredindicator {
                         float: none;
                         color: $required-color;
@@ -55,6 +66,11 @@ div.returningcustomers {
                         display: inline-block;
                         padding: 0;
                     }
+                }
+                span.errorclient,
+                div.errorclient,
+                span.existing_register {
+                    margin-top: rem(3px);
                 }
             }
         }
@@ -64,6 +80,16 @@ div.returningcustomers {
         .formactions {
             .signin-button {
                 @include button;
+                span {
+                    text-transform: inherit;
+                    color: inherit;
+                }
+                &:hover {
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                }
             }
         }
     }
@@ -98,11 +124,21 @@ div.returningcustomers {
                 float: right;
                 .send.greybutton {
                     @include button;
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                    &:hover {
+                        span {
+                            text-transform: inherit;
+                            color: inherit;
+                        }
+                    }
                 }
             }
             .back-link {
                 a {
-                    color: $black;;
+                    color: $black;
                 }
             }
         }
@@ -115,6 +151,19 @@ div.returningcustomers {
     }
     #primary.primary-content {
         .account-section {
+            .requiredindicator {
+                color: $required-color;
+            }
+            .custom-checkbox.custom {
+                @include respond(large-down) {
+                    text-align: left;
+                }
+                .label {
+                    span.labeltext {
+                        color: inherit;
+                    }
+                }
+            }
             .cell.checkoutloginsignin {
                 box-shadow: none !important;
                 font-family: $font !important;
@@ -145,7 +194,8 @@ div.returningcustomers {
                         float: none;
                     }
                     span.errorclient,
-                    div.errorclient {
+                    div.errorclient,
+                    span.existing_register {
                         @include form-error;
                         margin-top: rem(3px);
                     }
@@ -176,6 +226,12 @@ div.returningcustomers {
                         @include button('submit');
                     }
                 }
+                .resetpwd {
+                    font-family: $font;
+                    @include respond(large-down) {
+                        font-family: $font;
+                    }
+                }
             }
             .createan-account {
                 input {
@@ -184,9 +240,13 @@ div.returningcustomers {
                     float: none;
                 }
                 span.errorclient,
-                div.errorclient {
+                div.errorclient,
+                span.existing_register {
                     @include form-error;
                     margin-top: rem(3px);
+                }
+                span.existing_register {
+                    margin-top: rem(5px);
                 }
                 .contentboxcontent.new-register {
                     box-shadow: none;
@@ -197,7 +257,12 @@ div.returningcustomers {
                         font-family: $font;
                     }
                     .registration {
+                        form {
+                            overflow: hidden;
+                        }
                         .formactions {
+                            float: none;
+                            width: 100%;
                             button {
                                 @include button('submit');
                             }
@@ -224,15 +289,45 @@ div.returningcustomers {
                             }
                             .labeltext {
                                 @include respond(medium-down) {
-                                    margin-left: 0;
+                                    margin-left: 0 !important;
+                                    color: $form-label-color !important;
                                 }
                             }
                         }
+                    }
+                    .signupfor-email {
+                        input[type="checkbox"] + label {
+                            &::before {
+                                float: left;
+                            }
+                        }
+                        .formfield {
+                            width: 100%;
+                        }
+                        .custom-link {
+                            width: 100%;
+                        }
+
                     }
                     .seesamples {
                         font-family: $font;
                         @include font-size($link-font-size);
                         margin-left: 0;
+                        text-align: left;
+                        display: inline;
+                        float: none !important;
+                    }
+                    .formactions {
+                        button {
+                            @include button('submit');
+                            width: 100%;
+                        }
+                    }
+                }
+                .rapala_benefits {
+                    clear: both;
+                    @include respond(large-up) {
+                        margin-top: rem(15px);
                     }
                 }
             }
@@ -258,10 +353,33 @@ div.returningcustomers {
     .ui-widget-header {
         border-bottom: none;
     }
+    .ui-widget-content {
+        .confirmationcontainer.resetpassword {
+            h1 {
+                @include h2;
+                font-family: $font-third;
+            }
+            #message.reset-success-email {
+                @include p;
+            }
+        }
+        .confirmationcontainer {
+            .actions {
+                button.confirmBtn {
+                    @include button(submit);
+                    width: 100%;
+                }
+            }
+        }
+    }
     .passwordreset {
         h1 {
             @include h2;
             font-family: $font-third;
+            span {
+                float: none;
+                width: auto;
+            }
         }
         p {
             font-family: $font;
@@ -272,11 +390,38 @@ div.returningcustomers {
             @include button('submit');
         }
     }
-    .form-row {
-        .requiredindicator {
-            float: none;
-            color: $required-color;
-            margin-left: rem(3px);
+    .formfield.passwordemail {
+        .form-row.required {
+            .textinput {
+                @include form-input;
+                &.errorclient {
+                    background: $error-bg-color !important;
+                    border: 1px solid $red !important;
+                }
+            }
+            .label {
+                @include label;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit;
+                    text-transform: inherit;
+                    font-variant: inherit;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+            span.errorclient {
+                @include form-error;
+            }
+            .requiredindicator {
+                font-family: $font;
+                float: none;
+                color: $required-color;
+                margin-left: rem(3px);
+            }
         }
     }
 }
@@ -319,12 +464,18 @@ ul.common-nav {
                     @include respond(medium-down) {
                         line-height: 16px;
                         padding-bottom: 0;
-                        margin-bottom: 9px;
+                        margin-bottom: 5px;
+                        text-align: left;
+                        width: 100%;
+                        float: none;
                     }
                     .labeltext {
                         font-family: inherit;
                         font-weight: inherit;
                         text-transform: inherit;
+                        @include respond(medium-down) {
+                            margin-left: 0;
+                        }
                     }
                 }
                 .field-wrapper {
@@ -338,9 +489,20 @@ ul.common-nav {
                 }
                 .form-caption {
                     margin-top: 0;
+                    @include form-caption;
+                    @include respond(medium-down) {
+                        margin-left: 0;
+                    }
+                    &.error-message {
+                        @include form-error;
+                        @include respond(large-up) {
+                            margin-top: -5px;
+                        }
+                    }
                 }
             }
             .form-row.form-indent {
+                margin-left: 0 !important;
                 @include respond(large-up) {
                     margin-left: 29% !important;
                 }
@@ -361,18 +523,32 @@ ul.common-nav {
                 }
             }
             .form-row.form-row-button {
+                margin-left: 0 !important;
                 @include respond(large-up) {
                     margin-left: 29% !important;
                 }
                 button {
                     @include button('submit');
+                    width: auto;
                     @include respond(large-up) {
                         width: auto;
                     }
                 }
             }
+            .charlimit {
+                margin-left: 0 !important;
+                font-family: $font;
+                padding: 0;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+            }
             .create_Agree {
                 font-family: $font;
+                margin-left: 0 !important;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
             }
         }
     }
@@ -630,13 +806,13 @@ ul.common-nav {
                     font-size: $font-error-font-size;
                 }
                 .input-select {
-                    width: 120% !important;
-                    width: calc(100% + 32px) !important;
+                    padding: 2px 0 2px 10px;
                 }
             }
             .form-caption {
                 margin-left: 0;
                 @include font-size(13px);
+                font-family: $font;
                 @include respond(large-up) {
                     margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
                 }
@@ -720,6 +896,193 @@ ul.common-nav {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.registration {
+    .custom_signup {
+        box-shadow: none;
+        border: $border;
+        .form-row {
+            .label {
+                .labeltext {
+                    @include label;
+                    margin: 0;
+                    float: none;
+                }
+                .requiredindicator {
+                    float: none;
+                    color: $required-color;
+                    margin-left: rem(3px);
+                    position: static;
+                    padding: 0;
+                    display: inline;
+                }
+            }
+            .field-wrapper {
+                span.errorclient {
+                    @include form-error;
+                }
+                .textinput {
+                    @include form-input
+                }
+            }
+        }
+        .emailsignupcheckbox {
+            .custom-checkbox {
+                .label {
+                    width: 100%;
+                    float: none;
+                    .labeltext {
+                        @include label;
+                        width: calc(100% - 35px);
+                        float: none;
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        .custom-checkbox {
+            .custom-link.active {
+                display: none;
+            }
+        }
+        .registration {
+            .custom_signup {
+                .create_Agree p {
+                    font-family: $font;
+                }
+            }
+        }
+        .create-account-btn {
+            .register-button.create-account {
+                @include button;
+                width: auto;
+                span {
+                    color: inherit;
+                    text-transform: inherit;
+                }
+                &:hover {
+                    @include font-size($button-font-size);
+                    @include line-height($button-line-height);
+                    height: $button-height;
+                    width: auto;
+                    color: $button-hover-color;
+                    text-decoration: $button-hover-text-decoration;
+                    background: $button-hover-bg;
+                    border: $button-hover-border;
+                    box-shadow: $button-hover-box-shadow;
+                    span {
+                        color: inherit;
+                        text-transform: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+.sample_header_text {
+    font-family: $font;
+}
+.sample_mail {
+    .sample_text {
+        p {
+            @include p;
+        }
+    }
+}
+.pt_customerservice {
+    form {
+        .formfields {
+            select {
+                height: $form-field-height - $form-field-border-width * 2;
+                border: none;
+                margin: 0;
+            }
+            .formfield.textbox {
+                textarea.textbox {
+                    width: 100% !important;
+                    border-radius: $form-field-border-radius;
+                    border: $form-field-border;
+                }
+            }
+            .formfield {
+                .char-count.contact-us {
+                    width: 100%;
+                }
+            }
+        }
+        .form-row-button {
+            margin-top: rem(20px);
+            button {
+                @include button(submit);
+                width: auto;
+            }
+        }
+    }
+    .site-map {
+        h2 {
+            font-family: $global-font-family;
+        }
+        ul {
+            li {
+                &.first-level {
+                    ul {
+                        li {
+                            margin-bottom: 18px;
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            a {
+                                color: $bg-darkbrown;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pt_acc_landing {
+    #NewPasswordForm {
+        max-width: rem(400px);
+        .form-row {
+            margin: $form-row-margin;
+            .label {
+                @include label;
+                padding: 0;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit !important;
+                    text-transform: inherit;
+                    font-variant: inherit !important;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include button(submit);
+            }
+        }
+        .form-row.inputlabel .label span,
+        .formfield.inputlabel .label span {
+            color: $form-label-color;
+        }
+    }
+}
+
+#container.pt_error {
+    #primary.primary-content {
+        .contentboxcontent {
+            @include respond(desktop-down) {
+                margin-bottom: 0;
             }
         }
     }

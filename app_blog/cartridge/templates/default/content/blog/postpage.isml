@@ -1,77 +1,112 @@
 <!--- TEMPLATENAME: postpage.isml --->
 <isinclude template="util/modules"/>
 
-<head>
-	<isinclude template="components/header/htmlhead"/>
-</head>
 <isscript>
-	var content = pdict.Content;
-	var rootBlogFolder = null;
-	var currentBlogFolder = content.getClassificationFolder();
-	var parentBlogFolder = currentBlogFolder.parent;
+    var content = pdict.Content;
+    var rootBlogFolder = null;
+    var currentBlogFolder = content.getClassificationFolder();
+    var parentBlogFolder = currentBlogFolder.parent;
 </isscript>
-<isdecorate template="blog/pt_blog">
-	<body>
-	<div id="container">
-		<div id="primary" class="primary-content">
-				<isinclude template="blog/components/breadcrumbs"/>
-				
-				<isinclude template="blog/components/postpagination"/>
-				
-				<div class="blog-post-title">
-					<isprint value="${content.name}" />
-				</div>
-				<div class="blog-post-date">
-					<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
-						<isprint value="${content.custom.blog_date}" />
-					<iselse>
-						<isprint value="${content.creationDate}" />
-					</isif>
-				</div>
-				
-				<isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-				<isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-				<isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
-				
-				<div class="blog-post-author">
-					<isif condition="${content.custom.author != null && !empty(content.custom.author)}">
-						<a href="${URLUtils.url('Search-Show', 'q', content.custom.author, 'id', 'author')}">
-							<isprint value="${content.custom.author}" />
-						</a>
-					</isif>
-				</div>
+<isdecorate template="blog/pt_blogpost">
+    <div class="blog-article">
+        <h1 class="blog-post-title">
+            <isprint value="${content.name}" />
+        </h1>
+        <div class="blog-post-info">
+            <div class="blog-post-author">
+                <isif condition="${content.custom.author != null && !empty(content.custom.author)}">
+                    <a href="${URLUtils.url('Search-Show', 'q', content.custom.author, 'id', 'author')}">
+                        ${Resource.msgf('blog.postpage.postedby','blog',null, content.custom.author)}
+                    </a>
+                </isif>
+            </div>
 
-				<div class="blog-post-skilllevel">
-					<isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
-						<a href="${URLUtils.url('Search-Show', 'q', content.custom.skill_level, 'id', 'skill_level')}">
-							<isprint value="${content.custom.skill_level}" />
-						</a>
-					</isif>
-				</div>
-				
-				<div class="blog-post-date">
-					<isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
-						<isprint value="${content.custom.blog_date}" />
-					<iselse>
-						<isprint value="${content.creationDate}" />
-					</isif>
-				</div>
-				<div class="blog-pos-html">
-					<isprint value="${content.custom.body}" encoding="off"/>
-				</div>
-				<div class="more-posts">
-					<isif condition="${content.custom.additional_posts != null && !empty(content.custom.additional_posts)}">
-						<a id="more-posts-link" href="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}">
-							<isprint value="${Resource.msg('blog.moreposts', 'blog', null)}" />
-						</a>
-						<div id="more-posts-container">
-							<div id="additional-posts" style="display:none">
-								<isinclude url="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}"/>
-							</div>
-						</div>
-					</isif>
-				</div>
-		</div><!-- END: primary -->
-	</div><!-- END: container -->
-	</body>
+            <div class="blog-post-skilllevel">
+                <isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
+                    <a href="${URLUtils.url('Search-Show', 'q', content.custom.skill_level, 'id', 'skill_level')}">
+                        <isprint value="${content.custom.skill_level}" />
+                    </a>
+                </isif>
+            </div>
+
+            <div class="blog-post-date">
+                <isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
+                    <isprint value="${content.custom.blog_date}" style="DATE_LONG" />
+                <iselse>
+                    <isprint value="${content.creationDate}" style="DATE_LONG" />
+                </isif>
+            </div>
+        </div>
+
+        <div class="blog-post-body">
+            <isif condition="${content.custom.display_content_slot_top && !empty(content.custom.display_content_slot_top)}">
+                <div class="blog-post-top">
+                    <isslot id="blog-post-top" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+                </div>
+            </isif>
+
+            <div class="blog-post-html">
+                <isprint value="${content.custom.body}" encoding="off"/>
+            </div>
+
+            <isif condition="${content.custom.display_content_slot_middle && !empty(content.custom.display_content_slot_middle)}">
+                <div class="blog-post-center">
+                    <isslot id="blog-post-center" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+                </div>
+            </isif>
+
+            <isif condition="${content.custom.body_lower != null && !empty(content.custom.body_lower)}">
+                <div class="blog-post-html">
+                    <isprint value="${content.custom.body_lower}" encoding="off"/>
+                </div>
+            </isif>
+
+            <isif condition="${content.custom.display_content_slot_bottom && !empty(content.custom.display_content_slot_bottom)}">
+                <div class="blog-post-bottom">
+                    <isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
+                </div>
+            </isif>
+        </div>
+
+        <div class="blog-post-info-bottom">
+            <div class="blog-post-author">
+                <isif condition="${content.custom.author != null && !empty(content.custom.author)}">
+                    <a href="${URLUtils.url('Search-Show', 'q', content.custom.author, 'id', 'author')}">
+                        ${Resource.msgf('blog.postpage.postedby','blog',null, content.custom.author)}
+                    </a>
+                </isif>
+            </div>
+
+            <div class="blog-post-skilllevel">
+                <isif condition="${content.custom.skill_level != null && !empty(content.custom.skill_level)}">
+                    <a href="${URLUtils.url('Search-Show', 'q', content.custom.skill_level, 'id', 'skill_level')}">
+                        <isprint value="${content.custom.skill_level}" />
+                    </a>
+                </isif>
+            </div>
+
+            <div class="blog-post-date">
+                <isif condition="${content.custom.blog_date != null && !empty(content.custom.blog_date)}">
+                    <isprint value="${content.custom.blog_date}" style="DATE_LONG" />
+                <iselse>
+                    <isprint value="${content.creationDate}" style="DATE_LONG" />
+                </isif>
+            </div>
+
+            <div class="blog-post-social-asset">
+                <iscontentasset aid="blog-social-share" />
+            </div>
+        </div>
+    </div>
+
+    <isif condition="${content.custom.additional_posts != null && !empty(content.custom.additional_posts)}">
+        <div class="blog-more-posts">
+            <h2 class="blog-more-posts-title">
+                ${Resource.msg('blog.postpage.checkoutmoreblogposts','blog',null)}
+            </h2>
+            <div class="blog-more-posts-container">
+                <isinclude url="${URLUtils.url('Blog-MorePosts', 'postID', content.ID)}"/>
+            </div>
+        </div>
+    </isif>
 </isdecorate>

@@ -69,7 +69,8 @@ function handlePayments(order) {
 
                 if (authorizationResult.not_supported || authorizationResult.error) {
                     return {
-                        error: true
+                        error: true,
+                        errorMessage : authorizationResult.PlaceOrderError != null ? authorizationResult.PlaceOrderError : ''
                     };
                 }
                 if (PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor().ID === 'ADYEN_CREDIT' && authorizationResult.authorized3d === true) {
@@ -174,7 +175,7 @@ function start() {
                     OrderMgr.failOrder(order);
                     return {
                         error: true,
-                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+                        errorMessage: handlePaymentsResult.errorMessage != null && !empty(handlePaymentsResult.errorMessage) ? handlePaymentsResult.errorMessage : new Status(Status.ERROR, 'confirm.error.technical')
                     };
                 });
 
@@ -370,6 +371,26 @@ function submit() {
     require('site_rapalaEU/cartridge/controllers/COSummary.js').Start();
 }
 
+function failImpl(order, errorMessage) {
+    var orderstatus;
+    orderstatus = Transaction.wrap(function(){
+        if (order instanceof dw.order.Order) {
+            return OrderMgr.failOrder(order);
+        } else {
+            return OrderMgr.failOrder(order.object);
+        }
+    });
+    if (order != null) {
+        Transaction.wrap(function(){
+            order.addNote("Order fail note", errorMessage);
+        });
+    }
+    if (!empty(orderstatus) && !orderstatus.isError()) {
+        return {error: false};
+    }
+    return {error: true, errorMessage : errorMessage};
+}
+
 
 /*
  * Module exports
@@ -382,6 +403,7 @@ function submit() {
 exports.SubmitPaymentJSON = guard.ensure(['https'], submitPaymentJSON);
 /** @see module:controllers/COPlaceOrder~submitPaymentJSON */
 exports.Submit = guard.ensure(['https'], submit);
+exports.FailImpl = failImpl;
 /*
  * Local methods
  */

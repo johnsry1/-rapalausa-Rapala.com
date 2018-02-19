@@ -219,7 +219,7 @@ function initializeEvents() {
     // Footer Brands carousel
     $('#footer-brands').owlCarousel({
         items: 5,
-        slideBy: 1,
+        slideBy: 5,
         margin: 0,
         navRewind: false,
         rewind: false,
@@ -231,11 +231,35 @@ function initializeEvents() {
             0: {
                 items: 3
             },
-            767: {
-                items: 2
-            },
-            1023: {
+            567: {
                 items: 5
+            }
+        }
+    });
+
+    $('#horizontal-carousel').owlCarousel({
+        items: 4,
+        slideBy: 4,
+        nav: true,
+        loop: false,
+        dots: true,
+        autoWidth: true,
+        margin: 20,
+        responsive: {
+            0: {
+                items: 2,
+                slideBy: 2,
+                nav: false
+            },
+            567: {
+                items: 3,
+                slideBy: 3,
+                nav: false
+            },
+            768: {
+                items: 4,
+                slideBy: 4,
+                nav: true
             }
         }
     });
@@ -285,7 +309,7 @@ function initializeEvents() {
         });
 
     //
-    $('body').on('submit', '#customercontactus', function (e) { 
+    $('body').on('submit', '#customercontactus', function (e) {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
@@ -609,6 +633,9 @@ var app = {
         }
         initializeEvents();
         require('./browsera').init();
+        if (!util.isMobile()) {
+            $('body').addClass('desktop-device');
+        }
     }
 };
 

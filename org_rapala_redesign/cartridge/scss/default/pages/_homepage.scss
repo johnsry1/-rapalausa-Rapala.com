@@ -206,3 +206,83 @@
         }
     }
 }
+
+.horizontal-carousel.owl-carousel {
+    margin: 0;
+    padding-bottom: rem(34px);
+    li {
+        margin: 0;
+    }
+    .owl-stage-outer {
+        margin: 0;
+        @include respond(medium-up) {
+            margin: 0 rem(40px);
+        }
+        @include respond(large-up) {
+            margin: 0 rem(50px);
+        }
+        @include respond(desktop) {
+            margin: 0 rem(45px);
+        }
+    }
+    .product-tile {
+        border: $border-secondary;
+        width: rem(140px);
+        padding: rem(11px);
+        text-align: left;
+        color: $black;
+        box-sizing: border-box;
+        @include respond(large-up) {
+            width: rem(140px);
+        }
+        .product-image {
+            width: 100%;
+            img {
+                width: 100%;
+                height: auto;
+            }
+            #quickviewbutton {
+                display: none !important;
+            }
+        }
+        .product-name {
+            @include font-size(13px);
+            margin-top: rem(7px);
+            height: auto;
+        }
+        .product-pricing {
+            margin: rem(7px) 0 0;
+            @include font-size(14px);
+            font-weight: bold;
+            .product-standard-price {
+                color: $silver;
+            }
+            .product-sales-price {
+                color: $black;
+                &:nth-child(-1) {
+                    color: $silver;
+                }
+            }
+        }
+    }
+    .owl-controls {
+        .owl-dots {
+            top: inherit;
+            top: initial;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: rem(18px);
+            width: 100%;
+            padding: 0;
+            text-align: center;
+            .owl-dot {
+                padding: 0;
+                float: none;
+                span {
+                    margin: 5px 5px;
+                }
+            }
+        }
+    }
+}

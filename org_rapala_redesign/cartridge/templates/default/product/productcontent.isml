@@ -1,0 +1,546 @@
+<isif condition="${!isQuickView}">
+	<div class="productcachejson hide" >
+		<isset name="productcachejson" value="${require('*/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+	</div>
+<iselse/>
+	<div class="productcacheQuickviewjson hide" >
+		<isset name="productcachejson" value="${require('*/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
+    </div>
+</isif>
+
+<input type="hidden" data-productjson="${productcachejson}" class="productjson"/>
+<input type="hidden" value="${pdict.CurrentHttpParameterMap.source.stringValue}" class="http-source"/>
+<isif condition="${pdict.resetAttributes}">
+	<isscript>
+		var ProductUtils = require('*/cartridge/scripts/product/ProductUtils.js');
+		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
+		var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ["source", "uuid", "Quantity"]);
+		if (qs && qs.length>0) { url+="&"+qs; }
+	</isscript>
+	<isinclude url="${url}"/>
+<iselse/>
+	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
+	<isscript>
+		var masterId = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID;
+		var avm = pdict.Product.availabilityModel;
+		pdict.available = avm.availability>0;
+
+		var availableCount = "0";
+		if (pdict.available && !empty(avm.inventoryRecord)) {
+			availableCount = avm.inventoryRecord.perpetual ? "999" : avm.inventoryRecord.ATS.value.toFixed().toString();
+		}
+		var tagManager = require('int_googletags/cartridge/scripts/googletags/Org_TagManager');
+	</isscript>
+	<iscomment>
+		primary details
+		=============================================================
+	</iscomment>
+
+	<h2 class="visually-hidden">Details</h2>
+	<span class="visually-hidden" itemprop="url">${URLUtils.https('Product-Show','pid', pdict.Product.ID)}</span>
+
+	<iscomment>
+		view detail link for quick view
+		=============================================================
+	</iscomment>
+
+	<isif condition="${isQuickView}">
+		<!-- shown only in quick view -->
+		<iscomment>JIRA PREV-50 : Next and Previous links will not be displayed on PDP if user navigate from Quick View.Added id="view-full-details" </iscomment>
+		<div id="pdpFullDetailsLink">
+			<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}" id="view-full-details">${Resource.msg('product.viewdetails','product',null)}</a>
+		</div>
+	</isif>
+
+	<iscomment>
+		product pricing
+		=============================================================
+	<isset name="showTieredPrice" value="${true}" scope="page"/>
+	<isinclude template="product/components/pricing"/></iscomment>
+
+	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
+	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
+	<isinclude template="product/components/group"/>
+
+	<iscomment>
+		product promotions
+		=============================================================
+
+
+	<isset name="showTieredPrice" value="${false}" scope="page"/>
+	<isinclude template="product/components/promotions"/></iscomment>
+
+	<iscomment>
+		variations
+		=============================================================
+		newSizes,newColors,newTestPounds,newPak are collections used to display "NEW" label on the swathces
+	</iscomment>
+	<isset name="newSizes" value="${flagUtils.getSizeCollection(pdict.Product)}" scope="page"/>
+	<isset name="newColors" value="${flagUtils.getColorCollection(pdict.Product)}" scope="page"/>
+	<isset name="newTestPounds" value="${flagUtils.getTestPoundsCollection(pdict.Product)}" scope="page"/>
+	<isset name="newPak" value="${flagUtils.getPakCollection(pdict.Product)}" scope="page" />
+	<isinclude template="product/components/variations"/>
+
+	<iscomment>
+		add to cart form
+		=============================================================
+	</iscomment>
+	<iscomment>JIRA PREV-67 : Incorrect price displayed for the standard product when multiple options are selected. Added "normalProduct" class</iscomment>
+	<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm normalProduct">
+		<fieldset>
+			<iscomment>
+				product options (Must be inside form)
+				=============================================================
+			</iscomment>
+
+			<h2 class="visually-hidden">Add to cart options</h2>
+			<isinclude template="product/components/options"/>
+
+				<div class="product-add-to-cart addtocart">
+					<h2 class="visually-hidden">Product Actions</h2>
+					<iscomment>
+						display Item Number
+						=============================================================
+					</iscomment>
+					<div class="productid">
+						<span class="label"><isprint value="${Resource.msg('product.item','product',null)}" />:</span>
+						<span class="value">
+							<isif condition="${!pdict.Product.master}">
+								<isprint value="${ pdict.Product.ID }"/>
+							</isif>
+						</span>
+					</div>
+					<iscomment>
+						availability
+						=============================================================
+					</iscomment>
+
+					<iscomment><isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+						<div class="availability-storepickup">
+							<div class="availability">
+								<i class="fa fa-truck fa-lg pull-left"></i>
+								<span class="label"><isprint value="${Resource.msg('product.webstock','product',null)}" /></span>
+								<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
+									<span class="value"><isinclude template="product/components/availability"/></span>
+								<iselse/>
+									<span class="value"><isprint value="${Resource.msg('product.selectforstock','product',null)}" /></span>
+								</isif>
+							</div>
+							<div class="mobile-view price&offer-detail"></div>
+							<div class="availability-instore">
+								<i class="fa fa-briefcase fa-lg pull-left"></i>
+								<label for="Stock"><isprint value="${Resource.msg('product.instorestock','product',null)}" /></label>
+								<isif condition="${empty(pdict.CurrentHttpParameterMap.uuid.value)}">
+									<div id="${pdict.Product.ID}" class="availability-results availability-msg store-stock">
+										<span class="label set-preferred-store"><a href="${URLUtils.url('StoreInventory-SetZipCodeCore','pid', pdict.Product.ID)}" title="${pdict.Product.name}">${Resource.msg('storelist.check.availablity','storepickup',null)}</a></span>
+									</div>
+								<iselse/>
+									<div id="${pdict.CurrentHttpParameterMap.uuid.value}" class="availability-results store-stock"></div>
+								</isif>
+							</div>
+						</div>
+					<iselse/>
+						<div class="availability">
+							<span class="label"><isprint value="${Resource.msg('global.availability','locale',null)}" /></span>
+							<isif condition="${!pdict.Product.master && !pdict.Product.variationGroup}">
+								<span class="value"><isinclude template="product/components/availability"/></span>
+							<iselse/>
+								<span class="value"><isprint value="${Resource.msg('product.selectforstock','product',null)}" /></span>
+							</isif>
+						</div>
+					</isif></iscomment>
+					<isif condition="${(pdict.Product.custom.availableForSale != null) && (pdict.Product.custom.availableForSale != false)}">
+						<div class="availability">
+							<span class="label">
+							<isprint value="${Resource.msg('global.availability','locale',null)}" />: </span>
+							<span class="value"><!-- Product Availability Message --></span>
+						</div>
+					</isif>
+
+
+					<iscomment>
+						product pricing
+						=============================================================
+					</iscomment>
+					<isset name="showTieredPrice" value="${true}" scope="page"/>
+					<div class="pdp-tablet-content">
+						<iscomment>
+							product promotions
+							=============================================================
+						</iscomment>
+						<div class="mobile-promotions">
+							<isset name="showTieredPrice" value="${false}" scope="page"/>
+							<isinclude template="product/components/promotions"/>
+						</div>
+						<div class="mobile-pricing">
+							<isinclude template="product/components/pricing"/>
+						</div>
+					</div>
+					<div id="pdpATCDivpdpMain" class="addtocartbar">
+					<iscomment>
+						product quantity
+						=============================================================
+					</iscomment>
+						<iscomment>
+							add to cart submit
+							=============================================================
+						</iscomment>
+
+						<isscript>
+							var updateSources = ["cart", "giftregistry", "wishlist"];
+							var source = pdict.CurrentHttpParameterMap.source.stringValue;
+							var buttonTitle = dw.web.Resource.msg('global.addtocart','locale','Add to Cart');
+							var plid = null;
+							if( updateSources.indexOf(source)>-1 ){
+								buttonTitle = dw.web.Resource.msg('global.update','locale','Update');
+								if( pdict.CurrentHttpParameterMap.productlistid && pdict.CurrentHttpParameterMap.productlistid.stringValue ) {
+									plid = pdict.CurrentHttpParameterMap.productlistid.stringValue;
+								}
+							} else {
+								// Only pass on white-listed sources
+								source = null;
+							}
+						</isscript>
+
+						<isset name="cartAction" value="add" scope="page"/>
+
+						<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
+							<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
+							<isset name="cartAction" value="update" scope="page"/>
+						</isif>
+						<isif condition="${source}">
+							<input type="hidden" name="source" id="source" value="${source}" />
+						</isif>
+						<isif condition="${plid}">
+							<input type="hidden" name="productlistid" id="productlistid" value="${plid}" />
+						</isif>
+						<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
+						<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
+						<input type="hidden" name="name" id="name" value="${pdict.Product.name}" />
+						<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master&&!pdict.Product.variationGroup ? '' : ' disabled="disabled"'}" scope="page"/>
+						<isif condition="${disabledAttr.length == 0}">
+							<div class="addtocart">
+								<div class="inventory">
+									<div class="quantity">
+										<span class="label"><isprint value="${Resource.msg('global.quantity','locale',null)}" /></span>
+									</div>
+								</div>
+								<div class="addedto-cartoverlay">
+									<div class="addedto-sucess-wrapper">
+										<span class="addedto-img"></span>
+										<span class="addedto-text"><isprint value="${Resource.msg('product.addedtocart','product',null)}"/></span>
+									</div>
+								</div>
+								<div class="addTo-cart-section">
+									<input type="number" class="input-text quantityinput" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
+									<isif condition="${pdict.CurrentHttpParameterMap.isCart.stringValue == 'true'}">
+										<input type="hidden" value="${pdict.CurrentHttpParameterMap.lineItemID.stringValue}" name="lineItemId" class="line-itemid"/>
+										<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}');"  type="button"  title="${Resource.msg('global.updatecart','locale',null)}"  value="${Resource.msg('global.updatecart','locale',null)}"  class="button-fancy-large add-to-cart addtocartbutton">${Resource.msg('global.cartupdate','locale',null)}</button>
+									<iselse/>
+										<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}');" id="add-to-cart" type="button" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart addtocartbutton recommendation_cart" data-gtmdata="${JSON.stringify(tagManager.getProductData(pdict.Product.ID))}">${buttonTitle}</button>
+									</isif>
+								</div>
+							</div>
+						<iselse/>
+							<isscript>
+								var pvm : dw.catalog.ProductVariationModel = pdict.Product.getVariationModel();
+								var it : dw.util.Iterator = pvm.getProductVariationAttributes().iterator();
+								var array : Array = [];
+								var options = '';
+								var requiredOptions = '';
+								while( it.hasNext() ) {
+									var text : dw.object.ObjectAttributeDefinition = it.next();
+									array.push( text.displayName );
+								}
+								options = array.join(', ');
+								var lastIndex = options.lastIndexOf(',');
+								if( lastIndex > 0 && options.length > 1 && array.length > 1) {
+								 requiredOptions = options.substr(0,lastIndex) + ' ' + dw.web.Resource.msg('product.attributedivider', 'product', null) + options.substr(lastIndex+1, options.length);
+								} else {
+								 requiredOptions = options;
+								}
+								var buttonTitleDisabledSelectVariation = StringUtils.format(dw.web.Resource.msg('product.missingval','product', null), requiredOptions);
+							</isscript>
+							<div class="addtocart disabled">
+								<div class="inventory">
+									<div class="quantity">
+										<span class="label"><isprint value="${Resource.msg('global.quantity','locale',null)}" /></span>
+									</div>
+								</div>
+								<div class="addedto-cartoverlay">
+									<div class="addedto-sucess-wrapper">
+										<span class="addedto-img"></span>
+										<span class="addedto-text"><isprint value="${Resource.msg('product.addedtocart','product',null)}"/></span>
+									</div>
+								</div>
+								<div class="addTo-cart-section">
+									<input type="number" class="input-text quantityinput" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}" disabled/>
+									<button onClick="googleAnalyticsEvents.addProduct('${pdict.Product.ID}')" id="add-to-cart" type="button" title="${buttonTitleDisabledSelectVariation}" value="${buttonTitleDisabledSelectVariation}" data-gtmdata="${JSON.stringify(tagManager.getProductData(pdict.Product.ID))}" class="button-fancy-large  add-to-cart-disabled addtocartbutton disabled"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
+								</div>
+							</div>
+						</isif>
+					</div><!--  end details block -->
+				</div>
+			</fieldset>
+		</form>
+
+	<iscomment>
+		product actions
+		=============================================================
+	</iscomment>
+
+	<iscomment><div class="product-actions">
+		<isscript>
+			var Url = require('*/cartridge/scripts/util/Url');
+			pdict.url = Url.getCurrent(pdict);
+			pdict.title = pdict.Product.name;
+		</isscript>
+		<isif condition="${!(pdict.Product.bundle)}">
+			<isif condition="${pdict.CurrentCustomer.registered}">
+				<div class="addtowishlist">
+					<div class="addtowish-tooltip" style="display: none;"><img src="${URLUtils.staticURL('/images/wishlistalert.png')}"/></div>
+					<a class="add-to-wishlist auth" data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}"><isprint value="${Resource.msg('global.addtowishlist','locale',null)}"/></a>
+				</div>
+			<iselse/>
+				<div class="addtowishlist">
+					<div class="addtowish-tooltip" style="display: none;"><img src="${URLUtils.staticURL('/images/wishlistalert.png')}"/></div>
+					<a class="add-to-wishlist non-auth" data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}"><isprint value="${Resource.msg('global.addtowishlist','locale',null)}"/></a>
+				</div>
+
+		<div class="socialsharing">
+			<isinclude template="components/socialsharing"/>
+		</div>
+
+	</div></iscomment><!--  end details block -->
+	<div class="socialmedia share">
+
+				<isif condition="${!isQuickView}">
+                    <iscomment>Add This</iscomment>
+					<script type="text/javascript">/*<![CDATA[*/
+						var addthis_config = {
+								  services_compact: 'email, facebook, twitter, more',
+						          services_exclude: 'print'
+						}
+						var addthis_share = {
+							url: '${URLUtils.abs‌('Product-Show','pid', pdict.Product.ID)}'
+						}
+					/* ]]> */</script>
+
+					<!-- AddThis Button BEGIN -->
+					<script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#username=xa-4cdd55c576074981&domready=1"></script>
+					<iscomment>dynamically add facebook/addthis script for the dialog</iscomment>
+					<script type="text/javascript">/* <![CDATA[ */
+					    var headTag = document.getElementsByTagName('head')[0];
+					    var scriptTag = document.createElement('script');
+					    scriptTag.type = 'text/javascript';
+					    scriptTag.src = location.protocol  + "//connect.facebook.net/en_US/all.js#xfbml=1";
+					    headTag.appendChild(scriptTag)
+					/* ]]> */</script>
+					<div class="addthis_toolbox addthis_default_style ">
+						<a class="sharing_button addthis_button_compact">
+						<img src="${URLUtils.staticURL('/images/share-icon.svg')}" width="47" height="16" border="0" alt="Share" /></a>
+						<script type="text/javascript">/*<![CDATA[*/
+							addthis.button('.sharing_button');
+							/* ]]> */</script>
+					</div>
+					</isif>
+					<isif condition="${!(pdict.Product.productSet)}">
+						<isif condition="${!empty(pdict.CurrentHttpParameterMap.source.stringValue)}">
+							<isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">
+								<isset name="wishlistUrl1" value="${URLUtils.url('Wishlist-AddAjax', 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
+							<iselse>
+								<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add', 'source', pdict.CurrentHttpParameterMap.source.stringValue)}" scope="page"/>
+							</isif>
+						<iselse>
+							<isset name="wishlistUrl1" value="${URLUtils.url('Wishlist-AddAjax')}" scope="page"/>
+							<isset name="wishlistUrl" value="${URLUtils.https('Wishlist-Add')}" scope="page"/>
+						</isif>
+						<isif condition="${!(pdict.Product.bundle)}">
+							<isif condition="${pdict.CurrentCustomer.registered}">
+		       					 <isif condition="${pdict.CurrentCustomer.authenticated}">
+									<div class="addtowishlist">
+									<div class="addtowish-tooltip" style="display: none;"><img src="${URLUtils.staticURL('/images/wishlistalert.png')}"/></div>
+									<a class="add-to-wishlist auth" href="${wishlistUrl1}"><isprint value="${Resource.msg('global.addtowishlist','locale',null)}" /></a>
+									</div>
+								</isif>
+							<iselse>
+								<div class="addtowishlist">
+								<div class="addtowish-tooltip" style="display: none;"><img src="${URLUtils.staticURL('/images/wishlistalert.png')}"/></div>
+									<a class="add-to-wishlist non-auth" href="${wishlistUrl}"><isprint value="${Resource.msg('global.addtowishlist','locale',null)}" /></a>
+								</div>
+							</isif>
+						</isif>
+					</isif>
+					<isif condition="${!empty(pdict.Product)}">
+						<isif condition="${pdict.Product.isVariant()}">
+							<isif  condition="${!empty(pdict.Product.masterProduct) && !empty(pdict.Product.masterProduct.custom.familyName) && !empty(pdict.Product.masterProduct.custom.familyURL)}">
+								<div class="series-landing">
+									<a href="${pdict.Product.masterProduct.custom.familyURL}"><isprint value="${pdict.Product.masterProduct.custom.familyName}" /></a>
+								</div>
+							</isif>
+						<iselse>
+							<isif  condition="${!empty(pdict.Product.custom.familyName) && !empty(pdict.Product.custom.familyURL)}">
+								<div class="series-landing">
+									<a href="${pdict.Product.custom.familyURL}"><isprint value="${pdict.Product.custom.familyName}" /></a>
+								</div>
+							</isif>
+						</isif>
+					</isif>
+
+					<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableSendToFriend')}">
+					<div class="sendtofriend">
+
+					<a class="send-to-friend"><isprint value="${Resource.msg('product.sendfriend','product',null)}" /></a>
+					</div>
+					</isif>
+					<div class="clear"></div>
+
+				</div>
+	<iscomment>This is ugly, but it works until we can get a better solution</iscomment>
+	<isif condition="${pdict.GetImages}">
+		<div id="update-images" style="display:none">
+			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('imageTransformationService') == 'DIS' || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}">
+				<isinclude template="product/components/productimagesDS"/>
+			<iselse/>
+			    <isinclude template="product/components/productimages"/>
+			</isif>
+		</div>
+	</isif>
+</isif>
+
+<script type="text/javascript" src="javascript/customer-service.js?$staticlink$"></script>
+<div class="customer-content" id="customer-contact-us">
+
+    <script type="text/javascript">
+        if(typeof geoip_country_code == 'function') {
+            var IP_GeoCode = geoip_country_code();
+            var allowed_countries = $(".allowed-countries").text();
+            if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){
+                allowed_countries = "US";
+            }
+            if(allowed_countries.indexOf(IP_GeoCode) == -1){
+                window.location.href = app.URLs.contactusnonus;
+            }
+        }
+    </script>
+    <p>This form is for USA customers only.&nbsp; <a style="font-style: italic; font-weight: bold" href="https://www.rapalaworld.com/contact">For International inquires, click here</a>. For quicker responses on website-related inquiries, please complete and send the form below. Please provide us with accurate information to make this process as efficient as possible. The information we collect will only be used to respond to your message. Your information will not be distributed.</p>
+    <p><b>If you are interested in Sponsorship, Donations or wish to make a Decal Request please apply through our <a href="https://www.rapala.com/RapalaInsider?id=1" target="_blank">Rapala Insider Program</a>.</b></p>
+
+    <hr />
+
+    <form action="/on/demandware.store/Sites-rapalaEU-Site/en_EC/CustomerService-ContactUsStart" method="post"  id="customercontactus" novalidate="novalidate">
+        <!-- dwMarker="form" dwPipelineTitle="CustomerService-ContactUs (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-ContactUs" --> 		<fieldset>
+        <div class="formfields">
+            <div class="formfield formfield_50 formfield_left firstname"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">Name</span>
+                    <span class="requiredindicator">*</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper">
+                    <input class="textinput required" id="dwfrm_contactus_firstname" type="text" name="dwfrm_contactus_firstname" value="" maxlength="50" /> 				<!-- display text area input field --> 				 				 					<!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js -->
+                </div>
+            </div>
+            <!-- END: firstname -->
+            <div class="formfield formfield_50 formfield_right lastname"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">Email</span>
+                    <span class="requiredindicator">*</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper"><input class="textinput required emailCM" id="dwfrm_contactus_email" type="text" name="dwfrm_contactus_email" value="" maxlength="50" /> 				<!-- display text area input field --> 				 				 					<!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --></div>
+            </div>
+            <div class="formfield formfield_50 formfield_left firstname"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">Phone</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper"><input class="textinput phone" id="dwfrm_contactus_phone" type="text" name="dwfrm_contactus_phone" value="" maxlength="50" /> 				<!-- display text area input field --> 				 				 					<!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --></div>
+            </div>
+            <div class="formfield formfield_50 formfield_right lastname"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">Order Number</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper"><input class="textinput" id="dwfrm_contactus_ordernumber" type="text" name="dwfrm_contactus_ordernumber" value="" maxlength="2147483647" /> 				<!-- display text area input field --> 				 				 					<!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --></div>
+            </div>
+
+            <div class="formfield formfield_50 formfield_left form-row-type-select">
+                <label class="label" for="dwfrm_contactus_country">
+                    <span class="labeltext">Country</span>
+                </label>
+                <div class="field-wrapper">
+                    <div class="select-style"><select class="input-select country valid" id="dwfrm_contactus_country" name="dwfrm_contactus_country" maxlength="2147483647" aria-invalid="false"><option class="select-option" label="Select..." value="">Select...</option><option class="select-option" label="Afghanistan" value="AF">Afghanistan</option><option class="select-option" label="Albania" value="AL">Albania</option><option class="select-option" label="Algeria" value="DZ">Algeria</option><option class="select-option" label="American Samoa" value="AS">American Samoa</option><option class="select-option" label="Andorra" value="AD">Andorra</option><option class="select-option" label="Angola" value="AO">Angola</option><option class="select-option" label="Anguilla" value="AI">Anguilla</option><option class="select-option" label="Antarctica" value="AQ">Antarctica</option><option class="select-option" label="Antigua And Barbuda" value="AG">Antigua And Barbuda</option><option class="select-option" label="Argentina" value="AR">Argentina</option><option class="select-option" label="Armenia" value="AM">Armenia</option><option class="select-option" label="Aruba" value="AW">Aruba</option><option class="select-option" label="Australia" value="AU">Australia</option><option class="select-option" label="Austria" value="AT">Austria</option><option class="select-option" label="Azerbaijan" value="AZ">Azerbaijan</option><option class="select-option" label="Bahamas" value="BS">Bahamas</option><option class="select-option" label="Bahrain" value="BH">Bahrain</option><option class="select-option" label="Bangladesh" value="BD">Bangladesh</option><option class="select-option" label="Barbados" value="BB">Barbados</option><option class="select-option" label="Belarus" value="BY">Belarus</option><option class="select-option" label="Belgium" value="BE">Belgium</option><option class="select-option" label="Belize" value="BZ">Belize</option><option class="select-option" label="Benin" value="BJ">Benin</option><option class="select-option" label="Bermuda" value="BM">Bermuda</option><option class="select-option" label="Bhutan" value="BT">Bhutan</option><option class="select-option" label="Bolivia" value="BO">Bolivia</option><option class="select-option" label="Bosnia And Herzegovina" value="BA">Bosnia And Herzegovina</option><option class="select-option" label="Botswana" value="BW">Botswana</option><option class="select-option" label="Bouvet Island" value="BV">Bouvet Island</option><option class="select-option" label="Brazil" value="BR">Brazil</option><option class="select-option" label="British Indian Ocean Territory" value="IO">British Indian Ocean Territory</option><option class="select-option" label="Brunei Darussalam" value="BN">Brunei Darussalam</option><option class="select-option" label="Bulgaria" value="BG">Bulgaria</option><option class="select-option" label="Burkina Faso" value="BF">Burkina Faso</option><option class="select-option" label="Burundi" value="BI">Burundi</option><option class="select-option" label="Cambodia" value="KH">Cambodia</option><option class="select-option" label="Cameroon" value="CM">Cameroon</option><option class="select-option" label="Canada" value="CA">Canada</option><option class="select-option" label="Cape Verde" value="CV">Cape Verde</option><option class="select-option" label="Cayman Islands" value="KY">Cayman Islands</option><option class="select-option" label="Central African Republic" value="CF">Central African Republic</option><option class="select-option" label="Chad" value="TD">Chad</option><option class="select-option" label="Chile" value="CL">Chile</option><option class="select-option" label="China" value="CN">China</option><option class="select-option" label="Christmas Island" value="CX">Christmas Island</option><option class="select-option" label="Cocos (Keeling) Islands" value="CC">Cocos (Keeling) Islands</option><option class="select-option" label="Colombia" value="CO">Colombia</option><option class="select-option" label="Comoros" value="KM">Comoros</option><option class="select-option" label="Cook Islands" value="CK">Cook Islands</option><option class="select-option" label="Costa Rica" value="CR">Costa Rica</option><option class="select-option" label="Cote D'Ivoire" value="CI">Cote D'Ivoire</option><option class="select-option" label="Croatia (Local Name: Hrvatska)" value="HR">Croatia (Local Name: Hrvatska)</option><option class="select-option" label="Cyprus" value="CY">Cyprus</option><option class="select-option" label="Czech Republic" value="CZ">Czech Republic</option><option class="select-option" label="Denmark" value="DK">Denmark</option><option class="select-option" label="Djibouti" value="DJ">Djibouti</option><option class="select-option" label="Dominica" value="DM">Dominica</option><option class="select-option" label="Dominican Republic" value="DO">Dominican Republic</option><option class="select-option" label="East Timor" value="TP">East Timor</option><option class="select-option" label="Ecuador" value="EC">Ecuador</option><option class="select-option" label="Egypt" value="EG">Egypt</option><option class="select-option" label="El Salvador" value="SV">El Salvador</option><option class="select-option" label="Equatorial Guinea" value="GQ">Equatorial Guinea</option><option class="select-option" label="Eritrea" value="ER">Eritrea</option><option class="select-option" label="Estonia" value="EE">Estonia</option><option class="select-option" label="Ethiopia" value="ET">Ethiopia</option><option class="select-option" label="Falkland Islands (Malvinas)" value="FK">Falkland Islands (Malvinas)</option><option class="select-option" label="Faroe Islands" value="FO">Faroe Islands</option><option class="select-option" label="Fiji" value="FJ">Fiji</option><option class="select-option" label="Finland" value="FI">Finland</option><option class="select-option" label="France" value="FR">France</option><option class="select-option" label="French Guiana" value="GF">French Guiana</option><option class="select-option" label="French Polynesia" value="PF">French Polynesia</option><option class="select-option" label="French Southern Territories" value="TF">French Southern Territories</option><option class="select-option" label="Gabon" value="GA">Gabon</option><option class="select-option" label="Gambia" value="GM">Gambia</option><option class="select-option" label="Georgia" value="GE">Georgia</option><option class="select-option" label="Germany" value="DE">Germany</option><option class="select-option" label="Ghana" value="GH">Ghana</option><option class="select-option" label="Gibraltar" value="GI">Gibraltar</option><option class="select-option" label="Greece" value="GR">Greece</option><option class="select-option" label="Greenland" value="GL">Greenland</option><option class="select-option" label="Grenada" value="GD">Grenada</option><option class="select-option" label="Guadeloupe" value="GP">Guadeloupe</option><option class="select-option" label="Guam" value="GU">Guam</option><option class="select-option" label="Guatemala" value="GT">Guatemala</option><option class="select-option" label="Guinea" value="GN">Guinea</option><option class="select-option" label="Guinea-Bissau" value="GW">Guinea-Bissau</option><option class="select-option" label="Guyana" value="GY">Guyana</option><option class="select-option" label="Haiti" value="HT">Haiti</option><option class="select-option" label="Heard And Mc Donald Islands" value="HM">Heard And Mc Donald Islands</option><option class="select-option" label="Honduras" value="HN">Honduras</option><option class="select-option" label="Hong Kong" value="HK">Hong Kong</option><option class="select-option" label="Hungary" value="HU">Hungary</option><option class="select-option" label="Iceland" value="IS">Iceland</option><option class="select-option" label="India" value="IN">India</option><option class="select-option" label="Indonesia" value="ID">Indonesia</option><option class="select-option" label="Ireland" value="IE">Ireland</option><option class="select-option" label="Israel" value="IL">Israel</option><option class="select-option" label="Italy" value="IT">Italy</option><option class="select-option" label="Jamaica" value="JM">Jamaica</option><option class="select-option" label="Japan" value="JP">Japan</option><option class="select-option" label="Jordan" value="JO">Jordan</option><option class="select-option" label="Kazakhstan" value="KZ">Kazakhstan</option><option class="select-option" label="Kenya" value="KE">Kenya</option><option class="select-option" label="Kiribati" value="KI">Kiribati</option><option class="select-option" label="Kuwait" value="KW">Kuwait</option><option class="select-option" label="Kyrgyzstan" value="KG">Kyrgyzstan</option><option class="select-option" label="Lao People's Democratic Republic" value="LA">Lao People's Democratic Republic</option><option class="select-option" label="Latvia" value="LV">Latvia</option><option class="select-option" label="Lebanon" value="LB">Lebanon</option><option class="select-option" label="Lesotho" value="LS">Lesotho</option><option class="select-option" label="Liberia" value="LR">Liberia</option><option class="select-option" label="Libya" value="LY">Libya</option><option class="select-option" label="Liechtenstein" value="LI">Liechtenstein</option><option class="select-option" label="Lithuania" value="LT">Lithuania</option><option class="select-option" label="Luxembourg" value="LU">Luxembourg</option><option class="select-option" label="Macau" value="MO">Macau</option><option class="select-option" label="Macedonia, The Former Yugoslav Republic Of" value="MK">Macedonia, The Former Yugoslav Republic Of</option><option class="select-option" label="Madagascar" value="MG">Madagascar</option><option class="select-option" label="Malawi" value="MW">Malawi</option><option class="select-option" label="Malaysia" value="MY">Malaysia</option><option class="select-option" label="Maldives" value="MV">Maldives</option><option class="select-option" label="Mali" value="ML">Mali</option><option class="select-option" label="Malta" value="MT">Malta</option><option class="select-option" label="Martinique" value="MQ">Martinique</option><option class="select-option" label="Mauritania" value="MR">Mauritania</option><option class="select-option" label="Mauritius" value="MU">Mauritius</option><option class="select-option" label="Mayotte" value="YT">Mayotte</option><option class="select-option" label="Mexico" value="MX">Mexico</option><option class="select-option" label="Moldova, Republic Of" value="MD">Moldova, Republic Of</option><option class="select-option" label="Monaco" value="MC">Monaco</option><option class="select-option" label="Mongolia" value="MN">Mongolia</option><option class="select-option" label="Montenegro" value="ME">Montenegro</option><option class="select-option" label="Montserrat" value="MS">Montserrat</option><option class="select-option" label="Morocco" value="MA">Morocco</option><option class="select-option" label="Mozambique" value="MZ">Mozambique</option><option class="select-option" label="Myanmar" value="MM">Myanmar</option><option class="select-option" label="Namibia" value="NA">Namibia</option><option class="select-option" label="Nauru" value="NR">Nauru</option><option class="select-option" label="Nepal" value="NP">Nepal</option><option class="select-option" label="Netherlands" value="NL">Netherlands</option><option class="select-option" label="New Zealand" value="NZ">New Zealand</option><option class="select-option" label="Nicaragua" value="NI">Nicaragua</option><option class="select-option" label="Niger" value="NE">Niger</option><option class="select-option" label="Nigeria" value="NG">Nigeria</option><option class="select-option" label="Niue" value="NU">Niue</option><option class="select-option" label="Norfolk Island" value="NF">Norfolk Island</option><option class="select-option" label="Norway" value="NO">Norway</option><option class="select-option" label="Northern Mariana Islands" value="MP">Northern Mariana Islands</option><option class="select-option" label="Oman" value="OM">Oman</option><option class="select-option" label="Pakistan" value="PK">Pakistan</option><option class="select-option" label="Palau" value="PW">Palau</option><option class="select-option" label="Panama" value="PA">Panama</option><option class="select-option" label="Papua New Guinea" value="PG">Papua New Guinea</option><option class="select-option" label="Paraguay" value="PY">Paraguay</option><option class="select-option" label="Peru" value="PE">Peru</option><option class="select-option" label="Philippines" value="PH">Philippines</option><option class="select-option" label="Pitcairn" value="PN">Pitcairn</option><option class="select-option" label="Poland" value="PL">Poland</option><option class="select-option" label="Portugal" value="PT">Portugal</option><option class="select-option" label="Puerto Rico" value="PR">Puerto Rico</option><option class="select-option" label="Qatar" value="QA">Qatar</option><option class="select-option" label="Reunion" value="RE">Reunion</option><option class="select-option" label="Romania" value="RO">Romania</option><option class="select-option" label="Russian Federation" value="RU">Russian Federation</option><option class="select-option" label="Rwanda" value="RW">Rwanda</option><option class="select-option" label="Samoa" value="WS">Samoa</option><option class="select-option" label="San Marino" value="SM">San Marino</option><option class="select-option" label="Sao Tome And Principe" value="ST">Sao Tome And Principe</option><option class="select-option" label="Saudi Arabia" value="SA">Saudi Arabia</option><option class="select-option" label="Senegal" value="SN">Senegal</option><option class="select-option" label="Serbia" value="RS">Serbia</option><option class="select-option" label="Seychelles" value="SC">Seychelles</option><option class="select-option" label="Sierra Leone" value="SL">Sierra Leone</option><option class="select-option" label="Singapore" value="SG">Singapore</option><option class="select-option" label="St. Maarten" value="SX">St. Maarten</option><option class="select-option" label="Slovakia (Slovak Republic)" value="SK">Slovakia (Slovak Republic)</option><option class="select-option" label="Slovenia" value="SI">Slovenia</option><option class="select-option" label="Solomon Islands" value="SB">Solomon Islands</option><option class="select-option" label="South Africa" value="ZA">South Africa</option><option class="select-option" label="South Georgia And The South Sandwich Islands" value="GS">South Georgia And The South Sandwich Islands</option><option class="select-option" label="South Korea" value="KR">South Korea</option><option class="select-option" label="South Sudan" value="SS">South Sudan</option><option class="select-option" label="Spain" value="ES">Spain</option><option class="select-option" label="Sri Lanka" value="LK">Sri Lanka</option><option class="select-option" label="St. Helena" value="SH">St. Helena</option><option class="select-option" label="Saint Kitts And Nevis" value="KN">Saint Kitts And Nevis</option><option class="select-option" label="Saint Lucia" value="LC">Saint Lucia</option><option class="select-option" label="St. Martin" value="MF">St. Martin</option><option class="select-option" label="St. Pierre And Miquelon" value="PM">St. Pierre And Miquelon</option><option class="select-option" label="Saint Vincent And The Grenadines" value="VC">Saint Vincent And The Grenadines</option><option class="select-option" label="Sudan" value="SD">Sudan</option><option class="select-option" label="Suriname" value="SR">Suriname</option><option class="select-option" label="Svalbard And Jan Mayen Islands" value="SJ">Svalbard And Jan Mayen Islands</option><option class="select-option" label="Swaziland" value="SZ">Swaziland</option><option class="select-option" label="Sweden" value="SE">Sweden</option><option class="select-option" label="Switzerland" value="CH">Switzerland</option><option class="select-option" label="Taiwan" value="TW">Taiwan</option><option class="select-option" label="Tajikistan" value="TJ">Tajikistan</option><option class="select-option" label="Tanzania, United Republic Of" value="TZ">Tanzania, United Republic Of</option><option class="select-option" label="Thailand" value="TH">Thailand</option><option class="select-option" label="Tibet" value="TB">Tibet</option><option class="select-option" label="Togo" value="TG">Togo</option><option class="select-option" label="Tokelau" value="TK">Tokelau</option><option class="select-option" label="Trinidad And Tobago" value="TT">Trinidad And Tobago</option><option class="select-option" label="Tunisia" value="TN">Tunisia</option><option class="select-option" label="Turkey" value="TR">Turkey</option><option class="select-option" label="Turkmenistan" value="TM">Turkmenistan</option><option class="select-option" label="Turks And Caicos Islands" value="TC">Turks And Caicos Islands</option><option class="select-option" label="Tuvalu" value="TV">Tuvalu</option><option class="select-option" label="United Arab Emirates" value="AE">United Arab Emirates</option><option class="select-option" label="Uganda" value="UG">Uganda</option><option class="select-option" label="Ukraine" value="UA">Ukraine</option><option class="select-option" label="United Kingdom" value="GB">United Kingdom</option><option class="select-option" label="United States" value="US">United States</option><option class="select-option" label="Uruguay" value="UY">Uruguay</option><option class="select-option" label="United States Minor Outlying Islands" value="UM">United States Minor Outlying Islands</option><option class="select-option" label="Uzbekistan" value="UZ">Uzbekistan</option><option class="select-option" label="Vanuatu" value="VU">Vanuatu</option><option class="select-option" label="Venezuela" value="VE">Venezuela</option><option class="select-option" label="Vietnam" value="VN">Vietnam</option><option class="select-option" label="Virgin Islands (British)" value="VG">Virgin Islands (British)</option><option class="select-option" label="Virgin Islands (U.S.)" value="VI">Virgin Islands (U.S.)</option><option class="select-option" label="Wallis And Futuna Islands" value="WF">Wallis And Futuna Islands</option><option class="select-option" label="Western Sahara" value="EH">Western Sahara</option><option class="select-option" label="Yemen" value="YE">Yemen</option><option class="select-option" label="Zambia" value="ZM">Zambia</option><option class="select-option" label="Zimbabwe" value="ZW">Zimbabwe</option></select></div>
+                </div>
+            </div>
+
+            <div class="formfield formfield_50 formfield_right form-row-type-select"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">My Question</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper">
+                    <div class="select-style">
+                        <select class="selectbox" id="dwfrm_contactus_myquestion" name="dwfrm_contactus_myquestion">
+                            <option class="selectoption" label="General Information" value="General Information">General Information</option>
+                            <option class="selectoption" label="Order Status" value="Order Status">Order Status</option>
+                            <option class="selectoption" label="My Account" value="My Account">My Account</option>
+                            <option class="selectoption" label="Other" value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="formfield formfield_50 formfield_left textbox"><!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" -->
+                <div class="label">
+                    <span class="labeltext">Comment</span>
+                </div>
+                <!-- END: label -->
+                <div class="field-wrapper">
+                    <textarea class="textbox" id="dwfrm_contactus_comment" class="contactus_comment" name="dwfrm_contactus_comment" rows="8" cols="40" maxlength="1000" ></textarea>
+                </div>
+            </div>
+            <div class="form-row  form-row-button">
+                <button id="sendBtn" type="submit" value="Send" name="dwfrm_contactus_send">Submit</button>
+            </div>
+            <!-- END: formfields -->
+            <div id="formaction">&nbsp;</div>
+        </div>
+    </fieldset>
+    </form>
+    <!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/contentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentasset.isml" -->       <!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/htmlcontentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/htmlcontentasset.isml" -->
+    <div style="display:none;" class="dw-object dw-object-rinclude">
+        <textarea cols="100" rows="10" wrap="off">({&quot;PipelineURL&quot;:&quot;http://localhost:60606/target=/c/app_rapala_core/p/Page-Include&quot;,&quot;TemplateURL&quot;:&quot;http://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentassetinclude.isml&quot;,&quot;PageCacheExpires&quot;:&quot;10/26/2011 1:26 am&quot;,&quot;PipelineTitle&quot;:&quot;Page-Include (app_rapala_core)&quot;,&quot;TemplateTitle&quot;:&quot;/default/content/content/contentassetinclude.isml (app_rapala_core)&quot;,&quot;PageProcessingTime&quot;:4})</textarea>
+    </div>
+    <div class="contentasset"></div>
+    <!-- End contentasset -->
+    <isinputfield formfield="baseurl" name="baseurl" type="hidden" value="/on/demandware.store/Sites-Rapala-Site" id="hiddenid"></isinputfield>
+
+    <div id="related-links">
+        <h2>Related Links</h2>
+        <ol>
+            <li><a href="$httpsURL('Page-Show','cid','customer-privacy-security')$">Privacy &amp; Security Policy</a></li>
+        </ol>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.pt_customerservice #customercontactus textarea[maxlength]').each(function(){
+        charcount($(this));
+        // trigger the keydown event so that any existing character data is calculated
+    }).on('keyup keypress', function(){
+        charcount($(this));
+    });
+
+    function charcount($this){
+        var characterLimit = "1000";
+        var charRemains = characterLimit - $this.val().trim().length;
+        var enteredchar = $this.val().trim().length;
+        var charCountContainer='';
+        var charCountHtml = enteredchar + '/' + characterLimit ;
+
+        if ($this.next('div.char-count').length === 0) {
+            charCountContainer = $('<div class="char-count contact-us"/>').insertAfter($this);
+        }
+
+        $this.next('div.char-count').html(charCountHtml);
+    }
+</script>

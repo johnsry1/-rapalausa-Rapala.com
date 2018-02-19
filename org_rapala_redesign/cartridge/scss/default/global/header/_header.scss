@@ -39,6 +39,7 @@ body {
             }
         }
         ul {
+            font-family: $font;
             @include respond(desktop) {
                 float: none;
             }
@@ -240,6 +241,14 @@ body {
                         display: inline-block;
                     }
                 }
+                .ui-email {
+                    a {
+                        @include respond($desktop-breakpoint) {
+                            position: relative;
+                            top: 1px;
+                        }
+                    }
+                }
                 ul,
                 li {
                     height: auto;
@@ -316,6 +325,11 @@ body {
                                 }
                             }
                         }
+                        .header-create {
+                            .custom-link {
+                                display: none;
+                            }
+                        }
                     }
                     .sign-up-blk.js-active {
                         position: relative;
@@ -330,17 +344,21 @@ body {
                 }
             }
         }
-        .wrapper.handle-non-us-vh {
+        .wrapper {
+            &.handle-non-us-vh {
+                .row.column1 {
+                    @include respond(desktop) {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .cell {
+                        padding: 0;
+                    }
+                }
+            }
             .row.column1 {
-                @include respond(desktop) {
-                    padding: 0;
-                    margin: 0;
-                }
-                .cell {
-                    padding: 0;
-                }
                 .headerbanner {
-                    margin: rem(15px) 0 rem(10px) 0;
+                    margin: rem(15px) 0 rem(10px) 0 !important;
                     height: auto;
                     box-sizing: border-box;
                     @include respond(desktop-down) {
@@ -402,5 +420,31 @@ body {
     }
     a {
         font-family: $font;
+    }
+}
+
+#alert-message {
+    .non-usa-alert {
+        box-sizing: border-box;
+        padding: 0 rem(35px);
+        p {
+            @include p;
+        }
+    }
+    #close-non-us-alert {
+        position: absolute;
+        display: block;
+        width: rem(15px);
+        height: rem(15px);
+        top: rem(10px);
+        right: rem(10px);
+        @include respond(desktop) {
+            right: calc((100vw - 996px) / 2);
+        }
+        span {
+            display: block;
+            text-indent: -9999px;
+            overflow: hidden;
+        }
     }
 }

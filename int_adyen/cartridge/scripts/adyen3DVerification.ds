@@ -115,7 +115,7 @@ function verify( args : PipelineDictionary ) : Number {
 		// assign default values for the script output variables
 		var resultCode = '';
 		args.Decision = "ERROR";
-		args.PaymentStatus = resultObj.errorText; 
+		args.PaymentStatus = resultObj.errorText != null ? resultObj.errorText : ((responseObj.refusalReason != null) ? responseObj.refusalReason : ''); 
 		args.AuthorizationCode = '';
 		args.RequestToken = '';
 		

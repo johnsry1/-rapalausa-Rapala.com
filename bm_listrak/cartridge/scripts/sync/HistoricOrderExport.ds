@@ -1,0 +1,171 @@
+/**
+* export all orders from 2016
+* Purpose:	Exports Orders placed or modified since October 2016. Order file is sent to Listrak via FTP.
+*
+*/
+importPackage( dw.system );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.object );
+importPackage( dw.catalog );
+
+importScript( "objects/ltkOrder.ds" ); 
+importScript( "sync/ltkExportUtils.ds" ); 
+
+function execute( args : PipelineDictionary ) : Number
+{
+	var ltkHistoricDataExportLogger = dw.system.Logger.getLogger('ltkHistoricDataExport','ltkHistoricDataExport');
+	try {
+		var ltkHistoricConfig = CustomObjectMgr.getCustomObject('ltk_historic', 'historicExportConfig');
+	} catch (e) {
+		ltkHistoricDataExportLogger.info('HistoricOrderExport.ds ' + e);
+		return PIPELET_ERROR;
+	}
+	if (empty(ltkHistoricConfig)) {
+		ltkHistoricDataExportLogger.info('ltk_historic historicExportConfig is empty');
+		return PIPELET_ERROR;
+	}
+	// Job configuration variables
+	var startDate 				= ltkHistoricConfig.custom.startDate;
+	var endDate 					= ltkHistoricConfig.custom.endDate;
+	var lastSuccessExportDate 	= ltkHistoricConfig.custom.lastSuccessExportDate;// last exported order date create
+	var maxExportOrderCount 		= ltkHistoricConfig.custom.maxExportOrderCount;
+	var totalExportedOrders 		= ltkHistoricConfig.custom.totalExportedOrders;
+	var orderFileName			= ltkHistoricConfig.custom.orderFileName;
+	var itemFileName				= ltkHistoricConfig.custom.itemFileName;
+	var datePattern				= ltkHistoricConfig.custom.datePattern; //"yyyy-MM-dd_HH-mm-ss"
+
+	var calendar = new Calendar(lastSuccessExportDate);
+	var gmtDateString : String = StringUtils.formatCalendar( calendar, datePattern);
+
+	if (empty(lastSuccessExportDate) || lastSuccessExportDate >= endDate)
+	{
+		ltkHistoricDataExportLogger.info('no orders to export, lastSuccessExportDate=[' + lastSuccessExportDate + '], endDate=[' + endDate + ']');
+		return PIPELET_NEXT;
+	}
+	
+	// Get the orders ready for export
+	var orders : SeekableIterator = OrderMgr.queryOrders("creationDate > {0}", "creationDate ASC", lastSuccessExportDate, 2);
+	if (orders.getCount() == 0) {
+		ltkHistoricDataExportLogger.info('no orders to export, EXPORT DONE');
+		return PIPELET_NEXT;
+	}
+	ltkHistoricDataExportLogger.info('orders to export from '+ lastSuccessExportDate +', count=' + orders.getCount());
+	var ordersCount = 0;
+	
+	if (orders.hasNext())
+	{
+		////////// Prepare order files //////////
+		var orderfile = new ExportFile(orderFileName + '_' + gmtDateString +".txt");
+		var itemfile = new ExportFile(itemFileName + '_' + gmtDateString +".txt");
+		
+		// order header row
+		orderfile.AddRowItem('Email');
+		orderfile.AddRowItem('OrderNumber');
+		orderfile.AddRowItem('DateEntered');
+		orderfile.AddRowItem('OrderTotal');
+		orderfile.AddRowItem('ItemTotal');
+		orderfile.AddRowItem('TaxTotal');
+		orderfile.AddRowItem('ShippingTotal');
+		orderfile.AddRowItem('Status');
+		orderfile.AddRowItem('CouponCode');
+		orderfile.AddRowItem('TrackingNumber');
+		orderfile.WriteRow();
+	
+		// item header row
+		itemfile.AddRowItem('OrderNumber');
+		itemfile.AddRowItem('Sku');
+		itemfile.AddRowItem('Quantity');
+		itemfile.AddRowItem('Price');
+		itemfile.AddRowItem('TrackingNumber');
+		itemfile.WriteRow();
+		
+		// Process all orders
+		for each(var order : order in orders)
+		{
+			if (ordersCount >= maxExportOrderCount) {
+				break;
+			}
+			ordersCount++;
+			var o = new ltkOrder();
+			o.LoadOrder(order);
+	
+			// Add the order information to the order file		
+			orderfile.AddRowItem(decodeURI(o.Order.EmailAddress), true);
+			orderfile.AddRowItem(o.Order.OrderNumber, true);
+			orderfile.AddRowItemAsDate(o.Order.OrderDate);
+			lastSuccessExportDate = o.Order.OrderDate;
+			orderfile.AddRowItem(o.orderTotal());
+			orderfile.AddRowItem(o.Order.ItemTotal);
+			orderfile.AddRowItem(o.Order.TaxTotal);
+			orderfile.AddRowItem(o.Order.ShipTotal);
+			
+			var status = 'NotSet';
+			switch (o.Order.Status) {
+				case "NEW" :
+				case "CREATED":
+				case "OPEN" :
+					status = 'Pending';
+					break;				
+				case "CANCELLED" :
+					status = 'Canceled';
+					break;				
+				case "REPLACED" :
+					status = 'Misc';					
+					break;
+				default :
+					status = 'Unknown';
+					break;
+			}
+						
+			if (order.getShippingStatus().getDisplayValue() == 'SHIPPED')
+				status = "Shipped";
+			if (o.Order.Status == "COMPLETED")
+				status = "Completed";
+						
+			orderfile.AddRowItem(status, true);
+			orderfile.AddRowItem(o.Order.CouponCodes, true);
+			orderfile.AddRowItem(o.Order.TrackingNumbers, true);
+			
+			orderfile.WriteRow();
+			
+			// Add the order items for this order to the items files
+			for each(var i : ProductLineItem in o.Order.OrderItems)
+			{
+				itemfile.AddRowItem(o.Order.OrderNumber,true);
+				itemfile.AddRowItem(i.Sku,true);
+				itemfile.AddRowItem(i.Qty);
+				itemfile.AddRowItem(i.Price);
+				itemfile.AddRowItem(i.TrackingNumber, true);
+				
+				itemfile.WriteRow();
+			}
+			
+		}
+			
+		// Write the files and submit via FTP to Listrak
+		var orderResult = orderfile.SubmitFile();
+		var itemResult = itemfile.SubmitFile();
+		
+		if (orderResult == false || itemResult == false)
+		{
+			return PIPELET_ERROR;
+		}
+
+		orderfile.Delete();
+		itemfile.Delete();			
+	}
+	
+	/* Close the SeekableIterator object. */
+	orders.close();
+	ltkHistoricDataExportLogger.info('Total orders added=' + ordersCount);
+	if (orderResult || itemResult)
+	{
+		Transaction.wrap(function(){
+				CustomObjectMgr.getCustomObject('ltk_historic', 'historicExportConfig').custom.totalExportedOrders = totalExportedOrders + ordersCount;
+				CustomObjectMgr.getCustomObject('ltk_historic', 'historicExportConfig').custom.lastSuccessExportDate = lastSuccessExportDate;
+		});
+	}
+
+	return PIPELET_NEXT;
+}

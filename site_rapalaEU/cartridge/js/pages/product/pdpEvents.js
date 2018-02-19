@@ -2222,10 +2222,13 @@ var pdpEvents = {
             }
         });
         $('#add-to-cart').bind('click', function () {
-            $('.addedto-cartoverlay').addClass('added-overlay');
-            setTimeout(function () {
-                $('.addedto-cartoverlay').removeClass('added-overlay');
-            }, 2000);
+            var qtyValue = $(this).parent('.addTo-cart-section').find('.quantityinput').val();
+            if (qtyValue > 0) {
+                $('.addedto-cartoverlay').addClass('added-overlay');
+                setTimeout(function () {
+                    $('.addedto-cartoverlay').removeClass('added-overlay');
+                }, 2000);
+            }
         });
         $('#QuickViewDialog .product-primary-image').find('.product-image').click(function () {
             return false;

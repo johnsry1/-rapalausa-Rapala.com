@@ -50,6 +50,17 @@ a.filter {
         li {
             border: none;
             height: auto;
+            &.selected {
+                a.swatchanchor {
+                    color: $swatch-attr-hover-color;
+                    text-decoration: $swatch-attr-hover-text-decoration;
+                    background: $swatch-attr-hover-bg;
+                    border: $swatch-attr-hover-border;
+                    span {
+                        color: $swatch-attr-inner-color;
+                    }
+                }
+            }
             a {
                 @include swatch-attr;
             }
@@ -57,19 +68,51 @@ a.filter {
     }
 }
 
+.desktop-device {
+    .variationattributes {
+        .swatches.Size,
+        .swatches.size {
+            a:hover {
+                color: $swatch-attr-hover-color;
+                text-decoration: $swatch-attr-hover-text-decoration;
+                background: $swatch-attr-hover-bg;
+                border: $swatch-attr-hover-border;
+                span {
+                    color: $swatch-attr-inner-color;
+                }
+            }
+        }
+    }
+}
+
 #pdpMain {
     .addTo-cart-section {
+        padding-bottom: rem(10px);
+        position: relative;
         input.quantityinput {
             width: rem(50px);
             height: rem(40px);
             margin: 0 rem(10px) 0 0;
             border: $border;
         }
+        input.quantityinput[type="number"]::-webkit-outer-spin-button,
+        input.quantityinput[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input.quantityinput[type="number"] {
+            -moz-appearance: textfield;
+        }
+        span.errorclient {
+            position: absolute;
+            left: 0;
+            bottom: rem(-9px);
+        }
     }
 }
 
 .pdp-main {
-    .product-add-to-cart  {
+    .product-add-to-cart {
         button {
             @include button('submit');
             width: calc(100% - #{rem(60px)});

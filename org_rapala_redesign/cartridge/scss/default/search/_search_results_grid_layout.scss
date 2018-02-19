@@ -24,6 +24,14 @@
             }
         }
         #primary {
+            .bannerslot {
+                & > div {
+                    margin-bottom: rem(20px);
+                }
+                p {
+                    float: none;
+                }
+            }
             p {
                 @include p;
             }
@@ -68,7 +76,19 @@
                                         padding: 0;
                                     }
                                 }
+                                .first-last,
+                                .last-last {
+                                    background: none;
+                                }
+                                .first-last {
+                                    &.inactive a {
+                                        @include respond(desktop-down) {
+                                            background-position: -1px 4px;
+                                        }
+                                    }
+                                }
                                 a {
+                                    font-family: $font;
                                     @include respond(desktop-down) {
                                         padding: 0;
                                         width: 40px;
@@ -122,6 +142,21 @@
                                         top: 74%;
                                     }
                                 }
+                                .product-promo {
+                                    @include pdp-promo;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .productlisting.sub-cat {
+                    .cell {
+                        .product-promo {
+                            max-height: rem(60px);
+                            overflow: hidden;
+                            .promotionalMessage {
+                                @include pdp-promo;
                             }
                         }
                     }
@@ -163,6 +198,9 @@
                             letter-spacing: $pdp-price-letter-spacing;
                             color: $pdp-price-sale-color;
                         }
+                    }
+                    .product-promo {
+                        @include pdp-promo;
                     }
                 }
             }
@@ -307,6 +345,9 @@
         #primary {
             .folder-content-list {
                 font-family: $font;
+                @include respond(medium-down) {
+                    margin-top: rem(10px);
+                }
                 li {
                     a {
                         @include h3;
@@ -316,6 +357,16 @@
                             @include link;
                         }
                     }
+                }
+            }
+        }
+        #secondary {
+            .column {
+                .contentboxcontent {
+                    box-shadow: none;
+                    border: $border !important;
+                    font-family: $font;
+                    background: $background;
                 }
             }
         }

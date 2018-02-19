@@ -17,6 +17,7 @@ var ajax = require('../../ajax'),
 var flageallotmentcover = $('input.flageallotmentcover').val();
 var allotmentAmount = parseInt($('input.allotmentAmount').val(), 10);
 var couponMenthods = {
+    showPromoCode: false,
     updateSummary: function () {
         var $summary = $('#secondary .new-summery-cart');
         // indicate progress
@@ -341,6 +342,10 @@ var couponMenthods = {
             }
             couponMenthods.ordertotals();
             uievents.synccheckoutH();
+
+            if (couponMenthods.showPromoCode) {
+                $('.couponcode .label').click();
+            }
         });
         //app.execUjs();
     },
@@ -371,6 +376,7 @@ var couponMenthods = {
         if (typeof countryCode == 'undefined') {
             countryCode = 'US';
         }
+        couponMenthods.showPromoCode = true;
         couponMenthods.updatePaymentMethods(countryCode);
         couponMenthods.ordertotals();
 
@@ -735,7 +741,7 @@ exports.init = function () {
     $('body').on('click', '.payment-method-options input[type="radio"]', function () {
         updatePaymentMethod($(this).val());
         if ($(this).val() == 'Adyen' && $payType.length > 0) {
-            updatePaymentMethod($(this).val()); //set payment type of Adyen to the first one 
+            updatePaymentMethod($(this).val()); //set payment type of Adyen to the first one
             updatePaymentType((selectedPayType) ? selectedPayType : $payType[0].value, false);
         } else {
             $payType.removeAttr('checked');
@@ -1112,7 +1118,7 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
-    
+
     if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initBilling();
     }

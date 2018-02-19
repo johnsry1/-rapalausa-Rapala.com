@@ -117,7 +117,6 @@ body.js-body {
                                 &.color {
                                     @include respond(desktop) {
                                         display: inline-block;
-                                        margin-top: rem(5px);
                                     }
                                 }
                                 &.grayscale {
@@ -154,6 +153,7 @@ body.js-body {
                                 }
                             }
                             .mega-menu {
+                                font-family: $font !important;
                                 @include respond(desktop) {
                                     float: none;
                                 }
@@ -175,7 +175,7 @@ body.js-body {
                                 a {
                                     @include respond(desktop) {
                                         @include font-size(13px);
-                                        @include line-height(20px);
+                                        @include line-height(24px);
                                         color: $main-nav-subcategory-color;
                                         white-space: nowrap;
                                     }
@@ -183,13 +183,28 @@ body.js-body {
                                 .nav-banner {
                                     display: none;
                                     @include respond(desktop) {
-                                        display: block;
-                                        float: left;
+                                        display: inline-block;
+                                        vertical-align: top;
                                         margin-left: rem(20px);
                                     }
                                     p {
                                         margin: 0;
                                         padding: 0;
+                                    }
+                                    ul,
+                                    li {
+                                        margin: 0;
+                                        padding: 0;
+                                        float: none;
+                                        height: auto;
+                                        font-family: $font;
+                                        @include font-size(13px);
+                                        @include line-height(24px);
+                                        color: $main-nav-subcategory-color;
+                                        white-space: nowrap;
+                                        a {
+                                            color: $main-nav-subcategory-color;
+                                        }
                                     }
                                 }
                             }
@@ -257,6 +272,8 @@ body.js-body {
                                 border: $border-secondary;
                                 border-radius: 5px 5px 0 0;
                                 box-sizing: border-box;
+                                vertical-align: middle;
+                                float: none;
                             }
                         }
                         span {
@@ -307,6 +324,7 @@ body.js-body {
                                 min-width: rem(170px);
                                 left: 50%;
                                 transform: translateX(-50%);
+                                white-space: nowrap;
                             }
                         }
                     }
@@ -368,6 +386,7 @@ body.js-body {
                                     min-width: rem(170px);
                                     left: 50%;
                                     transform: translateX(-50%);
+                                    white-space: nowrap;
                                 }
                             }
                         }
@@ -378,7 +397,8 @@ body.js-body {
                         padding-bottom: rem(15px);
                     }
                     @include respond(desktop) {
-                        float: left;
+                        display: inline-block;
+                        vertical-align: top;
                     }
                 }
                 a.level-2 {

@@ -24,7 +24,7 @@
 	<label for="creditCard_number"><span class="required-indicator">•
 	</span><span>Number</span></label>
 	<div class="field-wrapper">
-		<input class="input-text  required" type="text" id="creditCard_number"
+		<input class="input-text creditCard-number required" type="text" id="creditCard_number" maxlength="16"
 			value="" aria-required="true">
 	</div>
 	<div class="form-caption">Example: 4111111111111111</div>
@@ -87,8 +87,19 @@
 	<label for="creditCard_cvn"><span class="required-indicator">•
 	</span><span>${Resource.msg('creditcard.cvnlabel', 'forms', null)}</span></label>
 	<div class="field-wrapper">
-		<input class="input-text  required" type="text" id="creditCard_cvn"
+		<input class="input-text creditcard_cvn  required" type="text" id="creditCard_cvn"
 			value="" aria-required="true">
 	</div>
 	<div class="form-caption"></div>
 </div>
+
+<isif condition="${pdict.CurrentCustomer.authenticated}">
+	<div class="formfield form-row-50 form-row-left SaveCard">
+		<div class="custom-checkbox">
+			<div class="custom-link active"></div>
+			<div class="checkbox">
+				<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.saveCard}" type="checkbox"/>
+			</div>
+		</div>
+	</div>
+</isif>

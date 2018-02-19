@@ -4,10 +4,74 @@ form {
     }
 }
 .pt_customerservice {
+    &.pt_customerservice-box {
+        #content {
+            .column3.style-cservice {
+                .column.colspan2 {
+                    .cell-header {
+                        .cell.contentbox {
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
     #content {
         .productsearchbreadcrumb {
             background: none !important;
             box-shadow: none !important;
+        }
+        .column3.about-us {
+            .contentbox.secondbox {
+                .left-content {
+                    .nav-group {
+                        border: 0;
+                        li {
+                            font-family: $font;
+                            height: auto;
+                            line-height: 46px;
+                            @include respond(desktop) {
+                                border: $border;
+                            }
+                            &.list-active {
+                                ul {
+                                    li {
+                                        a {
+                                            font-family: $font;
+                                            font-weight: normal;
+                                        }
+                                    }
+                                }
+                            }
+                            &.active {
+                                border-color: $border-color;
+                                background: $background;
+                                &.first-level-no-children {
+                                    border-top: none;
+                                    a {
+                                        color: $black;
+                                    }
+                                }
+                            }
+                            span {
+                                width: 100%;
+                                box-sizing: border-box;
+                                padding: 13.5px 45px 13.5px 14px;
+                                margin: 2px 0;
+                                line-height: normal;
+                                font-weight: normal;
+                                &:after {
+                                    top: 12px;
+                                }
+                            }
+                        }
+                    }
+                    .contentboxcontent {
+                        background: $background;
+                    }
+                }
+            }
         }
     }
     form {
@@ -90,6 +154,228 @@ form {
                     font-family: $font;
                 }
             }
+        }
+    }
+    .column3 {
+        .colspan2 {
+            .prostaff {
+                .pro-detail {
+                    .proddesc {
+                        .subhead {
+                            font-family: $font;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .nav-group {
+        font-family: $font;
+    }
+    .style-cservice,
+    .customer {
+        .colspan2 {
+            .site-map {
+                .cs-landing {
+                    h2 {
+                        font-family: $font;
+                    }
+                    .first-level {
+                        ul {
+                            li {
+                                font-family: $font;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .column {
+            .contentbox {
+                .left-nav-top {
+                    .contentboxcontent {
+                        h2.left-nav-style {
+                            background: $background;
+                            border-color: $border-color;
+                        }
+                    }
+                    .contentboxcontent {
+                        .nav-group {
+                            li {
+                                background: $background;
+                                border-color: $border-color;
+                                border-left: none;
+                                border-right: none;
+                                &.first-level-no-children {
+                                    border-top: none;
+                                    a {
+                                        color: $black;
+                                    }
+                                }
+                                &:first-child {
+                                    border-color: $border-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .about-us {
+        .left-content.left-nav-top   {
+            h2.left-nav-style {
+                display: block !important;
+                padding: rem(11px) 0;
+                text-align: center;
+                border-bottom: $border;
+                background: $background;
+                font-weight: normal;
+                text-transform: capitalize;
+                margin: 0;
+                font-variant: normal;
+                color: $black;
+            }
+        }
+        .column {
+            .contentbox.cell {
+                @include respond(desktop) {
+                    margin-left: 0 !important;
+                }
+                .contentboxcontent {
+                    margin: 35px;
+                    padding: 1px;
+                }
+                h1 {
+                    margin: 10px 0;
+                    padding: 0;
+                    text-align: center;
+                    &.head {
+                        padding-left: 36px;
+                        text-align: left;
+                    }
+                }
+                .left-nav-top {
+                    background: $background;
+                    .contentboxcontent {
+                        margin: 0;
+                        padding: 0;
+                        h2.left-nav-style {
+                            padding: rem(11px) 0;
+                            text-align: center;
+                            border-bottom: $border;
+                            background: $background;
+                            font-weight: normal;
+                            text-transform: capitalize;
+                            margin: 0;
+                            font-variant: normal;
+                            color: $black;
+                        }
+                        .nav-group {
+                            padding: 0;
+                            li {
+                                color: $black;
+                                margin: 0;
+                                border-bottom: $border;
+                                background: $background;
+                                padding: 0;
+                                position: relative;
+                                font-size: 15px;
+                                font-style: normal;
+                                font-weight: 400;
+                                &:first-child {
+                                    border-top: $border;
+                                }
+                                &.first-level {
+                                    &:after {
+                                        background: url(../images/responsive-icons/navigation-assets.svg) 10px -1px no-repeat;
+                                        content: '';
+                                        width: 31px;
+                                        top: 16px;
+                                        height: 16px;
+                                        position: absolute;
+                                        display: block;
+                                        right: 15px;
+                                    }
+                                    &.list-active {
+                                        border-left: $border;
+                                        border-right: $border;
+                                        background: $white;
+                                        &:after {
+                                            background-position: -21px -1px;
+                                            width: 21px;
+                                            height: 20px;
+                                        }
+                                    }
+                                    span {
+                                        width: 100%;
+                                        box-sizing: border-box;
+                                        padding: 13.5px 45px 13.5px 14px;
+                                        margin: 2px 0;
+                                    }
+                                    .second-level {
+                                        padding: 0;
+                                        li {
+                                            border: none;
+                                            background: $white;
+                                            padding: 0;
+                                            text-indent: 0;
+                                            a {
+                                                padding: 13.5px 40px 13.5px 54px;
+                                                width: 100%;
+                                                margin: 2.5px 0;
+                                                display: inline-block;
+                                                box-sizing: border-box;
+                                                line-height: 18px;
+                                            }
+                                        }
+                                    }
+                                }
+                                &.active {
+                                    border-color: $border-color;
+                                    background: $background;
+                                    border-left: none;
+                                    border-right: none;
+                                    &.first-level-no-children {
+                                        border-top: none;
+                                        a {
+                                            color: $black;
+                                        }
+                                    }
+                                }
+                                span {
+                                    padding: 13.5px 40px 13.5px 14px;
+                                    a {
+                                        color: $black;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.colspan2 {
+                .cell {
+                    @include respond(desktop) {
+                        margin-left: 18px !important;
+                        border: $border;
+                   }
+                    a {
+                        font-family: $font;
+                    }
+                   &.tabover {
+                       @include respond(desktop) {
+                           border: $error-border;
+                       }
+                   }
+                }
+            }
+        }
+    }
+    .back-noborder {
+        a {
+            color: $button-color;
         }
     }
 }

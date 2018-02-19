@@ -8,8 +8,10 @@
 
 <fieldset>
 	<hr class="hrdottedline authentication-detail-hrdottedline">
-	<isif condition="${pdict.CurrentHttpParameterMap.PlaceOrderError.value != null || pdict.PlaceOrderError == true}">
-		<div id="error-message" class="invalidCreditcard"></div>
+	<isif condition="${pdict.CurrentHttpParameterMap.PlaceOrderError.value != null || pdict.PlaceOrderError.error == true}">
+		<div id="error-message error" class="invalidCreditcard">
+			<isprint value="${pdict.PlaceOrderError.errorMessage}"/>
+		</div>
 	</isif>
 	<input type="hidden" name="${pdict.CurrentForms.billing.secureKeyHtmlName}" value="${pdict.CurrentForms.billing.secureKeyValue}"/>
 
@@ -244,7 +246,7 @@
 							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" fieldClass="creditcard_name" requiredtext="${Resource.msg('forms.billing.nameoncard.missing','forms',null)}"/>
 						</div>
 						<div class="formfield form-row-50 creditCard-type">
-							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select" rowClass="custom-select" fieldClass="custom-select-wrap select-creditCard-type"/>
+							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.type}" type="select" rowClass="custom-select" fieldClass="custom-select-wrap select-creditCard-type" />
 						</div>
 						<div class="formfield form-row-50">
 							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" dynamicname="true" rowClass="cardnumber" fieldClass="creditCard-number" requiredtext="${Resource.msg('forms.billing.cardnumber.missing','forms',null)}"/>

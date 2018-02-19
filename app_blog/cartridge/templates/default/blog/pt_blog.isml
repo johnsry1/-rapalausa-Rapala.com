@@ -6,36 +6,48 @@
 <!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+    <isscript>
+        var pageContext = {
+            title: 'Blog',
+            type: 'blog',
+            ns: 'blog'
+        };
+    </isscript>
 
-	<isscript>
-		var pageContext = {
-			title: 'Blog',
-			type: 'blog',
-			ns: 'blog'
-		};
-	</isscript>
-
-	<isinclude template="components/header/htmlhead"/>
-	<isinclude template="blog/pt_blog_UI"/>
-
+    <isinclude template="components/header/htmlhead"/>
+    <isinclude template="blog/pt_blog_UI"/>
 </head>
 <body>
-	<isinclude template="components/googletagmanager"/>
+    <isinclude template="components/googletagmanager"/>
 
-	<div id="wrapper"  class="pt_blog">
+    <div id="container"  class="pt_blog">
+        <isinclude template="components/header/header"/>
 
-		<isinclude template="components/header/header"/>
+        <div id="main" role="main" class="page-content clearfix">
+            <div id="content">
+                <div id="page-background">
+                    <div id="page">
+                        <div class="wrapper">
+                            <isinclude template="blog/components/breadcrumbs"/>
 
-		<div id="main" role="main" class="page-content clearfix">
+                            <isinclude template="blog/components/navigation_top"/>
 
-			<isreplace/>
+                            <div id="secondary" class="nav">
+                                <isinclude template="blog/components/navigation_left"/>
+                            </div>
 
-			<isinclude template="components/browsertoolscheck"/>
-		</div>
+                            <div id="primary" class="primary-content content">
+                                <isreplace/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<isinclude template="components/footer/footer"/>
-		<isinclude template="blog/pt_blog_VARS"/>
-
-	</div><!--  /wrapper -->
+        <isinclude template="components/browsertoolscheck"/>
+        <isinclude template="components/footer/footer"/>
+        <isinclude template="blog/pt_blog_VARS"/>
+    </div>
 </body>
 </html>
