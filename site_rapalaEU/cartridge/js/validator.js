@@ -45,20 +45,22 @@ var settings = {
         if (!this.checkable(element)) {
             $(element).removeClass('stopKeypress');
             this.element(element);
-
-            if ($('.account-logs').length > 0 || $('.new-register').length > 0 || $('.wish-logs').length > 0 || $('.forgot_old').length > 0 || $('.passwordreset').length > 0 || $('.vipInsider-dlg.ui-dialog ').length > 0 || $('.promo-sec').length > 0 || $('.pt_checkout').length > 0) {
+            var $selectStyleElement = $(element).parent('.select-style');
+            if ($('.account-logs').length > 0 || $('.new-register').length > 0 || $('.wish-logs').length > 0 || $('.forgot_old').length > 0 || $('.passwordreset').length > 0 || $('.vipInsider-dlg.ui-dialog ').length > 0 || $('.promo-sec').length > 0 || $('.pt_checkout').length > 0 || $('.pt_leftnav-addressbook').length > 0) {
                 if ($(element).hasClass('errorclient')) {
                     $(element).closest('.form-row').addClass('inputlabel');
                     $(element).closest('.formfield').addClass('inputlabel');
                     $(element).closest('.formfield').find('.label span').addClass('inputlabel');
                     $(element).closest('.form-row').find('.label span').addClass('inputlabel');
                     $(element).closest('.formfield').find('.logerror , .existing_register').hide();
+                    $selectStyleElement.addClass('select-style-error');
                 } else {
                     $(element).closest('.form-row').removeClass('inputlabel');
                     $(element).closest('.formfield').removeClass('inputlabel');
                     $(element).closest('.form-row').find('.label span').removeClass('inputlabel');
                     $(element).closest('.formfield').find('.label span').removeClass('inputlabel');
                     $(element).closest('.formfield').find('.logerror , .existing_register').hide();
+                    $selectStyleElement.removeClass('select-style-error');
                 }
             }
             /*** if($(element).closest('.ui-dialog').hasClass('vipInsider-dlg')) {
