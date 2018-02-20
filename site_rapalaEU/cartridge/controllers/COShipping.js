@@ -145,7 +145,7 @@ function singleShipping() {
 function startStateVerification() {
     var existingcart = app.getModel('Cart').get();
     var singleShippingForm = app.getForm('singleshipping');
-    var shipLimit = require('app_rapala_core/cartridge/scripts/checkout/ValidateShippingStateForCartItems.ds').validateProductCategoryJSON(existingcart,singleShippingForm);
+    var shipLimit = require('*/cartridge/scripts/checkout/ValidateShippingStateForCartItems.ds').validateProductCategoryJSON(existingcart,singleShippingForm);
     return shipLimit;
 }
 

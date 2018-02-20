@@ -98,31 +98,31 @@ function validateProductCategoryJSON (basket : Basket, singleShippingForm) {
 			var shipzip	: String = singleShippingForm.object.shippingAddress.addressFields.postal.htmlValue;
 			var shipcountry : String = singleShippingForm.object.shippingAddress.addressFields.country.htmlValue;
 			var productLIs : Iterator  = basket.getProductLineItems().iterator();
-			while (productLIs.hasNext()){
+			while (productLIs.hasNext()) {
 				var pli : ProductLineItem = productLIs.next();
 				var product = pli.getProduct();
 				var productAttributes = new ArrayList(product.custom.shippingLimitations);
 				
-				var isKnife = productAttributes.contains('knife');
-				var isLead = productAttributes.contains('lead');
-
-				if (isKnife) {
-					var knivestateList = new ArrayList(limitationsJSON['knife']['state']);
-					var Kniveziplist = new ArrayList(limitationsJSON['knife']['postalCode']);
-					var knifecountrylist = new ArrayList(limitationsJSON['knife']['country']);
-					if (!empty(knivestateList) && knivestateList.contains(shipState) || Kniveziplist.contains(shipzip) || knivestateList.contains(shipcity.toLocaleLowerCase()) || 
-						(!empty(knifecountrylist) && knifecountrylist.contains(shipcountry))) {
-						return true;
-					}
-				}
-				
-				if (isLead) {
-					var countryList = new ArrayList(limitationsJSON['lead']['country']);
-					if (!empty(countryList) && countryList.contains(shipcountry.toUpperCase())) {
-						return {
-							limit: true,
-							message: limitationsJSON['lead']['reason']
-						};	
+				for each (var productLimitationAttribute in productAttributes) {
+					if (limitationsJSON[productLimitationAttribute] != null) {
+						var stateList = limitationsJSON[productLimitationAttribute]['state'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['state']) : new ArrayList();
+						var postalCodeList = limitationsJSON[productLimitationAttribute]['postalCode'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['postalCode']) : new ArrayList();
+						var countryList = limitationsJSON[productLimitationAttribute]['country'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['country']) : new ArrayList();
+						var cityList = limitationsJSON[productLimitationAttribute]['city'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['city']) : new ArrayList();
+						
+						if ((stateList.size() > 0 && stateList.contains(shipState)) ||
+							(postalCodeList.size() > 0 && postalCodeList.contains(shipzip)) ||
+							(countryList.size() > 0 && countryList.contains(shipcountry)) || 
+							(cityList.size() > 0 && cityList.contains(shipcity))) {
+								var message = '';
+								if (limitationsJSON[productLimitationAttribute]['reason'] != null) {
+									message = limitationsJSON[productLimitationAttribute]['reason'];
+								}
+								return {
+									limit: true,
+									message: message
+								};	
+						}
 					}
 				}
 			}
