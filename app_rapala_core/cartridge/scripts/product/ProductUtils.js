@@ -287,8 +287,8 @@ ProductUtils.getImagesDetails = function (item, pvm) {
   	                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
   	                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
                     } else if (dw.system.Site.current.ID == 'rapalaEU') {
-                      variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master");
-                      zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master");
+                      variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                      zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
                     }
 	           }
 	    }
