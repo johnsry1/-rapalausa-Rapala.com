@@ -229,7 +229,6 @@ exports.init = function () {
     $('.continue-checkout-button .continue-checkout').on('click', function () {
 
         updateButton();
-        updateButtonIE()
         var form = $(this).closest('form[id$="_shippingAddress"]');
         if ($('.state-blk select').valid() == 0) {
             if (!$('.state-blk.custom-select').hasClass('blured')) {
