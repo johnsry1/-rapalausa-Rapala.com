@@ -2204,7 +2204,7 @@ var pdpEvents = {
         });
         $('#Quantity').keyup(function(e) {
             var key = e.charCode || e.keyCode || 0;
-            if ($.isNumeric($('#Quantity').val()) && key == 13) {
+            if ($.isNumeric($('#Quantity').val()) && (key == 13 || key == 8)) {
                 $('#add-to-cart').click();
             } else if (!$.isNumeric($('#Quantity').val())) {
                 $('.addtocartbutton:last').prop('disabled', true);
