@@ -2204,7 +2204,10 @@ var pdpEvents = {
         });
         $('#Quantity').keyup(function(e) {
             var key = e.charCode || e.keyCode || 0;
-            if (key < 48 || key > 58 && $('#Quantity').val() < 1) {
+            if (key == 13) {
+                $('#add-to-cart').click();
+            }
+            if ((key < 48 && key != 13) || key > 58 && $('#Quantity').val() < 1) {
                 $('.addtocartbutton:last').prop('disabled', true);
                 $('.addtocart, .addtocartbutton').addClass('disabled');
                 return false;
