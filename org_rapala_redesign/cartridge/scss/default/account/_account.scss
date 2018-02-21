@@ -138,7 +138,7 @@ div.returningcustomers {
             }
             .back-link {
                 a {
-                    color: $black;;
+                    color: $black;
                 }
             }
         }
@@ -666,7 +666,7 @@ ul.common-nav {
                             margin-left: 0;
                             font-size: $form-field-font-size;
                             font-family: $form-field-font-family;
-                            line-height: 30px;
+                            line-height: 26px;
                         }
                     }
                     span.errorclient,
@@ -1019,6 +1019,47 @@ ul.common-nav {
             button {
                 @include button(submit);
                 width: auto;
+            }
+        }
+    }
+    .site-map {
+        h2 {
+            font-family: $global-font-family;
+        }
+        ul {
+            li {
+                &.first-level {
+                    ul {
+                        li {
+                            margin-bottom: 18px;
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            a {
+                                color: $bg-darkbrown;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #content {
+        .style-cservice {
+            .column {
+                .cell {
+                    &.contentbox {
+                        .dealer {
+                            &.contentboxcontent {
+                                .confirmation-message {
+                                    padding: 0;
+                                    p {
+                                        font-family: $font;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

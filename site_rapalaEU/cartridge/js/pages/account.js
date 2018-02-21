@@ -23,6 +23,7 @@ function initializeAddressForm() {
     $form.on('click', '.apply-button', function (e) {
         e.preventDefault();
         if (!$form.valid()) {
+            $('body .input-select.errorclient').parent('.select-style').addClass('select-style-error');
             return false;
         }
         var url = util.appendParamToURL($form.attr('action'), 'format', 'ajax');
@@ -143,6 +144,17 @@ function initializeAddressForm() {
         }
     });
     validator.init();
+    $('body').find('input').focusin(function () {
+        $(this).closest('.formfield, .form-row').removeClass('inputlabel');
+        $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
+        $(this).removeClass('errorclient');
+    });
+    $('body').find('select').focusin(function () {
+        $(this).closest('.formfield, .form-row').removeClass('inputlabel');
+        $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
+        $(this).removeClass('errorclient');
+        $(this).parent('.select-style').removeClass('select-style-error');
+    });
 }
 
 /**
@@ -193,7 +205,7 @@ function initAddressEvents() {
                          */
                         util.updateStateOptions($form);
                     });
-                } 
+                }
             }
         });
     }).on('click', '.delete', function (e) {
@@ -232,13 +244,13 @@ function initPaymentEvents() {
                 open: initializePaymentForm
             }
         });
-    }); 
+    });
     */
-    
-    if (SitePreferences.ADYEN_CSE_ENABLED) {             
+
+    if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initAccount();
     }
-    
+
     var paymentList = $('.payment-list');
     if (paymentList.length === 0) {
         return;
@@ -274,7 +286,7 @@ function initializePaymentForm() {
         e.preventDefault();
         dialog.close();
     });
-    if (SitePreferences.ADYEN_CSE_ENABLED) {                 
+    if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initAccount();
     }
 
