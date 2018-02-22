@@ -89,41 +89,42 @@
 				<div class="row column1">
 					<div class="column">
 						<div class="cell">
-		 					<iscomment>SLOT CONFIGURATION:  SLOT/ID: global header-banner</iscomment>
-							<div class="headerbanner">
-		   						<isslot id="global_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-							</div><!-- END: headerbanner -->
-								<iscomment>SLOT CONFIGURATION:  SLOT/ID: brand-specific header-bar</iscomment>
-							<div class="headerbanner">
-								<isif condition="${'rapala' == session.custom.currentSite}">
-									<isslot id="brand_rapala_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'sufix' == session.custom.currentSite}">
-									<isslot id="brand_sufix_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'triggerx' == session.custom.currentSite}">
-									<isslot id="brand_triggerx_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'storm' == session.custom.currentSite}">
-									<isslot id="brand_storm_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-									<isslot id="brand_luhrjensen_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'vmc' == session.custom.currentSite}">
-									<isslot id="brand_vmc_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'terminator' == session.custom.currentSite}">
-									<isslot id="brand_terminator_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'bluefox' == session.custom.currentSite}">
-									<isslot id="brand_bluefox_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'williamson' == session.custom.currentSite}">
-									<isslot id="brand_williamson_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'marcum' == session.custom.currentSite}">
-									<isslot id="brand_marcum_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'strikemaster' == session.custom.currentSite}">
-									<isslot id="brand_strikemaster_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'iceforce' == session.custom.currentSite}">
-									<isslot id="brand_iceforce_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								<iselseif condition="${'otter' == session.custom.currentSite}">
-									<isslot id="brand_otter_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
-								</isif>
-							</div>
-
+							<isif condition="${!pdict.isTriggered}">
+								<iscomment>SLOT CONFIGURATION:  SLOT/ID: global header-banner</iscomment>
+								<div class="headerbanner">
+									<isslot id="global_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								</div><!-- END: headerbanner -->
+									<iscomment>SLOT CONFIGURATION:  SLOT/ID: brand-specific header-bar</iscomment>
+								<div class="headerbanner">
+									<isif condition="${'rapala' == session.custom.currentSite}">
+										<isslot id="brand_rapala_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'sufix' == session.custom.currentSite}">
+										<isslot id="brand_sufix_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'triggerx' == session.custom.currentSite}">
+										<isslot id="brand_triggerx_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'storm' == session.custom.currentSite}">
+										<isslot id="brand_storm_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+										<isslot id="brand_luhrjensen_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'vmc' == session.custom.currentSite}">
+										<isslot id="brand_vmc_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'terminator' == session.custom.currentSite}">
+										<isslot id="brand_terminator_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'bluefox' == session.custom.currentSite}">
+										<isslot id="brand_bluefox_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'williamson' == session.custom.currentSite}">
+										<isslot id="brand_williamson_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'marcum' == session.custom.currentSite}">
+										<isslot id="brand_marcum_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+										<isslot id="brand_strikemaster_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'iceforce' == session.custom.currentSite}">
+										<isslot id="brand_iceforce_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									<iselseif condition="${'otter' == session.custom.currentSite}">
+										<isslot id="brand_otter_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+									</isif>
+								</div>
+							</isif>
 						</div><!-- END: cell -->
 					</div><!-- END: column -->
 				</div><!-- END: row column1 -->

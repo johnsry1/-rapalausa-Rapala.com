@@ -12,23 +12,7 @@
 
 <div class="pdpmain-content">
 	<div class="productname h-one-tag" itemprop="name">
-		<isset name="name" value="${pdict.Product.name}" scope="page" />
-		<isif condition="${name.indexOf('&reg;') >= 0}">
-			<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
-		</isif>
-		<isif condition="${name.indexOf('®') >= 0}">
-			<isset name="name" value="${name.replace('®','<sup>&reg;</sup>','g')}" scope="page" />
-		</isif>
-		<isif condition="${name.indexOf('&trade;') >= 0}">
-			<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
-		</isif>
-		<isif condition="${name.indexOf('&#8482;') >= 0}">
-			<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
-		</isif>
-		<isif condition="${name.indexOf('™') >= 0}">
-			<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
-		</isif>
-		<isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/><isprint value="${name}" encoding="off" />
+		<isdisplayvariantnew p_product="${pdict.Product}" p_bigimage="true"/><isproductname productname="${pdict.Product.name}"/>
 	</div>
 	<isif condition="${pdict.Product.custom.videoId.length > 0 || (!empty(pdict.Product.custom.xAxis || pdict.Product.custom.specTable))}">
 		<ul class="provideo-spec-link">

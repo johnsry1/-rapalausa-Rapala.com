@@ -2199,8 +2199,10 @@ var pdpEvents = {
             }
         });
         $('#Quantity').keyup(function(e) {
-            var key = e.charCode || e.keyCode || 0;
-            if (key < 48 || key > 58 && $('#Quantity').val() < 1) {
+            var key = e.charCode || e.keyCode || e.which || 0;
+            if ($.isNumeric($('#Quantity').val()) && (key == 13)) {
+                $('#add-to-cart').trigger('click');
+            } else if (!$.isNumeric($('#Quantity').val())) {
                 $('.addtocartbutton:last').prop('disabled', true);
                 $('.addtocart, .addtocartbutton').addClass('disabled');
                 return false;

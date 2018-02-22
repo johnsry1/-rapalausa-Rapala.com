@@ -288,6 +288,11 @@ function initializeEvents() {
     //
     $('body').on('submit', '#customercontactus', function (e) {
         e.preventDefault();
+        var res = $('#g-recaptcha-response').val();
+        if (res == '' || res == undefined || res.length == 0) {
+            $('.recaprcha-error').removeClass('hide');
+            return false;
+        }
         var $form = $(this);
         if ($form.valid()) {
             // set the action
@@ -309,6 +314,11 @@ function initializeEvents() {
                 dataType: 'html',
                 data: data
             }).done(function (response) {
+                if (navigator.userAgent.match(/(\(iPod|\(iPhone|\(iPad)/)) {
+                    window.setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 0);
+                }
                 $('.column.colspan2').empty().html(response);
             });
         }
