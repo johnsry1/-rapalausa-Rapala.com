@@ -83,7 +83,61 @@ function validateProductCategory(basket : Basket, singleShippingForm) {
 	
 }
 
+/**
+*	Return boolean flag that will allow ship product to shipping address or not. 
+*	If any error occur Ship Limit will be restricted.
+*/
+function validateProductCategoryJSON (basket : Basket, singleShippingForm) {
+	
+	try {
+		if (!empty(dw.system.Site.getCurrent().getCustomPreferenceValue('shippingLimitations'))) {
+			var limitationsJSON = JSON.parse(dw.system.Site.getCurrent().getCustomPreferenceValue('shippingLimitations'));
+		    var basket : Basket = basket; 
+			var shipState : String = singleShippingForm.object.shippingAddress.addressFields.states.state.htmlValue;
+			var shipcity : String = singleShippingForm.object.shippingAddress.addressFields.city.htmlValue;
+			var shipzip	: String = singleShippingForm.object.shippingAddress.addressFields.postal.htmlValue;
+			var shipcountry : String = singleShippingForm.object.shippingAddress.addressFields.country.htmlValue;
+			var productLIs : Iterator  = basket.getProductLineItems().iterator();
+			while (productLIs.hasNext()) {
+				var pli : ProductLineItem = productLIs.next();
+				var product = pli.getProduct();
+				var productAttributes = new ArrayList(product.custom.shippingLimitations);
+				
+				for each (var productLimitationAttribute in productAttributes) {
+					if (limitationsJSON[productLimitationAttribute] != null) {
+						var stateList = limitationsJSON[productLimitationAttribute]['state'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['state']) : new ArrayList();
+						var postalCodeList = limitationsJSON[productLimitationAttribute]['postalCode'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['postalCode']) : new ArrayList();
+						var countryList = limitationsJSON[productLimitationAttribute]['country'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['country']) : new ArrayList();
+						var cityList = limitationsJSON[productLimitationAttribute]['city'] != null ? new ArrayList(limitationsJSON[productLimitationAttribute]['city']) : new ArrayList();
+						
+						if ((stateList.size() > 0 && stateList.contains(shipState)) ||
+							(postalCodeList.size() > 0 && postalCodeList.contains(shipzip)) ||
+							(countryList.size() > 0 && countryList.contains(shipcountry)) || 
+							(cityList.size() > 0 && cityList.contains(shipcity))) {
+								var message = '';
+								if (limitationsJSON[productLimitationAttribute]['reason'] != null) {
+									message = limitationsJSON[productLimitationAttribute]['reason'];
+								}
+								return {
+									limit: true,
+									message: message
+								};	
+						}
+					}
+				}
+			}
+			return false;
+		} else {
+			return true;
+		}
+	} catch (e) {
+		dw.system.Logger.error(e.message);
+		return true;
+	}
+}
+
 
 module.exports = {
-    validateProductCategory : validateProductCategory
+    validateProductCategory : validateProductCategory,
+    validateProductCategoryJSON : validateProductCategoryJSON
 };
