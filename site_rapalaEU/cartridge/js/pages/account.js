@@ -249,6 +249,7 @@ function initPaymentEvents() {
 
     if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initAccount();
+        validator.init();
     }
 
     var paymentList = $('.payment-list');
