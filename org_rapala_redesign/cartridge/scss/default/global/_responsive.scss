@@ -6841,16 +6841,22 @@
                         }
                         &.inputlabel {
                             .field-wrapper {
-                                width: 76% !important;
+                                width: 100% !important;
                                 margin-left: 0;
+                                @include respond(large-up) {
+                                    width: 76% !important;
+                                }
                             }
                         }
                         .errorclient {
                             margin-left: 0;
                         }
                         .field-wrapper {
-                            width: 76% !important;
+                            width: 100% !important;
                             margin-left: 0;
+                            @include respond(large-up) {
+                                width: 76% !important;
+                            }
                         }
                     }
                 }
@@ -10078,7 +10084,7 @@
                     width: 53%;
                     box-sizing: border-box;
                     .cell {
-                        box-shadow: 0 0 5px 1px $shadow-light-grey;
+                        box-shadow: none
                     }
                 }
                 .product-detail {
