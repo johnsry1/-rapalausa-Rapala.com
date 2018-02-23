@@ -609,7 +609,9 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
-        tagmanager.init(window.pageContext.ns);
+        if (SitePreferences.GTM_ENABLED) {
+            tagmanager.init(window.pageContext.ns);
+        }
         quickviewAsset.init();
 
         // execute page specific initializations
