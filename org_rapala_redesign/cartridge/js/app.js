@@ -529,7 +529,17 @@ function initializeEvents() {
             });
         }
     });
-
+    $('body .formfields-global').find('input').focusin(function () {
+        $(this).closest('.formfield, .form-row').removeClass('inputlabel');
+        $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
+        $(this).removeClass('errorclient');
+    });
+    $('body .formfields-global').find('select').focusin(function () {
+        $(this).closest('.formfield, .form-row').removeClass('inputlabel');
+        $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
+        $(this).removeClass('errorclient');
+        $(this).parent('.select-style').removeClass('select-style-error');
+    });
 }
 /**
  * @private

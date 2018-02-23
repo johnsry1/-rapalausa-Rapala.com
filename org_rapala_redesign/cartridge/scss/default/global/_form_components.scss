@@ -250,3 +250,66 @@ div.error {
     padding-top: .75em;
     width: 20%;
 }
+.formfields-global {
+    .form-row {
+        margin: 6px 0 12px;
+        .field-wrapper {
+            width: 100% !important;
+            padding-left: 0 !important;
+            @include respond(large-up) {
+                width: rem($form-horizontal-field-width) !important;
+                padding-left: rem($form-horizontal-field-padding) !important;
+                margin-bottom: 0;
+            }
+            .input-select {
+                width: 100%;
+                height: $form-field-height - $form-field-border-width * 2;
+                margin-bottom: 0;
+                background: $trans;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                border-radius: 0;
+                width: calc(100% + #{$form-dropdown-arrow-icon-width}) !important;
+                appearance: none;
+                &.errorclient {
+                    background: $trans;
+                    border: 0;
+                }
+            }
+        }
+        .form-caption {
+            margin-left: 0 !important;
+            @include font-size(13px);
+            @include respond(large-up) {
+                margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+            }
+        }
+        .label {
+            margin: 0 0 9px 0;
+            padding-bottom: 0 !important;
+            text-align: left;
+            width: 100%;
+            @include respond(large-up) {
+                text-align: right;
+                width: rem($form-horizontal-label-width + 10px);
+                @include line-height($form-horizontal-label-height);
+            }
+            .labeltext {
+                text-transform: inherit !important;
+                font-variant: inherit;
+            }
+            .requiredindicator {
+                font-family: $font;
+                color: $required-color;
+                margin-left: rem(3px);
+            }
+        }
+    }
+    .formactions {
+        @include respond(large-up) {
+            margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding + 10px);
+            text-align: left;
+        }
+    }
+}
