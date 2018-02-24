@@ -1,0 +1,62 @@
+importPackage( dw.system );
+/*
+ * Recaptcha helper
+ */
+function recaptchaHelper(response, remoteip) {
+	try {
+		var reCaptcha  : Object = new ReCaptcha();
+		var reResponse : Object = reCaptcha.checkAnswer(response, remoteip);
+		if (reResponse.isValid) {
+			return true;
+		}
+		else {
+			dw.system.Logger.debug('reCaptcha check failed');
+			return false;
+		}
+	} catch(e) {
+		dw.system.Logger.debug('reCaptcha error - ' + e);
+		return false;
+	}
+}
+function ReCaptcha() {
+	var currentSite : dw.system.Site = dw.system.Site.getCurrent();
+	this.RECAPTCHA_ENABLED = currentSite.getCustomPreferenceValue("reCaptchaEnabled");
+	this.RECAPTCHA_PUBLIC_KEY  = currentSite.getCustomPreferenceValue("reCaptchaPublicKey");
+	this.RECAPTCHA_PRIVATE_KEY = currentSite.getCustomPreferenceValue("reCaptchaPrivateKey");
+}
+/*
+ * Calls an HTTP POST function to verify if the user's guess was correct
+ */
+ReCaptcha.prototype.checkAnswer = function(response : String, remoteip : String) : Object {
+	var aa = this.RECAPTCHA_ENABLED
+	if (!this.RECAPTCHA_ENABLED) {
+		return {isValid: true};
+	}
+	var postData : String = "";
+	postData += ("secret=" + encodeURIComponent(this.RECAPTCHA_PRIVATE_KEY));
+	postData += ("&response="  + encodeURIComponent(response));
+	postData += ("&remoteip="  + encodeURIComponent(remoteip));
+	
+	var httpClient : dw.net.HTTPClient = new dw.net.HTTPClient();
+	httpClient.open("POST", "https://www.google.com/recaptcha/api/siteverify");
+	httpClient.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+	httpClient.setRequestHeader("User-agent", "ReCaptcha/Demandware");
+	httpClient.send(postData);
+	
+	if (httpClient.statusCode == 200) {
+		var postResponse = JSON.parse(httpClient.text);
+		return {
+			isValid    : postResponse.success,
+			statusCode : httpClient.statusCode
+		};
+	}
+	else {
+		throw {
+			name    : "HTTPClientError",
+			message : "StatusCode: " + httpClient.statusCode + ", StatusMessage: " + httpClient.statusMessage
+		};
+	}
+}
+module.exports = {
+	recaptchaHelper: recaptchaHelper
+	};

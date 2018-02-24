@@ -1,0 +1,23 @@
+<iscomment>
+	This template replaces the register and/or trademark symbol(s) with respective html character codes and wrap them in the superscript tag.
+	The following parameters must be passed into the template module:
+		productname 		: the product name
+</iscomment>
+
+<isset name="name" value="${pdict.productname}" scope="page" />
+<isif condition="${name.indexOf('&reg;') >= 0}">
+	<isset name="name" value="${name.replace('&reg;','<sup>&reg;</sup>','g')}" scope="page" />
+</isif>
+<isif condition="${name.indexOf('®') >= 0}">
+	<isset name="name" value="${name.replace('®','<sup>&reg;</sup>','g')}" scope="page" />
+</isif>
+<isif condition="${name.indexOf('&trade;') >= 0}">
+	<isset name="name" value="${name.replace('&trade;','<sup>&trade;</sup>','g')}" scope="page" />
+</isif>
+<isif condition="${name.indexOf('&#8482;') >= 0}">
+	<isset name="name" value="${name.replace('&#8482;','<sup>&#8482;</sup>','g')}" scope="page" />
+</isif>
+<isif condition="${name.indexOf('™') >= 0}">
+	<isset name="name" value="${name.replace('™','<sup>™</sup>','g')}" scope="page" />
+</isif>
+<isprint value="${name}" encoding="off" />

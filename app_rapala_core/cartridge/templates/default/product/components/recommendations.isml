@@ -1,4 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('imageTransformationService') == 'DIS' || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}">
 	<isscript>
 			importScript("app_disbestpractice:product/ProductImageSO.ds");
@@ -58,7 +59,7 @@
 									</a>
 								</div>
 								<div class="product-name">
-									<a href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('global.goto.label', 'locale', null, pName)}"><isprint value="${pName}"/></a>
+									<a href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}" title="${Resource.msgf('global.goto.label', 'locale', null, pName)}"><isproductname productname="${pName}"/></a>
 								</div>
 								<isinclude template="product/components/pricing.isml"/>
 								<div class="tooltip-content" data-layout="medium">

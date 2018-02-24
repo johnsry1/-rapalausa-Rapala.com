@@ -77,10 +77,14 @@ function singleShipping() {
                 return;
             }
             
-            var stateVerification = require('app_rapala_controllers/cartridge/controllers/COShipping.js').StartStateVerification();
+            var stateVerification = startStateVerification();
             var shippingmethod = session.forms.singleshipping.shippingAddress.shippingMethodID.value;
             if (stateVerification) {
-            	response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification));
+                if ('limit' in stateVerification && 'message' in stateVerification) {
+                    response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification.limit, 'ShipMessage' , stateVerification.message));
+                } else {
+                    response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification));
+                }
             	app.getView({ShipLimit : stateVerification}).render('checkout/shipping/singleshipping');
             } else if (shippingmethod == null) {
                 response.redirect(URLUtils.https('COShipping-Start','ShipLimit',true));
@@ -138,6 +142,12 @@ function singleShipping() {
     });
 }
 
+function startStateVerification() {
+    var existingcart = app.getModel('Cart').get();
+    var singleShippingForm = app.getForm('singleshipping');
+    var shipLimit = require('*/cartridge/scripts/checkout/ValidateShippingStateForCartItems.ds').validateProductCategoryJSON(existingcart,singleShippingForm);
+    return shipLimit;
+}
 
 /*
 * Module exports

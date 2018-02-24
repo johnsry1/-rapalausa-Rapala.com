@@ -623,7 +623,9 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
-        tagmanager.init(window.pageContext.ns);
+        if (SitePreferences.GTM_ENABLED) {
+            tagmanager.init(window.pageContext.ns);
+        }
 
         // execute page specific initializations
         $.extend(page, window.pageContext);

@@ -249,7 +249,6 @@ input[type="radio"] {
         @media all and (min-width: 0\0) and (min-resolution: .001dpcm) {
             padding-right: 10px;
         }
-        width: 120%; // in case some browser doesn't support the calc function below
         width: calc(100% + #{$form-dropdown-arrow-icon-width});
         appearance: none;
     }
@@ -277,4 +276,11 @@ span.existing_register {
 .section-header {
     background: $background;
     @include h3;
+}
+.textinput {
+    @include form-input;
+    &.errorclient {
+        background: $error-bg-color !important;
+        border: 1px solid $red !important;
+    }
 }

@@ -242,6 +242,9 @@ body {
                     }
                 }
                 .ui-email {
+                    @include respond(desktop) {
+                        @include line-height(29px);
+                    }
                     a {
                         @include respond($desktop-breakpoint) {
                             position: relative;

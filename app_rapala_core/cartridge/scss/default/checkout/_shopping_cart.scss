@@ -310,7 +310,7 @@ ul.product-availability-list {
             padding: 13px 10px;
             width: 100%;
             font-size: 13px;
-            font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+            font-family: $lucida-font-family;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
@@ -396,7 +396,7 @@ ul.product-availability-list {
                         cursor: pointer;
                         display: block;
                         float: left;
-                        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                        font-family: $lucida-font-family;
                         font-size: 11px;
                         font-weight: normal;
                     }
@@ -441,7 +441,7 @@ ul.product-availability-list {
                                 font-weight: normal;
                                 color: $white;
                                 font-size: 12px;
-                                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                font-family: $lucida-font-family;
                                 line-height: 26px;
                                 letter-spacing: normal;
                                 display: inline-block;
@@ -574,7 +574,7 @@ ul.product-availability-list {
                 margin-bottom: 10px;
                 width: 565px;
                 text-align: center;
-                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif !important;
+                font-family: $lucida-font-family;
                 .orderpromotionfish {
                     padding: 0;
                     height: 61px;
@@ -724,7 +724,7 @@ ul.product-availability-list {
                         border-bottom-width: 0;
                         float: none;
                         .coupon_code {
-                            font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                            font-family: $lucida-font-family;
                             font-size: 12px;
                             font-weight: bold;
                             width: auto;
@@ -743,7 +743,7 @@ ul.product-availability-list {
                         .discount {
                             span {
                                 color: $night-rider;
-                                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                font-family: $lucida-font-family;
                                 font-size: 11px;
                                 font-weight: bold;
                                 padding: 0;
@@ -799,7 +799,7 @@ ul.product-availability-list {
                             color: $light-green;
                             float: left;
                             font-style: italic;
-                            font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                            font-family: $lucida-font-family;
                             font-size: 12px;
                             font-weight: bold;
                             width: auto;
@@ -1242,7 +1242,7 @@ ul.product-availability-list {
                         }
                     }
                     .in-wishlist {
-                        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                        font-family: $lucida-font-family;
                         font-size: 12px;
                         font-weight: bold;
                         height: 18px;
@@ -1301,7 +1301,6 @@ ul.product-availability-list {
                 position: relative;
                 margin: 0;
                 .cart-footer-left {
-                    border-right: 1px solid $very-light-gray;
                     float: left;
                     padding: 0 30px 0 0;
                     width: 477px;
@@ -1354,7 +1353,7 @@ ul.product-availability-list {
                                 margin: 0;
                                 padding-top: 0;
                                 width: auto;
-                                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                font-family: $lucida-font-family;
                                 text-transform: capitalize;
                                 font-size: 13px;
                                 font-style: italic;
@@ -1413,7 +1412,7 @@ ul.product-availability-list {
                                     .price {
                                         color: $black;
                                         display: inline;
-                                        font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                        font-family: $lucida-font-family;
                                         font-size: 12px;
                                         font-style: italic;
                                         font-weight: normal;
@@ -1670,7 +1669,7 @@ ul.product-availability-list {
                                 text-align: left;
                                 line-height: 15px;
                                 font-style: normal;
-                                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                                font-family: $lucida-font-family;
                                 font-size: 11px;
                             }
                             .input-sec {
@@ -1812,7 +1811,7 @@ ul.product-availability-list {
                 clear: both;
                 margin: 18px 0;
                 line-height: 18px;
-                font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                font-family: $lucida-font-family;
                 font-size: 11px;
                 border-width: 1px;
                 border-style: solid;
@@ -1871,7 +1870,7 @@ ul.product-availability-list {
                             font-weight: normal;
                             color: $white;
                             font-size: 12px;
-                            font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", Helvetica, Arial, sans-serif;
+                            font-family: $lucida-font-family;
                             line-height: 26px;
                             letter-spacing: normal;
                             display: inline-block;
@@ -1891,9 +1890,9 @@ ul.product-availability-list {
                         width: 300px;
                     }
                     .secure-payment-icons {
-                        float: right;
-                        @include respond (0, $large-breakpoint) {
-                            float:none;
+                        float: none;
+                        @include respond ($desktop-breakpoint) {
+                         float: right;
                         }
                     }
                     .payment-trust-imgs {
