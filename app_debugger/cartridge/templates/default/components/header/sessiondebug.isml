@@ -21,10 +21,17 @@
 			if (session != null && 'custom' in session) {
 			    for (var key in session.custom) {
 			        if (session.custom.hasOwnProperty(key)) {
-			            attributes.add({'name' : key, 'value' : session.custom[key]})
+			            attributes.add({'name' : "(cus) " + key, 'value' : session.custom[key]})
 			        }
 			    }
 		    }
+				if (session != null && 'privacy' in session) {
+						for (var key in session.privacy) {
+								if (session.privacy.hasOwnProperty(key)) {
+										attributes.add({'name' : "(prv) " + key, 'value' : session.privacy[key]})
+								}
+						}
+					}
 		</isscript>
 		<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
 			<b>Site Attributes:</b><br>
