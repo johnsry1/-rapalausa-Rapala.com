@@ -15,4 +15,9 @@ exports.init = function () {
         $(this).toggleClass('active');
         $blogLeftNav.toggleClass('active');
     });
+    $blogLeftNav.find('.blog-nav-level-2 li').each(function() {
+        if ($(this).hasClass('active')) {
+            $(this).parents('.toggle-blog').addClass('expanded');
+        }
+    });
 };

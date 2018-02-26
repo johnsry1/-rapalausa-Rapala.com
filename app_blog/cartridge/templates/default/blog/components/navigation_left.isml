@@ -22,7 +22,7 @@
 					<ul class="blog-nav-level-2 blog-nav-level">
 						<div class="sub-folders-two">
 						<isloop items="${levelOneFolder.subFolders}" var="levelTwoFolder"/>
-							<li class="active">
+							<li class="<isif condition="${request.httpParameterMap.fdid.value == levelTwoFolder.ID}">active</isif>">
 								<a href="${URLUtils.url('Search-ShowContent', 'fdid', levelTwoFolder.ID)}">
 									<isprint value="${levelTwoFolder.displayName}"/>
 								</a>
