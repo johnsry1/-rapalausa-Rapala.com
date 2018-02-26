@@ -111,9 +111,15 @@ function getBilling() {
     cart.setCustomerEmail('dcturner@lyonscg.com');
 
 		cart.calculate();
-		cart.validateForCheckout();
+		var x = cart.validateForCheckout();
+		var basketStatus = x.BasketStatus;
+		var checkoutStatus = x.EnableCheckout;
 
-});
+		var y = 12;
+
+	});
+
+	app.getForm('singleshipping').object.shippingAddress.useAsBillingAddress.value = false;
 
   response.redirect(URLUtils.https('COBilling-Start'));
 }
