@@ -307,13 +307,17 @@
             margin-bottom: rem(22px);
             @include respond(large-up) {
                 display: flex;
+                justify-content: space-between;
             }
             .blog-post-image {
+                @include respond(large-up) {
+                    width: calc(50% - #{rem(12px)});
+                }
                 img {
                     width: 100%;
                     height: auto;
                     @include respond(large-up) {
-                        width: auto;
+                        width: 100%;
                         height: 100%;
                         max-width: rem(355px);
                     }
@@ -321,6 +325,11 @@
             }
             .blog-body {
                 padding: rem(20px);
+                @include respond(large-up) {
+                    width: calc(50% - #{rem(12px)});
+                    box-sizing: border-box;
+                    padding: rem(20px) rem(20px) rem(20px) 0;
+                }
             }
             .blog-post-title {
                 @include h1;
@@ -375,7 +384,7 @@
         &:not(.first) {
             box-sizing: border-box;
             @include respond(large-up) {
-                width: calc(50% - #{rem(13px)});
+                width: calc(50% - #{rem(12px)});
                 display: inline-block;
                 vertical-align: top;
             }
