@@ -75,6 +75,9 @@
 .pt_blogpost {
     .blog-post-title {
         text-align: center;
+        @include respond(medium-down) {
+            @include font-size(30px);
+        }
     }
     .blog-post-info {
         text-align: center;
@@ -95,6 +98,9 @@
     }
     .blog-post-author {
         @include h3;
+        a {
+            color: $blog-main-link-color
+        }
     }
     .blog-post-skilllevel {
         a {
@@ -144,9 +150,9 @@
     a {
         display: inline-block;
         text-transform: uppercase;
-        font-family: $font-fourth;
+        font-family: $global-font-family;
         @include font-size(14px);
-        line-height: 1.2;
+        @include line-height(20px);
         text-transform: uppercase;
         color: black;
         padding: 0 rem(20px);
@@ -164,6 +170,7 @@
         }
         &.blog-post-prev {
             padding-left: 0;
+            @include line-height(20px);
             .arrow-bold {
                 transform: rotate(180deg);
                 margin-right: rem(7px);
@@ -171,6 +178,7 @@
         }
         &.blog-post-next {
             padding-right: 0;
+            @include line-height(20px);
             .arrow-bold {
                 margin-left: rem(7px);
             }
@@ -187,11 +195,17 @@
     .blog-post-title {
         display: inline-block;
         @include h2;
+        @include line-height(20px);
+        position: relative;
+        top: rem(2px);
         text-transform: uppercase;
         padding: 0 rem(20px);
         border-right: 1px solid $black;
         @include respond(large-up) {
             padding: 0 rem(40px);
+        }
+        @include respond(medium-down) {
+            @include font-size(20px);
         }
     }
 }
@@ -356,10 +370,20 @@
                 }
             }
             .blog-button-wrapper {
+                color: $blog-main-link-color;
+
                 a {
+                    @include respond(medium-down) {
+                        text-decoration: underline;
+                    }
                     @include respond(large-up) {
                         display: inline-block;
                         @include button;
+                    }
+                    &:hover {
+                        @include respond(medium-down) {
+                            text-decoration: none;
+                        }
                     }
                 }
             }
@@ -404,6 +428,7 @@
             .blog-button-wrapper {
                 a {
                     text-decoration: underline;
+                    color: $blog-main-link-color;
                     &:hover {
                         text-decoration: none;
                     }
@@ -514,7 +539,7 @@
          }
      }
     .blog-post-html {
-        margin: rem(20px) rem(10px);
+        margin: rem(20px) 0;
         @include font-size(13px);
         line-height: 1.54;
         @include respond(large-up) {
@@ -524,6 +549,10 @@
         p {
             @include font-size(13px);
             line-height: 1.54;
+            @include respond(medium-down) {
+                padding-left: rem(10px);
+                padding-right: rem(10px);
+            }
         }
         .blog-image {
             @include respond(large-up) {
