@@ -8935,8 +8935,27 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+			<attribute-definition attribute-id="GeoIPRedirects">
+				<display-name xml:lang="x-default">GeoIP Redirects Configuration</display-name>
+				<type>text</type>
+				<mandatory-flag>false</mandatory-flag>
+				<externally-managed-flag>false</externally-managed-flag>
+			</attribute-definition>
+          <attribute-definition attribute-id="enableGeoIPRedirects">
+                <display-name xml:lang="x-default">Enable GeoIP Redirects Configuration</display-name>
+                <description xml:lang="x-default">This Boolean enables GeoIP Redirects Configuration</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+          </attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
+			<attribute-group group-id="GeoIP">
+                <display-name xml:lang="x-default">GeoIP Redirects</display-name>
+                <attribute attribute-id="GeoIPRedirects"/>
+				<attribute attribute-id="enableGeoIPRedirects"/>
+            </attribute-group>
             <attribute-group group-id="Adyen">
                 <display-name xml:lang="x-default">Adyen Account Settings</display-name>
                 <attribute attribute-id="Adyen_merchantCode"/>
