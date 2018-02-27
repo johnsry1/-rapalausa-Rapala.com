@@ -432,6 +432,11 @@ var headerEvents = {
                 var $input = $(this).clone();
                 $form.append($input);
             });
+            
+            realForm.find('select').each(function (i) {
+                var select = this;
+                $form.find('select').eq(i).val($(select).val());    
+            });
 
             $('body').append($form);
             $form.hide();

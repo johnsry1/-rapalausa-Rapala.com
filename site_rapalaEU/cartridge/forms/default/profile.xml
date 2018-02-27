@@ -12,7 +12,7 @@
 		<field formid="email" label="profile.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="validate.email" binding="email" max-length="50"/>
 		<field formid="emailconfirm" label="profile.confirmemail" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="validate.email" max-length="50" value-error="validate.equalTo"/>
 		<field formid="birthday" label="profile.dob"  description="profile.dobexample" type="date" mandatory="false" format="MM/dd/yyyy" max="now" binding="birthday" max-length="10"/>
-		<field formid="country" binding="custom.countryCode" label="profile.country" type="string" mandatory="false"> 
+		<field formid="country" binding="custom.countryCode" label="profile.country" type="string" mandatory="true"> 
         <options>
             <option optionid=""     label="resource.select"     value=""/>
             <option optionid="AF"   label="country.afghanistan" value="AF"/>
