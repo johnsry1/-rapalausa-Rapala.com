@@ -80,7 +80,7 @@ function singleShipping() {
             var stateVerification = startStateVerification();
             var shippingmethod = session.forms.singleshipping.shippingAddress.shippingMethodID.value;
             if (stateVerification) {
-                if ('limit' in stateVerification && 'message' in stateVerification) {
+                if (typeof stateVerification === 'object' && 'limit' in stateVerification && 'message' in stateVerification) {
                     response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification.limit, 'ShipMessage' , stateVerification.message));
                 } else {
                     response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification));
