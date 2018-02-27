@@ -8731,7 +8731,6 @@
                     &.button {
                         width: 100%;
                         margin-right: 0;
-                        padding: 10px 0;
                         margin: 0;
                         font-size: 15px;
                     }
@@ -8802,24 +8801,8 @@
                 .no-hits-search {
                     &.mobileHide {
                         display: inline-block;
-                        text-align: left;
-                        float: none;
-                        margin: 0 auto;
-                        height: 50px;
-                        border: 1px solid $very-light-gray;
-                        box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
-                        width: 392px;
                         input {
-                            width: 89%;
-                            height: 48px;
-                            color: $banner-shadow;
-                            background: 0;
-                            float: left;
-                            text-align: left;
-                            font-size: 15px;
                             margin: 0;
-                            padding-left: 20px;
-                            border-color: transparent;
                         }
                     }
                 }
@@ -8904,8 +8887,7 @@
                                 margin-bottom: 20px;
                                 width: 100%;
                                 input {
-                                    width: 85%;
-                                    font-size: 12px;
+                                    @include font-size(13px);
                                 }
                             }
                         }
@@ -11734,6 +11716,11 @@
     width: 100%;
     float: left;
     position: relative;
+}
+#sendBtn {
+    @include respond(medium-down) {
+        width: 100%;
+    }
 }
 
 @include respond(0, $desktop-breakpoint - 1) {
