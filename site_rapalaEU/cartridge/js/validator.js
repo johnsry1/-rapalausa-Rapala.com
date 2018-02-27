@@ -107,7 +107,11 @@ var settings = {
                 $('.passwordreset').find('button.send.clickedButton').removeClass('clickedButton');
             } else {
                 if ($('.header-forgot-pwd.accountcontent').css('display') == 'none') {
-                    $(element).after(error);
+                    if ($(element).hasClass('input-select')) {
+                        error.insertAfter($(element).parent('.select-style'));
+                    } else {
+                        $(element).after(error);
+                    }
                 } else if ($('.header-forgot-pwd.accountcontent').css('display') == 'block') {
                     // Do Nothing
                 } else {
