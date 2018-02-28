@@ -50,28 +50,28 @@
 								</div>
 							</div>
 
-							<form action="${URLUtils.https('COShipping-ShippingLogin')}" method="post" id="${pdict.CurrentForms.login.htmlName}"  class="shippinglogin <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">invalid </isif>">
+							<form action="${URLUtils.https('COShipping-ShippingLogin')}" method="post" id="${pdict.CurrentForms.login.htmlName}"  class="shippinglogin form-horizontal <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">invalid </isif>">
 								<fieldset>
 
 										<input type="text" name="first-hidden" class="first-hidden"/>
-										<div class="formfield username account-email err <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
+										<div class="username account-email err <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
 											<isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">
-												<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail errorclient"  rowClass="inputlabel form-row-50 username" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
-												<span class="email_error logerror"><isprint value="${Resource.msg('shippinginfo.login','checkout',null)}"/></span>
+												<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail errorclient"  rowClass="inputlabel username" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+												<span class="email_error logerror errorclient"><isprint value="${Resource.msg('shippinginfo.login','checkout',null)}"/></span>
 											<iselse>
-											    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" rowclass=" form-row-50 username" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+											    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" rowclass="username" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 											</iselse>
 											</isif>
 
 											<div class="clear"><!-- FLOAT CLEAR --></div>
 										</div>
 
-										<div class="formfield password <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
+										<div class="password <isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">log_error</isif>" >
 											<isif condition="${pdict.CurrentHttpParameterMap.loginstatus.stringValue=='failed'}">
-												<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password errorclient" rowClass="inputlabel form-row-50 password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
-												<span class="pwd_error logerror"><isprint value="${Resource.msg('logininclude.loginerror','account',null)}"/></span>
+												<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password errorclient" rowClass="inputlabel password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+												<span class="pwd_error logerror errorclient"><isprint value="${Resource.msg('logininclude.loginerror','account',null)}"/></span>
 											 <iselse>
-											 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowclass=" form-row-50 password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+											 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowclass="password"  requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
 											 </iselse>
 											</isif>
 
@@ -192,7 +192,7 @@
 									<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
 									<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
 									<isinputfield type="hidden" formfield="${pdict.CurrentForms.singleshipping.shippingAddress.selectedaddress}" />
-										<div class="select-address addresslist form-row custom-select">
+										<div class="select-address form-row custom-select">
 											<iscomment>
 											<label for="${pdict.CurrentForms.singleshipping.addressList.htmlName}">
 												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
@@ -236,14 +236,14 @@
 
 
 										<isif condition="${pdict.CurrentCustomer.authenticated}">
-											 <div class="formfield form-row-50 form-row-left addressid"  >
+											 <div class="addressid">
 											 	<isscript>
 											 		var addressCustAttr = {
 														placeholder : 'ex. Home, Work (optional)'
 													};
 											 	</isscript>
 										    	<isinputfield formfield="${pdict.CurrentForms.singleshipping.shippingAddress.addressid}" type="input" value="true" attributes="${addressCustAttr}"/>
-										    	<a class="Custom-tooltip tooltip">
+										    	<a class="address-tooltip tooltip">
 													?
 													<div class="tooltip-body" style="display:none">
 														<div class="tooltipcontainer Nick">
