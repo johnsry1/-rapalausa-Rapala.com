@@ -93,14 +93,6 @@
     }
     #paymentmethods {
         .payment-method {
-            label {
-                margin-right: rem(10px);
-                @include respond(medium-down) {
-                    text-align: left !important;
-                    margin: 0;
-                    padding: 0;
-                }
-            }
             .expirationdate {
                 margin-bottom: rem(7px);
                 clear: both;
@@ -114,11 +106,11 @@
                 }
                 .label {
                     line-height: rem(15px) !important;
+                    margin-bottom: 9px !important;
                     float: none;
                     text-align: left;
                     display: block;
                     position: static;
-                    margin: 0 0 rem(5px);
                     .requiredindicator {
                         float: none !important;
                     }
@@ -241,6 +233,10 @@
                 }
             }
             .paymentform.creditcardpayment {
+                border: 0;
+                padding: 0;
+                width: 100%;
+                background: none;
                 .clearbutton {
                     right: 0;
 
@@ -253,6 +249,11 @@
                     float: none;
                 }
             }
+            .promo-input-button {
+                @include respond(medium-down) {
+                    width: 100%;
+                }
+            }
             input.textinput {
                 @include form-input;
                 font-style: normal;
@@ -260,17 +261,32 @@
             #couponentry {
                 .form-row-type-text {
                     @include respond(medium-down) {
-                        float: left;
-                        width: auto;
+                        width: 100%;
                     }
                 }
                 button {
                     @include button;
-                    height: rem($form-field-height);
-                    @include line-height($form-field-height);
                     min-width: inherit;
                     @include respond(medium-down) {
-                        padding: 0
+                        width: 100%;
+                    }
+                    @include respond(large-up) {
+                        height: rem($form-field-height);
+                        @include line-height($form-field-height);
+                    }
+                }
+                .field-wrapper {
+                    padding-left: 0 !important;
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                }
+                .coupon-apply {
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                    @include respond(large-up) {
+                        padding-top: rem(6px);
                     }
                 }
             }
@@ -328,10 +344,10 @@
         .field-wrapper {
             width: 100% !important;
             padding-left: 0 !important;
+            margin-bottom: 0;
             @include respond(large-up) {
                 width: rem($form-horizontal-field-width) !important;
                 padding-left: rem($form-horizontal-field-padding) !important;
-                margin-bottom: 0;
             }
             .input-select {
                 width: 100%;
@@ -352,6 +368,7 @@
         }
         &.select-address  {
             margin-bottom: rem(20px);
+            clear: both;
             .field-wrapper {
                 background: none !important;
                 padding: 0 !important;
@@ -454,6 +471,9 @@
                 }
             }
             .continue-checkout-button {
+                @include respond(medium-down) {
+                    width: 100% !important;
+                }
                 button {
                     @include button('submit');
                     min-width: inherit;
@@ -604,10 +624,16 @@
                 margin: 0 !important;
             }
             .new-address-field {
+                @include respond(medium-down) {
+                    width: 100%;
+                }
                 .new-address-button {
                     @include button;
                     min-width: inherit;
                     width: auto;
+                    @include respond(medium-down) {
+                        width: 100% !important;
+                    }
                 }
             }
         }
@@ -680,15 +706,39 @@
         }
     }
     #paymentmethods {
-        .form-row {
-            margin-bottom: 0;
-        }
+        margin: 0 0.625rem;
         .paymentmethods_cont {
             .toggle {
+                background: none;
+                border: 0;
+                @include respond(medium-down) {
+                    background: none !important;
+                    width: 100% !important;
+                    color: $form-caption-color !important;
+                    font-size: 16px !important;
+                    border: 0 !important;
+                }
                 label,
                 label.paypaltoggle {
-                    margin-bottom: 0;
                     line-height: normal;
+                    padding: 0 0 rem(10px) 0;
+                    text-align: left;
+                    @include respond(medium-down) {
+                        width: 100% !important;
+                        padding: 0 !important;
+
+                    }
+                }
+                .toggle-label {
+                    text-align: center;
+                    padding-bottom: rem(10px);
+                    @include respond(large-up) {
+                        margin-left: rem(-12px);
+                        text-align: left;
+                    }
+                }
+                .form-row {
+                    margin: 0;
                 }
             }
         }
@@ -772,6 +822,51 @@
                 padding-left: 0 !important;
             }
         }
+    }
+    .payment-method-options {
+        .form-row {
+            float: none !important;
+            .label {
+                margin-bottom: 9px !important;
+            }
+            &.year {
+                clear: left;
+                margin: 0 0 0 0 !important;
+                @include respond(large-up) {
+                    margin: rem(11px) 0 rem(8px) rem($form-horizontal-label-width) !important;
+                }
+            }
+            &.month {
+                @include respond(medium-down) {
+                    margin-bottom: rem(20px);
+                }
+            }
+        }
+        .form-caption {
+            margin-left: 0 !important;
+            @include font-size(13px);
+            text-align: left;
+            @include respond(large-up) {
+                margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+            }
+        }
+        .custom-checkbox {
+            margin: 0 !important;
+            padding: 0;
+            .checkbox {
+                margin: 0 !important;
+                .field-wrapper {
+                    margin: 0;
+                    padding: 0 !important;
+                    @include respond(large-up) {
+                        margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+                    }
+                }
+            }
+        }
+    }
+    .payment-mobile-handling {
+        width: 100% !important;
     }
 }
 
