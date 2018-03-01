@@ -161,7 +161,7 @@
                                      phone : (address.phone != null) ? address.phone : ''
                               }
                        		</isscript>
-							<div class="custom-checkbox" data-address="${JSON.stringify(shipaddr)}">
+							<div class="custom-checkbox custom-checkbox-billing" data-address="${JSON.stringify(shipaddr)}">
                                 <isif condition="${!empty(pdict.CurrentForms.billing.billingAddress.sameasshippingaddress) && pdict.CurrentForms.billing.billingAddress.sameasshippingaddress.value}">
 	                                <div class="custom-link active"></div>
 	                                <div class="checkbox">
@@ -182,7 +182,7 @@
 							<isset name="shippingAddr" value="${address}" scope="page"/>
 							<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
 							<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
-								<div class="select-address addresslist form-row custom-select">
+								<div class="select-address form-row custom-select">
 										<iscomment>
 											<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
 												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
@@ -223,14 +223,14 @@
 							</isscript>
 							<div class="shipping-address-field-section billing-address-fields hide">
 								<isif condition="${pdict.CurrentCustomer.authenticated}">
-									 <div class="formfield form-row-50 form-row-left addressid"  >
+									 <div class="addressid">
 									 	<isscript>
 									 		var addressCustAttr = {
 												placeholder : 'ex. Home, Work (optional)'
 											};
 									 	</isscript>
 								    	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressid}" rowClass=" " type="input" value="true" attributes="${addressCustAttr}"/>
-								    	<a class="Custom-tooltip tooltip">
+								    	<a class="address-tooltip tooltip">
 											?
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer Nick">
@@ -261,12 +261,12 @@
 							    </div>
 						    </div>
 							<isif condition="${pdict.CurrentCustomer.authenticated}">
-								<div class="formfield  email-field hide">
-                               		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left"/>
+								<div class="formfield hide">
+                               		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" />
 								</div>
 							<iselse/>
-								<div class="formfield email-field">
-									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+								<div class="formfield">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 									<div class="whyemail-address">
 										<a class="Custom-tooltip">
 											?

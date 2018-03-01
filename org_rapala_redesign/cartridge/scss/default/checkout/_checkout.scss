@@ -196,14 +196,29 @@
                     }
                 }
             }
-            .shippinglogindetails,
             .shippinglogindetails {
                 font-family: $font;
+                @include respond(medium-down) {
+                    width: 100%;
+                }
                 button {
                     @include button('submit');
                     padding: 0;
                     min-width: inherit;
                     width: rem(100px);
+                }
+                .log_error {
+                    .form-row {
+                        margin-bottom: 0;
+                    }
+                    span.logerror {
+                        padding: 0 0 rem(12px) 0;
+                        @include respond(large-up) {
+                            margin-left: rem(136px);
+                            max-width: rem(280px);
+                        }
+
+                    }
                 }
             }
             .addresslist.custom-select {
@@ -289,17 +304,62 @@
         }
     }
     .form-row {
+        margin: 6px 0 12px;
+        @include respond(medium-down) {
+            position: relative;
+        }
         .tooltip {
             @include tooltip;
             @include line-height(15px);
-            float: right !important;
             top: inherit !important;
             background: none !important;
             text-indent: 0 !important;
             width: auto !important;
             height: auto !important;
-            @include respond(medium-up) {
-                margin: rem(-30px) rem(-12px) 0 0 !important;
+            @include respond(large-up) {
+                margin: rem(6px) 0 0 rem(10px);
+            }
+            @include respond(medium-down) {
+                position: absolute;
+                top: rem(52px) !important;
+                right: 0;
+            }
+        }
+        .field-wrapper {
+            width: 100% !important;
+            padding-left: 0 !important;
+            @include respond(large-up) {
+                width: rem($form-horizontal-field-width) !important;
+                padding-left: rem($form-horizontal-field-padding) !important;
+                margin-bottom: 0;
+            }
+            .input-select {
+                width: 100%;
+                height: $form-field-height - $form-field-border-width * 2;
+                margin-bottom: 0;
+                background: $trans;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                border-radius: 0;
+                width: calc(100% + #{$form-dropdown-arrow-icon-width}) !important;
+                appearance: none;
+                &.errorclient {
+                    background: $trans;
+                    border: 0;
+                }
+            }
+        }
+        &.select-address  {
+            margin-bottom: rem(20px);
+            .field-wrapper {
+                background: none !important;
+                padding: 0 !important;
+                border: 0 !important;
+                height: rem(30px) !important;
+                @include respond(large-up) {
+                    margin: 0 0 0 rem(12px) !important;
+                }
             }
         }
     }
@@ -311,10 +371,21 @@
                 border-radius: $form-field-border-radius !important;
             }
         }
-        .label {
+        .addressid {
+            position: relative;
+            clear: both;
+        }
+        .address-tooltip {
+            color: $tooltip-color;
+            position: absolute;
+            @include font-size(13px);
             @include respond(large-up) {
-                margin-bottom: rem(5px);
-                line-height: rem(15px) !important;
+                left: rem(418px);
+                top: 0;
+            }
+            @include respond(medium-down) {
+                top: rem(42px) !important;
+                right: 0;
             }
         }
     }
@@ -541,11 +612,21 @@
             }
         }
     }
-    .shipping-address-field-section {
+    .shipping-address-field-section,
+    .shippinglogin {
         @include respond(large-up) {
             margin: 0 rem(10px);
         }
     }
+    .shippinglogin {
+        .formactions {
+            @include respond(large-up) {
+                margin-left: rem(134px);
+                width: rem(280px) !important;
+            }
+        }
+    }
+
     .billingsection {
         .shipping-address-field-section .billing-address-fields {
             @include respond(large-up) {
@@ -628,6 +709,7 @@
                 height: 30px !important;
                 font-family: $font !important;
                 color: $form-field-color !important;
+                font-size: 13px !important;
             }
             .required-indicator {
                 @include respond(medium-down) {
@@ -663,6 +745,13 @@
     .cardnotworking-tooltip {
         font-family: $font;
     }
+    .selectorOut {
+        line-height: 30px !important;
+        height: 30px !important;
+        font-family: $font !important;
+        color: $form-field-color !important;
+        font-size: 13px !important;
+    }
     .checkout {
         .paymentform.creditcardpayment {
             .creditcardlist.custom-select {
@@ -674,6 +763,13 @@
                     height: 30px;
                     line-height: 30px;
                 }
+            }
+        }
+    }
+    .custom-checkbox-billing {
+        .form-row {
+            .field-wrapper {
+                padding-left: 0 !important;
             }
         }
     }
@@ -781,6 +877,9 @@
             }
         }
     }
+}
+.checkout-copyright {
+    box-sizing: border-box;
 }
 
 .pt_orderconfirmation {
