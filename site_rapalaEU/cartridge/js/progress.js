@@ -8,6 +8,7 @@ var $loader;
  * @param {Element} container The Element on top of which the AJAX-Loader will be shown
  */
 var show = function (container) {
+    $('body').removeClass('hide-loader');
     var target = (!container || $(container).length === 0) ? $('body') : $(container);
     $loader = $loader || $('.loader');
 
@@ -24,6 +25,7 @@ var show = function (container) {
 var hide = function () {
     if ($loader) {
         $loader.hide();
+        $('body').addClass('hide-loader');
     }
 };
 
