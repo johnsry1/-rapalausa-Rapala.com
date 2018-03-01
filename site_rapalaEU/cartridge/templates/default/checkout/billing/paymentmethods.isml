@@ -137,7 +137,7 @@
 				<isif condition="${paymentMethodType.value.equals(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE) || paymentMethodType.value.equals("ALLOTMENT")}">
 					<iscontinue/>
 				</isif>
-				
+
 				<isset name="radioID" value="${paymentMethodType.value}" scope="page"/>
 				<div class='toggle <isif condition="${paymentMethodType.value == pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.htmlValue}"> active</isif>'>
 					<div class="form-row label-inline">
@@ -166,7 +166,7 @@
 				</div>
 			</isloop>
 		</div>
-		
+
 		<isif condition="${!empty(pdict.MissingPaymentProcessor)}">
 			<div class="billing-error"><isprint value="${Resource.msg('billing.missingprocessorerror','checkout',null)}"/></div>
 		</isif>
@@ -186,7 +186,7 @@
 					<iscomment>display select box with stored credit cards if customer is authenticated</iscomment>
 					<isif condition="${pdict.CurrentCustomer.authenticated && !empty(pdict.ApplicableCreditCards)}">
 
-						<div class="formfield form-row-50 selected-saved-payment-info">
+						<div class="formfield selected-saved-payment-info">
 							<div class="form-row custom-select creditcardlist">
 								<div class="label">
 									<span class="labeltext">${Resource.msg('billing.savedcreditcard','checkout',null)}</span>
@@ -241,7 +241,7 @@
 						<script src="${AdyenHelper.getCSEJsUrl()}" type="text/javascript"></script>
 						<isinclude template="checkout/billing/adyenpaymentmethods"/>
 					<iselse/>
-				
+
 						<div class="formfield form-row-50">
 							<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.owner}" type="input" fieldClass="creditcard_name" requiredtext="${Resource.msg('forms.billing.nameoncard.missing','forms',null)}"/>
 						</div>
@@ -262,7 +262,7 @@
 								<span class="required-indicator">&#x2A;</span>
 								<span class="labeltext"><isprint value="${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}"/></span>
 							</label>
-	
+
 							<isscript>
 								var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 							</isscript>
@@ -306,7 +306,7 @@
 						                    </div>
 						                 </a>
 						             </span>
-	
+
 						   </div>
 						<isif condition="${pdict.CurrentCustomer.authenticated}">
 							<div class="formfield form-row-50 form-row-left SaveCard">
@@ -335,7 +335,7 @@
 				<isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}">
 					<div class="error-paypal-heading"><p><isprint value="${Resource.msg('billinginfo.paypalnotauthorized','checkout',null)}"/></p></div>
 				</isif>
-		
+
 				<div class="paypalimg <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmargin-paypalimg</isif>">
 					<input type="hidden" name="paypalpayment" value="true"/>
 					<button name="${pdict.CurrentForms.billing.paypallogin.htmlName}" type="submit"  value="${Resource.msg('global.continue','locale',null)}" class="continuecheckout-paypallogin <isif condition="${(typeof paypalErr != 'undefined') && !empty(paypalErr) && pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.value == 'PayPal'}"> no-topmoegin</isif>"><span>${Resource.msg('global.continue','locale',null)}</span></button>
@@ -361,11 +361,11 @@
 								var code = Errors[0];
 							}
 			       </isscript>
-		
+
 			       	<iscomment>
 			       		<div class="paypalmsg error-paypal less-than-767">Your PayPal payment has not been authorized. Please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> credit card</span></div>
 			       	</iscomment>
-					 
+
 					<div class="paypalmsg error-paypal-discription"><p><isprint value="${discription}"/></p></div>
 					<div class="paypalmsg error-paypal-code "><p><a href="https://www.paypal.com/us/weapps/helpcenter/helphub//home/?action=callus#">Visit PayPal Customer Service</a> or Call PayPal directly: 888-221-1161</p><p>(Please Reference Error Code: ${code})</div>
 					<div class="error-paypal"><p>If you think you have recieved this message in error please <span class="trypaypal">try again</span> or pay with a <span class="switchtocredit"> Credit Card</span></p></div>
@@ -381,14 +381,14 @@
 					<button class="continuecheckout-paypallogin"  type="submit" name="${pdict.CurrentForms.billing.paypallogin.htmlName}" disabled="disabled" value="${Resource.msg('global.continue','locale',null)}"><span><isprint value="${Resource.msg('global.continue','locale',null)}"/></span></button>
 					<img class="greater-than-767" src="${URLUtils.staticURL('/images/check-mark.PNG')}" style="width:35px;height: 30px;"></img>
 				</div>
-			
+
 				<div class="paypalmsg success-paypal">
 					<div class="less-than-767">
 						<p>Your PayPal Authorization has been confirmed.
 						 Click the "Submit My Order" button below to finalize your payment
 					 	& process your order.</p>
 				 	</div>
-			
+
 				 	<div class="greater-than-767">
 						<p>Your PayPal Authorization has been confirmed.</p>
 						<p>Click the "Submit My Order" button below to finalize your payment</p>

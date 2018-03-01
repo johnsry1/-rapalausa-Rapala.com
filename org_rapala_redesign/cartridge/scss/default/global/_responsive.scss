@@ -11886,3 +11886,23 @@
         }
     }
 }
+.ui-dialog.state-shipping-dialog {
+    @include respond(large-up) {
+        width: rem(356px) !important;
+    }
+    #dialog-container {
+        h1 {
+            font-family: $global-font-family;
+        }
+        .button {
+            @include respond(medium-down) {
+                width: 100% !important;
+            }
+            &.edit-my-order {
+                @include respond(medium-down) {
+                    margin-bottom: rem(10px);
+                }
+            }
+        }
+    }
+}
