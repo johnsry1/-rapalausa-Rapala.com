@@ -138,6 +138,9 @@
                 }
             }
         }
+        .label {
+            padding-left: 0 !important;
+        }
     }
     #footernew {
         .footer-links {
@@ -219,8 +222,9 @@
                     box-shadow: none;
                     font-family: $font;
                     border: none;
-                    background: none;
-                    height: rem(30px);
+                    background: none !important;
+                    height: rem(40px);
+                    line-height: rem(40px);
                     margin-left: 0;
                     @include respond(large-up) {
                         margin-left: 10px;
@@ -333,11 +337,11 @@
             width: auto !important;
             height: auto !important;
             @include respond(large-up) {
-                margin: rem(6px) 0 0 rem(10px);
+                margin: rem(12px) 0 0 rem(10px);
             }
             @include respond(medium-down) {
                 position: absolute;
-                top: rem(52px) !important;
+                top: rem(62px) !important;
                 right: 0;
             }
         }
@@ -346,7 +350,7 @@
             padding-left: 0 !important;
             margin-bottom: 0;
             @include respond(large-up) {
-                width: rem($form-horizontal-field-width) !important;
+                width: rem($form-horizontal-field-width  + 20px) !important;
                 padding-left: rem($form-horizontal-field-padding) !important;
             }
             .input-select {
@@ -359,11 +363,17 @@
                 -webkit-box-shadow: none;
                 border-radius: 0;
                 width: calc(100% + #{$form-dropdown-arrow-icon-width}) !important;
+                height: 38px;
+                @include line-height(38px);
                 appearance: none;
                 &.errorclient {
                     background: $trans;
                     border: 0;
                 }
+            }
+            .textinput {
+                height: 40px;
+                @include line-height(40px);
             }
         }
         &.select-address  {
@@ -373,7 +383,8 @@
                 background: none !important;
                 padding: 0 !important;
                 border: 0 !important;
-                height: rem(30px) !important;
+                height: rem(40px) !important;
+                line-height: rem(40px) !important;
                 @include respond(large-up) {
                     margin: 0 0 0 rem(12px) !important;
                 }
@@ -386,23 +397,53 @@
             input[type="password"] {
                 @include form-input;
                 border-radius: $form-field-border-radius !important;
+                height: 40px;
+                line-height: 40px;
             }
         }
         .addressid {
             position: relative;
             clear: both;
         }
+        .formfield-email .address-tooltip,
         .address-tooltip {
-            color: $tooltip-color;
-            position: absolute;
-            @include font-size(13px);
+            background: none !important;
+            color: $tooltip-color !important;
+            position: absolute !important;
+            font-size: 13px !important;
+            text-indent: 0 !important;
+            width: auto !important;
+            height: auto !important;
             @include respond(large-up) {
-                left: rem(418px);
-                top: 0;
+                left: rem(438px) !important;
+                top: rem(5px) !important;
             }
             @include respond(medium-down) {
-                top: rem(42px) !important;
-                right: 0;
+                top: rem(52px) !important;
+                right: 0 !important;
+            }
+        }
+        .label {
+            font-family: $font;
+            @include respond(large-up) {
+                line-height: 40px !important;
+            }
+        }
+        .clearbutton {
+            top: rem(4px) !important;
+        }
+        .formfield-email {
+            @include respond(large-up) {
+                margin: 0 rem(10px);
+            }
+            .address-tooltip {
+                text-decoration: underline;
+                @include respond(large-up) {
+                    margin-left: rem(7px) !important;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
             }
         }
     }
@@ -584,6 +625,11 @@
                     @include respond(medium-down) {
                         border: $form-field-border !important;
                     }
+                    &.errorclient {
+                        @include respond(medium-down) {
+                            border: $error-border !important;
+                        }
+                    }
                 }
             }
             .form-row-50.addressid {
@@ -755,8 +801,8 @@
                 }
             }
             .selectorOut {
-                line-height: 30px !important;
-                height: 30px !important;
+                line-height: 40px !important;
+                height: 40px !important;
                 font-family: $font !important;
                 color: $form-field-color !important;
                 font-size: 13px !important;
@@ -776,7 +822,7 @@
                 line-height: 20px;
             }
             @include respond(large-up) {
-                line-height: rem(30px) !important;
+                line-height: rem(40px) !important;
             }
             .labeltext {
                 color: inherit;
@@ -796,8 +842,8 @@
         font-family: $font;
     }
     .selectorOut {
-        line-height: 30px !important;
-        height: 30px !important;
+        line-height: 40px !important;
+        height: 40px !important;
         font-family: $font !important;
         color: $form-field-color !important;
         font-size: 13px !important;
@@ -805,13 +851,14 @@
     .checkout {
         .paymentform.creditcardpayment {
             .creditcardlist.custom-select {
+                margin-bottom: 0;
                 .field-wrapper {
                     font-family: $font;
-                    background: none;
+                    background: none !important;
                     border: none;
                     box-shadow: none;
-                    height: 30px;
-                    line-height: 30px;
+                    height: 40px;
+                    line-height: 40px;
                 }
             }
         }
@@ -841,6 +888,10 @@
                     margin-bottom: rem(20px);
                 }
             }
+            &.form-row-type-hidden {
+                margin: 0;
+                height: 1px;
+            }
         }
         .form-caption {
             margin-left: 0 !important;
@@ -864,6 +915,12 @@
                 }
             }
         }
+        .form-data-error {
+            text-align: left;
+            margin: 0 0 rem(11px) rem($form-horizontal-label-width + 20px) !important;
+            width: calc(100% - $form-horizontal-label-width - 20px);
+            min-height: 1px;
+        }
     }
     .payment-mobile-handling {
         width: 100% !important;
@@ -871,6 +928,13 @@
     .checkout-billing {
         .formfield {
             clear: both;
+            &.selected-saved-payment-info {
+                .field-wrapper {
+                    border-radius: 0 !important;
+                    margin-left: 0 !important;
+                    background: none !important;
+                }
+            }
         }
     }
 }
