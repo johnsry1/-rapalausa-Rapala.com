@@ -138,6 +138,9 @@
                 }
             }
         }
+        .label {
+            padding-left: 0 !important;
+        }
     }
     #footernew {
         .footer-links {
@@ -219,7 +222,7 @@
                     box-shadow: none;
                     font-family: $font;
                     border: none;
-                    background: none;
+                    background: none !important;
                     height: rem(40px);
                     line-height: rem(40px);
                     margin-left: 0;
@@ -394,6 +397,8 @@
             input[type="password"] {
                 @include form-input;
                 border-radius: $form-field-border-radius !important;
+                height: 40px;
+                line-height: 40px;
             }
         }
         .addressid {
@@ -817,7 +822,7 @@
                 line-height: 20px;
             }
             @include respond(large-up) {
-                line-height: rem(30px) !important;
+                line-height: rem(40px) !important;
             }
             .labeltext {
                 color: inherit;
@@ -846,9 +851,10 @@
     .checkout {
         .paymentform.creditcardpayment {
             .creditcardlist.custom-select {
+                margin-bottom: 0;
                 .field-wrapper {
                     font-family: $font;
-                    background: none;
+                    background: none !important;
                     border: none;
                     box-shadow: none;
                     height: 40px;
@@ -882,6 +888,10 @@
                     margin-bottom: rem(20px);
                 }
             }
+            &.form-row-type-hidden {
+                margin: 0;
+                height: 1px;
+            }
         }
         .form-caption {
             margin-left: 0 !important;
@@ -905,6 +915,12 @@
                 }
             }
         }
+        .form-data-error {
+            text-align: left;
+            margin: 0 0 rem(11px) rem($form-horizontal-label-width + 20px) !important;
+            width: calc(100% - $form-horizontal-label-width - 20px);
+            min-height: 1px;
+        }
     }
     .payment-mobile-handling {
         width: 100% !important;
@@ -912,6 +928,13 @@
     .checkout-billing {
         .formfield {
             clear: both;
+            &.selected-saved-payment-info {
+                .field-wrapper {
+                    border-radius: 0 !important;
+                    margin-left: 0 !important;
+                    background: none !important;
+                }
+            }
         }
     }
 }
