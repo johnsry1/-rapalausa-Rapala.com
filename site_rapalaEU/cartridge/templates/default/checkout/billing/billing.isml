@@ -265,10 +265,9 @@
                                		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" />
 								</div>
 							<iselse/>
-								<div class="formfield">
+								<div class="formfield formfield-email addressid">
 									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
-									<div class="whyemail-address">
-										<a class="Custom-tooltip">
+										<a class="address-tooltip tooltip">
 											?
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer">
@@ -276,7 +275,6 @@
 												</div>
 											</div>
 										</a>
-									</div>
 								</div>
 
                                </isif>

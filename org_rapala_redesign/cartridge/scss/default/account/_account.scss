@@ -151,6 +151,14 @@ div.returningcustomers {
     }
     #primary.primary-content {
         .account-section {
+            .formfield {
+                &.formfield_country {
+                    float: none;
+                    @include respond(large-up) {
+                        max-width: 375px;
+                    }
+                }
+            }
             .requiredindicator {
                 color: $required-color;
             }
@@ -303,6 +311,12 @@ div.returningcustomers {
                         }
                         .formfield {
                             width: 100%;
+                            &.formfield_country {
+                                float: none;
+                                @include respond(large-up) {
+                                    max-width: 375px;
+                                }
+                            }
                         }
                         .custom-link {
                             width: 100%;
