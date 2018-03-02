@@ -102,6 +102,7 @@ var settings = {
                 $(element).closest('.formfield').find('.label').removeClass('erroroccured');
             }
         } else {
+
             if ($('.passwordreset').find('button.send.clickedButton').length > 0) {
                 $(element).after(error);
                 $('.passwordreset').find('button.send.clickedButton').removeClass('clickedButton');
@@ -120,7 +121,11 @@ var settings = {
                     } else if ($selectStyle.length) {
                         $selectStyle.after(error);
                     } else {
-                        $(element).after(error);
+                        if ($(element).hasClass('checkinput')) {
+                            $(element).parent('.field-wrapper').append(error);
+                        } else {
+                            $(element).after(error);
+                        }
                     }
                 }
             }
