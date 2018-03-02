@@ -1168,9 +1168,57 @@
             <attribute-definition attribute-id="pageURL">
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="template">
-                <min-length>0</min-length>
-            </attribute-definition>
+            <attribute-definition attribute-id="siteMapChangeFrequency">
+              <value-definitions immutable="true">
+                  <value-definition>
+                      <display xml:lang="x-default">always</display>
+                      <value>always</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">hourly</display>
+                      <value>hourly</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">daily</display>
+                      <value>daily</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">weekly</display>
+                      <value>weekly</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">monthly</display>
+                      <value>monthly</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">yearly</display>
+                      <value>yearly</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">never</display>
+                      <value>never</value>
+                  </value-definition>
+              </value-definitions>
+          </attribute-definition>
+          <attribute-definition attribute-id="siteMapIncluded">
+              <value-definitions immutable="true">
+                  <value-definition>
+                      <display xml:lang="x-default">YES</display>
+                      <value>1</value>
+                  </value-definition>
+                  <value-definition>
+                      <display xml:lang="x-default">NO</display>
+                      <value>0</value>
+                  </value-definition>
+              </value-definitions>
+          </attribute-definition>
+          <attribute-definition attribute-id="siteMapPriority">
+              <min-value>0.0</min-value>
+              <max-value>1.0</max-value>
+          </attribute-definition>
+          <attribute-definition attribute-id="template">
+              <min-length>0</min-length>
+          </attribute-definition>
         </system-attribute-definitions>
         <custom-attribute-definitions>
             <attribute-definition attribute-id="content_search_term">
@@ -1264,6 +1312,12 @@
                 <attribute attribute-id="leftNavRoot"/>
                 <attribute attribute-id="showInMainMenu"/>
                 <attribute attribute-id="expandable"/>
+            </attribute-group>
+            <attribute-group group-id="SiteMap">
+                <display-name xml:lang="x-default">Sitemap Attributes</display-name>
+                <attribute attribute-id="siteMapIncluded" system="true"/>
+                <attribute attribute-id="siteMapChangeFrequency" system="true"/>
+                <attribute attribute-id="siteMapPriority" system="true"/>
             </attribute-group>
             <attribute-group group-id="CustomerService">
                 <display-name xml:lang="x-default">Customer Service</display-name>
@@ -5823,7 +5877,7 @@ Test (lb. / kg.)|testLb,testKg|Diameter (in. / mm.)|diameterInches,diameterMM|Mo
                 <externally-defined-flag>false</externally-defined-flag>
                 <field-length>0</field-length>
             </attribute-definition>
-            
+
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="ShippingLimitations">
@@ -10297,6 +10351,27 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="reCaptchaEnabled">
+                <display-name xml:lang="x-default">ReCaptcha Enabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="reCaptchaPrivateKey">
+                <display-name xml:lang="x-default">ReCaptcha Private Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="reCaptchaPublicKey">
+                <display-name xml:lang="x-default">ReCaptcha Public Key</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="restrictedProduct">
                 <display-name xml:lang="x-default">Restricted ProductID</display-name>
                 <description xml:lang="x-default">This is used to get the shipping alert message.</description>
@@ -10992,11 +11067,17 @@ If empty value is specified, space will be used as a delimiter.</description>
             </attribute-group>
             <attribute-group group-id="UPS">
                 <display-name xml:lang="x-default">UPS Configuration</display-name>
-				<attribute attribute-id="enableUPS"/>
-				<attribute attribute-id="upsaddressValidationURL"/>
+                <attribute attribute-id="enableUPS"/>
+                <attribute attribute-id="upsaddressValidationURL"/>
                 <attribute attribute-id="upsuserID"/>
                 <attribute attribute-id="upspassword"/>
                 <attribute attribute-id="upsaccessLicenseNumber"/>
+            </attribute-group>
+            <attribute-group group-id="ReCaptcha">
+                <display-name xml:lang="x-default">ReCaptcha</display-name>
+                <attribute attribute-id="reCaptchaEnabled"/>
+                <attribute attribute-id="reCaptchaPublicKey"/>
+                <attribute attribute-id="reCaptchaPrivateKey"/>
             </attribute-group>
             <attribute-group group-id="Cart_Recommendations">
                 <display-name xml:lang="x-default">Cart Recommendations Product ID List</display-name>
@@ -11064,6 +11145,13 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <attribute attribute-id="otterrestrictedZipcode"/>
                 <attribute attribute-id="restrictedProduct"/>
                 <attribute attribute-id="shippingLimitations"/>
+            </attribute-group>
+            <attribute-group group-id="upsconfiguration">
+                <display-name xml:lang="x-default">UPS Configuration</display-name>
+                <attribute attribute-id="upsaddressValidationURL"/>
+                <attribute attribute-id="upspassword"/>
+                <attribute attribute-id="upsaccessLicenseNumber"/>
+                <attribute attribute-id="upsuserID"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
