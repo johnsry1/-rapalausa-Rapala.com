@@ -66,7 +66,7 @@ exports.init = function () {
         selectedAddress.postalCode = selectedAddress.postalCode != null ? selectedAddress.postalCode : '';
         selectedAddress.phone = selectedAddress.phone != null ? selectedAddress.phone : '';
         
-        $('.selected-shipping-address').append(selectedAddress.title + '<br/>' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.countryDisplayValue + '<br/>' + selectedAddress.phone);
+        $('.selected-shipping-address').append(selectedAddress.title + ' ' + selectedAddress.firstName + ' ' + selectedAddress.lastName + '<br/>' + selectedAddress.address1 + ' ' + selectedAddress.address2 + '<br/>' + selectedAddress.city + ' ' + selectedAddress.stateCode + ' ' + selectedAddress.postalCode + '<br/>' + selectedAddress.countryDisplayValue + '<br/>' + selectedAddress.phone);
         if ($('.checkout').hasClass('billingsection')) {
             var editAddressObject = {
                 firstName: selectedAddress.firstName,
