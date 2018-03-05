@@ -750,6 +750,13 @@
                 margin-bottom: 0;
             }
         }
+        .knife {
+            .custom-checkbox {
+                .label {
+                    display: block;
+                }
+            }
+        }
     }
     #paymentmethods {
         margin: 0 0.625rem;
@@ -1262,4 +1269,42 @@
 
 .summary-carttable {
     font-family: $font;
+}
+
+.pt_checkout {
+    .knife {
+        .knife-checkbox {
+            width: 100% !important;
+            .field-wrapper {
+                width: 100% !important;
+                @include respond(large-up) {
+                    padding-left: rem(6px) !important;
+                }
+                .label {
+                    width: 100% !important;
+                    display: flex !important;
+                    &::before {
+                        width: rem(74px) !important;
+                        @include respond(large-up) {
+                            width: rem(49px) !important;
+                        }
+                    }
+                    .requiredindicator {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .labeltext,
+        .agecheck-order {
+            line-height: 18px !important;
+            font-family: $font !important;
+            color: $form-label-color !important;
+        }
+        input[type="checkbox"].errorclient + label {
+            .labeltext {
+                color: $font-error-color !important;
+            }
+        }
+    }
 }
