@@ -376,7 +376,6 @@ body.js-body {
                             }
                             & ~ .sub-category-section {
                                 @include respond(desktop) {
-                                    display: block !important;
                                     position: absolute;
                                     top: rem(35px);
                                     background-color: $main-nav-hover-bg;
@@ -387,6 +386,28 @@ body.js-body {
                                     left: 50%;
                                     transform: translateX(-50%);
                                     white-space: nowrap;
+                                }
+                            }
+                        }
+                    }
+                }
+                .sub-category-section-1:not(.no-desktop-menu) {
+                    & > a {
+                        &:hover {
+                            & ~ .sub-category-section {
+                                @include respond(desktop) {
+                                    display: block !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                .sub-category-section-1.no-desktop-menu {
+                    & > a {
+                        &:hover {
+                            & ~ .sub-category-section {
+                                @include respond(desktop) {
+                                    display: none !important;
                                 }
                             }
                         }
