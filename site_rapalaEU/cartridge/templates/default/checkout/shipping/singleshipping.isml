@@ -211,7 +211,7 @@
 									<isset name="addressForm" value="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields}" scope="page">
 											<div class="selected-shipping-address <isif condition="${billingreturn == 'true' || (pdict.CurrentHttpParameterMap.addressDisplay.value != null && pdict.CurrentHttpParameterMap.addressDisplay.value != 'true')}">hide</isif>">
 											<isif condition="${addressForm.firstName.value != null}">
-												<isprint value="${addressForm.firstName.value}"/> <isprint value="${addressForm.lastName.value}"/><br/>
+                                                <isif condition="${addressForm.title.value != null}"><isprint value="${addressForm.title.value}"/></isif><isprint value="${addressForm.firstName.value}"/> <isprint value="${addressForm.lastName.value}"/><br/>
 												<isprint value="${addressForm.address1.value}"/> <isif condition="${addressForm.address2.value != null}"><isprint value="${addressForm.address2.value}"/></isif><br/>
 												<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.states.state.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
 												<isprint value="${addressForm.phone.value}"/>
