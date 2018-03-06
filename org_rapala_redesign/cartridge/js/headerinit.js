@@ -219,8 +219,12 @@ var headerEvents = {
         });
 
         $('body').click(function (event) {
-            if (!$(event.target).is('.signupfor-email .seesamples') && (!$(event.target).is('.create_email_checkbox .seesamples'))) {
+            var target = $(event.target);
+            if (!target.is('input') && !target.is('a') && (!$(event.target).is('.create_email_checkbox .seesamples'))) {
                 $('.sample_mail_main').slideUp(500);
+            }
+            if (target.is('a')) {
+                target.parents('.field-wrapper').find('.checkinput').click();
             }
         });
         /**This is used to get the tick mark for create account when the field is valid*/
@@ -432,10 +436,10 @@ var headerEvents = {
                 var $input = $(this).clone();
                 $form.append($input);
             });
-            
+
             realForm.find('select').each(function (i) {
                 var select = this;
-                $form.find('select').eq(i).val($(select).val());    
+                $form.find('select').eq(i).val($(select).val());
             });
 
             $('body').append($form);
