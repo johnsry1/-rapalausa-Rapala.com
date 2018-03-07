@@ -1,0 +1,32 @@
+<!--- TEMPLATENAME: internationalEU.isml --->
+<isdecorate template="content/home/pt_international">
+	<isinclude template="util/modules"/>
+	
+	<div class="rapala-shop-products">
+		${Resource.msg('global.eu.international.countrieslist','locale',null)}
+		<div class="rapala-shipping-countries">
+			<a class="link-ca" href="https://rapala.ca/">${Resource.msg('global.eu.international.ca','locale',null)}</a>
+			<a class="link-eu" href="https://www.rapala.com/eu/rapala-lures/">${Resource.msg('global.eu.international.eu','locale',null)}</a>
+			<a class="link-us" href="https://www.rapala.com/us/rapala-lures/">${Resource.msg('global.eu.international.us','locale',null)}</a>
+		</div>
+	</div>
+	
+	<div class="explore-rapala-products">
+		${Resource.msg('global.eu.international.exploreproductslink','locale',null)}
+		<div>
+			<a class="international-link" href="https://www.rapala.com/eu/rapala-lures/"><img src="${URLUtils.staticURL('/images/all-other-countries.png')}" alt="Flag">${Resource.msg('global.eu.international.link.name','locale',null)}</a>
+		</div>
+	</div>
+	
+	<div class="distrobutors-countries">
+		${Resource.msg('global.eu.international.distributors','locale',null)}
+		<div class="distrobutors-countries-list">
+			<isloop items="${pdict.distributorCountries}" var="distributor">
+				<div class="distributor-link">
+					<a class="link" href="">${distributor.custom.countryDisplayName}</a>
+				</div>
+			</isloop>
+		</div>
+	</div>
+</isdecorate>
+
