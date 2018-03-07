@@ -19,6 +19,7 @@ var countries = require('./countries'),
     headerinit = require('./headerinit'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
+    quickviewAsset = require('./quickview-asset'),
     tls = require('./tls');
 
 // if jQuery has not been loaded, load from google cdn
@@ -286,6 +287,11 @@ function initializeEvents() {
     //
     $('body').on('submit', '#customercontactus', function (e) {
         e.preventDefault();
+        var res = $('#g-recaptcha-response').val();
+        if (res == '' || res == undefined || res.length == 0) {
+            $('.recaprcha-error').removeClass('hide');
+            return false;
+        }
         var $form = $(this);
         if ($form.valid()) {
             // set the action
@@ -307,6 +313,11 @@ function initializeEvents() {
                 dataType: 'html',
                 data: data
             }).done(function (response) {
+                if (navigator.userAgent.match(/(\(iPod|\(iPhone|\(iPad)/)) {
+                    window.setTimeout(function() {
+                        window.scrollTo(0, 0);
+                    }, 0);
+                }
                 $('.column.colspan2').empty().html(response);
             });
         }
@@ -596,6 +607,7 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
+        quickviewAsset.init();
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;

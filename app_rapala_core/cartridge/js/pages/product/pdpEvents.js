@@ -228,7 +228,9 @@ var product = function (response) {
                 }
                 // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
                 // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
+                /*eslint-disable */
                 var event = jQuery.Event('AddToCart');
+                /*eslint-enable */
                 event.selectedOptions = thisProduct.selectedOptions;
 
                 if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
@@ -1224,6 +1226,10 @@ var product = function (response) {
                     // enable add to cart button
                     this.enableA2CButton();
                     jQuery(this).trigger('AddtoCartEnabled');
+                    if ($('#Quantity').val() < 1) {
+                        $('addtocartbutton:last').prop('disabled', true);
+                        $('.addtocart').addClass('disabled');
+                    }
                 } else if (this.selectedVar.earlyBirdMessage != '') {
                     this.showItemNo();
                     //this.hideAvailability();
@@ -2196,6 +2202,24 @@ var pdpEvents = {
                 e.preventDefault();
             }
         });
+        $('#Quantity').keyup(function(e) {
+            var key = e.charCode || e.keyCode || e.which || 0;
+            if ($.isNumeric($('#Quantity').val()) && (key == 13)) {
+                $('#add-to-cart').trigger('click');
+            } else if (!$.isNumeric($('#Quantity').val())) {
+                $('.addtocartbutton:last').prop('disabled', true);
+                $('.addtocart, .addtocartbutton').addClass('disabled');
+                return false;
+            } else {
+                if ($(this).val() < 1) {
+                    $('addtocartbutton:last').prop('disabled', true);
+                    $('.addtocart').addClass('disabled');
+                } else {
+                    $('.addtocartbutton:last').prop('disabled', false);
+                    $('.addtocart, .addtocartbutton').removeClass('disabled');
+                }
+            }
+        });
         $(document).on('click', '.youtube-list-video a', function () {
             if ($(window).width() > 480 && $(window).width() < 959) {
                 util.scrollBrowser($('.tab-sec').offset().top);
@@ -2226,10 +2250,12 @@ var pdpEvents = {
             }
         });
         $('#add-to-cart').bind('click', function () {
-            $('.addedto-cartoverlay').addClass('added-overlay');
-            setTimeout(function () {
-                $('.addedto-cartoverlay').removeClass('added-overlay');
-            }, 2000);
+            if ($('#Quantity').val() > 0) {
+                $('.addedto-cartoverlay').addClass('added-overlay');
+                setTimeout(function () {
+                    $('.addedto-cartoverlay').removeClass('added-overlay');
+                }, 2000);
+            }
         });
         $('#QuickViewDialog .product-primary-image').find('.product-image').click(function () {
             return false;

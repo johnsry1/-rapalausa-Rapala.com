@@ -246,6 +246,9 @@ exports.init = function () {
         }
         if (!form.valid()) {
             progress.hide();
+            if (navigator.userAgent.match(/Trident\/7\./)) {
+                $('button.continue-checkout .loader').remove();
+            }
             if (jQuery('.shipping-address-field-section').hasClass('hide')) {
                 $('select[name$=singleshipping_addressList]').val('');
                 $('input[name$="singleshipping_shippingAddress_selectedaddress"]').val('');

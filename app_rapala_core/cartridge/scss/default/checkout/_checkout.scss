@@ -3072,11 +3072,20 @@ body {
         float: right;
         padding-top: 7px;
         clear: both;
-        width: 300px;
+        width:100%;
+        @include respond (0, $medium-breakpoint - 1) {
+            width: 300px;
+        }
         .paymenttrustimgs-paypal {
             float: right;
             height: 30px;
             padding: 8px 0 8px 10px;
+        }
+        .secure-payment-icons {
+            float: right;
+            @include respond (0, $medium-breakpoint - 1) {
+                float:none;
+            }
         }
         .payment-trust-imgs {
             float: right;
@@ -3088,10 +3097,23 @@ body {
             &.pci-secured-payment-icon {
                 background: url('../images/pci_secured.png') no-repeat 0 0;
                 background-size: cover;
+                height: 36px;
+                margin: 7px 0 8px 10px;
+                width: 80px;
+                @include respond (0, $medium-breakpoint - 1) {
+                    display: inline-block;
+                    float: none;
+                    margin: 7px 0 3px 10px;
+                }
             }
             &.smcs-payment-icon {
                 background: url('../images/smcs.jpg') no-repeat 0 0;
                 background-size: cover;
+                margin: 8px 0 8px 10px;
+                @include respond (0, $medium-breakpoint - 1) {
+                    display: inline-block;
+                    float: none;
+                }
             }
         }
     }
@@ -4094,6 +4116,9 @@ body {
                         background: linear-gradient(to bottom, #360 1%, #52a300 100%);
                         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#336600', endColorstr='#52a300', GradientType=0);
                     }
+                   &.bob {
+                       background: #360;
+                   }
                     span {
                         padding: 0;
                         width: 100%;
@@ -4517,7 +4542,7 @@ body {
                     text-align: center;
                     button {
                         float: none;
-                        display: inline-block;
+                        display: block;
                     }
                     .ipad-handling {
                         width: auto;
@@ -4948,7 +4973,7 @@ body {
                     text-align: center;
                     button {
                         float: right;
-                        display: inline-block;
+                        display: block;
                     }
                     .ipad-handling {
                         width: auto;
@@ -5012,11 +5037,10 @@ body {
                 .continue-checkout-button {
                     float: none;
                     text-align: center;
-                    display: inline-block;
                     width: 100%;
                     button {
                         float: none;
-                        display: inline-block;
+                        display: block;
                     }
                     .ipad-handling {
                         width: auto;
@@ -6148,7 +6172,7 @@ body {
                     text-align: center;
                     button {
                         float: none;
-                        display: inline-block;
+                        display: block;
                     }
                     .ipad-handling {
                         width: auto;

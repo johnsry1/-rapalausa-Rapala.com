@@ -1301,7 +1301,6 @@ ul.product-availability-list {
                 position: relative;
                 margin: 0;
                 .cart-footer-left {
-                    border-right: 1px solid #ccc;
                     float: left;
                     padding: 0 30px 0 0;
                     width: 477px;
@@ -1887,7 +1886,47 @@ ul.product-availability-list {
                 padding-top: 7px;
                 clear: both;
                 .trustmarksimgs {
-                    width: 300px;
+                    width:100%;
+                    @include respond (0, $large-breakpoint) {
+                        width: 300px;
+                    }
+                    .secure-payment-icons {
+                        float: none;
+                        @include respond ($desktop-breakpoint) {
+                         float: right;
+                        }
+                    }
+                    .payment-trust-imgs {
+                        float: right;
+                        height: 30px;
+                        padding: 0;
+                        width: 77px;
+                        margin-left: 10px;
+
+                        &.pci-secured-payment-icon {
+                            background: url('../images/pci_secured.png') no-repeat 0 0;
+                            background-size: cover;
+                            height: 36px;
+                            margin: 7px 0 8px 10px;
+                            width: 80px;
+                            @include respond (0, $desktop-breakpoint - 1) {
+                                display: inline-block;
+                                float: none;
+                                margin-top: 0px;
+                                top: 4px;
+                                position: relative;
+                            }
+                        }
+                        &.smcs-payment-icon {
+                            background: url('../images/smcs.jpg') no-repeat 0 0;
+                            background-size: cover;
+                            margin: 8px 0 8px 10px;
+                            @include respond (0, $desktop-breakpoint - 1) {
+                                display: inline-block;
+                                float: none;
+                           }
+                        }
+                    }
                 }
                 .paymenttrustimgs-paypal {
                     float: right;

@@ -1,11 +1,12 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
 <div id="subProduct${pdict.ProductCount}Div" class="subProduct">
 	<div class="productsetdetail">
 		<div class="productdetailcolumn productinfo">
 
 			<div class="productname h-one-tag ">
 				<a href="${URLUtils.url('Product-Show','pid', pdict.Product.ID)}" title="${pdict.Product.name}">
-					<isprint value="${pdict.Product.name}" encoding="off" />
+					<isproductname productname="${pdict.Product.name}"/>
 				</a>
 			</div>
 			<div class="itemNo productID">

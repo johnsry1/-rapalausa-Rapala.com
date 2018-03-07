@@ -141,7 +141,9 @@ var addToCart = {
             // fire the BonusDiscountLineItemCheck event so we can check
             // if there is a bonus discount line item
             jQuery(document).trigger(
+                /*eslint-disable */
                 jQuery.Event('BonusDiscountLineItemCheck'));
+                /*eslint-enable */
         };
 
         // handles add to cart error
