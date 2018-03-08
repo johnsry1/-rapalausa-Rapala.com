@@ -649,6 +649,13 @@ var app = {
         if (!util.isMobile()) {
             $('body').addClass('desktop-device');
         }
+        $('.sub-category-section-3').each(function(){
+            if ($(this).children().length == $(this).children('.mobileHide').length) {
+                $(this).parents('.sub-category-section-1').addClass('no-desktop-menu');
+
+            }
+        });
+
     }
 };
 
