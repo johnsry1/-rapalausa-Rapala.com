@@ -518,3 +518,29 @@ body.js-body {
         }
     }
 }
+.blog-top-menu {
+    background: $mobile-nav-bg;
+    border-bottom: $border;
+    @include respond(desktop) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: rem(4px);
+        background: $greyish-brown;
+        height: rem(35px);
+        box-sizing: border-box;
+        border: 0;
+    }
+    a {
+        @include respond(desktop) {
+            padding: 0 rem(6px);
+            font-size: $main-nav-font-size;
+            color: $main-nav-color;
+            display: inline-block;
+            border: rem(1px) solid $white;
+            height: rem(20px);
+            line-height: rem(20px);
+            text-transform: uppercase;
+        }
+    }
+}
