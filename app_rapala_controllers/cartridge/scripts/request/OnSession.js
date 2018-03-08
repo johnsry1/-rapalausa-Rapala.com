@@ -40,6 +40,59 @@ function getDeviceType() {
     return deviceType;
 }
 
+function geolocationRestrictions() {
+    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGeoIPRedirects')) {
+        var logMessage = '';
+        logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
+        try {
+            var geolocation = request.getGeolocation();
+            var host = request.getHttpHost();
+            var path = request.getHttpPath();
+            if (geolocation != null) {
+                var country = geolocation.getCountryCode();
+                logMessage += 'Geolocation country: ' + country + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
+                var json = dw.system.Site.getCurrent().getCustomPreferenceValue("GeoIPRedirects");
+                var redirects = JSON.parse(json);
+                if (!empty(redirects)) {
+                    var ignoreUserAgents = redirects["userAgent"];
+                    var userAgent = request.getHttpUserAgent();
+                    if (!empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip") {
+                        logMessage += 'Ignored userAgent found: ' + ignoreUserAgents[userAgent] + ' \n';
+                        RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                        return;
+                    } else {
+                        var redirectto = redirects["default"];
+                        if (country in redirects) {
+                            redirectto = redirects[country];
+                        } else if (path == null || path == '') {
+                            logMessage += 'Country not found in config JSON file and path value empty or equal NULL, no redirect. \n';
+                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                            return;
+                        }
+                        if ((host + path) == redirectto) {
+                            logMessage += 'Host and path equals redirected value, no redirect. \n';
+                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                            return;
+                        } else {
+                            logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
+                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                            response.redirect(redirectto);
+                        }
+                    }
+                } else {
+                    logMessage += 'Empty JSON redirect config \n';
+                }
+            } else {
+                logMessage += 'Geolocation not available, no redirect. \n';
+            } 
+            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+        } catch (e) {
+            RapalaHelper.getLogger('geoip-country-redirect').error(RapalaHelper.prepareLogMessage(e));    
+        }
+    }
+    return;
+}
+
 function geoIpDefaultCurrency() { 
     var logMessage = '';
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
@@ -87,6 +140,7 @@ function geoIpDefaultCurrency() {
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
+    geolocationRestrictions();
     geoIpDefaultCurrency();
     return new Status(Status.OK);
 };
