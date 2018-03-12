@@ -29,7 +29,12 @@ var guard = require('~/cartridge/scripts/guard');
 function start() {
     var redirect = URLRedirectMgr.getRedirect();
 
-    if (redirect === null) {
+    var LOGGER = dw.system.Logger.getLogger('redirect');
+    LOGGER.error('redirect: ' + redirect);
+    LOGGER.error('redirect location: ' + redirect.location);
+    LOGGER.error('redirect status: ' + redirect.status);
+
+    if (redirect === null || redirect.location === null) {
         app.getView().render('util/redirecterrorutil/redirecterror');
     } else {
         app.getView({
