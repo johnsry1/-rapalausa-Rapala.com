@@ -39,6 +39,15 @@ var RapalaHelper : Object = {
         if ('name' in e) {
         	msg += 'error name: ' + e.name + '\n';	
         }
+        if ('causeFullName' in e) {
+        	msg += 'causeFullName: ' + e.causeFullName + '\n';
+        }
+        if ('causeMessage' in e) {
+        	msg += 'causeMessage: ' + e.causeMessage + '\n';
+        }
+        if ('causeName' in e) {
+        	msg += 'causeName: ' + e.causeName + '\n';
+        }
         if ('stack' in e) {
         	msg += 'stack: ' + e.stack + '\n';	
         }

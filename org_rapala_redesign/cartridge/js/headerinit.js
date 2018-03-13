@@ -130,6 +130,7 @@ var headerEvents = {
             headerEvents.accountContPos($('.ui-login .sign-up-blk > a'), $(this).closest('.ui-login').find('.header-create'));
             $('.headermask').show();
             $('.ExistedUser-error').hide();
+            $('.PasswordFormat-error').hide();
             clearTimeout(appGlobal.globalTimer);
             //appGlobal.globalTimer == 0;
             appGlobal.globalTimer = setTimeout(function () {
@@ -287,6 +288,7 @@ var headerEvents = {
                 document.location.reload(true);
             } else {
                 $('.ExistedUser-error').hide();
+                $('.PasswordFormat-error').hide();
                 $('.custom_signin').find('.loading').remove();
                 progress.hide();
                 $('.custom_signin input[type="text"], .custom_signin input[type="password"]').addClass('errorclient');
@@ -400,7 +402,11 @@ var headerEvents = {
             } else {
                 $('.accountcontent').hide();
                 progress.hide();
-                $('.ExistedUser-error').show();
+                if (str.passwordinvalidformat) {
+                    $('.PasswordFormat-error').show();
+                } else {
+                    $('.ExistedUser-error').show();
+                }
                 $('.errormessage').hide();
                 $('.ui-login').find('.header-sign-in').show();
                 //$('.ui-login').find('.header-sign-in .accountemail').val(emailId);
