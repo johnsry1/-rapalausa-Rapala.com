@@ -258,7 +258,7 @@ body {
                 }
                 #user {
                     @include respond(desktop-down) {
-                        display: block;
+                        display: block !important;
                     }
                     .loggeduser,
                     .congrats-message,
@@ -322,9 +322,15 @@ body {
                                 }
                             }
                             .icon {
-                                margin-top: rem(7px);
+                                margin-top: rem(6px);
+                                fill: $user-logged-in-icon-background;
                                 @include respond(desktop) {
                                     display: none;
+                                }
+                            }
+                            &.signout {
+                                .icon {
+                                    fill: $user-logged-out-icon-background;
                                 }
                             }
                         }
