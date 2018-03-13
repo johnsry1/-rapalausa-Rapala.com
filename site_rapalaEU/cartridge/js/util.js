@@ -431,7 +431,6 @@ var util = {
 
         }
         var $container = $('#state-container'),
-            $phoneContainer = $('#phone-container'),
             url = '',
             options = {},
             $country = $form.find('select[id$="_country"]'),
@@ -527,24 +526,6 @@ var util = {
                     $cityLabel.html(country.cityLabel);
                 }
             }
-        }
-        
-        if ($phoneContainer.length != 0) { 
-            url = this.appendParamsToUrl(Urls.getPhoneHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
-            options = {
-                url: url,
-                type: 'GET',
-                target: $phoneContainer
-            };
-            $.ajax(options).done(function (response) {
-                if (options.target) {
-                    $($phoneContainer).empty().html(response);
-                    if (callback != undefined) {
-                        callback();
-                    }
-                }
-            });
-            
         }
     }    
 };
