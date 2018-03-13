@@ -158,7 +158,18 @@ CustomerModel.retrieveCustomerByLogin = function (login) {
  * @param {String} password - Plain customer password, which is encrypted before it is stored at the profile..
  */
 CustomerModel.createNewCustomer = function (login, password) {
-    var newCustomer = CustomerMgr.createCustomer(login, password);
+    var newCustomer = null;
+    try {
+        newCustomer = CustomerMgr.createCustomer(login, password);
+    } catch (e) {
+        var debug = e;
+        if (debug.causeName == 'PasswordFormatException') {
+            var RapalaHelper = require('*/cartridge/scripts/util/RapalaHelper');
+            RapalaHelper.getLogger().error(RapalaHelper.prepareLogMessage(e));
+            
+            session.custom.accountHeaderError = true;
+        }
+    }
 
     if (newCustomer === null) {
         return null;
