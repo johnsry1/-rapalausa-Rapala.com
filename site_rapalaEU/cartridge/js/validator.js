@@ -3,7 +3,7 @@
 var regex = {
     phone: {
         gb: /^[0-9]{9,16}$/,
-        default: /^[0-9]{6,20}$/
+        default: /^[+0-9]{7,20}$/
     },
     postal: {
         gb: /^[A-Z]((\d{1,2})|(\d[A-Z])|([A-Z]\d([\dA-Z])?)) \d[A-Z]{2}$/i,
