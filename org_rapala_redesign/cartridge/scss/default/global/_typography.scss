@@ -521,6 +521,44 @@
         color: $a-filter-hover-color;
     }
 }
+@mixin geoip-title-text {
+    @include font-size($geoip-top-block-title-font-size);
+    @include line-height($geoip-top-block-title-lin-height);
+    font-family: $geoip-main-font-family;
+    color: $geoip-main-text-color;
+    font-weight: $geoip-top-block-title-weight;
+    text-transform: $geoip-top-block-title-transform;
+}
+@mixin geoip-link {
+    @include font-size($geoip-top-block-title-font-size);
+    @include line-height($geoip-link-line-height);
+    font-family: $geoip-main-font-family;
+    color: $geoip-main-link-color;
+    text-decoration: $geoip-link-decoration;
+    font-weight: $geoip-link-weight;
+    &:hover {
+        color: $geoip-main-link-color;
+        text-decoration: $geoip-link-hover-decoration;
+    }
+ }
+@mixin geoip-footer-text {
+    @include font-size($geoip-footer-text-font-size);
+    font-family: $geoip-main-font-family;
+    font-weight: $geoip-footer-text-font-weight;
+    color: $geoip-footer-text-color;
+}
+@mixin geoip-footer-link {
+    @include font-size($geoip-footer-text-link-font-size);
+    font-family: $geoip-main-font-family;
+    color: $geoip-footer-text-link-color;
+    text-decoration: $geoip-link-decoration;
+    font-weight: $geoip-link-weight;
+    &:hover {
+        color: $geoip-footer-text-link-color;
+        text-decoration: $geoip-footer-text-link-hover-decoration;
+    }
+}
+
 
 h1,
 .h1 {
