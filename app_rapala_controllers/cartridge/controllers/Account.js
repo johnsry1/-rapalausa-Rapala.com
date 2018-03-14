@@ -530,6 +530,9 @@ function headerregistrationForm() {
 		Message.process = "create-account";
 		Message.status = "error";
         Message.email = email;
+        if ('accountHeaderError' in session.custom && session.custom.accountHeaderError) {
+            Message.passwordinvalidformat = true;
+        }
         app.getView({
             Message: Message
         }).render('util/postmessage');

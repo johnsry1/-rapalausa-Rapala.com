@@ -29,7 +29,7 @@ var guard = require('~/cartridge/scripts/guard');
 function start() {
     var redirect = URLRedirectMgr.getRedirect();
 
-    if (redirect === null) {
+    if (redirect === null || redirect.location === null) {
         app.getView().render('util/redirecterrorutil/redirecterror');
     } else {
         app.getView({
