@@ -284,7 +284,7 @@
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else if ((Product.master || Product.variationGroup) && Product.priceModel.isPriceRange()) {
 						price.class = 'product-sales-price';
-						price.value = '$' + Product.priceModel.minPrice.value.toFixed(2) + ' - $' + Product.priceModel.maxPrice.value.toFixed(2);
+						price.value = session.getCurrency().getSymbol() + Product.priceModel.minPrice.value.toFixed(2) + ' - ' + session.getCurrency().getSymbol() + Product.priceModel.maxPrice.value.toFixed(2);
 						//price.value = 'helloo';
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else {
