@@ -317,7 +317,7 @@ body.js-body {
                                 display: block !important;
                                 position: absolute;
                                 top: rem(35px);
-                                background-color: $main-nav-hover-bg;
+                                background-color: $main-nav-color;
                                 border: $border;
                                 border-top: none;
                                 padding: rem(20px) rem(20px) rem(20px) rem(12px);
@@ -355,7 +355,7 @@ body.js-body {
                             display: inline-block;
                             width: 2px;
                             height: 13px;
-                            background: black;
+                            background: $main-nav-color;
                             position: relative;
                             top: 2px;
                         }
@@ -376,7 +376,6 @@ body.js-body {
                             }
                             & ~ .sub-category-section {
                                 @include respond(desktop) {
-                                    display: block !important;
                                     position: absolute;
                                     top: rem(35px);
                                     background-color: $main-nav-hover-bg;
@@ -387,6 +386,28 @@ body.js-body {
                                     left: 50%;
                                     transform: translateX(-50%);
                                     white-space: nowrap;
+                                }
+                            }
+                        }
+                    }
+                }
+                .sub-category-section-1:not(.no-desktop-menu) {
+                    & > a {
+                        &:hover {
+                            & ~ .sub-category-section {
+                                @include respond(desktop) {
+                                    display: block !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                .sub-category-section-1.no-desktop-menu {
+                    & > a {
+                        &:hover {
+                            & ~ .sub-category-section {
+                                @include respond(desktop) {
+                                    display: none !important;
                                 }
                             }
                         }
@@ -515,6 +536,32 @@ body.js-body {
                 padding: 0;
                 margin-top: rem(24px);
             }
+        }
+    }
+}
+.blog-top-menu {
+    background: $mobile-nav-bg;
+    border-bottom: $border;
+    @include respond(desktop) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: rem(4px);
+        background: $greyish-brown;
+        height: rem(35px);
+        box-sizing: border-box;
+        border: 0;
+    }
+    a {
+        @include respond(desktop) {
+            padding: 0 rem(6px);
+            font-size: $main-nav-font-size;
+            color: $main-nav-color;
+            display: inline-block;
+            border: rem(1px) solid $white;
+            height: rem(20px);
+            line-height: rem(20px);
+            text-transform: uppercase;
         }
     }
 }

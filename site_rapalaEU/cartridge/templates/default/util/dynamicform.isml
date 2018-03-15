@@ -8,10 +8,6 @@ var adyenAVSEnabled = dw.system.Site.getCurrent().getCustomPreferenceValue("Adye
         <div id="state-container">
     </isif>
 
-    <isif condition="${field.formfield.formId == 'phone'}">
-        <div id="phone-container">
-    </isif>
-
     <isif condition="${field.formfield.formId == 'address1' && adyenAVSEnabled && field.formfield.parent.htmlName == 'dwfrm_billing_billingAddress_addressFields'}">
     	<iscontinue/>
     </isif>
@@ -26,9 +22,4 @@ var adyenAVSEnabled = dw.system.Site.getCurrent().getCustomPreferenceValue("Adye
 	<isif condition="${field.formfield.formId == 'state'}">
         </div>
     </isif> 
-
-    <isif condition="${field.formfield.formId == 'phone'}">
-        </div>
-    </isif>
-	
 </isloop>

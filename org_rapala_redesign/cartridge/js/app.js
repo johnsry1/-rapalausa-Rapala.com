@@ -603,6 +603,7 @@ var app = {
                 $('.cust-non-us').find('a').attr('href', contactusNonusUrl);
                 $('.ui-login,.magnifier-icon').css({'background': 'none'});
                 $('.handle-non-us-vh').addClass('vhide');
+                $('.email-signup').addClass('hide');
                 $('.subscribe').prop('disabled', true);
                 setTimeout(function () {
                     $('.product-promo, .newrecommendation').css({'display': 'none'});
@@ -648,6 +649,13 @@ var app = {
         if (!util.isMobile()) {
             $('body').addClass('desktop-device');
         }
+        $('.sub-category-section-3').each(function(){
+            if ($(this).children().length == $(this).children('.mobileHide').length) {
+                $(this).parents('.sub-category-section-1').addClass('no-desktop-menu');
+
+            }
+        });
+
     }
 };
 

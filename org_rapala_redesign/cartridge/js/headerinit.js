@@ -130,6 +130,7 @@ var headerEvents = {
             headerEvents.accountContPos($('.ui-login .sign-up-blk > a'), $(this).closest('.ui-login').find('.header-create'));
             $('.headermask').show();
             $('.ExistedUser-error').hide();
+            $('.PasswordFormat-error').hide();
             clearTimeout(appGlobal.globalTimer);
             //appGlobal.globalTimer == 0;
             appGlobal.globalTimer = setTimeout(function () {
@@ -219,8 +220,12 @@ var headerEvents = {
         });
 
         $('body').click(function (event) {
-            if (!$(event.target).is('.signupfor-email .seesamples') && (!$(event.target).is('.create_email_checkbox .seesamples'))) {
+            var target = $(event.target);
+            if (!target.is('input') && !target.is('a') && (!$(event.target).is('.create_email_checkbox .seesamples'))) {
                 $('.sample_mail_main').slideUp(500);
+            }
+            if (target.is('a')) {
+                target.parents('.field-wrapper').find('.checkinput').click();
             }
         });
         /**This is used to get the tick mark for create account when the field is valid*/
@@ -283,6 +288,7 @@ var headerEvents = {
                 document.location.reload(true);
             } else {
                 $('.ExistedUser-error').hide();
+                $('.PasswordFormat-error').hide();
                 $('.custom_signin').find('.loading').remove();
                 progress.hide();
                 $('.custom_signin input[type="text"], .custom_signin input[type="password"]').addClass('errorclient');
@@ -396,7 +402,11 @@ var headerEvents = {
             } else {
                 $('.accountcontent').hide();
                 progress.hide();
-                $('.ExistedUser-error').show();
+                if (str.passwordinvalidformat) {
+                    $('.PasswordFormat-error').show();
+                } else {
+                    $('.ExistedUser-error').show();
+                }
                 $('.errormessage').hide();
                 $('.ui-login').find('.header-sign-in').show();
                 //$('.ui-login').find('.header-sign-in .accountemail').val(emailId);
@@ -432,10 +442,10 @@ var headerEvents = {
                 var $input = $(this).clone();
                 $form.append($input);
             });
-            
+
             realForm.find('select').each(function (i) {
                 var select = this;
-                $form.find('select').eq(i).val($(select).val());    
+                $form.find('select').eq(i).val($(select).val());
             });
 
             $('body').append($form);

@@ -75,8 +75,17 @@
 													<isif condition="${!empty(address.address2)}">
 														<div><isprint value="${address.address2}"/></div>
 													</isif>
-													<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
-													<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
+													<isif condition="${address.countryCode.value.toLowerCase() == 'gb' || address.countryCode.value.toLowerCase() == 'uk'}">
+														<div><isprint value="${address.city}"/>, <isprint value="${address.postalCode}"/></div>
+														<div>
+															<isif condition="${!empty(address.stateCode)}">
+																<isprint value="${address.stateCode}"/>
+															</isif>
+															,<isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
+													<iselse>
+														<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
+														<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
+													</isif>
 													<isif condition="${!empty(address.phone)}">
 														<div><isprint value="${address.phone}"/></div>
 													</isif>
@@ -213,8 +222,13 @@
 								<isprint value="${shippingAddr.lastName}"/><br/>
 								<isprint value="${shippingAddr.address1}"/>
 								<isprint value="${shippingAddr.address2}"/><br/>
-								<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
-								<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/>
+								<isif condition="${shippingAddr.countryCode.value.toLowerCase() == 'gb' || shippingAddr.countryCode.value.toLowerCase() == 'uk'}">
+									<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
+									<isprint value="${shippingAddr.stateCode}"/> <isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+								<iselse>
+									<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
+									<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+								</isif>
 								<isprint value="${shippingAddr.phone}"/>
 							</div>
 							<input type="hidden" value="${shippingAddr.stateCode}" class="shipping-state"/>
