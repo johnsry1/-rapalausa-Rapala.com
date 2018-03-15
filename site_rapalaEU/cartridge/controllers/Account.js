@@ -87,10 +87,12 @@ function registrationForm() {
             if (profileValidation) {
                 profileValidation = Customer.createAccount(email, password, app.getForm('profile'));
 
-                var custForm = app.getForm('profile.customer');
-                Transaction.wrap(function(){
-                    customer.profile.custom.countryCode = custForm.object.country.value;
-                })
+                if (profileValidation) {
+                    var custForm = app.getForm('profile.customer');
+                    Transaction.wrap(function(){
+                        customer.profile.custom.countryCode = custForm.object.country.value;
+                    })
+                }
             }
 
             if (!profileValidation) {
