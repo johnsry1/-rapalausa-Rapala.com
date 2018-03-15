@@ -213,7 +213,12 @@
 											<isif condition="${addressForm.firstName.value != null}">
                                                 <isif condition="${addressForm.title.value != null}"><isprint value="${addressForm.title.value}"/></isif><isprint value="${addressForm.firstName.value}"/> <isprint value="${addressForm.lastName.value}"/><br/>
 												<isprint value="${addressForm.address1.value}"/> <isif condition="${addressForm.address2.value != null}"><isprint value="${addressForm.address2.value}"/></isif><br/>
-												<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.states.state.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
+												<isif condition="${addressForm.country.value.toLowerCase() == 'gb' || address.country.value.toLowerCase() == 'uk'}">
+													<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
+													<isprint value="${addressForm.states.state.value}"/> <isprint value="${Resource.msg(('country.'+addressForm.country.value).toLowerCase(), 'forms', null)}"/><br/> 
+												<iselse>
+													<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.states.state.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
+												</isif>
 												<isprint value="${addressForm.phone.value}"/>
 												<input type="hidden" value="true" name="addressDisplay"/>
 											</isif>
