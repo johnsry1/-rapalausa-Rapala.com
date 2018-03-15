@@ -517,7 +517,6 @@ var StoreLocator = {
             } else {
                 StoreLocator.initialLocation = new google.maps.LatLng(37.09024, -95.71289100000001);
             }
-            StoreLocator.renderStores(StoreLocator.initialLocation.lat(), StoreLocator.initialLocation.lng(), $('#country').val(), $('#distanceunitpref').val(), 15000, true);
         });
     },
 
