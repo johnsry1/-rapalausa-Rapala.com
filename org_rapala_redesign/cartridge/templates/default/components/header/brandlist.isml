@@ -13,10 +13,12 @@
                         <isset name="brandImageGrayscaleUrl" value="${'/images/brands/' + cat_name + '_bw.png'}" scope="page"/>
 						<a onclick="googleAnalyticsEvents.brandSwitch('${cat_name}');" class="${brandtab.split('|')[0]}" href="${URLUtils.https('Home-Show','id',+brandtab.split('|')[1])}">
                             <span>
-                                <isprint value="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}" encoding="off" />
+                            	<isif condition="${dw.catalog.CatalogMgr.getCategory(cat_name) != null}">
+                                	<isprint value="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}" encoding="off" />
+                                </isif>
                             </span>
-                            <img class="color" src="${URLUtils.httpsStatic(brandImageUrl)}" alt="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}"/>
-                            <img class="grayscale" src="${URLUtils.httpsStatic(brandImageGrayscaleUrl)}" alt="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}"/>
+                            <img class="color" src="${URLUtils.httpsStatic(brandImageUrl)}" alt="${(dw.catalog.CatalogMgr.getCategory(cat_name) != null ? dw.catalog.CatalogMgr.getCategory(cat_name).displayName : '')}"/>
+                            <img class="grayscale" src="${URLUtils.httpsStatic(brandImageGrayscaleUrl)}" alt="${(dw.catalog.CatalogMgr.getCategory(cat_name) != null ? dw.catalog.CatalogMgr.getCategory(cat_name).displayName : '')}"/>
                             <i></i>
 						</a>
 						<div class="mobile-menu-slide">menu-brand-logo</div>
