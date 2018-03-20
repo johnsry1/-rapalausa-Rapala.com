@@ -1,6 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/cart/pt_cart">
 	<isinclude template="util/modules" />
+
+	<iscomment><!-- GTM track checkout steps --></iscomment>
+	<isgtmreportcheckout checkoutstep="${1}" />
+
 	<isinclude template="util/reporting/ReportBasket.isml" />
 
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
@@ -69,7 +73,6 @@
 			</div>
 		</div>
 	<iselse/>
-
 		<iscomment>show checkout and continue shopping buttons above cart</iscomment>
 		<div id="content">
 			<div id="page-background" class="downshift">
@@ -462,8 +465,16 @@
 												</div>
 												<div class="item-user-actions">
 													<input type="hidden" class='gaproductid' value="${lineItem.product.ID}"/>
+                                                    <isscript>
+                                                    var gtmProductData = {};
+                                                    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
+                                                    	gtmProductData = require('*/cartridge/scripts/googletags/Org_TagManager').getProductData(lineItem.productID);
+                                                    }
+                                                    </isscript>
 													<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
-														<button onClick="googleAnalyticsEvents.removeProduct();" class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span class="icon"></span><span class="text">${Resource.msg('global.remove','locale',null)}</span></button>
+														<button onClick="googleAnalyticsEvents.removeProduct();" class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"
+															data-gtmdata="${JSON.stringify(gtmProductData)}">
+														<span class="icon"></span><span class="text">${Resource.msg('global.remove','locale',null)}</span></button>
 													</isif>
 												</div>
 											</td>
@@ -1028,7 +1039,6 @@
 
 												<td class="item-quantity-details">
 													<div class="item-user-actions">
-
 														<iscomment>Delete product **************************** </iscomment>
 														<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}">
 															<isprint value="${Resource.msg('global.remove','locale',null)}"/>

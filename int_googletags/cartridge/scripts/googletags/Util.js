@@ -60,6 +60,11 @@ const NAMESPACE = {
      * @type {String}
      */
     SEARCH: 'search',
+    
+    /**
+     * @type {String}
+     */
+    HOME: 'storefront',
 
     /**
      * @type {String}
@@ -190,3 +195,63 @@ exports.getCoupons = function (coupons) {
     return text.join(",");
 
 };
+
+exports.getTotalDiscount = function (order) {
+    var ordertotalsaving = new dw.value.Money(0.0, session.currency.currencyCode);
+    var priceVals = require('*/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
+
+    if (priceVals[0] > order.getAdjustedMerchandizeTotalPrice(true).add(order.giftCertificateTotalPrice)) {
+        ordertotalsaving = ordertotalsaving.add(priceVals[0].subtract(order.getAdjustedMerchandizeTotalPrice(true).add(order.giftCertificateTotalPrice)));
+    }
+    var shippingExclDiscounts : dw.value.Money = order.shippingTotalPrice;
+    var shippingInclDiscounts : dw.value.Money = order.getAdjustedShippingTotalPrice();
+    var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
+
+    if (shippingDiscount > 0) {
+        ordertotalsaving = ordertotalsaving.add(shippingDiscount);
+    }
+    
+    return ordertotalsaving;
+};
+
+exports.getProductCategory = function (product) {
+    if (product.isVariant() || product.isVariationGroup()) {
+        product = product.getMasterProduct();
+    }
+    var cat = product.getPrimaryCategory();
+    return cat.ID.replace('-', '/', 'g');
+
+};
+
+exports.getProductCoupon = function (lineItem) {
+    var priceAdjustments = lineItem.getPriceAdjustments();
+    if (priceAdjustments != null && priceAdjustments.length > 0) {
+        var multipleCoupons = '';
+        for (var q = 0; q < priceAdjustments.length; q++) {
+            var pa = priceAdjustments[q];
+            if (pa.getPromotion() && pa.getPromotion().getPromotionClass().equals(dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT) && pa.getPromotion().isBasedOnCoupons()) {
+                multipleCoupons += (!empty(multipleCoupons)) ? pa.getCouponLineItem().getCouponCode() + '|' : pa.getCouponLineItem().getCouponCode();
+            }
+        }
+        return multipleCoupons;
+
+    } else {
+        return '';
+    }
+};
+
+exports.getProductOriginalPrice = function (product) {
+    var PriceModel = product.getPriceModel();
+    var standardPrice = dw.value.Money.NOT_AVAILABLE;
+
+    if (!empty(PriceModel) && PriceModel.priceInfo != null) {
+        var priceBook = PriceModel.priceInfo.priceBook;
+        standardPrice = PriceModel.getPriceBookPrice(priceBook.ID);
+    }
+
+    if (!standardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(standardPrice.getCurrencyCode())) {
+        standardPrice = dw.value.Money.NOT_AVAILABLE;
+    }
+
+    return standardPrice;
+}
