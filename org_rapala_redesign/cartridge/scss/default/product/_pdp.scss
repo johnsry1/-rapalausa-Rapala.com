@@ -106,3 +106,18 @@
 #special-offers ul li {
     @include pdp-promo;
 }
+.swatches {
+    li {
+        &.selected,
+        &:hover {
+            a {
+                background: $product-attr-swatch-active-background;
+                color: $product-attr-swatch-active-color;
+                border: $product-attr-swatch-active-border;
+                &:hover {
+                    border-color: $product-attr-swatch-active-border-color;
+                }
+            }
+        }
+    }
+}
