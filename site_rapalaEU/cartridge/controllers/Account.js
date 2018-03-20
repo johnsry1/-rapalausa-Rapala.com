@@ -87,10 +87,12 @@ function registrationForm() {
             if (profileValidation) {
                 profileValidation = Customer.createAccount(email, password, app.getForm('profile'));
 
-                var custForm = app.getForm('profile.customer');
-                Transaction.wrap(function(){
-                    customer.profile.custom.countryCode = custForm.object.country.value;
-                })
+                if (profileValidation) {
+                    var custForm = app.getForm('profile.customer');
+                    Transaction.wrap(function(){
+                        customer.profile.custom.countryCode = custForm.object.country.value;
+                    })
+                }
             }
 
             if (!profileValidation) {
@@ -116,7 +118,167 @@ function registrationForm() {
     });
 }
 
+/**
+ * Handles form submission from dialog and full page password reset. Handles cancel, send, and error actions.
+ *  - cancel - renders the given template.
+ *  - send - gets a CustomerModel object that wraps the current customer. Gets an EmailModel object that wraps an Email object.
+ * Checks whether the customer requested the their login password be reset.
+ * If the customer wants to reset, a password reset token is generated and an email is sent to the customer using the mail/resetpasswordemail template.
+ * Then the account/password/requestpasswordreset_confirm template is rendered.
+ *  - error - the given template is rendered and passed an error code.
+ */
+function passwordResetFormHandler(templateName, continueURL) {
+    var resetPasswordToken, passwordemail;
 
+    app.getForm('profile').handleAction({
+        cancel: function () {
+            app.getView({
+                ContinueURL: continueURL
+            }).render(templateName);
+        },
+        send: function () {
+            var Customer, resettingCustomer, Email;
+            Customer = app.getModel('Customer');
+            Email = app.getModel('Email');
+            var requestForm = Form.get('requestpassword').object.email.htmlValue;
+            resettingCustomer = Customer.retrieveCustomerByLogin(requestForm);
+
+            if (!empty(resettingCustomer)) {
+                resetPasswordToken = resettingCustomer.generatePasswordResetToken();
+
+                passwordemail = Email.get('mail/headerresetpasswordemail', resettingCustomer.object.profile.email);
+                passwordemail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail'));
+                passwordemail.setSubject(Resource.msg('email.resetpassword', 'email', null));
+                passwordemail.send({
+                    ResetPasswordToken: resetPasswordToken,
+                    Customer: resettingCustomer.object.profile.customer
+                });
+                
+                app.getView({
+                    ErrorCode: null,
+                    ShowContinue: true,
+                    ContinueURL: continueURL
+                }).render('account/password/requestpasswordreset_confirm');
+            } else {
+
+            //for security reasons the same message will be shown for a valid reset password request as for a invalid one
+                app.getView({
+                    ErrorCode: 'notfounderror',
+                    ShowContinue: true,
+                    ContinueURL: continueURL
+                }).render('account/password/requestpasswordresetdialog');
+            }
+        },
+        error: function () {
+            app.getView({
+                ErrorCode: 'formnotvalid',
+                ContinueURL: continueURL
+            }).render(templateName);
+        }
+    });
+}
+
+/**
+ * The form handler for password resets.
+ */
+function passwordResetForm() {
+    passwordResetFormHandler('account/password/requestpasswordreset', URLUtils.https('Account-PasswordResetForm'));
+}
+
+/**
+ * Handles the password reset form.
+ */
+function passwordResetDialogForm() {
+    // @FIXME reimplement using dialogify
+    passwordResetFormHandler('account/password/requestpasswordresetdialog', URLUtils.https('Account-PasswordResetDialogForm'));
+}
+
+/**
+ * Gets a profile form and handles the cancel and send actions.
+ *  - cancel - renders the setnewpassword template.
+ *  - send - gets a CustomerModel object that wraps the current customer and gets an EmailModel object that wraps an Email object.
+ * Checks whether the customer can be retrieved using a reset password token.
+ * If the customer does not have a valid token, the controller redirects to the Account-PasswordReset controller function.
+ * If they do, then an email is sent to the customer using the mail/setpasswordemail template and the setnewpassword_confirm template is rendered.
+ * */
+function setNewPasswordForm() {
+
+    app.getForm('profile').handleAction({
+        cancel: function () {
+            app.getView({
+                ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
+            }).render('account/password/setnewpassword');
+            return;
+        },
+        send: function () {
+            var Customer;
+            var Email;
+            var passwordChangedMail;
+            var resettingCustomer;
+            var success;
+
+            Customer = app.getModel('Customer');
+            Email = app.getModel('Email');
+            resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
+
+            if (!resettingCustomer) {
+                response.redirect(URLUtils.https('Account-PasswordReset'));
+            }
+
+            if (app.getForm('resetpassword.password').value() !== app.getForm('resetpassword.passwordconfirm').value()) {
+                app.getForm('resetpassword.passwordconfirm').invalidate();
+                app.getView({
+                    ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
+                }).render('account/password/setnewpassword');
+            } else {
+
+                success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), app.getForm('resetpassword.password').value());
+                if (!success) {
+                    app.getView({
+                        ErrorCode: 'formnotvalid',
+                        ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
+                    }).render('account/password/setnewpassword');
+                } else {
+                    passwordChangedMail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
+                    passwordChangedMail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail'));
+                    passwordChangedMail.setSubject(Resource.msg('email.resetpassword', 'email', null));
+                    passwordChangedMail.send({
+                        Customer: resettingCustomer.object
+                    });
+
+                    app.getView().render('account/password/setnewpassword_confirm');
+                }
+            }
+        }
+    });
+}
+
+function lostPasswordHeader(){
+    var resetEmail,resettingCustomer,Customer,resetPasswordToken,passwordemail,Email;
+    
+    Customer = app.getModel('Customer');
+    Email = app.getModel('Email');
+    
+    resetEmail = app.getForm('requestpasswordheader.email').object.htmlValue;
+    
+    resettingCustomer = Customer.retrieveCustomerByLogin(resetEmail);
+    
+    if (!empty(resettingCustomer)) {
+        resetPasswordToken = resettingCustomer.generatePasswordResetToken();
+
+        passwordemail = Email.get('mail/headerresetpasswordemail', resettingCustomer.object.profile.email);
+        passwordemail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail'));
+        passwordemail.setSubject(Resource.msg('email.resetpassword', 'email', null));
+        passwordemail.send({
+            ResetPasswordToken: resetPasswordToken,
+            Customer: resettingCustomer.object.profile.customer
+        });
+    } else {
+        app.getView({
+            ErrorCode: "notfounderror"
+        }).render('components/header/headerlostpassword');
+    }
+}
 /* Web exposed methods */
 
 /** Renders the account overview.
@@ -139,16 +301,16 @@ exports.PasswordResetDialog = require('app_rapala_controllers/cartridge/controll
 exports.PasswordReset = require('app_rapala_controllers/cartridge/controllers/Account.js').PasswordReset;
 /** Handles the password reset form.
  * @see {@link module:controllers/Account~passwordResetDialogForm} */
-exports.PasswordResetDialogForm = require('app_rapala_controllers/cartridge/controllers/Account.js').PasswordResetDialogForm;
+exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
 /** The form handler for password resets.
  * @see {@link module:controllers/Account~passwordResetForm} */
-exports.PasswordResetForm = require('app_rapala_controllers/cartridge/controllers/Account.js').PasswordResetForm;
+exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
 /** Renders the screen for setting a new password.
  * @see {@link module:controllers/Account~setNewPassword} */
 exports.SetNewPassword = require('app_rapala_controllers/cartridge/controllers/Account.js').SetNewPassword;
 /** Handles the set new password form submit.
  * @see {@link module:controllers/Account~setNewPasswordForm} */
-exports.SetNewPasswordForm = require('app_rapala_controllers/cartridge/controllers/Account.js').SetNewPasswordForm;
+exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
 /** Start the customer registration process and renders customer registration page.
  * @see {@link module:controllers/Account~startRegister} */
 exports.StartRegister = require('app_rapala_controllers/cartridge/controllers/Account.js').StartRegister;
@@ -166,7 +328,7 @@ exports.SignInHeader = require('app_rapala_controllers/cartridge/controllers/Acc
 exports.HeaderRegistrationForm = require('app_rapala_controllers/cartridge/controllers/Account.js').HeaderRegistrationForm;
 /** Handles reset password from header overlay.
  * @see {@link module:controllers/Account~lostPasswordHeader} */
-exports.LostPasswordHeader = require('app_rapala_controllers/cartridge/controllers/Account.js').LostPasswordHeader;
+exports.LostPasswordHeader = guard.ensure(['get'], lostPasswordHeader);
 /** Sets price books for VIP customerGroups.
  * @see {@link module:controllers/Account~setPriceBookFromVIPCardCustomerGroups} */
 exports.SetPriceBookFromVIPCardCustomerGroups = require('app_rapala_controllers/cartridge/controllers/Account.js').SetPriceBookFromVIPCardCustomerGroups;

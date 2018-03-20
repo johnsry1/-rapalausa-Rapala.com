@@ -246,7 +246,7 @@ function submitImpl(order) {
 
     // Send order confirmation and clear used forms within the checkout process.
     Email.get('mail/orderconfirmation', order.getCustomerEmail())
-    	.setFrom("noreply@rapala.com")
+    	.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail'))
         .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' (' + order.getOrderNo()).toString() +') ')
         .send({
             Order: order
