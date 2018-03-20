@@ -2,6 +2,12 @@
 <div class="contentboxcontent new-register">
 	<div class="formsubmit" style="display: none;"></div>
 	<iscomment>Show any registration errors</iscomment>
+	<isif condition="${session.custom.accountHeaderError}">
+		<div class="password-format error">
+			<isprint value="${Resource.msg('account.passwordformaterror','account',null)}" />	
+		</div>
+		<isscript>delete session.custom.accountHeaderError</isscript>
+	</isif>
 	<h1 class="account_heading"><isprint value="${Resource.msg('accountsignup.header','account',null)}"/></h1>
 	<h1 class="landing_heading"><isprint value="${Resource.msg('landing.createheader','account',null)}"/></h1>
 	<iscomment><span class="Account-benefits account_page">${Resource.msg('accountsignup.subhead','account',null)}</span>
