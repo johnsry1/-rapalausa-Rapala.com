@@ -2192,6 +2192,24 @@ var pdpEvents = {
                 e.preventDefault();
             }
         });
+        $('#Quantity').keyup(function(e) {
+            var key = e.charCode || e.keyCode || e.which || 0;
+            if ($.isNumeric($('#Quantity').val()) && (key == 13)) {
+                $('#add-to-cart').trigger('click');
+            } else if (!$.isNumeric($('#Quantity').val())) {
+                $('.addtocartbutton:last').prop('disabled', true);
+                $('.addtocart, .addtocartbutton').addClass('disabled');
+                return false;
+            } else {
+                if ($(this).val() < 1) {
+                    $('.addtocartbutton:last').prop('disabled', true);
+                    $('.addtocart').addClass('disabled');
+                } else {
+                    $('.addtocartbutton:last').prop('disabled', false);
+                    $('.addtocart, .addtocartbutton').removeClass('disabled');
+                }
+            }
+        });
         $(document).on('click', '.youtube-list-video a', function () {
             if ($(window).width() > 480 && $(window).width() < 959) {
                 util.scrollBrowser($('.tab-sec').offset().top);
