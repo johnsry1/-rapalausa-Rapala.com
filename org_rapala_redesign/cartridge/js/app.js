@@ -603,8 +603,6 @@ var app = {
                 $('.cust-non-us').find('a').attr('href', contactusNonusUrl);
                 $('.ui-login,.magnifier-icon').css({'background': 'none'});
                 $('.handle-non-us-vh').addClass('vhide');
-                $('.emailSignup').addClass('hide');
-                $('.subscribe').prop('disabled', true);
                 setTimeout(function () {
                     $('.product-promo, .newrecommendation').css({'display': 'none'});
                 }, 5000);
