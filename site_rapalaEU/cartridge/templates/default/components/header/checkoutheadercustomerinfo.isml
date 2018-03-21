@@ -1,5 +1,5 @@
 <div class="headercustomerinfo newcheckout-headercustomerinfo">
-			
+
 		<div class="domainswitch" style="display: none;">
             <ul>
             	<isif condition="${session.custom.currentSite != 'strikemaster'}">
@@ -15,14 +15,14 @@
 	         <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)}" class="username">
 	        <span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span></a>
 	        </isif>
-	        
+
 	         <isif condition="${!pdict.CurrentCustomer.authenticated}">
 	          <span class="welcomebackmessage">${Resource.msg('headercustomerinfo.welcomeback','locale',null)}</span>
 	        <span class="unauthenticated"><a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName}" href="${URLUtils.https('Account-Show')}" class="userlogin">
 	        <isprint value="${pdict.CurrentCustomer.profile.firstName}"/></a></span>
 	          </isif>
 	          <lable class="sign-out">
-	        	(&nbsp;<a title="${Resource.msg('headercustomerinfo.not','locale',null)}" href="${URLUtils.url('Login-Logout')}" 
+	        	(&nbsp;<a title="${Resource.msg('headercustomerinfo.not','locale',null)}" href="${URLUtils.url('Login-Logout')}"
 	        class="usernot">${Resource.msg('headercustomerinfo.not','locale',null)}</a>&nbsp;)
 	        </lable>
 	    	<iselse>
@@ -36,10 +36,9 @@
 		        <iselse/>
 	        </isif>
 	        </iscomment>
-	      
+
 	    </isif>
 	</div>
-	<div class="checkout-header-center">${Resource.msg('headercustomerinfo.rapalabrand','locale',null)} </div>
 	<div id="userinfo">
 	        <isif condition="${session.custom.currentSite == 'rapala'}">
 	        	<span>
@@ -131,6 +130,6 @@
 		        	${Resource.msg('header.customerservice','locale',null)}</a>
 		        	<span class="arrow-size right-arrow">&nbsp;</span>
 	        	</span>
-	        </isif> 
+	        </isif>
     </div>
 </div><!-- END: headercustomerinfo -->
