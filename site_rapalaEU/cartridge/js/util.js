@@ -452,7 +452,7 @@ var util = {
             if ($container.length == 0) {
                 return;
             } else {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
+                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
                 options = {
                     url: url,
                     type: 'GET',
@@ -469,7 +469,7 @@ var util = {
             }
         } else {
             if ($container.length != 0) {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
+                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
                 options = {
                     url: url,
                     type: 'GET',

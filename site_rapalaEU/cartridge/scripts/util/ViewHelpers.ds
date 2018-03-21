@@ -244,7 +244,7 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 		try {
 			if (countryOptions[o] && countryOptions[o].value && countryOptions[o].value.length > 0) {
 				var option = countryOptions[o];
-				//var stateField = stateForm["state" + option.value];
+				var stateField = stateForm["state" + option.value];
 				
 				var townField = addressForm["city"];
 				var townLabel = 'resource.city' + option.value;
@@ -252,8 +252,8 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 				var postalField = addressForm["postal"];
 				var postalLabel = 'resource.postalCode' + option.value;
 				list[option.value] = {
-					//regionLabel: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
-					//regions: ViewHelpers.getFieldOptions(stateField, resourceName),
+					regionLabel: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
+					regions: ViewHelpers.getFieldOptions(stateField, resourceName),
 					postalLabel: dw.web.Resource.msg(postalLabel, resourceName, dw.web.Resource.msg(postalField.label, resourceName, null)),
 					cityLabel: dw.web.Resource.msg(townLabel, resourceName, dw.web.Resource.msg(townField.label, resourceName, null))
 				};
