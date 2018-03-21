@@ -853,6 +853,19 @@
                 float: right;
             }
         }
+        .inputlabel {
+            .label {
+                .labeltext {
+                    color: $font-error-color;
+                }
+            }
+            .input-text {
+                &.errorclient {
+                    border: $error-border;
+                }
+            }
+
+        }
     }
     .selectorOut,
     .singleshipping_error,
@@ -933,7 +946,8 @@
                 }
             }
         }
-        .form-data-error {
+        .form-data-error,
+        .form-data-new {
             text-align: left;
             margin: 0 0 rem(11px) rem($form-horizontal-label-width + 20px) !important;
             width: calc(100% - $form-horizontal-label-width - 20px);

@@ -1,14 +1,12 @@
 <!--- TEMPLATENAME: adyenpaymentfields.isml --->
-
+<div class="formfields-global">
 <div class="form-row form-row-type-text required" data-required-text="${Resource.msg('validate.required', 'forms', null)}" aria-required="true">
 	<label for="creditCard_owner" class="label">
 		<span class="labeltext">${Resource.msg('creditcard.ownerlabel', 'forms', null)}</span>
 		<span class="requiredindicator">*</span>
 	</label>
 	<div class="field-wrapper">
-		<input class="textinput required" type="text" id="creditCard_owner"
-			value="" aria-required="true" aria-invalid="true"
-			aria-describedby="dwfrm_paymentinstruments_creditcards_newcreditcard_owner-error">
+		<input class="textinput required" type="text" id="creditCard_owner" name="creditCard_owner" value="" aria-required="true">
 	</div>
 	<div class="form-caption"></div>
 </div>
@@ -84,8 +82,9 @@
 		<span class="requiredindicator">*</span>
 	</label>
 	<div class="field-wrapper">
-		<input class="textinput required" type="text" id="creditCard_cvn"
+		<input class="textinput required" type="text" id="creditCard_cvn" name="creditCard_cvn"
 			value="" aria-required="true">
 	</div>
 	<div class="form-caption"></div>
+</div>
 </div>
