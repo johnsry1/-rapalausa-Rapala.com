@@ -112,7 +112,7 @@
 															 </isif>
 														 </span>
 													<iselse/>
-														<span><isprint value="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
+														<span><isprint value="${shipment.adjustedShippingTotalPrice}"/></span>
 													</isif>
 													<isif condition="${pdict.surcharge.value > 0}"><span class="shippingsurcharge"> + <isprint value="${pdict.surcharge.value}"/> <isprint value="${Resource.msg('singleshipping.surcharge','checkout',null)}"/></span></isif>
 												</span>
