@@ -1,0 +1,13 @@
+<!--- TEMPLATENAME: gtmreportcheckout.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>
+    Log gtm checkout steps
+    
+    Parameters:
+
+    checkoutstep    : the checkout step number
+</iscomment>
+
+<isif condition="${ !empty(pdict.checkoutstep) }">
+    <isscript>session.custom.checkoutStep = pdict.checkoutstep; </isscript>
+</isif>

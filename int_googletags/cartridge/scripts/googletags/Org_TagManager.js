@@ -17,7 +17,7 @@ const app = require(Util.PATH.APP);
 const Org_TagManager = {
 
     util: Util,
-
+    
     /**
      *
      * @param {PipelineDictionary} args
@@ -26,6 +26,8 @@ const Org_TagManager = {
      */
     setPageData: function (args, nameSpace) {
 
+        var pageType = this.getPageType(nameSpace, args);
+        args.pageType = pageType;
         switch (nameSpace) {
             case Util.NAMESPACE.CART :
                 return this.getCheckoutData(args);
@@ -39,10 +41,40 @@ const Org_TagManager = {
                 return this.getSearchImpressionData(args);
             case Util.NAMESPACE.WISHLIST :
                 return this.getWishlistImpressionData(args);
+            //case Util.HOME : 
+            //    return this.getHomeData(args);
             default :
-                return {};
+                return {
+                    pageType: args.pageType,
+                };
         }
 
+    },
+    
+    getPageType : function (nameSpace, args) {
+        var type = Util.HOME;
+        switch (nameSpace) {
+            case Util.NAMESPACE.CART :
+            case Util.NAMESPACE.CHECKOUT :
+                return 'checkout';
+            case Util.NAMESPACE.ORDER_CONFIRMATION :
+                return 'confirmation';
+            case Util.NAMESPACE.PRODUCT :
+                return 'productPage';
+            case Util.NAMESPACE.SEARCH :
+                var productId = ''+request.httpParameterMap.productid.value || null;
+                var pageCategoryId = ''+request.httpParameterMap.cgid.value || null;
+                if (pageCategoryId != null && productId == 'null') {
+                    return 'categoryPage';
+                }
+                return '';
+            case Util.NAMESPACE.WISHLIST :
+                return '';
+            case Util.NAMESPACE.HOME : 
+                return 'home';
+            default :
+                return '';
+        }        
     },
 
     /**
@@ -54,6 +86,7 @@ const Org_TagManager = {
 
         /** @type {Object} */
         let obj = {
+            pageType: args.pageType,
             event: 'checkout',
             ecommerce: {
                 checkout: {
@@ -87,6 +120,7 @@ const Org_TagManager = {
     getConfirmationData: function (args) {
 
         let obj = {
+            "pageType": args.pageType,
             "ecommerce": {
                 "purchase": {
                     "actionField": {},
@@ -98,7 +132,7 @@ const Org_TagManager = {
         const order = args.Order;
 
         if (order) {
-            obj.ecommerce.purchase.products = Util.getProductArrayFromList(order.productLineItems.iterator(), this.getOrderProductObject);
+            obj.ecommerce.purchase.products = Util.getProductArrayFromList(order.productLineItems.iterator(), this.getOrderConfirmationProductObject);
             obj.ecommerce.purchase.actionField = this.getConfirmationActionFieldObject(order);
         }
 
@@ -115,6 +149,7 @@ const Org_TagManager = {
 
         /** @type {Object} */
         let obj = {
+            pageType: args.pageType,    
             ecommerce: {
                 detail: {
                     actionField: {"list": Resource.msg("ecommerce.list.pdp", "googletagmanager", null)},
@@ -146,6 +181,7 @@ const Org_TagManager = {
     getSearchImpressionData: function (args) {
 
         let obj = {
+            pageType: args.pageType,
             ecommerce: {
                 impressions: []
             }
@@ -167,6 +203,7 @@ const Org_TagManager = {
     getWishlistImpressionData: function (args) {
 
         let obj = {
+            pageType: args.pageType,    
             ecommerce: {
                 impressions: []
             }
@@ -198,10 +235,12 @@ const Org_TagManager = {
 
         obj.id = order.orderNo;
         obj.affiliation = Site.current.ID;
-        obj.revenue = order.totalNetPrice.value;
+        obj.revenue = order.totalNetPrice.value + order.totalTax.value;
+        obj.salesRevenue = order.getAdjustedMerchandizeTotalGrossPrice().value;
         obj.tax = order.totalTax.value;
         obj.shipping = order.shippingTotalPrice.value;
         obj.coupon = Util.getCoupons(order.couponLineItems.iterator());
+        obj.discount = Util.getTotalDiscount(order).value;
 
         return obj;
 
@@ -226,7 +265,7 @@ const Org_TagManager = {
             customerObject.demandwareID = customer.ID;
 
         }
-
+        
         return customerObject;
 
     },
@@ -290,6 +329,23 @@ Org_TagManager.getOrderProductObject = function (productLineItem) {
     let obj = Org_TagManager.getProductObject(productLineItem.product);
 
     obj.quantity = productLineItem.quantityValue;
+    obj.price = productLineItem.getAdjustedPrice().getValue();
+
+    return obj;
+
+};
+
+
+/**
+ * Data for a ProductLineItem
+ * @param {ProductLineItem} productLineItem
+ * @return {Object}
+ */
+Org_TagManager.getOrderConfirmationProductObject = function (productLineItem) {
+
+    let obj = Org_TagManager.getOrderProductObject(productLineItem);
+
+    obj.coupon = Util.getProductCoupon(productLineItem);
 
     return obj;
 
@@ -303,8 +359,18 @@ Org_TagManager.getOrderProductObject = function (productLineItem) {
 Org_TagManager.getProductObject = function (product) {
 
     let obj = {};
-
+    
     obj.productID = product.ID;
+    obj.name = product.name;
+
+    if (product.isVariant() || product.isVariationGroup()) {
+        obj.productID = product.getMasterProduct().ID;
+        obj.childID = product.ID
+    }
+    
+    obj.category = Util.getProductCategory(product);
+    obj.brand = product.brand;
+    obj.price = Util.getProductOriginalPrice(product).value;
 
     return obj;
 

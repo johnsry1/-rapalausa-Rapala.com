@@ -4,6 +4,8 @@
  */
 const Site_TagManager = require('./Org_TagManager');
 
+const Util = require('./Util');
+
 /**
  * @override
  * @return {Object}
@@ -30,6 +32,8 @@ Site_TagManager.getGlobalData = function () {
         customerObject.pageLanguage = httpLocale;
     }
 
+    customerObject.currencyCode = session.currency.currencyCode;
+
     return customerObject;
 
 };
@@ -45,6 +49,15 @@ Site_TagManager.getProductObject = function (product) {
 
     obj.productID = product.ID;
     obj.name = product.name;
+
+    if (product.isVariant() || product.isVariationGroup()) {
+        obj.productID = product.getMasterProduct().ID;
+        obj.childID = product.ID
+    }
+    
+    obj.category = Util.getProductCategory(product);
+    obj.brand = product.brand;
+
 
     return obj;
 

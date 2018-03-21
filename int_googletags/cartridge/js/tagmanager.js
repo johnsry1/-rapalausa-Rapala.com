@@ -6,7 +6,11 @@
  */
 var events = {
     account: function () {},
-    cart: function () {},
+    cart: function () {
+        $('[name$=_deleteProduct]').on('click', function () {
+            removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val()); 
+        });
+    },
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
@@ -15,7 +19,7 @@ var events = {
     compare: function () {},
     product: function () {
         $('#add-to-cart').on('click', function () {
-            addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+            addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val(), $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined);
         });
     },
     search: function () {},
@@ -39,6 +43,10 @@ var events = {
         $('.primary-logo').on('click', function () {
             pushEvent('trackEvent', 'User Action', 'Header Click', 'Home Link');
         });
+        
+        $('#quickviewbutton').on('click', function () {
+            productClick($.parseJSON($(this).attr('data-gtmdata')));
+        });
     }
 };
 
@@ -49,6 +57,9 @@ var events = {
 function productClick (productObject) {
     var obj = {
         'event': 'productClick',
+        'event_info': {
+            'label' : 'PDP'
+        },
         'ecommerce': {
             'click': {
                 'actionField': {'list': 'SearchResults'},
@@ -65,7 +76,7 @@ function productClick (productObject) {
  * @param {Object} productObject The product data
  * @param {String} quantity
  */
-function addToCart (productObject, quantity) {
+function addToCart (productObject, quantity, price) {
     var quantityObj = {'quantity': quantity},
         obj = {
             'event': 'addToCart',
@@ -76,6 +87,9 @@ function addToCart (productObject, quantity) {
             }
         };
     obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
+    if (price != undefined && price > 0) {
+        obj.ecommerce.add.products[0].price = price;
+    }
     dataLayer.push(obj);
 }
 
@@ -94,7 +108,7 @@ function removeFromCart (productObject, quantity) {
                 }
             }
         };
-    obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
+    obj.ecommerce.remove.products.push($.extend(productObject,quantityObj));
     dataLayer.push(obj);
 }
 
