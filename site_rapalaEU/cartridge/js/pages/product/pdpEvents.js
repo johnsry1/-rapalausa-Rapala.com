@@ -1326,11 +1326,11 @@ var product = function (response) {
                 }
 
             }
-            
+
             if (SitePreferences.GTM_ENABLED) {
                 $('#add-to-cart').attr('data-gtmpriceinfo', (standardPrice > salePrice && salePrice != 0 ? salePrice : standardPrice));
             }
-            
+
             var $price = jQuery(this.containerId + ' .productinfo .price:first');
             if (!$price.data('originalPrice')) {
                 $price.data('originalPrice', $price.html());
@@ -2157,8 +2157,7 @@ var quickviewShow = function (options) {
         options: {
             height: 530,
             width: 760,
-            dialogClass: 'quickview',
-            title: Resources.QUICK_VIEW_POPUP
+            dialogClass: 'quickview'
         }
     });
     quickViewDialog.dialog('open');
