@@ -1021,6 +1021,7 @@
                 }
                 .value {
                     @include product-attr-name;
+                    clear: both;
                 }
                 td {
                     span.label-total {
@@ -1030,6 +1031,15 @@
                 .order-total {
                     .value {
                         font-family: $font !important;
+                    }
+                }
+                .ordersubtotal-strike {
+                    position: relative;
+                    top: rem(3px);
+                }
+                .ordertotalsaving {
+                    .label {
+                        color: $pdp-message-color;
                     }
                 }
             }
