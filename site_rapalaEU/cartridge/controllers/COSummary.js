@@ -21,6 +21,7 @@ var guard = require('*/cartridge/scripts/guard');
 var Cart = app.getModel('Cart');
 
 var AdyenController = require("int_adyen_controllers/cartridge/controllers/Adyen");
+var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
 
 /**
  * Renders the summary page prior to order creation.
@@ -88,6 +89,19 @@ function submit() {
  * account creation.
  */
 function showConfirmation(order) {
+    var signUpMap = new dw.util.HashMap();
+    signUpMap.put('ltkSubscriptionCode', 'checkout');
+    signUpMap.put('dwfrm_billing_billingAddress_addToEmailList', app.getForm('billing').object.billingAddress.addToEmailList.value);
+    signUpMap.put('dwfrm_billing_billingAddress_email_emailAddress', app.getForm('billing').object.billingAddress.email.emailAddress.value);
+    signUpMap.put('dwfrm_billing_billingAddress_addressFields_firstName', app.getForm('billing').object.billingAddress.addressFields.firstName.value);
+    signUpMap.put('dwfrm_billing_billingAddress_addressFields_lastname', app.getForm('billing').object.billingAddress.addressFields.lastName.value);
+    signUpMap.put('brand', session.custom.currentSite);
+    signUpMap.put('source', 'checkout');
+    var signupObject = {
+        httpParameterMap : signUpMap
+    }
+    ltkSignupEmail.Signup(signupObject);
+    
     if (!customer.authenticated) {
         // Initializes the account creation form for guest checkouts by populating the first and last name with the
         // used billing address.
