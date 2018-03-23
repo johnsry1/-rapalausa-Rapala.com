@@ -354,7 +354,24 @@
 																				if(shippingDiscount>0){
 																				 ordertotalsaving=ordertotalsaving.add(shippingDiscount);
 																				}
+																				
+																				var allotmentAmt = new dw.value.Money(0.0, session.currency.currencyCode);
+																				var giftCertTotal = new dw.value.Money(0.0, session.currency.currencyCode);
+																				var gcPaymentInstrs = Order.getGiftCertificatePaymentInstruments();
+																				var creditapplied = false;
 																		</isscript>
+																		<isloop items="${gcPaymentInstrs}" var="gcPI">
+																			<isset name="giftCertTotal" value="${giftCertTotal.add( gcPI.getPaymentTransaction().getAmount() )}" scope="page"/>
+																		</isloop>
+																		<isset name="allPaymentInstrs" value="${Order.getPaymentInstruments()}" scope="page"/>
+																		<isloop items="${allPaymentInstrs}" var="allPI">
+																			<isif condition="${allPI.getPaymentMethod()=='ALLOTMENT'}">
+																				<isset name="allotmentAmt" value="${allotmentAmt.add(allPI.getPaymentTransaction().getAmount())}" scope="page"/>
+																			</isif>
+																		</isloop>
+																		<isif condition="${allotmentAmt>0 || giftCertTotal>0}">
+																			<isset name="creditapplied" value="true" scope="page"/>
+																		</isif>
 
 																		<tr>
 	                            											<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333; font-weight: bold; font-style: normal;">Shipping: </span> </font></td>
@@ -400,6 +417,15 @@
 	                           											<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #333;"><isprint value="${Order.totalTax}"/></span></font></td>
 	                         										</tr>
 							 										<tr>  <td colspan="3" height="2" style="border-bottom:1px solid #ccc">&nbsp;</td>  </tr>
+
+																	<iscomment>Allotment</iscomment>
+																	<isif condition="${allotmentAmt > 0}">
+																		<div class="allotment">
+																			<span class="label"><isprint value="${Resource.msg('ordersummary.allotmentnew','order',null)}"/></span>
+																			<span class="value">- <isprint value="${allotmentAmt}"/></span>
+																		</div>
+																	</isif>
+
 	                          										<tr>
 	                            										<td valign="top" align="left" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold; font-style: italic;">Order Total: </span> </font></td>
 											                            <isif condition="${Order.totalGrossPrice.available}">
@@ -410,6 +436,23 @@
 	                            										<td valign="top" align="right" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isprint value="${orderTotalValue}"/> </span> </font></td>
 	                          										</tr>
 	                           										<tr>  <td colspan="3" height="2" style="border-top:1px solid #ccc">&nbsp;</td>  </tr>
+	                           										
+	                           										
+																	<tr class="order-total <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
+																		<isif condition="${Order.totalGrossPrice.available}">
+																		 	<isif condition="${allotmentAmt > 0}">
+																				<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+																			</isif>
+																		<iselse/>
+																			<isif condition="${allotmentAmt > 0}">
+																				<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+																			</isif>
+																		</isif>
+																		<td><span class="label-total <isif condition="${creditapplied == 'true'}">label-total-remaining</isif>"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></td>
+																		<td class="miniright"><span class="value"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></td>
+																	</tr>
+																	
+																	
 							  										<isif condition="${ordertotalsaving > 0}">
 							   											<tr>
 			                          										<td colspan="3" align="center" valign="top" style="width: 225px; overflow: hidden;">
