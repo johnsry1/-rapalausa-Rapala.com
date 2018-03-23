@@ -458,7 +458,22 @@ $footer-bg-mobile: $concrete;
                     @include line-height(30px);
                     margin: 0;
                 }
+                p, a {
+                    @include font-size(10px);
+                }
+                a {
+                    color: $footer-link-color;
+                    text-decoration: $footer-link-text-decoration;
+                    &:hover {
+                        text-decoration: $footer-link-hover-text-decoration;
+                    }
+                }
             }
+        }
+    }
+    #footerSubForm {
+        span.errorclient {
+            top: rem(-19px);
         }
     }
 }
