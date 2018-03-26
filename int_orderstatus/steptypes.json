@@ -1,0 +1,68 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.OrderStatusUpdate",
+                "module": "int_orderstatus/cartridge/scripts/jobs/OrderStatusUpdate",
+                "description": "Order Status Update",
+                "transactional": "true",
+                "function": "execute",
+                "parameters": {
+                    "parameters": [
+                        {
+                            "@name": "targetFolder",
+                            "@description": "Target Folder (in IMPEX)",
+                            "@type": "string",
+                            "@required": true,
+                            "@trim": true
+                        },
+                        {
+                            "@name": "filePattern",
+                            "@description": "File pattern (RegExp. e.g. ^cat.*xml$)",
+                            "@type": "string",
+                            "@required": false,
+                            "@trim": true
+                        },
+                        {
+                            "@name": "archiveFolder",
+                            "@description": "Archive folder e.g. (src/archive)",
+                            "@type": "string",
+                            "@required": false,
+                            "@trim": true
+                        },
+                        {
+                            "@name": "deleteFile",
+                            "@description": "Delete File",
+                            "@type": "string",
+                            "@required": true,
+                            "@trim": true,
+                            "enum-values": {
+                                "value": [
+                                    "DELETE",
+                                    "KEEP_ON_SERVER",
+                                    "MOVE_TO_ARCHIVE"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "status-codes": {
+                    "status": [
+                        {
+                            "@code": "ERROR",
+                            "description": "Used when the step failed with an error."
+                        },
+                        {
+                            "@code": "OK",
+                            "description": "Used when the step finished successfully."
+                        },
+                        {
+                          "@code": "FINISHED_WITH_WARNINGS",
+                          "description": "Used when the step finished with warnings."
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

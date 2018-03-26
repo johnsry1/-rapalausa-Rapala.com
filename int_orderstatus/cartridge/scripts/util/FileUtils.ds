@@ -1,0 +1,67 @@
+/**
+* Contains util functions to work with files.
+*/
+
+/* API Includes */
+var dwsystem = require('dw/system');
+var dwutil = require('dw/util');
+var File = require('dw/io/File');
+
+module.exports = {
+    getFolderFiles : getFolderFiles,
+    moveToArchiveAndZip: moveToArchiveAndZip
+}
+
+/**
+* Returns list of files matches the file pattern.
+* @param  {dw.io.File} folder
+* @param  {String} filePattern
+* @return {dw.util.Iterator}
+*/
+function getFolderFiles(folder, filePattern) {
+    var fileList = new dwutil.SortedSet();
+    var filePattern = empty(filePattern) ? '^[\\w\-]{1,}\\.xml$' : filePattern;
+    var regExp = new RegExp(filePattern);
+
+    fileList.addAll(folder.listFiles(function(file) {
+
+        if (file.isDirectory()) {
+            return false;
+        }
+
+        return regExp.test(file.name);
+    }));
+
+    return fileList.iterator();
+}
+
+/**
+* Moves file to archive and zip it.
+* @param  {dw.io.File} fileToArchive
+* @param  {String} archiveFolderPath
+*/
+function moveToArchiveAndZip(fileToArchive, archiveFolderPath) {
+    if (!empty(fileToArchive)) {
+
+        if (empty(archiveFolderPath)) {
+            var path = fileToArchive.getFullPath();
+            archiveFolderPath = path.substr(0, path.lastIndexOf('/')) + File.SEPARATOR + 'archive';
+        } else if (archiveFolderPath.charAt(0) == File.SEPARATOR) {
+            archiveFolderPath = File.IMPEX + File.SEPARATOR + archiveFolderPath.substring(1);
+        }
+
+        var archiveFolder = new File(archiveFolderPath + File.SEPARATOR);
+
+        if (!archiveFolder.exists()) {
+            archiveFolder.mkdirs();
+        }
+
+        var fileArchiveDestination = new File(archiveFolder.getFullPath() + fileToArchive.name);
+        fileToArchive.renameTo(fileArchiveDestination);
+
+        var timestamp = dwutil.StringUtils.formatCalendar(dwsystem.System.getCalendar(), 'yyyyMMddHHmmssSSS');
+        var zipFile = new File(archiveFolder.getFullPath() + fileToArchive.name + '_' + timestamp + '.zip');
+        fileArchiveDestination.zip(zipFile);
+        fileArchiveDestination.remove();
+    }
+}
