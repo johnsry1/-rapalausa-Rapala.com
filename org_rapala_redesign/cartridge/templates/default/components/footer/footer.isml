@@ -115,7 +115,8 @@
                                                     <input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
                                                     <button class="subscribe" type="submit" value="subscribe">${Resource.msg('global.emailsubscribe','locale',null)}</button>
                                                 </div>
-                                                <p><isprint value="${Resource.msg('global.emailsubscribe.footer.text','locale',null)}" encoding="off"/></p>
+                                                <isset name="privacyLink" value="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}" scope="page">
+                                                <p><isprint value="${Resource.msgf('global.emailsubscribe.footer.text','locale', null, privacyLink)}" encoding="off"/></p>
                                             </fieldset>
                                         </form>
                                     </div>
@@ -157,7 +158,8 @@
                                                     <input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
                                                     <button class="subscribe" type="submit" value="subscribe">${Resource.msg('global.emailsubscribe','locale',null)}</button>
                                                 </div>
-                                                <p><isprint value="${Resource.msg('global.emailsubscribe.footer.text','locale',null)}" encoding="off"/></p>
+                                               <isset name="privacyLink" value="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}" scope="page">
+                                                <p><isprint value="${Resource.msgf('global.emailsubscribe.footer.text','locale', null, privacyLink)}" encoding="off"/></p>
                                             </fieldset>
                                         </form>
                                     </div>
