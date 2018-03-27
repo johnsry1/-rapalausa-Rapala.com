@@ -26,6 +26,7 @@ var megamenu = {
         $('.brand-active').animate({left: '0'}, 300);
         $('.banner_prostaff').animate({left: '280px'}, 300);
         $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseenter');
+        $('html').addClass('menu-open');
     },
     close: function () {
        //$('#container, .open-menu-wrap').animate({marginLeft: '0'}, 300);
@@ -36,6 +37,7 @@ var megamenu = {
         $('.magnifier-icon').removeClass('js-magnifier-icon-active');
         $('.menu-toggle').removeClass('js-menu-toggle');
         $('#brand-tabs-header').unwrap();
+        $('html').removeClass('menu-open');
         setTimeout(function () {
             $(window).scrollTop(0);
         }, 300);

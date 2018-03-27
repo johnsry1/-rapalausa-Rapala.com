@@ -19,7 +19,7 @@
                     @include respond(desktop-down) {
                         text-indent: 0;
                         background: none;
-                        border: 1px solid $black;
+                        border: 0;
                         border-radius: 50%;
                         width: rem(36px);
                         height: rem(36px);
@@ -30,9 +30,8 @@
                     }
                     .icon {
                         @include respond(desktop-down) {
-                            width: rem(21px);
-                            height: rem(17px);
-                            margin-top: rem(10px);
+                            width: rem(36px);
+                            height: rem(36px);
                         }
                     }
                     span {
@@ -64,6 +63,9 @@
                         box-shadow: none;
                         border-radius: 0 $button-border-radius $button-border-radius 0;
                         border: $border-secondary;
+                    }
+                    @include respond(desktop-down) {
+                        position: static;
                     }
 
                     .minicarticon-cont {

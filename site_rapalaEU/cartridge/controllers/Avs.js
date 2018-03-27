@@ -20,7 +20,7 @@ var guard = require('*/cartridge/scripts/guard');
  * Get html code for state field
  */
 function getStateHtml() {
-    var type = request.httpParameterMap.fieldType.value;
+    var type = 'input';
     var formID = request.httpParameterMap.formID.value;
     var countryValue = request.httpParameterMap.country.value;
     var formField = 'profile.address.states.state';
@@ -48,11 +48,17 @@ function getStateHtml() {
     
     if (stateFieldAdditional != null || stateFieldAdditional != undefined) {
         mandatoryAttribute =  stateFieldAdditional.mandatory;
+        stateField = stateFieldAdditional;
     } else {
         mandatoryAttribute = stateField.object.mandatory;
     }
+    
+    if (('object' in stateField && stateField.object.options != null && stateField.object.options.optionsCount > 0) ||
+            (stateField.options != null && stateField.options.optionsCount > 0)) {
+        type = 'select';
+    }
     var fieldObject = {
-            formfield: stateField.object,
+            formfield: 'object' in stateField ? stateField.object : stateField,
             type: type
         };
 
