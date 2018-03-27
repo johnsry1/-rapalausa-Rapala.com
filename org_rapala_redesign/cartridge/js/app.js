@@ -612,6 +612,10 @@ var app = {
                 $('.cust-non-us').find('a').attr('href', contactusNonusUrl);
                 $('.ui-login,.magnifier-icon').css({'background': 'none'});
                 $('.handle-non-us-vh').addClass('vhide');
+                $('.userregister').css({'display': 'none'});
+                $('.currency-selector').css({'display': 'none'});
+                $('.currency-flag').css({'display': 'none'});
+                $('.change-regionnew currency-selector').css({'display': 'none'});
                 setTimeout(function () {
                     $('.product-promo, .newrecommendation').css({'display': 'none'});
                 }, 5000);
