@@ -178,6 +178,13 @@ function passwordResetFormHandler(templateName, continueURL) {
     });
 }
 
+/**.
+ * This is for displaying megamenu login for nav menu.
+ */
+function includeMegamenuCustomerInfo() {
+    app.getView().render('components/header/megamenu_account_show');
+}
+
 /**
  * The form handler for password resets.
  */
@@ -335,3 +342,6 @@ exports.SetPriceBookFromVIPCardCustomerGroups = require('app_rapala_controllers/
 /** Sets price books for customerGroups.
  * @see {@link module:controllers/Account~setPriceBookFromCustomerGroups} */
 exports.SetPriceBookFromCustomerGroups = require('app_rapala_controllers/cartridge/controllers/Account.js').SetPriceBookFromCustomerGroups;
+/** Renders login/logout
+* @see module:controllers/Home~includeMegamenuCustomerInfo */
+exports.IncludeMegamenuCustomerInfo = guard.ensure(['get'], includeMegamenuCustomerInfo);
