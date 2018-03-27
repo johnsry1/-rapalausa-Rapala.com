@@ -277,7 +277,7 @@
 																			<iscomment>Render ALLOTMENT</iscomment>
 																			<isloop items="${Order.getPaymentInstruments('ALLOTMENT')}" var="paymentInstr" status="piloopstate">
 																			  	 <div style=" margin-top: 5px; padding:0px 0 0px 0px;text-align: left;">
-																			  	 	<span style="font-size: 11px; font-weight: bold; font-style: italic; color:#333;">${Resource.msg('orderdetails.paymentmethod.onlyallotment','order',null)}<br />
+																			  	 	<span><label>${Resource.msg('orderdetails.paymentmethod.onlyallotment','order',null)}</label><br />
 																					<span style="color:#333; font-style:italic; font-size:11px; font-weight:bold;padding:0px 0 0 0px;"><font face="Roboto,Arial,sans-serif"> ${Resource.msg('global.amount','locale',null)}:</font></span>
 																					<span style="color:#333; font-size:11px; font-weight:bold;padding:0px 0 0 0px;font-style: normal;"><font face="Roboto,Arial,sans-serif"> <isprint value="${paymentInstr.paymentTransaction.amount}"/></font></span>
 																					</span>
@@ -354,7 +354,7 @@
 																				if(shippingDiscount>0){
 																				 ordertotalsaving=ordertotalsaving.add(shippingDiscount);
 																				}
-																				
+
 																				var allotmentAmt = new dw.value.Money(0.0, session.currency.currencyCode);
 																				var giftCertTotal = new dw.value.Money(0.0, session.currency.currencyCode);
 																				var gcPaymentInstrs = Order.getGiftCertificatePaymentInstruments();
@@ -417,17 +417,11 @@
 	                           											<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #333;"><isprint value="${Order.totalTax}"/></span></font></td>
 	                         										</tr>
 							 										<tr>  <td colspan="3" height="2" style="border-bottom:1px solid #ccc">&nbsp;</td>  </tr>
+																	<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
 
-																	<iscomment>Allotment</iscomment>
-																	<isif condition="${allotmentAmt > 0}">
-																		<div class="allotment">
-																			<span class="label"><isprint value="${Resource.msg('ordersummary.allotmentnew','order',null)}"/></span>
-																			<span class="value">- <isprint value="${allotmentAmt}"/></span>
-																		</div>
-																	</isif>
 
 	                          										<tr>
-	                            										<td valign="top" align="left" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold; font-style: italic;">Order Total: </span> </font></td>
+	                            										<td valign="top" align="left" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;">Order Total: </span> </font></td>
 											                            <isif condition="${Order.totalGrossPrice.available}">
 																		 	<isset name="orderTotalValue" value="${Order.totalGrossPrice}" scope="page"/>
 																		<iselse/>
@@ -435,9 +429,23 @@
 																		</isif>
 	                            										<td valign="top" align="right" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isprint value="${orderTotalValue}"/> </span> </font></td>
 	                          										</tr>
-	                           										<tr>  <td colspan="3" height="2" style="border-top:1px solid #ccc">&nbsp;</td>  </tr>
-	                           										
-	                           										
+	                           										<iscomment>Allotment</iscomment>
+																	<isif condition="${allotmentAmt > 0}">
+																	<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+																		<tr>
+																			<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;"><isprint value="${Resource.msg('ordersummary.allotmentnew','order',null)}"/></span></font></td>
+																			<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #e80000;"><span class="value">- <isprint value="${allotmentAmt}"/></span></font></td>
+																		</tr>
+																		<tr>
+	                           										<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+
+	                           										<td colspan="3" height="2" style="border-top:1px solid #ccc">&nbsp;</td>
+
+	                           										</tr>
+
+																	</isif>
+
+																	<isif condition="${allotmentAmt > 0}">
 																	<tr class="order-total <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
 																		<isif condition="${Order.totalGrossPrice.available}">
 																		 	<isif condition="${allotmentAmt > 0}">
@@ -448,11 +456,12 @@
 																				<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
 																			</isif>
 																		</isif>
-																		<td><span class="label-total <isif condition="${creditapplied == 'true'}">label-total-remaining</isif>"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></td>
-																		<td class="miniright"><span class="value"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></td>
+																		<td valign="top" align="left" width="60%"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></font></td>
+																		<td valign="top" align="right" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></font></td>
 																	</tr>
-																	
-																	
+																	</isif>
+
+
 							  										<isif condition="${ordertotalsaving > 0}">
 							   											<tr>
 			                          										<td colspan="3" align="center" valign="top" style="width: 225px; overflow: hidden;">
