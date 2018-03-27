@@ -187,18 +187,13 @@
 					<td>
 						<span class="label"><span><isprint value="${Resource.msg('ordersummary.ordershippingShipping','order',null)}"/></span>
 						<span class="Custom-tooltip ">
-							<div class="tooltip-body" style="display:none">
-								<div class="tooltipcontainer">
-									<b><isprint value="${Resource.msg('ordersummary.shippingchargetooltipheading','order',null)}"/></b><hr>
-									<isloop items="${pdict.CurrentForms.cart.shipments}" var="ShippingMethod">
-										<isif condition="${ShippingMethod.object.shippingMethod.getID()=='ground' || ShippingMethod.object.shippingMethod.getID()=='next-day-air' ||ShippingMethod.object.shippingMethod.getID()=='second-day-air'}">
-											<isprint value="${ShippingMethod.object.shippingMethod.getDisplayName()}" />
-											<isprint value="${ShippingMethod.object.shippingMethod.getDescription()}" />
-										</isif>
-									</isloop>
-								</div>
-							</div>
-						</span>
+									<div class="tooltip-body" style="display:none">
+										<div class="tooltipcontainer">
+											<b><isprint value="${Resource.msg('ordersummary.shippingchargetooltipheading','order',null)}"/></b><hr>
+											${Resource.msg('ordersummary.shippingchargetooltiptext','order',null)}
+										</div>
+									</div>
+								</span>
 						:
 						</span>
 					</td>
