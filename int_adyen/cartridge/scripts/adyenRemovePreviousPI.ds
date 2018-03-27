@@ -10,6 +10,8 @@ importPackage( dw.util );
 importPackage( dw.value );
 importPackage( dw.web );
 
+var Cart = require(Resource.msg('script.models.cartmodel', 'require', null));
+
 function execute( args : PipelineDictionary ) : Number
 {
 	return removePaymentInstruments(args.Basket);
@@ -22,18 +24,10 @@ function removePaymentInstruments( basket : dw.order.Basket ) : Number
 	{
 		return PIPELET_ERROR;
 	}
+	var cart = Cart.get(basket);
 	
 	// get all credit card payment instruments
-	var ccPaymentInstrs : Collection = basket.getPaymentInstruments();
-	var iter : Iterator = ccPaymentInstrs.iterator();
-	var existingPI : OrderPaymentInstrument = null;
-
-	// remove them
-	while( iter.hasNext() )
-	{
-		existingPI = iter.next();
-		basket.removePaymentInstrument( existingPI );
-	}
+    cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 	
 	return PIPELET_NEXT;
 }
