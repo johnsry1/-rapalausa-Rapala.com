@@ -301,18 +301,17 @@
 								<div class="custom-checkbox hide">
 									<div class="custom-link"></div>
 									<div class="checkbox">
-										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox"/>
+										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox" />
 									</div
 								</div>
 							</isif>
 							<div class="custom-checkbox">
 								<div class="custom-link"></div>
 								<div class="checkbox">
-									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox"/>
+									<isset name="privacyLinkCheckout" value="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}" scope="page">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox" labellink="${Resource.msgf('global.addtoemail.checkout','locale', null, privacyLinkCheckout)}" rowclass="add-to-email-new"/>
+
 								</div>
-							</div>
-							<div class="form-caption">
-								<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','customer-privacy-security')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
 							</div>
 
 						</fieldset>

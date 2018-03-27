@@ -1364,6 +1364,23 @@
             }
         }
     }
+    .add-to-email-new {
+        margin-top: 0;
+        @include respond(large-up) {
+            padding-left: rem($form-horizontal-label-width - 6px);
+        }
+        .label {
+          &:before {
+              float: left;
+          }
+            .labeltext {
+                float: left;
+                width: calc(100% - 40px);
+                @include line-height(21px);
+            }
+
+        }
+    }
 }
 @media print {
     .owl-stage-outer {
