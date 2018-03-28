@@ -59,8 +59,8 @@ var megamenu = {
                         $curObj.next('.sub-cat-drop-down').trigger('click');
                     }
                 });
-                $this.find('.menulist .sub-category-section-1 > a').each(function () {
-                    var menuList = $(this).closest('.menulist');
+                $this.find('.megamenudrop .sub-category-section-1 > a').each(function () {
+                    var menuList = $(this).closest('.mega_subcategory');
                     var mainContent = $(this).closest('.sub-category-section-1');
                     $(mainContent).find('.sub-cat-drop-down').removeAttr('style');
                     var achorWidth = $(this).width();
