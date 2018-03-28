@@ -20,7 +20,7 @@
 	<isif condition="${newSizes.size()>0 || newColors.size()>0}">
 		<isif condition="${!empty(pdict.p_imagecheckout) && pdict.p_imagecheckout==true}">
 			<isif condition="${p_product.isVariant() || p_product.isMaster()}">
-				
+
 				<isif condition="${pdict.CurrentVariationModel != null}">
 					<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="page"/>
 				<iselse>
@@ -33,11 +33,11 @@
 					<isloop items="${VAVALS}" var="VV">
 						<isif condition="${newSizes.size()>0}">
 							<isif condition="${newSizes.contains(VV.displayValue)}">
-								<isif condition="${!(pdict.hasOwnProperty('showVariations'))}"> 
-							    	<isif condition="${newSizes.contains(p_product.custom.size)}"> 
+								<isif condition="${!(pdict.hasOwnProperty('showVariations'))}">
+							    	<isif condition="${newSizes.contains(p_product.custom.size)}">
 							   			<isset name="newSizeClass" value="true" scope="page"/>
 							   		<iselse/>
-							   			<isset name="newSizeClass" value="false" scope="page"/>		
+							   			<isset name="newSizeClass" value="false" scope="page"/>
 							   		</isif>
 								<iselse/>
 								   	<isset name="newSizeClass" value="true" scope="page"/>
@@ -45,11 +45,11 @@
 								<isif condition="${newSizeClass == 'true'}">
 									<div class="newFlagColorSize">
 										<isset name="imgSizeName" value="new-sizes-snipe" scope="page"/>
-										
-										
+
+
 										<isif condition="${!empty(p_email)}">
-											<isset name="imgSizeName" value="/images/new-sizes-snipe.png" scope="page"/>
-											<img class="new" src="${URLUtils.httpsStatic('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+											<isset name="imgSizeName" value="new-sizes-snipe.png" scope="page"/>
+											<img class="new" src="${URLUtils.httpsStatic('/images/' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
 										<iselse/>
 											<span class="${imgSizeName}">
 												<isif condition="${pdict.currentActiveBrand!=null && !empty(pdict.currentActiveBrand)}">
@@ -67,26 +67,26 @@
 								</isif>
 							</isif>
 						</isif>
-						
+
 						<isif condition="${newColors.size()>0}">
 							<isif condition="${newColors.contains(VV.displayValue)}">
 								<isif condition="${!(pdict.hasOwnProperty('showVariations'))}">
-							   		<isif condition="${newColors.contains(p_product.custom.color)}"> 
-							   			<isset name="newColorClass" value="true" scope="page"/>	
+							   		<isif condition="${newColors.contains(p_product.custom.color)}">
+							   			<isset name="newColorClass" value="true" scope="page"/>
 							   		<iselse/>
-							   			<isset name="newColorClass" value="false" scope="page"/>	
+							   			<isset name="newColorClass" value="false" scope="page"/>
 							   		</isif>
 							   	<iselse/>
-							   		<isset name="newColorClass" value="true" scope="page"/>		
+							   		<isset name="newColorClass" value="true" scope="page"/>
 							   	</isif>
 							   	<isif condition="${newColorClass == 'true'}">
 							   		<div class="newFlagColorSize">
 								   		<isset name="imgColorName" value="new-colors-snipe" scope="page"/>
-								   		
-								   		
+
+
 								   		<isif condition="${!empty(p_email)}">
-								   			<isset name="imgColorName" value="/images/new-colors-snipe.png" scope="page"/>
-								   			<img class="new" src="${URLUtils.httpsStatic('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
+								   			<isset name="imgColorName" value="new-colors-snipe.png" scope="page"/>
+								   			<img class="new" src="${URLUtils.httpsStatic('/images/' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img>
 								   		<iselse/>
 								   			<span class="${imgColorName}">
 									   			<isif condition="${!empty(pdict.p_imagecheckout)}">
@@ -110,25 +110,25 @@
 					</isloop>
 				</isloop>
 			</isif>
-		<iselse/>	
-			
-			
+		<iselse/>
+
+
 				<iscomment> displays new size flag</iscomment>
 				<isif condition="${newSizes.size()>0}">
 					<isset name="newSizeClass" value="true" scope="page"/>
 				<iselse/>
 					<isset name="newSizeClass" value="false" scope="page"/>
 				</isif>
-				
+
 				<isif condition="${newSizeClass == 'true'}">
 				<div class="newFlagColorSize">
-					
-					
+
+
 					<isset name="imgSizeName" value="new-sizes-snipe" scope="page"/>
-					
+
 					<isif condition="${!empty(p_email)}">
-						<isset name="imgSizeName" value="/images/new-sizes-snipe.png" scope="page"/>
-						<span><img class="new" src="${URLUtils.httpsStatic('/themes/rapala' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
+						<isset name="imgSizeName" value="new-sizes-snipe.png" scope="page"/>
+						<span><img class="new" src="${URLUtils.httpsStatic('/images/' +imgSizeName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
 					<iselse/>
 						<span class="${imgSizeName}">
 							<isif condition="${!empty(pdict.p_imagecheckout)}">
@@ -145,20 +145,20 @@
 					</isif>
 				</div>
 				</isif>
-			
+
 			<div class="newFlagColorSize">
 				<iscomment> displays new color flag</iscomment>
 				<isif condition="${newColors.size()>0}">
 					<isset name="newColorClass" value="true" scope="page"/>
 				<iselse/>
 					<isset name="newColorClass" value="false" scope="page"/>
-				</isif> 
+				</isif>
 				<isif condition="${newColorClass == 'true'}">
 					<isset name="imgColorName" value="new-colors-snipe" scope="page"/>
-					
+
 					<isif condition="${!empty(p_email)}">
-						<isset name="imgColorName" value="/images/new-colors-snipe.png" scope="page"/>
-						<span><img class="new" src="${URLUtils.httpsStatic('/themes/rapala' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
+						<isset name="imgColorName" value="new-colors-snipe.png" scope="page"/>
+						<span><img class="new" src="${URLUtils.httpsStatic('/images/' +imgColorName)}" alt="${Resource.msg('global.new','locale',null)}" ></img></span>
 					<iselse/>
 						<span class="${imgColorName}">
 							<isif condition="${pdict.currentActiveBrand!=null && !empty(pdict.currentActiveBrand)}">
