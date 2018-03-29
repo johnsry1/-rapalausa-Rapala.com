@@ -149,6 +149,25 @@ function startStateVerification() {
     return shipLimit;
 }
 
+/**
+ * To redirect checkout page from Mincart
+ */
+function miniCheckOut() {
+    var basket = app.getModel('Cart').get();
+    if(basket != null){
+        var validationResult = basket.validateForCheckout();
+        app.getForm('cart.shipments').copyFrom(basket.object.shipments);
+        app.getForm('cart.coupons').copyFrom(basket.object.couponLineItems);
+        if (validationResult.EnableCheckout) {
+            app.getController('COShipping').Start();
+            //response.redirect(URLUtils.https('COShipping-Start'));
+        } else {
+            response.redirect(URLUtils.https('Cart-Show'));
+        }
+    } else {
+         response.redirect(URLUtils.https('Cart-Show'));
+    }
+}
 /*
 * Module exports
 */
@@ -182,7 +201,7 @@ exports.SingleShipping = guard.ensure(['https'], singleShipping);
 exports.EditShippingAddress = require('app_rapala_controllers/cartridge/controllers/COShipping.js').EditShippingAddress;
 /** Form handler for the shippingAddressForm.
  * @see module:controllers/COShipping~miniCheckOut */
-exports.MiniCheckOut = require('app_rapala_controllers/cartridge/controllers/COShipping.js').MiniCheckOut;
+exports.MiniCheckOut = guard.ensure(['https', 'get'], miniCheckOut);
 /** Form handler for the shippingAddressForm.
  * @see module:controllers/COShipping~shippingLogin */
 exports.ShippingLogin = require('app_rapala_controllers/cartridge/controllers/COShipping.js').ShippingLogin;
