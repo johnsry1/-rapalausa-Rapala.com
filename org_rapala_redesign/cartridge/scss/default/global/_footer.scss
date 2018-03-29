@@ -302,7 +302,7 @@ $footer-bg-mobile: $concrete;
     .change-region {
         float: none;
         padding: 0 0 5px 0 !important;
-        z-index: 998;
+        z-index: 100;
         span.change-region-footer {
             .country {
                 display: inline-block;
@@ -458,7 +458,22 @@ $footer-bg-mobile: $concrete;
                     @include line-height(30px);
                     margin: 0;
                 }
+                p, a {
+                    @include font-size(10px);
+                }
+                a {
+                    color: $footer-link-color;
+                    text-decoration: $footer-link-text-decoration;
+                    &:hover {
+                        text-decoration: $footer-link-hover-text-decoration;
+                    }
+                }
             }
+        }
+    }
+    #footerSubForm {
+        span.errorclient {
+            top: rem(-19px);
         }
     }
 }
@@ -518,5 +533,13 @@ $footer-bg-mobile: $concrete;
         @include respond(desktop) {
             right: rem(10px);
         }
+    }
+}
+.footerEmailDialog {
+    .ui-dialog-title {
+        display: none;
+    }
+    .ui-dialog-titlebar {
+        border: 0;
     }
 }
