@@ -317,7 +317,7 @@ var util = {
                     }
                     if (val.length) {
                         if ($('.carderror.error').length == 0) {
-                            $(this).closest('.formfield').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
+                            $(this).closest('.field-wrapper').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
                         }
                         $('.carderror.error').hide();
                         var cardTypeval = util.validatecardtype(val);
