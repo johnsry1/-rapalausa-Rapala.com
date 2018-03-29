@@ -11907,3 +11907,28 @@
         }
     }
 }
+.new-colors-snipe,
+.new-stamp,
+.new-sizes-snipe {
+    @include new-label();
+    margin: 0 3px 3px 0 !important;
+    display: inline-block;
+    line-height: $new-labels-line-height;
+    height: $new-labels-height;
+}
+.new-stamp-big {
+    @include new-label();
+    @include new-label-big();
+    margin-right: 0;
+}
+.variationattributes {
+    .color {
+        ul {
+            li {
+                a span.corner-ribbon {
+                    @include new-label-swatch();
+                }
+            }
+        }
+    }
+}
