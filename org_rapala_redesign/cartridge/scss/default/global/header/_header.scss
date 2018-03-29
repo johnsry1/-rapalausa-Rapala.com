@@ -368,13 +368,13 @@ body {
                     height: auto;
                     box-sizing: border-box;
                     @include respond(desktop-down) {
-                        padding-left: rem(20px) !important;
-                        padding-right: rem(20px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                         margin-bottom: rem(10px) !important;
                     }
                     @include respond(medium-down) {
-                        padding-left: rem(10px) !important;
-                        padding-right: rem(10px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                     }
                     p {
                         margin: 0;
@@ -464,4 +464,16 @@ body {
     width: 100%;
     text-align: left;
     margin-top: 0;
+}
+.dialogBanner {
+    .ui-icon-closethick {
+        background-image: url("../images/close-button.png") !important;
+        background-position: 0 0 !important;
+        &:hover {
+            background-position: 0 -34px !important;
+        }
+    }
+    .formactions {
+        text-align: center;
+    }
 }
