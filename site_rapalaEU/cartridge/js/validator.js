@@ -577,8 +577,8 @@ $.validator.addMethod('cm_password', function (value, element) {
             passwordVal = $(element).closest('form').find('.c_password').val();
         }
 
-        if (value.length < 5) {
-            customErrormsg = 'Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.';
+        if (value.length < 8) {
+            customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
             return false;
         } else if (passwordVal != value) {
             customErrormsg = 'Oops - your passwords do not match.';
@@ -596,8 +596,8 @@ $.validator.addMethod('confirm_password', function (value, element) {
         return true;
     } else if ($(element).hasClass('required')) {
         var passwordVal = $(element).closest('form').find('.c_password').val();
-        if (value.length < 5) {
-            customErrormsg = 'Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.';
+        if (value.length < 8) {
+            customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
             return false;
         } else if (passwordVal != value) {
             customErrormsg = 'Oops - your passwords do not match.';
@@ -613,8 +613,8 @@ $.validator.addMethod('confirm_password', function (value, element) {
 $.validator.addMethod('c_password', function (value, element) {
     if ($(element).hasClass('stopKeypress')) {
         return true;
-    } else if ($(element).hasClass('required') && (value.length < 5)) {
-        customErrormsg = 'Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.';
+    } else if ($(element).hasClass('required') && (value.length < 8)) {
+        customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
         return false;
     } else {
         return true;
@@ -624,8 +624,8 @@ $.validator.addMethod('c_password', function (value, element) {
 $.validator.addMethod('login_password', function (value, element) {
     if ($(element).hasClass('stopKeypress')) {
         return true;
-    } else if ($(element).hasClass('required') && (value.length < 5)) {
-        customErrormsg = 'Passwords must contain a minimum of 5 characters and are CaSe SeNsItIvE.';
+    } else if ($(element).hasClass('required') && (value.length < 8)) {
+        customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
         return false;
     } else {
         return true;
