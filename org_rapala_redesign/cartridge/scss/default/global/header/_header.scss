@@ -400,9 +400,26 @@ body {
     form.simplesearch {
         input.simplesearchinput {
             @include form-input;
+            color: $search-input-color;
             @include respond(desktop-down) {
                 height: rem($mobile-search-height);
                 margin: 0;
+                color: $search-input-mobile-color;
+            }
+            &:focus {
+                color: $search-input-color;
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
+            }
+            &::placeholder {
+                color: $search-input-color;
+                @include respond(desktop) {
+                    opacity: 1;
+                }
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
             }
         }
         button.search-button {
