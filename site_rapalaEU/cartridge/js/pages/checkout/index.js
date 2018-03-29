@@ -5,6 +5,7 @@ var address = require('./address'),
     multiship = require('./multiship'),
     uievents = require('../../uievents'),
     util = require('../../util'),
+    dialog = require('../../dialog'),
     shipping = require('./shipping');
 
 /**
@@ -142,4 +143,15 @@ exports.init = function () {
              $('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
          }
      }*/
+    
+    $('.privacy-policy').on('click', function (e) {
+        e.preventDefault();
+        dialog.open({
+            url: $(e.target).attr('href'),
+            options: {
+                dialogClass: 'privacy-policy'
+            }
+        });
+    });
+
 };

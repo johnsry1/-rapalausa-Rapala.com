@@ -301,19 +301,18 @@
 								<div class="custom-checkbox hide">
 									<div class="custom-link"></div>
 									<div class="checkbox">
-										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox"/>
+										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox" />
 									</div
 								</div>
 							</isif>
-							<iscomment><div class="custom-checkbox">
+							<div class="custom-checkbox">
 								<div class="custom-link"></div>
 								<div class="checkbox">
-									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox"/>
+									<isset name="privacyLinkCheckout" value="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}" scope="page">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox" labellink="${Resource.msgf('global.addtoemail.checkout','locale', null, privacyLinkCheckout)}" rowclass="add-to-email-new"/>
+
 								</div>
 							</div>
-							<div class="form-caption">
-								<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
-							</div></iscomment>
 
 						</fieldset>
 
@@ -460,7 +459,6 @@
 														<span class="Troubleshooting-Tips"><isprint value="${Resource.msg('global.ordergothrough-subheader','locale',null)}"/>:</span>
 														<ul>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont1new','locale',null)}"/></li>
-															<li><isprint value="${Resource.msg('global.ordergothrough-cont2new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont3new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont4new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont5','locale',null)}"/></li>

@@ -1,0 +1,135 @@
+<div class="headercustomerinfo newcheckout-headercustomerinfo">
+
+		<div class="domainswitch" style="display: none;">
+            <ul>
+            	<isif condition="${session.custom.currentSite != 'strikemaster'}">
+            	<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}">${Resource.msg('global.changefooter','locale',null)}</a></li>
+				</isif>
+				<li><a href="${dw.system.Site.current.preferences.custom['investorsLink']}">${Resource.msg('global.investorsfooter','locale',null)}</a></li>
+	        </ul>
+        </div>
+	<div id="user" class="<isif condition="${!pdict.CurrentCustomer.registered}">pt_orderconf-guest</isif>">
+	    <isif condition="${pdict.CurrentCustomer.registered}">
+	        <isif condition="${pdict.CurrentCustomer.authenticated}">
+	        <span class="welcomemessage">${Resource.msg('headercustomerinfo.guestwelcome','locale',null)}</span>
+	         <a href="${URLUtils.https('Account-Show')}" title="${Resource.msg('global.accountlink','locale',null)}" class="username">
+	        <span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span></a>
+	        </isif>
+
+	         <isif condition="${!pdict.CurrentCustomer.authenticated}">
+	          <span class="welcomebackmessage">${Resource.msg('headercustomerinfo.welcomeback','locale',null)}</span>
+	        <span class="unauthenticated"><a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName}" href="${URLUtils.https('Account-Show')}" class="userlogin">
+	        <isprint value="${pdict.CurrentCustomer.profile.firstName}"/></a></span>
+	          </isif>
+	          <lable class="sign-out">
+	        	(&nbsp;<a title="${Resource.msg('headercustomerinfo.not','locale',null)}" href="${URLUtils.url('Login-Logout')}"
+	        class="usernot">${Resource.msg('headercustomerinfo.not','locale',null)}</a>&nbsp;)
+	        </lable>
+	    	<iselse>
+	        <span class="guest-welcomemessage">${Resource.msg('headercustomerinfo.welcome','locale',null)}</span>
+	        <span class="anonymous">${Resource.msg('headercustomerinfo.guest','locale',null)}</span>
+		    	<iscomment><isif condition="${!pdict.CurrentCustomer.authenticated}">
+		    		<lable class="sign-out">
+			    		(&nbsp;<a title="${Resource.msg('global.login','locale',null)}" href="${URLUtils.https('Account-Show')}"
+			    		 class="userlogin signin">${Resource.msg('global.login','locale',null)}</a> &nbsp;)
+		     	 	</lable>
+		        <iselse/>
+	        </isif>
+	        </iscomment>
+
+	    </isif>
+	</div>
+	<div id="userinfo">
+	        <isif condition="${session.custom.currentSite == 'rapala'}">
+	        	<span>
+	        		<a href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+	        		${Resource.msg('header.customerservice','locale',null)}</a>
+	        		<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'vmc'}">
+	        	<span>
+	        		<a href="${URLUtils.url('Folder-Show','fdid','vmc-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+	        		${Resource.msg('header.customerservice','locale',null)}</a>
+	        		<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'luhrjensen'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','luhrjensen-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'sufix'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','sufix-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+	        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'storm'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','storm-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'triggerx'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','triggerx-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'triggerx'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','triggerx-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'terminator'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','terminator-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'bluefox'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','bluefox-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'williamson'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','williamson-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'strikemaster'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','strikemaster-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'strikemaster'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','strikemaster-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	         <iselseif condition="${session.custom.currentSite == 'marcum'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','marcum-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'iceforce'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','iceforce-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        <iselseif condition="${session.custom.currentSite == 'otter'}">
+	        	<span>
+		        	<a href="${URLUtils.url('Folder-Show','fdid','otter-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+		        	${Resource.msg('header.customerservice','locale',null)}</a>
+		        	<span class="arrow-size right-arrow">&nbsp;</span>
+	        	</span>
+	        </isif>
+    </div>
+</div><!-- END: headercustomerinfo -->

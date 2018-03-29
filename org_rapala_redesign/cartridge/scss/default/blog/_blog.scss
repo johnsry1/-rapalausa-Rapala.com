@@ -22,9 +22,9 @@
             }
         }
         a.breadcrumb-element {
-            text-decoration: underline;
+            text-decoration: none;
             &:hover {
-                text-decoration: none;
+                text-decoration: underline;
             }
             &:last-child {
                 text-decoration: none;
@@ -39,6 +39,12 @@
         @include respond(medium-down) {
             margin-bottom: rem(25px);
             padding: 0 rem(10px);
+        }
+        a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
     #secondary.nav {
@@ -371,11 +377,10 @@
             }
             .blog-button-wrapper {
                 color: $blog-main-link-color;
-
                 a {
                     color: $blog-main-link-color;
                     @include respond(medium-down) {
-                        text-decoration: underline;
+                        text-decoration: none;
                     }
                     @include respond(large-up) {
                         display: inline-block;
@@ -383,7 +388,7 @@
                     }
                     &:hover {
                         @include respond(medium-down) {
-                            text-decoration: none;
+                            text-decoration: underline;
                         }
                     }
                 }
@@ -428,10 +433,10 @@
             }
             .blog-button-wrapper {
                 a {
-                    text-decoration: underline;
+                    text-decoration: none;
                     color: $blog-main-link-color;
                     &:hover {
-                        text-decoration: none;
+                        text-decoration: underline;
                     }
                 }
             }
@@ -725,9 +730,9 @@
                 float: right;
                 a {
                     color: $blog-main-link-color;
-                    text-decoration: underline;
+                    text-decoration: none;
                     &:hover {
-                        text-decoration: none;
+                        text-decoration: underline;
                     }
                 }
             }

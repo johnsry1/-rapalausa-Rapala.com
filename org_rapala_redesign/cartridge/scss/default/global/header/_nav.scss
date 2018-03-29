@@ -322,8 +322,8 @@ body.js-body {
                                 border-top: none;
                                 padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                 min-width: rem(170px);
-                                left: 50%;
-                                transform: translateX(-50%);
+                                left: 0%;
+                                transform: translateX(0);
                                 white-space: nowrap;
                             }
                         }
@@ -339,6 +339,17 @@ body.js-body {
                     &:last-child {
                         .sub-category-section-1:after {
                             display: none;
+                        }
+                    }
+                    a {
+                        @include respond(desktop-down) {
+                            height: 50px;
+                            box-sizing: border-box;
+                        }
+                    }
+                    .sub-cat-drop-down {
+                        @include respond(desktop-down) {
+                            height: 20px;
                         }
                     }
                 }
@@ -383,8 +394,8 @@ body.js-body {
                                     border-top: none;
                                     padding: rem(20px) rem(20px) rem(20px) rem(12px);
                                     min-width: rem(170px);
-                                    left: 50%;
-                                    transform: translateX(-50%);
+                                    left: 0;
+                                    transform: translateX(0);
                                     white-space: nowrap;
                                 }
                             }
@@ -428,7 +439,8 @@ body.js-body {
                     }
                 }
                 .mobile-menu-brandlogo {
-                    height: rem(60px);
+                    dispaly: block;
+                    cursor: pointer;
                     background-color: $concrete;
                     box-shadow: inset 0px 11px 8px -10px rgba(0, 0, 0, 0.2), inset 0px -11px 8px -10px rgba(0, 0, 0, 0.2);
                     &.sufix {
@@ -484,6 +496,13 @@ body.js-body {
                     padding: rem(10px) rem(10px) rem(10px) rem(40px);
                     &:hover {
                         color: $greyish-brown;
+                    }
+                    &.change-currency-link {
+                        @include respond(desktop-down) {
+                            width: 100%;
+                            box-sizing: border-box;
+                            max-width: 100%;
+                        }
                     }
                 }
                 .domainswitch-header {

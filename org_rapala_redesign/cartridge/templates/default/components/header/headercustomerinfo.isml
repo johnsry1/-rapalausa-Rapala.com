@@ -59,7 +59,7 @@
     <div id="user">
         <isif condition="${pdict.CurrentCustomer.registered}">
             <a href="${URLUtils.https('Account-Show')}" class="mobile-only userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
-                <issvghelper icon="user"/>
+                <issvghelper icon="profile-icon-active"/>
                 <span>
                     <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
                 </span>
@@ -136,7 +136,7 @@
                 <isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
                     <div class="sign-up-blk">
                         <a href="${URLUtils.https('Account-Show')}" class="userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();">
-                            <issvghelper icon="user"/>
+                            <issvghelper icon="profile-icon-static"/>
                             <span>
                                 <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
                             </span>
@@ -159,7 +159,7 @@
                 <iselse/>
                     <div class="sign-up-blk">
                         <a href="${URLUtils.https('Account-Show')}" class="userlogin signin" >
-                        	<issvghelper icon="user"/>
+                        	<issvghelper icon="profile-icon-static"/>
                             <span>
                                 <isprint value="${Resource.msg('global.Signin','locale',null)}"/>
                             </span>
@@ -172,6 +172,6 @@
 </isif>
 
 <a href="javascript:void(0);"class="magnifier-icon mobile-view">
-    <issvghelper icon="search"/>
+    <issvghelper icon="search-icon-static"/>
     <span>search icon</span>
 </a>

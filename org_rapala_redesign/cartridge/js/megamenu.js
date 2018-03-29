@@ -26,6 +26,7 @@ var megamenu = {
         $('.brand-active').animate({left: '0'}, 300);
         $('.banner_prostaff').animate({left: '280px'}, 300);
         $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseenter');
+        $('html').addClass('menu-open');
     },
     close: function () {
        //$('#container, .open-menu-wrap').animate({marginLeft: '0'}, 300);
@@ -36,6 +37,7 @@ var megamenu = {
         $('.magnifier-icon').removeClass('js-magnifier-icon-active');
         $('.menu-toggle').removeClass('js-menu-toggle');
         $('#brand-tabs-header').unwrap();
+        $('html').removeClass('menu-open');
         setTimeout(function () {
             $(window).scrollTop(0);
         }, 300);
@@ -57,8 +59,8 @@ var megamenu = {
                         $curObj.next('.sub-cat-drop-down').trigger('click');
                     }
                 });
-                $this.find('.menulist .sub-category-section-1 > a').each(function () {
-                    var menuList = $(this).closest('.menulist');
+                $this.find('.megamenudrop .sub-category-section-1 > a').each(function () {
+                    var menuList = $(this).closest('.mega_subcategory');
                     var mainContent = $(this).closest('.sub-category-section-1');
                     $(mainContent).find('.sub-cat-drop-down').removeAttr('style');
                     var achorWidth = $(this).width();

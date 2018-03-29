@@ -149,7 +149,12 @@ module.exports = function (pdict) {
 
     // label
     label = '<label class="label" for="' + name + '">';
-    label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+    if(pdict.labellink) {
+    	label += '<span class="labeltext">' + pdict.labellink + '</span>';
+
+    } else {
+    	label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+    }
     if (required) {
         label += '<span class="requiredindicator">&#42; </span>';
     }
