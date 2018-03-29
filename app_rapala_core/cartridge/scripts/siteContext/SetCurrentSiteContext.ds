@@ -172,8 +172,6 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	    // Product-Show with pid
 	    else if (!http.get("pid").empty && ProductMgr.getProduct(http.get("pid").value) != null && request.httpPath.indexOf('Product-Show') != -1) 
 	    {
-	    	var req = request;
-	    	var ses = session;
 	      	var prodID : String = http.get("pid").value;
 	      	var product : Product = ProductMgr.getProduct(prodID);
 	      	if(http.get("oneresult").value != false &&  product.getPrimaryCategory() != null)
