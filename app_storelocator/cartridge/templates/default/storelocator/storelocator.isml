@@ -6,10 +6,8 @@
     <div class="store-locator-slot">
         <isslot id="store-locator-slot" description="Just above the search fields on the store locator page. Viewable at resolutions of 1200px or greater." context="global" />
     </div>
-    <isscript>
-    	var siteId = dw.system.Site.current.ID
-   </isscript>
-   <isset name="currentPath" value="${'storelocator/components/' + siteId + '/storelocatorform'}" scope="page">
+   <isset name="currentSiteID" value="${dw.system.Site.current.ID}" scope="page" />
+   <isset name="currentPath" value="${'storelocator/components/' + currentSiteID + '/storelocatorform'}" scope="page" />
    <isinclude template="${currentPath}" />
     <div id="store-locator" class="store-locator">
         <div id="map-canvas" class="clearfix"></div>
