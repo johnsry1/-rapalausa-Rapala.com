@@ -445,6 +445,9 @@
         }
         .clearbutton {
             top: rem(4px) !important;
+            @include respond(medium-down) {
+                right: rem(20px);
+            }
         }
         .formfield-email {
             @include respond(large-up) {
@@ -466,6 +469,9 @@
             .left-nav-style {
                 font-family: $font;
             }
+        }
+        td.col1 {
+            width: 85px;
         }
     }
     .checkout_body_cont {
@@ -1149,6 +1155,7 @@
                                     font-family: $font;
                                     background: $background;
                                     border: $border;
+                                    height: auto;
                                     h2 {
                                         @include h2;
                                     }

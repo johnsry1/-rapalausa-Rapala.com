@@ -31,7 +31,11 @@ function execute( pdict : PipelineDictionary ) : Number
 	if (prods.hasNext()) 
 	{
 		try {
-			var productFile = new ExportFile("products_DW.txt");
+			var fileName = "products_DW.txt";
+			if (dw.system.Site.getCurrent().ID !== 'rapala') {
+				fileName = dw.system.Site.getCurrent().ID + "_" + fileName;
+			}
+			var productFile = new ExportFile(fileName);
 		
 			////////// Write header row //////////
 			productFile.AddRowItem('Sku');
