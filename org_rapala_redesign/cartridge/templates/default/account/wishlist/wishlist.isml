@@ -119,9 +119,16 @@
 								<isif condition="${item.object.type != isGiftCert && item.object.product != null}">
 
 									<isif condition="${pdict.CurrentCustomer == pdict.ProductList.owner}">
+										<isscript>
+											var liUrl : String = "";
+											liUrl = dw.web.URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'source', 'wishlist', 'isCart',true,'lineitemID',item.object.ID);
+										</isscript>
+										<a class="quickview" id="quickviewbutton" name="${item.object.ID}" href="${liUrl}" title="${item.object.product.name}" >${Resource.msg('global.editdetails','locale',null)}</a>
+									<iscomment>
 										<a name="${item.object.ID}" href="${URLUtils.url('Product-Show', 'pid', item.object.product.ID, 'Quantity', Number(item.object.quantity).toFixed(), 'uuid',item.object.ID)}" title="" >
 											${Resource.msg('global.editdetails','locale',null)}
 										</a>
+									 </iscomment>
 									</isif>
 								</isif>
 							</td>
