@@ -1,40 +1,16 @@
 <isdecorate template="storelocator/pt_storelocator">
-
+	 <isinclude template="util/modules"/>
     <div class="store-locator-header">
         <h1>${Resource.msg('storelocator.header','storelocator',null)}</h1>
     </div>
     <div class="store-locator-slot">
         <isslot id="store-locator-slot" description="Just above the search fields on the store locator page. Viewable at resolutions of 1200px or greater." context="global" />
     </div>
-    <div class="search-bar">
-        <form id="store-search-form" class="store-search-form">
-            <fieldset>
-                <div class="form-row address-field">
-                    <label class="label" for="address">${Resource.msg('storelocator.searchbar.address','storelocator',null)}</label>
-                    <div class="field-wrapper">
-                        <input type="text" name="address" id="address" value="" class="textinput" />
-                    </div>
-                </div>
-                <div class="form-row distance-select">
-                    <label class="label" for="distance">${Resource.msg('storelocator.searchbar.radius','storelocator',null)}</label>
-                    <div class="field-wrapper">
-                        <div class="select-style">
-                            <select id="distance" name="distance" unselectable="on">
-                                <option value="15" selected="selected">15 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                                <option value="30">30 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                                <option value="50">50 ${Resource.msg('storelocator.searchbar.miles','storelocator',null)}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row form-row-button locator-submit">
-                    <button type="submit" value="${Resource.msg('storelocator.searchbar.findstores','storelocator',null)}"><span>${Resource.msg('storelocator.searchbar.findstores','storelocator',null)}</span></button>
-                </div>
-                <input type="hidden" name="country" id="country" value="${dw.system.Site.current.preferences.custom.storeLocatorDefaultCountry}" />
-                <input type="hidden" name="distanceunitpref" id="distanceunitpref" value="${dw.system.Site.current.preferences.custom.storeLookupUnit.value}" />
-            </fieldset>
-        </form>
-    </div>
+    <isscript>
+    	var siteId = dw.system.Site.current.ID
+   </isscript>
+   <isset name="currentPath" value="${'storelocator/components/' + siteId + '/storelocatorform'}" scope="page">
+   <isinclude template="${currentPath}" />
     <div id="store-locator" class="store-locator">
         <div id="map-canvas" class="clearfix"></div>
         <!-- END: storelocator -->
