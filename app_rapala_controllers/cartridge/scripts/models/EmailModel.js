@@ -38,7 +38,7 @@ var EmailModel = AbstractModel.extend(
             var mail = this.object;
             mail.addTo(recipient);
             if (template === 'mail/lockoutemail') {
-                mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerLocakedEmail'));
+                mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerLockedEmail'));
             } else {
                 mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'RapalaInsider@rapalausa.com');
             }
