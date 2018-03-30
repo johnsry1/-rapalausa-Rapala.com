@@ -44,9 +44,11 @@ var events = {
             pushEvent('trackEvent', 'User Action', 'Header Click', 'Home Link');
         });
         
+        /*
         $('#quickviewbutton').on('click', function () {
             productClick($.parseJSON($(this).attr('data-gtmdata')));
         });
+        */
     }
 };
 
