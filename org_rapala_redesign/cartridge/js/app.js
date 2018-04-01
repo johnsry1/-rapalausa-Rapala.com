@@ -553,6 +553,9 @@ function initializeEvents() {
         $(this).removeClass('errorclient');
         $(this).parent('.select-style').removeClass('select-style-error');
     });
+    if ($('.remove-bottom-button').length > 0) {
+        $('.style-cservice').find('.content-back-button').remove();
+    }
 }
 /**
  * @private
