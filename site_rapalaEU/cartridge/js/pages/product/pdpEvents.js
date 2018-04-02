@@ -223,7 +223,7 @@ var product = function (response) {
                 addToCartBtn.prop('disabled', true);
 
                 
-                if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {
+                if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {  
                     var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
 
                     if (model.master || model.variant) {
@@ -237,6 +237,7 @@ var product = function (response) {
                     }
 
                     var tempUrl = this.href;
+                    tempUrl = Urls.wishlistadd;
 
                     if (!(tempUrl.indexOf('?') > 0)) {
                         tempUrl = tempUrl + '?';
@@ -246,18 +247,19 @@ var product = function (response) {
                     // serialize the name/value into url query string and append it to the url, make request
                     //var url = tempUrl + jQuery.param(selectedOptions);
                     window.location = tempUrl + jQuery.param(selectedOptions);
-                }
-                // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
-                // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
-                var event = jQuery.Event('AddToCart');
-                event.selectedOptions = thisProduct.selectedOptions;
-
-                if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
-                    addToCart.add('', thisProduct.selectedOptions, function () {
-                        addToCartBtn.prop('disabled', false);
-                    });
                 } else {
-                    jQuery(document).trigger(event)
+                    // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
+                    // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
+                    var event = jQuery.Event('AddToCart');
+                    event.selectedOptions = thisProduct.selectedOptions;
+    
+                    if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
+                        addToCart.add('', thisProduct.selectedOptions, function () {
+                            addToCartBtn.prop('disabled', false);
+                        });
+                    } else {
+                        jQuery(document).trigger(event)
+                    }
                 }
             }
             return false;
