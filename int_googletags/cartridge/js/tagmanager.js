@@ -44,13 +44,46 @@ var events = {
             pushEvent('trackEvent', 'User Action', 'Header Click', 'Home Link');
         });
         
-        /*
-        $('#quickviewbutton').on('click', function () {
-            productClick($.parseJSON($(this).attr('data-gtmdata')));
-        });
-        */
+        $(document).ready(function() {
+            $('#footerSubForm button').on('click', function () {
+                var validF = $(this).closest('form').valid();
+                if (validF) {
+                    signUpEvent('Footer Sign Up');
+                }
+            });
+            
+            $('.header-signup button').on('click', function() {
+                var validF = $(this).closest('form').valid();
+                var $signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]')[0];
+                if (validF && $signUpElem != undefined && $signUpElem.checked) {
+                    signUpEvent('Header Sign Up');
+                }
+            })
+        })
     }
 };
+
+/*
+ * 
+            var validF = $(this).closest('form').valid();
+            var signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]');
+            if (validF && signUpElem.checked) {
+                alert('Header Sign Up');
+                //pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
+                dataLayer.push({
+                    'event': 'emailSignUp',
+                    'eventCategory': 'Secondary Goals',
+                    'eventAction': 'Email Sign-up',
+                    'eventLabel': 'Header Sign Up'
+                });
+            }
+
+
+ */
+function signUpEvent(location) {
+    alert(location);
+    pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
+}
 
 /**
  * @param {Object} productObject The product data
