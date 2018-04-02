@@ -25,7 +25,6 @@ var Countries = require('*/cartridge/scripts/util/Countries');
 var app = require('*/cartridge/scripts/app');
 var guard = require('*/cartridge/scripts/guard');
 var ltkSendSca = require('int_listrak_controllers/cartridge/controllers/ltkSendSca.js');
-var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
 var AdyenController = require("int_adyen_controllers/cartridge/controllers/Adyen");
 var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
 
@@ -280,7 +279,6 @@ function billing() {
                 // Mark step as fulfilled
                 app.getForm('billing').object.fulfilled.value = true;
                 
-                ltkSignupEmail.Signup();
                 ltkSendSca.SendSCA();
 
                 require('site_rapalaEU/cartridge/controllers/COSummary.js').Submit();

@@ -317,7 +317,7 @@ var util = {
                     }
                     if (val.length) {
                         if ($('.carderror.error').length == 0) {
-                            $(this).closest('.formfield').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
+                            $(this).closest('.field-wrapper').append('<span class="carderror error">Not a valid Credit Card Number, please try again.</span>');
                         }
                         $('.carderror.error').hide();
                         var cardTypeval = util.validatecardtype(val);
@@ -452,7 +452,7 @@ var util = {
             if ($container.length == 0) {
                 return;
             } else {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
+                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
                 options = {
                     url: url,
                     type: 'GET',
@@ -469,7 +469,7 @@ var util = {
             }
         } else {
             if ($container.length != 0) {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'fieldType': 'input', 'country': $country.val()});
+                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
                 options = {
                     url: url,
                     type: 'GET',

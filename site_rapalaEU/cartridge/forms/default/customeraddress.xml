@@ -56,13 +56,13 @@
 		description="customeraddress.address2.description" />
 	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50"
 		missing-error="customeraddress.city.missing-error"/>
+	<!--  postal code -->
+	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" binding="postalCode"
+		missing-error="resource.errorpostal"/>
+
 
 	<!-- use global state list -->
 	<include formid="states" name="states"/>
-
-	<!--  postal code -->
-	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" min-length="5" max-length="10" binding="postalCode"
-		missing-error="resource.errorzip"/>
 
 
 	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" mandatory="true" binding="phone" max-length="20"/>

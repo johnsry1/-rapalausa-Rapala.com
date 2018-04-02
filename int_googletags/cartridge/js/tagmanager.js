@@ -51,7 +51,7 @@ var events = {
                     signUpEvent('Footer Sign Up');
                 }
             });
-            
+
             $('.header-signup button').on('click', function() {
                 var validF = $(this).closest('form').valid();
                 var $signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]')[0];
@@ -64,7 +64,7 @@ var events = {
 };
 
 /*
- * 
+ *
             var validF = $(this).closest('form').valid();
             var signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]');
             if (validF && signUpElem.checked) {

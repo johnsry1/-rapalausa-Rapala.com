@@ -73,6 +73,12 @@
             }
         }
     }
+    .product-add-to-cart {
+        overflow: visible;
+    }
+    .addedto-cartoverlay {
+        background-color: rgba(125, 125, 125, 1);
+    }
 }
 
 .pt_product-details {
@@ -105,4 +111,41 @@
 .promotion-callout,
 #special-offers ul li {
     @include pdp-promo;
+}
+.promotion-callout {
+    .formfieldtooltip {
+        .tooltip {
+            float: none;
+        }
+    }
+}
+.swatches {
+    li {
+        &.selected,
+        &:hover {
+            a {
+                background: $product-attr-swatch-active-background;
+                color: $product-attr-swatch-active-color;
+                border: $product-attr-swatch-active-border;
+                &:hover {
+                    border-color: $product-attr-swatch-active-border-color;
+                }
+            }
+        }
+    }
+    &.color {
+        li {
+            &.selected,
+            &:hover {
+                a {
+                    border: $product-attr-swatch-active-color-border;
+                }
+            }
+        }
+    }
+}
+.quickview {
+    .ui-dialog-titlebar {
+        border-bottom: 0;
+    }
 }

@@ -10,6 +10,9 @@
     @include respond(large-up) {
         font-size: $h1-font-size;
     }
+    @include respond(desktop-down) {
+        font-weight: $h1-font-weight !important;
+    }
 }
 @mixin h2 {
     font-family: $h2-font;
@@ -23,6 +26,9 @@
     @include respond(large-up) {
         font-size: $h2-font-size;
     }
+    @include respond(desktop-down) {
+        font-weight: $h2-font-weight !important;
+    }
 }
 @mixin h3 {
     font-family: $h3-font;
@@ -33,6 +39,9 @@
     line-height: $h3-line-height;
     text-transform: $h3-text-transform;
     color: $h3-color;
+    @include respond(desktop-down) {
+        font-weight: $h3-font-weight !important;
+    }
 }
 @mixin h4 {
     font-family: $h4-font;
@@ -43,6 +52,9 @@
     line-height: $h4-line-height;
     text-transform: $h4-text-transform;
     color: $h4-color;
+    @include respond(desktop-down) {
+        font-weight: $h4-font-weight !important;
+    }
 }
 @mixin h5 {
     font-family: $h5-font;
@@ -53,6 +65,9 @@
     line-height: $h5-line-height;
     text-transform: $h5-text-transform;
     color: $h5-color;
+    @include respond(desktop-down) {
+        font-weight: $h5-font-weight !important;
+    }
 }
 @mixin h6 {
     font-family: $h6-font;
@@ -63,6 +78,9 @@
     line-height: $h6-line-height;
     text-transform: $h6-text-transform;
     color: $h6-color;
+    @include respond(desktop-down) {
+        font-weight: $h6-font-weight !important;
+    }
 }
 
 @mixin color {
@@ -489,7 +507,7 @@
     @include line-height($tooltip-line-height);
     font-weight: $tooltip-font-weight;
     font-family: $tooltip-font-family;
-    color: $tooltip-color;
+    color: $tooltip-color !important;
     text-decoration: $tooltip-text-decoration;
     &:hover {
         color: $tooltip-hover-color;
@@ -557,6 +575,26 @@
         color: $geoip-footer-text-link-color;
         text-decoration: $geoip-footer-text-link-hover-decoration;
     }
+}
+@mixin new-label {
+    font-size: $new-labels-font-size;
+    font-family: $new-labels-font-family;
+    font-weight: $new-labels-font-weight;
+    font-style: $new-labels-font-style;
+    color: $new-labels-font-color;
+    background: $new-labels-background;
+    border-radius: $new-labels-border-radius;
+    padding: $new-labels-padding;
+}
+@mixin new-label-big {
+    font-size: $new-big-labels-font-size;
+    padding: $new-big-labels-padding;
+    box-shadow: $new-big-labels-shadow;
+}
+@mixin new-label-swatch {
+    background: $new-labels-background;
+    font-family: $new-labels-font-family;
+    color: $new-labels-font-color;
 }
 
 

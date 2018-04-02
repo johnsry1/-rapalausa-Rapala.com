@@ -206,24 +206,47 @@
         }
     }
 }
+.jcarouselcont {
+    h2 {
+        @include respond(desktop-down) {
+            padding: rem(20px) rem(10px);
+        }
+    }
+    .search-result-items {
+        .grid-tile {
+            width: 25% !important;
+            box-sizing: border-box;
+            @include respond(0, $medium-breakpoint) {
+                width: 50% !important;
+            }
+        }
+    }
+
+}
 
 .horizontal-carousel.owl-carousel {
     margin: 0;
+    box-sizing: border-box;
     padding-bottom: rem(34px);
+    padding-left: rem(20px);
+    padding-right: rem(20px);
+    @include respond(medium-up) {
+        padding-left: rem(40px);
+        padding-right: rem(40px);
+    }
+    @include respond(large-up) {
+        padding-left: rem(50px);
+        padding-right: rem(50px);
+    }
+    @include respond(desktop) {
+        padding-left: rem(45px);
+        padding-right: rem(45px);
+    }
     li {
         margin: 0;
     }
     .owl-stage-outer {
         margin: 0;
-        @include respond(medium-up) {
-            margin: 0 rem(40px);
-        }
-        @include respond(large-up) {
-            margin: 0 rem(50px);
-        }
-        @include respond(desktop) {
-            margin: 0 rem(45px);
-        }
     }
     .product-tile {
         border: $border-secondary;

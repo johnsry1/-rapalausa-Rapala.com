@@ -21,7 +21,12 @@ function show() {
     //app.getView('CustomerService').render('content/customerservice');
     app.getView().render('content/contactus');
 }
-
+/**
+ * Renders the customer service recaptcha.
+ */
+function recaptcha() {
+    app.getView('CustomerService').render('recaptcha/module');
+}
 /**
  * Renders the left hand navigation.
  */
@@ -103,6 +108,22 @@ function submit() {
  */
 function contactUsStart() {
 	
+    //read recaptcha response from page
+    var RECAPTCHA_ENABLED = dw.system.Site.getCurrent().getCustomPreferenceValue("reCaptchaEnabled");
+    if (RECAPTCHA_ENABLED) {
+        var recaptchaResponse = request.httpParameterMap.get('g-recaptcha-response').getStringValue();
+        var ip = request.getHttpRemoteAddress();
+        
+        //validation recaptcha
+        var RecaptchaCheck = require('*/cartridge/scripts/recaptcha/ReCaptchaCheck.ds').recaptchaHelper(recaptchaResponse, ip);
+        if(!RecaptchaCheck) {
+            var r = require('*/cartridge/scripts/util/Response');
+            r.renderJSON({
+                RecaptchaError: true
+            });
+            return;
+        }
+    }
 	var contactUsForm = app.getForm('contactus');
 	var Email = app.getModel('Email');
 	var emailTo=dw.system.Site.current.preferences.custom.csrRapalaDefaultMailId; 
@@ -168,6 +189,8 @@ function dealerLocator() {
  */
 /** @see module:controllers/CustomerService~show */
 exports.Show = guard.ensure(['get'], show);
+/** @see module:controllers/CustomerService~recaptcha */
+exports.Recaptcha = guard.ensure(['get'], recaptcha);
 /** @see module:controllers/CustomerService~leftNav */
 exports.LeftNav = guard.ensure(['get'], leftNav);
 /** @see module:controllers/CustomerService~contactUs */

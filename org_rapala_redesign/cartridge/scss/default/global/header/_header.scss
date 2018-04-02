@@ -71,17 +71,16 @@ body {
         .magnifier-icon {
             @include respond(desktop-down) {
                 background: none;
-                border: 1px solid $black;
-                border-radius: 50%;
+                border: 0;
                 width: rem(36px);
                 height: rem(36px);
                 text-align: center;
                 text-indent: 0;
-                margin-left: rem(20px);
+                margin-left: rem(10px);
                 .icon {
-                    width: rem(20px);
-                    height: rem(20px);
-                    margin-top: rem(7px);
+                    width: rem(36px);
+                    height: rem(36px);
+                    margin-top: 0;
                 }
             }
             @include respond(medium-down) {
@@ -89,6 +88,12 @@ body {
             }
             span {
                 display: none;
+            }
+            &.js-magnifier-icon-active {
+                background: url('../images/svg-icons/search-icon-active.svg');
+                .icon {
+                    display: none;
+                }
             }
         }
         div.logo {
@@ -272,7 +277,7 @@ body {
                         display: block;
                         width: rem(36px);
                         height: rem(36px);
-                        border: 1px solid $black;
+                        border: 0;
                         border-radius: 50%;
                         text-align: center;
                         text-indent: 0;
@@ -283,7 +288,6 @@ body {
                             display: none;
                         }
                         .icon {
-                            margin-top: rem(7px);
                             @include respond(desktop) {
                                 display: none;
                             }
@@ -307,7 +311,7 @@ body {
                             @include respond(desktop-down) {
                                 width: rem(36px);
                                 height: rem(36px);
-                                border: 1px solid $black;
+                                border: 0;
                                 border-radius: 50%;
                                 text-align: center;
                                 text-indent: 0;
@@ -322,7 +326,6 @@ body {
                                 }
                             }
                             .icon {
-                                margin-top: rem(7px);
                                 @include respond(desktop) {
                                     display: none;
                                 }
@@ -365,13 +368,13 @@ body {
                     height: auto;
                     box-sizing: border-box;
                     @include respond(desktop-down) {
-                        padding-left: rem(20px) !important;
-                        padding-right: rem(20px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                         margin-bottom: rem(10px) !important;
                     }
                     @include respond(medium-down) {
-                        padding-left: rem(10px) !important;
-                        padding-right: rem(10px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                     }
                     p {
                         margin: 0;
@@ -397,9 +400,26 @@ body {
     form.simplesearch {
         input.simplesearchinput {
             @include form-input;
+            color: $search-input-color;
             @include respond(desktop-down) {
                 height: rem($mobile-search-height);
                 margin: 0;
+                color: $search-input-mobile-color;
+            }
+            &:focus {
+                color: $search-input-color;
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
+            }
+            &::placeholder {
+                color: $search-input-color;
+                @include respond(desktop) {
+                    opacity: 1;
+                }
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
             }
         }
         button.search-button {
@@ -461,4 +481,16 @@ body {
     width: 100%;
     text-align: left;
     margin-top: 0;
+}
+.dialogBanner {
+    .ui-icon-closethick {
+        background-image: url("../images/close-button.png") !important;
+        background-position: 0 0 !important;
+        &:hover {
+            background-position: 0 -34px !important;
+        }
+    }
+    .formactions {
+        text-align: center;
+    }
 }

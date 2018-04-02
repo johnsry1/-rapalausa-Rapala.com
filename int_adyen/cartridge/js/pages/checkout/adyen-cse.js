@@ -3,6 +3,7 @@
 
 var util = require('../../util'),
     progress = require('../../progress'),
+    validator = require('../../validator'),
     ajax = require('../../ajax');
 
 function pad ( number ) {
@@ -125,19 +126,26 @@ function initializeBillingEvents() {
  * @description Initializes Adyen CSE My Account events
  */
 function initializeAccountEvents() {
+    $('#CreditCardForm').on('submit', function (e) {
+        var $form = $(this);
+        $form.validate();
+    });
     $('#add-card-submit').on('click', function (e) {
     		// TODO: fix this to use IDs and we need to change template to not use name attributes
-        e.preventDefault();
+        var $form = $(this).parents('#CreditCardForm');
+        if($form.valid()) {
+            e.preventDefault();
+        }
         var $creditCard = $('#CreditCardForm'),
         		encryptedData = $('#dwfrm_paymentinstruments_creditcards_newcreditcard_encrypteddata'),
         		encryptedDataValue,
         		options = {};
-      
+
         var cardData = getCardData(false);
-    
+
     		var cseInstance = adyen.createEncryption(options);
     		encryptedDataValue = cseInstance.encrypt(cardData);
-           
+
         if (encryptedDataValue === false) {
         		$('.form-data-error').html(Resources.ADYEN_CC_VALIDATE);
         } else {

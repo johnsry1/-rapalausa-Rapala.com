@@ -13,7 +13,7 @@ module.exports = function () {
     if (SitePreferences.COOKIE_HINT === true && document.cookie.indexOf('dw_cookies_accepted') < 0) {
         // check for privacy policy page
         if ($('.privacy-policy').length === 0) {
-            var $container = $('.cookie-footer');
+            var $container = $('.cookie-footer-one');
             var $close = $('<a href="#" id="cookie-close" class="cookie-close"></a>');
             $container.append('<div class="cookie-footer-inner"></div>');
             $container.append($close);

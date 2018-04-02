@@ -109,7 +109,7 @@
 
 					<iscomment>Render ALLOTMENT</iscomment>
 					<isloop items="${Order.getPaymentInstruments('ALLOTMENT')}" var="paymentInstr" status="piloopstate">
-						<div class="paymenttype"><div class="label"><isprint value="${Resource.msg('orderdetails.paymentmethod.onlyallotment','order',null)}"/></div></div>
+						<div class="paymenttype"><div class="label paymenttype"><isprint value="${Resource.msg('orderdetails.paymentmethod.onlyallotment','order',null)}"/></div></div>
 						<div class="paymentamount">
 							<span class="label"><isprint value="${Resource.msg('global.amount','locale',null)}"/>: </span>
 							<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
@@ -252,6 +252,7 @@
 									<isset name="giftCertTotal" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 									<isset name="allotmentAmt" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 									<isset name="gcPaymentInstrs" value="${Order.getGiftCertificatePaymentInstruments()}" scope="page"/>
+									<isset name="creditapplied" value="false" scope="page"/>
 									<isloop items="${gcPaymentInstrs}" var="gcPI">
 										<isset name="giftCertTotal" value="${giftCertTotal.add( gcPI.getPaymentTransaction().getAmount() )}" scope="page"/>
 									</isloop>
@@ -261,6 +262,9 @@
 											<isset name="allotmentAmt" value="${allotmentAmt.add(allPI.getPaymentTransaction().getAmount())}" scope="page"/>
 										</isif>
 									</isloop>
+									<isif condition="${allotmentAmt>0 || giftCertTotal>0}">
+										<isset name="creditapplied" value="true" scope="page"/>
+									</isif>
 									<isset name="ordertotalsaving" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 									<isif condition="${pdict.prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}">
 										<isset name="ordertotalsaving" value="${ordertotalsaving.add(pdict.prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)))}" scope="page"/>
@@ -269,15 +273,41 @@
 										<isset name="ordertotalsaving" value="${ordertotalsaving.add(shippingDiscount)}" scope="page"/>
 									</isif>
 									<iscomment>order total</iscomment>
+
+
+
+									<isif condition="${Order.totalGrossPrice.available}">
+										<isset name="orderTotalValue" value="${Order.totalGrossPrice.subtract(giftCertTotal)}" scope="page"/>
+									<iselse/>
+										<isset name="orderTotalValue" value="${Order.getAdjustedMerchandizeTotalPrice(true).subtract(giftCertTotal)}" scope="page"/>
+									</isif>
 									<div class="custom-table-row ordertotal">
-										 <isif condition="${Order.totalGrossPrice.available}">
-										 	<isset name="orderTotalValue" value="${Order.totalGrossPrice}" scope="page"/>
-										<iselse/>
-											<isset name="orderTotalValue" value="${Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}" scope="page"/>
-										</isif>
 										<div class="custom-table-data first"><span class="label-total"><isprint value="${Resource.msg('global.ordertotal','locale',null)}"/></span></div>
 										<div class="custom-table-data last"><span class="value"><isprint value="${orderTotalValue}"/></span></div>
 									</div>
+									<iscomment>Allotment</iscomment>
+									<isif condition="${allotmentAmt > 0}">
+										<div class="custom-table-data custom-table-row  allotment">
+											<div class="custom-table-data first"><span class="label"><isprint value="${Resource.msg('ordersummary.allotmentnew','order',null)}"/></span></div>
+											<div class="custom-table-data last"><span class="value">- <isprint value="${allotmentAmt}"/></span></div>
+										</div>
+									</isif>
+									<isif condition="${allotmentAmt > 0}">
+										<div class="custom-table-row ordertotal <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
+											<isif condition="${Order.totalGrossPrice.available}">
+											 	<isif condition="${allotmentAmt > 0}">
+													<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+												</isif>
+											<iselse/>
+												<isif condition="${allotmentAmt > 0}">
+													<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+												</isif>
+											</isif>
+											<div class="custom-table-data first"><span class="label-total <isif condition="${creditapplied == 'true'}">label-total-remaining</isif>"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></div>
+											<div class="custom-table-data last"><span class="value"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></div>
+										</div>
+									</isif>
+
 									<isif condition="${ordertotalsaving > 0}">
 										<div class="custom-table-row ordertotalsaving discount">
 											<td colspan="2"><span class="label"><isprint value="${Resource.msg('ordersummary.totalsavings','order',null)}"/> <isprint value="${ordertotalsaving}"/></span></td>
@@ -447,7 +477,7 @@
 												<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 												<div class="price">
 													<div class="discountprice">
-														<div class="standardprice">$<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
+														<div class="standardprice">${session.currency.getSymbol()} <isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
 													</div>
 													</div>
 												</isif>
@@ -502,7 +532,7 @@
 										<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 										<div class="price">
 											<div class="discountprice">
-												<div class="standardprice">${session.currency.getSymbol()}<isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
+												<div class="standardprice">${session.currency.getSymbol()} <isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
 											</div>
 											</div>
 										</isif>

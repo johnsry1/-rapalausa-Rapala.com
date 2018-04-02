@@ -1106,7 +1106,7 @@
                         }
                         .results-hits {
                             position: absolute;
-                            top: 0;
+                            top: 7px;
                             height: 16px;
                             width: 100%;
                             text-align: center;
@@ -6354,7 +6354,7 @@
                 .gridpage {
                     .product-listing {
                         background: none !important;
-                        width: 255px !important;
+                        width: 100% !important;
                         margin: 0 auto 40px !important;
                         float: none !important;
                     }
@@ -9566,7 +9566,7 @@
                             float: none;
                             height: 40px;
                             span {
-                                width: 40%;
+                                width: 100%;
                                 height: auto;
                                 background-position: 0 6px;
                             }
@@ -10898,7 +10898,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        max-width: 635px;
+                        max-width: 100%;
                         width: 100%;
                         margin: 30px auto 0;
                         float: none;
@@ -11154,7 +11154,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        width: 255px;
+                        width: 100%;
                         margin: 0 auto 40px;
                         float: none;
                         .owl-carousel {
@@ -11890,6 +11890,45 @@
     .checkout-billing {
         .formfield {
             clear: both;
+        }
+    }
+}
+.categorymenusnew {
+    .category-top-level {
+        .category-top-level2 {
+            li.active > a {
+                color: $clp-refinement-category-active-color;
+                text-decoration: $clp-refinement-category-active-text-decoration;
+                span {
+                    color: $clp-refinement-category-active-color;
+                }
+            }
+
+        }
+    }
+}
+.new-colors-snipe,
+.new-stamp,
+.new-sizes-snipe {
+    @include new-label();
+    margin: 0 3px 3px 0 !important;
+    display: inline-block;
+    line-height: $new-labels-line-height;
+    height: $new-labels-height;
+}
+.new-stamp-big {
+    @include new-label();
+    @include new-label-big();
+    margin-right: 0;
+}
+.variationattributes {
+    .color {
+        ul {
+            li {
+                a span.corner-ribbon {
+                    @include new-label-swatch();
+                }
+            }
         }
     }
 }

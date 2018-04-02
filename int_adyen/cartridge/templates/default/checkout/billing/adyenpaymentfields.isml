@@ -4,25 +4,23 @@
 			id="dwfrm_billing_paymentMethods_creditCard_selectedCardID"
 			name="dwfrm_billing_paymentMethods_creditCard_selectedCardID"
 			value="">
-<div class="form-row form-row-type-text required" aria-required="true">
-	<label for="dwfrm_billing_paymentMethods_creditCard_owner" class="label">
+<div class="form-row form-row-type-text required" data-required-text="Please enter your Name on Card" aria-required="true" >
+	<label for="creditCard_owner" class="label">
 		<span class="labeltext">${Resource.msg('creditcard.ownerlabel', 'forms', null)}</span>
 		<span class="requiredindicator">*</span>
 	</label>
 	<div class="field-wrapper">
-		<input class="input-text  required" type="text" id="creditCard_owner"
-			value="" aria-required="true" aria-invalid="true"
-			aria-describedby="dwfrm_billing_paymentMethods_creditCard_owner-error">
+		<input class="textinput required" type="text" id="creditCard_owner" maxlength="200" name="creditCard_owner" value="" aria-required="true" 			>
 	</div>
 	<div class="form-caption"></div>
 </div>
-<div class="form-row form-row-type-text  required" aria-required="true">
+<div class="form-row form-row-type-text  required" data-required-text="Please enter your Number"  aria-required="true">
 	<label for="creditCard_number" class="label">
 		<span class="labeltext">Number</span>
 		<span class="requiredindicator">*</span>
 	</label>
 	<div class="field-wrapper">
-		<input class="input-text creditCard-number required" type="text" id="creditCard_number" maxlength="16"
+		<input class="textinput creditCard-number required" type="text" id="creditCard_number" name="creditCard_number" maxlength="16"
 			value="" aria-required="true">
 	</div>
 	<div class="form-caption">Example: 4111111111111111</div>
@@ -82,13 +80,13 @@
 	</div>
 </div>
 
-<div class="form-row form-row-type-text cvn required" aria-required="true">
+<div class="form-row form-row-type-text cvn required" data-required-text="Please enter your Security Code"  aria-required="true">
 	<label for="creditCard_cvn" class="label">
 		<span class="labeltext">${Resource.msg('creditcard.cvnlabel', 'forms', null)}</span>
 		<span class="requiredindicator">*</span>
 	</label>
 	<div class="field-wrapper">
-		<input class="input-text creditcard_cvn  required" type="text" id="creditCard_cvn"
+		<input class="textinput creditcard_cvn  required" type="text" id="creditCard_cvn" name="creditCard_cvn"
 			value="" aria-required="true">
 	</div>
 	<div class="form-caption"></div>
