@@ -5,7 +5,11 @@
  * events that are needed are initialized.
  */
 var events = {
-    account: function () {},
+    account: function () {
+        $('[name$="_profile_confirm"]').on('click', function() {
+            signUpEvent('Account Sign Up', $(this), '_customer_addtoemaillist');
+        });
+    },
     cart: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val()); 
@@ -14,6 +18,9 @@ var events = {
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
+        });
+        $('[name$="_billing_save"]').on('click', function(){
+            signUpEvent('Billing Sign Up', $(this), '_billingAddress_addToEmailList');
         });
     },
     compare: function () {},
@@ -46,43 +53,37 @@ var events = {
         
         $(document).ready(function() {
             $('#footerSubForm button').on('click', function () {
-                var validF = $(this).closest('form').valid();
-                if (validF) {
-                    signUpEvent('Footer Sign Up');
+                if (SitePreferences.GTM_ENABLED) {
+                    var validF = $(this).closest('form').valid();
+                    if (validF) {
+                        dataLayer.push({
+                            'event': 'emailSignUp',
+                            'eventCategory': 'Secondary Goals',
+                            'eventAction': 'Email Sign-up',
+                            'eventLabel': 'Footer Sign Up'
+                        });
+                    }
                 }
             });
 
             $('.header-signup button').on('click', function() {
-                var validF = $(this).closest('form').valid();
-                var $signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]')[0];
-                if (validF && $signUpElem != undefined && $signUpElem.checked) {
-                    signUpEvent('Header Sign Up');
-                }
+                signUpEvent('Header Sign Up', $(this), '_customer_addtoemaillist');
             })
         })
     }
 };
 
-/*
- *
-            var validF = $(this).closest('form').valid();
-            var signUpElem = $(this).closest('form').find('[name$="_customer_addtoemaillist"]');
-            if (validF && signUpElem.checked) {
-                alert('Header Sign Up');
-                //pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
-                dataLayer.push({
-                    'event': 'emailSignUp',
-                    'eventCategory': 'Secondary Goals',
-                    'eventAction': 'Email Sign-up',
-                    'eventLabel': 'Header Sign Up'
-                });
-            }
-
-
+/**
+ * Push to DataLayer sign up event info
  */
-function signUpEvent(location) {
-    alert(location);
-    pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
+function signUpEvent(location, event, signUpCheckbox) {
+    if (SitePreferences.GTM_ENABLED) {
+        var validF = $(event).closest('form').valid();
+        var $signUpElem = $(event).closest('form').find('[name$="' + signUpCheckbox + '"]')[0];
+        if (validF && $signUpElem != undefined && $signUpElem.checked) {
+            pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
+        }
+    }
 }
 
 /**
