@@ -764,12 +764,10 @@ var product = function (response) {
                          */
                         var zoomimageurl = (thisVal.images.original.length > 0) ? thisVal.images.original[0].url : '';
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[i].url);
-                        jQuery('.MagicZoom').attr('href', zoomimageurl);
-                        $('body').find('.MagicZoom img').attr('src', zoomimageurl);
-                        MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
+                        jQuery('.main-image').attr('href', zoomimageurl);
+                        $('body').find('.main-image img').attr('src', zoomimageurl);
                         // jQuery(that.containerId+" .productimage").html("").append(jQuery("<img/>").attr("src", thisVal.images.large[0].url).attr("alt", thisVal.images.large[0].alt).attr("title", thisVal.images.large[0].title));
                     }
-
                     // make sure to show number of images based on the smallest of large or small as these have to have 1-1 correspondence.
                     var noOfImages = this.images.large.length >= this.images.small.length ? this.images.small.length : this.images.large.length;
 
@@ -796,8 +794,8 @@ var product = function (response) {
                                     $(this).closest('.owl-item').find('a.alternate-image').addClass('selected');
                                     var zoomimageurl = $(this).closest('.alternate-image').data('image');
                                     //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[imageInd].url);
-                                    $('body').find('.MagicZoom').attr('href', zoomimageurl);
-                                    $('body').find('.MagicZoom img').attr('src', zoomimageurl);
+                                    $('body').find('.main-image').attr('href', zoomimageurl);
+                                    $('body').find('.main-image img').attr('src', zoomimageurl);
                                     MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
                                     MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
                                     //$("body").find('.product-image').trigger("click");
@@ -1210,8 +1208,8 @@ var product = function (response) {
                     // load the fully qualified variation image
                     if (imageUrl != null) {
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',imageUrl);
-                        jQuery('.MagicZoom').attr('href', zoomImageUrl);
-                        $('body').find('.MagicZoom img').attr('src', zoomImageUrl);
+                        jQuery('.main-image ').attr('href', zoomImageUrl);
+                        $('body').find('.main-image img').attr('src', zoomImageUrl);
                         MagicZoom.update('product-image', zoomImageUrl, zoomImageUrl);
                     }
 
