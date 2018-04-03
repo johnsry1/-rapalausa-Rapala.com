@@ -178,10 +178,22 @@ body {
                 }
             }
         }
-        div.logo a {
-            width: rem(100px);
-            height: rem(33px);
-            padding-right: 0;
+        div.logo {
+            a {
+                width: auto;
+                height: auto;
+                padding-right: 0;
+                background: none !important;
+
+                }
+            &.rapala {
+                margin-top: rem(13px);
+                a {
+                    width: auto;
+                    height: auto;
+
+                }
+            }
         }
         .row.column1 {
             @include respond(desktop) {
@@ -347,6 +359,11 @@ body {
                             padding-right: rem(15px);
                         }
                     }
+                }
+            }
+            #topcell {
+                @include respond(desktop-down) {
+                    height: auto;
                 }
             }
         }
