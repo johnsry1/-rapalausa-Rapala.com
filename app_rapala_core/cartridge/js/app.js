@@ -493,15 +493,6 @@ function initializeEvents() {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
-            if (SitePreferences.GTM_ENABLED) {
-                var obj = {
-                    'event': 'emailSignUp',
-                    'event_info': {
-                        'label' : 'footer'
-                    } 
-                };
-                dataLayer.push(obj);
-            }
             // set the action
             $('<input/>').attr({
                 name: $form.attr('action'),
