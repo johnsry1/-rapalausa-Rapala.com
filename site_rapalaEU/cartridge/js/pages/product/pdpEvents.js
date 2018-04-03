@@ -222,17 +222,44 @@ var product = function (response) {
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
-                // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
-                // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
-                var event = jQuery.Event('AddToCart');
-                event.selectedOptions = thisProduct.selectedOptions;
+                
+                if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {  
+                    var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
 
-                if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
-                    addToCart.add('', thisProduct.selectedOptions, function () {
-                        addToCartBtn.prop('disabled', false);
-                    });
+                    if (model.master || model.variant) {
+                        if (thisProduct.selectedVar != null) {
+                            selectedOptions.pid = thisProduct.selectedVar.id;
+                        } else {
+                            return false; // do not allow master product to be added to gift registry/wishlist
+                        }
+                    } else {
+                        selectedOptions.pid = thisProduct.pid;
+                    }
+
+                    var tempUrl = this.href;
+                    tempUrl = Urls.wishlistadd;
+
+                    if (!(tempUrl.indexOf('?') > 0)) {
+                        tempUrl = tempUrl + '?';
+                    } else {
+                        tempUrl = tempUrl + '&';
+                    }
+                    // serialize the name/value into url query string and append it to the url, make request
+                    //var url = tempUrl + jQuery.param(selectedOptions);
+                    window.location = tempUrl + jQuery.param(selectedOptions);
                 } else {
-                    jQuery(document).trigger(event)
+                    // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
+                    // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
+                    var event = jQuery.Event('AddToCart');
+                    event.selectedOptions = thisProduct.selectedOptions;
+    
+                    if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
+                        addToCart.add('', thisProduct.selectedOptions, function () {
+                            addToCartBtn.prop('disabled', false);
+                        });
+                    } else {
+                        jQuery(document).trigger(event)
+                    }
                 }
             }
             return false;
