@@ -335,7 +335,7 @@ var StoreLocator = {
             }
 
             var storetext = (storeCount > 1) ? Resources.STORE_RESULTS_MULT : Resources.STORE_RESULTS_ONE;
-            storetext = storetext.toString().replace('{storeCount}', storeCount, 'g').replace('{milesAround}', milesAround, 'g').replace('{addressMessage}', addressMessage, 'g');
+            storetext = storetext.toString().replace('{storeCount}', storeCount, 'g').replace('{distanceUnit}', SitePreferences.STORELOCATOR_DISTANCE_UNIT, 'g').replace('{milesAround}', milesAround, 'g').replace('{addressMessage}', addressMessage, 'g');
             //var storetext = (storeCount > 1) ? 'There are ' + storeCount + ' stores within ' + milesAround + ' miles of ' + addressMessage : 'There is ' + storeCount + ' store within ' + milesAround + ' miles of ' + addressMessage;
 
             var titleString = '<div class="stores-header">' + storetext + '</div>';
