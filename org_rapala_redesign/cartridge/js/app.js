@@ -236,38 +236,51 @@ function initializeEvents() {
             }
         }
     });
+    /* should be set before slider init */
+    $('.horizontal-carousel').each(function() {
+        $(this).on('initialized.owl.carousel changed.owl.carousel refreshed.owl.carousel', function(event) {
+            if (!event.namespace) return;
+            var carousel = event.relatedTarget,
+                element = event.target,
+                current = carousel.current();
+            $('.owl-next', element).toggleClass('disabled', current === carousel.maximum());
+            $('.owl-prev', element).toggleClass('disabled', current === carousel.minimum());
 
-    var owl = $('#horizontal-carousel').owlCarousel({
-        items: 4,
-        slideBy: 4,
-        nav: true,
-        loop: false,
-        dots: true,
-        responsive: {
-            0: {
-                items: 2,
-                slideBy: 2,
-                nav: false
-            },
-            567: {
-                items: 3,
-                slideBy: 3,
-                nav: false
-            },
-            768: {
-                items: 4,
-                slideBy: 4,
-                nav: true
+        });
+    });
+    $('.horizontal-carousel').each(function() {
+        $(this).owlCarousel({
+            items: 4,
+            slideBy: 4,
+            nav: true,
+            loop: false,
+            dots: true,
+            responsive: {
+                0: {
+                    items: 2,
+                    slideBy: 2,
+                    nav: false
+                },
+                567: {
+                    items: 3,
+                    slideBy: 3,
+                    nav: false
+                },
+                768: {
+                    items: 4,
+                    slideBy: 4,
+                    nav: true
+                }
             }
-        }
+        });
     });
-
-    owl.on('changed.owl.carousel', function (event) {
-        if (event.item.count - event.page.size == event.item.index)
-            $(event.target).find('.owl-dots div:last')
-                .addClass('active').siblings().removeClass('active');
+    $('.horizontal-carousel').each(function() {
+        $(this).on('changed.owl.carousel', function (event) {
+            if (event.item.count - event.page.size == event.item.index)
+                $(event.target).find('.owl-dots div:last')
+                    .addClass('active').siblings().removeClass('active');
+        });
     });
-
     $('.domainswitch').hover(function () {
         $(this).show();
     }, function () {
@@ -506,15 +519,6 @@ function initializeEvents() {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
-            if (SitePreferences.GTM_ENABLED) {
-                var obj = {
-                    'event': 'emailSignUp',
-                    'event_info': {
-                        'label' : 'footer'
-                    }
-                };
-                dataLayer.push(obj);
-            }
             // set the action
             $('<input/>').attr({
                 name: $form.attr('action'),
@@ -553,6 +557,9 @@ function initializeEvents() {
         $(this).removeClass('errorclient');
         $(this).parent('.select-style').removeClass('select-style-error');
     });
+    if ($('.remove-bottom-button').length > 0) {
+        $('.style-cservice').find('.content-back-button').remove();
+    }
 }
 /**
  * @private
