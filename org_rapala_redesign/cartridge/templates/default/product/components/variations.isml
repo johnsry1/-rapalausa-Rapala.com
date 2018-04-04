@@ -1,0 +1,173 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<iscomment>
+	Desc:
+		Creates the variation section if product is a variation or a master,
+		otherwise
+
+	Parameter:
+		Product - the product to use
+
+	Options:
+		none
+</iscomment>
+
+<isif condition="${pdict.Product.isVariant() || pdict.Product.isMaster()}">
+	<isif condition="${pdict.CurrentVariationModel != null}">
+		<isset name="PVM" value="${pdict.CurrentVariationModel}" scope="page"/>
+	<iselse>
+		<isset name="PVM" value="${pdict.Product.variationModel}" scope="page"/>
+	</isif>
+
+	<div class="variationattributes">
+		<isif condition="${empty(dw.system.Site.getCurrent().getCustomPreferenceValue('pdppicktextboxvars'))}">
+			<isset name="pdpPickTextboxVars" value="${new Array('color','size','testLb')}" scope="page"/>
+		<iselse/>
+			<isset name="pdpPickTextboxVars" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('pdppicktextboxvars')}" scope="page"/>
+		</isif>
+		<iscomment>
+			Filter out variation attribute values with no orderable variants.
+			The "clean" ProductVariationModel of the master without any selected attribute values is used to filter the variants.
+			Otherwise hasOrderableVariants() would use currently selected values resulting in a too narrow selection of variants.
+		</iscomment>
+		<isset name="cleanPVM" value="${(pdict.Product.variant ? pdict.Product.masterProduct.variationModel : pdict.Product.variationModel)}" scope="page"/>
+		<isloop items="${PVM.productVariationAttributes}" var="VA" status="loopstatus0">
+			<isset name="VAVALS" value="${PVM.getAllValues(VA)}" scope="page"/>
+			<isset name="Valength" value="${VAVALS.length}" scope="page"/>
+			<isset name="vaId" value="${VA.getAttributeID()}" scope="page"/>
+			<iscomment>Making sure the learnMore content asset exists</iscomment>
+			<isset name="learnMoreAssetId" value=${"learnMore-" + vaId} scope="page"/>
+			<isset name="learnMoreAssetExists" value=${false} scope="page"/>
+
+			<isif condition="${learnMoreAssetId != null}">
+				<isset name="learnMoreContent" value="${dw.content.ContentMgr.getContent(learnMoreAssetId)}" scope="page"/>
+					<isif condition="${null != learnMoreContent}">
+						<isset name="learnMoreAssetExists" value=${true} scope="page"/>
+					</isif>
+			</isif>
+
+			<isif condition="${pdpPickTextboxVars.indexOf(vaId) > -1}">
+				<iscomment>custom ui i.e. divs controlled via css</iscomment>
+				<div class="swatches ${VA.getID()}">
+				<a class="filter"><span><isprint value="${loopstatus0.index + 1}" style="INTEGER"/></span>.&nbsp;<isprint value="${VA.displayName}"/>
+					<span class="value selectedvarval"></span>
+				</a>
+				<div class="optionwrapper">
+					<div class="cta"><iscomment><span><isprint value="${StringUtils.format(Resource.msg('product.selectabelow','product',null),VA.displayName)}"/></span></iscomment>
+						<isif condition="${learnMoreAssetExists}">
+							<br/><span class="learnmore"><isprint value="${Resource.msg('product.notsure','product',null)}"/>&nbsp;<a href="${URLUtils.url('Page-Include','cid', learnMoreAssetId)}"><isprint value="${Resource.msg('product.learnmore','product',null)}"/></a></span>
+						</isif>
+					</div>
+					<ul class="swatchesdisplay">
+						<isloop items="${VAVALS}" var="VV">
+							<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
+							<isif condition="${VV.getImage('hi-res')}">
+								<isset name="hiresURL" value="${VV.getImage('hi-res').getURL()}" scope="page"/>
+							<iselse/>
+								<isset name="hiresURL" value="${''}" scope="page"/>
+							</isif>
+						    <iscomment>set an additional class for 'new' colors</iscomment>
+						    <isif condition="${newColors.contains(VV.displayValue) || newSizes.contains(VV.displayValue) || newTestPounds.contains(VV.displayValue) || newPak.contains(VV.ID)}">
+						       <isset name="newSpanText" value="New" scope="page"/>
+	                           <isset name="newTitle" value="" scope="page"/>
+						    <iselse>
+	                           <isset name="newSpanText" value="" scope="page"/>
+	                           <isset name="newTitle" value="" scope="page"/>
+						    </isif>
+
+							<li class='<isif condition="${Valength == 1 || PVM.isSelectedAttributeValue(VA, VV)}">selected<iselse/>emptyswatch</isif>'>
+								<isif condition="${VV.displayValue != null}">
+									<isset name="anchorTitle" value="${VV.displayValue + newTitle}" scope="page"/>
+									<isset name="display" value="${VV.displayValue}" scope="page"/>
+								<iselse/>
+									<isset name="anchorTitle" value="${VV.value + newTitle}" scope="page"/>
+									<isset name="display" value="${VV.value}" scope="page"/>
+								</isif>
+
+								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+									<isif condition="${newColors.contains(VV.displayValue)}">
+										<span class="new corner-ribbon">New</span>
+									</isif>
+									<isprint value="${display}"/>
+									<span class='outofstockpdp'><isprint value="${newSpanText}" encoding="off"/></span>
+								</a>
+	                    	</li>
+						</isloop>
+					</ul>
+					<iscomment>
+					<div class="prev-next">
+						<isif condition="${!loopstatus0.last}">
+							<isif condition="${!loopstatus0.first}">
+								<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}">${Resource.msg('global.previous','locale',null)}</a>
+							</isif>
+						<iselse/>
+							<isif condition="${!loopstatus0.first}">
+								<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}">${Resource.msg('global.previous','locale',null)}</a>
+							</isif>
+						</isif>
+					</div></iscomment>
+				</div>
+			<iselse>
+				<iscomment>default ui i.e. dropdown</iscomment>
+				<div class="variantdropdown">
+					<a class="filter"><span><isprint value="${loopstatus0.index + 1}" style="INTEGER"/></span>.&nbsp;<isprint value="${VA.displayName}"/>
+						<span class="value selectedvarval"></span>
+					</a>
+					<div class="optionwrapper">
+						<div class="cta">
+							<iscomment><span><isprint value="${StringUtils.format(Resource.msg('product.selectabelow','product',null),VA.displayName)}"/></span></iscomment>
+							<isif condition="${learnMoreAssetExists}">
+								<br/><span class="learnmore"><isprint value="${Resource.msg('product.notsure','product',null)}"/>&nbsp;<a href="${URLUtils.url('Page-Include','cid', learnMoreAssetId)}"><isprint value="${Resource.msg('product.learnmore','product',null)}"/></a></span>
+							</isif>
+						</div>
+						<select>
+							<isloop items="${VAVALS}" var="VV">
+								<isif condition="${Valength > 0}">
+									<option value="">
+										<isprint value="${Resource.msg('global.select','locale',null)}"/> <isprint value="${VA.displayName}"/>
+									</option>
+								</isif>
+								<isif condition="${newColors.contains(VV.displayValue) || newSizes.contains(VV.displayValue) || newTestPounds.contains(VV.displayValue) || newPak.contains(VV.ID)} ">
+							  		<isif condition="${newPak.contains(VV.ID)}">
+							  			<isset name="newString" value="- New Pak Size" scope="page"/>
+							  		<iselse/>
+							  			<isset name="newString" value="- NEW" scope="page"/>
+							  		</isif>
+							    <iselse>
+		                           <isset name="newString" value="" scope="page"/>
+							    </isif>
+									<isif condition="${PVM.isSelectedAttributeValue(VA,VV)}">
+										<isset name="selected" value="${'selected=\'selected\''}" scope="page"/>
+									<iselse/>
+										<isset name="selected" value="${''}" scope="page"/>
+									</isif>
+									<isif condition="${VV.displayValue != null}">
+										<option class="paks" value="${VV.displayValue}" ${selected}><isprint value="${VV.displayValue}"/>&nbsp;<isprint value="${newString}"/></option>
+									<iselse>
+										<option class="paks" value="${VV.value}" ${selected}><isprint value="${VV.value}"/>&nbsp;<isprint value="${newString}"/></option>
+									</isif>
+							</isloop>
+						</select>
+						<span class="hidden"><isprint value="${vaId}"/></span>
+						<iscomment>
+						<div class="prev-next">
+							<isif condition="${!loopstatus0.last}">
+								<isif condition="${!loopstatus0.first}">
+									<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}"><isprint value="${Resource.msg('global.previous','locale',null)}"/></a>
+								</isif>
+							<iselse/>
+								<isif condition="${!loopstatus0.first}">
+									<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}"><isprint value="${Resource.msg('global.previous','locale',null)}"/></a>
+								</isif>
+							</isif>
+						</div></iscomment>
+						<div class="clear"></div>
+					</div>
+			</isif>
+
+			<div class="clear"><!-- FLOAT CLEAR --></div>
+			</div>
+			<span class="hidden"><isprint value="${vaId}"/></span>
+			<div class="clear"><!-- FLOAT CLEAR --></div>
+		</isloop>
+	</div><!-- END: variationattributes -->
+</isif>
