@@ -73,7 +73,21 @@
 	                           <isset name="newSpanText" value="" scope="page"/>
 	                           <isset name="newTitle" value="" scope="page"/>
 						    </isif>
-
+							<isscript>
+							    if(VA.getID() == 'color' || VA.getID()=="color lens") {
+                                    var mainTransform : Object = {'scaleWidth': parseInt(Resource.msg('productImage.pdpMain.width', 'product', null))},
+                                        filter = new dw.util.HashMap(),
+						    	        variantImage = ''
+                                    filter.put(VA.getID(), VV.getValue());
+                                    variants = PVM.getVariants(filter);
+                                    if(variants.size() > 0) {
+                                        var variant = variants[0];
+                                    }
+                                    if(!empty(variant.custom.variantImage)) {
+                                        variantImage =  dw.web.URLUtils.imageURL(variant.custom.variantImage, mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                                    }
+                                }
+						    </isscript>
 							<li class='<isif condition="${Valength == 1 || PVM.isSelectedAttributeValue(VA, VV)}">selected<iselse/>emptyswatch</isif>'>
 								<isif condition="${VV.displayValue != null}">
 									<isset name="anchorTitle" value="${VV.displayValue + newTitle}" scope="page"/>
@@ -83,7 +97,7 @@
 									<isset name="display" value="${VV.value}" scope="page"/>
 								</isif>
 
-								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" <isif condition="${!empty(variantImage)}">data-variantImage ="${variantImage}"</isif> data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 									<isif condition="${newColors.contains(VV.displayValue)}">
 										<span class="new corner-ribbon">New</span>
 									</isif>
