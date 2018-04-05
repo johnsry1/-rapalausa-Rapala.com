@@ -7,13 +7,15 @@ var page = require('../page'),
 
 
 function initQuickVieweditButtons() {
+    /*
     var $qvButton = $('#quickviewbutton');
     var $link = $(this);
     $qvButton.attr({
         'href': $link.attr('href'),
         'title': $link.attr('title')
     }).appendTo(this);
-    $qvButton.off('click').on('click', function (e) {
+    */
+    $('.quickview').on('click', function (e) {
         e.preventDefault();
         quickview.show({
             url: $(this).attr('href').split('#')[0], //PREV JIRA PREV-255 :PLP: On Click Quick view navigating to a wrong page when user first changes the swatches. Taking only href.

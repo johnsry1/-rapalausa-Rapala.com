@@ -224,7 +224,7 @@ var product = function (response) {
 
                 
                 if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {  
-                    var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
+                    var selectedOptions = jQuery.extend({'wishlist': true}, {}, thisProduct.selectedOptions);
 
                     if (model.master || model.variant) {
                         if (thisProduct.selectedVar != null) {
