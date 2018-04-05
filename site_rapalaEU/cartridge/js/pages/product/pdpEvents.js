@@ -2033,7 +2033,11 @@ var product = function (response) {
                         if ($(window).width() > 1024) {
                             varJqryObjs.data('data', {id: pdpVarId}).mouseenter(function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
-                                thisProduct.showImages(this.title, colorAttrDef.vals);
+                                if ($(this).attr('data-variantimage')) {
+                                    $('#product-image img').attr('src', $(this).data('variantimage'));
+                                } else {
+                                    thisProduct.showImages(this.title, colorAttrDef.vals);
+                                }
                             }).mouseleave(function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
