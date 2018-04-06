@@ -381,8 +381,7 @@ var util = {
             result = 'UnionPay';
         } else if (cardregex.diners.test(carNo)) {
             result = 'Diners';
-        }
-        else {
+        } else {
             result = 'Error';
         }
         return result;
