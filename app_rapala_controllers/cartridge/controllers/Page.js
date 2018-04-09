@@ -32,6 +32,10 @@ function show() {
     } else {
         var Search = app.getModel('Search');
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
+        var isBlogArticleSearch = Search.isBlogArticleSearch(request.httpParameterMap);
+        if (isBlogArticleSearch) {
+            contentSearchModel.setSortingCondition('creationDate', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
+        }
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
 
@@ -39,6 +43,7 @@ function show() {
 
         app.getView({
             Content: content.object,
+            searchedID: isBlogArticleSearch ? request.httpParameterMap.id.stringValue.toLowerCase() : '',
             ContentSearchResult: contentSearchModel
         }).render(content.object.template || 'content/content/contentpage');
     }

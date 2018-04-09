@@ -1,0 +1,58 @@
+/**
+*
+* This script creates a helper object that stores all constants, utility helper functions to get or
+* pivot off of site preferences based on values
+*
+*/
+
+var dwsystem	= require ("dw/system");
+var dworder		= require ("dw/order");
+var dwvalue		= require ("dw/value");
+var dwcatalog 	= require ("dw/catalog");
+var dwutil		= require ("dw/util");
+
+var Resource = require('dw/web/Resource');
+
+var currentSite = dwsystem.Site.getCurrent();
+
+
+var RapalaHelper : Object = {
+	
+	/**
+	* Return logger instanse for caterogy Rapala
+	*/
+	getLogger : function(loggerName : String) : dwsystem.Logger {
+		if (empty(loggerName)) {
+			return 	dwsystem.Logger.getLogger("Rapala");
+		} else {
+			return 	dwsystem.Logger.getLogger(loggerName, "Rapala");
+		}
+	},
+
+	prepareLogMessage: function (e){
+        var msg = '';
+        msg += '\nfileName: ' + e.fileName + '\n';
+        if ('lineNumber' in e) {
+        	msg += 'lineNumber: ' + e.lineNumber + '\n';	
+        }
+        msg += 'message: ' + e.message + '\n';
+        if ('name' in e) {
+        	msg += 'error name: ' + e.name + '\n';	
+        }
+        if ('causeFullName' in e) {
+        	msg += 'causeFullName: ' + e.causeFullName + '\n';
+        }
+        if ('causeMessage' in e) {
+        	msg += 'causeMessage: ' + e.causeMessage + '\n';
+        }
+        if ('causeName' in e) {
+        	msg += 'causeName: ' + e.causeName + '\n';
+        }
+        if ('stack' in e) {
+        	msg += 'stack: ' + e.stack + '\n';	
+        }
+        return msg;
+     }
+}
+module.exports=RapalaHelper;
+     

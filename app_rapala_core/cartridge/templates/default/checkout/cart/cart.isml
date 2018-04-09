@@ -1,6 +1,10 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="checkout/cart/pt_cart">
 	<isinclude template="util/modules" />
+
+	<iscomment><!-- GTM track checkout steps --></iscomment>
+	<isgtmreportcheckout checkoutstep="${1}" />
+
 	<isinclude template="util/reporting/ReportBasket.isml" />
 
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
@@ -69,7 +73,6 @@
 			</div>
 		</div>
 	<iselse/>
-
 		<iscomment>show checkout and continue shopping buttons above cart</iscomment>
 		<div id="content">
 			<div id="page-background" class="downshift">
@@ -351,7 +354,7 @@
 																	<isset name="itemUrl" value="${empty(lineItem.categoryID) ? URLUtils.https('Product-Show','pid', lineItem.productID) : URLUtils.https('Product-Show','pid', lineItem.productID, 'cgid', lineItem.categoryID)}" scope="page"/>
 																	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 																	<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',lineItem.product, 0,'cart')}" scope="page"/>
-																	  <a href="${itemUrl}"><a href="${itemUrl}"><iscartimages product="${lineItem}" imageurl="${imageObjDesktop}"/></a></a>
+																	  <a href="${itemUrl}"><iscartimages product="${lineItem}" imageurl="${imageObjDesktop}"/></a>
 																	 <iselse/>
 																	 <isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">
 																   			  <a href="${itemUrl}"><img src="${lineItem.product.getImage('small',0).getURL()}"	alt="${lineItem.product.getImage('small',0).alt}" title="${lineItem.product.getImage('small',0).title}" /></a>
@@ -420,9 +423,9 @@
 															<div class="standardprice"><isprint value="${StandardPrice}"/></div>
 															<div class="salesprice">
 															<isif condition="${lineItem.priceAdjustments.length > 0}">
-															$<isprint value="${SalesPrice}"/>
+																${session.currency.symbol}<isprint value="${SalesPrice}"/>
 															<iselse>
-															<isprint value="${SalesPrice}"/>
+																<isprint value="${SalesPrice}"/>
 															</isif>
 															</div>
 														</div>
@@ -462,8 +465,16 @@
 												</div>
 												<div class="item-user-actions">
 													<input type="hidden" class='gaproductid' value="${lineItem.product.ID}"/>
+                                                    <isscript>
+                                                    var gtmProductData = {};
+                                                    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
+                                                    	gtmProductData = require('*/cartridge/scripts/googletags/Org_TagManager').getProductData(lineItem.productID);
+                                                    }
+                                                    </isscript>
 													<isif condition="${!lineItem.bonusProductLineItem || lineItem.getBonusDiscountLineItem() != null}">
-														<button onClick="googleAnalyticsEvents.removeProduct();" class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span class="icon"></span><span class="text">${Resource.msg('global.remove','locale',null)}</span></button>
+														<button onClick="googleAnalyticsEvents.removeProduct();" class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"
+															data-gtmdata="${JSON.stringify(gtmProductData)}">
+														<span class="icon"></span><span class="text">${Resource.msg('global.remove','locale',null)}</span></button>
 													</isif>
 												</div>
 											</td>
@@ -533,7 +544,7 @@
 												<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 												<div class="price">
 													<div class="discountprice">
-														<div class="standardprice">$<isprint value="${Standard_quantity.toFixed(2)}"/></div>
+														<div class="standardprice">${session.currency.symbol}<isprint value="${Standard_quantity.toFixed(2)}"/></div>
 													</div>
 													</div>
 												</isif>
@@ -550,7 +561,7 @@
 														<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 														<div class="price">
 															<div class="discountprice">
-																<div class="standardprice">$<isprint value="${Standard_quantity.toFixed(2)}"/></div>
+																<div class="standardprice">${session.currency.symbol}<isprint value="${Standard_quantity.toFixed(2)}"/></div>
 															</div>
 														</div>
 													</isif>
@@ -1028,7 +1039,6 @@
 
 												<td class="item-quantity-details">
 													<div class="item-user-actions">
-
 														<iscomment>Delete product **************************** </iscomment>
 														<button class="button-text" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}">
 															<isprint value="${Resource.msg('global.remove','locale',null)}"/>

@@ -11,6 +11,7 @@
 	<isscript>
 		var formID = pdict.CurrentForms.wishlist.htmlName + '_items';
  		var isListOwner = pdict.TargetPipeline ? pdict.CurrentCustomer === pdict.ProductList.owner && pdict.TargetPipeline === 'Wishlist-Show' : pdict.CurrentCustomer === pdict.ProductList.owner;
+ 		var tagManager = require('int_googletags/cartridge/scripts/googletags/Org_TagManager');
 	</isscript>
 
 	<iscomment>wishlist items form</iscomment>
@@ -192,7 +193,7 @@
 												<iselse>
 													<label for="Quantity">${Resource.msg('global.qty','locale',null)}:</label>
 													<input class="input-text" type="number" min="0" step="1" name="Quantity" value="<isprint value="${item.quantity.value}" formatter="#"/>"/>
-													<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" id="add-to-cart" class="button-fancy-small addtocartbutton <isif condition="${!isGiftCert}">add-to-cart</isif>">
+													<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" id="add-to-cart" class="button-fancy-small addtocartbutton <isif condition="${!isGiftCert}">add-to-cart</isif>"<isif condition="${!isGiftCert}">data-gtmdata="${JSON.stringify(tagManager.getProductData(item.object.product.ID))}"</isif>>
 														${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 													</button>
 												</isif>

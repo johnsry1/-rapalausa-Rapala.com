@@ -1,0 +1,85 @@
+<!--- TEMPLATENAME: sessiondebug.isml --->
+<isinclude template="util/modules"/>
+
+<isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
+	<isscript>
+		var debugMode = false;
+		if (dw.system.System.getPreferences().getCustom()["debugCookieName"] != null && !empty(dw.system.System.getPreferences().getCustom()["debugCookieName"])) {
+		    var cookies = request.getHttpCookies();
+	        for each (var cookie in cookies) {
+	            if (cookie.getName() == dw.system.System.getPreferences().getCustom()["debugCookieName"]) {
+	            	if (dw.system.System.getPreferences().getCustom()["debugCookieValue"] == cookie.getValue()) {
+	            		debugMode = true;
+	            	}
+	            }
+	        }
+        }
+	</isscript>
+	<isif condition="${debugMode}">
+		<isscript>
+			var attributes = new dw.util.ArrayList();
+			if (session != null && 'custom' in session) {
+			    for (var key in session.custom) {
+			        if (session.custom.hasOwnProperty(key)) {
+			            attributes.add({'name' : "(cus) " + key, 'value' : session.custom[key]})
+			        }
+			    }
+		    }
+				if (session != null && 'privacy' in session) {
+						for (var key in session.privacy) {
+								if (session.privacy.hasOwnProperty(key)) {
+										attributes.add({'name' : "(prv) " + key, 'value' : session.privacy[key]})
+								}
+						}
+					}
+		</isscript>
+		<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+			<b>Site Attributes:</b><br>
+			Current Site: ${dw.system.Site.getCurrent().ID}<br>
+			Current Currency: ${session.currency} <br>
+			Current Locale: ${request.locale}<br><br>
+		</p>
+
+		<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+			<b>Session Custom Attributes:</b><br>
+			<isloop items="${attributes}" var="attribute" status="status">
+				<isif condition="${status.count % 5 == 0}">
+					</p>
+					<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+				</isif>
+				${attribute.name} : ${attribute.value} <br>
+			</isloop>
+		</p>
+
+		<isif condition="${pdict.Basket != null}">
+			<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+				<b>Basket Data:</b><br>
+				<isscript>
+				</isscript>
+				Bskt Adj Gross: ${pdict.Basket.adjustedMerchandizeTotalGrossPrice}<br>
+				Bskt Adj Tax: ${pdict.Basket.adjustedMerchandizeTotalTax}<br>
+				Bskt Adj Ship: ${pdict.Basket.adjustedShippingTotalPrice}<br>
+				Bskt Adj Ship Tax: ${pdict.Basket.adjustedShippingTotalTax}<br>
+				Bskt Def Ship Method: ${pdict.Basket.defaultShipment.shippingMethod.ID}<br>
+				Bskt Total Tax: ${pdict.totalTax}
+			</p>
+		</isif>
+
+		<isif condition="${pdict.Basket != null}">
+			<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+				<isloop items="${pdict.Basket.productLineItems}" var="pli" status="status">
+					<isif condition="${status.count % 2 == 0}">
+						</p>
+						<p style="border-right:1px black;border-style:solid;padding:5px;float:left">
+					</isif>
+					Product Line Item: ${pli.product.ID} <br>
+					Product Adj Tax: ${pli.adjustedTax} <br>
+					Product Tax Class: ${pli.product.taxClassID} <br>
+					Product Tax Rate: ${pli.taxRate} <br>
+					Product Net Price: ${pdict.prodNetPrice}
+				</isloop>
+			</p>
+		</isif>
+
+	</isif>
+</isif>

@@ -1,0 +1,41 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <isscript>var pageContext={title:'Store Locator', type:'storelocator',ns:'storelocator'};</isscript>
+    <isinclude template="util/modules"/>
+    <isinclude template="components/header/htmlhead"/>
+</head>
+<body>
+    <div id="container" class="pt_store-locator">
+        <isinclude template="components/header/header"/>
+
+        <div id="main" role="main" class="primary-focus clearfix">
+            <div id="content">
+                <div id="page-background">
+                    <div id="page">
+                        <div class="wrapper">
+                            <isinclude template="components/browsertoolscheck"/>
+                            <isbreadcrumbs bcurl1="${URLUtils.url('Stores-Find')}" bctext1="${Resource.msg('storelocator.header','storelocator',null)}"/>
+
+                            <div id="primary" class="">
+                                <div class="storelocator">
+                                    <isreplace/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="//www.google.com/jsapi?key=${dw.system.Site.getCurrent().getCustomPreferenceValue('googleAPIKey')}" type="text/javascript"></script>
+        <script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&key=${dw.system.Site.getCurrent().getCustomPreferenceValue('googleAPIKey')}"></script>
+
+        <div id="push"></div>
+        <isinclude template="components/footer/footer"/>
+    </div>
+</body>
+</html>

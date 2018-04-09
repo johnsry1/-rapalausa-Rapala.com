@@ -4,7 +4,7 @@
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
 
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
-	
+
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
@@ -14,7 +14,7 @@
 				<div class="wrapper">
 					<div class="contentboxcontent mobileHide">
 					<isinclude template="search/components/productsearchbreadcrumbs"/>
-						
+
 						<isif condition="${'rapala' == session.custom.currentSite}">
 							<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
 								<h1 class="search-result">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
@@ -24,10 +24,10 @@
 								<h1 class="leftnav">${Resource.msg('searchrefinebar.searchresultsheader','search',null)}</h1>
 							</isif>
 						</isif>
-						<isif condition="${pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null &&!empty(pdict.ProductSearchResult.category) && pdict.ProductSearchResult.category.displayName!=null}"> 
-						<h1 class="leftnav categoryTitle">${pdict.ProductSearchResult.category.displayName}</h1> 
+						<isif condition="${pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null &&!empty(pdict.ProductSearchResult.category) && pdict.ProductSearchResult.category.displayName!=null}">
+						<h1 class="leftnav categoryTitle">${pdict.ProductSearchResult.category.displayName}</h1>
 						</isif>
-						
+
 						<span class="count"><isprint value="${pdict.ProductPagingModel.count}"/> <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>
 					</div>
 				    <div class="desktop mobileHide">
@@ -42,11 +42,11 @@
 							<div class="brand-searchresult">
 								<isslot id="brand-searchresults" context="global"  description="brand-searchresults for search results page"/>
 							</div>
-							
+
 							<div class="global-searchresult">
 								<isslot id="global-searchresults" context="global"  description="global-searchresults for search results page"/>
 							</div>
-					</div>	
+					</div>
 					<div class="row column3 4">
 						<iscomment><isinclude template="search/components/productsearchbreadcrumbs"/></iscomment>
 						<div class="refinebar-outer mobileHide">
@@ -58,9 +58,9 @@
 								Sort By
 								<span class="active"></span>
 							</a>
-							
+
 							<div class="refine-display refine-values">
-						
+
 						<isset name="hasAttributes" value="${false}" scope="page" />
 						<isloop items="${psr.refinements.refinementDefinitions}" var="definition" status="attributes">
 					<isif condition="${definition.isAttributeRefinement() && psr.isRefinedByAttribute(definition.attributeID)}">
@@ -69,7 +69,7 @@
 							<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 					 		<span class="breadcrumb-refinement-name">
 							<isprint value="${definition.displayName}"/>
-							</span> 
+							</span>
 							</iscomment>
 							<isset name="hasAttributes" value="${true}" scope="page" />
 							<isloop items="${psr.refinements.getRefinementValues(definition)}" var="value" status="values">
@@ -92,7 +92,7 @@
 				<isscript>
 					// for price refinements, we use the display value of the price refinement definition's value
 					var breadcrumbLabel = null
-	
+
 					var refinements = psr.refinements;
 					var prdValues = refinements.getRefinementValues(refinements.priceRefinementDefinition);
 					if (prdValues.iterator().hasNext()) {
@@ -105,7 +105,7 @@
 							<isprint value="${psr.refinements.priceRefinementDefinition.displayName}"/>
 						</span>
 					</iscomment>
-	
+
 					<span class="breadcrumb-refinement-value">
 						<isif condition="${!empty(breadcrumbLabel)}">
 							<isprint value="${breadcrumbLabel}"/>
@@ -114,7 +114,7 @@
 							${Resource.msg('searchbreadcrumbs.to','search',null)}
 							<isprint value="${psr.priceMax}"/>
 						</isif>
-	
+
 						<isif condition="${empty(pagingModel)}">
 							<isset name="breadcrumbHref" value="${psr.urlRelaxPrice('Search-Show')}" scope="page" />
 						<iselse/>
@@ -123,15 +123,15 @@
 						<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 					</span>
 				</span>
-	
+
 			</isif>
 			</div>
-							
+
 						</div>
-						
-						
+
+
 						<div id="secondary" class="refinements searchResult-refinement visible-hidden">
- 							<isinclude template="search/components/productsearchrefinebar"/>						
+ 							<isinclude template="search/components/productsearchrefinebar"/>
  						</div>
 						<div id="primary" class="primary-content">
 							<div class="column colspan2 cell4">
@@ -152,12 +152,12 @@
 									<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite &&  pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
 										<h1 class="left-nav-style"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
 									<iselse>
-									<isif condition="${ pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}"> 
+									<isif condition="${ pdict.ProductSearchResult != null && !empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
 										<h1 class="leftnav"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
 									</isif>
 									</isif>
-									<isif condition="${pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}"> 
-										<p><isprint value="${pdict.ProductSearchResult.category.description}"/></p>
+									<isif condition="${pdict.ProductSearchResult.category != null && !empty(pdict.ProductSearchResult.category)}">
+										<p><isprint value="${pdict.ProductSearchResult.category.description}" encoding="off"/></p>
 									</isif>
 									<div class="bannerslot">
 										<isslot id="landingpage-slot" description="slot for all landing pages" context="global" />
@@ -169,9 +169,9 @@
 								</div>
 							</div>
 						</div>
-					</div>	
+					</div>
 				</div>
 			 </div>
 		</div>
-	</div>	 	
+	</div>
 </isdecorate>

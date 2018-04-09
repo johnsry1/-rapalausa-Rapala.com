@@ -1,0 +1,227 @@
+////-----------------------------------------------
+/// Responsive Grid Layouts
+///
+/// @author Anthony Smith
+////-----------------------------------------------
+
+///	Column Respond - Mixin needed to create column widths and float clears
+///
+///	This mixin generates a series of ranged media queries (of min-width and max-width) for
+///	each column breakpoint, using nth-child properties to target the first "column" of each
+///	row to assign float clears (to break to a new row), remove left margins and row/column
+///	divider styles on the "::before" and "::after" pseudo elements.
+///
+///	Below the smallest media query, the grid will default to 1 column (at 100% width). You
+///	can override this by setting a 0px breakpoint, ex: "0px : 2".
+///
+///	Gutters are 0px by default, but you can set a global gutter at the bottom of the input
+///	object, and/or assign different gutter values per breakpoint.
+///
+///	You can also set a "center-last-row" Boolean to true (default is false) in the input param
+///	to center the last row of tiles in the grid, instead of left-aligning.  If there's only one
+///	row, that still counts as the last row.  NOTE: This feature creates a relatively high amount
+///	of CSS bloat as it must account for every possibility of the number of tiles in the final row
+///	so use this sparingly. If the number of tiles in the grid happens to be a known quantity, and
+///	there are few breakpoints anyway, I would strongly suggest just manually styling this centering.
+///
+///	Column divider lines and row divider lines are also definable in the input object.
+///	Currently, col dividers and row dividers are only available to be set at a global level.
+
+///	@param {map} $params - A key-value map (see examples)
+
+///	@example scss - Column Respond Mixin with default gutters
+///		@include column-respond((
+///			// breakpoint : number of columns
+///			500px : 3,
+///			600px : 4,
+///			768px : 5,
+///			1080px : 6,
+///			// global gutter (px, rem, em, vw, or %)
+///			gutter : 10px
+///		));
+
+///	@example scss - Column Respond Mixin with a centered last row
+///		@include column-respond((
+///			// breakpoint : number of columns
+///			500px : 3,
+///			600px : 4,
+///			768px : 5,
+///			1080px : 6,
+///			gutter : 10px,
+///			center-last-row : true
+///		));
+
+///	@example scss - Column Respond Mixin with gutter overrides per breakpoint
+///		@include column-respond((
+///			500px : 3,
+///			600px : (
+///				columns : 4,
+///				gutter : 1rem
+///			),
+///			768px : (
+///				columns : 5,
+///				gutter : 7%
+///			)
+///			1080px : 6,
+///			gutter : 10px // global default
+///		));
+
+///	@example scss - Column Respond Mixin with column and row divider lines
+///		@include column-respond((
+///			500px : 3,
+///			600px : 4,
+///			768px : 5,
+///			1080px : 6,
+///			gutter : 10px,
+///			col-divider : ( // a map of real CSS rules (comma-delimited)
+///				width : 2px,
+///				top : 15px,
+///				background-color: $gainsboro
+///			),
+///			row-divider : (
+///				height : 3px,
+///				width : 90% // % of the full grid width (converted in mixin)
+///				background-color: $sangria
+///			)
+///		));
+
+//-----------------------------------------------
+
+@import "responsive_grid_functions";
+
+@mixin column-respond($params) {
+    // init some global variables
+    $i: 0;
+    // breakpoint counter
+    $global-gutter: map-get($params, "gutter") or 0;
+    //optional global gutter value
+    $global-col-div: map-get($params, "col-divider") or null;
+    //optional global column divider value
+    $global-row-div: map-get($params, "row-divider") or null;
+    //optional global row divider value
+    $global-center-last: map-get($params, "center-last-row") or false;
+    //optional global boolean indicating the last row should be centered
+    $sorted-breakpoint-map: getBreakpointsOnly($params);
+    $first-breakpoint: nth(map-keys($sorted-breakpoint-map), 1);
+    // start outputting scss styles
+    .grid-col {
+        position: relative;
+        // handle for global gutter setting
+        @if type-of($global-gutter) == number {
+            // initially, assume 1 column at lowest breakpoint, so no gutter margins yet.
+            // this will get overridden with each new number of columns
+            margin-left: 0;
+        }
+        // next handle initial global column divider styles
+        @if $global-col-div != null {
+            @include set-column-dividers($global-gutter, $global-col-div);
+            // We've just set column divider styles to appear to the left of each non-first tile via
+            // a pseudo element, but we don't want that left border to appear in a single-column grid,
+            // i.e. at the smallest breakpoint (unless it's a 0px breakpoint that overrides the default).
+            @if type-of($first-breakpoint) == number and $first-breakpoint != 0 {
+                @include respond(0, $first-breakpoint) {
+                    &::after {
+                        content: none;
+                    }
+                }
+            }
+        }
+        // iterate over mixin input parameter (a key-value pair map)
+        @each $key, $val in $params {
+            @if $key != "null" and type-of($key) == number {
+                $breakpoint: $key;
+                $columns: $val;
+                // first handle simple column input (number), ex: 768px : 3
+                $bp-columns: $columns;
+                $bp-gutter: $global-gutter;
+                // next handle complex column input (map object), ex: 768 : (columns:3, gutter:10px)
+                @if type-of($columns) == map {
+                    @if map-has-key($columns, columns) {
+                        $bp-columns: map-get($columns, columns);
+                    }
+                    @if map-has-key($columns, gutter) {
+                        $bp-gutter: map-get($columns, gutter);
+                    }
+                }
+                // finally output this breakpoint's media query and styles
+                @if type-of($bp-columns) == number and $bp-columns > 1 {
+                    $i: $i + 1;
+                    $next-breakpoint: getNextBreakpoint($breakpoint, $sorted-breakpoint-map);
+                    @include respond($breakpoint, $next-breakpoint) {
+                        // if $next-breakpoint is null, this just sets a min-width media query
+                        //first set all grid column widths to 100%/n, where n = # of columns (respecting gutters)
+                        width: get-column-width($bp-columns, $bp-gutter);
+                        //if gutters exist
+                        @if $bp-gutter != 0px {
+                            //set gutter margins for this breakpoint
+                            margin-left: $bp-gutter;
+                        }
+                        // Adjust the left-positioning of column dividers (if they exist), only if this breakpoint's gutters differ from global.
+                        // Or, if gutters happen to be % values, we have to adjust col divider positioning at every breakpoint, regardless. sigh.
+                        @if $bp-gutter != 0 and ($bp-gutter != $global-gutter or unit($bp-gutter) == "%") {
+                            @include adjust-col-div-left-position($global-col-div, $bp-columns, $bp-gutter);
+                        }
+                        //finally find the first column of each row using nth-child, based on total num of columns, and set row breaks via float clear,
+                        //override base gutter margins if they exist, and create row dividers if defined
+                        @include first-columns-nth-child-styles($bp-columns) {
+                            clear: both;
+                            //quick override of gutter margin (left)
+                            @if $bp-gutter != 0px {
+                                margin-left: 0;
+                            }
+                            //since this creates lots of CSS bloat, only add pseudos if needed...
+                            @if $global-col-div != null {
+                                &::after {
+                                    //quick override of column divider pseudo content
+                                    content: none;
+                                }
+                            }
+                            @if $global-row-div != null {
+                                &::before {
+                                    //create row divider pseudo content
+                                    @include set-row-divider($bp-columns, $bp-gutter, $global-row-div);
+                                }
+                            }
+                        }
+
+                        @if $global-center-last {
+                            @include center-last-row($bp-columns, $bp-gutter, $global-row-div != null);
+                        }
+                    }
+                }
+            }
+        }
+        // if there's a row divider defined, just make sure that it doesn't appear above row 1
+        @if $global-row-div != null {
+            &:first-child::before {
+                content: none;
+            }
+        }
+    }
+}
+
+// Global Styles for all .responsive-grid divs
+.responsive-grid {
+    @include clearfix();
+    display: block;
+    list-style: none;
+    //in case it's a <ul>
+    width: 100%;
+    max-width: $desktop-breakpoint;
+    margin: auto;
+    padding: 0;
+    // Reset box-sizing for all nested elements
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+    //default, override if nec
+    .grid-col {
+        display: block;
+        // Default mobile-first width or 100%.
+        // Can be easily overridden in column-respond() with a 0px breakpoint.
+        width: 100%;
+        float: left;
+    }
+}

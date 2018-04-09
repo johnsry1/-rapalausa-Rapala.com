@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<url-rules xmlns="http://www.demandware.com/xml/impex/urlrules/2012-12-01">
+    <general-settings>
+        <lower-case-urls>true</lower-case-urls>
+        <blank-substitute>-</blank-substitute>
+        <character-replacements-enabled>true</character-replacements-enabled>
+        <character-replacements-for-page-url-enabled>true</character-replacements-for-page-url-enabled>
+    </general-settings>
+    <category-rule>[ category-path, [ attribute, displayName ], / ]</category-rule>
+    <category-page-url-override>false</category-page-url-override>
+    <category-trailing-slash>true</category-trailing-slash>
+    <category-offline-url-generation>true</category-offline-url-generation>
+    <category-search-refinement-url-enabled>false</category-search-refinement-url-enabled>
+    <product-rule>[[ category, [ category-path, [ attribute, displayName ], / ] ], /,[ attribute, name ]]</product-rule>
+    <product-page-url-override>false</product-page-url-override>
+    <product-id-separator>/</product-id-separator>
+    <folder-rule>[[ constant, content],/,[ attribute, ID ]]</folder-rule>
+    <folder-page-url-override>false</folder-page-url-override>
+    <folder-trailing-slash>true</folder-trailing-slash>
+    <folder-offline-url-generation>true</folder-offline-url-generation>
+    <folder-search-refinement-url-enabled>false</folder-search-refinement-url-enabled>
+    <content-rule>[ folder ]</content-rule>
+    <content-page-url-override>false</content-page-url-override>
+    <content-id-separator>/</content-id-separator>
+    <pipeline-aliases xml:lang="x-default">
+        <pipeline-alias pipeline="Account-EditProfile">my-account-profile</pipeline-alias>
+        <pipeline-alias pipeline="VIPInsider-Home">RapalaInsider</pipeline-alias>
+        <pipeline-alias pipeline="COBilling-Start">checkout-billing</pipeline-alias>
+        <pipeline-alias pipeline="Folder-Show">folder</pipeline-alias>
+        <pipeline-alias pipeline="VIP-SignUp">VIP-SignUp</pipeline-alias>
+        <pipeline-alias pipeline="Home-ChangeRegion">ChangeRegion</pipeline-alias>
+        <pipeline-alias pipeline="COShipping-CheckOut">checkout</pipeline-alias>
+        <pipeline-alias pipeline="Cart-ContinueShopping">continue-shopping</pipeline-alias>
+        <pipeline-alias pipeline="VIP-FLWSignUp">VIP-Register</pipeline-alias>
+        <pipeline-alias pipeline="COSummary-Submit">checkout-purchase-confirmation</pipeline-alias>
+        <pipeline-alias pipeline="Address-List">my-account-address-book</pipeline-alias>
+        <pipeline-alias pipeline="SiteMap-Start">sitemap</pipeline-alias>
+        <pipeline-alias pipeline="PaymentInstruments-List">my-account-payment-settings</pipeline-alias>
+        <pipeline-alias pipeline="Account-Show">my-account</pipeline-alias>
+        <pipeline-alias pipeline="Wishlist-Show">my-account-wish-list</pipeline-alias>
+        <pipeline-alias pipeline="Login-Logout">logout</pipeline-alias>
+        <pipeline-alias pipeline="Order-History">my-account-order-history</pipeline-alias>
+        <pipeline-alias pipeline="Search-Show">search</pipeline-alias>
+        <pipeline-alias pipeline="COShipping-Start">checkout-shipping</pipeline-alias>
+        <pipeline-alias pipeline="Stores-Find">dealer-locations</pipeline-alias>
+        <pipeline-alias pipeline="Cart-Show">shopping-cart</pipeline-alias>
+    </pipeline-aliases>
+    <pipeline-trailing-slash>false</pipeline-trailing-slash>
+    <pipeline-perform-redirect>false</pipeline-perform-redirect>
+    <character-replacements xml:lang="x-default">
+        <character-replacement>
+            <character>‘</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>(</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>)</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>[</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>]</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>;</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>&amp;</character>
+            <replacement>and</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>"</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>'</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>/</character>
+            <replacement>-</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>…</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>#</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>™</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>%</character>
+            <replacement>prcnt</replacement>
+        </character-replacement>
+        <character-replacement>
+            <character>®</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>©</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>$</character>
+            <replacement/>
+        </character-replacement>
+        <character-replacement>
+            <character>,</character>
+            <replacement/>
+        </character-replacement>
+    </character-replacements>
+    <search-refinement-url-settings>
+        <position>after</position>
+        <segment-delimiter>slash</segment-delimiter>
+        <refinements-delimiter>minus</refinements-delimiter>
+        <value-delimiter>underscore</value-delimiter>
+        <conflicting-value-delimiter>blank</conflicting-value-delimiter>
+        <exclude-pipeline-alias-type>none</exclude-pipeline-alias-type>
+        <product-name-identifier>prefn</product-name-identifier>
+        <product-value-identifier>prefv</product-value-identifier>
+        <content-name-identifier>crefn</content-name-identifier>
+        <content-value-identifier>crefv</content-value-identifier>
+    </search-refinement-url-settings>
+</url-rules>

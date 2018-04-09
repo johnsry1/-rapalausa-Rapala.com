@@ -1,0 +1,30 @@
+/**
+* Sets user cookie containing preferred location (latitude / longitude)
+*
+*   @input Location : String Preferred location latitude / longitude
+*
+*/
+importPackage(dw.system);
+importPackage(dw.web);
+
+function execute(pdict : PipelineDictionary) : Number {
+
+    var cookieName : String = dw.system.Site.current.getCustomPreferenceValue("storeLocatorCookieName");
+
+    if (empty(cookieName)){
+        Logger.error('## GoogleGeolocator: No cookie name available!');
+        return PIPELET_ERROR;
+    }
+
+    var location : String = pdict.Location;
+
+    if (!empty(cookieName) && !empty(location)) {
+        var geoCookie : Cookie = new Cookie(cookieName, location);
+        geoCookie.path = "/";
+        geoCookie.maxAge = 604800;
+        response.addHttpCookie(geoCookie);
+    }
+
+    return PIPELET_NEXT;
+
+}

@@ -160,7 +160,7 @@
 					    </isif>
 					    <isif condition="${StandardPrice.available && Standard_quantity.toFixed(2) > productTotal && !(productLineItem.bonusProductLineItem)}">
 						    <div class="discountprice">
-								<strike><div class="standardprice">$<isprint value="${Standard_quantity.toFixed(2)}"/></div></strike>
+								<strike><div class="standardprice">${session.getCurrency().getSymbol()}<isprint value="${Standard_quantity.toFixed(2)}"/></div></strike>
 							</div>
 						</isif>
 					    			    

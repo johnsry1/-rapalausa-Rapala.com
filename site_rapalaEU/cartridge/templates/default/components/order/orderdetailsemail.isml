@@ -1,0 +1,820 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Order Details</title>
+	</head>
+	<body>
+	<isset name="Order" value="${pdict.order}" scope="page"/>
+	<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#e2e2e2" align="center" marginwidth="0" marginheight="0" valign="top" style="border-top-width:0px;padding-right:0px;padding-left:0px;border-left-width:0px;border-bottom-width:0px;padding-bottom:0px;margin:0px;width:100%;padding-top:0px;border-collapse:collapse;border-right-width:0px; color: #333;">
+		<tbody>
+			<tr>
+	    		<td width="100%" height="10" align="center" valign="top" bgcolor="#ffffff">
+			      <table width="597" cellspacing="0" cellpadding="0" border="0" align="center">
+			        <tbody>
+				        <tr>
+							<td width="18">&nbsp;</td>
+							<td width="561">
+								<table width="561" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td align="center"  width="561" height="20" >12 BRANDS 1 CART</td>
+										</tr>
+						            	<tr>
+	              							<td align="center">
+	              								<h1 style='font-family:Roboto,arial;font-weight: normal; font-size: 18px; font-weight:normal; letter-spacing: 4px; padding: 10px 0 5px 0; text-align: center; text-transform: uppercase;-webkit-margin-before:0em;-webkit-margin-after:0em;'>Respected Rapala Brands</h1>
+	              							</td>
+	              						</tr>
+	              						<tr>
+	              							<td height="20">
+	              								<img src="${URLUtils.httpsStatic('/images/Headerholder-mai.PNG')}" width="565px" alt="Header Holder"></img>
+	              							</td>
+	              						</tr>
+										<tr>
+		              						<td>
+												<div style="margin-left: 0px;margin-bottom: 7px;align: center;vertical-align: middle;text-align: center;">
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandrapala') != null) && (dw.system.Site.current.preferences.custom.activebrandrapala == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'rapala')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/rapala.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/rapala_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/vmc.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/vmc_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstorm') != null) && (dw.system.Site.current.preferences.custom.activebrandstorm == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'storm')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/storm.png')}" alt="Header Brand Images" width="73px"; height="26px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/storm_bw.png')}" alt="Header Brand Images" width="73px"; height="26px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandluhrjensen') != null) && (dw.system.Site.current.preferences.custom.activebrandluhrjensen == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'luhrjensen')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/luhrjensen.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/luhrjensen_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandsufix') != null) && (dw.system.Site.current.preferences.custom.activebrandsufix == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'sufix')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/sufix.png')}" alt="Header Brand Images" width="56px"; height="30px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/sufix_bw.png')}" alt="Header Brand Images" width="56px"; height="30px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandbluefox') != null) && (dw.system.Site.current.preferences.custom.activebrandbluefox == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'bluefox')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/bluefox.png')}" alt="Header Brand Images" width="57px"; height="23px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/bluefox_bw.png')}" alt="Header Brand Images" width="57px"; height="23px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandterminator') != null) && (dw.system.Site.current.preferences.custom.activebrandterminator == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'terminator')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/terminator.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/terminator_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandwilliamson') != null) && (dw.system.Site.current.preferences.custom.activebrandwilliamson == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'williamson')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/williamson.png')}" alt="Header Brand Images" width="46px"; height="29px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/williamson_bw.png')}" alt="Header Brand Images" width="46px"; height="29px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandtriggerx') != null) && (dw.system.Site.current.preferences.custom.activebrandtriggerx == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'triggerx')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/triggerx.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/triggerx_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarcum') != null) && (dw.system.Site.current.preferences.custom.activebrandmarcum == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'marcum')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/marcum.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/marcum_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstrikemaster') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'strikemaster')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/strikemaster.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/strikemaster_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandotter') != null) && (dw.system.Site.current.preferences.custom.activebrandotter == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'otter')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/otter.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/otter_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandiceforce') != null) && (dw.system.Site.current.preferences.custom.activebrandiceforce == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'iceforce')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/iceforce.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/iceforce_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                </div>
+		             					 	</td>
+										</tr>
+										<tr>
+	               							<td width="561" valign="top" align="center" colspan="2">
+	                  							<table width="559" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="border-right:#cccccc 1px solid;border-top:#cccccc 1px solid;border-left:#cccccc 1px solid;border-bottom:#cccccc 1px solid">
+	                    							<tbody>
+									                    <tr>
+									                    	<td width="18" bgcolor="#ffffff">&nbsp;</td>
+															<td width="559" colspan="3" align="center" valign="top" bgcolor="#ffffff" >
+	                      										<table width="100%" cellspacing="0" cellpadding="0">
+	                      											<tr><td width="18" bgcolor="#ffffff">&nbsp;</td></tr>
+	                      											<tr>
+	                      												<td align="center"><font face="Roboto,Arial,sans-serif"><span style="font-size: 25pt; color: #333; text-transform:uppercase;">Thank you For Your Order!</span></font></td>
+	                      											</tr>
+	                      		 									<tr>
+	                      		   										<td align="center"><font face="Roboto,Arial,sans-serif"><span style="font-size: 13px; color: #333;"> We hope this helps you catch more and bigger fish!</span></font></td>
+	                      		 									</tr>
+	                      		            						<tr><td width="18" bgcolor="#ffffff">&nbsp;</td> </tr>
+	                     	 									</table>
+	                      									</td>
+	                    									<td width="17" bgcolor="#ffffff">&nbsp;</td>
+	                    								</tr>
+	                      								<!--  gaps -->
+	                      								<tr><td width="18" bgcolor="#ffffff">&nbsp;</td> <td width="559" colspan="3" height="20" align="center" valign="top" bgcolor="#ffffff" >&nbsp;</td><td width="17" bgcolor="#ffffff">&nbsp;</td></tr>
+														<tr>
+		                      								<td width="18" bgcolor="#ffffff">&nbsp;</td>
+															<td width="559" colspan="3" align="center" valign="bottom"  style="background: none repeat scroll 0 0 #EBECF0;  " >
+																<div width="100%"  style="  font-size: 12px; ">
+																	<div style="font-size: 12pt; color: #333; text-align: left; margin:0; padding:0; font-family:Roboto,Arial,sans-serif;  margin-left:5px; margin-top: 8px;">A few important things to know:</div>
+																	<div style="font-size: 11px; margin-left:10px; color: #666;  text-align: left; font-family:Roboto,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."   ></img>&nbsp;&nbsp;Orders are usually processed and shipped within 2 business days.</div>
+																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Roboto,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="." ></img>&nbsp;&nbsp;Once your order ships, we will send a shipping confirmation to you at this same email.</div>
+																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Roboto,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."  ></img>&nbsp;&nbsp;If any item on your order is cancelled, we will send a cancellation email to this same email.</div>
+																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Roboto,Arial,sans-serif; margin-bottom: 8px;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."  ></img>&nbsp;&nbsp;The charge for this order will be from <span><i>Rapala USA</i>.</span></div>
+																</div>
+															</td>
+															<td width="17" bgcolor="#ffffff">&nbsp;</td>
+														</tr>
+														<tr>
+	                      									<td width="18" bgcolor="#ffffff">&nbsp;</td>
+	                      									<td height="60" colspan="3" align="center" valign="center">
+																<font face="Roboto,Arial,sans-serif"><span style="font-size: 25pt; color: #333; text-transform:uppercase;">Order Details</span></font>
+	                      									</td>
+	                      									<td width="17" bgcolor="#ffffff">&nbsp;</td>
+	                    								</tr>
+	                    								<tr>
+	                      									<td width="18" bgcolor="#ffffff">&nbsp;</td>
+	                      									<td colspan="3" align="left" valign="top" bgcolor="#ffffff">
+	                      										<table width="100%" height="23" border="0" cellpadding="0" cellspacing="0">
+	                        										<tr>
+	                          											<td height="23" align="left" valign="top" colspan="2"><font face="Roboto,Arial,sans-serif">
+	                            											<span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">Date:</span>
+	                            											<span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${Order.creationDate}" style="DATE_LONG"/></span></font>
+	                            										</td>
+	                          											<td align="right" valign="top"><font face="Roboto,Arial,sans-serif">
+	                            											<span style="font-size:12px; color:#999999; font-style:italic; font-weight:bold;">Order&nbsp;&#35;:</span>
+	                            											<span style="color:#333333; font-weight:bold; font-size:12px;">&nbsp;<isprint value="${Order.orderNo}"/></span></font>
+	                            										</td>
+	                          										</tr>
+
+	                        									</table>
+	                        								</td>
+	                      									<td width="17" bgcolor="#ffffff">&nbsp;</td>
+	                    								</tr>
+	                    								<tr>
+	                      									<td bgcolor="#ffffff" width="18">&nbsp;</td>
+	                      									<td valign="top" width="158" height="280" bgcolor="#eeeeee" align="left" style="border-right: 2px solid #fff;">
+	                 											<font face="Roboto,Arial,sans-serif">
+	                 												<div style=" margin-left: 5px; margin-top: 10px;">
+																		<div style="font-size: 15px; color: #333; font-weight: bold; text-transform:uppercase;">Ship To:</div>
+																		<div style="font-size: 11px; color: #333;font-weight: bold; margin-top: 10px;">
+																			<isprint value="${Order.shipments[0].shippingAddress.title}"/>
+																			<isprint value="${Order.shipments[0].shippingAddress.firstName}"/>
+																			<isprint value="${Order.shipments[0].shippingAddress.lastName}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.address1}"/>
+																			<isprint value="${Order.shipments[0].shippingAddress.address2}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.city}"/>,
+																			<isprint value="${Order.shipments[0].shippingAddress.stateCode}"/>
+																			<isprint value="${Order.shipments[0].shippingAddress.postalCode}"/><br />
+																			<isprint value="${Resource.msg(('country.' + Order.shipments[0].shippingAddress.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+																			<isprint value="${Order.shipments[0].shippingAddress.phone}"/>
+																		</div>
+				                     									<div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;">Method:<br/><span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;"><isprint value="${Order.shipments[0].shippingMethod.displayName}"/></div>
+		                           	 									<div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;">Status:<br/>
+		                                									<span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;">
+												                                <isif condition="${Order.shipments[0].shippingStatus==dw.order.Shipment.SHIPPING_STATUS_NOTSHIPPED}">
+															    					${Resource.msg('order.orderdetails.notshipped','order',null)}
+															    				<iselseif condition="${Order.shipments[0].shippingStatus==dw.order.Shipment.SHIPPING_STATUS_SHIPPED}"/>
+															    					${Resource.msg('order.orderdetails.shipped','order',null)}
+															    				<iselse/>
+															    					${Resource.msg('order.orderdetails.notknown','order',null)}
+															    				</isif>
+		                                									</span>
+
+																			<isif condition="${!empty(Order.shipments[0].trackingNumber)}">
+											                              	   <div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;"><span>Tracking Number:</span>
+											 								   <span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;"><isprint value="${Order.shipments[0].trackingNumber}"/></span></div>
+											 						      	<iselse/>
+											 						      	   <div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic; margin-top: 10px;"><span>Tracking Number:</span><br />
+											 								   <span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold; font-style: italic;">${Resource.msg('order.orderdetails.trackingmsg','order',null)}</span></div>
+																	    	</isif>
+						      											</div>
+	                        										</div>
+	                            								</font>
+	                       									</td>
+	                      									<td align="left"  width="158" height="280" bgcolor="#eeeeee" valign="top" style="border-right: 2px solid #fff;">
+	                       										<font face="Roboto,Arial,sans-serif">
+	                       											<div style="  margin-left: 5px; margin-top: 10px;">
+							 											<div style="font-size: 15px; color: #333; font-weight: bold; text-transform:uppercase;">Bill To:</div>
+																		<div style="font-size: 11px; color: #333; font-weight: bold; margin-top: 10px;">
+																			<isprint value="${Order.billingAddress.title}"/>
+																			<isprint value="${Order.billingAddress.firstName}"/>
+																			<isprint value="${Order.billingAddress.lastName}"/><br/>
+																			<isprint value="${Order.billingAddress.address1}"/>
+																			<isprint value="${Order.billingAddress.address2}"/><br/>
+																			<isprint value="${Order.billingAddress.city}"/>,
+																			<isprint value="${Order.billingAddress.stateCode}"/>
+																			<isprint value="${Order.billingAddress.postalCode}"/> <br />
+																			<isprint value="${Resource.msg(('country.' + Order.billingAddress.countryCode).toLowerCase(), 'forms', null)}"/><br/>
+																			<isprint value="${Order.billingAddress.phone}"/>
+																		</div>
+																		<div style="line-height:15px; padding:0px 0 0 0px; text-align: left; margin-top: 10px;"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #999; font-weight: bold; font-style: italic;">Payment Method:</span><br/></font></div>
+																		<iscomment>Render Credit Card</iscomment>
+																		<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD)}" var="paymentInstr" status="piloopstate">
+								         									<div style="margin-top: 5px;font-size: 11px;">
+																				<div class="type"><label><isprint value="${paymentInstr.creditCardType}"/></label></div>
+																				<div class="number"><label><isprint value="${paymentInstr.maskedCreditCardNumber}"/></label></div>
+																				<div class="paymentamount">
+																					<span style="font-size: 11px; color: rgb(51, 51, 51); font-style: italic; font-weight: bold;">${Resource.msg('global.amount','locale',null)}:</span>
+																					<span style="font-size: 11px; color: rgb(51, 51, 51); font-style: normal; font-weight: bold;"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+																				</div><!-- END: paymentamount -->
+									 										</div>
+																		</isloop>
+																		<div style="margin-top: 5px;">
+																			<iscomment>Render Pay Pal</iscomment>
+																			<isloop items="${Order.getPaymentInstruments('PayPal')}" var="paymentInstr" status="piloopstate">
+																			  	  <div style=" margin-top: 5px; padding:0px 0 0px 0px;text-align: left;">
+																			  	 		<font face="Roboto,Arial,sans-serif">
+																						<span style="font-size: 11px; color: #333; font-weight: bold; font-style: italic;">
+																							${Resource.msg('orderdetails.paymentmethod.paypal','order',null)}<br/>
+																							<span style="color:#333; font-style:italic; font-size:11px; font-weight:bold;padding:0px 0 0 0px;">${Resource.msg('global.amount','locale',null)}:</span>
+																							<span style="color:#333; font-size:11px; font-weight:bold;padding:0px 0 0 0px;font-style: normal;"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
+																						</span>
+
+																						</font>
+																				 </div>
+																			 </isloop>
+
+																			<iscomment>Render ALLOTMENT</iscomment>
+																			<isloop items="${Order.getPaymentInstruments('ALLOTMENT')}" var="paymentInstr" status="piloopstate">
+																			  	 <div style=" margin-top: 5px; padding:0px 0 0px 0px;text-align: left;">
+																			  	 	<span><label>${Resource.msg('orderdetails.paymentmethod.onlyallotment','order',null)}</label><br />
+																					<span style="color:#333; font-style:italic; font-size:11px; font-weight:bold;padding:0px 0 0 0px;"><font face="Roboto,Arial,sans-serif"> ${Resource.msg('global.amount','locale',null)}:</font></span>
+																					<span style="color:#333; font-size:11px; font-weight:bold;padding:0px 0 0 0px;font-style: normal;"><font face="Roboto,Arial,sans-serif"> <isprint value="${paymentInstr.paymentTransaction.amount}"/></font></span>
+																					</span>
+																				 </div>
+																			</isloop>
+
+																			<iscomment>Render gift certs</iscomment>
+																			<isloop items="${Order.getPaymentInstruments(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE)}" var="paymentInstr" status="piloopstate">
+																			  	 <div style=" margin-top: 5px; padding:0px 0 0px 0px;text-align: left;">
+																			  	 	<span style="font-size: 11px; font-weight: bold; font-style: italic; color:#333;">${Resource.msg('minibillinginfo.merchantcredit','checkout',null)}<br />
+																					<span style="color:#333; font-style:italic; font-size:11px; font-weight:bold;padding:0px 0 0 0px;"><font face="Roboto,Arial,sans-serif"> ${Resource.msg('global.amount','locale',null)}:</font></span>
+																					<span style="color:#333; font-size:11px; font-weight:bold;padding:0px 0 0 0px;font-style: normal;"><font face="Roboto,Arial,sans-serif"> <isprint value="${paymentInstr.paymentTransaction.amount}"/></font></span>
+																					</span>
+																				 </div>
+																			</isloop>
+		 																</div>
+	                          										</div>
+																</font>
+	                            							</td>
+	                      									<td align="left"  width="220" height="300" bgcolor="#ffffff" valign="top" style="border: 1px solid #ccc; padding-right:5px; padding-left:5px; padding-top:0px; padding-bottom:0px; border-bottom-width:0px;">
+	                       										<table cellspacing="0" bgcolor="#ffffff" cellpadding="0" border="0"  width="100%">
+	                        										<tbody>
+																		<tr>
+	                            											<td valign="top" bgcolor="#ffffff" align="left" colspan="3" style="padding:10px 0 5px 0px"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #333; font-weight: bold;">ORDER TOTAL</span></font></td>
+	                          											</tr>
+																		<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+	                         											<tr>
+	                            											<td bgcolor="#ffffff" width="93" valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333; font-weight: bold; font-style: normal;">Product Total: </span> </font></td>
+																			<isset name="priceVals" value="${require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(Order)}" scope="page" />
+																			<isset name="prodNetPrice" value="${priceVals[0]}" scope="page"/>
+																			<isset name="surcharge" value="${priceVals[1]}" scope="page"/>
+	                            											<td bgcolor="#ffffff" valign="top" align="right" colspan="2">
+	                            												<font face="Roboto,Arial,sans-serif">
+			                            											<span style="font-size: 11px; color: #333; ">
+			                            												<isif condition="${prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}">
+																							<div>
+																								<span style="color:#333; font-size:11px; ">
+																									<strike>
+																										<span style="color:#333; font-size:11px; ">
+																											<isprint value="${prodNetPrice}"/>
+																										</span>
+																									</strike>
+																									<span style="color:#333; font-size:11px;">
+																										<isprint value="${Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}"/>
+																									</span>
+																									<br />
+																									<span style="color:#E80000; font-size:11px; width:140px;">
+																										(you saved <isprint value="${prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice))}"/>)
+																									</span>
+																								</span>
+																							</div>
+																						<iselse/>
+																							<div>
+																								<span style="color:#333; font-size:11px; "><isprint value="${Order.getAdjustedMerchandizeTotalPrice(false).add(Order.giftCertificateTotalPrice)}"/></span>
+																							</div>
+																						</isif>
+																					</span>
+																				</font>
+																			</td>
+	                          											</tr>
+	 																	<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+											 							<isscript>
+																				//var surcharge = pdict.Totalsurcharges;
+																				var shippingExclDiscounts : dw.value.Money = Order.shippingTotalPrice;
+																				var ShipingChargewithoutsurcharge=shippingExclDiscounts.subtract(surcharge);
+																				var shippingExclDiscounts : dw.value.Money = Order.shippingTotalPrice.subtract(surcharge);
+																				var shippingInclDiscounts : dw.value.Money = Order.getAdjustedShippingTotalPrice().subtract(surcharge);
+																				var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
+																				var ordertotalsaving : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
+																				if(prodNetPrice > Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice))
+																				{
+																				 ordertotalsaving=ordertotalsaving.add(prodNetPrice.subtract(Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)));
+																				}
+																				if(shippingDiscount>0){
+																				 ordertotalsaving=ordertotalsaving.add(shippingDiscount);
+																				}
+
+																				var allotmentAmt = new dw.value.Money(0.0, session.currency.currencyCode);
+																				var giftCertTotal = new dw.value.Money(0.0, session.currency.currencyCode);
+																				var gcPaymentInstrs = Order.getGiftCertificatePaymentInstruments();
+																				var creditapplied = false;
+																		</isscript>
+																		<isloop items="${gcPaymentInstrs}" var="gcPI">
+																			<isset name="giftCertTotal" value="${giftCertTotal.add( gcPI.getPaymentTransaction().getAmount() )}" scope="page"/>
+																		</isloop>
+																		<isset name="allPaymentInstrs" value="${Order.getPaymentInstruments()}" scope="page"/>
+																		<isloop items="${allPaymentInstrs}" var="allPI">
+																			<isif condition="${allPI.getPaymentMethod()=='ALLOTMENT'}">
+																				<isset name="allotmentAmt" value="${allotmentAmt.add(allPI.getPaymentTransaction().getAmount())}" scope="page"/>
+																			</isif>
+																		</isloop>
+																		<isif condition="${allotmentAmt>0 || giftCertTotal>0}">
+																			<isset name="creditapplied" value="true" scope="page"/>
+																		</isif>
+
+																		<tr>
+	                            											<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333; font-weight: bold; font-style: normal;">Shipping: </span> </font></td>
+	                            											<td valign="top" align="right" colspan="2">
+	                            												<font face="Roboto,Arial,sans-serif">
+		                            												<span style="font-size: 11px; color: #333;">
+														                            	<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}">
+																							<strike><span class="basicordershippingcharge ordersubtotal-strike"><isprint value="${shippingExclDiscounts}"/></span></strike>
+																							<span class="discountedordershippingcharge">
+																								<isif condition="${shippingInclDiscounts == 0}">
+																									FREE
+																								<iselse/>
+																									<isprint value="${shippingInclDiscounts}"/>
+																								</isif>
+																							</span>
+																						<iselse/>
+																							<isprint value="${ShipingChargewithoutsurcharge}"/>
+																						</isif>
+		                            												</span>
+	                            												</font>
+	                            												<br/>
+													                            <div>
+													                            	<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}">
+													                            		<span style="color:#E80000; font-size:11px; width:140px;" class="label discount yousaved">(you saved <isprint value="${shippingDiscount}"/>)</span>
+													                            	</isif>
+													                            </div>
+	                          											</td>
+	                          										</tr>
+	                               									<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+																	<tr>
+																		<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;">Surcharge(s): </span> </font></td>
+																		<td valign="top" align="right" colspan="2">
+																			<font face="Roboto,Arial,sans-serif">
+																				<span style="font-size: 11px; color: #333;">
+																					<isprint value="${surcharge}"/>
+																				</span>
+																			</font>
+																		</td>
+																	</tr>
+	                        										<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+	                          										<tr>
+	                            										<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;"><isprint value="${Resource.msg('ordersummary.ordervattax','order',null)}"/> </span> </font></td>
+	                           											<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #333;"><isprint value="${Order.totalTax}"/></span></font></td>
+	                         										</tr>
+							 										<tr>  <td colspan="3" height="2" style="border-bottom:1px solid #ccc">&nbsp;</td>  </tr>
+																	<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+
+
+	                          										<tr>
+	                            										<td valign="top" align="left" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;">Order Total: </span> </font></td>
+											                            <isif condition="${Order.totalGrossPrice.available}">
+																		 	<isset name="orderTotalValue" value="${Order.totalGrossPrice}" scope="page"/>
+																		<iselse/>
+																			<isset name="orderTotalValue" value="${Order.getAdjustedMerchandizeTotalPrice(true).add(Order.giftCertificateTotalPrice)}" scope="page"/>
+																		</isif>
+	                            										<td valign="top" align="right" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isprint value="${orderTotalValue}"/> </span> </font></td>
+	                          										</tr>
+	                           										<iscomment>Allotment</iscomment>
+																	<isif condition="${allotmentAmt > 0}">
+																	<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+																		<tr>
+																			<td valign="top" align="left"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 9px; color: #333;font-weight: bold; font-style: normal;"><isprint value="${Resource.msg('ordersummary.allotmentnew','order',null)}"/></span></font></td>
+																			<td valign="top" align="right" colspan="2"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 11px; color: #e80000;"><span class="value">- <isprint value="${allotmentAmt}"/></span></font></td>
+																		</tr>
+																		<tr>
+	                           										<tr>  <td colspan="3" height="2">&nbsp;</td>  </tr>
+
+	                           										<td colspan="3" height="2" style="border-top:1px solid #ccc">&nbsp;</td>
+
+	                           										</tr>
+
+																	</isif>
+
+																	<isif condition="${allotmentAmt > 0}">
+																	<tr class="order-total <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
+																		<isif condition="${Order.totalGrossPrice.available}">
+																		 	<isif condition="${allotmentAmt > 0}">
+																				<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+																			</isif>
+																		<iselse/>
+																			<isif condition="${allotmentAmt > 0}">
+																				<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+																			</isif>
+																		</isif>
+																		<td valign="top" align="left" width="60%"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isif condition="${creditapplied == 'true'}">Remaining Total:<iselse/><isprint value="${pdict.p_totallabel}"/></isif></span></font></td>
+																		<td valign="top" align="right" ><font face="Roboto,Arial,sans-serif"> <span style="font-size: 15px; color: #000; font-weight: bold;"><isif condition="${orderTotalValue > 0}"><isprint value="${orderTotalValue}"/><iselse/>${session.currency.symbol}0.00</isif></span></font></td>
+																	</tr>
+																	</isif>
+
+
+							  										<isif condition="${ordertotalsaving > 0}">
+							   											<tr>
+			                          										<td colspan="3" align="center" valign="top" style="width: 225px; overflow: hidden;">
+			                          											<table cellpadding="0" cellspacing="0" border="0">
+			                          												<tr>
+														                          		<td style="padding: 0px; margin: 0px;">
+														                          			<img align="left" style="margin:0px; padding:0px;" src="${URLUtils.httpsStatic('/images/ellipse1.png')}" ></img>
+														                          		</td>
+														                          		<td align="center" style=" line-height: 100%;padding: 0px; margin: 0px;" >
+															                          		 <table cellpadding="0" cellspacing="0" border="0" style="height: 48px;" height="48">
+																                          		 <tr><td style="padding: 0px; margin: 0px;"><img align="left" style="margin:0px; padding:0px;" width="" src="${URLUtils.httpsStatic('/images/ellipse3.png')}" ></img></td> </tr>
+																                          		 <tr><td style="padding: 0px; margin: 0px; font-size: 11px; color: red; text-align: center;"><font face="Roboto,Arial,sans-serif">TOTAL SAVINGS <isprint value="${ordertotalsaving}"/></font></td> </tr>
+																                          		 <tr><td style="padding: 0px; margin: 0px;"><img align="right" style="margin:0px; padding:0px;"  width="" src="${URLUtils.httpsStatic('/images/ellipse4.png')}" align="left" ></img></td> </tr>
+															                          		 </table>
+														                          		</td>
+			                          													<td style="padding: 0px; margin: 0px;">
+														                          			<img align="right" style="margin:0px; padding: 0;" src="${URLUtils.httpsStatic('/images/ellipse2.png')}" ></img>
+														                          		</td>
+			                          												</tr>
+			                          											</table>
+			                          										</td>
+			                          									</tr>
+																	</isif>
+																</tbody>
+	                      									</table>
+	                     								</td>
+	                      								<td bgcolor="#ffffff" width="18">&nbsp;</td>
+	                    							</tr>
+													<tr>
+														<td bgcolor="#ffffff" width="18">&nbsp;</td>
+														<td bgcolor="#eeeeee"  width="158" style="border-right:2px solid #fff; padding-bottom:10px;"><div style="font-size: 11px; color: rgb(153, 153, 153); font-weight:normal; margin-left: 5px; text-align: center;"><font face="Roboto,Arial,sans-serif"><a href="https://www.rapala.com/on/demandware.store/Sites-rapala-Site/default/Folder-Show?fdid=rapala-shipping&id=1" style="text-decoration:underline; color:#333;">${Resource.msg('global.ordershipingmsg','locale',null)}</a></font></div></td>
+														<td bgcolor="#eeeeee" width="158" style="border-right:2px solid #fff; padding-bottom:10px;">
+															<font face="Roboto,Arial,sans-serif">
+																<div style="font-size: 11px; color: rgb(153, 153, 153); font-weight: normal; text-align: center;">
+											 			 		 	<a href="https://www.rapala.com/on/demandware.store/Sites-rapala-Site/default/Folder-Show?fdid=rapala-ordering-payment&id=1" style="text-decoration:underline; color:#333;">${Resource.msg('global.orderinsmsg','locale',null)}</a>
+																</div>
+															</font>
+														</td>
+														<td bgcolor="#ffffff"  width="230" style="border:1px solid  #ccc; border-top-width: 0px; padding-bottom:10px; text-align: center;">
+															<font face="Roboto,Arial,sans-serif">
+																<span style="font-size: 11px; color: rgb(153, 153, 153); font-weight: normal;">
+																	<a href="https://www.rapala.com/on/demandware.store/Sites-rapala-Site/default/Folder-Show?fdid=rapala-my-order&id=1" style="text-decoration:underline; color:#333;">${Resource.msg('global.ordersummsg','locale',null)}</a><br/>
+																	<a href="https://www.rapala.com/on/demandware.store/Sites-rapala-Site/default/Folder-Show?fdid=rapala-returns-exchanges&id=1" style="text-decoration:underline; color:#333;">${Resource.msg('global.ordersummsgone','locale',null)}</a>
+																</span>
+															</font>
+														</td>
+														<td bgcolor="#ffffff" width="18">&nbsp;</td>
+													</tr>
+	                          						<tr>
+														<td width="18" bgcolor="#ffffff">&nbsp;</td>
+														<td height="60" colspan="3" align="center" valign="center">
+															<font face="Roboto,Arial,sans-serif"><span style="font-size: 12px; color: #333; font-style:italic;">Orders are usually processed and shipped within 2 business days.</span></font>
+														</td>
+														<td width="17" bgcolor="#ffffff">&nbsp;</td>
+								                    </tr>
+	                    							<tr>
+	                     								<td width="18" bgcolor="#ffffff">&nbsp;</td>
+	                      								<td colspan="3" align="left" valign="top" bgcolor="#ffffff">
+	                      									<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	                        									<tbody>
+	                          										<tr><td style="border-top:1px solid #ccc; border-bottom:1px solid #fff;" colspan="4" height="0"></td></tr>
+	                          										<tr>
+	                            										<td width="160" valign="middle" bgcolor="#eeeeee" align="center" style="border-right: 1px solid rgb(255, 255, 255);"><h3 style="margin: 0pt; text-transform: uppercase;"><font face="Roboto,Arial,sans-serif">Item</font></h3></td>
+											                            <td width="160" valign="middle" bgcolor="#eeeeee" align="center" style="border-right: 1px solid rgb(255, 255, 255);"><h3 style="margin: 0pt; text-transform: uppercase;"><font face="Roboto,Arial,sans-serif">Item Details</font></h3></td>
+											                            <td width="67" valign="middle" bgcolor="#eeeeee" align="center" style="border-right: 1px solid rgb(255, 255, 255);"><h3 style="margin: 0pt; text-transform: uppercase;"><font face="Roboto,Arial,sans-serif">Qty</font></h3></td>
+											                            <td width="96" valign="middle" bgcolor="#eeeeee" align="center" style="border-right: 1px solid rgb(255, 255, 255);"><h3 style="margin: 0pt; text-transform: uppercase;"><font face="Roboto,Arial,sans-serif">Price</font></h3></td>
+	 						 										</tr>
+	                          										<tr>
+	                            										<td valign="top" align="left" rowspan="2" colspan="4">
+	                            											<table width="100%" height="58" cellspacing="0" cellpadding="0" border="0">
+	                              												<tbody>
+																					<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
+																						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
+															                                <isif condition="${productLineItem.product.getClassificationCategory().displayName == 'Sleds' || productLineItem.product.getClassificationCategory().displayName == 'Shelters'}">
+																							<tr class="tablerow sledscatrow" bgcolor="#FFFEDF">
+																							<iselse/>
+																							<tr class="tablerow">
+																							</isif>
+																								<td colspan="4">
+																									<table width="100%">
+											   															<isif condition="${productLineItem.product.getClassificationCategory().displayName == 'Sleds' || productLineItem.product.getClassificationCategory().displayName == 'Shelters'}">
+																											<tr>
+																												<td colspan="4">
+																												<div  style="margin: 0px 0px 0px 5px !important; color: #e6ba45; border: none; font-size:12px; text-align: left;">
+																													<font face="Roboto,Arial,sans-serif"><img src="${URLUtils.httpsStatic('/images/icon-alert-e6ba45.png')}" /> Please allow 7-14 days for arrival of Otter Sleds & Shelters</font>
+																												</div>
+																												</td>
+																											</tr>
+											  															</isif>
+																										<tr>
+																											<td width="175" class="item <isif condition="${productLineItem.product.getClassificationCategory().displayName == 'Sleds' || productLineItem.product.getClassificationCategory().displayName == 'Shelters' }">summary_notifications_img</isif>">
+																											 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
+																													<isscript>
+																														importScript("app_disbestpractice:product/ProductImageSO.ds");
+																													</isscript>
+																												</isif>
+																											  	<div class="prod_image" style="text-align:center;">
+																													<div class="prod_image">
+																														<isif condition="${productLineItem.product != null && productLineItem.product.getImage('large',0) != null}">
+																															<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
+																																<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'orderconfirmation')}" scope="page"/>
+																																<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>
+																																<isset name="imageObjIPhone" value="${new ProductImage('cartIPhone',productLineItem.product, 0,'cart')}" scope="page"/>
+																																<img src="${imageObjDesktop.getURL()}"	alt="${imageObjDesktop.getAlt()}" title="${imageObjDesktop.getTitle()}"/>
+																															<iselse/>
+																																<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
+																															   		<img src="${productLineItem.product.getImage('small',0).getURL()}"	alt="${productLineItem.product.getImage('small',0).alt}" title="${productLineItem.product.getImage('small',0).title}" />
+																															   	<iselse/>
+																																	<img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${productLineItem.product.productName}" title="${lineItem.productName}" />
+																																</isif>
+																														   	</isif>
+																														</isif>
+																														<isdisplayvariantnew p_product="${productLineItem.product}" p_imagecheckout="${true}" p_email="${true}" />
+																														<isdisplayvariantnewcolorsize p_product="${productLineItem.product}" p_imagecheckout="${true}" p_email="${true}"/>
+																														<isdisplayvariantnewpaksize p_product="${productLineItem.product}"  p_imagecheckout="${true}" p_email="${true}"/>
+
+																													</div>
+																													<iscomment>Display product line and product using module</iscomment>
+																												</div>
+										  																	</td>
+		                                  																	<td width="180">
+																												<font face="Roboto,Arial,sans-serif">
+																													<span style="font-size: 10px; color: rgb(51, 51, 51); font-weight: bold;">
+																														<isprint value="${productLineItem.productName}"/>
+																													</span>
+																												</font>
+																				                                <isif condition="${ productLineItem != null && !empty(productLineItem) && productLineItem.shippingLineItem !=null && !empty(productLineItem.shippingLineItem)  && productLineItem.shippingLineItem.surcharge}">
+																					                                <div>
+																						                                <span style="font-size: 11px; color: #FF0000; font-weight: bold;">Shipping Surcharge:</span>
+																							                            <span style="font-size: 11px; color: #FF0000; font-weight: bold;"><isprint value="${productLineItem.quantity * productLineItem.shippingLineItem.basePrice}"/></span></font>
+																						                            </div>
+																												</isif>
+		                                  																		<isif condition="${productLineItem.product != null && productLineItem.product.isVariant()}">
+				                            																		<isloop items="${productLineItem.product.variationModel.attributeDefinitions}" var="VA">
+																														<isset name="SelectedVariationValue" value="${productLineItem.product.variationModel.getSelectedValue(VA)}" scope="page"/>
+																					                               	  <div>
+																						                                	<font face="Roboto,Arial,sans-serif"> <span style="font-size: 10px; color: rgb(153, 153, 153); font-weight: bold; font-style: italic;">${VA.displayName}:</span> <span style="font-size: 10px; color: rgb(51, 51, 51); font-weight: bold;">
+																						                                  	<isif condition="${SelectedVariationValue != null}">
+																																<isprint value="${SelectedVariationValue.displayValue}"/>
+																															<iselse>
+																																-
+																															</isif>
+																						                                  	</span></font>
+																					                                  </div>
+				                               																		</isloop>
+																												</isif>
+																												<div>
+																													<font face="Roboto,Arial,sans-serif">
+																							                            <span style="font-size: 11px; color: rgb(153, 153, 153); font-weight: bold;">item:</span>
+																							                            <span style="font-size: 11px; color: rgb(51, 51, 51); font-weight: bold;"><isprint value="${productLineItem.productID}"/></span>
+																						                            </font>
+																					                            </div>
+		                                  																	</td>
+			                                  																<td width="73" align="center"><font face="Roboto,Arial,sans-serif"> <span style="font-size: 10px; color: rgb(51, 51, 51); font-weight: bold;"><isprint value="${productLineItem.quantity}"/></span></font></td>
+			                                  																<td width="105" valign="middle" align="center">
+			                                  																	<font face="Roboto,Arial,sans-serif">
+			                                  																		<span style="font-size: 14px; color: #333; font-weight: bold;">
+			                                  																			<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
+
+																														<isset name="lineItem" value="${productLineItem}" scope="page"/>
+																														<isif condition="${lineItem.product != null}">
+																															<iscomment>
+																															StandardPrice:  quantity-one unit price from the configured list price book.
+																															SalesPrice:     product line item base price.
+																															If these are different, then we display crossed-out StandardPrice and also SalesPrice.
+																															</iscomment>
+
+																															<iscomment>Get the price model for this product.</iscomment>
+																															<isset name="PriceModel" value="${lineItem.product.getPriceModel()}" scope="page"/>
+
+																															<iscomment>Get StandardPrice from list price book.</iscomment>
+																															<isinclude template="product/components/standardprice"/>
+
+																															<iscomment>Get SalesPrice from line item itself.</iscomment>
+																															<isif condition="${lineItem.bonusProductLineItem}">
+																																<span class="bonusitem">${Resource.msg('global.bonus','locale',null)}</span>
+																															<iselse/>
+																																<isif condition="${lineItem.priceAdjustments.length > 0}">
+																																	<isset name="SalestotalPrice" value="${lineItem.getAdjustedPrice()}" scope="page"/>
+																																<iselse/>
+																																	<isset name="SalestotalPrice" value="${lineItem.basePrice*lineItem.quantityValue}" scope="page"/>
+																																</isif>
+																															</isif>
+
+																															<iscomment>Display the item total.</iscomment>
+																															<isif condition="${StandardPrice.available && StandardPrice*lineItem.quantityValue > SalestotalPrice}">
+																																<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
+																																<div class="price">
+																																	<div class="discountprice">
+																																		<div class="standardprice" style="text-decoration: line-through;color: #999999;">${session.currency.getSymbol()} <isprint value="${StandardPrice*lineItem.quantityValue}"/></div>
+																																	</div>
+																																</div>
+																															</isif>
+																														</isif>
+																														<isif condition="${productLineItem.bonusProductLineItem}">
+
+												    																	<iselse/>
+																													    	<isif condition="${StandardPrice.available && StandardPrice*lineItem.quantityValue > SalestotalPrice}">
+																													    		<span style="color:#E80000;">
+																													    			<isif condition="${productLineItem.adjustedPrice>0}">
+																													    				<isprint value="${productLineItem.adjustedPrice}"/>
+																													    			<iselse/>
+																													    				FREE
+																													    			</isif>
+																													    		</span>
+																													    	<iselse/>
+																													    		<isprint value="${productLineItem.adjustedPrice}"/>
+																													    	</isif>
+																												            <isif condition="${productLineItem.optionProductLineItems.size() > 0}">
+																																<isloop items="${productLineItem.optionProductLineItems}" var="optionLI">
+																																	<p>+ <isprint value="${optionLI.adjustedPrice}"/></p>
+																																</isloop>
+																															</isif>
+																														</isif>
+			                                   																		</span>
+			                                   																	</font>
+			                                   																</td>
+																										</tr>
+																									</table>
+																								</td>
+	                                														</tr>
+	                                														<tr><td style="border-top:1px solid #ccc;" colspan="4"></td></tr>
+													                                	</isloop>
+	                                													<tr>
+	                                  														<td colspan="3"><div style="background: url(&quot;../RapalaEmailer/row-shading.jpg&quot;) repeat-x scroll 0% 0% transparent; height: 26px;"></div></td>
+	                                													</tr>
+																					</isloop>
+									 												<isloop items="${Order.getCouponLineItems()}" var="couponline" status="shipmentloopstate">
+																						<tr class="tablerow summary-rowcoupons">
+																							<td class="summary-promotion" width="175">
+																								<div class="prod_image" style="text-align:center;width:175">
+														  											<img src="${URLUtils.httpsStatic('/images/promocode.png')}" alt="Promo Code" />
+																								</div>
+																							</td>
+																							<td width="180">
+																								<div class="product">
+																									<isif condition="${couponline.applied}">
+																										<isloop items="${couponline.priceAdjustments}" var="Promo" status="couponcount" >
+																											<isif condition="${couponcount.count==1}"><div class="discountinfo"><isprint value="${Promo.lineItemText}"/></div></isif>
+																										</isloop>
+																									</isif>
+																								</div>
+																							</td>
+																							<td class="quantitycolumn" width="73" align="center">1</td>
+																							<td class="itemtotalcolumn coupontotal" width="105" align="center">
+																								<isif condition="${couponline.applied}">
+																									<isloop items="${couponline.priceAdjustments}" var="Promo" status="couponcount" >
+																										 <isif condition="${Promo.getPromotion().getPromotionClass() == dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT}"	>
+																											<isif condition="${couponcount.count==1}"><div class="discount_amount discount_amount-prod" style="color:#E80000; font-weight:bold;">${Resource.msg('global.applied','locale',null)}</div></isif>
+																										<iselse/>
+																											<isif condition="${couponcount.count==1}"><div class="discount_amount" style="color: #e80000; font-weight:bold;"><isprint value="${Promo.price}"/></div></isif>
+																										</isif>
+																									</isloop>
+																								</isif>
+																							</td>
+																						</tr>
+																					</isloop>
+	                                											</tbody>
+	                            											</table>
+	                            										</td>
+	                          										</tr>
+	                        									</tbody>
+	                      									</table>
+	                      								</td>
+	                      								<td width="17" bgcolor="#ffffff">&nbsp;</td></tr>
+	                   									<tr>
+	                    									<td height="9" bgcolor="#ffffff" colspan="5">&nbsp;</td>
+	                    								</tr>
+	                       								<tr>
+	                        								<td width="18" bgcolor="#ffffff">&nbsp;</td>
+	                    									<td height="0" colspan="3" style="border-top:8px solid #f5f5f5;"></td>
+	                     									<td width="17" bgcolor="#ffffff">&nbsp;</td>
+	                    								</tr>
+	                     								<tr>
+	                      									<td height="10" colspan="5" align="center" valign="center">
+																<table style="width: 175px;height:25px;background:#2b2b2b; " align="center" valign="center">
+																	<tr>
+																		<td align="center" valign="center">
+																			<a style="text-decoration:none; text-align: center;border: 0 none;color: #fff;cursor: pointer;font-size: 11px;line-height:25px;  text-transform:uppercase;" title="Visit Customer Service" href="https://www.rapala.com/on/demandware.store/Sites-rapala-Site/default/Folder-Show?fdid=rapala-customer-service&id=1"><font face="Roboto,Arial,sans-serif">Visit Customer Service</font></a>
+																		</td>
+																	</tr>
+																</table>
+	                      									</td>
+	                    								</tr>
+	                    								<tr>
+	                    									<td height="9" bgcolor="#ffffff" colspan="5">&nbsp;</td>
+									                    </tr>
+	                      								<tr>
+	      													<td colpsan="5" height="10" colspan="5" align="center" valign="center">
+	  															<table>
+															  		<isset name="isAssignedToVIP" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isVIP(pdict.CurrentCustomer)}" scope="page"/>
+																	<isset name="knifeAvailable" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isKnifeAvailable(Order)}" scope="page"/>
+																	<isif condition="${knifeAvailable == true}">
+															      		<tr>
+															      			<td width="18" bgcolor="#ffffff">&nbsp;</td>
+	      																	<td colspan="3"><span style="font-size:12px; color:#666;"> <font face="Roboto,Arial,sans-serif" style="width: 560px;">Thank you for verifying that you are 18 years of age or older, and for taking full responsibility for compliance with all applicable federal, state, and local laws, regulations and other restrictions regarding your knife purchase(s).</font></span></td>
+	      																	<td width="17" bgcolor="#ffffff">&nbsp;</td>
+															      		</tr>
+															      	</isif>
+															      	<isif condition="${isAssignedToVIP == true}">
+															         	<tr>
+																         	<td width="18" bgcolor="#ffffff">&nbsp;</td>
+																         	<td colspan="3"><span style='font-size:12px; color:#666;'> <font face="Roboto,Arial,sans-serif" style="width: 560px;">Thank you for agreeing to the Terms and Conditions of the Rapala VIP Program.</font></span></td>
+															         		<td width="17" bgcolor="#ffffff">&nbsp;</td>
+															         	</tr>
+															        </isif>
+	  															</table>
+	      													</td>
+	  													</tr>
+	                    								<tr>
+	                    									<td height="9" bgcolor="#ffffff" colspan="5">&nbsp;</td>
+	                    								</tr>
+	                    							</tbody>
+	                    						</table>
+	                    					</td>
+	                    				</tr>
+	              						<tr>
+	                						<td width="561" valign="top" height="25" colspan="2"><img width="561" height="25" border="0" src="${URLUtils.httpsStatic('/images/page-shadow.jpg')}" style="display:block"></td>
+	              						</tr>
+								         <tr style="height:15.0pt">
+											<td style="padding:0cm 0cm 22.5pt 0cm;height:15.0pt">
+												<span style="font-size:8.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">
+													<a href="https://www.rapala.com/content/rapala-shipping/customer-tracking-my-order.html?fdid=rapala-shipping&id=1" target="_blank" title="Track My Order">
+														<strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Track My Order</span></strong>
+													</a>&nbsp;|
+													&nbsp;<a href="https://www.rapala.com/folder?fdid=rapala-my-order&id=1"  target="_blank" title="Order FAQs"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Order FAQs</span></strong></a>&nbsp;|&nbsp;
+													<a href="https://www.rapala.com/content/rapala-shipping/customer-shipping-methods-costs-timing.html?fdid=rapala-shipping&id=1" target="_blank" title="Shipping FAQs"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Shipping FAQs</span></strong></a>&nbsp;|&nbsp;
+													<a href="https://www.rapala.com/folder?fdid=rapala-returns-exchanges&id=1" target="_blank" title="Returns FAQs"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Returns FAQs</span></strong></a>&nbsp;|&nbsp;
+													<a href="https://www.rapala.com/content/rapala-warranties/customer-warranty-information.html?fdid=rapala-warranties&id=1" target="_blank" title="Warranty FAQs"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Warranty FAQs</span></strong></a>&nbsp;|&nbsp;
+													<a href="https://www.rapala.com/folder?fdid=rapala-customer-service&id=1" target="_blank" title="Customer Service"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Customer Service</span></strong></a>
+													<br>
+													<br>
+													<a href="https://www.rapala.com/content/rapala-legal/customer-terms-conditions.html?fdid=rapala-legal&id=1" target="_blank" title="Terms of Use"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Terms & Conditions</span></strong></a>&nbsp;|&nbsp;
+													<a href="https://www.rapala.com/content/rapala-legal/customer-privacy-security.html?fdid=rapala-legal&id=1" target="_blank" title="Privacy Policy"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Privacy Policy</span></strong></a>
+													<br>
+													<br>
+													Rapala.com is operated by Rapala USA at 10395 Yellow Circle Drive, Minnetonka, Minnesota 55343.<br><br>©1961-${dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString()} Rapala USA. Rapala®, VMC®, Luhr Jensen®, Sufix®, Storm Lures®, ICE FORCE®, StrikeMaster®, MarCum Technologies®, Trigger X®, Terminator®, Blue Fox®, Williamson Lures® are trademarks of Rapala USA. All Rights Reserved.
+												</span>
+											</td>
+										</tr>
+	              						<tr>
+	                						<td width="561" height="2"  colspan="2">&nbsp;</td>
+	                					</tr>
+	              					</tbody>
+	              				</table>
+	              			</td>
+	          				<td width="18">&nbsp;</td>
+	          			</tr>
+	          		</tbody>
+	          	</table>
+	          </td>
+	  		</tr>
+	  	</tbody>
+	  </table>
+	</body>
+</html>

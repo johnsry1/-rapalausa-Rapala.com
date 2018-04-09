@@ -1,0 +1,173 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+
+<isinclude template="util/modules"/>
+
+<div id="alert-message">
+    <div class="non-usa-alert hide">
+        <p>
+            <img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/>
+            <isprint value="${Resource.msg('global.nonusaalert.message','locale',null)}" encoding="off" />
+            <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a>
+        </p>
+        <div class="close-alert-message">
+            <a href="#" id="close-non-us-alert">
+                <issvghelper icon="close"/>
+                <span>Close</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="browser-compatibility-alert hide">
+	<p><isprint value="${Resource.msg('tlsalert.increased','locale',null)}" encoding="off" /></p>
+	<p><isprint value="${Resource.msg('tlsalert.detected','locale',null)}" encoding="off" /><span class="browser_version"></span>
+	<span><isprint value="${Resource.msg('tlsalert.outdated','locale',null)}" encoding="off" /></span></p>
+	<p>${Resource.msg('tlsalert.chrome','locale',null)}<a href="https://www.google.com/chrome/browser/desktop/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.google.com/chrome/answer/95414?hl=en">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
+	<p>${Resource.msg('tlsalert.firefox','locale',null)}<a href="https://www.mozilla.org/en-US/firefox/new/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.mozilla.org/en-US/kb/update-firefox-latest-version">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
+	<p>${Resource.msg('tlsalert.safari','locale',null)}<a href="https://support.apple.com/en-us/HT204416">${Resource.msg('tlsalert.download','locale',null)}</a><a href=" https://www.apple.com/support/mac-apps/safari/">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
+	<p>${Resource.msg('tlsalert.edge','locale',null)}<a href="https://www.microsoft.com/en-us/windows/windows-10-upgrade">${Resource.msg('tlsalert.download','locale',null)}</a><a href="http://windows.microsoft.com/en-us/windows-10/upgrade-to-windows-10-faq">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
+	<p>${Resource.msg('tlsalert.ie','locale',null)}<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">${Resource.msg('tlsalert.download','locale',null)}</a><a href="http://windows.microsoft.com/en-us/internet-explorer/which-version-am-i-using#ie=other">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
+</div>
+
+<isinclude template="components/header/sessiondebug"/>
+
+<div id="headerwrapper">
+	<div id="header">
+		<div class="wrapper">
+			<div class="row column1">
+				<div class="column">
+					<div id="topcell" class="cell">
+						<button class="menu-toggle mobileHide">
+                            <issvghelper icon="menu"/>
+                            <issvghelper icon="close"/>
+							<span class="menu-text">Menu</span>
+						</button>
+						<isset name="brand" value="${0}" scope="page" />
+						<isif condition="${'rapala' == session.custom.currentSite}">
+						<isset name="brand" value="${1}" scope="page" />
+							<iselseif condition="${'sufix' == session.custom.currentSite}">
+						<isset name="brand" value="${2}" scope="page" />
+							<iselseif condition="${'triggerx' == session.custom.currentSite}">
+						<isset name="brand" value="${3}" scope="page" />
+							<iselseif condition="${'storm' == session.custom.currentSite}">
+						<isset name="brand" value="${4}" scope="page" />
+							<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+						<isset name="brand" value="${5}" scope="page" />
+							<iselseif condition="${'vmc' == session.custom.currentSite}">
+						<isset name="brand" value="${6}" scope="page" />
+							<iselseif condition="${'terminator' == session.custom.currentSite}">
+						<isset name="brand" value="${7}" scope="page" />
+							<iselseif condition="${'bluefox' == session.custom.currentSite}">
+						<isset name="brand" value="${8}" scope="page" />
+							<iselseif condition="${'williamson' == session.custom.currentSite}">
+						<isset name="brand" value="${9}" scope="page" />
+							<iselseif condition="${'marcum' == session.custom.currentSite}">
+						<isset name="brand" value="${10}" scope="page" />
+							<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+						<isset name="brand" value="${11}" scope="page" />
+							<iselseif condition="${'iceforce' == session.custom.currentSite}">
+						<isset name="brand" value="${20}" scope="page" />
+						</isif>
+
+						<div class="logo mobileHide ${session.custom.currentSite}">
+							<a href="${URLUtils.https('Home-Show','id',brand.toString())}" ></a>
+						</div>
+
+						<div class="logo desktopHide">
+							<a href="${URLUtils.https('Home-Show','id',1)}" ></a>
+						</div>
+
+						<div class="headercustomerinfo">
+							<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
+							<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
+							<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
+	    					<div id="minicart" class="minicart">
+	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
+	    					</div><!-- END:minicart -->
+                            <div class="change-region">
+                                <div class="currency-flag">
+                                    <span>
+                                        <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-eu.png')}" alt="${session.getCurrency().getSymbol()}">
+                                    </span>
+                                </div>
+                                <span class="change-regionnew currency-selector">
+                                    <a>${session.getCurrency().getSymbol()}</a>
+                                    <div class="domainswitch-header">
+                                        <div class="top_arrow"></div>
+                                        <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
+                                        <isloop items="${availableCurrencies}" var="currency">
+                                            <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
+                                            <ul>
+                                                <li><a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}"><isprint value="${currency}"/> ${currencyObj.getSymbol()}</a></li>
+                                            </ul>
+                                        </isloop>
+                                     </div>
+                                </span>
+                            </div>
+	    				</div>
+					</div><!-- END: cell -->
+				</div>
+			</div>
+		</div><!-- END: wrapper -->
+		<isinclude template="components/header/brandlist">
+		<div class="banner_prostaff">
+			<div class="wrapper handle-non-us-vh">
+				<div class="row column1">
+					<div class="column">
+						<div class="cell">
+		 					<iscomment>SLOT CONFIGURATION:  SLOT/ID: global header-banner</iscomment>
+							<div class="headerbanner">
+		   						<isslot id="global_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+							</div><!-- END: headerbanner -->
+								<iscomment>SLOT CONFIGURATION:  SLOT/ID: brand-specific header-bar</iscomment>
+							<div class="headerbanner">
+								<isif condition="${'rapala' == session.custom.currentSite}">
+									<isslot id="brand_rapala_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'sufix' == session.custom.currentSite}">
+									<isslot id="brand_sufix_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'triggerx' == session.custom.currentSite}">
+									<isslot id="brand_triggerx_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'storm' == session.custom.currentSite}">
+									<isslot id="brand_storm_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+									<isslot id="brand_luhrjensen_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'vmc' == session.custom.currentSite}">
+									<isslot id="brand_vmc_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'terminator' == session.custom.currentSite}">
+									<isslot id="brand_terminator_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'bluefox' == session.custom.currentSite}">
+									<isslot id="brand_bluefox_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'williamson' == session.custom.currentSite}">
+									<isslot id="brand_williamson_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'marcum' == session.custom.currentSite}">
+									<isslot id="brand_marcum_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+									<isslot id="brand_strikemaster_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'iceforce' == session.custom.currentSite}">
+									<isslot id="brand_iceforce_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								<iselseif condition="${'otter' == session.custom.currentSite}">
+									<isslot id="brand_otter_headerbanner" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+								</isif>
+							</div>
+
+						</div><!-- END: cell -->
+					</div><!-- END: column -->
+				</div><!-- END: row column1 -->
+				<div class="clear"><!-- FLOAT CLEAR --></div>
+			</div><!-- END: wrapper -->
+			<div class="wrapper prostaffwrapper">
+				<isif condition = "${pdict.CurrentCustomer.authenticated}">
+					<isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
+					<isif condition="${!empty(badgeText) && badgeText!=null}">
+						<isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetails','BT',badgeText)}"/>
+					</isif>
+				</isif>
+			</div>
+		</div>
+		<div class="clear"><!-- FLOAT CLEAR --></div>
+	</div><!-- END: header -->
+	<div class="clear"><!-- FLOAT CLEAR --></div>
+</div><!--  END: headerwrapper -->
+<iscomment>Including Google Analytics and GTM Standard Tagging GAcommented</iscomment>
+
+<isinclude template="universal/universalanalytics" />

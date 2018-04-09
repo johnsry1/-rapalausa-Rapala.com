@@ -18,22 +18,23 @@ function showNewFlag(product:Product) : Boolean
 	var showNew : boolean;
 	var rightNow = dw.util.Calendar().getTime();
 	showNew = false;
-	
-	if(!product.variant) {
-		if((product.custom.newUntil != null) && (product.custom.newUntil > rightNow)) {
+	if (product != null) {
+		if(!product.variant) {
+			if((product.custom.newUntil != null) && (product.custom.newUntil > rightNow)) {
+				showNew = true;
+			}
+		}
+		else if(product.variationModel.master.custom.newUntil != null && product.variationModel.master.custom.newUntil > rightNow) {
 			showNew = true;
 		}
-	}
-	else if(product.variationModel.master.custom.newUntil != null && product.variationModel.master.custom.newUntil > rightNow) {
-		showNew = true;
-	}
-	if(showNew == false && product.variant
-		 && 'newSnipeAttributeList' in dw.system.Site.current.preferences.custom 
-	     && dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
-		for ( var index : String in dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
-			var attr = dw.system.Site.current.preferences.custom.newSnipeAttributeList[index];
-			if(product.custom[attr] != null && product.custom[attr] > rightNow) {
-				showNew = true;
+		if(showNew == false && product.variant
+			 && 'newSnipeAttributeList' in dw.system.Site.current.preferences.custom 
+		     && dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
+			for ( var index : String in dw.system.Site.current.preferences.custom.newSnipeAttributeList) {
+				var attr = dw.system.Site.current.preferences.custom.newSnipeAttributeList[index];
+				if(product.custom[attr] != null && product.custom[attr] > rightNow) {
+					showNew = true;
+				}
 			}
 		}
 	}

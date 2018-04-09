@@ -1,0 +1,95 @@
+/**
+ * Resource helper
+ *
+ */
+var Currency = require('dw/util/Currency');
+var Site = require('dw/system/Site');
+var ContentMgr = require('dw/content/ContentMgr');
+var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
+
+/* Core Resource File*/
+importScript("app_rapala_core:util/Resource.ds");
+
+/* Script Modules */
+var AdyenHelper = require("*/cartridge/scripts/util/AdyenHelper");
+
+function SiteResourceHelper() {}
+/**
+ * Get the client-side constants
+ * @param pageContext
+ * @returns {Object} An objects key key-value pairs holding the constants
+ */
+SiteResourceHelper.getConstants = function(pageContext) {
+    return ResourceHelper.getConstants();
+}
+/**
+ * Get the client-side resources of a given page
+ * @param pageContext
+ * @returns {Object} An objects key key-value pairs holding the resources
+ */
+SiteResourceHelper.getResources = function(pageContext) {
+    var Resource = require('dw/web/Resource');
+
+    // application resources
+    var resources = ResourceHelper.getResources();
+
+    // additional resources
+    resources["ADYEN_CC_VALIDATE"] = Resource.msg('adyen.creditcard', 'adyen', null);
+
+    return resources;
+}
+
+/**
+ * Get the client-side URLs of a given page
+ * @returns {Object} An objects key key-value pairs holding the URLs
+ */
+SiteResourceHelper.getUrls = function(pageContext) {
+    var URLUtils = require('dw/web/URLUtils');
+    var Resource = require('dw/web/Resource');
+
+    // application urls
+    var urls = ResourceHelper.getUrls();
+    
+    //Dymanic address update url
+    urls.getStateHtml = URLUtils.url('Avs-GetStateHtml').toString();
+    urls.getPhoneHtml = URLUtils.url('Avs-GetPhoneHtml').toString();
+    urls.contactUsSubmit = URLUtils.https('CustomerService-Submit').toString();
+    urls.customerHeader = URLUtils.https('Avs-IncludeRegisteredHeaderCustomerInfo').toString();
+    
+    return urls;
+}
+/**
+ * Get the client-side preferences of a given page
+ * @returns {Object} An objects key key-value pairs holding the preferences
+ */
+SiteResourceHelper.getPreferences = function(pageContext) {
+    var cookieHintAsset = ContentMgr.getContent('cookie_hint');
+    
+    var prefs = ResourceHelper.getPreferences();
+    
+    prefs.ADYEN_CSE_ENABLED = AdyenHelper.getAdyenCseEnabled();
+    
+    return prefs;
+}
+/**
+ * Get the client-side preferences of a given page
+ * @returns {Object} An objects key key-value pairs holding the preferences
+ */
+SiteResourceHelper.getSessionAttributes = function(pageContext) {
+    return ResourceHelper.getSessionAttributes();
+}
+/**
+ * Get the client-side user settings
+ * @returns {Object} An objects key key-value pairs holding the settings
+ */
+SiteResourceHelper.getUserSettings = function(pageContext) {
+    return ResourceHelper.getUserSettings();
+}
+
+/**
+ * Get the client-side Javascript settings
+ * @returns {Object} An objects key key-value pairs holding the settings
+ */
+SiteResourceHelper.getScriptSettings = function (pageContext) {
+    return ResourceHelper.getScriptSettings();
+}

@@ -41,6 +41,30 @@ function setSessionCurrency() {
     });
 }
 
+function updateCurrency() {
+    var currencyCode = request.httpParameterMap.currencyCode.value;
+    var Response = require('~/cartridge/scripts/util/Response');
+    
+    var currency = Currency.getCurrency(currencyCode);
+    if (currency) {
+        session.setCurrency(currency);
+        
+        Transaction.wrap(function () {
+            var currentCart = Cart.get();
+            if (currentCart) {
+                currentCart.updateCurrency();
+                currentCart.calculate();
+            }
+        });
+        
+    }
+    
+    Response.renderJSON({
+        success: true
+    });
+    
+}
+
 /*
  * Module exports
  */
@@ -50,3 +74,6 @@ function setSessionCurrency() {
  */
 /** @see module:controllers/Currency~setSessionCurrency */
 exports.SetSessionCurrency = guard.ensure(['get'], setSessionCurrency);
+
+/** @see module:controllers/Currency~updateCurrency */
+exports.UpdateCurrency = guard.ensure(['get'], updateCurrency);

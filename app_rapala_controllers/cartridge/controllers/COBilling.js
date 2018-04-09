@@ -1161,3 +1161,9 @@ exports.ClearCCForm = guard.ensure([], clearCCForm);
 /** Billing redirect
 * @see module:controllers/COBilling~ReturnToBIlling */
 exports.ReturnToBIlling = guard.ensure([], returnToBIlling);
+
+exports.ResetPaymentForms = resetPaymentForms;
+exports.ValidateBilling = validateBilling;
+exports.HandleCoupon = handleCoupon;
+exports.RedeemGiftCertificate = redeemGiftCertificate;
+exports.ReturnToForm = returnToForm;

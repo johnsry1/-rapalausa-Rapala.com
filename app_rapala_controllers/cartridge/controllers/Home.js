@@ -171,9 +171,18 @@ function includeCheckOutHeaderCustomerInfo() {
 function includeMegamenuCustomerInfo() {
     app.getView().render('components/header/megamenu_account_show');
 }
+
+function internationalEUPage() {
+    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", 'rapalaEU');
+    app.getView({
+        distributorCountries : distributorCountries
+    }).render('content/home/internationalEU');
+    
+}
 /*
  * Export the publicly available controller methods
  */
+exports.ChangeRegionEUPage = guard.ensure(['get'], internationalEUPage);
 /** Renders the home page.
  * @see module:controllers/Home~show */
 exports.Show = guard.ensure(['get'], show);

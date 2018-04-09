@@ -1,0 +1,71 @@
+importPackage(dw.system);
+importPackage(dw.util);
+importPackage(dw.catalog);
+
+var GetStoresJSON = function(stores : LinkedHashMap) {
+    var storesString : String = '';
+
+    if (!empty(stores)) {
+        var storesIter : Iterator = stores.keySet().iterator(),
+            Store      : dw.catalog.Store   = null;
+
+        // make sure we're not going to violate the api.jsStringLength quota - warnings start at 600,000
+        var stringLimit = 598500;
+
+        while (storesIter.hasNext() && storesString.length < stringLimit) {
+            Store = storesIter.next();
+
+            var storeString : String = '"' + Store.ID + '": ';
+            var storeObj = {
+                name        : !empty(Store.name) ? Store.name : '',
+                storeSecondaryName : !empty(Store.custom['storeSecondaryName']) ? Store.custom['storeSecondaryName'] : '',
+                address1    : !empty(Store.address1) ? Store.address1 : '',
+                address2    : !empty(Store.address2) ? Store.address2 : '',
+                postalCode  : !empty(Store.postalCode) ? Store.postalCode : '',
+                website     : !empty(Store.custom['website']) ? Store.custom['website'] : '',
+                city        : !empty(Store.city) ? Store.city : '',
+                stateCode   : !empty(Store.stateCode) ? Store.stateCode : '',
+                countryCode : !empty(Store.countryCode.value) ? Store.countryCode.value : '',
+                phone       : !empty(Store.phone) ? Store.phone : '',
+                fax         : !empty(Store.fax) ? Store.fax : '',
+                email       : !empty(Store.email) ? Store.email : '',
+                image       : !empty(Store.image) ? Store.image.getURL().toString() : '',
+                storeHours  : !empty(Store.storeHours) ? StringUtils.decodeString(Store.storeHours.markup,StringUtils.ENCODE_TYPE_HTML) : '',
+                storeEvents : !empty(Store.storeEvents) ? StringUtils.decodeString(Store.storeEvents.markup,StringUtils.ENCODE_TYPE_HTML) : '',
+                latitude    : !empty(Store.latitude) ? StringUtils.formatNumber(Store.latitude, '##0.##########') : '',
+                longitude   : !empty(Store.longitude) ? StringUtils.formatNumber(Store.longitude, '##0.##########') : ''
+            };
+
+            // if the string length of a single store surpasses the quota length
+            // or if the combined store + stores surpasses the quota length, exit
+            var storeLen = storeString.length + getObjStringLength(storeObj);
+            if (storeLen > stringLimit || storeLen + storesString.length > stringLimit ) {
+                break;
+            }
+            storeString += JSON.stringify(storeObj).toString();
+
+            // add this store to the stores string
+            if (!empty(storesString)){
+                storesString += ',';
+            }
+            storesString += storeString;
+        }
+    }
+
+    return '{"stores":{' + storesString + '}}';
+};
+
+// this function loops every property in the object and gets the overall string length
+function getObjStringLength(storeObj : Object) {
+    var length = 0;
+    for (var prop in storeObj) {
+        // skip loop if the property is from prototype
+        if (!storeObj.hasOwnProperty(prop)) continue;
+
+        // your code
+        if (!empty(storeObj[prop])) {
+            length += storeObj[prop].length;
+        }
+    }
+    return length;
+}

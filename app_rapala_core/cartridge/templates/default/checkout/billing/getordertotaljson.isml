@@ -5,11 +5,11 @@
 {
 	<isscript>
 	        var LineItemCtnr = pdict.Basket;
-			var giftCertTotal : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency());
-			var allotmentAmt : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency());
+			var giftCertTotal : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
+			var allotmentAmt : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
 			var gcPaymentInstrs : dw.util.Collection = pdict.Basket.getGiftCertificatePaymentInstruments();
 			var iter : dw.util.Iterator = gcPaymentInstrs.iterator();
-			var orderPI : dw.order.OrderPaymentInstrument = null;	
+			var orderPI : dw.order.OrderPaymentInstrument = null;
 			var creditapplied: Boolean=false;
 			while( iter.hasNext() )
 			{
@@ -21,10 +21,10 @@
 			while(iterTemp.hasNext()){
 				orderPI = iterTemp.next();
 				if(orderPI.getPaymentMethod()=='ALLOTMENT'){
-					allotmentAmt = allotmentAmt.add(orderPI.getPaymentTransaction().getAmount());					
+					allotmentAmt = allotmentAmt.add(orderPI.getPaymentTransaction().getAmount());
 				}
 			}
-			var ordertotal : dw.value.Money = new dw.value.Money(0.0, dw.system.Site.getCurrent().getDefaultCurrency());
+			var ordertotal : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
 			if(LineItemCtnr.totalGrossPrice.available){
 			    ordertotal=LineItemCtnr.totalGrossPrice.subtract(giftCertTotal);
 			    if(allotmentAmt > 0){
@@ -36,9 +36,9 @@
 				 if(allotmentAmt > 0){
 			    	ordertotal=ordertotal.subtract(allotmentAmt);
 			    }
-			} 
-	</isscript> 
-		"Total": { 
+			}
+	</isscript>
+		"Total": {
 
 			    "OrderTotal": "<isprint value="${ordertotal}"/>"
 		}

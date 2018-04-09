@@ -1,0 +1,107 @@
+<isinclude template="util/modules"/>
+	<div class="registration">			
+		<form action="${URLUtils.https('Account-HeaderRegistrationForm')}" method="post" class="header-signup">
+			<input type="hidden" name="ltkSubscriptionCode" value="accountcreatedropdown" class="createanaccountbutton"/>
+			<input type="hidden" name="source" value="Account Create Dropdown" />
+			<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+			<fieldset>
+				<isscript>
+					var attributes = {
+						disabled: 'disabled'
+					};
+				</isscript>
+				<div class="custom_signup">
+				<div class="top_arrow"></div>
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
+					<div class="formfield formfield_name floatleft create_text" >
+							<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.firstname}" type="input" requiredtext="${Resource.msg('forms.address.firstname.missing','forms',null)}"/>
+					</div><!-- END: firstname -->
+					
+					<div class="formfield formfield_name floatleft create_text" >
+							<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.lastname}" type="input" requiredtext="${Resource.msg('forms.address.lastname.missing','forms',null)}"/>
+					</div><!-- END: lastname -->
+				<iselse/>	
+					<div class="formfield formfield_name floatleft create_text" >
+						<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.firstname}" type="input" attributes="${attributes}" requiredtext="${Resource.msg('forms.address.firstname.missing','forms',null)}"/>
+					</div><!-- END: firstname -->
+					
+					<div class="formfield formfield_name floatleft create_text">
+							<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.lastname}" type="input" attributes="${attributes}"  requiredtext="${Resource.msg('forms.address.lastname.missing','forms',null)}"/>
+					</div><!-- END: lastname -->
+				</isif>
+
+				<div class="formfield formfield_country floatleft" >
+					<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.country}" type="select" />
+				</div><!-- END: country -->
+				
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
+					<div class="formfield  formfield_email first floatleft create_text"  >
+						<isinputfield formfield="${pdict.CurrentForms.profileheader.customer.email}" fieldClass= "accountemail guestemail" type="input" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+					</div><!-- END: email -->
+					<div class="formfield formfield_pwd floatleft first passwordDiv create_text" >			
+						<isinputfield formfield="${pdict.CurrentForms.profileheader.login.password}" type="password" dynamicname="true" fieldClass="c_password" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+					</div>
+					<div class="formfield formfield_pwd norightmargin floatright create_text" >
+						<isinputfield formfield="${pdict.CurrentForms.profileheader.login.passwordconfirm}" type="password" dynamicname="true" fieldClass="cm_password" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}" />
+						<div class="clear"><!-- FOAT CLEAR --></div>
+					</div>
+				<iselse/>
+					<div class="formfield  formfield_email first floatleft create_text" >
+						<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attributes="${attributes}"  requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+					</div><!-- END: email -->
+				</isif>
+				
+				<div class="form-row">
+							<div class="emailsignupcheckbox create_email_checkbox">
+								<div class="custom-checkbox"><div class="custom-link active"></div><isinputfield formfield="${pdict.CurrentForms.profileheader.customer.addtoemaillist}" type="checkbox" /></div>
+								<div class="sample-section">
+									<a class="seesamples"><isprint value="${Resource.msg('accountsignup.seesample','account',null)}" /></a>
+								    <div class="sample_mail_main">
+								    	<div class="top_arrow"></div>
+										<div class="sample_mail">
+										  <div class="sample_head">
+												<div class="sample_img">
+													<img src="/on/demandware.static/Sites-rapala-Site/-/default/v1407833495128/images/see-sample.png">
+												</div>
+												<div class="sample_text"> <h3 class="sample_header_text"><isprint value="${Resource.msg('global.sample1','locale',null)}" /> &amp; <isprint value="${Resource.msg('global.sample2','locale',null)}" /></h3>
+													<p><isprint value="${Resource.msg('global.samplemessage1','locale',null)}" /></p>
+													<p class="second-text"><isprint value="${Resource.msg('global.samplemessage2','locale',null)}" /> 
+														<span>
+														<isprint value="${Resource.msg('global.samplemessage3','locale',null)}" /><a class="privacy-practices" href="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}"><isprint value="${Resource.msg('global.samplemessage4','locale',null)}" /></a>
+														</span>
+													</p>
+												</div>
+										    </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<iscomment>
+							<div class="privacy-care">
+								<span>Please click here for more information on our </span> 
+								<a title="${Resource.msg('global.readprivacypolicy','locale',null)}" href="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}">${Resource.msg('global.privacypractices','locale',null)}</a>.
+							</div>
+							 </iscomment>
+							 
+							 <div class="create_Agree">
+								 <p>
+									 <isprint value="${Resource.msg('global.agreecreateaccount','locale',null)}" />
+									 <a href="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}"><isprint value="${Resource.msg('global.privacypractices','locale',null)}" /></a> <isprint value="${Resource.msg('global.and','locale',null)}" /> 
+									 <a href="${URLUtils.https('Page-Show', 'cid', 'customer-terms-conditions')}"><isprint value="${Resource.msg('global.viptermsandconditions','locale',null)}" /></a>
+								 </p>
+							 </div>
+							<div class="formactions floatright create-account-btn">
+								<button type="button" class="register-button create-account greybutton"  value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profileheader.confirm.htmlName}"><span><isprint value="${Resource.msg('global.createaccount','locale',null)}" /></span></button>
+							</div>
+							<div class="clear"><!-- FOAT CLEAR --></div>
+							
+							</div>
+							<div class="account_sign_in">
+								<span><isprint value="${Resource.msg('vipaccountsignup.mainheaderupgrade','vip',null)}"/> <a href="#" class="signingin"><isprint value="${Resource.msg('global.login','locale',null)}"/></a></span>
+							</div>
+							<input type="hidden" name="${pdict.CurrentForms.profileheader.secureKeyHtmlName}" value="${pdict.CurrentForms.profileheader.secureKeyValue}"/>
+				</div>
+			</fieldset>
+		</form>
+	</div>		
