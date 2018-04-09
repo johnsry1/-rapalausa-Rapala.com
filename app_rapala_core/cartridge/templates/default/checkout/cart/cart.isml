@@ -423,7 +423,7 @@
 															<div class="standardprice"><isprint value="${StandardPrice}"/></div>
 															<div class="salesprice">
 															<isif condition="${lineItem.priceAdjustments.length > 0}">
-																${session.currency.symbol}<isprint value="${SalesPrice}"/>
+																${session.currency.symbol} <isprint value="${SalesPrice}"/>
 															<iselse>
 																<isprint value="${SalesPrice}"/>
 															</isif>
@@ -544,7 +544,7 @@
 												<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 												<div class="price">
 													<div class="discountprice">
-														<div class="standardprice">${session.currency.symbol}<isprint value="${Standard_quantity.toFixed(2)}"/></div>
+														<div class="standardprice">${session.currency.symbol} <isprint value="${Standard_quantity.toFixed(2)}"/></div>
 													</div>
 													</div>
 												</isif>
@@ -561,7 +561,7 @@
 														<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 														<div class="price">
 															<div class="discountprice">
-																<div class="standardprice">${session.currency.symbol}<isprint value="${Standard_quantity.toFixed(2)}"/></div>
+																<div class="standardprice">${session.currency.symbol} <isprint value="${Standard_quantity.toFixed(2)}"/></div>
 															</div>
 														</div>
 													</isif>
