@@ -3,6 +3,9 @@
 
 <isdecorate template="blog/pt_blogsearch">
     <div class="blog-search-resultes">
+    	<a href="${session.custom.blogReferer}" class="backtopost">
+    		${Resource.msg('blog.returntopost', 'blog', null)}
+    	</a>
         <isif condition="${!pdict.ContentPagingModel.empty}">
             <div class="blog-posts-by">
                 <h1>${Resource.msgf('blog.postsby', 'blog', null, pdict.searchedValue)}</h1>
