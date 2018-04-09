@@ -1,0 +1,45 @@
+<!--- TEMPLATENAME: postpagination.isml --->
+<isscript>
+    var postPagination;
+    var searchedFolder = (pdict.ContentSearchResult.folder != null && !empty(pdict.ContentSearchResult.folder.ID)) ? pdict.ContentSearchResult.folder.ID : '';
+    var contentFolder = pdict.Content.getClassificationFolder();
+    try {
+        postPagination = require('app_blog/cartridge/scripts/blog/Utils.ds').getPaginationPosts(pdict.ContentSearchResult, pdict.Content);
+    } catch (e) {
+        //just debug exception
+        var debug = e;
+    }
+</isscript>
+<div class="blog-post-pagination">
+    <isif condition="${postPagination.prev != null && postPagination.prev instanceof dw.content.Content}">
+        <isif condition="${searchedFolder != null && !empty(searchedFolder)}">
+            <a class="blog-post-prev" href="${URLUtils.url('Page-Show', 'cid', postPagination.prev.ID, 'fdid', pdict.ContentSearchResult.folder.ID)}">
+                <issvghelper icon="arrow-bold"/>
+                <span class="blog-post-arrow-title">${Resource.msg('blog.postpage.prev', 'blog', null)}</span>
+            </a>
+        <iselseif condition="${!empty(pdict.ContentSearchResult.searchPhrase)}">
+            <a class="blog-post-prev" href="${URLUtils.url('Page-Show', 'cid', postPagination.prev.ID, 'q', pdict.ContentSearchResult.searchPhrase, 'id', pdict.searchedID)}">
+                <issvghelper icon="arrow-bold"/>
+                <span class="blog-post-arrow-title">${Resource.msg('blog.postpage.prev', 'blog', null)}</span>
+            </a>
+        </isif>
+    </isif>
+    <isif condition="${pdict.ContentSearchResult.folder != null && !empty(pdict.ContentSearchResult.folder.ID)}">
+        <span class="blog-post-title"><isprint value="${pdict.ContentSearchResult.folder.displayName}" /></span>
+    <iselse>
+        <span class="blog-post-title"><isprint value="${contentFolder.displayName}" /></span>
+    </isif>
+    <isif condition="${postPagination.next != null && postPagination.next instanceof dw.content.Content}">
+        <isif condition="${searchedFolder != null && !empty(searchedFolder)}">
+            <a class="blog-post-next" href="${URLUtils.url('Page-Show', 'cid', postPagination.next.ID, 'fdid', pdict.ContentSearchResult.folder.ID)}">
+                <span class="blog-post-arrow-title">${Resource.msg('blog.postpage.next', 'blog', null)}</span>
+                <issvghelper icon="arrow-bold"/>
+            </a>
+        <iselseif condition="${!empty(pdict.ContentSearchResult.searchPhrase)}">
+            <a class="blog-post-next" href="${URLUtils.url('Page-Show', 'cid', postPagination.next.ID, 'q', pdict.ContentSearchResult.searchPhrase, 'id', pdict.searchedID)}">
+                <span class="blog-post-arrow-title">${Resource.msg('blog.postpage.next', 'blog', null)}</span>
+                <issvghelper icon="arrow-bold"/>
+            </a>
+        </isif>
+    </isif>
+</div>

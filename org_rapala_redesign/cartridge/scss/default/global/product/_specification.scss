@@ -1,0 +1,83 @@
+.product-specifications {
+    .specificiations {
+        border-radius: $table-border-radius;
+        border-collapse: $table-border-collapse;
+        thead {
+            tr,
+            tr.header {
+                td {
+                    border: $table-border;
+                    padding: $table-head-padding;
+                    background: $table-head-bg;
+                    font-family: $table-head-font-family !important;
+                    @include font-size($table-head-font-size);
+                    line-height: $table-head-line-height;
+                    font-weight: $table-head-font-weight !important;
+                    @include respond(small-down) {
+                        width: 100%;
+                        border-right: none;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+        tbody {
+            tr {
+                &:nth-child(even) {
+                    td {
+                        background: $table-even-bg;
+                    }
+                }
+                &:nth-child(odd) {
+                    td {
+                        background: $table-odd-bg;
+                    }
+                }
+                th {
+                    border: $table-border;
+                    padding: $table-head-padding;
+                    background: $table-head-bg;
+                    font-family: $table-head-font-family !important;
+                    @include font-size($table-head-font-size);
+                    line-height: $table-head-line-height;
+                    font-weight: $table-head-font-weight !important;
+                }
+                td {
+                    padding: $table-padding;
+                    border: $table-border;
+                    font-family: $table-font-family;
+                    @include font-size($table-font-size);
+                    line-height: $table-line-height;
+                    font-weight: $table-font-weight;
+                }
+            }
+        }
+    }
+    &.iphone-view {
+        tbody {
+            tr {
+                td {
+                    &:last-child {
+                        @include respond(small-down) {
+                            border-right: $table-border;
+                        }
+                    }
+                    @include respond(small-down) {
+                        width: 50%;
+                        float: left;
+                        box-sizing: border-box;
+                        border-bottom: none;
+                        border-right: none;
+                        border-left: $table-border;
+                    }
+                }
+                th {
+                @include respond(small-down) {
+                    width: 100%;
+                    border-right: none;
+                }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-objects xmlns="http://www.demandware.com/xml/impex/customobject/2006-10-31">
+    <custom-object type-id="FeedJobConfiguration" object-id="OrderStatusImport">
+        <object-attribute attribute-id="description">Order Status feed import</object-attribute>
+        <object-attribute attribute-id="fromEmail">johnson.henry@revsolutionsinc.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;!-- List of supported feed tasks with sample data.                                          --&gt;&#13;
+    &lt;!-- This configuration is stored in custom object FeedJobConfiguration, attribute tasksXML. --&gt;&#13;
+    &lt;!-- The order of the tasks defines execution order.                                         --&gt;&#13;
+&#13;
+    &lt;task id="DownloadAndImportOrderStatus"&gt;&#13;
+        &lt;!-- mandatory, URL to WebDAV or SFTP folder, e.g. "https://www.myserver.com/folder/", "sftp://sftp.myserver.com:22/folder/" --&gt;&#13;
+                &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/OrderStatus/&lt;/remote-folder-url&gt;&#13;
+        &lt;!-- optional, login and password for WebDAV Basic Authentication or Digest Autentication or SFTP --&gt;&#13;
+        &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+        &lt;!-- mandatory, a regular expression, e.g. "^Catalog_.*\.xml$", matching files are imported in alphanumerical order --&gt;&#13;
+        &lt;remote-file-pattern&gt;^orderstatus_.*\.xml$&lt;/remote-file-pattern&gt;&#13;
+        &lt;!-- mandatory, e.g. "catalog", folder is underneath Impex share, src folder, folder is created if it doesn't exist yet --&gt;&#13;
+        &lt;temp-folder&gt;orderstatus&lt;/temp-folder&gt;&#13;
+        &lt;!-- mandatory, valid values "MERGE", "UPDATE", "REPLACE", "DELETE" --&gt;&#13;
+        &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+        &lt;!-- optional, "TRUE" (regard import as successful even if DATAERRORs occured), "FALSE" (DATAERRORs are regarded as import errors), default is "FALSE" --&gt;&#13;
+        &lt;ignore-data-errors&gt;FALSE&lt;/ignore-data-errors&gt;&#13;
+        &lt;!-- optional, e.g. "archive", folder is underneath Impex share, src folder, no archiving if not provided --&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever a file was imported successfully --&gt;&#13;
+        &lt;success-email&gt;johnson.henry@revsolutionsinc.com&lt;/success-email&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever an error occurs --&gt;&#13;
+        &lt;error-email&gt;johnson.henry@revsolutionsinc.com&lt;/error-email&gt;&#13;
+        &lt;!-- optional, valid values "CONTINUE" (in case of download, locking or deletion errors go to next task), "FAIL" (abort execution to allow standard job failure handling), default is CONTINUE --&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="PricebookImport">
+        <object-attribute attribute-id="description">Pricebook Import</object-attribute>
+        <object-attribute attribute-id="fromEmail">johnson.henry@revsolutionsinc.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+	&lt;task id="DownloadAndImportPriceBook"&gt;&#13;
+		&lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/B2BPricebook/&lt;/remote-folder-url&gt;&#13;
+		&lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+		&lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+		&lt;remote-file-pattern&gt;^[eE]mployee[pP]rice[lL]ist.*.xml$&lt;/remote-file-pattern&gt;&#13;
+		&lt;temp-folder&gt;pbtemp&lt;/temp-folder&gt;&#13;
+		 &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+		&lt;!-- optional, "TRUE" (regard import as successful even if DATAERRORs occured), "FALSE" (DATAERRORs are regarded as import errors), default is "FALSE" --&gt;&#13;
+		&lt;ignore-data-errors&gt;FALSE&lt;/ignore-data-errors&gt;&#13;
+		&lt;!-- optional, e.g. "archive", folder is underneath Impex share, src folder, no archiving if not provided --&gt;&#13;
+		&lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+		&lt;!-- optional, e.g. "name@company.com", email is sent whenever a file was imported successfully --&gt;&#13;
+		&lt;success-email&gt;johnson.henry@revsolutionsinc.com&lt;/success-email&gt;&#13;
+		&lt;!-- optional, e.g. "name@company.com", email is sent whenever an error occurs --&gt;&#13;
+		&lt;error-email&gt;johnson.henry@revsolutionsinc.com&lt;/error-email&gt;&#13;
+		&lt;!-- optional, valid values "CONTINUE" (in case of download, locking or deletion errors go to next task), "FAIL" (abort execution to allow standard job failure handling), default is CONTINUE --&gt;&#13;
+		&lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+	&lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportVIPCards">
+        <object-attribute attribute-id="description">Download And Import VIP Cards</object-attribute>
+        <object-attribute attribute-id="fromEmail">noreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportVIPCards"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/VIPCards/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+	&lt;remote-file-pattern&gt;VIPCardFeed+.*\.csv$&lt;/remote-file-pattern&gt;&#13;
+        &lt;temp-folder&gt;vipcardfeed&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;error-folder&gt;vipcardfeed/vipcards-csv-error&lt;/error-folder&gt;&#13;
+        &lt;success-email&gt;jay.kumar@revsolutionsinc.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;jay.kumar@revsolutionsinc.com&lt;/error-email&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="Default">
+        <object-attribute attribute-id="description">Import Inventory</object-attribute>
+        <object-attribute attribute-id="fromEmail">ImportInventoryJob@rapala.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;!-- Tasks for importing  inventory from Rapala.                                          --&gt;&#13;
+    &lt;!-- The order of the tasks defines execution order.                                         --&gt;&#13;
+&#13;
+    &lt;task id="DownloadAndImportInventoryLists"&gt;&#13;
+        &lt;!-- mandatory, URL to WebDAV or SFTP folder, e.g. "https://www.myserver.com/folder/", "sftp://sftp.myserver.com:22/folder/" --&gt;&#13;
+                &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/Inventory/&lt;/remote-folder-url&gt;&#13;
+        &lt;!-- optional, login and password for WebDAV Basic Authentication or Digest Autentication or SFTP --&gt;&#13;
+                &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+                &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+        &lt;!-- mandatory, a regular expression, e.g. "^Catalog_.*\.xml$", matching files are imported in alphanumerical order --&gt;&#13;
+        &lt;remote-file-pattern&gt;^inventory_.*\.xml$&lt;/remote-file-pattern&gt;&#13;
+        &lt;!-- mandatory, e.g. "catalog", folder is underneath Impex share, src folder, folder is created if it doesn't exist yet --&gt;&#13;
+        &lt;temp-folder&gt;inventory&lt;/temp-folder&gt;&#13;
+        &lt;!-- mandatory, valid values "MERGE", "UPDATE", "REPLACE", "DELETE" --&gt;&#13;
+        &lt;import-mode&gt;MERGE&lt;/import-mode&gt;&#13;
+        &lt;!-- optional, "TRUE" (regard import as successful even if DATAERRORs occured), "FALSE" (DATAERRORs are regarded as import errors), default is "FALSE" --&gt;&#13;
+        &lt;ignore-data-errors&gt;FALSE&lt;/ignore-data-errors&gt;&#13;
+        &lt;!-- optional, e.g. "archive", folder is underneath Impex share, src folder, no archiving if not provided --&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever a file was imported successfully --&gt;&#13;
+        &lt;success-email&gt;jake.kolstad@revsolutionsinc.com&lt;/success-email&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever an error occurs --&gt;&#13;
+        &lt;error-email&gt;dwnotifications@rapalausa.com,jake.kolstad@revsolutionsinc.com,hbodemu@pfsweb.com&lt;/error-email&gt;&#13;
+        &lt;!-- optional, valid values "CONTINUE" (in case of download, locking or deletion errors go to next task), "FAIL" (abort execution to allow standard job failure handling), default is CONTINUE --&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ExportOrders">
+        <object-attribute attribute-id="description">ExportOrders</object-attribute>
+        <object-attribute attribute-id="fromEmail">OrderExport@rapala.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+&#13;
+    &lt;!-- export and upload orders that are EXPORT_STATUS_READY and exportAfter &gt; now --&gt;&#13;
+    &lt;task id="ExportAndUploadOrders"&gt;&#13;
+        &lt;!-- mandatory, URL to WebDAV or SFTP folder, e.g. "https://www.myserver.com/folder/", "sftp://sftp.myserver.com:22/folder/" --&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/Orders/&lt;/remote-folder-url&gt;&#13;
+        &lt;!-- optional, login and password for WebDAV Basic Authentication or Digest Autentication or SFTP --&gt;&#13;
+        &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+        &lt;!-- mandatory, e.g. "order", folder is underneath Impex share, src folder, folder is created if it doesn't exist yet --&gt;&#13;
+        &lt;temp-folder&gt;order&lt;/temp-folder&gt;&#13;
+        &lt;!-- optional, prefix for generated files, e.g. "Orders_" will create files like "Orders_2009-06-23_14-32-56.xml" (timestamp in GMT) --&gt;&#13;
+        &lt;file-prefix&gt;Orders_&lt;/file-prefix&gt;&#13;
+        &lt;!-- optional, encryption algorithm for payment information, e.g. "RSA" --&gt;&#13;
+        &lt;encryption-algorithm&gt;RSA&lt;/encryption-algorithm&gt;&#13;
+        &lt;!-- optional, base64 encoded public key for payment information --&gt;&#13;
+        &lt;encryption-key&gt;&lt;/encryption-key&gt;&#13;
+        &lt;!-- optional, e.g. "archive", folder is underneath Impex share, src folder, no archiving if not provided --&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever a file was uploaded successfully --&gt;&#13;
+        &lt;success-email&gt;&lt;/success-email&gt;&#13;
+        &lt;!-- optional, e.g. "name@company.com", email is sent whenever an error occurs --&gt;&#13;
+        &lt;error-email&gt;dwnotifications@rapalausa.com,jkolstad@pfsweb.com,hbodemu@pfsweb.com,tfoy@pfsweb.com&lt;/error-email&gt;&#13;
+        &lt;!-- optional, valid values "CONTINUE" (in case of upload error go to next task), "FAIL" (abort execution to allow standard job failure handling), default is CONTINUE --&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportVIPCustomers">
+        <object-attribute attribute-id="description">Download And Import VIP Customers</object-attribute>
+        <object-attribute attribute-id="fromEmail">noreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportVIPCustomers"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/VIPCustomers/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+	&lt;remote-file-pattern&gt;CustomerFeed+.*\.csv$&lt;/remote-file-pattern&gt;&#13;
+        &lt;temp-folder&gt;customerfeed&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;jay.kumar@revsolutionsinc.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;jay.kumar@revsolutionsinc.com&lt;/error-email&gt;&#13;
+        &lt;error-folder&gt;customerfeed/vipcustomer-csv-error&lt;/error-folder&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+    <custom-object type-id="FeedJobConfiguration" object-id="ImportB2BCustomers">
+        <object-attribute attribute-id="description">Download And Import B2B Customers</object-attribute>
+        <object-attribute attribute-id="fromEmail">noreply@demandware.com</object-attribute>
+        <object-attribute attribute-id="tasksXML">&lt;tasks&gt;&#13;
+    &lt;task id="DownloadAndImportB2BCustomers"&gt;&#13;
+        &lt;remote-folder-url&gt;sftp://ftp.rapalausa.com:22/Development/B2BCustomers/&lt;/remote-folder-url&gt;&#13;
+        &lt;remote-login&gt;dwdata&lt;/remote-login&gt;&#13;
+        &lt;remote-password&gt;345f8BzG&lt;/remote-password&gt;&#13;
+	&lt;remote-file-pattern&gt;CustomerFeed+.*\.csv$&lt;/remote-file-pattern&gt;&#13;
+        &lt;temp-folder&gt;customerfeed_b2b&lt;/temp-folder&gt;&#13;
+        &lt;archive-folder&gt;archive&lt;/archive-folder&gt;&#13;
+        &lt;success-email&gt;venkata.reddy@revsolutionsinc.com&lt;/success-email&gt;&#13;
+        &lt;error-email&gt;venkata.reddy@revsolutionsinc.com&lt;/error-email&gt;&#13;
+        &lt;error-folder&gt;customerfeed_b2b/b2bcustomer-csv-error&lt;/error-folder&gt;&#13;
+        &lt;on-temporary-error&gt;CONTINUE&lt;/on-temporary-error&gt;&#13;
+    &lt;/task&gt;&#13;
+&lt;/tasks&gt;</object-attribute>
+    </custom-object>
+
+</custom-objects>

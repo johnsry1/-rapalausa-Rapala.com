@@ -1,0 +1,1441 @@
+<!--- TEMPLATENAME: responsivegrids.isml --->
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+
+<isdecorate template="styleguide/components/pt_styleguide">
+    <isinclude template="util/modules"/>
+    
+    <h1>Guide to Responsive Grids</h1>
+    <p>This mixin allows CSS-only fluid grids - no JavaScript required. The markup for one of these grids is a set of multiple &lt;div class="grid-col"&gt; elements wrapped in a &lt;div class="repsonsive-grid"&gt; element. Then a simple mixin is applied to turn it into fluid responsive columns. Advanced options are available (see examples below).
+    <div class="quick-reference responsive-grid">
+        <div class="grid-col code-snippet">
+            <p>Example ISML:</p>
+            <small><pre><code>&lt;div class="my-class responsive-grid"&gt;
+                &#9;&lt;div class="grid-col"&gt;1&lt;/div&gt;
+                &#9;&lt;div class="grid-col"&gt;2&lt;/div&gt;
+                &#9;&lt;div class="grid-col"&gt;3&lt;/div&gt;
+                &#9;&lt;div class="grid-col"&gt;4&lt;/div&gt;
+                &#9;&lt;div class="grid-col"&gt;5&lt;/div&gt;
+                &lt;/div&gt;
+            </code></pre></small>
+        </div>
+        <div class="grid-col code-snippet">
+            <p>Example SASS Mixin:</p>
+            <small><pre><code>.my-class {
+                &#9;@include column-respond((
+                &#9;&#9;480px : 3,
+                &#9;&#9;768px : 5,
+                &#9;&#9;gutter : 10px
+                &#9;));
+                }
+            </code></pre></small>
+        </div>
+    </div>
+    
+    <p class="readme">Note: When using this mixin, if you override any of the following rules on <b>.grid-col</b>, you risk breaking the grid layout:
+        <small><pre><code>display
+        width
+        margin-left
+        margin-right
+        float
+        box-sizing
+        ::before
+        ::after
+        </code></pre></small>
+    </p>
+    <p>However, any other rules that do not increase the <b>.grid-col</b> element's overall width are fine to style, including the following:
+        <small><pre><code>padding
+        margin-top
+        margin-bottom
+        border
+        height
+        min-height
+        </code></pre></small>
+    </p>
+    <h2 class="section-header">Example Default Grid Markup - No Mixin Applied</h2>
+    <p class="style-spec">1 column of 100% width (default).</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-1 {
+                &#9;// no mixin applied
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-1 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-1 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+        
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+        
+            <p class="style-spec">Column 2</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Configured with @column-respond Mixin:</h2>
+    <p class="style-spec">1 column below 600px (1 column is the mobile-first default)</p>
+    <p class="style-spec">2 columns between 600px and 768px</p>
+    <p class="style-spec">3 columns at 768px and up</p>
+    <p class="style-spec">5% gutters (spacing between interior columns)</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-2 {
+                &#9;@include column-respond((
+                &#9;&#9;600px : 2,
+                &#9;&#9;768px : 3,
+                &#9;&#9;gutter : 5%
+                &#9;));
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-2 .grid-col {
+                    &nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-2 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 47.5%;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 5%; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-2 .grid-col:nth-child(2n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 768px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-2 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 30%;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 5%; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-2 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-1 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;This column will overflow...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-2 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+        
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+        
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+        
+            <p class="style-spec">Column 3</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                <span class="readme">At 768px, this column will overflow to the next row by default, since this grid is never configured to be 4 (or more) columns across.</span>
+                This column will overflow to the next row by default, since this grid is never configured to be 4 (or more) columns across.
+                This column will overflow to the next row by default, since this grid is never configured to be 4 (or more) columns across.
+            </p>
+        
+            <p class="style-spec">Column 4</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Example with one abnormally tall tile:</h2>
+    <p class="style-spec">2 columns below 480px (overrides the mobile-first default of 1 column by setting a 0px breakpoint... see below)</p>
+    <p class="style-spec">3 columns between 480px and 600px</p>
+    <p class="style-spec">4 columns between 600px and 768px</p>
+    <p class="style-spec">6 columns with <b>15px gutters</b> between 768px and 1200px</p>
+    <p class="style-spec">8 columns with <b>5px gutters</b> at 1200px and up</p>
+    <p class="style-spec">10px default gutters</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-3 {
+                &#9;@include column-respond((
+                &#9;&#9;0px : 2, // Setting 0px breakpoint is only necessary if number of columns > 1
+                &#9;&#9;480px : 3,
+                &#9;&#9;600px : 4,
+                &#9;&#9;768px : 6,
+                &#9;&#9;1200px : 8,
+                &#9;&#9;gutter : 10px
+                &#9;));
+                &#9;
+                &#9;.grid-col {
+                &#9;&#9;background-color: $light-gray;
+                &#9;&#9;border: 1px solid $dark-gray;
+                &#9;}
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;@media only screen and (min-width: 0px) and (max-width: 479px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 10px) / 2);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col:nth-child(2n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 480px) and (max-width: 599px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 20px) / 3);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 30px) / 4);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col:nth-child(4n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 768px) and (max-width: 1199px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 50px) / 6);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col:nth-child(6n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 1200px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 70px) / 8);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-3 .grid-col:nth-child(8n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }<br/>
+                    .example-grid-3 .grid-col {
+                    &nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;border: 1px solid #aaa; }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-3 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;This column is intentionally longer...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 5&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 6&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 7&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 8&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 9&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 10&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 11&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 12&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-3 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                <span class="readme">This column is intentionally longer to show that the grid is height-adjustable. Note, however, that the actual block heights of the other tiles in this row do not actually change, as evidenced by the background-color on these tiles.</span>
+            </p>
+            <p class="style-spec">Column 3</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 4</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 5</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 6</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 7</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 8</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 9</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 10</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 11</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 12</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Example showing different gutter values per breakpoint:</h2>
+    <p class="style-spec">2 columns below 480px (overrides the mobile-first default of 1 column by setting a 0px breakpoint... see below)</p>
+    <p class="style-spec">3 columns between 480px and 600px</p>
+    <p class="style-spec">4 columns with <b>5% gutters</b> between 600px and 768px</p>
+    <p class="style-spec">6 columns with <b>1px gutters</b> between 768px and 900px</p>
+    <p class="style-spec">7 columns with <b>default gutters</b> between 900px and 1200px</p>
+    <p class="style-spec">8 columns with <b>2em gutters</b> at 1200px and up</p>
+    <p class="style-spec">10px default gutters</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-4 {
+                &#9;background-color: $dark-gray;
+                &#9;padding: 3px;
+                &#9;box-sizing: border-box;
+                &#9;
+                &#9;@include column-respond((
+                &#9;&#9;0px : 2,
+                &#9;&#9;480px : 3,
+                &#9;&#9;600px : (
+                &#9;&#9;&#9;columns : 4,
+                &#9;&#9;&#9;gutter : 5%
+                &#9;&#9;),
+                &#9;&#9;768px : (
+                &#9;&#9;&#9;columns : 6,
+                &#9;&#9;&#9;gutter : 1px
+                &#9;&#9;),
+                &#9;&#9;900px : 7,
+                &#9;&#9;1200px : (
+                &#9;&#9;&#9;columns : 8,
+                &#9;&#9;&#9;gutter : 2em
+                &#9;&#9;),
+                &#9;&#9;gutter : 10px
+                &#9;));
+                &#9;
+                &#9;.grid-col {
+                &#9;&#9;background-color: $white;
+                &#9;&#9;margin-bottom: 3px;
+                &#9;}
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-4 {
+                    &nbsp;&nbsp;background-color: #aaa;
+                    &nbsp;&nbsp;padding: 3px;
+                    &nbsp;&nbsp;box-sizing: border-box; }
+                    &nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 0px) and (max-width: 479px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 10px) / 2);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(2n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 480px) and (max-width: 599px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 20px) / 3);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 21.25%;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 5%; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(4n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 768px) and (max-width: 899px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 5px) / 6);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 1px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(6n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 900px) and (max-width: 1199px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 60px) / 7);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(7n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;&nbsp;&nbsp;@media only screen and (min-width: 1200px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 14em) / 8);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 2em; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-4 .grid-col:nth-child(8n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }<br/>
+                    &nbsp;&nbsp;.example-grid-4 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: #fff;
+                    &nbsp;&nbsp;&nbsp;&nbsp;margin-bottom: 3px; }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-4 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 5&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 6&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 7&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 8&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 9&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 10&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 11&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 12&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-4 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 3</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 4</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 5</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 6</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 7</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 8</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 9</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 10</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 11</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 12</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Example with added Column Dividers and Row Dividers:</h2>
+    <p class="style-spec">2 columns below 480px (overrides the mobile-first default of 1 column by setting a 0px breakpoint... see below)</p>
+    <p class="style-spec">3 columns between 480px and 600px</p>
+    <p class="style-spec">4 columns between 600px and 768px</p>
+    <p class="style-spec">6 columns at 768px and up</p>
+    <p class="style-spec">10px default gutters</p>
+    <p class="style-spec">2px wide column dividers (auto-centered between columns)</p>
+    <p class="style-spec">1px wide (default) row dividers (auto-centered across full grid width)</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-5 {
+                &#9;@include column-respond((
+                &#9;&#9;0px : 2,
+                &#9;&#9;480px : 3,
+                &#9;&#9;600px : 4,
+                &#9;&#9;768px : 6,
+                &#9;&#9;gutter : 10px,
+                &#9;&#9;col-divider : ( // auto-centered. do not add left/right positioning
+                &#9;&#9;&#9;width: 2px,
+                &#9;&#9;&#9;height: 100%,
+                &#9;&#9;&#9;background-color: $sangria
+                &#9;&#9;),
+                &#9;&#9;row-divider : ( // defaults to 100% of the full grid width
+                &#9;&#9;&#9;height: 1px,
+                &#9;&#9;&#9;top: -3px,
+                &#9;&#9;&#9;background-color: $cerulean
+                &#9;&#9;)
+                &#9;));
+                &#9;
+                &#9;.grid-col {
+                &#9;&#9;padding-bottom: 6px;
+                &#9;}
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-5 .grid-col {
+                    &nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;.example-grid-5 .grid-col::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;clear: none;
+                    &nbsp;&nbsp;&nbsp;&nbsp;top: 0;
+                    &nbsp;&nbsp;&nbsp;&nbsp;width: 2px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;height: 100%;
+                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: #990000;
+                    &nbsp;&nbsp;&nbsp;&nbsp;left: calc( (10px + 2px) / -2); }
+                    &nbsp;&nbsp;@media only screen and (min-width: 0px) and (max-width: 479px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 10px) / 2);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(2n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(2n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(2n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -3px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 200% + 10px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 480px) and (max-width: 599px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 20px) / 3);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(3n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(3n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -3px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 300% + 20px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 30px) / 4);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(4n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(4n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(4n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -3px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 400% + 30px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 768px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 50px) / 6);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(6n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(6n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-5 .grid-col:nth-child(6n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -3px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 600% + 50px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; } }
+                    &nbsp;&nbsp;.example-grid-5 .grid-col:first-child::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;content: none; }<br/>
+                    .example-grid-5 .grid-col {
+                    &nbsp;&nbsp;padding-bottom: 6px; }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-5 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 5&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 6&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 7&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 8&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 9&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 10&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-5 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 3</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 4</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 5</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 6</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 7</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 8</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 9</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 10</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Example with the last row centered:</h2>
+    <p class="readme">Note: This option has the potential to create a lot of extra CSS bloat as it needs to account for each possibile amount of tiles in the last row. So, please use sparingly.</p>
+    <p class="style-spec">2 columns below 480px</p>
+    <p class="style-spec">3 columns between 480px and 600px</p>
+    <p class="style-spec">4 columns between 600px and 768px</p>
+    <p class="style-spec">6 columns between 768px and 1180px</p>
+    <p class="style-spec">8 columns at 1180px and up</p>
+    <p class="style-spec">10px default gutters</p>
+    <p class="style-spec">2px wide column dividers</p>
+    <p class="style-spec">1px wide row dividers</p>
+    <p class="style-spec">Last row is centered</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-6 {
+                &#9;@include column-respond((
+                &#9;&#9;0px : 2,
+                &#9;&#9;480px : 3,
+                &#9;&#9;600px : 4,
+                &#9;&#9;768px : 6,
+                &#9;&#9;1180px : 8,
+                &#9;&#9;gutter : 10px,
+                &#9;&#9;col-divider : (
+                &#9;&#9;&#9;width: 2px,
+                &#9;&#9;&#9;height: 100%,
+                &#9;&#9;&#9;background-color: $light-gray
+                &#9;&#9;),
+                &#9;&#9;row-divider : (
+                &#9;&#9;&#9;height: 1px,
+                &#9;&#9;&#9;top: -1em,
+                &#9;&#9;&#9;background-color: $light-gray
+                &#9;&#9;),
+                &#9;&#9;center-last-row: true
+                &#9;));
+                &#9;
+                &#9;.grid-col {
+                &#9;&#9;margin-bottom: 2em;
+                &#9;}
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;.example-grid-6 .grid-col::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;clear: none;
+                    &nbsp;&nbsp;&nbsp;&nbsp;top: 0;
+                    &nbsp;&nbsp;&nbsp;&nbsp;width: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;height: 100%;
+                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;left: calc( (10px + 1px) / -2); }
+                    &nbsp;&nbsp;@media only screen and (min-width: 0px) and (max-width: 479px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 10px) / 2);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(2n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(2n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(2n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -1em;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 200% + 10px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(2n+1):nth-last-child(1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 10px) * 0.25 + 5px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(2n+1):nth-last-child(1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (50% + 5px)); } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 480px) and (max-width: 599px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 20px) / 3);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -1em;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 300% + 20px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1):nth-last-child(1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 20px) * 0.33333 + 10px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1):nth-last-child(1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (100% + 10px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1):nth-last-child(2) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 20px) * 0.16667 + 5px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(3n+1):nth-last-child(2)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (50% + 5px)); } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 30px) / 4);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -1em;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 400% + 30px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 30px) * 0.375 + 15px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (150% + 15px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(2) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 30px) * 0.25 + 10px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(2)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (100% + 10px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(3) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 30px) * 0.125 + 5px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(4n+1):nth-last-child(3)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (50% + 5px)); } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 768px) and (max-width: 1179px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 50px) / 6);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -1em;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 600% + 50px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 50px) * 0.41667 + 25px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (250% + 25px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(2) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 50px) * 0.33333 + 20px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(2)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (200% + 20px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(3) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 50px) * 0.25 + 15px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(3)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (150% + 15px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(4) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 50px) * 0.16667 + 10px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(4)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (100% + 10px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(5) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 50px) * 0.08333 + 5px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(6n+1):nth-last-child(5)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (50% + 5px)); } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 1180px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 70px) / 8);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 10px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1)::after {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: none; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content: "";
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position: absolute;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display: block;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 1px;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index: 1;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background-color: #EBEBEB;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top: -1em;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( 800% + 70px);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left: initial; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.4375 + 35px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(1)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (350% + 35px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(2) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.375 + 30px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(2)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (300% + 30px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(3) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.3125 + 25px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(3)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (250% + 25px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(4) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.25 + 20px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(4)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (200% + 20px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(5) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.1875 + 15px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(5)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (150% + 15px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(6) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.125 + 10px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(6)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (100% + 10px)); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(7) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc((99.999% - 70px) * 0.0625 + 5px); }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-6 .grid-col:nth-child(8n+1):nth-last-child(7)::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: calc(-1 * (50% + 5px)); } }
+                    &nbsp;&nbsp;.example-grid-6 .grid-col:first-child::before {
+                    &nbsp;&nbsp;&nbsp;&nbsp;content: none; }<br/>
+                    .example-grid-6 .grid-col {
+                    &nbsp;&nbsp;margin-bottom: 2em; }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-6 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 5&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 6&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 7&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 8&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 9&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 10&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 11&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-6 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 3</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 4</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 5</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 6</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 7</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 8</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 9</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 10</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+            </p>
+            <p class="style-spec">Column 11</p>
+        </div>
+    </div>
+    
+    <h2 class="section-header">Example of a colspan effect:</h2>
+    <p class="style-spec">1 column below 600px (1 column is the mobile-first default)</p>
+    <p class="style-spec">3 columns between 600px and 768px</p>
+    <p class="style-spec">4 columns width at 768px and up</p>
+    <p class="style-spec">Note: this requires an extra blank div in markup.</p>
+    
+    <div class="code-examples">
+        <p>SCSS:</p>
+        <div class="code-snippet">
+            <small><pre><code>.example-grid-7 {
+                &#9;@include column-respond((
+                &#9;&#9;600px : (
+                &#9;&#9;&#9;columns : 3,
+                &#9;&#9;&#9;gutter : 2px
+                &#9;&#9;),
+                &#9;&#9;768px : (
+                &#9;&#9;&#9;columns : 4,
+                &#9;&#9;&#9;gutter : 1em
+                &#9;&#9;)
+                &#9;));
+                &#9;
+                &#9;// HACK to create a colspan effect. Not really recommended, but somewhat working.
+                &#9;.grid-col:nth-child(2) {
+                &#9;&#9;p {
+                &#9;&#9;&#9;width: 200%;
+                &#9;&#9;&#9;max-width: none;
+                &#9;&#9;}
+                &#9;}
+                &#9;.grid-col:nth-child(3) {
+                &#9;&#9;padding: 1px; //somehow this is needed to give the blank column dimension
+                &#9;}
+                }
+            </code></pre></small>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">Compiled CSS:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>.example-grid-7 .grid-col {
+                    &nbsp;&nbsp;position: relative;
+                    &nbsp;&nbsp;margin-left: 0; }
+                    &nbsp;&nbsp;@media only screen and (min-width: 600px) and (max-width: 767px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-7 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 4px) / 3);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 2px; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-7 .grid-col:nth-child(3n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }
+                    &nbsp;&nbsp;@media only screen and (min-width: 768px) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;.example-grid-7 .grid-col {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: calc( (99.999% - 3em) / 4);
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 1em; }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.example-grid-7 .grid-col:nth-child(4n+1) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear: both;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin-left: 0; } }<br/>
+                    .example-grid-7 .grid-col:nth-child(2) p {
+                    &nbsp;&nbsp;width: 200%;
+                    &nbsp;&nbsp;max-width: none; }<br/>
+                    .example-grid-7 .grid-col:nth-child(3) {
+                    &nbsp;&nbsp;padding: 1px; }
+                </code></pre></small>
+            </div>
+        </div>
+        <div class="expand-toggle">
+            <p class="toggle">HTML:</p>
+            <div class="code-snippet expandable">
+                <small><pre><code>&lt;div class="example-grid-7 responsive-grid"&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 1&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;&lt;b&gt;This column spans 2 column widths...&lt;/b&gt;&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 2&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 3&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 4&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 5&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &#9;&lt;div class="grid-col"&gt;
+                    &#9;&#9;&lt;p class="alt-p"&gt;Lorem ipsum...&lt;/p&gt;
+                    &#9;&#9;&lt;p class="style-spec"&gt;Column 6&lt;/p&gt;
+                    &#9;&lt;/div&gt;
+                    &lt;/div&gt;
+                </code></pre></small>
+            </div>
+        </div>
+    </div>
+    
+    <p>RESULT:</p>
+    <div class="example-grid-7 responsive-grid">
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+            <p class="style-spec">Column 1</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                <b>This column spans 2 column widths.</b> <span class="readme">This is done by setting a style of width: 200%; on the inner contents of the
+                &lt;div class="grid-col"&gt;, and inserting a blank column immediately after (see markup). When using this method, it might be a <b>bad
+                idea</b> to configure a breakpoint with some number of columns such that a "row break" is expected in the middle of this colspan.
+                Notice that this particular grid is not configured to ever be 2 columns across for this reason. However, it still defaults to
+                1 column (100% width) below the smallest breakpoint set... you can see how the 200% width on the inner &lt;p&gt; content makes
+                this single column problematic.</span> This is on the TODO list to fix. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis. Etiam quis erat tincidunt, posuere mauris ut, bibendum massa.
+                Nullam rhoncus, velit vitae posuere dapibus, lectus lorem suscipit ligula, id convallis ex justo quis urna.
+            </p>
+            <p class="style-spec">Column 2</p>
+        </div>
+        <div class="grid-col">
+            <!-- Blank Column 3 -->
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+            <p class="style-spec">Column 4</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+            <p class="style-spec">Column 5</p>
+        </div>
+        <div class="grid-col">
+            <p class="alt-p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nisi nisl, sed posuere arcu facilisis quis.
+                Etiam quis erat tincidunt, posuere mauris ut, bibendum massa. Nullam rhoncus, velit vitae posuere dapibus, lectus lorem
+                suscipit ligula, id convallis ex justo quis urna. Morbi ullamcorper non arcu vel ornare. Integer elementum, erat et
+                bibendum tristique, neque dui sollicitudin risus, et facilisis felis augue vitae arcu.
+            </p>
+            <p class="style-spec">Column 6</p>
+        </div>
+    </div>
+</isdecorate>

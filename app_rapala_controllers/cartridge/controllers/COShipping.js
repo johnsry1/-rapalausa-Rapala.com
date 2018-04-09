@@ -262,16 +262,13 @@ function singleShipping() {
             
             var stateVerification = startStateVerification();
             var shippingmethod = session.forms.singleshipping.shippingAddress.shippingMethodID.value;
-            if(stateVerification){
+            if (stateVerification) {
             	response.redirect(URLUtils.https('COShipping-Start','ShipLimit',stateVerification));
             	app.getView({ShipLimit : stateVerification}).render('checkout/shipping/singleshipping');
-            }
-            else if(shippingmethod == null){
+            } else if (shippingmethod == null) {
                 response.redirect(URLUtils.https('COShipping-Start','ShipLimit',true));
                 app.getView({ShipLimit : true}).render('checkout/shipping/singleshipping');
-            }
-            
-            else{
+            } else {
             	//UPS validation code
                 var DAVResult = validateDAV(cart);
                 if (DAVResult.endNodeName !== 'success') {
@@ -667,3 +664,5 @@ exports.EmptyCart = guard.ensure(['https'], emptyCart);
  * Local methods
  */
 exports.PrepareShipments = prepareShipments;
+exports.StartStateVerification = startStateVerification;
+exports.ValidateDAV = validateDAV;

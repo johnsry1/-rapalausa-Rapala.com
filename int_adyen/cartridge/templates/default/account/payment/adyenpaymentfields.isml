@@ -1,0 +1,90 @@
+<!--- TEMPLATENAME: adyenpaymentfields.isml --->
+<div class="formfields-global">
+<div class="form-row form-row-type-text required" data-required-text="${Resource.msg('validate.required', 'forms', null)}" aria-required="true">
+	<label for="creditCard_owner" class="label">
+		<span class="labeltext">${Resource.msg('creditcard.ownerlabel', 'forms', null)}</span>
+		<span class="requiredindicator">*</span>
+	</label>
+	<div class="field-wrapper">
+		<input class="textinput required" type="text" id="creditCard_owner" name="creditCard_owner" value="" aria-required="true">
+	</div>
+	<div class="form-caption"></div>
+</div>
+<div class="form-row form-row-type-text required" data-required-text="${Resource.msg('validate.required', 'forms', null)}" aria-required="true">
+	<label for="creditCard_number" class="label">
+	<span class="labeltext">Number</span>
+	<span class="requiredindicator">*</span>
+	</label>
+	<div class="field-wrapper">
+		<input class="textinput required" type="text" id="creditCard_number"
+			value="" aria-required="true">
+	</div>
+	<div class="form-caption">Example: 4111111111111111</div>
+</div>
+
+<div class="form-row form-row-type-select required" aria-required="true">
+	<label class="label">
+		<span class="labeltext">Expiration Date:</span>
+		<span class="requiredindicator">*</span>
+	</label>
+	<div class="form-row month required" aria-required="true">
+		<div class="field-wrapper">
+			<div class="select-style">
+			<select class="input-select  required"
+				id="creditCard_expiration_month" minlength="0"
+				maxlength="2147483647" aria-required="true">
+				<option class="select-option" value="1">${Resource.msg('month.january', 'forms', null)}</option>
+				<option class="select-option" value="2">${Resource.msg('month.february', 'forms', null)}</option>
+				<option class="select-option" value="3">${Resource.msg('month.march', 'forms', null)}</option>
+				<option class="select-option" value="4">${Resource.msg('month.april', 'forms', null)}</option>
+				<option class="select-option" value="5">${Resource.msg('month.may', 'forms', null)}</option>
+				<option class="select-option" value="6">${Resource.msg('month.june', 'forms', null)}</option>
+				<option class="select-option" value="7">${Resource.msg('month.july', 'forms', null)}</option>
+				<option class="select-option" value="8">${Resource.msg('month.august', 'forms', null)}</option>
+				<option class="select-option" value="9">${Resource.msg('month.september', 'forms', null)}</option>
+				<option class="select-option" value="10">${Resource.msg('month.october', 'forms', null)}</option>
+				<option class="select-option" value="11">${Resource.msg('month.november', 'forms', null)}</option>
+				<option class="select-option" value="12">${Resource.msg('month.december', 'forms', null)}</option></select>
+				</div>
+		</div>
+		<div class="form-caption"></div>
+	</div>
+
+	<div class="form-row form-row-type-select year required" aria-required="true">
+		<div class="field-wrapper">
+			<div class="select-style">
+			<select class="input-select  required"
+				id="creditCard_expiration_year" minlength="0" maxlength="2147483647"
+				aria-required="true">
+
+				<isscript>
+					var date = new Date();
+					var currentYear = date.getFullYear();
+					var years = [];
+
+					for (i = 0; i < 6; i++) {
+						years.push(Number(currentYear + i).toFixed(0));
+					}
+				 </isscript>
+				<isloop iterator="${years}" alias="year">
+					<option class="select-option" value="${year}">${year}</option>
+				</isloop>
+			</select>
+			</div>
+		</div>
+		<div class="form-caption"></div>
+	</div>
+</div>
+
+<div class="form-row form-row-type-text cvn required" data-required-text="${Resource.msg('validate.required', 'forms', null)}" aria-required="true">
+	<label for="creditCard_cvn" class="label">
+		<span class="labeltext">${Resource.msg('creditcard.cvnlabel', 'forms', null)}</span>
+		<span class="requiredindicator">*</span>
+	</label>
+	<div class="field-wrapper">
+		<input class="textinput required" type="text" id="creditCard_cvn" name="creditCard_cvn"
+			value="" aria-required="true">
+	</div>
+	<div class="form-caption"></div>
+</div>
+</div>

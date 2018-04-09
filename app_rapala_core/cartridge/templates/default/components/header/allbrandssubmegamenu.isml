@@ -1,8 +1,8 @@
 <isloop items="${getSubcategoriesInMenuForCategory(secondLevel)}" var="subCat">
 	<div class="${('showInMenu' in subCat.custom) && subCat.custom.showInMenu.valueOf() ? '' : 'mobileHide'}">
 				<isif condition="${('redirectingToPdp' in subCat.custom) && subCat.custom.redirectingToPdp.valueOf()}">
-					<isset name="brand" value="${subCat.getParent()}" scope="page" />	
-					<isset name="brands" value="${brand.getParent()}" scope="page" />					
+					<isset name="brand" value="${subCat.getParent()}" scope="page" />
+					<isset name="brands" value="${brand.getParent()}" scope="page" />
 						<a href="${URLUtils.https('Product-Show', 'pid', subCat.custom.redirectToPdp,'brandname',brands.ID)}" class="level-2">
 						<isprint value="${subCat.getDisplayName()}"/>
 						</a>
@@ -15,8 +15,8 @@
 				<div class="${('showInMenu' in subsubCat.custom) && subsubCat.custom.showInMenu.valueOf() ? 'desktopHide' : 'hide'}">
 						<isif condition="${('redirectingToPdp' in subCat.custom) && subCat.custom.redirectingToPdp.valueOf()}">
 							<isset name="brand" value="${subsubCat.getParent()}" scope="page" />
-							<isset name="brands" value="${brand.getParent()}" scope="page" />	
-							<isset name="branding" value="${brands.getParent()}" scope="page" />	
+							<isset name="brands" value="${brand.getParent()}" scope="page" />
+							<isset name="branding" value="${brands.getParent()}" scope="page" />
 							<a href="${URLUtils.https('Product-Show', 'pid', subCat.custom.redirectToPdp,'brandname',branding.ID)}" class="level-2">
 							<isprint value="${subsubCat.getDisplayName()}"/>
 							</a>
@@ -29,8 +29,8 @@
 							<div class="${('showInMenu' in fourth.custom) && fourth.custom.showInMenu.valueOf() ? 'desktopHide' : 'hide'}">
 								<isif condition="${('redirectingToPdp' in fourth.custom) && fourth.custom.redirectingToPdp.valueOf()}">
 								<isset name="brandFour" value="${fourth.getParent()}" scope="page" />
-								<isset name="brand" value="${brandFour.getParent()}" scope="page" />	
-								<isset name="branding" value="${brand.getParent()}" scope="page" />		
+								<isset name="brand" value="${brandFour.getParent()}" scope="page" />
+								<isset name="branding" value="${brand.getParent()}" scope="page" />
 								<isset name="brandslast" value="${branding.getParent()}" scope="page" />
 										<a href="${URLUtils.https('Product-Show', 'pid', fourth.custom.redirectToPdp,'brandname',brandslast.ID)}" class="level-2">
 										<isprint value="${fourth.getDisplayName()}"/>

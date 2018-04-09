@@ -19,8 +19,9 @@ var countries = require('./countries'),
     headerinit = require('./headerinit'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
-    quickviewAsset = require('./quickview-asset'),
-    tls = require('./tls');
+    tls = require('./tls'),
+    tagmanager = require('./tagmanager'),
+    quickviewAsset = require('./quickview-asset');
 
 // if jQuery has not been loaded, load from google cdn
 if (!window.jQuery) {
@@ -492,6 +493,15 @@ function initializeEvents() {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
+            if (SitePreferences.GTM_ENABLED) {
+                var obj = {
+                    'event': 'emailSignUp',
+                    'event_info': {
+                        'label' : 'footer'
+                    } 
+                };
+                dataLayer.push(obj);
+            }
             // set the action
             $('<input/>').attr({
                 name: $form.attr('action'),
@@ -549,7 +559,8 @@ var pages = {
     wishlist: require('./pages/wishlist'),
     rapalainsider: require('./pages/rapalainsider'),
     storelocator: require('./pages/storelocator'),
-    international: require('./pages/international')
+    international: require('./pages/international'),
+    blog: require('./pages/blog')
 };
 
 var app = {
@@ -607,7 +618,11 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
+        if (SitePreferences.GTM_ENABLED) {
+            tagmanager.init(window.pageContext.ns);
+        }
         quickviewAsset.init();
+
         // execute page specific initializations
         $.extend(page, window.pageContext);
         var ns = page.ns;

@@ -153,14 +153,24 @@
 				<isset name="thumbnailAlt" value="${Product.name + thumbnailAlt}" scope="page"/>
 			</isif>
 
-			<a class="thumb-link" href="${productUrl}" title="${Product.name}">
+			<isscript>
+				var gtmProductData = {};
+				if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
+					gtmProductData = require('*/cartridge/scripts/googletags/Site_TagManager').getProductData(Product.ID);
+				}
+			</isscript>
+			<a class="thumb-link" href="${productUrl}" title="${Product.name}"
+				data-gtmdata="${JSON.stringify(gtmProductData)}">
 				<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}" > 
-					<img src="${imageURLDesktopSmall}" alt="${thumbnailAlt}" class="tile-img" data-small-src="${imageURLDesktopSmall}" data-large-src="${imageURLDesktop}"/>
+					<img src="${imageURLDesktopSmall}" alt="${thumbnailAlt}" class="tile-img"
+						data-small-src="${imageURLDesktopSmall}" 
+						data-large-src="${imageURLDesktop}"/>
 				<iselse/>
 					<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
 				</isif>
 			</a>
-				<a id="quickviewbutton" class="quickview" href="${productUrl}">
+				<a id="quickviewbutton" class="quickview" href="${productUrl}"
+					data-gtmdata="${JSON.stringify(gtmProductData)}">
 					<isprint value="${Resource.msg('product.quickview','product',null)}"/>
 				</a>
 		</div>
@@ -175,8 +185,9 @@
 		<iscomment>Product Name</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<div class="product-name">
-			<a class="name-link" href="${productUrl}" title="${Resource.msgf('product.label','product',null, Product.name)}" encoding="off">
-				<isprint value="${Product.name}" encoding="off"/>
+			<a class="name-link" href="${productUrl}" title="${Resource.msgf('product.label','product',null, Product.name)}" encoding="off"
+				data-gtmdata="${JSON.stringify(gtmProductData)}">
+				<isproductname productname="${Product.name}"/>
 			</a>
 		</div>
 
@@ -284,7 +295,7 @@
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else if ((Product.master || Product.variationGroup) && Product.priceModel.isPriceRange()) {
 						price.class = 'product-sales-price';
-						price.value = '$' + Product.priceModel.minPrice.value.toFixed(2) + ' - $' + Product.priceModel.maxPrice.value.toFixed(2);
+						price.value = session.getCurrency().getSymbol() + Product.priceModel.minPrice.value.toFixed(2) + ' - ' + session.getCurrency().getSymbol() + Product.priceModel.maxPrice.value.toFixed(2);
 						//price.value = 'helloo';
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else {

@@ -1,0 +1,135 @@
+<div class="logincustomers">
+
+
+	<isif condition="${'sufix' == session.custom.currentSite}">
+		<h5 class="subheader" style="background-color: #fff;">${Resource.msg('logininclude.customersubheader','account',null)}</h5>
+	 	<h1 class="subheader"><isprint value="${Resource.msg('logininclude.customersheader','vip',null)}" encoding="off"></isprint></h1>
+		<p><isprint value = "${Resource.msg('logininclude.registered','vip',null)}" encoding = "off"></p>
+		<iscomment><p><isprint value = "${Resource.msg('vipaccountsignup.headercontent1','vip',null)}" encoding = "off"></p></iscomment>
+	<iselse/>
+		<h1 class="disign-header-title"><isprint value="${Resource.msg('logininclude.customersheader','vip',null)}" encoding="off"></isprint></h1>
+		<p><isprint value = "${Resource.msg('logininclude.registeredflw','vip',null)}" encoding = "off"></p>
+		<iscomment><p><isprint value = "${Resource.msg('vipaccountsignup.headercontentregflw','vip',null)}" encoding = "off"></p></iscomment>
+	 </isif>
+
+	<div class="returningcustomers vip">
+		
+		<form action="${URLUtils.httpsContinue()}" method="post" id="${pdict.CurrentForms.login.htmlName}" class="returncustomers">
+			<iscomment>Login Unsuccessful Error Message</iscomment>
+			<isif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && pdict.TempCustomer.profile.credentials.locked}">
+				<div id="message" class="error server-error" style="text-align: left;">${Resource.msg('logininclude.locked','account',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			<iselseif condition="${pdict.TempCustomer != null && pdict.TempCustomer.profile != null && (pdict.TempCustomer.profile.credentials.remainingLoginAttempts == 1)}">
+				<div id="message" class="error server-error" style="text-align: left;">${Resource.msg('logininclude.willbelocked','account',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			<iselseif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
+				<div id="message" class="error server-error" style="text-align: left;" >${Resource.msg('logininclude.loginerror','account',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			<iselseif condition="${!pdict.CurrentForms.vip.notused.valid}">
+				<div id="message" class="error server-error" style="text-align: left;" >${Resource.msg('vip.codeused','vip',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			<iselseif condition="${!pdict.CurrentForms.vip.numberexists.valid}">
+				<div id="message" class="error server-error" style="text-align: left;" >${Resource.msg('vip.codeerror','vip',null)}</div> <div class="clear"><!-- FLOAT CLEAR --></div>
+			</isif>
+			
+			<fieldset>				
+				<div class="formfield username">
+					<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" />
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield password">
+					<a id="password-reset" title="${Resource.msg('logininclude.forgotpassword','account',null)}" href="${URLUtils.url('Account-PasswordResetDialog')}">${Resource.msg('logininclude.forgotpassword','account',null)}</a>
+					<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password"/>					
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield accesscode desktopHide">
+					<isinputfield formfield="${pdict.CurrentForms.vip.numberflw}" type="input" fieldClass="desktop-accesscode"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="formfield accesscode mobileHide">
+					<isinputfield formfield="${pdict.CurrentForms.vip.numberflwmbl}" type="input" fieldClass="mobile-accesscode"/>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				</div>
+				<div class="vipformfieldaddtoemail clear">
+					<input type="hidden" name="ltkSubscriptionCode" value="flwviplogin" />
+					<input type="hidden" name="source" value="flwviplogin" />
+					<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+					<input type="hidden" name="customer_group" value="true" />
+					<div class="custom-checkbox custom">
+						<div class="custom-link active"></div>
+					
+					<isif condition="${!empty(pdict.CurrentForms.login.addtoemaillist.value) && pdict.CurrentForms.login.addtoemaillist.value}">
+						<isinputfield formfield="${pdict.CurrentForms.login.addtoemaillist}"  type="checkbox" label="false" />
+					<iselse/>
+						<isinputfield formfield="${pdict.CurrentForms.login.addtoemaillist}"  type="checkbox" label="false"/>
+					</isif>	
+						<label class="addtoemaillist" for="${pdict.CurrentForms.profile.customer.addtoemaillist.htmlName}">${Resource.msg('vip.createaccount.addtoemail','vip',null)}
+							<div class="privacy-care addtoemaillist">
+								<iscomment><span>Please click here for more information on our </span></iscomment>
+								<a title="${Resource.msg('global.readprivacypolicy','locale',null)}" href="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}">${Resource.msg('global.privacypractices','locale',null)}</a>.
+							</div>
+						</label>
+						</div>						
+					</div>
+					<div class="clear"><!-- FLOAT CLEAR --></div>
+				<div class="vipformfieldaddtoterms clear">
+					<div class="custom-checkbox custom">
+						<div class="custom-link"></div>
+					<input type="checkbox" class="vipcheck" id="${pdict.CurrentForms.agecheck.isvip.htmlName}" name="${pdict.CurrentForms.agecheck.isvip.htmlName}" value="${pdict.CurrentForms.agecheck.isvip.htmlValue}"/>
+					<div class="vipformfieldaddtoterms addtoterms">${Resource.msg('vip.createaccount.terms','vip',null)}<a class="vip-click" href="${URLUtils.url('Page-Show','cid','customer-terms-conditions-vip')}" target="_blank"><span class="bold">${Resource.msg('vip.createaccount.termsandconitions','vip',null)}</span></a>${Resource.msg('vip.createaccount.terms1','vip',null)}</div>						
+					</div>
+				</div>
+				
+					<div class="formactions vipactions">
+						<button onclick="googleAnalyticsEvents.loginCustomer();" type="submit" class="vip-chk" value="${Resource.msg('global.upgrade','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}"><span>${Resource.msg('vip.upgrade','vip',null)}</span></button>
+					</div><!-- END: returningcustomers_button -->
+				<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+			</fieldset>
+		</form>
+		<div class="clear"><!-- FLOAT CLEAR --></div>
+	</div><!-- END: returningcustomers -->
+	<div class="clear"><!-- FLOAT CLEAR --></div>
+</div><!-- END: logincustomers -->
+<script type="text/javascript">/*<![CDATA[*/
+
+
+	jQuery(document).ready(function() {
+		// see if we have password reset dialog div
+		// we need to add this dynamically as login panel can be present multiple times in the window
+		// but we want to use only 1 password reset dialog
+		if (jQuery(".PasswordResetDialog").length <=0) {
+	   		// create this div only once
+	   		jQuery("<div/>").attr("class", "PasswordResetDialog").appendTo(document.body);
+	   	}
+	  	jQuery('#PasswordReset').click(function() {
+	    	app.ajax.load({selector: ".PasswordResetDialog", url: '${URLUtils.url('Account-PasswordResetDialog')}'});
+	  	});
+	  
+	  jQuery('.formactions .vip-chk').click(function(event){
+		  var form = jQuery('.returncustomers');
+		  if(!form.valid()){
+			    if(jQuery('.vipcheck').size() <= 0) {
+			    }else if(jQuery('.vipcheck').is(':checked')){
+			    }else{
+			    	if(jQuery('.addtoterms').find('.vipcheckmessage').length == 0){
+				    	jQuery('.addtoterms').append('<span id="message" class="error vipcheckmessage">Please check the box to confirm you have read and agree to the Rapala VIP Terms & Conditions.</span>');
+			    	}
+			    	event.preventDefault();
+			    }
+			  return false;
+		  }else{
+			  if(jQuery('.vipcheck').size() <= 0) {
+			    }else if(jQuery('.vipcheck').is(':checked')){
+			    }else{
+			    	if(jQuery('.addtoterms').find('.vipcheckmessage').length == 0){
+				    	jQuery('.addtoterms').append('<span id="message" class="error vipcheckmessage">Please check the box to confirm you have read and agree to the Rapala VIP Terms & Conditions.</span>');
+			    	}
+			    	event.preventDefault();
+			    }
+		  }
+	  }); 
+	 	jQuery('.vipcheck').click(function(){
+	 		if($(this).is(':checked')){
+	 			jQuery('.addtoterms').find('.vipcheckmessage').remove();
+	 		}
+	 	});
+
+	});
+
+/* ]]> */</script>

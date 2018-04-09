@@ -1,0 +1,10 @@
+<iscontent type="application/json" charset="UTF-8" compact="true"/>
+<iscache type="relative" hour="8" />
+<iscomment>
+    Creates json containing store data
+</iscomment>
+<isscript>
+    importScript('app_storelocator:storelocator/StoreResults.ds');
+    var StoreJSON = GetStoresJSON(pdict.Stores);
+</isscript>
+<isprint value="${StoreJSON}" encoding="off" />

@@ -13,8 +13,8 @@ module.exports = function (gb) {
             scssFiles.push(gb.allStyleDirectories[i].scssPath + '/**/*.scss');
         }
 
-        for (var i = 0; i < gb.allStyleDirectories.length; i++) {
-            svgFiles.push(gb.allStyleDirectories[i].scssPath + '/**/*.svg');
+        for (var i = 0; i < gb.allSVGIconProjects.length; i++) {
+            svgFiles.push('../' + gb.allSVGIconProjects[i] + '/cartridge/static/default/images/svg-icons/*.svg');
         }
 
         watch(scssFiles, function() {
@@ -25,7 +25,7 @@ module.exports = function (gb) {
             gb.gulp.start('client-javascript');
         });
 
-        watch(gb.allSVGIconProjects, function() {
+        watch(svgFiles, function() {
             gb.gulp.start('svg');
         });
     });

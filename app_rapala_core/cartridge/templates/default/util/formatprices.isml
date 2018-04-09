@@ -6,19 +6,19 @@
 	Parameters (http):
 		salePrice - sale price to be formatted
 		standardPrice - standard price to be formatted.
-		
+
 	Returns:
 		a json with formtted prices
-		
+
 	Example:
-		Params: 
+		Params:
 			salePrice of 90
 			standardPrice of 100
-		Return: 
+		Return:
 			{salePrice: $90.00,
 			standardPrice: $100.00
 			}
 </iscomment>
-{"salePrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.salePrice.value), dw.system.Site.getCurrent().getDefaultCurrency())}"/>",
-"standardPrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.standardPrice.value), dw.system.Site.getCurrent().getDefaultCurrency())}"/>"
+{"salePrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.salePrice.value), session.getCurrency().getCurrencyCode())}"/>",
+"standardPrice": "<isprint value="${new dw.value.Money(new Number(pdict.CurrentHttpParameterMap.standardPrice.value), session.getCurrency().getCurrencyCode())}"/>"
 }

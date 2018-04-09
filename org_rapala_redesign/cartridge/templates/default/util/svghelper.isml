@@ -1,0 +1,24 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!--- TEMPLATENAME: svghelper.isml --->
+
+<iscomment>
+	SVG Helper Module
+
+	Purpose: this module outputs the SVG markup used for the icons
+</iscomment>
+
+<isif condition="${!empty(pdict.showbackground) && pdict.showbackground}">
+	<span class="icon-background">
+</isif>
+
+<svg class="icon ${pdict.icon} svg-${pdict.icon}-dims ${!empty(pdict.extraclasses) ? pdict.extraclasses : ''}">
+	<isif condition="${pdict.hideUrl}">
+		<use xlink:href="${'#' + pdict.icon}"/>
+	<iselse>
+		<use xlink:href="${URLUtils.abs('Images-Show') + '#' + pdict.icon}"/>
+	</isif>
+</svg>
+
+<isif condition="${!empty(pdict.showbackground) && pdict.showbackground}">
+	</span>
+</isif>

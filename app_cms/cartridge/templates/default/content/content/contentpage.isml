@@ -1,6 +1,11 @@
 <isset name="DecoratorTemplate" value="content/content/pt_content" scope="page"/>
 
+<isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+</isif>
+
 <isdecorate template="${DecoratorTemplate}">
+
 <iscomment>
 	Use the decorator template based on the page context. If
 	the content page was requested from a search result the

@@ -1,0 +1,25 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<isinclude template="util/modules"/>
+
+<isif condition="${rootBlogFolder != null && rootBlogFolder.ID === currentBlogFolder.ID}">
+	<isbreadcrumbs
+		bcurl1="${URLUtils.url('Home-Show')}"
+		bctext1="${Resource.msg('blog.sitename','blog',null)}"
+		bctext2="${rootBlogFolder.displayName}"/>
+<iselseif condition="${content != null}" >
+	<isbreadcrumbs
+		bcurl1="${URLUtils.url('Home-Show')}"
+		bctext1="${Resource.msg('blog.sitename','blog',null)}"
+		bcurl2="${URLUtils.url('Search-ShowContent', 'fdid', parentBlogFolder.ID)}"
+		bctext2="${parentBlogFolder.displayName}"
+		bcurl3="${URLUtils.url('Search-ShowContent', 'fdid', currentBlogFolder.ID)}"
+		bctext3="${currentBlogFolder.displayName}"
+		bctext4="${content.name}"/>
+<iselse>
+	<isbreadcrumbs
+		bcurl1="${URLUtils.url('Home-Show')}"
+		bctext1="${Resource.msg('blog.sitename','blog',null)}"
+		bcurl2="${URLUtils.url('Search-ShowContent', 'fdid', parentBlogFolder.ID)}"
+		bctext2="${parentBlogFolder.displayName}"
+		bctext3="${currentBlogFolder.displayName}"/>
+</isif>

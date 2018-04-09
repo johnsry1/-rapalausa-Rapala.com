@@ -16,6 +16,7 @@
  * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
 var browsing = require('~/cartridge/scripts/util/Browsing');
+var System = require('dw/system/System');
 var LOGGER   = dw.system.Logger.getLogger('guard');
 
 /**
@@ -79,6 +80,10 @@ var Filters = {
         // the main request will be something like kjhNd1UlX_80AgAK-0-00, all includes
         // have incremented trailing counters
         return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
+    },
+    /** Action must be on non-production environment */
+    nonproduction: function () {
+      return System.instanceType !== System.PRODUCTION_SYSTEM;
     }
 };
 

@@ -74,8 +74,8 @@ function ProductUtils (pdict) {
 
         return p;
     };
-    
-    
+
+
     var getVariantHierarchy = function () {
         if (_product === null) { return null; }
         var vh = {};
@@ -195,7 +195,7 @@ function ProductUtils (pdict) {
                                title : img.title.replace('&quot;','"')
                         })
                     }
-                    
+
                     // get swatch image
                     var swatch = attrValue.getImage('swatch');
                     if (swatch) {
@@ -246,18 +246,18 @@ function ProductUtils (pdict) {
 //get product image url
 ProductUtils.refineImageUrl = function (image, role) {
     if ( image != null)
-    {             
+    {
            var useITS : Boolean = Site.getCurrent().preferences.custom.useDynamicImagingService;
            if (useITS == null || useITS == false)
            {
                   return image.url;
-           } else {             
+           } else {
                   var resourceString : String = 'productImage.' + role + '.';
                   var transform : Object = {'scaleWidth': parseInt(Resource.msg(resourceString+'width', 'product', null))};
-                  var url:URL = image.getImageURL(transform);            
+                  var url:URL = image.getImageURL(transform);
                   return url;
            }
-    } 
+    }
 
     var nullFile:String = '/images/noimagelarge.png';
     if (role != null)
@@ -276,21 +276,26 @@ ProductUtils.getImagesDetails = function (item, pvm) {
     var zoomvariants = {};
     var varid = '';
     var productimages = '';
-    
+
     var mainTransform : Object = {'scaleWidth': parseInt(Resource.msg('productImage.pdpMain.width', 'product', null)) };
     var zoomTransform : Object = {'scaleWidth': parseInt(Resource.msg('productImage.zoom2.width', 'product', null)) };
     //var product = item.variationModel.master;
 	    for each(var variant in item.getVariants()){
 	           if(variant.custom.variantImage != null){
 	                  varid = variant.getID();
-	                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
-	                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                    if(dw.system.Site.current.ID == 'rapala') {
+  	                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+  	                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                    } else if (dw.system.Site.current.ID == 'rapalaEU') {
+                      variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                      zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                    }
 	           }
 	    }
-	    
+
     images.variants = variants;
     images.zoomvariants = zoomvariants;
-    
+
     for each(var img in item.getImages('large')){
            large.push({
                   url : ProductUtils.refineImageUrl(img,"pdpMain").toString(),
@@ -398,10 +403,17 @@ ProductUtils.getPricing = function (item) {
     var priceModel = item.getPriceModel();
     var standardPrice = null;
 
-    if ((!priceModel.getPrice().available) || (!Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode()))) {
+    /**
+     * According to multiple currency change we remove second verification for default site currency
+     * NOTE: (old if statement was)
+     *
+     * if ((!priceModel.getPrice().available) || (!Site.getCurrent().getDefaultCurrency().equals(session.getCurrency().getCurrencyCode())))
+     */
+    if (!priceModel.getPrice().available) {
         standardPrice = Money.NOT_AVAILABLE;
     } else if (('listPriceDefault' in Site.current.preferences.custom) && Site.current.preferences.custom.listPriceDefault) {
-        standardPrice = priceModel.getPriceBookPrice(Site.current.preferences.custom.listPriceDefault);
+        var currencyPriceBookId = session.getCurrency().getCurrencyCode().toLowerCase() + Site.current.preferences.custom.listPriceDefault;
+        standardPrice = priceModel.getPriceBookPrice(currencyPriceBookId);
     } else {
         standardPrice = priceModel.getPriceBookPrice('list-prices');
     }

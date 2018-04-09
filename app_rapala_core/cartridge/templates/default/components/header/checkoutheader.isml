@@ -1,11 +1,14 @@
 <div id="alert-message">
-	<div class="non-usa-alert hide">	
-		<p><img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/><isprint value="${Resource.msg('nonusaalert.message','locale',null)}" encoding="off"> <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a></p>	
+	<div class="non-usa-alert hide">
+		<p><img src="${URLUtils.staticURL('/images/icon-alert-e6ba45-large.png')}"/><isprint value="${Resource.msg('nonusaalert.message','locale',null)}" encoding="off"> <a href="${URLUtils.https('Home-ChangeRegion','launch','yes')}">click here.</a></p>
+		<div class="close-alert-message">
+			<a href="#" id="close-non-us-alert">Close</a>
+		</div>
 	</div>
 </div>
 <div class="browser-compatibility-alert hide">
-	<p><isprint value="${Resource.msg('tlsalert.increased','locale',null)}" encoding="off" /></p> 
-	<p><isprint value="${Resource.msg('tlsalert.detected','locale',null)}" encoding="off" /><span class="browser_version"></span> 
+	<p><isprint value="${Resource.msg('tlsalert.increased','locale',null)}" encoding="off" /></p>
+	<p><isprint value="${Resource.msg('tlsalert.detected','locale',null)}" encoding="off" /><span class="browser_version"></span>
 	<span><isprint value="${Resource.msg('tlsalert.outdated','locale',null)}" encoding="off" /></span></p>
 	<p>${Resource.msg('tlsalert.chrome','locale',null)}<a href="https://www.google.com/chrome/browser/desktop/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.google.com/chrome/answer/95414?hl=en">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
 	<p>${Resource.msg('tlsalert.firefox','locale',null)}<a href="https://www.mozilla.org/en-US/firefox/new/">${Resource.msg('tlsalert.download','locale',null)}</a><a href="https://support.mozilla.org/en-US/kb/update-firefox-latest-version">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
@@ -13,8 +16,11 @@
 	<p>${Resource.msg('tlsalert.edge','locale',null)}<a href="https://www.microsoft.com/en-us/windows/windows-10-upgrade">${Resource.msg('tlsalert.download','locale',null)}</a><a href="http://windows.microsoft.com/en-us/windows-10/upgrade-to-windows-10-faq">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
 	<p>${Resource.msg('tlsalert.ie','locale',null)}<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">${Resource.msg('tlsalert.download','locale',null)}</a><a href="http://windows.microsoft.com/en-us/internet-explorer/which-version-am-i-using#ie=other">${Resource.msg('tlsalert.upgrading','locale',null)}</a></p>
 </div>
+
+<isinclude template="components/header/sessiondebug"/>
+
 <div id="headerwrapper">
-	<div id="header"> 
+	<div id="header">
 		<div class="header-wrapper">
 			<div class="wrapper">
 				<div class="row column1">
@@ -39,56 +45,56 @@
 					<iselse>
 						<li class="rapala"><a class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('brand.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- VMC : id=6 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
 						<li class="vmc vmc-active" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
 					<iselse>
 						<li class="vmc" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- LUHR-JENSEN : id=5 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'luhrjensen')}">
 						<li class="luhrjensen luhrjensen-active" ><a class="luhrjensen" href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('brand.luhrjensen','common',null)}">${Resource.msg('account.luhrjensen','account',null)}</a></li>
 					<iselse>
 						<li class="luhrjensen" ><a class="luhrjensen" href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('brand.luhrjensen','common',null)}">${Resource.msg('account.luhrjensen','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- STORM : id=4 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'storm')}">
 						<li class="storm storm-active" ><a class="storm" href="${URLUtils.https('Home-Show','id','4')}" title="${Resource.msg('brand.storm','common',null)}">${Resource.msg('account.storm','account',null)}</a></li>
 					<iselse>
 						<li class="storm" ><a class="storm" href="${URLUtils.https('Home-Show','id','4')}" title="${Resource.msg('brand.storm','common',null)}">${Resource.msg('account.storm','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- SUFIX : id=2 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'sufix')}">
 						<li class="sufix sufix-active" ><a class="sufix" href="${URLUtils.https('Home-Show','id','2')}" title="${Resource.msg('brand.sufix','common',null)}">${Resource.msg('account.sufix','account',null)}</a></li>
 					<iselse>
 						<li class="sufix" ><a class="sufix" href="${URLUtils.https('Home-Show','id','2')}" title="${Resource.msg('brand.sufix','common',null)}">${Resource.msg('account.sufix','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- BLUEFOX : id=8 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'bluefox')}">
 						<li class="bluefox bluefox-active" ><a class="bluefox" href="${URLUtils.https('Home-Show','id','8')}" title="${Resource.msg('brand.bluefox','common',null)}">${Resource.msg('account.bluefox','account',null)}</a></li>
 					<iselse>
 						<li class="bluefox" ><a class="bluefox" href="${URLUtils.https('Home-Show','id','8')}" title="${Resource.msg('brand.bluefox','common',null)}">${Resource.msg('account.bluefox','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- TERMINATOR : id=7 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'terminator')}">
 						<li class="terminator terminator-active" ><a class="terminator" href="${URLUtils.https('Home-Show','id','7')}" title="${Resource.msg('brand.terminator','common',null)}">${Resource.msg('account.terminator','account',null)}</a></li>
 					<iselse>
 						<li class="terminator" ><a class="terminator" href="${URLUtils.https('Home-Show','id','7')}" title="${Resource.msg('brand.terminator','common',null)}">${Resource.msg('account.terminator','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- WILLIAMSON : id=9 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'williamson')}">
 						<li class="williamson williamson-active"><a class="williamson" href="${URLUtils.https('Home-Show','id','9')}" title="${Resource.msg('brand.williamson','common',null)}">${Resource.msg('account.williamson','account',null)}</a></li>
 					<iselse>
 						<li class="williamson"><a class="williamson" href="${URLUtils.https('Home-Show','id','9')}" title="${Resource.msg('brand.williamson','common',null)}">${Resource.msg('account.williamson','account',null)}</a></li>
 					</isif>
-					
+
 					<!-- TRIGGER X : id=3 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'triggerx')}">
 						<li class="triggerx triggerx-active" ><a class="triggerx" href="${URLUtils.https('Home-Show','id','3')}" title="${Resource.msg('brand.triggerx','common',null)}">${Resource.msg('account.triggerx','account',null)}</a></li>

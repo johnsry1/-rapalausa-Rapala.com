@@ -1,0 +1,77 @@
+<div class="clearfix"></div>
+<div id="brand-tabs-header">
+	<div class="floatright site-suggestion-section">
+		<isinclude template="search/simplesearch"/>
+	</div>
+	<ul class="clearfix">
+		<isloop items = "${dw.system.Site.current.getCustomPreferenceValue('brandtaborder')}" var="brandtab" status="status" >
+			<isif condition="${dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) != null && dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) == true}">
+				<li class="<isif condition="${status.odd}">odd<iselse/>even</isif><isif condition = "${brandtab.split('|')[0] == session.custom.currentSite}"> active</isif>">
+					<span class="mobile-main-menu-heading">
+					    <isset name="cat_name" value="${brandtab.split('|')[0]}" scope="page" />
+                        <isset name="brandImageUrl" value="${'/images/brands/' + cat_name + '.png'}" scope="page"/>
+                        <isset name="brandImageGrayscaleUrl" value="${'/images/brands/' + cat_name + '_bw.png'}" scope="page"/>
+						<a onclick="googleAnalyticsEvents.brandSwitch('${cat_name}');" class="${brandtab.split('|')[0]}" href="${URLUtils.https('Home-Show','id',+brandtab.split('|')[1])}">
+                            <span>
+                            	<isif condition="${dw.catalog.CatalogMgr.getCategory(cat_name) != null}">
+                                	<isprint value="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}" encoding="off" />
+                                </isif>
+                            </span>
+                            <img class="color" src="${URLUtils.httpsStatic(brandImageUrl)}" alt="${(dw.catalog.CatalogMgr.getCategory(cat_name) != null ? dw.catalog.CatalogMgr.getCategory(cat_name).displayName : '')}"/>
+                            <img class="grayscale" src="${URLUtils.httpsStatic(brandImageGrayscaleUrl)}" alt="${(dw.catalog.CatalogMgr.getCategory(cat_name) != null ? dw.catalog.CatalogMgr.getCategory(cat_name).displayName : '')}"/>
+                            <i></i>
+						</a>
+						<div class="mobile-menu-slide">menu-brand-logo</div>
+					</span>
+					<div class="megamenu-drop">
+						<span class="see-all-brands ${brandtab.split('|')[0]}">
+							<span class="right-back-icon"></span><a>see all brands</a>
+						</span>
+						<a class="mobile-menu-brandlogo ${brandtab.split('|')[0]}" href="${URLUtils.url('Home-Show','id',brandtab.split('|')[1])}">menu-brand-logo</a>
+						<div class="wrapper">
+							<div class="mega-categorymenu">
+								<isinclude url="${URLUtils.url('Home-MegaMenu','brand',brandtab.split('|')[0])}"/>
+							</div>
+						</div>
+					</div>
+				</li>
+			</isif>
+		</isloop>
+	</ul>
+    <ul class="mobile-view mobile-account-menu">
+        <li>
+            <a href="${'#'}" class="with-subcategory mobile-account-link">
+                ${Resource.msg('global.changecurrency','locale',null)} ${session.getCurrency()} ${session.getCurrency().getSymbol()}
+            </a>
+            <div class="mobile-account-submenu">
+                <div class="change-region">
+                    <span class="change-regionnew currency-selector">
+                        <div class="domainswitch-header">
+                            <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
+                            <isloop items="${availableCurrencies}" var="currency">
+                                <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
+                                <ul>
+                                    <li>
+                                        <a class="change-currency-link" href="${URLUtils.url('Currency-UpdateCurrency','currencyCode', currency)}">
+                                            ${Resource.msg('global.changeto','locale',null)} <isprint value="${currency}"/> ${currencyObj.getSymbol()}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </isloop>
+                         </div>
+                    </span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <isif condition="${pdict.CurrentCustomer.authenticated}">
+                <a class="mobile-account-link login-logout" href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a>
+             <iselse/>
+                <a class="mobile-account-link login-logout" href="${URLUtils.https('Account-Show')}"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
+            </isif>
+        </li>
+    </ul>
+</div>
+
+
+

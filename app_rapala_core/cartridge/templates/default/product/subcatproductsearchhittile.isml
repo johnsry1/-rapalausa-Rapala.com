@@ -1,14 +1,14 @@
 <iscomment>
 	This template renders a product in the search result using a ProductSearchHit object.
 </iscomment>
-
+<isinclude template="util/modules"/>
 <isif condition="${pdict.productsperrow == null}">
 	<isset name="productsperrow" value="${3}" scope="page"/>
 <iselse>
 	<isset name="productsperrow" value="${pdict.productsperrow}" scope="page"/>
-</isif>	
+</isif>
 
-<iscomment>This is used to get the description in the subcategory landing page </iscomment>		
+<iscomment>This is used to get the description in the subcategory landing page </iscomment>
 <isscript>
 	importScript( "common/GetCount.ds" );
 	importScript( "common/GetCategoryprods.ds" );
@@ -29,7 +29,7 @@
 		<div class="productlisting sub-cat">
 			<isloop items="${SubcategoryHit.getOnlineProducts().iterator()}" var="ProductHit" status="subcatloopstatus">
 			<isset name="Product" value="${ProductHit}" scope="page"/>
-			
+
 			<isscript>
 				importScript("app_disbestpractice:product/ProductImageSO.ds");
 				// set default settings
@@ -37,7 +37,7 @@
 					Relies on the fact that the represented product is a variant if color slicing is enabled
 				 	See script API doc @ProductSearchHit.product
 				*/
-		
+
 				var selectableColors = new dw.util.ArrayList();
 				var imageSize = 'medium';
 				var PVM = Product.variationModel;
@@ -79,7 +79,7 @@
 				} else {
 					imageSource = Product;
 				}
-				
+
 				if(dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')){
 					imageDesktop = new ProductImage('PLPDesktop',Product,0,"grid");
 					imageIPad = new ProductImage('PLPIPad',Product,0,"grid");
@@ -88,7 +88,7 @@
 				}else{
 					image = imageSource.getImage(imageSize, 0);
 				}
-		
+
 				// Generate link to product detail page: by default it's just the product of the product search hit.
 				// If a color variation is available, the first color is used as link URL.
 				//RAP-3006 - added cgid because the breadcumb will not work otherwise.  It needs to pass the category ID
@@ -97,31 +97,31 @@
 				if (selectedColor) {
 					productUrl = Product.variationModel.urlSelectVariationValue('Product-Show', colorVarAttr, selectedColor) + '&cgid=' + pdict.CurrentHttpParameterMap.cgid;
 				}
-			 	
+
 			 	var imageRatio = parseFloat(Resource.msg('productImage.imageRatio', 'product', null));
-			 	var height = Math.floor(parseInt(Resource.msg('productImage.'+"grid"+'.width', 'product', null)) * imageRatio); 
-			</isscript>	
-			
-			
+			 	var height = Math.floor(parseInt(Resource.msg('productImage.'+"grid"+'.width', 'product', null)) * imageRatio);
+			</isscript>
+
+
 			<iscomment>
 				Get the colors selectable from the current product master or variant range if we
 				need to determine them based on a search result.
 			</iscomment>
-			
+
 		    <iscomment>
 				Generate link to product detail page: by default it's just the product of the product search hit.
 				If a color variation is available, the first color is used as link URL.
 			</iscomment>
 			<isset name="productUrl" value="${URLUtils.https('Product-Show', 'pid', Product.ID)}" scope="page"/>
-			
+
 		    <iscomment>append the paging parameters to the product URL</iscomment>
 			<isset name="productUrl" value="${productUrl.append('start', starting)}" scope="page"/>
-		
+
 			<iscomment>append the search query parameters to the product URL</iscomment>
 			<isif condition="${!empty(pdict.ProductSearchResult)}">
 				<isset name="productUrl" value="${pdict.ProductSearchResult.url( productUrl )}" scope="page"/>
 			</isif>
-				
+
 			<div class="product-tile producttile grid-tile cell <isif condition="${(subcatloopstatus.count > 2)}"> subcatproduct</isif>" id="${Product.UUID}" data-itemid="${Product.ID}"  data-cgid="${pdict.CurrentHttpParameterMap.cgid.value}"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
 				<isobject object="${SubcategoryHit}" view="searchhit">
 		        <iscomment>Image</iscomment>
@@ -138,7 +138,7 @@
 						<isset name="thumbnailAlt" value="${Product.name}" scope="page"/>
 						<isset name="thumbnailTitle" value="${Product.name}" scope="page"/>
 					</isif>
-		
+
 					<iscomment>RAP-2997, if the product name is missing from the image title, add it in</iscomment>
 					<isif condition="${thumbnailTitle.charAt(0) == ','}">
 						<isset name="thumbnailTitle" value="${Product.name + thumbnailTitle}" scope="page"/>
@@ -147,7 +147,7 @@
 						<isset name="thumbnailAlt" value="${Product.name + thumbnailAlt}" scope="page"/>
 					</isif>
 					<a class="thumb-link" href="${productUrl}" title="${Product.name}">
-						<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}" > 
+						<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}" >
 							<img src="${imageDesktop.getURL()}" alt="${thumbnailAlt}" class="tile-img"/>
 						<iselse/>
 							<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
@@ -159,16 +159,16 @@
 				</div>
 				<div class="product-name">
 					<a class="name-link" href="${productUrl}" title="${Product.name}">
-						<isprint value="${(Product.name)}" encoding="off"/>
+						<isproductname productname="${Product.name}"/>
 					</a>
 				</div><!-- END: name -->
 				<div class="product-promo">
-					<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>	
+					<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>
 		            <isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
-					
+
 					<iscomment>Render information on active product promotions</iscomment>
 					<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(Product)}" scope="page"/>
-					
+
 					<isif condition="${!empty(promos)}">
 						<div class="promotionalMessage">
 							<isloop items="${promos}" var="promo">
@@ -180,20 +180,20 @@
 					</isif>
 					</isif>
 				</div><!-- END: promo -->
-					
+
 					<div class="product-pricing pricing">
-						<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>	
+						<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>
 			            <isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
-						
+
 						<iscomment>Renders pricing information depending on the option or variation model, as well as scaled prices and so on.</iscomment>
 						<div class="price">
 							<isif condition="${Product.productSet}">
 								<iscomment>Product set pricing</iscomment>
 								<div class="productsetprice">${Resource.msg('global.buyall','locale',null)}</div>
 							<iselseif condition="${Product.master && Product.priceModel.priceRange}"/>
-								<iscomment>Product master price range depending on the represented variants</iscomment>						
+								<iscomment>Product master price range depending on the represented variants</iscomment>
 									<div class="salesprice">${Resource.msg('pricing.startingat','product',null)} <isprint value="${Product.priceModel.minPrice}"/></div>
-							<iselse/>						
+							<iselse/>
 								<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
 								<isif condition="${Product.master && !Product.priceModel.priceRange}"/>
 									<iscomment>Preserve current product instance</iscomment>
@@ -209,17 +209,17 @@
 								<iselse/>
 									<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
 								</isif>
-			
+
 								<iscomment>
 									Check whether the product has price in the sale pricebook. If so, then
 									display two prices: crossed-out standard price and sales price.
 								</iscomment>
 								<isinclude template="product/components/standardprice"/>
-								
+
 								<!-- <isset name="SalesPrice" value="${Product.priceModel.minPrice}" scope="page"/> -->
-								
+
 								<isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page"/>
-			
+
 								<isif condition="${ShowStandardPrice}">
 									<div class="discountprice">
 										<div class="standardprice"><isprint value="${StandardPrice}"/></div>
@@ -231,7 +231,7 @@
 											<isprint value="${Product.custom.earlyBirdMessage}"/>
 										<iselse/>
 											<isprint value="${SalesPrice}"/>
-										</isif>							
+										</isif>
 									</div>
 								</isif>
 								<isif condition="${!empty(pdict.OrgProduct)}">
@@ -246,11 +246,11 @@
 						<iscomment>New Flag</iscomment>
 								<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 								<isdisplayvariantnew p_product="${Product}"/>
-								
+
 								<iscomment>New Flag and Size</iscomment>
 								<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 								<isdisplayvariantnewcolorsize p_product="${Product}"/>
-								
+
 								<iscomment>New Pak and Size</iscomment>
 								<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 								<isdisplayvariantnewpaksize p_product="${Product}"/>
@@ -260,19 +260,19 @@
 						<isset name="count" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getAvailability(ProductHit)}" scope="page"/>
 						<div id="stock">
 							<isif condition="${count == 0}">
-								<span class="out_stock"><isprint value="${Resource.msg('product.outofstock','product',null)}"/></span> 
+								<span class="out_stock"><isprint value="${Resource.msg('product.outofstock','product',null)}"/></span>
 							</isif>
-						</div>			
+						</div>
 					</div><!-- END: pricing -->
 				</isobject>
 			</div>
-		
+
 			<isif condition="${(subcatloopstatus.count >= 4)}">
 				<isbreak/>
 			</isif>
 		</isloop>
 	</div>
-	
+
 	<div class="clear"></div>
 		<!-- END: producttile -->
 		<!-- ProductSearchHit was not in dictionary, so blank. -->
@@ -286,7 +286,7 @@
 			<isset name="count" value="${getcategoryProductCount(SubcategoryHit.ID)}" scope="page"/>
 			<span>-<a class="" href="${URLUtils.https('Search-Show','cgid', SubcategoryHit.getID())}">See All <isprint value="${count.toFixed()}"/></a></span>
 		</div>
-		
+
 		<isinclude template="product/subcatprodsearchhittilewithoutprods"/>
 	</isif>
 </isif>

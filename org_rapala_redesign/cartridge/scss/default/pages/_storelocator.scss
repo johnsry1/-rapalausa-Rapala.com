@@ -1,0 +1,278 @@
+.pt_store-locator,
+.pt_customerservice {
+    .breadcrumb {
+        box-shadow: none !important;
+        font-family: $font !important;
+    }
+}
+.pt_store-locator {
+    .storelocator {
+        @include respond(desktop-down) {
+            padding-left: rem(10px);
+            padding-right: rem(10px);
+            box-sizing: border-box;
+        }
+        @include respond(medium-down) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+.pt_store-locator-details {
+    .breadcrumb {
+        font-size: 13px;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+        @include respond(0, $desktop-breakpoint - 1) {
+            padding: 10px;
+        }
+        .wrapper {
+            .cell {
+                margin: 9px 18px;
+                padding: 0;
+                @include respond(0, $desktop-breakpoint - 1) {
+                    margin: 0;
+                }
+                ul {
+                    line-height: 20px;
+                    .breadcrumb-element {
+                        margin: 0 0 0 5px;
+                        padding: 0 0 0 0.9px;
+                        color: $bg-darkbrown;
+                        font-size: 13px;
+                        height: 18px;
+                        line-height: 20px;
+                        float: left;
+                        @include respond(0, $desktop-breakpoint - 1) {
+                            float: none;
+                        }
+                        &:first-child {
+                            margin: 0;
+                            padding: 0;
+                        }
+                        &:last-child {
+                            font-weight: normal;
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .breadcrumb-element-slash {
+                        display: block;
+                        height: 20px;
+                        line-height: 20px;
+                        float: left;
+                        padding: 0 2px;
+                        margin-left: 5px;
+                        background: url("../images/arrow-333333.png") center center no-repeat;
+                        &:after {
+                            content: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.store-locator-header {
+    background: none;
+    padding: 0;
+    margin: rem(10px);
+    @include font-size(13px);
+    font-style: normal;
+    @include respond(large-up) {
+        margin: 0;
+    }
+}
+.search-bar {
+    overflow: hidden;
+}
+.store-search-form {
+    padding: 0 rem(10px);
+    @include respond(large-up) {
+        max-width: rem(460px);
+        padding: 0;
+    }
+    .form-row-button {
+        button {
+            @include button('submit');
+        }
+    }
+}
+#map-canvas {
+    display: none;
+    @include respond(large-up) {
+        display: block;
+        background: $white;
+        margin-bottom: 3rem;
+        float: right;
+        height: rem(450px);
+        width: 48%;
+    }
+}
+.store-locator {
+    clear: both;
+    overflow: hidden;
+    margin-top: rem(20px);
+    .stores-wrapper {
+        padding: 0 10px;
+        @include respond(large-up) {
+            float: left;
+            width: 50%;
+            padding: 0;
+        }
+    }
+    .stores-header {
+        @include h2;
+    }
+}
+.stores-container {
+    margin-top: rem(15px);
+    .store {
+        border-bottom: $border;
+        margin-bottom: rem(15px);
+        padding-bottom: rem(15px);
+        overflow: hidden;
+        @include font-size(13px);
+        @include line-height(18px);
+        &:last-child {
+            border-bottom: none;
+        }
+        .storenumber {
+            float: left;
+            width: rem(27px);
+            height: rem(32px);
+            @include line-height(25px);
+            background: url("../images/marker.png") no-repeat center;
+            @include font-size(10px);
+            text-align: center;
+            a {
+                color: $white;
+            }
+        }
+        .store-info {
+            float: right;
+            margin-left: rem(10px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                float: left;
+                width: rem(140px);
+                word-break: break-all;
+            }
+            @include respond(desktop) {
+                margin-left: rem(20px);
+                width: rem(160px);
+            }
+        }
+        .store-links {
+            float: right;
+            margin: rem(10px) 0 rem(10px) rem(20px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                width: auto;
+                float: left;
+            }
+            @include respond(desktop) {
+                margin: 0 0 0 rem(30px);
+            }
+            .details,
+            .directions {
+                @include respond(medium-down) {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: rem(15px);
+                }
+            }
+            .directions {
+                margin-right: 0;
+            }
+        }
+        .distance {
+            float: right;
+            margin-left: rem(20px);
+            width: calc(100% - #{rem(37px)});
+            @include respond(large-up) {
+                float: left;
+                width: auto;
+            }
+            @include respond(desktop) {
+                margin-left: rem(30px);
+            }
+        }
+        .storename {
+            @include h3;
+            margin-bottom: rem(7px);
+        }
+    }
+}
+.storedetails {
+    @include respond(large-up) {
+        margin-top: rem(20px);
+    }
+    h1 {
+        @include respond(medium-down) {
+            padding: 0 rem(10px);
+        }
+    }
+    .back {
+        @include font-size(13px);
+        margin: rem(10px);
+        padding: 0;
+        float: none;
+        @include respond(large-up) {
+            float: right;
+            margin: 0;
+        }
+        @include respond(desktop-down) {
+            margin-right: rem(10px);
+        }
+    }
+    .leftStore {
+        @include font-size(13px);
+        @include line-height(18px);
+        margin: rem(10px) 0 rem(20px);
+        padding: 0 rem(10px);
+
+        @include respond(large-up) {
+            box-sizing: border-box;
+            float: left;
+            margin: 0 2% 0 0;
+            width: 33%;
+        }
+        @include respond(desktop) {
+            padding: 0;
+        }
+        h1 {
+            @include respond(medium-down) {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+    .rightStore {
+        box-sizing: border-box;
+        @include respond(large-up) {
+            float: right;
+            width: 65%;
+        }
+        @include respond(desktop-down) {
+            padding-right: rem(10px);
+        }
+        @include respond(medium-down) {
+            padding-right: 0;
+        }
+    }
+    #map-canvas {
+        width: 100%;
+        display: block;
+    }
+}
+.storeImage {
+    margin-bottom: rem(15px);
+    img {
+        width: 100%;
+        height: auto;
+        vertical-align: top;
+    }
+}

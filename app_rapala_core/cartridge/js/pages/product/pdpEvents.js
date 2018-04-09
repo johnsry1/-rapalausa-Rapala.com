@@ -222,10 +222,6 @@ var product = function (response) {
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
-                // close the quick view when user clicks A2C.
-                if ($('#QuickViewDialog').length > 0) {
-                    $('#QuickViewDialog').dialog('close');
-                }
                 // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
                 // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
                 /*eslint-disable */
@@ -2203,8 +2199,10 @@ var pdpEvents = {
             }
         });
         $('#Quantity').keyup(function(e) {
-            var key = e.charCode || e.keyCode || 0;
-            if (key < 48 || key > 58 && $('#Quantity').val() < 1) {
+            var key = e.charCode || e.keyCode || e.which || 0;
+            if ($.isNumeric($('#Quantity').val()) && (key == 13)) {
+                $('#add-to-cart').trigger('click');
+            } else if (!$.isNumeric($('#Quantity').val())) {
                 $('.addtocartbutton:last').prop('disabled', true);
                 $('.addtocart, .addtocartbutton').addClass('disabled');
                 return false;

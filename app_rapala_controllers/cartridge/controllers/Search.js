@@ -69,10 +69,14 @@ function show() {
         var productSearchModel = Search.initializeProductSearchModel(params);
         var contentSearchModel = Search.initializeContentSearchModel(params);
 
+        var isBlogArticleSearch = Search.isBlogArticleSearch(params);
+        if (isBlogArticleSearch) {
+            contentSearchModel.setSortingCondition('creationDate', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
+        }
         // execute the product search
         productSearchModel.search();
         contentSearchModel.search();
-
+        
         if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
             response.redirect(URLUtils.abs('Home-Show'));
         } else if (productSearchModel.count > 0) {
@@ -139,6 +143,20 @@ function show() {
                 }).render('util/redirect');
 
             }
+        } else if (isBlogArticleSearch) {
+            var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
+            contentPagingModel.setPageSize(16);
+            if (params.start.submitted) {
+                contentPagingModel.setStart(params.start.intValue);
+            }
+            app.getView({
+                ProductSearchResult: productSearchModel,
+                ContentSearchResult: contentSearchModel,
+                ContentPagingModel: contentPagingModel,
+                searchedID: params.id.stringValue.toLowerCase(),
+                searchedValue : params.q.stringValue
+            }).render('blog/articlesearch');
+            
         } else {
             app.getView({
                 ProductSearchResult: productSearchModel,
@@ -174,21 +192,38 @@ function showContent() {
     var productSearchModel = Search.initializeProductSearchModel(params);
     var contentSearchModel = Search.initializeContentSearchModel(params);
 
+    var searchedFolderId = params.fdid.submitted ? dw.content.ContentMgr.getFolder(params.fdid.value) : '';
+    var renderBlogPages = false;
+    if (searchedFolderId != null && !empty(searchedFolderId)) {
+        var blogRootFolder = dw.system.Site.getCurrent().getCustomPreferenceValue('blogRootFolder');
+        if (blogRootFolder === searchedFolderId.ID || blogRootFolder === searchedFolderId.parent.ID || blogRootFolder === searchedFolderId.parent.parent.ID) {
+            contentSearchModel.setSortingCondition('weight', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
+            contentSearchModel.setSortingCondition('creationDate', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
+            renderBlogPages = true;
+            
+            if (searchedFolderId.custom.content_search_term != null && !empty(searchedFolderId.custom.content_search_term)) {
+                contentSearchModel.setSearchPhrase(searchedFolderId.custom.content_search_term);
+            }
+        }
+    }
+    
+
     // Executes the product search.
     productSearchModel.search();
     contentSearchModel.search();
 
     if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
         response.redirect(URLUtils.abs('Home-Show'));
-    } else if (contentSearchModel.count > 0) {
+    } else if (contentSearchModel.count > 0 || renderBlogPages) {
 
         var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
         contentPagingModel.setPageSize(16);
+        var test = contentSearchModel.getContent().asList();
         if (params.start.submitted) {
             contentPagingModel.setStart(params.start.intValue);
         }
 
-        if (contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
+        if ((renderBlogPages && contentSearchModel.folder.template) || contentSearchModel.folderSearch && !contentSearchModel.refinedFolderSearch && contentSearchModel.folder.template) {
             // Renders a dynamic template
             app.getView({
                 ProductSearchResult: productSearchModel,

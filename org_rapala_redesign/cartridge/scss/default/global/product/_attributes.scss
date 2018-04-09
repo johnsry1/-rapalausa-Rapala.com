@@ -1,0 +1,187 @@
+a.filter {
+    @include a-filter;
+    span {
+        font-family: $a-filter-font-family;
+        font-size: $a-filter-font-size;
+        font-weight: $a-filter-font-weight;
+    }
+}
+
+.productdetail {
+    a.filter {
+        border-radius: $a-filter-border-radius;
+        border: $a-filter-opened-section-border;
+        span {
+            font-family: $a-filter-font-family;
+            font-size: $a-filter-font-size;
+            font-weight: $a-filter-font-weight !important;
+            font-style: normal;
+            color: $a-filter-color;
+        }
+    }
+    .selected,
+    .future {
+        a.filter {
+            border: none;
+            background: $a-filter-not-active-bg;
+            border-radius: $a-filter-border-radius;
+        }
+    }
+    .optionwrapper {
+        border: $a-filter-opened-section-border;
+        border-top: none;
+    }
+}
+
+// Swatches
+.variationattributes {
+    .color li {
+        &.selected {
+            a {
+                border-color: $swatch-active-border-color;
+            }
+        }
+        a {
+            border-color: $swatch-border-color;
+        }
+    }
+    .swatches.Size,
+    .swatches.size {
+        li {
+            border: none;
+            height: auto;
+            &.selected {
+                a.swatchanchor {
+                    color: $swatch-attr-hover-color;
+                    text-decoration: $swatch-attr-hover-text-decoration;
+                    background: $swatch-attr-hover-bg;
+                    border: $swatch-attr-hover-border;
+                    span {
+                        color: $swatch-attr-inner-color;
+                    }
+                }
+            }
+            a {
+                @include swatch-attr;
+            }
+        }
+    }
+}
+
+.desktop-device {
+    .variationattributes {
+        .swatches.Size,
+        .swatches.size {
+            a:hover {
+                color: $swatch-attr-hover-color;
+                text-decoration: $swatch-attr-hover-text-decoration;
+                background: $swatch-attr-hover-bg;
+                border: $swatch-attr-hover-border;
+                span {
+                    color: $swatch-attr-inner-color;
+                }
+            }
+        }
+    }
+}
+
+#pdpMain {
+    .addTo-cart-section {
+        padding-bottom: rem(10px);
+        position: relative;
+        input.quantityinput {
+            width: rem(50px);
+            height: rem(40px);
+            margin: 0 rem(10px) 0 0;
+            border: $border;
+        }
+        input.quantityinput[type="number"]::-webkit-outer-spin-button,
+        input.quantityinput[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input.quantityinput[type="number"] {
+            -moz-appearance: textfield;
+        }
+        span.errorclient {
+            position: absolute;
+            left: 0;
+            bottom: rem(-9px);
+        }
+    }
+}
+
+.pdp-main {
+    .product-add-to-cart {
+        button {
+            @include button('submit');
+            width: calc(100% - #{rem(60px)});
+            &.disabled {
+                opacity: 1;
+                background-color: $button-disabled-bg;
+            }
+        }
+    }
+}
+
+a.add-to-wishlist {
+    float: right;
+    margin: 0;
+    @include font-size(13px);
+    font-family: $font;
+    color: $silver;
+}
+
+.productdetail {
+    .addtocartbar {
+        .addtocart {
+            .quantity {
+                .label {
+                    @include product-attr-title;
+                    font-weight: $product-attr-title-font-weight !important;
+                    font-size: $product-attr-title-font-size !important;
+                }
+            }
+        }
+    }
+    .label {
+        @include product-attr-title;
+        font-weight: $product-attr-title-font-weight !important;
+        font-size: $product-attr-title-font-size !important;
+    }
+    .availability,
+    .productid {
+        .label {
+            @include product-attr-title;
+            font-weight: $product-attr-title-font-weight !important;
+            font-size: $product-attr-title-font-size !important;
+            margin-right: rem(3px);
+        }
+        .value {
+            @include product-attr-name;
+            .in-stock,
+            .in-stock {
+                color: $product-attr-name-color;
+            }
+        }
+    }
+}
+
+.pdp-tablet-content {
+    .mobile-pricing {
+        @include respond(desktop) {
+            margin: rem(7px) 0 rem(10px);
+        }
+    }
+}
+
+#content {
+    .cell.productdetailcolumn.productinfo.contentbox {
+        padding: rem(20px);
+    }
+}
+
+.variationattributes {
+    margin-top: 0;
+}
+
