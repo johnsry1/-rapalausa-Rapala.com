@@ -37,6 +37,11 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>FAVICON ICON: (website icon, a page icon or an urlicon) 16x16 pixel image icon for website
 <link href="${URLUtils.staticURL('/images/rapala.png')}" rel="shortcut icon" /></iscomment>
+<isif condition="${!empty(session.custom.currentSite)}">
+	<link href="${URLUtils.staticURL('/images/'  + session.custom.currentSite + '/favicon.ico')}" rel="shortcut icon" />
+<iselse>
+	<link href="${URLUtils.staticURL('/images/favicon.ico')}" rel="shortcut icon" />
+</isif>
 
 <isset name="htmlheader" value=${dw.content.ContentMgr.getContent('html-header-css')} scope="page" />
 <isif condition="${!empty(htmlheader)}">
