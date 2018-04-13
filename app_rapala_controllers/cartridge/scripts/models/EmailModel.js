@@ -66,6 +66,9 @@ var EmailModel = AbstractModel.extend(
             //var template = new dw.util.Template('mail/pt_email');
             //var content = template.render(params);
 
+            //set From Address again if missed by init()
+            this.object.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'RapalaInsider@rapalausa.com');
+
             // Sets the content and sends it.
             this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
             return this.object.send();
