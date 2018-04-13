@@ -627,6 +627,7 @@ var app = {
                 $('.currency-selector').css({'display': 'none'});
                 $('.currency-flag').css({'display': 'none'});
                 $('.change-regionnew currency-selector').css({'display': 'none'});
+                $('.email-signup').css({'display': 'none'});
                 setTimeout(function () {
                     $('.product-promo, .newrecommendation').css({'display': 'none'});
                 }, 5000);
