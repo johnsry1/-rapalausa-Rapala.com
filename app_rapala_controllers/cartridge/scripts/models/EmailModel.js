@@ -37,7 +37,7 @@ var EmailModel = AbstractModel.extend(
             // prepare the email object
             var mail = this.object;
             mail.addTo(recipient);
-            mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'RapalaInsider@rapalausa.com');
+            mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail') || 'RapalaInsider@rapalausa.com');
         },
 
         /**
@@ -67,7 +67,7 @@ var EmailModel = AbstractModel.extend(
             //var content = template.render(params);
 
             //set From Address again if missed by init()
-            this.object.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'RapalaInsider@rapalausa.com');
+            this.object.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail') || 'RapalaInsider@rapalausa.com');
 
             // Sets the content and sends it.
             this.object.setContent(params.MainContent, 'text/html', 'UTF-8');

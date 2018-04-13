@@ -3,11 +3,11 @@
 <iscomment>The "subject" tag contains the mail subject and can contain dynamic information, like the order number.</iscomment>
 <iscomment><subject><isif condition="${!empty(pdict.MailSubject)}">${pdict.MailSubject}<iselse/><isprint value="${Resource.msg('order.orderconfirmation-email.001','order',null)}" encoding="off"/> (<isprint value="${pdict.Order.orderNo}"/>)</isif></subject>
 
-	The "to" tag contains the email address of the recipient, the "from" tag the email address of the sender. 
+	The "to" tag contains the email address of the recipient, the "from" tag the email address of the sender.
 	Each tag is to be specified max. once. Multiple email address can be separated by "," (see RFC2822).
 
 <to>${pdict.Order.customerEmail}</to>
-<from>${dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail')}</from></iscomment>
+<from>${dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCustomerServiceEmail')}</from></iscomment>
 
 <head>
 
@@ -37,7 +37,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="font-size:12px;font-family:arial;padding:20px 10px;vertical-align:top;">
-						
+
 							<table  style="background:#ffffff;border:1px solid #999999;width:680px;">
 								<tr>
 									<th style="background:#cccccc;padding:5px 20px;font-size:12px;font-family:arial;text-align:left;">${Resource.msg('confirmation.thankyou','checkout',null)}</th>
@@ -57,12 +57,12 @@
 							<isemailorderdetails order="${pdict.Order}"/>
 						</td>
 					</tr>
-				</table>						
+				</table>
 			</center>
 		</td>
 	</tr>
-</table>	
-					
+</table>
+
 
 </body>
 </html>
