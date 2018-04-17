@@ -5,12 +5,12 @@
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax' || pdict.CurrentHttpParameterMap.ajax.stringValue == 'true' }">
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
 </isif>
-<div id="CreditCardDialog" class="creditcardform">
 <isdecorate template="${DecoratorTemplate}">
-	
+<div id="CreditCardDialog" class="creditcardform">
+
 	<h1 class="credit-cart-form-title">${Resource.msg('account.paymentinstrumentlist.addcard', 'account', null)}</h1>
 	<div class="dialog-required"> <span class="required-indicator">&#8727;</span> <em>${Resource.msg('global.requiredfield', 'locale', null)}</em></div>
-	
+
 	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('CCPaymentService') == 'AUTHORIZE_NET' && !empty(pdict.AuthErrorMessage) && pdict.AuthErrorMessage == 'true' }">
 		<div class="error-form">${Resource.msg("account.subscriptionerror", "account", null)}</div>
 	<iselseif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('CCPaymentService') == 'AUTHORIZE_NET' && !empty(pdict.AuthErrorMessage)}">
@@ -34,7 +34,7 @@
 					size: 17
 				};
 			</isscript>
-			<isset  name="AdyenHelper" value="${require('int_adyen/cartridge/scripts/util/AdyenHelper')}"   scope="pdict"   />     
+			<isset  name="AdyenHelper" value="${require('int_adyen/cartridge/scripts/util/AdyenHelper')}"   scope="pdict"   />
 			<isset  name="AdyenCseEnabled"  value="${pdict.AdyenHelper.getAdyenCseEnabled()}" scope="page"   />
 			<isif condition="${AdyenCseEnabled}">
 				<isinclude template="account/payment/adyenpaymentinstrumentdetails"/>
@@ -52,15 +52,15 @@
 			<isscript>
 					var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 			</isscript>
-				
+
 			<isdynamicform formobject="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}" />
-			
+
 			<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('CCPaymentService') == 'AUTHORIZE_NET'}">
-				<isinclude template="account/payment/paymentaddressfields"/>				 
+				<isinclude template="account/payment/paymentaddressfields"/>
 			</isif>
-				
+
 			<div class="form-row form-row-button">
-				<iscomment> 
+				<iscomment>
 					JIRA PREV-39 :	CREDIT CARD Overlay: Overlay is transformed into page.Added name, data-dlg-options and data-dlg-action attributes.
 				</iscomment>
 				<button id="applyBtn" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
@@ -69,9 +69,9 @@
 				<button class="cancel cancel-button simple" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
 					${Resource.msg('global.cancel', 'locale', null)}
 				</button>
-				
+
 			</div>
-			</isif> 
+			</isif>
 			<input type="hidden" name="${pdict.CurrentForms.paymentinstruments.secureKeyHtmlName}" value="${pdict.CurrentForms.paymentinstruments.secureKeyValue}"/>
 		</fieldset>
 	</form>
@@ -80,5 +80,5 @@
 		<div class="error-form">${Resource.msg('account.paymentinstruments.forbidden', 'account', null)}</div>
 		<button type="button">${Resource.msg('global.close', 'locale', null)}</button>
 	</div>
-</isdecorate>
 </div>
+</isdecorate>
