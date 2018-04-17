@@ -44,9 +44,6 @@
                 ${Resource.msg('global.changecurrency','locale',null)} ${session.getCurrency()} ${session.getCurrency().getSymbol()}
             </a>
             <div class="mobile-account-submenu">
-                <div class="change-region">
-                    <span class="change-regionnew currency-selector">
-                        <div class="domainswitch-header">
                             <isset name="availableCurrencies" value="${dw.system.Site.getCurrent().getAllowedCurrencies()}" scope="page" />
                             <isloop items="${availableCurrencies}" var="currency">
                                 <isset name="currencyObj" value="${dw.util.Currency.getCurrency(currency)}" scope="page" />
@@ -58,9 +55,6 @@
                                     </li>
                                 </ul>
                             </isloop>
-                         </div>
-                    </span>
-                </div>
             </div>
         </li>
         <li>
