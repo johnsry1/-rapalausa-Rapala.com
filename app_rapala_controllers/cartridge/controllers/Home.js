@@ -173,7 +173,7 @@ function includeMegamenuCustomerInfo() {
 }
 
 function internationalEUPage() {
-    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite));
+    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite);
     app.getView({
         distributorCountries : distributorCountries
     }).render('content/home/internationalEU');
