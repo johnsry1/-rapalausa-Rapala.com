@@ -1,134 +1,103 @@
-<!--- TEMPLATENAME: international.isml. This isml renders all the countries available for the current site--->
-<iscache type="relative" hour="24"/>
+<!--- TEMPLATENAME: internationalEU.isml --->
 <isdecorate template="content/home/pt_international">
 	<isinclude template="util/modules"/>
-	
 	<style type="text/css">
-		.international-links-background-wrapper { min-width: 772px;background-color: white; background-repeat: no-repeat; background-position: top center; }
 		<isif condition="${'rapala' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala'))}'); }
+			.international-links-background-eu-wrapper {  background :transparent; background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala'))}'); }
 		<iselseif condition="${'sufix' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix'))}'); }
 		<iselseif condition="${'triggerx' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTriggerX')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTriggerX'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTriggerX')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTriggerX'))}'); }
 		<iselseif condition="${'storm' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStorm')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStorm'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStorm')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStorm'))}'); }
 		<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageLuhrJensen')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageLuhrJensen'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageLuhrJensen')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageLuhrJensen'))}'); }
 		<iselseif condition="${'vmc' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageVMC')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageVMC'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageVMC')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageVMC'))}'); }
 		<iselseif condition="${'terminator' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTerminator')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTerminator'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTerminator')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageTerminator'))}'); }
 		<iselseif condition="${'bluefox' == session.custom.currentSite}">
-			.international-links-background-wrapper {  background-color:transparent; background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageBlueFox')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageBlueFox'))}'); }
+			.international-links-background-eu-wrapper {  background-color:transparent; background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageBlueFox')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageBlueFox'))}'); }
 		<iselseif condition="${'williamson' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageWilliamson')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageWilliamson'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageWilliamson')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageWilliamson'))}'); }
 		<iselseif condition="${'marcum' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageMarCum')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageMarCum'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageMarCum')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageMarCum'))}'); }
 		<iselseif condition="${'strikemaster' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStrikeMaster')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStrikeMaster'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStrikeMaster')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageStrikeMaster'))}'); }
 		<iselseif condition="${'otter' == session.custom.currentSite}">
-			.international-links-background-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageOtter')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageOtter'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageOtter')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageOtter'))}'); }
 		</isif>
 	</style>
-	<isset name="internationalBrandLink" value="${pdict.intlBrandCountryLink}" scope="page"/>
-	<div class="international-links-background-wrapper ${session.custom.currentSite}-background">
-		<input type="hidden" class="current-session-site" value="${session.custom.currentSite}"/>
-		<div class="mobile-logo mobileView">
-			<a href="#" class="logo"></a>
-		</div>
-		<div class="international-links-container">
-			<div class="international-links">
-				<div class="international-links-body">
-					<isif condition="${internationalBrandLink != null && !empty(internationalBrandLink)}">
-						<isloop items="${internationalBrandLink}" var="internationalLink">
-							<div class="international-links-header">
-								<a class="international-link" href="${internationalLink.custom.url}"><img src="${URLUtils.staticURL('/images/all-other-countries.png')}" alt="Flag"></span>${internationalLink.custom.countryDisplayName}</a>
-							</div>
-							<isbreak/>
-						</isloop>
-					</isif>
-					<iscomment>Renders available country list for desktop</iscomment>
-					<isif condition="${pdict.availableBrandCountryLink != null && !empty(pdict.availableBrandCountryLink)}">
-						<div class="international-links-action desktop-view"><span>${Resource.msg('global.selectyourregion','locale',null)}</span></div>
-						<isset name="availableBrandLink" value="${pdict.availableBrandCountryLink.asList()}" scope="page"/>
-						<isset name="seqSort" value="${new dw.util.PropertyComparator("custom.sequenceNumber",true)}" scope="page"/>
-						<isscript>
-							availableBrandLink.sort(seqSort);
-						</isscript>
-						<ul class="desktop-view">
-							<isloop items="${availableBrandLink}" var="brandCountryLink">
-								<li><a href="${brandCountryLink.custom.url}"><img alt="${Resource.msg('global.flag','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,brandCountryLink.custom.imagePath)}"/>${brandCountryLink.custom.countryDisplayName}</a></li>
-							</isloop>
-						</ul>
-					</isif>
-					<iscomment>Renders available country list for other devices</iscomment>
-					<isif condition="${pdict.availableDeviceBrandCountryLink != null && !empty(pdict.availableDeviceBrandCountryLink)}">
-						<div class="international-links-action mobile-view"><span>${Resource.msg('global.selectyourregion','locale',null)}</span></div>
-						<isset name="availableDeviceBrandLink" value="${pdict.availableDeviceBrandCountryLink.asList()}" scope="page"/>
-						<isset name="alphabetSort" value="${new dw.util.PropertyComparator("custom.countryDisplayName",true)}" scope="page"/>
-						<isscript>
-							availableDeviceBrandLink.sort(alphabetSort);
-						</isscript>
-						<ul class="mobileHide">
-							<isloop items="${availableDeviceBrandLink}" var="deviceBrandLink">
-								<li><a href="${deviceBrandLink.custom.url}"><img alt="${Resource.msg('global.flag','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,deviceBrandLink.custom.imagePath)}"/>${deviceBrandLink.custom.countryDisplayName}</a></li>
-							</isloop>
-						</ul>
-					</isif>
+	<div class="international-links-background-eu-wrapper ${session.custom.currentSite}-background">
+		<div class="international-links-inner">
+			<div class="international-rapala-logo">
+				<a href="#" class="logo"></a>
+			</div>
+			<div class="rapala-top-block rapala-shop-products">
+				<div class="rapala-top-block-title">
+					<p>${Resource.msg('global.eu.international.countrieslist','locale',null)}</p>
 				</div>
-				<div class="international-links-footer">
-					<div class="international-links-footer-info">
-						<div class="international-links-footer-product">
-							<isif condition="${'rapala' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageRapala')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageRapala'))}" />				
-							<iselseif condition="${'sufix' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageSufix')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageSufix'))}" />				
-							<iselseif condition="${'triggerx' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTriggerX')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTriggerX'))}" />				
-							<iselseif condition="${'storm' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStorm')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStorm'))}" />				
-							<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageLuhrJensen')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageLuhrJensen'))}" />				
-							<iselseif condition="${'vmc' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageVMC')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageVMC'))}" />				
-							<iselseif condition="${'terminator' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTerminator')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTerminator'))}" />				
-							<iselseif condition="${'bluefox' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageBlueFox')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageBlueFox'))}" />				
-							<iselseif condition="${'williamson' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageWilliamson')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageWilliamson'))}" />				
-							<iselseif condition="${'marcum' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageMarCum')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageMarCum'))}" />				
-							<iselseif condition="${'strikemaster' == session.custom.currentSite}">
-								<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStrikeMaster')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStrikeMaster'))}" />				
-							<iselseif condition="${'otter' == session.custom.currentSite}">
-								<iscomment>
-									<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageOtter')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageOtter'))}" />				
-								</iscomment>
-							</isif>
+				<div class="rapala-middle-block rapala-middle-block-left">
+					<p><a class="link-ca" href="https://rapala.ca/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.ca','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+					<p><a class="link-eu" href="https://www.rapala.com/eu/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+					<p><a class="link-us" href="https://www.rapala.com/us/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+				</div>
+			</div>
+
+			<div class="rapala-top-block explore-rapala-products">
+				<div class="rapala-top-block-title">
+					<p>${Resource.msg('global.eu.international.exploreproductslink','locale',null)}</p>
+				</div>
+				<div class="rapala-middle-block">
+					<p><a class="international-link" href="https://www.rapala.com/eu/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.link.name','locale',null)}</span></a></p>
+				</div>
+			</div>
+
+			<div class="distrobutors-countries">
+				<div class="rapala-top-block-title">
+					<p>${Resource.msg('global.eu.international.distributors','locale',null)}</p>
+				</div>
+				<div class="distrobutors-countries-list">
+					<isloop items="${pdict.distributorCountries}" var="distributor">
+						<div class="distributor-link">
+							<a class="link" href="">${distributor.custom.countryDisplayName}</a>
 						</div>
-						<isset name="internationalSEOAssetId" value=${"intlSEO-" + session.custom.currentSite} scope="page"/>
-						<isset name="internationalSEOAssetExists" value=${false} scope="page"/>
-						<isscript>
-								if (internationalSEOAssetId != null) {
-									var internationalSEOContent : Content = dw.content.ContentMgr.getContent(internationalSEOAssetId);
-									if(null != internationalSEOContent) {
-										internationalSEOAssetExists = true;
-									}
-								}
-						</isscript>
-						<isif condition="${internationalSEOAssetExists}">
-							<isinclude url="${URLUtils.url('Page-Include','cid', internationalSEOAssetId)}" />
-						</isif>
-						<div class="international-investor-link">
-							<iscontentasset aid="international-link-hover"/> 
-							<a href="${dw.system.Site.current.preferences.custom['investorsLink']}">${Resource.msg('global.visitcorporatewebsite','locale',null)}</a>	 
-		   				</div>
-					</div>
-					
+					</isloop>
 				</div>
+			</div>
+			<div class="rapala-iternational-footer">
+				<isif condition="${'rapala' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageRapala')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageRapala'))}" />
+				<iselseif condition="${'sufix' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageSufix')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageSufix'))}" />
+				<iselseif condition="${'triggerx' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTriggerX')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTriggerX'))}" />
+				<iselseif condition="${'storm' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStorm')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStorm'))}" />
+				<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageLuhrJensen')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageLuhrJensen'))}" />
+				<iselseif condition="${'vmc' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageVMC')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageVMC'))}" />
+				<iselseif condition="${'terminator' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTerminator')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageTerminator'))}" />
+				<iselseif condition="${'bluefox' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageBlueFox')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageBlueFox'))}" />
+				<iselseif condition="${'williamson' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageWilliamson')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageWilliamson'))}" />
+				<iselseif condition="${'marcum' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageMarCum')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageMarCum'))}" />
+				<iselseif condition="${'strikemaster' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStrikeMaster')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageStrikeMaster'))}" />
+				<iselseif condition="${'otter' == session.custom.currentSite}">
+					<img alt="${Resource.msg('global.product','locale',null)}" src="${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageOtter')) ? '/international/rapala/rapala-rippin-rap.png' : dw.system.Site.getCurrent().getCustomPreferenceValue('landingProductImageOtter'))}" />
+				</isif>
+			</div>
+			<div class="rapala-iternational-footer-text">
+				<p><span>Rapala Fishing Lures</span> | The World’s Favorite Fishing Lure</p>
+				<p>${Resource.msg('global.eu.international.footer.text','locale',null)}</p>
+				<a href="https://rapalavmc.com/" class="footer-link">${Resource.msg('global.eu.international.footer.link','locale',null)}</a>
 			</div>
 		</div>
 	</div>
 </isdecorate>
+
