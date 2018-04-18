@@ -93,8 +93,14 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
 
     /** @type {Number} */
     let position = 1;
+    
+    let count = 0;
 
     while (productList.hasNext()) {
+        
+        if (count >= 20) {
+            break;
+        }
 
         let item = productList.next(),
             prodObj = objectCreationCallback(item);
@@ -104,6 +110,7 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
         productArray.push(prodObj);
 
         position++;
+        count++;
 
     }
 

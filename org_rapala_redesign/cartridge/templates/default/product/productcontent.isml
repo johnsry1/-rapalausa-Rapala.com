@@ -6,6 +6,14 @@
 	<div class="productcacheQuickviewjson hide" >
 		<isset name="productcachejson" value="${require('*/cartridge/scripts/product/ProductUtils.js').getProductJson(pdict.Product, pdict)}" scope="page"/>
     </div>
+    <isscript>
+        var pageContext = {
+            title: 'Product',
+            type: 'product',
+            ns: 'product'
+        };
+    </isscript>
+    <isinclude template="components/googletagmanager"/>
 </isif>
 
 <input type="hidden" data-productjson="${productcachejson}" class="productjson"/>

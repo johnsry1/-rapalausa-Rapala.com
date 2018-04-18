@@ -24,11 +24,7 @@ var events = {
         });
     },
     compare: function () {},
-    product: function () {
-        $('#add-to-cart').on('click', function () {
-            addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val(), $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined);
-        });
-    },
+    product: function () {},
     search: function () {},
     storefront: function () {},
     wishlist: function () {
@@ -50,7 +46,7 @@ var events = {
         $('.primary-logo').on('click', function () {
             pushEvent('trackEvent', 'User Action', 'Header Click', 'Home Link');
         });
-        
+
         $(document).ready(function() {
             $('#footerSubForm button').on('click', function () {
                 if (SitePreferences.GTM_ENABLED) {
@@ -98,7 +94,6 @@ function productClick (productObject) {
         },
         'ecommerce': {
             'click': {
-                'actionField': {'list': 'SearchResults'},
                 'products': []
             }
         }
