@@ -218,10 +218,28 @@ var product = function (response) {
             }
 
             // if it is not a productset then make sure qty is specified greater than 0
-            if (model.productSet || thisProduct.selectedOptions.Quantity > 0) {
+            if (model.productSet || thisProduct.selectedOptions.Quantity > 0) { 
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
+                if (SitePreferences.GTM_ENABLED) {
+                    var productObject = $.parseJSON($(this).attr('data-gtmdata'));
+                    var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
+                    var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
+                        obj = {
+                            'event': 'addToCart',
+                            'ecommerce': {
+                                'add': {
+                                    'products': []
+                                }
+                            }
+                        };
+                    obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
+                    if (price != undefined && price > 0) {
+                        obj.ecommerce.add.products[0].price = price;
+                    }
+                    dataLayer.push(obj);                
+                }
                 // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
                 // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
                 var event = jQuery.Event('AddToCart');

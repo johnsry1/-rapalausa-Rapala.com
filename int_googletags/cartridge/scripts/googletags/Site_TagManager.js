@@ -52,12 +52,10 @@ Site_TagManager.getProductObject = function (product) {
 
     if (product.isVariant() || product.isVariationGroup()) {
         obj.productID = product.getMasterProduct().ID;
-        obj.childID = product.ID
     }
     
     if (product.master && product.variationModel.variants.size() > 0) {
         obj.productID = product.ID;
-        obj.childID = product.variationModel.variants[0].ID
     }
     
     obj.category = Util.getProductCategory(product);
