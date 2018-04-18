@@ -113,11 +113,11 @@ function changeRegionURL(){
  * Renders the international region options for user
  */
 function internationalOptions(){
-	
+
 	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
 	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-	
+
 	app.getView({
 		intlBrandCountryLink : internationalBrandLink,
 		availableBrandCountryLink : availableBrandLink,
@@ -134,7 +134,7 @@ function page(){
 		var pageMeta = require('~/cartridge/scripts/meta');
 		pageMeta.update(siteFolder);
 	}
-	
+
 	app.getView().render('content/home/homepage');
 }
 /**
@@ -173,11 +173,11 @@ function includeMegamenuCustomerInfo() {
 }
 
 function internationalEUPage() {
-    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", 'rapalaEU');
+    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite);
     app.getView({
         distributorCountries : distributorCountries
     }).render('content/home/internationalEU');
-    
+
 }
 /*
  * Export the publicly available controller methods

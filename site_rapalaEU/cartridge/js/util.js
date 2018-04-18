@@ -6,7 +6,10 @@ var cardregex = {
     mastercard: /^5[1-5][0-9]{2,14}$/,
     visa: /^4[0-9]{3,15}$/,
     amex: /^3[47]([0-9]{2,13})$/,
-    discover: /^6(?:011[0-9]{0,12}|5[0-9]{2,14})$/
+    discover: /^6(?:011[0-9]{0,12}|5[0-9]{2,14})$/,
+    diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+    jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
+    unionpay: /^(62[0-9]{14,17})$/
 };
 var util = {
     /**
@@ -264,7 +267,7 @@ var util = {
             }
         }
     },
-    
+
     /**
      * @function
      * @description Updates the number of the remaining character
@@ -372,6 +375,12 @@ var util = {
             result = 'Amex';
         } else if (cardregex.discover.test(carNo)) {
             result = 'Discover';
+        } else if (cardregex.jcb.test(carNo)) {
+            result = 'JCB';
+        } else if (cardregex.unionpay.test(carNo)) {
+            result = 'UnionPay';
+        } else if (cardregex.diners.test(carNo)) {
+            result = 'Diners';
         } else {
             result = 'Error';
         }
@@ -412,13 +421,13 @@ var util = {
         }
         return isMobile;
     },
-    
+
     /**
      * @function
      * @description Updates the states options to a given country
      * @param {String} countrySelect The selected country
      */
-    updateStateOptions: function (form, callback) { 
+    updateStateOptions: function (form, callback) {
         var $form = $(form);
         //Country should be pre-selected based on geoip info
         if ($form.find('select[id$="_country"]').val() != null && $form.find('select[id$="_country"]').val().length == 0) {
@@ -442,7 +451,7 @@ var util = {
             $postalLabel = ($postalField.length > 0) ? $form.find('#' + $postalField[0].id).parents('.form-row').find('.labeltext') : undefined,
             $cityField = $country.data('cityField') ? $country.data('cityField') : $form.find('input[name$="_city"]'),
             $cityLabel = ($cityField.length > 0) ? $form.find('#' + $cityField[0].id).parents('.form-row').find('.labeltext') : undefined;
-            
+
         if ($country.length === 0 || !country) {
             if ($postalLabel) {
                 country = Countries.default;
@@ -527,7 +536,7 @@ var util = {
                 }
             }
         }
-    }    
+    }
 };
 
 module.exports = util;

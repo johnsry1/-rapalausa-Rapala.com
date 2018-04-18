@@ -243,7 +243,14 @@
                 background: none;
                 .clearbutton {
                     right: 0;
-
+                    @include respond(medium-down) {
+                        right: rem(20px);
+                    }
+                }
+                .carderror {
+                    float: none;
+                    width: 100%;
+                    @include form-error;
                 }
             }
         }
@@ -911,6 +918,10 @@
                     height: 40px;
                     line-height: 40px;
                 }
+                .carderror {
+                    float: none;
+                    width: 100%;
+                }
             }
         }
     }
@@ -1055,9 +1066,11 @@
                         font-family: $font !important;
                     }
                 }
-                .ordersubtotal-strike {
-                    position: relative;
-                    top: rem(3px);
+                .order-shipping {
+                    .ordersubtotal-strike {
+                        position: relative;
+                        top: rem(3px);
+                    }
                 }
                 .ordertotalsaving {
                     .label {

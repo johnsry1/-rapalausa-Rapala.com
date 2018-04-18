@@ -218,39 +218,67 @@ var product = function (response) {
             }
 
             // if it is not a productset then make sure qty is specified greater than 0
-            if (model.productSet || thisProduct.selectedOptions.Quantity > 0) { 
+            if (model.productSet || thisProduct.selectedOptions.Quantity > 0) {
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
-                if (SitePreferences.GTM_ENABLED) {
-                    var productObject = $.parseJSON($(this).attr('data-gtmdata'));
-                    var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
-                    var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
-                        obj = {
-                            'event': 'addToCart',
-                            'ecommerce': {
-                                'add': {
-                                    'products': []
-                                }
-                            }
-                        };
-                    obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
-                    if (price != undefined && price > 0) {
-                        obj.ecommerce.add.products[0].price = price;
-                    }
-                    dataLayer.push(obj);                
-                }
-                // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
-                // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
-                var event = jQuery.Event('AddToCart');
-                event.selectedOptions = thisProduct.selectedOptions;
 
-                if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
-                    addToCart.add('', thisProduct.selectedOptions, function () {
-                        addToCartBtn.prop('disabled', false);
-                    });
+                if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {
+                    var selectedOptions = jQuery.extend({'wishlist': true}, {}, thisProduct.selectedOptions);
+
+                    if (model.master || model.variant) {
+                        if (thisProduct.selectedVar != null) {
+                            selectedOptions.pid = thisProduct.selectedVar.id;
+                        } else {
+                            return false; // do not allow master product to be added to gift registry/wishlist
+                        }
+                    } else {
+                        selectedOptions.pid = thisProduct.pid;
+                    }
+
+                    var tempUrl = this.href;
+                    tempUrl = Urls.wishlistadd;
+
+                    if (!(tempUrl.indexOf('?') > 0)) {
+                        tempUrl = tempUrl + '?';
+                    } else {
+                        tempUrl = tempUrl + '&';
+                    }
+                    // serialize the name/value into url query string and append it to the url, make request
+                    //var url = tempUrl + jQuery.param(selectedOptions);
+                    window.location = tempUrl + jQuery.param(selectedOptions);
                 } else {
-                    jQuery(document).trigger(event)
+                    if (SitePreferences.GTM_ENABLED) {
+                        var productObject = $.parseJSON($(this).attr('data-gtmdata'));
+                        var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
+                        var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
+                            obj = {
+                                'event': 'addToCart',
+                                'ecommerce': {
+                                    'add': {
+                                        'products': []
+                                    }
+                                }
+                            };
+                        obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
+                        if (price != undefined && price > 0) {
+                            obj.ecommerce.add.products[0].price = price;
+                        }
+                        dataLayer.push(obj);
+                    }
+
+                    // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
+                    // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
+                    var event = jQuery.Event('AddToCart');
+                    event.selectedOptions = thisProduct.selectedOptions;
+
+                    if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
+                        addToCart.add('', thisProduct.selectedOptions, function () {
+                            addToCartBtn.prop('disabled', false);
+                        });
+                    } else {
+                        jQuery(document).trigger(event)
+                    }
                 }
             }
             return false;
@@ -782,12 +810,10 @@ var product = function (response) {
                          */
                         var zoomimageurl = (thisVal.images.original.length > 0) ? thisVal.images.original[0].url : '';
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[i].url);
-                        jQuery('.MagicZoom').attr('href', zoomimageurl);
-                        $('body').find('.MagicZoom img').attr('src', zoomimageurl);
-                        MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
+                        jQuery('.main-image').attr('href', zoomimageurl);
+                        $('body').find('.main-image img').attr('src', zoomimageurl);
                         // jQuery(that.containerId+" .productimage").html("").append(jQuery("<img/>").attr("src", thisVal.images.large[0].url).attr("alt", thisVal.images.large[0].alt).attr("title", thisVal.images.large[0].title));
                     }
-
                     // make sure to show number of images based on the smallest of large or small as these have to have 1-1 correspondence.
                     var noOfImages = this.images.large.length >= this.images.small.length ? this.images.small.length : this.images.large.length;
 
@@ -814,8 +840,8 @@ var product = function (response) {
                                     $(this).closest('.owl-item').find('a.alternate-image').addClass('selected');
                                     var zoomimageurl = $(this).closest('.alternate-image').data('image');
                                     //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[imageInd].url);
-                                    $('body').find('.MagicZoom').attr('href', zoomimageurl);
-                                    $('body').find('.MagicZoom img').attr('src', zoomimageurl);
+                                    $('body').find('.main-image').attr('href', zoomimageurl);
+                                    $('body').find('.main-image img').attr('src', zoomimageurl);
                                     MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
                                     MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
                                     //$("body").find('.product-image').trigger("click");
@@ -1228,8 +1254,8 @@ var product = function (response) {
                     // load the fully qualified variation image
                     if (imageUrl != null) {
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',imageUrl);
-                        jQuery('.MagicZoom').attr('href', zoomImageUrl);
-                        $('body').find('.MagicZoom img').attr('src', zoomImageUrl);
+                        jQuery('.main-image ').attr('href', zoomImageUrl);
+                        $('body').find('.main-image img').attr('src', zoomImageUrl);
                         MagicZoom.update('product-image', zoomImageUrl, zoomImageUrl);
                     }
 
@@ -2026,7 +2052,11 @@ var product = function (response) {
                         if ($(window).width() > 1024) {
                             varJqryObjs.data('data', {id: pdpVarId}).mouseenter(function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
-                                thisProduct.showImages(this.title, colorAttrDef.vals);
+                                if ($(this).attr('data-variantimage')) {
+                                    $('#product-image img').attr('src', $(this).data('variantimage'));
+                                } else {
+                                    thisProduct.showImages(this.title, colorAttrDef.vals);
+                                }
                             }).mouseleave(function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
