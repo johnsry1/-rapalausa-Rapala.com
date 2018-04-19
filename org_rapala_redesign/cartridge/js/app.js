@@ -20,6 +20,7 @@ var countries = require('./countries'),
     uievents = require('./uievents'),
     //progress = require('./progress'),
     tls = require('./tls'),
+    imagesLoaded = require('imagesloaded'),
     tagmanager = require('./tagmanager');
 
 // if $ has not been loaded, load from google cdn
@@ -238,6 +239,17 @@ function initializeEvents() {
     });
     /* should be set before slider init */
     $('.horizontal-carousel').each(function() {
+        var $tiles = $(this).find('.product-tile');
+        if ($tiles.length === 0) { return; }
+        if ($tiles.length > 1 && $tiles.is('[style]')) {
+            $tiles.removeAttr('style');
+        }
+        imagesLoaded($(this)).on('always', function () {
+            $tiles.syncHeight()
+                .each(function (idx) {
+                    $(this).data('idx', idx);
+                });
+        });
         $(this).on('initialized.owl.carousel changed.owl.carousel refreshed.owl.carousel', function(event) {
             if (!event.namespace) return;
             var carousel = event.relatedTarget,
