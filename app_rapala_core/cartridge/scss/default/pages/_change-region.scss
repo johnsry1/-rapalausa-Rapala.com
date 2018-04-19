@@ -1,6 +1,9 @@
 .international-links-background-eu-wrapper {
     &.rapala-background {
         background-color: $white;
+        @include respond(medium-down) {
+            background: $white !important;
+        }
     }
 }
 .international-links-inner {
@@ -9,16 +12,19 @@
     color: $geoip-main-text-color;
     text-align: center;
     .international-rapala-logo {
-        padding: rem(20px) 0;
+        padding: rem(20px) 0 !important;
         @include respond(large-up) {
             display: none;
         }
+        .logo {
+            width: 100%;
+            min-height: rem(40px);
+            display: block;
+            float: none !important;
+            margin: 0 !important;
+        }
     }
-    .logo {
-        width: 100%;
-        min-height: rem(40px);
-        display: block;
-    }
+
     .rapala-top-block {
         width: 100%;
         text-align: center;
