@@ -117,11 +117,13 @@ function internationalOptions(){
 	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
 	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+  var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite);
 
 	app.getView({
 		intlBrandCountryLink : internationalBrandLink,
 		availableBrandCountryLink : availableBrandLink,
-		availableDeviceBrandCountryLink : availableDeviceBrandLink
+		availableDeviceBrandCountryLink : availableDeviceBrandLink,
+    distributorCountries : distributorCountries
 	}).render('content/home/international');
 }
 
