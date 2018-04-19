@@ -3,7 +3,7 @@
 	<isinclude template="util/modules"/>
 	<style type="text/css">
 		<isif condition="${'rapala' == session.custom.currentSite}">
-			.international-links-background-eu-wrapper {  background :transparent; background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala'))}'); }
+			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageRapala'))}'); }
 		<iselseif condition="${'sufix' == session.custom.currentSite}">
 			.international-links-background-eu-wrapper { background-image: url('${dw.web.URLUtils.absStatic(dw.web.URLUtils.CONTEXT_LIBRARY, null,empty(dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix')) ? "/international/rapala/international-rapala-background.jpg" : dw.system.Site.getCurrent().getCustomPreferenceValue('landingBackgroundImageSufix'))}'); }
 		<iselseif condition="${'triggerx' == session.custom.currentSite}">
@@ -100,4 +100,3 @@
 		</div>
 	</div>
 </isdecorate>
-
