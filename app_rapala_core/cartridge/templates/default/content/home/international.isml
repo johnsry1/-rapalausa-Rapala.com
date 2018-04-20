@@ -39,8 +39,8 @@
 				</div>
 				<div class="rapala-middle-block rapala-middle-block-left">
 					<p><a class="link-ca" href="https://rapala.ca/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.ca','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-					<p><a class="link-eu" href="https://www.rapala.com/eu/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-					<p><a class="link-us" href="https://www.rapala.com/us/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+					<p><a class="link-eu" href="https://www.rapala.com/eu-en/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+					<p><a class="link-us" href="https://www.rapala.com/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
 				</div>
 			</div>
 
@@ -49,7 +49,10 @@
 					<p>${Resource.msg('global.eu.international.exploreproductslink','locale',null)}</p>
 				</div>
 				<div class="rapala-middle-block">
-					<p><a class="international-link" href="https://www.rapala.com/eu/rapala-lures/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.link.name','locale',null)}</span></a></p>
+					<isloop items="${pdict.internationalBrandLink}" var="internationalLink">
+							<p><a class="international-link" href="${internationalLink.custom.url}"></span>${internationalLink.custom.countryDisplayName}</a></p>
+						<isbreak/>
+					</isloop>
 				</div>
 			</div>
 
