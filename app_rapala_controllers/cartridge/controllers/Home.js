@@ -114,16 +114,16 @@ function changeRegionURL(){
  */
 function internationalOptions(){
 
-	var availableBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-	var availableDeviceBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
-  var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite);
+  //retrieve intl link (should be one)
+  var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+
+  //retrieve all country distributor links
+  var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND NOT custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite);
+
 
 	app.getView({
-		intlBrandCountryLink : internationalBrandLink,
-		availableBrandCountryLink : availableBrandLink,
-		availableDeviceBrandCountryLink : availableDeviceBrandLink,
-    distributorCountries : distributorCountries
+		internationalBrandLink : internationalBrandLink,
+		distributorCountries : distributorCountries
 	}).render('content/home/international');
 }
 
@@ -174,17 +174,9 @@ function includeMegamenuCustomerInfo() {
     app.getView().render('components/header/megamenu_account_show');
 }
 
-function internationalEUPage() {
-    var distributorCountries = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0}", "custom.sequenceNumber asc", session.custom.currentSite);
-    app.getView({
-        distributorCountries : distributorCountries
-    }).render('content/home/internationalEU');
-
-}
 /*
  * Export the publicly available controller methods
  */
-exports.ChangeRegionEUPage = guard.ensure(['get'], internationalEUPage);
 /** Renders the home page.
  * @see module:controllers/Home~show */
 exports.Show = guard.ensure(['get'], show);
