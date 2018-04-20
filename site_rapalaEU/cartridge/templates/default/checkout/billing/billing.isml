@@ -4,7 +4,7 @@
 	<isinclude template="util/modules"/>
 
 	<iscomment><!-- GTM track checkout steps --></iscomment>
-	<isgtmreportcheckout checkoutstep="${4}" />
+	<isgtmreportcheckout checkoutstep="${3}" />
 
 	<iscomment>
 		This template visualizes the billing step of both checkout scenarios.
@@ -112,7 +112,7 @@
 															 </isif>
 														 </span>
 													<iselse/>
-														<span><isprint value="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
+														<span><isprint value="${shipment.adjustedShippingTotalGrossPrice.subtract(pdict.surcharge)}"/></span>
 													</isif>
 													<isif condition="${pdict.surcharge.value > 0}"><span class="shippingsurcharge"> + <isprint value="${pdict.surcharge.value}"/> <isprint value="${Resource.msg('singleshipping.surcharge','checkout',null)}"/></span></isif>
 												</span>
@@ -440,12 +440,6 @@
 									</isif>
 									</iscomment>
 
-									<div class="cart-payment-buttons">
-										<div class="trust-marks-imgs">
-											<span class="payment-trust-imgs pci-secured-payment-icon"></span>
-											<span class="payment-trust-imgs smcs-payment-icon"></span>
-										</div>
-									</div>
 								</div>
 
 								<div class="ordergothrough-tooltip">

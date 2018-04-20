@@ -102,7 +102,7 @@
 
     <payment-card card-type="Discover">
         <name xml:lang="x-default">Discover</name>
-        <enabled-flag>true</enabled-flag>
+        <enabled-flag>false</enabled-flag>
         <card-number-settings>
             <enable-checksum-verification>true</enable-checksum-verification>
             <number-length>
@@ -134,6 +134,41 @@
             </number-prefix>
         </card-number-settings>
         <security-code-length>3</security-code-length>
+    </payment-card>
+    <payment-card card-type="JCB">
+        <name xml:lang="x-default">JCB</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length/>
+            <number-prefix/>
+        </card-number-settings>
+        <security-code-length>0</security-code-length>
+    </payment-card>
+
+    <payment-card card-type="CartesBancaires">
+        <name xml:lang="x-default">Cartes Bancaires</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length/>
+            <number-prefix/>
+        </card-number-settings>
+        <security-code-length>0</security-code-length>
+        <currencies>
+            <currency>EUR</currency>
+        </currencies>
+    </payment-card>
+
+    <payment-card card-type="UnionPay">
+        <name xml:lang="x-default">UnionPay</name>
+        <enabled-flag>true</enabled-flag>
+        <card-number-settings>
+            <enable-checksum-verification>true</enable-checksum-verification>
+            <number-length/>
+            <number-prefix/>
+        </card-number-settings>
+        <security-code-length>0</security-code-length>
     </payment-card>
 
 </payment-settings>

@@ -9923,6 +9923,15 @@ Final URL should look like - http://&lt;env&gt;.web.&lt;client&gt;.demandware.ne
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="rapalaCustomerLockedEmail">
+                <display-name xml:lang="en">Customer Locked Email</display-name>
+                <description xml:lang="en">Customer Locked Email</description>
+				<type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>noreply@rapala.com</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="csrRapalaDefaultMailId">
                 <display-name xml:lang="en">Default Customer Service Mail Id</display-name>
                 <description xml:lang="en">Default Customer Service Mail Id</description>
@@ -10794,6 +10803,13 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
           </attribute-definition>
+            <attribute-definition attribute-id="useMinifiedFiles">
+                <display-name xml:lang="x-default">Use Minified Files</display-name>
+                <description xml:lang="x-default">If enabled, the styles.min.css and app.min.js will be loaded in on the frontend. Otherwise, the non-minified files will be utilized.</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
 		</custom-attribute-definitions>
         <group-definitions>
 			<attribute-group group-id="GeoIP">
@@ -10833,6 +10849,8 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <attribute attribute-id="storeLocatorZoomRadius"/>
                 <attribute attribute-id="storeLocatorDefaultCountry"/>
                 <attribute attribute-id="storeLocatorMapType"/>
+                <attribute attribute-id="storeLookupUnit"/>
+
             </attribute-group>
             <attribute-group group-id="Google">
                 <display-name xml:lang="x-default">Google Tag Manager</display-name>
@@ -10914,6 +10932,7 @@ If empty value is specified, space will be used as a delimiter.</description>
                 <description xml:lang="en">Customer Service Email Ids</description>
                 <attribute attribute-id="csrProStaffInquiriesMailId"/>
                 <attribute attribute-id="rapalaCustomerServiceEmail"/>
+                <attribute attribute-id="rapalaCustomerLockedEmail"/>
                 <attribute attribute-id="csrRapalaDefaultMailId"/>
                 <attribute attribute-id="csrDonationRequestsMailId"/>
                 <attribute attribute-id="csrNewDealerMailId"/>
@@ -10990,6 +11009,7 @@ If empty value is specified, space will be used as a delimiter.</description>
             </attribute-group>
             <attribute-group group-id="SiteCustomizations">
                 <display-name xml:lang="x-default">Site Customizations</display-name>
+				<attribute attribute-id="useMinifiedFiles"/>
                 <attribute attribute-id="useDynamicImagingService"/>
                 <attribute attribute-id="buildNotificationEmailList"/>
                 <attribute attribute-id="variantNewSnipeAttributes"/>

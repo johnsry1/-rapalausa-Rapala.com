@@ -57,13 +57,13 @@
 				<div class="rapala-top-block-title">
 					<p>${Resource.msg('global.eu.international.distributors','locale',null)}</p>
 				</div>
-				<div class="distrobutors-countries-list">
+				<ul class="distrobutors-countries-list">
 					<isloop items="${pdict.distributorCountries}" var="distributor">
-						<div class="distributor-link">
+						<li class="distributor-link">
 							<a class="link" href="">${distributor.custom.countryDisplayName}</a>
-						</div>
+						</li>
 					</isloop>
-				</div>
+				</ul>
 			</div>
 			<div class="rapala-iternational-footer">
 				<isif condition="${'rapala' == session.custom.currentSite}">

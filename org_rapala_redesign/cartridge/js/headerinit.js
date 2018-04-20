@@ -525,6 +525,11 @@ var headerEvents = {
         $('.rapala_device .user-profile a').on('hover', function () {
             window.location.href = $(this).attr('href');
         });
+        $('.simplesearchinput').on('focus', function(){
+            $(this).attr('placeholder', '');
+        }).on('blur focusout', function(){
+            $(this).attr('placeholder', $(this).data('placeholder'));
+        });
     },
     /** ON HOVER */
     accountContPos: function ($source, $destiny) {

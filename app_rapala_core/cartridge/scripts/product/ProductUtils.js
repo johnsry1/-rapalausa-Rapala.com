@@ -281,16 +281,21 @@ ProductUtils.getImagesDetails = function (item, pvm) {
     var zoomTransform : Object = {'scaleWidth': parseInt(Resource.msg('productImage.zoom2.width', 'product', null)) };
     //var product = item.variationModel.master;
 	    for each(var variant in item.getVariants()){
-	           if(variant.custom.variantImage != null){
-	                  varid = variant.getID();
-                    if(dw.system.Site.current.ID == 'rapala') {
-  	                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
-  	                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
-                    } else if (dw.system.Site.current.ID == 'rapalaEU') {
-                      variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
-                      zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
-                    }
-	           }
+            varid = variant.getID();
+            if(variant.custom.variantImage != null){
+                if(dw.system.Site.current.ID == 'rapala') {
+                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                } else  {
+                  variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                  zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
+                 }
+           } else {
+               if (dw.system.Site.current.ID == 'rapalaEU') {
+                   variants[varid] = ProductUtils.refineImageUrl(variant.getImage('large'),"zoom2").toString();
+                   zoomvariants[varid] = ProductUtils.refineImageUrl(variant.getImage('large'),"zoom2").toString();
+               }
+           }
 	    }
 
     images.variants = variants;

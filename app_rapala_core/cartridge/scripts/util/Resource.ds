@@ -168,18 +168,18 @@ ResourceHelper.getResources = function(pageContext) {
 		GA_ACTION_SIGNIN 	            : Resource.msg('gAnalytics.events.login','events',null),
 		GA_CATEGORY_USER 	            : Resource.msg('gAnalytics.events.accessinfo','events',null),
 		GA_ACTION_ADDPRODUCT 			: Resource.msg('gAnalytics.events.addproduct','events',null),
-		GA_ACTION_ADDALLPRODUCT			: Resource.msg('gAnalytics.events.addalltocart','events',null),	
+		GA_ACTION_ADDALLPRODUCT			: Resource.msg('gAnalytics.events.addalltocart','events',null),
 		GA_ACTION_ADDALLPRODUCTQV       : Resource.msg('gAnalytics.events.addalltocartqv','events',null),
 		GA_ACTION_ADDALLPRODUCTPV       : Resource.msg('gAnalytics.events.addalltocartpv','events',null),
 		GA_CATEGORY_NAVIGATION          : Resource.msg('gAnalytics.events.navigation','events',null),
-		GA_ACTION_CATEGORY		        : Resource.msg('gAnalytics.events.category','events',null),    
+		GA_ACTION_CATEGORY		        : Resource.msg('gAnalytics.events.category','events',null),
 	    GA_ACTION_LOGOUT                : Resource.msg('gAnalytics.events.logout','events',null),
 	    GA_CATEGORY_PROMOTION           : Resource.msg('gAnalytics.events.promotion','events',null),
 	    GA_ACTION_REMOVEPROMOTION       : Resource.msg('gAnalytics.events.removepromotion','events',null),
 	    GA_CATEGORY_PDPVIEW             : Resource.msg('gAnalytics.events.pdpview','events',null),
 	    GA_ACTION_PDPVIEW               : Resource.msg('gAnalytics.events.quickview','events',null),
 	    GA_CATEGORY_BRAND				: Resource.msg('gAnalytics.events.brand', 'events', null),
-	    
+
 	    ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null)
     };
 
@@ -308,6 +308,7 @@ ResourceHelper.getPreferences = function(pageContext) {
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
         CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS'),
         GTM_ENABLED: Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager'),
+        STORELOCATOR_DISTANCE_UNIT: Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').displayValue
     };
 }
 /**

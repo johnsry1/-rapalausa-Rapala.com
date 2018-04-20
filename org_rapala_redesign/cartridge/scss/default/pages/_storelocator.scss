@@ -91,12 +91,54 @@
 .store-search-form {
     padding: 0 rem(10px);
     @include respond(large-up) {
-        max-width: rem(460px);
         padding: 0;
     }
+    .form-row  {
+        margin-top: 0;
+        .label {
+            padding: 0;
+            margin: 0 0 rem(9px) 0;
+            @include respond(medium-down) {
+                padding-left: 0 !important;
+            }
+        }
+    }
     .form-row-button {
+        clear: none;
         button {
             @include button('submit');
+        }
+    }
+    .field-wrapper {
+        margin-bottom: 0;
+    }
+    .address-field {
+        width: 100%;
+        @include respond(large-up) {
+            width: 50%;
+            margin-right: 2%;
+        }
+    }
+    .distance-select {
+        margin-right: 6%;
+        width: 47%;
+        @include respond(large-up) {
+            margin-right: 2%;
+            width: 13%;
+        }
+    }
+    .locator-submit {
+        width: 46%;
+        margin-top: rem(13px);
+        @include respond(large-up) {
+            clear: none;
+            float: left;
+            width: 30%;
+        }
+        button {
+            @include respond(large-up) {
+                max-width: rem(148px);
+            }
         }
     }
 }
