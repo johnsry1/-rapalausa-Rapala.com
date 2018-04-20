@@ -8,8 +8,10 @@
             .customerservices {
                 a {
                     @include button;
+                    width: rem(196px);
                     @include respond(desktop-down) {
                         box-sizing: border-box;
+                        width: 100%;
                     }
                 }
             }
@@ -22,6 +24,9 @@
                 button {
                     min-width: inherit;
                     padding: 0;
+                }
+                .form-row {
+                    margin: 0;
                 }
             }
             .section-header {
@@ -718,6 +723,22 @@ ul.common-nav {
                             margin-right: 0;
                         }
                     }
+                }
+            }
+        }
+        .form-row-type-text {
+            position: relative;
+            .label {
+                @include respond(medium-down) {
+                    min-height: rem(18px);
+                }
+            }
+            .tooltip {
+                @include respond(medium-down) {
+                    position: absolute;
+                    width: auto !important;
+                    top: rem(22px);
+                    right: rem(-13px);
                 }
             }
         }

@@ -44,8 +44,14 @@ function execute( args : PipelineDictionary ) : Number
 	if (orders.hasNext())
 	{
 		////////// Prepare order files //////////
-		var orderfile = new ExportFile("orders_DW.txt");
-		var itemfile = new ExportFile("orderItems_DW.txt");
+		var fileName = "orders_DW.txt";
+		var itemsFileName = "orderItems_DW.txt";
+		if (dw.system.Site.getCurrent().ID !== 'rapala') {
+			fileName = dw.system.Site.getCurrent().ID + "_" + fileName;
+			itemsFileName = dw.system.Site.getCurrent().ID + "_" + itemsFileName;
+		}
+		var orderfile = new ExportFile(fileName);
+		var itemfile = new ExportFile(itemsFileName);
 		
 		// order header row
 		orderfile.AddRowItem('Email');

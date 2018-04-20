@@ -105,9 +105,7 @@ const Org_TagManager = {
             obj.ecommerce.checkout.products = Util.getProductArrayFromList(basket.getProductLineItems().iterator(), this.getOrderProductObject);
         }
 
-        if ('CheckoutStep' in args) {
-            obj.ecommerce.checkout.actionField.step = args.CheckoutStep;
-        }
+        obj.ecommerce.checkout.actionField.step = session.custom.checkoutStep;
 
         return obj;
     },
@@ -152,7 +150,6 @@ const Org_TagManager = {
             pageType: args.pageType,    
             ecommerce: {
                 detail: {
-                    actionField: {"list": Resource.msg("ecommerce.list.pdp", "googletagmanager", null)},
                     products: []
                 }
             }
@@ -365,7 +362,10 @@ Org_TagManager.getProductObject = function (product) {
 
     if (product.isVariant() || product.isVariationGroup()) {
         obj.productID = product.getMasterProduct().ID;
-        obj.childID = product.ID
+    }
+
+    if (product.master && product.variationModel.variants.size() > 0) {
+        obj.productID = product.ID;
     }
     
     obj.category = Util.getProductCategory(product);

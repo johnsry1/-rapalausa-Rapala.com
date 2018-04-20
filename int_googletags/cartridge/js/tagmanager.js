@@ -5,7 +5,11 @@
  * events that are needed are initialized.
  */
 var events = {
-    account: function () {},
+    account: function () {
+        $('[name$="_profile_confirm"]').on('click', function() {
+            signUpEvent('Account Sign Up', $(this), '_customer_addtoemaillist');
+        });
+    },
     cart: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val()); 
@@ -15,13 +19,12 @@ var events = {
         $('[name$=_deleteProduct]').on('click', function () {
             removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
         });
-    },
-    compare: function () {},
-    product: function () {
-        $('#add-to-cart').on('click', function () {
-            addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val(), $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined);
+        $('[name$="_billing_save"]').on('click', function(){
+            signUpEvent('Billing Sign Up', $(this), '_billingAddress_addToEmailList');
         });
     },
+    compare: function () {},
+    product: function () {},
     search: function () {},
     storefront: function () {},
     wishlist: function () {
@@ -43,8 +46,41 @@ var events = {
         $('.primary-logo').on('click', function () {
             pushEvent('trackEvent', 'User Action', 'Header Click', 'Home Link');
         });
+
+        $(document).ready(function() {
+            $('#footerSubForm button').on('click', function () {
+                if (SitePreferences.GTM_ENABLED) {
+                    var validF = $(this).closest('form').valid();
+                    if (validF) {
+                        dataLayer.push({
+                            'event': 'emailSignUp',
+                            'eventCategory': 'Secondary Goals',
+                            'eventAction': 'Email Sign-up',
+                            'eventLabel': 'Footer Sign Up'
+                        });
+                    }
+                }
+            });
+
+            $('.header-signup button').on('click', function() {
+                signUpEvent('Header Sign Up', $(this), '_customer_addtoemaillist');
+            })
+        })
     }
 };
+
+/**
+ * Push to DataLayer sign up event info
+ */
+function signUpEvent(location, event, signUpCheckbox) {
+    if (SitePreferences.GTM_ENABLED) {
+        var validF = $(event).closest('form').valid();
+        var $signUpElem = $(event).closest('form').find('[name$="' + signUpCheckbox + '"]')[0];
+        if (validF && $signUpElem != undefined && $signUpElem.checked) {
+            pushEvent('emailSignUp', 'Secondary Goals', 'Email Sign-up', location);
+        }
+    }
+}
 
 /**
  * @param {Object} productObject The product data
@@ -58,7 +94,6 @@ function productClick (productObject) {
         },
         'ecommerce': {
             'click': {
-                'actionField': {'list': 'SearchResults'},
                 'products': []
             }
         }

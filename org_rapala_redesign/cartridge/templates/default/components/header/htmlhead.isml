@@ -10,7 +10,7 @@ If you are not using the build cartridge the comments can be safely removed.
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <iscomment>See https://github.com/h5bp/html5-boilerplate/blob/5.2.0/dist/doc/html.md#mobile-viewport</iscomment>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
 <script type="text/javascript">
   WebFontConfig = {
@@ -37,6 +37,11 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>FAVICON ICON: (website icon, a page icon or an urlicon) 16x16 pixel image icon for website
 <link href="${URLUtils.staticURL('/images/rapala.png')}" rel="shortcut icon" /></iscomment>
+<isif condition="${!empty(session.custom.currentSite)}">
+	<link href="${URLUtils.staticURL('/images/'  + session.custom.currentSite + '/favicon.ico')}" rel="shortcut icon" />
+<iselse>
+	<link href="${URLUtils.staticURL('/images/favicon.ico')}" rel="shortcut icon" />
+</isif>
 
 <isset name="htmlheader" value=${dw.content.ContentMgr.getContent('html-header-css')} scope="page" />
 <isif condition="${!empty(htmlheader)}">
@@ -68,9 +73,15 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>DEFAULT STYLESHEETS INCLUDED ON ALL PAGES</iscomment>
 
+<isset name="styleVersion" value="/css/style.css" scope="page" />
+<isif condition="${!empty(dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')) && dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')}">
+    <isset name="styleVersion" value="/css/style.min.css" scope="page" />
+</isif>
+<link rel="stylesheet" href="${URLUtils.staticURL(styleVersion)}" />
+
 <!--- BEGIN CSS files to merge.(source_path=app_rapala_core/cartridge/static/default;targetfile=css/allinone.css) --->
 <link href="${URLUtils.staticURL('/lib/jquery/ui/jquery-ui.min.css')}" type="text/css" rel="stylesheet" />
-<link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" type="text/css" rel="stylesheet"/>
+<!--<link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" type="text/css" rel="stylesheet"/> -->
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/styleguide.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.min.css')}" type="text/css" rel="stylesheet"/>

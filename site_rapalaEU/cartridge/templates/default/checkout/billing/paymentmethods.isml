@@ -145,7 +145,11 @@
 						<span class="toggle-label"><isprint value="${Resource.msg(paymentMethodType.label,'forms',null)}"/></span>
 							<div class="card-typ-image">
 								<isif condition="${radioID == 'CREDIT_CARD'}">
-									<img src="${URLUtils.staticURL('/images/tab_credit.png')}"  alt="" title="" />
+									<issvghelper icon="visa-dark" extraclasses="payment-small" />
+									<issvghelper icon="master-card-dark" extraclasses="payment-small"/>
+									<issvghelper icon="american-express-dark" extraclasses="payment-small"/>
+									<issvghelper icon="jcb-dark" extraclasses="payment-small"/>
+									<issvghelper icon="diners-club-dark" extraclasses="payment-small"/>
 								</isif>
 
 								<isif condition="${radioID== 'PayPal'}">

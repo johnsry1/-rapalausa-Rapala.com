@@ -4291,6 +4291,7 @@
                         text-align: center;
                         width: 100%;
                         margin: 0 auto;
+                        padding-top: rem(8px);
                         img {
                             float: none;
                         }
@@ -6354,7 +6355,7 @@
                 .gridpage {
                     .product-listing {
                         background: none !important;
-                        width: 255px !important;
+                        width: 100% !important;
                         margin: 0 auto 40px !important;
                         float: none !important;
                     }
@@ -10898,7 +10899,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        max-width: 635px;
+                        max-width: 100%;
                         width: 100%;
                         margin: 30px auto 0;
                         float: none;
@@ -11154,7 +11155,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        width: 255px;
+                        width: 100%;
                         margin: 0 auto 40px;
                         float: none;
                         .owl-carousel {
@@ -11905,5 +11906,43 @@
             }
 
         }
+    }
+}
+.new-colors-snipe,
+.new-stamp,
+.new-sizes-snipe {
+    @include new-label();
+    margin: 0 3px 3px 0 !important;
+    display: inline-block;
+    line-height: $new-labels-line-height;
+    height: $new-labels-height;
+}
+.new-stamp-big {
+    @include new-label();
+    @include new-label-big();
+    margin-right: 0;
+}
+.variationattributes {
+    .color {
+        ul {
+            li {
+                a span.corner-ribbon {
+                    @include new-label-swatch();
+                }
+            }
+        }
+    }
+}
+#alert-message {
+    #close-non-us-alert {
+        right: rem(5px);
+        width: rem(34px);
+        height: rem(34px);
+    }
+}
+.trustmarksimgs {
+    @include respond(large-up) {
+        position: relative;
+        right: rem(-3px);
     }
 }

@@ -108,7 +108,7 @@ body {
                     @include respond(desktop-down) {
                         width: rem(100px);
                         height: rem(33px);
-                        background: url("../images/brands/rapala.svg") no-repeat center;
+                        background: url("../images/rapala-logo.svg") no-repeat center;
                         background-size: auto;
                     }
                 }
@@ -368,13 +368,13 @@ body {
                     height: auto;
                     box-sizing: border-box;
                     @include respond(desktop-down) {
-                        padding-left: rem(20px) !important;
-                        padding-right: rem(20px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                         margin-bottom: rem(10px) !important;
                     }
                     @include respond(medium-down) {
-                        padding-left: rem(10px) !important;
-                        padding-right: rem(10px) !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
                     }
                     p {
                         margin: 0;
@@ -400,9 +400,26 @@ body {
     form.simplesearch {
         input.simplesearchinput {
             @include form-input;
+            color: $search-input-color;
             @include respond(desktop-down) {
                 height: rem($mobile-search-height);
                 margin: 0;
+                color: $search-input-mobile-color;
+            }
+            &:focus {
+                color: $search-input-color;
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
+            }
+            &::placeholder {
+                color: $search-input-color;
+                @include respond(desktop) {
+                    opacity: 1;
+                }
+                @include respond(desktop-down) {
+                    color: $search-input-mobile-color;
+                }
             }
         }
         button.search-button {
@@ -464,4 +481,19 @@ body {
     width: 100%;
     text-align: left;
     margin-top: 0;
+}
+.dialogBanner {
+    .ui-icon-closethick {
+        background-image: url("../images/close-button.png") !important;
+        background-position: 0 0 !important;
+        &:hover {
+            background-position: 0 -34px !important;
+        }
+    }
+    .formactions {
+        text-align: center;
+    }
+    .ui-dialog-titlebar {
+        border-bottom: 0;
+    }
 }

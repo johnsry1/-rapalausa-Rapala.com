@@ -12,7 +12,7 @@
 <isinclude template="util/modules"/>
 
 <iscomment><!-- GTM track checkout steps --></iscomment>
-<isgtmreportcheckout checkoutstep="${3}" />
+<isgtmreportcheckout checkoutstep="${2}" />
 
 <iscomment>
 	This template visualizes the first step of the single shipping checkout
@@ -218,7 +218,7 @@
 												<isprint value="${addressForm.address1.value}"/> <isif condition="${addressForm.address2.value != null}"><isprint value="${addressForm.address2.value}"/></isif><br/>
 												<isif condition="${addressForm.country.value.toLowerCase() == 'gb' || address.country.value.toLowerCase() == 'uk'}">
 													<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
-													<isprint value="${addressForm.states.state.value}"/> <isprint value="${Resource.msg(('country.'+addressForm.country.value).toLowerCase(), 'forms', null)}"/><br/> 
+													<isprint value="${addressForm.states.state.value}"/> <isprint value="${Resource.msg(('country.'+addressForm.country.value).toLowerCase(), 'forms', null)}"/><br/>
 												<iselse>
 													<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.states.state.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
 												</isif>
@@ -349,12 +349,7 @@
 										<iselse/>
 											<button class="continue-checkout" type="submit" name="${pdict.CurrentForms.singleshipping.shippingAddress.save.htmlName}" value="${Resource.msg('global.continuebilling','locale',null)}"><span>${Resource.msg('global.continuebilling','locale',null)}</span></button>
 										</isif>
-										<div class="cart-payment-buttons">
-											<div class="trust-marks-imgs">
-												<span class="payment-trust-imgs pci-secured-payment-icon"></span>
-												<span class="payment-trust-imgs smcs-payment-icon"></span>
-											</div>
-										</div>
+
 									</div>
 								</div>
 

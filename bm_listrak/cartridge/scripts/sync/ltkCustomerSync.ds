@@ -38,7 +38,11 @@ function execute( pdict : PipelineDictionary ) : Number
 
 	if (customers.hasNext())
 	{
-		var customerfile = new ExportFile("Customers_DW.txt");
+		var fileName = "Customers_DW.txt";
+		if (dw.system.Site.getCurrent().ID !== 'rapala') {
+			fileName = dw.system.Site.getCurrent().ID + "_" + fileName;
+		}
+		var customerfile = new ExportFile(fileName);
 		
 		////////// Write header row //////////
 		customerfile.AddRowItem('Email');

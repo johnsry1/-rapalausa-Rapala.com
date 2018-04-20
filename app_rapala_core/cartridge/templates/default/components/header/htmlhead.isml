@@ -73,9 +73,14 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <iscomment>DEFAULT STYLESHEETS INCLUDED ON ALL PAGES</iscomment>
 
+<isset name="styleVersion" value="/css/style.css" scope="page" />
+<isif condition="${!empty(dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')) && dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')}">
+    <isset name="styleVersion" value="/css/style.min.css" scope="page" />
+</isif>
+<link rel="stylesheet" href="${URLUtils.staticURL(styleVersion)}" />
+
 <!--- BEGIN CSS files to merge.(source_path=app_rapala_core/cartridge/static/default;targetfile=css/allinone.css) --->
 <link href="${URLUtils.staticURL('/lib/jquery/ui/jquery-ui.min.css')}" type="text/css" rel="stylesheet" />
-<link rel="stylesheet" href="${URLUtils.staticURL('/css/style.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.carousel.min.css')}" type="text/css" rel="stylesheet"/>
 <link rel="stylesheet" href="${URLUtils.staticURL('/css/owl/owl.theme.default.min.css')}" type="text/css" rel="stylesheet"/>

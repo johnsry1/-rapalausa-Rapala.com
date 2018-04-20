@@ -93,8 +93,14 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
 
     /** @type {Number} */
     let position = 1;
+    
+    let count = 0;
 
     while (productList.hasNext()) {
+        
+        if (count >= 20) {
+            break;
+        }
 
         let item = productList.next(),
             prodObj = objectCreationCallback(item);
@@ -104,6 +110,7 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
         productArray.push(prodObj);
 
         position++;
+        count++;
 
     }
 
@@ -251,6 +258,19 @@ exports.getProductOriginalPrice = function (product) {
 
     if (!standardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(standardPrice.getCurrencyCode())) {
         standardPrice = dw.value.Money.NOT_AVAILABLE;
+    }
+
+    if (product.master && !product.priceModel.isPriceRange() && product.variationModel.variants.size() > 0) {
+        product = product.variationModel.variants[0]
+        PriceModel = product.getPriceModel();
+        if (!empty(PriceModel) && PriceModel.priceInfo != null) {
+            var priceBook = PriceModel.priceInfo.priceBook;
+            standardPrice = PriceModel.getPriceBookPrice(priceBook.ID);
+        }
+
+        if (!standardPrice.equals(dw.value.Money.NOT_AVAILABLE) && !session.getCurrency().getCurrencyCode().equals(standardPrice.getCurrencyCode())) {
+            standardPrice = dw.value.Money.NOT_AVAILABLE;
+        }
     }
 
     return standardPrice;

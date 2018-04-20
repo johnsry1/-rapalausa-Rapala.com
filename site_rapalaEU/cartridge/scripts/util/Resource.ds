@@ -35,6 +35,7 @@ SiteResourceHelper.getResources = function(pageContext) {
 
     // additional resources
     resources["ADYEN_CC_VALIDATE"] = Resource.msg('adyen.creditcard', 'adyen', null);
+    resources["PASSWORD_VALIDATION_ERROR"] = Resource.msg('global.password.validation.error', 'locale', null);
 
     return resources;
 }
@@ -55,6 +56,7 @@ SiteResourceHelper.getUrls = function(pageContext) {
     urls.getPhoneHtml = URLUtils.url('Avs-GetPhoneHtml').toString();
     urls.contactUsSubmit = URLUtils.https('CustomerService-Submit').toString();
     urls.customerHeader = URLUtils.https('Avs-IncludeRegisteredHeaderCustomerInfo').toString();
+    urls.wishlistadd = URLUtils.https('Wishlist-Add').toString();
     
     return urls;
 }

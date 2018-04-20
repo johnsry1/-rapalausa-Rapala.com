@@ -144,6 +144,10 @@ function show() {
 
             }
         } else if (isBlogArticleSearch) {
+            //set up post page url to session that allow customer go back to original post
+            if (!params.start.submitted) {
+                session.custom.blogReferer = request.httpReferer;
+            }
             var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
             contentPagingModel.setPageSize(16);
             if (params.start.submitted) {
