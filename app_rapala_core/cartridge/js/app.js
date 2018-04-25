@@ -101,7 +101,9 @@ function changeRegionPopUp() {
                 url: util.appendParamToURL(Urls.internationalHomeCountyPopUp, 'coid', id),
                 options: {
                     title: name,
-                    dialogClass: 'change-region-popup'
+                    dialogClass: 'change-region-popup',
+                    height: 500,
+                    width: 500
                 }
             });
         });
