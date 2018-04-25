@@ -91,6 +91,22 @@ function resetPasswordEvents() {
     });
     validator.init();
 }
+function changeRegionPopUp() {
+    $('.haspop').each(function(){
+        $(this).on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id'),
+                name = $(this).data('name');
+            dialog.open({
+                url: util.appendParamToURL(Urls.internationalHomeCountyPopUp, 'coid', id),
+                options: {
+                    title: name,
+                    dialogClass: 'change-region-popup'
+                }
+            });
+        });
+    });
+}
 
 function initializeEvents() {
     var isSafari = navigator.userAgent.indexOf('Safari') > -1;
@@ -520,7 +536,7 @@ function initializeEvents() {
             });
         }
     });
-
+    changeRegionPopUp();
 }
 
 /**

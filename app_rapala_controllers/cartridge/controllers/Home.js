@@ -174,6 +174,11 @@ function includeMegamenuCustomerInfo() {
     app.getView().render('components/header/megamenu_account_show');
 }
 
+function countyPopUp() {
+	var COBrand = dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", request.httpParameterMap.coid.stringValue);
+	app.getView({customObject: COBrand}).render('content/home/internationalpopup');
+}
+
 /*
  * Export the publicly available controller methods
  */
@@ -232,3 +237,5 @@ exports.IncludeCheckOutHeaderCustomerInfo = guard.ensure(['get'], includeCheckOu
 /** Renders login/logout
 * @see module:controllers/Home~includeMegamenuCustomerInfo */
 exports.IncludeMegamenuCustomerInfo = guard.ensure(['get'], includeMegamenuCustomerInfo);
+
+exports.CountyPopUp = guard.ensure(['get'], countyPopUp);
