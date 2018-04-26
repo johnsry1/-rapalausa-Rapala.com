@@ -182,7 +182,14 @@
     }
     .ui-dialog-titlebar-close {
         span {
-            left: rem(-10px) !important;
+            @include respond(medium-down) {
+                left: 0 !important;
+                top: rem(-5px) !important;
+            }
+            @include respond(large-up) {
+                left: rem(-10px) !important;
+                top: 0 !important;
+            }
         }
     }
     .change-region-popup-container {
@@ -190,5 +197,8 @@
     }
     .dialog-content {
         margin: 0 rem(19px) rem(10px) 0;
+    }
+    a {
+        outline: none;
     }
 }
