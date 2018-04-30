@@ -248,7 +248,7 @@ var product = function (response) {
                     //var url = tempUrl + jQuery.param(selectedOptions);
                     window.location = tempUrl + jQuery.param(selectedOptions);
                 } else {
-                    if (SitePreferences.GTM_ENABLED) {
+                    if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
                         var productObject = $.parseJSON($(this).attr('data-gtmdata'));
                         var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
                         var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
