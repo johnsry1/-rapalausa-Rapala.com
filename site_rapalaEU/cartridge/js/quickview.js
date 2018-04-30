@@ -130,8 +130,8 @@ var quickview = {
                 product.init();
                 progress.hide();
                 
-                var gtmData = $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata');
-                if (SitePreferences.GTM_ENABLED) {
+                if (SitePreferences.GTM_ENABLED && $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata')) {
+                    var gtmData = $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata');
                     var obj = {
                         'pageType': 'productPage',
                         'ecommerce': {

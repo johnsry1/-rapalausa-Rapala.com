@@ -17,7 +17,7 @@ function initQuickViewButtons() {
         }).appendTo(this);
         $qvButton.off('click').on('click', function (e) {
             e.preventDefault();
-            if (SitePreferences.GTM_ENABLED) {
+            if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
                 var obj = {
                     'event': 'productClick',
                     'event_info': {
