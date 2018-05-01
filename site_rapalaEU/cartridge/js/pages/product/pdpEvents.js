@@ -248,7 +248,7 @@ var product = function (response) {
                     //var url = tempUrl + jQuery.param(selectedOptions);
                     window.location = tempUrl + jQuery.param(selectedOptions);
                 } else {
-                    if (SitePreferences.GTM_ENABLED) {
+                    if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
                         var productObject = $.parseJSON($(this).attr('data-gtmdata'));
                         var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
                         var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
@@ -833,20 +833,18 @@ var product = function (response) {
                                 href = 'javascript:void(0);';
                             }
                             $(that.containerId + ' .productthumbnails:last').append('<div class=\'alternate-images\'><a data-zoom-id=\'product-image\' href=\'' + href + '\' class=\'alternate-image\' data-image=\'' + thisVal.images.original[index].url + '\'><img class=\'index' + index + '\' src=\'' + this.url + '\' title=\'' + this.title + '\' alt=\'' + this.alt + '\'/></a></div>');
-                            if (that.containerId.indexOf('ui-dialog') == 1) {
-                                $(that.containerId + ' .productthumbnails:last .alternate-image img').on('click touchstart', function (e) {
-                                    e.preventDefault();
-                                    $(this).closest('.owl-item').siblings('.owl-item').find('a.alternate-image').removeClass('selected');
-                                    $(this).closest('.owl-item').find('a.alternate-image').addClass('selected');
-                                    var zoomimageurl = $(this).closest('.alternate-image').data('image');
-                                    //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[imageInd].url);
-                                    $('body').find('.main-image').attr('href', zoomimageurl);
-                                    $('body').find('.main-image img').attr('src', zoomimageurl);
-                                    MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
-                                    MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
-                                    //$("body").find('.product-image').trigger("click");
-                                });
-                            }
+                            $(that.containerId + ' .productthumbnails:last .alternate-image img').on('click touchstart', function (e) {
+                                e.preventDefault();
+                                $(this).closest('.owl-item').siblings('.owl-item').find('a.alternate-image').removeClass('selected');
+                                $(this).closest('.owl-item').find('a.alternate-image').addClass('selected');
+                                var zoomimageurl = $(this).closest('.alternate-image').data('image');
+                                //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[imageInd].url);
+                                $('body').find('.main-image').attr('href', zoomimageurl);
+                                $('body').find('.main-image img').attr('src', zoomimageurl);
+                                MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
+                                MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
+                                //$("body").find('.product-image').trigger("click");
+                            });
                         });
                         jQuery(that.containerId + ' .productthumbnails:last .owl-item').first().find('img').click();
                         //var $images = jQuery(that.containerId+" .productthumbnails:last .owl-item img");
