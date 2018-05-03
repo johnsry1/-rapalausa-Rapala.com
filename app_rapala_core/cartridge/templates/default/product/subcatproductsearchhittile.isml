@@ -146,19 +146,28 @@
 					<isif condition="${thumbnailAlt.charAt(0) == ','}">
 						<isset name="thumbnailAlt" value="${Product.name + thumbnailAlt}" scope="page"/>
 					</isif>
-					<a class="thumb-link" href="${productUrl}" title="${Product.name}">
+					<isscript>
+						var gtmProductData = {};
+						if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
+							gtmProductData = require('*/cartridge/scripts/googletags/Site_TagManager').getProductData(Product.ID);
+						}
+					</isscript>
+					<a class="thumb-link" href="${productUrl}" title="${Product.name}"
+						data-gtmdata="${JSON.stringify(gtmProductData)}">
 						<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}" >
 							<img src="${imageDesktop.getURL()}" alt="${thumbnailAlt}" class="tile-img"/>
 						<iselse/>
 							<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
 						</isif>
 					</a>
-					<a id="quickviewbutton" class="quickview" href="${productUrl}">
+					<a id="quickviewbutton" class="quickview" href="${productUrl}"
+						data-gtmdata="${JSON.stringify(gtmProductData)}">
 						QUICK VIEW
 					</a>
 				</div>
 				<div class="product-name">
-					<a class="name-link" href="${productUrl}" title="${Product.name}">
+					<a class="name-link" href="${productUrl}" title="${Product.name}"
+						data-gtmdata="${JSON.stringify(gtmProductData)}">
 						<isproductname productname="${Product.name}"/>
 					</a>
 				</div><!-- END: name -->

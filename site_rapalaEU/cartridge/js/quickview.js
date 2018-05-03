@@ -129,6 +129,20 @@ var quickview = {
                 $(quickViewDialog).append(data);
                 product.init();
                 progress.hide();
+                
+                if (SitePreferences.GTM_ENABLED && $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata')) {
+                    var gtmData = $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata');
+                    var obj = {
+                        'pageType': 'productPage',
+                        'ecommerce': {
+                            'detail': {
+                                'products': []
+                            }
+                        }
+                    };
+                    obj.ecommerce.detail.products.push($.parseJSON(gtmData));
+                    dataLayer.push(obj);  
+                }
             }
         });
         //PREVAIL-Added for GA integration

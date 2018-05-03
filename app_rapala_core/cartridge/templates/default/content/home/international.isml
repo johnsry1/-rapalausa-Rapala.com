@@ -63,7 +63,7 @@
 				<ul class="distrobutors-countries-list">
 					<isloop items="${pdict.distributorCountries}" var="distributor">
 						<li class="distributor-link">
-							<a class="link" href="${distributor.custom.url}">${distributor.custom.countryDisplayName}</a>
+							<a class='link<isif condition="${!empty(distributor.custom.popupDistributorHTML)}"> haspop</isif>' href="${distributor.custom.url}" data-id="${distributor.custom.id}" data-name="${distributor.custom.countryDisplayName}">${distributor.custom.countryDisplayName}</a>
 						</li>
 					</isloop>
 				</ul>

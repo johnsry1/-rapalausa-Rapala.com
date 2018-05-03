@@ -12,12 +12,16 @@ var events = {
     },
     cart: function () {
         $('[name$=_deleteProduct]').on('click', function () {
-            removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val()); 
+            if ($(this).attr('data-gtmdata')) {
+                removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val());
+            }
         });
     },
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
-            removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
+            if ($(this).attr('data-gtmdata')) {
+                removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
+            }
         });
         $('[name$="_billing_save"]').on('click', function(){
             signUpEvent('Billing Sign Up', $(this), '_billingAddress_addToEmailList');
@@ -29,16 +33,22 @@ var events = {
     storefront: function () {},
     wishlist: function () {
         $('[name$=_addToCart]').on('click', function () {
-            addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+            if ($(this).attr('data-gtmdata')) {
+                addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+            }
         });
     },
     // events that should happen on every page
     all: function () {
         $('.name-link').on('click', function () {
-            productClick($.parseJSON($(this).attr('data-gtmdata')));
+            if ($(this).attr('data-gtmdata')) {
+                productClick($.parseJSON($(this).attr('data-gtmdata')));
+            }
         });
         $('.thumb-link').on('click', function () {
-            productClick($.parseJSON($(this).attr('data-gtmdata')));
+            if ($(this).attr('data-gtmdata')) {
+                productClick($.parseJSON($(this).attr('data-gtmdata')));
+            }
         });
         $('.has-sub-menu').on('click', function () {
             pushEvent('trackEvent', 'User Action', 'Header Click', $(this).html());
