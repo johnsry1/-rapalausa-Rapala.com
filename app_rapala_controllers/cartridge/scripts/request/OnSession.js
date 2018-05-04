@@ -76,6 +76,10 @@ function geolocationRestrictions() {
                         } else {
                             logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
                             RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                            if(redirectto == null || redirectto == 'undefined' || redirectto == '') {
+                              RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
+                              return;
+                            }
                             response.redirect(redirectto);
                         }
                     }
@@ -84,32 +88,32 @@ function geolocationRestrictions() {
                 }
             } else {
                 logMessage += 'Geolocation not available, no redirect. \n';
-            } 
+            }
             RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
         } catch (e) {
-            RapalaHelper.getLogger('geoip-country-redirect').error(RapalaHelper.prepareLogMessage(e));    
+            RapalaHelper.getLogger('geoip-country-redirect').error(RapalaHelper.prepareLogMessage(e));
         }
     }
     return;
 }
 
-function geoIpDefaultCurrency() { 
+function geoIpDefaultCurrency() {
     var logMessage = '';
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
         try {
             var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
-            
+
             var geolocation = request.getGeolocation();
             if (geolocation == null) {
-                logMessage += 'Geolocation not available, set up default currency from config \n';    
+                logMessage += 'Geolocation not available, set up default currency from config \n';
             }
             var country = (geolocation != null) ? geolocation.getCountryCode() : 'default';
             logMessage += 'Geolocation country: ' + country + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
-            
+
             var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
             var currencies = JSON.parse(json);
-            
+
             if (!empty(currencies)) {
                 if (country in currencies) {
                     currency = currencies[country];
@@ -126,7 +130,7 @@ function geoIpDefaultCurrency() {
                     logMessage += 'Sep up session currency to default : ' + currencies['default'] + '\n';
                 }
             } else {
-                logMessage += 'Empty JSON default currency config \n';  
+                logMessage += 'Empty JSON default currency config \n';
             }
             RapalaHelper.getLogger('geoip-default-currency').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
         } catch (e) {
