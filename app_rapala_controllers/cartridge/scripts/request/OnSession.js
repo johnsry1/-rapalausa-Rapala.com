@@ -79,6 +79,9 @@ function geolocationRestrictions() {
                             if(redirectto == null || redirectto == 'undefined' || redirectto == '') {
                               RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
                               return;
+                            } else if(redirectto.indexOf(request.httpHost) < 0) {
+                              RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Another domain was request that does not match country based redirect. i.e. strikemaster.com -> rapala.com.  no redirect."}));
+                              return;
                             }
                             response.redirect(redirectto);
                         }
