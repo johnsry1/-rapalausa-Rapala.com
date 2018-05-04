@@ -69,13 +69,12 @@ function geolocationRestrictions() {
                             RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
                             return;
                         }
+
                         if ((host + path) == redirectto) {
                             logMessage += 'Host and path equals redirected value, no redirect. \n';
                             RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
                             return;
                         } else {
-                            logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
                             if(redirectto == null || redirectto == 'undefined' || redirectto == '') {
                               RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
                               return;
@@ -83,6 +82,15 @@ function geolocationRestrictions() {
                               RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Another domain was request that does not match country based redirect. i.e. strikemaster.com -> rapala.com.  no redirect."}));
                               return;
                             }
+                            //Append original request queryString if applicable
+                            if (request.httpQueryString != '' || request.httpQueryString != null) {
+                              RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Appending query string to redirect url: " + request.httpQueryString}));
+                              redirectto += ('?' + request.httpQueryString);
+                            }
+
+                            logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
+                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+
                             response.redirect(redirectto);
                         }
                     }
