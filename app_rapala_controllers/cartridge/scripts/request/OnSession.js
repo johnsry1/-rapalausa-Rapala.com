@@ -108,6 +108,13 @@ function geolocationRestrictions() {
                     var siteID = redirectto;
                     var locale = redirects[country].locale;
                     var requestedAction = request.httpPath.split("/").pop();
+                    
+                    if(requestedAction.indexOf("Sites-") > -1) {
+                      requestedAction = "Home-Show"
+                    }
+
+                    RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Requested Path: " + request.httpPath}));
+
                     if (redirects[country].action != '' && redirects[country].action != null && redirects[country].action != 'undefined') {
                         requestedAction = redirects[country].action;
                     }
