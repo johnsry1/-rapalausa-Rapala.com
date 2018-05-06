@@ -41,75 +41,81 @@ function getDeviceType() {
 }
 
 function geolocationRestrictions() {
-    if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGeoIPRedirects')) {
+    if (dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects')) {
         var logMessage = '';
-        logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
+        logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.current.ID + '\n';
         try {
-            var geolocation = request.getGeolocation();
-            var host = request.getHttpHost();
-            var path = request.getHttpPath();
+            var geolocation = request.geolocation;
+            var host = request.httpHost;
+            var path = request.httpPath;
             if (geolocation != null) {
-                var country = geolocation.getCountryCode();
-                logMessage += 'Geolocation country: ' + country + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
-                var json = dw.system.Site.getCurrent().getCustomPreferenceValue("GeoIPRedirects");
+                var country = geolocation.countryCode;
+                logMessage += 'Geolocation country: ' + country + ', site: ' + dw.system.Site.current.ID + '\n';
+                var json = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirects");
                 var redirects = JSON.parse(json);
                 if (!empty(redirects)) {
 
                     var ignoreUserAgents = redirects["userAgent"];
-                    var userAgent = request.getHttpUserAgent();
-
+                    var userAgent = request.httpUserAgent;
                     if (!empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip") {
-                        logMessage += 'Ignored userAgent found: ' + ignoreUserAgents[userAgent] + ' \n';
+                        logMessage += 'Ignored userAgent found.  No redirect.  User Agent: ' + ignoreUserAgents[userAgent] + ' \n';
                         RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
                         return;
+                    }
+
+                    if(hostWhitelist != 'undefined' && hostWhitelist != '' && hostWhitelist != null && hostWhitelist.indexOf(host) > -1) {
+                      logMessage += 'Whitelisted Host found.  No Redirect.   Host: ' + host + ' \n';
+                      RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+
+                      return;
+                    }
+
+
+                    var redirectto = redirects["default"];
+                    if (country in redirects) {
+
+                      if(redirects[country].url) {
+                        logMessage += 'Direct URL identified in GeoIP json. \n';
+                        RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+
+                        directUrlRedirect = true;
+                        redirectto = redirects[country].url;
+
+                      } else {
+                        directUrlRedirect = false;
+                        redirectto = redirects[country].siteID;
+                        locale = redirects[country].locale;
+                      }
+
+                    } else if (path == null || path == '') {
+                        logMessage += 'Country not found in config JSON file and path value empty or equal NULL, no redirect. \n';
+                        RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                        return;
+                    }
+
+
+                    if ((host + path) == redirectto) {
+                        logMessage += 'Host and path equals redirected value, no redirect. \n';
+                        RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                        return;
+                    }
+
+                    if (redirectto == null || redirectto == 'undefined' || redirectto == '') {
+                      RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
+                      return;
+                    }
+                    // prepare SFCC url for redirection
+                    var siteID = redirectto;
+                    var requestedAction = request.httpPath.split("/").pop();
+
+                    if (!directUrlRedirect) {
+                        var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, siteID, locale, requestedAction);
+
+                        logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
+                        RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Redirect Ready.  SiteID:  " + siteID + ".  Locale: " + locale + ".  Action: " + requestedAction + ".  Redirect URL:  " + url }));
+                        response.redirect(url);
                     } else {
-                        var redirectto = redirects["default"];
-                        if (country in redirects) {
-
-                          if(redirects[country].url) {
-                            logMessage += 'Direct URL identified in GeoIP json. \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
-
-                            directUrlRedirect = true;
-                            redirectto = redirects[country].url;
-
-                          } else {
-                            directUrlRedirect = false;
-                            redirectto = redirects[country].siteID;
-                            locale = redirects[country].locale;
-                          }
-
-                        } else if (path == null || path == '') {
-                            logMessage += 'Country not found in config JSON file and path value empty or equal NULL, no redirect. \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
-                            return;
-                        }
-
-
-                        if ((host + path) == redirectto) {
-                            logMessage += 'Host and path equals redirected value, no redirect. \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
-                            return;
-                        }
-
-                        if (redirectto == null || redirectto == 'undefined' || redirectto == '') {
-                          RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
-                          return;
-                        }
-                        // prepare SFCC url for redirection
-                        var siteID = redirectto;
-                        var requestedAction = request.httpPath.split("/").pop();
-
-                        if (!directUrlRedirect) {
-                            var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, siteID, locale, requestedAction);
-
-                            logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Redirect Ready.  SiteID:  " + siteID + ".  Locale: " + locale + ".  Action: " + requestedAction + ".  Redirect URL:  " + url }));
-                            response.redirect(url);
-                        } else {
-                            response.redirect(redirectto);
-                        }
-
+                        response.redirect(redirectto);
                     }
                 } else {
                     logMessage += 'Empty JSON redirect config \n';
