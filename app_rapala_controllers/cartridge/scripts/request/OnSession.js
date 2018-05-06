@@ -54,8 +54,10 @@ function geolocationRestrictions() {
                 var json = dw.system.Site.getCurrent().getCustomPreferenceValue("GeoIPRedirects");
                 var redirects = JSON.parse(json);
                 if (!empty(redirects)) {
+
                     var ignoreUserAgents = redirects["userAgent"];
                     var userAgent = request.getHttpUserAgent();
+
                     if (!empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip") {
                         logMessage += 'Ignored userAgent found: ' + ignoreUserAgents[userAgent] + ' \n';
                         RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
@@ -63,7 +65,8 @@ function geolocationRestrictions() {
                     } else {
                         var redirectto = redirects["default"];
                         if (country in redirects) {
-                            redirectto = redirects[country];
+                            redirectto = redirects[country].siteID;
+                            locale = redirects[country].locale;
                         } else if (path == null || path == '') {
                             logMessage += 'Country not found in config JSON file and path value empty or equal NULL, no redirect. \n';
                             RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
@@ -78,20 +81,17 @@ function geolocationRestrictions() {
                             if(redirectto == null || redirectto == 'undefined' || redirectto == '') {
                               RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "No country found & no default redirect set. no redirect. "}));
                               return;
-                            } else if(redirectto.indexOf(request.httpHost) < 0) {
-                              RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Another domain was request that does not match country based redirect. i.e. strikemaster.com -> rapala.com.  no redirect."}));
-                              return;
                             }
-                            //Append original request queryString if applicable
-                            if (request.httpQueryString != '' || request.httpQueryString != null) {
-                              RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Appending query string to redirect url: " + request.httpQueryString}));
-                              redirectto += ('?' + request.httpQueryString);
-                            }
+
+                            // prepare SFCC url for redirection
+                            var siteID = redirectto;
+                            var requestedAction = request.httpPath.split("/").pop();
+                            var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, siteID, locale, requestedAction);
 
                             logMessage += 'Redirect country found, making redirect to : ' + redirectto + ' \n';
-                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
+                            RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: "Redirect Ready.  SiteID:  " + siteID + ".  Locale: " + locale + ".  Action: " + requestedAction + ".  Redirect URL:  " + url }));
 
-                            response.redirect(redirectto);
+                            response.redirect(url);
                         }
                     }
                 } else {
