@@ -63,6 +63,7 @@ function geolocationRestrictions() {
                         return;
                     }
 
+                    var hostWhitelist = redirects["hostWhitelist"];
                     if(hostWhitelist != 'undefined' && hostWhitelist != '' && hostWhitelist != null && hostWhitelist.indexOf(host) > -1) {
                       logMessage += 'Whitelisted Host found.  No Redirect.   Host: ' + host + ' \n';
                       RapalaHelper.getLogger('geoip-country-redirect').info(RapalaHelper.prepareLogMessage({fileName: 'OnSession.js hook, action: onSession', message: logMessage}));
@@ -84,7 +85,6 @@ function geolocationRestrictions() {
                       } else {
                         directUrlRedirect = false;
                         redirectto = redirects[country].siteID;
-                        locale = redirects[country].locale;
                       }
 
                     } else if (path == null || path == '') {
@@ -106,7 +106,11 @@ function geolocationRestrictions() {
                     }
                     // prepare SFCC url for redirection
                     var siteID = redirectto;
+                    var locale = redirects[country].locale;
                     var requestedAction = request.httpPath.split("/").pop();
+                    if (redirects[country].action != '' && redirects[country].action != null && redirects[country].action != 'undefined') {
+                        requestedAction = redirects[country].action;
+                    }
 
                     if (!directUrlRedirect) {
                         var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, siteID, locale, requestedAction);
