@@ -6,6 +6,7 @@ var util = require('../../util'),
     //quickview = require('../../quickview'),
     addToCart = require('./addToCart'),
     progress = require('../../progress'),
+    imagesLoaded = require('imagesloaded'),
     ajax = require('../../ajax');
 
 var product = function (response) {
@@ -745,6 +746,63 @@ var product = function (response) {
         readReviews: function () {
             jQuery(this.containerId + ' #tabs').tabs('select', 'pdpReviewsTab');
         },
+        pdpMobileSlide: function() {
+            var timeOut = setTimeout(nextTry, 500),
+                secondsCounter = 0,
+                flag = true,
+                desktopItems = 4,
+                pdpOwlCarousel = $('.pdp-owl-customization');
+            function nextTry() {
+                if (!flag){
+                    return false;
+                }
+
+                clearTimeout(timeOut);
+                flag = false;
+                timeOut = setTimeout(nextTry, 500);
+                if (secondsCounter >= 100){
+                    flag = false;
+                } else {
+                    if ($('.pdp-owl-customization .alternate-images').length > 0) {
+                        imagesLoaded('.pdp-owl-customization').on('done', function () {
+                            pdpOwlCarousel.owlCarousel({
+                                items: 1,
+                                slideBy: 1,
+                                margin: 10,
+                                navRewind: false,
+                                rewind: false,
+                                nav: true,
+                                dots: true,
+                                navigation: false,
+                                responsive: {
+                                    0: {
+                                        items: 1,
+                                        slideBy: 1
+                                    },
+                                    481: {
+                                        items: 3,
+                                        slideBy: 3
+                                    },
+                                    960: {
+                                        items: desktopItems,
+                                        slideBy: desktopItems
+                                    }
+                                }
+                            });
+                            $('body').on('click' , '.owl-dot', function(){
+                                var currentIndex = $('.owl-dot').index(this);
+                                $('body .productthumbnails .owl-item:eq(' + currentIndex +') .alternate-images img').trigger('click');
+                            });
+                        });
+                        flag = false;
+                    } else {
+                        secondsCounter = secondsCounter + 1
+                        flag = true;
+                    }
+                }
+                return false;
+            }
+        },
 
         // shows product images and thumbnails
         // @param selectedVal - currently selected variation attr val
@@ -869,30 +927,7 @@ var product = function (response) {
                                 $('img.index0').parents('.owl-item').find('a.alternate-image').addClass('selected');
                             }
                         } else if ($(window).width() < 481) {
-                            pdpOwlCarousel.owlCarousel({
-                                items: 1,
-                                slideBy: 1,
-                                margin: 10,
-                                navRewind: false,
-                                rewind: false,
-                                nav: true,
-                                dots: true,
-                                navigation: false,
-                                responsive: {
-                                    0: {
-                                        items: 1,
-                                        slideBy: 1
-                                    },
-                                    481: {
-                                        items: 3,
-                                        slideBy: 3
-                                    },
-                                    960: {
-                                        items: desktopItems,
-                                        slideBy: desktopItems
-                                    }
-                                }
-                            });
+                            that.pdpMobileSlide();
                         }
                     }
                 }
