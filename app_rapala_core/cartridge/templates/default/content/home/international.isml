@@ -37,10 +37,21 @@
 				<div class="rapala-top-block-title">
 					<p>${Resource.msg('global.eu.international.countrieslist','locale',null)}</p>
 				</div>
+				<isscript>
+					var intlHelper = require("*/cartridge/scripts/util/UtilityHelpers");
+					var urlHelper = require('*/cartridge/scripts/util/Url');
+					var currentSite = intlHelper.getBrandID();
+				 </isscript>
 				<div class="rapala-middle-block rapala-middle-block-left">
+				<isif condition="${currentSite['allowedregion']['ca']}"> 
 					<p><a class="link-ca" href="https://rapala.ca/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.ca','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-					<p><a class="link-eu" href="https://www.rapala.com/eu-en/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-					<p><a class="link-us" href="https://www.rapala.com/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+				</isif>
+				<isif condition="${currentSite['allowedregion']['eu']}">
+					<p><a class="link-eu" href="${urlHelper.getCurrentInSession(request, 'rapalaEU', 'en_EC', 'Home-Show')}&id=${currentSite['brandid']}"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+				</isif>
+				<isif condition="${currentSite['allowedregion']['us']}">
+					<p><a class="link-us" href="${urlHelper.getCurrentInSession(request, 'rapala', 'default', 'Home-Show')}&id=${currentSite['brandid']}"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
+				</isif>
 				</div>
 			</div>
 

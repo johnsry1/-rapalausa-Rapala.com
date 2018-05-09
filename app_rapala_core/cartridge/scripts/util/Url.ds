@@ -35,3 +35,37 @@ exports.getCurrent = function getCurrent(pdict, locale) {
 		pdict.CurrentRequest.httpHost +
 		URLUtils.url.apply(null, args);
 };
+
+
+/**
+ * @description Generate URL for the current request from Session start.  Used for GeoIP Redirection.
+ * @param {request} request Current request
+ * @param {string} siteID Site the URL will be generated to
+ * @param {string} locale Locale the URL will be generated for.  Will defaults to "default" if no locale is identified
+ * @param {string} currentAction Controller endpoint the URL will be generated to
+ */
+exports.getCurrentInSession = function getCurrentInSession(request, siteID, locale, currentAction) {
+
+	if (!locale) {
+		locale = 'default';
+	}
+
+	var urlAction = new URLAction(currentAction, siteID, locale);
+	var args = [urlAction];
+	var parameterMap = request.httpParameterMap;
+
+	// iterate over current request's parameters, put them into the URL
+	for (var p in parameterMap) {
+		if (parameterMap.hasOwnProperty(p)) {
+			// ignore the lang parameter
+			if (p === 'lang') {
+				continue;
+			}
+			args.push(new URLParameter(p, parameterMap[p]));
+		}
+	}
+
+	return request.httpProtocol + '://' +
+		request.httpHost +
+		URLUtils.url.apply(null, args);
+};

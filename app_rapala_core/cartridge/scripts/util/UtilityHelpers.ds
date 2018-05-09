@@ -188,6 +188,13 @@ function isKnifeAvailable(basket){
 	}
 	return knifeAvailable;
 }
+
+function getBrandID(){
+	var intlPref = JSON.parse(System.getPreferences().getCustom()['internationalJSON']);
+	var currentSite = ""+request.httpParameterMap.currentSite.value;
+	var brand = intlPref["brands"][currentSite];
+	return brand;
+}
 module.exports={
 	getAvailability : getAvailability,
 	recommendationDisplay : recommendationDisplay,
@@ -196,5 +203,6 @@ module.exports={
 	isAllotmentOnly : isAllotmentOnly,
 	getRemainingOrderBalance : getRemainingOrderBalance,
 	isKnifeAvailable : isKnifeAvailable,
-	getAllotmentAmount : getAllotmentAmount
+	getAllotmentAmount : getAllotmentAmount,
+	getBrandID : getBrandID
 }
