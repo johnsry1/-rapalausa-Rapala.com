@@ -19,7 +19,7 @@ exports.geolocationRestrictions = function() {
             var redirects = JSON.parse(json);
             var country = geolocation.countryCode;
             var redirectType = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirectType").value;
-            if(redirectType === 'request' && (path.indexOf(redirects[country].siteID) < 0 && session.clickStream.clicks.length == 1)){
+            if(redirectType === 'request' && (path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)){
             	geoIPRedirection(geolocation, redirects, logMessage);
             }
             if(redirectType === 'session'){
