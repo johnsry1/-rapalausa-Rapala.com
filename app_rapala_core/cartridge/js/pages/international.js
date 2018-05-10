@@ -57,8 +57,8 @@ function initializationEvent() {
                 allowedCountries = 'US';
             }
             if (allowedCountries.indexOf(IPGeoCode) != -1) {
-                util.appendParamToURL(Urls.internationalHomeShow, 'id', currentSiteID);
-                //window.location.href = url;
+                var url = util.appendParamToURL(Urls.internationalHomeShow, 'id', currentSiteID);
+                window.location.href = url;
             }
         }
     }
