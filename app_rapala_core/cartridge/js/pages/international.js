@@ -49,6 +49,20 @@ function initializationEvent() {
             currentSiteID = '1';
     }
 
+    if (document.location.pathname.indexOf('ChangeRegion') < 0) {
+        if (typeof geoipCountryCode == 'function') {
+            var IPGeoCode = geoipCountryCode();
+            var allowedCountries = $('.allowed-countries').text();
+            if (allowedCountries == null || allowedCountries == 'null' || allowedCountries == 'undefined') {
+                allowedCountries = 'US';
+            }
+            if (allowedCountries.indexOf(IPGeoCode) != -1) {
+                util.appendParamToURL(Urls.internationalHomeShow, 'id', currentSiteID);
+                //window.location.href = url;
+            }
+        }
+    }
+
 }
 
 var international = {
