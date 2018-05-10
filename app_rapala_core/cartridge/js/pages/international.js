@@ -49,6 +49,7 @@ function initializationEvent() {
             currentSiteID = '1';
     }
 
+/*
     if (document.location.pathname.indexOf('ChangeRegion') < 0) {
         if (typeof geoipCountryCode == 'function') {
             var IPGeoCode = geoipCountryCode();
@@ -62,6 +63,7 @@ function initializationEvent() {
             }
         }
     }
+*/
 
 }
 
