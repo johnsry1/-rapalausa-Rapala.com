@@ -561,11 +561,26 @@ var headerEvents = {
                 }
             }
         }
+    },
+    userTimeout: function() {
+        if ($('.loggeduser').length) {
+            $(document).click(function(){
+                if (typeof timeOutObj != 'undefined') {
+                    clearTimeout(timeOutObj);
+                }
+
+                var timeOutObj = setTimeout(function(){ 
+                    localStorage.clear();
+                    window.location = '/';
+                }, 8000);   //will expire after twenty minutes
+            });
+        }
     }
 };
 var headerinit = {
     init: function () {
         headerEvents.initializeEvent();
+        headerEvents.userTimeout();
     }
 };
 
