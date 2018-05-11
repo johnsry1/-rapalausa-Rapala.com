@@ -29,7 +29,7 @@
                 </a>
             <iselse>
                 <isif condition="${(secondLevel.onlineProducts.size()>0) || (secondLevel.onlineSubCategories.size()>0)}">
-                    <a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${secondLevel.getDisplayName()}">
+                    <a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${pdict.currentRequest.locale}">
                         <isprint value="${secondLevel.getDisplayName()}"/>
                     </a>
                 </isif>
