@@ -29,33 +29,16 @@
 		</isif>
 	</style>
 	<div class="international-links-background-eu-wrapper ${session.custom.currentSite}-background">
+
+	<iscomment>The line below controls brand redirection found in: app_rapala_core/cartridge/js/pages/international.js. </iscomment>
+	<input type="hidden" class="current-session-site" value="${session.custom.currentSite}"/>
+
 		<div class="international-links-inner">
 			<div class="international-rapala-logo">
 				<a href="#" class="logo"></a>
 			</div>
-			<div class="rapala-top-block rapala-shop-products">
-				<div class="rapala-top-block-title">
-					<p>${Resource.msg('global.eu.international.countrieslist','locale',null)}</p>
-				</div>
-				<isscript>
-					var intlHelper = require("*/cartridge/scripts/util/UtilityHelpers");
-					var urlHelper = require('*/cartridge/scripts/util/Url');
-					var currentSite = intlHelper.getBrandID();
-				 </isscript>
-				<div class="rapala-middle-block rapala-middle-block-left">
-				<isif condition="${currentSite['allowedregion']['ca']}"> 
-					<p><a class="link-ca" href="https://rapala.ca/"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.ca','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-				</isif>
-				<isif condition="${currentSite['allowedregion']['eu']}">
-					<p><a class="link-eu" href="${urlHelper.getCurrentInSession(request, 'rapalaEU', 'en_EC', 'Home-Show')}&id=${currentSite['brandid']}"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.eu','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-				</isif>
-				<isif condition="${currentSite['allowedregion']['us']}">
-					<p><a class="link-us" href="${urlHelper.getCurrentInSession(request, 'rapala', 'default', 'Home-Show')}&id=${currentSite['brandid']}"><span class="rapala-iternational-flag"></span><span class="rapala-iternational-text">${Resource.msg('global.eu.international.us','locale',null)}</span><span class="rapala-iternational-cart"></span></a></p>
-				</isif>
-				</div>
-			</div>
 
-			<div class="rapala-top-block explore-rapala-products">
+			<div class="distrobutors-countries rapala-top-block explore-rapala-products">
 				<div class="rapala-top-block-title">
 					<p>${Resource.msg('global.eu.international.exploreproductslink','locale',null)}</p>
 				</div>
