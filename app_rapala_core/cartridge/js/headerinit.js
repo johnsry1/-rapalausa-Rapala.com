@@ -564,16 +564,32 @@ var headerEvents = {
     },
     userTimeout: function() {
         if ($('.loggeduser').length) {
-            $(document).click(function(){
-                if (typeof timeOutObj != 'undefined') {
-                    clearTimeout(timeOutObj);
-                }
 
-                var timeOutObj = setTimeout(function(){ 
-                    localStorage.clear();
-                    window.location = '/';
-                }, 8000);   //will expire after twenty minutes
+            var timer = this;
+            this.timeAllowed = 200000;
+
+            this.timeOutObj = function() { 
+                return (window.setTimeout(function() {
+                    dialog.open({
+                        html: 'This is a Custom Dialog Box...',
+                        options: {
+                            height: 600
+                        }
+                    });
+                }, this.timeAllowed));
+            };
+
+            this.timer = timer.timeOutObj();
+
+            this.clear = function(ref) { 
+                clearTimeout(ref.timer); 
+                ref.timeOutObj(); 
+            };
+
+            $(document).click(function(){
+                timer.clear(timer, [timer])
             });
+
         }
     }
 };
