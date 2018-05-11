@@ -45,7 +45,7 @@
 			}];
 		}
 	</isscript>
-
+<iscomment>
 		<span class="change-regionnew">
 			<isif condition="${session.custom.currentSite == 'iceforce'}">
 				<a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
@@ -56,7 +56,7 @@
 					<img src="${URLUtils.staticURL('/images/flag.png')}" alt="${Resource.msg('global.changefooter','locale',null)}"/>
 				</a>
 			</iselse>
-			</isif>	
+			</isif>
 			<div class="domainswitch-header">
 				<div class="top_arrow"></div>
 				<ul>
@@ -64,7 +64,7 @@
 						<isif condition="${session.custom.currentSite == 'iceforce'}">
 							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
 						<iselse>
-							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>	
+							<li><a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"><isprint value="${Resource.msg('global.changefooter','locale',null)}"/></a></li>
 						</isif>
 					</isif>
 					<isif condition="${session.custom.currentSite == 'iceforce'}" >
@@ -75,7 +75,8 @@
 		        </ul>
 		     </div>
 		</span>
-		
+	</iscomment>
+
 		<div id="user">
 			<isif condition="${pdict.CurrentCustomer.registered}">
 				<span class="loggeduser">
@@ -90,13 +91,13 @@
 			 		</isif>
 			      	  <span class="username"><isprint value="${pdict.CurrentCustomer.profile.firstName}"/></span></a>
 			        </isif>
-		         
+
 			         <isif condition="${!pdict.CurrentCustomer.authenticated}">
 			          <span class="welcomebackmessage"><isprint value="${Resource.msg('headercustomerinfo.welcomeback','locale',null)}" /></span>
 			      	  <span class="unauthenticated"><a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName}" href="${URLUtils.https('Account-Show','LocationURL',pdict.LoactionURL)}" class="userlogin">
 			        	<isprint value="${pdict.CurrentCustomer.profile.firstName}"/></a></span>
 			         </isif>
-		
+
 			     </span>
 			<iselse>
 	        	<span class="guest-welcomemessage"><isprint value="${Resource.msg('headercustomerinfo.guestwelcome1','locale',null)}"/></span>
@@ -128,10 +129,10 @@
 					    <li><a href="${URLUtils.https('Address-List')}"><isprint value="${Resource.msg('global.AddressBook','locale',null)}"/></a></li>
 					    <li><a href="${URLUtils.https('PaymentInstruments-List')}"><isprint value="${Resource.msg('global.paymentsettings','locale',null)}"/></a></li>
 					    <li class="logsout"><a href="${URLUtils.https('Login-Logout')}"><isprint value="${Resource.msg('global.SignOut','locale',null)}"/></a></li>
-					</ul>	
+					</ul>
 				</isif>
 			</div>
-			<isif condition="${pdict.CurrentCustomer.registered}"><div class="headermask"></div></isif> 
+			<isif condition="${pdict.CurrentCustomer.registered}"><div class="headermask"></div></isif>
 		</div>
 		<a href="javascript:void(0);"class="magnifier-icon mobile-view">
 			<span>search icon</span>
@@ -177,7 +178,7 @@
 			         <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">
 			        <li class="dividers pipe first">&nbsp;|</li></isif>
 		        <li class="ui-email">
-			       <isif condition="${pdict.CurrentCustomer.authenticated}"> 
+			       <isif condition="${pdict.CurrentCustomer.authenticated}">
 						<a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
 					<iselse/>
 					  <a href="${URLUtils.https('Page-Show','cid','email-preference-center')}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
