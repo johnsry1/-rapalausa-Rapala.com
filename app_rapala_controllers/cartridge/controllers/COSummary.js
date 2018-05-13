@@ -65,31 +65,7 @@ function submit() {
     if (placeOrderResult.error) {
         var cart = Cart.get();
         var COBilling = app.getController('COBilling');
-        
-        /*var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart.object);
-        
-        app.getView({
-            Basket: cart.object,
-            PlaceOrderError : placeOrderResult.error,
-            prodNetPrice : priceVals[0],
-            surcharge : priceVals[1],
-            ContinueURL: URLUtils.https('COBilling-Billing')
-        }).render('checkout/billing/billing');*/
-        
-        //if (!COBilling.ValidatePayment(cart)) {
             COBilling.ReturnToBIlling(placeOrderResult.error);
-            //return;
-        /*} else {
-
-            Transaction.wrap(function () {
-                cart.calculate();
-            });
-
-            app.getView({
-                Basket: cart.object,
-                PlaceOrderError: placeOrderResult.PlaceOrderError
-            }).render('checkout/summary/summary');
-        }*/
     } else if (placeOrderResult.order_created) {
         showConfirmation(placeOrderResult.Order);
     }

@@ -192,65 +192,69 @@ function start() {
  * JSON object containing error information, or the order and/or order creation information.
  */
 function submitImpl(order) {
-	var customer = Customer.get().object;
-    var orderPlacementStatus = Transaction.wrap(function () {
-        if (OrderMgr.placeOrder(order) === Status.ERROR) {
-            OrderMgr.failOrder(order);
-            return false;
-        }
-
-        order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
-
-        return true;
-    });
-
-    if (orderPlacementStatus === Status.ERROR) {
-        return {error: true};
-    }
-
-    // Creates purchased gift certificates with this order.
-    if (!createGiftCertificates(order)) {
-        OrderMgr.failOrder(order);
-        return {error: true};
-    }
-
-    // Send order confirmation and clear used forms within the checkout process.
-    Email.get('mail/orderconfirmation', order.getCustomerEmail())
-    	.setFrom("noreply@rapala.com")
-        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' (' + order.getOrderNo()).toString() +') ')
-        .send({
-            Order: order
-        });
-
-    // Mark order as EXPORT_STATUS_READY.
-    Transaction.wrap(function () {
-        order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
-        order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
-        
-        //update customer allotment amount
-        if(customer.authenticated){
-        	require('app_rapala_core/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
-	    	if('iceforce' != session.custom.currentSite && session.custom.isProStaffAllotmentused){
-	    		require('app_rapala_core/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
-	    	}
-	    } else {
-	    	var randomnum = new dw.crypto.SecureRandom();
-	    	var customerNum = randomnum.nextInt(99999999);
-	    	customerNum = '9'+(customerNum);
-	    	order.setCustomerNo(customerNum);
+	try{
+		var customer = Customer.get().object;
+	    var orderPlacementStatus = Transaction.wrap(function () {
+	        if (OrderMgr.placeOrder(order) === Status.ERROR) {
+	            OrderMgr.failOrder(order);
+	            return false;
+	        }
+	
+	        order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
+	
+	        return true;
+	    });
+	
+	    if (orderPlacementStatus === Status.ERROR) {
+	        return {error: true};
 	    }
-    });
-    ltkSendOrder.Start(order);
-    ltkSendOrder.Send();
-    // Clears all forms used in the checkout process.
-    session.forms.singleshipping.clearFormElement();
-    session.forms.multishipping.clearFormElement();
-    session.forms.billing.clearFormElement();
-
-    return {
-        Order: order,
-        order_created: true
-    };
+	
+	    // Creates purchased gift certificates with this order.
+	    if (!createGiftCertificates(order)) {
+	        OrderMgr.failOrder(order);
+	        return {error: true};
+	    }
+	
+	    // Send order confirmation and clear used forms within the checkout process.
+	    Email.get('mail/orderconfirmation', order.getCustomerEmail())
+	    	.setFrom("noreply@rapala.com")
+	        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' (' + order.getOrderNo()).toString() +') ')
+	        .send({
+	            Order: order
+	        });
+	
+	    // Mark order as EXPORT_STATUS_READY.
+	    Transaction.wrap(function () {
+	        order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
+	        order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
+	        
+	        //update customer allotment amount
+	        if(customer.authenticated){
+	        	require('app_rapala_core/cartridge/scripts/checkout/SetCustomerGroupsToOrder.ds').setCustomergrp(customer, order);
+		    	if('iceforce' != session.custom.currentSite && session.custom.isProStaffAllotmentused){
+		    		require('app_rapala_core/cartridge/scripts/prostaff/UpdateProStaffDetails.ds').updateAllotmentDetails(customer,order);
+		    	}
+		    } else {
+		    	var randomnum = new dw.crypto.SecureRandom();
+		    	var customerNum = randomnum.nextInt(99999999);
+		    	customerNum = '9'+(customerNum);
+		    	order.setCustomerNo(customerNum);
+		    }
+	    });
+	    ltkSendOrder.Start(order);
+	    ltkSendOrder.Send();
+	    // Clears all forms used in the checkout process.
+	    session.forms.singleshipping.clearFormElement();
+	    session.forms.multishipping.clearFormElement();
+	    session.forms.billing.clearFormElement();
+	
+	    return {
+	        Order: order,
+	        order_created: true
+	    };
+	}catch(e){
+    	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
+    }
 }
 
 /**
