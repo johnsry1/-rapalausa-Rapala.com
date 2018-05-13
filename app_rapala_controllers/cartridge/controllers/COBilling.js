@@ -629,7 +629,6 @@ function billing() {
                 	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
                 }
                 // A successful billing page will jump to the next checkout step.
-                //app.getController('COSummary').Start();
                 app.getController('COSummary').Submit();
                 return;
             }
