@@ -62,12 +62,14 @@ function submit() {
     // COPlaceOrder returns a JSON object with an order_created key and a boolean value if the order was created successfully.
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
-    if (placeOrderResult.error) {
-        var cart = Cart.get();
-        var COBilling = app.getController('COBilling');
-            COBilling.ReturnToBIlling(placeOrderResult.error);
-    } else if (placeOrderResult.order_created) {
+    if (('Order' in placeOrderResult) && ('order_created' in placeOrderResult && placeOrderResult.order_created)) {
         showConfirmation(placeOrderResult.Order);
+    } else if('error' in placeOrderResult && placeOrderResult.error){
+    	 var cart = Cart.get();
+         var COBilling = app.getController('COBilling');
+         COBilling.ReturnToBIlling(placeOrderResult.error);
+    } else {
+    	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: could not send confirmation email');
     }
 }
 
@@ -78,28 +80,32 @@ function submit() {
  * account creation.
  */
 function showConfirmation(order) {
-    if (!customer.authenticated) {
-        // Initializes the account creation form for guest checkouts by populating the first and last name with the
-        // used billing address.
-        var customerForm = app.getForm('profile.customer');
-        customerForm.setValue('firstname', order.billingAddress.firstName);
-        customerForm.setValue('lastname', order.billingAddress.lastName);
-        customerForm.setValue('email', order.customerEmail);
+	try{
+	    if (!customer.authenticated) {
+	        // Initializes the account creation form for guest checkouts by populating the first and last name with the
+	        // used billing address.
+	        var customerForm = app.getForm('profile.customer');
+	        customerForm.setValue('firstname', order.billingAddress.firstName);
+	        customerForm.setValue('lastname', order.billingAddress.lastName);
+	        customerForm.setValue('email', order.customerEmail);
+	    }
+	
+	    app.getForm('profile.login.passwordconfirm').clear();
+	    app.getForm('profile.login.password').clear();
+	
+	    var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
+	    
+	    var pageMeta = require('~/cartridge/scripts/meta');
+	    pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
+	    app.getView({
+	        Order: order,
+	        prodNetPrice : priceVals[0],
+	        surcharge : priceVals[1],
+	        ContinueURL: URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
+	    }).render('checkout/confirmation/confirmation');
+	}catch(e){
+    	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
     }
-
-    app.getForm('profile.login.passwordconfirm').clear();
-    app.getForm('profile.login.password').clear();
-
-    var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
-    
-    var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
-    app.getView({
-        Order: order,
-        prodNetPrice : priceVals[0],
-        surcharge : priceVals[1],
-        ContinueURL: URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
-    }).render('checkout/confirmation/confirmation');
 }
 
 /*
