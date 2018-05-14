@@ -11,6 +11,10 @@
      </isif>
 </isloop>
 
+<isscript>
+    var currentLocale : String = pdict.CurrentRequest.getLocale();
+</isscript>
+
 <isloop items="${position.entrySet()}" var="positionEntry" status="status">
     <div class="mega_subcategory">
         <isset name="secondLevel" value="${dw.catalog.CatalogMgr.getCategory(positionEntry.value)}" scope="page" />
@@ -29,7 +33,7 @@
                 </a>
             <iselse>
                 <isif condition="${(secondLevel.onlineProducts.size()>0) || (secondLevel.onlineSubCategories.size()>0)}">
-                    <a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${pdict.currentRequest.locale}">
+                    <a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${currentLocale}">
                         <isprint value="${secondLevel.getDisplayName()}"/>
                     </a>
                 </isif>
