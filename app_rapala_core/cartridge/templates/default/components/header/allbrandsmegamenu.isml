@@ -1,6 +1,7 @@
 	<isset name="columnNo" value="${1}" scope="page" />
 	<isscript>
 		var position : dw.util.SortedMap = new dw.util.SortedMap();
+        var currentLocale : String = pdict.CurrentRequest.getLocale();
 	</isscript>
 	<isloop items="${getSubcategoriesInMenuForCategory(topCat)}" var="secondLevel" status="status">
 		<isif condition="${!empty(secondLevel.custom.megaNavPosition)}">
@@ -21,7 +22,7 @@
 						</a>
 				<iselse>
 					<isif condition="${(secondLevel.onlineProducts.size()>0) || (secondLevel.onlineSubCategories.size()>0)}">
-						<a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${secondLevel.getDisplayName()}">
+						<a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${currentLocale}">
 						<isprint value="${secondLevel.getDisplayName()}"/>
 						</a>
 					</isif>
