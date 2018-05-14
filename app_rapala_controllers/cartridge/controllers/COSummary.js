@@ -62,7 +62,7 @@ function submit() {
     // COPlaceOrder returns a JSON object with an order_created key and a boolean value if the order was created successfully.
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
-    } if (('Order' in placeOrderResult) && ('order_created' in placeOrderResult && placeOrderResult.order_created)) {
+    if (('Order' in placeOrderResult) && ('order_created' in placeOrderResult && placeOrderResult.order_created)) {
         showConfirmation(placeOrderResult.Order);
     } else if('error' in placeOrderResult && placeOrderResult.error){
     	var cart = Cart.get();
