@@ -564,32 +564,33 @@ var headerEvents = {
     },
     userTimeout: function() {
         if ($('.loggeduser').length) {
-
-            var timer = this;
-            this.timeAllowed = 200000;
-
-            this.timeOutObj = function() { 
-                return (window.setTimeout(function() {
-                    dialog.open({
-                        html: 'This is a Custom Dialog Box...',
-                        options: {
-                            height: 600
-                        }
-                    });
-                }, this.timeAllowed));
-            };
-
-            this.timer = timer.timeOutObj();
-
-            this.clear = function(ref) { 
-                clearTimeout(ref.timer); 
-                ref.timeOutObj(); 
-            };
-
+            var timeOutObj;
             $(document).click(function(){
-                timer.clear(timer, [timer])
+                if (typeof timeOutObj != undefined) {
+                    clearTimeout(timeOutObj);
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionWarning,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 120000);
+                    
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionExpired,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 180000);
+                }
             });
-
         }
     }
 };
