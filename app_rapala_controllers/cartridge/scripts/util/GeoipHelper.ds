@@ -18,12 +18,20 @@ exports.geolocationRestrictions = function() {
         	var json = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirects");
             var redirects = JSON.parse(json);
             var country = geolocation.countryCode;
+            var hostWhitelist = redirects["hostWhitelist"];
+            var ignoreUserAgents = redirects["userAgent"];
+            var userAgent = request.httpUserAgent;
+            var host = request.httpHost;
             var redirectType = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirectType").value;
-            if(redirectType === 'request' && (path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)){
+            if(redirectType === 'request' && (!empty(redirects[country]) && !empty(redirects[country].siteID) && path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)){
             	geoIPRedirection(geolocation, redirects, logMessage);
             }
             if(redirectType === 'session'){
             	geoIPRedirection(geolocation, redirects, logMessage);
+            }
+            if(geolocation.countryCode !== 'US' && !empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip" && hostWhitelist != 'undefined' && hostWhitelist != '' && hostWhitelist != null && hostWhitelist.indexOf(host) > -1 && session.clickStream.clicks.length == 1){
+            	var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, 'rapala', 'en_US', 'Home-Show');
+                response.redirect(url);
             }
             
         } else {
