@@ -1,11 +1,12 @@
 <!--- TEMPLATENAME: htmlheadseo.isml --->
 
+<isset name="locales" value="${new Array(dw.system.Site.getCurrent().getCustomPreferenceValue('hrefLangSEO'))}" scope="page"/>
+
 <isscript>
     var countries = require('app_rapala_core/cartridge/countries');
     var currentLocale : String = pdict.CurrentRequest.getLocale();
-    var locs = ['en_US', 'en_CA', 'en_GB', 'en_IE', 'en_DE', 'de_DE', 'en_FR', 'fr_FR', 'en_SE', 'sv_SE', 'en_NL', 'nl_NL', 'en_ES', 'es_ES', 'en_IT', 'it_IT', 'en_BE', 'nl_BE', 'fr_BE'];
     var localeDomainMap : dw.util.HashMap = new dw.util.HashMap();
-
+    var path = '';
     for each (var country in countries) {
         for each (var countryLocale in country.locales) {
             localeDomainMap[countryLocale] = country.domain;
@@ -13,7 +14,8 @@
     }
 </isscript>
 
-<isloop iterator="${locs}" alias="loc" status="loopstatus">
+
+<isloop iterator="${locales}" alias="loc" status="loopstatus">
     <isscript>
         var locale = '';
         if (loc == 'sv_SE' || loc == 'de_DE' || loc == 'fr_FR' || loc == 'nl_NL' || loc == 'es_ES' || loc == 'it_IT' || loc == 'nl_BE' || loc == 'fr_BE') {
@@ -25,12 +27,12 @@
         var query = '';
         if (loc == 'en_US' || loc == 'en_CA') {
             loc = '';
-            var path = request.httpHeaders['x-is-path_info'].replace(currentLocale+"/",loc);
+            path = request.httpHeaders['x-is-path_info'].replace(currentLocale+"/",loc);
         } else {
             if (currentLocale == 'en_US' || currentLocale == 'en_CA') {
                 var path = '/' + loc + request.httpHeaders['x-is-path_info'];
             } else {
-                var path = request.httpHeaders['x-is-path_info'].replace(currentLocale,loc);
+                path = request.httpHeaders['x-is-path_info'].replace(currentLocale,loc);
             }
         }
     </isscript>
