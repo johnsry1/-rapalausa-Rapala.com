@@ -11,6 +11,7 @@
 var Status = require('dw/system/Status');
 
 var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
+var app = require('*/cartridge/scripts/app');
 /**
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
