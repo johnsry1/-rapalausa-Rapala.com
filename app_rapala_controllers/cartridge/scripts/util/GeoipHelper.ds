@@ -30,7 +30,7 @@ exports.geolocationRestrictions = function() {
             	geoIPRedirection(geolocation, redirects, logMessage);
             }
             if(geolocation.countryCode !== 'US' && !empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip" && hostWhitelist != 'undefined' && hostWhitelist != '' && hostWhitelist != null && hostWhitelist.indexOf(host) > -1 && session.clickStream.clicks.length == 1){
-            	var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, 'rapala', 'en_US', 'Home-Show');
+            	var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, 'rapala', 'default', 'Home-Show');
                 response.redirect(url);
             }
             
