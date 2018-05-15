@@ -1,5 +1,5 @@
 /**
-*	Helper file to enforce the GeoIP redirection based on the geolocation and the country code. 
+*	Controllers to enforce the GeoIP redirection based on the geolocation and the country code. 
 *	The redirection JSON has been configured in the site preference.
 *
 */
@@ -8,7 +8,7 @@ var Status = require('dw/system/Status');
 var RapalaHelper = require('*/cartridge/scripts/util/RapalaHelper');
 
 
-exports.geolocationRestrictions = function() {
+function geolocationRestrictions() {
     if (dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects')) {
         var logMessage = '';
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.current.ID + '\n';
@@ -131,7 +131,7 @@ function geoIPRedirection(geolocation , redirects, logMessage){
             RapalaHelper.getLogger('geoip-country-redirect').error(RapalaHelper.prepareLogMessage(e));
         }
 }
-exports.geoIpDefaultCurrency = function() {
+function geoIpDefaultCurrency() {
     var logMessage = '';
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
@@ -172,3 +172,7 @@ exports.geoIpDefaultCurrency = function() {
         }
     }
 }
+
+
+exports.geolocationRestrictions = geolocationRestrictions;
+exports.geoIpDefaultCurrency = geoIpDefaultCurrency;
