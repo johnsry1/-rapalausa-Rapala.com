@@ -23,7 +23,7 @@ function geolocationRestrictions() {
             var userAgent = request.httpUserAgent;
             var host = request.httpHost;
             var redirectType = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirectType").value;
-            if(redirectType === 'request' && (!empty(redirects[country]) && !empty(redirects[country].siteID) && path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)){
+            if(redirectType === 'request' && (!empty(redirects[country]) && ( !empty(redirects[country]).url || (!empty(redirects[country].siteID) && path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)))){
             	geoIPRedirection(geolocation, redirects, logMessage);
             }
             if(redirectType === 'session'){
