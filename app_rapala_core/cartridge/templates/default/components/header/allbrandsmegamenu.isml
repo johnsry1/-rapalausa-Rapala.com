@@ -1,7 +1,6 @@
 	<isset name="columnNo" value="${1}" scope="page" />
 	<isscript>
 		var position : dw.util.SortedMap = new dw.util.SortedMap();
-        var currentLocale : String = pdict.CurrentRequest.getLocale();
 	</isscript>
 	<isloop items="${getSubcategoriesInMenuForCategory(topCat)}" var="secondLevel" status="status">
 		<isif condition="${!empty(secondLevel.custom.megaNavPosition)}">
@@ -17,12 +16,13 @@
 				<isset name="columnNo" value="${positionEntry.key.substr(0,positionEntry.key.length-1)}" scope="page" />
 				<isif condition="${('redirectingToPdp' in secondLevel.custom) && secondLevel.custom.redirectingToPdp.valueOf()}">
 						<isset name="brand" value="${secondLevel.getParent()}" scope="page" />			
-						<a href="${URLUtils.https('Product-Show', 'pid', secondLevel.custom.redirectToPdp,'brandname',brand.ID)}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">saeffw
+						<a href="${URLUtils.https('Product-Show', 'pid', secondLevel.custom.redirectToPdp,'brandname',brand.ID)}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">
 						<isprint value="${secondLevel.getDisplayName()}"/>
 						</a>
 				<iselse>
 					<isif condition="${(secondLevel.onlineProducts.size()>0) || (secondLevel.onlineSubCategories.size()>0)}">
-						<a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}" hreflang="${currentLocale}">
+					    <isinclude template="components/hreflangseo"/>
+						<a href="${URLUtils.https('Search-Show', 'cgid', secondLevel.getID())}" class="level-1 column-${columnNo} ${secondLevel.getDisplayName()=="Sale"?'sale':''}">
 						<isprint value="${secondLevel.getDisplayName()}"/>
 						</a>
 					</isif>

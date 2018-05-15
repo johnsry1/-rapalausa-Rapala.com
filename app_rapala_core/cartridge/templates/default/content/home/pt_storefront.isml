@@ -19,38 +19,36 @@
 	<iscomment>This page must be cachable. It inherits the caching attributes by the decorated template.</iscomment>
 
 	<isinclude template="components/header/htmlhead"/>
+	<isinclude template="components/hreflangseo"/>
 	<isinclude template="content/home/pt_storefront_UI"/>
-	<isscript>
-        var currentLocale : String = pdict.CurrentRequest.getLocale();
-    </isscript>
 
 	<iscomment>Setting up a canonical link to the homepage</iscomment>
 	<isif condition="${'rapala' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.rapala.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.rapala.com/" />
 	<iselseif condition="${'sufix' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.sufix.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.sufix.com/" />
 	<iselseif condition="${'triggerx' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.triggerx.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.triggerx.com/" />
 	<iselseif condition="${'storm' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.stormlures.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.stormlures.com/" />
 	<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.luhrjensen.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.luhrjensen.com/" />
 	<iselseif condition="${'strikemaster' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.strikemaster.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.strikemaster.com/" />
 	<iselseif condition="${'iceforce' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.iceforce.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.iceforce.com/" />
 	<iselseif condition="${'vmc' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.vmchooks.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.vmchooks.com/" />
 	<iselseif condition="${'bluefox' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.bluefox.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.bluefox.com/" />
 	<iselseif condition="${'terminator' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.terminatorlures.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.terminatorlures.com/" />
 	<iselseif condition="${'marcum' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.marcumtech.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.marcumtech.com/" />
 	<iselseif condition="${'williamson' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.williamsonlures.com/" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="https://www.williamsonlures.com/" />
 	<iselseif condition="${'otter' == session.custom.currentSite}">
-		<link rel="canonical" href="https://www.otteroutdoors.com/" hreflang="${currentLocale}"/>	
+		<link rel="canonical" href="https://www.otteroutdoors.com/" />	
 	</isif>
 	<iscomment>Add page specific header information here.</iscomment>
 	

@@ -21,11 +21,9 @@
 
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="search/pt_categorylanding_UI"/>
-    <isscript>
-        var currentLocale : String = pdict.CurrentRequest.getLocale();
-    </isscript>
+    <isinclude template="components/hreflangseo"/>
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
-		<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" hreflang="${currentLocale}"/>
+		<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}"/>
 	</isif>
 
 	<iscomment>Add  template-specific header information here.</iscomment>
