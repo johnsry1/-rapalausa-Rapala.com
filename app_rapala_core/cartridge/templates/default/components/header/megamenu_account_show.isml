@@ -1,15 +1,13 @@
-<isif condition="${dw.system.Site.getCurrent().name !== 'RapalaEU'}">
-	<div class="menulist mobile-view">
-		<span class="sub-category-section-1">
-			<isif condition="${pdict.CurrentCustomer.authenticated}">
-				<a class="level-1" href="${URLUtils.https('Login-Logout')}">
-					<isprint value="${String.toUpperCase(Resource.msg('global.logout','locale',null))}"/>
-				</a>
-			<iselse>
-				<a class="level-1" href="${URLUtils.https('Login-Show')}">
-					<isprint value="${String.toUpperCase(Resource.msg('global.login','locale',null))}"/>
-				</a>
-			</isif>
-	 	</span>
-	</div>
-</isif>
+<div class="menulist mobile-view">
+	<span class="sub-category-section-1">
+		<isif condition="${pdict.CurrentCustomer.authenticated}">
+			<a class="level-1" href="${URLUtils.https('Login-Logout')}">
+				<isprint value="${String.toUpperCase(Resource.msg('global.logout','locale',null))}"/>
+			</a>
+		<iselse>
+			<a class="level-1" href="${URLUtils.https('Login-Show')}">
+				<isprint value="${String.toUpperCase(Resource.msg('global.login','locale',null))}"/>
+			</a>
+		</isif>
+ 	</span>
+</div>
