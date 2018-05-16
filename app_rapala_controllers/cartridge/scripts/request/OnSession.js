@@ -10,7 +10,8 @@
 
 var Status = require('dw/system/Status');
 
-var GeoipHelper = require('*/cartridge/scripts/util/GeoipHelper.ds');
+var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
+var app = require('*/cartridge/scripts/app');
 /**
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
@@ -45,8 +46,8 @@ function getDeviceType() {
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
-    	GeoipHelper.geolocationRestrictions();
+		app.getController('GeoipRedirects').geolocationRestrictions();
     }
-    GeoipHelper.geoIpDefaultCurrency();
+    app.getController('GeoipRedirects').geoIpDefaultCurrency();
     return new Status(Status.OK);
 };
