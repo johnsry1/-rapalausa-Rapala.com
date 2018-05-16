@@ -1,5 +1,5 @@
 /**
-*	Helper file to enforce the GeoIP redirection based on the geolocation and the country code. 
+*	Controllers to enforce the GeoIP redirection based on the geolocation and the country code. 
 *	The redirection JSON has been configured in the site preference.
 *
 */
@@ -8,7 +8,7 @@ var Status = require('dw/system/Status');
 var RapalaHelper = require('*/cartridge/scripts/util/RapalaHelper');
 
 
-exports.geolocationRestrictions = function() {
+function geolocationRestrictions() {
     if (dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects')) {
         var logMessage = '';
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.current.ID + '\n';
@@ -18,12 +18,20 @@ exports.geolocationRestrictions = function() {
         	var json = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirects");
             var redirects = JSON.parse(json);
             var country = geolocation.countryCode;
+            var hostWhitelist = redirects["hostWhitelist"];
+            var ignoreUserAgents = redirects["userAgent"];
+            var userAgent = request.httpUserAgent;
+            var host = request.httpHost;
             var redirectType = dw.system.Site.current.getCustomPreferenceValue("GeoIPRedirectType").value;
-            if(redirectType === 'request' && (path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)){
+            if(redirectType === 'request' && (!empty(redirects[country]) && ( !empty(redirects[country]).url || (!empty(redirects[country].siteID) && path.indexOf('Sites-' +redirects[country].siteID + '-Site') < 0)))){
             	geoIPRedirection(geolocation, redirects, logMessage);
             }
             if(redirectType === 'session'){
             	geoIPRedirection(geolocation, redirects, logMessage);
+            }
+            if(geolocation.countryCode !== 'US' && !empty(ignoreUserAgents) && userAgent in ignoreUserAgents && ignoreUserAgents[userAgent] == "skip" && hostWhitelist != 'undefined' && hostWhitelist != '' && hostWhitelist != null && hostWhitelist.indexOf(host) > -1 && session.clickStream.clicks.length == 1){
+            	var url = require('*/cartridge/scripts/util/Url').getCurrentInSession(request, 'rapala', 'default', 'Home-Show');
+                response.redirect(url);
             }
             
         } else {
@@ -123,7 +131,7 @@ function geoIPRedirection(geolocation , redirects, logMessage){
             RapalaHelper.getLogger('geoip-country-redirect').error(RapalaHelper.prepareLogMessage(e));
         }
 }
-exports.geoIpDefaultCurrency = function() {
+function geoIpDefaultCurrency() {
     var logMessage = '';
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableCountryDefaultCurrency')) {
         logMessage += 'Requested IP address: ' + request.httpRemoteAddress + ', site: ' + dw.system.Site.getCurrent().ID + '\n';
@@ -164,3 +172,7 @@ exports.geoIpDefaultCurrency = function() {
         }
     }
 }
+
+
+exports.geolocationRestrictions = geolocationRestrictions;
+exports.geoIpDefaultCurrency = geoIpDefaultCurrency;
