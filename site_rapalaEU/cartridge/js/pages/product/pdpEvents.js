@@ -1,9 +1,9 @@
 'use strict';
 var util = require('../../util'),
     dialog = require('../../dialog'),
-    //tooltip = require('../../tooltip'),
-    //uievents = require('../../uievents'),
-    //quickview = require('../../quickview'),
+//tooltip = require('../../tooltip'),
+//uievents = require('../../uievents'),
+//quickview = require('../../quickview'),
     addToCart = require('./addToCart'),
     progress = require('../../progress'),
     imagesLoaded = require('imagesloaded'),
@@ -78,8 +78,6 @@ var product = function (response) {
         });
 
     };
-
-
     // returns the aggregate available to sell value
     // from all variants
     var getATS = function (variants) {
@@ -114,7 +112,6 @@ var product = function (response) {
     // helper function to bind product options drop downs event handlers
     // Intializes the product.selectedOptions object with the currently selected options
     // it also shows the computed/updated price
-
     var getOptionsDiv = function (thisProduct) {
 
         if (model.isOption) {
@@ -226,63 +223,19 @@ var product = function (response) {
                 // disable a2c button
                 addToCartBtn.prop('disabled', true);
 
+                // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
+                // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
+                /*eslint-disable */
+                var event = jQuery.Event('AddToCart');
+                /*eslint-enable */
+                event.selectedOptions = thisProduct.selectedOptions;
 
-                if ($('#sourceFrom').length > 0 && $('#sourceFrom').val() == 'wishlist') {
-                    var selectedOptions = jQuery.extend({'wishlist': true}, {}, thisProduct.selectedOptions);
-
-                    if (model.master || model.variant) {
-                        if (thisProduct.selectedVar != null) {
-                            selectedOptions.pid = thisProduct.selectedVar.id;
-                        } else {
-                            return false; // do not allow master product to be added to gift registry/wishlist
-                        }
-                    } else {
-                        selectedOptions.pid = thisProduct.pid;
-                    }
-
-                    var tempUrl = this.href;
-                    tempUrl = Urls.wishlistadd;
-
-                    if (!(tempUrl.indexOf('?') > 0)) {
-                        tempUrl = tempUrl + '?';
-                    } else {
-                        tempUrl = tempUrl + '&';
-                    }
-                    // serialize the name/value into url query string and append it to the url, make request
-                    //var url = tempUrl + jQuery.param(selectedOptions);
-                    window.location = tempUrl + jQuery.param(selectedOptions);
+                if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
+                    addToCart.add('', thisProduct.selectedOptions, function () {
+                        addToCartBtn.prop('disabled', false);
+                    });
                 } else {
-                    if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
-                        var productObject = $.parseJSON($(this).attr('data-gtmdata'));
-                        var price = $(this).attr('data-gtmpriceinfo') != undefined ? $.parseJSON($(this).attr('data-gtmpriceinfo')) : undefined;
-                        var quantityObj = {'quantity': $(this).closest('div').find('[name=Quantity]').val()},
-                            obj = {
-                                'event': 'addToCart',
-                                'ecommerce': {
-                                    'add': {
-                                        'products': []
-                                    }
-                                }
-                            };
-                        obj.ecommerce.add.products.push($.extend(productObject,quantityObj));
-                        if (price != undefined && price > 0) {
-                            obj.ecommerce.add.products[0].price = price;
-                        }
-                        dataLayer.push(obj);
-                    }
-
-                    // find if there is a handler bound to AddToCart event e.g. cart -> edit details or wishlist -> edit details etc.
-                    // then fire it otherewise call addToCart.add to add the selected product to the cart and show minicart
-                    var event = jQuery.Event('AddToCart');
-                    event.selectedOptions = thisProduct.selectedOptions;
-
-                    if (jQuery.event.global.AddToCart == undefined || jQuery.event.global.AddToCart == null) {
-                        addToCart.add('', thisProduct.selectedOptions, function () {
-                            addToCartBtn.prop('disabled', false);
-                        });
-                    } else {
-                        jQuery(document).trigger(event)
-                    }
+                    jQuery(document).trigger(event)
                 }
             }
             return false;
@@ -543,7 +496,7 @@ var product = function (response) {
                 avMessage = avMessage + '<span class=\'in-stock\'>' + $.validator.format(Resources['QTY_' + avStatus], ats) + '</span>';
             }
             // display backorder/preorder availability
-            avMessage = avMessage + '. ' + getInStockDateMsg(thisProduct);
+            avMessage = avMessage + getInStockDateMsg(thisProduct);
         } else if (val > inStockLevel && avStatus !== Constants.AVAIL_STATUS_NOT_AVAILABLE) {
 
             avMessage = '';
@@ -788,18 +741,36 @@ var product = function (response) {
                 }
             });
         },
+        triggerZoomClick : function () {
+            var timeOut = setTimeout(nextTtyNew, 500),
+                secondsCounter = 0,
+                flag = true;
+            function nextTtyNew() {
+                if (!flag){
+                    return false;
+                }
 
-        // selects review tab
-        readReviews: function () {
-            jQuery(this.containerId + ' #tabs').tabs('select', 'pdpReviewsTab');
+                clearTimeout(timeOut);
+                flag = false;
+                timeOut = setTimeout(nextTtyNew, 500);
+                if (secondsCounter >= 200){
+                    flag = false;
+                } else {
+                    if ($('body').find('.index0').parent().hasClass('mz-thumb')) {
+                        $('body').find('.index0').trigger('click');
+                        flag = false;
+                    } else {
+                        secondsCounter = secondsCounter + 1
+                        flag = true;
+                    }
+                }
+            }
         },
 
-        pdpMobileSlide: function() {
+        refreshZoom : function () {
             var timeOut = setTimeout(nextTry, 500),
                 secondsCounter = 0,
-                flag = true,
-                desktopItems = 4,
-                pdpOwlCarousel = $('.pdp-owl-customization');
+                flag = true;
             function nextTry() {
                 if (!flag){
                     return false;
@@ -808,49 +779,27 @@ var product = function (response) {
                 clearTimeout(timeOut);
                 flag = false;
                 timeOut = setTimeout(nextTry, 500);
-                if (secondsCounter >= 100){
+                if (secondsCounter >= 200){
                     flag = false;
                 } else {
                     if ($('.pdp-owl-customization .alternate-images').length > 0) {
-                        imagesLoaded('.pdp-owl-customization').on('done', function () {
-                            pdpOwlCarousel.owlCarousel({
-                                items: 1,
-                                slideBy: 1,
-                                margin: 10,
-                                navRewind: false,
-                                rewind: false,
-                                nav: true,
-                                dots: true,
-                                navigation: false,
-                                responsive: {
-                                    0: {
-                                        items: 1,
-                                        slideBy: 1
-                                    },
-                                    481: {
-                                        items: 3,
-                                        slideBy: 3
-                                    },
-                                    960: {
-                                        items: desktopItems,
-                                        slideBy: desktopItems
-                                    }
-                                }
-                            });
-                            $('body').on('click' , '.owl-dot', function(){
-                                var currentIndex = $('.owl-dot').index(this);
-                                $('body .productthumbnails .owl-item:eq(' + currentIndex +') .alternate-images img').trigger('click');
-                            });
+                        imagesLoaded('.pdp-owl-customization .owl-loaded').on('done', function () {
+                            MagicZoom.refresh();
                         });
-                        flag = false;
+                        flag = false
                     } else {
                         secondsCounter = secondsCounter + 1
                         flag = true;
                     }
                 }
-                return false;
             }
         },
+
+        // selects review tab
+        readReviews: function () {
+            jQuery(this.containerId + ' #tabs').tabs('select', 'pdpReviewsTab');
+        },
+
         // shows product images and thumbnails
         // @param selectedVal - currently selected variation attr val
         // @param vals - total available variation attr values
@@ -871,10 +820,12 @@ var product = function (response) {
                          */
                         var zoomimageurl = (thisVal.images.original.length > 0) ? thisVal.images.original[0].url : '';
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[i].url);
-                        jQuery('.main-image').attr('href', zoomimageurl);
-                        $('body').find('.main-image img').attr('src', zoomimageurl);
+                        jQuery('.MagicZoom').attr('href', zoomimageurl);
+                        $('body').find('.MagicZoom img').attr('src', zoomimageurl);
+                        MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
                         // jQuery(that.containerId+" .productimage").html("").append(jQuery("<img/>").attr("src", thisVal.images.large[0].url).attr("alt", thisVal.images.large[0].alt).attr("title", thisVal.images.large[0].title));
                     }
+
                     // make sure to show number of images based on the smallest of large or small as these have to have 1-1 correspondence.
                     var noOfImages = this.images.large.length >= this.images.small.length ? this.images.small.length : this.images.large.length;
 
@@ -900,13 +851,26 @@ var product = function (response) {
                                 $(this).closest('.owl-item').find('a.alternate-image').addClass('selected');
                                 var zoomimageurl = $(this).closest('.alternate-image').data('image');
                                 //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',thisVal.images.large[imageInd].url);
-                                $('body').find('.main-image').attr('href', zoomimageurl);
-                                $('body').find('.main-image img').attr('src', zoomimageurl);
+                                $('body').find('.MagicZoom').attr('href', zoomimageurl);
+                                $('body').find('.MagicZoom img').attr('src', zoomimageurl);
                                 MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
                                 MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
                                 //$("body").find('.product-image').trigger("click");
                             });
+                            $('.product-primary-image').css({
+                                height: $('.product-primary-image').height() + 'px',
+                                width: $('.product-primary-image').width() + 'px'
+                            });
+                            $(window).resize(function() {
+                                $('.product-primary-image').removeAttr('style');
+                                $('.product-primary-image').css({
+                                    height: $('.product-primary-image').height() + 'px',
+                                    width: $('.product-primary-image').width() + 'px'
+                                });
+                            });
                         });
+
+
                         jQuery(that.containerId + ' .productthumbnails:last .owl-item').first().find('img').click();
                         //var $images = jQuery(that.containerId+" .productthumbnails:last .owl-item img");
                         //var numOfRows = Math.ceil($images.size()/6);
@@ -923,7 +887,7 @@ var product = function (response) {
                                     navRewind: false,
                                     rewind: false,
                                     nav: true,
-                                    dots: false,
+                                    dots: true,
                                     navigation: false,
                                     responsive: {
                                         0: {
@@ -972,13 +936,37 @@ var product = function (response) {
                                 $('img.index0').parents('.owl-item').find('a.alternate-image').addClass('selected');
                             }
                         } else if ($(window).width() < 481) {
-                            that.pdpMobileSlide();
+                            pdpOwlCarousel.owlCarousel({
+                                items: 1,
+                                slideBy: 1,
+                                margin: 10,
+                                navRewind: false,
+                                rewind: false,
+                                nav: true,
+                                dots: true,
+                                navigation: false,
+                                responsive: {
+                                    0: {
+                                        items: 1,
+                                        slideBy: 1
+                                    },
+                                    481: {
+                                        items: 3,
+                                        slideBy: 3
+                                    },
+                                    960: {
+                                        items: desktopItems,
+                                        slideBy: desktopItems
+                                    }
+                                }
+                            });
                         }
                     }
                 }
             });
+            this.refreshZoom();
+            this.triggerZoomClick();
         },
-
 
         /**
          * Event handler when a variation attribute is selected/deselected.
@@ -1291,8 +1279,8 @@ var product = function (response) {
                     // load the fully qualified variation image
                     if (imageUrl != null) {
                         //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',imageUrl);
-                        jQuery('.main-image ').attr('href', zoomImageUrl);
-                        $('body').find('.main-image img').attr('src', zoomImageUrl);
+                        jQuery('.MagicZoom').attr('href', zoomImageUrl);
+                        $('body').find('.MagicZoom img').attr('src', zoomImageUrl);
                         MagicZoom.update('product-image', zoomImageUrl, zoomImageUrl);
                     }
 
@@ -1301,6 +1289,10 @@ var product = function (response) {
                     // enable add to cart button
                     this.enableA2CButton();
                     jQuery(this).trigger('AddtoCartEnabled');
+                    if ($('#Quantity').val() < 1) {
+                        $('addtocartbutton:last').prop('disabled', true);
+                        $('.addtocart').addClass('disabled');
+                    }
                 } else if (this.selectedVar.earlyBirdMessage != '') {
                     this.showItemNo();
                     //this.hideAvailability();
@@ -1407,11 +1399,6 @@ var product = function (response) {
                 }
 
             }
-
-            if (SitePreferences.GTM_ENABLED) {
-                $('#add-to-cart').attr('data-gtmpriceinfo', (standardPrice > salePrice && salePrice != 0 ? salePrice : standardPrice));
-            }
-
             var $price = jQuery(this.containerId + ' .productinfo .price:first');
             if (!$price.data('originalPrice')) {
                 $price.data('originalPrice', $price.html());
@@ -1476,8 +1463,8 @@ var product = function (response) {
             for (var i = 0; i < variants.length; i++) {
                 variant = variants[i];
                 if ((variant.attributes[attr.id] === attr.val) /*&&
-						//(variant.inStock || (variant.avStatus === app.constants.AVAIL_STATUS_BACKORDER && variant.ATS > 0) || (variant.avStatus === app.constants.AVAIL_STATUS_PREORDER && variant.ATS > 0))*/
-                ) {
+                 //(variant.inStock || (variant.avStatus === app.constants.AVAIL_STATUS_BACKORDER && variant.ATS > 0) || (variant.avStatus === app.constants.AVAIL_STATUS_PREORDER && variant.ATS > 0))*/
+                    ) {
                     foundVariants.push(variant);
                 }
             }
@@ -1647,9 +1634,9 @@ var product = function (response) {
                      * Event handler when a subproduct of a product set or a bundle is selected.
                      * disable the add to cart button
                      */
-                    function () {
-                        thisProduct.disableA2CButton();
-                    });
+                        function () {
+                            thisProduct.disableA2CButton();
+                        });
             });
 
             // see if have any sub-products and bind AddtoCartEnabled event
@@ -1659,48 +1646,48 @@ var product = function (response) {
                      * Event handler when a subproduct of a product set or a bundle is selected.
                      * Basically enable the add to cart button or do other  refresh if needed like price etc.
                      */
-                    function () {
-                        // enable Add to cart button if all the sub products have been selected
-                        // and show the updated price
-                        var enableAddToCart = true;
-                        var subProducts = thisProduct.subProducts;
-                        var price = new Number();
+                        function () {
+                            // enable Add to cart button if all the sub products have been selected
+                            // and show the updated price
+                            var enableAddToCart = true;
+                            var subProducts = thisProduct.subProducts;
+                            var price = new Number();
 
-                        for (var i = 0; i < subProducts.length; i++) {
-                            if (((subProducts[i].variant || subProducts[i].master) && subProducts[i].selectedVar == null) ||
-                                (!subProducts[i].bundled && (subProducts[i].selectedOptions.Quantity == undefined ||
-                                    subProducts[i].selectedOptions.Quantity <= 0))) {
-                                enableAddToCart = false;
-                                break;
-                            } else {
-                                if (subProducts[i].selectedVar != null) {
-                                    subProducts[i].selectedOptions.pid = subProducts[i].selectedVar.pid;
+                            for (var i = 0; i < subProducts.length; i++) {
+                                if (((subProducts[i].variant || subProducts[i].master) && subProducts[i].selectedVar == null) ||
+                                    (!subProducts[i].bundled && (subProducts[i].selectedOptions.Quantity == undefined ||
+                                        subProducts[i].selectedOptions.Quantity <= 0))) {
+                                    enableAddToCart = false;
+                                    break;
                                 } else {
-                                    subProducts[i].selectedOptions.pid = subProducts[i].pid;
-                                }
+                                    if (subProducts[i].selectedVar != null) {
+                                        subProducts[i].selectedOptions.pid = subProducts[i].selectedVar.pid;
+                                    } else {
+                                        subProducts[i].selectedOptions.pid = subProducts[i].pid;
+                                    }
 
-                                // Multiply the subproduct quantity-one price by the entered quantity.
-                                // Important note:  This value will be incorrect if subproduct uses
-                                // tiered pricing !!!!!
-                                var subproductQuantity = subProducts[i].selectedOptions.Quantity;
-                                if (subproductQuantity == undefined) {
-                                    subproductQuantity = 1;
+                                    // Multiply the subproduct quantity-one price by the entered quantity.
+                                    // Important note:  This value will be incorrect if subproduct uses
+                                    // tiered pricing !!!!!
+                                    var subproductQuantity = subProducts[i].selectedOptions.Quantity;
+                                    if (subproductQuantity == undefined) {
+                                        subproductQuantity = 1;
+                                    }
+                                    price += new Number(subproductQuantity * subProducts[i].getPrice());
                                 }
-                                price += new Number(subproductQuantity * subProducts[i].getPrice());
+                            }
+
+                            if (enableAddToCart && (model.productSet || model.inStock) && (price > 0 || thisProduct.isPromoPrice())) {
+                                thisProduct.enableA2CButton();
+
+                                // show total price except for a bundle
+                                if (!model.bundle) {
+                                    thisProduct.showUpdatedPrice(price);
+                                }
+                            } else {
+                                thisProduct.disableA2CButton();
                             }
                         }
-
-                        if (enableAddToCart && (model.productSet || model.inStock) && (price > 0 || thisProduct.isPromoPrice())) {
-                            thisProduct.enableA2CButton();
-
-                            // show total price except for a bundle
-                            if (!model.bundle) {
-                                thisProduct.showUpdatedPrice(price);
-                            }
-                        } else {
-                            thisProduct.disableA2CButton();
-                        }
-                    }
                 );
             });
         },
@@ -2089,11 +2076,7 @@ var product = function (response) {
                         if ($(window).width() > 1024) {
                             varJqryObjs.data('data', {id: pdpVarId}).mouseenter(function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
-                                if ($(this).attr('data-variantimage')) {
-                                    $('#product-image img').attr('src', $(this).data('variantimage'));
-                                } else {
-                                    thisProduct.showImages(this.title, colorAttrDef.vals);
-                                }
+                                thisProduct.showImages(this.title, colorAttrDef.vals);
                             }).mouseleave(function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
@@ -2242,7 +2225,8 @@ var quickviewShow = function (options) {
         options: {
             height: 530,
             width: 760,
-            dialogClass: 'quickview'
+            dialogClass: 'quickview',
+            title: Resources.QUICK_VIEW_POPUP
         }
     });
     quickViewDialog.dialog('open');
@@ -2291,7 +2275,7 @@ var pdpEvents = {
                 return false;
             } else {
                 if ($(this).val() < 1) {
-                    $('.addtocartbutton:last').prop('disabled', true);
+                    $('addtocartbutton:last').prop('disabled', true);
                     $('.addtocart').addClass('disabled');
                 } else {
                     $('.addtocartbutton:last').prop('disabled', false);
@@ -2329,8 +2313,7 @@ var pdpEvents = {
             }
         });
         $('#add-to-cart').bind('click', function () {
-            var qtyValue = $(this).parent('.addTo-cart-section').find('.quantityinput').val();
-            if (qtyValue > 0) {
+            if ($('#Quantity').val() > 0) {
                 $('.addedto-cartoverlay').addClass('added-overlay');
                 setTimeout(function () {
                     $('.addedto-cartoverlay').removeClass('added-overlay');
@@ -2395,9 +2378,9 @@ var pdpEvents = {
             var itemCount = jQuery('.owl-carousel .item').length;
             if (
                 (viewport >= 959 && itemCount > 5) //desktop
-                || ((viewport >= 481 && viewport < 600) && itemCount > 3) //tablet
-                || (viewport < 480 && itemCount > 2) //mobile
-            ) {
+                    || ((viewport >= 481 && viewport < 600) && itemCount > 3) //tablet
+                    || (viewport < 480 && itemCount > 2) //mobile
+                ) {
                 $('.pdprecomo-owl').find('.owl-prev, .owl-next').show();
                 $('.pdprecomo-owl').find('.owl-dots').show();
 
