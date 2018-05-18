@@ -1,0 +1,22 @@
+<!--- TEMPLATENAME: hreflang.isml --->
+<isloop items="${dw.system.Site.getAllSites()}" var="site" >
+    <isset name="getAllowedLocale" value="${site.getAllowedLocales()}" scope="page"/>
+
+	<isloop items="${getAllowedLocale}" var="getAllowedLocaleItr">
+		<isif condition="${getAllowedLocaleItr != 'default'}">
+    		<isscript>
+			    var action : URLAction = new dw.web.URLAction(pdict.CurrentRequest.httpPath.split('/').pop(), site.ID, getAllowedLocaleItr);
+
+                var paramArray = [];
+    		    for each (var paramName in pdict.CurrentRequest.httpParameterMap.parameterNames) {
+    		        paramArray.push(dw.web.URLParameter(paramName, pdict.CurrentRequest.httpParameterMap[paramName]));
+    		    }
+		        var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
+
+				var gethrefLang = getAllowedLocaleItr.toLowerCase().replace("_", "-");
+    		</isscript>
+
+			<link rel="alternate" href="${subdomainURL}" hreflang="${gethrefLang}" />
+		</isif>
+	</isloop>
+</isloop>
