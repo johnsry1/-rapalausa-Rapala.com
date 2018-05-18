@@ -18,37 +18,40 @@ function prodNetPrice(basket)
 	var surcharge : Money = new dw.value.Money(0.0, session.currency.currencyCode);
 	var apli : Iterator = basket.getAllProductLineItems().iterator();
 	var priceValues : List = new ArrayList();
-	while(apli.hasNext()){
-		var pli : ProductLineItem = apli.next();
-		var PriceModel :ProductPriceModel = pli.product.getPriceModel();
-		var productShippingModel : ProductShippingModel = ShippingMgr.getProductShippingModel(pli.product);
-		if(!pli.isBonusProductLineItem() || !pli.isGift() ) {
-			if(('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)){
-				var currencyPriceBookId = session.getCurrency().getCurrencyCode().toLowerCase() + dw.system.Site.current.preferences.custom.listPriceDefault;
-				netPrice = netPrice.add(PriceModel.getPriceBookPrice(currencyPriceBookId).multiply(pli.quantityValue));
+	try{
+		while(apli.hasNext()){
+			var pli : ProductLineItem = apli.next();
+			var PriceModel :ProductPriceModel = pli.product.getPriceModel();
+			var productShippingModel : ProductShippingModel = ShippingMgr.getProductShippingModel(pli.product);
+			if(!pli.isBonusProductLineItem() || !pli.isGift() ) {
+				if(('listPriceDefault' in dw.system.Site.current.preferences.custom) && !empty(dw.system.Site.current.preferences.custom.listPriceDefault)){
+					var currencyPriceBookId = session.getCurrency().getCurrencyCode().toLowerCase() + dw.system.Site.current.preferences.custom.listPriceDefault;
+					netPrice = netPrice.add(PriceModel.getPriceBookPrice(currencyPriceBookId).multiply(pli.quantityValue));
+				}
+				else
+				{
+					netPrice = netPrice.add(PriceModel.maxPrice.multiply(pli.quantityValue));
+				}
 			}
 			else
-			{
-				netPrice = netPrice.add(PriceModel.maxPrice.multiply(pli.quantityValue));
-			}
+				{
+					netPrice = netPrice.add(PriceModel.maxPrice.multiply(pli.quantityValue));
+				}
+				var productShippingCost : ProductShippingCost = null;
+				if(basket.defaultShipment != null && (!empty(basket.defaultShipment)) && basket.defaultShipment.shippingMethod != null){
+					productShippingCost = productShippingModel.getShippingCost(basket.defaultShipment.shippingMethod);
+				}
+				if(productShippingCost != null && productShippingCost.isSurcharge() ){
+					surcharge = surcharge.add(productShippingCost.getAmount().multiply(pli.quantityValue));
+				}
 		}
-		else
-			{
-				netPrice = netPrice.add(PriceModel.maxPrice.multiply(pli.quantityValue));
-			}
-			var productShippingCost : ProductShippingCost = null;
-			if(basket.defaultShipment != null && (!empty(basket.defaultShipment)) && basket.defaultShipment.shippingMethod != null){
-				productShippingCost = productShippingModel.getShippingCost(basket.defaultShipment.shippingMethod);
-			}
-			if(productShippingCost != null && productShippingCost.isSurcharge() ){
-				surcharge = surcharge.add(productShippingCost.getAmount().multiply(pli.quantityValue));
-			}
+		priceValues.push(netPrice);
+		priceValues.push(surcharge);
+	}catch(e){
+		dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkout error: {0} -- stack trace -- {1}', e.message, e.stack);
 	}
-	//pdict.ProductNetPrice=netPrice;
-	//pdict.Surcharge = surcharge;
-	priceValues.push(netPrice);
-	priceValues.push(surcharge);
 	return priceValues;
+	
 }
 
 
