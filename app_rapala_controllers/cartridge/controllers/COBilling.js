@@ -626,7 +626,7 @@ function billing() {
                 	ltkSignupEmail.Signup();
                 	ltkSendSca.SendSCA();
                 } catch(e){
-                	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
+                	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkout error: {0} -- stack trace -- {1}', e.message, e.stack);
                 }
                 // A successful billing page will jump to the next checkout step.
                 app.getController('COSummary').Submit();

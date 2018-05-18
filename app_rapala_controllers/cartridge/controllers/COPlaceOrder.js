@@ -253,7 +253,7 @@ function submitImpl(order) {
 	        order_created: true
 	    };
 	} catch(e){
-		dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
+		dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkout error: {0} -- stack trace -- {1}', e.message, e.stack);
 	}
 }
 

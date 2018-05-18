@@ -69,7 +69,7 @@ function submit() {
         var COBilling = app.getController('COBilling');
         COBilling.ReturnToBIlling(placeOrderResult.error);
     } else {
-    	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: could not send confirmation email');
+    	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkout error: could not send confirmation email');
     }
 }
 
@@ -80,32 +80,33 @@ function submit() {
  * account creation.
  */
 function showConfirmation(order) {
-	try{
-	    if (!customer.authenticated) {
-	        // Initializes the account creation form for guest checkouts by populating the first and last name with the
-	        // used billing address.
-	        var customerForm = app.getForm('profile.customer');
-	        customerForm.setValue('firstname', order.billingAddress.firstName);
-	        customerForm.setValue('lastname', order.billingAddress.lastName);
-	        customerForm.setValue('email', order.customerEmail);
-	    }
 	
-	    app.getForm('profile.login.passwordconfirm').clear();
-	    app.getForm('profile.login.password').clear();
+    if (!customer.authenticated) {
+        // Initializes the account creation form for guest checkouts by populating the first and last name with the
+        // used billing address.
+        var customerForm = app.getForm('profile.customer');
+        customerForm.setValue('firstname', order.billingAddress.firstName);
+        customerForm.setValue('lastname', order.billingAddress.lastName);
+        customerForm.setValue('email', order.customerEmail);
+    }
+
+    app.getForm('profile.login.passwordconfirm').clear();
+    app.getForm('profile.login.password').clear();
+    var priceVals;
+    priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
+    if(!empty(priceVals) || priceVals.length == 0){
+    	priceVals[0] = 0;
+    	priceVals[1] = 0;
+    }
+    var pageMeta = require('~/cartridge/scripts/meta');
+    pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
+    app.getView({
+        Order: order,
+        prodNetPrice : priceVals[0],
+        surcharge : priceVals[1],
+        ContinueURL: URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
+    }).render('checkout/confirmation/confirmation');
 	
-	    var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
-	    
-	    var pageMeta = require('~/cartridge/scripts/meta');
-	    pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
-	    app.getView({
-	        Order: order,
-	        prodNetPrice : priceVals[0],
-	        surcharge : priceVals[1],
-	        ContinueURL: URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
-	    }).render('checkout/confirmation/confirmation');
-	}catch(e){
-		dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkut error: {0} -- stack trace -- {1}', e.message, e.stack);
-	}
 }
 
 /*
