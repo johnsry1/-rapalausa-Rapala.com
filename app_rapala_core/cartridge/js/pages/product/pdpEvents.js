@@ -807,7 +807,19 @@ var product = function (response) {
         showImages: function (selectedVal, vals) {
             var that = this;
             vals = vals || {};
-
+            imagesLoaded('.product-image').on('done', function () {
+                $('.product-primary-image').css({
+                    height: $('.product-primary-image').height() + 'px',
+                    width: $('.product-primary-image').width() + 'px'
+                });
+            });
+            $(window).resize(function() {
+                $('.product-primary-image').removeAttr('style');
+                $('.product-primary-image').css({
+                    height: $('.product-primary-image').height() + 'px',
+                    width: $('.product-primary-image').width() + 'px'
+                });
+            });
             // show swatch related images for the current variation value
             jQuery.each(vals, function () {
                 var imgCounter = -1;
@@ -857,17 +869,6 @@ var product = function (response) {
                                 MagicZoom.update('product-image', zoomimageurl, zoomimageurl);
                                 MagicZoom.update('primary-image', zoomimageurl, zoomimageurl);
                                 //$("body").find('.product-image').trigger("click");
-                            });
-                            $('.product-primary-image').css({
-                                height: $('.product-primary-image').height() + 'px',
-                                width: $('.product-primary-image').width() + 'px'
-                            });
-                            $(window).resize(function() {
-                                $('.product-primary-image').removeAttr('style');
-                                $('.product-primary-image').css({
-                                    height: $('.product-primary-image').height() + 'px',
-                                    width: $('.product-primary-image').width() + 'px'
-                                });
                             });
                         });
                         jQuery(that.containerId + ' .productthumbnails:last .owl-item').first().find('img').click();
