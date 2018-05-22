@@ -3155,3 +3155,32 @@ a {
         font-style: italic;
     }
 }
+.pdp-main {
+    .product-image-container {
+        height: 100% !important;
+    }
+    .productthumbnails {
+        &.pdp-owl-customization {
+            &.owl-theme {
+                .owl-dots {
+                    @include respond(0, $medium-breakpoint) {
+                        display: none !important;
+                        top: 44px;
+                        position: absolute;
+                        padding: 0;
+                        text-align: center;
+                        margin: 0 auto;
+                        bottom: 21px;
+                        margin: 0 auto;
+                        left: 0;
+                        right: 0;
+                        opacity: 1;
+                        .owl-dot {
+                            float: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
