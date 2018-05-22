@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+    <job job-id="Order-Watcher" priority="0">
+        <description>The OrderWatcher job will monitor the order numbers of an instance. You set it up as a job that will run every X minutes.
+When the job runs, it will get the latest current order number and check that order number against the last order number, when the job last ran. If the order number is the same.</description>
+        <parameters/>
+        <flow>
+            <context site-id="rapalaEU"/>
+            <step step-id="Execute" type="ExecutePipeline" enforce-restart="false">
+                <description>Execute the start pipeline</description>
+                <parameters>
+                    <parameter name="ExecutePipeline.Pipeline">Watcher-Start</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2018-05-09Z</date-from>
+                    <date-to>2020-06-30Z</date-to>
+                    <start-time>13:14:00.000Z</start-time>
+                    <interval>5m</interval>
+                    <day-of-week>
+                        <weekday>Wednesday</weekday>
+                        <weekday>Tuesday</weekday>
+                        <weekday>Sunday</weekday>
+                        <weekday>Saturday</weekday>
+                        <weekday>Thursday</weekday>
+                        <weekday>Monday</weekday>
+                        <weekday>Friday</weekday>
+                    </day-of-week>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>

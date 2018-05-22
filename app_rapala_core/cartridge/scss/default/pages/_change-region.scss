@@ -56,12 +56,15 @@
         @include geoip-link();
     }
     .rapala-middle-block {
-        display: flex;
-        flex-flow: row wrap;
-        min-height: rem(101px);
         box-sizing: border-box;
         padding: rem(15px) 0;
         align-items: center;
+        @include respond(large-up) {
+            display: flex;
+            flex-flow: row wrap;
+            min-height: rem(101px);
+
+        }
         p {
             padding: 0;
             width: 100%;
@@ -119,22 +122,40 @@
         background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
         .distrobutors-countries-list {
             padding: rem(25px) rem(45px);
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
+            @include respond(large-up) {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+            }
         }
         .distributor-link {
-            text-align: left;
-            padding-right: rem(15px);
             box-sizing: border-box;
+            text-align: center;
+            @include respond(large-up) {
+                text-align: left;
+                padding-right: rem(15px);
+            }
+        }
+        .change-region-flag {
+            display: inline-block;
+            width: rem(16px);
+            height: rem(11px);
+            margin-right: rem(10px);
+            @include respond(large-up) {
+                display: none;
+            }
         }
     }
     .rapala-iternational-footer {
         text-align: center;
         padding: rem(25px) 0;
+        display: none;
+        @include respond(large-up) {
+            display: block;
+        }
     }
     .rapala-iternational-footer-text {
-        padding: 0 rem(10px);
+        padding: rem(10px);
         text-align: center;
         @include respond(large-up) {
             padding: 0;
