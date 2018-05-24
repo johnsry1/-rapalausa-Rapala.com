@@ -577,7 +577,7 @@ var headerEvents = {
                                 height: 250
                             }
                         });
-                    }, 120000);
+                    }, 1200000);
                     
                     timeOutObj = setTimeout(function(){ 
                         sessionStorage.setItem('time', timeOutObj);
@@ -588,7 +588,7 @@ var headerEvents = {
                                 height: 250
                             }
                         });
-                    }, 180000);
+                    }, 1800000);
                 }
             });
         }
