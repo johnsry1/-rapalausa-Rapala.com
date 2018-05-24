@@ -20,3 +20,12 @@
 		</isif>
 	</isloop>
 </isloop>
+<isscript>
+	var hrefLangSEO = dw.system.Site.getCurrent().getCustomPreferenceValue('hrefLangSEO');
+	importScript("app_rapala_core:util/ViewHelpers.ds");
+	var staticHrefLangObj = ViewHelpers.parseStaticLocaleValues(hrefLangSEO);
+</isscript>
+
+<isloop items="${staticHrefLangObj}" var="item">
+	<link rel="alternate" href="${item.subdomainURL}" hreflang="${item.hrefLang}" />
+</isloop>
