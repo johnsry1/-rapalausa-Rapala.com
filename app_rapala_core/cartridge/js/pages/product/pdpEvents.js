@@ -1,11 +1,12 @@
 'use strict';
 var util = require('../../util'),
     dialog = require('../../dialog'),
-    //tooltip = require('../../tooltip'),
-    //uievents = require('../../uievents'),
-    //quickview = require('../../quickview'),
+//tooltip = require('../../tooltip'),
+//uievents = require('../../uievents'),
+//quickview = require('../../quickview'),
     addToCart = require('./addToCart'),
     progress = require('../../progress'),
+    imagesLoaded = require('imagesloaded'),
     ajax = require('../../ajax');
 
 var product = function (response) {
@@ -741,6 +742,60 @@ var product = function (response) {
             });
         },
 
+        triggerZoomClick : function () {
+            var timeOut = setTimeout(nextTtyNew, 500),
+                secondsCounter = 0,
+                flag = true;
+            function nextTtyNew() {
+                if (!flag){
+                    return false;
+                }
+
+                clearTimeout(timeOut);
+                flag = false;
+                timeOut = setTimeout(nextTtyNew, 500);
+                if (secondsCounter >= 200){
+                    flag = false;
+                } else {
+                    if ($('body').find('.index0').parent().hasClass('mz-thumb')) {
+                        $('body').find('.index0').trigger('click');
+                        flag = false;
+                    } else {
+                        secondsCounter = secondsCounter + 1
+                        flag = true;
+                    }
+                }
+            }
+        },
+
+        refreshZoom : function () {
+            var timeOut = setTimeout(nextTry, 500),
+                secondsCounter = 0,
+                flag = true;
+            function nextTry() {
+                if (!flag){
+                    return false;
+                }
+
+                clearTimeout(timeOut);
+                flag = false;
+                timeOut = setTimeout(nextTry, 500);
+                if (secondsCounter >= 200){
+                    flag = false;
+                } else {
+                    if ($('.pdp-owl-customization .alternate-images').length > 0) {
+                        imagesLoaded('.pdp-owl-customization .owl-loaded').on('done', function () {
+                            MagicZoom.refresh();
+                        });
+                        flag = false
+                    } else {
+                        secondsCounter = secondsCounter + 1
+                        flag = true;
+                    }
+                }
+            }
+        },
+
         // selects review tab
         readReviews: function () {
             jQuery(this.containerId + ' #tabs').tabs('select', 'pdpReviewsTab');
@@ -752,7 +807,19 @@ var product = function (response) {
         showImages: function (selectedVal, vals) {
             var that = this;
             vals = vals || {};
-
+            imagesLoaded('.product-image').on('done', function () {
+                $('.product-primary-image').css({
+                    height: $('.product-primary-image').height() + 'px',
+                    width: $('.product-primary-image').width() + 'px'
+                });
+            });
+            $(window).resize(function() {
+                $('.product-primary-image').removeAttr('style');
+                $('.product-primary-image').css({
+                    height: $('.product-primary-image').height() + 'px',
+                    width: $('.product-primary-image').width() + 'px'
+                });
+            });
             // show swatch related images for the current variation value
             jQuery.each(vals, function () {
                 var imgCounter = -1;
@@ -897,6 +964,8 @@ var product = function (response) {
                     }
                 }
             });
+            this.refreshZoom();
+            this.triggerZoomClick();
         },
 
         /**
@@ -1394,8 +1463,8 @@ var product = function (response) {
             for (var i = 0; i < variants.length; i++) {
                 variant = variants[i];
                 if ((variant.attributes[attr.id] === attr.val) /*&&
-						//(variant.inStock || (variant.avStatus === app.constants.AVAIL_STATUS_BACKORDER && variant.ATS > 0) || (variant.avStatus === app.constants.AVAIL_STATUS_PREORDER && variant.ATS > 0))*/
-                ) {
+                 //(variant.inStock || (variant.avStatus === app.constants.AVAIL_STATUS_BACKORDER && variant.ATS > 0) || (variant.avStatus === app.constants.AVAIL_STATUS_PREORDER && variant.ATS > 0))*/
+                    ) {
                     foundVariants.push(variant);
                 }
             }
@@ -1565,9 +1634,9 @@ var product = function (response) {
                      * Event handler when a subproduct of a product set or a bundle is selected.
                      * disable the add to cart button
                      */
-                    function () {
-                        thisProduct.disableA2CButton();
-                    });
+                        function () {
+                            thisProduct.disableA2CButton();
+                        });
             });
 
             // see if have any sub-products and bind AddtoCartEnabled event
@@ -1577,48 +1646,48 @@ var product = function (response) {
                      * Event handler when a subproduct of a product set or a bundle is selected.
                      * Basically enable the add to cart button or do other  refresh if needed like price etc.
                      */
-                    function () {
-                        // enable Add to cart button if all the sub products have been selected
-                        // and show the updated price
-                        var enableAddToCart = true;
-                        var subProducts = thisProduct.subProducts;
-                        var price = new Number();
+                        function () {
+                            // enable Add to cart button if all the sub products have been selected
+                            // and show the updated price
+                            var enableAddToCart = true;
+                            var subProducts = thisProduct.subProducts;
+                            var price = new Number();
 
-                        for (var i = 0; i < subProducts.length; i++) {
-                            if (((subProducts[i].variant || subProducts[i].master) && subProducts[i].selectedVar == null) ||
-                                (!subProducts[i].bundled && (subProducts[i].selectedOptions.Quantity == undefined ||
-                                    subProducts[i].selectedOptions.Quantity <= 0))) {
-                                enableAddToCart = false;
-                                break;
-                            } else {
-                                if (subProducts[i].selectedVar != null) {
-                                    subProducts[i].selectedOptions.pid = subProducts[i].selectedVar.pid;
+                            for (var i = 0; i < subProducts.length; i++) {
+                                if (((subProducts[i].variant || subProducts[i].master) && subProducts[i].selectedVar == null) ||
+                                    (!subProducts[i].bundled && (subProducts[i].selectedOptions.Quantity == undefined ||
+                                        subProducts[i].selectedOptions.Quantity <= 0))) {
+                                    enableAddToCart = false;
+                                    break;
                                 } else {
-                                    subProducts[i].selectedOptions.pid = subProducts[i].pid;
-                                }
+                                    if (subProducts[i].selectedVar != null) {
+                                        subProducts[i].selectedOptions.pid = subProducts[i].selectedVar.pid;
+                                    } else {
+                                        subProducts[i].selectedOptions.pid = subProducts[i].pid;
+                                    }
 
-                                // Multiply the subproduct quantity-one price by the entered quantity.
-                                // Important note:  This value will be incorrect if subproduct uses
-                                // tiered pricing !!!!!
-                                var subproductQuantity = subProducts[i].selectedOptions.Quantity;
-                                if (subproductQuantity == undefined) {
-                                    subproductQuantity = 1;
+                                    // Multiply the subproduct quantity-one price by the entered quantity.
+                                    // Important note:  This value will be incorrect if subproduct uses
+                                    // tiered pricing !!!!!
+                                    var subproductQuantity = subProducts[i].selectedOptions.Quantity;
+                                    if (subproductQuantity == undefined) {
+                                        subproductQuantity = 1;
+                                    }
+                                    price += new Number(subproductQuantity * subProducts[i].getPrice());
                                 }
-                                price += new Number(subproductQuantity * subProducts[i].getPrice());
+                            }
+
+                            if (enableAddToCart && (model.productSet || model.inStock) && (price > 0 || thisProduct.isPromoPrice())) {
+                                thisProduct.enableA2CButton();
+
+                                // show total price except for a bundle
+                                if (!model.bundle) {
+                                    thisProduct.showUpdatedPrice(price);
+                                }
+                            } else {
+                                thisProduct.disableA2CButton();
                             }
                         }
-
-                        if (enableAddToCart && (model.productSet || model.inStock) && (price > 0 || thisProduct.isPromoPrice())) {
-                            thisProduct.enableA2CButton();
-
-                            // show total price except for a bundle
-                            if (!model.bundle) {
-                                thisProduct.showUpdatedPrice(price);
-                            }
-                        } else {
-                            thisProduct.disableA2CButton();
-                        }
-                    }
                 );
             });
         },
@@ -2309,9 +2378,9 @@ var pdpEvents = {
             var itemCount = jQuery('.owl-carousel .item').length;
             if (
                 (viewport >= 959 && itemCount > 5) //desktop
-                || ((viewport >= 481 && viewport < 600) && itemCount > 3) //tablet
-                || (viewport < 480 && itemCount > 2) //mobile
-            ) {
+                    || ((viewport >= 481 && viewport < 600) && itemCount > 3) //tablet
+                    || (viewport < 480 && itemCount > 2) //mobile
+                ) {
                 $('.pdprecomo-owl').find('.owl-prev, .owl-next').show();
                 $('.pdprecomo-owl').find('.owl-dots').show();
 

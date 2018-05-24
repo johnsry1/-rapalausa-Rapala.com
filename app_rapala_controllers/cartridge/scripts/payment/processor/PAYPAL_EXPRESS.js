@@ -22,7 +22,7 @@ function Handle(args) {
     });
 
     if (pdict.EndNodeName === 'Error') {
-    	cart.setVar(pdict.ScriptLog);
+    		//cart.setVar(pdict.ScriptLog);
         return {error: true};
     }
 
@@ -52,9 +52,9 @@ function Authorize(args) {
     var cart = Cart.get();
     
     if (pdict.EndNodeName === 'Error' || pdict.ErrorCode == true) {
-    	paypalErrorContainer = pdict.ResponseData.l_errorcode0+"; "+pdict.ResponseData.l_shortmessage0;
-    	cart.setVar(paypalErrorContainer);
-    	session.forms.billing.paypalval.paypalprocessed.value = "";
+    		paypalErrorContainer = pdict.ResponseData.l_errorcode0+"; "+pdict.ResponseData.l_shortmessage0;
+    		//cart.setVar(paypalErrorContainer);
+    		session.forms.billing.paypalval.paypalprocessed.value = "";
         return {error: true};
     }
 
