@@ -52,9 +52,8 @@ function Authorize(args) {
     var cart = Cart.get();
     
     if (pdict.EndNodeName === 'Error' || pdict.ErrorCode == true) {
-    		paypalErrorContainer = pdict.ResponseData.l_errorcode0+"; "+pdict.ResponseData.l_shortmessage0;
-    		//cart.setVar(paypalErrorContainer);
     		session.forms.billing.paypalval.paypalprocessed.value = "";
+    		session.custom.payPalPlaceorderError = true;
         return {error: true};
     }
 
