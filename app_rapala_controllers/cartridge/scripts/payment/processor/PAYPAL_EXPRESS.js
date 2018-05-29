@@ -53,6 +53,7 @@ function Authorize(args) {
     
     if (pdict.EndNodeName === 'Error' || pdict.ErrorCode == true) {
     		session.forms.billing.paypalval.paypalprocessed.value = "";
+    		session.custom.payPalPlaceorderError = true;
         return {error: true};
     }
 
