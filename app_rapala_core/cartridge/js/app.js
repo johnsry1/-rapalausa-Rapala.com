@@ -223,6 +223,15 @@ function initializeEvents() {
             'content_type':'product'
         });
     });
+
+    //AddToWishlist cart page
+    $('.add-to-wishlist').on('click', function (){
+        window.fbq('track','AddToWishlist',{
+            'content_ids': $(this).data('productid'),
+            'currency': $('[name$="basketcurrency"]').val()
+        });
+    });
+
     /*** minicart hide ***/
     var minicartlink = $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
     minicartlink.on('click', function () {

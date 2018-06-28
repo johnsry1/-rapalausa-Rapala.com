@@ -615,7 +615,7 @@
 											<td class="itemtotalcolumn cartactions">
 												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
 														<isif condition="${!isInWishList && !empty(lineItem.product)}">
-															<a onClick="fbq('track','AddToWishlist',{content_name:'${lineItem.product.name}',content_ids:'${lineItem.productID}',currency:'${pdict.Basket.getCurrencyCode()}'});" class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addthisitemtowishlist.title','locale',null)}">
+															<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" data-productid="${lineItem.productID}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addthisitemtowishlist.title','locale',null)}">
 																<isprint value="${Resource.msg('global.addtowishlist','locale',null)}"/>
 															</a>
 															<br />
