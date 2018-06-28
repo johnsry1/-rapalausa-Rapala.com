@@ -161,7 +161,19 @@
 													<isinclude template="paypal/expressbutton"/></iscomment>
 
 													<isif condition="${enableCheckout}">
-														<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+														<isscript> 
+														var pids = Array();
+														for each(p in pdict.Basket.getAllProductLineItems()){
+															var obj = {
+																'id': p.getProductID(),
+																'name': p.getProductName(),
+																'quantity': p.quantityValue,
+																'item_prices': p.getPriceValue()
+															}
+															pids.push(obj);
+														}
+														</isscript>
+														<button onClick="fbq('track',InitiateCheckout',{contents: '${JSON.stringify(pids)}',currency:'${pdict.Basket.getCurrencyCode()}',value:'${orderTotalValue}',content_type:'product'});" class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
 															<span><isprint value="${Resource.msg('minicart.securecheckout','checkout',null)}"/></span>
 														</button>
 													<iselse/>
@@ -605,7 +617,7 @@
 											<td class="itemtotalcolumn cartactions">
 												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
 														<isif condition="${!isInWishList && !empty(lineItem.product)}">
-															<a class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addthisitemtowishlist.title','locale',null)}">
+															<a onClick="fbq('track','AddToWishlist',{content_name:'${lineItem.product.name}',content_ids:'${lineItem.productID}',currency:'${pdict.Basket.getCurrencyCode()}'});" class="add-to-wishlist" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addthisitemtowishlist.title','locale',null)}">
 																<isprint value="${Resource.msg('global.addtowishlist','locale',null)}"/>
 															</a>
 															<br />
@@ -1321,7 +1333,18 @@
 										<isinclude template="paypal/expressbutton"/></iscomment>
 
 										<isif condition="${enableCheckout}">
-											<button class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+											<isscript> 
+											var pids = Array();
+											for each(p in pdict.Basket.getAllProductLineItems()){
+												var obj = {
+													'id': p.getProductID(),
+													'quantity': p.quantityValue,
+													'item_prices': p.getPriceValue()
+												}
+												pids.push(obj);
+											}
+											</isscript>
+											<button onClick="fbq('track','InitiateCheckout',{contents: '${JSON.stringify(pids)}',currency:'${pdict.Basket.getCurrencyCode()}',value:'${orderTotalValue}',content_type:'product'});" class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
 												<span><isprint value="${Resource.msg('minicart.securecheckout','checkout',null)}"/></span>
 											</button>
 										<iselse/>
