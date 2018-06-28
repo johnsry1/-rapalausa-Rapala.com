@@ -406,6 +406,41 @@ var util = {
             idx++;
         }
         return isMobile;
+    },
+
+    /**
+    user session timeout
+    */
+    userTimeout: function(dialog) {
+        if ($('.loggeduser').length) {
+            var timeOutObj;
+            $(document).click(function(){
+                if (typeof timeOutObj != undefined) {
+                    clearTimeout(timeOutObj);
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionWarning,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 120000);
+                    
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionExpired,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 180000);
+                }
+            });
+        }
     }
 };
 

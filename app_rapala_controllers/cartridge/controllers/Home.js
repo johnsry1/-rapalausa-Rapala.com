@@ -179,14 +179,6 @@ function countyPopUp() {
 	app.getView({customObject: COBrand}).render('content/home/internationalpopup');
 }
 
-function sessionWarnPopUp() {
-	app.getView().render('components/session_warn_popup');
-}
-
-function sessionExpiredPopUp() {
-	app.getView().render('components/session_expired_popup');
-}
-
 /*
  * Export the publicly available controller methods
  */
@@ -248,6 +240,3 @@ exports.IncludeMegamenuCustomerInfo = guard.ensure(['get'], includeMegamenuCusto
 
 exports.CountyPopUp = guard.ensure(['get'], countyPopUp);
 
-exports.SessionWarnPopUp = guard.ensure(['get'], sessionWarnPopUp);
-
-exports.SessionExpiredPopUp = guard.ensure(['get'], sessionExpiredPopUp);
