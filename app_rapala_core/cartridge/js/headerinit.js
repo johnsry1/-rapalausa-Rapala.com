@@ -561,11 +561,43 @@ var headerEvents = {
                 }
             }
         }
+    },
+    userTimeout: function() {
+        if ($('.loggeduser').length) {
+            var timeOutObj;
+            $(document).click(function(){
+                if (typeof timeOutObj != undefined) {
+                    clearTimeout(timeOutObj);
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionWarning,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 1200000);
+                    
+                    timeOutObj = setTimeout(function(){ 
+                        sessionStorage.setItem('time', timeOutObj);
+                        dialog.open({
+                            url : Urls.sessionExpired,
+                            options: {
+                                width: 280,
+                                height: 250
+                            }
+                        });
+                    }, 1800000);
+                }
+            });
+        }
     }
 };
 var headerinit = {
     init: function () {
         headerEvents.initializeEvent();
+        headerEvents.userTimeout();
     }
 };
 

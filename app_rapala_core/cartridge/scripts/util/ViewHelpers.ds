@@ -262,3 +262,25 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 	}
 	return list;
 };
+
+ViewHelpers.parseStaticLocaleValues = function(obj){
+	var locales = obj.split(',');
+	var site = dw.system.Site.getCurrent();
+	var output = [];
+	for(var i = 0; i < locales.length; i++){
+		var urlObj = {};
+		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, locales[i]);
+		var paramArray = [];
+	    for each (var paramName in request.httpParameterMap.parameterNames) {
+	        paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+	    }
+        var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
+
+		var hrefLang = locales[i].toLowerCase().replace("_", "-");
+		urlObj.hrefLang = hrefLang;
+		urlObj.subdomainURL = subdomainURL;
+		var x = urlObj;
+		output.push(urlObj);
+	}
+	return output;
+}

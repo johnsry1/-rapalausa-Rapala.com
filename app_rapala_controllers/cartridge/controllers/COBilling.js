@@ -622,11 +622,13 @@ function billing() {
                 // Mark step as fulfilled
                 app.getForm('billing').object.fulfilled.value = true;
                 
-                ltkSignupEmail.Signup();
-                ltkSendSca.SendSCA();
-
+                try{
+                	ltkSignupEmail.Signup();
+                	ltkSendSca.SendSCA();
+                } catch(e){
+                	dw.system.Logger.getLogger('CheckoutError', 'CheckoutError').error('checkout error: {0} -- stack trace -- {1}', e.message, e.stack);
+                }
                 // A successful billing page will jump to the next checkout step.
-                //app.getController('COSummary').Start();
                 app.getController('COSummary').Submit();
                 return;
             }

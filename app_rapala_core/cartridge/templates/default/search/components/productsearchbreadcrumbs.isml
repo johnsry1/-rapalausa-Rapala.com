@@ -25,7 +25,7 @@
 		searchPhraseURL = pagingModel.appendPaging(searchPhraseURL, 0);
 	}
 	if (suggestedSearchPhrase) {
-		resultsText = Resource.msg('searchbreadcrumbs.searchphrase', 'search', null);
+		resultsText = Resource.msg('searchbreadcrumbs.resultstext.responsive', 'search', null);
 	}
 
 	var category = psr.getCategory();
@@ -44,7 +44,7 @@
 		<span class="breadcrumb-element breadcrumb-result-text">
 			${resultsText}&nbsp;<a href="${searchPhraseURL}" title="${searchPhrase}"> &quot;${searchPhrase}&quot;</a>
 			<isif condition="${suggestedSearchPhrase !== ''}">
-				- ${Resource.msg('searchbreadcrumbs.showresults', 'search', null)} &quot;<a href="${suggestedSearchPhraseURL}" title="${suggestedSearchPhrase}">${suggestedSearchPhrase}</a>&quot;
+				&quot;<a href="${suggestedSearchPhraseURL}" title="${suggestedSearchPhrase}">${suggestedSearchPhrase}</a>&quot;
 			</isif>
 		</span>
 	</isif>

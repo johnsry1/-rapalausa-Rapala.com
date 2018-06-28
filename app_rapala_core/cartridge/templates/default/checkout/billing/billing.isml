@@ -30,6 +30,14 @@
 	<isif condition="${!empty(pdict.ppalError)}">
 		<isset name="paypalErr" value="${pdict.ppalError}" scope="page"/>
 	</isif>
+	<isif condition="${session.custom.payPalPlaceorderError}">
+		<div class="error-form">
+			<iscontentasset aid="paypalPlaceOrderError"/>
+		</div>
+		<isscript>
+			delete session.custom.payPalPlaceorderError;
+		</isscript>
+	</isif>
 	<div class="contentbox checkout_cont">
 		<div class="contentboxcontent">
 			<div class="checkout billingsection">
