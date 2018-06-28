@@ -162,18 +162,16 @@
 
 													<isif condition="${enableCheckout}">
 														<isscript> 
-														var pids = Array();
-														for each(p in pdict.Basket.getAllProductLineItems()){
-															var obj = {
-																'id': p.getProductID(),
-																'name': p.getProductName(),
-																'quantity': p.quantityValue,
-																'item_prices': p.getPriceValue()
+															//fb pixel
+															var productID = '';
+															for each(pli in pdict.Basket.getAllProductLineItems()){
+																productID = empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'";
 															}
-															pids.push(obj);
-														}
 														</isscript>
-														<button onClick="fbq('track',InitiateCheckout',{contents: '${JSON.stringify(pids)}',currency:'${pdict.Basket.getCurrencyCode()}',value:'${orderTotalValue}',content_type:'product'});" class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+														<input type="hidden" name="baskettotal" value="${pdict.Basket.totalGrossPrice.value}"/>
+														<input type="hidden" name="basketcurrency" value="${pdict.Basket.getCurrencyCode()}"/>
+														<input type="hidden" name="basketproductID" value="${productID}"/>
+														<button class="button-fancy-large cart-continue-checkout" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
 															<span><isprint value="${Resource.msg('minicart.securecheckout','checkout',null)}"/></span>
 														</button>
 													<iselse/>
@@ -1331,20 +1329,8 @@
 
 										<iscomment>Added for paypal
 										<isinclude template="paypal/expressbutton"/></iscomment>
-
 										<isif condition="${enableCheckout}">
-											<isscript> 
-											var pids = Array();
-											for each(p in pdict.Basket.getAllProductLineItems()){
-												var obj = {
-													'id': p.getProductID(),
-													'quantity': p.quantityValue,
-													'item_prices': p.getPriceValue()
-												}
-												pids.push(obj);
-											}
-											</isscript>
-											<button onClick="fbq('track','InitiateCheckout',{contents: '${JSON.stringify(pids)}',currency:'${pdict.Basket.getCurrencyCode()}',value:'${orderTotalValue}',content_type:'product'});" class="button-fancy-large" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
+											<button class="button-fancy-large cart-continue-checkout" type="submit" value="${Resource.msg('global.checkout','locale',null)}" name="${pdict.CurrentForms.cart.checkoutCart.htmlName}">
 												<span><isprint value="${Resource.msg('minicart.securecheckout','checkout',null)}"/></span>
 											</button>
 										<iselse/>
