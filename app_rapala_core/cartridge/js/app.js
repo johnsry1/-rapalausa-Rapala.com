@@ -214,7 +214,15 @@ function initializeEvents() {
             'content_type':'product'
         });
     });
-    
+
+    //AddToCart pdp/qw/cart update
+    $('.add-to-cart').on('click', function (){
+        window.fbq('track','AddToCart',{
+            'content_ids': $('#pid').val(),
+            'contents':'',
+            'content_type':'product'
+        });
+    });
     /*** minicart hide ***/
     var minicartlink = $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
     minicartlink.on('click', function () {
