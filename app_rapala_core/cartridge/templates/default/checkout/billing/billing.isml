@@ -469,23 +469,8 @@
 	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
-	//fb pixel
-	var productID = '';
-	for each(pli in pdict.Basket.getAllProductLineItems()){
-		productID = empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'";
-	}
 </isscript>
 <script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
-<script>
-$('body').on('click', '.place-order-btn',function(){
-	fbq('track','AddPaymentInfo',{
-		value: '${pdict.Basket.totalGrossPrice.value}',
-		currency: '${pdict.Basket.getCurrencyCode()}',
-		content_ids: '${productID}',
-		content_type: 'product'
-		});
-});
-</script>
 <iscomment>Google Analytics-Goals Funnels</iscomment>
 
 <isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
