@@ -404,6 +404,16 @@
 							<div class="ipad-handling">
 								<div class="singleshipping_error hide"><isprint value="${Resource.msg('billinginfo.addresserror','checkout',null)}"/></div>
 								<div class="continue-checkout-button">
+									<isscript>
+										//fb pixel
+										var productID = '';
+										for each(pli in pdict.Basket.getAllProductLineItems()){
+											productID = empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'";
+										}
+									</isscript>
+									<input type="hidden" name="baskettotal" value="${pdict.Basket.totalGrossPrice.value}"/>
+									<input type="hidden" name="basketcurrency" value="${pdict.Basket.getCurrencyCode()}"/>
+									<input type="hidden" name="basketproductID" value="${productID}"/>
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
 											<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 									<iselse/>
@@ -461,7 +471,6 @@
 	var json = JSON.stringify(countries);
 </isscript>
 <script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
-
 <iscomment>Google Analytics-Goals Funnels</iscomment>
 
 <isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
