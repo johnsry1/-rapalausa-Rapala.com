@@ -370,8 +370,8 @@ ResourceHelper.getScriptSettings = function (pageContext) {
             }
         },
         isLoggedInCustomer: customer.isAuthenticated(),
-        sessionWarningThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold")) && !empty(dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold") : 0,
-    	sessionExpireThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold")) && !empty(dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold") : 0
+        sessionWarningThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold") : 0,
+    	sessionExpireThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold") : 0
     };
 
     return scripts;
