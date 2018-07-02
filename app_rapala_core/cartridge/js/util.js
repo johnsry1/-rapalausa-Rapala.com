@@ -422,9 +422,8 @@ var util = {
         var isLoggedInCustomer = window.Scripts.isLoggedInCustomer;
         var sessionWarningThreshold = window.Scripts.sessionWarningThreshold;
         var sessionExpireThreshold = window.Scripts.sessionExpireThreshold;
-        var storage = localStorage.getItem('time');
         var timeOutObj;
-        if (storage != null && isLoggedInCustomer && sessionWarningThreshold != 0 && sessionExpireThreshold != 0) {
+        if (isLoggedInCustomer && sessionWarningThreshold != 0 && sessionExpireThreshold != 0) {
             timeOutObj = setTimeout(function(){
                 if (!isActive) {
                     dialog.open({
@@ -434,7 +433,6 @@ var util = {
                             height: 250
                         },
                         callback: function (){
-                            localStorage.setItem('time', true);
                             $('.session-warn').on('click', function(){
                                 //make server round trip to extend your session
                                 $.ajax({
