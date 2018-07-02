@@ -412,44 +412,60 @@ var util = {
     user session timeout
     */
     userTimeout: function(dialog) {
+        var isActive;
+        window.onfocus = function () { 
+            isActive = true; 
+        }; 
+        window.onblur = function () { 
+            isActive = false; 
+        };
         var isLoggedInCustomer = window.Scripts.isLoggedInCustomer;
         var sessionWarningThreshold = window.Scripts.sessionWarningThreshold;
         var sessionExpireThreshold = window.Scripts.sessionExpireThreshold;
         var storage = localStorage.getItem('time');
         var timeOutObj;
-        if (isLoggedInCustomer && sessionWarningThreshold != 0 && sessionExpireThreshold != 0) {
+        if (storage != null && isLoggedInCustomer && sessionWarningThreshold != 0 && sessionExpireThreshold != 0) {
             timeOutObj = setTimeout(function(){
-                dialog.open({
-                    url : Urls.sessionWarning,
-                    options: {
-                        width: 280,
-                        height: 250
-                    },
-                    callback: function (){
-                        localStorage.setItem('time', true);
-                        $('.session-warn').on('click', function(){
-                            //make server round trip to extend your session
-                            $.ajax({
-                                url: Urls.sessionReset,
-                                success: function(data){
-                                    console.log(data, sessionExpireThreshold, storage); //eslint-disable-line
-                                    clearTimeout(timeOutObj);
-                                    timeOutObj = null;
-                                }
-
-                            })
-                        })
-                    }
-                });
-            }, sessionWarningThreshold);
-            
-            if (typeof timeOutObj == undefined || timeOutObj != null) {
-                timeOutObj = setTimeout(function(){ 
+                if (!isActive) {
                     dialog.open({
-                        url : Urls.sessionExpired,
+                        url : Urls.sessionWarning,
                         options: {
                             width: 280,
                             height: 250
+                        },
+                        callback: function (){
+                            localStorage.setItem('time', true);
+                            $('.session-warn').on('click', function(){
+                                //make server round trip to extend your session
+                                $.ajax({
+                                    url: Urls.sessionReset,
+                                    success: function(){
+                                        clearTimeout(timeOutObj);
+                                        timeOutObj = null;
+                                    }
+
+                                })
+                            })
+                        }
+                    });
+                }
+            }, sessionWarningThreshold);
+            
+            if (timeOutObj != null) {
+                setTimeout(function(){
+                    //make ajax call to check user login
+                    $.ajax({
+                        url: Urls.isLoggedInCustomer,
+                        success: function(d) {
+                            if (!d.isAuthenciated) {
+                                dialog.open({
+                                    url : Urls.sessionExpired,
+                                    options: {
+                                        width: 280,
+                                        height: 250
+                                    }
+                                });
+                            }
                         }
                     });
                 }, sessionExpireThreshold);
