@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+	<type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+        	<attribute-definition attribute-id="sessionExpireThreshold">
+                <display-name xml:lang="x-default">Session Expire Threshold</display-name>
+                <type>double</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sessionWarningThreshold">
+                <display-name xml:lang="x-default">Session Warning Threshold</display-name>
+                <type>double</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+        	<attribute-group group-id="SiteCustomizations">
+                <attribute attribute-id="sessionWarningThreshold"/>
+                <attribute attribute-id="sessionExpireThreshold"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>

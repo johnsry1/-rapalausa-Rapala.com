@@ -291,6 +291,7 @@ ResourceHelper.getUrls = function(pageContext) {
         internationalHomeCountyPopUp: URLUtils.url('Home-CountyPopUp').toString(),
         sessionWarning				: URLUtils.url('SessionTimeOut-SessionWarnPopUp').toString(),
         sessionExpired				: URLUtils.url('SessionTimeOut-SessionExpiredPopUp').toString(),
+        sessionReset				: URLUtils.url('SessionTimeOut-SessionReset').toString(),
 
         //Dymanic address update url
         getStateHtml                : URLUtils.url('Avs-GetStateHtml').toString(),
@@ -367,7 +368,10 @@ ResourceHelper.getScriptSettings = function (pageContext) {
                 defaultlocation         : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorDefaultLocation")) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorDefaultLocation") : "39.9502843, -74.9521867",
                 maptype                 : !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType")) && !empty(dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType").value) ? dw.system.Site.current.getCustomPreferenceValue("storeLocatorMapType").value : "ROADMAP"
             }
-        }
+        },
+        isLoggedInCustomer: customer.isAuthenticated(),
+        sessionWarningThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionWarningThreshold") : 0,
+    	sessionExpireThreshold: !empty(dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold")) ? dw.system.Site.current.getCustomPreferenceValue("sessionExpireThreshold") : 0
     };
 
     return scripts;
