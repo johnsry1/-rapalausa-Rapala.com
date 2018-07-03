@@ -427,7 +427,7 @@ var util = {
             timeOutObj = setTimeout(function(){
                 if (!isActive) {
                     dialog.open({
-                        url : Urls.sessionWarning,
+                        html: Resources.SESSION_WARNING_POPUP,
                         options: {
                             width: 280,
                             height: 250
