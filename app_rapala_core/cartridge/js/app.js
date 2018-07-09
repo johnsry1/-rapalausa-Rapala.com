@@ -169,6 +169,69 @@ function initializeEvents() {
      * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
      * */
 
+    // facebook pixel
+    //Search Event click on search
+    $('body').on('click', '.search-button', function (){
+        var search = $('#searchinput').val();
+        window.fbq('track','Search',{
+            'content_type': 'product',
+            'search_string': search
+        });
+    });
+
+    //Search Event click on suggestion
+    $('body').on('click','.suggestionterm', function (){
+        var search = $(this).html();
+        window.fbq('track','Search',{
+            'content_type': 'product',
+            'search_string': search
+        });
+    });
+
+    //CompleteRegistration
+    $('body').on('click','.register-button', function (){
+        window.fbq('track','CompleteRegistration',{
+            'currency':'USD'
+        });
+    });
+
+    //AddPaymentInfo billing page
+    $('.continue-checkout-button').on('click', '.place-order-btn', function (){
+        window.fbq('track','AddPaymentInfo',{
+            'value': $('[name$="baskettotal"]').val(),
+            'currency': $('[name$="basketcurrency"]').val(),
+            'content_ids': $('[name$="basketproductID"]').val(),
+            'content_type': 'product'
+        });
+    });
+
+    //InitiateCheckout cart page
+    $('.cart-continue-checkout').on('click', function (){
+        window.fbq('track', 'InitiateCheckout',{
+            'contents': $('[name$="baskettotal"]').val(),
+            'currency': $('[name$="basketcurrency"]').val(),
+            'value': $('[name$="basketproductID"]').val(),
+            'content_type':'product'
+        });
+    });
+
+    //AddToCart pdp/qw/cart update
+    $('.add-to-cart').on('click', function (){
+        window.fbq('track','AddToCart',{
+            'content_ids': $('#pid').val(),
+            'contents':'',
+            'content_type':'product'
+        });
+    });
+
+    //AddToWishlist cart page
+    $('.add-to-wishlist').on('click', function (){
+        window.fbq('track','AddToWishlist',{
+            'content_ids': $(this).data('productid'),
+            'currency': $('[name$="basketcurrency"]').val()
+        });
+    });
+
     /*** minicart hide ***/
     var minicartlink = $('#headerwrapper #header .row.column1 #minicart .minicarttotal .minicarticon-cont .minicart-button');
     minicartlink.on('click', function () {
