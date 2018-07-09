@@ -617,8 +617,7 @@ function initializeDom() {
     }
     // load js specific styles//
     util.limitCharacters();
-    // user session timeout//
-    util.userTimeout(dialog);
+    window.dialog = dialog;
 }
 
 var pages = {

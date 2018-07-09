@@ -180,7 +180,8 @@ ResourceHelper.getResources = function(pageContext) {
 	    GA_ACTION_PDPVIEW               : Resource.msg('gAnalytics.events.quickview','events',null),
 	    GA_CATEGORY_BRAND				: Resource.msg('gAnalytics.events.brand', 'events', null),
 
-	    ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null)
+	    ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null),
+	    SESSION_EXPIRED_POPUP           : Resource.msg('global.sessionexpired','locale',null)
     };
 
     // additional resources
@@ -292,6 +293,8 @@ ResourceHelper.getUrls = function(pageContext) {
         sessionWarning				: URLUtils.url('SessionTimeOut-SessionWarnPopUp').toString(),
         sessionExpired				: URLUtils.url('SessionTimeOut-SessionExpiredPopUp').toString(),
         sessionReset				: URLUtils.url('SessionTimeOut-SessionReset').toString(),
+        isLoggedInCustomer          : URLUtils.url('SessionTimeOut-IsLoggedInCustomer').toString(),
+        accountShow                 : URLUtils.url('Account-Show').toString(),
 
         //Dymanic address update url
         getStateHtml                : URLUtils.url('Avs-GetStateHtml').toString(),

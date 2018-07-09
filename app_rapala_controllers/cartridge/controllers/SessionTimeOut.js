@@ -19,6 +19,15 @@ function sessionReset() {
 	return responseObj;
 }
 
+function isLoggedInCustomer() {
+	var isAuthenciated = customer.isAuthenticated();
+	var responseObj = responseUtils.renderJSON({
+		isAuthenciated: isAuthenciated 
+	});
+	return responseObj;
+}
+
 exports.SessionWarnPopUp = guard.ensure(['get'], sessionWarnPopUp);
 exports.SessionExpiredPopUp = guard.ensure(['get'], sessionExpiredPopUp);
 exports.SessionReset = guard.ensure(['get'], sessionReset);
+exports.IsLoggedInCustomer = guard.ensure(['get'], isLoggedInCustomer);

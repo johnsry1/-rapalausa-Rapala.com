@@ -15,6 +15,40 @@
                 ga('send', 'event', 'CART', 'ADD ITEM', productId, 1);
             else
                 ga('send', 'event', 'CART', 'ADD ITEM', productId, 1);
+            
+            //RPS-268
+            console.log(Urls.isLoggedInCustomer)
+            var dialog = window.dialog;
+            $.ajax({
+            	url: Urls.isLoggedInCustomer,
+            	success: function(data){
+            		if(data.isAuthenciated){
+            			//set timer if the customer is authenticated
+        				setTimeout(function(){
+        					$.ajax({
+        						url: Urls.isLoggedInCustomer,
+        						success: function(data){
+        							if(!data.isAuthenciated){
+        								//open dialog if the customer is logged out
+        								dialog.open({
+        	        						html: Resources.SESSION_EXPIRED_POPUP,
+        	        						options: {
+        	        							width: 280,
+        	        							height: 250
+        	        						},
+        	        						callback: function(){
+        	        							$('.session-timeout-login-redirect').on('click', function(){
+        	        								window.location.replace(Urls.accountShow);
+        	        							})
+        	        						}
+        	        					})
+        							}
+        						}
+        					});
+        				}, window.Scripts.sessionExpireThreshold);
+            		}
+            	}
+            })
 
         },
         //Event tracking for Brand Switch
