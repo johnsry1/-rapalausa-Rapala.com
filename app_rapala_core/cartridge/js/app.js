@@ -208,9 +208,9 @@ function initializeEvents() {
     //InitiateCheckout cart page
     $('.cart-continue-checkout').on('click', function (){
         window.fbq('track', 'InitiateCheckout',{
-            'contents': $('[name$="baskettotal"]').val(),
+            'contents': $('[name$="basketproductID"]').val(),
             'currency': $('[name$="basketcurrency"]').val(),
-            'value': $('[name$="basketproductID"]').val(),
+            'value': $('[name$="baskettotal"]').val(),
             'content_type':'product'
         });
     });
