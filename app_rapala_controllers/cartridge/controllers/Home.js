@@ -47,7 +47,17 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    app.getView().render('components/header/headercustomerinfo');
+	var basket = app.getModel('Cart').get();
+	var basketTotal = 0;
+	var basketCurrency = 'USD';
+	if (basket && basket.object.totalGrossPrice.available) {
+		basketTotal = basket.object.adjustedMerchandizeTotalGrossPrice.value;
+		basketCurrency = basket.object.currencyCode;
+	}
+    app.getView({
+        BasketTotal: basketTotal,
+        BasketCurrency: basketCurrency
+    }).render('components/header/headercustomerinfo');
 }
 
 /**
