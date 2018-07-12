@@ -47,7 +47,14 @@ function includeHeaderMenu() {
  * cached.
  */
 function includeHeaderCustomerInfo() {
-    app.getView().render('components/header/headercustomerinfo');
+	var basket = app.getModel('Cart').get();
+	var basketTotal = 0;
+	if (basket && basket.object.totalGrossPrice.available) {
+		basketTotal = basket.object.adjustedMerchandizeTotalGrossPrice.value;
+	}
+    app.getView({
+        BasketTotal: basketTotal,
+    }).render('components/header/headercustomerinfo');
 }
 
 /**

@@ -191,7 +191,8 @@ function initializeEvents() {
     //CompleteRegistration
     $('body').on('click','.register-button', function (){
         window.fbq('track','CompleteRegistration',{
-            'currency':'USD'
+            'currency': $('[name$="BasketCurrency"]').val(),
+            'value': $('[name$="BasketTotal"]').val()
         });
     });
 
@@ -228,7 +229,8 @@ function initializeEvents() {
     $('.add-to-wishlist').on('click', function (){
         window.fbq('track','AddToWishlist',{
             'content_ids': $(this).data('productid'),
-            'currency': $('[name$="basketcurrency"]').val()
+            'currency': $('[name$="basketcurrency"]').val(),
+            'value': $('[name$="baskettotal"]').val()
         });
     });
 
