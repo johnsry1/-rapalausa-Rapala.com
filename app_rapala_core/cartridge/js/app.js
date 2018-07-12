@@ -209,7 +209,7 @@ function initializeEvents() {
     //InitiateCheckout cart page
     $('.cart-continue-checkout').on('click', function (){
         window.fbq('track', 'InitiateCheckout',{
-            'contents': $('[name$="basketproductID"]').val(),
+            'content_ids': $('[name$="basketproductID"]').val(),
             'currency': $('[name$="basketcurrency"]').val(),
             'value': $('[name$="baskettotal"]').val(),
             'content_type':'product'
