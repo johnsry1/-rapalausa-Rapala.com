@@ -13,7 +13,13 @@ var app = require('*/cartridge/scripts/app');
  * The onRequest hook function.
  */
 exports.onRequest = function () {
-	
+	var isAuthenticatedCustomer = customer.isAuthenticated();
+	if(isAuthenticatedCustomer){
+		var cookie = request.httpCookies['loginStatus'];
+		if(!empty(cookie)){
+			cookie.setMaxAge(1800000);
+		}
+	}
 /*	Site Context called for every request to identify current site user is browsing
 	Sets the currentSite value to default value if the session is new */
 	require('app_rapala_core/cartridge/scripts/siteContext/SetCurrentSiteContext.ds').setSiteContext(request.httpParameterMap);

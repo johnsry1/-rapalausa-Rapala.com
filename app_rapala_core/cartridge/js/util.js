@@ -406,7 +406,28 @@ var util = {
             idx++;
         }
         return isMobile;
+    },
+
+    loggesInStatus: function(){
+
+        $.ajax({
+            url: Urls.isLoggedInCustomer,
+            success: function(d){
+                if (d.isAuthenciated) {
+                    window.isAuthenciatedUser = true;
+                    console.log(d) //eslint-disable-line
+                    var now = new Date();
+                    var minutes = 30;
+                    now.setTime(now.getTime() + (minutes * 60 * 1000));
+                    var cookievalue = d.isAuthenciated + ';'
+                    document.cookie='loginStatus=' + cookievalue;
+                    document.cookie = 'expires=' + now.toUTCString() + ';'
+                }
+
+            }
+        });
     }
+
 };
 
 module.exports = util;
