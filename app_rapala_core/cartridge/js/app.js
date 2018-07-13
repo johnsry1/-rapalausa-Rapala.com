@@ -619,6 +619,28 @@ function initializeDom() {
     }
     // load js specific styles//
     util.limitCharacters();
+    //check login status
+    util.loggesInStatus();
+    setInterval(timeoutModal, 1000);
+    //timeoutModal()
+    function timeoutModal(){
+        console.log('test')//eslint-disable-line
+        if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') < 0) {
+            dialog.open({
+                html: Resources.SESSION_TIMEOUT_MODAL,
+                options: {
+                    width: 280,
+                    height: 250
+                },
+                callback: function(){
+                    $('.session-timeout-login-redirect').on('click', function(){
+                        window.location.replace(Urls.accountShow);
+                    })
+                }
+            })
+        }
+    }
+
 }
 
 var pages = {
