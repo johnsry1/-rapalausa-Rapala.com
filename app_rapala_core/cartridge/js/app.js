@@ -622,8 +622,10 @@ function initializeDom() {
     //check login status
     util.loggesInStatus();
     setInterval(timeoutModal, 1000);
+    var i = 0;
     function timeoutModal(){
-        if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') < 0) {
+        console.log(++i) //eslint-disable-line
+        if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
             dialog.open({
                 html: Resources.SESSION_TIMEOUT_MODAL,
                 options: {
