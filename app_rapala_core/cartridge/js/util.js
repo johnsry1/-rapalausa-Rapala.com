@@ -416,12 +416,7 @@ var util = {
                     window.isAuthenciatedUser = true;
                     console.log(d) //eslint-disable-line
                     var now = new Date();
-                    //var minutes = 30;
-                    //now.setTime(now.getTime() + (minutes * 60 * 1000));
                     now.setTime(now.getTime() + 1800000);
-                    //var cookievalue = d.isAuthenciated + ';'
-                    //document.cookie='loginStatus=' + cookievalue;
-                    //document.cookie = 'expires=' + now.toUTCString() + ';path=/';
                     document.cookie = 'loginStatus=true; expires='+now.toUTCString();
                 }
 

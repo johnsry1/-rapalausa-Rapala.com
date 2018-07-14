@@ -622,8 +622,10 @@ function initializeDom() {
     //check login status
     util.loggesInStatus();
     setInterval(timeoutModal, 1000);
+    //take this line out after testing is over
     var i = 0;
     function timeoutModal(){
+        //take this line out after testing is over
         console.log(++i) //eslint-disable-line
         if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
             dialog.open({
