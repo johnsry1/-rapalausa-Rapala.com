@@ -313,7 +313,8 @@ ResourceHelper.getPreferences = function(pageContext) {
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
         CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS'),
         GTM_ENABLED: Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager'),
-        STORELOCATOR_DISTANCE_UNIT: Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').displayValue
+        STORELOCATOR_DISTANCE_UNIT: Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').displayValue,
+        sessionExpireThreshold  : dw.system.Site.getCurrent().getCustomPreferenceValue('sessionExpireThreshold')
     };
 }
 /**
