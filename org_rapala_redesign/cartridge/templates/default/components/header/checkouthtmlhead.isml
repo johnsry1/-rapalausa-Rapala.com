@@ -35,13 +35,13 @@ If you are not using the build cartridge the comments can be safely removed.
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1626799830775984',
+fbq('init', '${dw.system.Site.getCurrent().getCustomPreferenceValue('facebookPixelID')}',
 { em: 'insert_email_variable,' }
 );
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1626799830775984&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=${dw.system.Site.getCurrent().getCustomPreferenceValue('facebookPixelID')}&ev=PageView&noscript=1"
 /></noscript>
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
