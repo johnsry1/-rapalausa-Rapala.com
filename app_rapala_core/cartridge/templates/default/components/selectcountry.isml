@@ -1,0 +1,21 @@
+<!--- TEMPLATENAME: selectcountry.isml --->
+<div class="select-country-popup">
+    <div class="select-header">${Resource.msg('global.selectcountry.select','locale',null)}</div>
+    <p>${Resource.msg('global.selectcountry.currrentlyviewing','locale',null)}
+        <isif condition="${dw.system.Site.getCurrent().ID == 'rapala'}">
+            <img src="${URLUtils.staticURL('/images/us-flag.png')}" class="mini-flag"/>
+        <iselseif condition="${dw.system.Site.getCurrent().ID == 'rapalaEU'}">
+            <img src="${URLUtils.staticURL('/images/eu-flag.png')}" class="mini-flag"/>
+        </isif>
+    </p>
+    <div class="ca-eu-select">
+        <a href="https://rapala.ca/"><img src="${URLUtils.staticURL('/images/ca-flag.png')}" class="flag"/><img src="${URLUtils.staticURL('/images/shopping-icon-dark.png')}" class="shopping-cart"/>${Resource.msg('global.selectcountry.ca','locale',null)}</a>
+        <a href="https://www.rapala.com/eu-en"><img src="${URLUtils.staticURL('/images/eu-flag.png')}" class="flag"/><img src="${URLUtils.staticURL('/images/shopping-icon-dark.png')}" class="shopping-cart"/>${Resource.msg('global.selectcountry.eu','locale',null)}</a>
+    </div>
+    <div class="us-select">
+        <a href="https://www.rapala.com/"><img src="${URLUtils.staticURL('/images/us-flag.png')}" class="flag"/><img src="${URLUtils.staticURL('/images/shopping-icon-dark.png')}" class="shopping-cart"/>${Resource.msg('global.selectcountry.us','locale',null)}</a>
+    </div>
+    <p>${Resource.msg('global.selectcountry.localcountry','locale',null)}</p>
+    <a href="https://www.rapala.com/eu-en" class="select-button">${Resource.msg('global.selectcountry.international','locale',null)}</a>
+    <a href="${URLUtils.https('Home-ChangeRegion','launch','yes','id','1')}" class="select-button">${Resource.msg('global.selectcountry.distributer','locale',null)}</a>
+</div>
