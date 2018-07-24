@@ -18,9 +18,5 @@ exports.onRequest = function () {
 	Sets the currentSite value to default value if the session is new */
 	require('app_rapala_core/cartridge/scripts/siteContext/SetCurrentSiteContext.ds').setSiteContext(request.httpParameterMap);
 	ltkActivityTracking.TrackRequest();
-	if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'request') {
-		var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
-		app.getController('GeoipRedirects').geolocationRestrictions();
-    }
     return new Status(Status.OK);
 };

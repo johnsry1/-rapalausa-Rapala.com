@@ -45,9 +45,5 @@ function getDeviceType() {
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
-    if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
-		app.getController('GeoipRedirects').geolocationRestrictions();
-    }
-    app.getController('GeoipRedirects').geoIpDefaultCurrency();
     return new Status(Status.OK);
 };
