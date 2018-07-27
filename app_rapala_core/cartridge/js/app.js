@@ -637,13 +637,9 @@ function initializeDom() {
     // load js specific styles//
     util.limitCharacters();
     //check login status
-    util.loggesInStatus();
+    util.loggedInStatus();
     setInterval(timeoutModal, 1000);
-    //take this line out after testing is over
-    var i = 0;
     function timeoutModal(){
-        //take this line out after testing is over
-        console.log(++i) //eslint-disable-line
         if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
             dialog.open({
                 html: Resources.SESSION_TIMEOUT_MODAL,
@@ -651,6 +647,9 @@ function initializeDom() {
                     width: 280,
                     height: 250,
                     dialogClass: 'session-warning',
+                    close: function () { 
+                        window.isAuthenciatedUser = false; 
+                    },
                     buttons: [{
                         text: 'Log In',
                         click: function(){
