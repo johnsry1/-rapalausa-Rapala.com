@@ -2,9 +2,9 @@
 <div class="select-country-popup">
     <div class="select-header">${Resource.msg('global.selectcountry.select','locale',null)}</div>
     <p>${Resource.msg('global.selectcountry.currrentlyviewing','locale',null)}
-        <isif condition="${dw.system.Site.getCurrent().ID == 'rapala'}">
+        <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('siteLocale') == 'US'}">
             <img src="${URLUtils.staticURL('/images/us-flag.png')}" class="mini-flag"/>
-        <iselseif condition="${dw.system.Site.getCurrent().ID == 'rapalaEU'}">
+        <iselseif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('siteLocale') == 'EU'}">
             <img src="${URLUtils.staticURL('/images/eu-flag.png')}" class="mini-flag"/>
         </isif>
     </p>
