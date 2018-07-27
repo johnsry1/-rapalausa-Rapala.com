@@ -408,13 +408,12 @@ var util = {
         return isMobile;
     },
 
-    loggesInStatus: function(){
+    loggedInStatus: function(){
         $.ajax({
             url: Urls.isLoggedInCustomer,
             success: function(d){
                 if (d.isAuthenciated) {
                     window.isAuthenciatedUser = true;
-                    console.log(d) //eslint-disable-line
                     var now = new Date();
                     now.setTime(now.getTime() + SitePreferences.sessionExpireThreshold);
                     document.cookie = 'loginStatus=true; expires='+now.toUTCString();
