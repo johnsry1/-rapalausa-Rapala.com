@@ -597,7 +597,7 @@ var headerEvents = {
 var headerinit = {
     init: function () {
         headerEvents.initializeEvent();
-        headerEvents.userTimeout();
+        //headerEvents.userTimeout();
     }
 };
 
