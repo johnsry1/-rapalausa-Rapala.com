@@ -25,6 +25,7 @@ function initQuickViewrecommButtons() {
             url: $(this).attr('href').split('#')[0], //PREV JIRA PREV-255 :PLP: On Click Quick view navigating to a wrong page when user first changes the swatches. Taking only href.
             source: 'quickview'
         });
+        $('#QuickViewDialog').addClass('recommendation');
     });
 }
 
