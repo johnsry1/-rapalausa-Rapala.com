@@ -401,7 +401,7 @@
             var prop65 = dw.content.ContentMgr.getContent('prop65-warning');
         </isscript>
         <isif condition="${prop65.onlineFlag == true && !empty(prop65.custom.body)}">
-            <div class="prop-65"><img src ="${URLUtils.staticURL('/images/warning.svg')}" /><isprint value="${prop65.custom.body}" encoding="off"/></div>
+            <div class="prop-65"><isprint value="${prop65.custom.body}" encoding="off"/></div>
         </isif>
                 
 	<iscomment>This is ugly, but it works until we can get a better solution</iscomment>
