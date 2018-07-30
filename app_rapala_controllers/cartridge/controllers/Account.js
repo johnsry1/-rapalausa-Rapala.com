@@ -18,7 +18,7 @@ var Transaction = require('dw/system/Transaction');
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkSignupEmail.js');
-var Countries = require('*/cartridge/scripts/util/Countries');
+
 /**
  * Gets a ContentModel object that wraps the myaccount-home content asset,
  * updates the page metadata, and renders the account/accountoverview template.
@@ -453,14 +453,8 @@ function signInHeader() {
 		if(success){
 			app.getForm('login').invalidate();
 			var TempCustomer = Customer.get();
-			var customerGroups = TempCustomer.object.customerGroups;
-			app.getController('Account').SetPriceBookFromCustomerGroups(customerGroups);
-			var countryCode = Countries.getCurrent({
-				CurrentRequest: {
-					locale: request.locale
-				}
-				}).countryCode;
-			session.custom.customerCountryCode = countryCode ? countryCode : '';
+        	var customerGroups =TempCustomer.object.customerGroups;
+        	app.getController('Account').SetPriceBookFromCustomerGroups(customerGroups);
 			Message.process = "sign-in";
 			Message.status = "success";
 			Message.email = tempCustomer.object.profile.email;

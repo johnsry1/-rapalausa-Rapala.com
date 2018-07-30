@@ -172,3 +172,7 @@ function geoIpDefaultCurrency() {
         }
     }
 }
+
+
+exports.geolocationRestrictions = geolocationRestrictions;
+exports.geoIpDefaultCurrency = geoIpDefaultCurrency;
