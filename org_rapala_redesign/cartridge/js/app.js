@@ -111,23 +111,6 @@ function changeRegionPopUp() {
     });
 }
 
-function selectCountry() {
-    if (sessionStorage.getItem('selectCountry') == undefined) {
-        var selectCountryDialog = dialog.create({
-            target: $('.select-country-popup'),
-            options: {
-                height: 615,
-                width: 300,
-                dialogClass: 'select-country',
-                close: function () { 
-                    sessionStorage.setItem('selectCountry','closed');
-                }
-            }
-        });
-        selectCountryDialog.dialog('open');
-    }
-}
-
 function initializeEvents() {
     var isSafari = navigator.userAgent.indexOf('Safari') > -1;
     var isChrome = navigator.userAgent.indexOf('Chrome') > -1;
@@ -607,7 +590,6 @@ function initializeEvents() {
     if ($('.remove-bottom-button').length > 0) {
         $('.style-cservice').find('.content-back-button').remove();
     }
-    
 }
 /**
  * @private
@@ -705,7 +687,6 @@ var app = {
         megamenu.init();
         headerinit.init();
         searchplaceholder.init();
-        selectCountry();
         if (SitePreferences.GTM_ENABLED) {
             tagmanager.init(window.pageContext.ns);
         }
