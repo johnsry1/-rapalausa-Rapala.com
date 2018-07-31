@@ -180,7 +180,8 @@ ResourceHelper.getResources = function(pageContext) {
 	    GA_ACTION_PDPVIEW               : Resource.msg('gAnalytics.events.quickview','events',null),
 	    GA_CATEGORY_BRAND				: Resource.msg('gAnalytics.events.brand', 'events', null),
 
-	    ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null)
+	    ADYEN_CC_VALIDATE 				: Resource.msg('adyen.creditcard', 'adyen', null),
+	    SESSION_TIMEOUT_MODAL			: Resource.msg('global.sessionexpired', 'locale', null)
     };
 
     // additional resources
@@ -291,10 +292,11 @@ ResourceHelper.getUrls = function(pageContext) {
         internationalHomeCountyPopUp: URLUtils.url('Home-CountyPopUp').toString(),
         sessionWarning				: URLUtils.url('Home-SessionWarnPopUp').toString(),
         sessionExpired				: URLUtils.url('Home-SessionExpiredPopUp').toString(),
-
+		isLoggedInCustomer			: URLUtils.url('LoginUtil-IsLoggedInCustomer').toString(),
         //Dymanic address update url
         getStateHtml                : URLUtils.url('Avs-GetStateHtml').toString(),
-        getPhoneHtml                : URLUtils.url('Avs-GetPhoneHtml').toString()
+        getPhoneHtml                : URLUtils.url('Avs-GetPhoneHtml').toString(),
+        accountShow                 : URLUtils.url('Account-Show').toString()
     };
     return urls;
 }
@@ -311,7 +313,8 @@ ResourceHelper.getPreferences = function(pageContext) {
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
         CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS'),
         GTM_ENABLED: Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager'),
-        STORELOCATOR_DISTANCE_UNIT: Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').displayValue
+        STORELOCATOR_DISTANCE_UNIT: Site.getCurrent().getCustomPreferenceValue('storeLookupUnit').displayValue,
+        sessionExpireThreshold  : dw.system.Site.getCurrent().getCustomPreferenceValue('sessionExpireThreshold')
     };
 }
 /**
