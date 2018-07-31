@@ -604,7 +604,31 @@ function initializeDom() {
     }
     // load js specific styles//
     util.limitCharacters();
-
+    //check login status
+    util.loggedInStatus();
+    setInterval(timeoutModal, 1000);
+    function timeoutModal(){
+        if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
+            dialog.open({
+                html: Resources.SESSION_TIMEOUT_MODAL,
+                options: {
+                    width: 280,
+                    height: 250,
+                    dialogClass: 'session-warning',
+                    close: function () { 
+                        window.isAuthenciatedUser = false; 
+                    },
+                    buttons: [{
+                        text: 'Log In',
+                        click: function(){
+                            window.location.replace(Urls.accountShow);
+                        },
+                        class : 'greybutton timeout-modal-redirect'
+                    }]
+                }
+            })
+        }
+    }
     // Make sure that the SVGs work properly in older browsers
     /*eslint-disable */
     svg4everybody();
