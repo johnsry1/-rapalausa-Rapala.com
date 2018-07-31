@@ -193,6 +193,7 @@
 												<iselse>
 													<label for="Quantity">${Resource.msg('global.qty','locale',null)}:</label>
 													<input class="input-text" type="number" min="0" step="1" name="Quantity" value="<isprint value="${item.quantity.value}" formatter="#"/>"/>
+													<input type="hidden" id="pid" value="${item.object.product.ID}"/>
 													<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" id="add-to-cart" class="button-fancy-small addtocartbutton <isif condition="${!isGiftCert}">add-to-cart</isif>"<isif condition="${!isGiftCert}">data-gtmdata="${JSON.stringify(tagManager.getProductData(item.object.product.ID))}"</isif>>
 														${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 													</button>

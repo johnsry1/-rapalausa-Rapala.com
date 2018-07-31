@@ -125,11 +125,25 @@
         position: absolute;
         display: block;
     }
+    .ui-dialog-titlebar {
+        height: 34px;
+        .ui-dialog-titlebar-close {
+            right: 0;
+            span {
+                left: initial;
+                right: 8px;
+                top: -5px;
+            }
+        }
+    }
 }
 
 .quickview-nav {
     .quickview-next {
         float: right;
+    }
+    .cell {
+        padding: 0 18px 18px;
     }
 }
 
@@ -141,6 +155,9 @@
             .product-image-container {
                 .rollover-to-zoom {
                     display: none;
+                }
+                .cell {
+                    padding: 0 18px 18px;
                 }
             }
             .productinfo {
@@ -202,6 +219,8 @@
                         background: transparent;
                         width: 100%;
                         box-sizing: border-box;
+                        margin-top: 0;
+                        padding: 0 18px 18px;
                     }
                     ~ .clear {
                         height: auto !important;

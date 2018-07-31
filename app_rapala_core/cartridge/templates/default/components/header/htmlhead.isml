@@ -59,8 +59,8 @@ If you are not using the build cartridge the comments can be safely removed.
 </iscomment>
 
 <iscomment>Automatic generation for meta tags.</iscomment>
-<meta name="description" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.description)}">${pdict.CurrentPageMetaData.description}</isif> ${Resource.msg('global.storename','locale',null)}"/>
-<meta name="keywords" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.keywords)}">${pdict.CurrentPageMetaData.keywords}</isif> ${Resource.msg('global.storename','locale',null)}"/>
+<meta name="description" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.description)}">${pdict.CurrentPageMetaData.description}</isif>"/>
+<meta name="keywords" content=" <isif condition="${!empty(pdict.CurrentPageMetaData.keywords)}">${pdict.CurrentPageMetaData.keywords}</isif>"/>
 <iscomment>Commission Junction Script</iscomment>
 <isinclude template="components/header/cjtag" />
 <isinclude url="${URLUtils.url('CommissionJunction-SetCookie','AID',pdict.CurrentHttpParameterMap.AID,'PID',pdict.CurrentHttpParameterMap.PID,'SID',pdict.CurrentHttpParameterMap.SID,'source',pdict.CurrentHttpParameterMap.source,'pub',pdict.CurrentHttpParameterMap.pub,'LINK',pdict.CurrentHttpParameterMap.LINK,'CID',pdict.CurrentHttpParameterMap.CID)}" />
@@ -106,24 +106,7 @@ If you are not using the build cartridge the comments can be safely removed.
 <![endif]-->
 
 <script src="${URLUtils.staticURL('/js/googleAnalyticsEvents.js')}"></script>
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function()
-{n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}
-;if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '614476985424640',
-{ em: 'insert_email_variable,' }
-);
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
-/></noscript>
-<!-- DO NOT MODIFY -->
-<!-- End Facebook Pixel Code -->
+
 
 <iscomment>THEME STYLESHEETS</iscomment>
 
@@ -144,3 +127,11 @@ src="https://www.facebook.com/tr?id=614476985424640&ev=PageView&noscript=1"
 
 <iscomment>Gather device-aware scripts</iscomment>    
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>
+<!-- Facebook Pixel Code --> <script> !function(f,b,e,v,n,t,s) 
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; 
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; 
+t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window,document,'script', 
+'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '${dw.system.Site.getCurrent().getCustomPreferenceValue('facebookPixelID')}'); fbq('track', 'PageView'); 
+</script> <noscript> <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=${dw.system.Site.getCurrent().getCustomPreferenceValue('facebookPixelID')}&ev=PageView &noscript=1"/> </noscript> 
+<!-- End Facebook Pixel Code -->

@@ -408,6 +408,20 @@ var util = {
             scrollTop: xLocation
         }, 500);
     },
+    loggedInStatus: function(){
+        $.ajax({
+            url: Urls.isLoggedInCustomer,
+            success: function(d){
+                if (d.isAuthenciated) {
+                    window.isAuthenciatedUser = true;
+                    var now = new Date();
+                    now.setTime(now.getTime() + SitePreferences.sessionExpireThreshold);
+                    document.cookie = 'loginStatus=true; expires='+now.toUTCString();
+                }
+
+            }
+        });
+    },
 
     isMobile: function () {
         var mobileAgentHash = ['mobile', 'tablet', 'phone', 'ipad', 'ipod', 'android', 'blackberry', 'windows ce', 'opera mini', 'palm'];
