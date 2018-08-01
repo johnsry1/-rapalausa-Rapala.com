@@ -416,7 +416,7 @@
 												<iscomment>Get SalesPrice from line item itself.</iscomment>
 												<isif condition="${lineItem.bonusProductLineItem}">
 												<isset name="SalesPrice" value="${Resource.msg('global.bonusprice','locale',null)}" scope="page"/>
-													<span class="value freegift"><strike><isprint value="${lineItem.getPrice()}"/></strike> <span class="salesprice"> <isprint value="${SalesPrice}"/></span></span>
+													<span class="value freegift"><strike><isprint value="${lineItem.getPrice()}"/></strike> <span class="salesprice"> ${session.currency.symbol}<isprint value="${SalesPrice}"/></span></span>
 												<iselse>
 													<isif condition="${lineItem.priceAdjustments.length > 0}">
 														<isset name="SalesPrice" value="${lineItem.getAdjustedPrice()/lineItem.quantityValue}" scope="page"/>
@@ -426,7 +426,7 @@
 
 												</isif>
 
-												<isif condition="${StandardPrice.available && StandardPrice > SalesPrice}">
+												<isif condition="${StandardPrice.available && StandardPrice > SalesPrice && !lineItem.bonusProductLineItem}">
 													<iscomment>StandardPrice and SalesPrice are different.  Show both.</iscomment>
 													<div class="price">
 														<div class="discountprice">
