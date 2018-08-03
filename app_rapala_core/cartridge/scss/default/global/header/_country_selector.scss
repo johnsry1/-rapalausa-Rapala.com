@@ -168,3 +168,102 @@
     left: 93px;
     top: -19px;
 }
+
+.select-country {
+    div.ui-dialog-titlebar {
+        height: 0px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    button.ui-dialog-titlebar-close {
+        top: -10px;
+        right: -20px;
+        margin: 0;
+        padding: 0;
+        .ui-button-icon-primary {
+            background-image: url("../images/close-button.png");
+            background-position: 0 0;
+        }
+        span {
+            left: initial;
+            right: 5px;
+            top: -5px;
+        }
+    }
+    div.select-country-popup {
+        display: block;
+        padding: 15px 10px 0px 8px;
+        clear: both;
+        a,
+        p,
+        div {
+            font-family: $global-font-family;
+            text-align: center;
+            color: #4d4d4d;
+        }
+        .select-header {
+            font-size: 18px;
+            margin: 0 auto 10px;
+        }
+        img.mini-flag {
+            width: 12px;
+            vertical-align: middle;
+            margin: -3px 0 0 0;
+        }
+        img.flag {
+            width: 100px;
+            display: block;
+            margin: 12px auto;
+        }
+        img.shopping-cart {
+            margin: 0 3px 0 0;
+            vertical-align: middle;
+        }
+        .ca-eu-select {
+            border-top: 1px solid $border-lightgrey;
+            border-bottom: 1px solid $border-lightgrey;
+            a {
+                font-size: 12px;
+                display: inline-block;
+                width: 49%;
+                outline: none;
+                vertical-align: middle;
+                padding: 0 0 10px 0;
+                box-sizing: border-box;
+                &:first-of-type {
+                    border-right: 1px solid $border-lightgrey;
+                }
+            }
+        }
+        .us-select {
+            margin: 20px auto;
+            a {
+                font-size: 12px;
+            }
+        }
+        a.select-button {
+            background: rgb(239,239,239); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(220,220,220,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(239,239,239,1) 0%,rgba(220,220,220,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(239,239,239,1) 0%,rgba(220,220,220,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
+            font-size: 14px;
+            border: 1px solid #DCDCDC;
+            display: block;
+            overflow: hidden;
+            letter-spacing: 0;
+            line-height: 45px;
+            height: 45px;
+            padding: 0;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -ms-border-radius: 3px;
+            width: 100%;
+            &:first-of-type {
+                margin-bottom: 24px;
+            }
+        }
+    }
+}
