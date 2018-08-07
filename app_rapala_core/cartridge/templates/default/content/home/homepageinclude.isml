@@ -4,7 +4,11 @@
 <isinclude template="util/modules"/>
 
 <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '1'}">
-  <isredirect location="${URLUtils.url('Search-Show','cgid','dw.system.Site.getCurrent().getCustomPreferenceValue('homeCategoryID')')}" />
+	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isUseCategoryOnHomePage')}">
+		<isredirect location="${URLUtils.url('Search-Show','cgid','dw.system.Site.getCurrent().getCustomPreferenceValue('homeCategoryID')')}" />
+	<islese>
+		<isredirect location="${URLUtils.url('Page-Show','cid','dw.system.Site.getCurrent().getCustomPreferenceValue('homeCategoryID')')}" />
+	</isif>
 </isif>
  <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '2'}">
   <isredirect location="${URLUtils.url('Search-Show','cgid','sufix-home')}" />
