@@ -4,7 +4,7 @@
 <isinclude template="util/modules"/>
 
 <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '1'}">
-  <isredirect location="${URLUtils.url('Search-Show','cgid','rapala-home')}" />
+  <isredirect location="${URLUtils.url('Search-Show','cgid','dw.system.Site.getCurrent().getCustomPreferenceValue('homeCategoryID')')}" />
 </isif>
  <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '2'}">
   <isredirect location="${URLUtils.url('Search-Show','cgid','sufix-home')}" />
