@@ -124,6 +124,9 @@ function selectCountry() {
             }
         });
     }
+    $('body').on('click', '.select-country a', function (){
+        sessionStorage.setItem('selectCountry','closed');
+    });
 }
 
 function initializeEvents() {
