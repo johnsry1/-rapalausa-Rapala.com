@@ -11,12 +11,11 @@
 <div class="select-country-popup">
     <div class="select-header">${Resource.msg('global.selectcountry.select','locale',null)}</div>
     <p>${Resource.msg('global.selectcountry.currrentlyviewing','locale',null)}
-    <isset name="countryCode" value="${require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode}" scope="page" />
-        <isif condition="${countryCode == 'US'}">
-            <img src="${URLUtils.staticURL('/images/us-flag.png')}" class="mini-flag"/>
-        <iselseif condition="${countryCode == 'EU'}">
-            <img src="${URLUtils.staticURL('/images/eu-flag.png')}" class="mini-flag"/>
-        </isif>
+    <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('siteLocale') == 'US'}">
+        <img src="${URLUtils.staticURL('/images/us-flag.png')}" class="mini-flag"/>
+     <iselseif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('siteLocale') == 'EU'}">
+        <img src="${URLUtils.staticURL('/images/eu-flag.png')}" class="mini-flag"/>
+    </isif>
     </p>
     <div class="ca-eu-select">
         <a href="${caUrl}"><img src="${URLUtils.staticURL('/images/ca-flag.png')}" class="flag"/><img src="${URLUtils.staticURL('/images/shopping-icon-dark.png')}" class="shopping-cart"/>${Resource.msg('global.selectcountry.ca','locale',null)}</a>
