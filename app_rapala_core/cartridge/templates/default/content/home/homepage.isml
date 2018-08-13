@@ -10,12 +10,13 @@
 	</div>
 
 	<div id="content">
-		<div class="homepage"><!-- +1.888.553.9216 --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demadware customers can remove this.-->
-			<div class="wrapper">
+		<div id="page-background" class="downshift"><!-- +1.888.553.9216 --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demadware customers can remove this.-->
+			<div id="page">
+            <div class="wrapper">
 				<div class="row column1">
-					<div class="column cell1">
-						<div id="slideshow" class="cell skin-slidedeck">	
-							<dl id="slide_deck" class="slidedeck">
+                            <div class="column cell1">
+                                <div class="cell upshift contentbox">
+                                    <div class="contentboxcontent">
 								<isif condition="${'rapala' == session.custom.currentSite}">
 									<isslot id="brand-rapala-homepage-main" description="This is the Rapala brand slideshow content." context="global" />
 							    <iselseif condition="${'sufix' == session.custom.currentSite}">
@@ -51,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+            <iscomment> RPS-263 - Commenting out since only want to show content id: shop-by-brand
 			<div id="page-background" class="upshift">
 				<div id="page">
 					<div class="wrapper">
@@ -156,7 +158,13 @@
 					</div>
 				</div>
 			</div>
-		</div>
+            </iscomment>
+            
+		              </div>
+                </div>
+            </div>
+        </div>
+       
 	</div>
 	
 </isdecorate>
