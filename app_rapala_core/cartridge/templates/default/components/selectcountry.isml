@@ -1,11 +1,12 @@
 <!--- TEMPLATENAME: selectcountry.isml --->
     <isscript>
     var URLAction = require('dw/web/URLAction');
-    var action = new URLAction('Home-Show', 'rapala', 'default', pdict.CurrentRequest.httpHost);
+    var action = new URLAction('Home-Show', 'rapala', 'default');
     var usaUrl = 'https://' + pdict.CurrentRequest.httpHost + URLUtils.url.apply(null, [action]);
-    action = new URLAction('Home-Show', 'rapala', 'en_CA', pdict.CurrentRequest.httpHost);
-    var caUrl = 'https://' + pdict.CurrentRequest.httpHost + URLUtils.url.apply(null, [action]);
-    action = new URLAction('Home-Show', 'rapalaEU', 'default', pdict.CurrentRequest.httpHost);
+
+    var caUrl = ${dw.system.Site.getCurrent().getCustomPreferenceValue('rapalaCanadaUrl');
+
+    action = new URLAction('Home-Show', 'rapalaEU', 'default');
     var rapalaEUurl = 'https://' + pdict.CurrentRequest.httpHost + URLUtils.url.apply(null, [action]);
     </isscript>
 <div class="select-country-popup">
