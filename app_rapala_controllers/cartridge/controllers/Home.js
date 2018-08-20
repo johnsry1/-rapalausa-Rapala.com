@@ -194,9 +194,6 @@ function sessionExpiredPopUp() {
 	app.getView().render('components/session_expired_popup');
 }
 
-function showFirstVisitSite() {
-	app.getView().render('components/selectcountry');
-}
 /*
  * Export the publicly available controller methods
  */
@@ -261,6 +258,3 @@ exports.CountyPopUp = guard.ensure(['get'], countyPopUp);
 exports.SessionWarnPopUp = guard.ensure(['get'], sessionWarnPopUp);
 
 exports.SessionExpiredPopUp = guard.ensure(['get'], sessionExpiredPopUp);
-
-exports.ShowFirstVisitSite = guard.ensure(['get'], showFirstVisitSite);
-
