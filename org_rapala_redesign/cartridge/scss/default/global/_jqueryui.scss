@@ -18,6 +18,12 @@
         @include h2;
         font-family: $font-third;
     }
+    .ui-dialog-titlebar {
+        span.ui-icon-closethick {
+            background: url('../images/svg-icons/close-dialog.svg') no-repeat center;
+            top: -3px;
+        }
+    }
     .ui-dialog-titlebar-close {
         margin: 0 rem(-5px) 0 0;
         right: 0;
@@ -30,15 +36,13 @@
         @include respond(large-up) {
             margin: 0 rem(-20px) 0 0;
         }
-    }
-    .ui-icon-closethick {
-        background: url('../images/svg-icons/close-dialog.svg') no-repeat center;
-        top: 0;
-        left: 0;
         &:hover {
-            background-position: center;
+            .ui-icon-closethick {
+                background-position: center;
+            }
         }
     }
+    
     .ui-dialog-content {
         padding: rem(10px) rem(5px);
         @include respond(large-up) {
