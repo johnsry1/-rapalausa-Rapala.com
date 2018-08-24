@@ -6,6 +6,16 @@
 	var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
 	var caLink=URLUtils.url('Home-SetLocale', 'locale', 'en_CA');
 	var euLink='/eu-en';
+	
+	if (dw.system.Site.getCurrent().ID == 'rapalaEU') {
+		currentCountry = 'eu';
+		var usLink=usLink.toString().replace('rapalaEU', 'rapala');
+		var caLink=caLink.toString().replace('rapalaEU', 'rapala');
+	}
+	
+	if (!empty(pdict.Product)) {
+		let product = pdict.Product;
+	}
 
 	session.custom.showCountryPopup = false;
 </isscript>

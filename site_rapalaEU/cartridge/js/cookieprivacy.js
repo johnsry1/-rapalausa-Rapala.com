@@ -1,6 +1,8 @@
 'use strict';
 
-var ajax = require('./ajax');
+var ajax = require('./ajax'),
+    dialog = require('./dialog'),
+    SessionAttributes = window.SessionAttributes;
 
 /**
  * @function cookieprivacy    Used to display/control the scrim containing the cookie privacy code
@@ -34,6 +36,15 @@ module.exports = function () {
     } else {
         // Otherwise, we don't need to show the asset, just enable the cookies
         enableCookies();
+    }
+    if (SessionAttributes.SHOW_COUNTRY_POPUP) {
+        dialog.open({
+            url: Urls.countrySelectorPopup,
+            options: {
+                width: 300,
+                height: 575
+            }
+        });
     }
 
     function enableCookies() {

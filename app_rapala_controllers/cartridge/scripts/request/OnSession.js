@@ -43,6 +43,20 @@ function getDeviceType() {
 function showCountryPopup() {
 	var showPopup = true;
 	
+	// check for cookie
+	let cookies : dw.web.Cookies = request.getHttpCookies();
+	for (let i = 0; i < cookies.getCookieCount(); i++) {
+		let cookie : dw.web.Cookie = cookies[i];
+		if (cookie.name === 'CountrySelectorViewed') {
+			return showPopup = false;
+		}
+	}
+	// set cookie
+	let cookie : dw.web.Cookie = new dw.web.Cookie('CountrySelectorViewed','true');
+	cookie.setMaxAge(86400*360*10);
+	cookie.setPath("/");
+	response.addHttpCookie(cookie);
+	
 	return showPopup;
 }
 
