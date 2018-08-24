@@ -53,10 +53,10 @@ function showCountryPopup() {
 	}
 	
 	// check if a brand page or PDP is being accessed directly
-	if (request.httpParameterMap.isParameterSubmitted('cgid')) {
-		return showPopup = false;
-	} else if (request.httpParameterMap.isParameterSubmitted('pid')) {
+	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
+	} else if (request.httpParameterMap.isParameterSubmitted('cgid')) {
+		return showPopup = false;
 	}
 	
 	// set cookie
