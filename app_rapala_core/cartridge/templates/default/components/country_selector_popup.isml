@@ -14,6 +14,10 @@
 		var caLink=caLink.toString().replace('rapalaEU', 'rapala');
 	}
 	
+	if (request.currentLocale == 'en_CA') {
+		currentCountry = 'ca';
+	}
+	
 	if (session.custom.hasOwnProperty('countrySelectorPid')) {
 		let productID = session.custom.countrySelectorPid;
 		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU', 'rapala');

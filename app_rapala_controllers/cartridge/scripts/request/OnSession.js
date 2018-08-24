@@ -51,16 +51,20 @@ function showCountryPopup() {
 			return showPopup = false;
 		}
 	}
+	
+	// check if a brand page or PDP is being accessed directly
+	var test = request.httpParameterMap;
+	if (request.httpParameterMap.isParameterSubmitted('cgid')) {
+		return showPopup = false;
+	} else if (request.httpParameterMap.isParameterSubmitted('pid')) {
+		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
+	}
+	
 	// set cookie
 	let cookie : dw.web.Cookie = new dw.web.Cookie('CountrySelectorViewed','true');
 	cookie.setMaxAge(86400*360*10);
 	cookie.setPath("/");
 	response.addHttpCookie(cookie);
-	
-	// check if a PDP is being accessed directly
-	if (request.httpParameterMap.pid) {
-		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
-	}
 	
 	return showPopup;
 }
