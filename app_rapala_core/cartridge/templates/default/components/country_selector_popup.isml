@@ -2,19 +2,23 @@
 <isinclude template="util/modules"/>
 <isscript>
 	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
+	var currentSite = dw.system.Site.getCurrent();
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
 	var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
 	var caLink=URLUtils.url('Home-SetLocale', 'locale', 'en_CA');
 	var euLink='/eu-en';
 	
-	if (dw.system.Site.getCurrent().ID == 'rapalaEU') {
+	if (currentSite.ID == 'rapalaEU') {
 		currentCountry = 'eu';
 		var usLink=usLink.toString().replace('rapalaEU', 'rapala');
 		var caLink=caLink.toString().replace('rapalaEU', 'rapala');
 	}
 	
-	if (!empty(pdict.Product)) {
-		let product = pdict.Product;
+	if (session.custom.hasOwnProperty('countrySelectorPid')) {
+		let productID = session.custom.countrySelectorPid;
+		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU', 'rapala');
+		var caLink=URLUtils.url('Product-ShowInLocale', 'pid', productID, 'locale', 'en_CA').toString().replace('rapalaEU', 'rapala');
+		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapala', 'rapalaEU');
 	}
 
 	session.custom.showCountryPopup = false;

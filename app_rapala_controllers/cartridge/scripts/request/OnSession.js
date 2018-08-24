@@ -57,6 +57,11 @@ function showCountryPopup() {
 	cookie.setPath("/");
 	response.addHttpCookie(cookie);
 	
+	// check if a PDP is being accessed directly
+	if (request.httpParameterMap.pid) {
+		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
+	}
+	
 	return showPopup;
 }
 
