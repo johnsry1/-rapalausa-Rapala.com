@@ -53,7 +53,6 @@ function showCountryPopup() {
 	}
 	
 	// check if a brand page or PDP is being accessed directly
-	var test = request.httpParameterMap;
 	if (request.httpParameterMap.isParameterSubmitted('cgid')) {
 		return showPopup = false;
 	} else if (request.httpParameterMap.isParameterSubmitted('pid')) {
