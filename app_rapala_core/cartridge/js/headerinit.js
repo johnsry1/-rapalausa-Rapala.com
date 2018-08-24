@@ -2,7 +2,8 @@
 
 var //uievents = require('./uievents'),
     dialog = require('./dialog'),
-    progress = require('./progress');
+    progress = require('./progress'),
+    SessionAttributes = window.SessionAttributes;
 
 //var $con = $('body');
 var appGlobal = {
@@ -30,6 +31,17 @@ var headerEvents = {
                 }
             });
         });
+
+        if (SessionAttributes.SHOW_COUNTRY_POPUP) {
+            dialog.open({
+                url: Urls.countrySelectorPopup,
+                options: {
+                    width: 300,
+                    height: 575
+                }
+            });
+        }
+        
         //label text color change on submit
         if ($('.account-logs').length > 0 || $('.new-register').length > 0 || $('.wish-logs').length > 0 || $('.createan-account').length > 0 || $('.headercustomerinfo').length > 0 || $('.ui-login').length > 0 || $('.passwordreset').length > 0) {
             $('.formactions button').click(function () {

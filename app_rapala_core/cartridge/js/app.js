@@ -603,6 +603,7 @@ function initializeEvents() {
             });
         }
     });
+    
     changeRegionPopUp();
 }
 

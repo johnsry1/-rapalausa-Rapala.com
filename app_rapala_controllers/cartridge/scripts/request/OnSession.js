@@ -40,11 +40,18 @@ function getDeviceType() {
     return deviceType;
 }
 
+function showCountryPopup() {
+	var showPopup = true;
+	
+	return showPopup;
+}
+
 /**
  * The onSession hook function.
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
+    session.custom.showCountryPopup = showCountryPopup();
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
