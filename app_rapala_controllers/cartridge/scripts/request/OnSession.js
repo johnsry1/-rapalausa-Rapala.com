@@ -12,6 +12,7 @@ var Status = require('dw/system/Status');
 
 var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
 var app = require('*/cartridge/scripts/app');
+var URLUtils = require('dw/web/URLUtils');
 /**
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
@@ -51,11 +52,13 @@ function showCountryPopup() {
 			return showPopup = false;
 		}
 	}
-	
+	var test = request;
 	// check if a brand page or PDP is being accessed directly
 	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
 	} else if (request.httpParameterMap.isParameterSubmitted('cgid')) {
+		return showPopup = false;
+	} else if (request.geolocation.countryCode == 'US' && (request.httpPath == URLUtils.url('Home-Show') || request.httpPath == '/on/demandware.store/Sites-rapala-Site')) {
 		return showPopup = false;
 	}
 	

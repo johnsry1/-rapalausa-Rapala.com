@@ -201,7 +201,7 @@ function countrySelectorPopUp() {
 
 function setLocale() {
 	session.custom.selectedCountry = request.httpParameterMap.locale;
-	response.redirect(URLUtils.url('Home-Show'));
+	response.redirect(URLUtils.url('Page-Show','cid', 'shop-by-brand'));
 }
 /*
  * Export the publicly available controller methods
