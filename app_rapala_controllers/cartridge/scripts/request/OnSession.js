@@ -52,7 +52,7 @@ function showCountryPopup() {
 			return showPopup = false;
 		}
 	}
-	var test = request;
+
 	// check if a brand page or PDP is being accessed directly
 	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
