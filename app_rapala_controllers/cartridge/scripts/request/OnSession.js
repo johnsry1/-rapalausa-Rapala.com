@@ -58,8 +58,6 @@ function showCountryPopup() {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
 	} else if (request.httpParameterMap.isParameterSubmitted('cgid')) {
 		return showPopup = false;
-	} else if (request.geolocation.countryCode == 'US' && (request.httpPath == URLUtils.url('Home-Show') || request.httpPath == '/on/demandware.store/Sites-rapala-Site')) {
-		return showPopup = false;
 	}
 	
 	// set cookie
