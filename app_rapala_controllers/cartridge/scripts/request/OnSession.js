@@ -12,6 +12,7 @@ var Status = require('dw/system/Status');
 
 var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
 var app = require('*/cartridge/scripts/app');
+var URLUtils = require('dw/web/URLUtils');
 /**
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
@@ -40,11 +41,40 @@ function getDeviceType() {
     return deviceType;
 }
 
+function showCountryPopup() {
+	var showPopup = true;
+	
+	// check for cookie
+	let cookies : dw.web.Cookies = request.getHttpCookies();
+	for (let i = 0; i < cookies.getCookieCount(); i++) {
+		let cookie : dw.web.Cookie = cookies[i];
+		if (cookie.name === 'CountrySelectorViewed') {
+			return showPopup = false;
+		}
+	}
+
+	// check if a brand page or PDP is being accessed directly
+	if (request.httpParameterMap.isParameterSubmitted('pid')) {
+		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
+	} else if (request.httpParameterMap.isParameterSubmitted('cgid')) {
+		return showPopup = false;
+	}
+	
+	// set cookie
+	let cookie : dw.web.Cookie = new dw.web.Cookie('CountrySelectorViewed','true');
+	cookie.setMaxAge(86400*360*10);
+	cookie.setPath("/");
+	response.addHttpCookie(cookie);
+	
+	return showPopup;
+}
+
 /**
  * The onSession hook function.
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
+    session.custom.showCountryPopup = showCountryPopup();
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }

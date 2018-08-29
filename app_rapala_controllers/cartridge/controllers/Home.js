@@ -8,6 +8,7 @@
 
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
+var URLUtils = require('dw/web/URLUtils');
 
 /**
  * Renders the home page.
@@ -194,6 +195,14 @@ function sessionExpiredPopUp() {
 	app.getView().render('components/session_expired_popup');
 }
 
+function countrySelectorPopUp() {
+	app.getView().render('components/country_selector_popup');
+}
+
+function setLocale() {
+	session.custom.selectedCountry = request.httpParameterMap.locale;
+	response.redirect(URLUtils.url('Page-Show','cid', 'shop-by-brand'));
+}
 /*
  * Export the publicly available controller methods
  */
@@ -258,3 +267,7 @@ exports.CountyPopUp = guard.ensure(['get'], countyPopUp);
 exports.SessionWarnPopUp = guard.ensure(['get'], sessionWarnPopUp);
 
 exports.SessionExpiredPopUp = guard.ensure(['get'], sessionExpiredPopUp);
+
+exports.CountrySelectorPopUp = guard.ensure(['get'], countrySelectorPopUp);
+
+exports.SetLocale = guard.ensure(['get'], setLocale);

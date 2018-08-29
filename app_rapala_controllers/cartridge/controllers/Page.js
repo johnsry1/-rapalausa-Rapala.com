@@ -22,6 +22,10 @@ function show() {
 
     var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue);
+    
+    if (session.custom.hasOwnProperty('selectedCountry')) {
+        request.setLocale(session.custom.selectedCountry.value);
+    }
 
     if (!content) {
         Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);

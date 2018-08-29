@@ -182,3 +182,108 @@ div {
     white-space: nowrap;
     padding-left: 9px;
 }
+
+#country-selector-popup {
+	.country-select-header {
+		text-align: center;
+		margin-top: -10px;
+	}
+	.current-country {
+		span {
+			line-height: 40px;
+		}
+		img {
+			width: 14px;
+			vertical-align: middle;
+		}
+	}
+	.current-country,
+	.checking {
+		font-size: 12px;
+		text-align: center;
+	}
+	.row {
+		max-width: 100%;
+		.country {
+			width: 118px;
+			display: block;
+			margin: 18px auto 8px;
+			img.flag {
+				width: 100px;
+				height: auto;
+				margin: 0 auto 5px;
+				display: block;
+			}
+			.rapala-iternational-cart {
+				background: url('../images/shopping-cart.svg') top left no-repeat;
+				background-size: 100%;
+				height: 17px;
+				width: 19px;
+			}
+			.url-container {
+				width: fit-content;
+				margin: auto;
+			}
+			.url {
+				font-size: 10.25px;
+				color: $black;
+				vertical-align: text-top;
+			}
+			.rapala-iternational-cart,
+			.url {
+				display: inline-block;
+			}
+		}
+		&.first {
+			border-top: 1px solid $whitish-grey;
+			border-bottom: 1px solid $whitish-grey;
+			margin-top: 5px;
+			.country {
+				display: inline-block;
+				margin: 8px 0 8px 8px;
+			}
+		}
+		.divider {
+			background: $whitish-grey;
+		    height: 140px;
+		    width: 1px;
+    		display: inline-block;
+    		margin-bottom: -8px;
+		}
+	}
+	.gray-button {
+	    font-size: 13px;
+	    font-weight: normal;
+	    height: 40px;
+	    line-height: 40px;
+    	padding: 0;
+    	width: 100%;
+    	text-transform: unset;
+    	background: rgba(241, 241, 241, 1);
+        background: -ms-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -moz-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -o-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $shade-lightwhite), color-stop(100, $lightl-grey));
+        background: -webkit-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: linear-gradient(to bottom, $shade-lightwhite 0, $lightl-grey 100%);
+        border: 1px solid $darker-gray;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$shade-lightwhite', endColorstr='$lightl-grey', GradientType=0);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        float: right;
+        text-align: center;
+        box-sizing: border-box;
+        font-family: $global-font-family;
+        color: $night-rider;
+        text-transform: capitalize;
+        text-decoration: none;
+        margin-right: 10px;
+        &:hover {
+            text-decoration: none;
+            color: $night-rider;
+        }
+    	margin: 10px auto 5px;
+	}
+}
+

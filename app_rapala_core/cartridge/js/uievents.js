@@ -1,5 +1,6 @@
 'use strict';
-var util = require('./util');
+var util = require('./util'),
+    dialog = require('./dialog');
 /*function charcount($this){
 	var characterLimit = parseInt($this.data("character-limit"));
 	var charRemains = characterLimit - $this.val().trim().length;
@@ -481,6 +482,15 @@ var uievents = {
                 }
             }
         });
+        if (window.SessionAttributes.SHOW_COUNTRY_POPUP) {
+            dialog.open({
+                url: Urls.countrySelectorPopup,
+                options: {
+                    width: 300,
+                    height: 575
+                }
+            });
+        }
         /*$('textarea[data-character-limit]').each(function(){
             charcount($(this));
             // trigger the keydown event so that any existing character data is calculated

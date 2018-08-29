@@ -12,6 +12,7 @@ var params = request.httpParameterMap;
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
+var URLUtils = require('dw/web/URLUtils');
 
 /**
  * Renders the product page.
@@ -441,6 +442,18 @@ function guidesAndManuals(){
 		response.redirect(pdfUrl);
 	}
 }
+
+function showInLocale() {
+	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
+	let pid = request.httpParameterMap.pid.value;
+	
+	request.setLocale(locale);
+	
+	if (dw.catalog.ProductMgr.getProduct(pid).assignedToSiteCatalog) {
+		return show();
+	}
+	response.redirect(URLUtils.url('Home-Show'));
+}
 /*
  * Web exposed methods
  */
@@ -530,3 +543,5 @@ exports.YouTubeVideos = guard.ensure(['get'], youTubeVideos);
  * @see module:controllers/Product~formatPrices
  */
 exports.FormatPrices = guard.ensure(['get'], formatPrices);
+
+exports.ShowInLocale = guard.ensure(['get'], showInLocale);
