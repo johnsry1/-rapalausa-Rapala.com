@@ -42,7 +42,10 @@ function getDeviceType() {
 }
 
 function showCountryPopup() {
-	var showPopup = true;
+	var showPopup = true,
+		isUsSite = dw.system.Site.getCurrent().ID == 'rapala';
+
+	session.custom.showShopByBrand = isUsSite;
 	
 	// check for cookie
 	let cookies : dw.web.Cookies = request.getHttpCookies();
@@ -50,6 +53,7 @@ function showCountryPopup() {
 		let cookie : dw.web.Cookie = cookies[i];
 		if (cookie.name === 'CountrySelectorViewed') {
 			return showPopup = false;
+			sesssion.custom.showShopByBrand = false;
 		}
 	}
 
