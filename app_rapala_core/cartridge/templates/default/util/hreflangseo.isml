@@ -1,22 +1,22 @@
 <!--- TEMPLATENAME: hreflang.isml --->
+<isset name="rapalaEUsubdomainURL" value="${''}" scope="page" />
 <isloop items="${dw.system.Site.getAllSites()}" var="site" >
-    <isset name="getAllowedLocale" value="${site.getAllowedLocales()}" scope="page"/>
-
+	<isset name="getAllowedLocale" value="${site.getAllowedLocales()}" scope="page"/>
 	<isloop items="${getAllowedLocale}" var="getAllowedLocaleItr">
+		<isscript>
+			var action : URLAction = new dw.web.URLAction(pdict.CurrentRequest.httpPath.split('/').pop(), site.ID, getAllowedLocaleItr);
+			var paramArray = [];
+			for each (var paramName in pdict.CurrentRequest.httpParameterMap.parameterNames) {
+				paramArray.push(dw.web.URLParameter(paramName, pdict.CurrentRequest.httpParameterMap[paramName]));
+			}
+			var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
+			var gethrefLang = getAllowedLocaleItr.toLowerCase().replace("_", "-");
+		</isscript>
 		<isif condition="${getAllowedLocaleItr != 'default'}">
-    		<isscript>
-			    var action : URLAction = new dw.web.URLAction(pdict.CurrentRequest.httpPath.split('/').pop(), site.ID, getAllowedLocaleItr);
-
-                var paramArray = [];
-    		    for each (var paramName in pdict.CurrentRequest.httpParameterMap.parameterNames) {
-    		        paramArray.push(dw.web.URLParameter(paramName, pdict.CurrentRequest.httpParameterMap[paramName]));
-    		    }
-		        var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
-
-				var gethrefLang = getAllowedLocaleItr.toLowerCase().replace("_", "-");
-    		</isscript>
-
 			<link rel="alternate" href="${subdomainURL}" hreflang="${gethrefLang}" />
+		</isif>
+		<isif condition="${site.ID == 'rapalaEU'}">
+			<isset name="rapalaEUsubdomainURL" value="${subdomainURL}" scope="page" />
 		</isif>
 	</isloop>
 </isloop>
@@ -27,5 +27,5 @@
 </isscript>
 
 <isloop items="${staticHrefLangObj}" var="item">
-	<link rel="alternate" href="${item.subdomainURL}" hreflang="${item.hrefLang}" />
+	<link rel="alternate" href="${rapalaEUsubdomainURL}" hreflang="${item.hrefLang}" />
 </isloop>
