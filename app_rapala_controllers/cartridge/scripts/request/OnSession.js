@@ -43,9 +43,9 @@ function getDeviceType() {
 
 function showCountryPopup() {
 	var showPopup = true,
-		isUS = request.httpLocale.split('_')[1] == 'US';
+		isUsSite = dw.system.Site.getCurrent().ID == 'rapala';
 
-	session.custom.showShopByBrand = isUS;
+	session.custom.showShopByBrand = isUsSite;
 	
 	// check for cookie
 	let cookies : dw.web.Cookies = request.getHttpCookies();
