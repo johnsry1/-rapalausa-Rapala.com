@@ -42,7 +42,10 @@ function getDeviceType() {
 }
 
 function showCountryPopup() {
-	var showPopup = true;
+	var showPopup = true,
+		isUS = request.httpLocale.split('_')[1] == 'US';
+
+	session.custom.showShopByBrand = isUS;
 	
 	// check for cookie
 	let cookies : dw.web.Cookies = request.getHttpCookies();
@@ -50,6 +53,7 @@ function showCountryPopup() {
 		let cookie : dw.web.Cookie = cookies[i];
 		if (cookie.name === 'CountrySelectorViewed') {
 			return showPopup = false;
+			sesssion.custom.showShopByBrand = false;
 		}
 	}
 

@@ -18,9 +18,10 @@ function show() {
     require('~/cartridge/scripts/meta').update(rootFolder);
     if(session.custom.homeSplash){
         app.getController('Home').ChangeRegion();
-    } else if (request.httpParameterMap.isParameterSubmitted('id')) {
+    } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand) {
         app.getView().render('content/home/homepageinclude');
     } else {
+        session.custom.showShopByBrand = false;
         response.redirect(URLUtils.url('Page-Show','cid',"shop-by-brand"));
     }
 }
