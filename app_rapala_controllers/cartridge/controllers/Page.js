@@ -79,7 +79,6 @@ function showInLocale() {
 	let cid = request.httpParameterMap.cid.value;
 	
 	request.setLocale(locale);
-	var test = dw.content.ContentMgr.getContent(cid);
 	if (dw.content.ContentMgr.getContent(cid)) {
 		return show();
 	}
