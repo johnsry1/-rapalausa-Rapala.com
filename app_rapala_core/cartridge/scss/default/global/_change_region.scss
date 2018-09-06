@@ -192,9 +192,14 @@ div {
 		span {
 			line-height: 40px;
 		}
-		img {
-			width: 14px;
-			vertical-align: middle;
+		.current-flag-container {
+		height: 14px;
+		width: 14px;
+		display: inline;
+			img {
+				max-width: 14px;
+				vertical-align: middle;
+			}
 		}
 	}
 	.current-country,
@@ -205,15 +210,18 @@ div {
 	.row {
 		max-width: 100%;
 		.country {
-			width: 118px;
+			width: 125px;
 			display: block;
 			margin: 18px auto 8px;
-			img.flag {
-				width: 100px;
+			.flag-container {
 				height: 100px;
-				max-width: 85%;
-				margin: 0 auto 5px;
-				display: block;
+				width: 100px;
+				margin: auto;
+				img.flag {
+					max-width: 100%;
+					margin: 0 auto 5px;
+					display: block;
+				}
 			}
 			.rapala-iternational-cart {
 				background: url('../images/shopping-cart.svg') top left no-repeat;
@@ -223,7 +231,7 @@ div {
 			}
 			.url-container {
 				width: fit-content;
-				margin: auto;
+				margin: 5px auto 0;
 			}
 			.url {
 				font-size: 10.25px;
@@ -241,7 +249,7 @@ div {
 			margin-top: 5px;
 			.country {
 				display: inline-block;
-				margin: 8px 0 8px 8px;
+				margin: 8px auto;
 			}
 		}
 		.divider {
