@@ -4,6 +4,9 @@
 	<isset name="getAllowedLocale" value="${site.getAllowedLocales()}" scope="page"/>
 	<isloop items="${getAllowedLocale}" var="getAllowedLocaleItr">
 		<isscript>
+			if (site.ID == 'rapala') {
+				getAllowedLocaleItr = 'en-us';
+			}
 			var action : URLAction = new dw.web.URLAction(pdict.CurrentRequest.httpPath.split('/').pop(), site.ID, getAllowedLocaleItr);
 			var paramArray = [];
 			for each (var paramName in pdict.CurrentRequest.httpParameterMap.parameterNames) {
