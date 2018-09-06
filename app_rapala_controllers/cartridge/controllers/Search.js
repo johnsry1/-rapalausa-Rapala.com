@@ -327,13 +327,21 @@ function showProductGrid() {
 
 function showInLocale() {
 	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
-	let cgid = request.httpParameterMap.cgid.value;
+	let cgid = request.httpParameterMap.isParameterSubmitted('cgid') ? request.httpParameterMap.cgid.value : '';
+	let fdid = request.httpParameterMap.isParameterSubmitted('fdid') ? request.httpParameterMap.fdid.value : '';
 	
 	request.setLocale(locale);
 	
-	if (dw.catalog.CatalogMgr.getCategory(cgid)) {
-		return show();
+	if (!empty(cgid)) {
+		if (dw.catalog.CatalogMgr.getCategory(cgid)) {
+			return show();
+		}
+	} else if (!empty(fdid)) {
+		if (dw.content.ContentMgr.getFolder(fdid)) {
+			return showContent();
+		}
 	}
+	
 	response.redirect(URLUtils.url('Home-Show'));
 }
 
