@@ -325,6 +325,18 @@ function showProductGrid() {
 
 }
 
+function showInLocale() {
+	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
+	let cgid = request.httpParameterMap.cgid.value;
+	
+	request.setLocale(locale);
+	
+	if (dw.catalog.CatalogMgr.getCategory(cgid)) {
+		return show();
+	}
+	response.redirect(URLUtils.url('Home-Show'));
+}
+
 /*
  * Web exposed methods
  */
@@ -341,3 +353,4 @@ exports.ShowContent     = guard.ensure(['get'], showContent);
 /** Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  * @see module:controllers/Search~getSuggestions */
 exports.GetSuggestions = guard.ensure(['get'], getSuggestions);
+exports.ShowInLocale            = guard.ensure(['get'], showInLocale);

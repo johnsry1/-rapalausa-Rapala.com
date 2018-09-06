@@ -18,6 +18,12 @@
 		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU', 'rapala');
 		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapala', 'rapalaEU');
 	}
+	
+	if (session.custom.hasOwnProperty('countrySelectorCgid')) {
+		let cgid = session.custom.countrySelectorCgid;
+		var usLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapalaEU', 'rapala');
+		var euLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapala', 'rapalaEU');
+	}
 
 	session.custom.showCountryPopup = false;
 </isscript>
