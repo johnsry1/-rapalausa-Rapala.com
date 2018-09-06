@@ -17,12 +17,14 @@
 		let productID = session.custom.countrySelectorPid;
 		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU', 'rapala');
 		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapala', 'rapalaEU');
-	}
-	
-	if (session.custom.hasOwnProperty('countrySelectorCgid')) {
+	} else if (session.custom.hasOwnProperty('countrySelectorCgid')) {
 		let cgid = session.custom.countrySelectorCgid;
 		var usLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapalaEU', 'rapala');
 		var euLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapala', 'rapalaEU');
+	} else if (session.custom.hasOwnProperty('countrySelectorCid')) {
+		let cid = session.custom.countrySelectorCid;
+		var usLink=URLUtils.url('Page-ShowInLocale', 'cid', cid).toString().replace('rapalaEU', 'rapala');
+		var euLink=URLUtils.url('Page-ShowInLocale', 'cid', cid).toString().replace('rapala', 'rapalaEU');
 	}
 
 	session.custom.showCountryPopup = false;
