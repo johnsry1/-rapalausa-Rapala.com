@@ -56,7 +56,7 @@ function showCountryPopup() {
 			sesssion.custom.showShopByBrand = false;
 		}
 	}
-	var test = request;
+
 	// check if a category page or PDP is being accessed directly
 	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
