@@ -66,6 +66,8 @@ function showCountryPopup() {
 		session.custom.countrySelectorCid=request.httpParameterMap.cid.value;
 	} else if (request.httpParameterMap.isParameterSubmitted('fdid')) {
 		session.custom.countrySelectorFdid=request.httpParameterMap.fdid.value;
+	} else {
+		session.custom.countrySelectorPage=request.httpURL;
 	}
 	
 	// set cookie

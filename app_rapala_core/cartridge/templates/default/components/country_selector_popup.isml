@@ -29,6 +29,9 @@
 		let fdid = session.custom.countrySelectorFdid;
 		var usLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid).toString().replace('rapalaEU', 'rapala');
 		var euLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid).toString().replace('rapala', 'rapalaEU');
+	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
+		var usLink=URLUtils.url('Search-ShowInLocale').toString().replace('rapalaEU', 'rapala');
+		var euLink=URLUtils.url('Search-ShowInLocale').toString().replace('rapala', 'rapalaEU');
 	}
 
 	session.custom.showCountryPopup = false;

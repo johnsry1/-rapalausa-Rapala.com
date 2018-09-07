@@ -338,10 +338,12 @@ function showInLocale() {
 		}
 	} else if (!empty(fdid)) {
 		if (dw.content.ContentMgr.getFolder(fdid)) {
-			return showContent();
+			var FolderController = require("app_cms/cartridge/controllers/Folder");
+			return FolderController.Show();
 		}
+	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
+		return response.redirect(session.custom.countrySelectorPage);
 	}
-	
 	response.redirect(URLUtils.url('Home-Show'));
 }
 
