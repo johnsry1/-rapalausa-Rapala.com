@@ -21,6 +21,7 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
+    var test = request;
     var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue);
     
