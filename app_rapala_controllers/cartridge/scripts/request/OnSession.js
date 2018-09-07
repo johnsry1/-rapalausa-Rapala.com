@@ -56,7 +56,7 @@ function showCountryPopup() {
 			sesssion.custom.showShopByBrand = false;
 		}
 	}
-
+	var test = request;
 	// check if a category page or PDP is being accessed directly
 	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
@@ -66,8 +66,6 @@ function showCountryPopup() {
 		session.custom.countrySelectorCid=request.httpParameterMap.cid.value;
 	} else if (request.httpParameterMap.isParameterSubmitted('fdid')) {
 		session.custom.countrySelectorFdid=request.httpParameterMap.fdid.value;
-	} else {
-		session.custom.countrySelectorPage=request.httpURL;
 	}
 	
 	// set cookie
