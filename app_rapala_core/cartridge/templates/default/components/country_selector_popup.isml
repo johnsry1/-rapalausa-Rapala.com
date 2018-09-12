@@ -15,8 +15,23 @@
 	
 	if (session.custom.hasOwnProperty('countrySelectorPid')) {
 		let productID = session.custom.countrySelectorPid;
-		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU', 'rapala');
-		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapala', 'rapalaEU');
+		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorCgid')) {
+		let cgid = session.custom.countrySelectorCgid;
+		var usLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorCid')) {
+		let cid = session.custom.countrySelectorCid;
+		var usLink=URLUtils.url('Page-ShowInLocale', 'cid', cid).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Page-ShowInLocale', 'cid', cid).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorFdid')) {
+		let fdid = session.custom.countrySelectorFdid;
+		var usLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
+		var usLink=URLUtils.url('Search-ShowInLocale').toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale').toString().replace('rapala-', 'rapalaEU-');
 	}
 
 	session.custom.showCountryPopup = false;
@@ -26,12 +41,16 @@
 	<div class="country-select-header">${Resource.msg('global.selectcountry', 'locale', null)}</div>
 	<div class="current-country">
 		<span>${Resource.msg('global.currentlyviewing', 'locale', null)}</span>
-		<img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/' +currentCountry+ '.svg')}" alt="${currentCountry}">
+		<div class="current-flag-container">
+			<img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/' +currentCountry+ '.svg')}" alt="${currentCountry}">
+		</div>
 	</div>
 	<div class="countries-container">
 		<div class="row first">
 			<a class="country" href="${caLink}">
-				<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/ca.svg')}" alt="${'ca'}">
+				<div class="flag-container">
+					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/ca.svg')}" alt="${'ca'}">
+				</div>
 				<div class="url-container">
 					<div class="rapala-iternational-cart"></div>
 					<div class="url">${Resource.msg('global.caurl', 'locale', null)}</div>
@@ -39,7 +58,9 @@
 			</a>
 			<div class="divider"></div>
 			<a class="country" href="${euLink}">
-				<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/eu.svg')}" alt="${'ca'}">
+				<div class="flag-container">
+					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/eu.svg')}" alt="${'ca'}">
+				</div>
 				<div class="url-container">
 					<div class="rapala-iternational-cart"></div>
 					<div class="url">${Resource.msg('global.euurl', 'locale', null)}</div>
@@ -48,7 +69,9 @@
 		</div>
 		<div class="row second">
 			<a class="country" href="${usLink}">
-				<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/us.svg')}" alt="${'ca'}">
+				<div class="flag-container">
+					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/us.svg')}" alt="${'ca'}">
+				</div>
 				<div class="url-container">
 					<div class="rapala-iternational-cart"></div>
 					<div class="url">${Resource.msg('global.usurl', 'locale', null)}</div>
@@ -59,7 +82,7 @@
 	<div class="checking">
 		${Resource.msg('global.checkingcountry', 'locale', null)}
 	</div>
-	<a class="gray-button" href="${internationalBrandLink.custom.url}">${Resource.msg('global.internationalsite', 'locale', null)}</a>
-	<a class="gray-button" href="${URLUtils.url('Stores-Find')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
+	<a class="gray-button" href="${euLink}">${Resource.msg('global.internationalsite', 'locale', null)}</a>
+	<a class="gray-button" href="${URLUtils.url('Home-ChangeRegion').toString().replace('rapala-', 'rapalaEU-')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
 
 </div>

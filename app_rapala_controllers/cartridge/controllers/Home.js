@@ -17,9 +17,12 @@ function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
     require('~/cartridge/scripts/meta').update(rootFolder);
     if(session.custom.homeSplash){
-    	app.getController('Home').ChangeRegion();
-    }else{
-    	app.getView().render('content/home/homepageinclude');
+        app.getController('Home').ChangeRegion();
+    } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand) {
+        app.getView().render('content/home/homepageinclude');
+    } else {
+        session.custom.showShopByBrand = false;
+        response.redirect(URLUtils.url('Page-Show','cid',"shop-by-brand"));
     }
 }
 

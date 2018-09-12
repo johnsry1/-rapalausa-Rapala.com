@@ -7,6 +7,7 @@
 
 /* API Includes */
 var Logger = require('dw/system/Logger');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -73,6 +74,17 @@ function include() {
     }
 }
 
+function showInLocale() {
+	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
+	let cid = request.httpParameterMap.cid.value;
+	
+	request.setLocale(locale);
+	if (dw.content.ContentMgr.getContent(cid)) {
+		return show();
+	}
+	response.redirect(URLUtils.url('Home-Show'));
+}
+
 /*
  * Export the publicly available controller methods
  */
@@ -80,3 +92,4 @@ function include() {
 exports.Show = guard.ensure(['get'], show);
 /** @see module:controllers/Page~include */
 exports.Include = guard.ensure(['include'], include);
+exports.ShowInLocale = guard.ensure(['get'], showInLocale);

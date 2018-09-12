@@ -42,7 +42,10 @@ function getDeviceType() {
 }
 
 function showCountryPopup() {
-	var showPopup = true;
+	var showPopup = true,
+		isUsSite = dw.system.Site.getCurrent().ID == 'rapala';
+
+	session.custom.showShopByBrand = isUsSite;
 	
 	// check for cookie
 	let cookies : dw.web.Cookies = request.getHttpCookies();
@@ -50,14 +53,19 @@ function showCountryPopup() {
 		let cookie : dw.web.Cookie = cookies[i];
 		if (cookie.name === 'CountrySelectorViewed') {
 			return showPopup = false;
+			sesssion.custom.showShopByBrand = false;
 		}
 	}
 
-	// check if a brand page or PDP is being accessed directly
+	// check if a category page or PDP is being accessed directly
 	if (request.httpParameterMap.isParameterSubmitted('pid')) {
 		session.custom.countrySelectorPid=request.httpParameterMap.pid.value;
 	} else if (request.httpParameterMap.isParameterSubmitted('cgid')) {
-		return showPopup = false;
+		session.custom.countrySelectorCgid=request.httpParameterMap.cgid.value;
+	} else if (request.httpParameterMap.isParameterSubmitted('cid')) {
+		session.custom.countrySelectorCid=request.httpParameterMap.cid.value;
+	} else if (request.httpParameterMap.isParameterSubmitted('fdid')) {
+		session.custom.countrySelectorFdid=request.httpParameterMap.fdid.value;
 	}
 	
 	// set cookie

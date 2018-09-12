@@ -325,6 +325,28 @@ function showProductGrid() {
 
 }
 
+function showInLocale() {
+	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
+	let cgid = request.httpParameterMap.isParameterSubmitted('cgid') ? request.httpParameterMap.cgid.value : '';
+	let fdid = request.httpParameterMap.isParameterSubmitted('fdid') ? request.httpParameterMap.fdid.value : '';
+	
+	request.setLocale(locale);
+	
+	if (!empty(cgid)) {
+		if (dw.catalog.CatalogMgr.getCategory(cgid)) {
+			return show();
+		}
+	} else if (!empty(fdid)) {
+		if (dw.content.ContentMgr.getFolder(fdid)) {
+			var FolderController = require("app_cms/cartridge/controllers/Folder");
+			return FolderController.Show();
+		}
+	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
+		return response.redirect(session.custom.countrySelectorPage);
+	}
+	response.redirect(URLUtils.url('Home-Show'));
+}
+
 /*
  * Web exposed methods
  */
@@ -341,3 +363,4 @@ exports.ShowContent     = guard.ensure(['get'], showContent);
 /** Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  * @see module:controllers/Search~getSuggestions */
 exports.GetSuggestions = guard.ensure(['get'], getSuggestions);
+exports.ShowInLocale            = guard.ensure(['get'], showInLocale);
