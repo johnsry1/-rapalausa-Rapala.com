@@ -83,9 +83,17 @@ function showCountryPopup() {
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     session.custom.showCountryPopup = showCountryPopup();
-    if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
+    var countryCode = request.geolocation.countryCode;
+    if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session' && !session.custom.showCountryPopup) {
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
     app.getController('GeoipRedirects').geoIpDefaultCurrency();
+    if (!session.custom.showCountryPopup) {
+    	if (countryCode == 'CA') {
+    		return response.redirect(dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url);
+    	} else if (countryCode != 'US') {
+    		return response.redirect(request.httpURL.toString().replace('rapala-', 'rapalaEU-'));
+    	}
+    }
     return new Status(Status.OK);
 };
