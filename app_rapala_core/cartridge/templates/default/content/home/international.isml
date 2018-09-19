@@ -38,7 +38,6 @@
 				<a href="#" class="logo"></a>
 			</div>
             <isscript>
-                var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
                 var currentSite = dw.system.Site.getCurrent();
                 var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
                 var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
@@ -46,7 +45,6 @@
                 var euLink='/eu-en';
                 
                 if (currentSite.ID == 'rapalaEU') {
-                    currentCountry = 'eu';
                     var usLink=usLink.toString().replace('rapalaEU', 'rapala');
                 }
             </isscript>
