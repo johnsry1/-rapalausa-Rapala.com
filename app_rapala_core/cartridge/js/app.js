@@ -32,7 +32,6 @@ if (!window.jQuery) {
 }
 
 require('./jquery-ext')();
-require('./cookieprivacy')();
 require('./captcha')();
 
 var $ = window.jQuery;
