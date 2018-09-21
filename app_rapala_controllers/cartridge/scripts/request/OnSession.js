@@ -89,14 +89,21 @@ exports.onSession = function () {
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
     app.getController('GeoipRedirects').geoIpDefaultCurrency();
-    if (!session.custom.showCountryPopup) {
-    	if (countryCode != 'US') {
-    		if (!empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
-    			let geolocation = request.geolocation;
-    			let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
-    			app.getController('GeoipRedirects').geoIPRedirection(geolocation , redirects);
-    		}
-    	}
+    var cookies = request.getHttpCookies(),
+        cookieCount = cookies.cookieCount,
+        geoRedirect = false;
+
+    for(var i=0; i < cookieCount; i++) {
+        let cookie = cookies[i];
+        if (cookie.name == 'CountrySelectorViewed') {
+            geoRedirect = true;
+            break;
+        }
     }
+	if (geoRedirect && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
+		let geolocation = request.geolocation;
+		let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
+		app.getController('GeoipRedirects').geoIPRedirection(geolocation , redirects);
+	}
     return new Status(Status.OK);
 };
