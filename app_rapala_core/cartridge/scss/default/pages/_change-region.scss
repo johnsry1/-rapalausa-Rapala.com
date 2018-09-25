@@ -24,32 +24,12 @@
             margin: 0 !important;
         }
     }
-
-    .rapala-top-block {
-        width: 100%;
-        text-align: center;
-        background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
-        margin-bottom: rem(30px);
-        @include respond(large-up) {
-            width: rem(316px);
-        }
-        &.rapala-shop-products {
-            @include respond(large-up) {
-                float: left;
-            }
-        }
-        &.explore-rapala-products {
-            @include respond(large-up) {
-                float: right;
-            }
-        }
-    }
     .rapala-top-block-title {
         background: transparent url(../images/change-region/international-links-header-background-new.png) no-repeat center top;
         p {
            @include geoip-title-text();
-           padding: 0;
            margin: 0;
+           padding: 0;
         }
     }
     a {
@@ -76,19 +56,27 @@
             &:hover {
                 text-decoration: $geoip-link-decoration;
             }
+            &.country {
+                display: block;
+                width: 100%;
+                > div {
+                    display: inline-block;
+                    &.url {
+                        margin: 0 5px;
+                    }
+                }
+            }
         }
         .rapala-iternational-flag {
             display: inline-block;
             width: rem(16px);
             height: rem(11px);
-            margin-right: rem(10px);
             background-size: cover;
         }
         .rapala-iternational-cart {
             width: rem(17px);
             height: rem(13px);
             background: url('../images/change-region/shopping-cart.svg') top left no-repeat;
-            margin-left: rem(10px);
             display: inline-block;
             background-size: cover;
             position: relative;
@@ -111,6 +99,7 @@
         }
         .international-link {
             .rapala-iternational-flag {
+                margin: 0 7px 0 0;
                 background: url('../images/change-region/all-other-countries.png') top left no-repeat;
             }
         }
@@ -120,6 +109,32 @@
         width: 100%;
         text-align: center;
         background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
+        @include respond(medium-down) {
+            max-width: 316px;
+            margin: auto;
+        }
+        &.rapala-top-block {
+            width: 47%;
+            max-width: 316px;
+            clear: none;
+            text-align: center;
+            background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
+            margin-bottom: rem(40px);
+            @include respond(medium-down) {
+                width: 100%;
+                margin: 0 auto 2.5rem auto;
+            }
+            &.shop-rapala-products {
+                @include respond(large-up) {
+                    float: left;
+                }
+            }
+            &.explore-rapala-products {
+                @include respond(large-up) {
+                    float: right;
+                }
+            }
+        }
         .distrobutors-countries-list {
             padding: rem(25px) rem(45px);
             @include respond(large-up) {
@@ -165,6 +180,9 @@
             padding: 0;
             span {
                 font-weight: bold;
+            }
+            &.footer-top {
+                margin: 10px 0;
             }
         }
         a {

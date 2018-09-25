@@ -15,13 +15,24 @@ var URLUtils = require('dw/web/URLUtils');
  */
 function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
+	var countryCode = request.geolocation.countryCode;
     require('~/cartridge/scripts/meta').update(rootFolder);
     if(session.custom.homeSplash){
         app.getController('Home').ChangeRegion();
-    } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand) {
-        app.getView().render('content/home/homepageinclude');
+    } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand || session.custom.redirectGeolocation) {
+    	if (countryCode != 'US' && session.custom.redirectGeolocation) {
+    		if (!empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
+    			let geolocation = request.geolocation;
+    			let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
+    			var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
+    			app.getController('GeoipRedirects').geoIPRedirection(geolocation , redirects);
+    		}
+    	} else {
+    		app.getView().render('content/home/homepageinclude');
+    	}
     } else {
         session.custom.showShopByBrand = false;
+		session.custom.redirectGeolocation = true;
         response.redirect(URLUtils.url('Page-Show','cid',"shop-by-brand"));
     }
 }
