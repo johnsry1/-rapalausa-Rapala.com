@@ -46,6 +46,7 @@ function showCountryPopup() {
 		isUsSite = dw.system.Site.getCurrent().ID == 'rapala';
 
 	session.custom.showShopByBrand = isUsSite;
+	session.custom.redirectGeolocation = false;
 	
 	// check for cookie
 	let cookies : dw.web.Cookies = request.getHttpCookies();
@@ -83,9 +84,29 @@ function showCountryPopup() {
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     session.custom.showCountryPopup = showCountryPopup();
-    if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session') {
+    
+    if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session' && !session.custom.showCountryPopup) {
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
     app.getController('GeoipRedirects').geoIpDefaultCurrency();
+    if (!request.httpParameterMap.isParameterSubmitted('countrySelect')) {
+	    var cookies = request.getHttpCookies(),
+	        cookieCount = cookies.cookieCount,
+	        geoRedirect = false;
+	
+	    for(var i=0; i < cookieCount; i++) {
+	        let cookie = cookies[i];
+	        if (cookie.name == 'CountrySelectorViewed') {
+	            geoRedirect = true;
+	            break;
+	        }
+	    }
+		if (geoRedirect && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
+			let geolocation = request.geolocation;
+			let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
+			app.getController('GeoipRedirects').geoIPRedirection(geolocation , redirects);
+		}
+    }
+
     return new Status(Status.OK);
 };

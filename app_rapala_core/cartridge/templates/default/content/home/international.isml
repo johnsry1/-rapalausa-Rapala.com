@@ -37,6 +37,39 @@
 			<div class="international-rapala-logo">
 				<a href="#" class="logo"></a>
 			</div>
+            <isscript>
+                var currentSite = dw.system.Site.getCurrent();
+                var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
+                var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
+                var caLink=dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
+                var euLink='/eu-en';
+                
+                if (currentSite.ID == 'rapalaEU') {
+                    var usLink=usLink.toString().replace('rapalaEU', 'rapala');
+                }
+            </isscript>
+            <div class="distrobutors-countries rapala-top-block shop-rapala-products">
+                <div class="rapala-top-block-title">
+                    <p>${Resource.msg('global.eu.international.countrieslist','locale',null)}</p>
+                </div>
+                <div class="rapala-middle-block">
+                    <a class="country link-ca" href="${caLink}">
+                        <div class="rapala-iternational-flag"></div>
+                        <div class="url">${Resource.msg('global.eu.international.ca', 'locale', null)}</div>
+                        <div class="rapala-iternational-cart"></div>
+                    </a>
+                    <a class="country link-eu" href="${euLink}">
+                        <div class="rapala-iternational-flag"></div>
+                        <div class="url">${Resource.msg('global.eu.international.eu', 'locale', null)}</div>
+                        <div class="rapala-iternational-cart"></div>
+                    </a>
+                    <a class="country link-us" href="${usLink}">
+                        <div class="rapala-iternational-flag"></div>
+                        <div class="url">${Resource.msg('global.eu.international.us', 'locale', null)}</div>
+                        <div class="rapala-iternational-cart"></div>
+                    </a>
+                </div>
+            </div>
 
 			<div class="distrobutors-countries rapala-top-block explore-rapala-products">
 				<div class="rapala-top-block-title">
@@ -44,7 +77,7 @@
 				</div>
 				<div class="rapala-middle-block">
 					<isloop items="${pdict.internationalBrandLink}" var="internationalLink">
-							<p><a class="international-link" href="${internationalLink.custom.url}"><span class="rapala-iternational-flag"></span>${internationalLink.custom.countryDisplayName}</a></p>
+							<p><a class="international-link" href="${internationalLink.custom.url}"><span class="rapala-iternational-flag"></span>${Resource.msg('global.eu.international.link.name','locale',null)}</a></p>
 						<isbreak/>
 					</isloop>
 				</div>
@@ -90,7 +123,7 @@
 				</isif>
 			</div>
 			<div class="rapala-iternational-footer-text">
-				<p><span>Rapala Fishing Lures</span> | The World’s Favorite Fishing Lure</p>
+				<p class="footer-top"><span>${Resource.msg('global.international.footer1','locale',null)}</span> | ${Resource.msg('global.international.footer2','locale',null)}</p>
 				<p>${Resource.msg('global.eu.international.footer.text','locale',null)}</p>
 				<a href="https://rapalavmc.com/" class="footer-link">${Resource.msg('global.eu.international.footer.link','locale',null)}</a>
 			</div>
