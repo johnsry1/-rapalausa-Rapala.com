@@ -1,6 +1,7 @@
 'use strict';
 var util = require('./util'),
-    dialog = require('./dialog');
+    dialog = require('./dialog'),
+    cookieprivacy = require('./cookieprivacy');
 /*function charcount($this){
 	var characterLimit = parseInt($this.data("character-limit"));
 	var charRemains = characterLimit - $this.val().trim().length;
@@ -487,9 +488,14 @@ var uievents = {
                 url: Urls.countrySelectorPopup,
                 options: {
                     width: 300,
-                    height: 575
+                    height: 575,
+                    close: function () {
+                        cookieprivacy();
+                    }
                 }
             });
+        } else {
+            cookieprivacy();
         }
         /*$('textarea[data-character-limit]').each(function(){
             charcount($(this));

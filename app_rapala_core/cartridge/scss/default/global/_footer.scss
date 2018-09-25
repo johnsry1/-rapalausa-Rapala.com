@@ -760,5 +760,48 @@ footer {
         }
     }
 }
-
+.cookie-footer {
+    clear: both;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: transparent;
+    .cookie-footer-inner {
+        margin: 0;
+        @include font-size(13px);
+        color: #4d4d4d;
+        border: 1px solid #ccc;
+        padding: rem(20px) rem(35px) rem(20px) rem(10px);
+        margin: 0;
+        background: #fff;
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .cookie-footer-one {
+        position: relative;
+    }
+    p {
+        font-size: 12px;
+        font-family: $global-font-family;
+    }
+    .cookie-close {
+        display: block;
+        position: absolute;
+        right: rem(20px);
+        top: rem(10px);
+        width: rem(15px);
+        height: rem(15px);
+        background: url("../images/close.svg") center no-repeat;
+        @include respond(large-up) {
+            right: rem(30px);
+        }
+        @include respond(desktop) {
+            right: rem(10px);
+        }
+    }
+}
 /* end of footer styles */
