@@ -23,10 +23,6 @@ function show() {
 
     var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue);
-    
-    if (session.custom.hasOwnProperty('selectedCountry')) {
-        request.setLocale(session.custom.selectedCountry.value);
-    }
 
     if (!content) {
         Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);
@@ -77,8 +73,11 @@ function include() {
 function showInLocale() {
 	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
 	let cid = request.httpParameterMap.cid.value;
-	
+
 	request.setLocale(locale);
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	InterstitialHelper.setInterstitialSiteCookie(request);
+
 	if (dw.content.ContentMgr.getContent(cid)) {
 		return show();
 	}

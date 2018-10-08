@@ -331,6 +331,8 @@ function showInLocale() {
 	let fdid = request.httpParameterMap.isParameterSubmitted('fdid') ? request.httpParameterMap.fdid.value : '';
 	
 	request.setLocale(locale);
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	InterstitialHelper.setInterstitialSiteCookie(request);
 	
 	if (!empty(cgid)) {
 		if (dw.catalog.CatalogMgr.getCategory(cgid)) {
