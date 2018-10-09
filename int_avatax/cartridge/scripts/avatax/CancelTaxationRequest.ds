@@ -1,0 +1,65 @@
+/**
+ *	CancelTaxationRequest.ds
+ *	Voids or deletes and existing transaction record from the AvaTax system.
+ *
+ *	@input OrderNo : String
+ *	@input controller : Boolean
+ *	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+ *	@output ErrorMsg : String
+ */
+
+var dwsvc		= require ("dw/svc");
+var dwLogger	= require ("dw/system").Logger;
+var guard = require('int_avatax/cartridge/scripts/guard');
+
+function execute( args : PipelineDictionary ) : Number
+{   
+	try {
+		var service : dwsvc.Service = dwsvc.ServiceRegistry.get("avatax.soap.CancelTax");
+		var params : Object = {
+			"orderId"		: args.OrderNo,
+			"merchantId" 	: service.configuration.credential.user,
+			"securityKey" 	: service.configuration.credential.password
+		};
+
+		// Send request
+		var taxationResponse = service.call(params);
+	
+		if (!empty(taxationResponse)) {
+			args.ReasonCode = taxationResponse.object.cancelTaxResult.resultCode.value;
+			
+			if (args.ReasonCode != "Success") {
+				var errorMsgs = "";
+	
+				if (!empty(taxationResponse.object.cancelTaxResult.messages)) {
+					for each (let message in taxationResponse.object.cancelTaxResult.messages) {
+						errorMsgs += message.summary;
+					}
+				}
+				args.ErrorMsg = errorMsgs;
+				dwLogger.getLogger("Avalara", "AvaTax").warn("[CancelTaxationRequest.ds] CancelTax attempt failed - {0}", errorMsgs);
+			}	
+		}
+		else {
+			dwLogger.getLogger("Avalara", "AvaTax").warn("[CancelTaxationRequest.ds] CancelTax request failed. Empty response.");
+			return PIPELET_ERROR;
+		}
+		
+		if(args.controller) {
+			var Response = {};
+			Response.ReasonCode = args.ReasonCode;
+			Response.ErrorMsg = args.ErrorMsg;
+			return Response;
+		}
+		
+		return PIPELET_NEXT;
+	}
+	catch(e) {
+		dwLogger.getLogger("Avalara", "AvaTax").error("[CancelTaxationRequest.ds] Error in taxation request - {0}", e.message);
+		return PIPELET_ERROR;	
+	}
+}
+
+if(typeof exports != 'undefined') {
+	exports.Execute = guard.ensure(['https'], execute);
+}
