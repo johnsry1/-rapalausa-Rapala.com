@@ -1,0 +1,65 @@
+/**
+*
+* This script creates a helper object that stores all constants, utility helper functions to get or
+* pivot off of site preferences based on values
+*
+*/
+
+var dwsystem	= require ("dw/system");
+var URLUtils = require('dw/web/URLUtils');
+
+var InterstitialHelper : Object = {
+	getPopupShownCookie : function() {
+		return request.httpCookies['CountrySelectorViewed'];
+	},
+	setPopupShownCookie : function() {
+		setCookie('CountrySelectorViewed','true');
+		return;
+	},
+	setInterstitialSiteCookie: function (request) {
+		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
+		setCookie('interstitialSite',id);
+		return;
+	},
+	setRedirectUrl: function (request) {
+		var url, id, newHost;
+		var params = request.httpParameterMap;
+		var tempUrl = URLUtils.url('Home-SetLocale');
+
+		if (request.httpPath.indexOf('rapalaEU') != -1) {
+			id = 'rapalaEU-';
+			newHost = 'rapala-';
+		} else {
+			id = 'rapala-';
+			newHost = 'rapalaEU-';
+		}
+
+		if (params.isParameterSubmitted('pid')) {
+			let pid = params.pid.value;
+			tempUrl = URLUtils.url('Product-ShowInLocale', 'pid', pid, 'sessionRedirect', true);
+		} else if (params.isParameterSubmitted('cgid')) {
+			let cgid = params.cgid.value;
+			tempUrl = URLUtils.url('Search-ShowInLocale', 'cgid', cgid, 'sessionRedirect', true);
+		} else if (params.isParameterSubmitted('fdid')) {
+			let fdid = params.fdid.value;
+			tempUrl = URLUtils.url('Search-ShowInLocale', 'fdid', fdid, 'sessionRedirect', true);
+		} else if (params.isParameterSubmitted('cid')) {
+			let cid = params.cid.value;
+			tempUrl = URLUtils.url('Page-ShowInLocale', 'cid', cid, 'sessionRedirect', true);
+		}
+		if (tempUrl) {
+			url = tempUrl.toString().replace(id, newHost);
+		}
+		
+		return url;
+	}
+}
+
+function setCookie(name, value) {
+	let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
+	cookie.setMaxAge(86400*360*10);
+	cookie.setPath("/");
+	response.addHttpCookie(cookie);
+}
+
+module.exports=InterstitialHelper;

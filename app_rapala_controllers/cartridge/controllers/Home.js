@@ -17,6 +17,10 @@ function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
 	var countryCode = request.geolocation.countryCode;
     require('~/cartridge/scripts/meta').update(rootFolder);
+    if (request.httpParameterMap.isParameterSubmitted('countrySelect')) {
+    	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+    	InterstitialHelper.setInterstitialSiteCookie(request);
+    }
     if(session.custom.homeSplash){
         app.getController('Home').ChangeRegion();
     } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand || session.custom.redirectGeolocation) {
@@ -215,7 +219,15 @@ function countrySelectorPopUp() {
 
 function setLocale() {
 	session.custom.selectedCountry = request.httpParameterMap.locale;
-	response.redirect(URLUtils.url('Page-Show','cid', 'shop-by-brand'));
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	InterstitialHelper.setInterstitialSiteCookie(request);
+
+	if (session.custom.interstitialSiteId == 'rapala-') {
+		response.redirect(URLUtils.url('Page-Show','cid', 'shop-by-brand'));
+	} else {
+		response.redirect(URLUtils.url('Home-Show'));
+	}
+	
 }
 /*
  * Export the publicly available controller methods
