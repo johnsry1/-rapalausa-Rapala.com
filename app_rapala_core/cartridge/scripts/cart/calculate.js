@@ -15,6 +15,7 @@ var ShippingLocation = require('dw/order/ShippingLocation');
 var TaxMgr = require('dw/order/TaxMgr');
 var Logger = require('dw/system/Logger');
 var Status = require('dw/system/Status');
+var Site = require('dw/system/Site');
 
 /**
  * @function calculate
@@ -90,7 +91,9 @@ exports.calculate = function (basket) {
     //PREVAIL-Added to handle third party tax services.
 	//if (!dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant') &&
 		//dw.system.Site.getCurrent().getCustomPreferenceValue('taxService') === 'DEMANDWARE') {
+    if(!Site.getCurrent().getCustomPreferenceValue('ATEnable')) {
 		calculateTax(basket,stateCode);
+    }
     /*} else {
 		var shipments = basket.getShipments().iterator();
         while (shipments.hasNext()) {

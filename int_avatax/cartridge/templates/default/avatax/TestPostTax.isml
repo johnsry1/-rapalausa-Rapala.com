@@ -1,0 +1,9 @@
+Testing AvaTax PostTax Call<br/><br/>
+<isif condition="${empty(pdict.Order)}">
+	You must supply a valid "orderNo" in the query string.
+<iselse>
+	Result: <isprint value="${pdict.ReasonCode}"/><br/>
+	<isif condition="${!empty(pdict.ErrorMsg)}">
+		Error: <isprint value="${JSON.stringify(pdict.ErrorMsg)}" />
+	</isif>
+</isif>

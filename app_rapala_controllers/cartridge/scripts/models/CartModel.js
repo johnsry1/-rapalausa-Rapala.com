@@ -23,6 +23,8 @@ var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var TransientAddress = require('~/cartridge/scripts/models/TransientAddressModel');
 var UUIDUtils = require('dw/util/UUIDUtils');
+var avataxApp = require('int_avatax/cartridge/scripts/app');
+var Site = require('dw/system/Site');
 
 
 var lineItem,paypalErrorValue;
@@ -45,6 +47,9 @@ var CartModel = AbstractModel.extend({
      * @return {dw.system.Status} Returns OK if cart when the cart is recalculated.
      */
     calculate: function () {
+        if(Site.getCurrent().preferences.custom.hasOwnProperty('ATEnable') &&   Site.getCurrent().getCustomPreferenceValue('ATEnable')) {
+            avataxApp.getController('Avatax').CalculateTaxes(this.object);
+        }
         dw.system.HookMgr.callHook('dw.ocapi.shop.basket.calculate', 'calculate', this.object);
     },
     setVar : function(val){
@@ -1467,12 +1472,12 @@ var CartModel = AbstractModel.extend({
      * @alias module:models/CartModel~CartModel/createOrder
      * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
      */
-    createOrder: function () {
+    createOrder: function (OrderNo) {
         var basket = this.object;
         var order;
         try {
             order = Transaction.wrap(function () {
-            	return OrderMgr.createOrder(basket);
+            	return OrderMgr.createOrder(basket, OrderNo);
             });
         } catch (error) {
             return;

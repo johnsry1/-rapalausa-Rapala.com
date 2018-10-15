@@ -1,0 +1,257 @@
+/**
+ *	Initialize SOAP services for a cartridge
+ */    
+
+var dwsvc		= require ("dw/svc");
+var dworder		= require ("dw/order");
+var dwcustomer	= require ("dw/customer");
+
+var libAvatax = require("int_avatax/cartridge/scripts/avatax/libAvatax");
+var AvataxHelper = new libAvatax();
+
+/**
+ *
+ *	SOAP Services
+ *
+ */	 
+dwsvc.ServiceRegistry.configure("avatax.soap.GetTax", {
+	initServiceClient : function() {
+		// authentication is provided by "key" param and stored in credential object
+		// load the WebReference
+		this.webReference = webreferences.taxsvc;
+		this.serviceClient = this.webReference.getDefaultService();
+	    
+		// Get the default service.
+		return this.serviceClient;
+	},
+	createRequest : function(svc : dwsvc.SOAPService, params : Object) : Object {	
+		// Populate the request with data
+		var requestObj 						= new this.webReference.GetTax();
+		var basket : dworder.Basket			= params["basket"];
+		var finalCall : Boolean 			= params["finalCall"];
+		var OrderNo : String 				= params["orderNo"];
+		var customer : dwcustomer.Customer	= params["customer"];
+		var shipToArray	: Array				= params["shipToArray"];
+		var itemArray : Array				= params["itemArray"];
+		var merchantId : String				= params["merchantId"];
+		var securityKey : String			= params["securityKey"];
+		var VATid : String					= !empty(params["VATid"]) && typeof params["VATid"] != "undefined" ? params["VATid"] : '';
+		var randomNum : Number				= new dw.crypto.SecureRandom();
+			
+		if(!AvataxHelper.createHeader(this.serviceClient, merchantId, securityKey)){
+			return requestObj;
+		}
+				
+		//random number for Doc code, max integer int32
+		randomNum = randomNum.nextInt(2147483647);
+				
+		var req = requestObj.getTaxRequest = new this.webReference.GetTaxRequest();
+		var dateTime : String = AvataxHelper.getFormattedDate();
+		var orderNum = OrderNo != null ? OrderNo : randomNum;
+		var jurisdictionID = null;
+		var detailLevel = this.webReference.DetailLevel.Line;
+				
+		if (finalCall != null && finalCall) {
+			req.docType = this.webReference.DocumentType.SalesInvoice;
+		}
+		else {
+			req.docType = this.webReference.DocumentType.SalesOrder;
+		}
+		
+		if (!empty(basket.defaultShipment.shippingAddress)) {
+			var loc = new dworder.ShippingLocation(basket.defaultShipment.shippingAddress);
+            jurisdictionID = dworder.TaxMgr.getTaxJurisdictionID(loc);
+		}
+		if (!empty(jurisdictionID)) {
+			detailLevel = this.webReference.DetailLevel.Tax;
+		}
+				
+		req.commit 					= false;
+		req.detailLevel 			= detailLevel;
+		req.companyCode 			= AvataxHelper.getCompanyCode();
+		req.docDate 				= dateTime;
+		req.docCode 				= orderNum;
+		req.customerCode 			= customer != null && "ID" in customer ? customer.ID : "Cust123";
+		req.customerUsageType		= customer.authenticated && "entityCode" in customer.profile.custom ? customer.profile.custom.entityCode : "";
+		req.currencyCode			= basket.getCurrencyCode();
+		req.businessIdentificationNo = VATid;
+			    
+		var addresses : Array = new Array();
+				
+		//set to billing address using the origin address (i.e. warehouse address)
+		var origin 					= new this.webReference.BaseAddress();
+		origin.addressCode 			= "0";
+		origin.line1 				= "";
+		origin.line2 				= "";
+		origin.city 				= AvataxHelper.getShipFromCity();
+		origin.region 				= AvataxHelper.getShipFromStateCode();
+		origin.postalCode 			= AvataxHelper.getShipFromZipCode();
+		origin.country 				= AvataxHelper.getShipFromCountryCode();
+		addresses.push(origin);
+		
+		//Using the shipToObject, set the destination addresses
+		for each (let destAddress in shipToArray){
+			addresses.push(destAddress);
+		}
+		
+		req.addresses = addresses;
+		req.destinationCountryCode = loc.countryCode;
+		req.originCountryCode = origin.country;
+			    	
+		// Add line items to array for request object
+		var _items : Array = new Array();
+		for each (var item in itemArray) {
+			_items.push(item);	
+		}
+		req.lines = _items;
+		var a = 2;
+		return requestObj;
+	},
+	execute : function(svc : dwsvc.SOAPService, parameter : Object) {
+		var test = this.serviceClient.getTax(parameter)
+		return test;
+	},
+	parseResponse : function(service : dwsvc.SOAPService, response : Object) : Object {
+		var test1 = response
+		return test1;
+	},
+	mockCall : function(service : dwsvc.SOAPService, request : Object) : Object {
+		return { status: "MOCKED" };
+	}
+});
+
+dwsvc.ServiceRegistry.configure("avatax.soap.PostTax", {
+	initServiceClient : function() {
+		// authentication is provided by "key" param and stored in credential object
+		// load the WebReference
+		this.webReference = webreferences.taxsvc;
+		this.serviceClient = this.webReference.getDefaultService();
+	    
+		// Get the default service.
+		return this.serviceClient;
+	},
+	createRequest : function(svc : dwsvc.SOAPService, params : Object) : Object {	
+		// Populate the request with data
+		var order : dworder.Order	= params["order"];
+		var merchantId : String 	= params["merchantId"];
+		var securityKey : String 	= params["securityKey"];
+		var taxationRequest 		= new this.webReference.PostTax();
+				
+		if(!AvataxHelper.createHeader(this.serviceClient, merchantId, securityKey)){
+			return taxationRequest;
+		}
+				
+		var req 			= taxationRequest.postTaxRequest = new this.webReference.PostTaxRequest();
+		req.docType 		= this.webReference.DocumentType.SalesInvoice;
+		req.commit 			= true;
+		req.companyCode 	= AvataxHelper.getCompanyCode();
+		req.totalAmount		= order.merchandizeTotalPrice.add(order.shippingTotalPrice).value;
+		req.totalTax		= order.totalTax.value;
+		req.docDate 		= AvataxHelper.getFormattedDate();
+		req.docCode			= order.orderNo;
+				
+		return taxationRequest;
+	},
+	execute : function(svc : dwsvc.SOAPService, parameter : Object) {
+		return this.serviceClient.postTax(parameter);
+	},
+	parseResponse : function(service : dwsvc.SOAPService, response : Object) : Object {
+		return response;
+	},
+	mockCall : function(service : dwsvc.SOAPService, request : Object) : Object {
+		return { status: "MOCKED" };
+	}
+});
+
+dwsvc.ServiceRegistry.configure("avatax.soap.CancelTax", {
+	initServiceClient : function() {
+		// authentication is provided by "key" param and stored in credential object
+		// load the WebReference
+		this.webReference = webreferences.taxsvc;
+		this.serviceClient = this.webReference.getDefaultService();
+	    
+		// Get the default service.
+		return this.serviceClient;
+	},
+	createRequest : function(svc : dwsvc.SOAPService, params : Object) : Object {	
+		// Populate the request with data
+		var orderId : String 		= params["orderId"];
+		var merchantId : String 	= params["merchantId"];
+		var securityKey : String 	= params["securityKey"];
+		var taxationRequest 		= new this.webReference.CancelTax();
+		
+		if(!AvataxHelper.createHeader(this.serviceClient, merchantId, securityKey)){
+			return taxationRequest;
+		}
+		
+		var req 			= taxationRequest.cancelTaxRequest = new this.webReference.CancelTaxRequest();
+		req.docType 		= this.webReference.DocumentType.SalesInvoice;  
+		req.companyCode 	= AvataxHelper.getCompanyCode();
+	    req.cancelCode 		= this.webReference.CancelCode.DocDeleted;    
+	    req.docCode 		= orderId;
+
+		return taxationRequest;
+	},
+	execute : function(svc : dwsvc.SOAPService, parameter : Object) {
+		return this.serviceClient.cancelTax(parameter);
+	},
+	parseResponse : function(service : dwsvc.SOAPService, response : Object) : Object {
+		return response;
+	},
+	mockCall : function(service : dwsvc.SOAPService, request : Object) : Object {
+		return { status: "MOCKED" };
+	}
+});
+
+dwsvc.ServiceRegistry.configure("avatax.soap.ValidateAddress", {
+	initServiceClient : function() {
+		// authentication is provided by "key" param and stored in credential object
+		// load the WebReference
+		this.webReference = webreferences.addresssvc;
+		this.serviceClient = this.webReference.getDefaultService();
+	    
+		// Get the default service.
+		return this.serviceClient;
+	},
+	createRequest : function(svc : dwsvc.SOAPService, params : Object) : Object {	
+		//Populate the request with data
+		var validationRequest 		= new this.webReference.Validate(),
+			addressObject : Object 	= params["addressObject"],
+			merchantId : String		= params["merchantId"],
+			securityKey : String	= params["securityKey"];
+		
+		if(!AvataxHelper.createHeader(this.serviceClient, merchantId, securityKey)){
+			return validationRequest;
+		}
+		
+		var req = validationRequest.validateRequest = new this.webReference.ValidateRequest();
+		var dateTime : String = AvataxHelper.getFormattedDate();
+		
+		//set to shipping address
+	    var validationAddress = new this.webReference.BaseAddress();
+	    validationAddress.addressCode   = "1"
+	    validationAddress.taxRegionId 	= 0;
+	    validationAddress.line1 		= addressObject.address1;
+	    validationAddress.line2 		= addressObject.address2;
+	    validationAddress.city 			= addressObject.city;
+	    validationAddress.region 		= addressObject.stateCode;
+	    validationAddress.postalCode 	= addressObject.postalCode;
+	    validationAddress.country 		= addressObject.countryCode.value;
+		
+		req.address = validationAddress;
+	    req.textCase = this.webReference.TextCase.Mixed;
+	    req.coordinates = true;
+	    req.taxability = true;
+		
+		return validationRequest;
+	},
+	execute : function(svc : dwsvc.SOAPService, parameter : Object) {
+		return this.serviceClient.validate(parameter);
+	},
+	parseResponse : function(service : dwsvc.SOAPService, response : Object) : Object {
+		return response;
+	},
+	mockCall : function(service : dwsvc.SOAPService, request : Object) : Object {
+		return { status: "MOCKED" };
+	}
+});

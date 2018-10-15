@@ -108,9 +108,15 @@ function start() {
             return {};
         }
 
+        // avalara
+        var OrderNo = OrderMgr.createOrderNo();
+
         Transaction.wrap(function () {
             cart.calculate();
         });
+
+        // avalara
+        var basket = dw.order.BasketMgr.currentBasket;
 
         var COBilling = app.getController('COBilling');
 
@@ -142,7 +148,7 @@ function start() {
 
         // Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
         // 'Created'.
-        var order = cart.createOrder();
+        var order = cart.createOrder(OrderNo);
 
         if (!order) {
             // TODO - need to pass BasketStatus to Cart-Show ?
