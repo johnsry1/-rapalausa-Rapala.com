@@ -1,0 +1,89 @@
+/**
+ *	AvataxHelper class
+ */
+
+var dwsystem		= require ("dw/system");
+var dwrpc			= require ("dw/rpc");
+var dwStringUtils	= require ("dw/util").StringUtils;
+var dwLogger		= dwsystem.Logger;
+
+function AvataxHelper() {}
+
+AvataxHelper.prototype = {
+	taxReference : webreferences.taxsvc,
+
+	getDefaultShippingMethodTaxCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtDefaultShippingMethodTaxCode");
+	},
+
+	getDefaultProductTaxCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtDefaultProductTaxCode");
+	},
+
+	getShipFromCity : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtShipFromCity");
+	},
+	
+	getShipFromStateCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtShipFromStateCode");
+	},
+	
+	getShipFromZipCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtShipFromZipCode");
+	},
+		
+	getShipFromCountryCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtShipFromCountryCode");
+	},
+	
+	getCompanyCode : function () {
+		return dwsystem.Site.getCurrent().getCustomPreferenceValue("AtCompanyCode");
+	},
+
+	createHeader : function (service : dwrpc.Stub, merchantID : String, merchantPassword : String){
+		if (empty(merchantID) || empty(merchantPassword)) {
+			dwLogger.getLogger("Avalara", "AvaTax").warn("[libAvatax.ds] createHeader - merchantID and/or merchantPassword are missing.");	
+			return false;
+		}
+		
+		// create Security Header
+		var usernameToken : XML = 
+			<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+				<wsse:UsernameToken wsu:Id="UsernameToken-1" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+					<wsse:Username>{merchantID}</wsse:Username>
+					<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">{merchantPassword}</wsse:Password>
+				</wsse:UsernameToken>
+			</wsse:Security>;
+
+		dwrpc.SOAPUtil.setHeader( service, usernameToken, true );
+			
+		// create Security Header
+		var profile : XML = 
+			<ser:Profile xmlns:ser="http://avatax.avalara.com/services">
+				<ser:Name>5.7.0</ser:Name>
+				<ser:Client>DW,0.1</ser:Client>
+				<ser:Adapter>127.0.0.0</ser:Adapter>
+				<ser:Machine>AvalaraDW,0.13</ser:Machine>
+			</ser:Profile>; 
+
+		dwrpc.SOAPUtil.setHeader(service, profile, false);
+
+		return true;
+	},
+	
+	getFormattedDate : function () {
+		var date : Date = new Date();
+		return dwStringUtils.format('{0}-{1}-{2}', date.getFullYear().toString(), this.insertLeadingZero(date.getMonth() + 1), this.insertLeadingZero(date.getDate()));
+	},
+	
+	insertLeadingZero : function (nb : Number) {
+		if (nb < 10) {
+			return "0" + nb;
+		}
+		else {
+			return "" + nb;
+		}
+	}
+};
+
+module.exports = AvataxHelper;

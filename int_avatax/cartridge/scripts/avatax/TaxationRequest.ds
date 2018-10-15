@@ -1,0 +1,155 @@
+/**
+ *	TaxationRequest.ds
+ *	Sends a single taxation request to Avatax
+ *
+ *	@input  Basket : dw.order.Basket The basket whose tax is to be calculated
+ * 	@input  billTo : Object
+ * 	@input  shipTo : Array
+ * 	@input  shipFrom : Object
+ * 	@input  itemArray: Array 
+ * 	@input  customer : dw.customer.Customer
+ *	@input	OrderNo : String
+ *	@input  finalCall : Boolean
+ *	@input  VATid : String
+ *	@input controller : Boolean
+ * 	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+ */
+
+var dwsvc		= require ("dw/svc");
+var dworder		= require ("dw/order");
+var dwutil		= require ("dw/util");
+var dwvalue		= require ("dw/value");
+var dwLogger	= require ("dw/system").Logger;
+var guard = require('int_avatax/cartridge/scripts/guard');
+
+function execute( pdict : PipelineDictionary ) : Number
+{   
+	try {
+	    var basket : dworder.Basket = pdict.Basket;
+		
+		if (empty(basket)) {
+			dwLogger.getLogger("Avalara", "AvaTax").warn("[TaxationRequest.ds] Please provide a Basket!");
+			return PIPELET_ERROR;
+		}
+
+		var service : dwsvc.Service = dwsvc.ServiceRegistry.get("avatax.soap.GetTax");
+		
+		
+		var params : Object = {
+			"billToObject"	: pdict.billTo,
+			"shipToArray"	: pdict.shipTo,
+			"itemArray"		: pdict.itemArray,
+			"shipFrom"		: pdict.shipFrom,
+			"customer"		: pdict.customer,
+			"orderNo"		: pdict.OrderNo,
+			"finalCall"		: pdict.finalCall,
+			"merchantId"		: service.configuration.credential.user,
+			"securityKey"	: service.configuration.credential.password,
+			"basket"		: basket,
+			"VATid"			: pdict.VATid
+		};
+		  
+		// send request
+		var result = service.call(params);
+		
+		if (params['finalCall']  == true && params['orderNo'] != null) {
+			return PIPELET_NEXT;
+		}	
+		
+		// if there was a valid response object (whether success or failure)
+		if ("status" in result && result.status == "OK" && "object" in result && "getTaxResult" in result.object && !empty(result.object.getTaxResult)) {
+			var taxationResponse : Object = result.object.getTaxResult;
+			pdict.ReasonCode = taxationResponse.resultCode.value;
+
+			// Update basket on success
+			if (taxationResponse.resultCode.value == "Success") {
+				var resItem;
+
+				for each (let resItem in taxationResponse.taxLines) {
+					var lineItem : dworder.LineItem = getLineItemByUUID(basket, resItem.no);
+					if (lineItem != null) {
+						var taxable : dwvalue.Money = new dwvalue.Money(resItem.taxable.get(), basket.currencyCode);
+						var tax : dwvalue.Money = new dwvalue.Money(resItem.tax.get(), basket.currencyCode);
+						var liTotalTax : dwvalue.Money = new dwvalue.Money(0, basket.currencyCode);
+						var taxRate : Number = Number(resItem.rate);
+
+						if (tax.available && taxable.available && taxable.value > 0) {
+							liTotalTax = tax;
+						}
+
+						// get tax rate and tax basis
+						lineItem.setTaxRate(taxRate);
+						lineItem.updateTax(taxRate);
+						
+						// use updateTaxAmount to avoid rounding differences in tax calculations
+						lineItem.updateTaxAmount(liTotalTax);
+						
+						if (lineItem instanceof dworder.ProductLineItem || lineItem instanceof dworder.ProductShippingLineItem) {
+							for each (let pa : dworder.PriceAdjustment in lineItem.priceAdjustments) {
+								pa.updateTax(0);
+							}
+						}
+						else if (lineItem instanceof dworder.ShippingLineItem) {
+							for each (let pa : dworder.PriceAdjustment in lineItem.shippingPriceAdjustments) {
+								pa.updateTax(0);
+							}	
+						}
+					}
+				}
+				
+				for each (let basketPriceAdjustment : dworder.PriceAdjustment in basket.priceAdjustments.addAll(basket.shippingPriceAdjustments)) {
+					basketPriceAdjustment.updateTax(0);
+				}
+			} 
+			else {
+				// Note error messages
+				var lineItems : dwutil.Collection = basket.getAllLineItems();
+				var itemTax : dwvalue.Money = new dwvalue.Money(0, basket.currencyCode);
+				
+				for each (let lineItem : dworder.LineItem in lineItems) {
+					lineItem.setTax(itemTax);	
+					lineItem.setPriceValue(lineItem.netPrice.value);
+				}
+				
+				var errorMsgs : String = "";
+			
+				if (taxationResponse.messages != null) {
+					for each (let message : Object in taxationResponse.messages) {
+						errorMsgs += message.summary;
+					}
+				}
+				dwLogger.getLogger("Avalara", "AvaTax").warn("[TaxationRequest.ds] GetTax request REJECTED (ReasonCode {0}). Messages: {1}", taxationResponse.resultCode, errorMsgs);
+			}
+			
+			basket.updateTotals();
+		
+		} 
+		else {
+			dwLogger.getLogger("Avalara", "AvaTax").warn("[TaxationRequest.ds] GetTax request failed.");
+			return PIPELET_ERROR;
+		}
+	
+		return PIPELET_NEXT;
+		
+	}
+	catch(e) {
+		dwLogger.getLogger("Avalara", "AvaTax").error("[TaxationRequest.ds] Error in taxation request - {0}", e.message);
+		return PIPELET_ERROR;
+	}
+}
+
+function getLineItemByUUID(basket, uuid) {
+	for each (let li : dworder.LineItem in basket.getAllLineItems()) {
+		if (li.UUID === uuid) {
+			return li;
+		}
+		else if ("shippingLineItem" in li && !empty(li.shippingLineItem) && li.shippingLineItem.UUID === uuid) {
+			return li.shippingLineItem;
+		}
+	}	
+	return null;
+}
+
+if(typeof exports != 'undefined') {
+	exports.Execute = guard.ensure([], execute);
+}
