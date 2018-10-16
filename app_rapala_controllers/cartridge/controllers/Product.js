@@ -446,8 +446,12 @@ function guidesAndManuals(){
 function showInLocale() {
 	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
 	let pid = request.httpParameterMap.pid.value;
-	
+	let sessionRedirect = request.httpParameterMap.sessionRedirect.value;
+
 	request.setLocale(locale);
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	InterstitialHelper.setInterstitialSiteCookie(request);
+
 	
 	if (dw.catalog.ProductMgr.getProduct(pid).assignedToSiteCatalog) {
 		return show();

@@ -49,13 +49,11 @@ function showCountryPopup() {
 	session.custom.redirectGeolocation = false;
 	
 	// check for cookie
-	let cookies : dw.web.Cookies = request.getHttpCookies();
-	for (let i = 0; i < cookies.getCookieCount(); i++) {
-		let cookie : dw.web.Cookie = cookies[i];
-		if (cookie.name === 'CountrySelectorViewed') {
-			return showPopup = false;
-			sesssion.custom.showShopByBrand = false;
-		}
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	var CountrySelectorViewed = InterstitialHelper.getPopupShownCookie();
+	if (CountrySelectorViewed) {
+		return showPopup = false;
+		sesssion.custom.showShopByBrand = false;
 	}
 
 	// check if a category page or PDP is being accessed directly
@@ -70,10 +68,7 @@ function showCountryPopup() {
 	}
 	
 	// set cookie
-	let cookie : dw.web.Cookie = new dw.web.Cookie('CountrySelectorViewed','true');
-	cookie.setMaxAge(86400*360*10);
-	cookie.setPath("/");
-	response.addHttpCookie(cookie);
+	InterstitialHelper.setPopupShownCookie();
 	
 	return showPopup;
 }
@@ -84,6 +79,7 @@ function showCountryPopup() {
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     session.custom.showCountryPopup = showCountryPopup();
+    var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
     
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session' && !session.custom.showCountryPopup) {
 		app.getController('GeoipRedirects').geolocationRestrictions();
@@ -92,15 +88,9 @@ exports.onSession = function () {
     if (!request.httpParameterMap.isParameterSubmitted('countrySelect')) {
 	    var cookies = request.getHttpCookies(),
 	        cookieCount = cookies.cookieCount,
-	        geoRedirect = false;
-	
-	    for(var i=0; i < cookieCount; i++) {
-	        let cookie = cookies[i];
-	        if (cookie.name == 'CountrySelectorViewed') {
-	            geoRedirect = true;
-	            break;
-	        }
-	    }
+	        CountrySelectorViewed = InterstitialHelper.getPopupShownCookie(),
+	        geoRedirect = !empty(CountrySelectorViewed);
+
 		if (geoRedirect && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
 			let geolocation = request.geolocation;
 			let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
