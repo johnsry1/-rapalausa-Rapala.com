@@ -346,7 +346,7 @@ function selectShippingMethod() {
 
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     //avalavara
-    session.custom.NoCall = false;
+    session.custom.NoCall = false
     Transaction.wrap(function () {
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
         cart.calculate();
@@ -390,18 +390,18 @@ function updateShippingMethodList() {
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     shippingCosts = new HashMap();
     currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
-    session.custom.NoCall = true;
+
     // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
     Transaction.begin();
+        session.custom.NoCall = true;
+        for (i = 0; i < applicableShippingMethods.length; i++) {
+            method = applicableShippingMethods[i];
 
-    for (i = 0; i < applicableShippingMethods.length; i++) {
-        method = applicableShippingMethods[i];
-
-        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
-        cart.calculate();
-        shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
-    }
-    session.custom.NoCall = false;
+            cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
+            cart.calculate();
+            shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
+        }
+        session.custom.NoCall = false;
     Transaction.rollback();
 
     Transaction.wrap(function () {

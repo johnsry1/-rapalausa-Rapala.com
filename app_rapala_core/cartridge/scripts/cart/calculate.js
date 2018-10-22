@@ -16,7 +16,7 @@ var TaxMgr = require('dw/order/TaxMgr');
 var Logger = require('dw/system/Logger');
 var Status = require('dw/system/Status');
 var Site = require('dw/system/Site');
-
+var avataxApp = require('int_avatax/cartridge/scripts/app');
 /**
  * @function calculate
  *
@@ -91,8 +91,15 @@ exports.calculate = function (basket) {
     //PREVAIL-Added to handle third party tax services.
 	//if (!dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant') &&
 		//dw.system.Site.getCurrent().getCustomPreferenceValue('taxService') === 'DEMANDWARE') {
-    if(!Site.getCurrent().getCustomPreferenceValue('ATEnable')) {
-		calculateTax(basket,stateCode);
+    if(Site.getCurrent().preferences.custom.hasOwnProperty('ATEnable') &&   Site.getCurrent().getCustomPreferenceValue('ATEnable')) {
+        var response = avataxApp.getController('Avatax').CalculateTaxes(basket);
+        if (response!=null && response.error) {
+            calculateTax(basket,stateCode);
+            Logger.error('calculate.js: avatax calculation error, use SFCC tax tables');
+            
+        }
+    } else {
+        calculateTax(basket,stateCode);
     }
     /*} else {
 		var shipments = basket.getShipments().iterator();

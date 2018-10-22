@@ -97,7 +97,7 @@ function callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid) {
 		detailLevel = 'Tax';
 	}
 
-	req.commit 					= false;
+	req.commit 					= true;
 	req.detailLevel 			= detailLevel;
 	req.companyCode 			= AvataxHelper.getCompanyCode();
 	req.docDate 				= AvataxHelper.getFormattedDate();;
