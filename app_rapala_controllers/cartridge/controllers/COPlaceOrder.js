@@ -109,14 +109,16 @@ function start() {
         }
 
         // avalara
-        var OrderNo = OrderMgr.createOrderNo();
+        var OrderNo = OrderMgr.createOrderNo(); 
+
+        session.custom.NoCall = false;
+        session.custom.OrderNo = OrderNo;
+        session.custom.finalCall = true;
 
         Transaction.wrap(function () {
             cart.calculate();
         });
 
-        // avalara
-        var basket = dw.order.BasketMgr.currentBasket;
 
         var COBilling = app.getController('COBilling');
 
