@@ -27,7 +27,6 @@ var Site = require('dw/system/Site');
 
 var lineItem,paypalErrorValue;
 var app = require('~/cartridge/scripts/app');
-var avataxApp = require('int_avatax/cartridge/scripts/app');
 
 /**
  * Cart helper providing enhanced cart functionality

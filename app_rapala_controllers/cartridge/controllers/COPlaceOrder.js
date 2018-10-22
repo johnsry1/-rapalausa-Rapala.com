@@ -119,8 +119,6 @@ function start() {
             cart.calculate();
         });
 
-        // avalara
-        //var basket = dw.order.BasketMgr.currentBasket;
 
         var COBilling = app.getController('COBilling');
 

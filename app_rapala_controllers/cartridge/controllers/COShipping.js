@@ -346,7 +346,7 @@ function selectShippingMethod() {
 
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     //avalavara
-    session.custom.NoCall = false
+    session.custom.NoCall = false;
     Transaction.wrap(function () {
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
         cart.calculate();
