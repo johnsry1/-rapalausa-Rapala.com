@@ -143,7 +143,7 @@ function callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid) {
 	var reqHash = murmurhash.hashBytes(JSON.stringify(req), JSON.stringify(req).length, 523);
 
 	if (session.custom.avataxhash != null && session.custom.avataxhash == reqHash) {
-		return true;
+		return false;
 	}
 	
 	session.custom.avataxhash = reqHash;
