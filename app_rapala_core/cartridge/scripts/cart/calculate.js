@@ -93,7 +93,7 @@ exports.calculate = function (basket) {
 		//dw.system.Site.getCurrent().getCustomPreferenceValue('taxService') === 'DEMANDWARE') {
     if(Site.getCurrent().preferences.custom.hasOwnProperty('ATEnable') &&   Site.getCurrent().getCustomPreferenceValue('ATEnable')) {
         var response = avataxApp.getController('Avatax').CalculateTaxes(basket);
-        if (response!=null && response.error) {
+        if (response!=null && response.ERROR) {
             calculateTax(basket,stateCode);
             Logger.error('calculate.js: avatax calculation error, use SFCC tax tables');
             

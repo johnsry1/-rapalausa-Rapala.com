@@ -57,7 +57,10 @@ function calculateTaxes(basket) {
 			return {OK: true};
 		}
 		reasonCode = taxationRequest.Execute({Basket: basket, billTo: basket.getBillingAddress(), customer: customer, finalCall: finalCall, itemArray: ia.items, OrderNo: OrderNo, shipFrom: shipFrom, shipTo: shipTo.shipToArray, VATid: VATid});
-
+		if(!empty(reasonCode) && reasonCode == 2) {
+			//return PIPELET_ERROR; =>> reasonCode == 2
+			return {ERROR: true};
+		}
 		session.custom.finalCall = false;
 		session.custom.OrderNo = null;
 
@@ -140,7 +143,7 @@ function callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid) {
 	var reqHash = murmurhash.hashBytes(JSON.stringify(req), JSON.stringify(req).length, 523);
 
 	if (session.custom.avataxhash != null && session.custom.avataxhash == reqHash) {
-		return false;
+		return true;
 	}
 	
 	session.custom.avataxhash = reqHash;
