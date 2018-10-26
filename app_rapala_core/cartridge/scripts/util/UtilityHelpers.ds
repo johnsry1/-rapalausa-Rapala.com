@@ -53,8 +53,6 @@ function getBadgeText(currentCustomer,currentForms){
 	var ccg : dw.customer.CustomerGroup = null;
 	var customerGrp : dw.customer.CustomerGroup = null;
 	var customerGrpCol : Collection = currentCustomer.getCustomerGroups();
-	badgeText = 'VIP Member';
-	return badgeText;
 	for each(customerGrp in customerGrpCol){
 		if(customerGrp.getID().indexOf('VIP') != -1){
 			isVIP = true;
