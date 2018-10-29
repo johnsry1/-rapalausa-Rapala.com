@@ -406,7 +406,6 @@ function updateShippingMethodList() {
             cart.calculate();
             shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
         }
-        session.custom.NoCall = false;
     Transaction.rollback();
 
     Transaction.wrap(function () {
