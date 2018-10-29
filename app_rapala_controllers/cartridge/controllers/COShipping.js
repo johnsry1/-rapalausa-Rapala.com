@@ -398,7 +398,7 @@ function updateShippingMethodList() {
 
     // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
     Transaction.begin();
-        session.custom.NoCall = true;
+        session.custom.NoCall = false;
         for (i = 0; i < applicableShippingMethods.length; i++) {
             method = applicableShippingMethods[i];
 
