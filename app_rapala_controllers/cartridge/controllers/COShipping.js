@@ -347,10 +347,15 @@ function selectShippingMethod() {
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     //avalavara
     session.custom.NoCall = false;
-    Transaction.wrap(function () {
+    Transaction.begin();
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
         cart.calculate();
-    });
+    Transaction.commit();
+    if(customer.authenticated && 'iceforce' != session.custom.currentSite) {
+	    Transaction.wrap(function () {
+	    		var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
+	    });
+    }
 
     app.getView({
         Basket: cart.object
