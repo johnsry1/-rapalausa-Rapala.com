@@ -398,7 +398,7 @@ function updateShippingMethodList() {
 
     // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
     Transaction.begin();
-        session.custom.NoCall = true;
+        session.custom.NoCall = false;
         for (i = 0; i < applicableShippingMethods.length; i++) {
             method = applicableShippingMethods[i];
 
@@ -406,7 +406,6 @@ function updateShippingMethodList() {
             cart.calculate();
             shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
         }
-        session.custom.NoCall = false;
     Transaction.rollback();
 
     Transaction.wrap(function () {

@@ -44,7 +44,7 @@ function calculateTaxes(basket) {
 		return {OK: true};
 	}
 	if(empty(basket) || empty(basket.defaultShipment) || empty(basket.defaultShipment.shippingAddress)) {
-		return {OK: true};
+		return {ERROR: true};
 	}
 	if(NoCall === true) {
 		return {OK: true};
