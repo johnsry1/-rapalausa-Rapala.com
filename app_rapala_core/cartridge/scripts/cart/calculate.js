@@ -16,7 +16,9 @@ var TaxMgr = require('dw/order/TaxMgr');
 var Logger = require('dw/system/Logger');
 var Status = require('dw/system/Status');
 var Site = require('dw/system/Site');
+var Order = require ("dw/order");
 var avataxApp = require('int_avatax/cartridge/scripts/app');
+
 /**
  * @function calculate
  *
@@ -96,7 +98,8 @@ exports.calculate = function (basket) {
         if (response!=null && response.ERROR) {
             calculateTax(basket,stateCode);
             Logger.error('calculate.js: avatax calculation error, use SFCC tax tables');
-            
+        } else if (response!=null && response.noServiceCall) {
+            reApplyTaxes(basket);
         }
     } else {
         calculateTax(basket,stateCode);
@@ -346,4 +349,25 @@ function calculateTax (basket, stateCode) {
             basketShippingPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
         }
     }
+}
+
+//Update all line items and related price adjustments with tax amounts calculated by avatax,
+//should be called when request to avatax isn't fired, to make sure that all amount updated
+function reApplyTaxes(basket) {
+	for each (var productLineItem in basket.getAllProductLineItems()){
+		productLineItem.updateTax(productLineItem.getTaxRate(), productLineItem.getTaxBasis());
+		for each (let pa : Order.PriceAdjustment in productLineItem.priceAdjustments) {
+			pa.updateTax(0);
+		}
+	}
+
+	for each (var basketItem in basket.getAllLineItems()){
+		if (basketItem instanceof Order.ShippingLineItem) {
+			basketItem.updateTax(basketItem.getTaxRate(), basketItem.getTaxBasis());
+			for each(let shippingPriceAdjustment in basketItem.shippingPriceAdjustments) {
+				shippingPriceAdjustment.updateTax(0);
+			}
+		}
+	}
+
 }
