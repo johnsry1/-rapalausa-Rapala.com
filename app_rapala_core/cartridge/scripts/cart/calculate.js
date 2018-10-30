@@ -16,7 +16,7 @@ var TaxMgr = require('dw/order/TaxMgr');
 var Logger = require('dw/system/Logger');
 var Status = require('dw/system/Status');
 var Site = require('dw/system/Site');
-var Order = require ("dw/order");
+var Order = require ('dw/order');
 var avataxApp = require('int_avatax/cartridge/scripts/app');
 
 /**
