@@ -54,7 +54,7 @@ function calculateTaxes(basket) {
 		shipTo = createShipToObject.Execute({Basket: basket, controller: true});
 
 		if (!callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid)){
-			return {OK: true};
+			return {noServiceCall: true};
 		}
 		reasonCode = taxationRequest.Execute({Basket: basket, billTo: basket.getBillingAddress(), customer: customer, finalCall: finalCall, itemArray: ia.items, OrderNo: OrderNo, shipFrom: shipFrom, shipTo: shipTo.shipToArray, VATid: VATid});
 		if(!empty(reasonCode) && reasonCode == 2) {
