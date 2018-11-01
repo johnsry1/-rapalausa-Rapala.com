@@ -347,10 +347,15 @@ function selectShippingMethod() {
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     //avalavara
     session.custom.NoCall = false;
-    Transaction.wrap(function () {
+    Transaction.begin();
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
         cart.calculate();
-    });
+    Transaction.commit();
+    if(customer.authenticated && 'iceforce' != session.custom.currentSite) {
+	    Transaction.wrap(function () {
+	    		var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
+	    });
+    }
 
     app.getView({
         Basket: cart.object
@@ -390,18 +395,17 @@ function updateShippingMethodList() {
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
     shippingCosts = new HashMap();
     currentShippingMethod = cart.getDefaultShipment().getShippingMethod() || ShippingMgr.getDefaultShippingMethod();
-    session.custom.NoCall = true;
+
     // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
     Transaction.begin();
+        session.custom.NoCall = false;
+        for (i = 0; i < applicableShippingMethods.length; i++) {
+            method = applicableShippingMethods[i];
 
-    for (i = 0; i < applicableShippingMethods.length; i++) {
-        method = applicableShippingMethods[i];
-
-        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
-        cart.calculate();
-        shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
-    }
-    session.custom.NoCall = false;
+            cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
+            cart.calculate();
+            shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
+        }
     Transaction.rollback();
 
     Transaction.wrap(function () {

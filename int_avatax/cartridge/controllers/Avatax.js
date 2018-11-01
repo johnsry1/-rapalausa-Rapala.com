@@ -44,7 +44,7 @@ function calculateTaxes(basket) {
 		return {OK: true};
 	}
 	if(empty(basket) || empty(basket.defaultShipment) || empty(basket.defaultShipment.shippingAddress)) {
-		return {OK: true};
+		return {ERROR: true};
 	}
 	if(NoCall === true) {
 		return {OK: true};
@@ -54,10 +54,13 @@ function calculateTaxes(basket) {
 		shipTo = createShipToObject.Execute({Basket: basket, controller: true});
 
 		if (!callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid)){
-			return {OK: true};
+			return {noServiceCall: true};
 		}
 		reasonCode = taxationRequest.Execute({Basket: basket, billTo: basket.getBillingAddress(), customer: customer, finalCall: finalCall, itemArray: ia.items, OrderNo: OrderNo, shipFrom: shipFrom, shipTo: shipTo.shipToArray, VATid: VATid});
-
+		if(!empty(reasonCode) && reasonCode == 2) {
+			//return PIPELET_ERROR; =>> reasonCode == 2
+			return {ERROR: true};
+		}
 		session.custom.finalCall = false;
 		session.custom.OrderNo = null;
 
@@ -97,7 +100,7 @@ function callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid) {
 		detailLevel = 'Tax';
 	}
 
-	req.commit 					= false;
+	req.commit 					= true;
 	req.detailLevel 			= detailLevel;
 	req.companyCode 			= AvataxHelper.getCompanyCode();
 	req.docDate 				= AvataxHelper.getFormattedDate();;

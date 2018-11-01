@@ -28,13 +28,13 @@ dwsvc.ServiceRegistry.configure("avatax.soap.GetTax", {
 		// Populate the request with data
 		var requestObj 						= new this.webReference.GetTax();
 		var basket : dworder.Basket			= params["basket"];
-		var finalCall : Boolean 			= params["finalCall"];
+		var finalCall : Boolean 				= params["finalCall"];
 		var OrderNo : String 				= params["orderNo"];
 		var customer : dwcustomer.Customer	= params["customer"];
 		var shipToArray	: Array				= params["shipToArray"];
 		var itemArray : Array				= params["itemArray"];
 		var merchantId : String				= params["merchantId"];
-		var securityKey : String			= params["securityKey"];
+		var securityKey : String				= params["securityKey"];
 		var VATid : String					= !empty(params["VATid"]) && typeof params["VATid"] != "undefined" ? params["VATid"] : '';
 		var randomNum : Number				= new dw.crypto.SecureRandom();
 			
@@ -108,12 +108,10 @@ dwsvc.ServiceRegistry.configure("avatax.soap.GetTax", {
 		return requestObj;
 	},
 	execute : function(svc : dwsvc.SOAPService, parameter : Object) {
-		var test = this.serviceClient.getTax(parameter)
-		return test;
+		return this.serviceClient.getTax(parameter);
 	},
 	parseResponse : function(service : dwsvc.SOAPService, response : Object) : Object {
-		var test1 = response
-		return test1;
+		return response;
 	},
 	mockCall : function(service : dwsvc.SOAPService, request : Object) : Object {
 		return { status: "MOCKED" };
