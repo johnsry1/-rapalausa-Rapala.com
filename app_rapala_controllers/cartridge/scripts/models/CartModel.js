@@ -23,7 +23,7 @@ var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var TransientAddress = require('~/cartridge/scripts/models/TransientAddressModel');
 var UUIDUtils = require('dw/util/UUIDUtils');
-
+var Site = require('dw/system/Site');
 
 var lineItem,paypalErrorValue;
 var app = require('~/cartridge/scripts/app');
@@ -1467,12 +1467,12 @@ var CartModel = AbstractModel.extend({
      * @alias module:models/CartModel~CartModel/createOrder
      * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
      */
-    createOrder: function () {
+    createOrder: function (OrderNo) {
         var basket = this.object;
         var order;
         try {
             order = Transaction.wrap(function () {
-            	return OrderMgr.createOrder(basket);
+            	return OrderMgr.createOrder(basket, OrderNo);
             });
         } catch (error) {
             return;

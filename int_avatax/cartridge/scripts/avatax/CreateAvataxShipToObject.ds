@@ -1,0 +1,73 @@
+/**
+* 	CreateAvataxShipToObject.ds
+*	Creates the shipping request object
+*
+*	@input Basket : dw.order.Basket
+*	@input controller : Boolean
+*	@output AvataxShipTo : Array
+*/
+
+var dworder		= require ("dw/order");
+var dwLogger	= require ("dw/system").Logger;
+var guard = require('int_avatax/cartridge/scripts/guard');
+
+var libAvatax = require("int_avatax/cartridge/scripts/avatax/libAvatax");
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try {
+		var basket : dworder.Basket = args.Basket,
+			AvataxHelper = new libAvatax(),
+			shipToArray	: Array	= new Array(),
+			hashArray : Array = new Array();
+			
+
+		for each (var shipment : dworder.Shipment in basket.shipments) {
+			if (!empty(shipment.shippingAddress)) {
+				let shipToObject = new AvataxHelper.taxReference.BaseAddress();
+				var hashObject = {};
+				
+				let shippingAddress : dworder.OrderAddress = shipment.shippingAddress;
+
+				shipToObject.line1 = shippingAddress.address1;
+				shipToObject.line2 = shippingAddress.address2;
+				shipToObject.city = shippingAddress.city;
+				shipToObject.region = shippingAddress.stateCode;
+				shipToObject.postalCode = shippingAddress.postalCode;
+				shipToObject.country = shippingAddress.countryCode.value;
+				shipToObject.addressCode = shippingAddress.getUUID();
+
+				hashObject.line1 = shippingAddress.address1;
+				hashObject.line2 = shippingAddress.address2;
+				hashObject.city = shippingAddress.city;
+				hashObject.region = shippingAddress.stateCode;
+				hashObject.postalCode = shippingAddress.postalCode;
+				hashObject.country = shippingAddress.countryCode.value;
+				hashObject.addressCode = shippingAddress.getUUID();
+
+				shipToArray.push(shipToObject);
+				hashArray.push(hashObject);
+			}
+		}
+		
+		if(args.controller) {
+			return {
+				shipToArray: shipToArray,
+				hashArray: hashArray
+			};
+		}
+		
+		args.AvataxShipTo = shipToArray;
+	
+	    return PIPELET_NEXT;
+	}
+	catch(e) {
+		var err=e.message;
+		dwLogger.getLogger("Avalara", "AvaTax").error("[CreateAvataxShipToObject.ds] failed with the following error: {0}", e.message);
+		return PIPELET_ERROR;	
+	}
+}
+
+if(typeof exports != 'undefined') {
+	exports.Execute = guard.ensure([], execute);
+}

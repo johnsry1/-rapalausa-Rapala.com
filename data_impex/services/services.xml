@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
 
+    <service-credential service-credential-id="avatax">
+        <url>https://development.avalara.net/Tax/TaxSvc.asmx</url>
+        <user-id>2000316662</user-id>
+        <password encrypted="true" encryption-type="common.export">EU7US9uWfcdyNLA6x3IlJbFqUgR6YIeyaVrKOE7T6OaqYN0fstAf7R8fwXDFeU2s</password>
+    </service-credential>
+
+    <service-credential service-credential-id="avatax address validation">
+        <url>https://development.avalara.net/address/addresssvc.asmx</url>
+        <user-id>2000316662</user-id>
+        <password encrypted="true" encryption-type="common.export">nXzfvWS+PubfQSVmUfG6FQWUDp1BacYqIDQoeBuwOcs=</password>
+    </service-credential>
     <service-credential service-credential-id="AdyenPayment">
         <url>https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise</url>
         <user-id>ws_724260@Company.RapalaVMC</user-id>
@@ -33,6 +44,16 @@
 
     <service-profile service-profile-id="Adyen">
         <timeout-millis>2000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="taxService">
+        <timeout-millis>30000</timeout-millis>
         <rate-limit-enabled>false</rate-limit-enabled>
         <rate-limit-calls>0</rate-limit-calls>
         <rate-limit-millis>0</rate-limit-millis>
@@ -89,6 +110,50 @@
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id/>
         <credential-id>AdyenRecurringDisable</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.CancelTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.GetTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>AVA</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.PostTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.ValidateAddress">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id/>
+        <credential-id>avatax address validation</credential-id>
     </service>
 
 </services>

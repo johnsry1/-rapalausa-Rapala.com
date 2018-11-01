@@ -1,0 +1,185 @@
+/**
+* 	CreateAvataxTaxationItemsObject.ds
+*
+*	@input Basket : dw.order.Basket
+*	@input controller : Boolean
+*	@output itemarray : Array
+*/
+
+var dworder		= require ("dw/order");
+var dwLogger	= require ("dw/system").Logger;
+
+var libAvatax = require("int_avatax/cartridge/scripts/avatax/libAvatax");
+var guard = require('int_avatax/cartridge/scripts/guard');
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try {
+		var basket : dworder.Basket = args.Basket;		
+		var items : Array = new Array();	var hashArray : Array = new Array();
+		var AvataxHelper = new libAvatax();
+		
+		var defaultProductTaxCode : String = AvataxHelper.getDefaultProductTaxCode();
+		var defaultShippingMethodTaxCode : String = AvataxHelper.getDefaultShippingMethodTaxCode();
+		var taxIncluded : Boolean = (dworder.TaxMgr.taxationPolicy == dworder.TaxMgr.TAX_POLICY_GROSS);
+		
+		// Create product line items
+		for each (let li : dworder.ProductLineItem in basket.productLineItems) {
+			if (!empty(li.shipment.shippingAddress)) {
+				let line = new AvataxHelper.taxReference.Line();
+				var hashLine = {};
+				
+				let shippingAddress : dworder.OrderAddress = li.shipment.shippingAddress;
+				
+				line.destinationCode	= li.shipment.shippingAddress.UUID;
+				line.discounted 		= false;
+				line.description 		= li.productName;
+				line.itemCode 			= li.productID;
+				line.taxCode 			= !empty(li.taxClassID) ? li.taxClassID : defaultProductTaxCode;
+				line.no 				= li.UUID;
+				line.qty 				= li.quantityValue;
+				line.amount 			= li.proratedPrice.value;
+				line.originCode			= "0";
+				line.taxIncluded 		= taxIncluded;
+				
+				
+				hashLine.destinationCode	= li.shipment.shippingAddress.UUID;
+				hashLine.discounted 		= false;
+				hashLine.description 		= li.productName;
+				hashLine.itemCode 			= li.productID;
+				hashLine.taxCode 			= !empty(li.taxClassID) ? li.taxClassID : defaultProductTaxCode;
+				hashLine.no 				= li.UUID;
+				hashLine.qty 				= li.quantityValue;
+				hashLine.amount 			= li.proratedPrice.value;
+				hashLine.originCode			= "0";
+				hashLine.taxIncluded 		= taxIncluded;
+				
+				items.push(line);
+				hashArray.push(hashLine);
+				
+				for each (let oli : dworder.ProductLineItem in li.optionProductLineItems) {
+					let line = new AvataxHelper.taxReference.Line();
+					var hashLine = {};
+					
+					let shippingAddress : dworder.OrderAddress = li.shipment.shippingAddress;
+					
+					line.destinationCode	= li.shipment.shippingAddress.UUID;
+					line.discounted 		= false;
+					line.description 		= oli.productName;
+					line.itemCode 			= oli.productID;
+					line.taxCode 			= !empty(oli.taxClassID) ? oli.taxClassID : defaultProductTaxCode;
+					line.no 				= oli.UUID;
+					line.qty 				= oli.quantityValue;
+					line.amount 			= oli.proratedPrice.value;
+					line.originCode			= "0";
+					line.taxIncluded 		= taxIncluded;
+					
+					hashLine.destinationCode	= li.shipment.shippingAddress.UUID;
+					hashLine.discounted 		= false;
+					hashLine.description 		= oli.productName;
+					hashLine.itemCode 			= oli.productID;
+					hashLine.taxCode 			= !empty(oli.taxClassID) ? oli.taxClassID : defaultProductTaxCode;
+					hashLine.no 				= oli.UUID;
+					hashLine.qty 				= oli.quantityValue;
+					hashLine.amount 			= oli.proratedPrice.value;
+					hashLine.originCode			= "0";
+					hashLine.taxIncluded 		= taxIncluded;
+					
+					items.push(line);
+					hashArray.push(hashLine);
+				}
+				
+				if (!empty(li.shippingLineItem)) {
+					let line = new AvataxHelper.taxReference.Line();
+					var hashLine = {};
+					
+					let sli : dworder.ShippingLineItem = li.shippingLineItem;
+					let shippingAddress : dworder.OrderAddress = li.shipment.shippingAddress;
+					
+					line.destinationCode	= li.shipment.shippingAddress.UUID;
+					line.discounted 		= false;
+					line.description 		= sli.lineItemText;
+					line.itemCode 			= sli.lineItemText;
+					line.taxCode 			= !empty(sli.taxClassID) ? sli.taxClassID : defaultShippingMethodTaxCode;
+					line.no 				= sli.UUID;
+					line.qty 				= 1;
+					line.amount 			= sli.adjustedPrice.value;
+					line.originCode			= "0";
+					line.taxIncluded 		= taxIncluded;
+					
+					
+					hashLine.destinationCode	= li.shipment.shippingAddress.UUID;
+					hashLine.discounted 		= false;
+					hashLine.description 		= sli.lineItemText;
+					hashLine.itemCode 			= sli.lineItemText;
+					hashLine.taxCode 			= !empty(sli.taxClassID) ? sli.taxClassID : defaultShippingMethodTaxCode;
+					hashLine.no 				= sli.UUID;
+					hashLine.qty 				= 1;
+					hashLine.amount 			= sli.adjustedPrice.value;
+					hashLine.originCode			= "0";
+					hashLine.taxIncluded 		= taxIncluded;
+					
+					items.push(line);
+					hashArray.push(hashLine);
+				}
+			}
+		}
+		
+		// Create shipping line items
+		for each (var shipment : dworder.Shipment in basket.shipments) {
+			if (!empty(shipment.shippingAddress)) {
+				for each (let li : dworder.ShippingLineItem in shipment.shippingLineItems) {
+					let line = new AvataxHelper.taxReference.Line();
+					var hashLine = {};
+					
+					let shippingAddress : dworder.OrderAddress = shipment.shippingAddress;
+					
+					line.qty				= 1;
+					line.description		= li.lineItemText;
+					line.itemCode			= li.ID;
+					line.taxCode			= !empty(li.taxClassID) ? li.taxClassID : defaultShippingMethodTaxCode;
+					line.no					= li.getUUID();
+					line.destinationCode	= shipment.shippingAddress.UUID;
+					line.discounted 		= false;
+					line.originCode			= "0";
+					line.amount				= li.adjustedPrice.value;
+					line.taxIncluded 		= taxIncluded;
+					
+					hashLine.qty				= 1;
+					hashLine.description		= li.lineItemText;
+					hashLine.itemCode			= li.ID;
+					hashLine.taxCode			= !empty(li.taxClassID) ? li.taxClassID : defaultShippingMethodTaxCode;
+					hashLine.no					= li.getUUID();
+					hashLine.destinationCode	= shipment.shippingAddress.UUID;
+					hashLine.discounted 		= false;
+					hashLine.originCode			= "0";
+					hashLine.amount				= li.adjustedPrice.value;
+					hashLine.taxIncluded 		= taxIncluded;
+					
+					items.push(line);
+					hashArray.push(hashLine);
+				}
+			}
+		}
+		
+		if(args.controller) {
+			return {
+				items: items,
+				hashArray: hashArray
+			};
+		}
+		
+		args.itemarray = items;
+		
+	    return PIPELET_NEXT;
+	}
+	catch(e) {
+		dwLogger.getLogger("Avalara", "AvaTax").error("[CreateAvataxTaxationItemsObject.ds] failed with the following error: {0}", e.message);
+		return PIPELET_ERROR;
+	}	    
+
+}
+
+if(typeof exports != 'undefined') {
+	exports.Execute = guard.ensure([], execute);
+}

@@ -1,0 +1,10 @@
+Testing AvaTax ValidateAddress Call<br/><br/>
+<isif condition="${empty(pdict.Order)}">
+	You must supply a valid "orderNo" in the query string.
+<iselse>
+	Result: <isprint value="${pdict.ReasonCode}"/><br/>
+	Response Object: <isprint value="${JSON.stringify(pdict.ResponseObject)}"/>
+	<isif condition="${!empty(pdict.ErrorMsg)}">
+		<br/>Error: <isprint value="${JSON.stringify(pdict.ErrorMsg)}" />
+	</isif>
+</isif>

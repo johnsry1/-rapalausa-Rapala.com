@@ -1,0 +1,113 @@
+/**
+ *	AddressValidationRequest.ds
+ *	Creates a request for the AVS call
+ *
+ *	@input ValidateAddress : Object Should be an instance of dw.order.OrderAddress or dw.customer.CustomerAddress
+ *	@input controller : Boolean
+ *	@output Response : Object
+ *	@output ReasonCode : String The reason code returned by Avatax (100 = Success)
+ *	@output ResponseObject : Object
+ *	@output ErrorMsg : String
+ */
+
+var dwsvc		= require ("dw/svc");
+var dwsystem	= require ("dw/system");
+var dwLogger	= dwsystem.Logger;
+var guard = require('int_avatax/cartridge/scripts/guard');
+
+function execute( args : PipelineDictionary ) : Number
+{
+	try {
+	    var validateAddress : Object = args.ValidateAddress,
+			excludedCountries : String = dwsystem.Site.current.getCustomPreferenceValue("AtExcludedCountries");
+		
+		// Make sure an address was provided
+		if (empty(validateAddress)) {
+			dwLogger.getLogger("Avalara", "AvaTax").warn("AddressValidationRequest.ds - No address provided");
+			return PIPELET_ERROR;
+		}
+		
+		var countryCode : String = !empty(validateAddress.countryCode) ? validateAddress.countryCode.value : '';
+		
+		// Check excluded country list
+		if (!empty(excludedCountries)) {
+			var exCountriesArray : Array = excludedCountries.split(",");
+			
+			for each (let country : String in exCountriesArray) {
+				if (country == countryCode) {
+					return PIPELET_ERROR;
+				}
+			}
+		}
+		
+		var service : dwsvc.Service = dwsvc.ServiceRegistry.get("avatax.soap.ValidateAddress");
+		var params : Object = {
+			"addressObject"	: validateAddress,
+			"merchantId"	: service.configuration.credential.user,
+			"securityKey"	: service.configuration.credential.password
+		};
+		var validationResponse;
+	
+		// Send request
+		validationResponse = service.call(params);
+	
+		args.Response = validationResponse.object.validateResult;
+		args.ReasonCode = validationResponse.object.validateResult.resultCode.value;
+		args.ResponseObject = new Object();
+
+		// Log any errors
+		if (args.ReasonCode  != "Success") {
+			var errorMsgs : String = "";
+	
+			if (!empty(validationResponse.object.validateResult.messages)) {
+				for each (let message in validationResponse.object.validateResult.messages) {
+					errorMsgs += message.summary;
+				}
+			}
+			args.ErrorMsg = errorMsgs;
+			
+			dwLogger.getLogger("Avalara", "AvaTax").warn("[AddressValidationRequest.ds] Address Validation Failed (ReasonCode {0}). Messages: {1}", args.ReasonCode, errorMsgs);
+			return PIPELET_ERROR;
+		}
+		
+		if (!empty(validationResponse.object.validateResult.validAddresses)) {
+			for each (let validAddress : Object in validationResponse.object.validateResult.validAddresses) {
+				if(!empty(validAddress)) {				
+					args.ResponseObject.addressCode = validAddress.addressCode;
+					args.ResponseObject.Address1 = validAddress.line1;
+					args.ResponseObject.Address2 = validAddress.line2;
+					args.ResponseObject.city = validAddress.city;
+					args.ResponseObject.region = validAddress.region;
+					args.ResponseObject.postalCode = validAddress.postalCode;
+					args.ResponseObject.country = validAddress.country;
+					args.ResponseObject.county = validAddress.county;
+					args.ResponseObject.fipsCode = validAddress.fipsCode;
+					args.ResponseObject.postNet = validAddress.postNet;
+					args.ResponseObject.addressType = validAddress.addressType;
+					args.ResponseObject.latitude = validAddress.latitude;
+					args.ResponseObject.longitude = validAddress.longitude;
+
+					break;	
+				}	
+			}
+		}
+		
+		if(args.controller) {
+			var Response = {};
+			Response.ErrorMsg = args.ErrorMsg;
+			Response.ReasonCode = args.ReasonCode;
+			Response.ResponseObject = args.ResponseObject;
+			return Response;
+		}
+
+		return PIPELET_NEXT;
+	}
+	catch(e) {
+		dwLogger.getLogger("Avalara", "AvaTax").error("[AddressValidationRequest.ds] failed with error {0}", e.message);
+		return PIPELET_ERROR;
+	}
+}
+
+if(typeof exports != 'undefined') {
+	exports.Execute = guard.ensure([], execute);
+}

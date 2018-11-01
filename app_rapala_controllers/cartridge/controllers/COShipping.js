@@ -345,11 +345,17 @@ function selectShippingMethod() {
     address.address2 = request.httpParameterMap.address2.stringValue;
 
     applicableShippingMethods = cart.getApplicableShippingMethods(address);
-
-    Transaction.wrap(function () {
+    //avalavara
+    session.custom.NoCall = false;
+    Transaction.begin();
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), request.httpParameterMap.shippingMethodID.stringValue, null, applicableShippingMethods);
         cart.calculate();
-    });
+    Transaction.commit();
+    if(customer.authenticated && 'iceforce' != session.custom.currentSite) {
+	    Transaction.wrap(function () {
+	    		var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
+	    });
+    }
 
     app.getView({
         Basket: cart.object
@@ -392,15 +398,14 @@ function updateShippingMethodList() {
 
     // Transaction controls are for fine tuning the performance of the data base interactions when calculating shipping methods
     Transaction.begin();
+        session.custom.NoCall = false;
+        for (i = 0; i < applicableShippingMethods.length; i++) {
+            method = applicableShippingMethods[i];
 
-    for (i = 0; i < applicableShippingMethods.length; i++) {
-        method = applicableShippingMethods[i];
-
-        cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
-        cart.calculate();
-        shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
-    }
-
+            cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), method.getID(), method, applicableShippingMethods);
+            cart.calculate();
+            shippingCosts.put(method.getID(), cart.preCalculateShipping(method));
+        }
     Transaction.rollback();
 
     Transaction.wrap(function () {

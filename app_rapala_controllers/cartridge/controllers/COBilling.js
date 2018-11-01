@@ -135,19 +135,25 @@ function start(cart, params) {
     
     var addrid = session.forms.singleshipping.shippingAddress.addressid.value;
     app.getForm('billing.billingAddress').setValue('addressid',addrid);
-    Transaction.wrap(function () {
+    session.custom.NoCall = false;
+    Transaction.begin();
         cart.calculate();
-    });
-    if(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value == "PayPal" && app.getForm('billing.paypalval').object.paypalprocessed.value == 'true'){
-    	var paymentInstruments = cart.object.getPaymentInstruments("PayPal");
-    	for each(var paymentInstrument in paymentInstruments){
-    		Transaction.wrap(function(){
-	    		paymentInstrument.custom.paypalToken = request.httpParameterMap.token;
-	    		paymentInstrument.custom.paypalPayerID = request.httpParameterMap.PayerID;
-    		});
-    	}
+    Transaction.commit();
+    if(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value == "PayPal" && app.getForm('billing.paypalval').object.paypalprocessed.value == 'true') {
+    		var paymentInstruments = cart.object.getPaymentInstruments("PayPal");
+	    	for each(var paymentInstrument in paymentInstruments){
+	    		Transaction.wrap(function(){
+		    		paymentInstrument.custom.paypalToken = request.httpParameterMap.token;
+		    		paymentInstrument.custom.paypalPayerID = request.httpParameterMap.PayerID;
+	    		});
+	    	}
     }
-    if(customer.authenticated){
+    if(customer.authenticated && 'iceforce' != session.custom.currentSite) {
+	    Transaction.wrap(function () {
+	    		var orderTotal = require('app_rapala_core/cartridge/scripts/prostaff/UseProStaffAllowance.ds').checkAllotmentPayment(customer,cart.object);
+	    });
+    }
+    if(customer.authenticated ){
 	    var allotmentOnly = require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(cart.object);
 		if(allotmentOnly){
 			app.getForm('billing.paymentMethods').setValue('selectedPaymentMethodID','ALLOTMENT');
