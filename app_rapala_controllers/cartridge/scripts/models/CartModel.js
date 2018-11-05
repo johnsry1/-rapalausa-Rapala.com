@@ -1469,6 +1469,7 @@ var CartModel = AbstractModel.extend({
      */
     createOrder: function (OrderNo) {
         var basket = this.object;
+        var OrderNo = OrderNo || OrderMgr.createOrderNo();
         var order;
         try {
             order = Transaction.wrap(function () {
