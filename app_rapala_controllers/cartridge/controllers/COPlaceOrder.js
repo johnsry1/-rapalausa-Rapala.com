@@ -115,10 +115,9 @@ function start() {
         session.custom.OrderNo = OrderNo;
         session.custom.finalCall = true;
 
-        Transaction.begin();
+        Transaction.wrap(function () {
             cart.calculate();
-        Transaction.rollback();
-
+        });
 
         var COBilling = app.getController('COBilling');
 
