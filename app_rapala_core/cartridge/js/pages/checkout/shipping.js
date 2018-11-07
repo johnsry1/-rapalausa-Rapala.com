@@ -41,7 +41,7 @@ function updateSummary() {
     
     var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue)
     url = util.appendParamToURL(url, 'checkoutstep', 3);
-    console.log(url); //eslint-disable-line
+
     // load the updated summary area
     $summary.load(url, function () {
         // hide edit shipping method link
