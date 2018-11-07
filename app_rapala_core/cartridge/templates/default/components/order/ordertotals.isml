@@ -259,7 +259,9 @@
 						</span>
 					<td>
 						<span class="value-sales">
-							<isif condition="${LineItemCtnr.totalTax.available && LineItemCtnr.totalTax.value > 0.00}">
+							<isif condition="${checkoutstep == 3}">
+								<span class="value"><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></span>
+							<iselseif condition="${LineItemCtnr.totalTax.available && LineItemCtnr.totalTax.value > 0.00}">
 								<span class="total-tax-value">
 									<isprint value="${LineItemCtnr.totalTax}"/>
 								</span>
