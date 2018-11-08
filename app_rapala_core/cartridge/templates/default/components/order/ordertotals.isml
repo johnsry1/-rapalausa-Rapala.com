@@ -332,7 +332,12 @@
 			</isif>
 
 			<tr class="order-total <isif condition="${creditapplied == 'true'}">remainingtotal</isif>">
-				<isif condition="${LineItemCtnr.totalGrossPrice.available}">
+				<isif condition="${checkoutstep == 3 && LineItemCtnr.totalNetPrice.available}">
+				 	<isset name="orderTotalValue" value="${LineItemCtnr.totalNetPrice.subtract(giftCertTotal)}" scope="page"/>
+				 	<isif condition="${allotmentAmt > 0}">
+						<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
+					</isif>
+				<iselseif condition="${LineItemCtnr.totalGrossPrice.available}">
 				 	<isset name="orderTotalValue" value="${LineItemCtnr.totalGrossPrice.subtract(giftCertTotal)}" scope="page"/>
 				 	<isif condition="${allotmentAmt > 0}">
 						<isset name="orderTotalValue" value="${orderTotalValue.subtract(allotmentAmt)}" scope="page"/>
