@@ -171,7 +171,7 @@
 											var shippingInclDiscounts : dw.value.Money = Order.getAdjustedShippingTotalPrice();
 											var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
 									</isscript></iscomment>
-									<isset name="surcharge" value="${pdict.surcharge}" scope="page"/>
+									<isset name="surcharge" value="${dw.value.Money(pdict.surcharge, dw.system.Site.current.getCurrencyCode())}" scope="page"/>
 									<isset name="shippingExclDiscounts" value="${Order.shippingTotalPrice}" scope="page"/>
 									<isset name="ShipingChargewithoutsurcharge" value="${shippingExclDiscounts.subtract(surcharge)}" scope="page"/>
 									<isset name="shippingExclDiscounts" value="${Order.shippingTotalPrice.subtract(surcharge)}" scope="page"/>
