@@ -39,7 +39,7 @@ function updateSummary() {
     progress.show($summary);
     var stateValue = $('body').find('select[id$="_addressFields_states_state"]').val();
     
-    var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue)
+    var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
     url = util.appendParamToURL(url, 'checkoutstep', 3);
 
     // load the updated summary area
