@@ -94,9 +94,9 @@ function showConfirmation(order) {
     app.getForm('profile.login.password').clear();
     var priceVals;
     priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(order);
-    if(!empty(priceVals) || priceVals.length == 0){
-    	priceVals[0] = 0;
-    	priceVals[1] = 0;
+    if(empty(priceVals) || priceVals.length == 0){
+    	priceVals[0] = new dw.value.Money(0, dw.system.Site.current.getCurrencyCode());
+    	priceVals[1] = new dw.value.Money(0, dw.system.Site.current.getCurrencyCode());
     }
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'Checkout Confirmation')});
