@@ -719,9 +719,11 @@ function updateSummary() {
     }
   //get Product net price & surcharge price
     var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart.object);
-    
+
+    var checkoutstep = request.httpParameterMap.isParameterSubmitted('checkoutstep') ? Number(request.httpParameterMap.checkoutstep) : 4;
+
     app.getView({
-        checkoutstep: 4,
+        checkoutstep: checkoutstep,
         Basket: cart.object,
         prodNetPrice : priceVals[0],
         surcharge : priceVals[1]

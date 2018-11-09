@@ -163,7 +163,7 @@
 									</div>
 									<iscomment>render each single shipment or shipping total
 									<isscript>
-											var surcharge = pdict.surcharge;
+											var surcharge  : dw.value.Money = pdict.surcharge;
 											var shippingExclDiscounts : dw.value.Money = Order.shippingTotalPrice;
 											var ShipingChargewithoutsurcharge=shippingExclDiscounts.subtract(surcharge);
 
@@ -171,12 +171,14 @@
 											var shippingInclDiscounts : dw.value.Money = Order.getAdjustedShippingTotalPrice();
 											var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
 									</isscript></iscomment>
+
 									<isset name="surcharge" value="${pdict.surcharge}" scope="page"/>
 									<isset name="shippingExclDiscounts" value="${Order.shippingTotalPrice}" scope="page"/>
 									<isset name="ShipingChargewithoutsurcharge" value="${shippingExclDiscounts.subtract(surcharge)}" scope="page"/>
 									<isset name="shippingExclDiscounts" value="${Order.shippingTotalPrice.subtract(surcharge)}" scope="page"/>
 									<isset name="shippingInclDiscounts" value="${Order.getAdjustedShippingTotalPrice().subtract(surcharge)}" scope="page"/>
 									<isset name="shippingDiscount" value="${shippingExclDiscounts.subtract( shippingInclDiscounts )}" scope="page"/>
+
 										<div class="custom-table-row ordershipping">
 											<div class="custom-table-data first">
 												<span class="label"><isprint value="${Resource.msg('ordersummary.ordershippingShipping','order',null)}"/></span>
