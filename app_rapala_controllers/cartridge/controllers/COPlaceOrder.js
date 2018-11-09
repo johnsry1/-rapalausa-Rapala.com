@@ -119,7 +119,6 @@ function start() {
             cart.calculate();
         });
 
-
         var COBilling = app.getController('COBilling');
 
         Transaction.wrap(function () {
