@@ -30,6 +30,7 @@ function calculateTaxes(basket) {
 	var NoCall = session.custom.NoCall;
 	var finalCall = session.custom.finalCall;
 	var OrderNo = session.custom.OrderNo;
+	var areDiscountsApplied = false;
 
 	if(customer && customer.profile && 'VATid' in customer.profile.custom) {
 		var VATid = customer.profile.custom.VATid;
@@ -52,8 +53,9 @@ function calculateTaxes(basket) {
 	try {
 		ia = createTaxationItemsObject.Execute({Basket: basket, controller: true});
 		shipTo = createShipToObject.Execute({Basket: basket, controller: true});
+		areDiscountsApplied = getDiscountsApplied(basket);
 
-		if (!callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid)){
+		if (!areDiscountsApplied && !callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid)){
 			return {noServiceCall: true};
 		}
 		reasonCode = taxationRequest.Execute({Basket: basket, billTo: basket.getBillingAddress(), customer: customer, finalCall: finalCall, itemArray: ia.items, OrderNo: OrderNo, shipFrom: shipFrom, shipTo: shipTo.shipToArray, VATid: VATid});
@@ -148,6 +150,20 @@ function callsvc(ia, shipTo, shipFrom, basket, OrderNo, VATid) {
 	
 	session.custom.avataxhash = reqHash;
 	return true;
+}
+
+function getDiscountsApplied(basket) {
+	if (basket.getPriceAdjustments().length || basket.getShippingPriceAdjustments().length) {
+		return true;
+	}
+	var plis = basket.getProductLineItems().iterator();
+	while (plis.hasNext()) {
+		let pli = plis.next();
+		if (!pli.priceAdjustments.empty) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function validateAddress(shippingAddress) {
