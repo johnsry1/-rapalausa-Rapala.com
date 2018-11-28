@@ -98,8 +98,10 @@ exports.calculate = function (basket) {
         if (response!=null && response.ERROR) {
             calculateTax(basket,stateCode);
             Logger.error('calculate.js: avatax calculation error, use SFCC tax tables');
+        } else if (response != null) {
+            // if AvaTax call successful, update price adjustments to 0 tax
+            zeroTaxOnPriceAdjustments(basket);
         }
-        zeroTaxOnPriceAdjustments(basket);
     } else {
         calculateTax(basket,stateCode);
     }
