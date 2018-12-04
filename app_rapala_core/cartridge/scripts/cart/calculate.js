@@ -98,6 +98,9 @@ exports.calculate = function (basket) {
         if (response!=null && response.ERROR) {
             calculateTax(basket,stateCode);
             Logger.error('calculate.js: avatax calculation error, use SFCC tax tables');
+        } else if (response != null) {
+            // if AvaTax call successful, update price adjustments to 0 tax
+            zeroTaxOnPriceAdjustments(basket);
         }
     } else {
         calculateTax(basket,stateCode);
@@ -367,5 +370,19 @@ function reApplyTaxes(basket) {
 			}
 		}
 	}
+}
 
+// Apply zero tax to price adjustments
+function zeroTaxOnPriceAdjustments(basket) {
+	var adjustments = basket.getPriceAdjustments().iterator(),
+		shippingAdjustments = basket.getAllShippingPriceAdjustments().iterator();
+	
+	while (adjustments.hasNext()) {
+		let adj = adjustments.next();
+		adj.updateTax(0);
+	}
+	while (shippingAdjustments.hasNext()) {
+		let adj = shippingAdjustments.next();
+		adj.updateTax(0);
+	}
 }
