@@ -345,7 +345,7 @@
 				</isscript>
 				 <isloop items="${prices}" var="productPrice">
 					<isif condition="${productPrice.value == dw.value.Money.NOT_AVAILABLE && !empty(Product.custom.earlyBirdMessage)}">
-				        <isset name="isEarlyBirdMessage" value="${true}" scope="page"/>
+						<isset name="isEarlyBirdMessage" value="${true}" scope="page"/>
 						<span class="ebm-message"><isprint value="${Product.custom.earlyBirdMessage}" /></span>
 					<iselse/>
 						<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
@@ -380,7 +380,7 @@
 			<div class="product-pricing pricing desktopHide">
 				<isloop items="${prices}" var="productPrice">
 					<isif condition="${productPrice.value == dw.value.Money.NOT_AVAILABLE && !empty(Product.custom.earlyBirdMessage)}">
-					   <isset name="isEarlyBirdMessage" value="${true}" scope="page"/>
+						<isset name="isEarlyBirdMessage" value="${true}" scope="page"/>
 						<span class="ebm-message"><isprint value="${Product.custom.earlyBirdMessage}" /></span>	
 					<iselse/>
 						<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
