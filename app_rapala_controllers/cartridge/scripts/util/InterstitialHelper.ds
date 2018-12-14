@@ -19,6 +19,7 @@ var InterstitialHelper : Object = {
 	setInterstitialSiteCookie: function (request) {
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
 		setCookie('interstitialSite',id);
+		session.custom.interstitialSiteId = id;
 		return;
 	},
 	setRedirectUrl: function (request) {
@@ -56,9 +57,15 @@ var InterstitialHelper : Object = {
 }
 
 function setCookie(name, value) {
-	let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
-	cookie.setMaxAge(86400*360*10);
-	cookie.setPath("/");
+	if (!empty(request.httpCookies[name])) {
+		let cookie = request.httpCookies[name];
+		cookie.setValue(value);
+	} else {
+		let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
+		cookie.setMaxAge(86400*360*10);
+		cookie.setPath("/");
+	}
+	
 	response.addHttpCookie(cookie);
 }
 

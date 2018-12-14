@@ -26,14 +26,28 @@ exports.onRequest = function () {
 	require('app_rapala_core/cartridge/scripts/siteContext/SetCurrentSiteContext.ds').setSiteContext(request.httpParameterMap);
 	ltkActivityTracking.TrackRequest();
 
-	var interstitialSiteId = !empty(request.httpCookies['interstitialSite']) ? request.httpCookies['interstitialSite'].value : null;
-	if (!empty(interstitialSiteId) && request.httpPath.indexOf(interstitialSiteId) == -1 && !request.httpParameterMap.isParameterSubmitted('countrySelect')) {
-		var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'),
-			url = InterstitialHelper.setRedirectUrl(request);
-		return response.redirect(url);
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	var interstitialSiteId;
+
+	if (request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1) {
+		InterstitialHelper.setInterstitialSiteCookie(request);
 	}
 
-	if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'request') {
+	if (!request.httpParameterMap.isParameterSubmitted('countrySelect') && !request.httpParameterMap.isParameterSubmitted('sessionRedirect')) {
+		var interstitialSiteId = null;
+		if (session.custom.hasOwnProperty('interstitialSiteId')) {
+			interstitialSiteId = session.custom.interstitialSiteId;
+		} else if (!empty(request.httpCookies['interstitialSite'])) {
+			interstitialSiteId = request.httpCookies['interstitialSite'].value;
+		}
+		if (!empty(interstitialSiteId) && request.httpPath.indexOf(interstitialSiteId) == -1) {
+			var url = InterstitialHelper.setRedirectUrl(request);
+			return response.redirect(url);
+		}
+	}
+
+	var enableGeoRedirect = dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects');
+	if (enableGeoRedirect && dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'request') {
 		var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
