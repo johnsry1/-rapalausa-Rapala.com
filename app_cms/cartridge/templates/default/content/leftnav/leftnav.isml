@@ -16,15 +16,15 @@
 					<li id="${subFolder.ID}" class="first-level navfirstClick"><span>${subFolder.displayName}</span>
 				</isif>
 						<ul class="second-level">
-						<isloop items="${subFolder.onlineContent}" var="subContent">							
+						<isloop items="${subFolder.onlineContent}" var="subContent">						
 							<isif condition="${pdict.CurrentHttpParameterMap.cid.stringValue == subContent.ID}">
-								<li class="active ${subContent.ID== 'customer-contact-us' ? 'us-contactus' : ''}">
+								<li class="active ${subContent.ID== 'customer-contact-us' ? subContent.ID : ''}">
 							<iselse>
-								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'customer-pro-staff' || subContent.ID == 'customer-dealer-locator-additions' || subContent.ID == 'customer-become-a-dealer' || subContent.ID == 'customer-donations' || subContent.ID == 'customer-decals-patches' || subContent.ID == 'customer-donation-request' || subContent.ID == 'customer-donations' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-employment-opportunities' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume'||subContent.ID == 'strikemaster-customer-shipping' || subContent.ID == 'marcum-customer-warranty' || subContent.ID == 'strikemaster-customer-returns' || subContent.ID == 'strikemaster-warranty'|| subContent.ID =='strikemaster-become-dealer' || subContent.ID =='strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID =='marcum-become-dealer' || subContent.ID =='marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center' || subContent.ID == 'email-preference-center'}">
+								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'customer-pro-staff' || subContent.ID == 'customer-dealer-locator-additions' || subContent.ID == 'customer-donations' || subContent.ID == 'customer-decals-patches' || subContent.ID == 'customer-donation-request' || subContent.ID == 'customer-donations' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-employment-opportunities' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume'||subContent.ID == 'strikemaster-customer-shipping' || subContent.ID == 'marcum-customer-warranty' || subContent.ID == 'strikemaster-customer-returns' || subContent.ID == 'strikemaster-warranty'|| subContent.ID =='strikemaster-become-dealer' || subContent.ID =='strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID =='marcum-become-dealer' || subContent.ID =='marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center' || subContent.ID == 'email-preference-center'}">
 									<li class="handle-non-us geo">
 								<iselse>
 									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
-										<li class="non-us-contactus-non hide">
+										<iscontinue/>
 									<iselse>
 										<li>
 									</isif>
