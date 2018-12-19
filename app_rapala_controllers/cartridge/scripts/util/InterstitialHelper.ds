@@ -16,9 +16,12 @@ var InterstitialHelper : Object = {
 		setCookie('CountrySelectorViewed','true');
 		return;
 	},
+	getInterstitialSiteCookie: function () {
+		return request.httpCookies['preferredRegion'];
+	},
 	setInterstitialSiteCookie: function (request) {
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
-		setCookie('interstitialSite',id);
+		setCookie('preferredRegion',id);
 		session.custom.interstitialSiteId = id;
 		return;
 	},
@@ -56,14 +59,16 @@ var InterstitialHelper : Object = {
 	}
 }
 
-function setCookie(name, value) {
+function setCookie(name, value, age) {
+	let maxAge = !empty(age) ? age : 86400*30;
 	if (!empty(request.httpCookies[name])) {
 		let cookie = request.httpCookies[name];
 		cookie.setValue(value);
+		cookie.setPath("/");
 		response.addHttpCookie(cookie);
 	} else {
 		let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
-		cookie.setMaxAge(86400*360*10);
+		cookie.setMaxAge(maxAge);
 		cookie.setPath("/");
 		response.addHttpCookie(cookie);
 	}

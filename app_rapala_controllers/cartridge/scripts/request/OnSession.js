@@ -73,12 +73,21 @@ function showCountryPopup() {
 	return showPopup;
 }
 
+function getPreferredRegion() {
+	// check for cookie
+	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+	var preferredRegion = InterstitialHelper.getInterstitialSiteCookie();
+	
+	return preferredRegion;
+}
+
 /**
  * The onSession hook function.
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     session.custom.showCountryPopup = showCountryPopup();
+    session.custom.interstitialSite = getPreferredRegion();
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
     
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session' && !session.custom.showCountryPopup) {
