@@ -21,8 +21,8 @@ var InterstitialHelper : Object = {
 	},
 	setInterstitialSiteCookie: function (request) {
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
-		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
+		session.custom.interstitialSiteId = id;
 		return;
 	},
 	setRedirectUrl: function (request) {

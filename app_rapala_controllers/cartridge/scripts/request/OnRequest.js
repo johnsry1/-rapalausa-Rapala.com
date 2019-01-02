@@ -34,7 +34,9 @@ exports.onRequest = function () {
 	}
 
 	if (!request.httpParameterMap.isParameterSubmitted('countrySelect') && !request.httpParameterMap.isParameterSubmitted('sessionRedirect')) {
-		if (!empty(InterstitialHelper.getInterstitialSiteCookie())) {
+		if (session.custom.hasOwnProperty('interstitialSiteId')) {
+			interstitialSiteId = session.custom.interstitialSiteId;
+		} else if (!empty(InterstitialHelper.getInterstitialSiteCookie())) {
 			interstitialSiteId = InterstitialHelper.getInterstitialSiteCookie().value;
 		}
 		if (!empty(interstitialSiteId) && request.httpPath.indexOf(interstitialSiteId) == -1) {
