@@ -60,13 +60,13 @@ function setCookie(name, value) {
 	if (!empty(request.httpCookies[name])) {
 		let cookie = request.httpCookies[name];
 		cookie.setValue(value);
-		response.addHttpCookie(cookie);
 	} else {
 		let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
 		cookie.setMaxAge(86400*360*10);
 		cookie.setPath("/");
-		response.addHttpCookie(cookie);
 	}
+	
+	response.addHttpCookie(cookie);
 }
 
 module.exports=InterstitialHelper;
