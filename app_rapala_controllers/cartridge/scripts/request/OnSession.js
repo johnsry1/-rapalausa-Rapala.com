@@ -89,7 +89,7 @@ exports.onSession = function () {
 	    var cookies = request.getHttpCookies(),
 	        cookieCount = cookies.cookieCount,
 	        CountrySelectorViewed = InterstitialHelper.getPopupShownCookie(),
-	        geoRedirect = !empty(CountrySelectorViewed) && dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects');
+	        geoRedirect = !empty(CountrySelectorViewed);
 
 		if (geoRedirect && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
 			let geolocation = request.geolocation;
