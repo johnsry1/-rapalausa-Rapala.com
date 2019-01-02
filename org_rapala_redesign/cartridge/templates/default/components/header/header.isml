@@ -77,8 +77,13 @@
 	    					</div><!-- END:minicart -->
                             <div class="change-region">
                                 <div class="currency-flag">
+                                <isset name="sessionCurrencyCode" value="${session.getCurrency().currencyCode}" scope="page" />
                                     <span>
-                                        <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-eu.png')}" alt="${session.getCurrency().getSymbol()}">
+                                        <isif condition="${sessionCurrencyCode == 'SEK'}">
+                                            <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-se.jpg')}" alt="${session.getCurrency().getSymbol()}">
+                                        <iselse>
+                                            <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-eu.png')}" alt="${session.getCurrency().getSymbol()}">
+                                        </isif>
                                     </span>
                                 </div>
                                 <span class="change-regionnew currency-selector">
