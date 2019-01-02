@@ -87,7 +87,7 @@ function getPreferredRegion() {
 exports.onSession = function () {
     session.custom.device = getDeviceType();
     session.custom.showCountryPopup = showCountryPopup();
-    session.custom.interstitialSiteId = getPreferredRegion();
+    session.custom.interstitialSite = getPreferredRegion();
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
     
     if (dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirectType').value === 'session' && !session.custom.showCountryPopup) {
