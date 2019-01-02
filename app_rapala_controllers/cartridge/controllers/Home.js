@@ -17,7 +17,6 @@ function show() {
     var rootFolder = require('dw/content/ContentMgr').getSiteLibrary().root;
 	var countryCode = request.geolocation.countryCode;
     require('~/cartridge/scripts/meta').update(rootFolder);
-    var enableGeoRedirect = dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects') && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
     if (request.httpParameterMap.isParameterSubmitted('countrySelect')) {
     	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
     	InterstitialHelper.setInterstitialSiteCookie(request);
@@ -26,7 +25,7 @@ function show() {
         app.getController('Home').ChangeRegion();
     } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand || session.custom.redirectGeolocation) {
     	if (countryCode != 'US' && session.custom.redirectGeolocation) {
-    		if (enableGeoRedirect) {
+    		if (!empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'))) {
     			let geolocation = request.geolocation;
     			let redirects = JSON.parse(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
     			var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
@@ -37,7 +36,7 @@ function show() {
     	}
     } else {
         session.custom.showShopByBrand = false;
-		session.custom.redirectGeolocation = enableGeoRedirect;
+		session.custom.redirectGeolocation = true;
         response.redirect(URLUtils.url('Page-Show','cid',"shop-by-brand"));
     }
 }
