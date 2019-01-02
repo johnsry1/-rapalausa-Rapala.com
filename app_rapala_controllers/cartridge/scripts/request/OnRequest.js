@@ -27,13 +27,14 @@ exports.onRequest = function () {
 	ltkActivityTracking.TrackRequest();
 
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-	var interstitialSiteId = null;
+	var interstitialSiteId;
 
 	if (request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1) {
 		InterstitialHelper.setInterstitialSiteCookie(request);
 	}
 
 	if (!request.httpParameterMap.isParameterSubmitted('countrySelect') && !request.httpParameterMap.isParameterSubmitted('sessionRedirect')) {
+		var interstitialSiteId = null;
 		if (session.custom.hasOwnProperty('interstitialSiteId')) {
 			interstitialSiteId = session.custom.interstitialSiteId;
 		} else if (!empty(request.httpCookies['interstitialSite'])) {
