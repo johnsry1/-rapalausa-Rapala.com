@@ -36,8 +36,8 @@ exports.onRequest = function () {
 	if (!request.httpParameterMap.isParameterSubmitted('countrySelect') && !request.httpParameterMap.isParameterSubmitted('sessionRedirect')) {
 		if (session.custom.hasOwnProperty('interstitialSiteId')) {
 			interstitialSiteId = session.custom.interstitialSiteId;
-		} else if (!empty(InterstitialHelper.getInterstitialSiteCookie())) {
-			interstitialSiteId = InterstitialHelper.getInterstitialSiteCookie().value;
+		} else if (!empty(request.httpCookies['interstitialSite'])) {
+			interstitialSiteId = request.httpCookies['interstitialSite'].value;
 		}
 		if (!empty(interstitialSiteId) && request.httpPath.indexOf(interstitialSiteId) == -1) {
 			var url = InterstitialHelper.setRedirectUrl(request);
