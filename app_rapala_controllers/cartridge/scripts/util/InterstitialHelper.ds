@@ -61,17 +61,15 @@ var InterstitialHelper : Object = {
 
 function setCookie(name, value, age) {
 	let maxAge = !empty(age) ? age : 86400*30;
+	let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
 	if (!empty(request.httpCookies[name])) {
-		let cookie = request.httpCookies[name];
+		cookie = request.httpCookies[name];
 		cookie.setValue(value);
-		cookie.setPath("/");
-		response.addHttpCookie(cookie);
-	} else {
-		let cookie : dw.web.Cookie = new dw.web.Cookie(name, value);
-		cookie.setMaxAge(maxAge);
-		cookie.setPath("/");
-		response.addHttpCookie(cookie);
 	}
+
+	cookie.setMaxAge(maxAge);
+	cookie.setPath("/");
+	response.addHttpCookie(cookie);
 }
 
 module.exports=InterstitialHelper;
