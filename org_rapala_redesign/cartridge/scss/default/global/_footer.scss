@@ -67,10 +67,16 @@ $footer-bg-mobile: $concrete;
                 &.sufix {
                     width: rem(70px);
                     background: url("../images/brands/sufix_bw.png") no-repeat center;
-                    background-size: 135%;
+                    background-size: 108%;
+                    @include respond(desktop) {
+                        background-size: 135%;
+                    }
                     &:hover {
                         background: url("../images/brands/sufix.png") no-repeat center;
-                        background-size: 95%;
+                        background-size: 72%;
+                        @include respond(desktop) {
+                            background-size: 95%;
+                        }
                     }
                 }
                 &.storm {
