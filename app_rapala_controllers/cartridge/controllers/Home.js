@@ -24,7 +24,7 @@ function show() {
     }
     if(session.custom.homeSplash){
         app.getController('Home').ChangeRegion();
-    } else if (request.httpParameterMap.isParameterSubmitted('id') || !session.custom.showShopByBrand || session.custom.redirectGeolocation) {
+    } else if (request.httpParameterMap.isParameterSubmitted('id') || session.custom.redirectGeolocation) {
     	if (countryCode != 'US' && session.custom.redirectGeolocation) {
     		if (enableGeoRedirect) {
     			let geolocation = request.geolocation;
@@ -32,14 +32,11 @@ function show() {
     			var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
     			app.getController('GeoipRedirects').geoIPRedirection(geolocation , redirects);
     		}
-    	} else {
-    		app.getView().render('content/home/homepageinclude');
     	}
     } else {
-        session.custom.showShopByBrand = false;
 		session.custom.redirectGeolocation = enableGeoRedirect;
-        response.redirect(URLUtils.url('Page-Show','cid',"shop-by-brand"));
     }
+    app.getView().render('content/home/homepageinclude');
 }
 
 /**
@@ -223,11 +220,7 @@ function setLocale() {
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
 	InterstitialHelper.setInterstitialSiteCookie(request);
 
-	if (session.custom.interstitialSiteId == 'rapala-') {
-		response.redirect(URLUtils.url('Page-Show','cid', 'shop-by-brand'));
-	} else {
-		response.redirect(URLUtils.url('Home-Show'));
-	}
+	response.redirect(URLUtils.url('Home-Show'));
 	
 }
 /*
