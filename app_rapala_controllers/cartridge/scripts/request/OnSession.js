@@ -45,7 +45,6 @@ function showCountryPopup() {
 	var showPopup = true,
 		isUsSite = dw.system.Site.getCurrent().ID == 'rapala';
 
-	session.custom.showShopByBrand = isUsSite;
 	session.custom.redirectGeolocation = false;
 	
 	// check for cookie
@@ -53,7 +52,6 @@ function showCountryPopup() {
 	var CountrySelectorViewed = InterstitialHelper.getPopupShownCookie();
 	if (CountrySelectorViewed) {
 		return showPopup = false;
-		sesssion.custom.showShopByBrand = false;
 	}
 
 	// check if a category page or PDP is being accessed directly
