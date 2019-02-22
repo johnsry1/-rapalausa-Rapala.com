@@ -77,6 +77,21 @@ exports.init = function () {
         $('body').find('input[name$=_sameasshippingaddress]').closest('.custom-checkbox').find('.custom-link').removeClass('active');
         uievents.synccheckoutH();
         shipping.updateShippingMethodList();
+        var $requiredFields = $form.find('input[aria-required="true"]'),
+            missingRequiredFields = [];
+        $requiredFields.each(function() {
+            if ($(this).val() == '') {
+                missingRequiredFields.push(this);
+            }
+        });
+        if (missingRequiredFields.length) {
+            $('.shipping-address-field-section').removeClass('hide');
+            for (var i=0; i < missingRequiredFields.length; i++) {
+                var field = missingRequiredFields[i];
+                $(field).trigger('blur');
+            }
+        }
+        
         // re-validate the form
         /* JIRA PREV-95 : Highlighting the Credit card  details field, when the user select any saved address from the 'Select An Address' drop down.
            (logged-in user) .Commented to prevent form from re-validation.
