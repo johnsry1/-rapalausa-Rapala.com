@@ -18,7 +18,7 @@
 
 <isset name="Product" value="${pdict.product}" scope="page"/>
 <isset name="role" value="${pdict.role}" scope="page"/>
-+<isset name="isEarlyBirdMessage" value="${false}" scope="page"/>
+<isset name="isEarlyBirdMessage" value="${false}" scope="page"/>
 <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 	<isscript>
 		importScript("app_disbestpractice:product/ProductImageSO.ds");
@@ -346,7 +346,7 @@
 				 <isloop items="${prices}" var="productPrice">
 					<isif condition="${productPrice.value == dw.value.Money.NOT_AVAILABLE && !empty(Product.custom.earlyBirdMessage)}">
 						<isset name="isEarlyBirdMessage" value="${true}" scope="page"/>
-+						<span class="ebm-message"><isprint value="${Product.custom.earlyBirdMessage}" /></span>
+						<span class="ebm-message"><isprint value="${Product.custom.earlyBirdMessage}" /></span>
 					<iselse/>
 						<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
 					</isif>
