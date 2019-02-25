@@ -98,7 +98,7 @@
 								</isif>
 
 								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" <isif condition="${!empty(variantImage)}">data-variantImage ="${variantImage}"</isif> data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
-									<isif condition="${newColors.contains(VV.displayValue)}">
+									<isif condition="${newColors.contains(VV.value)}">
 										<span class="new corner-ribbon">New</span>
 									</isif>
 									<isprint value="${display}"/>
