@@ -169,6 +169,10 @@ function start(cart, params) {
     pageMeta.update({
         pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
     });
+    
+    if (params.hasOwnProperty('PlaceOrderError')) {
+        params.isBillingError = true;
+    }
 
     returnToForm(cart, params);
 }
