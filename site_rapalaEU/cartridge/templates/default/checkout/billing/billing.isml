@@ -238,7 +238,7 @@
 							<isscript>
 								var currentCountry = require('site_rapalaEU/cartridge/scripts/util/Countries').getCurrent(pdict);
 							</isscript>
-							<div class="shipping-address-field-section billing-address-fields hide">
+							<div class="shipping-address-field-section billing-address-fields ${empty(pdict.isBillingError) || !pdict.isBillingError ? 'hide' : ''}">
 								<isif condition="${pdict.CurrentCustomer.authenticated}">
 									 <div class="addressid">
 									 	<isscript>

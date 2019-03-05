@@ -77,7 +77,7 @@ exports.init = function () {
         $('body').find('input[name$=_sameasshippingaddress]').closest('.custom-checkbox').find('.custom-link').removeClass('active');
         uievents.synccheckoutH();
         shipping.updateShippingMethodList();
-        var $requiredFields = $form.find('input[aria-required="true"]'),
+        var $requiredFields = $('.shipping-address-field-section').find('input[aria-required="true"]'),
             missingRequiredFields = [];
         $requiredFields.each(function() {
             if ($(this).val() == '') {
