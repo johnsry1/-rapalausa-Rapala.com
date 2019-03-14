@@ -1272,19 +1272,19 @@ var product = function (response) {
                 reloadAvailability(thisProduct, thisProduct.selectedOptions.Quantity);
                 // update price
                 this.showUpdatedPrice(computePrice(thisProduct), this.selectedVar.pricing.standard);
-
+                
+                // Replace the hero shot with the specific variant chosen
+                var varID = this.selectedVar.id;
+                var imageUrl = model.images.variants[varID];
+                var zoomImageUrl = model.images.zoomvariants[varID];
+                // load the fully qualified variation image
+                if (imageUrl != null) {
+                    //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',imageUrl);
+                    jQuery('.MagicZoom').attr('href', zoomImageUrl);
+                    $('body').find('.MagicZoom img').attr('src', zoomImageUrl);
+                    MagicZoom.update('product-image', zoomImageUrl, zoomImageUrl);
+                }
                 if (!(!this.selectedVar.inStock && this.selectedVar.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE) && (this.getPrice() > 0 || this.isPromoPrice())) {
-                    // Replace the hero shot with the specific variant chosen
-                    var varID = this.selectedVar.id;
-                    var imageUrl = model.images.variants[varID];
-                    var zoomImageUrl = model.images.zoomvariants[varID];
-                    // load the fully qualified variation image
-                    if (imageUrl != null) {
-                        //jQuery('.productdetailcolumn .productimage img, .productdetailcolumn .quickviewproductimage img').attr('src',imageUrl);
-                        jQuery('.MagicZoom').attr('href', zoomImageUrl);
-                        $('body').find('.MagicZoom img').attr('src', zoomImageUrl);
-                        MagicZoom.update('product-image', zoomImageUrl, zoomImageUrl);
-                    }
 
                     this.showItemNo();
                     this.showAvailability();
