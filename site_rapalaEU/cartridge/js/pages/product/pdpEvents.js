@@ -783,9 +783,6 @@ var product = function (response) {
                     flag = false;
                 } else {
                     if ($('.pdp-owl-customization .alternate-images').length > 0) {
-                        imagesLoaded('.pdp-owl-customization .owl-loaded').on('done', function () {
-                            MagicZoom.refresh();
-                        });
                         flag = false
                     } else {
                         secondsCounter = secondsCounter + 1
