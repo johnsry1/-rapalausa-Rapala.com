@@ -57,7 +57,7 @@ function execute( pdict : PipelineDictionary ) : Number
 		// BUT THIS CODE BLOCK ALL TAX CALCULATION
 		// ON COPLACEORDER CONTPLLER AFTER SERVICE CALL 
 		// BUT NOT APPLY ALL TAX FROM AVALARA SERVICE
-		if (params['finalCall']  == true && params['orderNo'] != null) {
+		if ("status" in result && result.status == "OK" && params['finalCall']  == true && params['orderNo'] != null) {
 			reApplyTaxes(basket);
 			return PIPELET_NEXT;
 		}	
