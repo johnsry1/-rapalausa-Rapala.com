@@ -1039,7 +1039,7 @@ exports.init = function () {
     if ($('.ccGeneralError').length > 0) {
         $('.cardnumber input').addClass('errorclient');
         $('.cardnumber .labeltext').addClass('error');
-        $('<span class="invalidcredit generalError error">Invalid Credit Card, Verify Credit Card Number & Billing Address</span>').appendTo('.cardnumber .field-wrapper');
+        $('<span class="invalidcredit generalError error">There was an error processing. Please verify your address and payment information.</span>').appendTo('.cardnumber .field-wrapper');
         $('.cardnumber .errormessage').css('display', 'none');
     }
     $('.cardnumber input').blur(function() {
