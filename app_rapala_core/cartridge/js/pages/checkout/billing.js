@@ -1036,4 +1036,13 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
+    if ($('.ccGeneralError').length > 0) {
+        $('.cardnumber input').addClass('errorclient');
+        $('.cardnumber .labeltext').addClass('error');
+        $('<span class="invalidcredit generalError error">'+Resources.BILLING_GENERAL_ERROR+'</span>').appendTo('.cardnumber .field-wrapper');
+        $('.cardnumber .errormessage').css('display', 'none');
+    }
+    $('.cardnumber input').blur(function() {
+        $('.generalError').hide();
+    });
 };

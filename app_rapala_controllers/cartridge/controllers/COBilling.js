@@ -84,9 +84,13 @@ function initEmailAddress(cart) {
 function returnToForm(cart, params) {
     var pageMeta = require('~/cartridge/scripts/meta');
 	var ppalError = null;
+	var isBillingError = false;
 	if(cart.getVar()!=null){
 		ppalError = cart.getVar();
-	} 
+	}
+	if (params.hasOwnProperty('isBillingError')) {
+		isBillingError = true;
+	}
 	
     // if the payment method is set to gift certificate get the gift certificate code from the form
     //PREVAIL - Modified below block to fix deprecated API
@@ -115,6 +119,7 @@ function returnToForm(cart, params) {
         app.getView({
             Basket: cart.object,
             ppalError : ppalError,
+            isBillingError: isBillingError,
             prodNetPrice : priceVals[0],
             surcharge : priceVals[1],
             ApplicableCreditCards : creditCardList.ApplicableCreditCards,
@@ -164,6 +169,10 @@ function start(cart, params) {
     pageMeta.update({
         pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'Rapala Checkout')
     });
+    
+    if (params.hasOwnProperty('PlaceOrderError')) {
+        params.isBillingError = true;
+    }
 
     returnToForm(cart, params);
 }
@@ -601,10 +610,11 @@ function billing() {
         	    	require('app_rapala_core/cartridge/scripts/prostaff/HandleAllotmentExpiry.ds').handleAllotmentExp(customer,cart.object);
         	    });
             }
+
             if (!resetPaymentForms() || !validateBilling() || !handleBillingAddress(cart))// Performs validation steps, based upon the entered billing address
             // and address options.
             {// Performs payment method specific checks, such as credit card verification.
-                returnToForm(cart);
+                returnToForm(cart, {isBillingError: true});
             } else {
                 //PREVAIL - Removed handlePaymentSelection(cart) from main condition and handled speperately.
                 if(app.getForm('billing.paypalval').object.paypalprocessed.value != "true"){

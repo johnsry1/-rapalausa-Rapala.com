@@ -1118,6 +1118,12 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
+    if ($('.ccGeneralError').length > 0) {
+        $('.cardnumber input').addClass('errorclient');
+        $('.cardnumber .labeltext').addClass('error');
+        $('<span class="invalidcredit generalError error">'+Resources.BILLING_GENERAL_ERROR+'</span>').appendTo('.cardnumber .field-wrapper');
+        $('.cardnumber .errormessage').css('display', 'none');
+    }
 
     if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initBilling();
@@ -1131,6 +1137,10 @@ exports.init = function () {
         yearRange: initYear + ':' + currentYear,
         changeYear: true,
         dateFormat: 'yyyy-mm-dd'
+    });
+    
+    $('.cardnumber input').blur(function() {
+        $('.generalError').hide();
     });
 
 };
