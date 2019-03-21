@@ -1043,6 +1043,6 @@ exports.init = function () {
         $('.cardnumber .errormessage').css('display', 'none');
     }
     $('.cardnumber input').blur(function() {
-        $('.generalError').hide();
+        $('.generalError').addClass('hide');
     });
 };
