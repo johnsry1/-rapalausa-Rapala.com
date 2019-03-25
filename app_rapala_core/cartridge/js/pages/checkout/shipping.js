@@ -209,7 +209,7 @@ function signin() {
 }
 
 exports.init = function () {
-    if ($(document).find('.address-select').val() != '' && $(document).find('.address-select').val() != undefined) {
+    if ($(document).find('.address-select').val() != '' && $(document).find('.address-select').val() != undefined && $('input[name="addressError"]').val() != 'true') {
         $(document).find('.shipping-address-field-section').addClass('hide');
     } else {
         $(document).find('.shipping-address-field-section').removeClass('hide');
@@ -225,6 +225,16 @@ exports.init = function () {
         'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_postal"]', // PREVAIL-Changed ZIP to postal
         updateShippingMethodList
     );
+    
+    if ($('input[name="addressError"]').val() == 'true') {
+        $('.shipping-address-field-section').removeClass('hide');
+        var $requiredFields = $('.shipping-address-field-section').find('input[aria-required="true"]');
+        $requiredFields.each(function() {
+            if ($(this).val() == '') {
+                $(this).trigger('blur');
+            }
+        });
+    }
 
     giftMessageBox();
     updateShippingMethodList();

@@ -1121,7 +1121,6 @@ exports.init = function () {
     if ($('.ccGeneralError').length > 0) {
         $('.cardnumber input').addClass('errorclient');
         $('.cardnumber .labeltext').addClass('error');
-        $('<span class="invalidcredit generalError error">'+Resources.BILLING_GENERAL_ERROR+'</span>').appendTo('.cardnumber .field-wrapper');
         $('.cardnumber .errormessage').css('display', 'none');
     }
 
