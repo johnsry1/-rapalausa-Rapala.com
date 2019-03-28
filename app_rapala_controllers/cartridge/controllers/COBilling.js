@@ -88,7 +88,7 @@ function returnToForm(cart, params) {
 	if(cart.getVar()!=null){
 		ppalError = cart.getVar();
 	}
-	if (params.hasOwnProperty('isBillingError')) {
+	if (params && params.hasOwnProperty('isBillingError')) {
 		isBillingError = true;
 	}
 	
@@ -106,7 +106,7 @@ function returnToForm(cart, params) {
     });
     var priceVals = require('app_rapala_core/cartridge/scripts/cart/calculateProductNetPrice.ds').prodNetPrice(cart.object);
     
-    if (params && ppalError == null) {
+    if (params && ppalError == null && !isBillingError) {
         app.getView(require('~/cartridge/scripts/object').extend(params, {
             Basket: cart.object,
             prodNetPrice : priceVals[0],
@@ -620,7 +620,7 @@ function billing() {
                 if(app.getForm('billing.paypalval').object.paypalprocessed.value != "true"){
 	            	var handlePaymentSelectionResult = handlePaymentSelection(cart);
 	                if (handlePaymentSelectionResult.error) {
-	                    returnToForm(cart);
+	                    returnToForm(cart, {isBillingError: true});
 	                    return;
 	                }
 	
