@@ -964,7 +964,9 @@ var product = function (response) {
                 }
             });
             this.refreshZoom();
-            this.triggerZoomClick();
+            if (navigator.userAgent.indexOf('Chrome') != -1 || navigator.userAgent.indexOf('Safari') != -1) {
+                this.triggerZoomClick();
+            }
         },
 
         /**
