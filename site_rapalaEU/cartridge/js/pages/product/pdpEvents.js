@@ -964,7 +964,8 @@ var product = function (response) {
                 }
             });
             this.refreshZoom();
-            this.triggerZoomClick();
+            // RPS-321 - commenting out zoom click trigger, causing primary image to revert back to the master image after a variant swatch is clicked
+            //this.triggerZoomClick();
         },
 
         /**
