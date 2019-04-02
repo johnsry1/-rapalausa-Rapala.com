@@ -1132,9 +1132,5 @@ exports.init = function () {
         changeYear: true,
         dateFormat: 'yyyy-mm-dd'
     });
-    
-    $('.cardnumber input').blur(function() {
-        $('.generalError').hide();
-    });
 
 };
