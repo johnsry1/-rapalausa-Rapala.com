@@ -1118,11 +1118,6 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
-    if ($('.ccGeneralError').length > 0) {
-        $('.cardnumber input').addClass('errorclient');
-        $('.cardnumber .labeltext').addClass('error');
-        $('.cardnumber .errormessage').css('display', 'none');
-    }
 
     if (SitePreferences.ADYEN_CSE_ENABLED) {
         adyenCse.initBilling();
