@@ -137,7 +137,7 @@ function singleShipping() {
         },
         shipToMultiple: app.getController('COShippingMultiple').Start,
         error: function () {
-            response.redirect(URLUtils.https('COShipping-Start'));
+            response.redirect(URLUtils.https('COShipping-Start', 'addressError', true));
         }
     });
 }

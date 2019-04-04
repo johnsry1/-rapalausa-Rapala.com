@@ -10,7 +10,14 @@ function getPaginationPosts(ContentSearchResult, currentPost) {
 		prev: null,
 		next: null
 	};
-	var postsList = ContentSearchResult.getContent().asList();	
+	var postsList = ContentSearchResult.getContent().asList();
+	if (!postsList.empty) {
+		postsList.sort(function(a,b){
+			var aDate = a.custom.blog_date != null && !empty(a.custom.blog_date) ? a.custom.blog_date : a.creationDate,
+				bDate = b.custom.blog_date != null && !empty(b.custom.blog_date) ? b.custom.blog_date : b.creationDate;
+			return new Date(aDate).getTime() < new Date(bDate).getTime() ? -1 : 1;
+		});
+	}
 	for (var i = 0; i < postsList.length; i++) {
 		var _post = postsList[i];
 		if (_post.ID === currentPost.ID) {

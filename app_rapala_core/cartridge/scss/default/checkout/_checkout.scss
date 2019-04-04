@@ -21,6 +21,9 @@
     position: relative;
     font-size: 11px;
     clear: both;
+    &.generalError {
+        font-style: normal;
+    }
 }
 
 .billing-coupon-code {
@@ -1530,13 +1533,13 @@ body {
             }
             &.sufix {
                 background-position: -380px -45px;
-                width: 44px;
+                width: 50px;
                 &.sufix-active {
                     background-position: -380px -6px;
-                    width: 44px;
+                    width: 50px;
                     &:hover {
                         background-position: -380px -6px;
-                        width: 44px;
+                        width: 50px;
                     }
                 }
             }
@@ -2703,7 +2706,8 @@ body {
         }
     }
     .singleshipping_error,
-    .billing_error {
+    .billing_error,
+    .generalError {
         background: none repeat scroll 0 0 $cinderella;
         border: 1px solid red;
         color: $red;
@@ -2712,7 +2716,8 @@ body {
         text-align: left;
         width: 41%;
         margin-left: 15px;
-        float: left;
+        margin-bottom: 15px;
+        float: right;
         font-family: $lucida-font-family;
     }
     .selected-shipping-address,
