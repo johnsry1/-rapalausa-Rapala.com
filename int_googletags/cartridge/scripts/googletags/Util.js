@@ -226,7 +226,7 @@ exports.getProductCategory = function (product) {
         product = product.getMasterProduct();
     }
     var cat = product.getPrimaryCategory();
-    return cat.ID.replace('-', '/', 'g');
+    return (!empty(cat) ? cat.ID.replace('-', '/', 'g') : '');
 
 };
 

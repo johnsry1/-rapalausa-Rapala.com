@@ -28,7 +28,13 @@ var events = {
         });
     },
     compare: function () {},
-    product: function () {},
+    product: function () {
+        $('[name$=_addToCart]').on('click', function () {
+            if ($(this).attr('data-gtmdata')) {
+                addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+            }
+        });	
+    },
     search: function () {},
     storefront: function () {},
     wishlist: function () {
