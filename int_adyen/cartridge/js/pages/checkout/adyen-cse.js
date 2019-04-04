@@ -50,10 +50,13 @@ function initializeBillingEvents() {
             if ($('#creditCard_number').val().indexOf('*') === -1) {
                 selectedCardID.val('');
             }
-
             if (encryptedDataValue === false) {
 	        		$('.form-data-error').html(Resources.ADYEN_CC_VALIDATE);
 	                progress.hide();
+	                $('.generalError').removeClass('hide');
+	                $('input#creditCard_number').blur(function() {
+	                    $('.generalError').addClass('hide');
+	                });
 	        } else {
 		        	$('.form-data-error').html('');
 		        	encryptedData.val(encryptedDataValue);
