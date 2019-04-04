@@ -24,11 +24,8 @@
             <isslot id="blog-post-bottom" description="Folder Slot Sample" context="folder" context-object="${currentBlogFolder}" />
         </iscomment>
 
-        <isloop items="${pdict.ContentSearchResult.getContent()}" var="asset" status="loopstatus">
+        <isloop items="${pdict.ContentSearchResultSorted}" var="asset" status="loopstatus">
             <isif condition="${asset != null && asset.online}">
-                <isif condition="${loopstatus.count > 9}">
-                    <isbreak>
-                </isif>
                 <isif condition="${loopstatus.count == 2}">
 					<div class="subhero-container">
 				</isif>

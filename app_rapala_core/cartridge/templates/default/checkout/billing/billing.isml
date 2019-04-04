@@ -226,7 +226,7 @@
 							<isscript>
 								var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 							</isscript>
-							<div class="shipping-address-field-section billing-address-fields hide">
+							<div class="shipping-address-field-section billing-address-fields ${empty(pdict.isBillingError) || !pdict.isBillingError ? 'hide' : ''}">
 								<isif condition="${pdict.CurrentCustomer.authenticated}">
 									 <div class="formfield form-row-50 form-row-left addressid"  >
 									 	<isscript>
@@ -402,6 +402,7 @@
 						</div>
 						<div class="form-row form-row-button form-actions">
 							<div class="ipad-handling">
+								<div class="generalError <isif condition="${!pdict.isBillingError}">hide</isif>"><isprint value="${Resource.msg('billing.generalerror','checkout',null)}"/></div>
 								<div class="singleshipping_error hide"><isprint value="${Resource.msg('billinginfo.addresserror','checkout',null)}"/></div>
 								<div class="continue-checkout-button">
 									<isscript>

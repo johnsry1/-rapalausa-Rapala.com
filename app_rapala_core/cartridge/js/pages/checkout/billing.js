@@ -1036,4 +1036,7 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
+    $('.cardnumber input').blur(function() {
+        $('.generalError').addClass('hide');
+    });
 };

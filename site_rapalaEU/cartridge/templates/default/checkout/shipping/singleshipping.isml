@@ -224,6 +224,7 @@
 												</isif>
 												<isprint value="${addressForm.phone.value}"/>
 												<input type="hidden" value="true" name="addressDisplay"/>
+												<input type="hidden" value="${pdict.addressError}" name="addressError"/>
 											</isif>
 											</div>
 											<div class="new-address-field <isif condition="${billingreturn == 'true' || addressForm.firstName.value == null || pdict.MultiAddressCheck != null || pdict.CurrentCustomer.profile.addressBook.preferredAddress == null }">hide</isif>">
@@ -235,7 +236,7 @@
 									<isscript>
 										var currentCountry = require('site_rapalaEU/cartridge/scripts/util/Countries').getCurrent(pdict);
 									</isscript>
-									<isif condition="${!pdict.CurrentCustomer.authenticated ||  pdict.MultiAddressCheck=='false'||  billingreturn == 'true' || productListAddresses.size() ==0 }">
+									<isif condition="${!pdict.CurrentCustomer.authenticated ||  pdict.MultiAddressCheck=='false'||  billingreturn == 'true' || productListAddresses.size() ==0 || pdict.addressError == true}">
 										<div class="shipping-address-field-section">
 									<iselseif condition="${pdict.CurrentCustomer.authenticated && productListAddresses.size() > 0}">
 										<div class="shipping-address-field-section  hide">

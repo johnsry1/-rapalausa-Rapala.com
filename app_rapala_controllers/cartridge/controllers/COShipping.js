@@ -119,6 +119,7 @@ function start() {
             app.getForm('singleshipping.shippingAddress.addressFields.states').copyFrom(customer.addressBook.preferredAddress);
         }
     }
+    var addressError = request.httpParameterMap.hasOwnProperty('addressError') && !request.httpParameterMap.addressError.empty;
     
     if (customer.authenticated && customer.registered){
     	var addressBookSize = customer.addressBook.addresses.size();
@@ -150,7 +151,8 @@ function start() {
             Basket: cart.object,
             HomeDeliveries: homeDeliveries,
             prodNetPrice : priceVals[0],
-            surcharge : priceVals[1]
+            surcharge : priceVals[1],
+            addressError: addressError
         }).render('checkout/shipping/singleshipping');
     }
 }
@@ -316,7 +318,7 @@ function singleShipping() {
         },
         shipToMultiple: app.getController('COShippingMultiple').Start,
         error: function () {
-            response.redirect(URLUtils.https('COShipping-Start'));
+            response.redirect(URLUtils.https('COShipping-Start', 'addressError', true));
         }
     });
 }

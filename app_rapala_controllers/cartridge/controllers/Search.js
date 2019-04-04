@@ -191,7 +191,7 @@ function show() {
 function showContent() {
 
     var params = request.httpParameterMap;
-
+    var blogAssets = null;
     var Search = app.getModel('Search');
     var productSearchModel = Search.initializeProductSearchModel(params);
     var contentSearchModel = Search.initializeContentSearchModel(params);
@@ -222,7 +222,10 @@ function showContent() {
 
         var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
         contentPagingModel.setPageSize(16);
-        var test = contentSearchModel.getContent().asList();
+        var blogAssets = contentSearchModel.getContent().asList();
+        if (renderBlogPages) {
+            blogAssets.sort(function(a,b){return new Date(a.creationDate).getTime() < new Date(b.creationDate).getTime() ? 1 : -1;});
+        }
         if (params.start.submitted) {
             contentPagingModel.setStart(params.start.intValue);
         }
@@ -232,7 +235,8 @@ function showContent() {
             app.getView({
                 ProductSearchResult: productSearchModel,
                 ContentSearchResult: contentSearchModel,
-                ContentPagingModel: contentPagingModel
+                ContentPagingModel: contentPagingModel,
+                ContentSearchResultSorted: blogAssets
             }).render(contentSearchModel.folder.template);
         } else {
             app.getView({
