@@ -131,11 +131,6 @@ var quickview = {
                 progress.hide();
             }
         });
-        //PREVAIL-Added for GA integration
-        //GAcommented
-        if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
-            googleAnalyticsEvents.quickView();
-        }
     },
     exists: function () {
         return this.$container && (this.$container.length > 0);

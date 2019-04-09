@@ -67,11 +67,5 @@
 	    <isinclude template="components/footer/footer"/>
 		<isinclude template="content/home/pt_storefront_VARS"/>		
 	</div><!--  /wrapper -->
-	<iscomment>Google Analytics Event Tracking</iscomment>
-	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-	  <script>ga('send','event','HOME','VIEW','${dw.system.Site.getCurrent().name}',1);</script>
-	</isif>
-	
 </body>
 </html>
