@@ -230,6 +230,25 @@ exports.getProductCategory = function (product) {
 
 };
 
+exports.getPrimaryCategory = function (product) {
+    if (product.isVariant() || product.isVariationGroup()) {
+        product = product.getMasterProduct();
+    }
+    var cat = product.getPrimaryCategory().getParent().getDisplayName();
+    return cat;
+
+};
+
+exports.getSecondaryCategory = function (product) {
+    if (product.isVariant() || product.isVariationGroup()) {
+        product = product.getMasterProduct();
+    }
+    var cat = product.getPrimaryCategory().getDisplayName();
+    return cat;
+
+};
+
+
 exports.getProductCoupon = function (lineItem) {
     var priceAdjustments = lineItem.getPriceAdjustments();
     if (priceAdjustments != null && priceAdjustments.length > 0) {
