@@ -36,14 +36,5 @@
 	    <isinclude template="components/footer/footer"/>
 		<isinclude template="content/home/pt_storefront_VARS"/>		
 	</div><!--  /wrapper -->
-	<iscomment>
-	GAcommented
-	<isscript>
-		var isGAEnabled = new Array(dw.system.Site.getCurrent().getCustomPreferenceValue('trackingService'))[0].some(function(ele){return ele.value == 'GOOGLE_ANALYTICS'});
-	</isscript>
-	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-	  <script>ga('send','event','HOME','VIEW','${dw.system.Site.getCurrent().name}',1);</script>
-	</isif>
-	</iscomment>
 </body>
 </html>

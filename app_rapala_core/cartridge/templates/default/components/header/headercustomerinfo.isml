@@ -82,7 +82,7 @@
 				<span class="loggeduser">
 			        <isif condition="${pdict.CurrentCustomer.authenticated}">
 			        <span class="welcomemessage"><isprint value="${Resource.msg('headercustomerinfo.guestwelcome','locale',null)}" /> </span>
-			         <a href="javascript:void(0)" class="username" onclick="googleAnalyticsEvents.loginCustomer();">
+			         <a href="javascript:void(0)" class="username">
 			      	  <isif condition = "${pdict.CurrentCustomer.authenticated}">
 						<isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
 						<isif condition="${!empty(badgeText) && badgeText!=null}">
@@ -151,7 +151,7 @@
 				    	<isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
 					    	<div class="sign-up-blk">
 						    	<a href="${URLUtils.https('Account-Show')}"
-				    	 class="userlogin signin" onClick="googleAnalyticsEvents.loginCustomer();"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
+				    	 class="userlogin signin"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
 				    	    </div>
 				    	    <div class="header-sign-in accountcontent">
 								<isinclude template="components/header/headersignin"/>

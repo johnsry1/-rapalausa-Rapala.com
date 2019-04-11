@@ -45,7 +45,7 @@
 							<input type="hidden" id="productURL" value="${URLUtils.url('Product-YouTubeVideos','pid', pdict.Product.ID)}" />
 							<isif condition="${pdict.Product.custom.videoId.length > 0}">					
 								<li id="videoTab">
-									<a class="videoTab" onClick="googleAnalyticsEvents.productDetails('PRODUCT','Video Tab','${pdict.Product.ID}');" href="#pdpVideoTab">
+									<a class="videoTab" href="#pdpVideoTab">
 										<span><isprint value="${Resource.msg('product.tab2','product',null)}"/> (<isprint value="${pdict.Product.custom.videoId.length}"/>)</span>
 										<span class="active-state-tab"></span>
 									</a>
@@ -70,7 +70,7 @@
 						</isif>
 						<isif condition="${! empty(pdict.Product.longDescription) && pdict.Product.longDescription.markup.length > 0}">
 							<li>
-								<a href="#pdpTab1" onClick="googleAnalyticsEvents.productDetails('PRODUCT','Feature & Details Tab','${pdict.Product.ID}');">
+								<a href="#pdpTab1">
 								<span><isprint value="${Resource.msg('product.tab1','product',null)}"/></span>
 								<span class="active-state-tab"></span>
 								</a>
