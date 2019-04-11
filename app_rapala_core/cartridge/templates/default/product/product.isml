@@ -30,11 +30,5 @@
 	
 	<isinclude url="${productDetailUrl}"/>
 	
-	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
 	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
-	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-	 	<isif condition="${!isQuickView}"> 
-			<script>googleAnalyticsEvents.pdpView('${pdict.Product.ID}');</script>
-		</isif>
-	</isif>
 </isdecorate>

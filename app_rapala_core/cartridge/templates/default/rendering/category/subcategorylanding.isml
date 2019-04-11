@@ -115,16 +115,5 @@
 	<iscomment>Render promotional content at the bottom of search results as global slot
 	<div class="search-promo"><isslot id="search-promo" description="Promotional Content at the bottom of Search Results" context="global"/></div>
 	<div class="search-promo one"><isslot id="search-promo" description="Promotional Content at the bottom of Search Results" context="global"/></div></iscomment>
-	<iscomment>Event Tracking For Search hits 
-	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
-		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-			<script>
-			  var term=$('#q').val();
-			  googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.searchhit','events',null)}','${pdict.ProductSearchResult.searchPhrase}',term);
-			</script>
-		</isif>	
-		
-	 </isif></iscomment>
-	
+
 </isdecorate>

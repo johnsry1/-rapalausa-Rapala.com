@@ -472,15 +472,5 @@
 	var json = JSON.stringify(countries);
 </isscript>
 <script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
-<iscomment>Google Analytics-Goals Funnels</iscomment>
 
-<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
-	<script>
-		//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
-		ga('send' ,'pageview', '/billing-info');
-		//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
-		//ga('send' ,'pageview', '/checkout_MultiPage/billing.html');
-	</script>
-</isif>
 </isdecorate>

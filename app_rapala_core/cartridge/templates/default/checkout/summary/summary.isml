@@ -248,20 +248,4 @@
 
 		</div>
 
-	<iscomment>Google Analytics-Goals Funnels</iscomment>
-	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-	<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
-			<script>
-				//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
-				ga('send' ,'pageview', '/checkoutAll/review.html');
-				//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
-				ga('send' ,'pageview', '/checkout_MultiPage/review.html');
-			</script>
-
-			<isif condition="${pdict.CurrentCustomer.registered}">
-					<script>ga('send' ,'pageview', '/checkoutregistered/review.html');</script>
-			<iselse/>
-					<script>ga('send' ,'pageview', '/checkoutguest/review.html');</script>
-			</isif>
-	</isif>
 </isdecorate>
