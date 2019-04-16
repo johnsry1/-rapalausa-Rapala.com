@@ -291,6 +291,5 @@ exports.getProductOriginalPrice = function (product) {
             standardPrice = dw.value.Money.NOT_AVAILABLE;
         }
     }
-
     return standardPrice;
 }
