@@ -7,12 +7,14 @@
 			if (site.ID == 'rapala') {
 				getAllowedLocaleItr = 'en-us';
 			}
-			var action : URLAction = new dw.web.URLAction(pdict.CurrentRequest.httpPath.split('/').pop(), site.ID, getAllowedLocaleItr);
-			var paramArray = [];
-			for each (var paramName in pdict.CurrentRequest.httpParameterMap.parameterNames) {
-				paramArray.push(dw.web.URLParameter(paramName, pdict.CurrentRequest.httpParameterMap[paramName]));
+			var action : URLAction = new dw.web.URLAction(pdict.endpoint,site.ID,getAllowedLocaleItr);
+			var subdomainURL = dw.web.URLUtils.abs(action);
+			if (!empty(pdict.parametername) && !empty(pdict.parametervalue)) {
+				subdomainURL = subdomainURL.append(pdict.parametername,pdict.parametervalue);
 			}
-			var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
+			if (!empty(pdict.parametername2) && !empty(pdict.parametervalue2)) {
+				subdomainURL = subdomainURL.append(pdict.parametername2,pdict.parametervalue2);
+			}
 			var gethrefLang = getAllowedLocaleItr.toLowerCase().replace("_", "-");
 		</isscript>
 		<isif condition="${getAllowedLocaleItr != 'default'}">
@@ -26,7 +28,7 @@
 <isscript>
 	var hrefLangSEO = dw.system.Site.getCurrent().getCustomPreferenceValue('hrefLangSEO');
 	importScript("app_rapala_core:util/ViewHelpers.ds");
-	var staticHrefLangObj = ViewHelpers.parseStaticLocaleValues(hrefLangSEO);
+	var staticHrefLangObj = ViewHelpers.parseStaticLocaleValues(hrefLangSEO, pdict.endpoint, pdict.parametername, pdict.parametervalue);
 </isscript>
 
 <isloop items="${staticHrefLangObj}" var="item">

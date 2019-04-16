@@ -18,7 +18,10 @@
 
 	<isinclude template="product/pt_productdetails_UI"/>
 
-	<link rel="canonical" href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}"/>	
+	<link rel="canonical" href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}"/>
+	
+	<iscomment>Include hreflang tags</iscomment>
+	<ishreflangseo endpoint="${'Product-Show'}" parametername="${'pid'}" parametervalue="${pdict.CurrentHttpParameterMap.pid.stringValue}"/>
 </head>
 <body>
 	<isinclude template="components/googletagmanager"/>

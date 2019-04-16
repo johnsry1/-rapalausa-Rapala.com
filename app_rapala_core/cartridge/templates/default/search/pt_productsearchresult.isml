@@ -16,6 +16,9 @@
 	
 	<isif condition="${(pdict.CurrentHttpParameterMap.cgid.submitted && pdict.CurrentHttpParameterMap.cgid.value != '')}">
    		<link rel="canonical" href="${URLUtils.https('Search-Show','cgid', pdict.CurrentHttpParameterMap.cgid)}" />
+   		
+   		<iscomment>Include hreflang tags</iscomment>
+		<ishreflangseo endpoint="${'Search-Show'}" parametername="${'cgid'}" parametervalue="${pdict.CurrentHttpParameterMap.cgid.stringValue}"/>
 	</isif>
 	<iscomment>Add  template-specific header information here.</iscomment>	
 </head>
