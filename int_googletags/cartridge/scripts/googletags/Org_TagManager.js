@@ -260,7 +260,7 @@ const Org_TagManager = {
         if (customer) {
 
             customerObject.demandwareID = customer.ID;
-
+            
         }
         
         return customerObject;

@@ -10,7 +10,7 @@ const Util = require('./Util');
  * @override
  * @return {Object}
  */
-Site_TagManager.getGlobalData = function () {
+Site_TagManager.getGlobalData = function () { 
 
     /** @type {Customer} */
     const customer = session.customer;
@@ -25,7 +25,8 @@ Site_TagManager.getGlobalData = function () {
 
         customerObject.demandwareID = customer.ID;
         customerObject.loggedInState = customer.authenticated;
-
+        customerObject.customerGroup = getCustomerGroups(customer);
+        customerObject.loggedInStatus = GetLoggedInStatus(customer);
     }
 
     if (httpLocale) {
@@ -34,6 +35,20 @@ Site_TagManager.getGlobalData = function () {
 
     customerObject.currencyCode = session.currency.currencyCode;
 
+    
+    // get a string of all the customer groups the current customer is assigned to
+    function getCustomerGroups(customer) {
+        var allGroups = "";
+        var groups = customer.customerGroups;
+        for (var i = 0; i < groups.length; i++) {
+        	
+            var allGroups = (i+1 < groups.length ) ? allGroups + groups[i].ID + ' | ' : allGroups + groups[i].ID;
+        }
+        return allGroups;
+    }
+    function getLoggedInStatus(customer) {
+    	
+    }
     return customerObject;
 
 };
@@ -47,7 +62,7 @@ Site_TagManager.getProductObject = function (product) {
 
     let obj = {};
 
-    obj.productID = product.ID;
+    obj.id = product.ID;
     obj.name = product.name;
 
     if (product.isVariant() || product.isVariationGroup()) {
