@@ -326,7 +326,7 @@ Org_TagManager.getOrderProductObject = function (productLineItem) {
     let obj = Org_TagManager.getProductObject(productLineItem.product);
 
     obj.quantity = productLineItem.quantityValue;
-    obj.price = productLineItem.getAdjustedPrice().getValue();
+    obj.price = Util.getProductOriginalPrice(productLineItem.product).value;
 
     return obj;
 

@@ -185,3 +185,6 @@ exports.init = function (nameSpace) {
     }
     events.all();
 };
+exports.addToCart = function (productObject, quantity, price) {
+    addToCart(productObject, quantity, price);
+};
