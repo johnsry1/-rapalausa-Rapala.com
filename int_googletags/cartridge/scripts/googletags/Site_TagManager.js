@@ -47,15 +47,15 @@ Site_TagManager.getProductObject = function (product) {
 
     let obj = {};
 
-    obj.productID = product.ID;
+    obj.id = product.ID;
     obj.name = product.name;
 
     if (product.isVariant() || product.isVariationGroup()) {
-        obj.productID = product.getMasterProduct().ID;
+        obj.id = product.getMasterProduct().ID;
     }
     
     if (product.master && product.variationModel.variants.size() > 0) {
-        obj.productID = product.ID;
+        obj.id = product.ID;
     }
     
     obj.category = Util.getPrimaryCategory(product);
