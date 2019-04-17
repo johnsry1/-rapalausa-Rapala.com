@@ -17,13 +17,6 @@
 
 	<isinclude template="components/header/htmlhead"/>
 	<isinclude template="search/pt_contentsearchresult_UI"/>
-	
-	<iscomment>Include hreflang tags</iscomment>
-	<isif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('cid')}">
-		<ishreflangseo endpoint="${'Search-Show'}" parametername="${'cid'}" parametervalue="${pdict.CurrentHttpParameterMap.cid}"/>
-	<iselseif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('fdid')}">
-		<ishreflangseo endpoint="${'Folder-Show'}" parametername="${'fdid'}" parametervalue="${pdict.CurrentHttpParameterMap.fdid}"/>
-	</isif>
 
 	<iscomment>Add template-specific header information here.</iscomment>
 
