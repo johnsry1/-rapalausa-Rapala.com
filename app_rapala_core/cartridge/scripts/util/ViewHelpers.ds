@@ -274,9 +274,6 @@ ViewHelpers.parseStaticLocaleValues = function(obj, endpoint, paramName, paramVa
 		if (!empty(paramName) && !empty(paramValue)) {
 			subdomainURL = subdomainURL.append(paramName,paramValue);
 		}
-		if (!empty(paramName2) && !empty(paramValue2)) {
-			subdomainURL = subdomainURL.append(paramName2,paramValue2);
-		}
 
 		var hrefLang = locales[i].toLowerCase().replace("_", "-");
 		urlObj.hrefLang = hrefLang;
