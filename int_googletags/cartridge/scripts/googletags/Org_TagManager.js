@@ -357,7 +357,7 @@ Org_TagManager.getProductObject = function (product) {
 
     let obj = {};
     
-    obj.productID = product.ID;
+    obj.id = product.ID;
     obj.name = product.name;
 
     if (product.isVariant() || product.isVariationGroup()) {
