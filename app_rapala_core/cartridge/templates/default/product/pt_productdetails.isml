@@ -21,14 +21,18 @@
 	<link rel="canonical" href="${URLUtils.https('Product-Show','pid', pdict.Product.ID)}"/>
 	
 	<iscomment>Include hreflang tags</iscomment>
-	<ishreflangseo endpoint="${'Product-Show'}" parametername="${'pid'}" parametervalue="${pdict.CurrentHttpParameterMap.pid.stringValue}"/>
+	<isif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('cgid')}">
+		<ishreflangseo endpoint="${'Product-Show'}" parametername="${'pid'}" parametervalue="${pdict.CurrentHttpParameterMap.pid.stringValue}" parametername2="${'cgid'}" parametervalue2="${pdict.CurrentHttpParameterMap.cgid.stringValue}"/>
+	<iselse>
+		<ishreflangseo endpoint="${'Product-Show'}" parametername="${'pid'}" parametervalue="${pdict.CurrentHttpParameterMap.pid.stringValue}"/>
+	</isif>
 </head>
 <body>
 	<isinclude template="components/googletagmanager"/>
 	
 	<div id="container" class="pt_product-details">
 		<isinclude template="components/header/header"/>	
-		<div id="main" role="main" class="full-width clearfix">
+		<div id="main" role="main" class="full-width clearfix">${pdict.CurrentHttpParameterMap.parameterNames}
 			<isinclude template="components/productbreadcrumbs"/>		
 			<isinclude template="components/browsertoolscheck"/>	
 			<div id="content">							

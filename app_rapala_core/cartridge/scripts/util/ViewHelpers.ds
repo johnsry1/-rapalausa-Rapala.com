@@ -263,7 +263,7 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 	return list;
 };
 
-ViewHelpers.parseStaticLocaleValues = function(obj, endpoint, paramName, paramValue){
+ViewHelpers.parseStaticLocaleValues = function(obj, endpoint, paramName, paramValue, paramName2, paramValue2){
 	var locales = obj.split(',');
 	var site = dw.system.Site.getCurrent();
 	var output = [];
@@ -273,6 +273,9 @@ ViewHelpers.parseStaticLocaleValues = function(obj, endpoint, paramName, paramVa
 		var subdomainURL = dw.web.URLUtils.abs(action);
 		if (!empty(paramName) && !empty(paramValue)) {
 			subdomainURL = subdomainURL.append(paramName,paramValue);
+		}
+		if (!empty(paramName2) && !empty(paramValue2)) {
+			subdomainURL = subdomainURL.append(paramName2,paramValue2);
 		}
 
 		var hrefLang = locales[i].toLowerCase().replace("_", "-");
