@@ -112,19 +112,19 @@
 
                                                                     <isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
                                                                         <li class="selected ${swatchID}">
-                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.selected.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                            <a id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.selected.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
                                                                                 <isprint value="${RefinementValue.getDisplayValue()}"><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
                                                                             </a>
                                                                         </li>
                                                                     <iselseif condition="${RefinementValue.hitCount == 0}">
                                                                         <li class="unselectable ${swatchID}">
-                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" title="${Resource.msgf('global.refinement.unselectable.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                            <a id="${swatchID}" title="${Resource.msgf('global.refinement.unselectable.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
                                                                                 <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
                                                                             </a>
                                                                         </li>
                                                                     <iselse/>
                                                                         <li class="${swatchID}">
-                                                                            <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
+                                                                            <a id="${swatchID}" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msgf('global.refinement.label','locale',null, RefinementDefinition.displayName, RefinementValue.getDisplayValue())}">
                                                                                 <isprint value="${RefinementValue.getDisplayValue()}"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
                                                                             </a>
                                                                         </li>
@@ -153,13 +153,13 @@
                                                                     <isloop items="${Refinements.getAllRefinementValues(RefinementDefinition)}" var="RefinementValue">
                                                                         <isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(RefinementDefinition.attributeID,RefinementValue.value)}">
                                                                             <li class="selected">
-                                                                                <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+                                                                                <a href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
                                                                                     ${Resource.msg('refinement.' + RefinementDefinition.attributeID + '.' + RefinementValue.getDisplayValue(), 'locale', RefinementValue.getDisplayValue())}<span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
                                                                                 </a>
                                                                             </li>
                                                                         <iselse/>
                                                                             <li>
-                                                                                <a onClick="googleAnalyticsEvents.filterSelect('${RefinementValue.getDisplayValue()}');" href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
+                                                                                <a href="${StringHelpers.unsanitizeOR(pdict.ProductSearchResult.urlRefineAttributeValue('Search-Show',RefinementValue.getID(),RefinementValue.getValue()))}" title="${Resource.msg('search.productsearchrefinebar.clickrefine','search',null)}${RefinementValue.getDisplayValue()}">
                                                                                     <isprint value="${Resource.msg('refinement.' + RefinementDefinition.attributeID + '.' + RefinementValue.getDisplayValue(), 'locale', RefinementValue.getDisplayValue())}" encoding="off"/><span id="search-count">(<isprint value="${RefinementValue.getHitCount()}" />)</span>
                                                                                 </a>
                                                                             </li>

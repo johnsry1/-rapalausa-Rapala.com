@@ -31,7 +31,7 @@
 						<a><isprint value="${Resource.msg('logininclude.forgotpassword','account',null)}"/></a>
 					</div>
 					<div class="formactions">
-						<button onClick="googleAnalyticsEvents.loginCustomer('USER','LOGIN','');" type="button" class="signin-button greybutton" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}"><span><isprint value="${Resource.msg('global.Signin','locale',null)}"/></span></button>
+						<button type="button" class="signin-button greybutton" value="${Resource.msg('global.login','locale',null)}" name="${pdict.CurrentForms.login.login.htmlName}"><span><isprint value="${Resource.msg('global.Signin','locale',null)}"/></span></button>
 					</div><!-- END: returningcustomers_button -->
 					<div class="clear"><!-- FLOAT CLEAR --></div>
 					
@@ -43,7 +43,3 @@
 	</form>
 	<div class="clear"><!-- FLOAT CLEAR --></div>
 </div><!-- END: returningcustomers -->
-<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled && pdict.CurrentCustomer.profile != null}">
-   <isgaEvents ga_data="${pdict.CurrentCustomer.profile.email}" ga_category="${Resource.msg('gAnalytics.events.accessinfo','events',null)}" ga_evnet="${Resource.msg('gAnalytics.events.login','events',null)}" />
-</isif>

@@ -7,7 +7,8 @@ var util = require('../../util'),
     addToCart = require('./addToCart'),
     progress = require('../../progress'),
     imagesLoaded = require('imagesloaded'),
-    ajax = require('../../ajax');
+    ajax = require('../../ajax'),
+    tagmanager = require('../../tagmanager');
 
 var product = function (response) {
     // product private data
@@ -240,7 +241,12 @@ var product = function (response) {
             }
             return false;
         });
-
+        // add event to datalayer
+        $('[name$=_addToCart]').on('click', function () {
+            if ($(this).attr('data-gtmdata')) {
+                tagmanager.addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+            }
+        });	
         return addToCartBtn;
     };
 
@@ -1267,7 +1273,13 @@ var product = function (response) {
                 reloadAvailability(thisProduct, thisProduct.selectedOptions.Quantity);
                 // update price
                 this.showUpdatedPrice(computePrice(thisProduct), this.selectedVar.pricing.standard);
-
+                // update price for gtm
+                if (Number(this.selectedVar.pricing.standard) > 0) {
+                    var addToCartBtn = $('[name$=_addToCart]');
+                    var newGtmDataObj = JSON.parse(addToCartBtn.attr('data-gtmdata'));
+                    newGtmDataObj.price = computePrice(thisProduct);
+                    addToCartBtn.attr('data-gtmdata', JSON.stringify(newGtmDataObj));
+                }
                 if (!(!this.selectedVar.inStock && this.selectedVar.avStatus === Constants.AVAIL_STATUS_NOT_AVAILABLE) && (this.getPrice() > 0 || this.isPromoPrice())) {
                     // Replace the hero shot with the specific variant chosen
                     var varID = this.selectedVar.id;

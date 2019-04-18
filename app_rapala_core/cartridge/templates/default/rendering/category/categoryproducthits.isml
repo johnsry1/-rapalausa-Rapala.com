@@ -220,19 +220,4 @@
 		</div>
 
 	</isif>
-
-	<iscomment>Render promotional content at the bottom of search results as global slot</iscomment>
-	
-	<iscomment>Event Tracking For Search hits </iscomment>
-	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
-		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-			<script>
-			  var term=$('#q').val();
-			  googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.searchhit','events',null)}','${pdict.ProductSearchResult.searchPhrase}',term);
-			</script>
-		</isif>	
-		
-	 </isif>
-	
 </isdecorate>

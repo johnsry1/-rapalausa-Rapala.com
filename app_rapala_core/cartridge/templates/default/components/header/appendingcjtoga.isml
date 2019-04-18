@@ -5,14 +5,3 @@
 <isset name="cookie_pub" value="${request.httpCookies['CJ_pub'] ? request.httpCookies['CJ_pub'].value : null}" scope="page" />
 <isset name="cookie_LINK" value="${request.httpCookies['CJ_LINK'] ? request.httpCookies['CJ_LINK'].value : null}" scope="page" />
 <isset name="cookie_CID" value="${request.httpCookies['CJ_CID'] != null ? request.httpCookies['CJ_CID'].value : null}" scope="page" />
-<script type="text/javascript">
- googleAnalyticsEvents.cjValuesToGa('AID','${cookie_AID}');
- googleAnalyticsEvents.cjValuesToGa('PID','${cookie_PID}');
- googleAnalyticsEvents.cjValuesToGa('SID','${cookie_SID}');
- googleAnalyticsEvents.cjValuesToGa('Source','${cookie_Source}');
- googleAnalyticsEvents.cjValuesToGa('pub','${cookie_pub}');
- googleAnalyticsEvents.cjValuesToGa('LINK','${cookie_LINK}');
- googleAnalyticsEvents.cjValuesToGa('CID','${cookie_CID}');
-</script>
-
-
