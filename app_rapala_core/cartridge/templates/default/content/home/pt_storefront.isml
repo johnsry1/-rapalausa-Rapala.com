@@ -52,15 +52,6 @@
 	</isif>
 	<iscomment>Add page specific header information here.</iscomment>
 	
-	<iscomment>Include hreflang tags</iscomment>
-	<iscomment>Check for brand homepage ID</iscomment>
-	<isif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('cgid')}">
-		<ishreflangseo endpoint="${'Search-Show'}" parametername="${'cgid'}" parametervalue="${pdict.CurrentHttpParameterMap.cgid.stringValue}"/>
-	<iselseif condition="${pdict.CurrentHttpParameterMap.isParameterSubmitted('id')}">
-		<ishreflangseo endpoint="${'Home-Show'}" parametername="${'id'}" parametervalue="${pdict.CurrentHttpParameterMap.id.stringValue}"/>
-	<iselse>
-		<ishreflangseo endpoint="${'Home-Show'}"/>
-	</isif>
 </head>
 <body>
 	<isinclude template="components/googletagmanager"/>
