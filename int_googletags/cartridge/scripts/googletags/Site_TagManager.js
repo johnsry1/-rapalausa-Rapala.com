@@ -26,7 +26,7 @@ Site_TagManager.getGlobalData = function () {
         customerObject.demandwareID = customer.ID;
         customerObject.loggedInState = customer.authenticated;
         customerObject.customerGroup = getCustomerGroups(customer);
-        customerObject.loggedInStatus = GetLoggedInStatus(customer);
+        customerObject.loggedInStatus = getLoggedInStatus(customer);
     }
 
     if (httpLocale) {
@@ -47,7 +47,13 @@ Site_TagManager.getGlobalData = function () {
         return allGroups;
     }
     function getLoggedInStatus(customer) {
-    	
+        var logInStatus = "Logged Out";
+        if (customer.isAuthenticated() && customer.isRegistered()){
+            logInStatus = "Hard Logged In";
+        } else if(customer.isAuthenticated()) {
+            logInStatus = "Soft Logged In";
+        }
+        return logInStatus;
     }
     return customerObject;
 

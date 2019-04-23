@@ -33,7 +33,39 @@ var events = {
             if ($(this).attr('data-gtmdata')) {
                 addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
             }
-        });	
+        });
+        // Select the node that will be observed for mutations
+        var targetNode = $('[id^="cq_recomm"]')[0];
+
+        // Options for the observer (which mutations to observe)
+        var config = {attributes: false, childList: true, subtree: true};
+
+        // Callback function to execute when mutations are observed
+        var callback = function(mutationsList) {
+            for (var i = 0; i < mutationsList.length; i++) {
+                var mutation = mutationsList[i];
+                if (mutation.type == 'childList') {
+                    for (var j = 0; j < mutation.addedNodes.length; j++) {
+                        if ($(mutation.addedNodes[j]).hasClass('owl-stage-outer')) {
+                            getRecommendedProductImpressions();
+                            observer.disconnect();
+                            break;
+                        }
+                    }
+                }
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        var observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+        
+        $(document).ready(function() {
+            getRecommendedProductImpressions();
+        });
+        
     },
     search: function () {},
     storefront: function () {},
@@ -175,6 +207,46 @@ function pushEvent (event, eventCategory, eventAction, eventLabel) {
     });
 }
 
+
+/**
+ * @description get product recommendations impressions on pdp
+ * 
+ */
+function getRecommendedProductImpressions () {
+    // helper function to update the ecommerce object with impression data
+    var parentKey = 'ecommerce';
+    var prodImpressions = getImpressionObjectsArray('PDP: Recommended For You');
+    for (var i = 0; i < dataLayer.length; i++) {
+        if (!$.isEmptyObject(dataLayer[i][parentKey])) {
+            if (!$.isEmptyObject(dataLayer[i][parentKey].impressions)) {
+                // add new impression objects to existing impressions
+                dataLayer[i][parentKey].impressions.push(prodImpressions);
+            } else {
+                dataLayer[i][parentKey].impressions = prodImpressions;
+            }
+        }
+    }
+    
+}
+function getImpressionObjectsArray(impressionType) {
+    var visibleProductRecommendations = $('.recommendations').find('.owl-item.active');
+    var rpDataObjs = [];
+    for (var i = 0; i < visibleProductRecommendations.length; i++) {
+        var rp = visibleProductRecommendations[i];
+        var gtmData = $(rp).find('a.thumb-link').data('gtmdata');
+        var obj = {
+            'name': gtmData.name, 
+            'id': gtmData.id,
+            'price': gtmData.price,
+            'brand': gtmData.brand,
+            'category': gtmData.category,
+            'list': impressionType
+        }
+        rpDataObjs.push(obj);
+    }
+    return rpDataObjs;
+}
+
 /**
  * @description Initialize the tag manager functionality
  * @param {String} nameSpace The current name space
@@ -188,3 +260,7 @@ exports.init = function (nameSpace) {
 exports.addToCart = function (productObject, quantity, price) {
     addToCart(productObject, quantity, price);
 };
+exports.getImpressionObjectsArray = function (impressionType) {
+    getImpressionObjectsArray(impressionType);
+};
+

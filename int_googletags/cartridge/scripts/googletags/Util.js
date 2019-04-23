@@ -292,4 +292,4 @@ exports.getProductOriginalPrice = function (product) {
         }
     }
     return standardPrice;
-}
+};
