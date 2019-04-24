@@ -34,38 +34,7 @@ var events = {
                 addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
             }
         });
-        // Select the node that will be observed for mutations
-        var targetNode = $('[id^="cq_recomm"]')[0];
-
-        // Options for the observer (which mutations to observe)
-        var config = {attributes: false, childList: true, subtree: true};
-
-        // Callback function to execute when mutations are observed
-        var callback = function(mutationsList) {
-            for (var i = 0; i < mutationsList.length; i++) {
-                var mutation = mutationsList[i];
-                if (mutation.type == 'childList') {
-                    for (var j = 0; j < mutation.addedNodes.length; j++) {
-                        if ($(mutation.addedNodes[j]).hasClass('owl-stage-outer')) {
-                            getRecommendedProductImpressions();
-                            observer.disconnect();
-                            break;
-                        }
-                    }
-                }
-            }
-        };
-
-        // Create an observer instance linked to the callback function
-        var observer = new MutationObserver(callback);
-
-        // Start observing the target node for configured mutations
-        observer.observe(targetNode, config);
-        
-        $(document).ready(function() {
-            getRecommendedProductImpressions();
-        });
-        
+        initProductRecommendations('PDP: Recommended For You', 'ecommerce');
     },
     search: function () {},
     storefront: function () {},
@@ -116,6 +85,38 @@ var events = {
         })
     }
 };
+
+
+function initProductRecommendations(listType, parentKey) {
+    // Select the node that will be observed for mutations
+    var targetNode = $('[id^="cq_recomm"]')[0];
+    var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
+    var callback = function(mutationsList) {
+        var newTilesCount = 0;
+        for (var i = 0; i < mutationsList.length; i++) {
+            var mutation = mutationsList[i];
+            if (mutation.type == 'childList') {
+                for (var j = 0; j < mutation.addedNodes.length; j++) {
+                    if ($(mutation.addedNodes[j]).hasClass('owl-stage-outer')) {
+                        getRecommendedProductImpressions(listType, parentKey);
+                    } 
+                }
+            } else if (mutation.type == 'attributes' && $(mutation.target).hasClass('active')) {
+                console.log('active class added'); //eslint-disable-line
+                newTilesCount++;
+                if (newTilesCount == 5) {
+                    getRecommendedProductImpressions(listType, parentKey)
+                }
+            }
+        }
+    };
+
+    // Create an observer instance linked to the callback function
+    var observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+}
 
 /**
  * Push to DataLayer sign up event info
@@ -212,10 +213,9 @@ function pushEvent (event, eventCategory, eventAction, eventLabel) {
  * @description get product recommendations impressions on pdp
  * 
  */
-function getRecommendedProductImpressions () {
+function getRecommendedProductImpressions (listType, parentKey) {
     // helper function to update the ecommerce object with impression data
-    var parentKey = 'ecommerce';
-    var prodImpressions = getImpressionObjectsArray('PDP: Recommended For You');
+    var prodImpressions = getImpressionObjectsArray(listType);
     for (var i = 0; i < dataLayer.length; i++) {
         if (!$.isEmptyObject(dataLayer[i][parentKey])) {
             if (!$.isEmptyObject(dataLayer[i][parentKey].impressions)) {
@@ -262,5 +262,8 @@ exports.addToCart = function (productObject, quantity, price) {
 };
 exports.getImpressionObjectsArray = function (impressionType) {
     getImpressionObjectsArray(impressionType);
+};
+exports.initProductRecommendations = function (listType, parentKey) {
+    initProductRecommendations(listType, parentKey);
 };
 
