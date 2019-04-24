@@ -53,19 +53,7 @@
 			<isloop status="i" begin="${rangeBegin}" end="${rangeEnd}">
 				<isif condition="${i.index != currentPage}">
 					<li>
-						<iscomment>This long line is needed to avoid extra whitespaces in the link text</iscomment>
-						<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-						<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-							<isif condition="${!empty(pdict.ProductSearchResult) || !empty(pdict.OrderPagingModel)}">
-								<isif condition="${pdict.ProductSearchResult.categorySearch}">	
-									<a class="page-<isprint value="${i.index + 1}" style="0"/>" onClick="googleAnalyticsEvents.pagination('${Resource.msg('gAnalytics.events.browse_pagination','events',null)}','${pdict.CurrentHttpParameterMap.cgid}','PAGE-<isprint value="${i.index + 1}" style="0"/>')" title="${Resource.msgf('global.paginginformation.goto.label', 'locale', null, i.index + 1)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
-								<iselse/>
-									<a class="page-<isprint value="${i.index + 1}" style="0"/>" onClick="googleAnalyticsEvents.pagination('${Resource.msg('gAnalytics.events.search_pagination','events',null)}','${pdict.CurrentHttpParameterMap.q}','PAGE-<isprint value="${i.index + 1}" style="0"/>')" title="${Resource.msgf('global.paginginformation.goto.label', 'locale', null, i.index + 1)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
-								</isif>	
-							</isif>
-						<iselse/>
-							<a class="page-<isprint value="${i.index + 1}" style="0"/>" title="${Resource.msgf('global.paginginformation.goto.label', 'locale', null, i.index + 1)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
-						</isif>
+						<a class="page-<isprint value="${i.index + 1}" style="0"/>" title="${Resource.msgf('global.paginginformation.goto.label', 'locale', null, i.index + 1)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (i.index - currentPage) * pageSize))}"><isprint value="${i.index + 1}" style="0"/></a>
 					</li>
 				<iselse/>
 					<li class="current-page" title="${Resource.msgf('global.paginginformation.current.label', 'locale', null, i.index + 1)}">

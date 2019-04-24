@@ -259,11 +259,6 @@ var minicart = {
         // after a time out automatically close it
         minicart.timer = setTimeout('minicart.close()', 1000);
 
-        // Google Analytics code to track mini cart open.
-        if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
-            googleAnalyticsEvents.miniCart();
-        }
-
     },
     hoverSlide: function () {
         if (minicart.suppressSlideDown && minicart.suppressSlideDown()) {
@@ -337,11 +332,6 @@ var minicart = {
                     });
                 }
             });
-
-        // Google Analytics code to track mini cart open.
-        if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
-            googleAnalyticsEvents.miniCart();
-        }
 
         jQuery('.minicarttotal').addClass('enablehover');
         minicart.enablehovereffect();

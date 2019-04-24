@@ -226,9 +226,28 @@ exports.getProductCategory = function (product) {
         product = product.getMasterProduct();
     }
     var cat = product.getPrimaryCategory();
-    return cat.ID.replace('-', '/', 'g');
+    return (!empty(cat) ? cat.ID.replace('-', '/', 'g') : '');
 
 };
+
+exports.getPrimaryCategory = function (product) {
+    if (product.isVariant() || product.isVariationGroup()) {
+        product = product.getMasterProduct();
+    }
+    var cat = product.getPrimaryCategory().getParent().getDisplayName();
+    return cat;
+
+};
+
+exports.getSecondaryCategory = function (product) {
+    if (product.isVariant() || product.isVariationGroup()) {
+        product = product.getMasterProduct();
+    }
+    var cat = product.getPrimaryCategory().getDisplayName();
+    return cat;
+
+};
+
 
 exports.getProductCoupon = function (lineItem) {
     var priceAdjustments = lineItem.getPriceAdjustments();
@@ -272,6 +291,5 @@ exports.getProductOriginalPrice = function (product) {
             standardPrice = dw.value.Money.NOT_AVAILABLE;
         }
     }
-
     return standardPrice;
 }
