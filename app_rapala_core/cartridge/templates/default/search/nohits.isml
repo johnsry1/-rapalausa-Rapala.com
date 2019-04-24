@@ -75,16 +75,6 @@
 	       <div class="propicks"><a href="${URLUtils.https('Search-Show', 'cgid','rapala-propicks')}"><isprint value="${Resource.msg('nohits.propicks','search',null)}" /><span></span></a></div>
 	       <div class="bestsellers"><a href="${URLUtils.https('Search-Show', 'cgid','rapala-bestSellers')}"><isprint value="${Resource.msg('nohits.bestsellers','search',null)}" /><span></span></a></div>
 	       <div class="customerservices"><a href="${URLUtils.https('Folder-Show', 'fdid', 'rapala-customer-service')}"><isprint value="${Resource.msg('nohits.customerservice','search',null)}" /><span></span></a></div>
-		</div>
-	<iscomment>Event Tracking for SearchHits</iscomment>
-	<isif condition="${pdict.ProductSearchResult.searchPhrase != null}">
-		<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-		<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-			<script>
-			 	googleAnalyticsEvents.searchHits('${Resource.msg('gAnalytics.events.nohit','events',null)}','${pdict.ProductSearchResult.searchPhrase}');
-			</script>
-		</isif>
-	
-	</isif>
+	</div>
 	
 </isdecorate>

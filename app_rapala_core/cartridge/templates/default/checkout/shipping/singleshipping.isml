@@ -378,25 +378,6 @@
 					<iscomment>UPS address validation</iscomment>
 					<isinclude template="ups/addressvalidationdialog" />
 
-					<iscomment>EVENT TRACKING FOR LOGIN </iscomment>
-					<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-					<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-						<isif condition="${!empty(pdict.CurrentCustomer.profile)}">
-							<isgaEvents	ga_data="${pdict.CurrentCustomer.profile.email}" ga_category="${Resource.msg('gAnalytics.events.accessinfo','events',null)}" ga_evnet="${Resource.msg('gAnalytics.events.login','events',null)}" />
-						</isif>
-					</isif>
-
-					<iscomment>Google Analytics-Goals Funnels</iscomment>
-					<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
-						<script>
-							//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
-							ga('send' ,'pageview', '/shipping-info');
-
-							//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
-							//ga('send' ,'pageview', '/checkout_MultiPage/shipping.html');
-						</script>
-					</isif>
-
 					<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
 						<ischeckouttabs  position="footer" checkoutpage="shipping"/>
 					</isif>

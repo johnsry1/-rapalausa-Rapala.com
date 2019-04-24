@@ -101,56 +101,5 @@
 </div>
 </div>
 <isset name="productID" value="${}" scope="page" />
-<script>
-	googleAnalyticsEvents.orderConfirm('${pdict.Order.orderNo}');
-	ga("require", "ecommerce", "ecommerce.js");
-
-	ga("ecommerce:addTransaction", {
-			  "id": "<isprint value="${pdict.Order.orderNo}"/>",
-			  "affiliation":"<isprint value="${dw.system.Site.getCurrent().getName()}"/>",
-			  "revenue":"<isprint value="${pdict.Order.totalGrossPrice}" formatter="#.00"/>",
-			  "shipping":"<isprint value="${pdict.Order.getAdjustedShippingTotalPrice()}" formatter="#.00"/>",
-			  "tax":"<isprint value="${pdict.Order.totalTax}" formatter="#.00"/>"
-			});
-
-		<isloop items="${pdict.Order.getShipments()}" var="shipments">
-			<isloop items="${shipments.getProductLineItems()}" var="pli">
-				<isset name ="productID" value="${empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'"}" scope="page"/>
-					<isset name="name" value="${pli.product.name}" scope="page" />
-					<isif condition="${name.indexOf('&reg;') >= 0}">
-						<isset name="name" value="${name.replace('&reg;','','g')}" scope="page" />
-					</isif>
-					<isif condition="${name.indexOf('®') >= 0}">
-						<isset name="name" value="${name.replace('®','','g')}" scope="page" />
-					</isif>
-					<isif condition="${name.indexOf('&trade;') >= 0}">
-						<isset name="name" value="${name.replace('&trade;','','g')}" scope="page" />
-					</isif>
-					<isif condition="${name.indexOf('&#8482;') >= 0}">
-						<isset name="name" value="${name.replace('&#8482;','','g')}" scope="page" />
-					</isif>
-					<isif condition="${name.indexOf('™') >= 0}">
-						<isset name="name" value="${name.replace('™','','g')}" scope="page" />
-					</isif>
-				ga("ecommerce:addItem", {
-					  "id":"<isprint value="${pdict.Order.orderNo}"/>",
-					  "name":"<isprint value="${name}" encoding="on"/>",
-					  "sku":"<isprint value="${pli.product.ID}" encoding="on"/>",
-					  <isif condition="${!empty(pli.product.classificationCategory)}">
-					  "category": "<isprint value="${pli.product.classificationCategory.displayName}" encoding="on"/>",
-					  </isif>
-					  "price":"<isprint value="${pli.adjustedPrice/pli.quantity.value}" formatter="#.00"/>",
-					  "quantity":"<isprint value="${pli.quantity.value}" formatter="#"/>"
-				});
-			</isloop>
-		</isloop>
-
-		ga("ecommerce:send");
-
-		fbq('track', 'Purchase',
-			{ content_ids: [${productID}], content_type: 'product', value: ${pdict.Order.totalGrossPrice.value}, currency: 'USD' }
-		);
-
-</script>
 
 </isdecorate>

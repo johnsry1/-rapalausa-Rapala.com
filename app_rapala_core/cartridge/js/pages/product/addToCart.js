@@ -12,12 +12,6 @@ var dialog = require('../../dialog'),
 var addAllToCart = function (e) {
     e.preventDefault();
 
-    //PREVAIL-Added for GA integration
-    //GAcommented
-    if (isEventTrackingEnabled && isGoogleAnalyticsEnabled) {
-        googleAnalyticsEvents.addProductSet();
-    }
-
     var $productForms = $('#product-set-list').find('form').toArray();
     TPromise.all(_.map($productForms, addToCart))
         .then(function (responses) {

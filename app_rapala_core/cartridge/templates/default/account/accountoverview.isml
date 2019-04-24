@@ -10,8 +10,4 @@
 <iscontentasset aid="account-main-registered"/> 
 
 	<iscontentasset aid="account-landing"/>
-     <isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('isEventTrackingEnabled') && isGAEnabled}">
-        <isgaEvents ga_data="${pdict.CurrentCustomer.profile.email}" ga_category="${Resource.msg('gAnalytics.events.accessinfo','events',null)}" ga_evnet="${Resource.msg('gAnalytics.events.login','events',null)}" />
-     </isif>
 </isdecorate>

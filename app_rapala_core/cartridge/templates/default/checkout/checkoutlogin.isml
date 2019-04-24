@@ -59,13 +59,4 @@
 				<isinclude template="account/login/logininclude"/>
 			</div>
 		</div>
-	<isset name="isGAEnabled" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('GAEnable')}" scope="page"/>
-	<isif condition="${isGAEnabled && dw.system.Site.getCurrent().getCustomPreferenceValue('isGoogleAnalyticsGoalsEnable')}">
-		<script>
-			//Goals tagging for Cummulative Checkout irrespecive of customer type (registered or guest)
-			ga('send' ,'pageview', '/checkoutAll/login.html');
-			//Goals tagging for Cummulative Checkout of Multi Pages irrespecive of customer type (registered or guest)
-			ga('send' ,'pageview', '/checkout_MultiPage/login.html');
-		</script>
-	</isif>
 </isdecorate>
