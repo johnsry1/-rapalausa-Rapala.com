@@ -16,6 +16,7 @@ var events = {
                 removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val());
             }
         });
+        initProductRecommendations('Cart: Recommended For You', 'ecommerce');
     },
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
@@ -36,7 +37,9 @@ var events = {
         });
         initProductRecommendations('PDP: Recommended For You', 'ecommerce');
     },
-    search: function () {},
+    search: function () {
+        initProductRecommendations('Grid: Recommended For You', 'ecommerce');
+    },
     storefront: function () {},
     wishlist: function () {
         $('[name$=_addToCart]').on('click', function () {
@@ -89,33 +92,36 @@ var events = {
 
 function initProductRecommendations(listType, parentKey) {
     // Select the node that will be observed for mutations
-    var targetNode = $('[id^="cq_recomm"]')[0];
-    var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
-    var callback = function(mutationsList) {
-        var newTilesCount = 0;
-        for (var i = 0; i < mutationsList.length; i++) {
-            var mutation = mutationsList[i];
-            if (mutation.type == 'childList') {
-                for (var j = 0; j < mutation.addedNodes.length; j++) {
-                    if ($(mutation.addedNodes[j]).hasClass('owl-stage-outer')) {
-                        getRecommendedProductImpressions(listType, parentKey);
-                    } 
-                }
-            } else if (mutation.type == 'attributes' && $(mutation.target).hasClass('active')) {
-                console.log('active class added'); //eslint-disable-line
-                newTilesCount++;
-                if (newTilesCount == 5) {
-                    getRecommendedProductImpressions(listType, parentKey)
-                }
+    var targetNodes = $('[id^="cq_recomm"]');
+    for (var i = 0; i < targetNodes.length; i++) {
+        var targetNode = targetNodes[i];
+        var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
+        var callback = function(mutationsList) {
+            //var newTilesCount = 0;
+            for (var j = 0; j < mutationsList.length; j++) {
+                var mutation = mutationsList[j];
+                if (mutation.type == 'childList') {
+                    for (var k = 0; k < mutation.addedNodes.length; k++) {
+                        if ($(mutation.addedNodes[k]).hasClass('owl-stage-outer')) {
+                            getRecommendedProductImpressions('', parentKey, mutation);
+                        } 
+                    }
+                }// else if (mutation.type == 'attributes' && $(mutation.target).hasClass('active')) {
+                 //   console.log('active class added'); //eslint-disable-line
+                 //   newTilesCount++;
+                //    if (newTilesCount == 5) {
+                //        getRecommendedProductImpressions(listType, parentKey)
+                //    }
+               // }
             }
-        }
-    };
+        };
 
-    // Create an observer instance linked to the callback function
-    var observer = new MutationObserver(callback);
+        // Create an observer instance linked to the callback function
+        var observer = new MutationObserver(callback);
 
-    // Start observing the target node for configured mutations
-    observer.observe(targetNode, config);
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+    }
 }
 
 /**
@@ -213,14 +219,34 @@ function pushEvent (event, eventCategory, eventAction, eventLabel) {
  * @description get product recommendations impressions on pdp
  * 
  */
-function getRecommendedProductImpressions (listType, parentKey) {
+function getRecommendedProductImpressions (listType, parentKey, mutation) {
     // helper function to update the ecommerce object with impression data
-    var prodImpressions = getImpressionObjectsArray(listType);
+    var listTypePrefix = '';
+    var targetTitle = $(mutation.target).closest('.product-listing').find('h2').text();
+    if (listType.length <= 0 && targetTitle.toLowerCase().indexOf('recommended') > -1) {
+        switch (window.pageContext.ns) {
+            case 'product':
+                listTypePrefix = 'PDP: ';
+                break;
+            case 'search':
+                listTypePrefix = 'Grid: ';
+                break;
+            case 'cart':
+                listTypePrefix = 'Cart: ';
+                break;
+            default:
+                listTypePrefix = '';
+        }
+    }
+    
+    listType = (listType.length > 0) ? listType : listTypePrefix + targetTitle;
+    var prodImpressions = getImpressionObjectsArray(listType, mutation);
+
     for (var i = 0; i < dataLayer.length; i++) {
         if (!$.isEmptyObject(dataLayer[i][parentKey])) {
             if (!$.isEmptyObject(dataLayer[i][parentKey].impressions)) {
                 // add new impression objects to existing impressions
-                dataLayer[i][parentKey].impressions.push(prodImpressions);
+                dataLayer[i][parentKey].impressions = $.merge(dataLayer[i][parentKey].impressions, prodImpressions);
             } else {
                 dataLayer[i][parentKey].impressions = prodImpressions;
             }
@@ -228,8 +254,8 @@ function getRecommendedProductImpressions (listType, parentKey) {
     }
     
 }
-function getImpressionObjectsArray(impressionType) {
-    var visibleProductRecommendations = $('.recommendations').find('.owl-item.active');
+function getImpressionObjectsArray(impressionType, mutation) {
+    var visibleProductRecommendations = $(mutation.target).find('.owl-item.active');
     var rpDataObjs = [];
     for (var i = 0; i < visibleProductRecommendations.length; i++) {
         var rp = visibleProductRecommendations[i];
@@ -240,6 +266,7 @@ function getImpressionObjectsArray(impressionType) {
             'price': gtmData.price,
             'brand': gtmData.brand,
             'category': gtmData.category,
+            'secondary category' : gtmData['secondary category'],
             'list': impressionType
         }
         rpDataObjs.push(obj);
