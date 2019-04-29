@@ -16,7 +16,7 @@
 					<li id="${subFolder.ID}" class="first-level navfirstClick"><span>${subFolder.displayName}</span>
 				</isif>
 						<ul class="second-level">
-						<isloop items="${subFolder.onlineContent}" var="subContent">						
+						<isloop items="${subFolder.onlineContent}" var="subContent">							
 							<isif condition="${pdict.CurrentHttpParameterMap.cid.stringValue == subContent.ID}">
 								<li class="active ${subContent.ID== 'customer-contact-us' ? subContent.ID : ''}">
 							<iselse>
