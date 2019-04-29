@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * Events are divided up by name space so only the
  * events that are needed are initialized.
@@ -88,10 +87,69 @@ var events = {
             $('.header-signup button').on('click', function() {
                 signUpEvent('Header Sign Up', $(this), '_customer_addtoemaillist');
             })
-        })
+        });
+        // form valid / invalid submission tracking
+        initFormWatcher();
+        // navigation click tracking
+        initNavigationClick();
     }
 };
 
+function initNavigationClick() {
+    var event = 'navigationClick';
+    // main mega nav with brands for mobile and desktop
+    $('.megamenu-drop a').on('click', function(e){
+        var isMobile = $(window).width() < 960;
+        pushEvent(event , '', (isMobile ? 'Primary Mobile Navigation' : 'Primary Desktop Navigation'), $(e.target).text().trim());
+    });
+    // left hand navigation
+    $('.categorymenusnew a').on('click', function(e){
+        pushEvent(event , '', 'Left Hand Nav', $(e.target).text().trim());
+    });
+    // footer navigation
+    $('.footer-main a').on('click', function(e){
+        pushEvent(event , '', 'Footer Nav', $(e.target).text().trim());
+    });
+    // customer service and about us navigation
+    $('.pt_customerservice .nav-group a').on('click', function(e){
+        var isAboutNav = $('.pt_customerservice .nav-group').closest('div').find('h2').text().toLowerCase().indexOf('about') > -1;
+        pushEvent(event , '', (isAboutNav ? 'About Us Nav' : 'Customer Service Nav'), $(e.target).text().trim());
+    });
+    // breadcrumb navigation
+    $('.breadcrumb a').on('click', function(e){
+        pushEvent(event , '', 'Breadcrumb Nav', $(e.target).text().trim());
+    });
+}
+
+function initFormWatcher() {
+    var s = '';
+    if (s == 0) {
+        // Select the node that will be observed for mutations
+        var targetNodes = $('form');
+        for (var i = 0; i < targetNodes.length; i++) {
+            var targetNode = targetNodes[i];
+            var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
+            var callback = function(mutationsList) {
+                for (var j = 0; j < mutationsList.length; j++) {
+                    var mutation = mutationsList[j];
+                    if (mutation.type == 'childList') {
+                        for (var k = 0; k < mutation.addedNodes.length; k++) {
+                            if ($(mutation.addedNodes[k]).hasClass('errorclient')) {
+                                pushEvent('invalidFormSubmit', '', 'Invalid form Submit', 'form');
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Create an observer instance linked to the callback function
+            var observer = new MutationObserver(callback);
+
+            // Start observing the target node for configured mutations
+            observer.observe(targetNode, config);
+        }
+    }
+}
 
 function initProductRecommendations(listType, parentKey) {
     // Select the node that will be observed for mutations
