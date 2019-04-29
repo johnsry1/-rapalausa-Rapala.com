@@ -244,7 +244,11 @@ var product = function (response) {
         // add event to datalayer
         $('[name$=_addToCart]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                tagmanager.addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+                var source = ($(this).data('quickview')) ? 'Quickview' : 'PDP';
+                // init for product recommendations on pdp:
+                if (source!='PDP'){
+                    tagmanager.addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val(), source);
+                }
             }
         });	
         return addToCartBtn;

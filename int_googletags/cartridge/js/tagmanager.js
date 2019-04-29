@@ -32,7 +32,10 @@ var events = {
     product: function () {
         $('[name$=_addToCart]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+                var prodObj = $.parseJSON($(this).attr('data-gtmdata'));
+                var quantity = $(this).closest('div').find('[name=Quantity]').val();
+                var source = ($(this).data('quickview')) ? 'Quickview' : 'PDP';
+                addToCart(prodObj, quantity, source, null);
             }
         });
         initProductRecommendations('PDP: Recommended For You', 'ecommerce');
@@ -149,7 +152,10 @@ function productClick (productObject) {
         },
         'ecommerce': {
             'click': {
-                'products': []
+                'products': [],
+                'actionField' : {
+                    'list' : getListDataValue()
+                }
             }
         }
     };
@@ -161,11 +167,16 @@ function productClick (productObject) {
  * @description Click event for add product to cart
  * @param {Object} productObject The product data
  * @param {String} quantity
+ * @param {String} source Optional where the a2c button was clicked, typically pdp or quickview
+ * @param {String} price Optional price value to pass. 
  */
-function addToCart (productObject, quantity, price) {
+function addToCart (productObject, quantity, source, price) {
     var quantityObj = {'quantity': quantity},
         obj = {
             'event': 'addToCart',
+            'event_info': {
+                'label' : source
+            },
             'ecommerce': {
                 'add': {
                     'products': []
@@ -220,26 +231,7 @@ function pushEvent (event, eventCategory, eventAction, eventLabel) {
  * 
  */
 function getRecommendedProductImpressions (listType, parentKey, mutation) {
-    // helper function to update the ecommerce object with impression data
-    var listTypePrefix = '';
-    var targetTitle = $(mutation.target).closest('.product-listing').find('h2').text();
-    if (listType.length <= 0 && targetTitle.toLowerCase().indexOf('recommended') > -1) {
-        switch (window.pageContext.ns) {
-            case 'product':
-                listTypePrefix = 'PDP: ';
-                break;
-            case 'search':
-                listTypePrefix = 'Grid: ';
-                break;
-            case 'cart':
-                listTypePrefix = 'Cart: ';
-                break;
-            default:
-                listTypePrefix = '';
-        }
-    }
-    
-    listType = (listType.length > 0) ? listType : listTypePrefix + targetTitle;
+    listType = (listType.length > 0) ? listType : getListDataValue(mutation);
     var prodImpressions = getImpressionObjectsArray(listType, mutation);
 
     for (var i = 0; i < dataLayer.length; i++) {
@@ -267,11 +259,37 @@ function getImpressionObjectsArray(impressionType, mutation) {
             'brand': gtmData.brand,
             'category': gtmData.category,
             'secondary category' : gtmData['secondary category'],
-            'list': impressionType
+            'list': impressionType, 
+            'childID': gtmData.childID,
+            'position' : i+1
         }
         rpDataObjs.push(obj);
     }
     return rpDataObjs;
+}
+function getListDataValue(mutation) {
+    var listValue = 'Internal Search'; // default value for PDP click and PDP Detail
+    var listTypePrefix = '';
+    if (mutation) {
+        listValue = $(mutation.target).closest('.product-listing').find('h2').text();
+        if (listValue.toLowerCase().indexOf('recommended') > -1) {
+            switch (window.pageContext.ns) {
+                case 'product':
+                    listTypePrefix = 'PDP: ';
+                    break;
+                case 'search':
+                    listTypePrefix = 'Grid: ';
+                    break;
+                case 'cart':
+                    listTypePrefix = 'Cart: ';
+                    break;
+                default:
+                    listTypePrefix = '';
+            }
+        }
+    }
+    listValue = listTypePrefix + listValue;
+    return listValue;
 }
 
 /**
@@ -284,8 +302,8 @@ exports.init = function (nameSpace) {
     }
     events.all();
 };
-exports.addToCart = function (productObject, quantity, price) {
-    addToCart(productObject, quantity, price);
+exports.addToCart = function (productObject, quantity, source, price) {
+    addToCart(productObject, quantity, source, price);
 };
 exports.getImpressionObjectsArray = function (impressionType) {
     getImpressionObjectsArray(impressionType);

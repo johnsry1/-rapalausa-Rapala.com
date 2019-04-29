@@ -70,6 +70,7 @@ Site_TagManager.getProductObject = function (product) {
 
     obj.id = product.ID;
     obj.name = product.name;
+    obj.childID = (product.master) ? product.getVariationModel().getDefaultVariant().getID() : product.getID();
 
     if (product.isVariant() || product.isVariationGroup()) {
         obj.id = product.getMasterProduct().ID;
@@ -83,6 +84,7 @@ Site_TagManager.getProductObject = function (product) {
     obj["secondary category"] = Util.getSecondaryCategory(product);
     obj.brand = product.brand;
     obj.price = Util.getProductOriginalPrice(product).value;
+    obj.list = 'Internal Search';
 
 
     return obj;
