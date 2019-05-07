@@ -1,8 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="search/pt_category_refinements">
-	<div class="bannerslot cat_subslots">
-		<isslot id="landingpages-top" description="slot for all landing pages" context="category" context-object="${pdict.ProductSearchResult.category}"/>
-	</div>
 	<iscomment><isscript>
 		var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
 	</isscript></iscomment>
@@ -71,7 +68,9 @@
 		<h1 class="content-header" id="results-products"><isprint value="${Resource.msgf('search.producthits.productsfoundcount','search',null,pdict.ProductSearchResult.count)}" /></h1>
 		
 	</isif>
-	
+	<div class="bannerslot cat_subslots desktopHide">
+		<isslot id="landingpages-top" description="slot for all landing pages" context="category" context-object="${pdict.ProductSearchResult.category}"/>
+	</div>
 	<isif condition="${!(pdict.ProductPagingModel == null) && !pdict.ProductPagingModel.empty}">
 
 		<div class="search-result-options search-top">
