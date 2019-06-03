@@ -38,9 +38,11 @@ var events = {
             }
         });
         initProductRecommendations('PDP: Recommended For You', 'ecommerce');
+        initPdpEngagement();
     },
     search: function () {
         initProductRecommendations('Grid: Recommended For You', 'ecommerce');
+        initPdpEngagement();
     },
     storefront: function () {},
     wishlist: function () {
@@ -167,13 +169,7 @@ function initProductRecommendations(listType, parentKey) {
                             getRecommendedProductImpressions('', parentKey, mutation);
                         } 
                     }
-                }// else if (mutation.type == 'attributes' && $(mutation.target).hasClass('active')) {
-                 //   console.log('active class added'); //eslint-disable-line
-                 //   newTilesCount++;
-                //    if (newTilesCount == 5) {
-                //        getRecommendedProductImpressions(listType, parentKey)
-                //    }
-               // }
+                }
             }
         };
 
@@ -183,6 +179,61 @@ function initProductRecommendations(listType, parentKey) {
         // Start observing the target node for configured mutations
         observer.observe(targetNode, config);
     }
+}
+
+function initPdpEngagement() {
+    var obj = {
+        'event' : 'pdpEngagement',
+        'event_info' : {
+            'label' : $('input[name="pid"]').val()
+        }
+    }
+    function checkObj(obj, ele) {
+        if (obj.event_info.label == null) {
+            obj.event_info.label = ele.closest('#pdpMain').find('input[name="pid"]').val(); // eslint-disable-line
+        }
+        if ($('#QuickViewDialog').length > 0) {
+            obj.event = 'quickviewEngagement';
+        }
+    }
+    // 'Spec Chart' click on top right of the product details
+    $('.specChart-link').on('click', function(){
+        obj['event_info']['action'] = 'Top Spec Chart Link'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
+    // Tab click handling on pdp
+    $('body').on('click', '#tabs .ui-tabs-nav > li', function(e) {
+        obj['event_info']['action'] = e.target.innerText + ' Tab'; // eslint-disable-line
+        checkObj(obj);
+        dataLayer.push(obj);
+    });
+    // When the video link above the product image is clicked (not on all products)
+    $('body').on('click', '.provideo-spec-link', function(){
+        obj['event_info']['action'] = 'Top Video Link'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
+    $('body').on('click', '.owl-nav > div', function() {
+        obj['event_info']['action'] = 'Alt Image Arrow Click'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
+    $('body').on('click', '#pdpFullDetailsLink', function() {
+        obj['event_info']['action'] = 'View Full Details'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
+    $('body').on('click', '.add-to-wishlist', function() {
+        obj['event_info']['action'] = 'Wish List Link'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
+    $('body').on('click', '.addthis_toolbox', function() {
+        obj['event_info']['action'] = 'Share This'; // eslint-disable-line
+        checkObj(obj, $(this));
+        dataLayer.push(obj);
+    });
 }
 
 /**
