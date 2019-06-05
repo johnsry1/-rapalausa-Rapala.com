@@ -8,6 +8,7 @@ var events = {
         $('[name$="_profile_confirm"]').on('click', function() {
             signUpEvent('Account Sign Up', $(this), '_customer_addtoemaillist');
         });
+        initAccountUpgrade();
     },
     cart: function () {
         $('[name$=_deleteProduct]').on('click', function () {
@@ -51,6 +52,7 @@ var events = {
                 addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
             }
         });
+        initAccountUpgrade();
     },
     // events that should happen on every page
     all: function () {
@@ -234,6 +236,67 @@ function initPdpEngagement() {
         checkObj(obj, $(this));
         dataLayer.push(obj);
     });
+}
+
+function initAccountUpgrade() {
+    var obj = {
+        'event' : 'accountUpgrade',
+        'event_info' : {
+            'action' : 'New'
+        }
+    }
+    // drop down from header registration
+    $('.header-create .register-button').on('click', function() {
+        obj['event_info']['label'] = 'New B2C Account Drop-Down'; // eslint-disable-line
+        obj['event_info']['action'] = 'New'; // eslint-disable-line
+        dataLayer.push(obj);
+    });
+    // drop down from header login
+    $('.header-sign-in .signin-button').on('click', function() {
+        obj['event_info']['label'] = 'Create Account - Log In Drop Down'; // eslint-disable-line
+        obj['event_info']['action'] = ''; // eslint-disable-line
+        dataLayer.push(obj);
+    });
+    // VIP account creation signup and registration
+    $('.viplogin .vip-chks').on('click', function() {
+        if ($('.vip-register').length > 0) { // initial registration
+            obj['event_info']['label'] = 'Create Account - VIP Register'; // eslint-disable-line
+            obj['event_info']['action'] = 'New'; // eslint-disable-line        
+        } else { // signup 
+            obj['event_info']['label'] = 'Create Account - VIP Sign Up'; // eslint-disable-line
+            obj['event_info']['action'] = 'New'; // eslint-disable-line
+        }
+        dataLayer.push(obj);
+    });
+    // VIP Upgrade signup and registration
+    $('.viploginsignin .vip-chk').on('click', function() {
+        if ($('.vip-register').length > 0) { // initial registration
+            obj['event_info']['label'] = 'Upgrade Account - VIP Register'; // eslint-disable-line
+            obj['event_info']['action'] = 'Upgrade'; // eslint-disable-line        
+        } else { // signup 
+            obj['event_info']['label'] = 'Upgrade Account - VIP Signup'; // eslint-disable-line
+            obj['event_info']['action'] = 'Upgrade'; // eslint-disable-line
+        }
+        dataLayer.push(obj);
+    });
+    
+    // register button on wishlist and account pages
+    $('.registration-button').on('click', function() {
+        obj['event_info']['label'] = (window.pageContext.ns.toLowerCase() == 'wishlist') ? 'Create Account - Wishlist' : 'Create Account - My Account'; // eslint-disable-line
+        obj['event_info']['action'] = 'New'; // eslint-disable-line
+        dataLayer.push(obj);
+    });
+
+    /**
+    Wish List link (site url contains Wishlist-Add)
+    New B2C Account Drop-Down - is this just tracking where they start creating an account from? And do we do this on link click or once the account creation completes? (Yes, that's correct)
+    New B2C Account Page
+    New B2C Account via Wishlist 
+    VIP Sign Up - whats the difference between signup and register? (I cant figure out, would be question for Bonnie and Client team)
+    VIP Register (Again, not sure what they qualify as VIP)
+    VIP sign Up Upgrade (Again not sure what they qualify as VIP)
+    VIP Register Upgrade - what is the case where it becomes a sign up or register upgrade? (I cant locate, would be question for Bonnie and Client Team)
+    **/
 }
 
 /**
