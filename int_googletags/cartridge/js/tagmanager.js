@@ -101,6 +101,10 @@ var events = {
 
 function initNavigationClick() {
     var event = 'navigationClick';
+    // brand level navigation
+    $('#brand-tabs-header ul li > span > a').on('click', function(e) {
+        pushEvent(event, '', 'Main Navigation', $(e.target).text().trim())
+    })
     // main mega nav with brands for mobile and desktop
     $('.megamenu-drop a').on('click', function(e){
         var isMobile = $(window).width() < 960;
