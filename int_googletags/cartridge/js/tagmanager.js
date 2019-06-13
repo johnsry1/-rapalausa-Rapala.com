@@ -425,7 +425,7 @@ function getImpressionObjectsArray(impressionType, mutation) {
             'price': gtmData.price,
             'brand': gtmData.brand,
             'category': gtmData.category,
-            'secondary category' : gtmData['secondary category'],
+            'dimension3' : gtmData.dimension3,
             'list': impressionType, 
             'childID': gtmData.childID,
             'position' : i+1

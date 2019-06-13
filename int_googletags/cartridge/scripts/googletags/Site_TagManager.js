@@ -81,7 +81,7 @@ Site_TagManager.getProductObject = function (product) {
     }
     
     obj.category = Util.getPrimaryCategory(product);
-    obj["secondary category"] = Util.getSecondaryCategory(product);
+    obj["dimension3"] = Util.getSecondaryCategory(product);
     obj.brand = product.brand;
     obj.price = Util.getProductOriginalPrice(product).value;
     obj.list = 'Internal Search';
