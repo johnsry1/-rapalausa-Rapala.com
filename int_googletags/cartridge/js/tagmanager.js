@@ -210,9 +210,11 @@ function initPdpEngagement() {
     });
     // Tab click handling on pdp
     $('body').on('click', '#tabs .ui-tabs-nav > li', function(e) {
-        obj['event_info']['action'] = e.target.innerText + ' Tab'; // eslint-disable-line
-        checkObj(obj);
-        dataLayer.push(obj);
+        if (typeof e.originalEvent != 'undefined') {
+            obj['event_info']['action'] = e.target.innerText + ' Tab'; // eslint-disable-line
+            checkObj(obj);
+            dataLayer.push(obj);
+        }
     });
     // When the video link above the product image is clicked (not on all products)
     $('body').on('click', '.provideo-spec-link', function(){
@@ -290,17 +292,6 @@ function initAccountUpgrade() {
         obj['event_info']['action'] = 'New'; // eslint-disable-line
         dataLayer.push(obj);
     });
-
-    /**
-    Wish List link (site url contains Wishlist-Add)
-    New B2C Account Drop-Down - is this just tracking where they start creating an account from? And do we do this on link click or once the account creation completes? (Yes, that's correct)
-    New B2C Account Page
-    New B2C Account via Wishlist 
-    VIP Sign Up - whats the difference between signup and register? (I cant figure out, would be question for Bonnie and Client team)
-    VIP Register (Again, not sure what they qualify as VIP)
-    VIP sign Up Upgrade (Again not sure what they qualify as VIP)
-    VIP Register Upgrade - what is the case where it becomes a sign up or register upgrade? (I cant locate, would be question for Bonnie and Client Team)
-    **/
 }
 
 /**
