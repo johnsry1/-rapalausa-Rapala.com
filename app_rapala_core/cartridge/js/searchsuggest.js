@@ -103,6 +103,8 @@ var searchsuggest = {
                 k = searchUrl + '?id=11';
             } else if (sessionId == 'otter') {
                 k = searchUrl + '?id=21';
+            } else if (sessionId == 'iceforce') {
+                k = searchUrl + '?id=20';
             }
             var searchTerm = $searchField.val();
             if (searchTerm != defaultValue && searchTerm != '') {
