@@ -106,6 +106,7 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
             prodObj = objectCreationCallback(item);
 
         prodObj.position = position;
+        prodObj.list = "Internal Search" // default value for most CLP pages
 
         productArray.push(prodObj);
 
@@ -292,4 +293,4 @@ exports.getProductOriginalPrice = function (product) {
         }
     }
     return standardPrice;
-}
+};

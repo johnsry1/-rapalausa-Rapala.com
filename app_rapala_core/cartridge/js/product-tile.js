@@ -27,10 +27,14 @@ function initQuickViewButtons() {
                         'click': {
                             'actionField': {'list': 'SearchResults'},
                             'products': []
+                        },
+                        'detail': {
+                            'products': []
                         }
                     }
                 };
                 obj.ecommerce.click.products.push($.parseJSON($(this).attr('data-gtmdata')));
+                obj.ecommerce.detail.products.push($.parseJSON($(this).attr('data-gtmdata')));
                 dataLayer.push(obj); 
             }
             quickview.show({

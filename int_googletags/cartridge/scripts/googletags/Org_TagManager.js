@@ -64,10 +64,10 @@ const Org_TagManager = {
             case Util.NAMESPACE.SEARCH :
                 var productId = ''+request.httpParameterMap.productid.value || null;
                 var pageCategoryId = ''+request.httpParameterMap.cgid.value || null;
-                if (pageCategoryId != null && productId == 'null') {
+                if (pageCategoryId != 'null' && productId == 'null') {
                     return 'categoryPage';
                 }
-                return '';
+                return 'searchResults';
             case Util.NAMESPACE.WISHLIST :
                 return '';
             case Util.NAMESPACE.HOME : 
@@ -184,8 +184,14 @@ const Org_TagManager = {
             }
         };
 
-        if ('ProductSearchResult' in args && 'ProductPagingModel' in args) {
-            obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject)
+        if ('ProductSearchResult' in args) {
+            if (!empty(args.ProductSearchResult.searchPhrase)) {
+                obj.eventLabel = args.ProductSearchResult.searchPhrase + ' | ' + args.ProductSearchResult.count;
+                obj.eventAction = (args.ProductSearchResult.count > 0 ? 'True Search Results' : 'Null Results');
+            }
+            if ('ProductPagingModel' in args) {
+                obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject)
+            }
         }
 
         return obj;
@@ -260,7 +266,7 @@ const Org_TagManager = {
         if (customer) {
 
             customerObject.demandwareID = customer.ID;
-
+            
         }
         
         return customerObject;
