@@ -92,8 +92,6 @@ var events = {
                 signUpEvent('Header Sign Up', $(this), '_customer_addtoemaillist');
             })
         });
-        // form valid / invalid submission tracking
-        initFormWatcher();
         // navigation click tracking
         initNavigationClick();
     }
@@ -127,36 +125,6 @@ function initNavigationClick() {
     $('.breadcrumb a').on('click', function(e){
         pushEvent(event , '', 'Breadcrumb Nav', $(e.target).text().trim());
     });
-}
-
-function initFormWatcher() {
-    var s = '';
-    if (s == 0) {
-        // Select the node that will be observed for mutations
-        var targetNodes = $('form');
-        for (var i = 0; i < targetNodes.length; i++) {
-            var targetNode = targetNodes[i];
-            var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
-            var callback = function(mutationsList) {
-                for (var j = 0; j < mutationsList.length; j++) {
-                    var mutation = mutationsList[j];
-                    if (mutation.type == 'childList') {
-                        for (var k = 0; k < mutation.addedNodes.length; k++) {
-                            if ($(mutation.addedNodes[k]).hasClass('errorclient')) {
-                                pushEvent('invalidFormSubmit', '', 'Invalid form Submit', 'form');
-                            }
-                        }
-                    }
-                }
-            };
-
-            // Create an observer instance linked to the callback function
-            var observer = new MutationObserver(callback);
-
-            // Start observing the target node for configured mutations
-            observer.observe(targetNode, config);
-        }
-    }
 }
 
 function initProductRecommendations(listType, parentKey) {
