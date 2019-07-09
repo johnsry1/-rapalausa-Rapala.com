@@ -200,7 +200,9 @@ function showContent() {
     var renderBlogPages = false;
     if (searchedFolderId != null && !empty(searchedFolderId)) {
         var blogRootFolder = dw.system.Site.getCurrent().getCustomPreferenceValue('blogRootFolder');
-        if (blogRootFolder === searchedFolderId.ID || blogRootFolder === searchedFolderId.parent.ID || blogRootFolder === searchedFolderId.parent.parent.ID) {
+        if (blogRootFolder === searchedFolderId.ID || 
+                (!empty(searchedFolderId.parent) && blogRootFolder === searchedFolderId.parent.ID) || 
+                (!empty(searchedFolderId.parent.parent) && blogRootFolder === searchedFolderId.parent.parent.ID) {
             contentSearchModel.setSortingCondition('weight', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
             contentSearchModel.setSortingCondition('creationDate', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
             renderBlogPages = true;
