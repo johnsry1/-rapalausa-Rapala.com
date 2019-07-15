@@ -491,10 +491,10 @@ var product = function (response) {
         //var notAvailLevel = avLevels[Constants.AVAIL_STATUS_NOT_AVAILABLE];
 
         if (avStatus === Constants.AVAIL_STATUS_IN_STOCK) {
-            avMessage = '<span class=\'in-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'in-stock\' itemprop="availability" href="http://schema.org/InStock">' + avMessage + '</span>';
         }
         if (avStatus === 'NOT_AVAILABLE') {
-            avMessage = '<span class=\'out-of-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'out-of-stock\' itemprop="availability" href="http://schema.org/OutOfStock">' + avMessage + '</span>';
         }
         if (avStatus === Constants.AVAIL_STATUS_BACKORDER ||
             avStatus === Constants.AVAIL_STATUS_PREORDER) {

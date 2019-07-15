@@ -102,8 +102,16 @@ if ( pdict.Product && pdict.Product.variationGroup )
 				
 			<iselseif condition="${(pdict.Product.master || pdict.Product.variationGroup) && pdict.Product.priceModel.isPriceRange()}" >
 				<iscomment>Product master price range depending on the variants</iscomment>
-				<div>			
-					<isprint value="${pdict.Product.priceModel.minPrice}"/> - <isprint value="${pdict.Product.priceModel.maxPrice}"/>
+				<div>
+    				<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer" >
+                        <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
+                        <span itemprop="lowprice" content="${pdict.Product.priceModel.minPrice.value}">
+                            <isprint value="${pdict.Product.priceModel.minPrice}"/>
+                        </span>
+                         - 
+                        <span itemprop="highprice" content="${pdict.Product.priceModel.maxPrice.value}">
+                            <isprint value="${pdict.Product.priceModel.maxPrice}"/>
+                        </span>
 				</div>		
 			<iselse/>	
 				<isif condition="${ShowStandardPrice}">
