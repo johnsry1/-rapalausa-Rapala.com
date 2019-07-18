@@ -114,20 +114,23 @@ if ( pdict.Product && pdict.Product.variationGroup )
                         </span>
 				</div>		
 			<iselse/>	
-				<isif condition="${ShowStandardPrice}">
-					<span class="price-standard standardprice"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
-				</isif>
-				<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
-				
-				<span class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
-					<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
-						<isprint value="${SalesPrice}"/>
-					<iselse/>
-						<isif condition="${!empty(pdict.Product.custom.earlyBirdMessage)}">
-							<span class="ebm-std-prod"><isprint value="${pdict.Product.custom.earlyBirdMessage}" /></span>									
-						</isif>	
-					</isif>
-				</span>
+                <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer" >
+                    <isif condition="${ShowStandardPrice}">
+                        <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
+                        <span itemprop="standardprice" class="price-standard standardprice"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
+                    </isif>
+					<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
+					
+					<span itemprop="saleprice" class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
+						<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
+							<isprint value="${SalesPrice}"/>
+						<iselse/>
+							<isif condition="${!empty(pdict.Product.custom.earlyBirdMessage)}">
+								<span class="ebm-std-prod"><isprint value="${pdict.Product.custom.earlyBirdMessage}" /></span>									
+							</isif>	
+						</isif>
+					</span>
+                </div>
 				<iscomment>
 					JIRA PREV-66:Incorrect price displayed for the product set when options are selected for multiple individual products. 
 					Added Script and hidden input
