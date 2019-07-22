@@ -64,10 +64,10 @@ const Org_TagManager = {
             case Util.NAMESPACE.SEARCH :
                 var productId = ''+request.httpParameterMap.productid.value || null;
                 var pageCategoryId = ''+request.httpParameterMap.cgid.value || null;
-                if (pageCategoryId != null && productId == 'null') {
+                if (pageCategoryId != 'null' && productId == 'null') {
                     return 'categoryPage';
                 }
-                return '';
+                return 'searchResults';
             case Util.NAMESPACE.WISHLIST :
                 return '';
             case Util.NAMESPACE.HOME : 
@@ -162,9 +162,24 @@ const Org_TagManager = {
             product = args.Product;
         }
 
-        if (product) {
-            obj.ecommerce.detail.products.push(this.getProductObject(product));
-        }
+        // update list if product was clicked from category page
+    	if (!empty(request.httpParameterMap.cgid) && request.httpParameterMap.cgid.value != null) {
+    		var category = dw.catalog.CatalogMgr.getCategory(request.httpParameterMap.cgid.value);
+    		var list = null;
+    		if (!empty(category)) {
+    			list = Util.getCategorySearch(category);
+    		}
+    		
+    		if (!empty(list)) {
+    			var productObj = this.getProductObject(product);
+    			productObj.list = list;
+    			obj.ecommerce.detail.products.push(productObj);
+    		} else {
+    			obj.ecommerce.detail.products.push(this.getProductObject(product));
+    		}
+    	} else {
+    		obj.ecommerce.detail.products.push(this.getProductObject(product));
+    	}
 
         return obj;
 
@@ -184,8 +199,19 @@ const Org_TagManager = {
             }
         };
 
-        if ('ProductSearchResult' in args && 'ProductPagingModel' in args) {
-            obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject)
+        if ('ProductSearchResult' in args) {
+            if (!empty(args.ProductSearchResult.searchPhrase)) {
+                obj.eventLabel = args.ProductSearchResult.searchPhrase + ' | ' + args.ProductSearchResult.count;
+                obj.eventAction = (args.ProductSearchResult.count > 0 ? 'True Search Results' : 'Null Results');
+            }
+            if ('ProductPagingModel' in args) {
+            	var list = null;
+            	if (args.pageType == "categoryPage" && args.ProductSearchResult.categorySearch) {
+            		list = Util.getCategorySearch(args.ProductSearchResult.category);
+            	}
+
+                obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject, list)
+            }
         }
 
         return obj;
@@ -260,7 +286,7 @@ const Org_TagManager = {
         if (customer) {
 
             customerObject.demandwareID = customer.ID;
-
+            
         }
         
         return customerObject;
@@ -373,6 +399,19 @@ Org_TagManager.getProductObject = function (product) {
     obj.price = Util.getProductOriginalPrice(product).value;
 
     return obj;
+
+};
+
+Org_TagManager.getCategorySearch = function (args, nameSpace) {
+
+	var categorySearch = null;
+
+	var pageType = this.getPageType(nameSpace, args);
+	if (pageType == "categoryPage" && nameSpace == Util.NAMESPACE.SEARCH) {
+		categorySearch = Util.getCategorySearch(args.ProductSearchResult.category);
+	}
+
+	return categorySearch;
 
 };
 
