@@ -24,4 +24,11 @@
 </script>
 <!-- End Google Tag Manager -->
 
+<isset name="categorySearchGoogleTag" value="${tagManager.getCategorySearch(pdict, nameSpace)}" scope="page"/>
+<isif condition="${!empty(categorySearchGoogleTag)}">
+	<div id="categorySearchGoogleTagId" class="visually-hidden">
+		${categorySearchGoogleTag}
+	</div>
+</isif>
+
 </isif>

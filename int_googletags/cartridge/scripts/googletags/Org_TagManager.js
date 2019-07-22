@@ -162,9 +162,24 @@ const Org_TagManager = {
             product = args.Product;
         }
 
-        if (product) {
-            obj.ecommerce.detail.products.push(this.getProductObject(product));
-        }
+        // update list if product was clicked from category page
+    	if (!empty(request.httpParameterMap.cgid) && request.httpParameterMap.cgid.value != null) {
+    		var category = dw.catalog.CatalogMgr.getCategory(request.httpParameterMap.cgid.value);
+    		var list = null;
+    		if (!empty(category)) {
+    			list = Util.getCategorySearch(category);
+    		}
+    		
+    		if (!empty(list)) {
+    			var productObj = this.getProductObject(product);
+    			productObj.list = list;
+    			obj.ecommerce.detail.products.push(productObj);
+    		} else {
+    			obj.ecommerce.detail.products.push(this.getProductObject(product));
+    		}
+    	} else {
+    		obj.ecommerce.detail.products.push(this.getProductObject(product));
+    	}
 
         return obj;
 
@@ -190,7 +205,12 @@ const Org_TagManager = {
                 obj.eventAction = (args.ProductSearchResult.count > 0 ? 'True Search Results' : 'Null Results');
             }
             if ('ProductPagingModel' in args) {
-                obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject)
+            	var list = null;
+            	if (args.pageType == "categoryPage" && args.ProductSearchResult.categorySearch) {
+            		list = Util.getCategorySearch(args.ProductSearchResult.category);
+            	}
+
+                obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject, list)
             }
         }
 
@@ -379,6 +399,19 @@ Org_TagManager.getProductObject = function (product) {
     obj.price = Util.getProductOriginalPrice(product).value;
 
     return obj;
+
+};
+
+Org_TagManager.getCategorySearch = function (args, nameSpace) {
+
+	var categorySearch = null;
+
+	var pageType = this.getPageType(nameSpace, args);
+	if (pageType == "categoryPage" && nameSpace == Util.NAMESPACE.SEARCH) {
+		categorySearch = Util.getCategorySearch(args.ProductSearchResult.category);
+	}
+
+	return categorySearch;
 
 };
 

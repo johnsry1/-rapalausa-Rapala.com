@@ -17,6 +17,7 @@ var events = {
             }
         });
         initProductRecommendations('Cart: Recommended For You', 'ecommerce');
+        initProductBestSelling('Don\'t Forget these Best Selling Essentials', 'ecommerce');
     },
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
@@ -58,11 +59,31 @@ var events = {
     all: function () {
         $('.name-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
+                //Set category to list of gtmdata if it's a click on the product on the categoryPage
+                var categorySearchGoogleTagElement = $('#categorySearchGoogleTagId');
+                if (categorySearchGoogleTagElement.length > 0) {
+                    var categorySearchGoogleTag = categorySearchGoogleTagElement.text();
+                    var gtmDataAttr = $.parseJSON($(this).attr('data-gtmdata'));
+                    gtmDataAttr.list = categorySearchGoogleTag;
+                    productClick(gtmDataAttr);
+                    return;
+                }
+
                 productClick($.parseJSON($(this).attr('data-gtmdata')));
             }
         });
         $('.thumb-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
+                //Set category to list of gtmdata if it's a click on the product on the categoryPage
+                var categorySearchGoogleTagElement = $('#categorySearchGoogleTagId');
+                if (categorySearchGoogleTagElement.length > 0) {
+                    var categorySearchGoogleTag = categorySearchGoogleTagElement.text();
+                    var gtmDataAttr = $.parseJSON($(this).attr('data-gtmdata'));
+                    gtmDataAttr.list = categorySearchGoogleTag;
+                    productClick(gtmDataAttr);
+                    return;
+                }
+
                 productClick($.parseJSON($(this).attr('data-gtmdata')));
             }
         });
@@ -125,6 +146,33 @@ function initNavigationClick() {
     $('.breadcrumb a').on('click', function(e){
         pushEvent(event , '', 'Breadcrumb Nav', $(e.target).text().trim());
     });
+}
+
+function initProductBestSelling(listType, parentKey) {
+    // Select the node that will be observed for mutations
+    var targetNodes = $('.cartrecommendations').first();
+    for (var i = 0; i < targetNodes.length; i++) {
+        var targetNode = targetNodes[i];
+        var config = {attributes: true, childList: true, subtree: true, attributeFilter: ['class']};
+        var callback = function(mutationsList) {
+            for (var j = 0; j < mutationsList.length; j++) {
+                var mutation = mutationsList[j];
+                if (mutation.type == 'childList') {
+                    for (var k = 0; k < mutation.addedNodes.length; k++) {
+                        if ($(mutation.addedNodes[k]).hasClass('owl-stage-outer')) {
+                            getRecommendedProductImpressions(listType, parentKey, mutation);
+                        } 
+                    }
+                }
+            }
+        };
+
+        // Create an observer instance linked to the callback function
+        var observer = new MutationObserver(callback);
+
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config);
+    }
 }
 
 function initProductRecommendations(listType, parentKey) {
@@ -289,11 +337,15 @@ function productClick (productObject) {
             'click': {
                 'products': [],
                 'actionField' : {
-                    'list' : getListDataValue()
+                    'list' : productObject.list
                 }
             }
         }
     };
+
+    // delete list from products because it is in the actionField
+    delete productObject.list;
+
     obj.ecommerce.click.products.push(productObject);
     dataLayer.push(obj);
 }
@@ -373,7 +425,9 @@ function getRecommendedProductImpressions (listType, parentKey, mutation) {
         if (!$.isEmptyObject(dataLayer[i][parentKey])) {
             if (!$.isEmptyObject(dataLayer[i][parentKey].impressions)) {
                 // add new impression objects to existing impressions
-                dataLayer[i][parentKey].impressions = $.merge(dataLayer[i][parentKey].impressions, prodImpressions);
+                for (var prodIndex = 0; prodIndex < prodImpressions.length; prodIndex++) {
+                    dataLayer[i][parentKey].impressions.push(prodImpressions[prodIndex]);
+                }
             } else {
                 dataLayer[i][parentKey].impressions = prodImpressions;
             }
@@ -386,16 +440,34 @@ function getImpressionObjectsArray(impressionType, mutation) {
     var rpDataObjs = [];
     for (var i = 0; i < visibleProductRecommendations.length; i++) {
         var rp = visibleProductRecommendations[i];
-        var gtmData = $(rp).find('a.thumb-link').data('gtmdata');
+
+        // init events for recommended and recently viewed product
+        $(rp).find('.name-link').on('click', function () {
+            if ($(this).attr('data-gtmdata')) {
+                productClick($.parseJSON($(this).attr('data-gtmdata')));
+            }
+        });
+        $(rp).find('.thumb-link').on('click', function () {
+            if ($(this).attr('data-gtmdata')) {
+                productClick($.parseJSON($(this).attr('data-gtmdata')));
+            }
+        });
+
+        // update list
+        var gtmDataAttr = JSON.parse($(rp).find('a.thumb-link').attr('data-gtmdata'));
+        gtmDataAttr.list = impressionType;
+        $(rp).find('a.thumb-link').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
+        $(rp).find('a.quickview').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
+
         var obj = {
-            'name': gtmData.name, 
-            'id': gtmData.id,
-            'price': gtmData.price,
-            'brand': gtmData.brand,
-            'category': gtmData.category,
-            'dimension3' : gtmData.dimension3,
-            'list': impressionType, 
-            'childID': gtmData.childID,
+            'name': gtmDataAttr.name, 
+            'id': gtmDataAttr.id,
+            'price': gtmDataAttr.price,
+            'brand': gtmDataAttr.brand,
+            'category': gtmDataAttr.category,
+            'dimension3' : gtmDataAttr.dimension3,
+            'list': gtmDataAttr.list, 
+            'childID': gtmDataAttr.childID,
             'position' : i+1
         }
         rpDataObjs.push(obj);
