@@ -150,6 +150,7 @@ const Org_TagManager = {
             pageType: args.pageType,    
             ecommerce: {
                 detail: {
+                	actionField: {list: null},
                     products: []
                 }
             }
@@ -162,24 +163,21 @@ const Org_TagManager = {
             product = args.Product;
         }
 
+        var productObj = this.getProductObject(product);
+
         // update list if product was clicked from category page
-    	if (!empty(request.httpParameterMap.cgid) && request.httpParameterMap.cgid.value != null) {
-    		var category = dw.catalog.CatalogMgr.getCategory(request.httpParameterMap.cgid.value);
-    		var list = null;
-    		if (!empty(category)) {
-    			list = Util.getCategorySearch(category);
-    		}
-    		
-    		if (!empty(list)) {
-    			var productObj = this.getProductObject(product);
-    			productObj.list = list;
-    			obj.ecommerce.detail.products.push(productObj);
-    		} else {
-    			obj.ecommerce.detail.products.push(this.getProductObject(product));
-    		}
-    	} else {
-    		obj.ecommerce.detail.products.push(this.getProductObject(product));
+    	if (!empty(request.httpParameterMap.taglist) && request.httpParameterMap.taglist.value != null) {
+			var list = request.httpParameterMap.taglist.value;
+			productObj = this.getProductObject(product);
+			productObj.list = list;
     	}
+
+    	//set list in to the actionField and delete list from products
+    	obj.ecommerce.detail.actionField.list = productObj.list;
+    	delete productObj.list;
+
+    	//set product
+    	obj.ecommerce.detail.products.push(productObj);
 
         return obj;
 
@@ -410,6 +408,15 @@ Org_TagManager.getCategorySearch = function (args, nameSpace) {
 	if (pageType == "categoryPage" && nameSpace == Util.NAMESPACE.SEARCH) {
 		categorySearch = Util.getCategorySearch(args.ProductSearchResult.category);
 	}
+
+	return categorySearch;
+
+};
+
+Org_TagManager.getCategorySearchById = function (id) {
+
+	var category = dw.catalog.CatalogMgr.getCategory(id);
+	var categorySearch = Util.getCategorySearch(category);
 
 	return categorySearch;
 

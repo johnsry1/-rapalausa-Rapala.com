@@ -18,6 +18,12 @@ function initQuickViewButtons() {
         $qvButton.off('click').on('click', function (e) {
             e.preventDefault();
             if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
+                var gtmData = $.parseJSON($link.attr('data-gtmdata'));
+                var list = gtmData.list;
+
+                // remove list from product because it is in actionFiled
+                delete gtmData.list;
+
                 var obj = {
                     'event': 'productClick',
                     'event_info': {
@@ -25,17 +31,18 @@ function initQuickViewButtons() {
                     },
                     'ecommerce': {
                         'click': {
-                            'actionField': {'list': 'SearchResults'},
+                            'actionField': {'list': list},
                             'products': []
                         },
                         'detail': {
+                            'actionField': {'list': list},
                             'products': []
                         }
                     }
                 };
-                obj.ecommerce.click.products.push($.parseJSON($(this).attr('data-gtmdata')));
-                obj.ecommerce.detail.products.push($.parseJSON($(this).attr('data-gtmdata')));
-                dataLayer.push(obj); 
+                obj.ecommerce.click.products.push(gtmData);
+                obj.ecommerce.detail.products.push(gtmData);
+                dataLayer.push(obj);
             }
             quickview.show({
                 url: $(this).attr('href').split('#')[0], //PREV JIRA PREV-255 :PLP: On Click Quick view navigating to a wrong page when user first changes the swatches. Taking only href.
