@@ -348,6 +348,7 @@ a.button {
     clear: both;
     margin: 0 auto;
     max-width: 996px;
+    max-width: 100%;
 }
 
 #main {
@@ -456,12 +457,12 @@ table {
 }
 
 .column1 .column {
-    width: 996px;
+    width: 100%;
 }
 
 .row {
     clear: both;
-    width: 996px;
+    width: 100%;
 }
 
 .value {
@@ -523,6 +524,9 @@ table {
 
 .column1 {
     .cell3 {
+        float: none;
+        margin: 0 auto;
+        width: 996px;
         .cell {
             width: 296px;
         }
@@ -531,9 +535,9 @@ table {
 
 #slideshow {
     &.cell {
-        height: 390px;
-        padding: 1px 19px 0 19px;
-        margin: 0;
+        height: auto;
+        padding: 1px 0 0;
+        margin: 0 0 50px 0;
         text-align: left;
         background: none;
         z-index: 2;
@@ -542,6 +546,9 @@ table {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+        // delete next two lines if not approved
+        max-height: 347px;
+        overflow: hidden;
         @include respond(0, $desktop-breakpoint - 1) {
             height: inherit;
             padding-left: 0;
@@ -706,6 +713,9 @@ table {
                                 width: 100%;
                                 box-sizing: border-box;
                                 border: 1px solid $black;
+                                // delete next two lines if not approved
+                                object-fit: cover;
+                                max-height: 347px;
                             }
                         }
                     }
