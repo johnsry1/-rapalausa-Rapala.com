@@ -155,11 +155,25 @@
 
 			<isscript>
 				var gtmProductData = {};
+				var productLink = productUrl;
 				if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
 					gtmProductData = require('*/cartridge/scripts/googletags/Site_TagManager').getProductData(Product.ID);
+
+					// update list in gtmProductData if it's category search 
+					if (pdict.CurrentHttpParameterMap.cgid && !empty(pdict.CurrentHttpParameterMap.cgid.value)) {
+						var categoryId = pdict.CurrentHttpParameterMap.cgid.value;
+						var categorySearch = require('*/cartridge/scripts/googletags/Site_TagManager').getCategorySearchById(categoryId);
+
+						if (!empty(categorySearch))	{
+							gtmProductData.list = categorySearch;
+
+							//update url with adding parameter tag
+							productLink = URLUtils.url('Product-Show', 'pid', Product.ID, 'cgid', pdict.CurrentHttpParameterMap.cgid, 'taglist', gtmProductData.list);
+						}
+					}
 				}
 			</isscript>
-			<a class="thumb-link" href="${productUrl}" title="${Product.name}"
+			<a class="thumb-link" href="${productLink}" title="${Product.name}"
 				data-gtmdata="${JSON.stringify(gtmProductData)}">
 				<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService') || dw.system.Site.getCurrent().getCustomPreferenceValue('isEndToEndMerchant')}" > 
 					<img src="${imageURLDesktopSmall}" alt="${thumbnailAlt}" class="tile-img"
@@ -169,7 +183,7 @@
 					<img src="${thumbnailUrl}" alt="${thumbnailAlt}"/>
 				</isif>
 			</a>
-				<a id="quickviewbutton" class="quickview" href="${productUrl}"
+				<a id="quickviewbutton" class="quickview" href="${productLink}"
 					data-gtmdata="${JSON.stringify(gtmProductData)}">
 					<isprint value="${Resource.msg('product.quickview','product',null)}"/>
 				</a>
@@ -185,7 +199,7 @@
 		<iscomment>Product Name</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<div class="product-name">
-			<a class="name-link" href="${productUrl}" title="${Resource.msgf('product.label','product',null, Product.name)}" encoding="off"
+			<a class="name-link" href="${productLink}" title="${Resource.msgf('product.label','product',null, Product.name)}" encoding="off"
 				data-gtmdata="${JSON.stringify(gtmProductData)}">
 				<isproductname productname="${Product.name}"/>
 			</a>

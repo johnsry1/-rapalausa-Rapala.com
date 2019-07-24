@@ -1,4 +1,7 @@
 'use strict';
+
+var util = require('./util');
+
 /**
  * Events are divided up by name space so only the
  * events that are needed are initialized.
@@ -59,31 +62,11 @@ var events = {
     all: function () {
         $('.name-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                //Set category to list of gtmdata if it's a click on the product on the categoryPage
-                var categorySearchGoogleTagElement = $('#categorySearchGoogleTagId');
-                if (categorySearchGoogleTagElement.length > 0) {
-                    var categorySearchGoogleTag = categorySearchGoogleTagElement.text();
-                    var gtmDataAttr = $.parseJSON($(this).attr('data-gtmdata'));
-                    gtmDataAttr.list = categorySearchGoogleTag;
-                    productClick(gtmDataAttr);
-                    return;
-                }
-
                 productClick($.parseJSON($(this).attr('data-gtmdata')));
             }
         });
         $('.thumb-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                //Set category to list of gtmdata if it's a click on the product on the categoryPage
-                var categorySearchGoogleTagElement = $('#categorySearchGoogleTagId');
-                if (categorySearchGoogleTagElement.length > 0) {
-                    var categorySearchGoogleTag = categorySearchGoogleTagElement.text();
-                    var gtmDataAttr = $.parseJSON($(this).attr('data-gtmdata'));
-                    gtmDataAttr.list = categorySearchGoogleTag;
-                    productClick(gtmDataAttr);
-                    return;
-                }
-
                 productClick($.parseJSON($(this).attr('data-gtmdata')));
             }
         });
@@ -452,12 +435,25 @@ function getImpressionObjectsArray(impressionType, mutation) {
                 productClick($.parseJSON($(this).attr('data-gtmdata')));
             }
         });
+        // for click on product name in Best Selling Essentials in the cart
+        $(rp).find('.cart-recommendationName').on('click', function () {
+            if ($(this).attr('data-gtmdata')) {
+                productClick($.parseJSON($(this).attr('data-gtmdata')));
+            }
+        });
 
         // update list
         var gtmDataAttr = JSON.parse($(rp).find('a.thumb-link').attr('data-gtmdata'));
         gtmDataAttr.list = impressionType;
         $(rp).find('a.thumb-link').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
+        $(rp).find('a.name-link').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
         $(rp).find('a.quickview').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
+        $(rp).find('a.cart-recommendationName').attr('data-gtmdata', JSON.stringify(gtmDataAttr));
+
+        // update links with adding parameter tagList which should be passed to PDP
+        addTagListParamToLink($(rp).find('a.thumb-link'), gtmDataAttr.list);
+        addTagListParamToLink($(rp).find('a.name-link'), gtmDataAttr.list);
+        addTagListParamToLink($(rp).find('a.cart-recommendationName'), gtmDataAttr.list);
 
         var obj = {
             'name': gtmDataAttr.name, 
@@ -497,6 +493,14 @@ function getListDataValue(mutation) {
     }
     listValue = listTypePrefix + listValue;
     return listValue;
+}
+
+function addTagListParamToLink (linkElement, tagList) {
+    if (linkElement.length > 0) {
+        var href = linkElement.attr('href');
+        href = util.appendParamToURL(href, 'taglist', tagList);
+        linkElement.attr('href', href);
+    }
 }
 
 /**
