@@ -347,16 +347,21 @@ a.button {
 .wrapper {
     clear: both;
     margin: 0 auto;
-    max-width: 996px;
     max-width: 100%;
 }
 
 #main {
     float: left;
-    width: 100%;
     position: relative;
+    width: 996px;
+    float: none;
+    margin: 0 auto;
 }
-
+.pt_storefront, #container {
+    #main {
+        width: 100%;
+    }
+}
 .js-container-active {
     .banner_prostaff {
         position: fixed;
@@ -448,6 +453,9 @@ table {
 
 #page {
     background-color: $white;
+    .wrapper {
+        width: 996px;
+    }
 }
 
 .row,
