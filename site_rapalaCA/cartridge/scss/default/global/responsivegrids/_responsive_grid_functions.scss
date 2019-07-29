@@ -1,0 +1,297 @@
+////-----------------------------------------------
+/// Responsive Grid Helper Functions and Mixins
+///
+/// @author Anthony Smith
+////-----------------------------------------------
+
+///	gridPercentMultiplier - Calculate a number value to use as a multiplier in converting a column percent value
+///	into a full-grid-width percent value.
+
+///	@param {number} $gutter - Gutter width value
+///	@param {number} $num-of-cols - Number of columns per row
+///	@return {number} A percentage value
+
+@function gridPercentMultiplier($gutter: 0, $num-of-cols: 1) {
+    @if unit($gutter) != "%" {
+        @error "gridPercentMultiplier cannot be used with non-percentage gutter values.";
+    }
+    @return strip-units($gutter) / strip-units(get-column-width($num-of-cols, $gutter)) * 100%;
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	quickSort Function - Sort a list using quick sort algorithm.
+
+///	@author Sam Richards
+/// @link https://css-tricks.com/snippets/sass/sorting-function/
+///	@param {list} $list - list to sort
+///	@return {list}
+
+@function quickSort($list) {
+    $less: ();
+    $equal: ();
+    $large: ();
+    @if length($list) > 1 {
+        $seed: nth($list, ceil(length($list) / 2));
+        @each $item in $list {
+            @if $item == $seed {
+                $equal: append($equal, $item);
+            }
+            @else if strip-units($item) < strip-units($seed) {
+                $less: append($less, $item);
+            }
+            @else if strip-units($item) > strip-units($seed) {
+                $large: append($large, $item);
+            }
+        }
+        @return join(join(quickSort($less), $equal), quickSort($large));
+    }
+    @return $list;
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	sortMap Function - Sort a map by keys. Keys should be numbers only, but unit numbers are ok (ex: 768px)
+
+///	@param {map} $map - map to sort by numeric key values
+///	@return {map} sorted map
+
+@function sortMap($map: null) {
+    $sortedmap: ();
+    @if type-of($map) == map {
+        $sortedkeys: quickSort(map-keys($map));
+        @each $key in $sortedkeys {
+            $sortedmap: map-merge($sortedmap, ($key: map-get($map, $key)));
+        }
+    }
+    @return $sortedmap;
+}
+
+///---------------------------------------------------------------------------------------------------------------
+///	getBreakpointsOnly Function - Extract and return a map of only the breakpoint:columns value pairs from a map
+///	object which may contain extra data.
+///
+///	@param {map} $params - key:value map of params from the original column-respond mixin call
+///	@return {map} map of only the breakpoint:columns value pairs
+
+@function getBreakpointsOnly($params: null) {
+    $returnmap: ();
+    @if type-of($params) == map {
+        @each $breakpoint, $value in $params {
+            @if type-of($breakpoint) == number {
+                $columns: 0;
+                @if type-of($value) == number and unitless($value) {
+                    $columns: $value;
+                }
+                @else if type-of($value) == map and map-has-key($value, "columns") {
+                    $columns: map-get($value, "columns");
+                }
+                $returnmap: map-merge($returnmap, ($breakpoint: $columns));
+            }
+        }
+    }
+    @return sortMap($returnmap);
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	getNextBreakpoint Function - Search the breakpoints map for the given $key (a breakpoint), and return the next
+///	available breakpoint key in the map, or null if it's the last key found.
+
+///	@param {number} $breakpoint - breakpoint value to find in the map
+///	@param {map} $map - key:value map of breakpoints:columns
+///	@return {number} the value of the next breakpoint found
+
+@function getNextBreakpoint($breakpoint, $map) {
+    @if type-of($breakpoint) == number and type-of($map) == map {
+        $keys: map-keys(sortMap($map));
+        $thisindex: index($keys, $breakpoint);
+        $nextindex: $thisindex + 1;
+        @if length($keys) >= $nextindex {
+            $nextkey: nth($keys, $nextindex);
+            @return $nextkey;
+        }
+    }
+    @return null;
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	get-column-width Mixin - Create column widths and float clears for a given number of columns per row.
+
+/// @param {number} $num-of-cols - The defined number of columns per row for the current breakpoint
+///	@param {number} $gutter - Gutter width value
+///	@return {number} a percentage or a calc() value
+
+@function get-column-width($num-of-cols, $gutter: null) {
+    @if $gutter == 0 {
+        @return 100% / $num-of-cols;
+    } @else {
+        @if unit($gutter) == "%" {
+            @return (100% - $gutter * ($num-of-cols - 1)) / $num-of-cols;
+        } @else {
+            ///must use 99.999 instead of 100% for compatibility with some IE calc functions
+            @return calc((99.999% - #{$gutter * ($num-of-cols - 1)}) / #{$num-of-cols});
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	set-global-column-dividers Mixin - Makes column dividers using pseudo elements on all but the first column in
+///	each row. Initially, we will actually set the element to be hidden because we don't want column dividers in the
+///	lowest (potentially single-column) viewport.
+
+///	@param {number} $gutter - Gutter width value
+///	@param {map} $global-col-div - Key:value map of styles defining global column dividers
+
+@mixin set-column-dividers($gutter: 0, $global-col-div: null) {
+    @if $global-col-div != null {
+        $default-col-div-values: (top: 0, width: 1px, height: 100%, background-color: $box-bg);
+        $col-div-styles: map-merge($default-col-div-values, $global-col-div);
+        @if map-has-key($col-div-styles, "left") {
+            @error "column-respond() - You are not allowed to set 'left' styles for column dividers.";
+        } @else if unit($gutter) == "%" {
+            //this will need to be set and overridden at each breakpoint instead
+            $col-div-styles: map-remove($col-div-styles, left);
+        } @else {
+            $col-div-width: map-get($col-div-styles, width);
+            $new-left: null;
+            @if $gutter == 0 {
+                $new-left: #{$col-div-width / -2};
+            } @else {
+                $new-left: calc((#{$gutter} + #{$col-div-width}) / -2);
+            }
+            $col-div-styles: map-merge($col-div-styles, (left: $new-left));
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            display: block;
+            clear: none;
+            //output mapped styles
+            @include output-styles($col-div-styles);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	adjust-col-div-left-position Mixin - Adjust visibility and left positioning of column dividers per breakpoint.
+
+///	@param {map} $col-div-styles - Key:value map of styles defining global column dividers
+/// @param {number} $n - The defined number of columns per row for the current breakpoint
+///	@param {number} $g - Gutter width value (px, em, rem, vw, or %)
+
+@mixin adjust-col-div-left-position($col-div-styles, $n, $g: null) {
+    @if $col-div-styles != null and $g != 0 and type-of($n) == number and $n > 1 {
+        $col-div-width: map-get($col-div-styles, "width") or 1px;
+        $new-left: null;
+        @if unit($g) == "%" {
+            // avoid using calc() if possible
+            @if type-of($col-div-width) == "%" {
+                $new-left: gridPercentMultiplier($g, $n) / -2 - $col-div-width / 2;
+            } @else {
+                $new-left: calc(#{gridPercentMultiplier($g, $n) / -2} - (#{$col-div-width} / 2));
+            }
+        } @else {
+            // avoid using calc() if possible
+            @if type-of($col-div-width) == type-of($g) {
+                $new-left: ($g + $col-div-width) / -2;
+            } @else {
+                $new-left: calc((#{$g} + #{$col-div-width}) / -2);
+            }
+        }
+        &::after {
+            content: "";
+            left: $new-left;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	set-row-divider Mixin - Create row dividers off the first grid-col in each row.
+
+/// @param {number} $n - the defined number of columns per row for the current breakpoint
+///	@param {number} $g - Gutter width value
+///	@param {map} $global-row-div - Key:value map of styles defining global row dividers
+
+@mixin set-row-divider($n, $g: 0, $global-row-div: null) {
+    @if $global-row-div != null {
+        $default-row-div-values: (width: 100%, height: 1px, left: initial, z-index: 1, background-color: $box-bg);
+        $row-div-styles: map-merge($default-row-div-values, $global-row-div);
+        $requested-width: map-get($row-div-styles, width) or 100%;
+        $requested-left: map-get($row-div-styles, left) or 0%;
+        $row-div-styles: map-remove($row-div-styles, "width", "left");
+        content: "";
+        position: absolute;
+        display: block;
+        @include output-styles($row-div-styles);
+        @if $g != 0 and unit($g) == "%" {
+            $g: gridPercentMultiplier($g, $n);
+        }
+        @if type-of($requested-width) == number and unit($requested-width) == "%" {
+            width: calc(#{$n * $requested-width} + #{$g * ($n - 1)});
+        } @else {
+            width: $requested-width;
+        } @if type-of($requested-left) == number and unit($requested-left) == "%" {
+            left: calc(#{$n * $requested-left} + #{$g * ($n - 1) * strip-units($requested-left) / 100});
+        } @else {
+            left: $requested-left;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	first-columns-nth-child-styles Mixin - Create an nth-child wrapper targeting the first tile in each row, and allow other
+///	styles to be injected via @content.
+
+///	@param {number} $num-of-cols - Number of columns per row in the current breakpoint
+/// @content - styles to be rendered inside the nth-child wrapper
+
+@mixin first-columns-nth-child-styles($num-of-cols) {
+    @if $num-of-cols > 0 {
+        &:nth-child(#{$num-of-cols + "n+1"}) {
+            @content;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------
+///	center-last-row Mixin - Create a series of nth-child wrappers targeting in sequence: the last tile found if it
+///	is also the first tile of a row, the seoncond-to-last tile if it is also the first of a row, etc., down to the
+///	nth-to-last that is also first of a row, where n is equal to the number of tiles per row - 1.  Then, ensuring we
+///	have identified the true first tile in the last row, give it a proper margin-left to push the whole row to the
+///	center of the grid.  Creates a massive amount of CSS bloat, therefore if the number of tiles in the grid is a
+///	known quantity, it is suggested that you write the nth wrapper and margin-left manually.
+
+///	@param {number} $n - Number of columns per row in the current breakpoint
+///	@param {number} $g - Gutter width value
+///	@param {boolean} $has-row-div - Boolean indicating whether this grid has row dividers or not
+/// @content - styles to be rendered inside the nth-child wrapper
+
+@mixin center-last-row($n, $g: 0, $has-row-div: false) {
+    // Only iterate up to n-1 because if the last tile is already the natural last in a row,
+    // we don't need to do anything.
+    @for $i from 1 through $n - 1 {
+        // &:nth-child(#{$n}n+1) is the magic nth property that id's the first tile in a row.
+        // We will combine that nth with the nth-last-child to determine how many tiles are
+        // actually in the last row.
+        &:nth-child(#{$n + "n+1"}):nth-last-child(#{$i}) {
+            // Now, set an appropriate left margin to push the whole row to the right by some franction
+            // of a tile width.
+            $tileWidthsToPush: ($n - $i) / 2;
+            @if $g == 0px {
+                margin-left: 100% / $n * $tileWidthsToPush;
+            } @else {
+                // Both of the equations below calculate the following:
+                // (width of one tile) x (# slots to shift over) + (extra gutter spacing)
+                @if unit($g) == "%" {
+                    margin-left: (100% - $g * ($n - 1)) / $n * $tileWidthsToPush + $g * $tileWidthsToPush;
+                } @else {
+                    margin-left: calc((99.999% - #{$g * ($n - 1)}) * #{$tileWidthsToPush / $n} + #{$g * $tileWidthsToPush});
+                }
+            }
+            // adjust row divider (on this tile's ::before pseudo element) if it exists
+            @if $has-row-div {
+                &::before {
+                    margin-left: calc(-1 * (#{100% * $tileWidthsToPush} + #{$g * $tileWidthsToPush}));
+                }
+            }
+        }
+    }
+}
