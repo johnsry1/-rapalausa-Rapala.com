@@ -1,0 +1,1437 @@
+.pt_orderconfirmation,
+.pt_checkout {
+    #main {
+        box-shadow: none;
+    }
+    .header-wrapper {
+        background: $white;
+        box-shadow: none;
+        border-bottom: $border;
+        @include respond(medium-down) {
+            background: $white !important;
+            box-shadow: none !important;
+            border-bottom: $border !important;
+            height: auto !important;
+        }
+    }
+    #headerwrapper {
+        #header {
+            box-shadow: none !important;
+            background: none !important;
+            .row.column1 {
+                @include respond(large-up) {
+                    margin: 0;
+                }
+                .headercustomerinfo {
+                    #user {
+                        margin-top: 0 !important;
+                        @include respond(medium-down) {
+                            width: auto;
+                            @include line-height(33px);
+                        }
+                        @include respond(large-up) {
+                            float: left;
+                        }
+                        .welcomemessage {
+                            @include line-height(33px);
+                        }
+                    }
+                    #userinfo {
+                        margin-top: 0 !important;
+                        a {
+                            margin-right: rem(3px) !important;
+                        }
+                        .arrow-size.right-arrow {
+                            margin-top: rem(11px) !important;
+                            @include respond(medium-down) {
+                                margin-top: 14px !important;
+                            }
+                        }
+                    }
+                }
+            }
+            .header-wrapper {
+                .row.column1 {
+                    #topcell {
+                        .headercustomerinfo.newcheckout-headercustomerinfo {
+                            #userinfo {
+                                @include respond(medium-down) {
+                                    margin-top: 0 !important;
+                                }
+                                a {
+                                    @include respond(medium-down) {
+                                        padding-top: 0 !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .pt_orderconf-guest {
+        @include respond(large-up) {
+            float: left !important;
+        }
+    }
+    .headercustomerinfo {
+        a {
+            padding: 0 !important;
+            margin-right: 5px;
+            line-height: rem(33px) !important;
+        }
+    }
+    #header-brands,
+    #header-brands {
+        text-align: center;
+        li {
+            float: none;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    #paymentmethods {
+        .payment-method {
+            .expirationdate {
+                margin-bottom: rem(7px);
+                clear: both;
+                overflow: hidden;
+                @include respond(large-up) {
+                    width: rem(300px);
+                    margin-left: rem(125px);
+                }
+                .form-row {
+                    margin: 0;
+                }
+                .label {
+                    line-height: rem(15px) !important;
+                    margin-bottom: 9px !important;
+                    float: none;
+                    text-align: left;
+                    display: block;
+                    position: static;
+                    .requiredindicator {
+                        float: none !important;
+                    }
+                }
+                .field-wrapper {
+                    float: none;
+                    width: 100%;
+                    display: block;
+                }
+                .month,
+                .year {
+                    width: 50% !important;
+                    margin: 0 !important;
+                    box-sizing: border-box;
+                    .textinput {
+                        width: 100% !important;
+                        float: none;
+                    }
+                }
+                .month {
+                    padding-right: rem(5px);
+                }
+                .year {
+                    padding-left: rem(5px);
+                }
+            }
+        }
+        .label {
+            padding-left: 0 !important;
+        }
+    }
+    #footernew {
+        .footer-links {
+            box-shadow: none;
+        }
+    }
+}
+
+.pt_checkout {
+    #content {
+        .contentbox.checkout_cont {
+            @include respond(medium-down) {
+                border: none;
+            }
+        }
+    }
+    .shippingaccountmsg {
+        font-family: $font;
+    }
+    .checkout_body_cont {
+        #couponentry,
+        .formfield.giftcertfield {
+            span.label,
+            .label {
+                font-family: $font;
+            }
+        }
+        .checkoutshipping,
+        .checkoutbilling {
+            .shipping-signintomyaccount,
+            .shipping-checkoutasguest,
+            .shipping-address {
+                font-family: $font;
+            }
+            .form-row,
+            .field-wrapper {
+                @include respond(small-down) {
+                    float: none;
+                    width: 100%;
+                }
+            }
+            .form-row-type-checkbox {
+                .label {
+                    @include respond(medium-down) {
+                        float: none;
+                        width: 100% !important;
+                        padding: 0;
+                    }
+                }
+            }
+            .shippinglogindetails {
+                font-family: $font;
+                @include respond(medium-down) {
+                    width: 100%;
+                }
+                button {
+                    @include button('submit');
+                    padding: 0;
+                    min-width: inherit;
+                    width: rem(100px);
+                }
+                .log_error {
+                    .form-row {
+                        margin-bottom: 0;
+                    }
+                    span.logerror {
+                        padding: 0 0 rem(12px) 0;
+                        @include respond(large-up) {
+                            margin-left: rem(136px);
+                            max-width: rem(280px);
+                        }
+
+                    }
+                }
+            }
+            .addresslist.custom-select {
+                font-family: $font;
+                .field-wrapper {
+                    box-shadow: none;
+                    font-family: $font;
+                    border: none;
+                    background: none !important;
+                    height: rem(40px);
+                    line-height: rem(40px);
+                    margin-left: 0;
+                    @include respond(large-up) {
+                        margin-left: 10px;
+                    }
+                }
+            }
+            .SaveCard {
+                .labeltext {
+                    float: none !important;
+                }
+            }
+            .paymentform.creditcardpayment {
+                border: 0;
+                padding: 0;
+                width: 100%;
+                background: none;
+                .clearbutton {
+                    right: 0;
+                    @include respond(medium-down) {
+                        right: rem(20px);
+                    }
+                }
+                .carderror {
+                    float: none;
+                    width: 100%;
+                    @include form-error;
+                }
+            }
+        }
+        #couponsform {
+            .formfield.couponcode {
+                @include respond(medium-down) {
+                    float: none;
+                }
+            }
+            .promo-input-button {
+                @include respond(medium-down) {
+                    width: 100%;
+                }
+            }
+            input.textinput {
+                @include form-input;
+                font-style: normal;
+            }
+            #couponentry {
+                .form-row-type-text {
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                }
+                button {
+                    @include button;
+                    min-width: inherit;
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                    @include respond(large-up) {
+                        height: rem($form-field-height);
+                        @include line-height($form-field-height);
+                    }
+                }
+                .field-wrapper {
+                    padding-left: 0 !important;
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                }
+                .coupon-apply {
+                    @include respond(medium-down) {
+                        width: 100%;
+                    }
+                    @include respond(large-up) {
+                        padding-top: rem(6px);
+                    }
+                }
+            }
+            .discount-success {
+                button.remove-cop {
+                    background: url(../images/RemoveBlack10.png) no-repeat scroll 0 1px transparent !important;
+                    color: $black !important;
+                    font-size: 12px !important;
+                    border: medium none !important;
+                    padding: 0 !important;
+                    height: 14px !important;
+                    line-height: 0 !important;
+                    width: 80px !important;
+                    margin: 0 10px !important;
+                    font-weight: bold !important;
+                    margin-top: 5px !important;
+                }
+            }
+        }
+    }
+    .checkout-header-center {
+        float: left !important;
+        font-family: $font !important;
+    }
+    .respected-rapala-brands {
+        font-family: $font !important;
+    }
+    .encapsulate-section {
+        a.continueshopping {
+            font-family: $font;
+        }
+    }
+    .form-row {
+        margin: 6px 0 12px;
+        @include respond(medium-down) {
+            position: relative;
+        }
+        .tooltip {
+            @include tooltip;
+            @include line-height(15px);
+            top: inherit !important;
+            background: none !important;
+            float: none !important;
+            text-indent: 0 !important;
+            float: none !important;
+            width: auto !important;
+            height: auto !important;
+            @include respond(large-up) {
+                margin: rem(12px) 0 0 rem(10px);
+            }
+            @include respond(medium-down) {
+                position: absolute;
+                top: rem(31px) !important;
+                right: 0;
+            }
+        }
+        .field-wrapper {
+            width: 100% !important;
+            padding-left: 0 !important;
+            margin-bottom: 0;
+            @include respond(large-up) {
+                width: rem($form-horizontal-field-width  + 20px) !important;
+                padding-left: rem($form-horizontal-field-padding) !important;
+            }
+            .select-style {
+                @include respond(medium-down) {
+                    width: calc(100% - 20px);
+                }
+            }
+            .input-select {
+                width: 100%;
+                height: $form-field-height - $form-field-border-width * 2;
+                margin-bottom: 0;
+                background: $trans;
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                border-radius: 0;
+                width: calc(100% + #{$form-dropdown-arrow-icon-width}) !important;
+                height: 38px;
+                @include line-height(38px);
+                appearance: none;
+                @include respond(medium-down) {
+                    width: calc(100% - 20px) !important;
+                }
+                &.errorclient {
+                    background: $trans;
+                    border: 0;
+                }
+            }
+            .textinput {
+                height: 40px;
+                @include line-height(40px);
+                @include respond(medium-down) {
+                    width: calc(100% - 20px);
+                }
+            }
+        }
+        &.select-address  {
+            margin-bottom: rem(20px);
+            clear: both;
+            .field-wrapper {
+                background: none !important;
+                padding: 0 !important;
+                border: 0 !important;
+                height: rem(40px) !important;
+                line-height: rem(40px) !important;
+                @include respond(large-up) {
+                    margin: 0 0 0 rem(12px) !important;
+                }
+            }
+        }
+    }
+    form {
+        .field-wrapper {
+            input[type="text"],
+            input[type="password"] {
+                @include form-input;
+                border-radius: $form-field-border-radius !important;
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+        .addressid {
+            position: relative;
+            clear: both;
+        }
+        .formfield-email .address-tooltip,
+        .address-tooltip {
+            background: none !important;
+            color: $tooltip-color !important;
+            position: absolute !important;
+            font-size: 13px !important;
+            text-indent: 0 !important;
+            width: auto !important;
+            height: auto !important;
+            @include respond(large-up) {
+                left: rem(438px) !important;
+                top: rem(5px) !important;
+            }
+            @include respond(medium-down) {
+                top: rem(23px) !important;
+                left: calc(100% - 5px) !important;
+                margin-left: 0 !important;
+            }
+        }
+        .label {
+            font-family: $font;
+            @include respond(large-up) {
+                line-height: 40px !important;
+            }
+        }
+        .clearbutton {
+            top: rem(4px) !important;
+            @include respond(medium-down) {
+                right: rem(20px);
+            }
+        }
+        .formfield-email {
+            @include respond(large-up) {
+                margin: 0 rem(10px);
+            }
+            .address-tooltip {
+                text-decoration: underline;
+                @include respond(large-up) {
+                    margin-left: rem(7px) !important;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    .summary-carttable {
+        th {
+            .left-nav-style {
+                font-family: $font;
+            }
+        }
+        td.col1 {
+            width: 85px;
+        }
+    }
+    .checkout_body_cont {
+        .checkoutshipping,
+        .checkoutbilling {
+            .custom-checkbox {
+                .field-wrapper {
+                    label {
+                        padding-left: 0;
+                        font-family: $font;
+                    }
+                }
+            }
+            .checkbox {
+                @include respond(medium-down) {
+                    float: none;
+                    width: 100%;
+                }
+            }
+            .form-row-50 {
+                width: rem(270px);
+                &.zip {
+                    @include respond(medium-down) {
+                        float: none !important;
+                        margin-left: 0 !important;
+                    }
+                    @include respond(large-up) {
+                        width: rem(134px);
+                    }
+                    .field-wrapper {
+                        input[type="text"] {
+                            @include respond(large-up) {
+                                width: 100%;
+                            }
+                        }
+                    }
+                    .clearbutton {
+                        left: inherit !important;
+                        right: 0 !important;
+                    }
+                }
+                .field-wrapper {
+                    float: none;
+                    select {
+                        border: 0;
+                        background: $trans;
+                        padding: 2px 0 2px 10px;
+                        height: $form-field-height - $form-field-border-width * 2;
+                        margin: 0;
+                        //Hack: IE9 only
+                        @media all and (min-width: 0\0) and (min-resolution: .001dpcm) {
+                            padding-right: 10px;
+                        }
+                        width: 120%; // in case some browser doesn't support the calc function below
+                        width: calc(100% + #{$form-dropdown-arrow-icon-width});
+                        appearance: none;
+                    }
+                }
+            }
+            .continue-checkout-button {
+                @include respond(medium-down) {
+                    width: 100% !important;
+                }
+                button {
+                    @include button('submit');
+                    min-width: inherit;
+                    box-sizing: border-box;
+                    @include respond(medium-down) {
+                        width: 100% !important;
+                    }
+                    span {
+                        line-height: inherit;
+                        text-transform: inherit;
+                        font-size: inherit;
+                        color: inherit;
+                        text-decoration: none;
+                        display: inline-block;
+                        background: none;
+                        width: 100%;
+                        font-weight: inherit;
+                        font-family: inherit;
+                        letter-spacing: normal;
+                        padding: 0;
+                        height: inherit;
+                    }
+                }
+            }
+            .formfield.email-field {
+                @include respond(small-down) {
+                    margin-bottom: rem(20px);
+                }
+                .whyemail-address {
+                    @include respond(small-down) {
+                        position: static;
+                        width: 100% !important;
+                    }
+                    @include respond(medium-down) {
+                        float: none !important;
+                        width: 48%;
+                    }
+                    .Custom-tooltip {
+                        @include tooltip;
+                        @include line-height(15px);
+                        float: right !important;
+                        top: inherit !important;
+                        background: none !important;
+                        text-indent: 0 !important;
+                        width: auto !important;
+                        height: auto !important;
+                        @include respond(medium-up) {
+                            margin: rem(-30px) rem(-12px) 0 0 !important;
+                        }
+                    }
+                }
+            }
+        }
+        .shipping-ordermessage-process {
+            font-family: $font;
+        }
+    }
+    .shippingmethod-tooltip {
+        font-family: $font;
+    }
+    legend {
+        font-family: $font;
+    }
+    .selected-shipping-address,
+    .selected-billing-address,
+    .minishipment .billingpageShippingaddress {
+        font-family: $font;
+    }
+    .checkout {
+        .addressform,
+        .checkoutbilling {
+            .custom-checkbox {
+                margin-bottom: 0;
+                .custom-link {
+                    display: none !important;
+                }
+                & + .form-row-type-hidden {
+                    display: none;
+                }
+            }
+            .expirationdate-field-wrapper {
+                @include respond(medium-down) {
+                    margin-left: 0 !important;
+                }
+            }
+            .form-row,
+            .form-caption {
+                margin-left: 0;
+                &.year {
+                    @include respond(medium-down) {
+                        margin-left: rem(5px);
+                        float: left;
+                    }
+                }
+                &.month {
+                    @include respond(medium-down) {
+                        margin-right: rem(5px);
+                        float: left;
+                    }
+                }
+                input[type="text"],
+                input[type="tel"],
+                input[type="email"],
+                input[type="number"],
+                input[type="password"],
+                input[type="date"],
+                textarea {
+                    @include respond(medium-down) {
+                        border: $form-field-border !important;
+                    }
+                    &.errorclient {
+                        @include respond(medium-down) {
+                            border: $error-border !important;
+                        }
+                    }
+                }
+            }
+            .form-row-50.addressid {
+                margin-left: 0;
+                .label {
+                    @include label;
+                    margin-bottom: 0;
+                    width: 100%;
+                    @include respond(medium-down) {
+                        margin-left: 0;
+                        padding-left: 0;
+                        line-height: 20px;
+                    }
+                    @include respond(large-up) {
+                        margin-bottom: rem(5px);
+                        line-height: rem(15px) !important;
+                    }
+                    .labeltext {
+                        color: inherit;
+                    }
+                }
+                .tooltip {
+                    @include tooltip;
+                    @include line-height(15px);
+                    float: right !important;
+                    top: inherit !important;
+                    margin: -10px 0 0 !important;
+                    left: inherit;
+                    right: 0;
+                    background: none !important;
+                    text-indent: 0 !important;
+                    width: auto !important;
+                    height: auto !important;
+                }
+            }
+            .whyemail-address {
+                float: right !important;
+                margin: 0 !important;
+            }
+            .new-address-field {
+                @include respond(medium-down) {
+                    width: 100%;
+                }
+                .new-address-button {
+                    @include button;
+                    min-width: inherit;
+                    width: auto;
+                    @include respond(medium-down) {
+                        width: 100% !important;
+                    }
+                }
+            }
+        }
+    }
+    .shipping-address-field-section,
+    .shippinglogin {
+        @include respond(large-up) {
+            margin: 0 rem(10px);
+        }
+    }
+    .shippinglogin {
+        .formactions {
+            @include respond(large-up) {
+                margin-left: rem(134px);
+                width: rem(280px) !important;
+            }
+        }
+    }
+
+    .billingsection {
+        .shipping-address-field-section .billing-address-fields {
+            @include respond(large-up) {
+                margin-left: rem(10px);
+            }
+        }
+        .addressform {
+            .new-address-field,
+            .edit-address-field {
+                .new-address-button,
+                .edit-billing-button {
+                    @include button;
+                    min-width: inherit;
+                    width: auto;
+                }
+            }
+        }
+        .editshippingaddress.first {
+            margin-right: 112px;
+        }
+        .side-note {
+            font-family: $font;
+        }
+        .billingbutton {
+            @include button;
+            min-width: inherit;
+            a {
+                color: inherit;
+                font-size: inherit;
+                line-height: inherit;
+            }
+            .arrow-size {
+                margin-top: rem(15px) !important;
+                margin-right: rem(5px) !important;
+            }
+        }
+        .field-wrapper {
+            padding-left: 0;
+        }
+        .email-field {
+            @include respond(large-up) {
+                max-width: rem(287px);
+                margin-bottom: rem(25px);
+                clear: both;
+            }
+            .form-row {
+                float: none !important;
+                margin-left: rem(13px);
+                margin-bottom: 0;
+            }
+        }
+        .knife {
+            .custom-checkbox {
+                .label {
+                    display: block;
+                }
+            }
+        }
+        .shippingMethodDetails {
+            .input-style {
+                font-family: $font;
+            }
+            .shippingmethod-block {
+                .shippingmethodName,
+                .shippingPrice {
+                    font-family: $font;
+                }
+            }
+        }
+    }
+    #paymentmethods {
+        margin: 0 0.625rem;
+        .paymentmethods_cont {
+            .toggle {
+                background: none;
+                border: 0;
+                @include respond(medium-down) {
+                    background: none !important;
+                    width: 100% !important;
+                    color: $form-caption-color !important;
+                    font-size: 16px !important;
+                    border: 0 !important;
+                }
+                label,
+                label.paypaltoggle {
+                    line-height: normal;
+                    padding: 0 0 rem(10px) 0;
+                    text-align: left;
+                    @include respond(medium-down) {
+                        width: 100% !important;
+                        padding: 0 !important;
+
+                    }
+                }
+                .toggle-label {
+                    text-align: center;
+                    padding-bottom: rem(10px);
+                    @include respond(large-up) {
+                        margin-left: rem(-12px);
+                        text-align: left;
+                    }
+                }
+                .form-row {
+                    margin: 0;
+                }
+            }
+        }
+        .card-typ-image {
+            line-height: normal;
+        }
+        .expirationdate {
+            .custom-select {
+                .field-wrapper {
+                    background: none !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    height: auto !important;
+                }
+            }
+            .selectorOut {
+                line-height: 40px !important;
+                height: 40px !important;
+                font-family: $font !important;
+                color: $form-field-color !important;
+                font-size: 13px !important;
+            }
+            .required-indicator {
+                @include respond(medium-down) {
+                    display: none;
+                }
+            }
+        }
+        .label {
+            @include label;
+            margin-bottom: 0;
+            @include respond(medium-down) {
+                margin-left: 0;
+                padding-left: 0;
+                line-height: 20px;
+            }
+            @include respond(large-up) {
+                line-height: rem(40px) !important;
+            }
+            .labeltext {
+                color: inherit;
+            }
+        }
+        .required-indicator,
+        .requiredindicator {
+            margin-left: 3px !important;
+            @include respond(large-up) {
+                float: right;
+            }
+        }
+        .inputlabel {
+            .label {
+                .labeltext {
+                    color: $font-error-color;
+                }
+            }
+            .input-text {
+                &.errorclient {
+                    border: $error-border;
+                }
+            }
+
+        }
+    }
+    .selectorOut,
+    .singleshipping_error,
+    .cardnotworking-tooltip {
+        font-family: $font;
+    }
+    .selectorOut {
+        line-height: 40px !important;
+        height: 40px !important;
+        font-family: $font !important;
+        color: $form-field-color !important;
+        font-size: 13px !important;
+    }
+    .checkout {
+        .paymentform.creditcardpayment {
+            .creditcardlist.custom-select {
+                margin-bottom: 0;
+                .field-wrapper {
+                    font-family: $font;
+                    background: none !important;
+                    border: none;
+                    box-shadow: none;
+                    height: 40px;
+                    line-height: 40px;
+                }
+                .carderror {
+                    float: none;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .custom-checkbox-billing {
+        .form-row {
+            .field-wrapper {
+                padding-left: 0 !important;
+            }
+        }
+    }
+    .payment-method-options {
+        .form-row {
+            float: none !important;
+            .label {
+                margin-bottom: 9px !important;
+            }
+            &.year {
+                clear: left;
+                margin: 0 0 0 0 !important;
+                @include respond(large-up) {
+                    margin: rem(11px) 0 rem(8px) rem($form-horizontal-label-width) !important;
+                }
+            }
+            &.month {
+                @include respond(medium-down) {
+                    margin-bottom: rem(20px);
+                }
+            }
+            &.form-row-type-hidden {
+                margin: 0;
+                height: 1px;
+            }
+        }
+        .form-caption {
+            margin-left: 0 !important;
+            @include font-size(13px);
+            text-align: left;
+            @include respond(large-up) {
+                margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+            }
+        }
+        .custom-checkbox {
+            margin: 0 !important;
+            padding: 0;
+            .checkbox {
+                margin: 0 !important;
+                .field-wrapper {
+                    margin: 0;
+                    padding: 0 !important;
+                    @include respond(large-up) {
+                        margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+                    }
+                }
+            }
+        }
+        .form-data-error,
+        .form-data-new {
+            text-align: left;
+            margin: 0 0 rem(11px) rem($form-horizontal-label-width + 20px) !important;
+            width: calc(100% - $form-horizontal-label-width - 20px);
+            min-height: 1px;
+        }
+    }
+    .payment-mobile-handling {
+        width: 100% !important;
+    }
+    .checkout-billing {
+        .formfield {
+            clear: both;
+            &.selected-saved-payment-info {
+                .field-wrapper {
+                    border-radius: 0 !important;
+                    margin-left: 0 !important;
+                    background: none !important;
+                }
+            }
+        }
+    }
+}
+
+.contentboxcontent {
+    p {
+        font-family: $font;
+    }
+}
+
+#shipping-method-list  {
+    .shipping-methods,
+    .shippingMethodDetails {
+        font-family: $font;
+        label {
+            font-family: $font;
+        }
+        .shippingmethod-left {
+            .shippingprice-detail {
+                font-family: $font;
+            }
+        }
+        .field-wrapper {
+            padding-left: 0;
+        }
+        .form-row,
+        .form-caption {
+            margin-left: 0;
+        }
+    }
+}
+
+.pt_checkout {
+    .column3 {
+        .column {
+            .summary-section {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    }
+}
+
+.new-summery-cart {
+    .checkoutordertotals {
+        .ordertotals {
+            table.ordertotalstable,
+            table.order-totals-table {
+                .label {
+                    @include product-attr-title;
+                    color: $order-total-font-color;
+                }
+                .value {
+                    @include product-attr-name;
+                    clear: both;
+                }
+                td {
+                    color: $order-total-font-color;
+                    span.label-total {
+                        font-family: $font !important;
+                    }
+                }
+                .order-total {
+                    .value {
+                        font-family: $font !important;
+                    }
+                }
+                .order-shipping {
+                    .ordersubtotal-strike {
+                        position: relative;
+                        top: rem(3px);
+                    }
+                }
+                .ordertotalsaving {
+                    .label {
+                        color: $pdp-message-color;
+                    }
+                }
+            }
+        }
+    }
+    .checkoutminisummary {
+        .section-header {
+            font-family: $font;
+        }
+    }
+}
+
+.checkout_cont,
+.new-summery {
+    border: none;
+    padding: 0;
+}
+
+.summary-carttable {
+    tr.tablerow:last-child {
+        table {
+            border-bottom: none;
+        }
+    }
+}
+
+.column3 {
+    .column {
+        .summary-section {
+            .heading,
+            .basketItems,
+            .editcart {
+                font-family: $font;
+            }
+        }
+        .itemtotalcolumn {
+            .totalprice {
+                @include pdp-price;
+                font-style: normal;
+                font-size: 10px;
+            }
+        }
+    }
+}
+.checkout-copyright {
+    box-sizing: border-box;
+}
+
+.pt_orderconfirmation {
+    #page-background {
+        @include respond(medium-down) {
+            box-shadow: none;
+        }
+    }
+    #content {
+        .row {
+            .colspan2 {
+                .cell {
+                    .contentboxcontent {
+                        h1 {
+                            font-family: $font;
+                        }
+                        .ordernumber {
+                            font-family: $font;
+                        }
+                        .orderdate {
+                            .value {
+                                font-family: $font;
+                            }
+                        }
+                        .thankyoumessage {
+                            box-shadow: none !important;
+                            h1 {
+                                @include h1;
+                            }
+                            .orderdate {
+                                .value {
+                                    font-family: $font;
+                                }
+                            }
+                            .ordernumber {
+                                .label {
+                                    @include product-attr-title;
+                                }
+                                .value {
+                                    @include product-attr-name;
+                                }
+                            }
+                            .order-content {
+                                .impo-things {
+                                    font-family: $font;
+                                    background: $background;
+                                    border: $border;
+                                    height: auto;
+                                    h2 {
+                                        @include h2;
+                                    }
+                                    ul {
+                                        li {
+                                            font-family: $font;
+                                            span {
+                                                font-family: $font;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .ordermessage-process {
+                                span {
+                                    font-family: $font;
+                                }
+                            }
+                        }
+                    }
+                    .order-confirmation-details {
+                        .orderpayment {
+                            .orderpaymentdetails {
+                                .orderpaymentdetailstable {
+                                    * {
+                                        font-family: $font;
+                                    }
+                                    .custom-table-head {
+                                        font-family: $font;
+                                    }
+                                    .custom-table-data.orderpaymentinstruments {
+                                        .mini-address-location {
+                                            address,
+                                            .label.paymenttype {
+                                                font-family: $font !important;
+                                            }
+                                        }
+                                        .label.paymenttype {
+                                            font-family: $font;
+                                            color: $black;
+                                            @include font-size(13px);
+                                        }
+                                        .paymentamount {
+                                            .label {
+                                                @include product-attr-title;
+                                                margin-right: rem(3px);
+                                            }
+                                            .value {
+                                                @include product-attr-name;
+                                            }
+                                        }
+                                    }
+                                    .cc-type,
+                                    .cc-number {
+                                        label {
+                                            font-family: $font !important;
+                                        }
+                                    }
+                                    .custom-table-data.ordershipping {
+                                        .ordershipmentaddress {
+                                            .name {
+                                                .address {
+                                                    font-family: $font;
+                                                }
+                                            }
+                                        }
+                                        .shippingmethod,
+                                        .shippingstatus,
+                                        .trackingnumber {
+                                            .label {
+                                                @include product-attr-title;
+                                            }
+                                            .value {
+                                                @include product-attr-name;
+                                            }
+                                        }
+                                    }
+                                    .custom-table-data.orderpaymentsummary {
+                                        .custom-table-row {
+                                            .label,
+                                            .value-sales,
+                                            .value {
+                                                font-family: $font;
+                                            }
+                                           &.allotment {
+                                                margin-bottom: 5px;
+                                                border-bottom: 2px solid #e1e1e1;
+                                           }
+                                        }
+                                    }
+                                    .custom-table-data.orderpaymentsummary {
+                                        .custom-table-row.ordertotal {
+                                            .label-total,
+                                            .value {
+                                                font-family: $font;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .submission-box {
+        .button-box {
+            &.customerService,
+            &.returnShopping {
+                @include respond(large-down) {
+                    padding: 0;
+                    float: none;
+                    width: 100%;
+                }
+            }
+        }
+        a {
+            @include button;
+            width: auto;
+            @include respond(large-down) {
+                width: 100%;
+            }
+        }
+    }
+    .ordershipments {
+        @include respond(medium-down) {
+            padding: 0 rem(10px);
+        }
+        .ordershipment {
+            .ordershipmenttable {
+                thead {
+                    th {
+                        font-family: $font;
+                    }
+                }
+            }
+        }
+    }
+    .ordertotals_conatiner {
+        * {
+            font-family: $font !important;
+        }
+        .details.ordercol2 {
+            .product-list-item {
+                .attribute,
+                .sku {
+                    .label {
+                        @include product-attr-title;
+                    }
+                    .value {
+                        @include product-attr-name;
+                    }
+                }
+            }
+        }
+    }
+    .checkout-header-center,
+    #userinfo a,
+    .respected-rapala-brands,
+    .footer-links a {
+        font-family: $font !important;
+    }
+}
+
+.checkoutbilling .gucreateaccount .optionalgray,
+.guestbillingform,
+.checkout .labeltext,
+.editshippingaddress,
+.checkoutbilling .label .labeltext,
+.checkoutbilling .billing-promocode, .paymentmethods .toggle-label,
+.paymentmethodform .billing-paymentmethod,
+.billing-review,
+.reviewcontent,
+#address-valid-dialog .addresses-section .left-pane h2,
+#address-valid-dialog .addresses-section .right-pane h2 {
+    font-family: $font;
+}
+
+.summary-carttable {
+    font-family: $font;
+}
+
+.pt_checkout {
+    .knife {
+        .knife-checkbox {
+            width: 100% !important;
+            .field-wrapper {
+                width: 100% !important;
+                @include respond(large-up) {
+                    padding-left: rem(6px) !important;
+                }
+                .label {
+                    width: 100% !important;
+                    display: flex !important;
+                    &::before {
+                        width: rem(74px) !important;
+                        @include respond(large-up) {
+                            width: rem(49px) !important;
+                        }
+                    }
+                    .requiredindicator {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .labeltext,
+        .agecheck-order {
+            line-height: 18px !important;
+            font-family: $font !important;
+            color: $form-label-color !important;
+        }
+        input[type="checkbox"].errorclient + label {
+            .labeltext {
+                color: $font-error-color !important;
+            }
+        }
+    }
+    .add-to-email-new {
+        margin-top: 0;
+        @include respond(large-up) {
+            padding-left: rem($form-horizontal-label-width - 6px);
+        }
+        .label {
+          &:before {
+              float: left;
+          }
+            .labeltext {
+                float: left;
+                width: calc(100% - 40px);
+                @include line-height(21px);
+            }
+
+        }
+    }
+}
+.allotment {
+    .value {
+        color: $pdp-promo-color !important;
+    }
+}
+@media print {
+    .owl-stage-outer {
+        margin: 0 auto!important;
+    }
+    .owl-controls {
+        display: none!important;
+    }
+    .owl-stage {
+        transform: translate3d(0px, 0px, 0px);
+        transition: 0s!important;
+        width: 100%!important;
+        margin: 0 auto!important;
+        text-align: center!important;
+    }
+    .owl-item {
+        width: auto !important;
+        margin-right: 0 !important;
+        float: none !important;
+        display: inline-block !important;
+        li {
+            float: none !important;
+        }
+    }
+}

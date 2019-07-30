@@ -1,0 +1,1178 @@
+#container.pt_product-search-noresult {
+    #primary.primary-content.contentbox {
+        box-shadow: none;
+        .shopping {
+            .bybrand,
+            .propicks,
+            .bestsellers,
+            .customerservices {
+                a {
+                    @include button;
+                    width: rem(196px);
+                    @include respond(desktop-down) {
+                        box-sizing: border-box;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .nohits {
+            h1 {
+                @include h1;
+            }
+            .no-hits-search {
+                button {
+                    min-width: inherit;
+                    padding: 0;
+                }
+                .form-row {
+                    margin: 0;
+                }
+            }
+            .section-header {
+                p {
+                    font-family: $font;
+                }
+            }
+            .no-hits-help {
+                h2 {
+                    @include h2;
+                }
+                .disc-outside {
+                    @include ul;
+                }
+            }
+        }
+    }
+}
+
+div.returningcustomers {
+    .custom_signin {
+        .formfield {
+            .form-row {
+                margin: $form-row-margin;
+                .label {
+                    @include label;
+                    margin-bottom: 0;
+                    .labeltext {
+                        color: inherit;
+                        letter-spacing: inherit;
+                        font-weight: normal;
+                        text-transform: inherit;
+                        font-family: inherit;
+                        font-variant: inherit;
+                        font-size: inherit;
+                        vertical-align: inherit;
+                    }
+                    .requiredindicator {
+                        float: none;
+                        color: $required-color;
+                        position: static;
+                        display: inline-block;
+                        padding: 0;
+                    }
+                }
+                span.errorclient,
+                div.errorclient,
+                span.existing_register {
+                    margin-top: rem(3px);
+                }
+            }
+        }
+        .forgot-password {
+            width: auto;
+        }
+        .formactions {
+            .signin-button {
+                @include button;
+                span {
+                    text-transform: inherit;
+                    color: inherit;
+                }
+                &:hover {
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.header-sign-in {
+    box-shadow: none;
+}
+
+#header {
+    #userinfo {
+        .header-forgot-pwd {
+            box-shadow: none;
+            text-align: left;
+            .forgot-email {
+                @include label;
+                padding: 0;
+            }
+            .requiredindicator {
+                float: none;
+                color: $required-color;
+                position: static;
+                display: inline-block;
+                padding: 0;
+            }
+            .passwordreset {
+                p {
+                    font-family: $font;
+                }
+            }
+            .lost_btn {
+                float: right;
+                .send.greybutton {
+                    @include button;
+                    span {
+                        text-transform: inherit;
+                        color: inherit;
+                    }
+                    &:hover {
+                        span {
+                            text-transform: inherit;
+                            color: inherit;
+                        }
+                    }
+                }
+            }
+            .back-link {
+                a {
+                    color: $black;
+                }
+            }
+        }
+    }
+}
+#container.pt_account {
+    .breadcrumb {
+        background: none;
+        box-shadow: none;
+    }
+    #primary.primary-content {
+        .account-section {
+            .formfield {
+                &.formfield_country {
+                    float: none;
+                    clear: left;
+                    @include respond(large-up) {
+                        max-width: 375px;
+                    }
+                }
+            }
+            .requiredindicator {
+                color: $required-color;
+            }
+            .custom-checkbox.custom {
+                @include respond(large-down) {
+                    text-align: left;
+                }
+                .label {
+                    span.labeltext {
+                        color: inherit;
+                    }
+                }
+            }
+            .cell.checkoutloginsignin {
+                box-shadow: none !important;
+                font-family: $font !important;
+                @include respond(medium-up) {
+                    border: $border;
+                }
+            }
+            .custom-checkbox {
+                .custom-link {
+                    display: none !important;
+                }
+            }
+            .upshift {
+                .contentboxcontent.account-logs {
+                    h1 {
+                        font-family: $font;
+                    }
+                    .form-indent {
+                        margin-left: 0;
+                    }
+                    .field-wrapper {
+                        input {
+                            border-radius: $form-field-border-radius;
+                            border: $form-field-border;
+                        }
+                    }
+                    .textinput {
+                        float: none;
+                    }
+                    span.errorclient,
+                    div.errorclient,
+                    span.existing_register {
+                        @include form-error;
+                        margin-top: rem(3px);
+                    }
+                }
+            }
+            .label {
+                @include label;
+                margin-bottom: 0;
+                width: 100%;
+                @include respond(medium-down) {
+                    margin-left: 0;
+                    padding-left: 0;
+                    line-height: 20px;
+                }
+                @include respond(large-up) {
+                    margin-bottom: rem(5px);
+                    line-height: rem(15px) !important;
+                }
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                }
+            }
+            .returningcustomers {
+                .formactions {
+                    button.signinbtn {
+                        @include button('submit');
+                    }
+                }
+                .resetpwd {
+                    font-family: $font;
+                    @include respond(large-down) {
+                        font-family: $font;
+                    }
+                }
+            }
+            .createan-account {
+                input {
+                    border-radius: $form-field-border-radius;
+                    border: $form-field-border;
+                    float: none;
+                }
+                span.errorclient,
+                div.errorclient,
+                span.existing_register {
+                    @include form-error;
+                    margin-top: rem(3px);
+                }
+                span.existing_register {
+                    margin-top: rem(5px);
+                }
+                .contentboxcontent.new-register {
+                    box-shadow: none;
+                    @include respond(medium-up) {
+                        border: $border;
+                    }
+                    h1 {
+                        font-family: $font;
+                    }
+                    .registration {
+                        form {
+                            overflow: visible;
+                        }
+                        .formactions {
+                            float: none;
+                            width: 100%;
+                            button {
+                                @include button('submit');
+                            }
+                        }
+                        .custom-checkbox {
+                            .form-row {
+                                margin: 0;
+                            }
+                        }
+                        .create_Agree {
+                            p {
+                                @include p;
+                            }
+                        }
+                    }
+                    .custom-checkbox {
+                        label {
+                            font-family: $form-label-font-family;
+                            font-size: $form-label-font-size;
+                            color: $form-label-color;
+                            @include respond(medium-down) {
+                                margin: 0;
+                                width: 100%;
+                            }
+                            .labeltext {
+                                @include respond(medium-down) {
+                                    margin-left: 0 !important;
+                                    color: $form-label-color !important;
+                                }
+                            }
+                        }
+                    }
+                    .signupfor-email {
+                        input[type="checkbox"] + label {
+                            &::before {
+                                float: left;
+                            }
+                        }
+                        .formfield {
+                            width: 100%;
+                            &.formfield_country {
+                                float: none;
+                                clear: left;
+                                @include respond(large-up) {
+                                    max-width: 375px;
+                                }
+                            }
+                        }
+                        .custom-link {
+                            width: 100%;
+                        }
+
+                    }
+                    .seesamples {
+                        font-family: $font;
+                        @include font-size($link-font-size);
+                        margin-left: 0;
+                        text-align: left;
+                        display: inline;
+                        float: none !important;
+                    }
+                    .formactions {
+                        button {
+                            @include button('submit');
+                            width: 100%;
+                        }
+                    }
+                }
+                .rapala_benefits {
+                    clear: both;
+                    @include respond(large-up) {
+                        margin-top: rem(15px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.rapala_benefits {
+    ul {
+        li {
+            font-family: $ul-font-family;
+        }
+    }
+}
+
+#container.pt_account {
+    .floatright.site-suggestion-section {
+
+    }
+}
+
+.ui-dialog.PasswordResetDialog.ui-widget-content {
+    .ui-widget-header {
+        border-bottom: none;
+    }
+    .ui-widget-content {
+        .confirmationcontainer.resetpassword {
+            h1 {
+                @include h2;
+                font-family: $font-third;
+            }
+            #message.reset-success-email {
+                @include p;
+            }
+        }
+        .confirmationcontainer {
+            .actions {
+                button.confirmBtn {
+                    @include button(submit);
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .passwordreset {
+        h1 {
+            @include h2;
+            font-family: $font-third;
+            span {
+                float: none;
+                width: auto;
+            }
+        }
+        p {
+            font-family: $font;
+        }
+    }
+    .formactions {
+        button {
+            @include button('submit');
+        }
+    }
+    .formfield.passwordemail {
+        .form-row.required {
+            .textinput {
+                @include form-input;
+                &.errorclient {
+                    background: $error-bg-color !important;
+                    border: 1px solid $red !important;
+                }
+            }
+            .label {
+                @include label;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit;
+                    text-transform: inherit;
+                    font-variant: inherit;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+            span.errorclient {
+                @include form-error;
+            }
+            .requiredindicator {
+                font-family: $font;
+                float: none;
+                color: $required-color;
+                margin-left: rem(3px);
+            }
+        }
+    }
+}
+
+.pt_wish-list,
+.pt_leftnav-addressbook,
+.pt_order,
+.pt_leftnav-payment,
+.pt_leftnav-profile,
+.pt_acc_landing {
+    #main {
+        #page-background {
+            #secondary {
+                h2 {
+                    @include clp-refinement-title;
+                }
+            }
+        }
+        .breadcrumb {
+            box-shadow: none;
+        }
+    }
+}
+
+ul.common-nav {
+    font-family: $font;
+    li {
+        @include font-size(13px);
+        font-style: normal;
+        font-weight: normal;
+        background-position: 0 7px;
+    }
+}
+
+.pt_leftnav-profile {
+    #primary {
+        #RegistrationForm {
+            .form-row {
+                .label {
+                    @include respond(medium-down) {
+                        line-height: 16px;
+                        padding-bottom: 0;
+                        margin-bottom: 5px;
+                        text-align: left;
+                        width: 100%;
+                        float: none;
+                    }
+                    .labeltext {
+                        font-family: inherit;
+                        font-weight: inherit;
+                        text-transform: inherit;
+                        @include respond(medium-down) {
+                            margin-left: 0;
+                        }
+                    }
+                }
+                .field-wrapper {
+                    @include respond(medium-down) {
+                        padding: 0;
+                        width: 100%;
+                    }
+                    .textinput {
+                        @include form-input;
+                    }
+                }
+                .form-caption {
+                    margin-top: 0;
+                    @include form-caption;
+                    @include respond(medium-down) {
+                        margin-left: 0;
+                    }
+                    &.error-message {
+                        @include form-error;
+                        @include respond(large-up) {
+                            margin-top: -5px;
+                        }
+                    }
+                }
+            }
+            .form-row.form-indent {
+                margin-left: 0 !important;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                .field-wrapper {
+                    max-width: rem(380px);
+                }
+                .label {
+                    width: 100%;
+                    float: none;
+                    text-align: left;
+                    .labeltext {
+                        font-family: inherit;
+                        font-style: inherit;
+                        font-weight: inherit;
+                        color: inherit;
+                        float: none !important;
+                    }
+                }
+            }
+            .form-row.form-row-button {
+                margin-left: 0 !important;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+                button {
+                    @include button('submit');
+                    width: auto;
+                    @include respond(large-up) {
+                        width: auto;
+                    }
+                }
+            }
+            .charlimit {
+                margin-left: 0 !important;
+                font-family: $font;
+                padding: 0;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+            }
+            .create_Agree {
+                font-family: $font;
+                margin-left: 0 !important;
+                @include respond(large-up) {
+                    margin-left: 29% !important;
+                }
+            }
+        }
+    }
+}
+
+.pt_leftnav-addressbook {
+    #addresses {
+        .address-list {
+            .address-tile {
+                &.default {
+                    h3 {
+                        font-family: $font;
+                        font-style: normal;
+                    }
+                }
+                .mini-address-title:first-child {
+                    @include h3;
+                }
+                .mini-address-title ~ .mini-address-title {
+                    display: inline-block;
+                }
+                .mini-address-name {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .nav {
+        clear: both;
+        padding-top: 10px !important;
+        @include respond(large-up) {
+            clear: none;
+            padding-top: 0 !important;
+        }
+    }
+}
+
+.ui-dialog.addressadd,
+.ui-dialog.payment-settings {
+    background: $white;
+    .ui-dialog-titlebar.ui-widget-header {
+        height: auto;
+        border-radius: 0;
+        border-bottom: none;
+        padding: 0;
+        .ui-dialog-titlebar-close {
+            right: 0;
+            top: 0;
+        }
+    }
+    .dialog-required {
+        float: right;
+        font-size: 13px;
+        line-height: 30px;
+        padding: 0;
+        margin: rem(-20px) 0 0;
+    }
+    h1,
+    .ui-dialog h2 {
+        @include h2;
+        font-family: $font-third;
+        font-style: normal;
+    }
+    .dialog-content h1 {
+        float: left;
+        border-bottom: $border;
+        width: 100%;
+        margin: rem(25px) 0 rem(30px);
+        padding: 0 0 7px;
+        @include respond(medium-up) {
+            margin-top: 0;
+        }
+    }
+    #dialog-container {
+        padding: 0.875rem 1.25rem 1.25rem;
+        .form-horizontal {
+            @include respond(large-up) {
+                margin: 20px auto;
+                width: rem(500px);
+                overflow: hidden;
+            }
+            .form-row {
+                .label {
+                    margin: 0 0 9px 0;
+                    text-align: left;
+                    width: 100%;
+                    @include respond(large-up) {
+                        text-align: right;
+                        width: rem($form-horizontal-label-width);
+                        @include line-height($form-horizontal-label-height);
+                    }
+                    .labeltext {
+                        text-transform: inherit;
+                        font-variant: inherit;
+                    }
+                    .requiredindicator {
+                        font-family: $font;
+                        color: $required-color;
+                        margin-left: rem(3px);
+                    }
+                }
+                .field-wrapper {
+                    width: 100% !important;
+                    padding-left: 0;
+                    @include respond(large-up) {
+                        width: rem($form-horizontal-field-width) !important;
+                        padding-left: rem($form-horizontal-field-padding);
+                        margin-bottom: 0;
+                    }
+                    input,
+                    .textinput {
+                        @include form-input;
+                        margin: $form-field-margin;
+                        box-shadow: none;
+                    }
+                    .input-select {
+                        height: $form-field-height - $form-field-border-width * 2;
+                        border-radius: 0;
+                        box-shadow: none;
+                        &.errorclient {
+                            background: $white;
+                            border: none;
+                            margin-left: 0;
+                            font-size: $form-field-font-size;
+                            font-family: $form-field-font-family;
+                            line-height: 26px;
+                        }
+                    }
+                    span.errorclient,
+                    div.errorclient {
+                        font-size: $font-error-font-size;
+                    }
+                }
+                .form-caption {
+                    margin-left: 0;
+                    @include font-size(13px);
+                    @include respond(large-up) {
+                        margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
+                    }
+                }
+            }
+            .form-row-button {
+                button {
+                    @include respond(small-down) {
+                        min-width: inherit;
+                        padding: 0;
+                        width: calc(50% - #{rem(5px)});
+                    }
+                    &:last-child {
+                        @include respond(small-down) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+        .form-row-type-text {
+            position: relative;
+            .label {
+                @include respond(medium-down) {
+                    min-height: rem(18px);
+                }
+            }
+            .tooltip {
+                @include respond(medium-down) {
+                    position: absolute;
+                    width: auto !important;
+                    top: rem(22px);
+                    right: rem(-13px);
+                }
+            }
+        }
+    }
+}
+
+.account-no-address {
+    clear: both;
+}
+
+.creditcardform {
+    #CreditCardForm {
+        .form-row.form-row-button {
+            button.cancel-button {
+                border-top: none;
+            }
+        }
+        .form-label-text {
+            float: none;
+            text-align: left;
+            width: 100%;
+            max-width: inherit;
+            @include respond(large-up) {
+                text-align: right;
+                width: 7.1875rem;
+                @include line-height(30px);
+                height: rem(30px);
+                float: left;
+            }
+            .label {
+                float: none;
+
+                .labeltext {
+                    text-transform: none;
+                }
+                .requiredindicator {
+                    @include respond(large-up) {
+                        float: right;
+                    }
+                }
+            }
+        }
+        .form-row.month.custom-select,
+        .form-row.year.custom-select {
+            margin: 0;
+            width: 48%;
+            max-width: none;
+            @include respond(large-up) {
+                width: rem(150px);
+            }
+            .field-wrapper {
+                width: 100% !important;
+            }
+        }
+        .form-row.year.custom-select {
+            @include respond(medium-down) {
+                margin-left: 4% !important;
+            }
+        }
+        .form-row {
+            .label {
+                margin: 0 0 9px 0;
+                padding-bottom: 0 !important;
+                text-align: left;
+                width: 100%;
+                @include respond(large-up) {
+                    text-align: right;
+                    width: rem($form-horizontal-label-width);
+                    @include line-height($form-horizontal-label-height);
+                }
+                .labeltext {
+                    text-transform: inherit !important;
+                    font-variant: inherit;
+                }
+                .requiredindicator {
+                    font-family: $font;
+                    color: $required-color;
+                    margin-left: rem(3px);
+                }
+            }
+            .field-wrapper {
+                width: 100% !important;
+                padding-left: 0 !important;
+                @include respond(large-up) {
+                    width: rem($form-horizontal-field-width) !important;
+                    padding-left: rem($form-horizontal-field-padding) !important;
+                    margin-bottom: 0;
+                }
+                input,
+                .textinput {
+                    @include form-input;
+                    margin: $form-field-margin;
+                    box-shadow: none;
+                }
+                .input-select {
+                    height: $form-field-height - $form-field-border-width * 2;
+                    border-radius: 0;
+                    box-shadow: none;
+                    &.errorclient {
+                        background: $white;
+                        border: none;
+                        margin-left: 0;
+                        font-size: $form-field-font-size;
+                        font-family: $form-field-font-family;
+                        line-height: 30px;
+                    }
+                }
+                span.errorclient,
+                div.errorclient {
+                    font-size: $font-error-font-size;
+                }
+                .input-select {
+                    padding: 2px 0 2px 10px;
+                }
+            }
+            .form-caption {
+                margin-left: 0;
+                @include font-size(13px);
+                font-family: $font;
+                @include respond(large-up) {
+                    margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding);
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include respond(small-down) {
+                    min-width: inherit;
+                    padding: 0;
+                    width: calc(50% - #{rem(5px)});
+                    margin-right: rem(5px) !important;
+                }
+                &:last-child {
+                    @include respond(small-down) {
+                        margin-right: 0;
+                    }
+                }
+                &.cancel-button {
+                    background: $white !important;
+                    border: $button-border !important;
+                    @include respond(small-down) {
+                        margin-right: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.paymentslist {
+    .paymentinstruments {
+        .creditcard {
+            .payment-list {
+                .actions {
+                    .button-text.delete {
+                        @include link;
+                        background: none;
+                        border: none;
+                        color: $black;
+                        display: inline-block;
+                        float: left;
+                        padding: 0;
+                        text-transform: none;
+                        text-decoration: none;
+                        margin: rem(9px) 0 0 0;
+                        @include line-height(20px);
+                        height: rem(20px);
+                        min-width: inherit;
+                        width: auto;
+                        &:hover {
+                            text-decoration: underline;
+                            color: $black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.pt_leftnav-payment {
+    .paymentslist {
+        .paymentinstruments {
+            .creditcard {
+                .payment-list {
+                    .cc-owner {
+                        .label {
+                            @include product-attr-name;
+                        }
+                    }
+                    label,
+                    .label {
+                        @include product-attr-name;
+                    }
+                    .cc-exp {
+                        .label {
+                            @include product-attr-title;
+                        }
+                        label {
+                            @include product-attr-name;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.registration {
+    .custom_signup {
+        box-shadow: none;
+        border: $border;
+        .form-row {
+            .label {
+                .labeltext {
+                    @include label;
+                    margin: 0;
+                    float: none;
+                }
+                .requiredindicator {
+                    float: none;
+                    color: $required-color;
+                    margin-left: rem(3px);
+                    position: static;
+                    padding: 0;
+                    display: inline;
+                }
+            }
+            .field-wrapper {
+                span.errorclient {
+                    @include form-error;
+                }
+                .textinput {
+                    @include form-input
+                }
+            }
+        }
+        .emailsignupcheckbox {
+            .custom-checkbox {
+                .label {
+                    width: 100%;
+                    float: none;
+                    .labeltext {
+                        @include label;
+                        width: calc(100% - 35px);
+                        float: none;
+                        vertical-align: top;
+                    }
+                }
+            }
+        }
+        .custom-checkbox {
+            .custom-link.active {
+                display: none;
+            }
+        }
+        .registration {
+            .custom_signup {
+                .create_Agree p {
+                    font-family: $font;
+                }
+            }
+        }
+        .create-account-btn {
+            .register-button.create-account {
+                @include button;
+                width: auto;
+                span {
+                    color: inherit;
+                    text-transform: inherit;
+                }
+                &:hover {
+                    @include font-size($button-font-size);
+                    @include line-height($button-line-height);
+                    height: $button-height;
+                    width: auto;
+                    color: $button-hover-color;
+                    text-decoration: $button-hover-text-decoration;
+                    background: $button-hover-bg;
+                    border: $button-hover-border;
+                    box-shadow: $button-hover-box-shadow;
+                    span {
+                        color: inherit;
+                        text-transform: inherit;
+                    }
+                }
+            }
+        }
+    }
+    .field-wrapper {
+        width: 100% !important;
+    }
+}
+.sample_header_text {
+    font-family: $font;
+}
+.sample_mail {
+    .sample_text {
+        p {
+            @include p;
+        }
+    }
+}
+.pt_customerservice {
+    form {
+        .formfields {
+            select {
+                height: $form-field-height - $form-field-border-width * 2;
+                border: none;
+                margin: 0;
+            }
+            .formfield.textbox {
+                textarea.textbox {
+                    width: 100% !important;
+                    border-radius: $form-field-border-radius;
+                    border: $form-field-border;
+                }
+            }
+            .formfield {
+                .char-count.contact-us {
+                    width: 100%;
+                }
+            }
+        }
+        .form-row-button {
+            margin-top: rem(20px);
+            button {
+                @include button(submit);
+                width: auto;
+            }
+        }
+    }
+    .site-map {
+        h2 {
+            font-family: $global-font-family;
+        }
+        ul {
+            li {
+                &.first-level {
+                    ul {
+                        li {
+                            margin-bottom: 18px;
+                            font-size: 12px;
+                            font-family: $global-font-family;
+                            a {
+                                color: $bg-darkbrown;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #content {
+        .style-cservice {
+            .column {
+                .cell {
+                    &.contentbox {
+                        .dealer {
+                            &.contentboxcontent {
+                                .confirmation-message {
+                                    padding: 0;
+                                    p {
+                                        font-family: $font;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pt_acc_landing {
+    #NewPasswordForm {
+        max-width: rem(400px);
+        .form-row {
+            margin: $form-row-margin;
+            .label {
+                @include label;
+                padding: 0;
+                .labeltext {
+                    color: inherit;
+                    font-family: inherit;
+                    font-size: inherit;
+                    font-style: inherit;
+                    line-height: inherit !important;
+                    text-transform: inherit;
+                    font-variant: inherit !important;
+                    font-weight: inherit;
+                    margin: 0;
+                }
+            }
+        }
+        .form-row-button {
+            button {
+                @include button(submit);
+            }
+        }
+        .form-row.inputlabel .label span,
+        .formfield.inputlabel .label span {
+            color: $form-label-color;
+        }
+    }
+}
+
+#container.pt_error {
+    #primary.primary-content {
+        .contentboxcontent {
+            @include respond(desktop-down) {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+#container.pt_account  {
+    #main {
+        z-index: 2;
+    }
+}
+.signupfor-email-edit {
+    position: relative;
+    .sample_mail_main {
+        top: rem(50px) !important;
+    }
+}
+.new-register {
+    .password-format {
+        @include font-size(13px);
+        padding-bottom: rem(15px);
+        @include respond(large-up) {
+            padding: 0 rem(23px) rem(15px) rem(23px);
+        }
+    }
+}
+
