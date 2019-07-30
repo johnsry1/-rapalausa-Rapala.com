@@ -20,33 +20,8 @@
 	    </isif>
 		
 		<iscomment>Setting up a canonical link to the homepage</iscomment>
-		<isif condition="${'rapala' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.rapala.com/" />
-		<iselseif condition="${'sufix' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.sufix.com/" />
-		<iselseif condition="${'triggerx' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.triggerx.com/" />
-		<iselseif condition="${'storm' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.stormlures.com/" />
-		<iselseif condition="${'luhrjensen' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.luhrjensen.com/" />
-		<iselseif condition="${'iceforce' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.iceforce.com/" />
-		<iselseif condition="${'vmc' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.vmchooks.com/" />
-		<iselseif condition="${'bluefox' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.bluefox.com/" />
-		<iselseif condition="${'terminator' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.terminatorlures.com/" />
-		<iselseif condition="${'williamson' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.williamsonlures.com/" />
-		<iselseif condition="${'marcum' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.marcumtech.com/" />
-		<iselseif condition="${'otter' == session.custom.currentSite}">
-			<link rel="canonical" href="https://www.otteroutdoors.com/" />		
-		<iselse/>
-			<link rel="canonical" href="https://www.rapala.com/" />
-		</isif>
+        <link rel="canonical" href="${URLUtils.https('Search-Show', 'cgid', session.custom.currentSite+'-home')}" />
+
 		<iscomment>Add page type specific header information here.</iscomment>
 	</head>
 	<body>
