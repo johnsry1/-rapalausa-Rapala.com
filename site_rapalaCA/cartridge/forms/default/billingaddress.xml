@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+
+	<field formid="title" label="resource.title" type="string" mandatory="false" binding="title" max-length="30" missing-error="address.title.missing" range-error="address.field.invalid">
+		<options>
+            <option optionid=""     label="resource.select"     value=""/>
+			<option optionid="mr" label="resource.title.Mr" value="Mr"/>
+			<option optionid="mrs" label="resource.title.Mrs" value="Mrs"/>
+			<option optionid="ms" label="resource.title.Ms" value="Ms"/>
+		</options>
+	</field>
+	<field formid="firstName" label="profile.firstname" type="string" mandatory="true" binding="firstName" max-length="100" missing-error="address.firstname.missing" range-error="address.field.invalid" />
+	<field formid="lastName" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="100" missing-error="address.lastname.missing" range-error="address.field.invalid" />
+	<!-- use set of supported billing countries -->
+	<field formid="country" label="resource.country" type="string" default-value="US" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
+		<options>
+            <option optionid=""     label="resource.select"     value=""/>
+            <option optionid="AT"   label="country.austria" value="AT"/>
+            <option optionid="BE"   label="country.belgium" value="BE"/>
+            <option optionid="BG"   label="country.bulgaria"    value="BG"/>
+            <option optionid="HR"   label="country.croatia" value="HR"/>
+            <option optionid="CY"   label="country.cyprus"  value="CY"/>
+            <option optionid="CZ"   label="country.czechrepublic"  value="CZ"/>
+            <option optionid="DK"   label="country.denmark" value="DK"/>
+            <option optionid="EE"   label="country.estonia" value="EE"/>
+            <option optionid="FI"   label="country.finland" value="FI"/>
+            <option optionid="FR"   label="country.france"  value="FR"/>
+            <option optionid="DE"   label="country.germany" value="DE"/>
+            <option optionid="GR"   label="country.greece"  value="GR"/>
+            <option optionid="HU"   label="country.hungary" value="HU"/>
+            <option optionid="IE"   label="country.ireland" value="IE"/>
+            <option optionid="IT"   label="country.italy"   value="IT"/>
+            <option optionid="LV"   label="country.latvia"  value="LV"/>
+            <option optionid="LT"   label="country.lithuania"   value="LT"/>
+            <option optionid="LU"   label="country.luxembourg"  value="LU"/>
+            <option optionid="MT"   label="country.malta"   value="MT"/>
+            <option optionid="NL"   label="country.netherlands" value="NL"/>
+            <option optionid="PL"   label="country.poland"  value="PL"/>
+            <option optionid="PT"   label="country.portugal"    value="PT"/>
+            <option optionid="RO"   label="country.romania" value="RO"/>
+            <option optionid="SK"   label="country.slovakia"    value="SK"/>
+            <option optionid="SI"   label="country.slovenia"    value="SI"/>
+            <option optionid="ES"   label="country.spain"   value="ES"/>
+            <option optionid="SE"   label="country.sweden"  value="SE"/>
+            <option optionid="GB"   label="country.unitedkingdom"  value="GB"/>
+		</options>
+	</field>
+	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="200" missing-error="forms.addresserror" range-error="forms.address.field.invalid" />
+	<field formid="suite" label="forms.suite" type="string" mandatory="true" binding="suite" max-length="50" missing-error="forms.suiteerror" range-error="forms.suite.field.invalid" />
+	<field formid="streetName" label="forms.streetName" type="string" mandatory="true" binding="custom.streetName" max-length="50" missing-error="forms.streetnameerror" range-error="forms.streetname.field.invalid" />
+	<field formid="address2" label="resource.address2" type="string" mandatory="false" binding="address2" max-length="200" range-error="address.field.invalid" />
+	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" max-length="200" missing-error="address.city.missing" range-error="address.field.invalid" />
+	<!--  postal code -->
+	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" max-length="50" binding="postalCode"
+		missing-error="resource.errorpostal"/>
+
+
+	<!-- use global state list -->
+	<include formid="states" name="states"/>
+
+    <!-- phone is optional for billing addresses -->
+    <field formid="phone" label="profile.phone" type="string" mandatory="true" binding="phone" max-length="50" missing-error="address.phone.missing" range-error="address.field.invalid" />
+
+	<!-- actions provided by the edit billing address dialog -->
+	<action formid="apply" valid-form="true"/>
+	<action formid="remove" valid-form="false"/>
+</form>
