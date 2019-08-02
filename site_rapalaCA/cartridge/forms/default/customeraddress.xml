@@ -15,39 +15,10 @@
 		missing-error="customeraddress.firstname.missing-error"/>
 	<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"
 		missing-error="customeraddress.lastname.missing-error"/>
-	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
-		missing-error="customeraddress.country.missing-error">
+	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
 		<options>
-            <option optionid=""     label="resource.select"     value=""/>
-            <option optionid="AT"   label="country.austria" value="AT"/>
-            <option optionid="BE"   label="country.belgium" value="BE"/>
-            <option optionid="BG"   label="country.bulgaria"    value="BG"/>
-            <option optionid="HR"   label="country.croatia" value="HR"/>
-            <option optionid="CY"   label="country.cyprus"  value="CY"/>
-            <option optionid="CZ"   label="country.czechrepublic"  value="CZ"/>
-            <option optionid="DK"   label="country.denmark" value="DK"/>
-            <option optionid="EE"   label="country.estonia" value="EE"/>
-            <option optionid="FI"   label="country.finland" value="FI"/>
-            <option optionid="FR"   label="country.france"  value="FR"/>
-            <option optionid="DE"   label="country.germany" value="DE"/>
-            <option optionid="GR"   label="country.greece"  value="GR"/>
-            <option optionid="HU"   label="country.hungary" value="HU"/>
-            <option optionid="IE"   label="country.ireland" value="IE"/>
-            <option optionid="IT"   label="country.italy"   value="IT"/>
-            <option optionid="LV"   label="country.latvia"  value="LV"/>
-            <option optionid="LT"   label="country.lithuania"   value="LT"/>
-            <option optionid="LU"   label="country.luxembourg"  value="LU"/>
-            <option optionid="MT"   label="country.malta"   value="MT"/>
-            <option optionid="NL"   label="country.netherlands" value="NL"/>
-            <option optionid="PL"   label="country.poland"  value="PL"/>
-            <option optionid="PT"   label="country.portugal"    value="PT"/>
-            <option optionid="RO"   label="country.romania" value="RO"/>
-            <option optionid="SK"   label="country.slovakia"    value="SK"/>
-            <option optionid="SI"   label="country.slovenia"    value="SI"/>
-            <option optionid="ES"   label="country.spain"   value="ES"/>
-            <option optionid="SE"   label="country.sweden"  value="SE"/>
-            <option optionid="GB"   label="country.unitedkingdom"  value="GB"/>
-        </options>
+			<option optionid="CA" label="resource.country.ca" value="CA"/>
+		</options>
 	</field>
 	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50"
 		description="customeraddress.address1.description"
