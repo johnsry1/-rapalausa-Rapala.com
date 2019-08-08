@@ -284,3 +284,82 @@ ViewHelpers.parseStaticLocaleValues = function(obj){
 	}
 	return output;
 }
+
+/**
+*	Getting hreflang value according to allowed locale in the site and values in custom prefernce hreflang SEO
+*	First, get values from the custom preference hreflangSEO and create dictionary allHrefLangSEODict where key = countryCode, value = hreflang target
+*   For example key = "cz" and value = "en-cz"
+*   Then iterate through allowed locales in the site, get country from locale. Country from locale used like a key for getting hreflang from dictionary allHrefLangSEODict.
+*   If locale country are empty then it is not passed to result and <link rel="alternate" will not being shown.  
+*/
+ViewHelpers.getHreflangTags = function(){
+	// key = countryCode, value = hreflang target
+	var allHrefLangSEODict = {};
+	var result = [];
+
+	var site = dw.system.Site.getCurrent();
+
+	//get href
+	var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, request.locale);
+	var paramArray = [];
+	for each (var paramName in request.httpParameterMap.parameterNames) {
+		paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+	}
+	var href = dw.web.URLUtils.abs(action, paramArray);
+
+	// get allowed locales
+    var allActiveLocaleArray = site.getAllowedLocales();
+
+	// get all locales form the custom preferences
+	// and set to the dictionary allHrefLangSEODict with key = countryCode, value = hreflang target
+	// countryCode is the second part of hreflang target. 
+	// For example countryCode = "fi" for hreflang "en-fi"
+	var hrefLangSEOSettings = site.getCustomPreferenceValue('hrefLangSEO');
+	var hrefLangSEOArray = hrefLangSEOSettings.split(',');
+	for each (var hrefLangSEO in hrefLangSEOArray) {
+		var hrefLang = hrefLangSEO.split('-');
+		var countryCode = '';
+		if (hrefLang.length == 2) {
+			countryCode = hrefLang[1];
+		} else {
+			countryCode = hrefLang[0];
+		}
+
+		countryCode = countryCode.toLowerCase();
+		allHrefLangSEODict[countryCode] = hrefLangSEO;
+	}
+
+    // add obj with href and hrefLang into the result 
+    // if allowed locale in the site is in the custom preferences "hreflang SEO" 
+    for each (var activeLocale in allActiveLocaleArray) {
+    	var countryCode = '';
+
+    	if (activeLocale == 'default') {
+    		countryCode = activeLocale;
+    	} else {
+    		countryCode = dw.util.Locale.getLocale(activeLocale).country;
+    	}
+
+    	if (empty(countryCode)){
+    		continue;
+    	}
+
+    	countryCode = countryCode.toLowerCase();
+
+    	var hrefLangTarget = allHrefLangSEODict[countryCode];
+
+    	if (empty(hrefLangTarget)){
+    		continue;
+    	}
+
+    	var obj = {
+    		href:href,
+    		hrefLang: hrefLangTarget
+    	}
+
+    	result.push(obj);
+    }
+
+	return result;
+};
+
