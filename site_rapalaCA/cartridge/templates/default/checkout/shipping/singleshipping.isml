@@ -202,6 +202,7 @@
 										<isset name="addressForm" value="${pdict.CurrentForms.singleshipping.shippingAddress.addressFields}" scope="page">
 										<div class="selected-shipping-address <isif condition="${billingreturn == 'true' || (pdict.CurrentHttpParameterMap.addressDisplay.value != null && pdict.CurrentHttpParameterMap.addressDisplay.value != 'true')}">hide</isif>">
 											<isif condition="${addressForm.firstName.value != null}">
+												<isif condition="${addressForm.title.value != null}"><isprint value="${addressForm.title.value}"/></isif><isprint value="${addressForm.firstName.value}"/> <isprint value="${addressForm.lastName.value}"/><br/>
 												<isprint value="${addressForm.firstName.value}"/> <isprint value="${addressForm.lastName.value}"/><br/>
 												<isprint value="${addressForm.address1.value}"/> <isif condition="${addressForm.address2.value != null}"><isprint value="${addressForm.address2.value}"/></isif><br/>
 												<isprint value="${addressForm.city.value}"/> <isprint value="${addressForm.states.state.value}"/> <isprint value="${addressForm.postal.value}"/><br/>
@@ -219,6 +220,7 @@
 									<isscript>
 										var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 									</isscript>
+									${currentCountry}
 									<isif condition="${!pdict.CurrentCustomer.authenticated ||  pdict.MultiAddressCheck=='false'||  billingreturn == 'true' || productListAddresses.size() ==0 || pdict.addressError == true}">
 										<div class="shipping-address-field-section">
 									<iselseif condition="${pdict.CurrentCustomer.authenticated && productListAddresses.size() > 0}">

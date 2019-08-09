@@ -1,7 +1,7 @@
 [{
 	"countryCode": "CA",
 	"name": {
-		"en_US": "United States"
+		"en_CA": "United States"
 	},
 	"continent": "northamerica",
 	"locales": ["en_CA"],
@@ -15,20 +15,16 @@
 	],
 	"dynamicForms": {
 		"addressDetails": {
-			"title" : {
-				"type": "select",
-				"rowclass" : "title"
-			},
 			"firstName": {
-				"rowclass" : "firstname",
+				"rowclass" : "form-row-50 form-row-left firstname",
 				"requiredMsg": "Please enter your First Name"
 			},
-			"lastName": {
-				"rowclass" : "lastname",
+			"lastName": { 
+				"rowclass" : "form-row-50 form-row-right lastname",
 				"requiredMsg": "Please enter your Last Name"
 			},
 			"address1" : {
-				"rowclass" : "address1",
+				"rowclass" : "form-row-50 form-row-left address1",
 				"requiredMsg": "Please enter your Address",
 				"help": {
 					"cid": "help-address-1",
@@ -39,12 +35,15 @@
 				}
 			},
 			"city" : {
-				"rowclass" : "city",
-				"requiredMsg": "Please enter your Town"
+				"rowclass" : "form-row-50 form-row-left city",
+				"requiredMsg": "Please enter your City"
 			},
 			"postal" : {
-				"rowclass" : "zip",
-				"requiredMsg": "Please enter your Postal Code",
+				"rowclass" : "form-row-50 form-row-left zip",
+				"requiredMsg": "Please enter your 5 or 9 digit Zip Code with or without a hyphen",
+				"attributes": {
+					"pattern":"*"
+				},
 				"help": {
 					"cid": "help-zipcode",
 					"label": {
@@ -54,37 +53,37 @@
 				}
 			},
 			"country": {
-				"requiredMsg": "Please select your Country",
-				"type": "select"
+				"type": "select",
+				"rowclass" : "hide"
 			},
 			"states": [{
 				"fieldClass": "selectbox custom-select-wrap",
-                "rowclass": "custom-select state-blk",
+                "rowclass": "form-row-50 form-row-right custom-select state-blk",
                 "requiredMsg": "Please enter your State",
 				"fieldName": "state",
 				"type": "select",
 				"required": true
 			}],
 			"address2": {
-				"rowclass" : "address2",
+				"rowclass" : "form-row-50 form-row-right address2",
 				"attributes" : {
 					"placeholder" : "optional"
 				},
 				"help": {
 					"cid": "help-address-2",
 					"label": {
-						"property": "?",
+						"property": "singleshipping.apofpo",
 						"file": "checkout"
 					}
 				}
 			},
 			"phone": {
-				"rowclass" : "phone",
+				"rowclass" : "form-row-50 form-row-right phone",
 				"requiredMsg": "Please enter your Phone Number",
 				"help": {
 					"cid": "help-telephone",
 					"label": {
-						"property": "?",
+						"property": "singleshipping.phonerequired",
 						"file": "checkout"
 					}
 				}
@@ -95,14 +94,10 @@
 				"help": {
 					"cid": "help-address-2",
 					"label": {
-						"property": "?",
+						"property": "APO/FPO",
 						"file": "addressbook"
 					}
 				}
-			},
-			"title" : {
-				"type": "select",
-				"rowclass" : "title"
 			},
 			"firstname": {
 					"requiredMsg": "This field is required."
@@ -135,12 +130,12 @@
 					"requiredMsg": "This field is required."
 			},
 			"phone": {
-				"rowclass" : "phone",
+				"rowclass" : "form-row-50 form-row-right phone",
 				"requiredMsg": "This field is required.",
 				"help": {
 					"cid": "help-telephone",
 					"label": {
-						"property": "?",
+						"property": "Why is this required?",
 						"file": "checkout"
 					}
 				}
