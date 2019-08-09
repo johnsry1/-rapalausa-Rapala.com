@@ -9,7 +9,6 @@
 			<option optionid="ms" label="resource.title.Ms" value="Ms"/>
 		</options>
 	</field>
-
 	<field formid="firstName" label="profile.firstname" type="string" mandatory="true" binding="firstName" max-length="30" missing-error="address.firstname.missing" range-error="address.field.invalid" />
 	<field formid="lastName" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="30" missing-error="address.lastname.missing" range-error="address.field.invalid" />
 	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="30" missing-error="resource.addresserror" range-error="address.field.invalid" />
@@ -20,8 +19,8 @@
 	<include formid="states" name="states"/>
 	
 	<!--  postal code -->
-	<field formid="postal" label="resource.zipcode" type="string" mandatory="true" max-length="10" regexp="(^\d{5}(-\d{4})?$)|(^[abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Za-z]{1} *\d{1}[A-Za-z]{1}\d{1}$)" binding="postalCode"
-		missing-error="resource.errorzip"/>
+	<field formid="postal" label="resource.postalcode" type="string" mandatory="true" max-length="50" binding="postalCode"
+		missing-error="resource.errorpostal"/>
 		
 	<!-- use set of supported shipping countries -->
 	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
