@@ -6,7 +6,7 @@ var regex = {
         default: /^[+0-9]{7,20}$/
     },
     postal: {
-        ca: /^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] ?\d[A-Z]\d)$/i,
+        ca: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )3?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i,
         default: /^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] ?\d[A-Z]\d)$/
     },
     notCC: /^(?!(([0-9 -]){13,19})).*$/

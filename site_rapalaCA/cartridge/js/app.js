@@ -657,7 +657,7 @@ var app = {
             var IPGeoCode = geoipCountryCode();
             var allowedCountries = $('.allowed-countries').text();
             if (allowedCountries == null || allowedCountries == 'null' || allowedCountries == 'undefined') {
-                allowedCountries = 'CA';
+                allowedCountries = 'UA';
             }
             if (allowedCountries.indexOf(IPGeoCode) == -1) {
                 $('html').addClass('no-pricing');

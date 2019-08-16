@@ -220,7 +220,6 @@
 									<isscript>
 										var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
 									</isscript>
-									${currentCountry}
 									<isif condition="${!pdict.CurrentCustomer.authenticated ||  pdict.MultiAddressCheck=='false'||  billingreturn == 'true' || productListAddresses.size() ==0 || pdict.addressError == true}">
 										<div class="shipping-address-field-section">
 									<iselseif condition="${pdict.CurrentCustomer.authenticated && productListAddresses.size() > 0}">
