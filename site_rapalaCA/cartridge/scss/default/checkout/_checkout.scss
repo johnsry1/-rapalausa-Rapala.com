@@ -340,10 +340,6 @@
             width: 100%;
             padding-left: 0 !important;
             margin-bottom: 0;
-            @include respond(large-up) {
-                width: rem($form-horizontal-field-width  + 20px) !important;
-                padding-left: rem($form-horizontal-field-padding) !important;
-            }
             .select-style {
                 @include respond(medium-down) {
                     width: calc(100% - 20px);
@@ -428,9 +424,6 @@
         }
         .label {
             font-family: $font;
-            @include respond(large-up) {
-                line-height: 40px !important;
-            }
         }
         .clearbutton {
             top: rem(4px) !important;
@@ -1366,6 +1359,7 @@
         .label {
             @include label;
             margin-bottom: 0;
+            text-align: left;
             @include respond(medium-down) {
                 margin-left: 0;
                 padding-left: 0;
@@ -1464,9 +1458,6 @@
             margin-left: 0 !important;
             @include font-size(13px);
             text-align: left;
-            @include respond(large-up) {
-                margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
-            }
         }
         .custom-checkbox {
             margin: 0 !important;
@@ -1895,9 +1886,6 @@
     }
     .add-to-email-new {
         margin-top: 0;
-        @include respond(large-up) {
-            padding-left: rem($form-horizontal-label-width - 6px);
-        }
         .label {
           &:before {
               float: left;
@@ -2367,6 +2355,62 @@
         
         .form-row {
             width: 48%;
+            &.custom-select {
+                .select-style select {
+                    height: 35px !important;
+                }
+            }
+
+            label {
+                text-align: left;
+                line-height: 1;
+                width: auto !important; 
+            }
         }
+        #state-container {
+            max-width: 48%;
+            width: 274px;
+            &:first-child {
+                display: none !important;
+            }
+            .form-row {
+                width: 275px;
+                
+                .field-wrapper {
+                    width: 100% !important;
+                    .select-style {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .formfield.formfield-email.addressid {
+        width: 274px;
+        position: relative;
+        .address-tooltip.tooltip {
+            left: auto !important;
+            right: 0;
+        }
+    }
+}
+
+.hide.country {
+    display: none !important;
+}
+
+.shipping-address-field-section {
+    .form-row-type-select.title {
+        display: none;
+    }
+}
+
+.form-row-type-text.phone {
+    position: relative;
+    
+    .tooltip.Custom-tooltip {
+        position: absolute;
+        right: 0;
+        top: -4px;
     }
 }

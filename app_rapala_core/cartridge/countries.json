@@ -607,6 +607,10 @@
 	],
 	"dynamicForms": {
 		"addressDetails": {
+			"title" : {
+				"type": "select",
+				"rowclass" : "title"
+			},
 			"firstName": {
 				"rowclass" : "form-row-50 form-row-left firstname",
 				"requiredMsg": "Please enter your First Name"
@@ -634,7 +638,7 @@
 				"rowclass" : "form-row-50 form-row-left zip",
 				"requiredMsg": "Please enter your Postal Code",
 				"attributes": {
-					"pattern":"*"
+					
 				},
 				"help": {
 					"cid": "help-zipcode",
@@ -646,7 +650,7 @@
 			},
 			"country": {
 				"type": "select",
-				"rowclass" : "hide"
+				"rowclass" : "hide country"
 			},
 			"states": [{
 				"fieldClass": "selectbox custom-select-wrap",
@@ -708,7 +712,7 @@
 			},
 			"country": {
 				"type": "select",
-				"rowclass" : "custom-select"
+				"rowclass" : "custom-select hide"
 			},
 			"states": [{
 				"fieldName": "state",
