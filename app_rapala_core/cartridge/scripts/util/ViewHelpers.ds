@@ -343,7 +343,7 @@ ViewHelpers.getHreflangTags = function(){
     }
 
     //get href
-	var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, request.locale);
+	var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, site.defaultLocale);
 	var paramArray = [];
 	for each (var paramName in request.httpParameterMap.parameterNames) {
 		paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
