@@ -47,7 +47,7 @@ function show() {
     	app.getView().render('content/home/homepage');
     }
     else{
-    	
+
     	if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
             // TODO refactor and merge showProductGrid() code into here
             showProductGrid();
@@ -55,7 +55,7 @@ function show() {
         }
 
         var redirectUrl = SearchModel.getSearchRedirect(params.q.value);
-        
+
         if (redirectUrl){
             app.getView({
                 Location: redirectUrl.location,
@@ -76,7 +76,7 @@ function show() {
         // execute the product search
         productSearchModel.search();
         contentSearchModel.search();
-        
+
         if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
             response.redirect(URLUtils.abs('Home-Show'));
         } else if (productSearchModel.count > 0) {
@@ -160,15 +160,15 @@ function show() {
                 searchedID: params.id.stringValue.toLowerCase(),
                 searchedValue : params.q.stringValue
             }).render('blog/articlesearch');
-            
+
         } else {
             app.getView({
                 ProductSearchResult: productSearchModel,
                 ContentSearchResult: contentSearchModel
             }).render('search/nohits');
         }
-    	
-   
+
+
     }
 
 }
@@ -200,17 +200,19 @@ function showContent() {
     var renderBlogPages = false;
     if (searchedFolderId != null && !empty(searchedFolderId)) {
         var blogRootFolder = dw.system.Site.getCurrent().getCustomPreferenceValue('blogRootFolder');
-        if (blogRootFolder === searchedFolderId.ID || blogRootFolder === searchedFolderId.parent.ID || blogRootFolder === searchedFolderId.parent.parent.ID) {
+        if (blogRootFolder === searchedFolderId.ID ||
+                (!empty(searchedFolderId.parent) && blogRootFolder === searchedFolderId.parent.ID) ||
+                (!empty(searchedFolderId.parent.parent) && blogRootFolder === searchedFolderId.parent.parent.ID)) {
             contentSearchModel.setSortingCondition('weight', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
             contentSearchModel.setSortingCondition('creationDate', dw.catalog.SearchModel.SORT_DIRECTION_DESCENDING);
             renderBlogPages = true;
-            
+
             if (searchedFolderId.custom.content_search_term != null && !empty(searchedFolderId.custom.content_search_term)) {
                 contentSearchModel.setSearchPhrase(searchedFolderId.custom.content_search_term);
             }
         }
     }
-    
+
 
     // Executes the product search.
     productSearchModel.search();
@@ -258,12 +260,12 @@ function showContent() {
  * Renders the search suggestion page (search/suggestions template).
  */
 function getSuggestions() {
-	
+
 	var searchResults = new Pipelet('GetSearchSuggestions').execute({
 		MaxSuggestions : 10,
 		SearchPhrase : request.httpParameterMap.q.value
     });
-	
+
     app.getView({
     	Suggestions : searchResults.Suggestions
     }).render('search/suggestions');
@@ -333,11 +335,11 @@ function showInLocale() {
 	let locale = request.httpParameterMap.isParameterSubmitted('locale') ? request.httpParameterMap.locale.value : 'default';
 	let cgid = request.httpParameterMap.isParameterSubmitted('cgid') ? request.httpParameterMap.cgid.value : '';
 	let fdid = request.httpParameterMap.isParameterSubmitted('fdid') ? request.httpParameterMap.fdid.value : '';
-	
+
 	request.setLocale(locale);
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
 	InterstitialHelper.setInterstitialSiteCookie(request);
-	
+
 	if (!empty(cgid)) {
 		if (dw.catalog.CatalogMgr.getCategory(cgid)) {
 			return show();
@@ -357,12 +359,12 @@ function showInLocale() {
  * Web exposed methods
  */
 /** Renders a full featured product search result page.
- * @see module:controllers/Search~show 
+ * @see module:controllers/Search~show
  * */
 exports.Show            = guard.ensure(['get'], show);
 
 /** Renders a full featured content search result page.
- * @see module:controllers/Search~showContent 
+ * @see module:controllers/Search~showContent
  * */
 exports.ShowContent     = guard.ensure(['get'], showContent);
 
