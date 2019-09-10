@@ -64,10 +64,10 @@ const Org_TagManager = {
             case Util.NAMESPACE.SEARCH :
                 var productId = ''+request.httpParameterMap.productid.value || null;
                 var pageCategoryId = ''+request.httpParameterMap.cgid.value || null;
-                if (pageCategoryId != null && productId == 'null') {
+                if (pageCategoryId != 'null' && productId == 'null') {
                     return 'categoryPage';
                 }
-                return '';
+                return 'searchResults';
             case Util.NAMESPACE.WISHLIST :
                 return '';
             case Util.NAMESPACE.HOME : 
@@ -150,6 +150,7 @@ const Org_TagManager = {
             pageType: args.pageType,    
             ecommerce: {
                 detail: {
+                	actionField: {list: null},
                     products: []
                 }
             }
@@ -162,9 +163,21 @@ const Org_TagManager = {
             product = args.Product;
         }
 
-        if (product) {
-            obj.ecommerce.detail.products.push(this.getProductObject(product));
-        }
+        var productObj = this.getProductObject(product);
+
+        // update list if product was clicked from category page
+    	if (!empty(request.httpParameterMap.taglist) && request.httpParameterMap.taglist.value != null) {
+			var list = request.httpParameterMap.taglist.value;
+			productObj = this.getProductObject(product);
+			productObj.list = list;
+    	}
+
+    	//set list in to the actionField and delete list from products
+    	obj.ecommerce.detail.actionField.list = productObj.list;
+    	delete productObj.list;
+
+    	//set product
+    	obj.ecommerce.detail.products.push(productObj);
 
         return obj;
 
@@ -184,8 +197,19 @@ const Org_TagManager = {
             }
         };
 
-        if ('ProductSearchResult' in args && 'ProductPagingModel' in args) {
-            obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject)
+        if ('ProductSearchResult' in args) {
+            if (!empty(args.ProductSearchResult.searchPhrase)) {
+                obj.eventLabel = args.ProductSearchResult.searchPhrase + ' | ' + args.ProductSearchResult.count;
+                obj.eventAction = (args.ProductSearchResult.count > 0 ? 'True Search Results' : 'Null Results');
+            }
+            if ('ProductPagingModel' in args) {
+            	var list = null;
+            	if (args.pageType == "categoryPage" && args.ProductSearchResult.categorySearch) {
+            		list = Util.getCategorySearch(args.ProductSearchResult.category);
+            	}
+
+                obj.ecommerce.impressions = Util.getProductArrayFromList(Util.getSearchProducts(args.ProductSearchResult, args.ProductPagingModel).iterator(), this.getProductObject, list)
+            }
         }
 
         return obj;
@@ -260,7 +284,7 @@ const Org_TagManager = {
         if (customer) {
 
             customerObject.demandwareID = customer.ID;
-
+            
         }
         
         return customerObject;
@@ -373,6 +397,28 @@ Org_TagManager.getProductObject = function (product) {
     obj.price = Util.getProductOriginalPrice(product).value;
 
     return obj;
+
+};
+
+Org_TagManager.getCategorySearch = function (args, nameSpace) {
+
+	var categorySearch = null;
+
+	var pageType = this.getPageType(nameSpace, args);
+	if (pageType == "categoryPage" && nameSpace == Util.NAMESPACE.SEARCH) {
+		categorySearch = Util.getCategorySearch(args.ProductSearchResult.category);
+	}
+
+	return categorySearch;
+
+};
+
+Org_TagManager.getCategorySearchById = function (id) {
+
+	var category = dw.catalog.CatalogMgr.getCategory(id);
+	var categorySearch = Util.getCategorySearch(category);
+
+	return categorySearch;
 
 };
 
