@@ -7,9 +7,10 @@
 	var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true);
 	var caLink=dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
 	var euLink='/eu-en?countrySelect=true';
-	var fiLink='/fi-fi?countrySelect=true&locale=fi_FI';
-	var Site = dw.system.Site;
-	var allowedLocales = Site.getCurrent().getAllowedLocales();
+	var fiLink='/eu-en?countrySelect=true&locale=fi_FI';
+	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+	var showFinnishFlag : String = orgPrefs.getCustom()['showFinnishFlag'];
+
 	if (currentSite.ID == 'rapalaEU') {
 		currentCountry = 'eu';
 		var usLink=usLink.toString().replace('rapalaEU', 'rapala');
@@ -70,7 +71,7 @@
 			</a>
 		</div>
 		<div class="row second">
-			<a class="country <isif condition="${allowedLocales.indexOf('fi_FI') == -1}">single-country-row</isif>" href="${usLink}">
+			<a class="country <isif condition="${showFinnishFlag != true}">single-country-row</isif>" href="${usLink}">
 				<div class="flag-container">
 					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/us.svg')}" alt="${'ca'}">
 				</div>
@@ -79,7 +80,7 @@
 					<div class="url">${Resource.msg('global.usurl', 'locale', null)}</div>
 				</div>
 			</a>
-			<isif condition="${allowedLocales.indexOf('fi_FI') > -1}">
+			<isif condition="${showFinnishFlag}">
 				<div class="divider"></div>
 				<a class="country" href="${fiLink}">
 					<div class="flag-container">
