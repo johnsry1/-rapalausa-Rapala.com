@@ -1601,10 +1601,15 @@ a {
 
 .pt_product-details {
     .breadcrumb {
-        float: none;
+        @include respond($desktop-breakpoint - 1) {
+            float: none;
+            width: 996px;
+        }
+        float: left;
         margin: 0 auto;
-        width: 996px;
+        width: 100%;
         box-sizing: border-box;
+
     }
     .pdp-main {
         .pdpmain-content {

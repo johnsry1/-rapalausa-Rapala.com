@@ -5,6 +5,9 @@ body {
 #headerwrapper {
     @include respond($desktop-breakpoint - 1) {
         background: none;
+        float: none;
+        margin: 0 auto;
+        width: 996px;
     }
     #header {
         #brand-tabs-header {
@@ -63,6 +66,10 @@ body {
             }
         }
         .banner_prostaff {
+            @include respond(desktop-down) {
+                clear: both;
+                width: 100%;
+            }
             @include respond(desktop) {
                 margin-top: 0;
                 margin-bottom: rem(20px);
