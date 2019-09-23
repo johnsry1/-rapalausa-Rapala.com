@@ -83,7 +83,7 @@ function initializeEvents() {
     });
     /* used to slide toggle event in cart page promo code*/
     if ($('.pt_cart').length > 0) {
-        $(this).find('.applycoupon .label').text('Have a Promo Code?');
+        $(this).find('.applycoupon .label').text(Resources.HAVE_PROMO_CODE);
         $('.couponcode .label').click(function () {
             var $curObj = $(this);
             var fieldSection = '';
