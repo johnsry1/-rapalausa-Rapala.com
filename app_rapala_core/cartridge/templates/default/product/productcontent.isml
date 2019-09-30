@@ -29,7 +29,7 @@
 		if (pdict.available && !empty(avm.inventoryRecord)) {
 			availableCount = avm.inventoryRecord.perpetual ? "999" : avm.inventoryRecord.ATS.value.toFixed().toString();
 		}
-		var tagManager = require('int_googletags/cartridge/scripts/googletags/Org_TagManager');
+		var tagManager = require('int_googletags/cartridge/scripts/googletags/Site_TagManager');
 	</isscript>
 	<iscomment>
 		primary details
@@ -237,7 +237,7 @@
 										<input type="hidden" value="${pdict.CurrentHttpParameterMap.lineItemID.stringValue}" name="lineItemId" class="line-itemid"/>
 										<button name="_addToCart" type="button"  title="${Resource.msg('global.updatecart','locale',null)}"  value="${Resource.msg('global.updatecart','locale',null)}"  class="button-fancy-large add-to-cart addtocartbutton">${Resource.msg('global.cartupdate','locale',null)}</button>
 									<iselse/>
-										<button name="_addToCart" id="add-to-cart" type="button" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart addtocartbutton recommendation_cart" data-gtmdata="${JSON.stringify(tagManager.getProductData(pdict.Product.ID))}">${buttonTitle}</button>
+										<button name="_addToCart" id="add-to-cart" type="button" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart addtocartbutton recommendation_cart" data-gtmdata="${JSON.stringify(tagManager.getProductAddToCartObject(pdict.Product.ID))}">${buttonTitle}</button>
 									</isif>
 								</div>
 							</div>
@@ -275,7 +275,7 @@
 								</div>
 								<div class="addTo-cart-section">
 									<input type="text" class="input-text quantityinput" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}" disabled/>
-									<button name="_addToCart" id="add-to-cart" type="button" title="${buttonTitleDisabledSelectVariation}" value="${buttonTitleDisabledSelectVariation}" data-gtmdata="${JSON.stringify(tagManager.getProductData(pdict.Product.ID))}" class="button-fancy-large  add-to-cart-disabled addtocartbutton disabled"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
+									<button name="_addToCart" id="add-to-cart" type="button" title="${buttonTitleDisabledSelectVariation}" value="${buttonTitleDisabledSelectVariation}" data-gtmdata="${JSON.stringify(tagManager.getProductAddToCartObject(pdict.Product.ID))}" class="button-fancy-large  add-to-cart-disabled addtocartbutton disabled"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
 								</div>
 							</div>
 						</isif>
