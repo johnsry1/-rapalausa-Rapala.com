@@ -436,6 +436,199 @@
 		}
 	}
 }, {
+	"countryCode": "FI",
+	"name": {
+		"fi_FI": "Suomi"
+	},
+	"continent": "europe",
+	"locales": ["fi_FI"],
+	"currencyCode": "EUR",
+	"taxation": {
+		"type": "gross",
+		"rate": 0.2
+	},
+	"priceBooks" : [
+		"eur-list-prices",
+		"eur-sale-prices"
+	],
+	"dynamicForms": {
+"addressDetails": {
+			"title" : {
+				"type": "select",
+				"rowclass" : "title"
+			},
+			"firstName": {
+				"rowclass" : "firstname",
+				"requiredMsg": "Syötä etunimi"
+			},
+			"lastName": {
+				"rowclass" : "lastname",
+				"requiredMsg": "Syötä sukunimi"
+			},
+			"address1" : {
+				"rowclass" : "address1",
+				"requiredMsg": "Syötä osoitteesi",
+				"help": {
+					"cid": "help-address-1",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			},
+			"city" : {
+				"rowclass" : "city",
+				"requiredMsg": "Syötä postitoimipaikka"
+			},
+			"postal" : {
+				"rowclass" : "zip",
+				"requiredMsg": "Syötä postinumero",
+				"help": {
+					"cid": "help-zipcode",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			},
+			"country": {
+				"requiredMsg": "Valitse maa",
+				"type": "select"
+			},
+			"states": [{
+				"fieldClass": "selectbox custom-select-wrap",
+                "rowclass": "custom-select state-blk",
+                "requiredMsg": "Valitse osavaltio",
+				"fieldName": "state",
+				"type": "select",
+				"required": true
+			}],
+			"address2": {
+				"rowclass" : "address2",
+				"attributes" : {
+					"placeholder" : "optional"
+				},
+				"help": {
+					"cid": "help-address-2",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			},
+			"phone": {
+				"rowclass" : "phone",
+				"requiredMsg": "Syötä puhelinnumerosi",
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			}
+		},
+		"customerAddressDetails" : {
+			"address2": {
+				"help": {
+					"cid": "help-address-2",
+					"label": {
+						"property": "?",
+						"file": "addressbook"
+					}
+				}
+			},
+			"title" : {
+				"type": "select",
+				"rowclass" : "title"
+			},
+			"firstname": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"addressid": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"lastname": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"address1": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"city": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"country": {
+				"type": "select",
+				"rowclass" : "custom-select"
+			},
+			"states": [{
+				"fieldName": "state",
+				"type": "select",
+				"required": true,
+				"requiredMsg": "Kenttä vaaditaan.",
+				"rowclass" : "custom-select",
+				"fieldClass": "custom-select-wrap"
+			}],
+			"postal": {
+					"requiredMsg": "Kenttä vaaditaan."
+			},
+			"phone": {
+				"rowclass" : "phone",
+				"requiredMsg": "Kenttä vaaditaan.",
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			}
+		},
+		"giftRegistryEvent" : {
+			"eventaddress": [{
+				"fieldName": "country",
+				"type": "select"
+			}, {
+				"fieldName": "states.state"
+
+			}],
+			"type": {
+				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
+			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select",
+				"rowclass": "year"
+			},
+			"month" : {
+				"type" : "select",
+				"rowclass": "month"
+			}
+		}
+	}
+}, {
 	"countryCode": "FR",
 	"name": {
 		"fr_FR": "France"

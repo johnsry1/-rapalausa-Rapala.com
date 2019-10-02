@@ -1,4 +1,4 @@
-/**
+	/**
 * View Helpers are small snippets of code that can be called in your views to help keep isml DRY
 * i.e. Any code that you are repeating regularly can most likely be moved into a helper.
 */
@@ -284,3 +284,86 @@ ViewHelpers.parseStaticLocaleValues = function(obj){
 	}
 	return output;
 }
+
+/**
+*	Getting hreflang value according to allowed locale in the site and values in custom prefernce hreflang SEO
+*	First, get values from the custom preference hreflangSEO and create dictionary allHrefLangSEODict where key = countryCode, value = hreflang target
+*   For example key = "cz" and value = "en-cz"
+*   Then iterate through allowed locales in the site, get country from locale. Country from locale used like a key for getting hreflang from dictionary allHrefLangSEODict.
+*   If locale country are empty then it is not passed to result and <link rel="alternate" will not being shown.  
+*/
+ViewHelpers.getHreflangTags = function(){
+	// key = countryCode, value = hreflang target
+	var allHrefLangSEODict = {};
+	var result = [];
+	var hrefLangs = [];
+
+	var site = dw.system.Site.getCurrent();
+
+	// get allowed locales
+    var allActiveLocaleArray = site.getAllowedLocales();
+
+    // iterating through allowed locales and creating hrefLangTarget
+    for each (var activeLocale in allActiveLocaleArray) {
+    	
+    	//get href
+		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeLocale);
+		var paramArray = [];
+		for each (var paramName in request.httpParameterMap.parameterNames) {
+			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+		}
+		var href = dw.web.URLUtils.abs(action, paramArray);
+    	
+    	var hrefLangTarget = '';
+		
+    	if (activeLocale == 'default') {
+    		hrefLangTarget = 'x-default';
+    	} else {
+    		var activeLocaleArray = activeLocale.split('_');
+    		if (activeLocaleArray[1]) {
+    			hrefLangTarget = activeLocaleArray[0] + '-' + activeLocaleArray[1].toLowerCase();
+    		} else {
+    			hrefLangTarget = activeLocaleArray[0];
+    		}
+    	}
+
+    	if (empty(hrefLangTarget)){
+    		continue;
+    	}
+
+		hrefLangs.push(hrefLangTarget);
+
+    	var obj = {
+    		href:href,
+    		hrefLang: hrefLangTarget
+    	}
+
+    	result.push(obj);
+
+    }
+
+    //get href
+	var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, site.defaultLocale);
+	var paramArray = [];
+	for each (var paramName in request.httpParameterMap.parameterNames) {
+		paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+	}
+	var href = dw.web.URLUtils.abs(action, paramArray);
+
+	var hrefLangSEOSettings = site.getCustomPreferenceValue('hrefLangSEO');
+	var hrefLangSEOArray = hrefLangSEOSettings.split(',');
+	for each (var hrefLangSEO in hrefLangSEOArray) {
+		if (hrefLangs.indexOf(hrefLangSEO) != -1) {
+			continue;
+		}
+    	var obj = {
+    		href:href,
+    		hrefLang: hrefLangSEO
+    	}	
+    	
+    	result.push(obj);	
+	}
+
+	return result;
+};
+
