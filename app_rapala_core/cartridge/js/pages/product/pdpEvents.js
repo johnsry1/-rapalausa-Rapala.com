@@ -244,7 +244,11 @@ var product = function (response) {
         // add event to datalayer
         $('[name$=_addToCart]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                tagmanager.addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+                var source = ($(this).data('quickview')) ? 'Quickview' : 'PDP';
+                // init for product recommendations on pdp:
+                if (source!='PDP'){
+                    tagmanager.addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val(), source);
+                }
             }
         });	
         return addToCartBtn;
@@ -491,10 +495,10 @@ var product = function (response) {
         //var notAvailLevel = avLevels[Constants.AVAIL_STATUS_NOT_AVAILABLE];
 
         if (avStatus === Constants.AVAIL_STATUS_IN_STOCK) {
-            avMessage = '<span class=\'in-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'in-stock\'><link itemprop="availability" href="http://schema.org/InStock">' + avMessage + '</span>';
         }
         if (avStatus === 'NOT_AVAILABLE') {
-            avMessage = '<span class=\'out-of-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'out-of-stock\'><link itemprop="availability" href="http://schema.org/OutOfStock">' + avMessage + '</span>';
         }
         if (avStatus === Constants.AVAIL_STATUS_BACKORDER ||
             avStatus === Constants.AVAIL_STATUS_PREORDER) {
@@ -571,7 +575,6 @@ var product = function (response) {
         jQuery.each(thisProduct.selectedPrice, function () {
             price = (new Number(price) + new Number(this)).toFixed(2);
         });
-
         return price;
     };
     // Load the youtube videos only on demand
@@ -1392,13 +1395,15 @@ var product = function (response) {
                     formattedPrices = data;
                 }
             });
-
+            //get only the currency code/symbol
+            var currency = formattedPrices.standardPrice.split(standardPrice)[0];
+            
             // in case it is a promotional price then we do not care if it is 0
-            priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice">' + formattedPrices.salePrice + '</div>' : ' <div class="salesprice">N/A</div>';
+            priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice"> <span itemprop="priceCurrency" content="' + currency + '">' + currency + '</span><span itemprop="price" content="' + salePrice + '">' + salePrice + '</span></div>' : ' <div class="salesprice">N/A</div>';
 
             if (standardPrice > 0 && standardPrice > salePrice) {
                 // show both prices
-                priceHtml = '<div class="standardprice">' + formattedPrices.standardPrice + '</div>' + priceHtml;
+                priceHtml = '<div class="standardprice"> <span itemprop="priceCurrency" content="' + currency + '">' + currency + '</span><span itemprop="price" content="' + standardPrice + '">' + standardPrice + '</span></div>' + priceHtml;
             }
             if (standardPrice === 0 && salePrice === 0) {
                 if (this.selectedVar.earlyBirdMessage != '') {
@@ -2412,6 +2417,33 @@ var pdpEvents = {
                 }).appendTo(this);
                 $qvButton.off('click').on('click', function (e) {
                     e.preventDefault();
+                    if (SitePreferences.GTM_ENABLED && $(this).parent().find('.thumb-link').attr('data-gtmdata')) {
+                        var gtmData = $.parseJSON($(this).parent().find('.thumb-link').attr('data-gtmdata'));
+                        var list = gtmData.list;
+
+                        // remove list from product because it is in actionFiled
+                        delete gtmData.list;
+
+                        var obj = {
+                            'event': 'productClick',
+                            'event_info': {
+                                'label' : 'Quickview'
+                            },
+                            'ecommerce': {
+                                'click': {
+                                    'actionField': {'list': list},
+                                    'products': []
+                                },
+                                'detail': {
+                                    'actionField': {'list': list},
+                                    'products': []
+                                }
+                            }
+                        };
+                        obj.ecommerce.click.products.push(gtmData);
+                        obj.ecommerce.detail.products.push(gtmData);
+                        dataLayer.push(obj);
+                    }
                     var options = {
                         url: $(this).attr('href'), //PREV JIRA PREV-255 :PLP: On Click Quick view navigating to a wrong page when user first changes the swatches. Taking only href.
                         source: 'quickview'

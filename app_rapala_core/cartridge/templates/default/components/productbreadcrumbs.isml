@@ -7,33 +7,34 @@
 		<div class="row column1">
 			<div class="column">
 				<div class="cell">
-					<ul>
+					<ul itemscope itemtype="http://schema.org/BreadcrumbList">
+					   <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
 					<isset name="site" value="${session.custom.currentSite}" scope="page" />
-	
+
 					<isif condition="${'rapala' == site}">
-						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','1')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+						<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','1')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'sufix' == site}">
-						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','2')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+						<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','2')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'triggerx' == site}">
-						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','3')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+						<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','3')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					<iselseif condition="${'storm' == site}">
-						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','4')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+						<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','4')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					<iselseif condition="${'vmc' == site}">
-						<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','6')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+						<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','6')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'luhrjensen' == site}">
-	   					<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','5')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+	   					<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','5')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'marcum' == site}">
-	   					<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','10')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+	   					<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','10')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					<iselseif condition="${'terminator' == site}">
-					  	<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','7')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					  	<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','7')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'strikemaster' == site}">
-					   	<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','11')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash">  </span>
+					   	<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','11')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash">  </span>
 					<iselseif condition="${'bluefox' == site}">
-					   	<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','8')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					   	<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','8')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					<iselseif condition="${'williamson' == site}">
-					  	<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','9')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+					  	<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','9')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					<iselseif condition="${'iceforce' == site}">
-	   					<a class="breadcrumb-element" href="${URLUtils.https('Home-Show','id','20')}">${Resource.msg('global.breadcrumbs.home','locale',null)}</a><span class="breadcrumb-element-slash"> </span>
+	   					<a class="breadcrumb-element" itemprop="item" href="${URLUtils.https('Home-Show','id','20')}"><span itemprop="name">${Resource.msg('global.breadcrumbs.home','locale',null)}</span></a><meta itemprop="position" content="1" /><span class="breadcrumb-element-slash"> </span>
 					</isif>
 						
 					<iscomment>
@@ -93,14 +94,18 @@
 						<iscomment>display the path</iscomment>
 						<isloop items="${path}" var="cat" status="loopstate">
 						<isif condition="${!loopstate.first}">
-							<a class="breadcrumb-element" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}">${cat.displayName}</a>
-						<span class="breadcrumb-element-slash">  </span>
+                            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                <a class="breadcrumb-element" itemprop="item" href="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show',cat.ID)}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}"><span itemprop="name">${cat.displayName}</span></a>
+                                <meta itemprop="position" content="${loopstate.count}" />
+                                <span class="breadcrumb-element-slash">  </span>
+                            </li>
 						</isif>
 						</isloop>
 				
 						<iscomment>append product name</iscomment>
 						<span class="breadcrumb-element"><isproductname productname="${pdict.Product.name}"/></span>
 					</isif>
+					</li>
 					</ul>
 				</div>
 			</div>
