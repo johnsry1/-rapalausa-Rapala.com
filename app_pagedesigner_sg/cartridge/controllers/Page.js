@@ -20,3 +20,4 @@ function show() {
 /** @see module:controllers/Page~show */
 exports.Show = guard.ensure(['get'], show);
 exports.Include = module.superModule.Include;
+exports.ShowInLocale = module.superModule.ShowInLocale;
