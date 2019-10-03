@@ -11,6 +11,8 @@ if ( pdict.Product && pdict.Product.variationGroup )
 {
 	pdict.Product = pdict.Product.masterProduct;
 }
+var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
+
 </isscript>
 
 <isif condition="${pdict.Product.master && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
@@ -108,6 +110,12 @@ if ( pdict.Product && pdict.Product.variationGroup )
 				<div>
 
                         <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
+						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
+                        <isif condition="${isInStock}">
+	                        <link itemprop="availability" href="http://schema.org/InStock" />In stock
+	                    <iselse/>
+	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />Out of Stock
+	                    </isif>
                         <span itemprop="lowprice" content="${pdict.Product.priceModel.minPrice.value}">
                             <isprint value="${pdict.Product.priceModel.minPrice}"/>
                         </span>
@@ -124,7 +132,7 @@ if ( pdict.Product && pdict.Product.variationGroup )
                     </isif>
 					<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 					
-					<span itemprop="saleprice" class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
+					<span class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
 						<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
                             <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
                             <span itemprop="price" content="${pdict.Product.priceModel.minPrice.value}">
