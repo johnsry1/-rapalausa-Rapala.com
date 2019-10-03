@@ -123,6 +123,8 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
     float: left;
     width: 100%;
     background: $white;
+    position: relative;
+    z-index: 2;
     @include respond($desktop-breakpoint - 1) {
         background: transparent url("../images/header-background.jpg") top left repeat-x;
     }
@@ -322,9 +324,9 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
             &.column1 {
                 @include respond($desktop-breakpoint) {
                     padding: 21px 0 0 0;
-                    width: 989px;
-                    float: none;
                     margin: 0 auto;
+                    max-width: 996px;
+                    float: none;
                 }
                 .cell {
                     float: left;
@@ -552,6 +554,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
             &.handle-non-us-vh {
                 .row {
                     &.column1 {
+                        width: 996px;
                         padding: 7px 0 0 0;
                         @include respond(0, $medium-breakpoint) {
                             padding: 0;

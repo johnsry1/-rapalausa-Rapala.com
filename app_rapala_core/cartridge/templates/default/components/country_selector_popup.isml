@@ -8,6 +8,11 @@
 	var caLink=dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
 	var euLink='/eu-en?countrySelect=true';
 	var fiLink='/fi-fi?countrySelect=true&locale=fi_FI';
+	var gbLink='/en-gb?countrySelect=true&locale=en_GB';
+	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+	var showFinnishFlag : String = orgPrefs.getCustom()['showFinnishFlag'];
+	var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
+	activeCountries = JSON.parse(activeCountries);
 
 	if (currentSite.ID == 'rapalaEU') {
 		currentCountry = 'eu';
@@ -34,7 +39,6 @@
 		var usLink=URLUtils.url('Search-ShowInLocale','countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
 		var euLink=URLUtils.url('Search-ShowInLocale','countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
 	}
-
 	session.custom.showCountryPopup = false;
 </isscript>
 
@@ -48,47 +52,26 @@
 	</div>
 	<div class="countries-container">
 		<div class="row first">
-			<a class="country" href="${caLink}">
-				<div class="flag-container">
-					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/ca.svg')}" alt="${'ca'}">
-				</div>
-				<div class="url-container">
-					<div class="rapala-iternational-cart"></div>
-					<div class="url">${Resource.msg('global.caurl', 'locale', null)}</div>
-				</div>
-			</a>
-			<div class="divider"></div>
-			<a class="country" href="${euLink}">
-				<div class="flag-container">
-					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/eu.svg')}" alt="${'ca'}">
-				</div>
-				<div class="url-container">
-					<div class="rapala-iternational-cart"></div>
-					<div class="url">${Resource.msg('global.euurl', 'locale', null)}</div>
-				</div>
-			</a>
-		</div>
-		<div class="row second">
-			<a class="country" href="${usLink}">
-				<div class="flag-container">
-					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/us.svg')}" alt="${'ca'}">
-				</div>
-				<div class="url-container">
-					<div class="rapala-iternational-cart"></div>
-					<div class="url">${Resource.msg('global.usurl', 'locale', null)}</div>
-				</div>
-			</a>
-			<div class="divider"></div>
-			<a class="country" href="${fiLink}">
-				<div class="flag-container">
-					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/fi.svg')}" alt="${'fi'}">
-				</div>
-				<div class="url-container">
-					<div class="rapala-iternational-cart"></div>
-					<div class="url">${Resource.msg('global.fiurl', 'locale', null)}</div>
-				</div>
-			</a>
-		</div>
+			<isloop items="${activeCountries}" var="activeCountry" status="loopstatus">
+			<isif condition="${loopstatus.odd && loopstatus.count > 2 && !loopstatus.last}">
+					</div><div class="row first">
+				</isif>
+				<isif condition="${loopstatus.odd && loopstatus.last}">
+					</div><div class="row second">
+				</isif>
+				<a class="country single-row" href="${eval(activeCountry.flag + 'Link')}">
+					<div class="flag-container">
+						<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
+					</div>
+					<div class="url-container">
+						<div class="rapala-iternational-cart"></div>
+						<div class="url">${Resource.msg('global.'+activeCountry.flag+'url', 'locale', null)}</div>
+					</div>
+				</a>
+				<isif condition="${loopstatus.odd && !loopstatus.last}"><div class="divider"></div></isif>
+		</isloop>
+	</div>
+
 	</div>
 	<div class="checking">
 		${Resource.msg('global.checkingcountry', 'locale', null)}
