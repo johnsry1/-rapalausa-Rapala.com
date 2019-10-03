@@ -91,4 +91,28 @@ Site_TagManager.getProductObject = function (product) {
 
 };
 
+Site_TagManager.getProductAddToCartObject = function (productId) {
+    /** @type {Product} */
+    const product = dw.catalog.ProductMgr.getProduct(productId);
+    let obj = {};
+    
+    obj.id = product.ID;
+    obj.name = product.name;
+
+    if (product.isVariant() || product.isVariationGroup()) {
+        obj.productID = product.getMasterProduct().ID;
+    }
+
+    if (product.master && product.variationModel.variants.size() > 0) {
+        obj.productID = product.ID;
+    }
+    
+    obj.category = Util.getPrimaryCategory(product);
+    obj.brand = product.brand;
+    obj.price = Util.getProductOriginalPrice(product).value;
+
+    return obj;
+
+}
+
 module.exports = Site_TagManager;
