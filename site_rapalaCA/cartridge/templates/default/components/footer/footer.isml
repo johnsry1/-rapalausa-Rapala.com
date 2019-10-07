@@ -99,52 +99,57 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 							<div class="footer-right-section mobileHide">
 								
 								<div>
-								<div class="email-signup handle-non-us">
-							       <isscript>
-										var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
-										var nameField = dw.system.Site.current.preferences.custom['cmname'];
-										var emailField = dw.system.Site.current.preferences.custom['cmemail'];
-										var stateField = dw.system.Site.current.preferences.custom['cmstate'];
-										var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
-										
-										if(session.custom.currentSite == 'iceforce') {
-											formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
-											nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
-											emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
-											stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
-											zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
-											var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
-										}
-									</isscript>
-									<div class="emailSignup">
-										<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
-										<input type="hidden" name="ltkSubscriptionCode" value="footer" />
-										<input type="hidden" name="source" value="miniform" />
-										<input type="hidden" name="brand" value="${session.custom.currentSite}" />
-										<fieldset id="emailfooter">
-											<div class="pseudo_self_label">
-												<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
-												<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
-											</div>
-										</fieldset>
-										</form>
-									</div>
-									<div class="receive-emails">
-										 <a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our 12 brands (details)</a>
-									</div>
-									<div class="email-txt">
-										<span>Receive emails from our 12 brands (details)</span>
-										<span class="Custom-tooltip tooltip-footer"> 
-											${Resource.msg('global.whatwilliget','locale',null)}
-											<div class="tooltip-body" style="display:none">
-												<div class="tooltipcontainer">
-													<iscontentasset aid="footer-signup-tooltip"/>
+								<iscomment> Render Mail Chimp </iscomment>
+								<isif condition="${dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
+									<iscontentasset aid="mail-chimp-footer"/>
+								<iselse>
+									<div class="email-signup handle-non-us">
+								       <isscript>
+											var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
+											var nameField = dw.system.Site.current.preferences.custom['cmname'];
+											var emailField = dw.system.Site.current.preferences.custom['cmemail'];
+											var stateField = dw.system.Site.current.preferences.custom['cmstate'];
+											var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
+											
+											if(session.custom.currentSite == 'iceforce') {
+												formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
+												nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
+												emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
+												stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
+												zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
+												var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
+											}
+										</isscript>
+										<div class="emailSignup">
+											<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
+											<input type="hidden" name="ltkSubscriptionCode" value="footer" />
+											<input type="hidden" name="source" value="miniform" />
+											<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+											<fieldset id="emailfooter">
+												<div class="pseudo_self_label">
+													<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
+													<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
 												</div>
-											</div>
-										</span>
-										<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
-									</div>
-							 	</div>
+											</fieldset>
+											</form>
+										</div>
+										<div class="receive-emails">
+											 <a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our 12 brands (details)</a>
+										</div>
+										<div class="email-txt">
+											<span>Receive emails from our 12 brands (details)</span>
+											<span class="Custom-tooltip tooltip-footer"> 
+												${Resource.msg('global.whatwilliget','locale',null)}
+												<div class="tooltip-body" style="display:none">
+													<div class="tooltipcontainer">
+														<iscontentasset aid="footer-signup-tooltip"/>
+													</div>
+												</div>
+											</span>
+											<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
+										</div>
+								 	</div>
+								 </isif>
 							</div>
 					   <!---  below footer --->
 						</div><!--  footer right -->
@@ -158,48 +163,53 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 								<div class="footer-right-section desktopHide">
 								
 								<div>
-								<div class="email-signup handle-non-us"> 
-							       <isscript>
-										var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
-										var nameField = dw.system.Site.current.preferences.custom['cmname'];
-										var emailField = dw.system.Site.current.preferences.custom['cmemail'];
-										var stateField = dw.system.Site.current.preferences.custom['cmstate'];
-										var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
-										
-										if(session.custom.currentSite == 'iceforce') {
-											formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
-											nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
-											emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
-											stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
-											zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
-											var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
-										}
-									</isscript>
-									<div class="emailSignup">
-										<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
-											<input type="hidden" name="ltkSubscriptionCode" value="footer" />
-											<input type="hidden" name="source" value="miniform" />
-											<input type="hidden" name="brand" value="${session.custom.currentSite}" />
-											<fieldset id="emailfooter">
-												<div class="pseudo_self_label">
-												<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
-												<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
+								<iscomment> Render Mail Chimp For Canda only </iscomment>
+								<isif condition="${dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
+									<iscontentasset aid="mail-chimp-footer"/>
+								<iselse>
+									<div class="email-signup handle-non-us"> 
+								       <isscript>
+											var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
+											var nameField = dw.system.Site.current.preferences.custom['cmname'];
+											var emailField = dw.system.Site.current.preferences.custom['cmemail'];
+											var stateField = dw.system.Site.current.preferences.custom['cmstate'];
+											var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
+											
+											if(session.custom.currentSite == 'iceforce') {
+												formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
+												nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
+												emailField = dw.system.Site.current.preferences.custom['cmemailiceforce'];
+												stateField = dw.system.Site.current.preferences.custom['cmstateiceforce'];
+												zipCodeField = dw.system.Site.current.preferences.custom['cmzipiceforce'];
+												var rapalaOptIn = dw.system.Site.current.preferences.custom['cmrapalaoptiniceforce'];
+											}
+										</isscript>
+										<div class="emailSignup">
+											<form action="${URLUtils.url('ltkEmailSignup-FooterSignup')}" method="post" id="footerSubForm" class="email-subscribe">
+												<input type="hidden" name="ltkSubscriptionCode" value="footer" />
+												<input type="hidden" name="source" value="miniform" />
+												<input type="hidden" name="brand" value="${session.custom.currentSite}" />
+												<fieldset id="emailfooter">
+													<div class="pseudo_self_label">
+													<input type="text" name="email" id="footer-email-input" value="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}" class="emailinput emailfooter" data-placeholder="${dw.system.Site.getCurrent().getCustomPreferenceValue('FooterSubscriptionText')}"/>
+													<button class="subscribe" type="submit" value="subscribe"><span>${Resource.msg('global.emailsubscribe','locale',null)}</span></button>
+													</div>
+												</fieldset>
+											</form>
+										</div>
+										<div class="email-txt">
+											<span class="Custom-tooltip tooltip-footer"> 
+												${Resource.msg('global.whatwilliget','locale',null)}
+												<div class="tooltip-body" style="display:none">
+													<div class="tooltipcontainer">
+														<iscontentasset aid="footer-signup-tooltip"/>
+													</div>
 												</div>
-											</fieldset>
-										</form>
-									</div>
-									<div class="email-txt">
-										<span class="Custom-tooltip tooltip-footer"> 
-											${Resource.msg('global.whatwilliget','locale',null)}
-											<div class="tooltip-body" style="display:none">
-												<div class="tooltipcontainer">
-													<iscontentasset aid="footer-signup-tooltip"/>
-												</div>
-											</div>
-										</span>
-										<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
-									</div>
-							 	</div>
+											</span>
+											<a href="${URLUtils.url('Page-Show','cid','customer-online-promotion-details','fdid','rapala-promotions')}" class="applay">${Resource.msg('global.emailsignupfooterregister','locale',null)}</a>
+										</div>
+								 	</div>
+								 </isif>
 								
 								  <div class="social-icons">
 										<iscontentasset aid="follow_us_on"/>
