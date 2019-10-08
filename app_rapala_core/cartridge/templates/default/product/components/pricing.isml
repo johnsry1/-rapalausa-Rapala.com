@@ -53,7 +53,6 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
 
 <isset name="PromotionalPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
 <isset name="isPromoPrice" value="${false}" scope="page"/>
-
 <isif condition="${! empty(promos)}">
 	<isloop items="${promos}" var="promo">
 		<isif condition="${promo.getPromotionClass() != null && promo.getPromotionClass().equals(dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT)}">
@@ -112,9 +111,9 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
                         <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
 						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
                         <isif condition="${isInStock}">
-	                        <link itemprop="availability" href="http://schema.org/InStock" />In stock
+	                        <link itemprop="availability" href="http://schema.org/InStock" />
 	                    <iselse/>
-	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />Out of Stock
+	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
 	                    </isif>
                         <span itemprop="lowprice" content="${pdict.Product.priceModel.minPrice.value}">
                             <isprint value="${pdict.Product.priceModel.minPrice}"/>
