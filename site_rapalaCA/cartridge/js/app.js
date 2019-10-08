@@ -22,7 +22,7 @@ var countries = require('./countries'),
     tls = require('./tls'),
     imagesLoaded = require('imagesloaded'),
     tagmanager = require('./tagmanager');
-    
+
 // if $ has not been loaded, load from google cdn
 if (!window.$) {
     var s = document.createElement('script');
@@ -235,26 +235,6 @@ function initializeEvents() {
     // Footer copyright year
     $('.copyright-year').html(new Date().getFullYear());
 
-    // Footer Brands carousel
-    $('#footer-brands').owlCarousel({
-        items: 5,
-        slideBy: 5,
-        margin: 0,
-        navRewind: false,
-        rewind: false,
-        nav: true,
-        dots: false,
-        navigation: false,
-        autoWidth: true,
-        responsive: {
-            0: {
-                items: 3
-            },
-            567: {
-                items: 5
-            }
-        }
-    });
     /* should be set before slider init */
     $('.horizontal-carousel').each(function() {
         var $tiles = $(this).find('.product-tile');

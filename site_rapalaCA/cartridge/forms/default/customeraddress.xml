@@ -3,22 +3,15 @@
 	<field formid="addressid" label="customeraddress.addressid.label" type="string" mandatory="true" binding="ID" max-length="20"
 		missing-error="customeraddress.addressid.missing-error"
 		value-error="customeraddress.addressid.value-error"/>
-	<field formid="title" label="resource.title" type="string" mandatory="false" binding="title" max-length="30" missing-error="address.title.missing" range-error="address.field.invalid">
-		<options>
-            <option optionid=""     label="resource.select"     value=""/>
-			<option optionid="mr" label="resource.title.Mr" value="Mr"/>
-			<option optionid="mrs" label="resource.title.Mrs" value="Mrs"/>
-			<option optionid="ms" label="resource.title.Ms" value="Ms"/>
-		</options>
-	</field>
 	<field formid="firstname" label="profile.firstname" type="string" mandatory="true" binding="firstName" max-length="50"
 		missing-error="customeraddress.firstname.missing-error"/>
 	<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"
 		missing-error="customeraddress.lastname.missing-error"/>
-	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode" missing-error="address.country.missing" value-error="address.field.invalid">
+	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
+		missing-error="customeraddress.country.missing-error">
 		<options>
-			<option optionid="CA" label="resource.country.ca" value="CA"/>
-		</options>
+            <option optionid="CA"   label="country.ca"     value="CA"/>
+        </options>
 	</field>
 	<field formid="address1" label="resource.address1" type="string" mandatory="true" binding="address1" max-length="50"
 		description="customeraddress.address1.description"

@@ -1,4 +1,10 @@
 <div class="menulist mobile-view">
+	<isset name="top_menu_blog_link" value="${dw.content.ContentMgr.getContent('top-menu-blog-link')}" scope="page"/>
+		<isif condition="${top_menu_blog_link != null && top_menu_blog_link.onlineFlag == true && !empty(top_menu_blog_link.custom.body)}">
+			<div class="blog-top-menu">
+				<isprint value="${top_menu_blog_link.custom.body}" encoding="off"/>
+			</div>
+		</isif>
 	<span class="sub-category-section-1">
 		<isif condition="${pdict.CurrentCustomer.authenticated}">
 			<a class="level-1" href="${URLUtils.https('Login-Logout')}">

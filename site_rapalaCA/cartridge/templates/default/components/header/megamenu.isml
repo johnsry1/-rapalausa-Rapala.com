@@ -74,11 +74,5 @@
 			</isif>
 	 	</isloop>
 		 	<isinclude url="${URLUtils.https('Home-IncludeMegamenuCustomerInfo')}"/>
-	 		<isset name="top_menu_blog_link" value="${dw.content.ContentMgr.getContent('top-menu-blog-link')}" scope="page"/>
-	 		<isif condition="${top_menu_blog_link != null && top_menu_blog_link.onlineFlag == true && !empty(top_menu_blog_link.custom.body)}">
-				<div class="blog-top-menu">
-					<isprint value="${top_menu_blog_link.custom.body}" encoding="off"/>
-				</div>
-			</isif>
 		</div>
 </isif>
