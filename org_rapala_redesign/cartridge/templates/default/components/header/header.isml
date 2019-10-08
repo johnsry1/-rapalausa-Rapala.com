@@ -81,6 +81,8 @@
                                     <span>
                                         <isif condition="${sessionCurrencyCode == 'SEK'}">
                                             <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-se.jpg')}" alt="${session.getCurrency().getSymbol()}">
+                                        <iselseif condition="${sessionCurrencyCode == 'GBP'}">
+                                            <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-uk.png')}" alt="${session.getCurrency().getSymbol()}">
                                         <iselse>
                                             <img src="${URLUtils.httpsStatic('/images/currency/currency-flag-eu.png')}" alt="${session.getCurrency().getSymbol()}">
                                         </isif>
