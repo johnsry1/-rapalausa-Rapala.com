@@ -55,8 +55,8 @@
 <iscomment>Render a "back" link and the article title based on the page context.</iscomment>
 <div class="cell-header">
 <h1><isprint value="${pdict.Content.name}"/></h1>
-<iscomment> Render Mail Chimp </iscomment>
-<isif condition="${dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
+<iscomment> Render Mail Chimp only in Email Subscription Center</iscomment>
+<isif condition="${pdict.Content.ID == 'email-preference-center' && dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
 	<isset name="mailChimpContent" value=${dw.content.ContentMgr.getContent('mail-chimp-preference-center')} scope="page" />
 	<isif condition="${!empty(mailChimpContent)}">
 	
