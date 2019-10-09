@@ -20,7 +20,6 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		var z = request;
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
