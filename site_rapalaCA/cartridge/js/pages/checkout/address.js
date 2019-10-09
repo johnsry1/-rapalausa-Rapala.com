@@ -10,12 +10,6 @@ var util = require('../../util'),
  */
 exports.init = function () {
     var $form = $('.address');
-    
-    if ($form && $form.length) {
-        //set which section should display
-        util.updateStateOptions($form);
-        //Need to set the province or state value
-    }
 
     // select address from list
     $('select[name$="_addressList"]', $form).on('change', function () {
@@ -123,18 +117,6 @@ exports.init = function () {
            (logged-in user) .Commented to prevent form from re-validation.
 		*/
         //$form.validate().form();
-    });
-
-    // update state options in case the country changes
-    $('select[id$="_country"]', $form).on('change', function () {
-        util.updateStateOptions($form);
-        /*
-         *Run again as option is selected in back-end,
-         * but front-end needs to be refreshed. Call updateShippingMethodList()
-         * to ensure shipping method is changed.
-         */
-        util.updateStateOptions($form);
-        shipping.updateShippingMethodList();
     });
 
 };

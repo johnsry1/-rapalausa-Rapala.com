@@ -1,7 +1,7 @@
 <!--- TEMPLATENAME: session_warn_popup.isml --->
 <isinclude template="util/modules"/>
 <isscript>
-	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
+	var currentCountry = require('site_rapalaCA/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 	var currentSite = dw.system.Site.getCurrent();
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
 	var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true);
