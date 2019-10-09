@@ -59,7 +59,10 @@
 				<isif condition="${loopstatus.odd && loopstatus.last}">
 					</div><div class="row second">
 				</isif>
-				<a class="country <isif condition="${loopstatus.odd && loopstatus.last}">single-row</isif>" href="${eval(activeCountry.flag + 'Link')}">
+				<isscript>
+					var currentLink = eval(activeCountry.flag + 'Link');
+				</isscript>
+				<a class="country <isif condition="${loopstatus.odd && loopstatus.last}">single-row</isif>" href="${currentLink}">
 					<div class="flag-container">
 						<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
 					</div>
