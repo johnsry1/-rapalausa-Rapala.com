@@ -1,149 +1,16 @@
-/*******Old Rapala code*********
-@import "nav";
-@import "menu_utility";
-@import "country_selector";
-@import url("../css/MyFontsWebfontsKitVIP.css");
-@font-face {
-    font-family: 'bankgothicbold';
-    src: url('../fonts/bankgothic_bold-webfont.eot');
-    src: url('../fonts/bankgothic_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/bankgothic_bold-webfont.woff') format('woff'),
-         url('../fonts/bankgothic_bold-webfont.ttf') format('truetype'),
-         url('../fonts/bankgothic_bold-webfont.svg#bankgothicbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face{
-font-family:"Bank Gothic W01 Light";
-src:url("../fonts/b0df0ccb-0172-41f5-b268-518c0d282b49.eot?#iefix");
-src:url("../fonts/b0df0ccb-0172-41f5-b268-518c0d282b49.eot?#iefix") format("eot"),
-url("../fonts/5cc319e2-8904-4314-8b41-2cb21791a9e2.woff") format("woff"),
-url("../fonts/c02d61fb-d197-443b-aca0-108377939030.ttf") format("truetype"),
-url("../fonts/195985a8-c140-48ea-860f-9bdbb34ac967.svg#195985a8-c140-48ea-860f-9bdbb34ac967") format("svg");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face{
-font-family:"Bank Gothic W01 Medium";
-src:url("../fonts/d5c9f6f3-c676-4d64-a7ce-5d51cc7ddd40.eot?#iefix");
-src:url("../fonts/d5c9f6f3-c676-4d64-a7ce-5d51cc7ddd40.eot?#iefix") format("eot"),
-url("../fonts/bec343c9-a262-4ca1-8540-912ccd59580d.woff") format("woff"),
-url("../fonts/f7218b41-56c3-4ff8-b799-f06e7e0c061c.ttf") format("truetype"),
-url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4ef8e58d975d") format("svg");
-    font-weight: normal;
-    font-style: normal;
-}
-
-.top-banner {
-	position: relative;
-	* {
-		box-sizing: border-box;
-	}
-}
-
-.primary-logo {
-	height: 38px; // height of image
-	padding: .1em 0 0 0;
-	margin: 0 auto;
-	width: 200px; // width of image
-	z-index: 1;
-	@include respond(large-up) {
-		margin: 0;
-		padding: 0.3em 0 0 .5em;
-	}
-}
-
-.header-banner {
-	display:block;
-	.header-promotion {
-		background-color: $rain-forest;
-		color: $white;
-		padding: 3px 0 2px;
-		text-align: center;
-	}
-}
-
-.header-search {
-	color: $white;
-	width: 100%;
-	background-color: $dim-gray;
-	input[type="text"] {
-		margin:0;
-	}
-	@include respond(large-up) {
-		background-color: $white;
-		border: 1px solid $nobel;
-		border-radius: 10px;
-		color: $nobel;
-		height: 2.5em;
-		margin: 1.6em auto 0;
-		position: relative;
-		width: 300px;
-		z-index: 1;
-	}
-	form {
-		margin-bottom: 1px;
-	}
-	input[type="text"] {
-		background-color: transparent;
-		border: none;
-		float: left;
-		margin: 0;
-		padding-left: 1rem;
-		height: 2.3rem;
-		width: 85%; // default for older browser
-		width: calc(100% - 2.5rem);
-		@include respond(large-up) {
-			height: 1.75rem;
-			padding: 0 1rem;
-		}
-	}
-	button {
-		background-color: transparent;
-		border: none;
-		color: $nobel;
-		padding: .7em .5em;
-		@include respond(large-up) {
-			padding: .4em .5em;
-		}
-		&:hover {
-			color: $citrus;
-		}
-		i {
-			font-size: 1.4em;
-		}
-	}
-}
-*/
-
 #headerwrapper {
     float: left;
     width: 100%;
     background: $white;
     @include respond($desktop-breakpoint - 1) {
-        background: url("../images/header-background.jpg") top left repeat-x;
+        background: transparent url("../images/header-background.jpg") top left repeat-x;
     }
-
     #header {
-        .svg-cart-icon-static-dims {
-            @include respond($desktop-breakpoint) {
-                display: none;
-            }
-        }
-        #brand-tabs-header {
-            @include respond(desktop) {
-                height: rem(70px);
-            }
-        }
         @include respond(0, $desktop-breakpoint - 1) {
             padding: 0;
             box-sizing: border-box;
             position: relative;
             z-index: 1;
-           
             .magnifier-icon {
                 background: url("../images/responsive-icons/search-icon-static.svg") no-repeat;
                 width: 36px;
@@ -161,10 +28,9 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                 width: auto;
                 padding: 0;
                 display: inline-block;
-                height: 42px;
+                height: 33px;
                 margin: 17.5px 10px;
                 float: left;
-                min-width: auto;
                 &.js-menu-toggle {
                     #nav-icon1 span {
                         height: 19px;
@@ -215,7 +81,6 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                             }
                         }
                     }
-
                     .menu-text {
                         display: none;
                     }
@@ -410,58 +275,6 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                             margin-right: 5px;
                         }
                     }
-
-                    .change-region {
-                        font-family: $font;
-                        @include font-size(11px);
-                        @include respond(desktop) {
-                            @include line-height(30px);
-                            height: auto;
-                            margin: 0;
-                            float: right;
-                            display: inline-block;
-                            vertical-align: top;
-                        }
-                    }
-                    .currency-flag {
-                        display: inline-block;
-                        vertical-align: middle;
-                        margin-right: rem(5px);
-                        float: left;
-                        span {
-                            display: table-cell;
-                        }
-                        img {
-                            display: inline-block;
-                            width: 1.575rem;
-                            height: 0.95rem;
-                            vertical-align: middle;
-                        }
-                    }
-                    .change-regionnew {
-                        @include respond(desktop) {
-                            width: auto;
-                            padding: 0 rem(15px) 0 0;
-                            margin: 0;
-                            background-position: right center;
-                        }
-                        a {
-                            @include font-size(12px);
-                        }
-                        img {
-                            @include respond(desktop) {
-                                vertical-align: middle;
-                            }
-                        }
-                    }
-
-                    .change-region,
-                    .ui-email {
-                        display: none;
-                        @include respond(desktop) {
-                            display: inline-block;
-                        }
-                    }
                 }
             }
         }
@@ -597,7 +410,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                     top: 0;
                     width: 82px;
                     padding-right: 5px;
-                    background-size: 82px;
+
                     &.shop-by-brand {
                         background: 0;
                         font-weight: normal;
@@ -891,19 +704,6 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                     border: 1px solid $green-leaf;
                 }
             }
-        }
-    }
-}
-#headerwrapper #header .menu-toggle .close {
-    display: none;
-}
-
-#header {
-    .wrapper {
-        max-width: 1010px;
-
-        .column1 {
-            width: 1013px;
         }
     }
 }
