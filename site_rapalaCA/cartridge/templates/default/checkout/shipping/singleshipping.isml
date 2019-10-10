@@ -218,7 +218,7 @@
 										</div>
 									</isif>
 									<isscript>
-										var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict);
+										var currentCountry = require('site_rapalaCA/cartridge/scripts/util/Countries').getCurrent(pdict);
 									</isscript>
 									<isif condition="${!pdict.CurrentCustomer.authenticated ||  pdict.MultiAddressCheck=='false'||  billingreturn == 'true' || productListAddresses.size() ==0 || pdict.addressError == true}">
 										<div class="shipping-address-field-section">
@@ -369,7 +369,7 @@
 
 					</form>
 					<isscript>
-						importScript("app_rapala_core:util/ViewHelpers.ds");
+						importScript("site_rapalaCA:util/ViewHelpers.ds");
 						var addressForm = pdict.CurrentForms.singleshipping.shippingAddress.addressFields;
 						var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 						var json = JSON.stringify(countries);

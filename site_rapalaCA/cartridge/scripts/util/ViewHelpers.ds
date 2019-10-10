@@ -245,17 +245,11 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 			if (countryOptions[o] && countryOptions[o].value && countryOptions[o].value.length > 0) {
 				var option = countryOptions[o];
 				var stateField = stateForm["state" + option.value];
-				
-				var townField = addressForm["city"];
-				var townLabel = 'resource.city' + option.value;
-				
-				var postalField = addressForm["postal"];
-				var postalLabel = 'resource.postalCode' + option.value;
+				var postalField = addressForm["postal" + option.value];
 				list[option.value] = {
 					regionLabel: dw.web.Resource.msg(stateField.label, resourceName, stateField.label),
 					regions: ViewHelpers.getFieldOptions(stateField, resourceName),
-					postalLabel: dw.web.Resource.msg(postalLabel, resourceName, dw.web.Resource.msg(postalField.label, resourceName, null)),
-					cityLabel: dw.web.Resource.msg(townLabel, resourceName, dw.web.Resource.msg(townField.label, resourceName, null))
+					postalLabel: dw.web.Resource.msg(postalField.label, resourceName, postalField.label)
 				};
 			}
 		}
@@ -266,10 +260,27 @@ ViewHelpers.getCountriesAndRegions = function(addressForm : dw.web.FormGroup, re
 			list.error.push("Error: "+error);
 		}
 	}
-	list['default'] = {
-        postalLabel: dw.web.Resource.msg('resource.postalcode', resourceName, null),
-        cityLabel: dw.web.Resource.msg('resource.city', resourceName, null)
-    };
-	
 	return list;
 };
+
+ViewHelpers.parseStaticLocaleValues = function(obj){
+	var locales = obj.split(',');
+	var site = dw.system.Site.getCurrent();
+	var output = [];
+	for(var i = 0; i < locales.length; i++){
+		var urlObj = {};
+		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, locales[i]);
+		var paramArray = [];
+	    for each (var paramName in request.httpParameterMap.parameterNames) {
+	        paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+	    }
+        var subdomainURL = dw.web.URLUtils.abs(action, paramArray);
+
+		var hrefLang = locales[i].toLowerCase().replace("_", "-");
+		urlObj.hrefLang = hrefLang;
+		urlObj.subdomainURL = subdomainURL;
+		var x = urlObj;
+		output.push(urlObj);
+	}
+	return output;
+}

@@ -256,14 +256,7 @@ var util = {
             $form.find('[name$="' + field.replace('Code', '') + '"]').val(address[field]);
             // update the state fields
             if (field === 'countryCode') {
-                this.updateStateOptions($form, function() {
-                    // this results in duplication of the state code, but is a necessary evil
-                    // for now because we reload phone, postal code, state code block
-                    $form.find('[name$="state"]').val(address.stateCode);
-                    $form.find('[name$="phone"]').val(address.phone);
-                    $form.find('[name$="postalCode"]').val(address.postalCode);
-                });
-                //$form.find('[name$="country"]').trigger('change');
+                $form.find('[name$="country"]').trigger('change');
             }
         }
     },
@@ -434,122 +427,6 @@ var util = {
             idx++;
         }
         return isMobile;
-    },
-
-    /**
-     * @function
-     * @description Updates the states options to a given country
-     * @param {String} countrySelect The selected country
-     */
-    updateStateOptions: function (form, callback) {
-        var $form = $(form);
-        //Country should be pre-selected based on geoip info
-        if ($form.find('select[id$="_country"]').val() != null && $form.find('select[id$="_country"]').val().length == 0) {
-            if (window.User.geolocation != undefined) {
-                var countryCode = window.User.geolocation.countryCode;
-                if (Countries[countryCode] != undefined) {
-                    $form.find('select[id$="_country"]').val(window.User.geolocation.countryCode);
-                }
-            }
-
-        }
-        var $container = $('#state-container1'),
-            url = '',
-            options = {},
-            $country = $form.find('select[id$="_country"]'),
-            //pulling from countries JSON populating in singleshipping.isml / template for form.
-            //   var countries = ViewHelpers.getCountriesAndRegions(addressForm);
-            //   var json = JSON.stringify(countries);
-            country = Countries[$country.val()],
-            $postalField = $country.data('postalField') ? $country.data('postalField') : $form.find('input[name$="_postal"]'),
-            $postalLabel = ($postalField.length > 0) ? $form.find('#' + $postalField[0].id).parents('.form-row').find('.labeltext') : undefined,
-            $cityField = $country.data('cityField') ? $country.data('cityField') : $form.find('input[name$="_city"]'),
-            $cityLabel = ($cityField.length > 0) ? $form.find('#' + $cityField[0].id).parents('.form-row').find('.labeltext') : undefined;
-
-        if ($country.length === 0 || !country) {
-            if ($postalLabel) {
-                country = Countries.default;
-                $postalLabel.html(country.postalLabel);
-                $cityLabel.html(country.cityLabel);
-            }
-            if ($container.length == 0) {
-                return;
-            } else {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
-                options = {
-                    url: url,
-                    type: 'GET',
-                    target: $container
-                };
-                $.ajax(options).done(function (response) {
-                    if (options.target) {
-                        $($container).empty().html(response);
-                        if (callback != undefined) {
-                            callback();
-                        }
-                    }
-                });
-            }
-        } else {
-            if ($container.length != 0) {
-                url = this.appendParamsToUrl(Urls.getStateHtml, {'formID': $form.attr('id'), 'country': $country.val()});
-                options = {
-                    url: url,
-                    type: 'GET',
-                    target: $container
-                };
-                $.ajax(options).done(function (response) {
-                    // success
-                    if (options.target) {
-                        $($container).empty().html(response);
-
-                        var arrHtml = [],
-                            $stateField = $country.data('stateField') ? $country.data('stateField') : $form.find('select[name$="_state"]'),
-                            $stateLabel = ($stateField.length > 0) ? $form.find('#' + $stateField[0].id).parents('.form-row').find('.labeltext') : undefined,
-                            prevStateValue = $stateField.val();
-                        // set the label text
-                        if ($postalLabel) {
-                            $postalLabel.html(country.postalLabel);
-                        }
-                        if ($cityLabel) {
-                            $cityLabel.html(country.cityLabel);
-                        }
-                        if ($stateLabel) {
-                            $stateLabel.html(country.regionLabel);
-                        } else {
-                            return;
-                        }
-                        var s;
-                        for (s in country.regions) {
-                            arrHtml.push('<option value="' + s + '" >' + country.regions[s] + '</option>');
-                        }
-                        // clone the empty option item and add to stateSelect
-                        var o1 = $stateField.children().first().clone();
-                        $stateField.html(arrHtml.join('')).removeAttr('disabled').children().first().before(o1);
-                        // if a state was selected previously, save that selection
-                        if (prevStateValue === '' && window.SelectedState !== '') {
-                            prevStateValue = window.SelectedState;
-                        }
-                        if (prevStateValue && $.inArray(prevStateValue, country.regions)) {
-                            $stateField.val(prevStateValue);
-                        } else {
-                            $stateField[0].selectedIndex = 0;
-                        }
-                        if (callback != undefined) {
-                            callback();
-                        }
-                    }
-                });
-            } else {
-                // set the label text
-                if ($postalLabel) {
-                    $postalLabel.html(country.postalLabel);
-                }
-                if ($cityLabel) {
-                    $cityLabel.html(country.cityLabel);
-                }
-            }
-        }
     }
 };
 
