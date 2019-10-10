@@ -28,8 +28,9 @@ var InterstitialHelper : Object = {
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
 			var currencies = JSON.parse(json);
 			var params = request.httpParameterMap;
-			if (params.locale.value) {
-				country = params.locale.value.split('_').pop();
+			var localevalue = params.locale.value.slice(-2).toUpperCase();
+			if (localevalue) {
+				country = localevalue;
 			}
 			if (!empty(currencies)) {
 				if (country in currencies) {
