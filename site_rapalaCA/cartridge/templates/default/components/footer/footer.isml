@@ -110,7 +110,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 											var emailField = dw.system.Site.current.preferences.custom['cmemail'];
 											var stateField = dw.system.Site.current.preferences.custom['cmstate'];
 											var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
-											
+
 											if(session.custom.currentSite == 'iceforce') {
 												formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
 												nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
@@ -138,7 +138,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 										</div>
 										<div class="email-txt">
 											<span>Receive emails from our 12 brands (details)</span>
-											<span class="Custom-tooltip tooltip-footer"> 
+											<span class="Custom-tooltip tooltip-footer">
 												${Resource.msg('global.whatwilliget','locale',null)}
 												<div class="tooltip-body" style="display:none">
 													<div class="tooltipcontainer">
@@ -167,14 +167,14 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 								<isif condition="${dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
 									<iscontentasset aid="mail-chimp-footer"/>
 								<iselse>
-									<div class="email-signup handle-non-us"> 
+									<div class="email-signup handle-non-us">
 								       <isscript>
 											var formURL = dw.system.Site.current.preferences.custom['cmformurl'];
 											var nameField = dw.system.Site.current.preferences.custom['cmname'];
 											var emailField = dw.system.Site.current.preferences.custom['cmemail'];
 											var stateField = dw.system.Site.current.preferences.custom['cmstate'];
 											var zipCodeField = dw.system.Site.current.preferences.custom['cmzip'];
-											
+
 											if(session.custom.currentSite == 'iceforce') {
 												formURL = dw.system.Site.current.preferences.custom['cmformurliceforce'];
 												nameField = dw.system.Site.current.preferences.custom['cmnameiceforce'];
@@ -198,7 +198,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 											</form>
 										</div>
 										<div class="email-txt">
-											<span class="Custom-tooltip tooltip-footer"> 
+											<span class="Custom-tooltip tooltip-footer">
 												${Resource.msg('global.whatwilliget','locale',null)}
 												<div class="tooltip-body" style="display:none">
 													<div class="tooltipcontainer">

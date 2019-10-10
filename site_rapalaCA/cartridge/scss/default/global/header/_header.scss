@@ -122,10 +122,13 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 #headerwrapper {
     float: left;
     width: 100%;
+    background: $white;
+    @include respond($desktop-breakpoint - 1) {
+        background: url("../images/header-background.jpg") top left repeat-x;
+    }
 
     #header {
-        .svg-cart-icon-static-dims,
-        .minicarticon-cont .minicart-button {
+        .svg-cart-icon-static-dims {
             @include respond($desktop-breakpoint) {
                 display: none;
             }
@@ -158,7 +161,7 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                 width: auto;
                 padding: 0;
                 display: inline-block;
-                height: 33px;
+                height: 42px;
                 margin: 17.5px 10px;
                 float: left;
                 min-width: auto;
@@ -414,8 +417,8 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                         @include respond(desktop) {
                             @include line-height(30px);
                             height: auto;
-                            margin: 0 0 0 rem(17px);
-                            float: none;
+                            margin: 0;
+                            float: right;
                             display: inline-block;
                             vertical-align: top;
                         }
@@ -430,8 +433,8 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
                         }
                         img {
                             display: inline-block;
-                            width: rem(30px);
-                            height: rem(20px);
+                            width: 1.575rem;
+                            height: 0.95rem;
                             vertical-align: middle;
                         }
                     }
@@ -893,4 +896,18 @@ url("../fonts/12229708-f75b-43f6-85c2-4ef8e58d975d.svg#12229708-f75b-43f6-85c2-4
 }
 #headerwrapper #header .menu-toggle .close {
     display: none;
+}
+
+#header {
+    .wrapper {
+        max-width: 1010px;
+
+        .column1 {
+            width: 1013px;
+        }
+    }
+}
+
+#headerwrapper #header .row.column1 #minicart a.minicart-button {
+    color: #e80000 !important;
 }

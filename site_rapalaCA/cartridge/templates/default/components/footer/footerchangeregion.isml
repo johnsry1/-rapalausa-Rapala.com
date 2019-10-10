@@ -1,0 +1,47 @@
+<iscomment>
+       This template fetches current site and navigates to brand specific change region page
+</iscomment>
+
+<isif condition="${session.custom.currentSite == 'rapala'}">
+    <isset name="ID" value="1" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'vmc'}" >
+        <isset name="ID" value="6" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'luhrjensen'}" >
+        <isset name="ID" value="5" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'storm'}" >
+        <isset name="ID" value="4" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'sufix'}" >
+        <isset name="ID" value="2" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'bluefox'}" >
+        <isset name="ID" value="8" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'terminator'}" >
+        <isset name="ID" value="7" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'williamson'}" >
+        <isset name="ID" value="9" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'triggerx'}" >
+        <isset name="ID" value="3" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'marcum'}" >
+        <isset name="ID" value="10" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'strikemaster'}" >
+        <isset name="ID" value="11" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'otter'}" >
+        <isset name="ID" value="21" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'iceforce'}" >
+        <isset name="ID" value="20" scope="page" />
+<iselse>
+    <iscomment>Fallback if no site is selected.  Primarily needed to Test Helper purposes. </iscomment>
+    <isset name="ID" value="1" scope="page" />
+</isif>
+
+
+    <div class="change-region">
+        <div class="change-region-footer">
+            <isif condition="${session.custom.currentSite != 'strikemaster'}">
+                <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
+                    <span class="country">${Resource.msg('global.changecountry','locale',null)}</span>
+                <img src="${URLUtils.staticURL('/images/canada-flag.jpg')}" alt="${Resource.msg('global.changefooter','locale',null)}">
+                </a>
+            </isif>
+        </div>
+    </div>
+

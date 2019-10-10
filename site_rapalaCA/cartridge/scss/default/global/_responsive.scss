@@ -1354,7 +1354,7 @@
         }
     }
     #main {
-        background: $bg-white;
+        background: transparent;
     }
     .ui-dialog {
         max-width: 98%;
@@ -2122,7 +2122,7 @@
             }
             .email-subscribe {
                 input.emailinput {
-                    padding: 20px 0.5em 15px 0.5em;
+                    padding: 20px 0.5em 18px 0.5em;
                     font-size: 12px;
                 }
             }
@@ -7859,7 +7859,6 @@
                         #follow_us {
                             display: inline-block;
                             width: 100%;
-                            background: none;
                             margin-bottom: 5px;
                             padding-left: 10px;
                             padding-right: 0;
@@ -11946,5 +11945,14 @@
     @include respond(large-up) {
         position: relative;
         right: rem(-3px);
+    }
+}
+
+@media only screen and (max-width: 959px) and (min-width: 0) {
+    #footernew .wrapper .footer-main {
+        background-image: none;
+        margin: 0;
+        width: 100%;
+        box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
     }
 }

@@ -193,18 +193,6 @@ function initAddressEvents() {
                 dialogClass: 'addressadd',
                 open: function () {
                     initializeAddressForm();
-                    var $form = $('#edit-address-form');
-                    util.updateStateOptions($form);
-
-                    $('select[id$="_country"]', $form).on('change', function () {
-                        util.updateStateOptions($form);
-                        /*
-                         *Run again as option is selected in back-end,
-                         * but front-end needs to be refreshed. Call updateShippingMethodList()
-                         * to ensure shipping method is changed.
-                         */
-                        util.updateStateOptions($form);
-                    });
                 }
             }
         });
