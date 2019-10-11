@@ -46,20 +46,20 @@ function show() {
     	app.getView().render('content/home/homepage');
     } else {
 	    var redirectUrl = SearchModel.getSearchRedirect(params.q.value);
-	
+
 	    if (redirectUrl) {
 	        module.superModule.Show();
 	    }
-	
+
 	    // Constructs the search based on the HTTP params and sets the categoryID.
 	    var Search = app.getModel('Search');
 	    var productSearchModel = Search.initializeProductSearchModel(params);
 	    var contentSearchModel = Search.initializeContentSearchModel(params);
-	
+
 	    // execute the product search
 	    productSearchModel.search();
 	    contentSearchModel.search();
-	
+
 	    if (productSearchModel.emptyQuery && contentSearchModel.emptyQuery) {
 	        response.redirect(URLUtils.abs('Home-Show'));
 	    } else if (productSearchModel.count > 0) {
@@ -127,7 +127,7 @@ function showContent() {
     	if (contentSearchModel.folder) {
     	    meta.update(contentSearchModel.folder);
     	}
-    	meta.updatePageMetaTags(contentSearchModel);
+    	meta.updatePageMetaData();
 
         var contentPagingModel = new PagingModel(contentSearchModel.content, contentSearchModel.count);
         contentPagingModel.setPageSize(16);
