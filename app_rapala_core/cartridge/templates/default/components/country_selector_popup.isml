@@ -82,7 +82,7 @@
 					}
 				} else {
 					if (activeCountry.flag == 'us') {
-						currentLink =  URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true).toString().replace('-rapalaEU-', '-rapala-');;
+						currentLink =  URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/');
 					} else if (activeCountry.flag == 'eu') {
 						currentLink = '/eu-en?countrySelect=true';
 					} else {
