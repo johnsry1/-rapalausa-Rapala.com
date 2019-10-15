@@ -756,11 +756,5 @@ $(function () {
 
 // initialize app
 $(document).ready(function () {
-
-    $(document).on('click', '.order-items .toggle', function () {
-        $(this).parent().siblings('li.hidden').show();
-        $(this).remove();
-    });
-
     app.init();
 });

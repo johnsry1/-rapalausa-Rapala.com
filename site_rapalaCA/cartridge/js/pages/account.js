@@ -157,11 +157,6 @@ function initializeAddressForm() {
     });
 }
 
-$(document).on('click', '.toggle', function () {
-    $(this).parent().siblings('li.hidden').show();
-    $(this).remove();
-});
-
 /**
  * @private
  * @function

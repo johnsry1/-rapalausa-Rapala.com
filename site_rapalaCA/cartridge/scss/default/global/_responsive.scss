@@ -619,7 +619,7 @@
                         text-align: left;
                         .storeinformation {
                             h4 {
-                                font-family: lucida grande bold;
+                                font-family: $lucida-font-family;
                                 color: $black;
                                 font-size: 15px;
                                 line-height: 18px;
@@ -1001,24 +1001,22 @@
                                     a {
                                         height: 40px;
                                         line-height: 40px;
-                                        width: 40px;
+                                        width: 25px;
                                         font-family: $global-font-family;
                                         font-size: 13px;
                                         color: $night-rider;
-
                                     }
                                 }
                                 li.first-last {
                                     width: 12px;
                                     margin-right: 13px;
-                                    background: none;
                                     a {
                                         background: url("../images/responsive-page-arrows.svg") no-repeat -62px 5px transparent;
                                     }
                                     &.inactive {
                                         a {
                                             margin: 6px 0 0 0;
-                                            background: url("../images/responsive-page-arrows.svg") no-repeat -1px 5px transparent;
+                                            background: url("../images/responsive-page-arrows.svg") no-repeat -1px -1px transparent;
                                             pointer-events: none;
                                             cursor: default;
                                         }
@@ -1033,7 +1031,6 @@
                                 li.last-last {
                                     margin-left: 5px;
                                     width: 12px;
-                                    background: none;
                                     a {
                                         background: url("../images/responsive-page-arrows.svg") no-repeat -93px 5px transparent;
                                     }
@@ -1106,7 +1103,7 @@
                         }
                         .results-hits {
                             position: absolute;
-                            top: 7px;
+                            top: 0;
                             height: 16px;
                             width: 100%;
                             text-align: center;
@@ -1354,7 +1351,7 @@
         }
     }
     #main {
-        background: transparent;
+        background: $bg-white;
     }
     .ui-dialog {
         max-width: 98%;
@@ -2114,15 +2111,39 @@
                 .emailSignup {
                     height: 38px;
                     width: 303px;
-                    background: transparent;
                     input.emailinput {
                         width: 233px;
+                    }
+                    button {
+                        height: 40px;
+                        width: 70px;
+                        background: linear-gradient(to bottom, $bg-greydimr 60%, $bg-greydarkr 100%);
+                        background: -moz-linear-gradient(to bottom, $bg-greydimr 60%, $bg-greydarkr 100%);
+                        background: -webkit-linear-gradient(to bottom, $bg-greydimr 60%, $bg-greydarkr 100%);
+                        background: -ms-linear-gradient(to bottom, $bg-greydimr 60%, $bg-greydarkr 100%);
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(60%, $bg-greydimr), color-stop(100%, $bg-greydarkr));
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$bg-greydimr', endColorstr='$bg-greydarkr', GradientType=0);
+                        border: 1px solid $lightgrey;
+                    }
+                    button:hover {
+                        background: linear-gradient(to bottom, $bg-greydarkr 0%, $bg-greydimr 60%);
+                        background: -moz-linear-gradient(to bottom, $bg-greydarkr 0%, $bg-greydimr 60%);
+                        background: -webkit-linear-gradient(to bottom, $bg-greydarkr 0%, $bg-greydimr 60%);
+                        background: -ms-linear-gradient(to bottom, $bg-greydarkr 0%, $bg-greydimr 60%);
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $bg-greydarkr), color-stop(60%, $bg-greydimr));
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$bg-greydarkr', endColorstr='$bg-greydimr', GradientType=0);
+                        color: $night-rider;
+                        height: 26px;
+                        right: -1px;
+                        top: -1px;
+                        height: 40px;
+                        width: 70px;
                     }
                 }
             }
             .email-subscribe {
                 input.emailinput {
-                    padding: 20px 0.5em 18px 0.5em;
+                    padding: 20px 0.5em 15px 0.5em;
                     font-size: 12px;
                 }
             }
@@ -2854,7 +2875,7 @@
                         width: 320px;
                         margin-left: 50px;
                         .customerservicetabs {
-                            font-family: $font;
+                            font-family: $lucida-font-family;
                             background: transparent;
                             font-size: 15px;
                             text-align: center;
@@ -2910,11 +2931,11 @@
                                 text-align: center;
                                 font-size: 15px;
                                 background: transparent;
-                                font-family: $font;
+                                font-family: $lucida-font-family;
                                 padding-left: 0;
                                 a.links {
                                     font-size: 15px;
-                                    font-family: $font;
+                                    font-family: $lucida-font-family;
                                 }
                             }
                         }
@@ -4291,7 +4312,6 @@
                         text-align: center;
                         width: 100%;
                         margin: 0 auto;
-                        padding-top: rem(8px);
                         img {
                             float: none;
                         }
@@ -4320,7 +4340,7 @@
         }
         p {
             font-size: 12px;
-            font-family: $font;
+            font-family: $global-font-family;
         }
         hr {
             display: none;
@@ -5026,7 +5046,6 @@
                                                             box-sizing: border-box;
                                                             color: $white;
                                                             box-shadow: none;
-                                                            z-index: 2;
                                                         }
                                                     }
                                                 }
@@ -5048,8 +5067,6 @@
                                                         vertical-align: middle;
                                                         background: transparent;
                                                         line-height: 40px;
-                                                        z-index: 3;
-                                                        position: relative;
                                                         &.active-state-tab {
                                                             padding: 0;
                                                             position: relative;
@@ -5428,6 +5445,10 @@
                     width: 303px;
                     input.emailinput {
                         width: 233px;
+                    }
+                    button {
+                        height: 40px;
+                        width: 70px;
                     }
                 }
             }
@@ -6355,7 +6376,7 @@
                 .gridpage {
                     .product-listing {
                         background: none !important;
-                        width: 100% !important;
+                        width: 255px !important;
                         margin: 0 auto 40px !important;
                         float: none !important;
                     }
@@ -6817,22 +6838,16 @@
                         }
                         &.inputlabel {
                             .field-wrapper {
-                                width: 100% !important;
+                                width: 76% !important;
                                 margin-left: 0;
-                                @include respond(large-up) {
-                                    width: 76% !important;
-                                }
                             }
                         }
                         .errorclient {
                             margin-left: 0;
                         }
                         .field-wrapper {
-                            width: 100% !important;
+                            width: 76% !important;
                             margin-left: 0;
-                            @include respond(large-up) {
-                                width: 76% !important;
-                            }
                         }
                     }
                 }
@@ -7859,6 +7874,7 @@
                         #follow_us {
                             display: inline-block;
                             width: 100%;
+                            background: rgba(255, 255, 255, 0.5);
                             margin-bottom: 5px;
                             padding-left: 10px;
                             padding-right: 0;
@@ -8706,6 +8722,7 @@
                     &.button {
                         width: 100%;
                         margin-right: 0;
+                        padding: 10px 0;
                         margin: 0;
                         font-size: 15px;
                     }
@@ -8776,8 +8793,24 @@
                 .no-hits-search {
                     &.mobileHide {
                         display: inline-block;
+                        text-align: left;
+                        float: none;
+                        margin: 0 auto;
+                        height: 50px;
+                        border: 1px solid $very-light-gray;
+                        box-shadow: 1px 1px 5px rgba(153, 153, 153, 0.2) inset;
+                        width: 392px;
                         input {
+                            width: 89%;
+                            height: 48px;
+                            color: $banner-shadow;
+                            background: 0;
+                            float: left;
+                            text-align: left;
+                            font-size: 15px;
                             margin: 0;
+                            padding-left: 20px;
+                            border-color: transparent;
                         }
                     }
                 }
@@ -8862,7 +8895,8 @@
                                 margin-bottom: 20px;
                                 width: 100%;
                                 input {
-                                    @include font-size(13px);
+                                    width: 85%;
+                                    font-size: 12px;
                                 }
                             }
                         }
@@ -8930,7 +8964,7 @@
                     }
                 }
                 .requiredindicator {
-                    color: $required-color;
+                    color: $red;
                     font-size: 12px;
                 }
                 span.labeltext {
@@ -9305,6 +9339,7 @@
             float: left;
             width: 100%;
             &.active {
+            	background: $white;
                 border-bottom: 1px solid $darker-gray;
             }
             &:first-child {
@@ -9566,7 +9601,7 @@
                             float: none;
                             height: 40px;
                             span {
-                                width: 100%;
+                                width: 40%;
                                 height: auto;
                                 background-position: 0 6px;
                             }
@@ -10041,7 +10076,7 @@
                     width: 53%;
                     box-sizing: border-box;
                     .cell {
-                        box-shadow: none
+                        box-shadow: 0 0 5px 1px $shadow-light-grey;
                     }
                 }
                 .product-detail {
@@ -10898,7 +10933,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        max-width: 100%;
+                        max-width: 635px;
                         width: 100%;
                         margin: 30px auto 0;
                         float: none;
@@ -11154,7 +11189,7 @@
                 .gridpage {
                     .product-listing {
                         background: none;
-                        width: 100%;
+                        width: 255px;
                         margin: 0 auto 40px;
                         float: none;
                         .owl-carousel {
@@ -11692,11 +11727,6 @@
     float: left;
     position: relative;
 }
-#sendBtn {
-    @include respond(medium-down) {
-        width: 100%;
-    }
-}
 
 @include respond(0, $desktop-breakpoint - 1) {
     .mobile-pricing {
@@ -11859,100 +11889,5 @@
                 }
             }
         }
-    }
-}
-.ui-dialog.state-shipping-dialog {
-    @include respond(large-up) {
-        width: rem(356px) !important;
-    }
-    #dialog-container {
-        h1 {
-            font-family: $global-font-family;
-        }
-        .button {
-            @include respond(medium-down) {
-                width: 100% !important;
-            }
-            &.edit-my-order {
-                @include respond(medium-down) {
-                    margin-bottom: rem(10px);
-                }
-            }
-        }
-    }
-}
-.hide-loader {
-    .loader {
-        display: none !important;
-    }
-}
-.pt_checkout  {
-    .checkout-billing {
-        .formfield {
-            clear: both;
-        }
-    }
-}
-.categorymenusnew {
-    .category-top-level {
-        .category-top-level2 {
-            li.active > a {
-                color: $clp-refinement-category-active-color;
-                text-decoration: $clp-refinement-category-active-text-decoration;
-                span {
-                    color: $clp-refinement-category-active-color;
-                }
-            }
-
-        }
-    }
-}
-.new-colors-snipe,
-.new-stamp,
-.new-sizes-snipe {
-    @include new-label();
-    margin: 0 3px 3px 0 !important;
-    display: inline-block;
-    line-height: $new-labels-line-height;
-    height: $new-labels-height;
-}
-.new-stamp-big {
-    @include new-label();
-    @include new-label-big();
-    margin-right: 8px;
-    position: inherit;
-    top: -5px;
-}
-.variationattributes {
-    .color {
-        ul {
-            li {
-                a span.corner-ribbon {
-                    @include new-label-swatch();
-                }
-            }
-        }
-    }
-}
-#alert-message {
-    #close-non-us-alert {
-        right: rem(5px);
-        width: rem(34px);
-        height: rem(34px);
-    }
-}
-.trustmarksimgs {
-    @include respond(large-up) {
-        position: relative;
-        right: rem(-3px);
-    }
-}
-
-@media only screen and (max-width: 959px) and (min-width: 0) {
-    #footernew .wrapper .footer-main {
-        background-image: none;
-        margin: 0;
-        width: 100%;
-        box-shadow: inset 0 8px 8px -8px #696868, inset 0 -8px 8px -8px #696868;
     }
 }

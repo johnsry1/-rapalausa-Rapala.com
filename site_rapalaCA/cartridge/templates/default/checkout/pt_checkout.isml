@@ -1,0 +1,93 @@
+<iscontent type="text/html" charset="UTF-8" compact="true"/>
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+	<head>
+	
+		<isscript>
+			var pageContext = {
+				title: 'Checkout',
+				type: 'checkout',
+				ns: 'checkout'
+			};
+		</isscript>
+		<isinclude template="util/modules"/>
+	
+		<isinclude template="components/header/checkouthtmlhead"/>
+		<isinclude template="checkout/pt_checkout_UI"/>
+	
+		<iscomment>Add template-specific header information here.</iscomment>
+	
+	</head>
+
+	<body class="checkout-page">
+		<isinclude template="components/googletagmanager"/>
+		
+		<div id="container" class="pt_checkout">
+	
+			<isinclude template="components/header/checkoutheader"/>
+	
+			<div id="main" role="main" class="primary-focus clearfix">
+				<div id="content"> 
+					<div id="page-background" class="downshift">
+						<div id="page">
+							<div class="wrapper">
+								<div class="row column3 checkout_body_cont">
+									<div class="checkout-top-links">
+										<span class="encapsulate-section continue-shopping-section">
+											<span class="arrow-size left-arrow">&nbsp;</span>
+											<a class="continueshopping top" title="Continue Shopping" href="${URLUtils.https('Cart-ContinueShopping')}"><isprint value="${Resource.msg('confirmation.returnshop','checkout',null)}" /> </a>
+										</span>
+										<iscomment>
+											<span class="encapsulate-section mobile-customer-link-section  less-than-767">
+												<a class="mobile-customer-link" href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}" title="${Resource.msg('header.customerservice','locale',null)}">
+									        		${Resource.msg('header.customerservice','locale',null)} 
+									        	</a>
+									        	<span class="arrow-size right-arrow">&nbsp;</span>
+								        	</span>
+							        	</iscomment>
+							        	<span class="encapsulate-section mobile-edit-cart-section device-less-than-959">
+							        		<span class="arrow-size left-arrow">&nbsp;</span>
+								        	<a href="${URLUtils.https('Cart-Show')}"  title="${Resource.msg('minicart.viewcart','checkout',null)}" class="summary-cart-show  mobile-edit-cart">
+												<isprint value="${Resource.msg('summary.edit','checkout',null)}"/>
+											</a>
+										</span>
+							        </div>
+							        <div class="less-than-767">
+				    					<iscomment>SLOT CONFIGURATION:  SLOT/ID: brand-rapala-checkout</iscomment>
+				    						<isslot id="brand-rapala-checkout" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+				   					</div>
+				   					<div class="less-than-767">
+				   						<iscomment>SLOT CONFIGURATION:  SLOT/ID: global-checkout</iscomment>
+				           					<isslot id="global-checkout" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
+			           				</div>
+									<div id="primary" class="primary-content">
+										<div class="column colspan2">
+											<isreplace/>
+										</div>
+									</div>
+									<div id="secondary" class="nav summary shipping-secondary">
+										<div class="column new-summery-cart">
+											<isinclude template="checkout/minisummary"/>
+										</div>
+										<div class="column ajax-cartsummary"> 
+											<isinclude template="checkout/cartsummary"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<isinclude template="components/footer/checkoutfooter"/>
+			<isinclude template="checkout/pt_checkout_VARS"/>
+	
+		</div>
+	
+	</body>
+</html>

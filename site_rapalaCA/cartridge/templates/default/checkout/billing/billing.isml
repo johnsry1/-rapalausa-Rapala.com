@@ -30,6 +30,14 @@
 	<isif condition="${!empty(pdict.ppalError)}">
 		<isset name="paypalErr" value="${pdict.ppalError}" scope="page"/>
 	</isif>
+	<isif condition="${session.custom.payPalPlaceorderError}">
+		<div class="error-form">
+			<iscontentasset aid="paypalPlaceOrderError"/>
+		</div>
+		<isscript>
+			delete session.custom.payPalPlaceorderError;
+		</isscript>
+	</isif>
 	<div class="contentbox checkout_cont">
 		<div class="contentboxcontent">
 			<div class="checkout billingsection">
@@ -73,22 +81,13 @@
 													</isloop>
 												<iselseif condition="${shipment.shippingAddress != null && pdict.Basket.productLineItems.size() > 0}"/>
 													<isset name="address" value="${shipment.shippingAddress}" scope="page"/>
-													<div><isprint value="${address.title}" /> <isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
+													<div><isprint value="${address.firstName}"/> <isprint value="${address.lastName}"/></div>
 													<div><isprint value="${address.address1}"/></div>
 													<isif condition="${!empty(address.address2)}">
 														<div><isprint value="${address.address2}"/></div>
 													</isif>
-													<isif condition="${address.countryCode.value.toLowerCase() == 'gb' || address.countryCode.value.toLowerCase() == 'uk'}">
-														<div><isprint value="${address.city}"/>, <isprint value="${address.postalCode}"/></div>
-														<div>
-															<isif condition="${!empty(address.stateCode)}">
-																<isprint value="${address.stateCode}"/>
-															</isif>
-															,<isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
-													<iselse>
-														<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
-														<div><isprint value="${Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null)}"/></div>
-													</isif>
+													<div><isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/> <isprint value="${address.postalCode}"/></div>
+													<iscomment><div><isprint value="${address.countryCode}"/></div></iscomment>
 													<isif condition="${!empty(address.phone)}">
 														<div><isprint value="${address.phone}"/></div>
 													</isif>
@@ -112,7 +111,7 @@
 															 </isif>
 														 </span>
 													<iselse/>
-														<span><isprint value="${shipment.adjustedShippingTotalGrossPrice.subtract(pdict.surcharge)}"/></span>
+														<span><isprint value="${shipment.adjustedShippingTotalNetPrice.subtract(pdict.surcharge)}"/></span>
 													</isif>
 													<isif condition="${pdict.surcharge.value > 0}"><span class="shippingsurcharge"> + <isprint value="${pdict.surcharge.value}"/> <isprint value="${Resource.msg('singleshipping.surcharge','checkout',null)}"/></span></isif>
 												</span>
@@ -160,20 +159,18 @@
 							<iscomment>billing address area</iscomment>
 							<isscript>
                               var shipaddr = {
-                              		 title : (address.title != null) ? address.title : '',
                                      firstName : address.firstName,
                                      lastName : address.lastName,
                                      address1 : address.address1,
                                      address2 : (address.address2 != null)? address.address2 : '',
-                                     postalCode : (address.postalCode != null) ? address.postalCode : '',
-                                     city : (address.city != null) ? address.city : '',
-                                     stateCode : (address.stateCode != null) ? address.stateCode : '',
-                                     countryCode : address.countryCode,
-                                     countryDisplayValue : Resource.msg(('country.'+address.countryCode).toLowerCase(), 'forms', null),
-                                     phone : (address.phone != null) ? address.phone : ''
+                                     postalCode : address.postalCode,
+                                     city : address.city,
+                                     stateCode : address.postalCode,
+                                     countryCode : "US",
+                                     phone : address.phone
                               }
                        		</isscript>
-							<div class="custom-checkbox custom-checkbox-billing" data-address="${JSON.stringify(shipaddr)}">
+							<div class="custom-checkbox" data-address="${JSON.stringify(shipaddr)}">
                                 <isif condition="${!empty(pdict.CurrentForms.billing.billingAddress.sameasshippingaddress) && pdict.CurrentForms.billing.billingAddress.sameasshippingaddress.value}">
 	                                <div class="custom-link active"></div>
 	                                <div class="checkbox">
@@ -194,21 +191,19 @@
 							<isset name="shippingAddr" value="${address}" scope="page"/>
 							<iscomment>display select box with stored addresses if customer is authenticated and there are saved addresses</iscomment>
 							<isif condition="${pdict.CurrentCustomer.authenticated && pdict.CurrentCustomer.profile.addressBook.addresses.size() > 0}">
-								<div class="select-address form-row custom-select">
+								<div class="select-address addresslist form-row custom-select">
 										<iscomment>
 											<label for="${pdict.CurrentForms.billing.addressList.htmlName}">
 												<isprint value="${Resource.msg('global.selectaddressmessage','locale',null)}"/>
 											</label>
 										</iscomment>
 										<isscript>
-											importScript("site_rapalaEU:cart/CartUtils.ds");
+											importScript("app_rapala_core:cart/CartUtils.ds");
 											var customerAddresses = CartUtils.getAddressList(pdict.Basket, pdict.CurrentCustomer, false);
 										</isscript>
 										<iscomment>Start JIRA PREV-46:Checkout_Billing page: Not displaying the selected saved address in the 'Select an Address' drop down. Added p_form attribute </iscomment>
 										<div class="field-wrapper">
-                                            <div class="select-style">
-                                                <isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" p_form="billing" />
-                                            </div>
+											<isaddressselectlist p_listId="${pdict.CurrentForms.billing.addressList.htmlName}" p_listaddresses="${customerAddresses}" p_form="billing" />
 										</div>
 										<iscomment>End JIRA PREV-46  </iscomment>
 									<iscomment>
@@ -220,18 +215,11 @@
 
 							</isif>
 							<div class="selected-shipping-address">
-								<isprint value="${shippingAddr.title}"/>
 								<isprint value="${shippingAddr.firstName}"/>
 								<isprint value="${shippingAddr.lastName}"/><br/>
 								<isprint value="${shippingAddr.address1}"/>
 								<isprint value="${shippingAddr.address2}"/><br/>
-								<isif condition="${shippingAddr.countryCode.value.toLowerCase() == 'gb' || shippingAddr.countryCode.value.toLowerCase() == 'uk'}">
-									<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
-									<isprint value="${shippingAddr.stateCode}"/> <isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/><br/>
-								<iselse>
-									<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
-									<isprint value="${Resource.msg(('country.'+shippingAddr.countryCode).toLowerCase(), 'forms', null)}"/><br/>
-								</isif>
+								<isprint value="${shippingAddr.city}"/> <isprint value="${shippingAddr.stateCode}"/> <isprint value="${shippingAddr.postalCode}"/><br/>
 								<isprint value="${shippingAddr.phone}"/>
 							</div>
 							<input type="hidden" value="${shippingAddr.stateCode}" class="shipping-state"/>
@@ -240,23 +228,23 @@
 							</isscript>
 							<div class="shipping-address-field-section billing-address-fields ${empty(pdict.isBillingError) || !pdict.isBillingError ? 'hide' : ''}">
 								<isif condition="${pdict.CurrentCustomer.authenticated}">
-									 <div class="addressid">
+									 <div class="formfield form-row-50 form-row-left addressid"  >
 									 	<isscript>
 									 		var addressCustAttr = {
 												placeholder : 'ex. Home, Work (optional)'
 											};
 									 	</isscript>
 								    	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressid}" rowClass=" " type="input" value="true" attributes="${addressCustAttr}"/>
-								    	<a class="address-tooltip tooltip">
-											?
+								    	<a class="Custom-tooltip tooltip">
+											<img class="tooltip-shipping-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer Nick">
 													<span class="NickName"><b><isprint value="${Resource.msg('global.tooltipNicknameheader','locale',null)}"/></b></span>
 													<hr>
 														<div class="NickContent">
-														<isprint value="${Resource.msg('global.tooltipNicknamecontent1','locale',null)}"/></br>
-														<isprint value="${Resource.msg('global.tooltipNicknamecontent2','locale',null)}"/></br>
-														<isprint value="${Resource.msg('global.tooltipNicknamecontent3','locale',null)}"/></br>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent1','locale',null)}"/><br/>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent2','locale',null)}"/><br/>
+														<isprint value="${Resource.msg('global.tooltipNicknamecontent3','locale',null)}"/><br/>
 														<isprint value="${Resource.msg('global.tooltipNicknamecontent4','locale',null)}"/>
 														</div>
 												</div>
@@ -278,20 +266,22 @@
 							    </div>
 						    </div>
 							<isif condition="${pdict.CurrentCustomer.authenticated}">
-								<div class="formfield hide">
-                               		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" />
+								<div class="formfield  email-field hide">
+                               		<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left"/>
 								</div>
 							<iselse/>
-								<div class="formfield formfield-email addressid">
-									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
-										<a class="address-tooltip tooltip">
-											?
+								<div class="formfield email-field">
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
+									<div class="whyemail-address">
+										<a class="Custom-tooltip">
+											<span class="whyemail-address-tooltip"><isprint value="${Resource.msg('global.whyrequired','locale',null)}"/> </span>
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer">
 													<isprint value="${Resource.msg('global.whyemailrequired','locale',null)}"/>
 												</div>
 											</div>
 										</a>
+									</div>
 								</div>
 
                                </isif>
@@ -301,18 +291,19 @@
 								<div class="custom-checkbox hide">
 									<div class="custom-link"></div>
 									<div class="checkbox">
-										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox" />
+										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox"/>
 									</div
 								</div>
 							</isif>
-							<div class="custom-checkbox">
+							<iscomment><div class="custom-checkbox">
 								<div class="custom-link"></div>
 								<div class="checkbox">
-									<isset name="privacyLinkCheckout" value="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}" scope="page">
-									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox" labellink="${Resource.msgf('global.addtoemail.checkout','locale', null, privacyLinkCheckout)}" rowclass="add-to-email-new"/>
-
+									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToEmailList}" type="checkbox"/>
 								</div>
 							</div>
+							<div class="form-caption">
+								<a title="${Resource.msg('global.privacypolicy','locale',null)}" href="${URLUtils.url('Page-Show','cid','privacy-policy')}" class="privacy-policy" >${Resource.msg('global.privacypolicy','locale',null)}</a>
+							</div></iscomment>
 
 						</fieldset>
 
@@ -366,10 +357,11 @@
 								   			<div class="name age-verify"><isprint value="${Resource.msg('global.knivelabel','locale',null)}"/></div>
 								   			<div class="custom-checkbox">
 				    							<div class="custom-link agecheck-link"></div>
-				    							<div class="checkbox knife-checkbox">
+				    							<div class="checkbox">
 							 						<isinputfield formfield="${pdict.CurrentForms.agecheck.ischeck}" fieldClass="agecheck"  type="checkbox" />
 							 					</div>
 							 					<div class="knife-info-section">
+							    					<div class="agecheck_message"><span class="requiredindicator">*</span><isprint value="${Resource.msg('global.knivemsg','locale',null)}"/></div>
 							    					<div class="agecheck-order"><isprint value="${Resource.msg('global.kniveorder','locale',null)}"/></div><br/>
 							    					<div class="editorder-details">
 											    		<a class="edit-order" href="${URLUtils.url('Cart-Show')}"><span class="bold"><isprint value="${Resource.msg('global.editmyorder','locale',null)}"/></span></a>
@@ -410,37 +402,33 @@
 						</div>
 						<div class="form-row form-row-button form-actions">
 							<div class="ipad-handling">
-								<div class="generalError hide"><isprint value="${Resource.msg('billing.generalerror','checkout',null)}"/></div>
+								<div class="generalError <isif condition="${!pdict.isBillingError}">hide</isif>"><isprint value="${Resource.msg('billing.generalerror','checkout',null)}"/></div>
 								<div class="singleshipping_error hide"><isprint value="${Resource.msg('billinginfo.addresserror','checkout',null)}"/></div>
 								<div class="continue-checkout-button">
 									<isscript>
-										var AdyenHelper = require("int_adyen/cartridge/scripts/util/AdyenHelper");
+										//fb pixel
+										var productID = '';
+										for each(pli in pdict.Basket.getAllProductLineItems()){
+											productID = empty(productID)?"'" + pli.product.ID +"'":productID + ","+"'" + pli.product.ID + "'";
+										}
 									</isscript>
+									<input type="hidden" name="baskettotal" value="${pdict.Basket.totalGrossPrice.value}"/>
+									<input type="hidden" name="basketcurrency" value="${pdict.Basket.getCurrencyCode()}"/>
+									<input type="hidden" name="basketproductID" value="${productID}"/>
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('checkoutTemplateType') == 'ONE_PAGE'}">
-											<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
-												<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn adyen-place-order-button" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-												<button class="button-fancy-large adyen-place-order-hidden-button" type="submit" id="${billingFormSubmitButtonID}" style="display:none" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-											<iselse/>
-												<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-											</isif>
+											<button class="button-fancy-large spc-billing-btn continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
 									<iselse/>
-											<isif condition="${AdyenHelper && AdyenHelper.getAdyenCseEnabled()}">
-												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-button" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
-												<button class="button-fancy-large continuecheckout place-order-btn adyen-place-order-hidden-button" id="${billingFormSubmitButtonID}" style="display:none" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
-											<iselse/>
-												<button class="button-fancy-large continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
-											</isif>
+											<button class="button-fancy-large continuecheckout place-order-btn" id="${billingFormSubmitButtonID}" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.SubmitMyOrder','locale',null)}</span></button>
 									</isif>
-
-									<iscomment> Adyen goes here
-									<isif condition="${(pdict.AdyenHelper && pdict.AdyenHelper.getAdyenCseEnabled()) || pdict.AdyenCseEnabled === true}">
-										<button class="button-fancy-large" type="hidden" id="billing-submit-hidden" style="display:none" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-										<button class="button-fancy-large" type="submit" id="billing-submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-									<iselse/>
-										<button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
-									</isif>
-									</iscomment>
-
+									<div class="cart-payment-buttons">
+										<div class="trust-marks-imgs">
+											<img class="paymenttrustimgs-paypal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
+											<div class="secure-payment-icons">
+												<span class="payment-trust-imgs smcs-payment-icon"></span>
+												<span class="payment-trust-imgs pci-secured-payment-icon"></span>
+											</div>
+										</div>
+									</div>
 								</div>
 
 								<div class="ordergothrough-tooltip">
@@ -454,6 +442,7 @@
 														<span class="Troubleshooting-Tips"><isprint value="${Resource.msg('global.ordergothrough-subheader','locale',null)}"/>:</span>
 														<ul>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont1new','locale',null)}"/></li>
+															<li><isprint value="${Resource.msg('global.ordergothrough-cont2new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont3new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont4new','locale',null)}"/></li>
 															<li><isprint value="${Resource.msg('global.ordergothrough-cont5','locale',null)}"/></li>
@@ -477,10 +466,11 @@
 
 
 <isscript>
-	importScript("site_rapalaCA:util/ViewHelpers.ds");
+	importScript("app_rapala_core:util/ViewHelpers.ds");
 	var addressForm = pdict.CurrentForms.billing.billingAddress.addressFields;
 	var countries = ViewHelpers.getCountriesAndRegions(addressForm);
 	var json = JSON.stringify(countries);
 </isscript>
 <script>window.Countries = <isprint value="${json}" encoding="off"/>;</script>
+
 </isdecorate>
