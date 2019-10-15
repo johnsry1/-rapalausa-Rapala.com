@@ -18,32 +18,29 @@
 		currentCountry = 'eu';
 		var usLink=usLink.toString().replace('rapalaEU', 'rapala');
 	}
-	var pipelinePath = '';
-	var firstParam = '';
-	var firstParamValue = '';
-
-	if (session.custom.hasOwnProperty('countrySelectorPid')) {
-		pipelinePath = 'Product-ShowInLocale';
-		firstParam =  'pid';
-		firstParamValue = session.custom.countrySelectorPid;
-	} else if (session.custom.hasOwnProperty('countrySelectorCgid')) {
-		pipelinePath = 'Search-ShowInLocale';
-		firstParam =  'cgid';
-		firstParamValue = session.custom.countrySelectorCgid;
-	} else if (session.custom.hasOwnProperty('countrySelectorCid')) {
-		pipelinePath = 'Page-ShowInLocale';
-		firstParam =  'cid';
-		firstParamValue = session.custom.countrySelectorCid;
-	} else if (session.custom.hasOwnProperty('countrySelectorFdid')) {
-		pipelinePath = 'Search-ShowInLocale';
-		firstParam =  'fdid';
-		firstParamValue = session.custom.countrySelectorFdid;
-	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
-		pipelinePath = 'Search-ShowInLocale';
-		firstParam = false;
-	}
 	session.custom.showCountryPopup = false;
 </isscript>
+<isif condition="${session.custom.hasOwnProperty('countrySelectorPid')}">
+	<isset name="pipelinePath" value="Product-ShowInLocale" scope="page" />
+	<isset name="firstParam" value="pid" scope="page" />
+	<isset name="firstParamValue" value="${session.custom.countrySelectorPid}" scope="page" />
+<iselseif condition="${session.custom.hasOwnProperty('countrySelectorCgid')}">
+	<isset name="pipelinePath" value="Search-ShowInLocale" scope="page" />
+	<isset name="firstParam" value="cgid" scope="page" />
+	<isset name="firstParamValue" value="${session.custom.countrySelectorCgid}" scope="page" />
+<iselseif condition="${session.custom.hasOwnProperty('countrySelectorCid')}">
+	<isset name="pipelinePath" value="Page-ShowInLocale" scope="page" />
+	<isset name="firstParam" value="cid" scope="page" />
+	<isset name="firstParamValue" value="${session.custom.countrySelectorCid}" scope="page" />
+<iselseif condition="${session.custom.hasOwnProperty('countrySelectorFdid')}">
+	<isset name="pipelinePath" value="Search-ShowInLocale" scope="page" />
+	<isset name="firstParam" value="fdid" scope="page" />
+	<isset name="firstParamValue" value="${session.custom.countrySelectorFdid}" scope="page" />
+<iselseif condition="${session.custom.hasOwnProperty('countrySelectorPage')}">
+	<isset name="pipelinePath" value="Search-ShowInLocale" scope="page" />
+	<isset name="firstParam" value="false" scope="page" />
+	<isset name="firstParamValue" value="${session.custom.countrySelectorPid}" scope="page" />
+</isif>
 
 <div id="country-selector-popup">
 	<div class="country-select-header">${Resource.msg('global.selectcountry', 'locale', null)}</div>
@@ -72,7 +69,6 @@
 						currentLink = URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-');
 					} else {
 						currentLink = URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/');
-					//currentLink = firstParam  + firstParamValue;
 					}
 				} else if (pipelinePath && empty(firstParamValue)) {
 					if (activeCountry.flag == 'us') {
