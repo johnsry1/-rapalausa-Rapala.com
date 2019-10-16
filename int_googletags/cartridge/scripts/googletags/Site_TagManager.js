@@ -10,7 +10,7 @@ const Util = require('./Util');
  * @override
  * @return {Object}
  */
-Site_TagManager.getGlobalData = function () {
+Site_TagManager.getGlobalData = function () { 
 
     /** @type {Customer} */
     const customer = session.customer;
@@ -25,7 +25,8 @@ Site_TagManager.getGlobalData = function () {
 
         customerObject.demandwareID = customer.ID;
         customerObject.loggedInState = customer.authenticated;
-
+        customerObject.customerGroup = getCustomerGroups(customer);
+        customerObject.loggedInStatus = getLoggedInStatus(customer);
     }
 
     if (httpLocale) {
@@ -34,6 +35,26 @@ Site_TagManager.getGlobalData = function () {
 
     customerObject.currencyCode = session.currency.currencyCode;
 
+    
+    // get a string of all the customer groups the current customer is assigned to
+    function getCustomerGroups(customer) {
+        var allGroups = "";
+        var groups = customer.customerGroups;
+        for (var i = 0; i < groups.length; i++) {
+        	
+            var allGroups = (i+1 < groups.length ) ? allGroups + groups[i].ID + ' | ' : allGroups + groups[i].ID;
+        }
+        return allGroups;
+    }
+    function getLoggedInStatus(customer) {
+        var logInStatus = "Logged Out";
+        if (customer.isAuthenticated() && customer.isRegistered()){
+            logInStatus = "Hard Logged In";
+        } else if(customer.isAuthenticated()) {
+            logInStatus = "Soft Logged In";
+        }
+        return logInStatus;
+    }
     return customerObject;
 
 };
@@ -49,6 +70,7 @@ Site_TagManager.getProductObject = function (product) {
 
     obj.id = product.ID;
     obj.name = product.name;
+    obj.childID = (product.master) ? product.getVariationModel().getDefaultVariant().getID() : product.getID();
 
     if (product.isVariant() || product.isVariationGroup()) {
         obj.id = product.getMasterProduct().ID;
@@ -59,9 +81,10 @@ Site_TagManager.getProductObject = function (product) {
     }
     
     obj.category = Util.getPrimaryCategory(product);
-    obj["secondary category"] = Util.getSecondaryCategory(product);
+    obj["dimension3"] = Util.getSecondaryCategory(product);
     obj.brand = product.brand;
     obj.price = Util.getProductOriginalPrice(product).value;
+    obj.list = 'Internal Search';
 
 
     return obj;

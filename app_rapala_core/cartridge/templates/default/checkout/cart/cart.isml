@@ -161,7 +161,7 @@
 													<isinclude template="paypal/expressbutton"/></iscomment>
 
 													<isif condition="${enableCheckout}">
-														<isscript> 
+														<isscript>
 															//fb pixel
 															var productID = '';
 															for each(pli in pdict.Basket.getAllProductLineItems()){
@@ -1239,7 +1239,7 @@
 									 <div class="couponcodenew post-couponcode">
 									  <div id="couponentry" class="couponcode post-couponcode">
 											<div class="cart-coupon-code applycoupon dropdown" id="applycoupon">
-												<span class="label post-couponcode">Have a Promo Code?</span>
+												<span class="label post-couponcode">${Resource.msg('billinginfo.havepromo','checkout',null)}</span>
 												 <div class="promo-sec bottom-promo-section">
 												 <span class="input-sec">
 												 	<isif condition="${!empty(pdict.CouponStatus) && !empty(pdict.CouponStatus.couponCodeValue)}">

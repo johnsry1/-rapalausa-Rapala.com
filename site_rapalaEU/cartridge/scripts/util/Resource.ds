@@ -36,6 +36,14 @@ SiteResourceHelper.getResources = function(pageContext) {
     // additional resources
     resources["ADYEN_CC_VALIDATE"] = Resource.msg('adyen.creditcard', 'adyen', null);
     resources["PASSWORD_VALIDATION_ERROR"] = Resource.msg('global.password.validation.error', 'locale', null);
+    resources["INVALID_FORMATTING_ERROR"] = Resource.msg('forms.not.look.right', 'forms', null);
+    resources["INVALID_EMAIL_FORMAT"] = Resource.msg('forms.invalid.email.format', 'forms', null);
+    resources["LETTERS_ONLY"] = Resource.msg('forms.letters.only', 'forms', null);
+    resources["CVV_ONLY"] = Resource.msg('forms.cvv.only', 'forms', null);
+    resources["MATCH_EMAILS"] = Resource.msg('forms.match.emails', 'forms', null);
+    resources["MATCH_PASSWORDS"] = Resource.msg('forms.match.passwords', 'forms', null);
+    resources["CREDITCARD_NOT_VALID"] = Resource.msg('creditcard.not.valid.number', 'forms', null);
+    resources["HAVE_PROMO_CODE"] = Resource.msg('billing.havepromocode', 'forms', null);
 
     return resources;
 }
@@ -50,14 +58,14 @@ SiteResourceHelper.getUrls = function(pageContext) {
 
     // application urls
     var urls = ResourceHelper.getUrls();
-    
+
     //Dymanic address update url
     urls.getStateHtml = URLUtils.url('Avs-GetStateHtml').toString();
     urls.getPhoneHtml = URLUtils.url('Avs-GetPhoneHtml').toString();
     urls.contactUsSubmit = URLUtils.https('CustomerService-Submit').toString();
     urls.customerHeader = URLUtils.https('Avs-IncludeRegisteredHeaderCustomerInfo').toString();
     urls.wishlistadd = URLUtils.https('Wishlist-Add').toString();
-    
+
     return urls;
 }
 /**
@@ -66,11 +74,11 @@ SiteResourceHelper.getUrls = function(pageContext) {
  */
 SiteResourceHelper.getPreferences = function(pageContext) {
     var cookieHintAsset = ContentMgr.getContent('cookie_hint');
-    
+
     var prefs = ResourceHelper.getPreferences();
-    
+
     prefs.ADYEN_CSE_ENABLED = AdyenHelper.getAdyenCseEnabled();
-    
+
     return prefs;
 }
 /**
