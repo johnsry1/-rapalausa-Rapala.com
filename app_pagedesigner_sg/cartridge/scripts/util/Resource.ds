@@ -1,0 +1,103 @@
+/**
+ * Resource helper
+ *
+ */
+var Site = require('dw/system/Site');
+var ContentMgr = require('dw/content/ContentMgr');
+
+var currentSiteResourceHelper = null;
+
+if (Site.current.ID == 'rapala') {
+    importScript("app_rapala_core:util/Resource.ds");
+    currentSiteResourceHelper = ResourceHelper;
+} else if (Site.current.ID == 'rapalaEU') {
+	importScript("site_rapalaEU:util/Resource.ds");
+    currentSiteResourceHelper = SiteResourceHelper;
+} else if (Site.current.ID == 'rapalaCA') {
+	importScript("site_rapalaCA:util/Resource.ds");
+    currentSiteResourceHelper = SiteResourceHelper;
+}
+
+function PageDesignerResourceHelper() {}
+/**
+ * Get the client-side constants
+ * @param pageContext
+ * @returns {Object} An objects key key-value pairs holding the constants
+ */
+PageDesignerResourceHelper.getConstants = function(pageContext) {
+	return currentSiteResourceHelper.getConstants();
+}
+/**
+ * Get the client-side resources of a given page
+ * @param pageContext
+ * @returns {Object} An objects key key-value pairs holding the resources
+ */
+PageDesignerResourceHelper.getResources = function(pageContext) {
+    var Resource = require('dw/web/Resource');
+
+    // application resources
+    var resources = currentSiteResourceHelper.getResources();
+
+    // additional resources
+    // Common
+	resources["TRACKING_CONSENT"] = Resource.msg('global.tracking_consent', 'locale', null);
+	resources["TRACKING_NO_CONSENT"] = Resource.msg('global.tracking_no_consent', 'locale', null);	
+	// Checkout
+    resources["COULD_NOT_SAVE_ADDRESS"] = Resource.msg('multishippingaddresses.couldnotsaveaddress', 'checkout', null);
+    // Other
+    resources["CSRF_TOKEN_MISMATCH"] = Resource.msg('global.csrf.failed.error', 'locale', null);
+
+    return resources;
+}
+
+/**
+ * Get the client-side URLs of a given page
+ * @returns {Object} An objects key key-value pairs holding the URLs
+ */
+PageDesignerResourceHelper.getUrls = function(URLUtils) {
+    var URLUtils = require('dw/web/URLUtils');
+    var Resource = require('dw/web/Resource');
+
+    // application urls
+    var urls = currentSiteResourceHelper.getUrls();
+
+    // additional application urls
+    urls.consentTracking = URLUtils.url('Page-Show', 'cid', 'consent_tracking_hint').toString();
+    urls.consentTrackingSetSession = URLUtils.url('Account-ConsentTracking').toString();
+
+    return urls;
+}
+/**
+ * Get the client-side preferences of a given page
+ * @returns {Object} An objects key key-value pairs holding the preferences
+ */
+PageDesignerResourceHelper.getPreferences = function(pageContext) {
+    var consentTrackingHintAsset = ContentMgr.getContent('consent_tracking_hint');
+    
+    // application preferences
+    var pref = currentSiteResourceHelper.getPreferences();
+    
+    // additional application preferences
+    pref["CONSENT_TRACKING_HINT"] = (consentTrackingHintAsset && consentTrackingHintAsset.online) || false;
+    
+    return pref;
+}
+/**
+ * Get the client-side preferences of a given page
+ * @returns {Object} An objects key key-value pairs holding the preferences
+ */
+PageDesignerResourceHelper.getSessionAttributes = function(pageContext) {
+    return currentSiteResourceHelper.getSessionAttributes();
+}
+/**
+ * Get the client-side user settings
+ * @returns {Object} An objects key key-value pairs holding the settings
+ */
+PageDesignerResourceHelper.getUserSettings = function(pageContext) {
+    return currentSiteResourceHelper.getUserSettings();
+}
+
+PageDesignerResourceHelper.getScriptSettings = function (pageContext) {
+    return currentSiteResourceHelper.getScriptSettings();
+}
+
