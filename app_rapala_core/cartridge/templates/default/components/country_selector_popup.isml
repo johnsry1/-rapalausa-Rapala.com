@@ -4,19 +4,12 @@
 	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 	var currentSite = dw.system.Site.getCurrent();
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
-	var usLink = URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true);
-	var caLink = dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
-	var euLink = '/eu-en?countrySelect=true';
-	var fiLink = '/fi-fi?countrySelect=true&locale=fi_FI';
-	var gbLink = '/en-gb?countrySelect=true&locale=en_GB';
 	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
-	var showFinnishFlag : String = orgPrefs.getCustom()['showFinnishFlag'];
 	var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
 	activeCountries = JSON.parse(activeCountries);
 
 	if (currentSite.ID == 'rapalaEU') {
 		currentCountry = 'eu';
-		var usLink=usLink.toString().replace('rapalaEU', 'rapala');
 	}
 	session.custom.showCountryPopup = false;
 </isscript>
@@ -38,10 +31,8 @@
 	<isset name="firstParamValue" value="${session.custom.countrySelectorFdid}" scope="page" />
 <iselseif condition="${session.custom.hasOwnProperty('countrySelectorPage')}">
 	<isset name="pipelinePath" value="Search-ShowInLocale" scope="page" />
-	<isset name="firstParam" value="false" scope="page" />
-	<isset name="firstParamValue" value="${session.custom.countrySelectorPid}" scope="page" />
+	<isset name="firstParam" value="" scope="page" />
 </isif>
-
 <div id="country-selector-popup">
 	<div class="country-select-header">${Resource.msg('global.selectcountry', 'locale', null)}</div>
 	<div class="current-country">
@@ -59,33 +50,30 @@
 				<isif condition="${loopstatus.odd && loopstatus.last}">
 					</div><div class="row second">
 				</isif>
-				<isscript>
-				var localeID = activeCountry.localeID;
-				var currentLink = '';
-				if (activeCountry.flag == 'ca') {
-					currentLink = dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
-				} else if (pipelinePath) {
-					if (activeCountry.flag == 'us') {
-						currentLink = URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-');
-					} else {
-						currentLink = URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/');
-					}
-				} else if (pipelinePath && empty(firstParamValue)) {
-					if (activeCountry.flag == 'us') {
-						currentLink = URLUtils.url(pipelinePath,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-');
-					} else {
-						currentLink = URLUtils.url(pipelinePath,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/');
-					}
-				} else {
-					if (activeCountry.flag == 'us') {
-						currentLink =  URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/');
-					} else if (activeCountry.flag == 'eu') {
-						currentLink = '/eu-en?countrySelect=true';
-					} else {
-						currentLink = '/' + activeCountry.sitePath + '?countrySelect=true&locale='+ activeCountry.localeID;
-					}
-				}
-				</isscript>
+
+				<isset name="localeID" value="activeCountry.localeID" scope="page" />
+				<isif condition="${activeCountry.flag == 'ca'}">
+					<isset name="currentLink" value="${dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url}" scope="page" />
+				<iselseif condition="${pipelinePath && empty(firstParam)}">
+					<isif condition="${activeCountry.flag == 'us'}">
+						<isset name="currentLink" value="${URLUtils.url(pipelinePath,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					<iselse/>
+						<isset name="currentLink" value="${URLUtils.url(URLUtils.url(pipelinePath,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					</isif>
+				<iselseif condition="${pipelinePath && !empty(firstParam)}">
+					<isif condition="${activeCountry.flag == 'us'}">
+						<isset name="currentLink" value="${URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					<iselse/>
+						<isset name="currentLink" value="${URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					</isif>
+				<iselse/>
+					<isif condition="${activeCountry.flag == 'us'}">
+						<isset name="currentLink" value="${URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					<iselse/>
+						<isset name="currentLink" value="${URLUtils.url('Home-SetLocale', 'locale', activeCountry.sitePath,'countrySelect', true).toString().replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
+					</isif>
+				</isif>
+
 				<a class="country <isif condition="${loopstatus.odd && loopstatus.last}">single-row</isif>" href="${currentLink}">
 					<div class="flag-container">
 						<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
