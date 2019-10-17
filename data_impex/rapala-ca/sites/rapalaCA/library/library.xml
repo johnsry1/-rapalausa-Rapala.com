@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
+    <content content-id="customer-contact-us">
+        <display-name xml:lang="x-default">Contact Us</display-name>
+        <description xml:lang="x-default">Contact Us</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <template>/content/content/cscontent.isml</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Contact Us</page-title>
+            <page-description xml:lang="x-default">Contact Us</page-description>
+            <page-keywords xml:lang="x-default">Contact Us</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;script type="text/javascript" src="javascript/customer-service.js?$staticlink$"&gt;&lt;/script&gt;&#13;
+&#13;
+&lt;style&gt;&#13;
+.insider-container {&#13;
+    display: grid;&#13;
+    grid-template: repeat(2, 50%) / repeat(2, 1fr);&#13;
+    background-color: #CFCDCD;&#13;
+    padding: 5px;&#13;
+}&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px;&#13;
+}&#13;
+#insider-button {&#13;
+    background-color: #151515;&#13;
+    color: #fff;&#13;
+    padding: 10px 20px;&#13;
+    border-radius: 3px;&#13;
+    text-decoration: none;&#13;
+    font-weight: normal;&#13;
+    float: right;&#13;
+    margin-right: 20px;&#13;
+    margin-top: 10px;&#13;
+}&#13;
+.pt_customerservice form .formfields .formfield .char-count.contact-us {&#13;
+    margin: -15px 0 0px 0;&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 959px) {&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px !important;&#13;
+    padding-bottom: 10px !important;&#13;
+}&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 460px) {&#13;
+.insider-container {&#13;
+    display: inline-block;&#13;
+	margin-bottom: 10px;&#13;
+}&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px !important;&#13;
+    padding-bottom: 10px !important;&#13;
+}&#13;
+#insider-button {&#13;
+    padding: auto;&#13;
+    float: none;&#13;
+    margin-right: 0;&#13;
+    margin: 5px 5px 10px 5px;&#13;
+}&#13;
+}&#13;
+#address {&#13;
+    padding-bottom: 10px;&#13;
+}&#13;
+&lt;/style&gt;&#13;
+&lt;div class="customer-content" id="customer-contact-us"&gt;&#13;
+&#13;
+&lt;!--&#13;
+&lt;script type="text/javascript"&gt;&#13;
+$(document).ready(function()&#13;
+{&#13;
+   var storeurl= $("#hiddenid").attr("value");&#13;
+   var pipelineurl=$("#customercontactus").attr("action");&#13;
+   var l=storeurl+pipelineurl;&#13;
+   $("#customercontactus").attr("action",l);&#13;
+&#13;
+});&#13;
+&lt;/script&gt;&#13;
+&#13;
+--&gt; &#13;
+&#13;
+&lt;script type="text/javascript"&gt;&#13;
+    if(typeof geoip_country_code == 'function') {&#13;
+    var IP_GeoCode = geoip_country_code();    &#13;
+    var allowed_countries = $(".allowed-countries").text();&#13;
+        if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){&#13;
+            allowed_countries = "US";&#13;
+        }&#13;
+	if(allowed_countries.indexOf(IP_GeoCode) == -1){&#13;
+	    window.location.href = app.URLs.contactusnonus;		&#13;
+	}&#13;
+    }&#13;
+&lt;/script&gt;&#13;
+&lt;p style="font-family: lucida grande;"&gt;This form is for USA customers only.&amp;nbsp; &lt;a style="font-weight: bold" href="https://www.rapala.com/on/demandware.store/Sites-rapalaEU-Site/default/Page-ShowInLocale?cid=customer-contact-us&countrySelect=true"&gt;For International inquires, click here&lt;/a&gt;. For quicker responses on website-related inquiries, please complete and send the form below. Please provide us with accurate information to make this process as efficient as possible. The information we collect will only be used to respond to your message. Your information will not be distributed.&lt;/p&gt;&#13;
+&lt;div id="address"&gt; Rapala USA&lt;br&gt;&#13;
+  Rapala VMC Corporation&lt;br&gt;&#13;
+  10395 Yellow Circle Drive&lt;br&gt;&#13;
+  Minnetonka, MN 55343&lt;br&gt;&#13;
+  &lt;br&gt;&#13;
+  Customer Service&lt;br&gt;&#13;
+  &lt;a href="mailto:custserv@rapalausa.com"&gt;custserv@rapalausa.com&lt;/a&gt; &lt;/div&gt;&#13;
+&lt;hr /&gt;&#13;
+&lt;form action="/on/demandware.store/Sites-rapala-Site/default/CustomerService-ContactUsStart" method="post" id="customercontactus"&gt;&#13;
+  &lt;!-- dwMarker="form" dwPipelineTitle="CustomerService-ContactUs (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-ContactUs" --&gt;&#13;
+  &#13;
+  &lt;fieldset&gt;&#13;
+    &lt;div class="formfields"&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Name&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput required" id="dwfrm_contactus_firstname" type="text" name="dwfrm_contactus_firstname" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;!-- END: firstname --&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Email&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput required emailCM" id="dwfrm_contactus_email" type="text" name="dwfrm_contactus_email" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Phone&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput phoneCDUS" id="dwfrm_contactus_phone" type="text" name="dwfrm_contactus_phone" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Order Number&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput" id="dwfrm_contactus_ordernumber" type="text" name="dwfrm_contactus_ordernumber" value="" maxlength="2147483647" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;div class="formfield"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;My Question&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;select class="selectbox" id="dwfrm_contactus_myquestion" name="dwfrm_contactus_myquestion"&gt;&#13;
+            &lt;option class="selectoption" label="General Information" value="General Information"&gt;General Information&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="Order Status" value="Order Status"&gt;Order Status&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="My Account" value="My Account"&gt;My Account&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="Other" value="Other"&gt;Other&lt;/option&gt;&#13;
+          &lt;/select&gt;&#13;
+          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Comment&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;textarea class="textbox" id="dwfrm_contactus_comment" class="contactus_comment" name="dwfrm_contactus_comment" rows="8" cols="40" maxlength="1000" &gt;&#13;
+          &lt;/textarea&gt;&#13;
+          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="recaptcha"&gt; $include(CustomerService-Recaptcha)$&#13;
+        &lt;div class="value error recaprcha-error hide"&gt;Please validate your reCAPTCHA.&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;br&gt;&#13;
+      &lt;p style="font-family: lucida grande; width: 250px; background-color: #fffedf; border: 1px solid #c69c3e; color: #c69c3e; padding: 10px;"&gt;If you do not receive a response within 2 business days please check your SPAM folder before submitting a new form.&lt;/p&gt;&#13;
+      &lt;div class="formactions"&gt;&#13;
+        &lt;button id="sendBtn" class="customersubmit" type="submit" value="Submit" name="dwfrm_contactus_send"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;&#13;
+      &lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &#13;
+    &lt;!-- END: formfields --&gt;&#13;
+    &#13;
+    &lt;div id="formaction"&gt;&amp;nbsp;&lt;/div&gt;&#13;
+  &lt;/fieldset&gt;&#13;
+&lt;/form&gt;&#13;
+&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/contentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentasset.isml" --&gt; &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/htmlcontentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/htmlcontentasset.isml" --&gt;&#13;
+&lt;div style="display:none;" class="dw-object dw-object-rinclude"&gt;&#13;
+  &lt;textarea cols="100" rows="10" wrap="off"&gt;({&amp;quot;PipelineURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/p/Page-Include&amp;quot;,&amp;quot;TemplateURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentassetinclude.isml&amp;quot;,&amp;quot;PageCacheExpires&amp;quot;:&amp;quot;10/26/2011 1:26 am&amp;quot;,&amp;quot;PipelineTitle&amp;quot;:&amp;quot;Page-Include (app_rapala_core)&amp;quot;,&amp;quot;TemplateTitle&amp;quot;:&amp;quot;/default/content/content/contentassetinclude.isml (app_rapala_core)&amp;quot;,&amp;quot;PageProcessingTime&amp;quot;:4})&lt;/textarea&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;div class="contentasset"&gt;&lt;!-- dwMarker="content" dwContentID="cdMbwiaagJvbQaaacXBjdLdEAG" --&gt; &#13;
+  &#13;
+&lt;/div&gt;&#13;
+&lt;!-- End contentasset --&gt;&#13;
+&lt;isinputfield formfield="baseurl" name="baseurl" type="hidden" value="/on/demandware.store/Sites-Rapala-Site" id="hiddenid"&gt; &lt;/isinputfield&gt;&#13;
+&lt;div class="insider-container"&gt;&#13;
+  &lt;div&gt;&#13;
+    &lt;p&gt;&lt;strong&gt;Sponsorship, Donation and Decal Requests&lt;/strong&gt;&lt;/p&gt;&#13;
+    &lt;p&gt;For Sponsorship, Donation and Decal Requests please submit an application on our Rapala Insider Program.&lt;/p&gt;&#13;
+  &lt;/div&gt;&#13;
+  &lt;div&gt;&#13;
+    &lt;p&gt;&lt;a href="https://www.rapala.com/RapalaInsider?id=1" target="_blank" id="insider-button"&gt;Rapala Insider Program&lt;/a&gt;&lt;/p&gt;&#13;
+  &lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div id="related-links"&gt;&#13;
+  &lt;h2&gt;Related Links&lt;/h2&gt;&#13;
+  &lt;ol&gt;&#13;
+    &lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-privacy-security')$"&gt;Privacy &amp;amp; Security Policy&lt;/a&gt;&lt;/li&gt;&#13;
+  &lt;/ol&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;script type="text/javascript"&gt;&#13;
+&#13;
+ 	  	$('.pt_customerservice #customercontactus textarea[maxlength]').each(function(){&#13;
+			charcount($(this));&#13;
+			// trigger the keydown event so that any existing character data is calculated&#13;
+		}).on('keyup keypress', function(){&#13;
+			charcount($(this));&#13;
+		});&#13;
+		&#13;
+		function charcount($this){&#13;
+			var characterLimit = "1000";&#13;
+			var charRemains = characterLimit - $this.val().trim().length;&#13;
+                        var enteredchar = $this.val().trim().length;&#13;
+			var charCountContainer='';&#13;
+			var charCountHtml = enteredchar + '/' + characterLimit ;&#13;
+			if($this.hasClass("contactus_comment")){&#13;
+				if ($this.next('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertAfter($this);&#13;
+				}&#13;
+				$this.next('div.char-count').html(charCountHtml);&#13;
+			}else {&#13;
+				if ($this.prev('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertBefore($this);&#13;
+				}&#13;
+				$this.prev('div.char-count').html(charCountHtml);&#13;
+			}&#13;
+		}&#13;
+&lt;/script&gt;</custom-attribute>
+            <custom-attribute attribute-id="customCSSFile">css/customer-service.css</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="rapala-contact-us">
+                <position>-9.0</position>
+            </classification-link>
+        </folder-links>
+    </content>
+</library>
