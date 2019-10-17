@@ -23,6 +23,31 @@ var InterstitialHelper : Object = {
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
+		if (id == 'rapalaEU-') {
+			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
+			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
+			var currencies = JSON.parse(json);
+			var params = request.httpParameterMap;
+			var localevalue = params.locale.value.slice(-2).toUpperCase();
+			if (localevalue) {
+				country = localevalue;
+			}
+			if (!empty(currencies)) {
+				if (country in currencies) {
+					var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
+					var currency = currencies[country];
+					if (availableCurrency.indexOf(currency) != -1) {
+						session.setCurrency(dw.util.Currency.getCurrency(currency));
+					} else {
+						session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+					}
+				} else {
+					session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+				}
+			} else {
+				logMessage += 'Empty JSON default currency config \n';
+			}
+		}
 		return;
 	},
 	setRedirectUrl: function (request) {

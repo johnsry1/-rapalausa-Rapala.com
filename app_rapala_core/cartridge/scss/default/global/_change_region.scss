@@ -219,6 +219,10 @@ div {
 				display: block;
 				margin: 18px auto 8px;
 			}
+			&.single-row {
+				display: block;
+				width: auto;
+			}
 			.flag-container {
 				height: 100px;
 				width: 100px;
@@ -251,9 +255,9 @@ div {
 			}
 		}
 		&.first {
-			border-top: 1px solid $whitish-grey;
-			border-bottom: 1px solid $whitish-grey;
 			margin-top: 5px;
+			border-top: 1px solid $whitish-grey;
+
 			.country {
 				display: inline-block;
 				margin: 8px auto;
@@ -267,8 +271,13 @@ div {
 			margin-bottom: -8px;
 		}
 		&.second {
+			border-top: 1px solid $whitish-grey;
 			.divider {
 				opacity: 0;
+			}
+			.country {
+				display: block;
+				width: auto;
 			}
 		}
 	}
