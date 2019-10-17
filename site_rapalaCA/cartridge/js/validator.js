@@ -7,7 +7,7 @@ var regex = {
     },
     postal: {
         ca: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )3?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i,
-        default: /^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] ?\d[A-Z]\d)$/
+        default: /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )3?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i
     },
     notCC: /^(?!(([0-9 -]){13,19})).*$/
 };

@@ -54,8 +54,8 @@
                     @include respond($desktop-breakpoint) {
                         position: relative;
                         width: calc(100% - 220px);
-                        float: right;
-                        padding: 0;
+                        float: left;
+                        padding: 0 0 0 7px;
                         margin: 0;
                         -webkit-box-sizing: border-box;
                         -moz-box-sizing: border-box;
@@ -70,6 +70,7 @@
                         }
                     }
                     #userinfo {
+                        float: left;
                         width: auto;
                         margin: 0;
                         .dividers {
@@ -125,16 +126,16 @@
                                 }
                             }
                             @include respond(0, $medium-breakpoint) {
-                                margin: 0;
+                                margin: 0 0 0 10px;
                             }
                             .userlogin {
                                 &.signin {
                                     display: block;
                                     @include respond($desktop-breakpoint) {
-                                        background: url("../images/drop_arrow.png") no-repeat scroll 33px 14px transparent;
+                                        background: url("../images/drop_arrow.png") no-repeat scroll 33px 14px rgba(0, 0, 0, 0);
                                         display: block;
                                         float: left;
-                                        padding: 0 ;
+                                        padding: 0;
                                         width: 40px;
                                         font-style: normal !important;
                                         color: $user-info-color !important;
@@ -143,7 +144,7 @@
                             }
                         }
                         li {
-                            font-family: $lucida-font-family !important;
+                            font-family: $lucida-font-family;
                             padding: 0 5px;
 
                             @include respond(0, $desktop-breakpoint - 1) {
@@ -207,7 +208,6 @@
 }
 
 .loggeduser {
-    top: rem(1px);
     a {
         &:hover {
             .user-info {
@@ -223,20 +223,4 @@
             display: block;
         }
     }
-}
-.menu-open {
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    body {
-        overflow: hidden;
-        position: relative;
-        height: 100%;
-    }
-}
-
-.williamson-top-cat,
-.triggerx-top-cat,
-.terminator-top-cat {
-    display: none;
 }
