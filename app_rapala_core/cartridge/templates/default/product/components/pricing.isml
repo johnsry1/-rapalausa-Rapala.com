@@ -115,11 +115,11 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
 	                    <iselse/>
 	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
 	                    </isif>
-                        <span itemprop="lowprice" content="${pdict.Product.priceModel.minPrice.value}">
+                        <span itemprop="lowPrice" content="${pdict.Product.priceModel.minPrice.value}">
                             <isprint value="${pdict.Product.priceModel.minPrice}"/>
                         </span>
                          - 
-                        <span itemprop="highprice" content="${pdict.Product.priceModel.maxPrice.value}">
+                        <span itemprop="highPrice" content="${pdict.Product.priceModel.maxPrice.value}">
                             <isprint value="${pdict.Product.priceModel.maxPrice}"/>
                         </span>
 				</div>		
@@ -130,7 +130,13 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
                     </isif>
 					<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 					
-					<span class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
+					<span class=" <isif condition="${ShowStandardPrice}">salesprice</isif> ">
+						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
+                        <isif condition="${isInStock}">
+	                        <link itemprop="availability" href="http://schema.org/InStock" />
+	                    <iselse/>
+	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
+	                    </isif>
 						<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
                             <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
                             <span itemprop="price" content="${pdict.Product.priceModel.minPrice.value}">
@@ -141,12 +147,6 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
 								<span class="ebm-std-prod"><isprint value="${pdict.Product.custom.earlyBirdMessage}" /></span>
 							</isif>	
 						</isif>
-						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
-                        <isif condition="${isInStock}">
-	                        <link itemprop="availability" href="http://schema.org/InStock" />
-	                    <iselse/>
-	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
-	                    </isif>
 					</span>
 
 				<iscomment>
