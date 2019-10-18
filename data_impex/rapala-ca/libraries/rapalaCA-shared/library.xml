@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31">
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="rapalaCA-shared">
     <content content-id="customer-contact-us">
         <display-name xml:lang="x-default">Contact Us</display-name>
         <description xml:lang="x-default">Contact Us</description>
@@ -53,7 +53,7 @@
 @media only screen and (max-width: 460px) {&#13;
 .insider-container {&#13;
     display: inline-block;&#13;
-  margin-bottom: 10px;&#13;
+	margin-bottom: 10px;&#13;
 }&#13;
 .insider-container p {&#13;
     font-family: lucida grande;&#13;
@@ -95,19 +95,19 @@ $(document).ready(function()&#13;
         if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){&#13;
             allowed_countries = "US";&#13;
         }&#13;
-  if(allowed_countries.indexOf(IP_GeoCode) == -1){&#13;
-      window.location.href = app.URLs.contactusnonus;   &#13;
-  }&#13;
+	if(allowed_countries.indexOf(IP_GeoCode) == -1){&#13;
+	    window.location.href = app.URLs.contactusnonus;		&#13;
+	}&#13;
     }&#13;
 &lt;/script&gt;&#13;
-&lt;p style="font-family: lucida grande;"&gt;This form is for USA customers only.&amp;nbsp; &lt;a style="font-weight: bold" href="https://www.rapala.com/eu-en/content/rapala-contact-us/customer-contact-us.html"&gt;For International inquires, click here&lt;/a&gt;. For quicker responses on website-related inquiries, please complete and send the form below. Please provide us with accurate information to make this process as efficient as possible. The information we collect will only be used to respond to your message. Your information will not be distributed.&lt;/p&gt;&#13;
-&lt;div id="address"&gt; Rapala USA&lt;br&gt;&#13;
-  Rapala VMC Corporation&lt;br&gt;&#13;
-  10395 Yellow Circle Drive&lt;br&gt;&#13;
-  Minnetonka, MN 55343&lt;br&gt;&#13;
+&lt;p style="font-family: lucida grande;"&gt;This form is for Canada customers only.&amp;nbsp; &lt;a style="font-weight: bold" href="https://www.rapala.com/on/demandware.store/Sites-rapalaEU-Site/default/Page-ShowInLocale?cid=customer-contact-us&countrySelect=true"&gt;For International inquires, click here&lt;/a&gt;. For event sponsorship/donation requests, see 'Donations' page. For quicker responses on website-related inquiries, please complete and send the form below. Please provide us with accurate information to make this process as efficient as possible. The information we collect will only be used to respond to your message. Your information will not be distributed.&lt;/p&gt;&#13;
+&lt;div id="address"&gt; Rapala Canada&lt;br&gt;&#13;
+  Normark Inc.&lt;br&gt;&#13;
+  1350 Phillip Murray Ave.&lt;br&gt;&#13;
+  Oshawa, Ontario, L1J 6Z9&lt;br&gt;&#13;
   &lt;br&gt;&#13;
   Customer Service&lt;br&gt;&#13;
-  &lt;a href="mailto:custserv@rapalausa.com"&gt;custserv@rapalausa.com&lt;/a&gt; &lt;/div&gt;&#13;
+  &lt;a href="mailto:info@normarkcanada.com"&gt;info@normarkcanada.com&lt;/a&gt; &lt;/div&gt;&#13;
 &lt;hr /&gt;&#13;
 &lt;form action="/on/demandware.store/Sites-rapala-Site/default/CustomerService-ContactUsStart" method="post" id="customercontactus"&gt;&#13;
   &lt;!-- dwMarker="form" dwPipelineTitle="CustomerService-ContactUs (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-ContactUs" --&gt;&#13;
@@ -194,15 +194,6 @@ $(document).ready(function()&#13;
 &lt;/div&gt;&#13;
 &lt;!-- End contentasset --&gt;&#13;
 &lt;isinputfield formfield="baseurl" name="baseurl" type="hidden" value="/on/demandware.store/Sites-Rapala-Site" id="hiddenid"&gt; &lt;/isinputfield&gt;&#13;
-&lt;div class="insider-container"&gt;&#13;
-  &lt;div&gt;&#13;
-    &lt;p&gt;&lt;strong&gt;Sponsorship, Donation and Decal Requests&lt;/strong&gt;&lt;/p&gt;&#13;
-    &lt;p&gt;For Sponsorship, Donation and Decal Requests please submit an application on our Rapala Insider Program.&lt;/p&gt;&#13;
-  &lt;/div&gt;&#13;
-  &lt;div&gt;&#13;
-    &lt;p&gt;&lt;a href="https://www.rapala.com/RapalaInsider?id=1" target="_blank" id="insider-button"&gt;Rapala Insider Program&lt;/a&gt;&lt;/p&gt;&#13;
-  &lt;/div&gt;&#13;
-&lt;/div&gt;&#13;
 &#13;
 &lt;div id="related-links"&gt;&#13;
   &lt;h2&gt;Related Links&lt;/h2&gt;&#13;
@@ -212,31 +203,31 @@ $(document).ready(function()&#13;
 &lt;/div&gt;&#13;
 &lt;script type="text/javascript"&gt;&#13;
 &#13;
-      $('.pt_customerservice #customercontactus textarea[maxlength]').each(function(){&#13;
-      charcount($(this));&#13;
-      // trigger the keydown event so that any existing character data is calculated&#13;
-    }).on('keyup keypress', function(){&#13;
-      charcount($(this));&#13;
-    });&#13;
-    &#13;
-    function charcount($this){&#13;
-      var characterLimit = "1000";&#13;
-      var charRemains = characterLimit - $this.val().trim().length;&#13;
+ 	  	$('.pt_customerservice #customercontactus textarea[maxlength]').each(function(){&#13;
+			charcount($(this));&#13;
+			// trigger the keydown event so that any existing character data is calculated&#13;
+		}).on('keyup keypress', function(){&#13;
+			charcount($(this));&#13;
+		});&#13;
+		&#13;
+		function charcount($this){&#13;
+			var characterLimit = "1000";&#13;
+			var charRemains = characterLimit - $this.val().trim().length;&#13;
                         var enteredchar = $this.val().trim().length;&#13;
-      var charCountContainer='';&#13;
-      var charCountHtml = enteredchar + '/' + characterLimit ;&#13;
-      if($this.hasClass("contactus_comment")){&#13;
-        if ($this.next('div.char-count').length === 0) {&#13;
-          charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertAfter($this);&#13;
-        }&#13;
-        $this.next('div.char-count').html(charCountHtml);&#13;
-      }else {&#13;
-        if ($this.prev('div.char-count').length === 0) {&#13;
-          charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertBefore($this);&#13;
-        }&#13;
-        $this.prev('div.char-count').html(charCountHtml);&#13;
-      }&#13;
-    }&#13;
+			var charCountContainer='';&#13;
+			var charCountHtml = enteredchar + '/' + characterLimit ;&#13;
+			if($this.hasClass("contactus_comment")){&#13;
+				if ($this.next('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertAfter($this);&#13;
+				}&#13;
+				$this.next('div.char-count').html(charCountHtml);&#13;
+			}else {&#13;
+				if ($this.prev('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertBefore($this);&#13;
+				}&#13;
+				$this.prev('div.char-count').html(charCountHtml);&#13;
+			}&#13;
+		}&#13;
 &lt;/script&gt;</custom-attribute>
             <custom-attribute attribute-id="customCSSFile">css/customer-service.css</custom-attribute>
             <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
