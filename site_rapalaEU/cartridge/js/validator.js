@@ -373,10 +373,10 @@ $.validator.addMethod('emailCMrapala', function (value, element) {
         var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = '-Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -393,7 +393,7 @@ $.validator.addMethod('creditcard_name', function (value, element) {
         }
         return (/^[a-zA-Z ]+$/).test(value);
     }
-}, 'Only letters are valid for this field');
+}, Resources.LETTERS_ONLY);
 
 $.validator.addMethod('creditcard_cvn', function (value, element) {
     if ($(element).hasClass('stopKeypress')) {
@@ -415,7 +415,7 @@ $.validator.addMethod('creditcard_cvn', function (value, element) {
             return true;
         }
     }
-}, 'Please enter a valid Security Code for the Credit Card entered');
+}, Resources.CVV_ONLY);
 
 $.validator.addMethod('guestemailcon', function (value, element) {
     if ($(element).hasClass('stopKeypress')) {
@@ -434,13 +434,13 @@ $.validator.addMethod('guestemailcon', function (value, element) {
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         var emailVal = $(element).closest('.formfield').prev('.formfield').find('.guestemail').val();
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else if (emailVal != value) {
-            customErrormsg = 'Please make sure emails match.';
+            customErrormsg = Resources.MATCH_EMAILS;
             return false;
         } else {
             return true;
@@ -466,10 +466,10 @@ $.validator.addMethod('guestemail', function (value, element) {
         var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -495,10 +495,10 @@ $.validator.addMethod('loggedemail', function (value, element) {
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         //var emailVal = $(element).closest('.formfield').prev('.formfield').find('.guestemail').val();
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -524,13 +524,13 @@ $.validator.addMethod('accemailcon', function (value, element) {
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         var emailVal = $(element).closest('.formfield').prev('.formfield').find('.accemail').val();
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else if (emailVal != value) {
-            customErrormsg = 'Please make sure emails match.';
+            customErrormsg = Resources.MATCH_EMAILS;
             return false;
         } else {
             return true;
@@ -557,10 +557,10 @@ $.validator.addMethod('a-zA-Z0-9', function (value, element) {
         //var emailVal = $(element).closest('.formfield').prev('.formfield').find('.email').val();
 
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -581,7 +581,7 @@ $.validator.addMethod('cm_password', function (value, element) {
             customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
             return false;
         } else if (passwordVal != value) {
-            customErrormsg = 'Oops - your passwords do not match.';
+            customErrormsg = Resources.MATCH_PASSWORDS;
             return false;
         } else {
             return true;
@@ -600,7 +600,7 @@ $.validator.addMethod('confirm_password', function (value, element) {
             customErrormsg = Resources.PASSWORD_VALIDATION_ERROR;
             return false;
         } else if (passwordVal != value) {
-            customErrormsg = 'Oops - your passwords do not match.';
+            customErrormsg = Resources.MATCH_PASSWORDS;
             return false;
         } else {
             return true;
@@ -649,10 +649,10 @@ $.validator.addMethod('resetemail', function (value, element) {
         var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
 
             return false;
         } else {
@@ -677,10 +677,10 @@ $.validator.addMethod('accountemail', function (value, element) {
         var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -707,10 +707,10 @@ $.validator.addMethod('vipinsideremail', function (value, element) {
         var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = '-Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else {
             return true;
@@ -735,16 +735,16 @@ $.validator.addMethod('emailfooter', function (value, element) {
             var lcharS = (/^[a-zA-Z0-9]$/).test(lchar);
             var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
             if ((fcharS == false) || (lcharS == false)) {
-                customErrormsg = 'Something doesn\'t look right, please try again.';
+                customErrormsg = Resources.INVALID_FORMATTING_ERROR;
                 return false;
             } else if (emailCheck == false) {
-                customErrormsg = 'Oops - the email entered is not in a valid format.';
+                customErrormsg = Resources.INVALID_EMAIL_FORMAT;
                 return false;
             } else {
                 return true;
             }
         } else {
-            customErrormsg = 'Please enter your email address.';
+            customErrormsg = Resources.MISSING_EMAIL_ADDRESS;
 
         }
     }
@@ -770,13 +770,13 @@ $.validator.addMethod('accountemailconf', function (value, element) {
             emailVal = $(element).closest('form').find('.accountemail').val();
         }
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else if (emailVal != value) {
-            customErrormsg = 'Please make sure emails match.';
+            customErrormsg = Resources.MATCH_EMAILS;
             return false;
         } else {
             return true;
@@ -801,13 +801,13 @@ $.validator.addMethod('accountEmailConfirmation', function (value, element) {
         var emailCheck = (/^[-0-9a-zA-Z.-_]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value);
         var emailVal = $(element).closest('form').find('.accountemail').val();
         if ((fcharS == false) || (lcharS == false)) {
-            customErrormsg = 'Something doesn\'t look right, please try again.';
+            customErrormsg = Resources.INVALID_FORMATTING_ERROR;
             return false;
         } else if (emailCheck == false) {
-            customErrormsg = 'Oops - the email entered is not in a valid format.';
+            customErrormsg = Resources.INVALID_EMAIL_FORMAT;
             return false;
         } else if (emailVal != value) {
-            customErrormsg = 'Please make sure emails match.';
+            customErrormsg = Resources.MATCH_EMAILS;
             return false;
         } else {
             return true;

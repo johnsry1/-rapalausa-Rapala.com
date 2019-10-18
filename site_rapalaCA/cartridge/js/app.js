@@ -637,7 +637,7 @@ var app = {
             var IPGeoCode = geoipCountryCode();
             var allowedCountries = $('.allowed-countries').text();
             if (allowedCountries == null || allowedCountries == 'null' || allowedCountries == 'undefined') {
-                allowedCountries = 'CA';
+                allowedCountries = 'CA,UA,USA';
             }
             if (allowedCountries.indexOf(IPGeoCode) == -1) {
                 $('html').addClass('no-pricing');
@@ -756,5 +756,11 @@ $(function () {
 
 // initialize app
 $(document).ready(function () {
+
+    $(document).on('click', '.order-items .toggle', function () {
+        $(this).parent().siblings('li.hidden').show();
+        $(this).remove();
+    });
+
     app.init();
 });

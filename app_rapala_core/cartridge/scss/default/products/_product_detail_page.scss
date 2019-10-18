@@ -447,6 +447,9 @@
 
 .pdp-main {
     margin: 0;
+    .wrapper.top {
+        width: 996px;
+    }
     .product-image-container {
         width: 525px;
         margin-bottom: 25px;
@@ -1598,10 +1601,15 @@ a {
 
 .pt_product-details {
     .breadcrumb {
+        @include respond($desktop-breakpoint - 1) {
+            float: none;
+            width: 996px;
+        }
         float: left;
         margin: 0 auto;
         width: 100%;
         box-sizing: border-box;
+
     }
     .pdp-main {
         .pdpmain-content {

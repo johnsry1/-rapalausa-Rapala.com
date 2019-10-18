@@ -17,7 +17,14 @@
 						<div class="producttile item">
 							<div class="analytics capture-product-id"><isprint value="${recProduct.ID}"/></div>
 							<div class="product-image recommendation_image">
-								<a class="thumb-link" href="${URLUtils.https('Product-Show','pid', recProduct.ID)}">	
+							<isscript>
+								var gtmProductData = {};
+								if (dw.system.Site.getCurrent().getCustomPreferenceValue('enableGoogleTagManager')) {
+									gtmProductData = require('*/cartridge/scripts/googletags/Site_TagManager').getProductData(recProduct.ID);
+								}
+							</isscript>
+								<a class="thumb-link" href="${URLUtils.https('Product-Show','pid', recProduct.ID)}"
+									data-gtmdata="${JSON.stringify(gtmProductData)}">
 									<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 									    <isset name="imageObjDesktop" value="${new ProductImage('minicartDesktop',recProduct,0,'minicart')}" scope="page"/>
 									    <isset name="imageObjIPad" value="${new ProductImage('minicartIPad',recProduct,0,'minicart')}" scope="page"/>

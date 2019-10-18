@@ -86,7 +86,7 @@ exports.NAMESPACE = NAMESPACE;
  * @param {function} objectCreationCallback
  * @return {Array}
  */
-exports.getProductArrayFromList = function (productList, objectCreationCallback) {
+exports.getProductArrayFromList = function (productList, objectCreationCallback, list) {
 
     /** @type {Array} */
     let productArray = [];
@@ -106,6 +106,11 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback)
             prodObj = objectCreationCallback(item);
 
         prodObj.position = position;
+        if (!empty(list)) {
+        	prodObj.list = list;
+        } else {
+        	prodObj.list = "Internal Search"; // default value for most CLP pages
+        }
 
         productArray.push(prodObj);
 
@@ -292,4 +297,23 @@ exports.getProductOriginalPrice = function (product) {
         }
     }
     return standardPrice;
+};
+
+exports.getCategorySearch = function (foundCategory) {
+	var result = "";
+	var categoryArray = [];
+	var category = foundCategory;
+	var isRootCategory = category.root;
+	while (!empty(category) && !isRootCategory) {
+		categoryArray.unshift(category.displayName);
+		if (empty(category.parent)) {
+			break;
+		}
+		category = category.parent;
+		isRootCategory = category.root;
+	}
+	if (categoryArray.length > 0) {
+		result = categoryArray.join('|');
+	}
+	return result;
 }
