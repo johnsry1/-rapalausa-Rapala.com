@@ -131,14 +131,14 @@ var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUti
 					<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 					
 					<span class=" <isif condition="${ShowStandardPrice}">salesprice</isif> ">
-						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
-                        <isif condition="${isInStock}">
-	                        <link itemprop="availability" href="http://schema.org/InStock" />
-	                    <iselse/>
-	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
-	                    </isif>
 						<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
                             <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
+							<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
+	                        <isif condition="${isInStock}">
+		                        <link itemprop="availability" href="http://schema.org/InStock" />
+		                    <iselse/>
+		                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
+		                    </isif>
                             <span itemprop="price" content="${pdict.Product.priceModel.minPrice.value}">
 							 <isprint value="${SalesPrice}"/>
 							</span>
