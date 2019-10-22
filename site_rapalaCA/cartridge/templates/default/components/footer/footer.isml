@@ -101,7 +101,12 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 								<div>
 								<iscomment> Render Mail Chimp </iscomment>
 								<isif condition="${dw.system.Site.getCurrent().preferences.custom.hasOwnProperty('MailChimpEnable') && dw.system.Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')}">
-									<iscontentasset aid="mail-chimp-footer"/>
+									<div class="emailSignup">
+										<iscontentasset aid="mail-chimp-footer"/>
+										<div class="receive-emails">
+											<a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our 9 brands (details)</a>
+										</div>
+									</div>
 								<iselse>
 									<div class="email-signup handle-non-us">
 								       <isscript>
