@@ -213,8 +213,12 @@ div {
 		max-width: 100%;
 		.country {
 			width: 125px;
-			display: block;
-			margin: 18px auto 8px;
+			display: inline-block;
+			margin: 8px auto;
+			&.single-country-row {
+				display: block;
+				margin: 18px auto 8px;
+			}
 			.flag-container {
 				height: 100px;
 				width: 100px;
@@ -257,10 +261,15 @@ div {
 		}
 		.divider {
 			background: $whitish-grey;
-		    height: 140px;
-		    width: 1px;
-    		display: inline-block;
-    		margin-bottom: -8px;
+			height: 140px;
+			width: 1px;
+			display: inline-block;
+			margin-bottom: -8px;
+		}
+		&.second {
+			.divider {
+				opacity: 0;
+			}
 		}
 	}
 	.gray-button {

@@ -11,7 +11,7 @@
 					    <isset name="cat_name" value="${brandtab.split('|')[0]}" scope="page" />
                         <isset name="brandImageUrl" value="${'/images/brands/' + cat_name + '.png'}" scope="page"/>
                         <isset name="brandImageGrayscaleUrl" value="${'/images/brands/' + cat_name + '_bw.png'}" scope="page"/>
-						<a class="${brandtab.split('|')[0]}" href="${URLUtils.https('Home-Show','id',+brandtab.split('|')[1])}">
+						<a class="${brandtab.split('|')[0]}" href="${URLUtils.https('Search-Show', 'cgid', cat_name+'-home', 'id', brandtab.split('|')[1])}">
                             <span>
                             	<isif condition="${dw.catalog.CatalogMgr.getCategory(cat_name) != null}">
                                 	<isprint value="${dw.catalog.CatalogMgr.getCategory(cat_name).displayName}" encoding="off" />

@@ -485,10 +485,10 @@ var product = function (response) {
         //var notAvailLevel = avLevels[Constants.AVAIL_STATUS_NOT_AVAILABLE];
 
         if (avStatus === Constants.AVAIL_STATUS_IN_STOCK) {
-            avMessage = '<span class=\'in-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'in-stock\'><link itemprop="availability" href="http://schema.org/InStock">' + avMessage + '</span>';
         }
         if (avStatus === 'NOT_AVAILABLE') {
-            avMessage = '<span class=\'out-of-stock\'>' + avMessage + '</span>';
+            avMessage = '<span class=\'out-of-stock\'><link itemprop="availability" href="http://schema.org/OutOfStock">' + avMessage + '</span>';
         }
         if (avStatus === Constants.AVAIL_STATUS_BACKORDER ||
             avStatus === Constants.AVAIL_STATUS_PREORDER) {
@@ -1383,13 +1383,15 @@ var product = function (response) {
                     formattedPrices = data;
                 }
             });
+            //get only the currency code/symbol
+            var currency = formattedPrices.standardPrice.split(standardPrice)[0];
 
             // in case it is a promotional price then we do not care if it is 0
-            priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice">' + formattedPrices.salePrice + '</div>' : ' <div class="salesprice">N/A</div>';
+            priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice"> <span itemprop="priceCurrency" content="' + currency + '">' + currency + '</span><span itemprop="price" content="' + salePrice + '">' + salePrice + '</span></div>' : ' <div class="salesprice">N/A</div>';
 
             if (standardPrice > 0 && standardPrice > salePrice) {
                 // show both prices
-                priceHtml = '<div class="standardprice">' + formattedPrices.standardPrice + '</div>' + priceHtml;
+                priceHtml = '<div class="standardprice"> <span itemprop="priceCurrency" content="' + currency + '">' + currency + '</span><span itemprop="price" content="' + standardPrice + '">' + standardPrice + '</span></div>' + priceHtml;
             }
             if (standardPrice === 0 && salePrice === 0) {
                 if (this.selectedVar.earlyBirdMessage != '') {
