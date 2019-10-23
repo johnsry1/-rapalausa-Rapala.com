@@ -1,3 +1,4 @@
+@import "../global/fonts";
 .pt_blog,
 .pt_blogpost {
     .breadcrumb {
@@ -8,6 +9,7 @@
             margin-left: 0;
             padding: 0 rem(20px);
             margin-bottom: rem(25px);
+            margin-top:30px;
         }
         @include respond(desktop) {
             padding: 0;
@@ -23,6 +25,7 @@
         }
         a.breadcrumb-element {
             text-decoration: none;
+            color: #333;
             &:hover {
                 text-decoration: underline;
             }
@@ -30,6 +33,24 @@
                 text-decoration: none;
             }
         }
+    }
+
+    h2, .h2 {
+        font-family: $sans-serif-secondary;
+        font-weight: 400;
+        font-style: normal;
+        font-variant: normal;
+        line-height: 1;
+        text-transform: none;
+        color: #000;
+        @media screen and (min-width: 768px) {
+            font-size: 20px;
+        }
+    }
+
+    .blog-landing {
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -332,6 +353,7 @@
         @include respond(large-up) {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 2.5rem;
         }
     }
     .blog-post {
@@ -379,12 +401,15 @@
                 color: $blog-main-link-color;
                 a {
                     color: $blog-main-link-color;
+                    font-size: 13px;
+                    font-family: $sans-serif-regular;
+                    ;
                     @include respond(medium-down) {
                         text-decoration: none;
                     }
                     @include respond(large-up) {
                         display: inline-block;
-                        @include button;
+                        //@include button;
                     }
                     &:hover {
                         @include respond(medium-down) {
@@ -496,6 +521,9 @@
         }
         .blog-button-wrapper {
             text-align: right;
+            a {
+                font-size: 13px;
+            }
         }
         .blog-post-introtext {
             line-height: 1.54;
