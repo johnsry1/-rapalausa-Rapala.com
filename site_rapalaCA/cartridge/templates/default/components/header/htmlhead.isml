@@ -104,16 +104,10 @@ If you are not using the build cartridge the comments can be safely removed.
 <![endif]-->
 
 <iscomment>THEME STYLESHEETS</iscomment>
-
-<isif condition="${!empty(session.custom.currentSite)}">
-	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/css/' + session.custom.currentSite + '.min.css')}" type="text/css" rel="stylesheet"/>
-<iselse>
-	<isset name="siteCss" value="/themes/rapala/css/rapala.css" scope="page" />
-	<isif condition="${!empty(dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')) && dw.system.Site.getCurrent().getCustomPreferenceValue('useMinifiedFiles')}">
-		<isset name="styleVersion" value="/themes/rapala/css/rapala.min.css" scope="page" />
-	</isif>
-	<link href="${URLUtils.staticURL(siteCss)}" type="text/css" rel="stylesheet"/>
+<isif condition="${!empty(session.custom.currentSite) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandTheme')}">
+	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/css/' + session.custom.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
 </isif>
+
 <iscomment>geo ip code </iscomment>
 <div class="allowed-countries hide">${dw.system.Site.getCurrent().getCustomPreferenceValue("allowed_countries")}</div>
 <script src="${URLUtils.url('GeoIP-Country')}" type="text/javascript"></script>
