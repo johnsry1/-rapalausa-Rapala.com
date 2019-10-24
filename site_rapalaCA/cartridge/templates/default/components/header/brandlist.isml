@@ -3,7 +3,7 @@
 	<div class="floatright site-suggestion-section">
 		<isinclude template="search/simplesearch"/>
 	</div>
-	<ul>
+	<ul class="ca-top-menu">
 		<isloop items = "${dw.system.Site.current.getCustomPreferenceValue('brandtaborder')}" var="brandtab" status="status" >
 			<isif condition="${dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) != null && dw.system.Site.current.getCustomPreferenceValue('activebrand'+brandtab.split('|')[0]) == true}">
 				<li class="${brandtab.split('|')[0]}-top-cat <isif condition="${status.odd}">odd<iselse/>even</isif><isif condition = "${brandtab.split('|')[0] == session.custom.currentSite}"> active</isif>">
