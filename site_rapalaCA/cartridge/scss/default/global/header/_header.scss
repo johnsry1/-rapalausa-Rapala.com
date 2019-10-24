@@ -2,6 +2,8 @@
     float: left;
     width: 100%;
     background: $white;
+    position: relative;
+    z-index: 2;
     @include respond($desktop-breakpoint - 1) {
         background: transparent url("../images/header-background.jpg") top left repeat-x;
     }
@@ -201,6 +203,9 @@
             &.column1 {
                 @include respond($desktop-breakpoint) {
                     padding: 21px 0 0 0;
+                    margin: 0 auto;
+                    max-width: 996px;
+                    float: none;
                 }
                 .cell {
                     float: left;
