@@ -305,12 +305,11 @@
 					} else if ((Product.master || Product.variationGroup) && pdict.CurrentHttpParameterMap.pricerange.stringValue == 'true') {
 						// Product master or variation group price range depending on the represented variants
 						price.class = 'product-sales-price';
-						price.value = 'Starting at '+dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode));
+						price.value = Resource.msg('pricing.startingat','product',null) + ' ' + dw.util.StringUtils.formatMoney(dw.value.Money(pdict.CurrentHttpParameterMap.minprice, currencyCode));
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else if ((Product.master || Product.variationGroup) && Product.priceModel.isPriceRange()) {
 						price.class = 'product-sales-price';
 						price.value = session.getCurrency().getSymbol() + Product.priceModel.minPrice.value.toFixed(2) + ' - ' + session.getCurrency().getSymbol() + Product.priceModel.maxPrice.value.toFixed(2);
-						//price.value = 'helloo';
 						price.title = Resource.msg('product.pricerange', 'product', null);
 					} else {
 						// For product master or variation group without a price range get the pricing from first variant
