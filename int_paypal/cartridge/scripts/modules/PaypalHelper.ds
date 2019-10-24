@@ -474,18 +474,29 @@ function getPaymentRequestData(lineItemContainer : order.LineItemCtnr) : util.Ha
 	var paymentRequestData : util.HashMap = new util.HashMap();
 	var appliedGiftCertificatesAmount : value.Money = calculateAppliedGiftCertificatesAmount(lineItemContainer);
 	var amount : value.Money;
+	var itemsAmount : value.Money;
+	var shippingDiscountAmount : value.Money;
+	var tax = 0;
 	if(lineItemContainer.getTotalGrossPrice().available){
 		amount = lineItemContainer.getTotalGrossPrice().subtract(appliedGiftCertificatesAmount);
 	} else{
 		amount = lineItemContainer.getAdjustedMerchandizeTotalPrice(true).add(lineItemContainer.giftCertificateTotalPrice).subtract(appliedGiftCertificatesAmount);
 	}
-	var itemsAmount : value.Money = lineItemContainer.getTotalNetPrice().subtract(appliedGiftCertificatesAmount).subtract(lineItemContainer.getAdjustedShippingTotalNetPrice());
-	var shippingDiscountAmount : value.Money = lineItemContainer.getAdjustedShippingTotalNetPrice().subtract(lineItemContainer.getShippingTotalNetPrice());
+	if(dw.order.TaxMgr.taxationPolicy == dw.order.TaxMgr.TAX_POLICY_GROSS){
+		itemsAmount = lineItemContainer.getTotalGrossPrice().subtract(appliedGiftCertificatesAmount).subtract(lineItemContainer.getAdjustedShippingTotalGrossPrice());
+	    shippingDiscountAmount = lineItemContainer.getAdjustedShippingTotalGrossPrice().subtract(lineItemContainer.getShippingTotalGrossPrice());
+		// tax = 0 because it is already included in order total
+		tax = 0;
+	} else {
+		itemsAmount = lineItemContainer.getTotalNetPrice().subtract(appliedGiftCertificatesAmount).subtract(lineItemContainer.getAdjustedShippingTotalNetPrice());
+	    shippingDiscountAmount = lineItemContainer.getAdjustedShippingTotalNetPrice().subtract(lineItemContainer.getShippingTotalNetPrice());
+		tax = lineItemContainer.getTotalTax().getValue();
+	}
 
 	paymentRequestData.put('PAYMENTREQUEST_0_AMT', amount.getValue());
 	paymentRequestData.put('PAYMENTREQUEST_0_CURRENCYCODE', lineItemContainer.getCurrencyCode());
 	paymentRequestData.put('PAYMENTREQUEST_0_ITEMAMT', itemsAmount.getValue());
-	paymentRequestData.put('PAYMENTREQUEST_0_TAXAMT', lineItemContainer.getTotalTax().getValue());
+	paymentRequestData.put('PAYMENTREQUEST_0_TAXAMT', tax);
 	paymentRequestData.put('PAYMENTREQUEST_0_SHIPPINGAMT', lineItemContainer.getShippingTotalPrice().getValue());
 	paymentRequestData.put('PAYMENTREQUEST_0_SHIPDISCAMT', shippingDiscountAmount.getValue());
 
