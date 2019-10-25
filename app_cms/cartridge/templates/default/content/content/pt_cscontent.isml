@@ -7,7 +7,7 @@
 	<isinclude template="components/header/htmlhead"/>
 </head>
 <body>
-<isinclude template="components/googletagmanager"/> 
+<isinclude template="components/googletagmanager"/>
 <div id="container" class="pt_customerservice">
 	<isinclude template="components/header/header"/>
 	<div id="main">
@@ -15,7 +15,7 @@
 		<isscript>
 			var bcmap = new dw.util.LinkedHashMap();
 			var brandNames = new dw.util.HashSet();
-			brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce','otter']);	
+			brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce','otter']);
 			var containingFolder = null;
 			if(pdict.ContentSearchResult.folder) {
 				containingFolder = pdict.ContentSearchResult.folder;
@@ -29,10 +29,10 @@
 			if(empty(containingFolder) && !pdict.Content.folders.empty) {
 				var folderPaths = new dw.util.HashMap();
 				var folderPathStartingPoints = pdict.Content.folders;
-				
+
 				var fpspi = folderPathStartingPoints.iterator();
 				var nextFolder = null;
-				
+
 				while(fpspi.hasNext()) {
 					var firstFolder = nextFolder = fpspi.next();
 					if(firstFolder.online) {
@@ -65,7 +65,7 @@
 			if(!empty(containingFolder)) {
 				var bc = [];
 				bc.push(pdict.Content);
-				
+
 				var nextFolder = containingFolder;
 				while(nextFolder.root == false) {
 					if(!brandNames.contains(nextFolder.ID)) {
@@ -74,7 +74,7 @@
 					nextFolder = nextFolder.parent;
 				}
 				var len = bc.length;
-	
+
 				while(len--) {
 					if(len > 0) {
 						bcmap.put(bc[len].displayName, URLUtils.https('Folder-Show','fdid',bc[len].ID));
@@ -88,7 +88,7 @@
 				bcmap.put(pdict.Content.name, null);
 			}
 		</isscript>
-		
+
         <ismapbreadcrumbs bcmap="${bcmap.entrySet()}" />
 			<div id="page-background" class="downshift">
 				<div id="page">
@@ -134,7 +134,7 @@
 			  	<div class="content-button"
 			  		<isif condition="${!empty(containingFolder)}">
 			  			<div <isif condition="${flag}">class="back"<iselse>class="back-noborder"</isif>>
-			  			<a class="content-back-button button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}">${Resource.msg("content.goto","content",null)}&nbsp;<isprint value="${containingFolder.displayName}" /></a>
+			  			<a class="content-back-button button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}"><isprint value="${containingFolder.displayName}" /></a>
 			  			</div>
 				</div>
 			  	</isif>
@@ -148,7 +148,7 @@
 	</div><!-- END: main -->
 	<isinclude template="components/footer/footer"/>
 </div><!-- END: container -->
-<isif condition="${(pdict.Content.name) == 'Email Subscription Center'}"> 
+<isif condition="${(pdict.Content.name) == 'Email Subscription Center'}">
 	<script type=text/javascript src="https://services.xg4ken.com/js/kenshoo.js?cid=4f5a1e0a-d511-47bd-8354-af06bc6e7700" ></script>
 	<script type=text/javascript>
 		kenshoo.trackConversion('1157','4f5a1e0a-d511-47bd-8354-af06bc6e7700',{
@@ -168,7 +168,7 @@
 	</noscript>
 </isif>
 
-<isif condition="${(pdict.Content.name) == 'Contact Us'}"> 
+<isif condition="${(pdict.Content.name) == 'Contact Us'}">
 	<script type=text/javascript src="https://services.xg4ken.com/js/kenshoo.js?cid=4f5a1e0a-d511-47bd-8354-af06bc6e7700" ></script>
 	<script type=text/javascript>
 		kenshoo.trackConversion('1157','4f5a1e0a-d511-47bd-8354-af06bc6e7700',{
