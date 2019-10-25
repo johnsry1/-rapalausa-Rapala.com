@@ -21,7 +21,7 @@
 								<table width="561" cellspacing="0" cellpadding="0" border="0">
 									<tbody>
 										<tr>
-											<td align="center"  width="561" height="20" >8 BRANDS 1 CART</td>
+											<td align="center"  width="561" height="20" >9 BRANDS 1 CART</td>
 										</tr>
 						            	<tr>
 	              							<td align="center">
@@ -37,53 +37,99 @@
 		              						<td>
 												<div style="margin-left: 0px;align: center;">
 													<!-- Rapala : id=1 -->
-													<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'rapala')}">
-															<img src="${URLUtils.httpsStatic('/images/rapala.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- VMC : id=6 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
-															<img src="${URLUtils.httpsStatic('/images/vmc.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- STORM : id=4 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'storm')}">
-															<img src="${URLUtils.httpsStatic('/images/storm.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- LUHR-JENSEN : id=5 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'luhrjensen')}">
-															<img src="${URLUtils.httpsStatic('/images/lurjensen.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- SUFIX : id=2 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'sufix')}">
-															<img src="${URLUtils.httpsStatic('/images/sufix.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-													<!-- BLUEFOX : id=8 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'bluefox')}">
-															<img src="${URLUtils.httpsStatic('/images/bluefox.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- TERMINATOR : id=7 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'terminator')}">
-															<img src="${URLUtils.httpsStatic('/images/terminator.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- WILLIAMSON : id=9 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'williamson')}">
-															<img src="${URLUtils.httpsStatic('/images/williamson.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- TRIGGER X : id=3 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'triggerx')}">
-															<img src="${URLUtils.httpsStatic('/images/trigger-x.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- Marcum : id=10 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'marcum')}">
-															<img src="${URLUtils.httpsStatic('/images/marcum.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- Strike Master : id=10 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'strikemaster')}">
-															<img src="${URLUtils.httpsStatic('/images/strike-master.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													<!-- Ice Force : id=20 -->
-													<iselseif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'iceforce')}">
-															<img src="${URLUtils.httpsStatic('/images/iceforce.png')}" alt="Header Brand Images" width="563px"; height="22px"; ></img>
-
-													</isif>
+													<div style="margin-left: 0px;margin-bottom: 7px;align: center;vertical-align: middle;text-align: center;">
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandrapala') != null) && (dw.system.Site.current.preferences.custom.activebrandrapala == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'rapala')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/rapala.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/rapala_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/vmc.png')}" alt="Header Brand Images" width="50px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/vmc_bw.PNG')}" alt="Header Brand Images" width="50px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstorm') != null) && (dw.system.Site.current.preferences.custom.activebrandstorm == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'storm')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/storm.png')}" alt="Header Brand Images" width="73px"; height="26px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/storm_bw.png')}" alt="Header Brand Images" width="73px"; height="26px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandluhrjensen') != null) && (dw.system.Site.current.preferences.custom.activebrandluhrjensen == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'luhrjensen')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/luhrjensen.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/luhrjensen_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandsufix') != null) && (dw.system.Site.current.preferences.custom.activebrandsufix == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'sufix')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/sufix.png')}" alt="Header Brand Images" width="56px"; height="30px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/sufix_bw.png')}" alt="Header Brand Images" width="56px"; height="30px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandbluefox') != null) && (dw.system.Site.current.preferences.custom.activebrandbluefox == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'bluefox')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/bluefox.png')}" alt="Header Brand Images" width="57px"; height="23px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/bluefox_bw.png')}" alt="Header Brand Images" width="57px"; height="23px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandterminator') != null) && (dw.system.Site.current.preferences.custom.activebrandterminator == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'terminator')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/terminator.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/terminator_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandwilliamson') != null) && (dw.system.Site.current.preferences.custom.activebrandwilliamson == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'williamson')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/williamson.png')}" alt="Header Brand Images" width="46px"; height="29px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/williamson_bw.png')}" alt="Header Brand Images" width="46px"; height="29px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandtriggerx') != null) && (dw.system.Site.current.preferences.custom.activebrandtriggerx == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'triggerx')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/triggerx.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/triggerx_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarcum') != null) && (dw.system.Site.current.preferences.custom.activebrandmarcum == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'marcum')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/marcum.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/marcum_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstrikemaster') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'strikemaster')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/strikemaster.png')}" alt="Header Brand Images" width="80px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/strikemaster_bw.png')}" alt="Header Brand Images" width="80px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandotter') != null) && (dw.system.Site.current.preferences.custom.activebrandotter == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'otter')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/otter.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/otter_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandiceforce') != null) && (dw.system.Site.current.preferences.custom.activebrandiceforce == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'iceforce')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/iceforce.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/iceforce_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                </div>
 												</div>
 		             					 	</td>
 										</tr>
@@ -117,7 +163,7 @@
 																	<div style="font-size: 11px; margin-left:10px; color: #666;  text-align: left; font-family:Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."   ></img>&nbsp;&nbsp;Orders are usually processed and shipped within 2 business days.</div>
 																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="." ></img>&nbsp;&nbsp;Once your order ships, we will send a shipping confirmation to you at this same email.</div>
 																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."  ></img>&nbsp;&nbsp;If any item on your order is cancelled, we will send a cancellation email to this same email.</div>
-																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif; margin-bottom: 8px;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."  ></img>&nbsp;&nbsp;The charge for this order will be from <span><i>Rapala USA</i>.</span></div>
+																	<div style="font-size: 11px; margin-left:10px; color: #666; text-align: left; font-family:Lucida Grande,Lucida Sans,Lucida Sans Unicode,Trebuchet MS,Helvetica,Arial,sans-serif; margin-bottom: 8px;"><img src="${URLUtils.httpsStatic('/images/bulletpoint_small.png')}" alt="."  ></img>&nbsp;&nbsp;The charge for this order will be from <span><i>Rapala CA</i>.</span></div>
 																</div>
 															</td>
 															<td width="17" bgcolor="#ffffff">&nbsp;</td>
@@ -336,7 +382,7 @@
 	                            												<br/>
 													                            <div>
 													                            	<isif condition="${!empty(shippingDiscount) && shippingDiscount.value > 0.0}">
-													                            		<span style="color:#E80000; font-size:11px; width:140px;" class="label discount yousaved">(you saved <isprint value="${shippingDiscount}"/>)</span>
+													                            		<span style="color:#E80000; font-size:11px; width:140px;" class="label discount you saved">(you saved <isprint value="${shippingDiscount}"/>)</span>
 													                            	</isif>
 													                            </div>
 	                          											</td>
@@ -704,7 +750,7 @@
 													<a href="${URLUtils.https('Page-Show','cid','customer-privacy-security','fdid','rapala-legal')}" target="_blank" title="Privacy Policy"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Privacy Policy</span></strong></a>
 													<br>
 													<br>
-													Rapala.ca is operated by Normark, Inc. 1350 Phillip Murray Ave. Oshawa, L1J 6Z9 Ontario.<br><br>©1961-${dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString()} Rapala CA. Rapala®, VMC®, Luhr Jensen®, Sufix®, Storm Lures®, StrikeMaster®, Terminator®, Blue Fox® are trademarks of Rapala CA. All Rights Reserved.
+													Rapala.ca is operated by Normark, Inc. 1350 Phillip Murray Ave. Oshawa, L1J 6Z9 Ontario.<br><br>©1961-${dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString()} Rapala CA. Rapala®, VMC®, Luhr Jensen®, Sufix®, Storm Lures®, StrikeMaster®, Terminator®, Blue Fox®, MarCum® are trademarks of Rapala CA. All Rights Reserved.
 												</span>
 											</td>
 										</tr>
