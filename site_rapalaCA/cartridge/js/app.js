@@ -637,14 +637,14 @@ var app = {
             var IPGeoCode = geoipCountryCode();
             var allowedCountries = $('.allowed-countries').text();
             if (allowedCountries == null || allowedCountries == 'null' || allowedCountries == 'undefined') {
-                allowedCountries = 'CA,UA,USA';
+                allowedCountries = 'CA';
             }
             if (allowedCountries.indexOf(IPGeoCode) == -1) {
                 $('html').addClass('no-pricing');
                 $('.non-usa-alert').removeClass('hide');
                 $('.ui-customer,.dividers.pipe,.ui-email,.ui-storelocator,.ui-wishlist,.ui-login,.handle-non-us,.welcomemessage,.anonymous,.site-suggestion-section').addClass('hide');
-                $('.minicart, .promotional-message, .product-colors-size, .header-blog-link').css({'display': 'none'});
-                $('#customer-returns,#customer-shipping,#customer-warranty').addClass('hide');
+                $('.minicart, .promotional-message, .product-colors-size, .header-blog-link, .top-menu-login').css({'display': 'none'});
+                $('#customer-returns,#customer-shipping,#customer-warranty, .top-menu-login').addClass('hide');
                 $('.addtowishlist').addClass('hide');
                 $('.header-blog-link').addClass('hide');
                 $('.non-us-contactus geo,.us-contactus').addClass('hide');
