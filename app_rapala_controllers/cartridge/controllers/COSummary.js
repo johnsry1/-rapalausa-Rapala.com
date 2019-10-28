@@ -63,8 +63,7 @@ function submit() {
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
     if (('Order' in placeOrderResult) && ('order_created' in placeOrderResult && placeOrderResult.order_created)) {
-        var orderID = placeOrderResult.Order.getOrderNo();
-        response.redirect(URLUtils.https('COSummary-RenderConfirmation', 'orderID', orderID));
+        showConfirmation(placeOrderResult.Order);
     } else if('error' in placeOrderResult && placeOrderResult.error){
     	var cart = Cart.get();
         var COBilling = app.getController('COBilling');
@@ -74,12 +73,6 @@ function submit() {
     }
 }
 
-
-function renderConfirmation() {
-	var order = dw.order.OrderMgr.getOrder(request.httpParameterMap.orderID);
-	showConfirmation(order);
-}
-
 /**
  * Renders the order confirmation page after successful order
  * creation. If a nonregistered customer has checked out, the confirmation page
@@ -87,6 +80,7 @@ function renderConfirmation() {
  * account creation.
  */
 function showConfirmation(order) {
+	
     if (!customer.authenticated) {
         // Initializes the account creation form for guest checkouts by populating the first and last name with the
         // used billing address.
@@ -126,8 +120,6 @@ function showConfirmation(order) {
 exports.Start = guard.ensure(['https'], start);
 /** @see module:controllers/COSummary~Submit */
 exports.Submit = guard.ensure(['https', 'post'], submit);
-/** @see module:controllers/COSummary~ShowConfirmation */
-exports.RenderConfirmation = guard.ensure(['https'], renderConfirmation);
 
 /*
  * Local method
