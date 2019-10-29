@@ -20,6 +20,7 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
+		var z = request;
 		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
@@ -28,9 +29,8 @@ var InterstitialHelper : Object = {
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
 			var currencies = JSON.parse(json);
 			var params = request.httpParameterMap;
-			var localevalue = params.locale.value.slice(-2).toUpperCase();
-			if (localevalue) {
-				country = localevalue;
+			if (params.locale.value) {
+				country = params.locale.value.split('_').pop();
 			}
 			if (!empty(currencies)) {
 				if (country in currencies) {

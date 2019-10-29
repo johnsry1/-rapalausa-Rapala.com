@@ -4,12 +4,38 @@
 	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 	var currentSite = dw.system.Site.getCurrent();
 	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
+	var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true);
+	var caLink=dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url;
+	var euLink='/eu-en?countrySelect=true';
+	var fiLink='/fi-fi?countrySelect=true&locale=fi_FI';
+	var gbLink='/en-gb?countrySelect=true&locale=en_GB';
 	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+	var showFinnishFlag : String = orgPrefs.getCustom()['showFinnishFlag'];
 	var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
 	activeCountries = JSON.parse(activeCountries);
 
 	if (currentSite.ID == 'rapalaEU') {
 		currentCountry = 'eu';
+	}
+	if (session.custom.hasOwnProperty('countrySelectorPid')) {
+		let productID = session.custom.countrySelectorPid;
+		var usLink=URLUtils.url('Product-ShowInLocale', 'pid', productID,'countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Product-ShowInLocale', 'pid', productID,'countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorCgid')) {
+		let cgid = session.custom.countrySelectorCgid;
+		var usLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid,'countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale', 'cgid', cgid,'countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorCid')) {
+		let cid = session.custom.countrySelectorCid;
+		var usLink=URLUtils.url('Page-ShowInLocale', 'cid', cid,'countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Page-ShowInLocale', 'cid', cid,'countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorFdid')) {
+		let fdid = session.custom.countrySelectorFdid;
+		var usLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid,'countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale', 'fdid', fdid,'countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
+	} else if (session.custom.hasOwnProperty('countrySelectorPage')) {
+		var usLink=URLUtils.url('Search-ShowInLocale','countrySelect', true).toString().replace('rapalaEU-', 'rapala-');
+		var euLink=URLUtils.url('Search-ShowInLocale','countrySelect', true).toString().replace('rapala-', 'rapalaEU-');
 	}
 	session.custom.showCountryPopup = false;
 </isscript>
@@ -50,31 +76,7 @@
 				<isif condition="${loopstatus.odd && loopstatus.last}">
 					</div><div class="row second">
 				</isif>
-
-				<isset name="localeID" value="activeCountry.localeID" scope="page" />
-				<isif condition="${activeCountry.flag == 'ca'}">
-					<isset name="currentLink" value="${dw.object.CustomObjectMgr.getCustomObject("BrandCountryLinks", "Rapala - Canada").custom.url}" scope="page" />
-				<iselseif condition="${pipelinePath && empty(firstParam)}">
-					<isif condition="${activeCountry.flag == 'us'}">
-						<isset name="currentLink" value="${URLUtils.url(pipelinePath,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					<iselse/>
-						<isset name="currentLink" value="${URLUtils.url(URLUtils.url(pipelinePath,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					</isif>
-				<iselseif condition="${pipelinePath && !empty(firstParam)}">
-					<isif condition="${activeCountry.flag == 'us'}">
-						<isset name="currentLink" value="${URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					<iselse/>
-						<isset name="currentLink" value="${URLUtils.url(pipelinePath, firstParam, firstParamValue,'countrySelect', true, 'locale', activeCountry.sitePath).toString().replace('-rapala-', '-rapalaEU-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					</isif>
-				<iselse/>
-					<isif condition="${activeCountry.flag == 'us'}">
-						<isset name="currentLink" value="${URLUtils.url('Home-SetLocale', 'locale', 'default','countrySelect', true).toString().replace('-rapalaEU-', '-rapala-').replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					<iselse/>
-						<isset name="currentLink" value="${URLUtils.url('Home-SetLocale', 'locale', activeCountry.sitePath,'countrySelect', true).toString().replace('/' + pdict.CurrentRequest.locale + '/', '/' + activeCountry.localeID + '/')}" scope="page" />
-					</isif>
-				</isif>
-
-				<a class="country <isif condition="${loopstatus.odd && loopstatus.last}">single-row</isif>" href="${currentLink}">
+				<a class="country single-row" href="${eval(activeCountry.flag + 'Link')}">
 					<div class="flag-container">
 						<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
 					</div>
@@ -84,8 +86,8 @@
 					</div>
 				</a>
 				<isif condition="${loopstatus.odd && !loopstatus.last}"><div class="divider"></div></isif>
-			</isloop>
-		</div>
+		</isloop>
+	</div>
 
 	</div>
 	<div class="checking">
