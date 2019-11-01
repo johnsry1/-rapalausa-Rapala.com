@@ -11,6 +11,8 @@ if ( pdict.Product && pdict.Product.variationGroup )
 {
 	pdict.Product = pdict.Product.masterProduct;
 }
+var ProductUtils = require('app_rapala_core/cartridge/scripts/product/ProductUtils.js');
+
 </isscript>
 
 <isif condition="${pdict.Product.master && !pdict.Product.priceModel.isPriceRange() && pdict.Product.variationModel.variants.size() > 0}"/>
@@ -51,7 +53,6 @@ if ( pdict.Product && pdict.Product.variationGroup )
 
 <isset name="PromotionalPrice" value="${dw.value.Money.NOT_AVAILABLE}" scope="page"/>
 <isset name="isPromoPrice" value="${false}" scope="page"/>
-
 <isif condition="${! empty(promos)}">
 	<isloop items="${promos}" var="promo">
 		<isif condition="${promo.getPromotionClass() != null && promo.getPromotionClass().equals(dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT)}">
@@ -79,7 +80,7 @@ if ( pdict.Product && pdict.Product.variationGroup )
 	
 	<div class="product-price pricing">
 		<div class="price">
-			<isif condition="${pdict.Product.productSet}">						
+			<isif condition="${pdict.Product.productSet}">
 				<isset name="ProductMinPrice" value="${new dw.value.Money(0, currencyCode)}" scope="pdict" />
 				<isset name="ProductMaxPrice" value="${new dw.value.Money(0, currencyCode)}" scope="pdict" />
 				<isset name="ProductSetStandardPrice" value="${new dw.value.Money(0, currencyCode)}" scope="pdict" />
@@ -108,25 +109,36 @@ if ( pdict.Product && pdict.Product.variationGroup )
 				<div>
 
                         <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
-                        <span itemprop="lowprice" content="${pdict.Product.priceModel.minPrice.value}">
+						<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
+                        <isif condition="${isInStock}">
+	                        <link itemprop="availability" href="http://schema.org/InStock" />
+	                    <iselse/>
+	                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
+	                    </isif>
+                        <span itemprop="lowPrice" content="${pdict.Product.priceModel.minPrice.value}">
                             <isprint value="${pdict.Product.priceModel.minPrice}"/>
                         </span>
                          - 
-                        <span itemprop="highprice" content="${pdict.Product.priceModel.maxPrice.value}">
+                        <span itemprop="highPrice" content="${pdict.Product.priceModel.maxPrice.value}">
                             <isprint value="${pdict.Product.priceModel.maxPrice}"/>
                         </span>
 				</div>		
 			<iselse/>	
-
                     <isif condition="${ShowStandardPrice}">
                         <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
                         <span itemprop="standardprice" class="price-standard standardprice"><isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}"><isprint value="${StandardPrice}"/><iselse/>${Resource.msg('product.pricing.noprice','product',null)}</isif></span>
                     </isif>
 					<iscomment>Let promotional price of 0 display as is, in this case isPromoPrice is true</iscomment>
 					
-					<span itemprop="saleprice" class=" price-sales <isif condition="${ShowStandardPrice}">salesprice</isif> ">
+					<span class=" <isif condition="${ShowStandardPrice}">salesprice</isif> ">
 						<isif condition="${(SalesPrice.valueOrNull != null && SalesPrice.valueOrNull > 0) || isPromoPrice}">
                             <meta itemprop="priceCurrency" content="${pdict.Product.priceModel.minPrice.currencyCode}">
+							<isset name="isInStock" value="${ProductUtils.hasInStockVariants(pdict.Product)}" scope="page" />
+	                        <isif condition="${isInStock}">
+		                        <link itemprop="availability" href="http://schema.org/InStock" />
+		                    <iselse/>
+		                        <link itemprop="availability" href="https://schema.org/OutOfStock" />
+		                    </isif>
                             <span itemprop="price" content="${pdict.Product.priceModel.minPrice.value}">
 							 <isprint value="${SalesPrice}"/>
 							</span>

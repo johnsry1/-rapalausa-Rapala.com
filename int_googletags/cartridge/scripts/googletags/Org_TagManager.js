@@ -392,7 +392,7 @@ Org_TagManager.getProductObject = function (product) {
         obj.productID = product.ID;
     }
     
-    obj.category = Util.getProductCategory(product);
+    obj.category = Util.getPrimarytCategory(product);
     obj.brand = product.brand;
     obj.price = Util.getProductOriginalPrice(product).value;
 
