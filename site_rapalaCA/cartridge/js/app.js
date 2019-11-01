@@ -554,6 +554,8 @@ function initializeEvents() {
                 open: function () {
                 }
             });
+        } else if ($form.find('#footer-email-input').val().length <=0) {
+            $('#footer-email-input-error').text('Please enter your email address.');
         }
     });
     $('body .formfields-global').find('input').focusin(function () {
