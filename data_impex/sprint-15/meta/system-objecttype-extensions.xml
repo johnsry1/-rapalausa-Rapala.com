@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="enablejQueryMigrationTool">
+                <display-name xml:lang="x-default">Enable jQuery Migration Tool</display-name>
+                <description xml:lang="x-default">Enable newer version of jQuery</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Storefront Configs">
+                <display-name xml:lang="x-default">Storefront Configurations</display-name>
+                <attribute attribute-id="enablejQueryMigrationTool"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+     <type-extension type-id="OrganizationPreferences">
+        <custom-attribute-definitions>
+           <attribute-definition attribute-id="ActiveCountries">
+                <display-name xml:lang="x-default">Active Countries</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="showFlags">
+                <display-name xml:lang="x-default">Show Flags</display-name>
+                <attribute attribute-id="showFinnishFlag"/>
+                <attribute attribute-id="ActiveCountries"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
