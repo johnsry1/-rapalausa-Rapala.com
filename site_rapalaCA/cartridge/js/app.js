@@ -422,20 +422,6 @@ function initializeEvents() {
             }, 2000);
         }
     });
-    $(window).resize(function () {
-        if ($(window).width() > 960) {
-            if ($('#container').hasClass('js-container-active')) {
-                $('#container, .open-menu-wrap').removeAttr('style');
-                $('#container').removeClass('js-container-active').find('.menu-toggle').removeClass('js-menu-toggle');
-                $('#main, #footernew').unwrap();
-                $('#brand-tabs-header').unwrap();
-            }
-            // Disable mobile nav
-            $('.sub-category-section-2').slideUp();
-            $('.sub-category-section-1').removeClass('js-active-sub-menu');
-            //megamenu.init();
-        }
-    });
     // add generic toggle functionality
     $('.toggle').next('.toggle-content').hide();
     if ($('.pt_checkout').length == 0) {
