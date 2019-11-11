@@ -22,7 +22,9 @@ var uievents = {
         var $con = $('body');
         $con.find('.custom-checkbox').each(function () {
             if (jQuery(this).find('input[type="checkbox"]').is(':checked')) {
-                jQuery(this).find('.custom-link').addClass('active');
+                if (!$(this).hasClass('signupfor-email')) {
+                    jQuery(this).find('.custom-link').addClass('active');
+                }
             }
         });
 
