@@ -102,9 +102,7 @@
 .pt_blogpost {
     .blog-post-title {
         text-align: center;
-        @include respond(medium-down) {
-            @include font-size(30px);
-        }
+        @include font-size(30px);
     }
     .blog-post-info {
         text-align: center;
@@ -388,6 +386,8 @@
             }
             .blog-post-title {
                 @include h1;
+                font-family: $sans-serif-secondary;
+                font-size: 30px!important;
             }
             .blog-post-introtext {
                 margin: rem(14px) 0 rem(20px);
