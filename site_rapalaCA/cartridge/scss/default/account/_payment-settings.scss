@@ -1,97 +1,10 @@
 .paymentslist {
-    float: left;
-    width: 100%;
-    .paymentsettings {
-        font-variant: normal;
-        text-transform: uppercase;
-    }
-    .address-head {
-        padding-bottom: 30px;
-        border-bottom: 1px solid $very-light-gray;
-        float: left;
-        width: 100%;
-    }
     .paymentinstruments {
-        float: left;
-        width: 100%;
         .creditcard {
-            float: left;
-            margin: 15px 0 15px 1px;
-            width: 100%;
             .payment-list {
-                li {
-                    width: 33%;
-                    display: block;
-                    float: left;
-                    padding: 1em;
-                    box-sizing: border-box;
-                    @include respond(0, $medium-breakpoint) {
-                        width: 100%;
-                    }
-                    &.null {
-                        display: none;
-                    }
-                }
-
-                label {
-                    margin: 0;
-                }
-                .actions {
-                    margin: 5px 0;
-                    text-align: left;
-                    fieldset {
-                        margin: 0;
-                        width: 100%;
-                    }
-                    .button-text {
-                        &.delete {
-                            background-color: $shaded-grey;
-                            border-bottom: 1px solid $shadeddeep-veryLight-grey;
-                            border-left: 1px solid $shaded-veryLight-grey;
-                            border-right: 1px solid $shaded-veryLight-grey;
-                            border-top: 1px solid $shaded-light-grey;
-                            color: $bg-darkbrown;
-                            display: block;
-                            float: left;
-                            font-family: $lucida-font-family;
-                            font-size: 11px;
-                            font-style: normal;
-                            font-weight: bold;
-                            height: 28px;
-                            letter-spacing: 1px;
-                            line-height: 28px;
-                            padding: 0 18px;
-                            text-transform: uppercase;
-                            margin: 9px 0 0 0;
-                            &:hover {
-                                color: $shadow-light-grey;
-                            }
-                        }
-                    }
-                }
-                .cc-owner {
-                    overflow: hidden;
-                    padding-bottom: 3px;
-                    white-space: nowrap;
-                    text-transform: uppercase;
-                }
                 .cc-exp {
                     .label {
-                        color: $my-account-grey;
-                        float: left;
-                        font-size: 12px;
-                        font-variant: normal;
-                        font-weight: bold;
-                        font-style: italic;
                         font-family: $font;
-                    }
-                    label {
-                        padding-left: 5px;
-                        clear: left;
-                        display: inline;
-                        font-weight: bold;
-                        text-align: right;
-                        word-wrap: break-word;
                     }
                 }
             }
@@ -100,28 +13,6 @@
 }
 
 .pt_leftnav-payment {
-    .paymentslist {
-        .paymentinstruments {
-            .creditcard {
-                .payment-list {
-                    .cc-owner {
-                        .label {
-                            font-family: $global-font-family;
-                            font-size: 13px;
-                            text-transform: capitalize;
-                            font-variant: normal;
-                            font-weight: bold;
-                        }
-                    }
-                }
-            }
-        }
-
-        .address-head {
-            border-bottom: none;
-            padding: 0;
-        }
-    }
     .dialog-required {
         font-size: 13px;
         .required-indicator {
@@ -133,28 +24,33 @@
     }
 }
 
-
-    .payment-settings {
-    .dialog-content {
-        border: 0;
-        padding: 6px 12px;
-        background: $white;
-        overflow: auto;
-        zoom: 1;
-    }
-}
-
 .creditcardform {
     #CreditCardForm {
         .form-row {
             margin: 6px 0 12px;
+            & > .form-row {
+                float: left;
+                margin: 0;
+                .field-wrapper {
+                    width: 100%!important;
+                    .select-style {
+                        width: 100%;
+                        .input-select {
+                            width: 100%!important;
+                        }
+                    }
+                }
+            }
             .field-wrapper {
-                width: 100% !important;
+                width: 100%;
                 padding-left: 0 !important;
                 @include respond(large-up) {
                     width: rem($form-horizontal-field-width) !important;
                     padding-left: rem($form-horizontal-field-padding) !important;
                     margin-bottom: 0;
+                }
+                .select-style {
+                    width: 50%;
                 }
                 .input-select {
                     width: 100%;
@@ -182,46 +78,9 @@
             }
             &.month,
             &.year {
-                clear: none;
-                float: left;
                 margin: 0;
                 @include respond(medium-down) {
                     width: 100%;
-                }
-                .label {
-                    display: none;
-                }
-                .field-wrapper {
-                    .input-select {
-                        width: auto;
-                    }
-                }
-            }
-            &.year {
-                clear: left;
-                margin: rem(11px) 0 rem(8px);
-                @include respond(large-up) {
-                    margin-left: rem($form-horizontal-label-width);
-                }
-            }
-            &.form-row-button {
-                margin-left: 27%;
-                button {
-                    clear: none;
-                    margin-right: 9px;
-                    border-radius: 3px;
-                    &.cancel-button {
-                        background-color: $shaded-grey;
-                        border-bottom: 1px solid $shadeddeep-veryLight-grey;
-                        border-left: 1px solid $shaded-veryLight-grey;
-                        border-right: 1px solid $shaded-veryLight-grey;
-                        border-top: 1px solid $shaded-light-grey;
-                        color: $bg-darkbrown;
-                        &:hover {
-                            background-color: $payment-settingddd;
-                            text-decoration: none;
-                        }
-                    }
                 }
             }
         }
