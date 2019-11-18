@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
+    <service-credential service-credential-id="MailChimpMembersCredentials">
+        <url>https://us7.api.mailchimp.com/3.0/lists/{list_id}/members</url>
+        <user-id>MailChimpUser</user-id>
+        <password masked="true">********</password>
+    </service-credential>
+
+    <service-profile service-profile-id="MailChimpProfile">
+        <timeout-millis>5000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service service-id="MailChimp.HTTP.CreateMembers">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>mailchimp</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>MailChimpProfile</profile-id>
+        <credential-id>MailChimpMembersCredentials</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.CancelTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.GetTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>AVA</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.PostTax">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>taxService</profile-id>
+        <credential-id>avatax</credential-id>
+    </service>
+
+    <service service-id="avatax.soap.ValidateAddress">
+        <service-type>SOAP</service-type>
+        <enabled>true</enabled>
+        <log-prefix/>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id/>
+        <credential-id>avatax address validation</credential-id>
+    </service>
+
+    <service service-id="int_paypal.http.nvp.payment.PayPal">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>PayPalHttpNvp</log-prefix>
+        <comm-log-enabled>true</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>PayPal_Default_Profile</profile-id>
+        <credential-id>PayPal_Sandbox_Signature_Credentials</credential-id>
+    </service>
+
+</services>
