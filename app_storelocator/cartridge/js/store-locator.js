@@ -231,7 +231,7 @@ var StoreLocator = {
                 storeinfo += '<div class="storename"><a href="' + this.storeurl + store + '"><span class="primaryName">' + stores[store].name + '</span> <span class="secondaryName">' + secondaryName + '</span></a></div>';
                 storeinfo += '<div class="address1">' + stores[store].address1 + '</div>';
                 storeinfo += '<div class="address2">' + stores[store].address2 + '</div>';
-                storeinfo += '<div class="cityStateZip">' + stores[store].city + ', ' + stores[store].stateCode + ' ' + stores[store].postalCode + '</div>';
+                storeinfo += '<div class="cityStateZip">' + stores[store].city + ', ' + stores[store].stateCode + '<div class="postalCode"> ' + stores[store].postalCode + '</div></div>';
                 storeinfo += '<div class="phone">' + stores[store].phone + '</div>';
 
                 if (stores[store].website) {
