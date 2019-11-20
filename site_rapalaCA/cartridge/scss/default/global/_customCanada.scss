@@ -270,3 +270,176 @@ button, .button, a.button {
         margin-right: 3px;
     }
 }
+
+// this section is to overwrite the themes on the PDP and render it like the EU site - Yeah, it's ugly
+#container.pt_product-details {
+    #main {
+        @include respond(medium-up) {
+            margin-top: -60px;
+            padding-top: 60px;
+        }
+    }
+}
+.pt_product-details {
+    #content {
+        #primary {
+            background: $white;
+        }
+        .contentbox {
+            box-shadow: none;
+        }
+    }
+}
+#pdpMain {
+    .addTo-cart-section {
+        input.quantityinput {
+            border: 1px solid $pinkish-grey;
+            color: $black;
+        }
+    }
+}
+.productdetail {
+    .addtocartbar {
+        .addtocart {
+            button {
+                background: $kermit-green !important;
+                border: 1px solid $kermit-green !important;
+                &.disabled {
+                    background: $silver-two !important;
+                    color: $silver !important;
+                }
+            }
+        }
+    }
+    #special-offers {
+        ul {
+            li {
+                color: $red-two !important;
+            }
+        }
+    }
+    .selected a.filter,
+    .productdetail .future a.filter {
+        border: none;
+        background: $silver-two !important;
+        border-radius: 0;
+    }
+    .price {
+        color: $black !important;
+        .salesprice {
+            color: $black !important;
+        }
+    }
+}
+.pt_product-details {
+    .productdetail {
+        .wrapper {
+            ~ #page-background {
+                .product-info {
+                    &.column {
+                        &.tab-sec {
+                            #tabs {
+                                ul {
+                                    &.ui-tabs-nav {
+                                        li {
+                                            &.ui-state-active {
+                                                a {
+                                                    background: $white !important;
+                                                    span {
+                                                        color: $black !important;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.product-specifications {
+    .specificiations {
+        tbody {
+            tr.evenrow {
+                background: $silver-two !important;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 481px) {
+    .product-specifications {
+        .specificiations {
+            thead {
+                tr {
+                    background: $silver !important;
+                    color: $black;
+                }
+            }
+        }
+    }
+}
+a.filter {
+    background: linear-gradient(to bottom, $silver 0%, $silver 100%) !important;
+    background-repeat: no-repeat;
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: $silver !important;
+    border-right-color: $silver !important;
+    border-bottom-color: $silver !important;
+    border-left-color: $silver !important;
+}
+@include respond(0, $medium-breakpoint) {
+    .iphone-view {
+        .specificiations {
+            tbody {
+                tr:first-child {
+                    th {
+                        &:first-child {
+                            background: $silver !important;
+                            background: linear-gradient(to bottom, $silver 0%, $silver 100%) !important;
+                        }
+                        &:nth-child(2n+3) {
+                            background: $silver-two !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .product-specifications {
+        .specificiations {
+            border-bottom: none;
+            tbody {
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 2em;
+                display: table;
+                width: 100%;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                tr {
+                    &:first-child {
+                        background: $silver !important;
+                        background: linear-gradient(to bottom, $silver 0%, $silver 100%) !important;
+                    }
+                    &:nth-child(2n+3) {
+                        background: $silver-two !important;
+                    }
+                }
+            }
+        }
+    }
+}
+@include respond(0, $desktop-breakpoint - 1) {
+    .productdetail {
+        .price {
+            .salesprice {
+                color: $black;
+            }
+        }
+    }
+}
