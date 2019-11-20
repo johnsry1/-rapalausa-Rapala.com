@@ -25,9 +25,8 @@ var InterstitialHelper : Object = {
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
 		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
-			id = 'rapalaCA-';
-		}
-
+			id = (!empty(request.httpParameterMap.locale) && request.httpParameterMap.locale == 'default') ? id : 'rapalaCA-';
+		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
 		if (id == 'rapalaEU-') {
@@ -62,13 +61,14 @@ var InterstitialHelper : Object = {
 		var url, id, newHost;
 		var params = request.httpParameterMap;
 		var tempUrl = URLUtils.url('Home-SetLocale');
+		newHost = session.custom.interstitialSiteId;
 
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
-			newHost = 'rapala-';
+		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
+			id = 'rapalaCA-';
 		} else {
 			id = 'rapala-';
-			newHost = 'rapalaEU-';
 		}
 
 		if (params.isParameterSubmitted('pid')) {
