@@ -64,7 +64,7 @@ function getPreferences() : Object {
 	//cancel urls and service name
 	prefs.paypalCancelUrl = dw.web.URLUtils.https(dw.web.Resource.msg('paypal.cancelpipeline', 'preferences', 'COBilling-Start'));
 	prefs.paypalFromCartCancelUrl = dw.web.URLUtils.https(dw.web.Resource.msg('paypal.onexpressfromcarterror', 'preferences', 'Cart-Show'));
-	prefs.nvpServiceName = 'int_paypal.http.nvp.payment.PayPal';
+	prefs.nvpServiceName = getSitePref('ppServiceName');
 
 	//create url depend on credentials type (Sandbox or Production)
 	try {
