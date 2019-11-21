@@ -539,8 +539,8 @@ function setCCFields(data) {
     $creditCard.find('input[id$="creditCard_owner"]').val(data.holder).trigger('blur');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('change');
     $creditCard.find('select[name$="_type"]').val(data.type).trigger('blur');
-    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('change');
-    $creditCard.find('input[id$="creditCard_number"]').val(data.maskedNumber).trigger('blur');
+    $creditCard.find('input[id*="creditCard_number"]').val(data.maskedNumber).trigger('change');
+    $creditCard.find('input[id*="creditCard_number"]').val(data.maskedNumber).trigger('blur');
     $creditCard.find('[id*="_expiration_month"]').val(data.expirationMonth).trigger('change');
     var date = new Date();
     var currentYear = date.getFullYear();
@@ -555,8 +555,8 @@ function setCCFields(data) {
     } else {
         $creditCard.find('[id$="_year"]').val(data.expirationYear).trigger('blur');
     }
-    $creditCard.find('input[id$="_cvn"]').val('').trigger('change');
-    $creditCard.find('input[id$="_cvn"]').val('').trigger('blur');
+    $creditCard.find('input[id*="_cvn"]').val('').trigger('change');
+    $creditCard.find('input[id*="_cvn"]').val('').trigger('blur');
     $creditCard.find('[name$="creditCard_selectedCardID"]').val(data.selectedCardID).trigger('change');
     uievents.synccheckoutH();
 }
