@@ -282,40 +282,6 @@
 				</isif>
 			</isif></iscomment>
 
-			<iscomment>tax amount - Note: only show this field if taxation policy is net</iscomment>
-			<isif condition="${dw.order.TaxMgr.getTaxationPolicy() == dw.order.TaxMgr.TAX_POLICY_GROSS}">
-				<tr class="order-sales-tax">
-					<td>
-						<span class="label">
-							<span><isprint value="${Resource.msg('ordersummary.estordertax','order',null)}"/></span>
-							<span class="Custom-tooltip ">
-								<div class="tooltip-body" style="display:none">
-									<div class="tooltipcontainer">
-									<b><isprint value="${Resource.msg('ordersummary.estimatedsalestax','order',null)}"/></b><hr>
-										<isprint value="${Resource.msg('ordersummary.taxtooltip','order',null)}"/>
-									</div>
-								</div>
-							</span>:
-						</span>
-					<td>
-						<span class="value-sales">
-							<isif condition="${LineItemCtnr.totalTax.available && LineItemCtnr.totalTax.value > 0.00}">
-								<span class="total-tax-value">
-									<isprint value="${LineItemCtnr.totalTax}"/>
-								</span>
-							<iselseif condition="${LineItemCtnr.totalTax.available && LineItemCtnr.totalTax.value == 0.00 && (pdict.stateCode == null || pdict.stateCode !='')}">
-								<span class="total-tax-value">
-									$0.00
-								</span>
-							<iselseif condition="${LineItemCtnr.defaultShipment.shippingAddress == null && (pdict.stateCode == null || pdict.stateCode =='')}">
-								<span class="value"><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></span>
-							<iselseif condition="${LineItemCtnr.defaultShipment.shippingAddress != null && ( pdict.stateCode =='')}">
-								<span class="value"><isprint value="${Resource.msg('ordersummary.tobecalculated','order',null)}"/></span>
-							</isif>
-						</span>
-					</td>
-				</tr>
-			</isif>
 			<isset name="giftCertTotal" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 			<isset name="allotmentAmt" value="${new dw.value.Money(0.0, session.currency.currencyCode)}" scope="page"/>
 			<isset name="gcPaymentInstrs" value="${LineItemCtnr.getGiftCertificatePaymentInstruments()}" scope="page"/>
