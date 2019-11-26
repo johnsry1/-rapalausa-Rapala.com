@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="rapalaCA-shared">
+    <content content-id="customer-contact-us">
+        <display-name xml:lang="x-default">Contact Us</display-name>
+        <description xml:lang="x-default">Contact Us</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <template>/content/content/cscontent.isml</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Contact Us</page-title>
+            <page-description xml:lang="x-default">Contact Us</page-description>
+            <page-keywords xml:lang="x-default">Contact Us</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;script type="text/javascript" src="javascript/customer-service.js?$staticlink$"&gt;&lt;/script&gt;&#13;
+&#13;
+&lt;style&gt;&#13;
+.insider-container {&#13;
+    display: grid;&#13;
+    grid-template: repeat(2, 50%) / repeat(2, 1fr);&#13;
+    background-color: #CFCDCD;&#13;
+    padding: 5px;&#13;
+}&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px;&#13;
+}&#13;
+#insider-button {&#13;
+    background-color: #151515;&#13;
+    color: #fff;&#13;
+    padding: 10px 20px;&#13;
+    border-radius: 3px;&#13;
+    text-decoration: none;&#13;
+    font-weight: normal;&#13;
+    float: right;&#13;
+    margin-right: 20px;&#13;
+    margin-top: 10px;&#13;
+}&#13;
+.pt_customerservice form .formfields .formfield .char-count.contact-us {&#13;
+    margin: -15px 0 0px 0;&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 959px) {&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px !important;&#13;
+    padding-bottom: 10px !important;&#13;
+}&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 460px) {&#13;
+.insider-container {&#13;
+    display: inline-block;&#13;
+	margin-bottom: 10px;&#13;
+}&#13;
+.insider-container p {&#13;
+    font-family: lucida grande;&#13;
+    margin: 0;&#13;
+    padding: 10px !important;&#13;
+    padding-bottom: 10px !important;&#13;
+}&#13;
+#insider-button {&#13;
+    padding: auto;&#13;
+    float: none;&#13;
+    margin-right: 0;&#13;
+    margin: 5px 5px 10px 5px;&#13;
+}&#13;
+}&#13;
+#address {&#13;
+    padding-bottom: 10px;&#13;
+}&#13;
+&lt;/style&gt;&#13;
+&lt;div class="customer-content" id="customer-contact-us"&gt;&#13;
+&#13;
+&lt;!--&#13;
+&lt;script type="text/javascript"&gt;&#13;
+$(document).ready(function()&#13;
+{&#13;
+   var storeurl= $("#hiddenid").attr("value");&#13;
+   var pipelineurl=$("#customercontactus").attr("action");&#13;
+   var l=storeurl+pipelineurl;&#13;
+   $("#customercontactus").attr("action",l);&#13;
+&#13;
+});&#13;
+&lt;/script&gt;&#13;
+&#13;
+--&gt; &#13;
+&#13;
+&lt;script type="text/javascript"&gt;&#13;
+    if(typeof geoip_country_code == 'function') {&#13;
+    var IP_GeoCode = geoip_country_code();    &#13;
+    var allowed_countries = $(".allowed-countries").text();&#13;
+        if(allowed_countries == null || allowed_countries == 'null' || allowed_countries == "undefined"){&#13;
+            allowed_countries = "US";&#13;
+        }&#13;
+	if(allowed_countries.indexOf(IP_GeoCode) == -1){&#13;
+	    window.location.href = app.URLs.contactusnonus;		&#13;
+	}&#13;
+    }&#13;
+&lt;/script&gt;&#13;
+&lt;p style="font-family: lucida grande;"&gt;This form is for Canada customers only.&amp;nbsp; &lt;a style="font-weight: bold" href="https://www.rapala.com/on/demandware.store/Sites-rapalaEU-Site/default/Page-ShowInLocale?cid=customer-contact-us&amp;countrySelect=true"&gt;For International inquires, click here&lt;/a&gt;. For event sponsorship/donation requests, see 'Donations' page. For quicker responses on website-related inquiries, please complete and send the form below. Please provide us with accurate information to make this process as efficient as possible. The information we collect will only be used to respond to your message. Your information will not be distributed.&lt;/p&gt;&#13;
+&lt;div id="address"&gt; Rapala Canada&lt;br&gt;&#13;
+  Normark, Inc.&lt;br&gt;&#13;
+  1350 Phillip Murray Ave.&lt;br&gt;&#13;
+  Oshawa, L1J 6Z9&lt;br&gt;&#13;
+  Ontario, Canada&lt;br&gt;&#13;
+  &lt;br&gt;&#13;
+  Customer Service&lt;br&gt;&#13;
+  &lt;a href="mailto:info@normarkcanada.com"&gt;info@normarkcanada.com&lt;/a&gt; &lt;/div&gt;&#13;
+&lt;hr /&gt;&#13;
+&lt;form action="/on/demandware.store/Sites-rapalaCA-Site/default/CustomerService-ContactUsStart" method="post" id="customercontactus"&gt;&#13;
+  &lt;!-- dwMarker="form" dwPipelineTitle="CustomerService-ContactUs (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-ContactUs" --&gt;&#13;
+  &#13;
+  &lt;fieldset&gt;&#13;
+    &lt;div class="formfields"&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Name&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput required" id="dwfrm_contactus_firstname" type="text" name="dwfrm_contactus_firstname" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;!-- END: firstname --&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Email&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput required emailCM" id="dwfrm_contactus_email" type="text" name="dwfrm_contactus_email" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Phone&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput phoneCDUS" id="dwfrm_contactus_phone" type="text" name="dwfrm_contactus_phone" value="" maxlength="50" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Order Number&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;input class="textinput" id="dwfrm_contactus_ordernumber" type="text" name="dwfrm_contactus_ordernumber" value="" maxlength="2147483647" /&gt;&#13;
+          &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;div class="formfield"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;My Question&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;select class="selectbox" id="dwfrm_contactus_myquestion" name="dwfrm_contactus_myquestion"&gt;&#13;
+            &lt;option class="selectoption" label="General Information" value="General Information"&gt;General Information&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="Order Status" value="Order Status"&gt;Order Status&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="My Account" value="My Account"&gt;My Account&lt;/option&gt;&#13;
+            &lt;option class="selectoption" label="Other" value="Other"&gt;Other&lt;/option&gt;&#13;
+          &lt;/select&gt;&#13;
+          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="formfield"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+        &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Comment&lt;/span&gt;&lt;/div&gt;&#13;
+        &lt;!-- END: label --&gt;&#13;
+        &lt;div class="value"&gt;&#13;
+          &lt;textarea class="textbox" id="dwfrm_contactus_comment" class="contactus_comment" name="dwfrm_contactus_comment" rows="8" cols="40" maxlength="1000" &gt;&#13;
+          &lt;/textarea&gt;&#13;
+          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+        &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;div class="recaptcha"&gt; $include(CustomerService-Recaptcha)$&#13;
+        &lt;div class="value error recaprcha-error hide"&gt;Please validate your reCAPTCHA.&lt;/div&gt;&#13;
+      &lt;/div&gt;&#13;
+      &lt;br&gt;&#13;
+      &lt;p style="font-family: lucida grande; width: 250px; background-color: #fffedf; border: 1px solid #c69c3e; color: #c69c3e; padding: 10px;"&gt;If you do not receive a response within 2 business days please check your SPAM folder before submitting a new form.&lt;/p&gt;&#13;
+      &lt;div class="formactions"&gt;&#13;
+        &lt;button id="sendBtn" class="customersubmit" type="submit" value="Submit" name="dwfrm_contactus_send"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;&#13;
+      &lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &#13;
+    &lt;!-- END: formfields --&gt;&#13;
+    &#13;
+    &lt;div id="formaction"&gt;&amp;nbsp;&lt;/div&gt;&#13;
+  &lt;/fieldset&gt;&#13;
+&lt;/form&gt;&#13;
+&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/contentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentasset.isml" --&gt; &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/htmlcontentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/htmlcontentasset.isml" --&gt;&#13;
+&lt;div style="display:none;" class="dw-object dw-object-rinclude"&gt;&#13;
+  &lt;textarea cols="100" rows="10" wrap="off"&gt;({&amp;quot;PipelineURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/p/Page-Include&amp;quot;,&amp;quot;TemplateURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentassetinclude.isml&amp;quot;,&amp;quot;PageCacheExpires&amp;quot;:&amp;quot;10/26/2011 1:26 am&amp;quot;,&amp;quot;PipelineTitle&amp;quot;:&amp;quot;Page-Include (app_rapala_core)&amp;quot;,&amp;quot;TemplateTitle&amp;quot;:&amp;quot;/default/content/content/contentassetinclude.isml (app_rapala_core)&amp;quot;,&amp;quot;PageProcessingTime&amp;quot;:4})&lt;/textarea&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;div class="contentasset"&gt;&lt;!-- dwMarker="content" dwContentID="cdMbwiaagJvbQaaacXBjdLdEAG" --&gt; &#13;
+  &#13;
+&lt;/div&gt;&#13;
+&lt;!-- End contentasset --&gt;&#13;
+&lt;isinputfield formfield="baseurl" name="baseurl" type="hidden" value="/on/demandware.store/Sites-Rapala-Site" id="hiddenid"&gt; &lt;/isinputfield&gt;&#13;
+&#13;
+&lt;div id="related-links"&gt;&#13;
+  &lt;h2&gt;Related Links&lt;/h2&gt;&#13;
+  &lt;ol&gt;&#13;
+    &lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-privacy-security')$"&gt;Privacy &amp;amp; Security Policy&lt;/a&gt;&lt;/li&gt;&#13;
+  &lt;/ol&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;script type="text/javascript"&gt;&#13;
+&#13;
+ 	  	$('.pt_customerservice #customercontactus textarea[maxlength]').each(function(){&#13;
+			charcount($(this));&#13;
+			// trigger the keydown event so that any existing character data is calculated&#13;
+		}).on('keyup keypress', function(){&#13;
+			charcount($(this));&#13;
+		});&#13;
+		&#13;
+		function charcount($this){&#13;
+			var characterLimit = "1000";&#13;
+			var charRemains = characterLimit - $this.val().trim().length;&#13;
+                        var enteredchar = $this.val().trim().length;&#13;
+			var charCountContainer='';&#13;
+			var charCountHtml = enteredchar + '/' + characterLimit ;&#13;
+			if($this.hasClass("contactus_comment")){&#13;
+				if ($this.next('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertAfter($this);&#13;
+				}&#13;
+				$this.next('div.char-count').html(charCountHtml);&#13;
+			}else {&#13;
+				if ($this.prev('div.char-count').length === 0) {&#13;
+					charCountContainer = $('&lt;div class="char-count contact-us"/&gt;').insertBefore($this);&#13;
+				}&#13;
+				$this.prev('div.char-count').html(charCountHtml);&#13;
+			}&#13;
+		}&#13;
+&lt;/script&gt;</custom-attribute>
+            <custom-attribute attribute-id="customCSSFile">css/customer-service.css</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="rapala-contact-us">
+                <position>-9.0</position>
+            </classification-link>
+        </folder-links>
+    </content>
+    <content content-id="customer-become-a-dealer">
+        <display-name xml:lang="x-default">Become a Dealer</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <template>/content/content/cscontent.isml</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Become a Dealer</page-title>
+            <page-description xml:lang="x-default">Become a Dealer</page-description>
+            <page-keywords xml:lang="x-default">Become a Dealer</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;script type="text/javascript" src="javascript/customer-service.js?$staticlink$"&gt;&lt;/script&gt;&#13;
+&#13;
+&lt;div class="customer-content" id="customer-become-a-dealer"&gt;&#13;
+&#13;
+&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/contentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentasset.isml" --&gt;       &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/htmlcontentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/htmlcontentasset.isml" --&gt;&#13;
+&lt;div style="display:none;" class="dw-object dw-object-rinclude"&gt;&lt;textarea cols="100" rows="10" wrap="off"&gt;({&amp;quot;PipelineURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/p/Page-Include&amp;quot;,&amp;quot;TemplateURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentassetinclude.isml&amp;quot;,&amp;quot;PageCacheExpires&amp;quot;:&amp;quot;09/28/2011 10:28 am&amp;quot;,&amp;quot;PipelineTitle&amp;quot;:&amp;quot;Page-Include (app_rapala_core)&amp;quot;,&amp;quot;TemplateTitle&amp;quot;:&amp;quot;/default/content/content/contentassetinclude.isml (app_rapala_core)&amp;quot;,&amp;quot;PageProcessingTime&amp;quot;:12})&lt;/textarea&gt;&lt;/div&gt;&#13;
+&lt;div class="contentasset"&gt;&lt;!-- dwMarker="content" dwContentID="bcAHaiaagJUroaaacWNQwfexA9" --&gt;&#13;
+&lt;p&gt;If you are interested in becoming a Rapala dealer, please complete and send the form below. Your business name and personal contact information will be forwarded to a Rapala Sales Representative in your area. One of our representatives will contact you to further discuss your eligibility for becoming a Rapala dealer. &lt;span style="font-weight:bold;"&gt;It is also required that you have a valid resale or sales tax certificate to become a Rapala dealer.&lt;/span&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p&gt;Dealer inquiries outside of Canada, &lt;a style="font-style: italic; font-weight:bold;" href="https://www.rapalaworld.com/alasivu.php?s=c212dT1kaXN0jmg9MzVaZnhtZEtH"&gt;click here.&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;!-- End contentasset --&gt;&lt;hr /&gt;&#13;
+&lt;form action="/on/demandware.store/Sites-rapalaCA-Site/default/CustomerService-Dealer" method="post" id="customercontactus"&gt;&#13;
+    &lt;!-- dwMarker="form" dwPipelineTitle="CustomerService-Dealer (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-Dealer" --&gt;    &lt;fieldset&gt;&#13;
+    &lt;div class="formfields"&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;First Name&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required" id="dwfrm_dealer_firstname" name="dwfrm_dealer_firstname" value="" maxlength="50" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;!-- END: firstname --&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Last Name&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required" id="dwfrm_dealer_lastname" name="dwfrm_dealer_lastname" value="" maxlength="50" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_left emailAddress"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;E-Mail Address&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required emailCM" id="dwfrm_dealer_emailaddress" name="dwfrm_dealer_emailaddress" value="" maxlength="50" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_right phonenumber"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Phone&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required phoneCDUS" id="dwfrm_dealer_phone" name="dwfrm_dealer_phone" value="" maxlength="50" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield_left stack-fullwidth"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Business Name&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required" id="dwfrm_dealer_businessname" name="dwfrm_dealer_businessname" value="" maxlength="2147483647" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_left businessaddress1"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Business Address1&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required" id="dwfrm_dealer_businessaddress1" name="dwfrm_dealer_businessaddress1" value="" maxlength="2147483647" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_right pbusinessaddress2"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Business Address2&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput" id="dwfrm_dealer_businessaddress2" name="dwfrm_dealer_businessaddress2" value="" maxlength="2147483647" /&gt;        &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_left city"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;City&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required" id="dwfrm_dealer_city" name="dwfrm_dealer_city" value="" maxlength="2147483647" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 formfield_right"&gt;&#13;
+    &lt;div class="formfield formfield_25 floatleft custom-select"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Province/Territory&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;&#13;
+    &lt;div class="value"&gt;&lt;select class="selectbox required" id="dwfrm_dealer_states_state" name="dwfrm_dealer_states_state"&gt;&#13;
+    &lt;option class="selectoption" label="Select..." value=""&gt;Select...&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Alberta" value="AB"&gt;Alberta&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="British Columbia" value="BC"&gt;British Columbia&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Manitoba" value="MB"&gt;Manitoba&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="New Brunswick" value="NB"&gt;New Brunswick&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Newfoundland &amp; Labrador" value="NL"&gt;Newfoundland &amp; Labrador&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Northwest Territories" value="NT"&gt;Northwest Territories&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Nova Scotia" value="NS"&gt;Nova Scotia&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Nunavut" value="NU"&gt;Nunavut&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Ontario" value="ON"&gt;Ontario&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Prince Edward Island" value="PEI"&gt;Prince Edward Island&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Quebec" value="QC"&gt;Quebec&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Saskatchewan" value="SK"&gt;Saskatchewan&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Yukon" value="YY"&gt;Yukon&lt;/option&gt;&#13;
+    &lt;option class="selectoption" label="Non-CAN/Other" value="OTHER"&gt;Non-CAN/Other&lt;/option&gt;&#13;
+    &lt;/select&gt;                                   &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_25 floatright zip"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt;                           &lt;span class="labeltext"&gt;Postal Code&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;                           &lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="value"&gt;&lt;input type="text" class="textinput required zipCode" id="dwfrm_dealer_zipCode" name="dwfrm_dealer_zipCode" value="" maxlength="2147483647" /&gt;         &lt;!-- display text area input field --&gt;                          &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="formfield formfield_50 floatleft"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+    &lt;div class="label"&gt;&lt;span class="labeltext"&gt;Your Message&lt;/span&gt;&lt;/div&gt;&#13;
+    &lt;!-- END: label --&gt;&#13;
+    &lt;div class="value"&gt;&lt;textarea class="textbox" id="dwfrm_dealer_message" name="dwfrm_dealer_message" rows="8" cols="40"&gt;&lt;/textarea&gt;                           &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+       &lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="recaptcha"&gt;&#13;
+        $include(CustomerService-Recaptcha)$&#13;
+    &lt;div class="value error recaprcha-error hide"&gt;Please validate your reCAPTCHA.&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;&#13;
+    &lt;div class="formactions"&gt;&lt;button id="sendBtn" class="customersubmit" type="submit" value="Submit" name="null"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+    &lt;!-- END: formfields --&gt;    &lt;/fieldset&gt;&#13;
+&lt;/form&gt;&#13;
+&#13;
+&lt;div id="related-links"&gt;&#13;
+&lt;h2&gt;Related Links&lt;/h2&gt;&#13;
+&lt;ol&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-dealer-locator-additions')$"&gt;Dealer Locator Additions&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-terms-conditions')$"&gt;Terms of Use&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-privacy-security')$"&gt;Privacy &amp;amp; Security Policy&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ol&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="customCSSFile">css/customer-service.css</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="rapala-contact-us">
+                <position>-2.0</position>
+            </classification-link>
+        </folder-links>
+        <sitemap-included-flag>true</sitemap-included-flag>
+    </content>
+    <content content-id="customer-dealer-locator-additions">
+        <display-name xml:lang="x-default">Dealer Locator Additions</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <template>/content/content/cscontent.isml</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Dealer Locator Additions</page-title>
+            <page-description xml:lang="x-default">Dealer Locator Additions</page-description>
+            <page-keywords xml:lang="x-default">Dealer Locator Additions</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;script type="text/javascript" src="javascript/customer-service.js?$staticlink$"&gt;&lt;/script&gt;&#13;
+&lt;div class="customer-content" id="customer-dealer-locator-additions"&gt;&lt;!--&#13;
+&lt;script type="text/javascript"&gt;&#13;
+$(document).ready(function()&#13;
+{&#13;
+ var storeurl= $("#hiddenid").attr("value");&#13;
+ var pipelineurl=$("#customercontactus").attr("action");&#13;
+ var l=storeurl+pipelineurl;&#13;
+ $("#customercontactus").attr("action",l);&#13;
+$("#customercontactus").validate();&#13;
+});&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&lt;/script&gt;&#13;
+--&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/contentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentasset.isml" --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/content/content/htmlcontentasset.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/content/content/htmlcontentasset.isml" --&gt;&#13;
+&lt;div class="dw-object dw-object-rinclude" style="display:none;"&gt;&lt;textarea cols="100" rows="10" wrap="off"&gt;({&amp;quot;PipelineURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/p/Page-Include&amp;quot;,&amp;quot;TemplateURL&amp;quot;:&amp;quot;http://localhost:60606/target=/c/app_rapala_core/t/default/content/content/contentassetinclude.isml&amp;quot;,&amp;quot;PageCacheExpires&amp;quot;:&amp;quot;09/30/2011 2:37 am&amp;quot;,&amp;quot;PipelineTitle&amp;quot;:&amp;quot;Page-Include (app_rapala_core)&amp;quot;,&amp;quot;TemplateTitle&amp;quot;:&amp;quot;/default/content/content/contentassetinclude.isml (app_rapala_core)&amp;quot;,&amp;quot;PageProcessingTime&amp;quot;:113})&lt;/textarea&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="contentasset"&gt;&lt;!-- dwMarker="content" dwContentID="bcHT2iaagJCK6aaacWjkQfexQG" --&gt;&#13;
+&lt;p&gt;If you are currently a Rapala dealer and interested in having your business listed on our &lt;a href="$httpsURL('Stores-Find')$"&gt;dealer locator&lt;/a&gt;, please complete and send the form below. &lt;span style="font-weight:bold;"&gt;It is also required that you are already a registered Rapala dealer to be listed on our Dealer Locator.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;!-- End contentasset --&gt;&#13;
+&#13;
+&lt;hr /&gt;&#13;
+&lt;form action="/on/demandware.store/Sites-rapalaCA-Site/default/CustomerService-DealerLocator" id="customercontactus" method="post"&gt;&lt;!-- dwMarker="form" dwPipelineTitle="CustomerService-DealerLocator (app_rapala_core)" dwPipelineURL="https://localhost:60606/target=/c/app_rapala_core/p/CustomerService-DealerLocator" --&gt;&#13;
+&lt;fieldset&gt;&#13;
+&lt;div class="formfields"&gt;&#13;
+&lt;div class="formfield formfield_50 formfield_left firstname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;First Name&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required" id="dwfrm_dealer_firstname" maxlength="50" name="dwfrm_dealer_firstname" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;!-- END: firstname --&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_right lastname"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Last Name&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required" id="dwfrm_dealer_lastname" maxlength="50" name="dwfrm_dealer_lastname" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_left emailAddress"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;E-Mail Address&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required emailCM" id="dwfrm_dealer_emailaddress" maxlength="50" name="dwfrm_dealer_emailaddress" type="text" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_right phone"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Phone&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required phoneCDUS" id="dwfrm_dealer_phone" maxlength="50" name="dwfrm_dealer_phone" type="text" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield_left stack-fullwidth"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Business Name&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required" id="dwfrm_dealer_businessname" maxlength="2147483647" name="dwfrm_dealer_businessname" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_left businessaddress1"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Business Address1&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required" id="dwfrm_dealer_businessaddress1" maxlength="2147483647" name="dwfrm_dealer_businessaddress1" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_right pbusinessaddress2"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="labeltext"&gt;Business Address2&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput" id="dwfrm_dealer_businessaddress2" maxlength="2147483647" name="dwfrm_dealer_businessaddress2" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_left city"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;City&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required" id="dwfrm_dealer_city" maxlength="2147483647" name="dwfrm_dealer_city" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&lt;!-- FLOAT CLEAR --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_50 formfield_right"&gt;&#13;
+&lt;div class="formfield formfield_25 floatleft state custom-select"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Province/Territory&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;select class="selectbox required" id="dwfrm_dealer_states_state" name="dwfrm_dealer_states_state"&gt;
+&lt;option class="selectoption" label="Select..." value=""&gt;Select...&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Alberta" value="AB"&gt;Alberta&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="British Columbia" value="BC"&gt;British Columbia&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Manitoba" value="MB"&gt;Manitoba&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="New Brunswick" value="NB"&gt;New Brunswick&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Newfoundland &amp; Labrador" value="NL"&gt;Newfoundland &amp; Labrador&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Northwest Territories" value="NT"&gt;Northwest Territories&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Nova Scotia" value="NS"&gt;Nova Scotia&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Nunavut" value="NU"&gt;Nunavut&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Ontario" value="ON"&gt;Ontario&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Prince Edward Island" value="PEI"&gt;Prince Edward Island&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Quebec" value="QC"&gt;Quebec&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Saskatchewan" value="SK"&gt;Saskatchewan&lt;/option&gt;&#13;
+&lt;option class="selectoption" label="Yukon" value="YY"&gt;Yukon&lt;/option&gt;&#13;
+&lt;/select&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="formfield formfield_25 floatright zip"&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&lt;div class="label"&gt;&lt;span class="requiredindicator"&gt;*&lt;/span&gt; &lt;span class="labeltext"&gt;Postal Code&lt;/span&gt;&lt;/div&gt;&#13;
+&lt;!-- END: label --&gt;&lt;!-- dwMarker="linclude" dwTemplateTitle="/default/util/inputfield.isml (app_rapala_core)" dwTemplateURL="https://localhost:60606/target=/c/app_rapala_core/t/default/util/inputfield.isml" --&gt;&#13;
+&#13;
+&lt;div class="value"&gt;&lt;input class="textinput required zipCode" id="dwfrm_dealer_zipCode" maxlength="2147483647" name="dwfrm_dealer_zipCode" type="text" value="" /&gt; &lt;!-- display text area input field --&gt; &lt;!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js --&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&#13;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;&#13;
+&lt;div class="recaptcha"&gt;&#13;
+        $include(CustomerService-Recaptcha)$&#13;
+    &lt;div class="value error recaprcha-error hide"&gt;Please validate your reCAPTCHA.&lt;/div&gt;&#13;
+    &lt;/div&gt;&#13;
+&lt;div class="formactions"&gt;&lt;button class="customersubmit" id="sendBtn" name="null" type="submit" value="Submit"&gt;&lt;span&gt;Submit&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;!-- END: formfields --&gt;&lt;/fieldset&gt;&#13;
+&lt;/form&gt;&#13;
+&#13;
+&lt;div id="related-links"&gt;&#13;
+&lt;h2&gt;Related Links&lt;/h2&gt;&#13;
+&#13;
+&lt;ol&gt;&#13;
+  &lt;li&gt;&lt;a href="$httpsURL('Stores-Find')$"&gt;Find a Dealer Near You&lt;/a&gt;&lt;/li&gt;&#13;
+  &lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-become-a-dealer')$"&gt;Become a Dealer&lt;/a&gt;&lt;/li&gt;&#13;
+  &lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-terms-conditions')$"&gt;Terms of Use&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ol&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="customCSSFile">css/customer-service.css</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="rapala-contact-us">
+                <position>-1.0</position>
+            </classification-link>
+        </folder-links>
+        <sitemap-included-flag>true</sitemap-included-flag>
+    </content>
+    <content content-id="error-callout">
+        <display-name xml:lang="x-default">error-callout</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;An unknown error has occurred.&lt;/p&gt;&#13;
+&#13;
+&lt;p&gt;&lt;strong&gt;If you tried to place an order there may have been an issue.&lt;/strong&gt;  Please do not resubmit your order.  Contact our customer service center by the most convenient means located at &lt;a href="$httpsURL('Page-Show','cid','customer-contact-us','fdid','rapala-contact-us')$"&gt;Contact Us&lt;/a&gt;.  For future orders, please ensure your billing address matches the address registered to your form of payment.&lt;/p&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="footer-links">
+        <display-name xml:lang="x-default">Footer Links</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;style&gt;&#13;
+#credit-card-safe { width: 250px; padding-top: 10px;}&#13;
+ &#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop {&#13;
+    width: 140px !important;&#13;
+    padding-right: 40px !important;          &#13;
+                }&#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #about {&#13;
+    width: 105px;&#13;
+    padding-right: 30px;&#13;
+}&#13;
+@media only screen and (max-width: 959px) and (min-width: 481px) {&#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop {  &#13;
+    width: 96% !important;&#13;
+    padding-right: 0 !important;  &#13;
+}&#13;
+ &#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #about {&#13;
+    width: 96% !important;&#13;
+    padding-right: 0 !important;&#13;
+}&#13;
+}&#13;
+@media only screen and (max-width: 480px) and (min-width: 0) {&#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #More-ways-to-shop { &#13;
+    width: 100% !important;&#13;
+    padding-right: 0 !important;  &#13;
+}&#13;
+#footernew .wrapper .footer-main .footer-left-section .footer-links #about {&#13;
+    width: 100% !important;&#13;
+    padding-right: 0 !important;&#13;
+}&#13;
+}&#13;
+              &#13;
+&lt;/style&gt;&#13;
+&lt;div class="footer-links"&gt;&#13;
+&lt;div class="footer-heading"&gt;&#13;
+&lt;p&gt;Take a Fish Boating!&lt;/p&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;div class="mainone"&gt;&#13;
+              &#13;
+&lt;div id="about"&gt;&#13;
+&lt;h3 id="linkheading" class="handle-non-us geo"&gt;&lt;a href="$url('Account-Show')$"&gt;My Account&lt;/a&gt;&lt;/h3&gt;&#13;
+&lt;ul&gt;&#13;
+&lt;li class="handle-non-us geo"&gt;&lt;a href="$url('Account-Show')$"&gt;My Profile&lt;/a&gt;&lt;/li&gt;  &#13;
+&lt;li class="handle-non-us geo"&gt;&lt;a href="$httpsURL('Page-Show','cid','email-preference-center')$"&gt;Email Sign Up&lt;/a&gt;&lt;/li&gt;                               &#13;
+&lt;li class="handle-non-us geo"&gt;&lt;a href="$httpsURL('Page-Show','cid','email-preference-center')$"&gt;Email Preferences&lt;/a&gt;&lt;/li&gt; &#13;
+&lt;li class="handle-non-us geo"&gt;&lt;a href="$httpsURL('Page-Show','cid','unsubscribe')$"&gt;Unsubscribe&lt;/a&gt;&lt;/li&gt;        &#13;
+&lt;li id="linkheading" class="desktopHide handle-non-us geo"&gt;&lt;a href="$httpsUrl('VIPInsider-Home')$"&gt;&lt;span&gt;Rapala&amp;nbsp;Insider&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&lt;/div&gt;&#13;
+              &#13;
+&lt;div id="customer-service"&gt;&#13;
+&lt;h3 id="linkheading"&gt;&lt;a href="$httpsURL('Folder-Show','fdid','rapala-customer-service')$"&gt;Customer Service&lt;/a&gt;&lt;/h3&gt;&#13;
+&lt;ul&gt;                     &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-tracking-my-order')$"&gt;Track My Order&lt;/a&gt;&lt;/li&gt;              &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Folder-Show','fdid','rapala-my-order')$"&gt;Order FAQ's&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Folder-Show','fdid','rapala-shipping')$"&gt;Shipping&lt;/a&gt;&lt;/li&gt;        &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Folder-Show','fdid','rapala-returns-exchanges')$"&gt;Returns&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-warranty-information')$"&gt;Warranty&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li class="cust-non-us"&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-contact-us','fdid','rapala-contact-us')$"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+&#13;
+&lt;/ul&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;div id="More-ways-to-shop"&gt;&#13;
+&lt;h3 id="linkheading"&gt;&lt;span&gt;More Ways To Shop&lt;/span&gt;&lt;/h3&gt;&#13;
+&lt;ul&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','gift-finder')$"&gt;Gift Finder&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','rapala-international-exclusives')$"&gt;International Exclusives&lt;/a&gt;&lt;/li&gt;                &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','lure-finder')$"&gt;Rapala Lure Finder&lt;/a&gt;&lt;/li&gt;    &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','shop-by-brand')$"&gt;Shop By Brand&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','meet-the-rapala-lures-family')$"&gt;Rapala Lure Family&lt;/a&gt;&lt;/li&gt;                                  &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Search-Show', 'cgid', 'rapala-allNewArrivals')$"&gt;Shop New Arrivals&lt;/a&gt;&lt;/li&gt;              &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Search-Show', 'cgid', 'rapala-sale')$"&gt;Shop Sale&lt;/a&gt;&lt;/li&gt;     &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Search-Show', 'cgid', 'rapala-propicks')$"&gt;Shop Pro Picks&lt;/a&gt;&lt;/li&gt; &#13;
+&lt;li&gt;&lt;a href="https://www.rapala.com/content/rapala-general-information/logo-lures.html?id=1"&gt;Rapala Logo Lures&lt;/a&gt;&lt;/li&gt;        &#13;
+&lt;li&gt;&lt;a href="http://usa.rapala.com/catalog/"&gt;Online Catalogs&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a href="$url('Stores-Find')$"&gt;Store Locator&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;/ul&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+              &#13;
+               &#13;
+&lt;div class="maintwo"&gt;&#13;
+&lt;div id="busniness"&gt;&#13;
+&lt;h3 id="linkheading"&gt;&lt;span&gt;Change Country &amp; Legal&lt;/span&gt;&lt;/h3&gt;&#13;
+&lt;ul&gt;                            &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-privacy-security')$"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;              &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-terms-conditions')$"&gt;Terms &amp; Conditions&lt;/a&gt;&lt;/li&gt;              &#13;
+&lt;li&gt;&lt;a href="$httpsURL('SiteMap-Start')$"&gt;Site Map&lt;/a&gt;&lt;/li&gt;       &#13;
+&lt;li&gt;&lt;a href="$httpsURL('Page-Show','cid','customer-investor-relations')$"&gt;Investors&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&#13;
+                &lt;div class="change-region"&gt;$include('Home-FooterChangeRegion')$ &lt;/div&gt;&#13;
+&lt;/li&gt;&#13;
+              &#13;
+&lt;/ul&gt;&#13;
+               &#13;
+&lt;/div&gt;&#13;
+ &#13;
+                               &#13;
+&lt;div id="follow_us"&gt;&#13;
+&lt;div class="social-icons desktopHide"&gt;&#13;
+$include('Page-Include','cid', 'follow_us_on')$ &#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+               &#13;
+               &#13;
+&lt;div id="rapala_insider" class="mobileHide handle-non-us geo"&gt;&#13;
+&lt;h3 id="linkheading" class="handle-non-us geo"&gt;&lt;a href="$httpsUrl('VIPInsider-Home')$"&gt;&lt;span&gt;Rapala&amp;nbsp;Insider&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;div id="payment-methods"&gt;&#13;
+                &lt;img src="images/content-assets/rapala/credit-card-icons.png?$staticlink$" id="credit-card-safe"&gt;&#13;
+&lt;/div&gt;&#13;
+&lt;/div&gt;&#13;
+              &#13;
+ &#13;
+&lt;div class="terms-privacy mobileHide"&gt;&#13;
+    &lt;a href="$httpsURL('Page-Show','cid','customer-terms-conditions')$" class="terms"&gt;Terms &amp; Conditions&lt;/a&gt;&#13;
+    &lt;a href="$httpsURL('Page-Show','cid','customer-privacy-security')$" class="privacy"&gt;Privacy Policy&lt;/a&gt;&#13;
+  &lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="help-address-1">
+        <display-name xml:lang="x-default">help-address-1</display-name>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="tooltipcontainer"&gt;&#13;
+&lt;b&gt;Address 1 Tips&lt;/b&gt;&#13;
+&lt;hr/&gt;&#13;
+&lt;ul&gt;&#13;
+&lt;li&gt;This field is limited to 30 characters because the shipping label only has room for 30 characters. If your address is longer than this, (for instance, if there is an Apt &#35;, Suite &#35;, or a long street name that doesn't fit), please use the ' Address ' field, which has room for an additional 30 characters. If Address 2 is filled in, it will appear on the shipping label.&lt;/li&gt;&#13;
+&lt;li&gt;Postal Office Boxes or P.O. Boxes are &lt;strong&gt;&lt;u&gt;NOT&lt;/strong&gt;&lt;/u&gt; accepted as a shipping address.&lt;/li&gt;&#13;
+&lt;li&gt;A physical address is required for any order placed on Rapala.ca.&lt;/li&gt;&#13;
+&lt;li&gt;Unfortunately we are unable to ship to AFO/APO addresses at this time.&lt;/li&gt;&#13;
+&lt;/div&gt;</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </content>
+    <content content-id="html-header-css">
+        <display-name xml:lang="x-default">HTML Header</display-name>
+        <description xml:lang="x-default">This content of the asset will be loaded into html head of the site</description>
+        <online-flag>false</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;!--// START: Content Asset: htmlheader --&gt;&#13;
+&#13;
+&lt;link rel="stylesheet" href="css/navigation-asset-css.css?$staticlink$" /&gt;&#13;
+&#13;
+&lt;!--// END: Content Asset: htmlheader --&gt;</custom-attribute>
+            <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
+        </custom-attributes>
+    </content>
+</library>

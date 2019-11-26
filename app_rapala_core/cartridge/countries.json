@@ -590,4 +590,199 @@
 			}
 		}
 	}
+}, {
+	"countryCode": "CA",
+	"name": {
+		"en_CA": "United States"
+	},
+	"continent": "northamerica",
+	"locales": ["en_CA"],
+	"currencyCode": "CAD",
+	"taxation": {
+		"type": "net"
+	},
+	"priceBooks": [
+		"cad-list-prices",
+		"cad-list-prices-sale"
+	],
+	"dynamicForms": {
+		"addressDetails": {
+			"title" : {
+				"type": "select",
+				"rowclass" : "title"
+			},
+			"firstName": {
+				"rowclass" : "form-row-50 form-row-left firstname",
+				"requiredMsg": "Please enter your First Name"
+			},
+			"lastName": { 
+				"rowclass" : "form-row-50 form-row-right lastname",
+				"requiredMsg": "Please enter your Last Name"
+			},
+			"address1" : {
+				"rowclass" : "form-row-50 form-row-left address1",
+				"requiredMsg": "Please enter your Address",
+				"help": {
+					"cid": "help-address-1",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			},
+			"city" : {
+				"rowclass" : "form-row-50 form-row-left city",
+				"requiredMsg": "Please enter your City"
+			},
+			"postal" : {
+				"rowclass" : "form-row-50 form-row-left zip",
+				"requiredMsg": "Please enter your Postal Code",
+				"attributes": {
+					
+				},
+				"help": {
+					"cid": "help-zipcode",
+					"label": {
+						"property": "?",
+						"file": "checkout"
+					}
+				}
+			},
+			"country": {
+				"type": "select",
+				"rowclass" : "hide country"
+			},
+			"states": [{
+				"fieldClass": "selectbox custom-select-wrap",
+                "rowclass": "form-row-50 form-row-right custom-select state-blk",
+                "requiredMsg": "Please enter your State",
+				"fieldName": "state",
+				"type": "select",
+				"required": true
+			}],
+			"address2": {
+				"rowclass" : "form-row-50 form-row-right address2",
+				"attributes" : {
+					"placeholder" : "optional"
+				},
+				"help": {
+					"cid": "help-address-2",
+					"label": {
+						"property": "singleshipping.apofpo",
+						"file": "checkout"
+					}
+				}
+			},
+			"phone": {
+				"rowclass" : "form-row-50 form-row-right phone",
+				"requiredMsg": "Please enter your Phone Number",
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "singleshipping.phonerequired",
+						"file": "checkout"
+					}
+				}
+			}
+		},
+		"customerAddressDetails" : {
+			"address2": {
+				"help": {
+					"cid": "help-address-2",
+					"label": {
+						"property": "APO/FPO",
+						"file": "addressbook"
+					}
+				}
+			},
+			"firstname": {
+					"requiredMsg": "This field is required."
+			},
+			"addressid": {
+					"requiredMsg": "This field is required."
+			},
+			"lastname": {
+					"requiredMsg": "This field is required."
+			},
+			"address1": {
+					"requiredMsg": "This field is required."
+			},
+			"city": {
+					"requiredMsg": "This field is required."
+			},
+			"country": {
+				"type": "select",
+				"rowclass" : "custom-select hide"
+			},
+			"states": [{
+				"fieldName": "state",
+				"type": "select",
+				"required": true,
+				"requiredMsg": "This field is required.",
+				"rowclass" : "custom-select",
+				"fieldClass": "custom-select-wrap"
+			}],
+			"postal": {
+					"requiredMsg": "This field is required."
+			},
+			"phone": {
+				"rowclass" : "form-row-50 form-row-right phone",
+				"requiredMsg": "This field is required.",
+				"help": {
+					"cid": "help-telephone",
+					"label": {
+						"property": "Why is this required?",
+						"file": "checkout"
+					}
+				}
+			}
+		},
+		"giftRegistryEvent" : {
+			"eventaddress": [{
+				"fieldName": "country",
+				"type": "select"
+			}, {
+				"fieldName": "states.state",
+				"type": "select",
+				"required": true
+			}],
+			"type": {
+				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state",
+					"type": "select"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
+			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select",
+				"rowclass": "year custom-select",
+				"fieldClass": "yearselect custom-select-wrap"
+			},
+			"month" : {
+				"type" : "select",
+				"rowclass": "month custom-select",
+				"fieldClass": "monthselect custom-select-wrap"
+			}
+		}
+	}
 }]
