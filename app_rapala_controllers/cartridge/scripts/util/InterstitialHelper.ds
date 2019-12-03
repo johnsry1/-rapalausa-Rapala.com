@@ -120,6 +120,17 @@ var InterstitialHelper : Object = {
 			countryLink = "https://www.rapala.com/";
 		}
 		return countryLink;
+	},
+	getCurrentCountryCode: function(request) {
+		var currentCountry = 'us'; // default to US site view
+		var currentSite = dw.system.Site.getCurrent().ID;
+		if (currentSite.indexOf('CA') != -1) {
+			currentCountry = 'ca';
+		} else if (currentSite.indexOf('EU') != -1) {
+			var locale = dw.util.Locale.getLocale(request.locale);
+			currentCountry = locale.country.toLowerCase();
+		}
+		return currentCountry;
 	}
 }
 
