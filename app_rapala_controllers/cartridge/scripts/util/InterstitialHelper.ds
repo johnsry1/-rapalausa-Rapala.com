@@ -20,16 +20,14 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		var z = request;
 		var id = "rapala-";
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
-		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
 			if (empty(request.httpParameterMap.locale)) {
-				id = 'rapalaCA-';
-			} else if (request.httpParameterMap.locale == 'eu-en') {
-				id = 'rapalaEU-';
-			}
+				id = 'rapala-';
+			} 
+		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
+			id = (!empty(request.httpParameterMap.locale) && request.httpParameterMap.locale == 'default') ? id : 'rapalaCA-';
 		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
@@ -95,7 +93,7 @@ var InterstitialHelper : Object = {
 		return url;
 	},
 	constructCountryLink: function(activeCountryJSON) {
-		let defaultLink = 'http://www.rapala.com';
+		let defaultLink = 'http:s//www.rapala.com';
 		let activeCountry = activeCountryJSON.country;
 		let protocol = "https://";
 		let countryLink;
@@ -117,7 +115,7 @@ var InterstitialHelper : Object = {
 
 		// default the URL to US Production in the event we failed to construct a url beforehand.
 		if (countryLink.length <= 0 || countryLink.indexOf('undefined') > -1) {
-			countryLink = "https://www.rapala.com/";
+			countryLink = defaultLink;
 		}
 		return countryLink;
 	},
