@@ -131,7 +131,11 @@
 				  </isif>
 				  <isif condition="${!empty(containingFolder)}">
 				  	<div <isif condition="${flag}">class="back"<iselse>class="back-noborder content-button"</isif>>
-				  		<a class="button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}">${Resource.msg("global.back","locale",null)}</a>
+				  		<isif condition="${dw.system.Site.getCurrent().ID == 'rapalaCA'}">
+				  			<a class="button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}">${Resource.msg("content.goto","content",null)}&nbsp;<isprint value="${containingFolder.displayName}" /></a>
+				  		<iselse>
+					  		<a class="button" href="${URLUtils.url('Folder-Show','fdid',containingFolder.ID)}">${Resource.msg("global.back","locale",null)}</a>
+				  		</isif>
 				  	</div>
 				  </isif>
 				</div>

@@ -81,7 +81,10 @@ var serviceConfig : Object = {
 };
 
 //NVP service registration
-svc.ServiceRegistry.configure(prefs.nvpServiceName, serviceConfig);
+//svc.ServiceRegistry.configure(prefs.nvpServiceName, serviceConfig);
+svc.ServiceRegistry.configure("int_paypal.http.nvp.payment.PayPal", serviceConfig);
+svc.ServiceRegistry.configure("int_paypal.http.nvp.payment.PayPalCA", serviceConfig);
+
 
 /**
  * checkRequestDataContainer() function. Checks requestDataContainer object {method: String, data: Object}
