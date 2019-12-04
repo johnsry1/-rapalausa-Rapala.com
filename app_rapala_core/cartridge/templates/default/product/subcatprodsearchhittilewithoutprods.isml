@@ -12,10 +12,10 @@
 						<isif condition="${!empty(pdict.ProductSearchResult)}">
 							<isset name="productUrl" value="${pdict.ProductSearchResult.url( productUrl )}" scope="page"/>
 						</isif>
-						
-						
+
+
 						<div class="product producttile cell"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
-							
+
 							<isobject object="${SubSubcategoryHit}" view="searchhit">
 								<div class="image">
 									<iscomment>Render the thumbnail</iscomment>
@@ -29,7 +29,7 @@
 										<a href="${productUrl}" title="<isprint value="${Product.name}" encoding="off" />">Quick View</a>
 									</div><!-- END: quickviewbutton -->
 								</div><!-- END: image -->
-								
+
 								 <div class="newFlag">
 								 	<isdisplayvariantnew p_product="${Product}"/>
 								 </div>
@@ -40,7 +40,7 @@
 									if(Product.isMaster()){
 									var variants: dw.util.Collection =Product.getVariants();
 									var variantIter : dw.util.Iterator = variants.iterator();
-										while(variantIter.hasNext()){ 
+										while(variantIter.hasNext()){
 										var variant : dw.catalog.Variant = variantIter.next();
 													  if(variant.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
 													  count = count+1;
@@ -52,16 +52,16 @@
 										count = count+1;
 										}
 									}
-								</isscript>	
-								
+								</isscript>
+
 								<div class="name">
 									<a href="${productUrl}" title="${Product.name}">
 											<isproductname productname="${Product.name}"/>
 									</a>
 								</div><!-- END: name -->
-								
+
 								<div class="promo">
-									<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>	
+									<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>
 						            <isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
 									<iscomment>Render information on active product promotions</iscomment>
 									<isset name="promos" value="${dw.campaign.PromotionMgr.activeCustomerPromotions.getProductPromotions(Product)}" scope="page"/>
@@ -74,7 +74,7 @@
 									</isif>
 									</isif>
 								</div><!-- END: promo -->
-								
+
 								<div class="pricing">
 									<iscomment> If custom.abilityForSale is not true, then do not display price OR promotions </iscomment>
 									<isif condition="${(Product.custom.availableForSale != null) && (Product.custom.availableForSale != false)}">
@@ -84,9 +84,9 @@
 											<iscomment>Product set pricing</iscomment>
 											<div class="productsetprice">${Resource.msg('global.buyall','locale',null)}</div>
 										<iselseif condition="${Product.master && Product.priceModel.priceRange}"/>
-											<iscomment>Product master price range depending on the represented variants</iscomment>						
+											<iscomment>Product master price range depending on the represented variants</iscomment>
 												<div class="salesprice">${Resource.msg('pricing.startingat','product',null)} <isprint value="${Product.priceModel.minPrice}"/></div>
-										<iselse/>						
+										<iselse/>
 											<iscomment>For Product master without a price range get the pricing from firstRepresentedProduct </iscomment>
 											<isif condition="${Product.master && !Product.priceModel.priceRange}"/>
 												<iscomment>Preserve current product instance</iscomment>
@@ -102,17 +102,17 @@
 											<iselse/>
 												<isset name="PriceModel" value="${Product.getPriceModel()}" scope="page"/>
 											</isif>
-						
+
 											<iscomment>
 												Check whether the product has price in the sale pricebook. If so, then
 												display two prices: crossed-out standard price and sales price.
 											</iscomment>
 											<isinclude template="product/components/standardprice"/>
-											
+
 											<!-- <isset name="SalesPrice" value="${Product.priceModel.minPrice}" scope="page"/> -->
-											
+
 											<isset name="ShowStandardPrice" value="${StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1}" scope="page"/>
-						
+
 											<isif condition="${ShowStandardPrice}">
 												<div class="discountprice">
 													<div class="standardprice"><isprint value="${StandardPrice}"/></div>
@@ -124,7 +124,7 @@
 														<isprint value="${Product.custom.earlyBirdMessage}"/>
 													<iselse/>
 														<isprint value="${SalesPrice}"/>
-													</isif>							
+													</isif>
 												</div>
 											</isif>
 											<isif condition="${!empty(pdict.OrgProduct)}">
@@ -135,15 +135,15 @@
 										</isif>
 									</div><!-- price  -->
 									</isif>
-								
+
 								<div id="stock">
 									<iscomment>out of stock label</iscomment>
 									<isif condition="${count == 0}">
-									<span class="out_stock"><isprint value="${'Out Of Stock'}"/></span> 
+									<span class="out_stock"><isprint value="${Resource.msg('product.outofstock','product',null)}"/></span>
 									</isif>
 								</div>
 								</div><!-- pricing -->
-						
+
 								<div class="review"></div><!-- END: review -->
 								<iscomment>
 									Render the compare checkbox, if search result is based on a category context.
@@ -153,7 +153,7 @@
 								<isscript>
 									var cat 			= pdict.ProductSearchResult.category,
 										enableCompare 	= false;
-									
+
 									while (cat != null) {
 										if ('enableCompare' in cat.custom && cat.custom.enableCompare) {
 											enableCompare = true;
@@ -162,52 +162,52 @@
 										cat = cat.parent;
 									}
 								</isscript>
-								
+
 										<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.category) && enableCompare}">
 									        <div class="compare">
 												<isif condition="${!Product.productSet && !Product.bundle}">
 													<isscript>
-														// mark the compare checkbox checked if the current product is 
+														// mark the compare checkbox checked if the current product is
 														// in the current comparison list for the current category
-														
+
 														importScript( "catalog/libCompareList.ds" );
 														importScript( "common/libJson.ds" );
-							
+
 														var comparison = GetProductCompareList();
 														// Set the category
 														comparison.setCategory(pdict.ProductSearchResult.category.ID);
-								
+
 														var comparisonProducts = null;
-														
+
 														if (comparison) {
 															comparisonProducts = comparison.getProducts();
 														}
-														
+
 														var checkedStr = '';
-														
-														if (!empty(comparisonProducts)) {								
+
+														if (!empty(comparisonProducts)) {
 															var pIt = comparisonProducts.iterator();
 															var productId = null;
-															
+
 															while (pIt.hasNext()) {
-																productId = pIt.next();									
+																productId = pIt.next();
 																if (productId == Product.ID) {
 																	checkedStr = 'checked=true';
 																	break;
 																}
 															}
-														}		    				
-									    			</isscript>	
+														}
+									    			</isscript>
 													<isset name="compareId" value="${dw.util.UUIDUtils.createUUID()}" scope="page"/>
 													<input type="checkbox" id="compare${compareId}" class="compareCheck" ${checkedStr}/>
 													<span class="hidden json">{boxId:"compare${compareId}", id:"<isprint value="${escapeJsonString(Product.ID)}"/>", catId:"<isprint value="${escapeJsonString(pdict.ProductSearchResult.category.ID)}"/>"}</span><!-- this MUST be immediately after the input/field tag. Hiden data to be attached to the input field (app.hiddenData in app.js -->
-													<label for="compare${compareId}">Compare</label>						
+													<label for="compare${compareId}">Compare</label>
 												</isif>
 											</div><!-- END: compare -->
 										</isif>
 									</isobject>
 						</div><!--producttile-->
-							
+
 							<isif condition="${(subcatloopstatus.count >= 4)}">
 								<isbreak></isbreak>
 							</isif>
@@ -218,7 +218,7 @@
 
 <isif condition="${(status.count >= 1)}">
 <isbreak></isbreak>
-									
+
 </isif>
 </isif>
 
