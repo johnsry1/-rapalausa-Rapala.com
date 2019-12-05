@@ -78,7 +78,7 @@ var dialog = {
         }
         imagesLoaded(this.$container).on('done', function () {
             this.$container.dialog('option', 'position', position);
-        }.bind(this));
+        }.on(this));
 
         callback = (typeof params.callback === 'function') ? params.callback : function () {
         };
@@ -102,7 +102,7 @@ var dialog = {
                 callback: function (response) {
                     params.content = response;
                     this.openWithContent(params);
-                }.bind(this)
+                }.on(this)
             });
         } else if (params.html) {
             this.openWithContent(params);
@@ -148,7 +148,7 @@ var dialog = {
                 $('.ui-dialog-content:visible').each(function () {
                     $(this).dialog('option', 'position', $(this).dialog('option', 'position'));
                 });
-            }.bind(this),
+            }.on(this),
             failure: function () {
                 window.alert(Resources.SERVER_ERROR);
             }

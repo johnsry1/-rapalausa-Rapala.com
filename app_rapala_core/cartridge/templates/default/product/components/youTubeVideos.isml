@@ -5,7 +5,7 @@
 	var videos : dw.util.ArrayList = new dw.util.ArrayList();
 	var newVideos : dw.util.ArrayList = new dw.util.ArrayList();
 	var oldVideos : dw.util.ArrayList = new dw.util.ArrayList();
-	
+
 	for ( var x in Product.custom.videoId ) {
 		var video = {};
 		video.id = Product.custom.videoId[x];
@@ -48,12 +48,12 @@
     <div class="rightcol">
 	    <h2 class="onlyMobile-hide">${Resource.msg('product.videoplaylist','product',null)}
 		</h2>
-	    <div class="skin-slidedeck">	
+	    <div class="skin-slidedeck">
 		<dl id="youtube_slide_deck" class="yt_slidedeck">
 		<dd><ul>
 	    <isloop items="${videos}" var="video" status="videoStatus">
-	    
-	    
+
+
 	    		<isif condition="${videoStatus.index == 0}">
                    <isset name="selectedString" value="${'selected '}" scope="page" />
                		<iselse/>
@@ -73,18 +73,19 @@
 	    				<div class="description">
 	    					<isprint value="${video.description}"/>
 	    				</div>
-	              </a>   
+	              </a>
 	           </li>
 	    </isloop>
-	   
+
 	    	</ul><div class="clear"></div></dd>
 	    <div class="clear"></div>
 	    </dd>
 	    </dl>
 	    </div>
 	    <script>
-	    jQuery('.productdetail .yt_slidedeck li a').click(function(e) {
+	    jQuery('.productdetail .yt_slidedeck li a').on('click', function(e) {
             e.preventDefault();
+            console.log('hello world');
             var $this = jQuery(this);
             if(!$this.parent().hasClass('selected')) {
                 jQuery('.productdetail .yt_slidedeck li').removeClass('selected');

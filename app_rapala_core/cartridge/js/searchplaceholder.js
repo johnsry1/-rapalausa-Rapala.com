@@ -9,13 +9,13 @@ function initializeEvents() {
     /* Start JIRA PREV-53:No search result page: When the search text field is
       empty,on clicking of "GO" button user is navigating to Home page.
       Replaced #q with 'input[name=q]'*/
-    $('input[name=q]').focus(function () {
+    $('input[name=q]').on('focus', function () {
         var input = $(this);
         if (input.val() === input.attr('value')) {
             input.val('');
         }
     })
-        .blur(function () {
+        .on('blur', function () {
             var input = $(this);
             /* Start JIRA PREV-53:No search result page: When the search text field is empty,on clicking of "GO"
                  button user is navigating to Home page.Added $.trim(input.val()) === ""*/
@@ -23,12 +23,12 @@ function initializeEvents() {
                 input.val(input.attr('value'));
             }
         })
-        .blur();
+        .trigger('blur');
 
     /* Start JIRA-PREV-54:General Error page: When the new search field empty, on clicking of "GO" user is navigating to Home page.
          Added condition for disabling search button in header and No search results page and error pages.
          Start JIRA-PREV-53:No search result page: When the search text field is empty,on clicking of "GO" button user is navigating to Home page.*/
-    $('input[name=q]').closest('form').submit(function (e) {
+    $('input[name=q]').closest('form').on('submit', function (e) {
         var input = $(this).find('input[name=q]');
         if ($.trim(input.val()) === input.attr('value') || $.trim(input.val()) === '') {
             e.preventDefault();

@@ -6,9 +6,9 @@
 	<h1 class="landing_heading"><isprint value="${Resource.msg('landing.createheader','account',null)}"/></h1>
 	<iscomment><span class="Account-benefits account_page">${Resource.msg('accountsignup.subhead','account',null)}</span>
 	<span class="Account-benefits landing_page">${Resource.msg('accountsignup.subheadlanding','account',null)}</span></iscomment>
-	
+
 	<iscomment>Builds a registration page for the user. It provides all input fields for names and address</iscomment>
-	<div class="registration ">			
+	<div class="registration ">
 		<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 			<input type="hidden" name="ltkSubscriptionCode" value="register" class="createanaccountbutton"/>
 			<input type="hidden" name="source" value="register" />
@@ -20,7 +20,7 @@
 						attributemaxlength : 30,
 						tabindex : 30
 					};
-					
+
 					var lastNameAttr = {
 						attributemaxlength : 30,
 						tabindex : 31
@@ -46,27 +46,27 @@
 				<div class="formfield formfield_name floatleft">
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input" fieldClass="firstname" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.firstname.missing','forms',null)}"/>
 				</div><!-- END: firstname -->
-				
+
 				<div class="formfield formfield_name floatleft" >
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input" fieldClass="lastname" attributes="${lastNameAttr}" requiredtext="${Resource.msg('forms.address.lastname.missing','forms',null)}"/>
 				</div><!-- END: lastname -->
-				
+
 				<div class="formfield formfield_email first floatleft" >
-					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" fieldClass="accountemail" attributes="${emailAttr}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/> 
+					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" fieldClass="accountemail" attributes="${emailAttr}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 					<isif condition="${!empty(pdict.CurrentHttpParameterMap.MailExisted.stringValue) && pdict.CurrentHttpParameterMap.MailExisted.stringValue == 'true'}">
 						<span class="existing_register"><isprint value="${Resource.msg('accountsignup.emailexist','account',null)}"/></span>
 					</isif>
 				</div><!-- END: email -->
-				
+
 				<div class="formfield formfield formfield_pwd floatleft first passwordDiv" >
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" fieldClass="c_password" attributes="${passwordAttr}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/> 
-				</div><!-- END: passowrd --> 
-		
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" fieldClass="c_password" attributes="${passwordAttr}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
+				</div><!-- END: passowrd -->
+
 				<div class="formfield formfield formfield_pwd norightmargin floatright" >
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password"  fieldClass="cm_password" attributes="${passwordcnfAttr}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
 					<div class="clear"><!-- FOAT CLEAR --></div>
 				</div><!-- END: password confirm -->
-				
+
 				<div class="formfield">
 					<div class="custom-checkbox tab mobileHide">
 						<isif condition="${!empty(pdict.CurrentForms.profile.login.rememberme) && pdict.CurrentForms.profile.login.rememberme.value}">
@@ -75,7 +75,7 @@
 						<iselse/>
 							<div class="custom-link"></div>
 							<isinputfield formfield="${pdict.CurrentForms.profile.login.rememberme}"  type="checkbox" attributes="${remembermeAttr}"/>
-						</isif>						
+						</isif>
 					</div>
 
 					<div class="custom-checkbox desktopHide">
@@ -85,19 +85,19 @@
 						<iselse/>
 							<div class="custom-link"></div>
 							<isinputfield formfield="${pdict.CurrentForms.profile.login.remembermeMobile}"  type="checkbox" attributes="${remembermeAttr}"/>
-						</isif>						
+						</isif>
 					</div>
 					<div class="custom-checkbox signupfor-email">
 						<isif condition="${!empty(pdict.CurrentForms.profile.customer.addtoemaillist) && pdict.CurrentForms.profile.customer.addtoemaillist.value}">
 							<div class="custom-link"></div>
 							<label><isprint value="${Resource.msg('productlist.emailnews','account',null)}"/> <a class="seesamples desktopHide"><isprint value="${Resource.msg('accountsignup.seesample','account',null)}"/></a></label>
 							<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}"  type="checkbox"  rowclass="nolabel" attributes="${lastNameAttr5}"/>
-							
+
 						<iselse/>
 							<div class="custom-link active"></div>
 							<label><isprint value="${Resource.msg('productlist.emailnews','account',null)}"/><a class="seesamples desktopHide"><isprint value="${Resource.msg('accountsignup.seesample','account',null)}"/></a></label>
 							 <isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}"  type="checkbox" rowclass="nolabel" attributes="${lastNameAttr5}"/>
-							 
+
 						</isif>
 					    <div class="sample_mail_main">
 							<div class="top_arrow"></div>
@@ -129,7 +129,7 @@
 					<button type="submit" class="registration-button" tabindex="37" value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span><isprint value="${Resource.msg('global.createaccount','locale',null)}"/></span><span class='loadImage'></span></button>
 				</div>
 				<div id="registrationformaction"></div>
-				<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>	
+				<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
 			</fieldset>
 		</form>
 		<div class="rapala_benefits">
@@ -141,7 +141,7 @@
 				<li><isprint value="${Resource.msg('accountsignup.benefit4','account',null)}"/></li>
 			</ul>
 		</div>
-	</div>		
+	</div>
 	<div class="privacypolicy" id="privacypolicy" style="display:none;overflow:auto;">
 		<iscontentasset aid="privacy-policy"/>
 	</div>
@@ -150,18 +150,18 @@
 			var loginChanged = false;
 			var nameChanged = false;
 			app.URLs.submitFormURL = "${URLUtils.url('Account-UpdateName')}"
-			
+
 			function submitForm() {
 				// if firstname/lastname change and no other field update the data via AJAX
-				// otherwise do normal submit				
+				// otherwise do normal submit
 				if (nameChanged && !loginChanged) {
-		
-					if (jQuery("#RegistrationForm").validate().element( "[name=${pdict.CurrentForms.profile.customer.firstname.htmlName}]" ) && 
+
+					if (jQuery("#RegistrationForm").validate().element( "[name=${pdict.CurrentForms.profile.customer.firstname.htmlName}]" ) &&
 							jQuery("#RegistrationForm").validate().element( "[name=${pdict.CurrentForms.profile.customer.lastname.htmlName}]" )&&
 							jQuery("#RegistrationForm").validate().element( "[name=${pdict.CurrentForms.profile.customer.email.htmlName}]" )) {
-						
+
 						var post = jQuery('#RegistrationForm').serialize();
-						
+
 				  		jQuery.ajax({
 						   type: "POST",
 						   url: app.URLs.submitFormURL,
@@ -172,7 +172,7 @@
 								window.location.href = showurl;
 						   },
 						   failure: function(data) {
-						   		alert("${Resource.msg('global.serverconnection','locale',null)}");		
+						   		alert("${Resource.msg('global.serverconnection','locale',null)}");
 						   }
 						});
 					}
@@ -181,10 +181,10 @@
 					jQuery("#RegistrationForm").submit();
 				}
 			}
-		
+
 			jQuery(document).ready(function() {
-					
-				   
+
+
 			 	jQuery('#privacypolicy').dialog({
 			 			bgiframe: true,
 						autoOpen: false,
@@ -194,72 +194,72 @@
 				    	title: '${Resource.msg('global.privacypolicy','locale',null)}',
 				    	resizable: false
 				});
-								
-				jQuery('#privacyPolicy').click( function() {
+
+				jQuery('#privacyPolicy').on('click', function() {
 					jQuery('#privacypolicy').show();
 					jQuery('#privacypolicy').dialog('open');
 				});
-		
+
 				// keep track of which fields are changed, firstname/lastname are nameChanged, all others are loginChanged
-				jQuery('input').change(function(formField) {			
-			        if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.login.htmlName}") >= 0) {  
+				jQuery('input').on('change', function(formField) {
+			        if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.login.htmlName}") >= 0) {
 			        	loginChanged = true;
 			        } else if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.email.htmlName}") >= 0) {
 			        	loginChanged = true;
-			        } else if ((formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.firstname.htmlName}") >= 0) || 
-			    	        (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.lastname.htmlName}") >= 0)) {  
-			        	nameChanged = true;    
-			        }   
+			        } else if ((formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.firstname.htmlName}") >= 0) ||
+			    	        (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.lastname.htmlName}") >= 0)) {
+			        	nameChanged = true;
+			        }
 				});
-		
+
 				// if the select box has a change set the flag
-				jQuery('select').change(function(e) {
+				jQuery('select').on('change', function(e) {
 					loginChanged = true;
 				});
-		
+
 				// clear out formfields that could be part of autocomplete
 			    //jQuery("[name=${pdict.CurrentForms.profile.customer.emailconfirm.htmlName}]").val("");
-			    //jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").val("");	 
-			   // jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").val("");	
-		
+			    //jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").val("");
+			   // jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").val("");
+
 			    // change the labels of the password fields in case the user is logged in
 			    if (${pdict.CurrentCustomer.registered}) {
 			    	jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").parent().prev().children('.labeltext').html("${Resource.msg('label.newpassword','forms',null)}:");
 			    	jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").parent().prev().children('.labeltext').html("${Resource.msg('profile.newpasswordconfirm','forms',null)}:");
 			    }
-		
+
 			    // hide the facebook registration div
 			    jQuery('.facebookregistration').hide();
-		    
+
 			 	// bind the registration selection
 			    bindRegistrationChangeHandler();
-		
+
 			    // check for any registration errors
 			    <isif condition="${pdict.RegistrationStatus != null && pdict.RegistrationStatus.code=='CustomerAlreadyExistError'}">
 		    		jQuery('.registrationselection').hide();
 			    	jQuery('.facebookregistration').hide();
 					jQuery('.registration').hide();
 			    </isif>
-			    
-			    jQuery("#privacy").click(function() {
+
+			    jQuery("#privacy").on('click', function() {
 					jQuery(this).attr("target", "_blank");
-				});	
-			
-			    // open privacy pop-up	
-				jQuery("#privacy").click(function(){		
+				});
+
+			    // open privacy pop-up
+				jQuery("#privacy").on('click', function(){
 					app.dialog.open('${URLUtils.url('Page-Include','cid','privacy-policy')}','${Resource.msg('global.privacypolicy','locale',null)}');
 					return false;
-				});	
-			 
+				});
+
 			});
-		
+
 			function bindRegistrationChangeHandler() {
 				// bind payment method change handler
-				jQuery("input[name=registration]").click(function() {
+				jQuery("input[name=registration]").on('click', function() {
 					//var selectedID = jQuery(this).val();
 					//changePaymentMethod(selectedID);
 					registrationType = jQuery(this).val();
-		
+
 					if (registrationType == "newcustomerregistration") {
 						jQuery('.facebookregistration').hide();
 						jQuery('.registration').show();

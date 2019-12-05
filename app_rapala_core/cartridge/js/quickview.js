@@ -77,11 +77,11 @@ var quickview = {
         $btnNext.on('click', function (e) {
             e.preventDefault();
             this.navigateQuickview(1);
-        }.bind(this));
+        }.on(this));
         $btnPrev.on('click', function (e) {
             e.preventDefault();
             this.navigateQuickview(-1);
-        }.bind(this));
+        }.on(this));
     },
 
     /**
@@ -93,7 +93,7 @@ var quickview = {
         var url = makeUrl(this.productLinks[this.productLinkIndex], 'quickview');
         dialog.replace({
             url: url,
-            callback: this.setup.bind(this, url)
+            callback: this.setup.on(this, url)
         });
     },
 

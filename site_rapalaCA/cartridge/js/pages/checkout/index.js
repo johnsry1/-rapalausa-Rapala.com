@@ -22,7 +22,7 @@ exports.init = function () {
     }  else {
         billing.init();
     }
-    $(window).resize(function () {
+    $(window).on('resize', function () {
         $('.ui-dialog-content:visible').each(function () {
             $(this).dialog('option', 'position', $(this).dialog('option', 'position'));
         });
@@ -54,7 +54,7 @@ exports.init = function () {
             }
         }
     });
-    $('body').find('input').focusin(function () {
+    $('body').find('input').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
@@ -140,7 +140,7 @@ exports.init = function () {
              $('.order-summary-footer .submit-order .button-fancy-large').attr('disabled', 'disabled');
          }
      }*/
-    
+
     $('.privacy-policy').on('click', function (e) {
         e.preventDefault();
         dialog.open({

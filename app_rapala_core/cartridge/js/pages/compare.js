@@ -42,7 +42,7 @@ function initializeEvents() {
         });
 
     $('#compare-category-list').on('change', function () {
-        $(this).closest('form').submit();
+        $(this).closest('form').trigger('submit');
     });
 }
 
