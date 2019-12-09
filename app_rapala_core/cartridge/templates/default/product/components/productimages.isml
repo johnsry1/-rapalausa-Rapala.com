@@ -47,7 +47,7 @@
 	<isif condition="${imageTitle.charAt(0) == ','}">
 		<isset name="imageTitle" value="${pdict.Product.name + imageTitle}" scope="page"/>
 	</isif>
-	<a id="product-image" class="product-image main-image MagicZoom" data-options="cssClass: white-bg; zoomDistance: 43; zoomWidth:362px; zoomHeight:320px" href="${imageUrl}" title="${imageTitle}">
+	<a id="product-image" class="product-image main-image MagicZoom" data-options="cssClass: white-bg; zoomDistance: 43; zoomWidth:362px; zoomHeight:320px; textHoverZoomHint:${Resource.msg('productImage.hover.to.zoom','product',null)}" href="${imageUrl}" title="${imageTitle}">
 		<img itemprop="image" class="primary-image" src="${imageUrl}" alt="${imageAlt}"/>
 	</a>
 </div>
