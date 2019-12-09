@@ -10,7 +10,7 @@ var appGlobal = {
 };
 var headerEvents = {
     initializeEvent: function () {
-        $('body').find('input, select.input-select').focusin(function () {
+        $('body').find('input, select.input-select').on('focusin', function () {
             $(this).closest('.formfield').removeClass('inputlabel');
             $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
             $(this).removeClass('errorclient');
@@ -32,7 +32,7 @@ var headerEvents = {
         });
         //label text color change on submit
         if ($('.account-logs').length > 0 || $('.new-register').length > 0 || $('.wish-logs').length > 0 || $('.createan-account').length > 0 || $('.headercustomerinfo').length > 0 || $('.ui-login').length > 0 || $('.passwordreset').length > 0) {
-            $('.formactions button').click(function () {
+            $('.formactions button').on('click', function () {
                 $('span.existing_register').hide();
                 var crrobj = $(this).closest('form').find('.field-wrapper .required');
                 $(crrobj).each(function () {
@@ -48,7 +48,7 @@ var headerEvents = {
         }
         //login & wish list validations
         if ($('.account-logs').length > 0 || $('.new-register').length > 0 || $('.wish-logs').length > 0 || $('.createan-account').length > 0 || $('.headercustomerinfo').length > 0 || $('.ui-login').length > 0) {
-            $('a.clearbutton').click(function () {
+            $('a.clearbutton').on('click', function () {
                 $(this).closest('.formfield').find('input').val('');
                 $(this).closest('.formfield').find('textarea').val('');
                 $(this).closest('.field-wrapper').find('span').remove();
@@ -99,7 +99,7 @@ var headerEvents = {
             }
 
         });
-        $('.signingin').click(function (e) {
+        $('.signingin').on('click', function (e) {
             e.preventDefault();
             $('.accountcontent').hide();
             var validator = $(this).closest('form').validate();
@@ -116,7 +116,7 @@ var headerEvents = {
             $('.headermask').addClass('no-hide').show();
         });
 
-        $('.sign-message a, .ExistedUser-error .createaccount').click(function (e) {
+        $('.sign-message a, .ExistedUser-error .createaccount').on('click', function (e) {
             e.preventDefault();
             $('.accountcontent').hide();
             $(this).closest('.ui-login').find('.header-create').show();
@@ -140,7 +140,7 @@ var headerEvents = {
             }, 5000);
         });
 
-        $('.forgot-password a').click(function (e) {
+        $('.forgot-password a').on('click', function (e) {
             e.preventDefault();
             $('.accountcontent').hide();
             $('.header-forgot-pwd span.reset_email_error').hide();
@@ -165,7 +165,7 @@ var headerEvents = {
             }, 5000);
         });
 
-        $('.accountcontent').mouseenter(function () {
+        $('.accountcontent').on('mouseenter', function () {
             $('.headermask').removeClass('no-hide');
             $('.headermask').show();
             $('.confirmationcontainer').hide();
@@ -174,14 +174,14 @@ var headerEvents = {
             //appGlobal.globalTimer == 0;
         });
 
-        $('.headermask').click(function (e) {
+        $('.headermask').on('click', function (e) {
             headerEvents.maskEvent(e);
         });
 
-        $('.headermask').mouseenter(function (e) {
+        $('.headermask').on('mouseenter', function (e) {
             headerEvents.maskEvent(e);
         });
-        $('.accountcontent').mouseenter(function () {
+        $('.accountcontent').on('mouseenter', function () {
             $('.headermask').removeClass('no-hide');
             $('.headermask').show();
             $('.confirmationcontainer').hide();
@@ -193,15 +193,15 @@ var headerEvents = {
             e.preventDefault();
             $(this).parent('.user-info').toggleClass('active');
         });
-        $('.change-regionnew').mouseenter(function () {
+        $('.change-regionnew').on('mouseenter', function () {
             $('.domainswitch-header').show();
             $('.headermask').show();
         });
-        $('.change-region').mouseenter(function () {
+        $('.change-region').on('mouseenter', function () {
             jQuery('.domainswitch').show();
             $('.region_overlay').show();
         });
-        $('.region_overlay').mouseenter(function () {
+        $('.region_overlay').on('mouseenter', function () {
             jQuery('.domainswitch').hide();
             $(this).hide();
         });
@@ -210,22 +210,22 @@ var headerEvents = {
                 $('.resetpassword').closest('div.dialog-content').addClass('confirmationcontainer');
             }
         });
-        $('.sample-section').click(function () {
+        $('.sample-section').on('click', function () {
             if (!$(this).find('.sample_mail_main').is(':visible')) {
                 $(this).find('.sample_mail_main').slideDown(500);
             }
         });
-        $('.signupfor-email .seesamples').click(function () {
+        $('.signupfor-email .seesamples').on('click', function () {
             $(this).closest('.signupfor-email').find('.sample_mail_main').slideToggle(500);
         });
 
-        $('body').click(function (event) {
+        $('body').on('click', function (event) {
             if (!$(event.target).is('.signupfor-email .seesamples') && (!$(event.target).is('.create_email_checkbox .seesamples'))) {
                 $('.sample_mail_main').slideUp(500);
             }
         });
         /**This is used to get the tick mark for create account when the field is valid*/
-        $('.ui-login input.required').blur(function () {
+        $('.ui-login input.required').on('blur', function () {
             if ($(this).hasClass('valid')) {
                 $(this).addClass('click-mark');
             } else {
@@ -233,13 +233,13 @@ var headerEvents = {
             }
         });
 
-        $('.back-link, .signingin').click(function () {
+        $('.back-link, .signingin').on('click', function () {
             $('.accountcontent').hide();
             $(this).closest('.ui-login').find('.header-sign-in').show();
             $('.header-sign-in .signin_main .loginfail.errormessage').hide();
         });
 
-        $('.forgot_create').click(function () {
+        $('.forgot_create').on('click', function () {
             $('.header-forgot-pwd').hide();
             $('.header-create').show();
             $('.header-create .errormessage').hide();
@@ -261,7 +261,7 @@ var headerEvents = {
             $('.user-info').show();
             $('.headermask').show();
         });
-        jQuery(window).bind('message', function (e) {
+        jQuery(window).on('message', function (e) {
             var str;
             e = e.originalEvent;
             if (e.origin.indexOf(document.location.host) === -1) {
@@ -292,7 +292,7 @@ var headerEvents = {
                 $('.accountcontent .loading').remove();
             }
         });
-        jQuery('.signin-button').click(function (e) {
+        jQuery('.signin-button').on('click', function (e) {
             e.preventDefault();
             var realForm = $(this).closest('form');
             if (!realForm.valid()) {
@@ -320,14 +320,14 @@ var headerEvents = {
 
             $('body').append($form);
             $form.hide();
-            $form.submit();
+            $form.trigger('submit');
         });
         /*$(".PasswordResetForm").on("keyup",".guestemail",function(e){
                 if(e.keyCode == 13) {
                     $('.lost_btn .send').trigger("click");
                 }
             });*/
-        $('.PasswordResetForm').unbind('submit').on('submit', function (e) {
+        $('.PasswordResetForm').off('submit').on('submit', function (e) {
             $('.header-forgot-pwd span.reset_email_error').hide();
             $('.lost_btn .send').addClass('clickedButton');
             e.preventDefault();
@@ -362,7 +362,7 @@ var headerEvents = {
             });
             return false;
         });
-        jQuery(window).bind('message', function (e) {
+        jQuery(window).on('message', function (e) {
             var str;
             e = e.originalEvent;
             if (e.origin.indexOf(document.location.host) === -1) {
@@ -415,7 +415,7 @@ var headerEvents = {
             }
         });
 
-        jQuery('.create-account').unbind('click').click(function (e) {
+        jQuery('.create-account').off('click').on('click', function (e) {
             e.preventDefault();
             var realForm = $(this).closest('form');
             if (!realForm.valid()) {
@@ -442,7 +442,7 @@ var headerEvents = {
 
             $('body').append($form);
             $form.hide();
-            $form.submit();
+            $form.trigger('submit');
         });
 
         if ($('#user').length > 0) {
@@ -501,7 +501,7 @@ var headerEvents = {
             }
         }
 
-        $('.accountcontent input[type="text"], .accountcontent input[type="password"]').bind('keyup', function (e) {
+        $('.accountcontent input[type="text"], .accountcontent input[type="password"]').on('keyup', function (e) {
             var keycode = e.keyCode ? e.keyCode : e.which;
             if (!$(this).closest('.accountcontent').hasClass('js-entered')) {
                 $(this).closest('.accountcontent').addClass('js-entered');
@@ -565,10 +565,10 @@ var headerEvents = {
     userTimeout: function() {
         if ($('.loggeduser').length) {
             var timeOutObj;
-            $(document).click(function(){
+            $(document).on('click', function(){
                 if (typeof timeOutObj != undefined) {
                     clearTimeout(timeOutObj);
-                    timeOutObj = setTimeout(function(){ 
+                    timeOutObj = setTimeout(function(){
                         sessionStorage.setItem('time', timeOutObj);
                         dialog.open({
                             url : Urls.sessionWarning,
@@ -578,8 +578,8 @@ var headerEvents = {
                             }
                         });
                     }, 1200000);
-                    
-                    timeOutObj = setTimeout(function(){ 
+
+                    timeOutObj = setTimeout(function(){
                         sessionStorage.setItem('time', timeOutObj);
                         dialog.open({
                             url : Urls.sessionExpired,

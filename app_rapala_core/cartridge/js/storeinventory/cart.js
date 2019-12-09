@@ -30,7 +30,7 @@ var cartInventory = {
                 selectedStoreText: Resources.SELECTED_STORE,
                 continueCallback: function () {
                 },
-                selectStoreCallback: self.setSelectedStore.bind(self)
+                selectStoreCallback: self.setSelectedStore.on(self)
             });
         }).done();
     },

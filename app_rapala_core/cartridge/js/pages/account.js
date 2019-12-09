@@ -81,7 +81,7 @@ function initializeAddressForm() {
         $('.account-logs .logincustomers .login_password').addClass('errorclient');
         //$(".pt_account .wrapper .account-section .returningcustomers .value ").css("margin-bottom", "0");
     }
-    $('.registration-button').click(function () {
+    $('.registration-button').on('click', function () {
         var maskheight = $('.createan-account .formsubmit').parent('div').outerHeight();
         var realForm = jQuery(this).closest('form');
         if (!realForm.valid()) {
@@ -110,7 +110,7 @@ function initializeAddressForm() {
         $('.returningcustomers').find('.formfield_email').find('.labeltext').addClass('inputlabel');
         $('.returningcustomers').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
     }
-    $('.signinbtn').click(function () {
+    $('.signinbtn').on('click', function () {
         var maskheight = $('.account-logs .formsubmit').parent('div').outerHeight();
         var maskheightwishlist = $('.wish-logs .formsubmit').parent('div').outerHeight();
         var realForm = jQuery(this).closest('form');
@@ -127,16 +127,16 @@ function initializeAddressForm() {
         }
     });
     if ($('.ui-login .header-forgot-pwd').length > 0) {
-        $(this).find('input.required').bind('keydown keyup focusin focusout keypress', function () {
+        $(this).find('input.required').on('keydown keyup focusin focusout keypress', function () {
             //e.stopPropagation();
             $(this).closest('.value').find('errorclient').remove();
 
         });
-        $('.ui-login header-forgot-pwd').find('input.required').bind('focusin', function () {
+        $('.ui-login header-forgot-pwd').find('input.required').on('focusin', function () {
             $(this).closest('.value').find('errorclient').remove();
         });
     }
-    $('.sample-section').click(function () {
+    $('.sample-section').on('click', function () {
         if (!$(this).find('.sample_mail_main').is(':visible')) {
             $(this).find('.sample_mail_main').slideDown(500);
         }
@@ -155,7 +155,7 @@ function toggleFullOrder() {
         .prev('li')
         .append('<a class="toggle">View All</a>')
         .children('.toggle')
-        .click(function () {
+        .on('click', function () {
             $(this).parent().siblings('li.hidden').show();
             $(this).remove();
         });
@@ -262,12 +262,12 @@ function initializePaymentForm() {
  */
 function initLoginPage() {
     //o-auth binding for which icon is clicked
-    $('.oAuthIcon').bind('click', function () {
+    $('.oAuthIcon').on('click', function () {
         $('#OAuthProvider').val(this.id);
     });
 
     //toggle the value of the rememberme checkbox
-    $('#dwfrm_login_rememberme').bind('change', function () {
+    $('#dwfrm_login_rememberme').on('change', function () {
         if ($('#dwfrm_login_rememberme').attr('checked')) {
             $('#rememberme').val('true');
         } else {

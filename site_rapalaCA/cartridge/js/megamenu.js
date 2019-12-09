@@ -3,7 +3,7 @@
 var $main = $('#main'),
     $footer = $('#footernew'),
     $banner = $('.banner_prostaff');
-    
+
 var megamenu = {
     globalTimer: 0,
     init: function () {
@@ -234,14 +234,14 @@ var megamenu = {
                     $('.magnifier-icon').addClass('js-magnifier-icon-active');
                     megamenu.open();
                     if ($('.magnifier-icon').hasClass('js-magnifier-icon-active')) {
-                        $('#container').find('.simplesearchinput').focus();
+                        $('#container').find('.simplesearchinput').trigger('focus');
                     }
                 }
             }
         });
 
         // Mega menu events for window width greater than 959
-        $('#brand-tabs-header > ul > li').mouseenter(function () {
+        $('#brand-tabs-header > ul > li').on('mouseenter', function () {
             var $id = $(this).find('.mobile-main-menu-heading > a').attr('class');
             var $this = $(this);
 
@@ -272,7 +272,7 @@ var megamenu = {
                 }
                 $('.brand-tabs-header-mask').show();
             }
-        }).mouseleave(function () {
+        }).on('mouseleave', function () {
 
             if ($(window).width() > 959) {
                 $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseout');
@@ -286,10 +286,10 @@ var megamenu = {
         });
 
         /** single click redirecting of megamenu categories*/
-        /*$('.rapala_device .menulist a').mouseenter(function(){
+        /*$('.rapala_device .menulist a').on('mouseenter', function(){
             window.location.href = $(this).attr('href');
         });*/
-        $('#brand-tabs-header').mouseleave(function () {
+        $('#brand-tabs-header').on('mouseleave', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();
@@ -298,7 +298,7 @@ var megamenu = {
             }
         });
 
-        $('.brand-tabs-header-mask').mouseenter(function () {
+        $('.brand-tabs-header-mask').on('mouseenter', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();
@@ -308,7 +308,7 @@ var megamenu = {
             }
         });
 
-        /*$(".rapala_device #brand-tabs-header a").click(function(e){
+        /*$(".rapala_device #brand-tabs-header a").on('click', function(e){
             e.preventDefault();
             if($(this).hasClass('selected')){
                 $(this).removeClass('selected');

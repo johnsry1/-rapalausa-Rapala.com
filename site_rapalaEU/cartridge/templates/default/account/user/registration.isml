@@ -203,13 +203,13 @@
 				    	resizable: false
 				});
 
-				jQuery('#privacyPolicy').click( function() {
+				jQuery('#privacyPolicy').on('click', function() {
 					jQuery('#privacypolicy').show();
 					jQuery('#privacypolicy').dialog('open');
 				});
 
 				// keep track of which fields are changed, firstname/lastname are nameChanged, all others are loginChanged
-				jQuery('input').change(function(formField) {
+				jQuery('input').on('change', function(formField) {
 			        if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.login.htmlName}") >= 0) {
 			        	loginChanged = true;
 			        } else if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.email.htmlName}") >= 0) {
@@ -221,7 +221,7 @@
 				});
 
 				// if the select box has a change set the flag
-				jQuery('select').change(function(e) {
+				jQuery('select').on('change', function(e) {
 					loginChanged = true;
 				});
 
@@ -249,12 +249,12 @@
 					jQuery('.registration').hide();
 			    </isif>
 
-			    jQuery("#privacy").click(function() {
+			    jQuery("#privacy").on('click', function() {
 					jQuery(this).attr("target", "_blank");
 				});
 
 			    // open privacy pop-up
-				jQuery("#privacy").click(function(){
+				jQuery("#privacy").on('click', function(){
 					app.dialog.open('${URLUtils.url('Page-Include','cid','privacy-policy')}','${Resource.msg('global.privacypolicy','locale',null)}');
 					return false;
 				});
@@ -263,7 +263,7 @@
 
 			function bindRegistrationChangeHandler() {
 				// bind payment method change handler
-				jQuery("input[name=registration]").click(function() {
+				jQuery("input[name=registration]").on('click', function() {
 					//var selectedID = jQuery(this).val();
 					//changePaymentMethod(selectedID);
 					registrationType = jQuery(this).val();

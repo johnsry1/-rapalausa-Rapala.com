@@ -132,13 +132,13 @@ var updateContent = function (href) {
 
 function initializeEvent() {
     //bind the 'previous' buttons in the picker
-    jQuery('a.previous').click(function (e) {
+    jQuery('a.previous').on('click', function (e) {
         e.preventDefault();
         jQuery(this)
             .closest('.swatches, .variantdropdown')
             .prevUntil('.swatches, .variantdropdown')
             .prev()
-            .find('a.filter').click();
+            .find('a.filter').trigger('click');
     });
 
     // hover on swatch - should update main image with swatch image
@@ -189,7 +189,7 @@ function initializeEvent() {
         var $this = $(this).closest('.selected');
         $('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');
         $this.removeClass('selected').addClass('current');
-        $(this).parent().find('.swatchesdisplay .selected a').click();
+        $(this).parent().find('.swatchesdisplay .selected a').trigger('click');
         $(this).parent().find('select').val($(this).parent().find('select').find('option.emptytext').attr('value')).trigger('change');
         $this = $('body').find('.product-variations .attribute.current').last();
         $this.nextAll('.swatches, .variantdropdown').each(function (i) {
@@ -197,7 +197,7 @@ function initializeEvent() {
             if ($variant.hasClass('future')) {
                 $variant.addClass('future').removeClass('selected');
                 if ($variant.hasClass('swatches')) {
-                    $variant.find('.selected a').click();
+                    $variant.find('.selected a').trigger('click');
                 } else if ($variant.hasClass('variantdropdown')) {
                     var $select = $variant.find('select');
                     $select.val($select.find('option.emptytext').attr('value')).trigger('change');
@@ -207,7 +207,7 @@ function initializeEvent() {
                     var unSelectUrl = $variant.closest('.product-variations').find('.future').find('.selected a').attr('href');
                     unSelectUrl = util.appendParamToURL(unSelectUrl, 'unselect', 'true');
                     $variant.closest('.product-variations').find('.future').find('.selected a').attr('href', unSelectUrl);
-                    $variant.closest('.product-variations').find('.future').find('.selected a').click();
+                    $variant.closest('.product-variations').find('.future').find('.selected a').trigger('click');
                 }
 
             }

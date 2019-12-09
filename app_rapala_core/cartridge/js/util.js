@@ -277,7 +277,7 @@ var util = {
             }
             charCountContainer.html(charCountHtml);
             // trigger the keydown event so that any existing character data is calculated
-            $(this).change();
+            $(this).trigger('change');
         });
     },
     trimPrefix: function (str, prefix) {
@@ -286,7 +286,7 @@ var util = {
     cardtype: {
         init: function () {
             if ($('#paymentmethods').find('.creditCard-number').length > 0) {
-                $('#paymentmethods').find('.creditCard-number').bind('keypress keyup', function () {
+                $('#paymentmethods').find('.creditCard-number').on('keypress keyup', function () {
                     if ($(this).val().length) {
                         $('.carderror.error').hide();
                     }
@@ -302,7 +302,7 @@ var util = {
                     }
                     return true;
                 });
-                $('#paymentmethods').find('.creditCard-number').blur(function () {
+                $('#paymentmethods').find('.creditCard-number').on('blur', function () {
                     var val = $.trim($(this).val());
                     //var regex = /^[a-zA-Z]+$/;
                     var errorspan = $(this).closest('.formfield').find('span.carderror');
