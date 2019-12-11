@@ -65,7 +65,7 @@ var InterstitialHelper : Object = {
 		var url, id, newHost;
 		var params = request.httpParameterMap;
 		var tempUrl = URLUtils.url('Home-SetLocale');
-		newHost = session.custom.interstitialSiteId;
+		newHost = request.httpCookies['preferredRegion'].value;
 
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
