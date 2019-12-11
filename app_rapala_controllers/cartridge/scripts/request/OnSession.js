@@ -74,7 +74,7 @@ function showCountryPopup() {
 function getPreferredRegion() {
 	// check for cookie
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-	var preferredRegion = InterstitialHelper.getInterstitialSiteCookie();
+	var preferredRegion = InterstitialHelper.getInterstitialSiteCookie().value;
 	
 	return preferredRegion;
 }
