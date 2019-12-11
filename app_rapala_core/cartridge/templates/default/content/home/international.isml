@@ -50,12 +50,12 @@
                 var caObj = activeCountries.filter(function(x) { return x.country == 'ca'});
                 var usObj = activeCountries.filter(function(x) { return x.country == 'us'});
                 
-                var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
-                
+                var usLink=InterstitialHelper.constructCountryLink(usObj[0]);
                 var caLink=InterstitialHelper.constructCountryLink(caObj[0]);
                 var euLink=InterstitialHelper.constructCountryLink(usObj[0]) + 'eu-en';
                 
                 if (currentSite.ID == 'rapalaEU') {
+                	usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
                     usLink=usLink.toString().replace('rapalaEU', 'rapala');
                 }
             </isscript>
