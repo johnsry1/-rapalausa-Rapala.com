@@ -50,14 +50,13 @@
                 var caObj = activeCountries.filter(function(x) { return x.country == 'ca'});
                 var usObj = activeCountries.filter(function(x) { return x.country == 'us'});
                 
-                //var usLink=InterstitialHelper.constructCountryLink(usObj[0]);
                 var usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
                 
                 var caLink=InterstitialHelper.constructCountryLink(caObj[0]);
                 var euLink=InterstitialHelper.constructCountryLink(usObj[0]) + 'eu-en';
                 
                 if (currentSite.ID == 'rapalaEU') {
-                    var usLink=usLink.toString().replace('rapalaEU', 'rapala');
+                    usLink=usLink.toString().replace('rapalaEU', 'rapala');
                 }
             </isscript>
             <div class="distrobutors-countries rapala-top-block shop-rapala-products">
