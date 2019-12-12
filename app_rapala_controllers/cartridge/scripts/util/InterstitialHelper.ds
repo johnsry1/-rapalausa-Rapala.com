@@ -127,8 +127,12 @@ var InterstitialHelper : Object = {
 		if (currentSite.indexOf('CA') != -1) {
 			currentCountry = 'ca';
 		} else if (currentSite.indexOf('EU') != -1) {
+			//Default to EU
+			currentCountry = 'eu'
 			var locale = dw.util.Locale.getLocale(request.locale);
-			currentCountry = locale.country.toLowerCase();
+			if (!empty(locale.country)) {
+				currentCountry = locale.country.toLowerCase();
+			}
 		}
 		return currentCountry;
  	}
