@@ -38,52 +38,32 @@
 				<a href="#" class="logo"></a>
 			</div>
             <isscript>
+            	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+				var currentSite = dw.system.Site.getCurrent();
+				var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+				var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
+				activeCountries = JSON.parse(activeCountries);
+				
             	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
-				var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 				var currentSite = dw.system.Site.getCurrent();
 				var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
 				var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
 				activeCountries = JSON.parse(activeCountries);
     
                 var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
-                
-                var caObj = activeCountries.filter(function(x) { return x.country == 'ca'});
-                var usObj = activeCountries.filter(function(x) { return x.country == 'us'});
-                
-                var usLink=InterstitialHelper.constructCountryLink(usObj[0]);
-                var caLink=InterstitialHelper.constructCountryLink(caObj[0]);
-                var euLink=InterstitialHelper.constructCountryLink(usObj[0]) + 'eu-en';
-                
-                if (currentSite.ID == 'rapalaEU') {
-                	usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
-                    usLink=usLink.toString().replace('rapalaEU', 'rapala');
-                } else if (currentSite.ID == 'rapalaCA') {
-                	//Hard coded for now, but we need to change this later to be more dynamic
-                	usLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
-                    usLink=usLink.toString().replace('rapalaCA', 'rapala');
-                    usLink="https://" + usObj[0].domain + usLink.toString().replace('en_CA', 'default');
-                }
             </isscript>
             <div class="distrobutors-countries rapala-top-block shop-rapala-products">
                 <div class="rapala-top-block-title">
                     <p>${Resource.msg('global.eu.international.countrieslist','locale',null)}</p>
                 </div>
                 <div class="rapala-middle-block">
-                    <a class="country link-ca" href="${caLink}">
-                        <div class="rapala-iternational-flag"></div>
-                        <div class="url">${Resource.msg('global.eu.international.ca', 'locale', null)}</div>
-                        <div class="rapala-iternational-cart"></div>
-                    </a>
-                    <a class="country link-eu" href="${euLink}">
-                        <div class="rapala-iternational-flag"></div>
-                        <div class="url">${Resource.msg('global.eu.international.eu', 'locale', null)}</div>
-                        <div class="rapala-iternational-cart"></div>
-                    </a>
-                    <a class="country link-us" href="${usLink}">
-                        <div class="rapala-iternational-flag"></div>
-                        <div class="url">${Resource.msg('global.eu.international.us', 'locale', null)}</div>
-                        <div class="rapala-iternational-cart"></div>
-                    </a>
+                	<isloop items="${activeCountries}" var="activeCountry" status="loopstatus">
+                		<a class="country link-${activeCountry.country}" href="${InterstitialHelper.constructCountryLink(activeCountry)}">
+	                        <div class="rapala-iternational-flag"></div>
+	                        <div class="url">${Resource.msg('global.eu.international.' + activeCountry.country, 'locale', null)}</div>
+	                        <div class="rapala-iternational-cart"></div>
+	                    </a>
+                	</isloop>
                 </div>
             </div>
 
