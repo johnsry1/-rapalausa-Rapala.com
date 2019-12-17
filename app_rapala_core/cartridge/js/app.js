@@ -62,7 +62,7 @@ function resetPasswordEvents() {
     // Attach keypress handler to input box.  Submit form if user presses 'enter' key.
     $('body').find('.PasswordResetDialog input.resetold').keypress(function (e) {
         if (e.which == 13) {
-            //jQuery('#sendBtn').click();
+            //jQuery('#sendBtn').trigger('click');
             return false;
         }
         return true;
@@ -289,12 +289,12 @@ function initializeEvents() {
         $(this).parents('.dialogBanner').find('.ui-dialog-titlebar-close').trigger('click');
     });
     //footer change region event
-    $('.change-region-footer').hover(function () {
+    $('.change-region-footer').on('hover', function () {
         $('.domainswitch').show();
     }, function () {
         $('.domainswitch').hide();
     });
-    $('.domainswitch').hover(function () {
+    $('.domainswitch').on('hover', function () {
         $(this).show();
     }, function () {
         $(this).hide();
@@ -313,11 +313,11 @@ function initializeEvents() {
              * if(jQuery.trim($input.val()) != "") {
                  * $input.data('toggle').hide(); } else
              *if($input.data('toggle') &&
-             * $input.data('toggle').size() >= 1) {
+             * $input.data('toggle').length >= 1) {
                  * $input.val($input.data('toggle')); }
              */
             $input
-                .blur(function () {
+                .on('blur', function () {
                     var $this = jQuery(this);
                     if (jQuery
                             .trim($this.val()) == '') {
@@ -333,7 +333,7 @@ function initializeEvents() {
                     }
                 });
             $input
-                .focus(function () {
+                .on('focus', function () {
                     $('.emailinput.emailfooter').removeClass('footerplace');
                     var $this = jQuery(this);
                     if ($this.data('toggle') && (jQuery
@@ -347,7 +347,7 @@ function initializeEvents() {
                 });
             $this
                 .parents('form')
-                .submit(
+                .on('submit',
                     function () {
                         var $this = jQuery(this);
                         $this
@@ -410,15 +410,15 @@ function initializeEvents() {
         $(this).children('.second-level').toggle();
         $(this).toggleClass('list-active');
     });
-    $('.first-level li.active').closest('.first-level').click();
-    $('.first-level li a').click(function (event) {
+    $('.first-level li.active').closest('.first-level').trigger('click');
+    $('.first-level li a').on('click', function (event) {
         event.stopPropagation();
     });
     $('.first-levell').on('click', function () {
         $(this).children('.second-levell').toggle();
         //$(this).toggleClass('list-active');
     });
-    $(window).load(function () {
+    $(window).on('load', function () {
         var currentItem = null;
         if ($('.newMargin').length > 0) {
             currentItem = $('.newMargin');
@@ -471,7 +471,7 @@ function initializeEvents() {
             }, 2000);
         }
     });
-    $(window).resize(function () {
+    $(window).on('resize', function () {
         if ($(window).width() > 960) {
             if ($('#container').hasClass('js-container-active')) {
                 $('#container, .open-menu-wrap').removeAttr('style');
@@ -502,7 +502,7 @@ function initializeEvents() {
         });
     }
 
-    $('#footernew .footer-main #linkheading').click(function () {
+    $('#footernew .footer-main #linkheading').on('click', function () {
         $(this).toggleClass('show');
         $(this).closest('div').toggleClass('expanded');
         if ($('#about, #customer-service, #More-ways-to-shop').hasClass('expanded')) {
@@ -530,7 +530,7 @@ function initializeEvents() {
         $('.old-swim').removeClass('hide').addClass('show');
         $('.new-swim').removeClass('show').addClass('hide');
     }
-    $(window).bind('scroll resize', function () {
+    $(window).on('scroll resize', function () {
         if ($('.rapala_device').length > 0 && $(window).width() < 768) {
             if ($('#footerEmailDialog.ui-dialog-content').length > 0) {
                 $('.ui-dialog').css({'left': ($(document).width() - $('.ui-dialog').width()) / 2, 'top': '100px'});
@@ -541,7 +541,7 @@ function initializeEvents() {
         }
     });
 
-    $('.tabsHeader').bind('click', function () {
+    $('.tabsHeader').on('click', function () {
         var currentItem = $(this);
         currentItem.closest('.mobile-tabs-section').toggleClass('active');
     });
@@ -571,7 +571,7 @@ function initializeEvents() {
         });
     }
 
-    $('.email-subscribe').submit(function (e) {
+    $('.email-subscribe').on('submit', function (e) {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
@@ -629,8 +629,8 @@ function initializeDom() {
                     width: 280,
                     height: 250,
                     dialogClass: 'session-warning',
-                    close: function () { 
-                        window.isAuthenciatedUser = false; 
+                    close: function () {
+                        window.isAuthenciatedUser = false;
                     },
                     buttons: [{
                         text: 'Log In',
@@ -748,7 +748,7 @@ var app = {
 
 jQuery(function () {
     jQuery('.accordion')
-        .hover(function () {
+        .on('hover', function () {
             var $this = jQuery(this);
             if ($this.hasClass('highlight')) {
                 $this.addClass('contentbox');
@@ -759,7 +759,7 @@ jQuery(function () {
             function () {
                 jQuery(this).removeClass('tabover').addClass('contentbox');
             }
-        ).click(function () {
+        ).on('click', function () {
             var $this = jQuery(this);
             if ($this.find('.expandcontent').length > 0) {
                 $this.find('h1').toggleClass('downarrow').next().toggle('fast');

@@ -83,7 +83,7 @@ function initializeAddressForm() {
         $('.account-logs .logincustomers .login_password').addClass('errorclient');
         //$(".pt_account .wrapper .account-section .returningcustomers .value ").css("margin-bottom", "0");
     }
-    $('.registration-button').click(function () {
+    $('.registration-button').on('click', function () {
         var maskheight = $('.createan-account .formsubmit').parent('div').outerHeight();
         var realForm = jQuery(this).closest('form');
         if (!realForm.valid()) {
@@ -112,7 +112,7 @@ function initializeAddressForm() {
         $('.returningcustomers').find('.formfield_email').find('.labeltext').addClass('inputlabel');
         $('.returningcustomers').find('.formfield_email').find('.requiredindicator').addClass('inputlabel');
     }
-    $('.signinbtn').click(function () {
+    $('.signinbtn').on('click', function () {
         var maskheight = $('.account-logs .formsubmit').parent('div').outerHeight();
         var maskheightwishlist = $('.wish-logs .formsubmit').parent('div').outerHeight();
         var realForm = jQuery(this).closest('form');
@@ -138,18 +138,18 @@ function initializeAddressForm() {
             $(this).closest('.value').find('errorclient').remove();
         });
     }
-    $('.sample-section').click(function () {
+    $('.sample-section').on('click', function () {
         if (!$(this).find('.sample_mail_main').is(':visible')) {
             $(this).find('.sample_mail_main').slideDown(500);
         }
     });
     validator.init();
-    $('body').find('input').focusin(function () {
+    $('body').find('input').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
     });
-    $('body').find('select').focusin(function () {
+    $('body').find('select').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
@@ -168,7 +168,7 @@ function toggleFullOrder() {
         .prev('li')
         .append('<a class="toggle">View All</a>')
         .children('.toggle')
-        .click(function () {
+        .on('click', function () {
             $(this).parent().siblings('li.hidden').show();
             $(this).remove();
         });

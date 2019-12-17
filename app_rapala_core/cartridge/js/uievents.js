@@ -31,10 +31,10 @@ var uievents = {
             var $customcheck = $(this).closest('.custom-checkbox');
             $(this).removeClass('error');
             if ($customcheck.find('input[type="checkbox"]').is(':checked')) {
-                $customcheck.find('input[type="checkbox"]').click();
+                $customcheck.find('input[type="checkbox"]').trigger('click');
                 $customcheck.find('.custom-link').removeClass('active');
             } else {
-                $customcheck.find('input[type="checkbox"]').click();
+                $customcheck.find('input[type="checkbox"]').trigger('click');
                 $customcheck.find('.custom-link').addClass('active');
             }
         });
@@ -56,7 +56,7 @@ var uievents = {
                  $(this).selectbox();
              }
                 $('.sbOptions li:last').addClass('last');
-            }).focus(function(){
+            }).on('focus', function(){
                 $(this).next('.sbHolder').trigger('focus');
             });
 
@@ -149,7 +149,7 @@ var uievents = {
             }
             $(this).find('.selectorOut').text('').text($(this).find(':selected').text());
 
-        }).change(function () {
+        }).on('change', function () {
             var str = '';
             str = $(this).find(':selected').text();
             $(this).find('.selectorOut').text('').text(str);
@@ -161,7 +161,7 @@ var uievents = {
             }
         });
 
-        $con.find('.custom-select select').bind('blur change', function () {
+        $con.find('.custom-select select').on('blur change', function () {
             if ($(this).hasClass('valid') || $(this).val().length > 0) {
                 $(this).closest('.custom-select').removeClass('customselect-error');
                 $(this).removeClass('errorclient').addClass('valid');
@@ -296,31 +296,31 @@ var uievents = {
             $('.pt_vipinsider').find('span.rapala-entity-holder i').addClass('macfont');
         }
 
-        $('.paymentmethods_cont .toggle').click(function () {
+        $('.paymentmethods_cont .toggle').on('click', function () {
             uievents.synccheckoutH();
         });
 
-        $('button[name=\'dwfrm_login_login\']').click(function () {
+        $('button[name=\'dwfrm_login_login\']').on('click', function () {
             setTimeout(function () {
                 uievents.synccheckoutH();
             }, 100);
         });
-        $('button[name=\'dwfrm_billinggiftcert_redeemGiftCert\']').click(function () {
+        $('button[name=\'dwfrm_billinggiftcert_redeemGiftCert\']').on('click', function () {
             setTimeout(function () {
                 uievents.synccheckoutH();
             }, 100);
         });
-        $('button[name=\'dwfrm_billingcoupon_applyCoupon\']').click(function () {
+        $('button[name=\'dwfrm_billingcoupon_applyCoupon\']').on('click', function () {
             setTimeout(function () {
                 uievents.synccheckoutH();
             }, 100);
         });
-        $('.checkbalance a').click(function () {
+        $('.checkbalance a').on('click', function () {
             setTimeout(function () {
                 uievents.synccheckoutH();
             }, 100);
         });
-        $('.giftcertcouponform .gift-heading').click(function () {
+        $('.giftcertcouponform .gift-heading').on('click', function () {
             if ($('.show-content').is(':visible') == true) {
                 $('.show-content').hide();
                 $(this).closest('.giftcertfield').find('span.error').hide();
@@ -380,7 +380,7 @@ var uievents = {
                 if ($(this).find('.field-wrapper .clearbutton').length == 0 && $(this).find('.field-wrapper input[type="text"]').length > 0 || $(this).find('.field-wrapper textarea').length > 0 || $(this).find('.field-wrapper input[type="password"]').length > 0) {
                     $(this).find('.field-wrapper').append('<a class="clearbutton"></a>');
                 }
-                $(this).find('.field-wrapper input.textinput, .field-wrapper textarea').unbind('change').bind('click change', function () {
+                $(this).find('.field-wrapper input.textinput, .field-wrapper textarea').off('change').on('click change', function () {
                     if ($(this).hasClass('errorclient')) {
                         $(this).removeClass('errorclient');
                         $(this).closest('.formfield').find('.label').find('span.errorclient').remove();
@@ -390,7 +390,7 @@ var uievents = {
                         return false;
                     }
                 });
-                $(this).find('.field-wrapper select').unbind('change').bind('focusin change', function () {
+                $(this).find('.field-wrapper select').off('change').on('focusin change', function () {
                     if ($(this).hasClass('errorclient')) {
                         $(this).removeClass('errorclient');
                         $(this).closest('.formfield').find('.label').find('span.errorclient').remove();
@@ -399,13 +399,13 @@ var uievents = {
                     }
                 });
             });
-            $('#VIPInsider-form-cancel-id').click(function () {
+            $('#VIPInsider-form-cancel-id').on('click', function () {
                 $('.ui-dialog-titlebar-close').trigger('click');
             });
 
             /********************* vip phone and zip error exceed code **************************/
 
-            $('input[id$="_vipinsider_customer_zip"],input[id$="_vipinsider_customer_phone"]').bind('keypress keyup', function (e) {
+            $('input[id$="_vipinsider_customer_zip"],input[id$="_vipinsider_customer_phone"]').on('keypress keyup', function (e) {
                 var keycode = e.keyCode ? e.keyCode : e.which;
                 var maxlength = $(this).attr('maxlength');
                 var maxlmsg = 'This field is limited to ' + maxlength + ' characters.';
@@ -444,7 +444,7 @@ var uievents = {
                 }
             });
             //this is used after to remove the exceeding error message on blur for 1143 ticket
-            jQuery('input[id$="_vipinsider_customer_zip"],input[id$="_vipinsider_customer_phone"]').bind('blur', function () {
+            jQuery('input[id$="_vipinsider_customer_zip"],input[id$="_vipinsider_customer_phone"]').on('blur', function () {
                 if ($(this).closest('.formfield').find('.label').find('.maxelement').is(':visible')) {
                     $('.maxelement').addClass('hide');
                     $('#VipinsiderForm').find('span').removeClass('maxelement');

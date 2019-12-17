@@ -193,7 +193,7 @@
 				    	resizable: false
 				});
 
-				jQuery('#privacyPolicy').click( function() {
+				jQuery('#privacyPolicy').on('click', function() {
 					jQuery('#privacypolicy').show();
 					jQuery('#privacypolicy').dialog('open');
 				});
@@ -239,12 +239,12 @@
 					jQuery('.registration').hide();
 			    </isif>
 
-			    jQuery("#privacy").click(function() {
+			    jQuery("#privacy").on('click', function() {
 					jQuery(this).attr("target", "_blank");
 				});
 
 			    // open privacy pop-up
-				jQuery("#privacy").click(function(){
+				jQuery("#privacy").on('click', function(){
 					app.dialog.open('${URLUtils.url('Page-Include','cid','privacy-policy')}','${Resource.msg('global.privacypolicy','locale',null)}');
 					return false;
 				});
@@ -253,7 +253,7 @@
 
 			function bindRegistrationChangeHandler() {
 				// bind payment method change handler
-				jQuery("input[name=registration]").click(function() {
+				jQuery("input[name=registration]").on('click', function() {
 					//var selectedID = jQuery(this).val();
 					//changePaymentMethod(selectedID);
 					registrationType = jQuery(this).val();

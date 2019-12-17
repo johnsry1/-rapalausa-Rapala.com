@@ -56,7 +56,7 @@ function initializeEvents() {
 
         $cache.validatoionDialog.dialog('close');
         $cache.byPassDAV.attr('value', 'true');
-        $cache.submitFormButton.click();
+        $cache.submitFormButton.trigger('click');
     });
 
     $cache.validatoionDialog.on('click', '[id|="suggested-address-edit"]', function () {
@@ -88,7 +88,7 @@ function initializeEvents() {
         $cache.byPassDAV.attr('value', 'true');
         $cache.validatoionDialog.dialog('close');
 
-        $cache.submitFormButton.click();
+        $cache.submitFormButton.trigger('click');
     });
 }
 

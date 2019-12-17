@@ -129,7 +129,7 @@ var quickview = {
                 $(quickViewDialog).append(data);
                 product.init();
                 progress.hide();
-                
+
                 if (SitePreferences.GTM_ENABLED && $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata')) {
                     var gtmData = $(quickViewDialog).find('#add-to-cart').attr('data-gtmdata');
                     var obj = {
@@ -140,8 +140,8 @@ var quickview = {
                             }
                         }
                     };
-                    obj.ecommerce.detail.products.push($.parseJSON(gtmData));
-                    dataLayer.push(obj);  
+                    obj.ecommerce.detail.products.push(JSON.parse(gtmData));
+                    dataLayer.push(obj);
                 }
             }
         });

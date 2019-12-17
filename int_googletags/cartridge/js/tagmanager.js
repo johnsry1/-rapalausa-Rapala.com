@@ -16,7 +16,7 @@ var events = {
     cart: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                removeFromCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val());
+                removeFromCart(JSON.parse($(this).attr('data-gtmdata')), $(this).closest('div').parent().find('[name$=_quantity]').val());
             }
         });
         initProductRecommendations('Cart: Recommended For You', 'ecommerce');
@@ -25,7 +25,7 @@ var events = {
     checkout: function () {
         $('[name$=_deleteProduct]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                removeFromCart($.parseJSON($(this).attr('data-gtmdata')), 1);
+                removeFromCart(JSON.parse($(this).attr('data-gtmdata')), 1);
             }
         });
         $('[name$="_billing_save"]').on('click', function(){
@@ -36,7 +36,7 @@ var events = {
     product: function () {
         $('[name$=_addToCart]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                var prodObj = $.parseJSON($(this).attr('data-gtmdata'));
+                var prodObj = JSON.parse($(this).attr('data-gtmdata'));
                 var quantity = $(this).closest('div').find('[name=Quantity]').val();
                 var source = ($(this).data('quickview')) ? 'Quickview' : 'PDP';
                 addToCart(prodObj, quantity, source, null);
@@ -53,7 +53,7 @@ var events = {
     wishlist: function () {
         $('[name$=_addToCart]').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                addToCart($.parseJSON($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
+                addToCart(JSON.parse($(this).attr('data-gtmdata')), $(this).closest('div').find('[name=Quantity]').val());
             }
         });
         initAccountUpgrade();
@@ -62,12 +62,12 @@ var events = {
     all: function () {
         $('.name-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                productClick($.parseJSON($(this).attr('data-gtmdata')));
+                productClick(JSON.parse($(this).attr('data-gtmdata')));
             }
         });
         $('.thumb-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                productClick($.parseJSON($(this).attr('data-gtmdata')));
+                productClick(JSON.parse($(this).attr('data-gtmdata')));
             }
         });
         $('.has-sub-menu').on('click', function () {
@@ -144,7 +144,7 @@ function initProductBestSelling(listType, parentKey) {
                     for (var k = 0; k < mutation.addedNodes.length; k++) {
                         if ($(mutation.addedNodes[k]).hasClass('owl-stage-outer')) {
                             getRecommendedProductImpressions(listType, parentKey, mutation);
-                        } 
+                        }
                     }
                 }
             }
@@ -172,7 +172,7 @@ function initProductRecommendations(listType, parentKey) {
                     for (var k = 0; k < mutation.addedNodes.length; k++) {
                         if ($(mutation.addedNodes[k]).hasClass('owl-stage-outer')) {
                             getRecommendedProductImpressions('', parentKey, mutation);
-                        } 
+                        }
                     }
                 }
             }
@@ -266,8 +266,8 @@ function initAccountUpgrade() {
     $('.viplogin .vip-chks').on('click', function() {
         if ($('.vip-register').length > 0) { // initial registration
             obj['event_info']['label'] = 'Create Account - VIP Register'; // eslint-disable-line
-            obj['event_info']['action'] = 'New'; // eslint-disable-line        
-        } else { // signup 
+            obj['event_info']['action'] = 'New'; // eslint-disable-line
+        } else { // signup
             obj['event_info']['label'] = 'Create Account - VIP Sign Up'; // eslint-disable-line
             obj['event_info']['action'] = 'New'; // eslint-disable-line
         }
@@ -277,14 +277,14 @@ function initAccountUpgrade() {
     $('.viploginsignin .vip-chk').on('click', function() {
         if ($('.vip-register').length > 0) { // initial registration
             obj['event_info']['label'] = 'Upgrade Account - VIP Register'; // eslint-disable-line
-            obj['event_info']['action'] = 'Upgrade'; // eslint-disable-line        
-        } else { // signup 
+            obj['event_info']['action'] = 'Upgrade'; // eslint-disable-line
+        } else { // signup
             obj['event_info']['label'] = 'Upgrade Account - VIP Signup'; // eslint-disable-line
             obj['event_info']['action'] = 'Upgrade'; // eslint-disable-line
         }
         dataLayer.push(obj);
     });
-    
+
     // register button on wishlist and account pages
     $('.registration-button').on('click', function() {
         obj['event_info']['label'] = (window.pageContext.ns.toLowerCase() == 'wishlist') ? 'Create Account - Wishlist' : 'Create Account - My Account'; // eslint-disable-line
@@ -338,7 +338,7 @@ function productClick (productObject) {
  * @param {Object} productObject The product data
  * @param {String} quantity
  * @param {String} source Optional where the a2c button was clicked, typically pdp or quickview
- * @param {String} price Optional price value to pass. 
+ * @param {String} price Optional price value to pass.
  */
 function addToCart (productObject, quantity, source, price) {
     var quantityObj = {'quantity': quantity},
@@ -398,7 +398,7 @@ function pushEvent (event, eventCategory, eventAction, eventLabel) {
 
 /**
  * @description get product recommendations impressions on pdp
- * 
+ *
  */
 function getRecommendedProductImpressions (listType, parentKey, mutation) {
     listType = (listType.length > 0) ? listType : getListDataValue(mutation);
@@ -416,7 +416,7 @@ function getRecommendedProductImpressions (listType, parentKey, mutation) {
             }
         }
     }
-    
+
 }
 function getImpressionObjectsArray(impressionType, mutation) {
     var visibleProductRecommendations = $(mutation.target).find('.owl-item.active');
@@ -427,18 +427,18 @@ function getImpressionObjectsArray(impressionType, mutation) {
         // init events for recommended and recently viewed product
         $(rp).find('.name-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                productClick($.parseJSON($(this).attr('data-gtmdata')));
+                productClick(JSON.parse($(this).attr('data-gtmdata')));
             }
         });
         $(rp).find('.thumb-link').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                productClick($.parseJSON($(this).attr('data-gtmdata')));
+                productClick(JSON.parse($(this).attr('data-gtmdata')));
             }
         });
         // for click on product name in Best Selling Essentials in the cart
         $(rp).find('.cart-recommendationName').on('click', function () {
             if ($(this).attr('data-gtmdata')) {
-                productClick($.parseJSON($(this).attr('data-gtmdata')));
+                productClick(JSON.parse($(this).attr('data-gtmdata')));
             }
         });
 
@@ -456,13 +456,13 @@ function getImpressionObjectsArray(impressionType, mutation) {
         addTagListParamToLink($(rp).find('a.cart-recommendationName'), gtmDataAttr.list);
 
         var obj = {
-            'name': gtmDataAttr.name, 
+            'name': gtmDataAttr.name,
             'id': gtmDataAttr.id,
             'price': gtmDataAttr.price,
             'brand': gtmDataAttr.brand,
             'category': gtmDataAttr.category,
             'dimension3' : gtmDataAttr.dimension3,
-            'list': gtmDataAttr.list, 
+            'list': gtmDataAttr.list,
             'childID': gtmDataAttr.childID,
             'position' : i+1
         }

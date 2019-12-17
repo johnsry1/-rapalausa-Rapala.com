@@ -142,7 +142,7 @@ function updateShippingMethodList() {
             $shippingMethodList.load(smlUrl, function () {
                 $shippingMethodList.fadeIn('fast');
                 // rebind the radio buttons onclick function to a handler.
-                $shippingMethodList.find('[name$="_shippingMethodID"]').click(function () {
+                $shippingMethodList.find('[name$="_shippingMethodID"]').on('click', function () {
                     $('.shipping-methods .shipping-method .value .custom-link ').removeClass('active');
                     $(this).closest('.custom-link').addClass('active');
                     selectShippingMethod($(this).val());
@@ -195,7 +195,7 @@ exports.init = function () {
         'input[name$="_addressFields_address1"], input[name$="_addressFields_address2"], select[name$="_addressFields_states_state"], input[name$="_addressFields_city"], input[name$="_addressFields_postal"]', // PREVAIL-Changed ZIP to postal
         updateShippingMethodList
     );
-    
+
     if ($('input[name="addressError"]').val() == 'true') {
         $('.shipping-address-field-section').removeClass('hide');
         var $requiredFields = $('.shipping-address-field-section').find('input[aria-required="true"]');
@@ -220,8 +220,8 @@ exports.init = function () {
         var form = $(this).closest('form[id$="_shippingAddress"]');
 
         if (!$('.checkoutasguestbutton').is(':visible')) {
-            $('.guestemailcon').blur();
-            $('.guestemail').blur();
+            $('.guestemailcon').trigger('blur');
+            $('.guestemail').trigger('blur');
         }
         if (!form.valid()) {
             progress.hide();
@@ -240,7 +240,7 @@ exports.init = function () {
                 $('.signinabove').hide();
             } else if ($('.shippinglogindetails').is(':visible')) {
                 if (!$('.shippinglogindetails form').valid()) {
-                    $('.shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw').blur();
+                    $('.shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw').trigger('blur');
                     $('button[name$="login_login"]').trigger('click');
                 }
                 var errormsg = '<div id=\'message\' class=\'error-alert signinabove\' style=\'text-align: left;\'>Please Log in above to continue</div>';
@@ -323,7 +323,7 @@ exports.init = function () {
         $('.shippinglogindetails .correctaddress').removeClass('error').hide();
         if ($('.emailhidden').val()) {
             $('input[id$="login_username"]').val($('.emailhidden').val());
-            $('input[id$="login_username"]').blur();
+            $('input[id$="login_username"]').trigger('blur');
             $('input[id$="login_username"]').closest('.formfield').find('.correctaddress').show();
         }
         $('.New-shipping-authentication-detail input[name$=\'shippingAddress_password\']').removeClass('c_password');
@@ -336,7 +336,7 @@ exports.init = function () {
         uievents.synccheckoutH();
     });
 
-    $('.shipping-guestemailaddress .textinput, .shipping-guestconfirmemailaddress .textinput, .shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw, .shipping-emailaddress .textinput, .shipping-confirmemailaddress .textinput, .shipping-password .textinputpw, .shipping-confirmpassword .textinputpw').blur(function () {
+    $('.shipping-guestemailaddress .textinput, .shipping-guestconfirmemailaddress .textinput, .shippinglogindetails .username .textinput, .shippinglogindetails .textinputpw, .shipping-emailaddress .textinput, .shipping-confirmemailaddress .textinput, .shipping-password .textinputpw, .shipping-confirmpassword .textinputpw').on('blur', function () {
         if ($(this).valid() == 0) {
             $(this).closest('.formfield').find('.correctaddress').addClass('error').show();
         } else {
