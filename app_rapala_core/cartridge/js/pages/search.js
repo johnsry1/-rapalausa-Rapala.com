@@ -60,7 +60,7 @@ function updateProductListing(url) {
     }
     $('#main').addClass('hidecontent');
     progress.show('#main');
-    $('#main').load(util.appendParamToURL(url, 'format', 'ajax'), function () {
+    $('#main').on('load', util.appendParamToURL(url, 'format', 'ajax'), function () {
         searchRefinment.searchRefinementToggle();
         uievents.init();
         compareWidget.init();
@@ -248,7 +248,7 @@ var searchRefinment = {
             //jQuery(this).closest('.navgroup').find(".js-scrollbar").tinyscrollbar({trackSize : 200});
         });
 
-        $(window).load(function () {
+        $(window).on('load', function () {
             $('#secondary').removeClass('visible-hidden').addClass('secondary-hide');
         });
         if ($(window).width() > 959) {
@@ -306,7 +306,7 @@ function initializeEvents() {
             //$("#secondary").css("top",secondaryTop+"px");
         }
     });
-    $('#tabs a').click(function (e) {
+    $('#tabs a').on('click', function (e) {
         e.preventDefault();
         $(this).prev('input[type="radio"]').prop('checked', true);
         var href = $(this).attr('href');
@@ -363,7 +363,7 @@ function initializeEvents() {
 
     searchRefinment.searchRefinementToggle();
 
-    /*$(window).resize(function(){
+    /*$(window).on('resize',function(){
 		searchRefinment.searchRefinementToggle();
     });*/
 
@@ -394,20 +394,20 @@ function initializeEvents() {
         }
         $(this).addClass('loaded');
         var cont = $(this).parent().find('ul.swatch-list.swatch-toggle');
-        cont.show().focus();
+        cont.show().trigger('focus');
         $(this).parent().find('ul.swatch-toggle li > a').each(function () {
             if ($(this).data('href')) {
                 $(this).find('img').attr('src', $(this).data('href'));
             }
 
         });
-        cont.show().focus();
+        cont.show().trigger('focus');
     });
     // prepare swatch palettes and thumbnails
     // show the palette
 
     // hide the palette
-    $('#content div.product-swatches div.swatch-image').mouseout(function (e) {
+    $('#content div.product-swatches div.swatch-image').on('mouseout', function (e) {
         // fix for event bubbling (http://www.quirksmode.org/js/events_mouse.html)
         if (!e) {
             e = window.event;
@@ -430,26 +430,26 @@ function initializeEvents() {
         return false;
     });
 
-    $('.swatch-list.swatch-toggle').mouseleave(function () {
+    $('.swatch-list.swatch-toggle').on('mouseleave', function () {
         $('.swatch-list.swatch-toggle').hide();
     });
 
     jQuery('#content .producttile div.swatches div.invisible').hide();
     jQuery('#content .producttile div.swatches a.swatch img.hiddenthumbnail').hide();
 
-    $('#content.product-swatches .product-swatches-all.loaded').click(function () {
+    $('#content.product-swatches .product-swatches-all.loaded').on('click', function () {
         //var swatch = jQuery(this);
         updateProductListing(this.href);
         // omit following the swatch link
         return false;
     });
 
-    $('body').mouseleave(function () {
+    $('body').on('mouseleave', function () {
         if ($(window).width() > 960) {
             $('.swatch-list.swatch-toggle').hide();
         }
     });
-    $('body').bind('blur', function () {
+    $('body').on('blur', function () {
         $('.swatch-list.swatch-toggle').hide();
 
     });

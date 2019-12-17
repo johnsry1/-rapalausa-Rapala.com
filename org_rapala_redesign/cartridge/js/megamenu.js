@@ -139,7 +139,7 @@ var megamenu = {
                     $('.magnifier-icon').addClass('js-magnifier-icon-active');
                     megamenu.open();
                     if ($('.magnifier-icon').hasClass('js-magnifier-icon-active')) {
-                        $('#container').find('.simplesearchinput').focus();
+                        $('#container').find('.simplesearchinput').trigger('focus');
                     }
                 }
             }
@@ -151,7 +151,7 @@ var megamenu = {
         });
 
         /** single click redirecting of megamenu categories*/
-        $('#brand-tabs-header').mouseleave(function () {
+        $('#brand-tabs-header').on('mouseleave', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();
@@ -160,7 +160,7 @@ var megamenu = {
             }
         });
 
-        $('.brand-tabs-header-mask').mouseenter(function () {
+        $('.brand-tabs-header-mask').on('mouseenter', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();

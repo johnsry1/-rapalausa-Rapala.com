@@ -22,7 +22,7 @@ function initQuickViewrecommButtons() {
     $qvButton.off('click').on('click', function (e) {
         e.preventDefault();
         if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
-            var gtmData = $.parseJSON($(this).attr('data-gtmdata'));
+            var gtmData = JSON.parse($(this).attr('data-gtmdata'));
             var list = gtmData.list;
 
             // remove list from product because it is in actionFiled
@@ -84,7 +84,7 @@ function initializeEvents() {
     /* used to slide toggle event in cart page promo code*/
     if ($('.pt_cart').length > 0) {
         $(this).find('.applycoupon .label').text(Resources.HAVE_PROMO_CODE);
-        $('.couponcode .label').click(function () {
+        $('.couponcode .label').on('click', function () {
             var $curObj = $(this);
             var fieldSection = '';
             if ($(this).hasClass('pre_label')) {
@@ -130,7 +130,7 @@ function initializeEvents() {
         }
 
     }
-    $('.promo-sec').find('.couponinput').click(function () {
+    $('.promo-sec').find('.couponinput').on('click', function () {
         $('.promo-sec').find('.couponinput').removeClass('inputlabel');
     });
 
@@ -173,7 +173,7 @@ function initializeEvents() {
     $('form input.couponinput').on('keydown', function (e) {
         if (e.which === 13) {
             e.preventDefault();
-            $(this).closest('form').find('.cartcoupon-apply').click();
+            $(this).closest('form').find('.cartcoupon-apply').trigger('click');
         } // JIRA PREV-30 : Cart page:  Coupon Code is not applying, when the user hit enter key.
     });
 

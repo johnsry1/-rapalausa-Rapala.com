@@ -64,7 +64,7 @@ function resetPasswordEvents() {
     // Attach keypress handler to input box.  Submit form if user presses 'enter' key.
     $('body').find('.PasswordResetDialog input.resetold').keypress(function (e) {
         if (e.which == 13) {
-            //$('#sendBtn').click();
+            //$('#sendBtn').trigger('click');
             return false;
         }
         return true;
@@ -226,7 +226,7 @@ function initializeEvents() {
         $(this).parents('.dialogBanner').find('.ui-dialog-titlebar-close').trigger('click');
     });
     //footer change region event
-    $('.change-region-footer').hover(function () {
+    $('.change-region-footer').on('hover', function () {
         $('.domainswitch').show();
     }, function () {
         $('.domainswitch').hide();
@@ -291,7 +291,7 @@ function initializeEvents() {
                     .addClass('active').siblings().removeClass('active');
         });
     });
-    $('.domainswitch').hover(function () {
+    $('.domainswitch').on('hover', function () {
         $(this).show();
     }, function () {
         $(this).hide();
@@ -306,7 +306,7 @@ function initializeEvents() {
                 $('.emailinput.emailfooter').addClass('footerplace');
             }
 
-            $input.blur(function () {
+            $input.on('blur', function () {
                 var $this = $(this);
                 if ($.trim($this.val()) == '') {
                     $this.val($this.data('toggle'));
@@ -316,7 +316,7 @@ function initializeEvents() {
                 }
             });
 
-            $input.focus(function () {
+            $input.on('focus', function () {
                 $('.emailinput.emailfooter').removeClass('footerplace');
                 var $this = $(this);
                 if ($this.data('toggle') && ($.trim($this.val()) == $.trim($this.data('toggle')))) {
@@ -324,7 +324,7 @@ function initializeEvents() {
                 }
             });
 
-            $this.parents('form').submit(function () {
+            $this.parents('form').on('submit', function () {
                 var $this = $(this);
                 $this.find('div.pseudo_self_label input').each(function () {
                     var $this = $(this);
@@ -361,8 +361,8 @@ function initializeEvents() {
         $(this).children('.second-level').toggle();
         $(this).toggleClass('list-active');
     });
-    $('.first-level li.active').closest('.first-level').click();
-    $('.first-level li a').click(function (event) {
+    $('.first-level li.active').closest('.first-level').trigger('click');
+    $('.first-level li a').on('click', function (event) {
         event.stopPropagation();
     });
     $('.first-levell').on('click', function () {
@@ -442,7 +442,7 @@ function initializeEvents() {
         });
     }
 
-    $('#footernew .footer-main #linkheading').click(function () {
+    $('#footernew .footer-main #linkheading').on('click', function () {
         $(this).toggleClass('show');
         $(this).closest('div').toggleClass('expanded');
         if ($('#about, #customer-service, #More-ways-to-shop').hasClass('expanded')) {
@@ -511,7 +511,7 @@ function initializeEvents() {
         });
     }
 
-    $('.email-subscribe').submit(function (e) {
+    $('.email-subscribe').on('submit', function (e) {
         e.preventDefault();
         var $form = $(this);
         if ($form.valid()) {
@@ -544,12 +544,12 @@ function initializeEvents() {
             $('#footer-email-input-error').text('Please enter your email address.');
         }
     });
-    $('body .formfields-global').find('input').focusin(function () {
+    $('body .formfields-global').find('input').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
     });
-    $('body .formfields-global').find('select').focusin(function () {
+    $('body .formfields-global').find('select').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
@@ -583,8 +583,8 @@ function initializeDom() {
                     width: 280,
                     height: 250,
                     dialogClass: 'session-warning',
-                    close: function () { 
-                        window.isAuthenciatedUser = false; 
+                    close: function () {
+                        window.isAuthenciatedUser = false;
                     },
                     buttons: [{
                         text: 'Log In',
@@ -720,7 +720,7 @@ var app = {
 
 $(function () {
     $('.accordion')
-        .hover(function () {
+        .on('hover', function () {
             var $this = $(this);
             if ($this.hasClass('highlight')) {
                 $this.addClass('contentbox');
@@ -731,7 +731,7 @@ $(function () {
             function () {
                 $(this).removeClass('tabover').addClass('contentbox');
             }
-        ).click(function () {
+        ).on('click', function () {
             var $this = $(this);
             if ($this.find('.expandcontent').length > 0) {
                 $this.find('h1').toggleClass('downarrow').next().toggle('fast');

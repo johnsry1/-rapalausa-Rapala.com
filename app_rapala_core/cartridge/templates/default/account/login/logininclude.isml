@@ -37,10 +37,10 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 					    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 					</iselse>
 					</isif>
-					
+
 					<div class="clear"><!-- FLOAT CLEAR --></div>
 				</div>
-				
+
 				<div class="formfield password <isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">log_error</isif>" >
 					<isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
 						<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowClass="inputlabel" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
@@ -49,7 +49,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 					 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
 					 </iselse>
 					</isif>
-					
+
 					<div class="clear"><!-- FLOAT CLEAR --></div>
 				</div>
 				<div class="custom-checkbox custom desktopHide ">
@@ -98,7 +98,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 	   		// create this div only once
 	   		jQuery("<div/>").attr("class", "PasswordResetDialog").appendTo(document.body);
 	   	}
-	  	jQuery('#PasswordReset').click(function() {
+	  	jQuery('#PasswordReset').on('click', function() {
 	    	app.ajax.load({selector: ".PasswordResetDialog", url: '${URLUtils.url('Account-PasswordResetDialog')}'});
 	  	});
 
@@ -108,15 +108,15 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 			if($('.resetpassword').is(':Visible')) {
 				$('.resetpassword').closest('div.dialog-content').addClass('confirmationcontainer')
 			}
-			else 
+			else
 			{
-		
+
 			}
-		
+
 		});
 	}, 500);
-	
-	
-	
+
+
+
 
 /* ]]> */</script>

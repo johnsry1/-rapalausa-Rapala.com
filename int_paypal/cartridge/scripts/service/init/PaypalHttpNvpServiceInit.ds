@@ -85,7 +85,6 @@ var serviceConfig : Object = {
 svc.ServiceRegistry.configure("int_paypal.http.nvp.payment.PayPal", serviceConfig);
 svc.ServiceRegistry.configure("int_paypal.http.nvp.payment.PayPalCA", serviceConfig);
 
-
 /**
  * checkRequestDataContainer() function. Checks requestDataContainer object {method: String, data: Object}
  * @param {Object} equestDataContainer object.
@@ -96,7 +95,7 @@ svc.ServiceRegistry.configure("int_paypal.http.nvp.payment.PayPalCA", serviceCon
 function checkRequestDataContainer(requestDataContainer) : Boolean {
 	var result = (!empty(requestDataContainer)
 				&& !empty(requestDataContainer.method)
-				&& !empty(requestDataContainer.data) 
+				&& !empty(requestDataContainer.data)
 				&& typeof requestDataContainer.method === 'string'
 				&& typeof requestDataContainer.data === 'object');
 
@@ -111,7 +110,7 @@ function checkRequestDataContainer(requestDataContainer) : Boolean {
 function prepareLogData(data : String) : String {
 	var result : String = '\n';
 	var params : Array = data.split('&');
- 
+
 	params.forEach(function(param) {
 		var paramArr = param.split('=');
 		var key = paramArr[0];

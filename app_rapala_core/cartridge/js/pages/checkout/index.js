@@ -22,7 +22,7 @@ exports.init = function () {
     }  else {
         billing.init();
     }
-    $(window).resize(function () {
+    $(window).on('resize', function () {
         $('.ui-dialog-content:visible').each(function () {
             $(this).dialog('option', 'position', $(this).dialog('option', 'position'));
         });
@@ -54,7 +54,7 @@ exports.init = function () {
             }
         }
     });
-    $('body').find('input').focusin(function () {
+    $('body').find('input').on('focusin', function () {
         $(this).closest('.formfield, .form-row').removeClass('inputlabel');
         $(this).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
         $(this).removeClass('errorclient');
@@ -69,7 +69,7 @@ exports.init = function () {
         $(this).closest('.form-row').find('span.logerror , .existing_register').hide();
     });
 
-    $('.pt_checkout .textinput, .pt_checkout .custom-select-wrap, .pt_checkout .textinputpw').bind('keyup blur', function () {
+    $('.pt_checkout .textinput, .pt_checkout .custom-select-wrap, .pt_checkout .textinputpw').on('keyup blur', function () {
         if (jQuery('.New-shipping-authentication-detail').find('input[name$=\'_ProcessWay\']').val() == 2) {
             var errordiv = '<div class=\'error loginerror\'>' + Resources.checkout_login_error + '</div>';
             if ($('.shippinglogindetails').is(':visible') || !$('.checkoutshipping form[id$="_login"]').valid()) {
@@ -87,7 +87,7 @@ exports.init = function () {
         }, 100);
     });
 
-    $('.new-address-button').bind('click', function () {
+    $('.new-address-button').on('click', function () {
         //jQuery("input[name=${pdict.CurrentForms.singleshipping.shippingAddress.makedefault.htmlName}]").attr('checked', true);
         $('.addressoptions-addToAddressBook,.addressoptions-makedefault ').removeClass('hide');
         $('input[name$=\'shippingAddress_selectedaddress\']').val('');
@@ -123,7 +123,7 @@ exports.init = function () {
         uievents.customFields();
         uievents.synccheckoutH();
     });
-    $('.edit-address-field .edit-billing-button').bind('click', function () {
+    $('.edit-address-field .edit-billing-button').on('click', function () {
         var $form = $('.address');
         var selectedAddress = $(this).closest('.edit-address-field').data('address');
         util.fillAddressFields(selectedAddress, $form);
