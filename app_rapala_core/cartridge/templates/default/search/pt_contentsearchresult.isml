@@ -35,7 +35,7 @@
 					<div id="page">
 						<div class="wrapper">
 							<isinclude template="components/browsertoolscheck"/>
-						
+
 							<div class="searchresult-contentHeader mobileHide">
 								<isif condition="${'rapala' == session.custom.currentSite}">
 									<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
@@ -50,14 +50,14 @@
 							</div>
 							<div class="content">
 							<a class="mobile-filter-by mobileHide">
-								filter by
+								<isprint value="${Resource.msg('searchrefinebar.searchresults','search',null)}" />
 								<span class="active"></span>
 							</a>
 							<div id="secondary" class="refinements contentsecondary searchResult-refinement visible-hidden">
- 									<div class="mobileHide"><isinclude template="search/components/productsearchrefinebar"/></div>		
- 									<div class="desktopHide"><isinclude template="search/components/contentsearchrefinebar"/></div>				
+ 									<div class="mobileHide"><isinclude template="search/components/productsearchrefinebar"/></div>
+ 									<div class="desktopHide"><isinclude template="search/components/contentsearchrefinebar"/></div>
  							</div>
-				
+
 							<div id="primary" class="primary-content">
 								<isreplace/>
 							</div>
