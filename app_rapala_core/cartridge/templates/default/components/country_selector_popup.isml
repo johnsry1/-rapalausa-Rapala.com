@@ -1,20 +1,12 @@
 <!--- TEMPLATENAME: country_selector_popup.isml --->
 <isinclude template="util/modules"/>
 <isscript>
-<<<<<<< HEAD
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-=======
-	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
->>>>>>> refs/remotes/origin/release/sprint-canada-dev3
 	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 	var currentSite = dw.system.Site.getCurrent();
 	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
 	var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
 	activeCountries = JSON.parse(activeCountries);
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/release/sprint-canada-dev3
 	var euObj = activeCountries.filter(function(x) { return x.country == 'eu'});
 	// set flag for popup shown
 	session.custom.showCountryPopup = false;
