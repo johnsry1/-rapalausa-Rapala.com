@@ -49,7 +49,7 @@ function initializationEvent() {
             currentSiteID = '1';
     }
 
-    if (document.location.pathname.indexOf('ChangeRegion') < 0) {
+    if (document.location.pathname.indexOf('ChangeRegion') < 0 && document.location.pathname.indexOf('change-region') < 0) {
         if (typeof geoipCountryCode == 'function') {
             var IPGeoCode = geoipCountryCode();
             var allowedCountries = $('.allowed-countries').text();

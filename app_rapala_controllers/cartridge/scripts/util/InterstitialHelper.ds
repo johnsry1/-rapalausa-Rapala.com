@@ -25,7 +25,11 @@ var InterstitialHelper : Object = {
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
 		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
-			id = (!empty(request.httpParameterMap.locale) && request.httpParameterMap.locale == 'default') ? id : 'rapalaCA-';
+		    if (empty(request.httpParameterMap.locale)) {
+				id = 'rapalaCA-';
+			} else if (request.httpParameterMap.locale == 'eu-en') {
+				id = 'rapalaEU-';
+			}	
 		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
@@ -61,7 +65,7 @@ var InterstitialHelper : Object = {
 		var url, id, newHost;
 		var params = request.httpParameterMap;
 		var tempUrl = URLUtils.url('Home-SetLocale');
-		newHost = session.custom.interstitialSiteId;
+		newHost = request.httpCookies['preferredRegion'].value;
 
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
@@ -89,7 +93,60 @@ var InterstitialHelper : Object = {
 		}
 
 		return url;
-	}
+	},
+	constructCountryLink: function(activeCountryJSON) {
+		let defaultLink = 'http://www.rapala.com';
+		let activeCountry = activeCountryJSON.country;
+		let currentSite = dw.system.Site.getCurrent();
+		let protocol = "https://";
+		let countryLink;
+		
+		if (activeCountry == "ca") {
+			countryLink = protocol + activeCountryJSON.domain + "/";
+		} else if (activeCountry == "us") {
+			countryLink = protocol + activeCountryJSON.domain + "/";
+			//Need to build the setLocale url for the case of moving from EU or CA sites	
+			if (currentSite.ID == 'rapalaEU') {
+				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
+                countryLink=countryLink.toString().replace('rapalaEU', 'rapala');
+			} else if (currentSite.ID == 'rapalaCA') {
+				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
+                countryLink=countryLink.toString().replace('rapalaCA', 'rapala');
+                countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('en_CA', 'default');
+			}
+		} else {
+			let protocol = "https://";
+			let params = "?countrySelect=true&locale=";
+			// construct a url based of the global custom preference json config
+			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
+			countryLink = protocol + 
+						  activeCountryJSON.domain + "/" + 
+						  activeCountryJSON.sitePath + 
+						  params + 
+						  activeCountryJSON.localeID;
+		}
+
+		// default the URL to US Production in the event we failed to construct a url beforehand.
+		if (countryLink.length <= 0 || countryLink.indexOf('undefined') > -1) {
+			countryLink = "https://www.rapala.com/";
+		}
+		return countryLink;
+	},
+	getCurrentCountryCode: function(request) {
+		var currentCountry = 'us'; // default to US site view
+		var currentSite = dw.system.Site.getCurrent().ID;
+		if (currentSite.indexOf('CA') != -1) {
+			currentCountry = 'ca';
+		} else if (currentSite.indexOf('EU') != -1) {
+			//Default to EU
+			currentCountry = 'eu'
+			var locale = dw.util.Locale.getLocale(request.locale);
+			if (!empty(locale.country)) {
+				currentCountry = locale.country.toLowerCase();
+			}
+		}
+		return currentCountry;
+ 	}
 }
 
 function setCookie(name, value, age) {
