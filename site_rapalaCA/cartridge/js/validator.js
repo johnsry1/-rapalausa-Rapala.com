@@ -1055,7 +1055,7 @@ var validator = {
             });
         }
 
-        /* $("input[name$='phone']").blur(function (e) {
+        /* $("input[name$='phone']").on('blur', function (e) {
              $(this).val(this.value.replace(/[A-Za-z` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''));
                  var curval = $(this).val();
                  var str1 = curval.substring(0, 3);

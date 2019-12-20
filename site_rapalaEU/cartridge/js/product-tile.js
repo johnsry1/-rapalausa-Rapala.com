@@ -30,8 +30,8 @@ function initQuickViewButtons() {
                         }
                     }
                 };
-                obj.ecommerce.click.products.push($.parseJSON($(this).attr('data-gtmdata')));
-                dataLayer.push(obj); 
+                obj.ecommerce.click.products.push(JSON.parse($(this).attr('data-gtmdata')));
+                dataLayer.push(obj);
             }
             quickview.show({
                 url: $(this).attr('href').split('#')[0], //PREV JIRA PREV-255 :PLP: On Click Quick view navigating to a wrong page when user first changes the swatches. Taking only href.

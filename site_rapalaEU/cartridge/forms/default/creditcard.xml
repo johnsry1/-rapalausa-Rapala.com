@@ -11,8 +11,8 @@
     <field formid="number" label="creditcard.number" type="string" mandatory="true" masked="4" max-length="16"
 	    binding="creditCardNumber"
 	    missing-error="creditcard.numbermissingerror" description="creditcard.numberexample" value-error="creditcard.numbervalueerror"/>
-	    
-	<group formid="expiration"> 
+
+	<group formid="expiration">
 		<!-- field for credit card expiration month -->
 	    <field formid="month" label="resource.month.credit" type="integer" mandatory="true" binding="creditCardExpirationMonth"
 	      	missing-error="creditcard.monthmissingerror" value-error="creditcard.yearvalueerror">
@@ -32,26 +32,22 @@
 	            <option label="month.december"  value="12"/>
 	        </options>
 	    </field>
-	
-		<!-- 
-			field for credit card expiration year; 
-			a value error (credit card is expired is only displayed for this field) 
+
+		<!--
+			field for credit card expiration year;
+			a value error (credit card is expired is only displayed for this field)
 		-->
 	    <field formid="year" label="resource.year-credit" type="integer" mandatory="true" binding="creditCardExpirationYear"
 	      	missing-error="creditcard.yearmissingerror">
 	        <options>
 	       		<option optionid="" label="Year" value=""/>
-	            <option optionid="2016" label="year.2016" value="2016"/>
-	            <option optionid="2017" label="year.2017" value="2017"/>
-	            <option optionid="2018" label="year.2018" value="2018"/>
-	            <option optionid="2019" label="year.2019" value="2019"/>
 	            <option optionid="2020" label="year.2020" value="2020"/>
 	            <option optionid="2021" label="year.2021" value="2021"/>
             	<option optionid="2022" label="year.2022" value="2022"/>
             	 <!-- JIRA PREV-288 : Year drop down does not have correct year + 10 next year values. Added  2023, 2024, 2025 options-->
             	<option optionid="2023" label="year.2023" value="2023"/>
             	<option optionid="2024" label="year.2024" value="2024"/>
-            	<option optionid="2025" label="year.2025" value="2025"/>            
+            	<option optionid="2025" label="year.2025" value="2025"/>
 	        </options>
 	    </field>
 	</group>
@@ -61,12 +57,12 @@
      	missing-error="creditcard.ownermissingerror"/>
 
 	<field formid="encrypteddata" type="string" mandatory="false"/>
-	
+
 	<!-- field for credit card security code -->
 	<!-- JIRA PREV-76 : In payment section CVV field does not accept more than 4 digits and Alphanumeric values. Added max-length="4" -->
     <field formid="cvn" label="creditcard.cvnlabel" type="string" mandatory="true" masked="0"
      	missing-error="creditcard.cvnmissingerror" value-error="creditcard.cvnrangeerror" max-length="4"/>
- 
+
 	<!-- optional flags -->
 	<field formid="saveCard" label="creditcard.savecard" type="boolean" mandatory="false" default-value="true" />
 

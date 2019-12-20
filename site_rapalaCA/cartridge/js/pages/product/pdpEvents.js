@@ -118,7 +118,7 @@ var product = function (response) {
 
             var pdpOpt = jQuery(thisProduct.containerId + ' .product_options:last select');
 
-            pdpOpt.change(function () {
+            pdpOpt.on('change', function () {
                 var vals = this.options[this.selectedIndex].value.split('%?%'); // 0 = value, 1 = price
                 thisProduct.selectedOptions[this.id] = vals[0];
                 thisProduct.selectedPrice[this.id] = vals[1];
@@ -138,7 +138,7 @@ var product = function (response) {
 
     // binds A2C button click handler
     var getAddToCartBtn = function (thisProduct) {
-        var addToCartBtn = jQuery(thisProduct.containerId + ' .addtocartbutton:last').click(function () {
+        var addToCartBtn = jQuery(thisProduct.containerId + ' .addtocartbutton:last').on('click', function () {
             if (model.master || model.variant) {
                 if (thisProduct.selectedVar == null) {
                     return false;
@@ -251,7 +251,7 @@ var product = function (response) {
     // trigger AddtoCartEnabled event
     var getQtyBox = function (thisProduct) {
 
-        jQuery(thisProduct.containerId + ' .quantityinput:last').keyup(function () {
+        jQuery(thisProduct.containerId + ' .quantityinput:last').on('keyup', function () {
             var val = null;
             try {
                 val = parseInt(jQuery(thisProduct.containerId + ' .quantityinput:last').val(), 10);
@@ -318,7 +318,7 @@ var product = function (response) {
         tabsDiv.tabs();
 
         // tab print handler
-        jQuery('a.printpage').click(function () {
+        jQuery('a.printpage').on('click', function () {
             window.print();
             return false;
         });
@@ -368,7 +368,7 @@ var product = function (response) {
 
         // Add to wishlist, Add to gift registry click handler
 
-        jQuery(thisProduct.containerId + ' .addtowishlist a.auth').click(function () {
+        jQuery(thisProduct.containerId + ' .addtowishlist a.auth').on('click', function () {
             // append the currently selectied options to the url
 
             // create a local copy of the selected options
@@ -412,7 +412,7 @@ var product = function (response) {
         });
 
         // Add to wishlist, Add to gift registry click handler
-        jQuery(thisProduct.containerId + ' .addtowishlist a.non-auth, ' + thisProduct.containerId + ' .addtoregistry a').click(function () {
+        jQuery(thisProduct.containerId + ' .addtowishlist a.non-auth, ' + thisProduct.containerId + ' .addtoregistry a').on('click', function () {
             // append the currently selectied options to the url
 
             // create a local copy of the selected options
@@ -441,7 +441,7 @@ var product = function (response) {
             return false;
         });
 
-        jQuery(thisProduct.containerId + ' .sendtofriend').click(function () {
+        jQuery(thisProduct.containerId + ' .sendtofriend').on('click', function () {
             // create a local copy of the selected options
             var selectedOptions = jQuery.extend({}, {}, thisProduct.selectedOptions);
 
@@ -460,11 +460,11 @@ var product = function (response) {
     // read review link opens reviews tab
     var getRatingSection = function (containerId) {
 
-        jQuery(containerId + ' #pdpReadReview').click(function () {
+        jQuery(containerId + ' #pdpReadReview').on('click', function () {
             jQuery(containerId + ' #tabs').tabs('select', 'pdpReviewsTab');
         });
 
-        jQuery(containerId + ' #pdpWriteReview').click(function () {
+        jQuery(containerId + ' #pdpWriteReview').on('click', function () {
         });
     };
 
@@ -571,7 +571,7 @@ var product = function (response) {
     // Load the youtube videos only on demand
     // when the user clicks on the videos tab, then the youtube videos will be fetched dynamically
     // and loads the content in the pdpVideoTab div.
-    jQuery('.videoTab').click(function () {
+    jQuery('.videoTab').on('click', function () {
         if ($(this).hasClass('loaded')) {
             return false;
         }
@@ -595,7 +595,7 @@ var product = function (response) {
         // HYPERLINKS AND POWERREVIEWS WORKS FINE.
 
         // bind events
-        //jQuery(".productnavigation a").click(function(e) {
+        //jQuery(".productnavigation a").on('click', function(e) {
         //	app.getProduct({url: this.href, source: "search"});
         //	return false;
         //});
@@ -603,7 +603,7 @@ var product = function (response) {
 
     // size chart link click binding
     var getSizeChart = function () {
-        jQuery('.attributecontentlink').click(function () {
+        jQuery('.attributecontentlink').on('click', function () {
             // add size chart dialog container div if its not added yet
             // only added once
             if (jQuery('#sizeChartDialog').length == 0) {
@@ -814,7 +814,7 @@ var product = function (response) {
                         width: $('.product-primary-image').width() + 'px'
                     });
                 });
-                $(window).resize(function() {
+                $(window).on('resize', function() {
                     $('.product-primary-image').removeAttr('style');
                     $('.product-primary-image').css({
                         height: $('.product-primary-image').height() + 'px',
@@ -870,9 +870,9 @@ var product = function (response) {
                         });
 
 
-                        jQuery(that.containerId + ' .productthumbnails:last .owl-item').first().find('img').click();
+                        jQuery(that.containerId + ' .productthumbnails:last .owl-item').first().find('img').trigger('click');
                         //var $images = jQuery(that.containerId+" .productthumbnails:last .owl-item img");
-                        //var numOfRows = Math.ceil($images.size()/6);
+                        //var numOfRows = Math.ceil($images.length/6);
                         //$images.slice(numOfRows * 6 - 6, numOfRows * 6 - 1).css('margin-bottom','0');
                         var desktopItems = 4;
                         if (that.containerId.indexOf('ui-dialog') == 1) {
@@ -1151,7 +1151,7 @@ var product = function (response) {
                             parentLi.removeClass('unselectable');
                             if ($swatch.hasClass('color')) {
                                 if (!getAvailability(filteredVariants)) {
-                                    if ($this.find('.out-of-stock').size() === 0) {
+                                    if ($this.find('.out-of-stock').length === 0) {
                                         $this.prepend('<span class=\'out-of-stock\'></span>');
                                     }
                                 } else {
@@ -1270,7 +1270,7 @@ var product = function (response) {
                 reloadAvailability(thisProduct, thisProduct.selectedOptions.Quantity);
                 // update price
                 this.showUpdatedPrice(computePrice(thisProduct), this.selectedVar.pricing.standard);
-                
+
                 // Replace the hero shot with the specific variant chosen
                 var varID = this.selectedVar.id;
                 var imageUrl = model.images.variants[varID];
@@ -1746,7 +1746,7 @@ var product = function (response) {
                     var $this = jQuery(this);
                     if ($this.hasClass('swatches')) {
                         //if it is swatches, find the selected swatch
-                        if ($this.find('.selected').size() > 0) {
+                        if ($this.find('.selected').length > 0) {
                             $this.addClass('selected');
                         } else {
                             $this.removeClass('selected');
@@ -1776,7 +1776,7 @@ var product = function (response) {
                         }
                     } else {
                         // if it's not the last item, hide the selections and leave the button enabled
-                        if ($attributes.size() - 1 != index) {
+                        if ($attributes.length - 1 != index) {
                             $this.find('.optionwrapper').slideUp().find('button').removeClass('non-selectable');
                         } else {
                             //it is the last item, and it's selected, so it's current
@@ -1805,7 +1805,7 @@ var product = function (response) {
 
                                     if ($swatch.hasClass('color')) {
                                         if (!getAvailability(filteredVariants)) {
-                                            if ($this.find('.out-of-stock').size() === 0) {
+                                            if ($this.find('.out-of-stock').length === 0) {
                                                 $this.prepend('<span class=\'out-of-stock\'></span>');
                                             }
                                         } else {
@@ -1900,7 +1900,7 @@ var product = function (response) {
                 // meanwhile display the available variation attributes
 
                 // bind the "next" buttons in the picker
-                jQuery('button.next').click(function () {
+                jQuery('button.next').on('click', function () {
                     /**var $this = jQuery(this);
                      if(!$this.hasClass("non-selectable")) {
 					$this.closest(".swatches, .variantdropdown").find(".optionwrapper").slideUp(400,function(){
@@ -1908,19 +1908,19 @@ var product = function (response) {
 							.removeClass("current").addClass("selected")
 							.nextUntil(".swatches, .variantdropdown").next()
 								.addClass("current").removeClass("future")
-									.find(".optionwrapper").slideDown().find('select').change();
+									.find(".optionwrapper").slideDown().find('select').trigger('change');
 					});
 					}*/
                 });
 
                 //bind the "previous" buttons in the picker
-                jQuery('a.previous').click(function (e) {
+                jQuery('a.previous').on('click', function (e) {
                     e.preventDefault();
                     jQuery(this)
                         .closest('.swatches, .variantdropdown')
                         .prevUntil('.swatches, .variantdropdown')
                         .prev()
-                        .find('a.filter').click();
+                        .find('a.filter').trigger('click');
                 });
                 $('.MagicZoom img.primary-image').bind('click', function () {
                     $('.new-swim,.old-swim').addClass('swimHide');
@@ -1933,7 +1933,7 @@ var product = function (response) {
                     }, 500);
                 });
                 // clicking on a previous step
-                jQuery('.variationattributes').delegate('.selected a.filter', 'click', function (e) {
+                jQuery('.variationattributes').on('click', '.selected a.filter', function (e) {
                     e.preventDefault();
                     var $this = jQuery(this).closest('.selected');
                     jQuery('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');
@@ -1942,15 +1942,15 @@ var product = function (response) {
                         var $variant = jQuery(this);
                         $variant.addClass('future').removeClass('selected');
                         if ($variant.hasClass('swatches')) {
-                            $variant.find('.selected a').click();
+                            $variant.find('.selected a').trigger('click');
                         } else if ($variant.hasClass('variantdropdown')) {
                             var $select = $variant.find('select');
-                            if ($select.find('option').size() > 1) {
-                                $select.val('').change();
+                            if ($select.find('option').length > 1) {
+                                $select.val('').trigger('change');
                             }
                         }
                     });
-                    $(this).parent().find('.swatchesdisplay .selected a').click();
+                    $(this).parent().find('.swatchesdisplay .selected a').trigger('click');
                     $(this).parent().find('select').val('');
 
                     jQuery('.variationattributes').find('.future .optionwrapper').slideUp(400, function () {
@@ -1964,7 +1964,7 @@ var product = function (response) {
                 });
 
                 // bind the "learn more" links
-                jQuery('span.learnmore a').click(function (e) {
+                jQuery('span.learnmore a').on('click', function (e) {
                     e.preventDefault();
                     // add learn more dialog container div if its not added yet
                     // only added once
@@ -2017,7 +2017,7 @@ var product = function (response) {
                             e.data = {id: pdpVarId, val: this.title};
                             // remove the current selection
                             thisSwatch.find('.selected').removeClass('selected');
-                            if (thisObj.closest('.swatches').nextUntil('.swatches, .variantdropdown').next().size() > 0) {
+                            if (thisObj.closest('.swatches').nextUntil('.swatches, .variantdropdown').next().length > 0) {
                                 thisObj.parent().addClass('selected').closest('.swatches').find('button').removeClass('non-selectable');
                                 var $this = jQuery(this);
                                 if (!$this.hasClass('non-selectable')) {
@@ -2030,7 +2030,7 @@ var product = function (response) {
                                                         //$(this).attr('selected','selected').trigger('change');
                                                     }
                                                 });
-                                            }).find('select').change();
+                                            }).find('select').trigger('change');
                                     });
                                 }
                             } else {
@@ -2074,10 +2074,10 @@ var product = function (response) {
                         // swatches click, hover and mouseleave event handlers
                         varJqryObjs.data('data', {id: pdpVarId}).click(varEventHandler);
                         if ($(window).width() > 1024) {
-                            varJqryObjs.data('data', {id: pdpVarId}).mouseenter(function () {
+                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter', function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
                                 thisProduct.showImages(this.title, colorAttrDef.vals);
-                            }).mouseleave(function () {
+                            }).on('mouseleave', function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
                                         'val': thisProduct.selectedVar.id,
@@ -2112,7 +2112,7 @@ var product = function (response) {
                 // loop thru all the non-swatches attributes and bind events etc.
                 jQuery(thisProduct.containerId + ' .variationattributes .variantdropdown select').each(function () {
                     // default ui i.e. drop downy
-                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).change(function (e) {
+                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).on('change', function (e) {
                         // if there is only 1 value to be selected then return i.e. no deselection available
                         //if (this.selectedIndex == 0 && this.options.length == 1) { return; }
 
@@ -2138,7 +2138,7 @@ var product = function (response) {
                                                 //$(this).attr('selected','selected').trigger('change');
                                             }
                                         });
-                                    }).find('select').change();
+                                    }).find('select').trigger('change');
                             });
                         }
 
@@ -2265,7 +2265,7 @@ var pdpEvents = {
                 e.preventDefault();
             }
         });
-        $('#Quantity').keyup(function(e) {
+        $('#Quantity').on('keyup', function(e) {
             var key = e.charCode || e.keyCode || e.which || 0;
             if ($.isNumeric($('#Quantity').val()) && (key == 13)) {
                 $('#add-to-cart').trigger('click');
@@ -2320,7 +2320,7 @@ var pdpEvents = {
                 }, 2000);
             }
         });
-        $('#QuickViewDialog .product-primary-image').find('.product-image').click(function () {
+        $('#QuickViewDialog .product-primary-image').find('.product-image').on('click', function () {
             return false;
         });
         if (($('.provideo-spec-link').length > 0)) {

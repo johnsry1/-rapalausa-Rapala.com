@@ -21,9 +21,9 @@ var rapalainsider = {
         var $vipinsider = $('.vipinsider-container');
             //vipform = $('.VipinsiderForm');
         //var validatorinit = $(this).closest('form').validate();
-        $('#PasswordReset123').click(function (e) {
+        $('#PasswordReset123').on('click', function (e) {
             e.preventDefault();
-            $vipinsider.load(Urls.vipInsider, function () {
+            $vipinsider.on('load', Urls.vipInsider, function () {
                 $vipinsider.dialog({
                     bgiframe: true,
                     autoOpen: false,
@@ -51,7 +51,7 @@ var rapalainsider = {
                         }
                         rapalainsider.textarearapala();
                         rapalainsider.clearbuttonfunct();
-                        $('.remove').click(function (e) {
+                        $('.remove').on('click', function (e) {
                             e.preventDefault();
                             var filename = $(this).attr('data-file');
                             var form = $(this).closest('form');
@@ -328,7 +328,7 @@ var rapalainsider = {
     vipinsiderevents: function () {
         var $vipinsider = $('.vipinsider-container');
             //vipform = $('.VipinsiderForm');
-        $vipinsider.find('.trigger_singleupload input[type="file"]').unbind('change').change(function () {
+        $vipinsider.find('.trigger_singleupload input[type="file"]').off('change').on('change', function () {
 
             var xhr = new XMLHttpRequest(),
                 data = new FormData(),
@@ -383,7 +383,7 @@ var rapalainsider = {
         });
 
         if ($(window).width() <= 767) {
-            $('.insider_body.rapala_device [maxlength]').bind('keypress keyup', function () {
+            $('.insider_body.rapala_device [maxlength]').on('keypress keyup', function () {
                 var $this = $(this);
                 var val = $this.val();
                 var valLength = val.length;
@@ -394,7 +394,7 @@ var rapalainsider = {
             });
         }
 
-        $vipinsider.find('.remove').unbind('click').click(function (e) {
+        $vipinsider.find('.remove').off('click').on('click', function (e) {
             e.preventDefault();
             var filename = $(this).attr('data-file');
             var form = $(this).closest('form');
@@ -480,7 +480,7 @@ var rapalainsider = {
                     $(this).selectbox();
                 }
                 $('.sbOptions li:last').addClass('last');
-            }).focus(function () {
+            }).on('focus', function () {
                 $(this).next('.sbHolder').trigger('focus');
             });
 

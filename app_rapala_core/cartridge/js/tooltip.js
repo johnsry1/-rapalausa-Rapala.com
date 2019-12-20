@@ -37,7 +37,7 @@ exports.init = function () {
     });
 
     /*JIRA PREV-282 : DEV-32: SG issue- 'What is this' link in checkout billing page should not be clickable. Added the folloiwng block.*/
-    $('a.tooltip').click(function (e) {
+    $('a.tooltip').on('click', function (e) {
         e.preventDefault();
     });
 };

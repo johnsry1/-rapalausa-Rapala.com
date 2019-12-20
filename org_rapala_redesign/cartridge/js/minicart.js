@@ -48,17 +48,17 @@ var minicart = {
 
         });
         // register close button event
-        $('.minicartcontent .minicartclose').click(function () {
+        $('.minicartcontent .minicartclose').on('click', function () {
             // reset all the events bindings
             minicart.reset();
             minicart.close(0);
             $('.rapala_device .minicart-button').removeClass('clicked');
         });
-        $('.minicartcontent').click(function () {
+        $('.minicartcontent').on('click', function () {
             clearTimeout(minicart.timer);
             minicart.timer = null;
         });
-        $('.minicart').mouseenter(function () {
+        $('.minicart').on('mouseenter', function () {
             minicart.setminicarheight();
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -67,7 +67,7 @@ var minicart = {
                 $('.minicartcontent').css({'opacity': '1', 'height': 'auto'});
                 minicart.init();
             }
-        }).mouseleave(function () {
+        }).on('mouseleave', function () {
             $('.rapala_device .minicart-button').removeClass('clicked');
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -94,13 +94,13 @@ var minicart = {
 
     // reset minicart
     reset: function () {
-        jQuery('.minicarticon-cont').unbind('hover');
-        jQuery('.minicart').unbind('mouseenter').unbind(
+        jQuery('.minicarticon-cont').off('hover');
+        jQuery('.minicart').off('mouseenter').off(
             'mouseleave');
     },
 
     enablehovereffect: function () {
-        jQuery('.minicarttotal').mouseenter(function () {
+        jQuery('.minicarttotal').on('mouseenter', function () {
             minicart.setminicarheight();
             //clearTimeout(minicart.timer);
             //minicart.timer = null;
@@ -112,7 +112,7 @@ var minicart = {
             }
 
         });
-        jQuery('.minicarttotal').mouseleave(function () {
+        jQuery('.minicarttotal').on('mouseleave', function () {
             jQuery('.minicartcontent').fadeOut(1000);
             $('.rapala_device .minicart-button').removeClass('clicked');
 
@@ -184,7 +184,7 @@ var minicart = {
             return;
         }
         // register close button event
-        jQuery('.minicartcontent .minicartclose').click(function () {
+        jQuery('.minicartcontent .minicartclose').on('click', function () {
             // reset all the events bindings
             minicart.reset();
             minicart.close(0);
@@ -197,7 +197,7 @@ var minicart = {
         }
 
         // register the mouseout events
-        jQuery('.minicartcontent').mouseenter(function () {
+        jQuery('.minicartcontent').on('mouseenter', function () {
             minicart.setminicarheight();
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -207,7 +207,7 @@ var minicart = {
                 minicart.init();
             }
         });
-        $('.minicart').mouseleave(function () {
+        $('.minicart').on('mouseleave', function () {
             $('.rapala_device .minicart-button').removeClass('clicked');
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -265,7 +265,7 @@ var minicart = {
             return;
         }
         // register close button event
-        jQuery('.minicartcontent .minicartclose').click(function () {
+        jQuery('.minicartcontent .minicartclose').on('click', function () {
             // reset all the events bindings
             minicart.reset();
             minicart.close(0);
@@ -278,7 +278,7 @@ var minicart = {
         }
 
         // register the mouseout events
-        jQuery('.minicartcontent').mouseenter(function () {
+        jQuery('.minicartcontent').on('mouseenter', function () {
             minicart.setminicarheight();
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -288,7 +288,7 @@ var minicart = {
                 minicart.init();
             }
         });
-        $('.minicart').mouseleave(function () {
+        $('.minicart').on('mouseleave', function () {
             $('.rapala_device .minicart-button').removeClass('clicked');
             clearTimeout(minicart.timer);
             minicart.timer = null;
@@ -336,7 +336,7 @@ var minicart = {
         jQuery('.minicarttotal').addClass('enablehover');
         minicart.enablehovereffect();
 
-        $('#main , #header , #footernew, #footernew .row').unbind('touchstart').bind('touchstart', function (e) {
+        $('#main , #header , #footernew, #footernew .row').off('touchstart').bind('touchstart', function (e) {
             if ($('.minicartcontent').is(':visible')) {
                 var currentLinkLength = $(e.target).closest('.minicartcontent').length;
                 var minicarttotal = $(e.target).closest('.minicart-button').length;
@@ -479,7 +479,7 @@ var minicart = {
             // sometimes infinitely thus changed it to fadeOut
             // add the open class to the total
             jQuery('.minicart .minicarttotal').removeClass('open');
-            jQuery('.minicartcontent .minicartclose').unbind('click');
+            jQuery('.minicartcontent .minicartclose').off('click');
         }
     }
 };

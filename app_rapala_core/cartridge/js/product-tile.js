@@ -18,7 +18,7 @@ function initQuickViewButtons() {
         $qvButton.off('click').on('click', function (e) {
             e.preventDefault();
             if (SitePreferences.GTM_ENABLED && $(this).attr('data-gtmdata')) {
-                var gtmData = $.parseJSON($link.attr('data-gtmdata'));
+                var gtmData = JSON.parse($link.attr('data-gtmdata'));
                 var list = gtmData.list;
 
                 // remove list from product because it is in actionFiled
@@ -190,7 +190,7 @@ function initializeEvents() {
             }
         });
         /*End JIRA PREV-466*/
-    }).bind('mouseenter click', function () {
+    }).on('mouseenter click', function () {
         // get current thumb details
         var $tile = $(this).closest('.product-tile'),
             $thumb = $tile.find('.product-image .thumb-link img').eq(0),
