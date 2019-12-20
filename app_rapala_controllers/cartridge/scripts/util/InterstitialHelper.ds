@@ -101,7 +101,7 @@ var InterstitialHelper : Object = {
 		let protocol = "https://";
 		let countryLink;
 		
-		if (activeCountry == "ca") {
+		if (activeCountry == "ca" || activeCountry == "fi"  || activeCountry == "uk") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
@@ -115,15 +115,21 @@ var InterstitialHelper : Object = {
                 countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('en_CA', 'default');
 			}
 		} else {
-			let protocol = "https://";
 			let params = "?countrySelect=true&locale=";
 			// construct a url based of the global custom preference json config
 			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
-			countryLink = protocol + 
+			if (!empty(activeCountryJSON.sitePath) && activeCountryJSON.sitePath !== 'undefined') {
+				countryLink = protocol + 
 						  activeCountryJSON.domain + "/" + 
 						  activeCountryJSON.sitePath + 
 						  params + 
 						  activeCountryJSON.localeID;
+			} else {
+				countryLink = protocol + 
+						  activeCountryJSON.domain + "/" + 
+						  params + 
+						  activeCountryJSON.localeID;
+			}
 		}
 
 		// default the URL to US Production in the event we failed to construct a url beforehand.
