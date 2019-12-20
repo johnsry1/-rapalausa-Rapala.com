@@ -4,14 +4,14 @@
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
 
 	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
-	
+
 </isif>
 
 <isdecorate template="${DecoratorTemplate}">
 	<div id="content">
 			<div id="page-background" class="downshift">
-				<div class="wrapper">					
-					
+				<div class="wrapper">
+
 					<div class="contentboxcontent mobileHide">
 						<isif condition="${'rapala' == session.custom.currentSite}">
 							<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
@@ -20,7 +20,7 @@
 						<iselse>
 							<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
 						</isif>
-						<span class="count">${pdict.ProductPagingModel.count} <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>						
+						<span class="count">${pdict.ProductPagingModel.count} <isprint value="${Resource.msg('search.producthits.items', 'search', null)}"/></span>
 					</div>
 					<div class="desktop mobileHide">
 					   <div class="leftnav_bottomfirst contentAsset-new cell contentbox upshift">
@@ -34,17 +34,17 @@
 				<div id="page">
 					<div class="wrapper">
 						<div class="row column3 ">
-						<iscomment> 
+						<iscomment>
 						<a class="mobile-filter-by mobileHide">
-							filter by
+							<isprint value="${Resource.msg('searchrefinebar.searchresults','search',null)}" />
 							<span class="active"></span>
 						</a>
 						<a class="sortby-button mobileHide">
-							Sort By
+							<isprint value="${Resource.msg('global.paginginformation.sortby','locale',null)}" />
 							<span class="active"></span>
 						</a>
 						</iscomment>
-						
+
 						<div id="secondary" class="refinements">
 							<isinclude template="search/components/subcategoryrefinementbar"/>
 						</div>
@@ -60,9 +60,9 @@
 							</div>
 							<isreplace/>
 						</div>
-					</div>	
+					</div>
 				</div>
 			 </div>
 		</div>
-	</div>	 	
+	</div>
 </isdecorate>

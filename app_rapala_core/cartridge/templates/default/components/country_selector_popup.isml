@@ -1,23 +1,25 @@
 <!--- TEMPLATENAME: country_selector_popup.isml --->
 <isinclude template="util/modules"/>
 <isscript>
-	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
+    var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
 	var currentCountry = require('app_rapala_core/cartridge/scripts/util/Countries').getCurrent(pdict).countryCode.toLowerCase();
 	var currentSite = dw.system.Site.getCurrent();
 	var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
 	var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
 	activeCountries = JSON.parse(activeCountries);
-	var euObj = activeCountries.filter(function(x) { return x.country == 'eu'});
+
+    var euObj = activeCountries.filter(function(x) { return x.country == 'eu'});
 	// set flag for popup shown
 	session.custom.showCountryPopup = false;
-	
+
 </isscript>
 <div id="country-selector-popup">
 	<div class="country-select-header">${Resource.msg('global.selectcountry', 'locale', null)}</div>
 	<div class="current-country">
 		<span>${Resource.msg('global.currentlyviewing', 'locale', null)}</span>
 		<div class="current-flag-container">
-			<img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/' +InterstitialHelper.getCurrentCountryCode(pdict.CurrentRequest)+ '.svg')}" alt="${currentCountry}">
+			<isset name="currentContryID" value="${InterstitialHelper.getCurrentCountryCode(pdict.CurrentRequest)}" scope="page" />
+			<img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/' +currentContryID+ '.svg')}" alt="${currentContryID}">
 		</div>
 	</div>
 	<div class="countries-container">
@@ -48,5 +50,4 @@
 	</div>
 	<a class="gray-button" href=${InterstitialHelper.constructCountryLink(euObj[0])}>${Resource.msg('global.internationalsite', 'locale', null)}</a>
 	<a class="gray-button" href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
-
 </div>

@@ -1165,18 +1165,18 @@ var product = function (response) {
                                 }
                             } else {
                                 if (!getAvailability(filteredVariants)) {
-                                    if ($this.find('span').text().indexOf('Out of Stock') === -1) {
-                                        if ($this.find('span').text().indexOf('New') !== -1) {
-                                            $this.find('span').text($this.find('span').text() + ' / Out of Stock');
+                                    if ($this.find('span').text().indexOf(Resources.OUT_OF_STOCK) === -1) {
+                                        if ($this.find('span').text().indexOf(Resources.NEW_ITEM) !== -1) {
+                                            $this.find('span').text($this.find('span').text() + ' / ' + Resources.OUT_OF_STOCK);
                                         } else {
-                                            $this.find('span').text('Out of Stock');
+                                            $this.find('span').text(Resources.OUT_OF_STOCK);
                                         }
                                     }
                                 } else {
-                                    if ($this.find('span').text().indexOf('New') !== -1) {
-                                        $this.find('span').text($this.find('span').text().replace(' / Out of Stock', ''));
+                                    if ($this.find('span').text().indexOf(Resources.NEW_ITEM) !== -1) {
+                                        $this.find('span').text($this.find('span').text().replace(' / ' + Resources.OUT_OF_STOCK, ''));
                                     } else {
-                                        $this.find('span').text($this.find('span').text().replace('Out of Stock', ''));
+                                        $this.find('span').text($this.find('span').text().replace(Resources.OUT_OF_STOCK, ''));
                                     }
                                 }
                             }
@@ -1229,7 +1229,7 @@ var product = function (response) {
                             // found at least 1 so keep it enabled
                             var oos = '';
                             if (!getAvailability(filteredVariants)) {
-                                oos = ' - Out of Stock';
+                                oos = ' - ' + Resources.OUT_OF_STOCK;
                             }
                             //add it
                             $select.append(
@@ -1827,21 +1827,21 @@ var product = function (response) {
                                         }
                                     } else {
                                         if (!getAvailability(filteredVariants)) {
-                                            if ($this.find('span').text().indexOf('Out of Stock') === -1) {
-                                                if ($this.find('span').text().indexOf('New') !== -1) {
+                                            if ($this.find('span').text().indexOf(Resources.OUT_OF_STOCK) === -1) {
+                                                if ($this.find('span').text().indexOf(Resources.NEW_ITEM) !== -1) {
                                                     $this.find('span').addClass('outofstockpdp');
-                                                    $this.find('span').text($this.find('span').text() + ' / Out of Stock');
+                                                    $this.find('span').text($this.find('span').text() + ' / ' + Resources.OUT_OF_STOCK);
                                                 } else {
                                                     $this.find('span').addClass('outofstockpdp');
-                                                    $this.find('span').text('Out of Stock');
+                                                    $this.find('span').text(Resources.OUT_OF_STOCK);
                                                 }
                                             }
                                         } else {
-                                            if ($this.find('span').text().indexOf('New') !== -1) {
-                                                $this.find('span').text($this.find('span').text().replace(' / Out of Stock', ''));
+                                            if ($this.find('span').text().indexOf(Resources.NEW_ITEM) !== -1) {
+                                                $this.find('span').text($this.find('span').text().replace(' / ' + Resources.OUT_OF_STOCK, ''));
                                             } else {
 
-                                                $this.find('span').text($this.find('span').text().replace('Out of Stock', ''));
+                                                $this.find('span').text($this.find('span').text().replace(Resources.OUT_OF_STOCK, ''));
                                             }
                                         }
                                     }
@@ -1855,7 +1855,7 @@ var product = function (response) {
                                             val: this.value
                                         }, model.variations.variants);
                                         if (!getAvailability(filteredVariants)) {
-                                            this.text = this.text + ' - Out of Stock';
+                                            this.text = this.text + ' - ' + Resources.OUT_OF_STOCK;
                                         }
                                     }
                                 });

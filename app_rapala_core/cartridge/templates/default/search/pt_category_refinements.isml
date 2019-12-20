@@ -2,17 +2,17 @@
 <isset name="DecoratorTemplate" value="search/pt_productsearchresult" scope="page"/>
 
 <isif condition="${pdict.CurrentHttpParameterMap.format.stringValue == 'ajax'}">
-	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>	
-</isif> 
+	<isset name="DecoratorTemplate" value="util/pt_empty" scope="page"/>
+</isif>
 <isdecorate template="${DecoratorTemplate}">
 	<div id="content">
 		<div id="page-background" class="downshift">
 			<div class="wrapper">
-				
+
 				<div class="contentboxcontent mobileHide">
-				
+
 				<div class="refine-display">
-						
+
 						<isset name="hasAttributes" value="${false}" scope="page" />
 						<isloop items="${psr.refinements.refinementDefinitions}" var="definition" status="attributes">
 					<isif condition="${definition.isAttributeRefinement() && psr.isRefinedByAttribute(definition.attributeID)}">
@@ -21,7 +21,7 @@
 							<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 					 		<span class="breadcrumb-refinement-name">
 							<isprint value="${definition.displayName}"/>
-							</span> 
+							</span>
 							</iscomment>
 							<isset name="hasAttributes" value="${true}" scope="page" />
 							<isloop items="${psr.refinements.getRefinementValues(definition)}" var="value" status="values">
@@ -44,7 +44,7 @@
 				<isscript>
 					// for price refinements, we use the display value of the price refinement definition's value
 					var breadcrumbLabel = null
-	
+
 					var refinements = psr.refinements;
 					var prdValues = refinements.getRefinementValues(refinements.priceRefinementDefinition);
 					if (prdValues.iterator().hasNext()) {
@@ -57,7 +57,7 @@
 							<isprint value="${psr.refinements.priceRefinementDefinition.displayName}"/>
 						</span>
 					</iscomment>
-	
+
 					<span class="breadcrumb-refinement-value">
 						<isif condition="${!empty(breadcrumbLabel)}">
 							<isprint value="${breadcrumbLabel}"/>
@@ -66,7 +66,7 @@
 							<isprint value="${Resource.msg('searchbreadcrumbs.to','search',null)}" />
 							<isprint value="${psr.priceMax}"/>
 						</isif>
-	
+
 						<isif condition="${empty(pagingModel)}">
 							<isset name="breadcrumbHref" value="${psr.urlRelaxPrice('Search-Show')}" scope="page" />
 						<iselse/>
@@ -75,10 +75,10 @@
 						<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 					</span>
 				</span>
-	
+
 			</isif>
 			</div>
-				
+
 					<isif condition="${'rapala' == session.custom.currentSite}">
 						<h1 class="leftnav categoryTitle"><isprint value="${pdict.ProductSearchResult.category.displayName}"/></h1>
 					<iselseif condition="${'marcum' == session.custom.currentSite || 'storm' == session.custom.currentSite || 'triggerx' == session.custom.currentSite || 'luhrjensen' == session.custom.currentSite || 'terminator' == session.custom.currentSite || 'bluefox' == session.custom.currentSite || 'williamson' == session.custom.currentSite || 'strikemaster' == session.custom.currentSite || 'otter' == session.custom.currentSite}">
@@ -104,11 +104,11 @@
 				<div class="wrapper">
 					<div class="row column3 3">
 						<a class="mobile-filter-by mobileHide">
-							filter by
+							<isprint value="${Resource.msg('searchrefinebar.searchresults','search',null)}" />
 							<span class="active"></span>
 						</a>
 						<a class="sortby-button mobileHide">
-							Sort By
+							<isprint value="${Resource.msg('global.paginginformation.sortby','locale',null)}" />
 							<span class="active"></span>
 						</a>
 						<div id="secondary" class="refinements visible-hidden">
@@ -116,10 +116,10 @@
 						</div>
 						<div id="primary" class="primary-content">
 							  <isreplace/>
-						</div>				
-					</div>	
+						</div>
+					</div>
 				</div>
 			 </div>
 		</div>
-	</div>	 	
+	</div>
 </isdecorate>

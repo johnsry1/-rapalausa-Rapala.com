@@ -67,7 +67,7 @@
 							</isif>
 						    <iscomment>set an additional class for 'new' colors</iscomment>
 						    <isif condition="${newColors.contains(VV.displayValue) || newSizes.contains(VV.displayValue) || newTestPounds.contains(VV.displayValue) || newPak.contains(VV.ID)}">
-						       <isset name="newSpanText" value="New" scope="page"/>
+						       <isset name="newSpanText" value="${Resource.msg('product.newitem','product',null)}" scope="page"/>
 	                           <isset name="newTitle" value="" scope="page"/>
 						    <iselse>
 	                           <isset name="newSpanText" value="" scope="page"/>
@@ -99,7 +99,7 @@
 
 								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" <isif condition="${!empty(variantImage)}">data-variantImage ="${variantImage}"</isif> data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 									<isif condition="${newColors.contains(VV.value)}">
-										<span class="new corner-ribbon">New</span>
+										<span class="new corner-ribbon">${Resource.msg('product.newitem','product',null)}</span>
 									</isif>
 									<isprint value="${display}"/>
 									<span class='outofstockpdp'><isprint value="${newSpanText}" encoding="off"/></span>
