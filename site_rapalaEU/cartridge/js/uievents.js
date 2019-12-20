@@ -490,7 +490,7 @@ var uievents = {
             dialog.open({
                 url: Urls.countrySelectorPopup,
                 options: {
-                    width: 300,
+                    width: 325,
                     height: 575
                 }
             });
