@@ -20,7 +20,6 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		var z = request;
 		var id = "rapala-";
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
@@ -30,16 +29,16 @@ var InterstitialHelper : Object = {
 			} else if (request.httpParameterMap.locale == 'eu-en') {
 				id = 'rapalaEU-';
 			}
-		} 
+		}
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
 		if (id == 'rapalaEU-') {
 			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
 			var currencies = JSON.parse(json);
-			var params = request.httpParameterMap;
-			if (params.locale.value) {
-				country = params.locale.value.split('_').pop();
+			var params = request;
+			if (params.locale) {
+				country = params.locale.slice(-2).toUpperCase();
 			}
 			if (!empty(currencies)) {
 				if (country in currencies) {
@@ -94,21 +93,22 @@ var InterstitialHelper : Object = {
 
 		return url;
 	},
-	constructCountryLink: function(activeCountryJSON) {
+	constructCountryLink: function(activeCountryJSON, request) {
 		let defaultLink = 'http://www.rapala.com';
 		let activeCountry = activeCountryJSON.country;
 		let currentSite = dw.system.Site.getCurrent();
 		let protocol = "https://";
 		let countryLink;
-		
+		let locale = request.locale;
+
 		if (activeCountry == "ca" || activeCountry == "fi"  || activeCountry == "uk") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
-			//Need to build the setLocale url for the case of moving from EU or CA sites	
+			//Need to build the setLocale url for the case of moving from EU or CA sites
 			if (currentSite.ID == 'rapalaEU') {
 				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
-                countryLink=countryLink.toString().replace('rapalaEU', 'rapala');
+                countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('rapalaEU', 'rapala').replace(locale, 'default');
 			} else if (currentSite.ID == 'rapalaCA') {
 				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
                 countryLink=countryLink.toString().replace('rapalaCA', 'rapala');
@@ -119,15 +119,15 @@ var InterstitialHelper : Object = {
 			// construct a url based of the global custom preference json config
 			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
 			if (!empty(activeCountryJSON.sitePath) && activeCountryJSON.sitePath !== 'undefined') {
-				countryLink = protocol + 
-						  activeCountryJSON.domain + "/" + 
-						  activeCountryJSON.sitePath + 
-						  params + 
+				countryLink = protocol +
+						  activeCountryJSON.domain + "/" +
+						  activeCountryJSON.sitePath +
+						  params +
 						  activeCountryJSON.localeID;
 			} else {
-				countryLink = protocol + 
-						  activeCountryJSON.domain + "/" + 
-						  params + 
+				countryLink = protocol +
+						  activeCountryJSON.domain + "/" +
+						  params +
 						  activeCountryJSON.localeID;
 			}
 		}
