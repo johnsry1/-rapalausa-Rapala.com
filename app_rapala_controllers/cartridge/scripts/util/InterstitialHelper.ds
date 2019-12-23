@@ -29,7 +29,7 @@ var InterstitialHelper : Object = {
 			} else if (request.httpParameterMap.locale == 'eu-en') {
 				id = 'rapalaEU-';
 			}
-		}
+		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
 		if (id == 'rapalaEU-') {
@@ -105,7 +105,7 @@ var InterstitialHelper : Object = {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
-			//Need to build the setLocale url for the case of moving from EU or CA sites
+			//Need to build the setLocale url for the case of moving from EU or CA sites	
 			if (currentSite.ID == 'rapalaEU') {
 				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
                 countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('rapalaEU', 'rapala').replace(locale, 'default');
@@ -119,15 +119,15 @@ var InterstitialHelper : Object = {
 			// construct a url based of the global custom preference json config
 			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
 			if (!empty(activeCountryJSON.sitePath) && activeCountryJSON.sitePath !== 'undefined') {
-				countryLink = protocol +
-						  activeCountryJSON.domain + "/" +
-						  activeCountryJSON.sitePath +
-						  params +
+				countryLink = protocol + 
+						  activeCountryJSON.domain + "/" + 
+						  activeCountryJSON.sitePath + 
+						  params + 
 						  activeCountryJSON.localeID;
 			} else {
-				countryLink = protocol +
-						  activeCountryJSON.domain + "/" +
-						  params +
+				countryLink = protocol + 
+						  activeCountryJSON.domain + "/" + 
+						  params + 
 						  activeCountryJSON.localeID;
 			}
 		}
