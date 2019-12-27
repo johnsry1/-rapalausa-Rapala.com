@@ -28,8 +28,7 @@ exports.onRequest = function () {
 
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
 	var interstitialSiteId = null;
-
-	if (request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1) {
+	if ((request.locale && request.locale != 'default') || request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1) {
 		InterstitialHelper.setInterstitialSiteCookie(request);
 	}
 
@@ -48,6 +47,6 @@ exports.onRequest = function () {
 		var GeoipRedirects = require('*/cartridge/controllers/GeoipRedirects.js');
 		app.getController('GeoipRedirects').geolocationRestrictions();
     }
-	
+
     return new Status(Status.OK);
 };
