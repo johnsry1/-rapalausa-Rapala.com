@@ -58,7 +58,7 @@
                 </div>
                 <div class="rapala-middle-block">
                 	<isloop items="${activeCountries}" var="activeCountry" status="loopstatus">
-                		<a class="country link-${activeCountry.country}" href="${InterstitialHelper.constructCountryLink(activeCountry)}">
+                	    <a class="country link-${activeCountry.country}" href="${InterstitialHelper.constructCountryLink(activeCountry, pdict.CurrentRequest)}">
 	                        <div class="rapala-iternational-flag"></div>
 	                        <div class="url">${Resource.msg('global.eu.international.' + activeCountry.country, 'locale', null)}</div>
 	                        <div class="rapala-iternational-cart"></div>
