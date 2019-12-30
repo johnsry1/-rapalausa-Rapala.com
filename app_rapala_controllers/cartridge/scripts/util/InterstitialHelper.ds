@@ -44,6 +44,12 @@ var InterstitialHelper : Object = {
 				if (country in currencies) {
 					var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
 					var currency = currencies[country];
+					if (request.httpParameterMap.currencyCode) {
+						currency = request.httpParameterMap.currencyCode.value;
+					}
+					if (request.session.currency.currencyCode) {
+						currency = request.session.currency.currencyCode;
+					}
 					if (availableCurrency.indexOf(currency) != -1) {
 						session.setCurrency(dw.util.Currency.getCurrency(currency));
 					} else {
