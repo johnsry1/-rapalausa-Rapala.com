@@ -44,16 +44,17 @@ var InterstitialHelper : Object = {
 				if (country in currencies) {
 					var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
 					var currency = currencies[country];
-					if (request.httpParameterMap.currencyCode) {
-						currency = request.httpParameterMap.currencyCode.value;
-					}
-					if (request.session.currency.currencyCode) {
-						currency = request.session.currency.currencyCode;
-					}
-					if (availableCurrency.indexOf(currency) != -1) {
+					if (params.httpPath.indexOf('UpdateCurrency') != -1) {
+						currency = params.httpParameterMap.currencyCode.value;
+						session.custom.currencyUpdated = true;
 						session.setCurrency(dw.util.Currency.getCurrency(currency));
-					} else {
-						session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+					}
+					if (!session.custom.currencyUpdated) {
+						if (availableCurrency.indexOf(currency) != -1) {
+							session.setCurrency(dw.util.Currency.getCurrency(currency));
+						} else {
+							session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+						}
 					}
 				} else {
 					session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
