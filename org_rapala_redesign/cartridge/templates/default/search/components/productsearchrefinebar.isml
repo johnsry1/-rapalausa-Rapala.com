@@ -62,12 +62,12 @@
                             <div id="tabs">
                                 <div class="product">
                                     <input type="radio" name="css-tabs" id="producttab" checked="checked" class="producttab">
-                                    <a href="${pdict.ProductSearchResult.url('Search-Show')}"   name="" id="producttab-link"><label for="tab-1" class="producttab">Products</label></a>
+                                    <a href="${pdict.ProductSearchResult.url('Search-Show')}"   name="" id="producttab-link"><label for="tab-1" class="producttab">${Resource.msg('search.products.option','search',null)}</label></a>
                                 </div>
                                 <div class="content">
                                     <isif condition="${!pdict.ProductSearchResult.refinedSearch && !empty(pdict.ContentSearchResult) && pdict.ContentSearchResult.count > 0}">
                                         <input type="radio" name="css-tabs" id="contenttab" class="contenttab">
-                                        <a href="${URLUtils.https('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab-link"><label for="tab-2" class="contenttab">Content</label></a>
+                                        <a href="${URLUtils.https('Search-ShowContent', 'q', pdict.ContentSearchResult.searchPhrase)}"  name="" id="contenttab-link"><label for="tab-2" class="contenttab">${Resource.msg('search.content.option','search',null)}</label></a>
                                     </isif>
                                 </div>
                             </div>

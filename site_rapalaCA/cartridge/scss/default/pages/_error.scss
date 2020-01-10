@@ -1,0 +1,107 @@
+#content .contentbox,
+.contentbox {
+    box-shadow: none;
+}
+
+#container.pt_error {
+    #primary.primary-content {
+        .errorpage {
+            fieldset.nohitsearch {
+                width: auto;
+                height: auto;
+                button.btn {
+                    margin: 0 !important;
+                    float: left !important;
+                    border-radius: 0 $button-border-radius $button-border-radius 0 !important;
+                }
+                input.box {
+                    @include form-input;
+                    background: none;
+                    width: rem(200px);
+                    @include respond(desktop-down) {
+                        width: calc(100% - #{rem(85px)});
+                    }
+                }
+                button.btn {
+                    @include button;
+                    text-indent: 0;
+                    margin: 0 0 0 rem(5px);
+                    min-width: inherit;
+                    width: auto;
+                    height: rem($form-field-height);
+                    @include line-height($form-field-height);
+                    @include respond(desktop-down) {
+                        float: none;
+                        width: rem(80px);
+                    }
+                }
+            }
+            fieldset.nohitsearch {
+                @include respond(desktop-down) {
+                    border: none;
+                    box-shadow: none;
+                    width: 100%;
+                }
+            }
+            .nohits {
+                a.button {
+                    min-width: inherit;
+                    width: auto;
+                    padding: $button-submit-padding;
+                    @include font-size($button-submit-font-size);
+                    @include line-height($button-submit-line-height);
+                    box-sizing: border-box;
+                    @include respond(desktop-down) {
+                        width: 100%;
+                    }
+                }
+            }
+            .errorfooter {
+                .errorfooterbottom {
+                    padding-top: 0;
+                    @include respond(desktop) {
+                        margin-left: 16.875rem;
+                    }
+                }
+            }
+        }
+        .contentboxcontent {
+            .nohits {
+                .no-hits-search.mobileHide {
+                    @include respond(desktop-down) {
+                        box-shadow: none;
+                        border: none;
+                        height: auto;
+                        margin-bottom: 0;
+                    }
+                    input {
+                        @include respond(desktop-down) {
+                            @include form-input;
+                            width: calc(100% - #{rem(60px)});
+                            border-right: none;
+                        }
+                    }
+                    button {
+                        @include respond(desktop-down) {
+                            @include button;
+                            min-width: inherit;
+                            padding: 0;
+                            width: rem(60px);
+                            height: rem(30px);
+                            @include line-height(30px);
+                            background: url(../images/no-search-results_icon.png) no-repeat scroll center;
+                            border-radius: 0 $button-border-radius $button-border-radius 0 !important;
+                            &:hover {
+                                background: url(../images/no-search-results_icon.png) no-repeat scroll center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+div.desc {
+    font-family: $font !important;
+}

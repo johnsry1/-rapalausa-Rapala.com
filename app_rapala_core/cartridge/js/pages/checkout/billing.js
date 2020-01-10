@@ -28,7 +28,7 @@ var couponMenthods = {
         var stateValue = $('body').find('.shipping-state').val();
         var url = util.appendParamToURL(Urls.summaryRefreshURL, 'selectedState', stateValue);
         // load the updated summary area
-        $summary.load(url, function () {
+        $summary.on('load', url, function () {
             // hide edit shipping method link
             $summary.fadeIn('fast');
             $summary.find('.checkout-mini-cart .minishipment .header a').hide();
@@ -110,7 +110,7 @@ var couponMenthods = {
 
             // if the whole order total was paid with gift certs then hide other payment methods and show a message
             $('#paymentmethods').hide();
-            $('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+            $('.continuecheckoutbutton .continuecheckout').prop('checked', false);
             // if the order total is zero, determine was it because of the gift certificate use or a promotion? and show appropriate message
             if (flageallotmentcover == 'true') {
                 $('.giftcertused').addClass('allotmentcover');
@@ -187,7 +187,7 @@ var couponMenthods = {
         });
     },
     bindGiftCertificateRemoval: function () {
-        $('#giftcertentry a.remove').unbind('click').bind('click', function () {
+        $('#giftcertentry a.remove').off('click').on('click', function () {
             var gcId = util.trimPrefix($(this).attr('id'), 'rgc-');
             couponMenthods.removeGiftCertificate(gcId);
             uievents.synccheckoutH();
@@ -255,7 +255,7 @@ var couponMenthods = {
     },
     bindCreditCardPopulationHandler: function () {
         // select credit card from list
-        $('.creditcardlist select').change(function () {
+        $('.creditcardlist').on('change',' select', function () {
             var cardUUID = $(this).val();
             if (!cardUUID) {
                 jQuery('input[name$=\'paymentMethods_creditCard_owner\']').val('');
@@ -284,7 +284,7 @@ var couponMenthods = {
     },
     bindPaymentMethodChangeHandler: function () {
         // bind payment method change handler
-        $('#paymentmethods .toggle').click(function () {
+        $('#paymentmethods .toggle').on('click', function () {
             if (jQuery('input[name$="billing_paypalprocessed"]').val() != 'true') {
                 $('#paymentmethods .toggle').removeClass('active');
                 $(this).addClass('active');
@@ -293,13 +293,13 @@ var couponMenthods = {
                     var paypalStatus = jQuery('input[name$="_billing_paypalval_paypalprocessed"]').val();
                     $('.cardnotworking').hide();
                     if (paypalStatus == 'true') {
-                        //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+                        //$('.continuecheckoutbutton .continuecheckout').prop('checked', false);
                     } else {
                         //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
                     }
                 } else if (selectedID == 'CREDIT_CARD') {
                     if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_expiration_month"]').val() != '' && $('select[name$="paymentMethods_creditCard_expiration_month"]').val() != '') {
-                        //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+                        //$('.continuecheckoutbutton .continuecheckout').prop('checked', false);
                     } else {
                         //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
                     }
@@ -308,10 +308,10 @@ var couponMenthods = {
                 couponMenthods.changePaymentMethod(selectedID);
             }
         });
-        $('#paymentmethods .paymentform.creditcardpayment').click(function () {
+        $('#paymentmethods .paymentform.creditcardpayment').on('click', function () {
             $('.paymentmethods .toggle input#is-CREDIT_CARD').closest('.toggle').addClass('active');
         });
-        $('#paymentmethods .paymentform.paypal').click(function () {
+        $('#paymentmethods .paymentform.paypal').on('click', function () {
             $('.paymentmethods .toggle input#is-PayPal').closest('.toggle').addClass('active');
         });
     },
@@ -323,7 +323,7 @@ var couponMenthods = {
         progress.show('#paymentmethodform');
 
         // load the updated payment method area
-        $('#paymentmethodform').load(url, function () {
+        $('#paymentmethodform').on('load', url, function () {
             $('#paymentmethodform').fadeIn('fast');
             //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
             //couponMenthods.initPaymentMethodSelection();
@@ -382,7 +382,7 @@ var couponMenthods = {
         // If so, display a popup alert and give the customer a chance to
         // return to the cart and select the bonus product.
 
-        /*$('.noBonusBtn').unbind("click").click( function() {
+        /*$('.noBonusBtn').off("click").on('click', function() {
             $('.bonusdiscountcontainer').dialog('close');
           });*/
     },
@@ -406,7 +406,7 @@ var couponMenthods = {
                 var date = new Date();
                 var currentYear = date.getFullYear();
                 if ((data.expirationYear <= currentYear)) {
-                    $creditCard.find('[name$="_year"]').val('').change();
+                    $creditCard.find('[name$="_year"]').val('').trigger('change');
                 } else {
                     $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
                 }
@@ -543,13 +543,13 @@ function setCCFields(data) {
     var date = new Date();
     var currentYear = date.getFullYear();
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').change();
+        $creditCard.find('[name$="_year"]').val('').trigger('change');
     } else {
         $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('change');
     }
     $creditCard.find('[name$="_expiration_month"]').val(data.expirationMonth).trigger('blur');
     if ((data.expirationYear <= currentYear)) {
-        $creditCard.find('[name$="_year"]').val('').blur();
+        $creditCard.find('[name$="_year"]').val('').trigger('blur');
     } else {
         $creditCard.find('[name$="_year"]').val(data.expirationYear).trigger('blur');
     }
@@ -794,13 +794,13 @@ exports.init = function () {
 
             }
 
-            jQuery('.selectBonusBtn').unbind('click').click(function () {
+            jQuery('.selectBonusBtn').off('click').on('click', function () {
                 jQuery('.bonusdiscountcontainer').dialog('close');
                 location.href = '${URLUtils.https(\'Cart-Show\')}';
                 return false;
             });
 
-            jQuery('.noBonusBtn').unbind('click').click(function () {
+            jQuery('.noBonusBtn').off('click').on('click', function () {
                 jQuery('.bonusdiscountcontainer').dialog('close');
             });
         });
@@ -810,13 +810,13 @@ exports.init = function () {
     $('body').on('keydown', 'input[name$="_couponCode"]', function (e) {
         if (e.which === 13) {
             e.preventDefault();
-            $('#add-coupon').click();
+            $('#add-coupon').trigger('click');
         }
     });
     $('body').on('keydown', 'input[name$="_giftCertCode"]', function (e) {
         if (e.which === 13) {
             e.preventDefault();
-            $('#add-giftcert').click();
+            $('#add-giftcert').trigger('click');
         }
     });
 
@@ -851,7 +851,7 @@ exports.init = function () {
         $('.guestbillingform .password .errormessage').remove();
     }
 
-    $('.guestbillingform .billing-conpassword').blur(function () {
+    $('.guestbillingform .billing-conpassword').on('blur', function () {
         var billingPas = $('.guestbillingform .billing-password').val();
         var billingConpas = $('.guestbillingform .billing-conpassword').val();
         $('.guestbillingform .password .errormessage').remove();
@@ -868,18 +868,18 @@ exports.init = function () {
                 $('.guestbillingform .billing-conpassword').removeClass('errorclient');
                 $('.billingconfpassword').text(Resources.billingpasswordconfirm).addClass('hide');
                 if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
-                    //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+                    //$('.continuecheckoutbutton .continuecheckout').prop('checked', false);
                 }
             }
         } else {
             $('.guestbillingform .billing-conpassword').removeClass('errorclient');
             $('.billingconfpassword').text(Resources.billingpasswordconfirm).addClass('hide');
             if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
-                //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+                //$('.continuecheckoutbutton .continuecheckout').prop('checked', false);
             }
         }
     });
-    $('.guestbillingform .billing-password').bind('blur', function () {
+    $('.guestbillingform .billing-password').on('blur', function () {
         var billingPas = $('.guestbillingform .billing-password').val();
         var billingConpas = $('.guestbillingform .billing-conpassword').val();
         //$('.continuecheckoutbutton .continuecheckout').attr('disabled', 'disabled');
@@ -906,7 +906,7 @@ exports.init = function () {
 
         if ((billingPas == billingConpas) && (billingPas.length >= 5)) {
             if (!$('input[name$="_creditCard_owner"]').hasClass('errorclient') && !$('input[name$="_creditCard_number"]').hasClass('errorclient') && !$('input[name$="_creditCard_cvn"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_year"]').hasClass('errorclient') && !$('select[name$="paymentMethods_creditCard_month"]').hasClass('errorclient') && $('input[name$="_creditCard_owner"]').val() != '' && $('input[name$="_creditCard_number"]').val() != '' && $('input[name$="_creditCard_cvn"]').val() != '' && $('select[name$="paymentMethods_creditCard_year"]').val() != '' && $('select[name$="paymentMethods_creditCard_month"]').val() != '') {
-                //$('.continuecheckoutbutton .continuecheckout').removeAttr('disabled');
+                //$('.continuecheckoutbutton .continuecheckout').prop('checked', false);
             }
         }
     });
@@ -915,7 +915,7 @@ exports.init = function () {
         $('.expirationdate .custom-select span.errormessage').hide();
         $('.expirationdate.error').show();
     }
-    $('.checkoutbilling .continue-checkout-button .continuecheckout').click(function () {
+    $('.checkoutbilling .continue-checkout-button .continuecheckout').on('click', function () {
         var $checkoutButton = $('.continuecheckout.place-order-btn');
         if (navigator.userAgent.match(/Trident\/7\./)) {
             $('.continuecheckout.place-order-btn').append('<div class="loader"><div class="loader-indicator"></div><div class="loader-bg"></div></div>');
@@ -1021,7 +1021,7 @@ exports.init = function () {
             return false;
         }
         if ($('.billing-address-fields').is(':visible')) {
-            $('.billing-address-fields .state-blk select').blur();
+            $('.billing-address-fields .state-blk select').trigger('blur');
         }
     });
     //JIRA PREV-38 : Billing page_Credit Card Section: CVV number should not pre-populate.
@@ -1036,7 +1036,7 @@ exports.init = function () {
         //$('.singleshipping_error').show();
         $('.cardnumber .errormessage').css('display', 'none');
     }
-    $('.cardnumber input').blur(function() {
+    $('.cardnumber input').on('blur', function() {
         $('.generalError').addClass('hide');
     });
 };

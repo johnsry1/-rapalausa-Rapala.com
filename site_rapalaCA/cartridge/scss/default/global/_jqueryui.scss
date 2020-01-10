@@ -1,0 +1,55 @@
+// Dialog
+.ui-dialog {
+    .ui-widget-header {
+        padding: rem(5px) 0 rem(4px);
+        margin-left: rem(5px);
+        margin-right: rem(5px);
+        border-bottom: $border;
+        height: auto;
+        @include respond(large-up) {
+            margin-left: rem(20px);
+            margin-right: rem(20px);
+            padding: rem(20px) 0 rem(9px);
+        }
+    }
+
+    .ui-dialog-title {
+        float: none;
+        @include h2;
+        font-family: $font-third;
+    }
+    .ui-dialog-titlebar {
+        span.ui-icon-closethick {
+            background: url('../images/svg-icons/close-dialog.svg') no-repeat center;
+            top: -3px;
+        }
+    }
+    .ui-dialog-titlebar-close {
+        margin: 0 rem(-5px) 0 0;
+        right: 0;
+        top: 0;
+        padding: rem(11px);
+        width: rem(15px);
+        height: rem(15px);
+        min-width: inherit;
+        box-sizing: content-box;
+        @include respond(large-up) {
+            margin: 0 rem(-20px) 0 0;
+        }
+        &:hover {
+            .ui-icon-closethick {
+                background-position: center;
+            }
+        }
+    }
+    
+    .ui-dialog-content {
+        padding: rem(10px) rem(5px);
+        @include respond(large-up) {
+            padding: rem(14px) rem(20px) rem(20px);
+        }
+    }
+}
+.ui-widget {
+    font-family: $font;
+}

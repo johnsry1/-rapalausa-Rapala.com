@@ -8,7 +8,7 @@
 		<isif condition="${pdict.RegistrationStatus != null && pdict.RegistrationStatus.error}">
 			<div class="errorform ">
 				<isif condition="${pdict.RegistrationStatus.code != null && pdict.RegistrationStatus.code=='CustomerAlreadyExistError'}">
-					${Resource.msg('registration.customerexisterror','account',null)} <a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Account-Show')}" class="userlogin">${Resource.msg('headercustomerinfo.pleaselogin','components',null)}</a>						
+					${Resource.msg('registration.customerexisterror','account',null)} <a title="${Resource.msg('global.login','locale',null)}${pdict.CurrentCustomer.profile.firstName} ${pdict.CurrentCustomer.profile.lastName}" href="${URLUtils.https('Account-Show')}" class="userlogin">${Resource.msg('headercustomerinfo.pleaselogin','components',null)}</a>
 				</isif>
 			</div>
 		</isif>
@@ -23,22 +23,22 @@
 			 	function validate(form) {
 			  		errors = {};
 			  		phoneNumber = form.phone.replace(/\s+/g, "");
-			  
+
 			  		var phoneRegEx = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-			
+
 			  		if (form.phone == "" || phoneNumber.match(phoneRegEx) == null) {
 				  		errors.phone = "${Resource.msg('registration.invalidphone','account',null)}:";
 			  		}
-		
+
 			  		return errors;
 				}
-					
-			/* ]]> */</script> 
-		
-			
+
+			/* ]]> */</script>
+
+
 		</isif>
 		<iscomment>Builds a registration page for the user. It provides all input fields for names and address</iscomment>
-		<div class="registration">			
+		<div class="registration">
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm" novalidate>
 				<input type="hidden" name="ltkSubscriptionCode" value="vipregister" />
 				<input type="hidden" name="source" value="vipregister" />
@@ -46,7 +46,7 @@
 				<input type="hidden" name="customer_group" value="true" />
 				<fieldset>
 					<div class="vipregform">
-						<isif condition="${!pdict.CurrentForms.profile.customer.notused.valid}">						
+						<isif condition="${!pdict.CurrentForms.profile.customer.notused.valid}">
 							<div id="message" class="error" style="text-align: left;">${Resource.msg('vip.codeused','forms',null)}</div>
 						<iselseif condition="${!pdict.CurrentForms.profile.customer.numberexists.valid}">
 							<div id="message" class="error" style="text-align: left;">${Resource.msg('vip.codeerror','forms',null)}</div>
@@ -65,19 +65,19 @@
 								<span class="existing_register"><isprint value="${Resource.msg('vipaccountsignup.emailexist','vip',null)}"/></span>
 							</isif>
 						</div><!-- END: email -->
-						
+
 						<div class="formfield_email  floatleft">
 							<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input" fieldClass="accountEmailConfirmation" />
-						
+
 						</div><!-- END: emailconfirm -->
-						
+
 						<div class="formfield_pwd phone norightmargin floatleft">
 							<isinputfield formfield="${pdict.CurrentForms.profile.customer.phone}" type="input" attribute1="pattern" value1="[0-9]*" />
-							
+
 						</div><!-- END: phone -->
 						<div class="formfield_pwd floatleft">
 							<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" fieldClass="c_password"/>
-							
+
 						</div><!-- END: passowrd -->
 						<div class="formfield_pwd floatleft">
 							<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" fieldClass="confirm_password"/>
@@ -96,24 +96,24 @@
 							<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}"  type="checkbox" attribute1="checked"  value1="checked" label="false"/>
 						<iselse/>
 							<isinputfield formfield="${pdict.CurrentForms.profile.customer.addtoemaillist}"  type="checkbox" label="false"/>
-						</isif>	
+						</isif>
 							<label for="${pdict.CurrentForms.profile.customer.addtoemaillist.htmlName}">${Resource.msg('vip.createaccount.addtoemail','vip',null)}
 								<div class="privacy-care">
 									<iscomment><span>Please click here for more information on our </span></iscomment>
 									<a title="${Resource.msg('global.readprivacypolicy','locale',null)}" href="${URLUtils.https('Page-Show', 'cid', 'customer-privacy-security')}">${Resource.msg('global.privacypractices','locale',null)}</a>.
 								</div>
 							</label>
-							</div>						
+							</div>
 						</div>
-						
+
 						<div class="vipformfieldaddtoterms clear">
 								<div class="custom-checkbox custom">
 									<div class="custom-link"></div>
 								<input type="checkbox" class="vipchecks" id="${pdict.CurrentForms.agecheck.isvip.htmlName}" name="${pdict.CurrentForms.agecheck.isvip.htmlName}" value="${pdict.CurrentForms.agecheck.isvip.htmlValue}"/>
-								<div class="vipformfieldaddtoterms addtoterms1">${Resource.msg('vip.createaccount.terms','vip',null)}<a class="vip-click" href="${URLUtils.url('Page-Show','cid','customer-terms-conditions-vip')}" target="_blank"><span class="bold">${Resource.msg('vip.createaccount.termsandconitions','vip',null)}</span></a>${Resource.msg('vip.createaccount.terms1','vip',null)}</div>						
+								<div class="vipformfieldaddtoterms addtoterms1">${Resource.msg('vip.createaccount.terms','vip',null)}<a class="vip-click" href="${URLUtils.url('Page-Show','cid','customer-terms-conditions-vip')}" target="_blank"><span class="bold">${Resource.msg('vip.createaccount.termsandconitions','vip',null)}</span></a>${Resource.msg('vip.createaccount.terms1','vip',null)}</div>
 							</div>
 						</div>
-						
+
 						<div class="formfield vipactions">
 							<button type="submit" class="vip-chks" value="${Resource.msg('global.apply','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('vip.account.signup','vip',null)}</span></button>
 							<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
@@ -124,14 +124,14 @@
 				</div>
 			</fieldset>
 		</form>
-	</div>		
+	</div>
 		<div class="privacypolicy" id="privacypolicy" style="display:none;overflow:auto;">
 			<iscontentasset aid="privacy-policy"/>
 		</div>
-			
+
 		<script type="text/javascript">/*<![CDATA[*/
-			jQuery(document).ready(function() {	
-				
+			jQuery(document).ready(function() {
+
 			 	jQuery('#privacypolicy').dialog({
 			 			bgiframe: true,
 						autoOpen: false,
@@ -141,63 +141,63 @@
 				    	title: '${Resource.msg('global.privacypolicy','locale',null)}',
 				    	resizable: false
 				});
-								
-				jQuery('#privacyPolicy').click( function() {
+
+				jQuery('#privacyPolicy').on('click', function() {
 					jQuery('#privacypolicy').show();
 					jQuery('#privacypolicy').dialog('open');
 				});
-		
+
 				// keep track of which fields are changed, firstname/lastname are nameChanged, all others are loginChanged
-				jQuery('input').change(function(formField) {			
-			        if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.login.htmlName}") >= 0) {  
+				jQuery('input').on('change', function(formField) {
+			        if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.login.htmlName}") >= 0) {
 			        	loginChanged = true;
 			        } else if (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.email.htmlName}") >= 0) {
 			        	loginChanged = true;
-			        } else if ((formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.firstname.htmlName}") >= 0) || 
-			    	        (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.lastname.htmlName}") >= 0)) {  
-			        	nameChanged = true;    
-			        }   
+			        } else if ((formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.firstname.htmlName}") >= 0) ||
+			    	        (formField.currentTarget.id.indexOf("${pdict.CurrentForms.profile.customer.lastname.htmlName}") >= 0)) {
+			        	nameChanged = true;
+			        }
 				});
-		
+
 				// if the select box has a change set the flag
-				jQuery('select').change(function(e) {
+				jQuery('select').on('change', function(e) {
 					loginChanged = true;
 				});
-				
-				// open privacy pop-up	
-				jQuery("#privacy").click(function(){		
+
+				// open privacy pop-up
+				jQuery("#privacy").on('click', function(){
 					app.dialog.open('${URLUtils.url('Page-Include','cid','privacy-policy')}','${Resource.msg('global.privacypolicy','locale',null)}');
 					return false;
-				});	
-		
+				});
+
 				// clear out formfields that could be part of autocomplete
 			    jQuery("[name=${pdict.CurrentForms.profile.customer.emailconfirm.htmlName}]").val("");
-			    jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").val("");	 
-			    jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").val("");	
-		
+			    jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").val("");
+			    jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").val("");
+
 			    // change the labels of the password fields in case the user is logged in
 			    if (${pdict.CurrentCustomer.registered}) {
 			    	jQuery("[name=${pdict.CurrentForms.profile.login.password.htmlName}]").parent().prev().children('.labeltext').html("${Resource.msg('label.newpassword','forms',null)}:");
 			    	jQuery("[name=${pdict.CurrentForms.profile.login.passwordconfirm.htmlName}]").parent().prev().children('.labeltext').html("${Resource.msg('profile.newpasswordconfirm','forms',null)}:");
 			    }
-		
+
 			    // hide the facebook registration div
 			    jQuery('.facebookregistration').hide();
-		    
+
 			 	// bind the registration selection
 			    bindRegistrationChangeHandler();
-		
+
 			    // check for any registration errors
 			    <isif condition="${pdict.RegistrationStatus != null && pdict.RegistrationStatus.code=='CustomerAlreadyExistError'}">
 		    		jQuery('.registrationselection').hide();
 			    	jQuery('.facebookregistration').hide();
 					jQuery('.registration').hide();
 			    </isif>
-			
-				jQuery('.formfield .vip-chks').click(function(event){
+
+				jQuery('.formfield .vip-chks').on('click', function(event){
 					  var form = jQuery('#RegistrationForm');
 					  if(!form.valid()){
-						    if(jQuery('.vipchecks').size() <= 0) {
+						    if(jQuery('.vipchecks').length <= 0) {
 						    }else if(jQuery('.vipchecks').is(':checked')){
 						    }else{
 						    	if(jQuery('.addtoterms1').find('.vipcheckmessage').length == 0){
@@ -207,7 +207,7 @@
 						    }
 						  return false;
 					  }else{
-						  if(jQuery('.vipchecks').size() <= 0) {
+						  if(jQuery('.vipchecks').length <= 0) {
 						    }else if(jQuery('.vipchecks').is(':checked')){
 						    }else{
 						    	if(jQuery('.addtoterms1').find('.vipcheckmessage').length == 0){
@@ -216,32 +216,32 @@
 						    	event.preventDefault();
 						    }
 					  }
-				  }); 
-				 	jQuery('.vipchecks').click(function(){
+				  });
+				 	jQuery('.vipchecks').on('click', function(){
 				 		if($(this).is(':checked')){
 				 			jQuery('.addtoterms1').find('.vipcheckmessage').remove();
 				 		}
 				 	});
-			    
+
 				});
-		
+
 				function bindRegistrationChangeHandler() {
-				jQuery("input[name=registration1]").click(function() {
+				jQuery("input[name=registration1]").on('click', function() {
 				checkType = jQuery(this).is(":checked");
 				if (checkType == true) {
 				jQuery('.registration').hide();
-				} 
+				}
 				else
 				{
 				jQuery('.registration').show();
 				}
-				}); 
+				});
 
-				jQuery("input[name=registration]").click(function() {
+				jQuery("input[name=registration]").on('click', function() {
 				checkTypes = jQuery(this).is(":checked");
 				if (checkTypes == true) {
 				jQuery('.registration').show();
-				} 
+				}
 				else
 				{
 				jQuery('.registration').hide();

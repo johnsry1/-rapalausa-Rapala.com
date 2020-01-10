@@ -1,0 +1,114 @@
+.paymentslist {
+    .paymentinstruments {
+        .creditcard {
+            .payment-list {
+                .cc-exp {
+                    .label {
+                        font-family: $font;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pt_leftnav-payment {
+    .dialog-required {
+        font-size: 13px;
+        .required-indicator {
+            font-family: $font;
+            em {
+                font-family: $font;
+            }
+        }
+    }
+}
+
+.creditcardform {
+    #CreditCardForm {
+        .form-row {
+            margin: 6px 0 12px;
+            & > .form-row {
+                float: left;
+                margin: 0;
+                .field-wrapper {
+                    width: 100%!important;
+                    .select-style {
+                        width: 100%;
+                        .input-select {
+                            width: 100%!important;
+                        }
+                    }
+                }
+            }
+            .field-wrapper {
+                width: 100%;
+                padding-left: 0 !important;
+                @include respond(large-up) {
+                    width: rem($form-horizontal-field-width) !important;
+                    padding-left: rem($form-horizontal-field-padding) !important;
+                    margin-bottom: 0;
+                }
+                .select-style {
+                    width: 50%;
+                }
+                .input-select {
+                    width: 100%;
+                    height: $form-field-height - $form-field-border-width * 2;
+                    margin-bottom: 0;
+                    background: $trans;
+                    box-shadow: none;
+                    -moz-box-shadow: none;
+                    -webkit-box-shadow: none;
+                    border-radius: 0;
+                    width: calc(100% + #{$form-dropdown-arrow-icon-width}) !important;
+                    appearance: none;
+                    &.errorclient {
+                        background: $trans;
+                        border: 0;
+                    }
+                }
+            }
+            .form-caption {
+                margin-left: 0 !important;
+                @include font-size(13px);
+                @include respond(large-up) {
+                    margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+                }
+            }
+            &.month,
+            &.year {
+                margin: 0;
+                @include respond(medium-down) {
+                    width: 100%;
+                }
+            }
+        }
+        .form-label-text {
+            float: left;
+            text-align: right;
+            width: 25%;
+            font-size: 12px;
+            padding: 0;
+            font-weight: normal;
+            .label {
+                text-align: right;
+                .requiredindicator {
+                    float: none;
+                }
+                .labeltext {
+                    text-transform: uppercase;
+                    font-variant: normal;
+                }
+            }
+        }
+    }
+   .selectorOut {
+       display: none;
+   }
+    #add-card-submit {
+        @include respond(large-up) {
+            margin-left: rem($form-horizontal-label-width + $form-horizontal-field-padding) !important;
+        }
+    }
+}

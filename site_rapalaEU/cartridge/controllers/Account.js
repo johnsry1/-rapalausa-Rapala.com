@@ -14,6 +14,7 @@ var URLUtils = require('dw/web/URLUtils');
 var Form = require('*/cartridge/scripts/models/FormModel');
 var Customer = require('*/cartridge/scripts/models/CustomerModel');
 var Transaction = require('dw/system/Transaction');
+var Site = require('dw/system/Site');
 
 /* Script Modules */
 var app = require('*/cartridge/scripts/app');
@@ -102,7 +103,14 @@ function registrationForm() {
             		response.redirect(URLUtils.https('Account-Show'));
             	}
             } else {
-            	ltkSignupEmail.Signup();
+            	if (Site.getCurrent().getCustomPreferenceValue('MailChimpEnable')) {
+                    if (app.getForm('profile.customer.addtoemaillist').value()) {
+                    	var mailchimpHelper = require('*/cartridge/scripts/util/MailchimpHelper.js');
+                    	mailchimpHelper.addNewListMember(app.getForm('profile.customer.firstname').value(), app.getForm('profile.customer.email').value());
+                    }
+                } else {
+                	ltkSignupEmail.Signup();
+                }
                 app.getForm('profile').clear();
                 target = session.custom.TargetLocation;
                 if (target) {

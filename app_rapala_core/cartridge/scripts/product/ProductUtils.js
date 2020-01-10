@@ -286,7 +286,10 @@ ProductUtils.getImagesDetails = function (item, pvm) {
                 if(dw.system.Site.current.ID == 'rapala') {
                   variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
                   zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapala-Site/-", "Sites-rapala-Site/Sites-rapala-master");
-                } else  {
+                } else if (dw.system.Site.current.ID == 'rapalaCA') {
+                    variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaCA-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                    zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaCA-Site/-", "Sites-rapala-Site/Sites-rapala-master");
+                } else {
                   variants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,mainTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
                   zoomvariants[varid] = dw.web.URLUtils.imageURL(variant.custom.variantImage,zoomTransform).toString().replace("Sites-rapalaEU-Site/-", "Sites-rapalaEU-Site/Sites-rapala-master-eu");
                  }
@@ -825,6 +828,32 @@ ProductUtils.getDefaultVariant = function (pvm) {
         }
     }
     return null;
+};
+
+ProductUtils.hasInStockVariants = function (product) {
+    var hasInStockVariants = false;
+    var masterPvm = product.getVariationModel();
+    var attrIter = masterPvm.productVariationAttributes.iterator();
+    while (attrIter.hasNext()) {
+        var attr = attrIter.next();
+        var pva = {
+            id: attr.getAttributeID(),
+            name: attr.getDisplayName(),
+            vals: []
+        };
+        var attValIterator = masterPvm.getAllValues(attr).iterator();
+        while (attValIterator.hasNext()) {
+            var attrValue = attValIterator.next();
+            if (masterPvm.hasOrderableVariants(attr, attrValue)) { 
+                hasInStockVariants = true;
+                break;
+            }
+        }
+        if (hasInStockVariants) {
+            break;
+        }
+    }
+    return hasInStockVariants;
 };
 
 ProductUtils.getProductType = function (product) {

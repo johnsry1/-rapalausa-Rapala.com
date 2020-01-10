@@ -21,7 +21,7 @@
 						jQuery('#footer').append('<a href="${URLUtils.url('Home-Show')}" class="full-site-link">View Full Site</a>');
 						jQuery('.full-site-link')
 							.attr('href', '<isprint value="${siteUrl}" encoding="off"/>')
-							.click(function(e) {
+							.on('click', function(e) {
 								e.preventDefault();
 								jQuery.ajax({
 									url: '<isprint value="${siteUrl}" encoding="off"/>',
@@ -45,7 +45,7 @@
 						jQuery('#footer').append('<a href="${URLUtils.url('Home-Show')}" class="mobile-site-link">View Mobile Site</a>');
 						jQuery('.mobile-site-link')
 						.attr('href', '<isprint value="${siteUrl}" encoding="off"/>')
-						.click(function(e) {
+						.on('click', function(e) {
 							e.preventDefault();
 							jQuery.ajax({
 								url: '<isprint value="${siteUrl}" encoding="off"/>',
