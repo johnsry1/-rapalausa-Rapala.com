@@ -21,7 +21,7 @@
 					<isprint value="${SubcategoryHit.displayName}"/>
 				</h2>
 				<isset name="count" value="${getcategoryProductCount(SubcategoryHit.ID)}" scope="page"/>
-				<span>-<a class="" href="${URLUtils.https('Search-Show','cgid', SubcategoryHit.getID())}">See All <isprint value="${count.toFixed()}"/></a></span>
+				<span>-<a class="" href="${URLUtils.https('Search-Show','cgid', SubcategoryHit.getID())}">${Resource.msg('product.seeall','product',null)} <isprint value="${count.toFixed()}"/></a></span>
 			</div>
 		</isif>
 		<div class="clear"></div>
@@ -162,7 +162,7 @@
 					</a>
 					<a id="quickviewbutton" class="quickview" href="${productUrl}"
 						data-gtmdata="${JSON.stringify(gtmProductData)}">
-						QUICK VIEW
+						${Resource.msg('product.quickview','product',null)}
 					</a>
 				</div>
 				<div class="product-name">
@@ -293,7 +293,7 @@
 				<isprint value="${SubcategoryHit.displayName}"/>
 			</h2>
 			<isset name="count" value="${getcategoryProductCount(SubcategoryHit.ID)}" scope="page"/>
-			<span>-<a class="" href="${URLUtils.https('Search-Show','cgid', SubcategoryHit.getID())}">See All <isprint value="${count.toFixed()}"/></a></span>
+			<span>-<a class="" href="${URLUtils.https('Search-Show','cgid', SubcategoryHit.getID())}">${Resource.msg('product.seeall','product',null)} <isprint value="${count.toFixed()}"/></a></span>
 		</div>
 
 		<isinclude template="product/subcatprodsearchhittilewithoutprods"/>

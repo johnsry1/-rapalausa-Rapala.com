@@ -27,7 +27,7 @@ var storeLocator = {
         $('.googlemap').on('click', function () {
             window.open(this.name);
         });
-        $('body').find('form.locatorForm').submit(function (e) {
+        $('body').find('form.locatorForm').on('submit', function (e) {
             e.preventDefault();
             var $form = jQuery(this);
             if ($('#locatorForm button').prop('disabled')) {

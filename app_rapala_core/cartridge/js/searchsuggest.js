@@ -50,7 +50,7 @@ var searchsuggest = {
         $searchField.attr('autocomplete', 'off');
 
         // on focus listener (clear default value)
-        $searchField.focus(function () {
+        $searchField.on('focus', function () {
             if (!$resultsContainer) {
                 // create results container if needed
                 //$resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
@@ -60,7 +60,7 @@ var searchsuggest = {
                 $searchField.val('');
             }
         });
-        $searchField.blur(function () {
+        $searchField.on('blur', function () {
             var temp = $searchField.val();
             if ($.trim(temp) == '') {
                 $searchField.val('Search Entire Site...');
@@ -75,7 +75,7 @@ var searchsuggest = {
         // on submit we do not submit the form, but change the window location
         // in order to avoid https to http warnings in the browser
         // only if it's not the default value and it's not empty
-        $searchForm.submit(function () {
+        $searchForm.on('submit', function () {
             var searchUrl = $searchForm.attr('action');
             var sessionId = jQuery('#footerhiddenid').text();
             var k = ''
@@ -113,7 +113,7 @@ var searchsuggest = {
             return false;
         });
         // on key up listener
-        $searchField.keyup(function (e) {
+        $searchField.on('keyup', function (e) {
 
             // get keyCode (window.event is for IE)
             var keyCode = e.keyCode || window.event.keyCode;

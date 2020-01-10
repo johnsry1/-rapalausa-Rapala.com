@@ -984,7 +984,7 @@ var validator = {
         var isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
         var isExplorer = navigator.userAgent.indexOf('MSIE') > -1;
         if (isFirefox || isExplorer) {
-            $('input[name$=\'phone\']').bind('keyup keydown', function (e) {
+            $('input[name$=\'phone\']').on('keyup keydown', function (e) {
                 if (e.shiftKey || e.ctrlKey || e.altKey) {
                     e.preventDefault();
                 } else {
@@ -1048,7 +1048,7 @@ var validator = {
             });
         }
 
-        /* $("input[name$='phone']").blur(function (e) {
+        /* $("input[name$='phone']").on('blur', function (e) {
              $(this).val(this.value.replace(/[A-Za-z` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''));
                  var curval = $(this).val();
                  var str1 = curval.substring(0, 3);

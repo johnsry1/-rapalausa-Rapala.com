@@ -55,7 +55,7 @@
                                 <isset name="Refinements" value="${pdict.ProductSearchResult.refinements}" scope="page"/>
                                 <isif condition="${Refinements != null && Refinements.refinementDefinitions.size() > 0}">
                                     <a class="mobile-filter-by mobileHide">
-                                        filter by
+                                        <isprint value="${Resource.msg('searchrefinebar.searchresults','search',null)}" />
                                         <span class="active"></span>
                                     </a>
                                 </isif>

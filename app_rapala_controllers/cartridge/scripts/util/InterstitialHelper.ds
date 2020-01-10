@@ -20,7 +20,6 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		var z = request;
 		var id = "rapala-";
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
@@ -29,7 +28,7 @@ var InterstitialHelper : Object = {
 				id = 'rapalaCA-';
 			} else if (request.httpParameterMap.locale == 'eu-en') {
 				id = 'rapalaEU-';
-			}	
+			}
 		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
@@ -37,18 +36,25 @@ var InterstitialHelper : Object = {
 			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
 			var currencies = JSON.parse(json);
-			var params = request.httpParameterMap;
-			if (params.locale.value) {
-				country = params.locale.value.split('_').pop();
+			var params = request;
+			if (params.locale) {
+				country = params.locale.slice(-2).toUpperCase();
 			}
 			if (!empty(currencies)) {
 				if (country in currencies) {
 					var availableCurrency = dw.system.Site.getCurrent().getAllowedCurrencies();
 					var currency = currencies[country];
-					if (availableCurrency.indexOf(currency) != -1) {
+					if (params.httpPath.indexOf('UpdateCurrency') != -1) {
+						currency = params.httpParameterMap.currencyCode.value;
+						session.custom.currencyUpdated = true;
 						session.setCurrency(dw.util.Currency.getCurrency(currency));
-					} else {
-						session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+					}
+					if (!session.custom.currencyUpdated) {
+						if (availableCurrency.indexOf(currency) != -1) {
+							session.setCurrency(dw.util.Currency.getCurrency(currency));
+						} else {
+							session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
+						}
 					}
 				} else {
 					session.setCurrency(dw.util.Currency.getCurrency(currencies['default']));
@@ -94,36 +100,43 @@ var InterstitialHelper : Object = {
 
 		return url;
 	},
-	constructCountryLink: function(activeCountryJSON) {
+	constructCountryLink: function(activeCountryJSON, request) {
 		let defaultLink = 'http://www.rapala.com';
 		let activeCountry = activeCountryJSON.country;
 		let currentSite = dw.system.Site.getCurrent();
 		let protocol = "https://";
 		let countryLink;
-		
-		if (activeCountry == "ca") {
+		let locale = request.locale;
+
+		if (activeCountry == "ca" || activeCountry == "fi"  || activeCountry == "uk") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 			//Need to build the setLocale url for the case of moving from EU or CA sites	
 			if (currentSite.ID == 'rapalaEU') {
 				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
-                countryLink=countryLink.toString().replace('rapalaEU', 'rapala');
+                countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('rapalaEU', 'rapala').replace(locale, 'default');
 			} else if (currentSite.ID == 'rapalaCA') {
 				countryLink=URLUtils.url('Home-SetLocale', 'locale', 'default');
                 countryLink=countryLink.toString().replace('rapalaCA', 'rapala');
                 countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('en_CA', 'default');
 			}
 		} else {
-			let protocol = "https://";
 			let params = "?countrySelect=true&locale=";
 			// construct a url based of the global custom preference json config
 			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
-			countryLink = protocol + 
+			if (!empty(activeCountryJSON.sitePath) && activeCountryJSON.sitePath !== 'undefined') {
+				countryLink = protocol + 
 						  activeCountryJSON.domain + "/" + 
 						  activeCountryJSON.sitePath + 
 						  params + 
 						  activeCountryJSON.localeID;
+			} else {
+				countryLink = protocol + 
+						  activeCountryJSON.domain + "/" + 
+						  params + 
+						  activeCountryJSON.localeID;
+			}
 		}
 
 		// default the URL to US Production in the event we failed to construct a url beforehand.
