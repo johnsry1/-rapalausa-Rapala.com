@@ -147,11 +147,14 @@ function initializeEvents() {
         var $tile = $(this).closest('.product-tile'),
             $thumb = $tile.find('.product-image .thumb-link img').eq(0),
             data = $thumb.data('current');
-        $thumb.attr({
-            src: data.src,
-            alt: data.alt,
-            title: data.title
-        });
+        // on selecting items on plp, the $thumb might not populate, tossing a JS error
+        if ($thumb) {
+            $thumb.attr({
+                src: data.src,
+                alt: data.alt,
+                title: data.title
+            });
+        }
         $('.search-result-content.wide-tiles .product-tile .product-image a.thumb-link.currentimg img').each(function () {
             this.src = this.src.replace('sw=130&sh=92', 'sw=352&sh=251');
         });
