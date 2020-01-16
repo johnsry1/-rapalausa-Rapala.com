@@ -60,7 +60,7 @@ function updateProductListing(url) {
     }
     $('#main').addClass('hidecontent');
     progress.show('#main');
-    $('#main').on('load', util.appendParamToURL(url, 'format', 'ajax'), function () {
+    $('#main').load(util.appendParamToURL(url, 'format', 'ajax'), function () {
         searchRefinment.searchRefinementToggle();
         uievents.init();
         compareWidget.init();
@@ -248,7 +248,7 @@ var searchRefinment = {
             //jQuery(this).closest('.navgroup').find(".js-scrollbar").tinyscrollbar({trackSize : 200});
         });
 
-        $(window).on('load', function () {
+        $(window).load(function () {
             $('#secondary').removeClass('visible-hidden').addClass('secondary-hide');
         });
         if ($(window).width() > 959) {
