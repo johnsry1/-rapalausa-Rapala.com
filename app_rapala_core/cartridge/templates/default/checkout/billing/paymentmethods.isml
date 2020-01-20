@@ -127,8 +127,8 @@
 <input type="hidden" value="${flageallotmentcover}" class="flageallotmentcover"/>
 <input type="hidden" value="${allotmentAmount}" class="allotmentAmount"/>
 <isset name="flageallotmentcover" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
-<isif condition="${'1' == '1'}">
-
+<isif condition="${pdict.OrderTotal > 0 && remainingBalance > 0}">
+	
 			<div id="paymentmethods"class="payment-method-options form-indent">
 				<div class="paymentmethods_cont">
 					<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
