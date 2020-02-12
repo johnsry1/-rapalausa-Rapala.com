@@ -36,15 +36,13 @@
 <li>
     <div class="change-region">
         <span class="change-region-footer">
-            <isif condition="${session.custom.currentSite != 'strikemaster'}">
-                <isif condition="${session.custom.currentSite == 'iceforce'}">
-                    <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
-                <iselse>
-                    <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id',ID)}">
-                </isif>
-                    <span class="country">${Resource.msg('global.changecountry','locale',null)}</span>
-                </a>
+            <isif condition="${session.custom.currentSite == 'iceforce'}">
+                <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
+            <iselse>
+                <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id',ID)}">
             </isif>
+                <span class="country">${Resource.msg('global.changecountry','locale',null)}</span>
+            </a>
         </span>
     </div>
 </li>
