@@ -23,7 +23,7 @@ var rapalainsider = {
         //var validatorinit = $(this).closest('form').validate();
         $('#PasswordReset123').on('click', function (e) {
             e.preventDefault();
-            $vipinsider.on('load', Urls.vipInsider, function () {
+            $vipinsider.load(Urls.vipInsider, function () {
                 $vipinsider.dialog({
                     bgiframe: true,
                     autoOpen: false,
