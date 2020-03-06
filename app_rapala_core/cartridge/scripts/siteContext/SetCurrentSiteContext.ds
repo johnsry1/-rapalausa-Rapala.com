@@ -27,8 +27,8 @@ importPackage(dw.catalog);
 function determineFolderContext (folder : dw.content.Folder) : String {
 	var nextFolder : dw.content.Folder = folder;
 	var brandNames : dw.util.HashSet = new dw.util.HashSet();
-		brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce']);	
-		
+		brandNames.add(['rapala','sufix','triggerx','storm','luhrjensen','marcum','vmc','bluefox','terminator','williamson','strikemaster','iceforce', 'marttiini']);
+
 	var context : String = "global";
 	while(nextFolder.root == false) {
 		if(brandNames.contains(nextFolder.ID)) {
@@ -96,8 +96,8 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	    					
 	    		case "20": currentSite = "iceforce";
 	    					break;
-	    					
-	    		case "22": currentSite = "martiini";
+
+	    		case "22": currentSite = "marttiini";
 	    					break;
 
 	    	}
@@ -160,6 +160,10 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 			else if ("strikemaster"==category.ID || category.ID.indexOf("strikemaster") != -1)
 	      	{
 	        	currentSite = "strikemaster";
+			}
+			else if ("marttiini"==category.ID || category.ID.indexOf("marttiini") != -1)
+	      	{
+	        	currentSite = "marttiini";
 			}
 			else if (category.ID.indexOf("iceforce") != -1)
 	      	{
@@ -275,7 +279,11 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 		      	{
 		        	currentSite = "strikemaster";
 				}
-			
+				else if ("marttiini"==category.ID)
+		      	{
+		        	currentSite = "marttiini";
+				}
+
 	      	}
 			
 	    }
@@ -312,6 +320,8 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 				break;
 				case 'iceforce' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','12'));
 				break;
+				case 'marttiini' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','22'));
+				break;
 				default: response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','1'));
 					}
 			
@@ -342,6 +352,8 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 				case 'strikemaster' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','11'));
 				break;
 				case 'iceforce' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','12'));
+				break;
+				case 'marttiini' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','22'));
 				break;
 				default:response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
 					}
@@ -383,6 +395,10 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 
 			else if(host.indexOf('strikemaster') > -1 || path.indexOf('strikemaster') > -1) {
 				currentSite = "strikemaster";
+			}
+
+			else if(host.indexOf('marttiini') > -1 || path.indexOf('marttiini') > -1) {
+				currentSite = "marttiini";
 			}
 
 			else if(host.indexOf('iceforce') > -1 || path.indexOf('iceforce') > -1) {
