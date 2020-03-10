@@ -14,7 +14,7 @@ importPackage( dw.catalog );
  */
 function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	var result = [];
-	
+
 	var psm : ProductSearchModel = new ProductSearchModel();
 	psm.setCategoryID(category.getID());
 	psm.search();
@@ -302,12 +302,22 @@ ViewHelpers.getHreflangTags = function(){
 
 	// get allowed locales
     var allActiveLocaleArray = site.getAllowedLocales();
+	var activeCountries = JSON.parse(System.getPreferences().getCustom()['ActiveCountries']);
 
     // iterating through allowed locales and creating hrefLangTarget
     for each (var activeLocale in allActiveLocaleArray) {
     	
     	//get href
 		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeLocale);
+		if (site.ID == 'rapalaEU') {
+			for (var i=0; i < activeCountries.length; i++) {
+				if (activeCountries[i].sitePath && activeCountries[i].sitePath !== 'default') {
+					if (activeCountries[i].localeID === activeLocale) {
+						action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeCountries[i].localeID, activeCountries[i].domain);
+					}
+				}
+			}
+    }
 		var paramArray = [];
 		for each (var paramName in request.httpParameterMap.parameterNames) {
 			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
