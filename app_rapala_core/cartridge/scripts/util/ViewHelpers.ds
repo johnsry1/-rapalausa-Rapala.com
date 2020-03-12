@@ -309,11 +309,16 @@ ViewHelpers.getHreflangTags = function(){
     	
     	//get href
 		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeLocale);
+		var isActiveCountry = false;
+		var activeCountriesLocaleID = '';
+		// if site is EU and country is active, rewrite the hreflang url
 		if (site.ID == 'rapalaEU') {
 			for (var i=0; i < activeCountries.length; i++) {
-				if (activeCountries[i].sitePath && activeCountries[i].sitePath !== 'default') {
+				if (activeCountries[i].sitePath && activeCountries[i].localeID !== 'default') {
 					if (activeCountries[i].localeID === activeLocale) {
 						action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeCountries[i].localeID, activeCountries[i].domain);
+						isActiveCountry = true;
+						activeCountriesLocaleID = activeCountries[i].localeID;
 					}
 				}
 			}
@@ -323,7 +328,11 @@ ViewHelpers.getHreflangTags = function(){
 			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
 		}
 		var href = dw.web.URLUtils.abs(action, paramArray);
-    	
+		//if site is EU and country is active, remove the localelD from the URL
+		if (isActiveCountry) {
+			href = href.toString().replace(activeCountriesLocaleID + '/', '');;
+		}
+
     	var hrefLangTarget = '';
 		
     	if (activeLocale == 'default') {
