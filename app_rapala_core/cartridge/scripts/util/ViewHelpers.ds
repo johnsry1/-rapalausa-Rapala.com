@@ -302,18 +302,37 @@ ViewHelpers.getHreflangTags = function(){
 
 	// get allowed locales
     var allActiveLocaleArray = site.getAllowedLocales();
+	var activeCountries = JSON.parse(System.getPreferences().getCustom()['ActiveCountries']);
 
     // iterating through allowed locales and creating hrefLangTarget
     for each (var activeLocale in allActiveLocaleArray) {
     	
     	//get href
 		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeLocale);
+		var isActiveCountry = false;
+		var activeCountriesLocaleID = '';
+		// if site is EU and country is active, rewrite the hreflang url
+		if (site.ID == 'rapalaEU') {
+			for (var i=0; i < activeCountries.length; i++) {
+				if (activeCountries[i].sitePath && activeCountries[i].localeID !== 'default') {
+					if (activeCountries[i].localeID === activeLocale) {
+						action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeCountries[i].localeID, activeCountries[i].domain);
+						isActiveCountry = true;
+						activeCountriesLocaleID = activeCountries[i].localeID;
+					}
+				}
+			}
+		}
 		var paramArray = [];
 		for each (var paramName in request.httpParameterMap.parameterNames) {
 			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
 		}
 		var href = dw.web.URLUtils.abs(action, paramArray);
-    	
+		//if site is EU and country is active, remove the localelD from the URL
+		if (isActiveCountry) {
+			href = href.toString().replace(activeCountriesLocaleID + '/', '');;
+		}
+
     	var hrefLangTarget = '';
 		
     	if (activeLocale == 'default') {
