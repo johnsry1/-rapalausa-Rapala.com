@@ -113,6 +113,12 @@
 					<iselseif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstrikemaster') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
 						<li class="strikemaster" ><a class="strikemaster" href="${URLUtils.https('Home-Show','id','11')}" title="${Resource.msg('brand.strikemaster','common',null)}">${Resource.msg('account.strikemaster','account',null)}</a></li>
 					</isif>
+					<!-- Marttiini : id=22 -->
+					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'marttiini')}">
+						<li class="marttiini marttiini-active"><a class="marttiini" href="${URLUtils.https('Home-Show','id','22')}" title="${Resource.msg('brand.marttiini','common',null)}">${Resource.msg('account.marttiini','account',null)}</a></li>
+					<iselseif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarttiini') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
+						<li class="marttiini" ><a class="marttiini" href="${URLUtils.https('Home-Show','id','22')}" title="${Resource.msg('brand.marttiini','common',null)}">${Resource.msg('account.marttiini','account',null)}</a></li>
+					</isif>
 					<!-- Ice Force : id=20 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'iceforce')}">
 						<li class="iceforce iceforce-active"><a class="iceforce" href="${URLUtils.https('Home-Show','id','20')}" title="${Resource.msg('brand.iceforce','common',null)}">${Resource.msg('account.iceforce','account',null)}</a></li>
