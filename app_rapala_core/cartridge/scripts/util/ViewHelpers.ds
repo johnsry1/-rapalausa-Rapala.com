@@ -14,7 +14,7 @@ importPackage( dw.catalog );
  */
 function getSubcategoriesInMenuForCategory(category : Category) : Object {
 	var result = [];
-	
+
 	var psm : ProductSearchModel = new ProductSearchModel();
 	psm.setCategoryID(category.getID());
 	psm.search();
@@ -25,7 +25,7 @@ function getSubcategoriesInMenuForCategory(category : Category) : Object {
 		var subCategory :  Category = CatalogMgr.getCategory(psrv.value);
 			result.push(subCategory);
 	}
-	
+
 	return result;
 }
 
@@ -290,7 +290,7 @@ ViewHelpers.parseStaticLocaleValues = function(obj){
 *	First, get values from the custom preference hreflangSEO and create dictionary allHrefLangSEODict where key = countryCode, value = hreflang target
 *   For example key = "cz" and value = "en-cz"
 *   Then iterate through allowed locales in the site, get country from locale. Country from locale used like a key for getting hreflang from dictionary allHrefLangSEODict.
-*   If locale country are empty then it is not passed to result and <link rel="alternate" will not being shown.  
+*   If locale country are empty then it is not passed to result and <link rel="alternate" will not being shown.
 */
 ViewHelpers.getHreflangTags = function(){
 	// key = countryCode, value = hreflang target
@@ -306,11 +306,18 @@ ViewHelpers.getHreflangTags = function(){
 
     // iterating through allowed locales and creating hrefLangTarget
     for each (var activeLocale in allActiveLocaleArray) {
-    	
+
     	//get href
 		var action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeLocale);
 		var isActiveCountry = false;
 		var activeCountriesLocaleID = '';
+		var paramArray = [];
+		var localDomain = '';
+		var defaultDomain = 'www.rapala.com/eu-en/'; // use this as the default URL for the EU in case there is no value pulled in from global pref
+		for each (var paramName in request.httpParameterMap.parameterNames) {
+			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
+		}
+
 		// if site is EU and country is active, rewrite the hreflang url
 		if (site.ID == 'rapalaEU') {
 			for (var i=0; i < activeCountries.length; i++) {
@@ -319,22 +326,31 @@ ViewHelpers.getHreflangTags = function(){
 						action = new dw.web.URLAction(request.httpPath.split('/').pop(), site.ID, activeCountries[i].localeID, activeCountries[i].domain);
 						isActiveCountry = true;
 						activeCountriesLocaleID = activeCountries[i].localeID;
+						localDomain = activeCountries[i].domain;
 					}
+				}
+				if (activeCountries[i].sitePath && activeCountries[i].localeID == 'default') {
+					defaultDomain = activeCountries[i].domain;
 				}
 			}
 		}
-		var paramArray = [];
-		for each (var paramName in request.httpParameterMap.parameterNames) {
-			paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
-		}
+
 		var href = dw.web.URLUtils.abs(action, paramArray);
 		//if site is EU and country is active, remove the localelD from the URL
 		if (isActiveCountry) {
-			href = href.toString().replace(activeCountriesLocaleID + '/', '');;
+			if (href.toString().indexOf('Home-Page') !== -1 || href.toString().indexOf('Home-Show') !== -1) {
+				href = localDomain;
+			} else {
+				href = href.toString().replace(activeCountriesLocaleID + '/', '');
+			}
+		} else {
+			if (href.toString().indexOf('Home-Page') !== -1 || href.toString().indexOf('Home-Show') !== -1) {
+				href = defaultDomain;
+			}
 		}
 
     	var hrefLangTarget = '';
-		
+
     	if (activeLocale == 'default') {
     		hrefLangTarget = 'x-default';
     	} else {
@@ -368,6 +384,9 @@ ViewHelpers.getHreflangTags = function(){
 		paramArray.push(dw.web.URLParameter(paramName, request.httpParameterMap[paramName]));
 	}
 	var href = dw.web.URLUtils.abs(action, paramArray);
+	if (href.toString().indexOf('Home-Page') !== -1 || href.toString().indexOf('Home-Show') !== -1) {
+		href = defaultDomain;
+	}
 
 	var hrefLangSEOSettings = site.getCustomPreferenceValue('hrefLangSEO');
 	var hrefLangSEOArray = hrefLangSEOSettings.split(',');
@@ -378,9 +397,9 @@ ViewHelpers.getHreflangTags = function(){
     	var obj = {
     		href:href,
     		hrefLang: hrefLangSEO
-    	}	
-    	
-    	result.push(obj);	
+    	}
+
+    	result.push(obj);
 	}
 
 	return result;
