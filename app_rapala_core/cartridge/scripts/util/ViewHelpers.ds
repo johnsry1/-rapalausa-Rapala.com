@@ -345,7 +345,7 @@ ViewHelpers.getHreflangTags = function(){
 			}
 		} else {
 			if (href.toString().indexOf('Home-Page') !== -1 || href.toString().indexOf('Home-Show') !== -1) {
-				href = defaultDomain;
+				href = defaultDomain + '/eu-en';
 			}
 		}
 
@@ -385,7 +385,7 @@ ViewHelpers.getHreflangTags = function(){
 	}
 	var href = dw.web.URLUtils.abs(action, paramArray);
 	if (href.toString().indexOf('Home-Page') !== -1 || href.toString().indexOf('Home-Show') !== -1) {
-		href = defaultDomain;
+		href = defaultDomain + '/eu-en';
 	}
 
 	var hrefLangSEOSettings = site.getCustomPreferenceValue('hrefLangSEO');
