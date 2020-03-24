@@ -28,6 +28,8 @@
         <isset name="ID" value="21" scope="page" />
 <iselseif condition="${session.custom.currentSite == 'iceforce'}" >
         <isset name="ID" value="20" scope="page" />
+<iselseif condition="${session.custom.currentSite == 'marttiini'}" >
+        <isset name="ID" value="22" scope="page" />
 <else>
     <iscomment>Fallback if no site is selected.  Primarily needed to Test Helper purposes. </iscomment>
     <isset name="ID" value="1" scope="page" />
@@ -36,15 +38,13 @@
 <li>
     <div class="change-region">
         <span class="change-region-footer">
-            <isif condition="${session.custom.currentSite != 'strikemaster'}">
-                <isif condition="${session.custom.currentSite == 'iceforce'}">
-                    <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
-                <iselse>
-                    <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id',ID)}">
-                </isif>
-                    <span class="country">${Resource.msg('global.changecountry','locale',null)}</span>
-                </a>
+            <isif condition="${session.custom.currentSite == 'iceforce'}">
+                <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id','1')}">
+            <iselse>
+                <a href="${URLUtils.url('Home-ChangeRegion','launch','yes','id',ID)}">
             </isif>
+                <span class="country">${Resource.msg('global.changecountry','locale',null)}</span>
+            </a>
         </span>
     </div>
 </li>
