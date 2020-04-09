@@ -108,7 +108,7 @@ var InterstitialHelper : Object = {
 		let countryLink;
 		let locale = request.locale;
 
-		if (activeCountry == "ca" || activeCountry == "fi"  || activeCountry == "uk") {
+		if (activeCountry == "ca" || activeCountry != "us"  || activeCountry != "eu") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
