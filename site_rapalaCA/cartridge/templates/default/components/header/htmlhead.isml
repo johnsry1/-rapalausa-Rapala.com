@@ -91,13 +91,13 @@ If you are not using the build cartridge the comments can be safely removed.
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <!--- END CSS files to merge. --->
 
-<!--[if gte IE 9 | !IE]><!-->
-  <script src="${URLUtils.staticURL('/lib/jquery/jquery-2.2.0.min.js')}" type="text/javascript"></script>
-<!--<![endif]-->
-
-<!--[if lte IE 8]>
-  <script src="${URLUtils.staticURL('/lib/jquery/jquery-1.11.1.min.js')}" type="text/javascript"></script>
-<![endif]-->
+<isinclude template="util/hreflangseo"/>
+<script src="${URLUtils.staticURL('/lib/jquery/jquery-3.4.1.min.js')}" type="text/javascript"></script>
+<isif condition="${dw.system.System.getInstanceType() != dw.system.System.PRODUCTION_SYSTEM}">
+	<script src="${URLUtils.staticURL('/lib/jquery/jquery-migrate-3.1.0.js')}" type="text/javascript"></script>
+<iselse>
+	<script src="${URLUtils.staticURL('/lib/jquery/jquery-migrate-3.1.0.min.js')}" type="text/javascript"></script>
+</isif>
 
 <!--[if lte IE 8]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js" type="text/javascript"></script>
