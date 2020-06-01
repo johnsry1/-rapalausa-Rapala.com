@@ -107,33 +107,57 @@ function TransferClient(url, serverType, userName, password) {
     	*	Initialises the FTP client
     	**/
     this.initFTP = function() {
-        if (serverType == "FTP") {
-            this.systemClient = new FTPClient();
-        } else {
-            this.systemClient = new SFTPClient();
-        }
-        this.systemClient.setTimeout(1000);
-
-        if (empty(this.userName)) {
-            if (this.urlObject.protocol == "SFTP") {
-                throw (new Error("Unsupported Configuration: User-ID and Password are mandatory for SFTP-Connection."));
-            }
-
-            if (empty(this.urlObject.port)) {
-                this.systemClient.connect(this.urlObject.host);
+        try {
+            if (serverType == "FTP") {
+                this.systemClient = new FTPClient();
             } else {
-                this.systemClient.connect(this.urlObject.host, this.urlObject.port);
+                this.systemClient = new SFTPClient();
             }
-        } else {
-            if (empty(this.password)) {
-                throw (new Error("Unsupported Configuration: No password provided for username " + userName));
-            }
+            this.systemClient.setTimeout(1000);
 
-            if (empty(this.urlObject.port)) {
-                this.systemClient.connect(this.urlObject.host, this.userName, this.password);
+            if (empty(this.userName)) {
+                if (this.urlObject.protocol == "SFTP") {
+                    throw (new Error("Unsupported Configuration: User-ID and Password are mandatory for SFTP-Connection."));
+                }
+
+                if (empty(this.urlObject.port)) {
+                    var connected = this.systemClient.connect(this.urlObject.host);
+                    if (!connected) {
+                        throw new Error(serverType + " connection failed to " + this.urlObject.host + " due to " + this.systemClient.errorMessage);
+                    } else {
+                        this.systemClient.connect(this.urlObject.host);
+                    }
+                } else {
+                    var connected = this.systemClient.connect(this.urlObject.host, this.urlObject.port);
+                    if (!connected) {
+                        throw new Error(serverType + " connection failed to " + this.urlObject.host + " due to " + this.systemClient.errorMessage);
+                    } else {
+                        this.systemClient.connect(this.urlObject.host, this.urlObject.port);
+                    }
+                }
             } else {
-                this.systemClient.connect(this.urlObject.host, this.urlObject.port, this.userName, this.password);
+                if (empty(this.password)) {
+                    throw (new Error("Unsupported Configuration: No password provided for username " + userName));
+                }
+
+                if (empty(this.urlObject.port)) {
+                    var connected = this.systemClient.connect(this.urlObject.host, this.userName, this.password);
+                    if (!connected) {
+                        throw new Error(serverType + " connection failed to " + this.urlObject.host + " due to " + this.systemClient.errorMessage);
+                    } else {
+                        this.systemClient.connect(this.urlObject.host, this.userName, this.password);
+                    }
+                } else {
+                    var connected = this.systemClient.connect(this.urlObject.host, this.urlObject.port, this.userName, this.password);
+                    if (!connected) {
+                        throw new Error(serverType + " connection failed to " + this.urlObject.host + " due to " + this.systemClient.errorMessage);
+                    } else {
+                        this.systemClient.connect(this.urlObject.host, this.urlObject.port, this.userName, this.password);
+                    }
+                }
             }
+        } catch (e) {
+            throw new Error(e.message);
         }
         //this.systemClient.cd(this.urlObject.path);
     };

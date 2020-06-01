@@ -31,6 +31,10 @@ var dialog = {
             if ($target.selector && $target.selector.charAt(0) === '#') {
                 id = $target.selector.substr(1);
                 $target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
+            } else {
+                // jQuery v3.0 and up won't find the container so assign and create one
+                id = 'dialog-container';
+                $target = $('<div>').attr('id', id).addClass('dialog-content').appendTo('body');
             }
         }
 
