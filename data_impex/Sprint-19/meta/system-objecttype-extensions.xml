@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="OrganizationPreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="ActiveCountries">
+                <display-name xml:lang="x-default">Active Countries</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="debugCookieName">
+                <display-name xml:lang="x-default">Cookie name that used in debug mode</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="debugCookieValue">
+                <display-name xml:lang="x-default">Cookie value that used in debug mode</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="internationalJSON">
+                <display-name xml:lang="x-default">International Brand JSON</display-name>
+                <type>text</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="DebugPreferences">
+                <display-name xml:lang="x-default">Debug Configurations</display-name>
+                <attribute attribute-id="debugCookieValue"/>
+                <attribute attribute-id="debugCookieName"/>
+            </attribute-group>
+            <attribute-group group-id="showFlags">
+                <display-name xml:lang="x-default">Show Flags</display-name>
+                <attribute attribute-id="ActiveCountries"/>
+            </attribute-group>
+            <attribute-group group-id="international">
+                <display-name xml:lang="x-default">International Landing Page</display-name>
+                <attribute attribute-id="internationalJSON"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
