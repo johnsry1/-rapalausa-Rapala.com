@@ -56,6 +56,9 @@
             float: left;
             width: 37%;
         }
+        &:focus {
+            outline: -webkit-focus-ring-color auto 1px;   
+        }
     }
     .product-col-2 {
         @include respond(medium-up) {
@@ -492,6 +495,9 @@
         font-family: $lucida-font-family;
         box-sizing: border-box;
         height: 28px;
+        &:focus {
+            outline: -webkit-focus-ring-color auto 1px;
+        }
     }
     .swatches {
         ul {
@@ -529,11 +535,14 @@
                 line-height: 20px;
                 padding: 0 12px;
                 text-decoration: none;
-                &:hover {
+                &:hover,
+                &:focus,
+                &:active {
                     background-position: 0 -20px;
-                    border-color: $red;
+                    border-color: $red !important;
                     color: $white;
-                    text-decoration: none;
+                    text-decoration: none !important;
+                    outline: 0;
                 }
             }
             &.selected {
@@ -578,10 +587,12 @@
                     max-height: 100%;
                     width: 100%;
                 }
-                &:hover {
-                    border-color: $red;
+                &:hover,
+                &:focus,
+                &:active {
+                    border-color: $red !important;
                     text-decoration: none;
-                    width: 36px;
+                    width: 36px !important;
                 }
             }
         }

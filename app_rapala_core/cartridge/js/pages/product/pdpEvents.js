@@ -1947,7 +1947,7 @@ var product = function (response) {
                     }, 500);
                 });
                 // clicking on a previous step
-                jQuery('.variationattributes').on('click','.selected a.filter', function (e) {
+                jQuery('.variationattributes').on('click focusin keydown','.selected a.filter', function (e) {
                     e.preventDefault();
                     var $this = jQuery(this).closest('.selected');
                     jQuery('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');
@@ -2078,7 +2078,6 @@ var product = function (response) {
                             var swatchUrl = (findSwatch(this.title)).url; // find swatch url
 
                             if (swatchUrl && swatchUrl != '') {
-                                //jQuery(this).css("color", "transparent").parent().css("background", "url(" + swatchUrl + ")");
                                 jQuery(this).css('text-indent', '-9999px').prepend('<img alt="' + this.title + '" src="' + swatchUrl + '"/>');
                             } else {
                                 jQuery(this).css('color', 'transparent'); // no swatch image found
@@ -2088,10 +2087,10 @@ var product = function (response) {
                         // swatches click, hover and mouseleave event handlers
                         varJqryObjs.data('data', {id: pdpVarId}).on('click', varEventHandler);
                         if ($(window).width() > 1024) {
-                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter', function () {
+                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter keydown focusin', function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
                                 thisProduct.showImages(this.title, colorAttrDef.vals);
-                            }).on('mouseleave', function () {
+                            }).on('mouseleave focusout', function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
                                         'val': thisProduct.selectedVar.id,
