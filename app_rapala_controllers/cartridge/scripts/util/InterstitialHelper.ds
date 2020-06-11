@@ -21,6 +21,7 @@ var InterstitialHelper : Object = {
 	},
 	setInterstitialSiteCookie: function (request) {
 		var id = "rapala-";
+		var id = request.httpPath.indexOf('rapalaEU') != -1 ? 'rapalaEU-' : 'rapala-';
 		if (request.httpPath.indexOf('rapalaEU') != -1) {
 			id = 'rapalaEU-';
 		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
