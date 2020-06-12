@@ -520,6 +520,7 @@
             height: 22px;
             margin: 0 5px 5px 0;
             padding: 0;
+            outline: $red solid 1px;
             a {
                 background-image: url("../images/product-detail-size.jpg");
                 background-position: 0 0;
@@ -538,17 +539,21 @@
                 &:hover,
                 &:focus,
                 &:active {
+                    outline: $red solid 1px;
                     background-position: 0 -20px;
                     border-color: $red !important;
                     color: $white;
                     text-decoration: none !important;
-                    outline: 0;
                 }
             }
             &.selected {
                 a {
                     background-position: 0 -20px;
+                    .trial {
+                        background-color: $alto6;
+                    }
                 }
+
             }
         }
     }
@@ -563,7 +568,7 @@
             width: 40px;
             border: 0;
             position: relative;
-
+            outline: transparent auto 1px;
             &.selected {
                 a {
                     border-color: $red;
@@ -590,6 +595,7 @@
                 &:hover,
                 &:focus,
                 &:active {
+                    outline: $red auto 1px;
                     border-color: $red !important;
                     text-decoration: none;
                     width: 36px !important;

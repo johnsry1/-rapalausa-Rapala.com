@@ -142,12 +142,12 @@ function initializeEvent() {
     });
 
     // hover on swatch - should update main image with swatch image
-    $('body').off('mouseenter mouseleave keydown focus', '.swatchanchor').on('mouseenter mouseleave keydown focus', '.swatchanchor', function (e) {
+    $('body').off('mouseenter mouseleave focusin', '.swatchanchor').on('mouseenter mouseleave focusout', '.swatchanchor', function (e) {
         var largeImg = $(this).data('lgimg'),
             $imgZoom = $pdpMain.find('.main-image'),
             $mainImage = $pdpMain.find('.primary-image');
         $(this).closest('.swatches.color ').find('.selectedvarval').text('');
-        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'keydown' || e.type == 'focus') {
+        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focus') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($(this).text());
         } else if (e.type == 'mouseout' || e.type == 'mouseleave') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($pdpMain.find('.swatches.color ').find('ul .selected-value').text());
