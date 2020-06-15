@@ -74,7 +74,7 @@
 	                           <isset name="newTitle" value="" scope="page"/>
 						    </isif>
 
-							<li class='<isif condition="${Valength == 1 || PVM.isSelectedAttributeValue(VA, VV)}">selected<iselse/>emptyswatch</isif>'>
+							<li class='<isif condition="${Valength == 1 || PVM.isSelectedAttributeValue(VA, VV)}">selected<iselse/>emptyswatch</isif>' >
 								<isif condition="${VV.displayValue != null}">
 									<isset name="anchorTitle" value="${VV.displayValue + newTitle}" scope="page"/>
 									<isset name="display" value="${VV.displayValue}" scope="page"/>
