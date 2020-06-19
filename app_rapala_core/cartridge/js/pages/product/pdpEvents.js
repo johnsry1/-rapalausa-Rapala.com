@@ -2092,7 +2092,7 @@ var product = function (response) {
                         // swatches click, hover and mouseleave event handlers
                         varJqryObjs.data('data', {id: pdpVarId}).on('click', varEventHandler);
                         if ($(window).width() > 1024) {
-                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter focusin keyup', function () {
+                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter focusin', function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
                                 thisProduct.showImages(this.title, colorAttrDef.vals);
                             }).on('mouseleave focusout', function () {
@@ -2112,6 +2112,12 @@ var product = function (response) {
                                 }
 
                                 thisProduct.showSelectedVarAttrVal('color', thisProduct.selectedVarAttribs.color || '');
+                            }).on('keydown', function (e) {
+                                if (e.which == 13 && !$(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+                                    e.preventDefault();
+                                    $(this).click();
+                                    $('.input-text.quantityinput').focus();
+                                }
                             });
                         }
 
