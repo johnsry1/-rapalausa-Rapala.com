@@ -57,7 +57,8 @@
             width: 37%;
         }
         &:focus {
-            outline: -webkit-focus-ring-color auto 1px;   
+            outline: $ada-focus-outline;
+            outline-color: $dim-gray;
         }
     }
     .product-col-2 {
@@ -496,7 +497,8 @@
         box-sizing: border-box;
         height: 28px;
         &:focus {
-            outline: -webkit-focus-ring-color auto 1px;
+            outline: $ada-focus-outline;
+            outline-color: $dim-gray;
         }
     }
     .swatches {
@@ -989,6 +991,9 @@ a {
         &:hover {
             color: $nobel;
             text-decoration: underline;
+        }
+        &:focus {
+            outline: $ada-focus-outline;
         }
     }
 }
@@ -2639,7 +2644,8 @@ a {
     .selected {
         a {
             &.filter {
-                &:hover {
+                &:hover,
+                &:focus {
                     background-color: $greyy-selected-row;
                 }
             }

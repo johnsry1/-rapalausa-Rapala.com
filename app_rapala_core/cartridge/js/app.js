@@ -602,7 +602,12 @@ function initializeEvents() {
             });
         }
     });
+
     changeRegionPopUp();
+
+    $(window).load(function() {
+        $('.logo.desktopHide a').first().focus();
+    })
 }
 
 /**
@@ -643,7 +648,7 @@ function initializeDom() {
             })
         }
     }
-
+    
 }
 
 var pages = {

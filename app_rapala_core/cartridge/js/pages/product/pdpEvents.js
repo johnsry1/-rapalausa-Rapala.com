@@ -1964,7 +1964,7 @@ var product = function (response) {
                             }
                         }
                     });
-                    $(this).parent().find('.swatchesdisplay .selected a').trigger('click');
+                    $(this).parent().find('.swatchesdisplay .selected a').trigger('click keydown');
                     $(this).parent().find('select').val('');
 
                     jQuery('.variationattributes').find('.future .optionwrapper').slideUp(400, function () {
@@ -1975,10 +1975,6 @@ var product = function (response) {
                     jQuery('.variationattributes').find('.current .optionwrapper').slideDown(400, function () {
                         $(this).closest('.current').find('.filter .value').text('');
                     });
-                });
-                jQuery('.variationattributes').on('focus keypress','.selected a.filter', function (e) {
-                    e.preventDefault();
-                    $(this).toggleClass('trial');
                 });
                 
 
@@ -2113,7 +2109,8 @@ var product = function (response) {
 
                                 thisProduct.showSelectedVarAttrVal('color', thisProduct.selectedVarAttribs.color || '');
                             }).on('keydown', function (e) {
-                                if (e.which == 13 && !$(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+                                // if (e.which == 13 && !$(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+                                if (e.which == 13) { // key 13 = enter key press
                                     e.preventDefault();
                                     $(this).click();
                                     $('.input-text.quantityinput').focus();
@@ -2136,7 +2133,7 @@ var product = function (response) {
                 // loop thru all the non-swatches attributes and bind events etc.
                 jQuery(thisProduct.containerId + ' .variationattributes .variantdropdown select').each(function () {
                     // default ui i.e. drop downy
-                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).on('change', function (e) {
+                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).off().on('change keypress', function (e) {
                         // if there is only 1 value to be selected then return i.e. no deselection available
                         //if (this.selectedIndex == 0 && this.options.length == 1) { return; }
 
@@ -2159,7 +2156,6 @@ var product = function (response) {
                                         jQuery(this).find('select option').each(function (index) {
                                             if ($(this).closest('select').find('option').length == 2 && index == 1) {
                                                 $(this).prop('selected', true).trigger('change');
-                                                //$(this).attr('selected','selected').trigger('change');
                                             }
                                         });
                                     }).find('select').trigger('change');
