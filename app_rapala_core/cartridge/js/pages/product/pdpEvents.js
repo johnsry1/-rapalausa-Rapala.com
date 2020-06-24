@@ -2133,7 +2133,7 @@ var product = function (response) {
                 // loop thru all the non-swatches attributes and bind events etc.
                 jQuery(thisProduct.containerId + ' .variationattributes .variantdropdown select').each(function () {
                     // default ui i.e. drop downy
-                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).on('change keypress', function (e) {
+                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).off().on('change keypress', function (e) {
                         // if there is only 1 value to be selected then return i.e. no deselection available
                         //if (this.selectedIndex == 0 && this.options.length == 1) { return; }
 
@@ -2156,7 +2156,6 @@ var product = function (response) {
                                         jQuery(this).find('select option').each(function (index) {
                                             if ($(this).closest('select').find('option').length == 2 && index == 1) {
                                                 $(this).prop('selected', true).trigger('change');
-                                                //$(this).attr('selected','selected').trigger('change');
                                             }
                                         });
                                     }).find('select').trigger('change');
