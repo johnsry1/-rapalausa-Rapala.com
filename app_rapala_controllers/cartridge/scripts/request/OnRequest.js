@@ -59,14 +59,13 @@ exports.onRequest = function () {
 	// }
 	
 	var temp = URLParsing.getPreferredRegion(request);
-	console.log(temp);
+	// console.log(temp);
 	
-	var prefReg = session.custom.preferredRegion;
-	console.log(prefReg);
+	// var prefReg = session.custom.hasProperty('preferredRegion');
+	// console.log(prefReg);
 
-	if (!request.httpCookies.preferredRegion
-		&& (request.httpPath.indexOf('rapala-') != -1 || request.httpPath.indexOf('rapalaCA-') != -1 
-		|| request.httpPath.indexOf('rapalaEU') != -1 || request.httpPath.indexOf('UpdateCurrency') != -1 
+	if (!request.httpCookies.preferredRegion && !session.custom.showCountryPopup
+		&& (URLParsing.getPreferredRegion(request) != null || request.httpPath.indexOf('UpdateCurrency') != -1 
 		|| request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1)) {
 		InterstitialHelper.setInterstitialSiteCookie(request);
 	}

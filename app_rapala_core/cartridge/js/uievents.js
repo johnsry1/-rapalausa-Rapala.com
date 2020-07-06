@@ -471,25 +471,25 @@ var uievents = {
                     close: function () {
                         cookieprivacy();
                     }
-                },
-                callback: function() {
-                    $('.body').find('.countries-container a').off('click').on('click', function(e) {
-                        e.stopPropagation();  
-                        var id = 'trial';
-                        if (location.pathname.indexOf('rapalaEU-') != -1) {
-                            $.cookie('preferredRegion', 'rapalaEU-');
-                            id = 'rapalaEU-';
-                        } else if (location.pathname.indexOf('rapalaCA-') != -1) {
-                            $.cookie('preferredRegion','rapalaCA-');
-                            id = 'rapalaCA-';
-                        } else if (location.pathname.indexOf('rapala-')) {
-                            $.cookie('preferredRegion', 'rapala-');
-                            id = 'rapala-';
-                        }
-                        window.SessionAttributes.PREFERRED_REGION = id;
-                        window.location.assign($(this).attr('href'));
-                    });
                 }
+                // callback: function() {
+                //     $('.body').find('.countries-container a').off('click').on('click', function(e) {
+                //         e.stopPropagation();  
+                //         var id = 'trial';
+                //         if (location.pathname.indexOf('rapalaEU-') != -1) {
+                //             $.cookie('preferredRegion', 'rapalaEU-');
+                //             id = 'rapalaEU-';
+                //         } else if (location.pathname.indexOf('rapalaCA-') != -1) {
+                //             $.cookie('preferredRegion','rapalaCA-');
+                //             id = 'rapalaCA-';
+                //         } else if (location.pathname.indexOf('rapala-')) {
+                //             $.cookie('preferredRegion', 'rapala-');
+                //             id = 'rapala-';
+                //         }
+                //         window.SessionAttributes.PREFERRED_REGION = id;
+                //         window.location.assign($(this).attr('href'));
+                //     });
+                // }
             });
         } else {
             cookieprivacy();

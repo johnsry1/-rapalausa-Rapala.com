@@ -7,5 +7,12 @@
  */
 
 exports.getPreferredRegion = function(request) {
-    return new RegExp('^' + request.httpPath.replace(/\*/g, '.*') + '$').test('*rapala*-*');
+    var regionOptions = ['rapala-', 'rapalaCA-', 'rapalaEU-'];
+    for (var i = 0; i < regionOptions.length; i++){
+
+        if (request.httpPath.indexOf(regionOptions[i]) != -1) {
+            return regionOptions[i];
+        }
+    }
+    return null;
 }

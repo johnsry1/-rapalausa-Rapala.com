@@ -495,29 +495,27 @@ var uievents = {
                 options: {
                     width: 325,
                     height: 575,
-                    // open: function() {          
 
-                    // },
                     close: function () {
                         cookieprivacy();
-                    },
-                    callback: function() { 
-                        $('.body').find('.countries-container a').off('click').on('click', function(e) {
-                            e.stopPropagation();  
-                            var id = 'other';
-                            if (location.pathname.indexOf('rapalaEU-') != -1) {
-                                $.cookie('preferredRegion', 'rapalaEU-');
-                                id = 'rapalaEU-';
-                            } else if (location.pathname.indexOf('rapalaCA-') != -1) {
-                                $.cookie('preferredRegion','rapalaCA-');
-                                id = 'rapalaCA-';
-                            } else if (location.pathname.indexOf('rapala-')) {
-                                $.cookie('preferredRegion', 'rapala-');
-                                id = 'rapala-';
-                            }
-                            window.SessionAttributes.PREFERRED_REGION = id;
-                            window.location.href.assign($(this).attr('href'));
-                        });
+                    }
+                    // callback: function() { 
+                    //     $('.body').find('.countries-container a').off('click').on('click', function(e) {
+                    //         e.stopPropagation();  
+                    //         var id = 'other';
+                    //         if (location.pathname.indexOf('rapalaEU-') != -1) {
+                    //             $.cookie('preferredRegion', 'rapalaEU-');
+                    //             id = 'rapalaEU-';
+                    //         } else if (location.pathname.indexOf('rapalaCA-') != -1) {
+                    //             $.cookie('preferredRegion','rapalaCA-');
+                    //             id = 'rapalaCA-';
+                    //         } else if (location.pathname.indexOf('rapala-')) {
+                    //             $.cookie('preferredRegion', 'rapala-');
+                    //             id = 'rapala-';
+                    //         }
+                    //         window.SessionAttributes.PREFERRED_REGION = id;
+                    //         window.location.href.assign($(this).attr('href'));
+                    //     });
                     }
                 }
             });
