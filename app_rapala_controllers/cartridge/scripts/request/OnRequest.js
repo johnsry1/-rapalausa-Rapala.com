@@ -27,11 +27,21 @@ exports.onRequest = function () {
 	require('app_rapala_core/cartridge/scripts/siteContext/SetCurrentSiteContext.ds').setSiteContext(request.httpParameterMap);
 	ltkActivityTracking.TrackRequest();
 
-	// if(request.httpCookies['redirectURL']) {
-	// 	return response.redirect(request.httpCookies['redirectURL']);
-	// }
-
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
+
+	var redirectedRegion = session.custom['preferredRegion'];
+	if (redirectedRegion) {
+		if (redirectedRegion == URLParsing.getPreferredRegion(request)) {
+ 			return new Status(Status.OK);
+	 	}
+		if (!session.custom.redirectURL) {
+ 			var url = InterstitialHelper.setRedirectUrl(request);
+			session.custom.redirectURL = url;
+		}
+
+		return response.redirect(session.custom.redirectURL);
+ 	}
+
 
 	// var interstitialSiteId = session.custom.interstitialSiteId ? session.custom.interstitialSiteId : null;
 
@@ -58,7 +68,7 @@ exports.onRequest = function () {
 
 	// }
 	
-	var temp = URLParsing.getPreferredRegion(request);
+	// var temp = URLParsing.getPreferredRegion(request);
 	// console.log(temp);
 	
 	// var prefReg = session.custom.hasProperty('preferredRegion');

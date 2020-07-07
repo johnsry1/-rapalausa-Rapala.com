@@ -68,6 +68,7 @@ function showCountryPopup() {
 	} else if (request.httpParameterMap.isParameterSubmitted('fdid')) {
 		session.custom.countrySelectorFdid=request.httpParameterMap.fdid.value;
 	}
+	InterstitialHelper.setPopupShownCookie();
 	return showPopup;
 }
 
