@@ -20,18 +20,20 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		var id = "rapala-";
-		if (request.httpPath.indexOf('rapalaEU') != -1) {
-			id = 'rapalaEU-';
-		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
-		    if (empty(request.httpParameterMap.locale)) {
-				id = 'rapalaCA-';
-			} else if (request.httpParameterMap.locale == 'eu-en') {
-				id = 'rapalaEU-';
+		var id = 'rapala-';
+		if(!request.httpCookies['CountrySelectorViewed'] || !request.httpCookies['preferredRegion']){	
+			if (request.httpPath.indexOf('rapalaEU') != -1) {
+				id  = 'rapalaEU-';
+			} else if (request.httpPath.indexOf('rapalaCA') != -1) {
+				
+				if (request.httpParameterMap.locale == 'eu-en') {
+					id  = 'rapalaEU-';
+				} else {
+					id  = 'rapalaCA-';
+				}
 			}
-		} 
-		session.custom.interstitialSiteId = id;
-		setCookie('preferredRegion',id);
+		}
+	
 		if (id == 'rapalaEU-') {
 			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
@@ -65,6 +67,9 @@ var InterstitialHelper : Object = {
 		} else if (id == 'rapalaCA-') {
 			session.setCurrency(dw.util.Currency.getCurrency('CAD'));
 		}
+		// set cookie
+		setCookie('preferredRegion',id);
+		InterstitialHelper.setPopupShownCookie();
 		return;
 	},
 	setRedirectUrl: function (request) {
@@ -108,7 +113,7 @@ var InterstitialHelper : Object = {
 		let countryLink;
 		let locale = request.locale;
 
-		if (activeCountry == "ca" || activeCountry != "us"  || activeCountry != "eu") {
+		if (activeCountry == "ca" || (activeCountry != "us"  && activeCountry != "eu")) {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";

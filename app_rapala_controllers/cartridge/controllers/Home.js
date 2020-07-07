@@ -20,7 +20,9 @@ function show() {
     var enableGeoRedirect = dw.system.Site.current.getCustomPreferenceValue('enableGeoIPRedirects') && !empty(dw.system.Site.current.getCustomPreferenceValue('GeoIPRedirects'));
     if (request.httpParameterMap.isParameterSubmitted('countrySelect')) {
     	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-    	InterstitialHelper.setInterstitialSiteCookie(request);
+		InterstitialHelper.setInterstitialSiteCookie(request);
+		session.custom.interstitialSiteId = InterstitialHelper.getInterstitialSiteCookie();
+
     }
     if(session.custom.homeSplash){
         app.getController('Home').ChangeRegion();

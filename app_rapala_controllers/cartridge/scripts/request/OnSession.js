@@ -51,6 +51,10 @@ function showCountryPopup() {
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
 	var CountrySelectorViewed = InterstitialHelper.getPopupShownCookie();
 	if (CountrySelectorViewed) {
+		if (request.httpPath.indexOf(request.httpCookies['preferredRegion']) == -1 ) {
+			var url = InterstitialHelper.setRedirectUrl(request);
+			return response.redirect(url);
+		}
 		return showPopup = false;
 	}
 
@@ -64,10 +68,7 @@ function showCountryPopup() {
 	} else if (request.httpParameterMap.isParameterSubmitted('fdid')) {
 		session.custom.countrySelectorFdid=request.httpParameterMap.fdid.value;
 	}
-	
-	// set cookie
 	InterstitialHelper.setPopupShownCookie();
-	
 	return showPopup;
 }
 

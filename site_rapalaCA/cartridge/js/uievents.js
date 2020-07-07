@@ -1,6 +1,7 @@
 'use strict';
 var util = require('./util'),
-    dialog = require('./dialog');
+    dialog = require('./dialog'),
+    cookieprivacy = require('./cookieprivacy');
 /*function charcount($this){
 	var characterLimit = parseInt($this.data("character-limit"));
 	var charRemains = characterLimit - $this.val().trim().length;
@@ -493,16 +494,47 @@ var uievents = {
                 url: Urls.countrySelectorPopup,
                 options: {
                     width: 325,
-                    height: 575
+                    height: 575,
+
+                    close: function () {
+                        cookieprivacy();
+                    }
                 }
             });
+        } else {
+            cookieprivacy();
         }
-        /*$('textarea[data-character-limit]').each(function(){
-            charcount($(this));
-            // trigger the keydown event so that any existing character data is calculated
-        }).on('keyup keypress', function(){
-            charcount($(this));
-        });*/
+        // $('.body').find('.countries-container a').off('click').on('click', function(e) {
+        //     e.stopPropagation();  
+        //     var id = 'other';
+        //     if (location.pathname.indexOf('rapalaEU-') != -1) {
+        //         $.cookie('preferredRegion', 'rapalaEU-');
+        //         id = 'rapalaEU-';
+        //     } else if (location.pathname.indexOf('rapalaCA-') != -1) {
+        //         $.cookie('preferredRegion','rapalaCA-');
+        //         id = 'rapalaCA-';
+        //     } else if (location.pathname.indexOf('rapala-')) {
+        //         $.cookie('preferredRegion', 'rapala-');
+        //         id = 'rapala-';
+        //     }
+        //     window.SessionAttributes.PREFERRED_REGION = id;
+        //     window.location.href.assign($(this).attr('href'));
+        // });
+        // $('.country .single-row').click(function (e) {
+        //     e.preventDefault();
+        //     if (location.pathname.indexOf('rapalaEU-') != -1) {
+        //         $.cookie('preferredRegion', 'rapalaEU-');
+        //     } else if (location.pathname.indexOf('rapalaCA-') != -1) {
+        //         $.cookie('preferredRegion','rapalaCA-');
+        //     } else if (location.pathname.indexOf('rapala-')) {
+        //         $.cookie('preferredRegion', 'rapala-');
+        //     } else {
+        //         $.cookie('preferredRegion', 'rapala-');                     
+        //     }
+        //     $.cookie('CountrySelectorViewed', 'true');
+        //     window.location.href = $(this).attr('href');
+        // });
+
     },
     synccheckoutH: function () {
         if ($('.pt_checkout').length > 0) {

@@ -83,7 +83,7 @@
 									<isset name="display" value="${VV.value}" scope="page"/>
 								</isif>
 
-								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" tabindex="0" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 									<isif condition="${newColors.contains(VV.displayValue)}">
 										<span class="new corner-ribbon">New</span>
 									</isif>
@@ -114,7 +114,6 @@
 					</a>
 					<div class="optionwrapper">
 						<div class="cta">
-							<iscomment><span><isprint value="${StringUtils.format(Resource.msg('product.selectabelow','product',null),VA.displayName)}"/></span></iscomment>
 							<isif condition="${learnMoreAssetExists}">
 								<br/><span class="learnmore"><isprint value="${Resource.msg('product.notsure','product',null)}"/>&nbsp;<a href="${URLUtils.url('Page-Include','cid', learnMoreAssetId)}"><isprint value="${Resource.msg('product.learnmore','product',null)}"/></a></span>
 							</isif>
@@ -148,18 +147,6 @@
 							</isloop>
 						</select>
 						<span class="hidden"><isprint value="${vaId}"/></span>
-						<iscomment>
-						<div class="prev-next">
-							<isif condition="${!loopstatus0.last}">
-								<isif condition="${!loopstatus0.first}">
-									<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}"><isprint value="${Resource.msg('global.previous','locale',null)}"/></a>
-								</isif>
-							<iselse/>
-								<isif condition="${!loopstatus0.first}">
-									<a href="${'#'}" class="previous" title="${Resource.msg('global.previous','locale',null)}"><isprint value="${Resource.msg('global.previous','locale',null)}"/></a>
-								</isif>
-							</isif>
-						</div></iscomment>
 						<div class="clear"></div>
 					</div>
 			</isif>
