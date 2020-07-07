@@ -147,7 +147,7 @@ function initializeEvent() {
             $imgZoom = $pdpMain.find('.main-image'),
             $mainImage = $pdpMain.find('.primary-image');
         $(this).closest('.swatches.color ').find('.selectedvarval').text('');
-        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focusin') {
+        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focus') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($(this).text());
         } else if (e.type == 'mouseout' || e.type == 'mouseleave') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($pdpMain.find('.swatches.color ').find('ul .selected-value').text());
