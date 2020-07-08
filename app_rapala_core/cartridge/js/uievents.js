@@ -38,6 +38,30 @@ var uievents = {
                 $customcheck.find('.custom-link').addClass('active');
             }
         });
+        /*if($('body').hasClass('rapala_device')){
+            $con.find(".ui-dialog #dialogcontainer123 #VipinsiderForm .select-style .selectbox").off('click').on("click",function(){
+                $(this).closest(".field-wrapper").addClass('expanded');
+                }).on("blur change", function(){
+                    $(this).closest(".field-wrapper").removeClass('expanded');
+                });
+        }*/
+
+        // custom select implementation in VIP insider
+        /*if(!$('body').hasClass('rapala_device')){
+            $con.find(".customized-select").find("select").each(function(){
+                if($(this).attr('disabled')){
+                    $(this).selectbox('disable');
+                }
+             else{
+                 $(this).selectbox();
+             }
+                $('.sbOptions li:last').addClass('last');
+            }).on('focus', function(){
+                $(this).next('.sbHolder').trigger('focus');
+            });
+
+        }
+    */
         $con.find('.custom-checkbox input[type="checkbox"]').off('change').on('change', function () {
             $(this).closest('.custom-checkbox').find('.custom-link').removeClass('error');
             var $form = $('.address');
@@ -465,51 +489,20 @@ var uievents = {
                 options: {
                     width: 325,
                     height: 575,
-                    // open: function() {          
-
-                    // },
                     close: function () {
                         cookieprivacy();
                     }
                 }
-                // callback: function() {
-                //     $('.body').find('.countries-container a').off('click').on('click', function(e) {
-                //         e.stopPropagation();  
-                //         var id = 'trial';
-                //         if (location.pathname.indexOf('rapalaEU-') != -1) {
-                //             $.cookie('preferredRegion', 'rapalaEU-');
-                //             id = 'rapalaEU-';
-                //         } else if (location.pathname.indexOf('rapalaCA-') != -1) {
-                //             $.cookie('preferredRegion','rapalaCA-');
-                //             id = 'rapalaCA-';
-                //         } else if (location.pathname.indexOf('rapala-')) {
-                //             $.cookie('preferredRegion', 'rapala-');
-                //             id = 'rapala-';
-                //         }
-                //         window.SessionAttributes.PREFERRED_REGION = id;
-                //         window.location.assign($(this).attr('href'));
-                //     });
-                // }
             });
         } else {
             cookieprivacy();
         }
-        // $('.body').find('.countries-container a').off('click').on('click', function(e) {
-        //     e.stopPropagation();  
-        //     var id = 'trial';
-        //     if (location.pathname.indexOf('rapalaEU-') != -1) {
-        //         $.cookie('preferredRegion', 'rapalaEU-');
-        //         id = 'rapalaEU-';
-        //     } else if (location.pathname.indexOf('rapalaCA-') != -1) {
-        //         $.cookie('preferredRegion','rapalaCA-');
-        //         id = 'rapalaCA-';
-        //     } else if (location.pathname.indexOf('rapala-')) {
-        //         $.cookie('preferredRegion', 'rapala-');
-        //         id = 'rapala-';
-        //     }
-        //     window.SessionAttributes.PREFERRED_REGION = id;
-        //     window.location.assign($(this).attr('href'));
-        // });
+        /*$('textarea[data-character-limit]').each(function(){
+            charcount($(this));
+            // trigger the keydown event so that any existing character data is calculated
+        }).on('keyup keypress', function(){
+            charcount($(this));
+        });*/
     },
     synccheckoutH: function () {
         if ($('.pt_checkout').length > 0) {
