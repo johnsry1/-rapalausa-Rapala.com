@@ -132,7 +132,7 @@ var updateContent = function (href) {
 
 function initializeEvent() {
     //bind the 'previous' buttons in the picker
-    jQuery('a.previous').on('click keypress', function (e) {
+    jQuery('a.previous').on('click', function (e) {
         e.preventDefault();
         jQuery(this)
             .closest('.swatches, .variantdropdown')
@@ -142,12 +142,12 @@ function initializeEvent() {
     });
 
     // hover on swatch - should update main image with swatch image
-    $('body').off('mouseenter mouseleave focusin', '.swatchanchor').on('mouseenter mouseleave focusout', '.swatchanchor', function (e) {
+    $('body').off('mouseenter mouseleave', '.swatchanchor').on('mouseenter mouseleave', '.swatchanchor', function (e) {
         var largeImg = $(this).data('lgimg'),
             $imgZoom = $pdpMain.find('.main-image'),
             $mainImage = $pdpMain.find('.primary-image');
         $(this).closest('.swatches.color ').find('.selectedvarval').text('');
-        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focus') {
+        if (e.type == 'mouseenter' || e.type == 'mouseover') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($(this).text());
         } else if (e.type == 'mouseout' || e.type == 'mouseleave') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($pdpMain.find('.swatches.color ').find('ul .selected-value').text());

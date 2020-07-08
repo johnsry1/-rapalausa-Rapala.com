@@ -241,7 +241,7 @@ var megamenu = {
         });
 
         // Mega menu events for window width greater than 959
-        $('#brand-tabs-header > ul > li').on('mouseenter focusin', function () {
+        $('#brand-tabs-header > ul > li').on('mouseenter', function () {
             var $id = $(this).find('.mobile-main-menu-heading > a').attr('class');
             var $this = $(this);
 
@@ -272,10 +272,16 @@ var megamenu = {
                 }
                 $('.brand-tabs-header-mask').show();
             }
-        }).on('mouseleave focusout', function () {
+        }).on('mouseleave', function () {
 
             if ($(window).width() > 959) {
                 $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseout');
+                /*var deviceAgent = navigator.userAgent.toLowerCase(),
+                deviceType = deviceAgent.match(/(iphone|ipod|ipad|android|blackBerry)/);
+                if(deviceType[0] == "iphone" || deviceType[0] == "ipad"){
+                    var $this = $(this);
+                    $this.find(".mobile-main-menu-heading > a").removeClass('selected');
+                }*/
             }
         });
 
@@ -283,7 +289,7 @@ var megamenu = {
         /*$('.rapala_device .menulist a').on('mouseenter', function(){
             window.location.href = $(this).attr('href');
         });*/
-        $('#brand-tabs-header').on('mouseleave focusout', function () {
+        $('#brand-tabs-header').on('mouseleave', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();
@@ -292,7 +298,7 @@ var megamenu = {
             }
         });
 
-        $('.brand-tabs-header-mask').on('mouseenter focusin', function () {
+        $('.brand-tabs-header-mask').on('mouseenter', function () {
             if ($(window).width() > 959) {
                 $('.megamenu-drop').hide();
                 $('.megamenudrop').hide();
@@ -302,6 +308,16 @@ var megamenu = {
             }
         });
 
+        /*$(".rapala_device #brand-tabs-header a").on('click', function(e){
+            e.preventDefault();
+            if($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+                window.location.href = $(this).attr('href');
+            }else{
+                $(this).closest("li").siblings().find("a").removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });*/
     },
     syncheight: function ($sel) {
         var current = 0;
