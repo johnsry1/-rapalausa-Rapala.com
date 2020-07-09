@@ -38,9 +38,7 @@ exports.onRequest = function () {
 		if (redirectedRegion == (request.httpProtocol + request.httpHost)) {
  			return new Status(Status.OK);
 	 	}
-		// if (!session.custom.redirectURL) {
-		// 	session.custom.redirectURL = session.custom['preferredRegion'];
-		// }
+
 		let cookie : dw.web.Cookie = new dw.web.Cookie('preferredRegion', redirectedRegion);
 		cookie.setMaxAge(86400*30);
 		cookie.setPath("/");

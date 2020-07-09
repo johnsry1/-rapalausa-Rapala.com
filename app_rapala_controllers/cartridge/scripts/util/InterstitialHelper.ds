@@ -73,8 +73,7 @@ var InterstitialHelper : Object = {
 	},
 	setRedirectUrl: function (request) {
 		var params = request.httpParameterMap;
-		// var url = request.httpCookies['preferredRegion'].value;
-		var url = URLUtils.url('Home-Show');
+		var url = request.httpCookies['preferredRegion'].value;
 
 		if (params.isParameterSubmitted('pid')) {
 			let pid = params.pid.value;
