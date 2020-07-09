@@ -147,7 +147,7 @@ function initializeEvent() {
             $imgZoom = $pdpMain.find('.main-image'),
             $mainImage = $pdpMain.find('.primary-image');
         $(this).closest('.swatches.color ').find('.selectedvarval').text('');
-        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focusin') {
+        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focus') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($(this).text());
         } else if (e.type == 'mouseout' || e.type == 'mouseleave') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($pdpMain.find('.swatches.color ').find('ul .selected-value').text());
@@ -176,16 +176,6 @@ function initializeEvent() {
         updateContent(this.href);
     });
 
-     // hit enter on swatch - should replace product content with new variant
-    $('body').on('keydown', '.swatches.color.current a.swatchanchor.corner-ribbon-wrapper', function (e) {
-        e.preventDefault();
-        if (e.which != 13 || $(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
-            return;
-        }
-        updateContent(this.href);
-        $('.input-text.quantityinput').focus();
-    });
-
     // change drop down variation attribute - should replace product content with new variant
     $('body').off('change', '.variation-select').on('change', '.variation-select', function () {
         if ($(this).val().length === 0) {
@@ -193,9 +183,8 @@ function initializeEvent() {
         }
         updateContent($(this).val());
     });
-
     // clicking on a previous step
-    $('.variationattributes').on('click keypress', '.selected a.filter', function (e) {
+    $('.variationattributes').on('click', '.selected a.filter', function (e) {
         e.preventDefault();
         var $this = $(this).closest('.selected');
         $('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');
