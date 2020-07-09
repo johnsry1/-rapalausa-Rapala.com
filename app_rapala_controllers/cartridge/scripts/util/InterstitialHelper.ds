@@ -20,9 +20,6 @@ var InterstitialHelper : Object = {
 		return request.httpCookies['preferredRegion'];
 	},
 	setInterstitialSiteCookie: function (request) {
-		// if(!request.httpCookies['preferredRegion']) {
-		// 	return;
-		// }
 		var id = 'rapala-';
 		if(!request.httpCookies['CountrySelectorViewed'] || !request.httpCookies['preferredRegion']){	
 			if (request.httpPath.indexOf('rapalaEU') != -1) {
@@ -70,27 +67,14 @@ var InterstitialHelper : Object = {
 		} else if (id == 'rapalaCA-') {
 			session.setCurrency(dw.util.Currency.getCurrency('CAD'));
 		}
-		// set cookie
 
-		setCookie('preferredRegion',id);
-		// session.custom.preferredRegion = id;
 		InterstitialHelper.setPopupShownCookie();
 		return;
 	},
 	setRedirectUrl: function (request) {
-		// var url, id, newHost;
 		var params = request.httpParameterMap;
-		var url = request.httpCookies['preferredRegion'].value;
-		// var tempUrl = URLUtils.url('Home-SetLocale');
-		// newHost = request.httpCookies['preferredRegion'].value;
-
-		// if (request.httpPath.indexOf('rapalaEU') != -1) {
-		// 	id = 'rapalaEU-';
-		// } else if (request.httpPath.indexOf('rapalaCA') != -1) {
-		// 	id = 'rapalaCA-';
-		// } else {
-		// 	id = 'rapala-';
-		// }
+		// var url = request.httpCookies['preferredRegion'].value;
+		var url = URLUtils.url('Home-Show');
 
 		if (params.isParameterSubmitted('pid')) {
 			let pid = params.pid.value;
@@ -105,9 +89,6 @@ var InterstitialHelper : Object = {
 			let cid = params.cid.value;
 			url = URLUtils.url('Page-ShowInLocale', 'cid', cid, 'sessionRedirect', true);
 		}
-		// if (tempUrl) {
-		// 	url = tempUrl.toString().replace(id, newHost);
-		// }
 
 		return url.toString();
 	},
