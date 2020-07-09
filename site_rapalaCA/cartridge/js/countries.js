@@ -58,4 +58,29 @@ exports.init = function init() {
         $.cookie('CountrySelectorViewed', 'true');
         window.location.href = $(this).attr('href');
     });
+    $('body').on('click', 'a.country.single-row', function(e) {
+        e.stopPropagation(); 
+        
+        // var urlString = $(this).attr('href');
+
+        //endpoint to value
+        
+
+        // var id = 'trial';
+        // if (window.path.indexOf('rapalaEU-') != -1) {
+        //     // $.cookie('preferredRegion', 'rapalaEU-');
+        //     id = 'rapalaEU-';
+        // } else if (window.path.indexOf('rapalaCA-') != -1) {
+        //     // $.cookie('preferredRegion','rapalaCA-');
+        //     id = 'rapalaCA-';
+        // } else if (window.path.indexOf('rapala-')) {
+        //     // $.cookie('preferredRegion', 'rapala-');
+        //     id = 'rapala-';
+        // }
+        window.alert('clicked url value is ' +$(this).attr('href'));
+        document.cookie = 'preferredRegion=' + $(this).attr('href');
+        // window.SessionAttributes.PREFERRED_REGION = id;
+        // window.SessionStorage.setItem('preferredLocation', id);
+        window.location.assign($(this).attr('href'));
+    });
 };

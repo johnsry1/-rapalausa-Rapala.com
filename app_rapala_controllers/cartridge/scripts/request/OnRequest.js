@@ -28,51 +28,26 @@ exports.onRequest = function () {
 	ltkActivityTracking.TrackRequest();
 
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-
+	if(!session.custom['preferredRegion'] && request.httpCookies['preferredRegion']) {
+		session.custom['preferredRegion'] = request.httpCookies['preferredRegion'].value;
+	}
 	var redirectedRegion = session.custom['preferredRegion'];
+
 	if (redirectedRegion) {
-		if (redirectedRegion == URLParsing.getPreferredRegion(request)) {
+		if (redirectedRegion == (request.httpProtocol + request.httpHost)) {
  			return new Status(Status.OK);
 	 	}
-		if (!session.custom.redirectURL) {
- 			var url = InterstitialHelper.setRedirectUrl(request);
-			session.custom.redirectURL = url;
-		}
-
-		return response.redirect(session.custom.redirectURL);
+		// if (!session.custom.redirectURL) {
+		// 	session.custom.redirectURL = session.custom['preferredRegion'];
+		// }
+		let cookie : dw.web.Cookie = new dw.web.Cookie('preferredRegion', session.custom['preferredRegion']);
+		cookie.setMaxAge(86400*30);
+		cookie.setPath("/");
+		// InterstitialHelper.setCookie('preferredRegion', session.custom['preferredRegion']);
+		var url = InterstitialHelper.setRedirectUrl(request);
+		response.addHttpCookie(cookie);
+		return response.redirect(url);
  	}
-
-
-	// var interstitialSiteId = session.custom.interstitialSiteId ? session.custom.interstitialSiteId : null;
-
-	
-	// if (session.custom.interstitialSiteId) {
-	// 	// if(session.custom.redirectURL) {
-	// 	// 	return new Status(Status.OK);
-	// 	// }
-	// 	var temp = request.httpCookies['preferredRegion'];
-	// 	console.log(temp);
-
-	// 	if (request.httpPath.indexOf(interstitialSiteID) != -1) {
-	// 		return new Status(Status.OK);
-	// 	}
-
-	// 	var url = InterstitialHelper.setRedirectUrl(request);
-	// 	// session.custom.redirectURL = url;
-	// 	return response.redirect(url);
-	// }
-
-	// if(request.httpCookies['preferredRegion'] && request.httpPath.indexOf('Analytics-Start') != -1) {
-	// 		var url = InterstitialHelper.setRedirectUrl(request);
-	// 		Logger.debug('URL', url);
-
-	// }
-	
-	// var temp = URLParsing.getPreferredRegion(request);
-	// console.log(temp);
-	
-	// var prefReg = session.custom.hasProperty('preferredRegion');
-	// console.log(prefReg);
 
 	if (!request.httpCookies.preferredRegion && !session.custom.showCountryPopup
 		&& (URLParsing.getPreferredRegion(request) != null || request.httpPath.indexOf('UpdateCurrency') != -1 

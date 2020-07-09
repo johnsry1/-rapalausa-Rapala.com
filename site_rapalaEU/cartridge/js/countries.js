@@ -43,4 +43,10 @@ exports.init = function init() {
                 window.location.reload(false);
             });
     });
+    $('body').on('click', 'a.country.single-row', function(e) {
+        e.stopPropagation(); 
+        window.alert('clicked url value is ' +$(this).attr('href'));
+        document.cookie = 'preferredRegion=' + $(this).attr('href');
+        window.location.assign($(this).attr('href'));
+    });
 };
