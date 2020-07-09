@@ -43,4 +43,9 @@ exports.init = function init() {
                 window.location.reload(false);
             });
     });
+    $('body').on('click', 'a.country.single-row', function(e) {
+        e.stopPropagation(); 
+        document.cookie = 'preferredRegion=' + $(this).attr('href');
+        window.location.assign($(this).attr('href'));
+    });
 };

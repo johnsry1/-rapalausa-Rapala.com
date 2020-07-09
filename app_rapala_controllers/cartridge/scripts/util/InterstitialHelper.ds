@@ -65,40 +65,32 @@ var InterstitialHelper : Object = {
 		} else if (id == 'rapalaCA-') {
 			session.setCurrency(dw.util.Currency.getCurrency('CAD'));
 		}
+<<<<<<< HEAD
+=======
+
+		InterstitialHelper.setPopupShownCookie();
+>>>>>>> bugfix/RPS-637-Global-Site-Interstitial-Not-Appearing
 		return;
 	},
 	setRedirectUrl: function (request) {
-		var url, id, newHost;
 		var params = request.httpParameterMap;
-		var tempUrl = URLUtils.url('Home-SetLocale');
-		newHost = request.httpCookies['preferredRegion'].value;
-
-		if (request.httpPath.indexOf('rapalaEU') != -1) {
-			id = 'rapalaEU-';
-		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
-			id = 'rapalaCA-';
-		} else {
-			id = 'rapala-';
-		}
+		var url = request.httpCookies['preferredRegion'].value;
 
 		if (params.isParameterSubmitted('pid')) {
 			let pid = params.pid.value;
-			tempUrl = URLUtils.url('Product-ShowInLocale', 'pid', pid, 'sessionRedirect', true);
+			url = URLUtils.url('Product-ShowInLocale', 'pid', pid, 'sessionRedirect', true);
 		} else if (params.isParameterSubmitted('cgid')) {
 			let cgid = params.cgid.value;
-			tempUrl = URLUtils.url('Search-ShowInLocale', 'cgid', cgid, 'sessionRedirect', true);
+			url = URLUtils.url('Search-ShowInLocale', 'cgid', cgid, 'sessionRedirect', true);
 		} else if (params.isParameterSubmitted('fdid')) {
 			let fdid = params.fdid.value;
-			tempUrl = URLUtils.url('Search-ShowInLocale', 'fdid', fdid, 'sessionRedirect', true);
+			url = URLUtils.url('Search-ShowInLocale', 'fdid', fdid, 'sessionRedirect', true);
 		} else if (params.isParameterSubmitted('cid')) {
 			let cid = params.cid.value;
-			tempUrl = URLUtils.url('Page-ShowInLocale', 'cid', cid, 'sessionRedirect', true);
-		}
-		if (tempUrl) {
-			url = tempUrl.toString().replace(id, newHost);
+			url = URLUtils.url('Page-ShowInLocale', 'cid', cid, 'sessionRedirect', true);
 		}
 
-		return url;
+		return url.toString();
 	},
 	constructCountryLink: function(activeCountryJSON, request) {
 		let defaultLink = 'http://www.rapala.com';

@@ -9,6 +9,8 @@
 var ltkActivityTracking = require('int_listrak_controllers/cartridge/controllers/ltkActivityTracking.js');
 var Status = require('dw/system/Status');
 var app = require('*/cartridge/scripts/app');
+var URLParsing = require('*/cartridge/scripts/util/URLParsing');
+// var URLUtils = require('dw/web/URLUtils');
 /**
  * The onRequest hook function.
  */
@@ -27,8 +29,28 @@ exports.onRequest = function () {
 	ltkActivityTracking.TrackRequest();
 
 	var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
-	var interstitialSiteId = null;
-	if (request.httpPath.indexOf('rapalaEU') != -1 || request.httpPath.indexOf('UpdateCurrency') != -1 || request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1) {
+	if(!session.custom['preferredRegion'] && request.httpCookies['preferredRegion']) {
+		session.custom['preferredRegion'] = request.httpCookies['preferredRegion'].value;
+	}
+	var redirectedRegion = session.custom['preferredRegion'];
+
+	if (redirectedRegion) {
+		if (redirectedRegion == (request.httpProtocol + request.httpHost)) {
+ 			return new Status(Status.OK);
+	 	}
+
+		let cookie : dw.web.Cookie = new dw.web.Cookie('preferredRegion', redirectedRegion);
+		cookie.setMaxAge(86400*30);
+		cookie.setPath("/");
+		// InterstitialHelper.setCookie('preferredRegion', session.custom['preferredRegion']);
+		var url = InterstitialHelper.setRedirectUrl(request);
+		response.addHttpCookie(cookie);
+		return response.redirect(url);
+ 	}
+
+	if (!request.httpCookies.preferredRegion && !session.custom.showCountryPopup
+		&& (URLParsing.getPreferredRegion(request) != null || request.httpPath.indexOf('UpdateCurrency') != -1 
+		|| request.httpPath.indexOf('SetLocale') != -1 || request.httpPath.indexOf('Default') != -1)) {
 		InterstitialHelper.setInterstitialSiteCookie(request);
 	}
 
