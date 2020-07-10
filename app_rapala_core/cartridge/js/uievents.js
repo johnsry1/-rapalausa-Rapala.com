@@ -38,30 +38,7 @@ var uievents = {
                 $customcheck.find('.custom-link').addClass('active');
             }
         });
-        /*if($('body').hasClass('rapala_device')){
-            $con.find(".ui-dialog #dialogcontainer123 #VipinsiderForm .select-style .selectbox").off('click').on("click",function(){
-                $(this).closest(".field-wrapper").addClass('expanded');
-                }).on("blur change", function(){
-                    $(this).closest(".field-wrapper").removeClass('expanded');
-                });
-        }*/
 
-        // custom select implementation in VIP insider
-        /*if(!$('body').hasClass('rapala_device')){
-            $con.find(".customized-select").find("select").each(function(){
-                if($(this).attr('disabled')){
-                    $(this).selectbox('disable');
-                }
-             else{
-                 $(this).selectbox();
-             }
-                $('.sbOptions li:last').addClass('last');
-            }).on('focus', function(){
-                $(this).next('.sbHolder').trigger('focus');
-            });
-
-        }
-    */
         $con.find('.custom-checkbox input[type="checkbox"]').off('change').on('change', function () {
             $(this).closest('.custom-checkbox').find('.custom-link').removeClass('error');
             var $form = $('.address');
@@ -370,11 +347,6 @@ var uievents = {
             $('.maxelement').addClass('hide');
             $('#customercontactus').find('span').removeClass('maxelement');
         });
-        /* if($(".ordertotalsaving").length > 0 ) {
-             $(".new-summery").removeClass("discount-available");
-         }else {
-             $(".new-summery").addClass("discount-available");
-         }*/
         if ($('.ui-dialog').hasClass('vipInsider-dlg')) {
             $('.vipInsider-dlg .formfield').each(function () {
                 if ($(this).find('.field-wrapper .clearbutton').length == 0 && $(this).find('.field-wrapper input[type="text"]').length > 0 || $(this).find('.field-wrapper textarea').length > 0 || $(this).find('.field-wrapper input[type="password"]').length > 0) {
@@ -457,15 +429,6 @@ var uievents = {
         $con.find('.category-top-level').each(function () {
             if ($(this).hasClass('current')) {
                 var $this = $('.categorymenusnew li.active');
-                /*
-                var $notthis = $('.categorymenusnew li').filter(function () {
-                    if ($(this).not('.active')) {
-                        if ($(this).find('> ul').length > 0) {
-                            $(this).find('> a .count-products').addClass('select_sublevelarrow');
-                        }
-                    }
-                });
-                */
                 $this.find('> ul').show();
                 $this.parents('ul').show();
                 if ($this.find('> ul').length > 0) {
@@ -497,12 +460,6 @@ var uievents = {
         } else {
             cookieprivacy();
         }
-        /*$('textarea[data-character-limit]').each(function(){
-            charcount($(this));
-            // trigger the keydown event so that any existing character data is calculated
-        }).on('keyup keypress', function(){
-            charcount($(this));
-        });*/
     },
     synccheckoutH: function () {
         if ($('.pt_checkout').length > 0) {

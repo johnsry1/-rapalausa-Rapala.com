@@ -31,19 +31,26 @@
 			<isif condition="${loopstatus.odd && loopstatus.last}">
 				</div><div class="row second">
 			</isif>
-				<a class="country single-row" href="${InterstitialHelper.constructCountryLink(activeCountry, pdict.CurrentRequest)}">
-					<div class="flag-container">
-						<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
-					</div>
-					<div class="url-container">
-						<div class="rapala-iternational-cart"></div>
-						<div class="url">${Resource.msg('global.'+activeCountry.flag+'url', 'locale', null)}</div>
-					</div>
-				</a>
-				<isif condition="${loopstatus.odd && !loopstatus.last}"><div class="divider"></div></isif>
+			<isset name="countryLink" value="${InterstitialHelper.constructCountryLink(activeCountry, pdict.CurrentRequest)}" scope="page">
+			<p>${countryLink}</p>
+			<a class="country single-row" href="${countryLink}">
+				<div class="flag-container">
+					<img class="flag" src="${URLUtils.staticURL('/lib/flag-icon-css/flags/1x1/'+activeCountry.flag+'.svg')}" alt="${'activeCountry.flag'}">
+				</div>
+				<div class="url-container">
+					<div class="rapala-iternational-cart"></div>
+					<div class="url">${Resource.msg('global.'+activeCountry.flag+'url', 'locale', null)}</div>
+				</div>
+				</a> 
+			<isif condition="${loopstatus.odd && !loopstatus.last}"><div class="divider"></div></isif>
 		</isloop>
 	</div>
 
+	</div>
+	<div class="trial">
+		<isloop items="${Object.keys(orgPrefs.getCustom())}" var="orgKey" status="loopstatus">
+			<p> ${orgKey} : ${orgPrefs[orgKey]}</p>
+		</isloop>
 	</div>
 	<div class="checking">
 		${Resource.msg('global.checkingcountry', 'locale', null)}

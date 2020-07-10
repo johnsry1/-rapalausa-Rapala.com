@@ -29,5 +29,6 @@ exports.init = function init() {
         e.stopPropagation();  
         document.cookie = 'preferredRegion=' + $(this).attr('href');
         window.location.assign($(this).attr('href'));
+        
     });
 };

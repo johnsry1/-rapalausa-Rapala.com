@@ -10,7 +10,7 @@ var ltkActivityTracking = require('int_listrak_controllers/cartridge/controllers
 var Status = require('dw/system/Status');
 var app = require('*/cartridge/scripts/app');
 var URLParsing = require('*/cartridge/scripts/util/URLParsing');
-// var URLUtils = require('dw/web/URLUtils');
+var URLUtils = require('dw/web/URLUtils');
 /**
  * The onRequest hook function.
  */
@@ -42,10 +42,11 @@ exports.onRequest = function () {
 		let cookie : dw.web.Cookie = new dw.web.Cookie('preferredRegion', redirectedRegion);
 		cookie.setMaxAge(86400*30);
 		cookie.setPath("/");
-		// InterstitialHelper.setCookie('preferredRegion', session.custom['preferredRegion']);
 		var url = InterstitialHelper.setRedirectUrl(request);
 		response.addHttpCookie(cookie);
 		return response.redirect(url);
+		// return response(URLUtils.sessionRedirect(redirectRegion, url));
+
  	}
 
 	if (!request.httpCookies.preferredRegion && !session.custom.showCountryPopup

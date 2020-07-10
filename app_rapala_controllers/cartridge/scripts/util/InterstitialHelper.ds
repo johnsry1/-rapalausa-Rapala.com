@@ -30,8 +30,8 @@ var InterstitialHelper : Object = {
 				id = 'rapalaEU-';
 			}
 		} 
-		session.custom.interstitialSiteId = id;
-		setCookie('preferredRegion',id);
+		// session.custom.interstitialSiteId = id;
+		// setCookie('preferredRegion',id);
 		if (id == 'rapalaEU-') {
 			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
@@ -97,7 +97,7 @@ var InterstitialHelper : Object = {
 		let countryLink;
 		let locale = request.locale;
 
-		if (activeCountry == "ca" || activeCountry != "us"  || activeCountry != "eu") {
+		if (activeCountry == "ca" && ( activeCountry != "us"  || activeCountry != "eu")) {
 			countryLink = protocol + activeCountryJSON.domain + "/";
 		} else if (activeCountry == "us") {
 			countryLink = protocol + activeCountryJSON.domain + "/";
@@ -128,6 +128,10 @@ var InterstitialHelper : Object = {
 			}
 		}
 
+		// countryLink = protocol + 'dev03.rapala.com/' + activeCountryJSON.localeID.toLowerCase();
+		// if(activeCountry == 'eu') {
+		// 	countryLink=countryLink.toString().replace('default', 'eu-en');
+		// }
 		// default the URL to US Production in the event we failed to construct a url beforehand.
 		if (countryLink.length <= 0 || countryLink.indexOf('undefined') > -1) {
 			countryLink = "https://www.rapala.com/";
