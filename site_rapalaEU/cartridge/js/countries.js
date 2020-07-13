@@ -43,9 +43,24 @@ exports.init = function init() {
                 window.location.reload(false);
             });
     });
-    $('body').on('click', 'a.country.single-row', function(e) {
+    $('body').on('click', 'a.country', function(e) {
         e.stopPropagation(); 
-        document.cookie = 'preferredRegion=' + $(this).attr('href');
-        window.location.assign($(this).attr('href'));
+        var url =  $(this)[0].host;
+
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.ca';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.com';        
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.fi';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.co.uk';
+        window.location.assign(url);
     });
+
+    // var buildURLS = function(currentdomain) {
+    //     var subdomain = currentdomain.split('.')[0];
+    //     var topLevel = ['.rapala.ca', '.rapala.com', '.rapala.fi', 'rapala.co.uk'];
+    //     for (var i = 0; i < topLevel.length; i++) {
+    //         topLevel[i] = subdomain + topLevel[i];
+    //     }
+    //     return topLevel;
+    // }
 };

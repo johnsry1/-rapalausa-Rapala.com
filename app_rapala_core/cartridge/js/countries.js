@@ -25,10 +25,14 @@ exports.init = function init() {
                 window.location.href = url;
             });
     });
-    $('body').on('click', 'a.country.single-row', function(e) {
-        e.stopPropagation();  
-        document.cookie = 'preferredRegion=' + $(this).attr('href');
-        window.location.assign($(this).attr('href'));
-        
+    $('body').on('click', 'a.country', function(e) {
+        e.stopPropagation(); 
+        var url =  $(this)[0].host;
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.ca';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.com';        
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.fi';
+        document.cookie = 'preferredRegion=' + url + '; max-age=180000, domain=dev03.rapala.co.uk';
+        window.location.assign(url);
     });
 };

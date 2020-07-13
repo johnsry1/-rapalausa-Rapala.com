@@ -35,13 +35,14 @@ exports.onRequest = function () {
 	var redirectedRegion = session.custom['preferredRegion'];
 
 	if (redirectedRegion) {
-		if (redirectedRegion == (request.httpProtocol + request.httpHost)) {
+		if (redirectedRegion == (request.httpHost)) {
  			return new Status(Status.OK);
 	 	}
 
 		let cookie : dw.web.Cookie = new dw.web.Cookie('preferredRegion', redirectedRegion);
 		cookie.setMaxAge(86400*30);
 		cookie.setPath("/");
+		cookie.setDomain(redirectedRegion);
 		var url = InterstitialHelper.setRedirectUrl(request);
 		response.addHttpCookie(cookie);
 		return response.redirect(url);
