@@ -46,13 +46,6 @@
 						<li class="rapala"><a class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('brand.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
 					</isif>
 
-					<!-- VMC : id=6 -->
-					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
-						<li class="vmc vmc-active" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
-					<iselseif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
-						<li class="vmc" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
-					</isif>
-
 					<!-- LUHR-JENSEN : id=5 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'luhrjensen')}">
 						<li class="luhrjensen luhrjensen-active" ><a class="luhrjensen" href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('brand.luhrjensen','common',null)}">${Resource.msg('account.luhrjensen','account',null)}</a></li>
@@ -119,6 +112,14 @@
 					<iselseif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarttiini') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
 						<li class="marttiini" ><a class="marttiini" href="${URLUtils.https('Home-Show','id','22')}" title="${Resource.msg('brand.marttiini','common',null)}">${Resource.msg('account.marttiini','account',null)}</a></li>
 					</isif>
+
+					<!-- VMC : id=6 -->
+					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
+						<li class="vmc vmc-active" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
+					<iselseif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
+						<li class="vmc" ><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('brand.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
+					</isif>
+
 					<!-- Ice Force : id=20 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'iceforce')}">
 						<li class="iceforce iceforce-active"><a class="iceforce" href="${URLUtils.https('Home-Show','id','20')}" title="${Resource.msg('brand.iceforce','common',null)}">${Resource.msg('account.iceforce','account',null)}</a></li>
