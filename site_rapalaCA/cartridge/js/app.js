@@ -421,6 +421,9 @@ function initializeEvents() {
                 }
             }, 2000);
         }
+        // $(window).load(function() {
+        $('.logo.desktopHide a').first().focus();
+        // })
     });
     // add generic toggle functionality
     $('.toggle').next('.toggle-content').hide();

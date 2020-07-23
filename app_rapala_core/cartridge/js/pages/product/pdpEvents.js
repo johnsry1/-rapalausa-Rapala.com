@@ -1947,7 +1947,7 @@ var product = function (response) {
                     }, 500);
                 });
                 // clicking on a previous step
-                jQuery('.variationattributes').on('click','.selected a.filter', function (e) {
+                jQuery('.variationattributes').on('click focusin keydown','.selected a.filter', function (e) {
                     e.preventDefault();
                     var $this = jQuery(this).closest('.selected');
                     jQuery('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');
@@ -1964,7 +1964,7 @@ var product = function (response) {
                             }
                         }
                     });
-                    $(this).parent().find('.swatchesdisplay .selected a').trigger('click');
+                    $(this).parent().find('.swatchesdisplay .selected a').trigger('click keydown');
                     $(this).parent().find('select').val('');
 
                     jQuery('.variationattributes').find('.future .optionwrapper').slideUp(400, function () {
@@ -1976,6 +1976,7 @@ var product = function (response) {
                         $(this).closest('.current').find('.filter .value').text('');
                     });
                 });
+                
 
                 // bind the "learn more" links
                 jQuery('span.learnmore a').on('click', function (e) {
@@ -2078,7 +2079,6 @@ var product = function (response) {
                             var swatchUrl = (findSwatch(this.title)).url; // find swatch url
 
                             if (swatchUrl && swatchUrl != '') {
-                                //jQuery(this).css("color", "transparent").parent().css("background", "url(" + swatchUrl + ")");
                                 jQuery(this).css('text-indent', '-9999px').prepend('<img alt="' + this.title + '" src="' + swatchUrl + '"/>');
                             } else {
                                 jQuery(this).css('color', 'transparent'); // no swatch image found
@@ -2088,10 +2088,10 @@ var product = function (response) {
                         // swatches click, hover and mouseleave event handlers
                         varJqryObjs.data('data', {id: pdpVarId}).on('click', varEventHandler);
                         if ($(window).width() > 1024) {
-                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter', function () {
+                            varJqryObjs.data('data', {id: pdpVarId}).on('mouseenter focusin', function () {
                                 thisProduct.showSelectedVarAttrVal('color', this.title);
                                 thisProduct.showImages(this.title, colorAttrDef.vals);
-                            }).on('mouseleave', function () {
+                            }).on('mouseleave focusout', function () {
                                 if (thisProduct.selectedVar) {
                                     thisProduct.showImages(thisProduct.selectedVar.id, [{
                                         'val': thisProduct.selectedVar.id,
@@ -2108,6 +2108,13 @@ var product = function (response) {
                                 }
 
                                 thisProduct.showSelectedVarAttrVal('color', thisProduct.selectedVarAttribs.color || '');
+                            }).on('keydown', function (e) {
+                                // if (e.which == 13 && !$(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+                                if (e.which == 13) { // key 13 = enter key press
+                                    e.preventDefault();
+                                    $(this).click();
+                                    $('.input-text.quantityinput').focus();
+                                }
                             });
                         }
 
@@ -2126,7 +2133,7 @@ var product = function (response) {
                 // loop thru all the non-swatches attributes and bind events etc.
                 jQuery(thisProduct.containerId + ' .variationattributes .variantdropdown select').each(function () {
                     // default ui i.e. drop downy
-                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).on('change', function (e) {
+                    jQuery(this).data('data', {id: jQuery(this).data('data'), val: ''}).off().on('change keypress', function (e) {
                         // if there is only 1 value to be selected then return i.e. no deselection available
                         //if (this.selectedIndex == 0 && this.options.length == 1) { return; }
 
@@ -2149,7 +2156,6 @@ var product = function (response) {
                                         jQuery(this).find('select option').each(function (index) {
                                             if ($(this).closest('select').find('option').length == 2 && index == 1) {
                                                 $(this).prop('selected', true).trigger('change');
-                                                //$(this).attr('selected','selected').trigger('change');
                                             }
                                         });
                                     }).find('select').trigger('change');

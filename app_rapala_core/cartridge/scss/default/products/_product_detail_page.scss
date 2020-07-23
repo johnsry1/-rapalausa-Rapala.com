@@ -56,6 +56,10 @@
             float: left;
             width: 37%;
         }
+        &:focus {
+            outline: $ada-focus-outline;
+            outline-color: $dim-gray;
+        }
     }
     .product-col-2 {
         @include respond(medium-up) {
@@ -487,11 +491,15 @@
         margin: 9px;
         width: 94%;
         color: $night-rider;
-        font-size: 12px;
+        font-size: 12px !important;
         font-weight: bold;
         font-family: $lucida-font-family;
         box-sizing: border-box;
         height: 28px;
+        &:focus {
+            outline: $ada-focus-outline;
+            outline-color: $dim-gray;
+        }
     }
     .swatches {
         ul {
@@ -514,6 +522,7 @@
             height: 22px;
             margin: 0 5px 5px 0;
             padding: 0;
+            outline: $red solid 1px;
             a {
                 background-image: url("../images/product-detail-size.jpg");
                 background-position: 0 0;
@@ -529,17 +538,24 @@
                 line-height: 20px;
                 padding: 0 12px;
                 text-decoration: none;
-                &:hover {
+                &:hover,
+                &:focus,
+                &:active {
+                    outline: $red solid 1px;
                     background-position: 0 -20px;
-                    border-color: $red;
+                    border-color: $red !important;
                     color: $white;
-                    text-decoration: none;
+                    text-decoration: none !important;
                 }
             }
             &.selected {
                 a {
                     background-position: 0 -20px;
+                    .trial {
+                        background-color: $alto6;
+                    }
                 }
+
             }
         }
     }
@@ -554,7 +570,7 @@
             width: 40px;
             border: 0;
             position: relative;
-
+            outline: transparent auto 1px;
             &.selected {
                 a {
                     border-color: $red;
@@ -578,10 +594,13 @@
                     max-height: 100%;
                     width: 100%;
                 }
-                &:hover {
-                    border-color: $red;
+                &:hover,
+                &:focus,
+                &:active {
+                    outline: $red auto 1px;
+                    border-color: $red !important;
                     text-decoration: none;
-                    width: 36px;
+                    width: 36px !important;
                 }
             }
         }
@@ -894,6 +913,7 @@
         a {
             &.sharing_button {
                 text-decoration: none;
+                background-image: url('../images/share-icon.svg');
             }
         }
     }
@@ -971,6 +991,9 @@ a {
         &:hover {
             color: $nobel;
             text-decoration: underline;
+        }
+        &:focus {
+            outline: $ada-focus-outline;
         }
     }
 }
@@ -2621,7 +2644,8 @@ a {
     .selected {
         a {
             &.filter {
-                &:hover {
+                &:hover,
+                &:focus {
                     background-color: $greyy-selected-row;
                 }
             }

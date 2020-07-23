@@ -132,7 +132,7 @@ var updateContent = function (href) {
 
 function initializeEvent() {
     //bind the 'previous' buttons in the picker
-    jQuery('a.previous').on('click', function (e) {
+    jQuery('a.previous').on('click keypress', function (e) {
         e.preventDefault();
         jQuery(this)
             .closest('.swatches, .variantdropdown')
@@ -142,12 +142,12 @@ function initializeEvent() {
     });
 
     // hover on swatch - should update main image with swatch image
-    $('body').off('mouseenter mouseleave', '.swatchanchor').on('mouseenter mouseleave', '.swatchanchor', function (e) {
+    $('body').off('mouseenter mouseleave focusin', '.swatchanchor').on('mouseenter mouseleave focusout', '.swatchanchor', function (e) {
         var largeImg = $(this).data('lgimg'),
             $imgZoom = $pdpMain.find('.main-image'),
             $mainImage = $pdpMain.find('.primary-image');
         $(this).closest('.swatches.color ').find('.selectedvarval').text('');
-        if (e.type == 'mouseenter' || e.type == 'mouseover') {
+        if (e.type == 'mouseenter' || e.type == 'mouseover' || e.type == 'focusin') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($(this).text());
         } else if (e.type == 'mouseout' || e.type == 'mouseleave') {
             $(this).closest('.swatches.color ').find('.selectedvarval').text($pdpMain.find('.swatches.color ').find('ul .selected-value').text());
@@ -176,6 +176,16 @@ function initializeEvent() {
         updateContent(this.href);
     });
 
+     // hit enter on swatch - should replace product content with new variant
+    $('body').on('keydown', '.swatches.color.current a.swatchanchor.corner-ribbon-wrapper', function (e) {
+        e.preventDefault();
+        if (e.which != 13 || $(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+            return;
+        }
+        updateContent(this.href);
+        $('.input-text.quantityinput').focus();
+    });
+
     // change drop down variation attribute - should replace product content with new variant
     $('body').off('change', '.variation-select').on('change', '.variation-select', function () {
         if ($(this).val().length === 0) {
@@ -183,8 +193,9 @@ function initializeEvent() {
         }
         updateContent($(this).val());
     });
+
     // clicking on a previous step
-    $('.variationattributes').on('click', '.selected a.filter', function (e) {
+    $('.variationattributes').on('click keypress', '.selected a.filter', function (e) {
         e.preventDefault();
         var $this = $(this).closest('.selected');
         $('.variationattributes .swatches,.variationattributes .variantdropdown').removeClass('current');

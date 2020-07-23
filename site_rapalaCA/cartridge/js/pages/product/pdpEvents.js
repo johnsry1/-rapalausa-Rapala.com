@@ -2094,6 +2094,12 @@ var product = function (response) {
                                 }
 
                                 thisProduct.showSelectedVarAttrVal('color', thisProduct.selectedVarAttribs.color || '');
+                            }).on('keydown', function (e) {
+                                if (e.which == 13 && !$(this).parents('li').hasClass('unselectable')) { // key 13 = enter key press
+                                    e.preventDefault();
+                                    $(this).click();
+                                    $('.input-text.quantityinput').focus();
+                                }
                             });
                         }
 
