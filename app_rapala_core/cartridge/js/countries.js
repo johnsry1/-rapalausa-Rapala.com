@@ -35,5 +35,5 @@ exports.init = function init() {
             document.cookie = 'preferredRegion=rapala-; max-age=180000, domain=rapala.com';
         }
         window.location.assign($(this).attr('href'));
-    });
+    }); 
 };
