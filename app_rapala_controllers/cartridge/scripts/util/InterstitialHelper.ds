@@ -21,10 +21,10 @@ var InterstitialHelper : Object = {
 	},
 	setInterstitialSiteCookie: function (request) {
 		var id = "rapala-";
-		if (request.httpPath.indexOf('rapalaEU') != -1) {
+		if (request.httpPath.indexOf('rapalaEU') != -1 || (session.custom.interstitialSiteId != null && session.custom.interstitialSiteId.indexOf('rapalaEU') != -1)) {
 			id = 'rapalaEU-';
-		} else if (request.httpPath.indexOf('rapalaCA') != -1) {
-		    if (empty(request.httpParameterMap.locale)) {
+		} else if (request.httpPath.indexOf('rapalaCA') != -1 || (session.custom.interstitialSiteId != null && session.custom.interstitialSiteId.indexOf('rapalaCA') != -1)) {
+		    if (empty(request.httpParameterMap.locale) || request.locale == 'en_CA') {
 				id = 'rapalaCA-';
 			} else if (request.httpParameterMap.locale == 'eu-en') {
 				id = 'rapalaEU-';
@@ -32,6 +32,7 @@ var InterstitialHelper : Object = {
 		} 
 		session.custom.interstitialSiteId = id;
 		setCookie('preferredRegion',id);
+		var logMessage = '';
 		if (id == 'rapalaEU-') {
 			var country = (request.geolocation != null) ? request.geolocation.getCountryCode() : 'default';
 			var json = dw.system.Site.getCurrent().getCustomPreferenceValue("countriesDefaultCurrency");
