@@ -1,12 +1,33 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscache type="relative" hour="24" />
-<isinclude template="util/modules"/>
 
+<iscomment> <h1>hello</h1> </iscomment>
+<isscript>  
+    var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
+    var currentSite = dw.system.Site.getCurrent();
+    var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+    var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
+    activeCountries = JSON.parse(activeCountries);
 
-
-<div class="header-changeregion">
-    <iscomment> <isinclude template="content/home/internationalinclude"/> </iscomment>
-    <a href="${URLUtils.url('Home-ChangeRegion','launch','yes')}"  title="${Resource.msg('global.changefooter','locale',null)}">
-        <img src="/on/demandware.static/Sites-rapala-Site/-/default/v1410331691654/images/flag.png" alt="${Resource.msg('global.changefooter','locale',null)}">
+    var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
+</isscript>
+<div class="change-region-dropdown">
+    <a href="${URLUtils.url('Home-HeaderChangeRegion')}"
+        title="${Resource.msg('global.changefooter', 'locale', null)}">
+        <img src="/on/demandware.static/Sites-rapala-Site/-/default/v1410331691654/images/flag.png"
+            alt="${Resource.msg('global.changefooter', 'locale', null)}">
     </a>
+    <div class="rapala-middle-block">
+        <isloop items="${activeCountries}" var="activeCountry"
+            status="loopstatus">
+            <a class="country link-${activeCountry.country}"
+                href="${InterstitialHelper.constructCountryLink(activeCountry, pdict.CurrentRequest)}">
+                <div class="rapala-iternational-flag"></div>
+                <div class="url">${Resource.msg('global.eu.international.' + activeCountry.country, 'locale', null)}</div>
+            </a>
+        </isloop>
+        <a class="gray-button"
+            href=${InterstitialHelper.constructCountryLink(euObj[0])}>${Resource.msg('global.internationalsite', 'locale', null)}</a>
+        <a class="gray-button"
+            href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
+    </div>
 </div>

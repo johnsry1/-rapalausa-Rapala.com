@@ -262,3 +262,86 @@
     }
 }
 
+.change-region-dropdown {
+    display: block;
+    .rapala-middle-block {
+        box-sizing: border-box;
+        padding: rem(15px) 0;
+        align-items: center;
+        display: none;
+        flex-flow: row wrap;
+        min-height: rem(101px);
+        background-color: $bg-white;
+        p {
+            padding: 0;
+            width: 100%;
+        }
+        a {
+            display: block !important;
+            padding: rem(15px) 15px;
+            .rapala-iternational-text {
+                @include geoip-link();
+            }
+            &:hover {
+                text-decoration: $geoip-link-decoration;
+            }
+            &.country {
+                > div {
+                    display: inline-block;
+                    &.url {
+                        margin: 0 5px;
+                    }
+                }
+            }
+        }
+        .rapala-iternational-flag {
+            display: inline-block;
+            width: rem(16px);
+            height: rem(11px);
+            background-size: cover;
+        }
+        .link-ca {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/canada.png') top left no-repeat;
+            }
+        }
+        .link-us {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/united-states.png') top left no-repeat;
+            }
+        }
+        .link-eu {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/eu.png') top left no-repeat;
+            }
+        }
+        .link-fi {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/finland.png') top left no-repeat;
+            }
+        }
+       .link-uk {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/uk.png') top left no-repeat;
+            }
+        }
+       .link-fr {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/france.png') top left no-repeat;
+            }
+        }
+        .international-link {
+            .rapala-iternational-flag {
+                margin: 0 7px 0 0;
+                background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+            }
+        }
+
+    }
+    &:hover {
+        .rapala-middle-block {
+            display: block;
+        }
+    }
+}
+
