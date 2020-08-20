@@ -283,38 +283,118 @@ div {
 		}
 	}
 	.gray-button {
-	    font-size: 13px;
-	    font-weight: normal;
-	    height: 40px;
-	    line-height: 40px;
-    	padding: 0;
-    	width: 100%;
-    	text-transform: unset;
-    	background: rgba(241, 241, 241, 1);
-        background: -ms-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
-        background: -moz-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
-        background: -o-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $shade-lightwhite), color-stop(100, $lightl-grey));
-        background: -webkit-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
-        background: linear-gradient(to bottom, $shade-lightwhite 0, $lightl-grey 100%);
-        border: 1px solid $darker-gray;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$shade-lightwhite', endColorstr='$lightl-grey', GradientType=0);
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        float: right;
-        text-align: center;
+        @include gray-button( right);
+        font-size: 13px;
+        font-weight: normal;
+        height: 40px;
+        line-height: 100%;
+        padding: 0;
+        width: 40px;
         box-sizing: border-box;
-        font-family: $global-font-family;
-        color: $night-rider;
-        text-transform: capitalize;
-        text-decoration: none;
-        margin-right: 10px;
-        &:hover {
-            text-decoration: none;
-            color: $night-rider;
-        }
-    	margin: 10px auto 5px;
-	}
+        margin: 10px 10px 5px auto;
+
+    }
 }
 
+.change-region-dropdown {
+    display: block;
+    span.change-region-header-flag {
+        display: flex;
+        img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: rem(16px);
+        }
+    }
+    .rapala-middle-block {
+        box-sizing: border-box;
+        padding: rem(5px) 0;
+        align-items: center;
+        display: none;
+        flex-flow: row wrap;
+        min-height: rem(101px);
+        background-color: $bg-white;
+        p {
+            padding: 0;
+            width: 100%;
+        }
+        a {
+            display: block !important;
+            padding: rem(15px) 15px;
+            .rapala-iternational-text {
+                @include geoip-link();
+            }
+            &:hover {
+                text-decoration: $geoip-link-decoration;
+            }
+            &.country {
+                > div {
+                    display: inline-block;
+                    &.url {
+                        margin: 0 5px;
+                    }
+                }
+            }
+        }
+        .rapala-iternational-flag {
+            display: inline-block;
+            width: rem(16px);
+            height: rem(11px);
+            background-size: cover;
+        }
+        .link-ca {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/canada.png') top left no-repeat;
+            }
+        }
+        .link-us {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/united-states.png') top left no-repeat;
+            }
+        }
+        .link-eu {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/eu.png') top left no-repeat;
+            }
+        }
+        .link-fi {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/finland.png') top left no-repeat;
+            }
+        }
+       .link-uk {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/uk.png') top left no-repeat;
+            }
+        }
+       .link-fr {
+            .rapala-iternational-flag {
+                background: url('../images/change-region/france.png') top left no-repeat;
+            }
+        }
+        .international-link {
+            .rapala-iternational-flag {
+                margin: 0 7px 0 0;
+                background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+            }
+        }
+
+    }
+    .gray-button {
+        @include gray-button(none);
+        font-size: 10px;
+        font-weight: normal;
+        height: 40px;
+        margin: 5px 0px;
+    }
+    &:focus,
+    &:active {
+        .rapala-middle-block {
+            display: block;
+        }
+        span.change-region-header-flag {
+            z-index: -1;
+        }
+    }
+}

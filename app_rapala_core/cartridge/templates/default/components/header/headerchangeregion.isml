@@ -11,11 +11,11 @@
     var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
 </isscript>
 <div class="change-region-dropdown">
-    <a href="${URLUtils.url('Home-HeaderChangeRegion')}"
-        title="${Resource.msg('global.changefooter', 'locale', null)}">
+    <span class="change-region-header-flag">
         <img src="/on/demandware.static/Sites-rapala-Site/-/default/v1410331691654/images/flag.png"
-            alt="${Resource.msg('global.changefooter', 'locale', null)}">
-    </a>
+        alt="${Resource.msg('global.headerchangeregion', 'locale', null)}">
+    </span>
+
     <div class="rapala-middle-block">
         <isloop items="${activeCountries}" var="activeCountry"
             status="loopstatus">
@@ -26,8 +26,12 @@
             </a>
         </isloop>
         <a class="gray-button"
-            href=${InterstitialHelper.constructCountryLink(euObj[0])}>${Resource.msg('global.internationalsite', 'locale', null)}</a>
+            href="${URLUtils.url('Home-International')}">${Resource.msg('global.paginginformation.viewall', 'locale', null)}</a>        
         <a class="gray-button"
-            href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
+            href="">${Resource.msg('global.internationalsite', 'locale', null)}</a>
+        <a class="gray-button"
+            href="${URLUtils.https('Stores-Find')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
     </div>
 </div>
+
+

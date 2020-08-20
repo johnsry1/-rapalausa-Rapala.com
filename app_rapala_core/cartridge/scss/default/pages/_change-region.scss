@@ -264,21 +264,27 @@
 
 .change-region-dropdown {
     display: block;
+    border: 1px solid $darker-gray;
+    border-radius: 3px;
     .rapala-middle-block {
         box-sizing: border-box;
-        padding: rem(15px) 0;
         align-items: center;
         display: none;
         flex-flow: row wrap;
         min-height: rem(101px);
         background-color: $bg-white;
+        padding: 2px 5px;
         p {
             padding: 0;
             width: 100%;
         }
         a {
+            padding: 2px 5px;
+        }
+        a:not(.gray-button) {
             display: block !important;
-            padding: rem(15px) 15px;
+            line-height: 12px;
+            height: auto;
             .rapala-iternational-text {
                 @include geoip-link();
             }
@@ -288,9 +294,6 @@
             &.country {
                 > div {
                     display: inline-block;
-                    &.url {
-                        margin: 0 5px;
-                    }
                 }
             }
         }
