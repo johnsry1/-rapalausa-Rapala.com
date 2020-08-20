@@ -264,16 +264,18 @@
 
 .change-region-dropdown {
     display: block;
-    border: 1px solid $darker-gray;
-    border-radius: 3px;
     .rapala-middle-block {
         box-sizing: border-box;
+        border: 1px solid $darker-gray;
+        border-radius: 3px;
         align-items: center;
         display: none;
         flex-flow: row wrap;
         min-height: rem(101px);
         background-color: $bg-white;
         padding: 2px 5px;
+        position: absolute;
+        top: 150%;
         p {
             padding: 0;
             width: 100%;
@@ -294,6 +296,9 @@
             &.country {
                 > div {
                     display: inline-block;
+                    &.url {
+                        font-size: small;;
+                    }
                 }
             }
         }
