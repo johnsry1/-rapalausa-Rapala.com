@@ -266,7 +266,7 @@
     display: block;
     float: left;
     .top_arrow {
-        left: 25px;
+        left: 15px;
     }
     .rapala-middle-block {
         box-sizing: border-box;
@@ -280,6 +280,13 @@
         padding: 2px 5px;
         position: absolute;
         top: 85%;
+        @include respond(0, $desktop-breakpoint - 1) {
+            top: 40%;
+            .top_arrow {
+                left: 10px;
+            }
+        }
+
         p {
             padding: 0;
             width: 100%;
