@@ -4,16 +4,18 @@
 <isscript>  
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
     var currentSite = dw.system.Site.getCurrent();
+    var currentCountry = pdict.CurrentRequest.geolocation.countryCode;
     var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
     var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
     activeCountries = JSON.parse(activeCountries);
-
     var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
 </isscript>
 <div class="change-region-dropdown">
     <span class="change-region-header-flag">
-        <img src="/on/demandware.static/Sites-rapala-Site/-/default/v1410331691654/images/flag.png"
-        alt="${Resource.msg('global.headerchangeregion', 'locale', null)}">
+            <a class="country link-${pdict.CurrentRequest.geolocation.countryCode.toLowerCase()}"
+                href="#">
+        <div class="rapala-iternational-flag"></div>
+        </a>
     </span>
 
     <div class="rapala-middle-block">

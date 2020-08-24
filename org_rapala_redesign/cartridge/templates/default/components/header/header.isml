@@ -75,7 +75,10 @@
 	    					<div id="minicart" class="minicart">
 	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    					</div><!-- END:minicart -->
-                            <div class="change-region">
+							
+							<div class="change-region">
+								<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}"/>
+
                                 <div class="currency-flag">
                                 <isset name="sessionCurrencyCode" value="${session.getCurrency().currencyCode}" scope="page" />
                                     <span>
@@ -101,7 +104,9 @@
                                         </isloop>
                                      </div>
                                 </span>
+								
                             </div>
+							
 	    				</div>
 					</div><!-- END: cell -->
 				</div>
