@@ -11,6 +11,7 @@
     var euObj = activeCountries.filter(function(x) { return x.country == 'eu'});
 	// set flag for popup shown
 	session.custom.showCountryPopup = false;
+	var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
 
 </isscript>
 <div id="country-selector-popup">
@@ -49,7 +50,7 @@
 		${Resource.msg('global.checkingcountry', 'locale', null)}
 	</div>
 	<a class="gray-button"
-		href="">${Resource.msg('global.internationalsite', 'locale', null)}</a>
+		href="${internationalBrandLink.custom.url}">${Resource.msg('global.internationalsite', 'locale', null)}</a>
 	<a class="gray-button"
 		href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
 	</div>

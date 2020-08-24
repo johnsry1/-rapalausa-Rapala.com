@@ -264,6 +264,7 @@
 
 .change-region-dropdown {
     display: block;
+    float: left;
     .top_arrow {
         left: 25px;
     }
@@ -307,39 +308,24 @@
         }
         .rapala-iternational-flag {
             display: inline-block;
-            width: rem(16px);
-            height: rem(11px);
+            width: 16px;
+            height: auto;
             background-size: cover;
-        }
-        .link-ca {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/canada.png') top left no-repeat;
+            img {
+                background: none;
+                width: rem(16px);
+                height: auto;
             }
         }
-        .link-us {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/united-states.png') top left no-repeat;
-            }
-        }
-        .link-eu {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/eu.png') top left no-repeat;
-            }
-        }
-        .link-fi {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/finland.png') top left no-repeat;
-            }
-        }
-       .link-uk {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/uk.png') top left no-repeat;
-            }
-        }
-       .link-fr {
-            .rapala-iternational-flag {
-                background: url('../images/change-region/france.png') top left no-repeat;
-            }
+        .link-ca,
+        .link-us,
+        .link-eu,
+        .link-fi,
+        .link-uk,
+        .link-fr {
+            background: none;
+            width: 100%;
+            height: auto;
         }
         .international-link {
             .rapala-iternational-flag {
@@ -349,10 +335,9 @@
         }
 
     }
-    // &:hover {
-    //     .rapala-middle-block {
-    //         display: block;
-    //     }
-    // }
+    @include respond(0, $desktop-breakpoint - 1) {
+        margin-top: 17.5px;
+    }
+
 }
 

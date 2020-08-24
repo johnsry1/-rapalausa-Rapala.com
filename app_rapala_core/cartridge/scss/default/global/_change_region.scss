@@ -286,7 +286,7 @@ div {
         @include gray-button( right);
         font-size: 13px;
         font-weight: normal;
-        height: 40px;
+        height: 20px;
         line-height: 100%;
         padding: 0;
         width: 40px;
@@ -298,13 +298,13 @@ div {
 
 .change-region-dropdown {
     display: block;
+    float: left;
     span.change-region-header-flag {
         display: flex;
         img {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: rem(16px);
+            background: none;
+            width: 100%;
+            height: auto;
         }
     }
     .rapala-middle-block {
@@ -337,85 +337,46 @@ div {
                 }
             }
         }
-    //     .rapala-iternational-flag {
-    //         display: inline-block;
-    //         width: rem(16px);
-    //         height: rem(11px);
-    //         background-size: cover;
-    //     }
-    //     .link-ca {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/canada.png') top left no-repeat;
-    //         }
-    //     }
-    //     .link-us {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/united-states.png') top left no-repeat;
-    //         }
-    //     }
-    //     .link-eu {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/eu.png') top left no-repeat;
-    //         }
-    //     }
-    //     .link-fi {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/finland.png') top left no-repeat;
-    //         }
-    //     }
-    //    .link-uk {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/uk.png') top left no-repeat;
-    //         }
-    //     }
-    //    .link-fr {
-    //         .rapala-iternational-flag {
-    //             background: url('../images/change-region/france.png') top left no-repeat;
-    //         }
-    //     }
-    //     .international-link {
-    //         .rapala-iternational-flag {
-    //             margin: 0 7px 0 0;
-    //             background: url('../images/change-region/all-other-countries.png') top left no-repeat;
-    //         }
-    //     }
+    }
+    @include respond(0, $desktop-breakpoint - 1) {
+        margin-top: 17.5px;
     }
     .rapala-iternational-flag {
         display: inline-block;
-        width: rem(16px);
-        height: rem(11px);
+        width: rem(18px);
+        height: rem(12px);
         background-size: cover;
     }
-    .link-ca {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/canada.png') top left no-repeat;
-        }
-    }
-    .link-us {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/united-states.png') top left no-repeat;
-        }
-    }
-    .link-eu {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/eu.png') top left no-repeat;
-        }
-    }
-    .link-fi {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/finland.png') top left no-repeat;
-        }
-    }
-   .link-uk {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/uk.png') top left no-repeat;
-        }
-    }
-   .link-fr {
-        .rapala-iternational-flag {
-            background: url('../images/change-region/france.png') top left no-repeat;
-        }
-    }
+//     .link-ca {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/canada.png') top left no-repeat;
+//         }
+//     }
+//     .link-us {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/united-states.png') top left no-repeat;
+//         }
+//     }
+//     .link-eu {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/eu.png') top left no-repeat;
+//         }
+//     }
+//     .link-fi {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/finland.png') top left no-repeat;
+//         }
+//     }
+//    .link-uk {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/uk.png') top left no-repeat;
+//         }
+//     }
+//    .link-fr {
+//         .rapala-iternational-flag {
+//             background: url('../images/change-region/france.png') top left no-repeat;
+//         }
+//     }
     .international-link {
         .rapala-iternational-flag {
             margin: 0 7px 0 0;
@@ -426,16 +387,7 @@ div {
         @include gray-button(none);
         font-size: 10px;
         font-weight: normal;
-        height: 40px;
+        height: 20px;
         margin: 5px 0px;
     }
-    // &:focus,
-    // &:active {
-    //     .rapala-middle-block {
-    //         display: block;
-    //     }
-    //     span.change-region-header-flag {
-    //         z-index: -1;
-    //     }
-    // }
 }
