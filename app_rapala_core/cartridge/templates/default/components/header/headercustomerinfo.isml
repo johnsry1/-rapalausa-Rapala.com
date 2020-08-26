@@ -139,44 +139,62 @@
 		</a>
 		<div id="userinfo">
 		    <ul>
-			    	<li class="ui-login <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
-			    		<div class="login-value mobile-view">
-			    			<isif condition = "${pdict.CurrentCustomer.authenticated}">
-								<isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer,pdict.CurrentForms)}" scope="page" />
-								<isif condition="${!empty(badgeText) && badgeText!=null}">
-									<isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini','BT',badgeText)}"/>
-								</isif>
-				 			</isif>
-			    		</div>
-				    	<isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
-					    	<div class="sign-up-blk">
-						    	<a href="${URLUtils.https('Account-Show')}"
-				    	 class="userlogin signin"><isprint value="${Resource.msg('global.Signin','locale',null)}"/></a>
-				    	    </div>
-				    	    <div class="header-sign-in accountcontent">
-								<isinclude template="components/header/headersignin"/>
+				<li class="ui-login <isif condition=" ${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
+					<div class="login-value mobile-view">
+						<isif condition="${pdict.CurrentCustomer.authenticated}">
+							<isset name="badgeText"
+								value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds')
+           	.getBadgeText(pdict.CurrentCustomer, pdict.CurrentForms)}"
+								scope="page" />
+							<isif condition="${!empty(badgeText) && badgeText != null}">
+								<isinclude
+									url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini', 'BT', badgeText)}" />
+							</isif>
+						</isif>
+					</div>
+					<isif
+						condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
+						<div class="sign-up-blk">
+							<a href="${URLUtils.https('Account-Show')}"
+								class="userlogin signin">
+								<isprint
+									value="${Resource.msg('global.Signin', 'locale', null)}" />
+								</a>
+						</div>
+						<div class="header-sign-in accountcontent">
+							<isinclude template="components/header/headersignin" />
+						</div>
+						<div class="header-create accountcontent">
+							<isinclude template="components/header/headercreateaccount" />
+						</div>
+						<div class="header-forgot-pwd accountcontent">
+							<isinclude template="components/header/headerlostpassword" />
+						</div>
+						<div class="confirmationcontainer forgotmsg" style="display:none;">
+							<div class="top_arrow"></div>
+							<div id="message" class="reset-success-email">
+								<isprint
+									value="${Resource.msg('passwordreset.sent', 'account', null)}" />
+								<br>
+								<isprint
+									value="${Resource.msg('passwordreset.sent2', 'account', null)}" />
 							</div>
-							<div class="header-create accountcontent">
-								<isinclude template="components/header/headercreateaccount"/>
-							</div>
-							<div class="header-forgot-pwd accountcontent">
-								<isinclude template="components/header/headerlostpassword"/>
-							</div>
-							<div class="confirmationcontainer forgotmsg"  style="display:none;">
-				    			<div class="top_arrow"></div>
-				    			<div id="message" class="reset-success-email"><isprint value="${Resource.msg('passwordreset.sent','account',null)}"/><br><isprint value="${Resource.msg('passwordreset.sent2','account',null)}"/></div>
-							</div>
-					    	<div class="headermask" style="display: none;"></div>
-					    <iselse/>
-				    		<div class="signedin">
-				    			&nbsp;<a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
-				    		</div>
-				        </isif>
-			        </li>
-			        <isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
-			        <li class="dividers pipe signin">|</li></isif>
-			         <isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">
-			        <li class="dividers pipe first">&nbsp;|</li></isif>
+						</div>
+						<div class="headermask" style="display: none;"></div>
+						<iselse />
+						<div class="signedin">
+							&nbsp;<a href="${URLUtils.https('Account-Show')}"
+								class="userloggedin signedin"></a>
+						</div>
+					</isif>
+				</li>
+				<isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
+					<li class="dividers pipe signin">|</li>
+				</isif>
+				<isif condition="${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">
+					<li class="dividers pipe first">&nbsp;|</li>
+				</isif>
+
 		        <li class="ui-email">
 			       <isif condition="${pdict.CurrentCustomer.authenticated}">
 						<a href="${URLUtils.https('Page-Show','cid','email-preference-center','fdid','rapala-contact-us')+'&email='+pdict.CurrentCustomer.profile.email}" class="userregister"><isprint value="${Resource.msg('global.register','locale',null)}"/></a>
@@ -193,5 +211,9 @@
 		        <li class="ui-customer">
 		        	<a href="${URLUtils.url('Folder-Show','fdid','rapala-customer-service')}" ><isprint value="${Resource.msg('header.customerservice','locale',null)}"/></a>
 		        </li>
+				<li class="dividers pipe">|</li>
+				<li class="ui-changeregion">
+					<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}"/>
+				</li>
 		     </ul>
 	    </div>

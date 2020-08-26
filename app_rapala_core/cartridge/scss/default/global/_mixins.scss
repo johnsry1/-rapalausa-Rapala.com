@@ -460,3 +460,31 @@
         text-decoration: $geoip-footer-text-link-hover-decoration;
     }
 }
+
+@mixin gray-button ($float) {
+
+    text-transform: unset;
+    background: rgba(241, 241, 241, 1);
+    background: -ms-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+    background: -moz-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+    background: -o-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $shade-lightwhite), color-stop(100, $lightl-grey));
+    background: -webkit-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+    background: linear-gradient(to bottom, $shade-lightwhite 0, $lightl-grey 100%);
+    border: 1px solid $darker-gray;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$shade-lightwhite', endColorstr='$lightl-grey', GradientType=0);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    float: $float;
+    text-align: center;
+    font-family: $global-font-family;
+    color: $night-rider;
+    text-transform: capitalize;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        color: $night-rider;
+    }
+
+}
