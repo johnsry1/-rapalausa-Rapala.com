@@ -122,20 +122,16 @@ var InterstitialHelper : Object = {
                 countryLink="https://" + activeCountryJSON.domain + countryLink.toString().replace('en_CA', 'default');
 			}
 		} else {
-			let params = "?countrySelect=true&locale=";
+			// let params = "?countrySelect=true&locale=";
 			// construct a url based of the global custom preference json config
 			// example: https://devXX.rapala.com/fi-fi?countrySelect=true&locale=fi_FI
 			if (!empty(activeCountryJSON.sitePath) && activeCountryJSON.sitePath !== 'undefined') {
 				countryLink = protocol + 
 						  activeCountryJSON.domain + "/" + 
-						  activeCountryJSON.sitePath + 
-						  params + 
-						  activeCountryJSON.localeID;
+						  activeCountryJSON.sitePath;
 			} else {
 				countryLink = protocol + 
-						  activeCountryJSON.domain + "/" + 
-						  params + 
-						  activeCountryJSON.localeID;
+						  activeCountryJSON.domain + "/";
 			}
 		}
 
