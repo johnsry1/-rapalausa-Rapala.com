@@ -283,16 +283,42 @@ div {
 		}
 	}
 	.gray-button {
-        @include gray-button( right);
+        // @include gray-button( right);
+        // font-size: 13px;
+        // font-weight: normal;
+        // height: 40px;
+        // line-height: 40px;
+        // padding: 0;
+        // width: 40px;
+        // box-sizing: border-box;
+        
         font-size: 13px;
-        font-weight: normal;
-        height: 20px;
-        line-height: 100%;
-        padding: 0;
-        width: 40px;
+	    font-weight: normal;
+	    height: 40px;
+	    line-height: 40px;
+    	padding: 0;
+    	width: 100%;
+    	text-transform: unset;
+    	background: rgba(241, 241, 241, 1);
+        background: -ms-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -moz-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -o-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, $shade-lightwhite), color-stop(100, $lightl-grey));
+        background: -webkit-linear-gradient(top, $shade-lightwhite 0, $lightl-grey 100%);
+        background: linear-gradient(to bottom, $shade-lightwhite 0, $lightl-grey 100%);
+        border: 1px solid $darker-gray;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$shade-lightwhite', endColorstr='$lightl-grey', GradientType=0);
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        float: right;
+        text-align: center;
         box-sizing: border-box;
-        margin: 10px 10px 5px auto;
-
+        font-family: $global-font-family;
+        color: $night-rider;
+        text-transform: capitalize;
+        text-decoration: none;
+        margin-top: 10px;
     }
 }
 
@@ -339,45 +365,13 @@ div {
             }
         }
     }
-    // @include respond(0, $desktop-breakpoint - 1) {
-    //     margin-top: 17.5px;
-    // }
+
     .rapala-iternational-flag {
         display: inline-block;
         width: rem(18px);
         height: rem(12px);
         background-size: cover;
     }
-//     .link-ca {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/canada.png') top left no-repeat;
-//         }
-//     }
-//     .link-us {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/united-states.png') top left no-repeat;
-//         }
-//     }
-//     .link-eu {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/eu.png') top left no-repeat;
-//         }
-//     }
-//     .link-fi {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/finland.png') top left no-repeat;
-//         }
-//     }
-//    .link-uk {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/uk.png') top left no-repeat;
-//         }
-//     }
-//    .link-fr {
-//         .rapala-iternational-flag {
-//             background: url('../images/change-region/france.png') top left no-repeat;
-//         }
-//     }
     .international-link {
         .rapala-iternational-flag {
             margin: 0 7px 0 0;
@@ -390,5 +384,9 @@ div {
         font-weight: normal;
         height: 20px;
         margin: 5px 0px;
+        // height: 20px;
+        line-height: 100%;
+        // margin: 10px 10px 5px auto;
+
     }
 }
