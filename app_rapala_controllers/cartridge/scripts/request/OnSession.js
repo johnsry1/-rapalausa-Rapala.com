@@ -84,7 +84,11 @@ function getPreferredRegion() {
  */
 exports.onSession = function () {
     session.custom.device = getDeviceType();
-    session.custom.showCountryPopup = showCountryPopup();
+    
+
+    if( dw.system.System.getPreferences().getCustom()["enableShowCountryPopup"] ) {
+        session.custom.showCountryPopup = showCountryPopup();
+    }
     session.custom.interstitialSiteId = getPreferredRegion();
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper');
     
