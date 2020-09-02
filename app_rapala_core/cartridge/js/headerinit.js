@@ -193,21 +193,6 @@ var headerEvents = {
             e.preventDefault();
             $(this).parent('.user-info').toggleClass('active');
         });
-        $('.change-regionnew').on('mouseenter', function () {
-            $('.domainswitch-header').show();
-            $('.headermask').show();
-        });
-        $('.change-region').on('mouseenter', function () {
-            jQuery('.domainswitch').show();
-            $('.region_overlay').show();
-        });
-        $('.region_overlay').on('mouseenter', function () {
-            jQuery('.domainswitch').hide();
-            $(this).hide();
-        });
-        $('.change-region-dropdown .change-region-header-flag a.country').on('click', function(e) {
-            e.preventDefault();
-        });
         $('.change-region-dropdown').on('click', function() {
             var block = $(this).find('.rapala-middle-block');
             block.toggleClass('active');
@@ -240,8 +225,21 @@ var headerEvents = {
                 $(this).click();
             }
         });
-
-
+        $('.change-region-dropdown .change-region-header-flag a.country').on('click', function(e) {
+            e.preventDefault();
+        });
+        $('.change-regionnew').on('mouseenter', function () {
+            $('.domainswitch-header').show();
+            $('.headermask').show();
+        });
+        $('.change-region').on('mouseenter', function () {
+            jQuery('.domainswitch').show();
+            $('.region_overlay').show();
+        });
+        $('.region_overlay').on('mouseenter', function () {
+            jQuery('.domainswitch').hide();
+            $(this).hide();
+        });
         $('button').on('click', function () {
             if ($('.resetpassword').is(':Visible')) {
                 $('.resetpassword').closest('div.dialog-content').addClass('confirmationcontainer');
