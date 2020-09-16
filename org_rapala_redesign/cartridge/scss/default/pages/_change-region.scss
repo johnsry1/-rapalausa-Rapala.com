@@ -243,7 +243,9 @@
 .change-region-dropdown {
     float: left;
     margin-top: 5px;
+    position: relative;
     .rapala-middle-block{
+        position: absolute;
         width: 200px;
         z-index: 1000;
         .top_arrow {
@@ -259,13 +261,9 @@
             top: 32%;
         }
     }
-    @include respond($desktop-breakpoint, $xxlg-content-breakpoint){
+    @include respond($desktop-breakpoint - 1, $xxlg-content-breakpoint){
         .rapala-middle-block {
-            right: 2%;
             top: 92%;
-            .top_arrow {
-                left: 176px;
-            }
         }
     }
 
