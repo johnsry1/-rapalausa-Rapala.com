@@ -274,7 +274,7 @@ var headerEvents = {
         })
             // aria-label=""navigation menu"" aria-haspopup=""menu""
 
-        });
+        //});
         /**This is used to get the tick mark for create account when the field is valid*/
         $('.ui-login input.required').on('blur', function () {
             if ($(this).hasClass('valid')) {
