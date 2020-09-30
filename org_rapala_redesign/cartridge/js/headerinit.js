@@ -208,15 +208,15 @@ var headerEvents = {
             var block = $(this).find('.rapala-middle-block');
             block.toggleClass('active');
             if (block.hasClass('active')) {
-                block.css('display', 'block');
+                block.css('display', 'inline-table');
             } else {
-                block.css('display', 'none');
+                block.css('display', 'none'); 
             }
 
         }).on('keyup', function(e) {
             var block = $(this).find('.rapala-middle-block');
             if (e.keyCode == 13) {
-                block.addClass('active').css('display', 'block');
+                block.addClass('active').css('display', 'inline-table');
                 return;
             }
             if (e.keyCode == 27 && block.hasClass('active')) {
