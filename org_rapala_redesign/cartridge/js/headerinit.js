@@ -16,6 +16,7 @@ var headerEvents = {
             $(this).removeClass('errorclient');
             $(this).closest('.formfield').find('.logerror , .existing_register').css('display', 'none');
         });
+        
         if ($('.logincustomers').length > 0) {
             var crrobj = $(this).find('.formfield  .logerror');
             $(crrobj).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
@@ -201,6 +202,41 @@ var headerEvents = {
             $('.domainswitch').show();
             $('.region_overlay').show();
         });
+        $('.change-region-dropdown .change-region-header-flag a.country').on('click', function(e) {
+            e.preventDefault();
+        });
+        $('.change-region-dropdown').on('click', function() {
+            var block = $(this).find('.rapala-middle-block');
+            block.toggleClass('active');
+            if (block.hasClass('active')) {
+                block.css('display', 'block');
+            } else {
+                block.css('display', 'none');
+            }
+
+        }).on('keyup', function(e) {
+            var block = $(this).find('.rapala-middle-block');
+            if (e.keyCode == 13) {
+                block.addClass('active').css('display', 'block');
+                return;
+            }
+            if (e.keyCode == 27 && block.hasClass('active')) {
+                block.find('active').removeClass('active');
+                block.css('display', 'none');
+                $(this).focus();
+            }
+        });
+        $('.change-region-dropdown .rapala-middle-block a').on('keyup', function(e) {
+            e.preventDefault();
+            if (e.keyCode == 27) {
+                var parent = $(this).parent();
+                parent.removeClass('active').css('display', 'none');
+                parent.parent().focus();
+            }
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
         $('.region_overlay').on('mouseenter', function () {
             $('.domainswitch').hide();
             $(this).hide();
@@ -228,6 +264,17 @@ var headerEvents = {
                 target.parents('.field-wrapper').find('.checkinput').trigger('click');
             }
         });
+        $('.menu-toggle').on('click', function() {
+            var expanded = $(this).find('.menu-icon').attr('aria-expanded');
+            $(this).find('.menu-icon').attr('aria-label', 'navigation menu').attr('aria-haspopup', 'menu').attr('aria-expanded', expanded == 'false');
+            // if(expanded) {
+            //     $(this).find()
+            // }
+
+        })
+            // aria-label=""navigation menu"" aria-haspopup=""menu""
+
+        //});
         /**This is used to get the tick mark for create account when the field is valid*/
         $('.ui-login input.required').on('blur', function () {
             if ($(this).hasClass('valid')) {

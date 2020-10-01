@@ -9,6 +9,17 @@
 
 <isscript>
 var inputField = require('app_rapala_core/cartridge/scripts/common/inputField')(pdict);
+
+var label = '';
+var temp = '';
+var arr = inputField.label.split('class="labeltext">');
+if(arr.length >= 1) {
+    label = arr[1];
+    label = label.split('</')[0];
+} 
+inputField.label = inputField.label.replace('<div class = "label"', '<label');
+inputField.label = inputField.label.replace('</div>','</label>');
+
 </isscript>
 <div class="form-row ${inputField.rowClass}" <isif condition="${pdict.requiredtext}"> data-required-text="<isprint value="${pdict.requiredtext}" encoding="on"/>"</isif>>
 	<isif condition="${inputField}">
@@ -25,7 +36,7 @@ var inputField = require('app_rapala_core/cartridge/scripts/common/inputField')(
 		<iselse/>
 			<isif condition="${!pdict.label || pdict.label === 'true'}">
 				<isprint value="${inputField.label}" encoding="off"/>
-			</isif>
+			</isif> 
 			<isprint value="${inputField.help}" encoding="off"/>
 			<isif condition="${!pdict.value || pdict.value === 'true'}">
 				<div class="field-wrapper">

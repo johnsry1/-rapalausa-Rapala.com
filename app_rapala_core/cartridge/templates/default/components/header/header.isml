@@ -71,6 +71,9 @@
 							<a href="${URLUtils.https('Home-Show')}" class="shop-by-brand"><span class="logo-border">RESPECTED<br /><span>Rapala Brands</span></span></a>
 						</div>
 
+						<div class="headerChangeRegion mobileHide">
+							<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}"/>
+						</div>
 						<div class="headercustomerinfo">
 							<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
 							<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
@@ -144,6 +147,12 @@
 	<div class="clear"><!-- FLOAT CLEAR --></div>
 </div><!--  END: headerwrapper -->
 <iscomment>Including Google Analytics and GTM Standard Tagging GAcommented</iscomment>
+<script type="text/javascript">/*<![CDATA[*/
+	jQuery(document).ready(function() {
+		jQuery("[name=${pdict.CurrentForms.login.username.htmlName}]").attr('tabindex', 21).attr('autocomplete', 'email');
+		jQuery("[name=${pdict.CurrentForms.login.password.htmlName}]").attr('tabindex', 22).attr('autocomplete', 'current-password');
+	});
 
+/* ]]> */</script>
 
 <isinclude url="${URLUtils.url('CommissionJunction-AppendCjGoogle')}" />

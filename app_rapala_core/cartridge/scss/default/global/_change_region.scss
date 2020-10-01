@@ -283,7 +283,16 @@ div {
 		}
 	}
 	.gray-button {
-	    font-size: 13px;
+        // @include gray-button( right);
+        // font-size: 13px;
+        // font-weight: normal;
+        // height: 40px;
+        // line-height: 40px;
+        // padding: 0;
+        // width: 40px;
+        // box-sizing: border-box;
+        
+        font-size: 13px;
 	    font-weight: normal;
 	    height: 40px;
 	    line-height: 40px;
@@ -309,12 +318,88 @@ div {
         color: $night-rider;
         text-transform: capitalize;
         text-decoration: none;
-        margin-right: 10px;
-        &:hover {
-            text-decoration: none;
-            color: $night-rider;
-        }
-    	margin: 10px auto 5px;
-	}
+        margin-top: 10px;
+    }
 }
 
+.change-region-dropdown {
+    display: block;
+    float: left;
+    span.change-region-header-flag {
+        display: flex;
+        img {
+            background: none;
+            width: 100%;
+            height: auto;
+            border: 1px solid $img-border-thumbnil;
+        }
+    }
+    .rapala-middle-block {
+        box-sizing: border-box;
+        padding: rem(5px) 0;
+        align-items: center;
+        display: none;
+        flex-flow: row wrap;
+        min-height: rem(101px);
+        background-color: $bg-white;
+        z-index: 1000;
+        p {
+            padding: 0;
+            width: 100%;
+        }
+        a {
+            padding: rem(15px) 15px;
+            display: flex !important;
+            align-items: center;
+            .rapala-iternational-text {
+                @include geoip-link();
+            }
+            &:hover {
+                text-decoration: $geoip-link-decoration;
+            }
+            &.country {
+                justify-content: left;
+                color: $night-rider;
+                > div {
+                    display: inline-block;
+                    &.url {
+                        margin: 0 5px;
+                    }
+                }
+            }
+            &.gray-button {
+                justify-content: center;
+            }
+        }
+    }
+
+    .rapala-iternational-flag {
+        display: inline-block;
+        width: rem(18px);
+        height: rem(12px);
+        background-size: cover;
+        img {
+            background: none;
+            width: rem(16px);
+            height: auto;
+            border: .5px solid $img-border-thumbnil;
+        }
+    }
+    .international-link {
+        .rapala-iternational-flag {
+            margin: 0 7px 0 0;
+            background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+        }
+    }
+    .gray-button {
+        @include gray-button(none);
+        font-size: 10px;
+        font-weight: normal;
+        height: 20px;
+        margin: 5px 0px;
+        // height: 20px;
+        line-height: 100%;
+        // margin: 10px 10px 5px auto;
+
+    }
+}
