@@ -16,11 +16,6 @@
                             <li><a class="rapala" title="${Resource.msg('footertab.rapala','common',null)}">${Resource.msg('account.rapala','account',null)}</a></li>
                         </isif>
 
-                        <!-- VMC : id=6 -->
-                        <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
-                            <li><a class="vmc" title="${Resource.msg('footertab.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
-                        </isif>
-
                         <!-- STORM : id=4 -->
                         <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstorm') != null) && (dw.system.Site.current.preferences.custom.activebrandstorm == true)}">
                             <li><a class="storm" title="${Resource.msg('footertab.storm','common',null)}">${Resource.msg('account.storm','account',null)}</a></li>
@@ -66,6 +61,11 @@
                         <!-- Strike Master : id=22 -->
                         <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarttiini') != null) && (dw.system.Site.current.preferences.custom.activebrandmarttiini == true)}">
                             <li><a class="marttiini" title="${Resource.msg('footertab.marttiini','common',null)}">${Resource.msg('account.marttiini','account',null)}</a></li>
+                        </isif>
+                        
+                        <!-- VMC : id=6 -->
+                        <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
+                            <li><a class="vmc" title="${Resource.msg('footertab.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
                         </isif>
                         <iscomment>
                             <!-- Otter : id=21 -->
