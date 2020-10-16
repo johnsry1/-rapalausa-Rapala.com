@@ -177,6 +177,12 @@ function leftnav(){
 	app.getView().render('components/header/leftnavmenu');
 }
 
+/**.
+ * Renders Change Country Dropdown in header
+ */
+function headerChangeRegion() {
+    app.getView().render('components/header/headerchangeregion');
+}
 
 /**.
  * This is designed as a content asset include to achieve dynamic change region link from the footer.
@@ -272,6 +278,9 @@ exports.MegaMenu = guard.ensure(['get'], megamenu);
 /** Renders leftnavmenu.isml.
 * @see module:controllers/Home~leftnav */
 exports.LeftNav = guard.ensure(['get'], leftnav);
+/** Renders headerchangeregion.isml
+* @see module:controllers/Home~headerChangeRegion */
+exports.HeaderChangeRegion = guard.ensure(['get'], headerChangeRegion);
 /** Renders footerchangeregion.isml
 * @see module:controllers/Home~footerChangeRegion */
 exports.FooterChangeRegion = guard.ensure(['get'], footerChangeRegion);

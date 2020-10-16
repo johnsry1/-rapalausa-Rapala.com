@@ -240,3 +240,34 @@
         outline: none;
     }
 }
+.change-region-dropdown {
+    float: left;
+    margin-top: 5px;
+    position: relative;
+    .rapala-middle-block{
+        position: absolute;
+		left: 0px;
+        width: 200px;
+        z-index: 1000;
+        .top_arrow {
+            left: 3px;
+        }
+        .url {
+            color: $night-rider;
+        }
+    }
+    @include respond(0, $desktop-breakpoint - 1) {
+        margin-top: 25px;
+        .rapala-middle-block {
+            top: 130%;
+			display: inline-table;
+        }
+    }
+    @include respond($desktop-breakpoint - 1, $xxlg-content-breakpoint){
+        .rapala-middle-block {
+            top: 92%;
+			left: 0px;
+        }
+    }
+
+}

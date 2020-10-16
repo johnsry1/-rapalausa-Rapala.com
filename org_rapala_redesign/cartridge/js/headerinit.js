@@ -201,6 +201,41 @@ var headerEvents = {
             $('.domainswitch').show();
             $('.region_overlay').show();
         });
+        $('.change-region-dropdown .change-region-header-flag a.country').on('click', function(e) {
+            e.preventDefault();
+        });
+        $('.change-region-dropdown').on('click', function() {
+            var block = $(this).find('.rapala-middle-block');
+            block.toggleClass('active');
+            if (block.hasClass('active')) {
+                block.css('display', 'inline-table');
+            } else {
+                block.css('display', 'none'); 
+            }
+
+        }).on('keyup', function(e) {
+            var block = $(this).find('.rapala-middle-block');
+            if (e.keyCode == 13) {
+                block.addClass('active').css('display', 'inline-table');
+                return;
+            }
+            if (e.keyCode == 27 && block.hasClass('active')) {
+                block.find('active').removeClass('active');
+                block.css('display', 'none');
+                $(this).focus();
+            }
+        });
+        $('.change-region-dropdown .rapala-middle-block a').on('keyup', function(e) {
+            e.preventDefault();
+            if (e.keyCode == 27) {
+                var parent = $(this).parent();
+                parent.removeClass('active').css('display', 'none');
+                parent.parent().focus();
+            }
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
         $('.region_overlay').on('mouseenter', function () {
             $('.domainswitch').hide();
             $(this).hide();

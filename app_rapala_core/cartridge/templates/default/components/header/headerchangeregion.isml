@@ -1,0 +1,46 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+
+<isscript>
+    var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
+    var currentSite = dw.system.Site.getCurrent();
+    var siteLocale = InterstitialHelper.getCurrentCountryCode(pdict.CurrentRequest);
+
+    var currentCountry = pdict.CurrentRequest.geolocation.countryCode;
+    var orgPrefs : OrganizationPreferences = dw.system.System.getPreferences();
+    var activeCountries: String = orgPrefs.getCustom()['ActiveCountries'];
+    activeCountries = JSON.parse(activeCountries);
+    var internationalBrandLink = dw.object.CustomObjectMgr.queryCustomObjects("BrandCountryLinks", "custom.brand = {0} AND custom.countryDisplayName ilike 'international*'", "custom.sequenceNumber asc", session.custom.currentSite).next();
+</isscript>
+<div class="change-region-dropdown">
+    <span class="change-region-header-flag">
+        <a class="country link-${pdict.CurrentRequest.geolocation.countryCode.toLowerCase()}"
+            href="">
+            <div class="rapala-iternational-flag">
+                <img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/4x3/' + siteLocale +
+                          '.svg')}"
+                    alt="${siteLocale} + flag" />
+            </div>
+        </a>
+    </span>
+    <div class="rapala-middle-block" style="display: none;"> 
+        <div class="top_arrow"></div>
+        <isloop items="${activeCountries}" var="activeCountry"
+            status="loopstatus">
+            <a class="country link-${activeCountry.country}"
+                href="${InterstitialHelper.constructCountryLink(activeCountry, pdict.CurrentRequest)}">
+                <div class="rapala-iternational-flag">
+                    <img src="${URLUtils.staticURL('/lib/flag-icon-css/flags/4x3/' + activeCountry.country +
+                              '.svg')}"
+                        alt="${activeCountry.country} + flag" />
+                </div>
+                <div class="url">${Resource.msg('global.eu.international.' + activeCountry.country, 'locale', null)}</div>
+            </a>
+        </isloop>
+        <a class="gray-button"
+            href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.paginginformation.viewall', 'locale', null)}</a>
+        <a class="gray-button"
+            href="${internationalBrandLink.custom.url}">${Resource.msg('global.internationalsite', 'locale', null)} </a>
+        <a class="gray-button"
+            href="${URLUtils.https('Stores-Find')}">${Resource.msg('global.localdistributor', 'locale', null)}</a>
+    </div>
+</div>

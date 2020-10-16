@@ -690,6 +690,9 @@ var app = {
                 $('.handle-non-us.geo').addClass('hide');
                 $('.ca-contactus-link').attr('href', contactusNonusUrl);
                 $('.cust-non-us').find('a').attr('href', contactusNonusUrl);
+                $('.currency-selector').css({'display': 'none'});
+                $('.currency-flag').css({'display': 'none'});
+                $('.change-regionnew currency-selector').css({'display': 'none'});
                 $('.ui-login,.magnifier-icon').css({'background': 'none'});
                 $('.handle-non-us-vh').addClass('vhide');
                 $('.subscribe').prop('disabled', true);

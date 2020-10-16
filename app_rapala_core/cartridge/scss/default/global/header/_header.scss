@@ -204,24 +204,28 @@
                 @include respond($desktop-breakpoint) {
                     padding: 21px 0 0 0;
                     margin: 0 auto;
-                    max-width: 996px;
+                    max-width: 1000px !important;
                     float: none;
                 }
                 .cell {
                     float: left;
                     padding: 8px 0 0 18px;
-                    width: 960px;
+                    width: 1000px;
                 }
                 #topcell {
                     height: 33px;
                     padding: 0;
-                    width: 100%;
+                    width: 102%;
                     -webkit-box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     box-sizing: border-box;
                     @include respond(0, $desktop-breakpoint - 1) {
                         min-height: 70px;
                     }
+					@media screen and (min-width: 960px) {
+						width: 90%;
+						display: contents;
+					}
                 }
 
                 .logo-border {

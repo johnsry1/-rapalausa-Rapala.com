@@ -262,3 +262,90 @@
     }
 }
 
+.change-region-dropdown {
+    display: block;
+    float: left;
+    .top_arrow {
+        left: 15px;
+    }
+    .rapala-middle-block {
+        box-sizing: border-box;
+        border: 1px solid $darker-gray;
+        border-radius: 3px;
+        align-items: center;
+        display: none;
+        flex-flow: row wrap;
+        min-height: rem(101px);
+        background-color: $bg-white;
+        padding: 2px 5px;
+        position: absolute;
+        top: 85%;
+        @include respond(0, $desktop-breakpoint - 1) {
+            top: 40%;
+            .top_arrow {
+                left: 3px;
+            }
+        }
+
+        p {
+            padding: 0;
+            width: 100%;
+        }
+        a {
+            padding: 2px 5px;
+        }
+        a:not(.gray-button) {
+            line-height: 12px;
+            height: 25px;
+            .rapala-iternational-text {
+                @include geoip-link();
+            }
+            &:hover {
+                text-decoration: $geoip-link-decoration;
+            }
+            &.country {
+                > div {
+                    display: inline-block;
+                    &.url {
+                        font-size: small;;
+                    }
+                }
+            }
+        }
+        .rapala-iternational-flag {
+            display: inline-block;
+            width: 16px;
+            height: auto;
+            background-size: cover;
+            img {
+                background: none;
+                width: rem(16px);
+                height: auto;
+                border: 1px solid gray;
+            }
+        }
+        .link-ca,
+        .link-us,
+        .link-eu,
+        .link-fi,
+        .link-uk,
+        .link-fr {
+            background: none;
+            width: 100%;
+            height: auto;
+        }
+        .international-link {
+            .rapala-iternational-flag {
+                margin: 0 7px 0 0;
+                background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+            }
+        }
+
+    }
+    @include respond(0, $desktop-breakpoint - 1) {
+        margin-top: 17.5px;
+    }
+    
+
+}
+
