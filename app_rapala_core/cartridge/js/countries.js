@@ -25,7 +25,7 @@ exports.init = function init() {
                 window.location.href = url;
             });
     });
-    $('body').on('click', 'a.country', function(e) {
+   /* $('body').on('click', 'a.country', function(e) {
         e.stopPropagation(); 
         if ($(this).attr('href').includes('eu-en')) {
             document.cookie = 'preferredRegion=rapalaEU-; max-age=180000, domain=rapala.com';
@@ -35,5 +35,5 @@ exports.init = function init() {
             document.cookie = 'preferredRegion=rapala-; max-age=180000, domain=rapala.com';
         }
         window.location.assign($(this).attr('href'));
-    }); 
+    }); */
 };

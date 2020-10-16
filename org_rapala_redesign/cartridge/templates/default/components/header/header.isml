@@ -72,15 +72,16 @@
     						<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}"/>
 						</div>
 						<div class="headercustomerinfo">
+							<iscomment> INCLUDE: Customer change region </iscomment>
+							<div class="ui-changeregion desktopHide">
+								<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}" />
+							</div>
 							<iscomment>INCLUDE: Customer login information, login, etc. (contains personal information, do not cache)</iscomment>
 							<isinclude url="${URLUtils.url('Home-IncludeHeaderCustomerInfo')}"/>
 							<iscomment>INCLUDE: Mini-cart, do not cache</iscomment>
 	    					<div id="minicart" class="minicart">
 	    						<isinclude url="${URLUtils.url('Cart-MiniCart')}"/>
 	    					</div><!-- END:minicart -->
-							<div class="ui-changeregion desktopHide">
-								<isinclude url="${URLUtils.url('Home-HeaderChangeRegion')}" />
-							</div>
 	    				</div>
 					</div><!-- END: cell -->
 				</div>
