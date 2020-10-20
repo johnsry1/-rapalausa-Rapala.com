@@ -25,4 +25,15 @@ exports.init = function init() {
                 window.location.href = url;
             });
     });
+   /* $('body').on('click', 'a.country', function(e) {
+        e.stopPropagation(); 
+        if ($(this).attr('href').includes('eu-en')) {
+            document.cookie = 'preferredRegion=rapalaEU-; max-age=180000, domain=rapala.com';
+        } else if ($(this).attr('href').includes('.ca')) {
+            document.cookie = 'preferredRegion=rapalaCA-; max-age=180000, domain=rapala.com';
+        } else {
+            document.cookie = 'preferredRegion=rapala-; max-age=180000, domain=rapala.com';
+        }
+        window.location.assign($(this).attr('href'));
+    }); */
 };

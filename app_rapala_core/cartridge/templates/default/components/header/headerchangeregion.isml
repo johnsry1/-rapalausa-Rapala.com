@@ -1,8 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true" />
 
-<iscomment>
-    <h1>hello</h1>
-</iscomment>
 <isscript>
     var InterstitialHelper = require('*/cartridge/scripts/util/InterstitialHelper'); 
     var currentSite = dw.system.Site.getCurrent();
@@ -25,7 +22,7 @@
             </div>
         </a>
     </span>
-    <div class="rapala-middle-block">
+    <div class="rapala-middle-block" style="display: none;"> 
         <div class="top_arrow"></div>
         <isloop items="${activeCountries}" var="activeCountry"
             status="loopstatus">
@@ -40,7 +37,7 @@
             </a>
         </isloop>
         <a class="gray-button"
-            href="${URLUtils.url('Home-International')}">${Resource.msg('global.paginginformation.viewall', 'locale', null)}</a>
+            href="${URLUtils.url('Home-ChangeRegion')}">${Resource.msg('global.paginginformation.viewall', 'locale', null)}</a>
         <a class="gray-button"
             href="${internationalBrandLink.custom.url}">${Resource.msg('global.internationalsite', 'locale', null)} </a>
         <a class="gray-button"
