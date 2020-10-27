@@ -41,10 +41,17 @@
 				<ul id="header-brands">
 					<!-- Rapala : id=1 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'rapala')}">
-					<li class="rapala rapala-active"><a class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('brand.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
+					    <li class="rapala rapala-active"><a class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('brand.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
 					<iselse>
 						<li class="rapala"><a class="rapala" href="${URLUtils.https('Home-Show','id','1')}" title="${Resource.msg('brand.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
 					</isif>
+
+                    <!-- 13Fishing : id=13 -->
+                    <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'fishing')}">
+                        <li class="fishing fishing-active"><a class="fishing" href="${URLUtils.https('Home-Show','id','13')}" title="${Resource.msg('brand.fishing','common',null)}">${Resource.msg('account.Fishing','account',null)}</a></li>
+                    <iselse>
+                        <li class="fishing"><a class="fishing" href="${URLUtils.https('Home-Show','id','13')}" title="${Resource.msg('brand.fishing','common',null)}">${Resource.msg('account.Fishing','account',null)}</a></li>
+                    </isif>
 
 					<!-- VMC : id=6 -->
 					<isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == 'vmc')}">
