@@ -19,7 +19,7 @@
             <isset name="columnNo" value="${positionEntry.key.substr(0,positionEntry.key.length-1)}" scope="page" />
 
             <isif condition="${(secondLevel.getSubCategories().getLength()>0)}">
-                <span class="sub-cat-drop-down">sub-cat-drop-down</span>
+                <span class="sub-cat-drop-down" aria-haspopup="menu" aria-expanded="false">sub-cat-drop-down</span>
             </isif>
 
             <isif condition="${('redirectingToPdp' in secondLevel.custom) && secondLevel.custom.redirectingToPdp.valueOf()}">
@@ -41,7 +41,7 @@
 				for each (var subCat in getSubcategoriesInMenuForCategory(secondLevel)) {
 					if( ('showInMenu' in subCat.custom) && subCat.custom.showInMenu.valueOf() ) {
 						isSubCategoryAvailable = true;
-						break;	
+						break;
 					}
 				}
 			</isscript>
