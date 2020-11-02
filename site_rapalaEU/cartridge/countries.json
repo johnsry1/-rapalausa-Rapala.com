@@ -788,4 +788,98 @@
 			}
 		}
 	}
+},{
+    "countryCode": "DE",
+    "name": {
+        "de_DE": "France"
+    },
+    "continent": "europe",
+    "locales": ["de_DE"],
+    "currencyCode": "EUR",
+    "taxation": {
+        "type": "gross",
+        "rate": 0.2
+    },
+    "priceBooks": [
+        "eur-list-prices",
+        "eur-sale-prices"
+    ],
+    "dynamicForms": {
+        "addressDetails": {
+            "title" : {
+                "type": "select",
+                "rowclass" : "title"
+            },
+            "firstName": {
+                "rowclass" : "firstname",
+                "requiredMsg": "Bitte Ihre Vorname eingeben"
+            },
+            "lastName": {
+                "rowclass" : "lastname",
+                "requiredMsg": "Bitte Ihre Nachname eingeben"
+            },
+            "address1" : {
+                "rowclass" : "address1",
+                "requiredMsg": "Bitte Ihre Adresse eingeben",
+                "help": {
+                    "cid": "help-address-1",
+                    "label": {
+                        "property": "?",
+                        "file": "checkout"
+                    }
+                }
+            },
+            "city" : {
+                "rowclass" : "city",
+                "requiredMsg": "Bitte Ihre Stadt eingeben"
+            },
+            "postal" : {
+                "rowclass" : "zip",
+                "requiredMsg": "Bitte Ihre PLZ eingeben",
+                "help": {
+                    "cid": "help-zipcode",
+                    "label": {
+                        "property": "?",
+                        "file": "checkout"
+                    }
+                }
+            },
+            "country": {
+                "requiredMsg": "Bitte Land auswählen",
+                "type": "select"
+            },
+            "states": [{
+                "fieldClass": "selectbox custom-select-wrap",
+                "rowclass": "custom-select state-blk",
+                "requiredMsg": "Please enter your State",
+                "fieldName": "state",
+                "type": "select",
+                "required": true
+            }],
+            "address2": {
+                "rowclass" : "address2",
+                "attributes" : {
+                    "placeholder" : "optional"
+                },
+                "help": {
+                    "cid": "help-address-2",
+                    "label": {
+                        "property": "?",
+                        "file": "checkout"
+                    }
+                }
+            },
+            "phone": {
+                "rowclass" : "phone",
+                "requiredMsg": "Bitte Ihre Telefonnummer eingeben",
+                "help": {
+                    "cid": "help-telephone",
+                    "label": {
+                        "property": "?",
+                        "file": "checkout"
+                    }
+                }
+            }
+        }
+    }
 }]
