@@ -66,7 +66,7 @@
 					var currentYear = date.getFullYear();
 					var years = [];
 
-					for (i = 0; i < 6; i++) {
+					for (i = 0; i < 7; i++) {
 						years.push(Number(currentYear + i).toFixed(0));
 					}
 				 </isscript>
@@ -80,7 +80,7 @@
 	</div>
 </div>
 
-<div class="form-row form-row-type-text cvn required" data-required-text="Please enter your Security Code"  aria-required="true">
+<div class="form-row form-row-type-text cvn required" data-required-text="${Resource.msg('creditcard.cvnmissingerror', 'forms', null)}"  aria-required="true">
 	<label for="creditCard_cvn" class="label">
 		<span class="labeltext">${Resource.msg('creditcard.cvnlabel', 'forms', null)}</span>
 		<span class="requiredindicator">*</span>

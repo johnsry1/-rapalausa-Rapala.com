@@ -16,6 +16,7 @@ var headerEvents = {
             $(this).removeClass('errorclient');
             $(this).closest('.formfield').find('.logerror , .existing_register').css('display', 'none');
         });
+        
         if ($('.logincustomers').length > 0) {
             var crrobj = $(this).find('.formfield  .logerror');
             $(crrobj).closest('.formfield').find('.form-row , .label span').removeClass('inputlabel');
@@ -263,6 +264,17 @@ var headerEvents = {
                 target.parents('.field-wrapper').find('.checkinput').trigger('click');
             }
         });
+        $('.menu-toggle').on('click', function() {
+            var expanded = $(this).find('.menu-icon').attr('aria-expanded');
+            $(this).find('.menu-icon').attr('aria-label', 'navigation menu').attr('aria-haspopup', 'menu').attr('aria-expanded', expanded == 'false');
+            // if(expanded) {
+            //     $(this).find()
+            // }
+
+        })
+            // aria-label=""navigation menu"" aria-haspopup=""menu""
+
+        //});
         /**This is used to get the tick mark for create account when the field is valid*/
         $('.ui-login input.required').on('blur', function () {
             if ($(this).hasClass('valid')) {
