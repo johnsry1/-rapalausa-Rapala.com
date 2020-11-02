@@ -34,4 +34,178 @@
             <custom-attribute attribute-id="showInMainMenu">false</custom-attribute>
         </custom-attributes>
     </content>
+
+    <content content-id="fishing-homepage-grid">
+        <display-name xml:lang="x-default">13 Fishing Homepage Grid</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes>
+            <page-title xml:lang="x-default">13 Fishing homepage Grid</page-title>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;style&gt;&#13;
+                &#13;
+                &lt;link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"&gt;&#13;
+                &#13;
+                a.focus, a:visited {&#13;
+                outline: none !important;&#13;
+                }&#13;
+                &#13;
+                .wrapper-grid {&#13;
+                display: grid;&#13;
+                display: -ms-grid;&#13;
+                grid-template-columns: repeat(3, 1fr);&#13;
+                -ms-grid-columns: 1fr 10px 1fr 10px 1fr;&#13;
+                -ms-grid-rows: 1fr 10px 1fr 10px; &#13;
+                grid-gap: 2em;&#13;
+                grid-auto-rows: minmax(75px, auto);&#13;
+                cursor: pointer;&#13;
+                width: 323%;&#13;
+                margin-top: 20px;&#13;
+                }&#13;
+                &#13;
+                .grid-image {&#13;
+                width: 100%;&#13;
+                }&#13;
+                &#13;
+                &#13;
+                &#13;
+                .grid-image {&#13;
+                transition: all .2s ease-in-out;&#13;
+                }&#13;
+                .grid-image:hover {&#13;
+                -webkit-transform: scale(1.05);&#13;
+                -ms-transform: scale(1.05);&#13;
+                transform: scale(1.05);&#13;
+                box-shadow: 0px 2px 2px #afafaf;&#13;
+                }&#13;
+                &#13;
+                a.grid-links {&#13;
+                outline: none !important!;&#13;
+                padding: 0;&#13;
+                margin: 0;&#13;
+                }&#13;
+                &#13;
+                a.grid-links:hover {&#13;
+                text-decoration: none;&#13;
+                }&#13;
+                &#13;
+                .seo-paragraph {	&#13;
+                width: 320%;&#13;
+                padding: 20px 10px 20px 10px;&#13;
+                font-size: 15px;&#13;
+                line-height: 25px !important;&#13;
+                text-align: center !important;&#13;
+                font-family: 'Roboto', sans-serif !important;&#13;
+                margin-left: -10px;&#13;
+                }&#13;
+                &#13;
+                /* in the current spec these would be postioned using auto-placement. For IE we need to set the position of the items. */&#13;
+                .a {&#13;
+                -ms-grid-row: 1;&#13;
+                -ms-grid-column: 1;&#13;
+                }&#13;
+                &#13;
+                .b {&#13;
+                -ms-grid-row: 1;&#13;
+                -ms-grid-column: 3;&#13;
+                }&#13;
+                &#13;
+                .c {&#13;
+                -ms-grid-row: 1;&#13;
+                -ms-grid-column: 5;&#13;
+                }&#13;
+                &#13;
+                .d {&#13;
+                -ms-grid-row: 3;&#13;
+                -ms-grid-column: 1;&#13;
+                }&#13;
+                &#13;
+                .e {&#13;
+                -ms-grid-row: 3;&#13;
+                -ms-grid-column: 3;&#13;
+                }&#13;
+                &#13;
+                .f {&#13;
+                -ms-grid-row: 3;&#13;
+                -ms-grid-column: 5;&#13;
+                }		&#13;
+                &#13;
+                .g {&#13;
+                -ms-grid-row: 5;&#13;
+                -ms-grid-column: 1;&#13;
+                }&#13;
+                &#13;
+                .h {&#13;
+                -ms-grid-row: 5;&#13;
+                -ms-grid-column: 3;&#13;
+                }&#13;
+                &#13;
+                .i {&#13;
+                -ms-grid-row: 5;&#13;
+                -ms-grid-column: 5;&#13;
+                }&#13;
+                &#13;
+                @media only screen and (max-width: 959px) {&#13;
+                .wrapper-grid {&#13;
+                max-width: none;&#13;
+                width: 333%;&#13;
+                }&#13;
+                .seo-paragraph {&#13;
+                width: 320%;&#13;
+                padding: 20px 10px 20px 10px !important;&#13;
+                margin: 0;&#13;
+                }&#13;
+                }	&#13;
+                &#13;
+                &#13;
+                @media only screen and (max-width: 600px)  {&#13;
+                .wrapper-grid {&#13;
+                grid-template-columns: repeat(1, 1fr);&#13;
+                width: 350%&#13;
+                }&#13;
+                &#13;
+                }&#13;
+                &#13;
+                &#13;
+                @media only screen and (max-width: 480px)  {&#13;
+                .wrapper-grid {&#13;
+                width: 100%;&#13;
+                grid-gap: 1em;&#13;
+                margin-top: 10px;&#13;
+                }&#13;
+                .seo-paragraph {&#13;
+                width: auto;&#13;
+                margin-left: 0;&#13;
+                padding: 20px 10px 20px 10px;&#13;
+                }&#13;
+                }	&#13;
+                &lt;/style&gt;&#13;
+                &#13;
+                &lt;div class="wrapper-grid"&gt;&#13;
+                &lt;div class="a"&gt; &lt;a href="$url('Search-Show','cgid','vmc-newArrivals')$" title="Reels" class="grid-links"&gt; &lt;img src="images/content-assets/rapala/13F-1Reels.jpg?$staticlink$" alt="Reels" class="grid-image"&gt; &lt;/a&gt; &lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="b"&gt; &lt;a href="$url('Search-Show','cgid','vmc-ikeApproved')$" title="Rods" class="grid-links"&gt; &lt;img src="images/content-assets/rapala/13F-2Rods.jpg?$staticlink$" alt="Rods" class="grid-image"&gt; &lt;/a&gt; &lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="c"&gt;&lt;a href="https://www.rapala.com/search?id=6&amp;q=coastal%20black#prefn1=brand&amp;prefv1=VMC" title="Combos" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-3Combos.jpg?$staticlink$" alt="Combos" class="grid-image"&gt;&lt;/a&gt;&lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="d"&gt; &lt;a href="$url('Search-Show','cgid','vmc-hooks')$" title="Hardwater" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-4Hardwater.jpg?$staticlink$" alt="Hardwater" class="grid-image"&gt;&lt;/a&gt; &lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="e"&gt; &lt;a href="$url('Search-Show','cgid','vmc-jigs')$" title="Baits By Species" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-5BaitsBySpecies.jpg?$staticlink$" alt="Baits By Species" class="grid-image"&gt;&lt;/a&gt;&lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="f"&gt; &lt;a href="$url('Search-Show','cgid','vmc-spoons')$" title="Baits By Technique" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-6BaitsByTechnique.jpg?$staticlink$" alt="Baits By Technique" class="grid-image"&gt; &lt;/a&gt;&lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="g"&gt; &lt;a href="$url('Search-Show','cgid','vmc-terminalTackle')$" title="Hardbaits" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-7Hardbaits.jpg?$staticlink$" alt="Hardbaits" class="grid-image"&gt;&lt;/a&gt;&lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="h"&gt;  &lt;a href="https://www.youtube.com/watch?v=pzmirGzEoLI&amp;index=3&amp;list=PL2DA5BF6F910B823A" title="Softbaits" class="grid-links"&gt; &lt;img src="images/content-assets/rapala/13F-8Softbaits.jpg?$staticlink$" alt="Softbaits" class="grid-image"&gt;&lt;/a&gt;&lt;/div&gt;&#13;
+                &#13;
+                &lt;div class="i"&gt; &lt;a href="$url('Page-Show','cid','vmc-manufacturer-inquiries')$" title="Best Sellers" class="grid-links"&gt;&lt;img src="images/content-assets/rapala/13F-9BestSellers.jpg?$staticlink$" alt="Best Sellers" class="grid-image"&gt;&lt;/a&gt; &lt;/div&gt;&#13;
+                &#13;
+                &lt;/div&gt;&#13;
+                &#13;
+                &#13;
+                &lt;div&gt;&lt;p class="seo-paragraph"&gt;With over two centuries of experience, the innovative craftsmanship of VMC® design show in every product. Award-winning hooks for every style of fishing, many with first-to-market features, plus rigs, jigs and terminal tackle second to none.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
 </library>
