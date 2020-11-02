@@ -79,6 +79,11 @@
                             <li><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('footertab.vmc','common',null)}">${Resource.msg('account.vmc','account',null)}</a></li>
                         </isif>
 
+                        <!-- 13 Fishing : id=6 -->
+                        <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandfishing') != null) && (dw.system.Site.current.preferences.custom.activebrandfishing == true)}">
+                            <li><a class="fishing" href="${URLUtils.https('Home-Show','id','13')}" title="${Resource.msg('footertab.fishing','common',null)}">${Resource.msg('account.fishing','account',null)}</a></li>
+                        </isif>
+
                         <iscomment>
                             <!-- Otter : id=21 -->
                             <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandotter') != null) && (dw.system.Site.current.preferences.custom.activebrandotter == true)}">
