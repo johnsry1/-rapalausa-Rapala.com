@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscache type="relative" hour="24"/>
 <isdecorate template="content/home/pt_storefront">
- 	
+
 <iscomment>this is the template rendering the homepage</iscomment>
 <!-- +1.888.553.XXXX --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demadware customers can remove this.-->
 	<div id="oc"></div>
@@ -14,7 +14,7 @@
 			<div class="wrapper">
 				<div class="row column1">
 					<div class="column cell1">
-						<div id="slideshow" class="cell skin-slidedeck">	
+						<div id="slideshow" class="cell skin-slidedeck">
 							<dl id="slide_deck" class="slidedeck">
 								<isif condition="${'rapala' == session.custom.currentSite}">
 									<isslot id="brand-rapala-homepage-main" description="This is the Rapala brand slideshow content." context="global" />
@@ -42,6 +42,8 @@
 									<isslot id="brand-iceforce-homepage-main" description="This is the Ice Force brand slideshow content." context="global" />
 							    <iselseif condition="${'otter' == session.custom.currentSite}">
 									<isslot id="brand-otter-homepage-main" description="This is the Otter brand slideshow content." context="global" />
+                                <iselseif condition="${'fishing' == session.custom.currentSite}">
+                                    <isslot id="brand-fishing-homepage-main" description="This is the 13 Fishing brand slideshow content." context="global" />
 							    <iselse/>
 							    	<isslot id="home-main" description="Flash Banner in homepage" context="global" />
 								</isif>
@@ -83,6 +85,8 @@
 								       <isslot id="brand-iceforce-homepage-featured-1" description="This is the Ice Force brand feature content 1." context="global" />
 								    <iselseif condition="${'otter' == session.custom.currentSite}">
 										<isslot id="brand-otter-homepage-featured-1" description="This is the Otter brand slideshow content 1." context="global" />
+                                    <iselseif condition="${'fishing' == session.custom.currentSite}">
+                                        <isslot id="brand-fishing-homepage-featured-1" description="This is the 13 Fishing brand slideshow content 1." context="global" />
 								    <iselse/>
 									</isif>
 									<div class="clear"></div>
@@ -114,6 +118,8 @@
 								       <isslot id="brand-iceforce-homepage-featured-2" description="This is the Ice Force brand feature content 2." context="global" />
 								   	<iselseif condition="${'otter' == session.custom.currentSite}">
 										<isslot id="brand-otter-homepage-featured-2" description="This is the Otter brand slideshow content 2." context="global" />
+                                    <iselseif condition="${'fishing' == session.custom.currentSite}">
+                                        <isslot id="brand-fishing-homepage-featured-2" description="This is the 13 Fishing brand slideshow content 1." context="global" />
 								    <iselse/>
 									</isif>
 									<div class="clear"></div>
@@ -145,6 +151,8 @@
 								       <isslot id="brand-iceforce-homepage-featured-3" description="This is the Ice Force brand feature content 3." context="global" />
 								    <iselseif condition="${'otter' == session.custom.currentSite}">
 										<isslot id="brand-otter-homepage-featured-3" description="This is the Otter brand slideshow content 3." context="global" />
+                                    <iselseif condition="${'fishing' == session.custom.currentSite}">
+                                        <isslot id="brand-fishing-homepage-featured-3" description="This is the 13 Fishing brand slideshow content 1." context="global" />
 								    <iselse/>
 									</isif>
 									<div class="clear"></div>
@@ -158,5 +166,5 @@
 			</div>
 		</div>
 	</div>
-	
+
 </isdecorate>
