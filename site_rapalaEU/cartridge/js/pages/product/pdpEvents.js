@@ -1384,7 +1384,7 @@ var product = function (response) {
                 }
             });
             //get only the currency code/symbol
-            var currency = formattedPrices.standardPrice.split(standardPrice)[0];
+            var currency = formattedPrices.standardPrice.split(standardPrice)[0].replace(/[\d\., ]/g, '');
 
             // in case it is a promotional price then we do not care if it is 0
             priceHtml = (salePrice > 0 || this.isPromoPrice()) ? '<div class="salesprice"> <span itemprop="priceCurrency" content="' + currency + '">' + currency + '</span><span itemprop="price" content="' + salePrice + '">' + salePrice + '</span></div>' : ' <div class="salesprice">N/A</div>';
