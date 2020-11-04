@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slot-configurations xmlns="http://www.demandware.com/xml/impex/slot/2008-09-08">
+    <slot-configuration slot-id="shipping-msg" context="global" configuration-id="2013-06-11_shipping-methods-default-message" default="true" assigned-to-site="true">
+        <description>default shipping method message</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <rank>100</rank>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="de-DE">&lt;div id ="message" class="error-alert"&gt;
+                    &lt;p&gt;Durch das Coronavirus gesperrte Postleitzahlgebiete. &lt;a href="https://gls-group.eu/EU/media/downloads/Restrictedzipcodes_Europe_26.03.2020.pdf" target="_blank"&gt;ISTE&amp;nbsp;HIER&lt;/a&gt;!&lt;/p&gt;
+                    &lt;p&gt;Für die Lieferung ist eine physische Adresse erforderlich.&lt;/p&gt;
+                    &lt;/div&gt;</body>
+                <body xml:lang="x-default">&lt;div id ="message" class="error-alert"&gt;
+                    &lt;p&gt;Blocked postal code areas due to corona virus &lt;a href="https://gls-group.eu/EU/media/downloads/Restrictedzipcodes_Europe_26.03.2020.pdf" target="_blank"&gt;LIST&amp;nbsp;HERE&lt;/a&gt;!&lt;/p&gt;
+                    &lt;p&gt;Shipping requires a Physical Address for delivery.&lt;/p&gt;
+                    &lt;/div&gt;</body>
+                <body xml:lang="fi-FI">&lt;div id ="message" class="error-alert"&gt;
+                    &lt;p&gt;Toimitukseen tarvitaan oikea osoite.&lt;/p&gt;
+                    &lt;/div&gt;</body>
+            </html>
+        </content>
+        <customer-groups>
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </slot-configuration>
+</slot-configurations>
