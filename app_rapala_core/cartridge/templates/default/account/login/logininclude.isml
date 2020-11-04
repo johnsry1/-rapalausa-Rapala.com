@@ -32,7 +32,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 				<div class="formfield username account-email err <isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">log_error</isif>" >
 					<isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
 						<isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" rowClass="inputlabel" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
-						<span class="email_error logerror">Please try again; the email and/or password do not match our records.</span>
+						<span class="email_error logerror">${Resource.msg('account.login.logerror','account',null)}</span>
 					<iselse>
 					    <isinputfield formfield="${pdict.CurrentForms.login.username}" type="input" fieldClass="accountemail" attributes="${customAttributes}" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 					</iselse>
@@ -44,7 +44,7 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 				<div class="formfield password <isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">log_error</isif>" >
 					<isif condition="${!pdict.CurrentForms.login.loginsucceeded.valid}">
 						<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" rowClass="inputlabel" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
-						<span class="pwd_error logerror">Please try again; the email and/or password do not match our records. Passwords are CaSe SeNsItIvE.</span>
+						<span class="pwd_error logerror">${Resource.msg('account.login.logpass','account',null)}</span>
 					 <iselse>
 					 	<isinputfield formfield="${pdict.CurrentForms.login.password}" type="password" fieldClass="login_password" attributes="${customAttributes1}" requiredtext="${Resource.msg('forms.billing.passwordmesg.missing','forms',null)}"/>
 					 </iselse>
