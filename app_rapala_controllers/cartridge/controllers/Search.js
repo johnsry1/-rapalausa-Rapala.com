@@ -39,7 +39,7 @@ var guard = require('~/cartridge/scripts/guard');
 function show() {
 
     var params = request.httpParameterMap;
-    if((params.cgid.value!=null) && (params.cgid.value.equals("rapala-home") || params.cgid.value.equals("vmc-home") || params.cgid.value.equals("marttiini-home") || params.cgid.value.equals("sufix-home") || params.cgid.value.equals("triggerx-home") || params.cgid.value.equals("storm-home") || params.cgid.value.equals("luhrjensen-home") || params.cgid.value.equals("terminator-home") || params.cgid.value.equals("bluefox-home") || params.cgid.value.equals("williamson-home") || params.cgid.value.equals("marcum-home") || params.cgid.value.equals("strikemaster-home") || params.cgid.value.equals("otter-home")||params.cgid.value.equals("iceforce-home"))){
+    if((params.cgid.value!=null) && (params.cgid.value.equals("rapala-home") || params.cgid.value.equals("vmc-home") || params.cgid.value.equals("marttiini-home") || params.cgid.value.equals("sufix-home") || params.cgid.value.equals("triggerx-home") || params.cgid.value.equals("storm-home") || params.cgid.value.equals("luhrjensen-home") || params.cgid.value.equals("terminator-home") || params.cgid.value.equals("bluefox-home") || params.cgid.value.equals("williamson-home") || params.cgid.value.equals("marcum-home") || params.cgid.value.equals("strikemaster-home") || params.cgid.value.equals("otter-home") || params.cgid.value.equals("iceforce-home") || params.cgid.value.equals("13fishing-home"))){
     	var category : Category = dw.catalog.CatalogMgr.getCategory(params.cgid.value);
     	if (category) {
 	        require('~/cartridge/scripts/meta').update(category);
