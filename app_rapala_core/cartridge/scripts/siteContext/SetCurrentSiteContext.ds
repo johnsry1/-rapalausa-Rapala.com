@@ -172,6 +172,10 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 	      	{
 	        	currentSite = "iceforce";
 			}
+			else if (category.ID.indexOf("13fishing") != -1)
+	      	{
+	        	currentSite = "13fishing";
+			}
 			else
 			{
 				currentSite = "rapala";
@@ -286,6 +290,10 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 		      	{
 		        	currentSite = "marttiini";
 				}
+				else if ("13fishing"==category.ID)
+		      	{
+		        	currentSite = "13fishing";
+				}
 
 	      	}
 
@@ -325,6 +333,8 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 				break;
 				case 'marttiini' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','22'));
 				break;
+				case '13fishing' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','13'));
+				break;
 				default: response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','1'));
 					}
 
@@ -357,6 +367,8 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 				case 'iceforce' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','12'));
 				break;
 				case 'marttiini' : response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','22'));
+				break;
+				case '13fishing' : response.redirect(dw.web.URLUtils.url('Page-Show','cid',http.get("cid"),'fdid',http.get("fdid"),'id','13'));
 				break;
 				default:response.redirect(dw.web.URLUtils.url('Folder-Show','fdid',http.get("fdid"),'id','1'));
 					}
@@ -410,6 +422,9 @@ function setSiteContext(http : CurrentHttpParameterMap) {
 			/*else if(host.indexOf('otter') > -1 || path.indexOf('otter') > -1) {
 				currentSite = "otter";
 			}*/
+			else if(host.indexOf('13fishing') > -1 || path.indexOf('13fishing') > -1) {
+				currentSite = "13fishing";
+			}
 
 			else if(host.indexOf('rapala') > -1 && path == "/on/demandware.store/Sites-rapala-Site") {
 				currentSite = "rapala";
