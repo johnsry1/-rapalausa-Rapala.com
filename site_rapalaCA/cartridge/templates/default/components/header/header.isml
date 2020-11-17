@@ -64,7 +64,7 @@
 						<isset name="brand" value="${20}" scope="page" />
 						</isif>
 
-						<div class="logo mobileHide ${session.custom.currentSite}">
+						<div class="logo mobileHide ${session.custom.currentSite.replace(/[0-9]/g, '').split('|')[0]}">
 							<a href="${URLUtils.https('Home-Show')}" ></a>
 							<a href="${URLUtils.https('Home-Show')}" class="shop-by-brand"><span class="logo-border">RESPECTED<br /><span>Rapala Brands</span></span></a>
 						</div>
