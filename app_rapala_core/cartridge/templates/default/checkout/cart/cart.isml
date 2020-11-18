@@ -364,6 +364,7 @@
 																	<isset name="itemUrl" value="${empty(lineItem.categoryID) ? URLUtils.https('Product-Show','pid', lineItem.productID) : URLUtils.https('Product-Show','pid', lineItem.productID, 'cgid', lineItem.categoryID)}" scope="page"/>
 																	<isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('useDynamicImagingService')}">
 																	<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',lineItem.product, 0,'cart')}" scope="page"/>
+																	${JSON.stringify(imageObjDesktop)}
 																	  <a href="${itemUrl}"><iscartimages product="${lineItem}" imageurl="${imageObjDesktop}"/></a>
 																	 <iselse/>
 																	 <isif condition="${lineItem.product != null && lineItem.product.getImage('small',0) != null}">

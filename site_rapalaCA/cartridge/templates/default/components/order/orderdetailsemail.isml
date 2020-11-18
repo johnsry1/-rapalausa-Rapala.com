@@ -517,7 +517,6 @@
 																																<isset name="imageObjDesktop" value="${new ProductImage('cartDesktop',productLineItem.product, 0,'orderconfirmation')}" scope="page"/>
 																																<isset name="imageObjIPad" value="${new ProductImage('cartIPad',productLineItem.product, 0,'cart')}" scope="page"/>
 																																<isset name="imageObjIPhone" value="${new ProductImage('cartIPhone',productLineItem.product, 0,'cart')}" scope="page"/>
-																																${JSON.stringify(imageObjDesktop)}
 																																<iscartimages product="${productLineItem}" imageurl="${imageObjDesktop}"/>
 																															<iselse/>
 																																<isif condition="${productLineItem.product != null && productLineItem.product.getImage('small',0) != null}">
