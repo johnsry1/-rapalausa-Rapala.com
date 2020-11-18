@@ -17,7 +17,7 @@
 			if(newImgurl.indexOf(vids[i].ID.toLowerCase())>-1 ) {
 				var ab = vids[i].ID.toLowerCase()+'.',
 					regExInput = new RegExp(ab, 'g'),
-					//newerImgurl = newImgurl.replace(regExInput, prodID+'.');
+					newerImgurl = newImgurl.replace(regExInput, prodID+'.');
 			}
 		}
 	}
@@ -26,4 +26,4 @@
 ${newImgurl}
 ${v.toString()}
 ${newerImgurl} -->
-<img src="${newerImgurl ? newerImgurl : imageurl.getURL()}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+<img src="${newerImgurl ? newerImgurl : newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
