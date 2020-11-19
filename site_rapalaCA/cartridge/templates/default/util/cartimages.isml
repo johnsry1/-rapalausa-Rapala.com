@@ -22,8 +22,11 @@
 		}
 	}
 </isscript>
-<!-- ${prodID}
+<!-- 
+${prodID}
 ${newImgurl}
-${v.toString()}
-${newerImgurl} -->
-<img src="${newImgurl ? newImgurl : newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+${newImgurl.indexOf(vids[i].ID.toLowerCase())>-1}
+${v.toLowerCase().toString()}
+${newerImgurl} 
+-->
+<img src="${newerImgurl ? newerImgurl : newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
