@@ -23,13 +23,17 @@
 	}
 </isscript>
 <!-- 
-${session.custom.currentSite}
+${pdict.CurrentSession.custom.currentSite}
 ${dw.system.Site.getCurrent().ID}
-'rapalaCA'
 ${prodID}
 ${newImgurl}
 ${newImgurl.indexOf(vids[i].ID.toLowerCase())>-1}
 ${v.toLowerCase().toString()}
 ${newerImgurl} 
 -->
-<img src="${newerImgurl ? newerImgurl : newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+<isif condition="${dw.system.Site.getCurrent().ID == 'rapalaCA'}" > 
+	<img src="${newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+<iselse/>
+	<img src="${newerImgurl ? newerImgurl : imageurl.getURL()}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+</isif>
+
