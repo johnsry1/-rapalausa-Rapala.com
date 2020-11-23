@@ -31,5 +31,9 @@ ${newImgurl.indexOf(vids[i].ID.toLowerCase())>-1}
 ${v.toLowerCase().toString()}
 ${newerImgurl} 
 -->
+<isif condition="${dw.system.Site.getCurrent().ID == 'rapalaCA'}" > 
+	<img src="${newImgurl}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+<iselse/>
 	<img src="${newerImgurl ? newerImgurl : imageurl.getURL()}"	alt="${imageurl.getAlt()}" title="${imageurl.getTitle()}" class="${pdict.classselector ? pdict.classselector : ''}" />
+</isif> 
 
