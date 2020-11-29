@@ -17,7 +17,7 @@
 </isif>
 <isif condition="${pdict.CurrentHttpParameterMap.id != null  && pdict.CurrentHttpParameterMap.id.value == '6'}">
   <isredirect location="${URLUtils.url('Search-Show','cgid','vmc-home')}" permanent="true" />
-</isif>  
+</isif>
 <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '7'}">
   <isredirect location="${URLUtils.url('Search-Show','cgid','terminator-home')}" permanent="true" />
 </isif>
@@ -36,8 +36,11 @@
 <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '20'}">
   <isredirect location="${URLUtils.url('Search-Show','cgid','iceforce-home')}" permanent="true" />
 </isif>
- <isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '21'}">
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '21'}">
    <isredirect location="${URLUtils.url('Search-Show','cgid','otter-home')}" permanent="true" />
+</isif>
+<isif condition="${pdict.CurrentHttpParameterMap.id != null && pdict.CurrentHttpParameterMap.id.value == '13'}">
+   <isredirect location="${URLUtils.url('Search-Show','cgid','13fishing-home')}" permanent="true" />
 <iselse/>
-	<isinclude url="${URLUtils.url('Home-Page','currentSite',session.custom.currentSite)}" permanent="true" />
+    <isinclude url="${URLUtils.url('Home-Page','currentSite',session.custom.currentSite)}" permanent="true" />
 </isif>
