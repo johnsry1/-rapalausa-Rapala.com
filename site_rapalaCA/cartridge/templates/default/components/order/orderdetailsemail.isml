@@ -21,7 +21,7 @@
 								<table width="561" cellspacing="0" cellpadding="0" border="0">
 									<tbody>
 										<tr>
-											<td align="center"  width="561" height="20" >8 BRANDS 1 CART</td>
+											<td align="center"  width="561" height="20" >9 BRANDS 1 CART</td>
 										</tr>
 						            	<tr>
 	              							<td align="center">
@@ -43,6 +43,13 @@
                                                             <img src="${URLUtils.httpsStatic('/images/brands/rapala.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
                                                         <iselse/>
                                                             <img src="${URLUtils.httpsStatic('/images/brands/rapala_bw.png')}" alt="Header Brand Images" width="100px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        </isif>
+                                                    </isif>
+                                                    <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrand13fishing') != null) && (dw.system.Site.current.preferences.custom.activebrand13fishing == true)}">
+                                                        <isif condition="${(session.custom.currentSite != null) && (session.custom.currentSite == '13fishing')}">
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/fishing.png')}" alt="Header Brand Images" width="50px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
+                                                        <iselse/>
+                                                            <img src="${URLUtils.httpsStatic('/images/brands/fishing_bw.png')}" alt="Header Brand Images" width="50px"; height="33px"; style="vertical-align: middle;margin-right: 5px;" ></img>
                                                         </isif>
                                                     </isif>
                                                     <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
@@ -743,7 +750,7 @@
 													<a href="${URLUtils.https('Page-Show','cid','customer-privacy-security','fdid','rapala-legal')}" target="_blank" title="Privacy Policy"><strong><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#666666">Privacy Policy</span></strong></a>
 													<br>
 													<br>
-													Rapala.ca is operated by Normark, Inc. 1350 Phillip Murray Ave. Oshawa, L1J 6Z9 Ontario, Canada.<br><br>©1961-${dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString()} Rapala CA. Rapala®, VMC®, Luhr Jensen®, Sufix®, Storm®, StrikeMaster®, Terminator®, Blue Fox® are trademarks of Rapala CA. All Rights Reserved.
+													Rapala.ca is operated by Normark, Inc. 1350 Phillip Murray Ave. Oshawa, L1J 6Z9 Ontario, Canada.<br><br>©1961-${dw.system.Site.getCalendar().get(dw.util.Calendar.YEAR).toString()} Rapala CA. Rapala®, 13Fishing®, VMC®, Luhr Jensen®, Sufix®, Storm®, StrikeMaster®, Terminator®, Blue Fox® are trademarks of Rapala CA. All Rights Reserved.
 												</span>
 											</td>
 										</tr>

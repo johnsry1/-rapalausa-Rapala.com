@@ -18,42 +18,49 @@
 										<iselse>
 											<li><a class="rapala" href="http://www.rapala.com/" title="${Resource.msg('footertab.rapala','common',null)}">${Resource.msg('account.Rapala','account',null)}</a></li>
 										</isif>
-										
+
+                                        <!-- 13Fishing : id=13 -->
+                                        <isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrand13fishing') != null) && (dw.system.Site.current.preferences.custom.activebrand13fishing == true)}">
+                                            <li><a class="fishing" href="${URLUtils.https('Home-Show','id','13')}" title="${Resource.msg('footertab.13fishing','common',null)}">${Resource.msg('account.13fishing','account',null)}</a></li>
+                                        <iselse>
+                                            <li><a class="fishing" href="https://www.instagram.com/rapalacanada/" title="${Resource.msg('footertab.13fishing','common',null)}">${Resource.msg('account.13fishing','account',null)}</a></li>
+                                        </isif>
+
 										<!-- VMC : id=6 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandvmc') != null) && (dw.system.Site.current.preferences.custom.activebrandvmc == true)}">
 											<li><a class="vmc" href="${URLUtils.https('Home-Show','id','6')}" title="${Resource.msg('footertab.vmc','common',null)}">${Resource.msg('account.VMC Hooks','account',null)}</a></li>
 										<iselse>
 											<li><a class="vmc" href="http://www.vmchooks.com/" title="${Resource.msg('footertab.vmc','common',null)}" target="_blank">${Resource.msg('account.VMC Hooks','account',null)}</a></li>
 										</isif>
-										
+
 										<!-- STORM : id=4 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstorm') != null) && (dw.system.Site.current.preferences.custom.activebrandstorm == true)}">
 											<li><a class="storm" href="${URLUtils.https('Home-Show','id','4')}" title="${Resource.msg('footertab.storm','common',null)}">${Resource.msg('account.Storm','account',null)}</a></li>
 										<iselse>
 											<li><a class="storm" href="http://www.stormlures.com/" title="${Resource.msg('footertab.storm','common',null)}" target="_blank">${Resource.msg('account.Storm','account',null)}</a></li>
 										</isif>
-										
+
 										<!-- LUHR-JENSEN : id=5 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandluhrjensen') != null) && (dw.system.Site.current.preferences.custom.activebrandluhrjensen == true)}">
 											<li><a class="luhrjensen" href="${URLUtils.https('Home-Show','id','5')}" title="${Resource.msg('footertab.luhrjensen','common',null)}">${Resource.msg('account.Luhr-Jensen','account',null)}</a></li>
 										<iselse>
 											<li><a class="luhrjensen" href="http://www.luhrjensen.com/" title="${Resource.msg('footertab.luhrjensen','common',null)}" target="_blank">${Resource.msg('account.Luhr-Jensen','account',null)}</a></li>
 										</isif>
-										
+
 										<!-- SUFIX : id=2 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandsufix') != null) && (dw.system.Site.current.preferences.custom.activebrandsufix == true)}">
 											<li><a class="sufix" href="${URLUtils.https('Home-Show','id','2')}" title="${Resource.msg('footertab.sufix','common',null)}">${Resource.msg('account.Sufix','account',null)}</a></li>
 										<iselse>
 											<li><a class="sufix" href="http://www.sufix.com/" title="${Resource.msg('footertab.sufix','common',null)}">${Resource.msg('account.Sufix','account',null)}</a></li>
 										</isif>
-										
+
 										<!-- BLUEFOX : id=8 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandbluefox') != null) && (dw.system.Site.current.preferences.custom.activebrandbluefox == true)}">
 											<li><a class="bluefox" href="${URLUtils.https('Home-Show','id','8')}" title="${Resource.msg('footertab.bluefox','common',null)}">${Resource.msg('account.Blue Fox','account',null)}</a></li>
 										<iselse>
 											<li><a class="bluefox" href="http://www.bluefox.com/" title="${Resource.msg('footertab.bluefox','common',null)}" target="_blank">${Resource.msg('account.Blue Fox','account',null)}</a></li>
 										</isif>
-										
+
 										<!-- TERMINATOR : id=7 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandterminator') != null) && (dw.system.Site.current.preferences.custom.activebrandterminator == true)}">
 											<li><a class="terminator" href="${URLUtils.https('Home-Show','id','7')}" title="${Resource.msg('footertab.terminator','common',null)}">${Resource.msg('account.Terminator','account',null)}</a></li>
@@ -77,7 +84,7 @@
 							        </ul>
 							</div>
 							<!--  below footer -->
-											
+
 							<div class="wrapper">
 								<isscript>
 									var footerContent = dw.content.ContentMgr.getContent(session.custom.currentSite + "-checkout-footer-links");
@@ -87,13 +94,13 @@
 								<iselse>
 									<iscontentasset aid="checkout-footer-links"/>
 								</isif>
-								
+
 								 <div class="clear"></div>
 							</div>
 					   <!---  below footer --->
 					</div>
 				</div>
-			</div>		
+			</div>
 </div><!--- END: footer --->
 <iscomment>
 	Customer registration can happen everywhere in the page flow. As special tag in the pdict
