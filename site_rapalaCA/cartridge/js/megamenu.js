@@ -78,6 +78,8 @@ var megamenu = {
                 divlength = 6;
             } else if ($(this).attr('id') == 'iceforce') {
                 divlength = 4;
+            } else if ($(this).attr('id') == 'fishing') {
+                divlength = 5;
             }
             //var intial = 0;
             var end = maxlength;
