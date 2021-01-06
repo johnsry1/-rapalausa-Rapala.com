@@ -15,7 +15,7 @@ var megamenu = {
         // To make default menu based on the brand active
         $('#brand-tabs-header > ul > li.active .mobile-main-menu-heading').trigger('click');
         $('#container').addClass('js-container-active');
-        $('.menu-toggle').addClass('js-menu-toggle');
+        $('.menu-toggle').addClass('js-menu-toggle').attr('aria-expanded', true);
         $('.menu-open-shadow').remove();
         $main.wrap('<div class=\'open-menu-wrap\'></div>');
         $('body').addClass('js-body');
@@ -38,7 +38,7 @@ var megamenu = {
         $('.owl-carousel').find('.owl-item, .owl-item img').trigger('mouseout');
         $('#main, #footernew').unwrap();
         $('.magnifier-icon').removeClass('js-magnifier-icon-active');
-        $('.menu-toggle').removeClass('js-menu-toggle');
+        $('.menu-toggle').removeClass('js-menu-toggle').attr('aria-expanded', false);
         $('#brand-tabs-header').unwrap();
         setTimeout(function () {
             $(window).scrollTop(0);
@@ -199,12 +199,11 @@ var megamenu = {
                         $this.addClass('js-active-sub-menu');
                         $this.find('.sub-category-section-2').removeAttr('style');
                         $this.find('.sub-category-section-2').slideDown();
-                        $this.siblings('span').attr('aria-expanded', 'false');
-                        $this.attr('aria-expanded', 'true');
+                        $this.find('.sub-cat-drop-down').attr('aria-expanded', true);
                     } else {
                         $this.find('.sub-category-section-2').slideUp();
                         $this.delay(1000).removeClass('js-active-sub-menu');
-                        $this.attr('aria-expanded', 'false');
+                        $this.find('.sub-cat-drop-down').attr('aria-expanded', false);
                     }
                 }
 
