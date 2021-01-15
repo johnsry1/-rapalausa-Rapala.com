@@ -125,6 +125,10 @@ src="https://www.facebook.com/tr?id=${dw.system.Site.getCurrent().getCustomPrefe
 <!-- DO NOT MODIFY -->
 <!-- End Facebook Pixel Code -->
 
+<!--  flowBox Snippett -->
+<isprint value="${dw.system.System.getPreferences().getCustom()['flowBoxSnippet']}" encoding="off" />
+<!-- End flowBox Snippett -->
+
 <iscomment>THEME STYLESHEETS</iscomment>
 <isif condition="${!empty(session.custom.currentSite) && dw.system.Site.getCurrent().getCustomPreferenceValue('enableBrandTheme')}">
 	<link href="${URLUtils.staticURL('/themes/' + session.custom.currentSite + '/css/' + session.custom.currentSite + '.css')}" type="text/css" rel="stylesheet"/>
