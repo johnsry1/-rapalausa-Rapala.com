@@ -160,7 +160,10 @@ function start() {
         } else {
         	 //set knife confirmation
             Transaction.wrap(function () {
-            	require('*/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
+                require('*/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
+                if(customer.profile.UUID == order.customer.profile.UUID) {
+                    order.setCustomer(customer);
+                }
             });
             var skipSubmitOrder : Boolean = false;
             
