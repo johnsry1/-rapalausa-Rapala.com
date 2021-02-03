@@ -219,8 +219,8 @@ exports.getTotalDiscount = function (order) {
     var shippingInclDiscounts : dw.value.Money = order.getAdjustedShippingTotalPrice();
     var shippingDiscount : dw.value.Money = shippingExclDiscounts.subtract( shippingInclDiscounts );
 
-    if (shippingDiscount > 0) {
-        ordertotalsaving = ordertotalsaving.add(shippingDiscount);
+    if (shippingDiscount > 0) { 
+        //ordertotalsaving = ordertotalsaving.add(shippingDiscount);
     }
     
     return ordertotalsaving;
