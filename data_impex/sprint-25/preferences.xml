@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
+    <standard-preferences>
+        <all-instances/>
+        <development/>
+        <staging/>
+        <production/>
+    </standard-preferences>
+    <custom-preferences>
+        <all-instances/>
+        <development>
+            <preference preference-id="flowBoxSnippet">
+                &lt;script&gt;&#13;
+  (function(d, id) {&#13;
+    if (!window.flowbox) { var f = function () { f.q.push(arguments); }; f.q = []; window.flowbox = f; }&#13;
+    if (d.getElementById(id)) {return;}&#13;
+    var s = d.createElement('script'), fjs = d.scripts[d.scripts.length - 1]; s.id = id; s.async = true;&#13;
+    s.src = ' https://connect.getflowbox.com/flowbox.js';&#13;
+    fjs.parentNode.insertBefore(s, fjs);&#13;
+  })(document, 'flowbox-js-embed');&#13;
+&lt;/script&gt;
+            </preference>
+        </development>
+        <staging/>
+        <production/>
+    </custom-preferences>
+</preferences>
