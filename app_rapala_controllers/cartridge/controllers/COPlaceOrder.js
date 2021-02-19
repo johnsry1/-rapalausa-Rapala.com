@@ -248,7 +248,7 @@ function submitImpl(order) {
 		    	var randomnum = new dw.crypto.SecureRandom();
 		    	var customerNum = randomnum.nextInt(99999999);
 		    	customerNum = '9'+(customerNum);
-		    	//order.setCustomerNo(customerNum);
+		    	order.setCustomerNo(customerNum);
 		    }
 	    });
 	    ltkSendOrder.Start(order);
