@@ -1,0 +1,208 @@
+/**
+* This file holds the common functions
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+importPackage( dw.util );
+importPackage( dw.customer );
+importPackage( dw.value );
+//returns the availability of the product
+function getAvailability( product: Product ){
+	var count= 0;
+	if(product.isMaster()){
+		var variants: dw.util.Collection =product.getVariants();
+		var variantIter : dw.util.Iterator = variants.iterator();
+		while(variantIter.hasNext()){
+			var variant : dw.catalog.Variant = variantIter.next();
+			if(variant.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
+		  		count = count+1;
+		  	}
+		}
+	} else {
+		if(product.availabilityModel.availabilityStatus != "NOT_AVAILABLE"){
+			count = count+1;
+		}
+	}
+	return count;
+}
+
+//returns true if recommendations should be displayed in PLP page
+function recommendationDisplay( productSearchResult: ProductSearchResult ){
+	var cat = productSearchResult.category;
+	var display = false;
+	if((cat.custom.enablecategoryrecommendationslot==null) || (cat.custom.enablecategoryrecommendationslot==false)){
+			if(cat.getParent().isTopLevel()){
+			display = true;
+			}
+			else{
+				if((cat.getParent().custom.enablecategoryrecommendationslot==null) || (cat.getParent().custom.enablecategoryrecommendationslot==false)){
+					if(cat.getParent().getParent().isTopLevel()){
+					display = true;
+					}
+				}
+			}
+		}
+	return display;
+}
+
+//get VIP Text on the header if the customer is VIP Customer
+function getBadgeText(currentCustomer,currentForms){
+	var badgeText : String = "";
+	var isVIP = false;
+	var isProStaff = false;
+	var ccg : dw.customer.CustomerGroup = null;
+	var customerGrp : dw.customer.CustomerGroup = null;
+	var customerGrpCol : Collection = currentCustomer.getCustomerGroups();
+	for each(customerGrp in customerGrpCol){
+		if(customerGrp.getID().indexOf('VIP') != -1){
+			isVIP = true;
+			ccg = customerGrp;
+			break;
+		}
+
+		if(!isVIP && customerGrp.getID().indexOf('ProStaff') != -1){
+			isProStaff=true;
+			ccg = customerGrp
+		}
+		if(!isProStaff && customerGrp.getID().indexOf('employee') != -1){
+			ccg = customerGrp
+		}
+	}
+	if(ccg != null && !empty(ccg.custom.badgeText) && ccg.custom.badgeText != null ){
+		badgeText = ccg.custom.badgeText;
+	} else {
+		var VIPCard = dw.object.CustomObjectMgr.queryCustomObject('VIPCard', 'custom.redeemingCustomer = {0}', currentCustomer.profile.customerNo);
+		if(empty(VIPCard) && currentForms != null && currentForms.profile.customer.numberflw.value != null){
+			VIPCard = dw.object.CustomObjectMgr.queryCustomObject('VIPCard2', 'custom.code = {0}', currentForms.profile.customer.numberflw.value);
+		} else if(empty(VIPCard) && currentForms != null && currentForms.vip.numberflw.value != null){
+			VIPCard = dw.object.CustomObjectMgr.queryCustomObject('VIPCard2', 'custom.code = {0}', currentForms.vip.numberflw.value);
+		}
+		if(!empty(VIPCard) && VIPCard != null) {
+			var grpArr : Array = VIPCard.custom.groups;
+			var cardcg = null;
+			for(var k=0; k < grpArr.length; k++){
+				cardcg = CustomerMgr.getCustomerGroup(grpArr[k]);
+			}
+			badgeText = cardcg.custom.badgeText;
+		}
+	}
+	return badgeText;
+}
+
+function isVIP(currentCustomer){
+	var isAssignedToVIP : Boolean = false;
+	var cglist : Collection = currentCustomer.getCustomerGroups();
+	for(var k=0; k < cglist.length; k++){
+		if(cglist[k].ID == 'VIP'){
+			isAssignedToVIP = true;
+		}
+	}
+	return isAssignedToVIP;
+}
+
+function isAllotmentOnly(basket){
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
+	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
+	var flageallotmentcover : Boolean = false;
+	var iterTemp : Iterator = allPaymentInstrs.iterator();
+	while(iterTemp.hasNext()){
+		orderPI = iterTemp.next();
+		if(orderPI.getPaymentMethod()=='ALLOTMENT'){
+			allotmentAmount = orderPI.getPaymentTransaction().getAmount();
+			break;
+		}
+	}
+	if(allotmentAmount > 0){
+		if(allotmentAmount >= basket.totalGrossPrice ){
+			flageallotmentcover=true;
+		}
+	}
+	return flageallotmentcover;
+}
+function getAllotmentAmount(basket){
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
+	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
+	var flageallotmentcover : Boolean = false;
+	var iterTemp : Iterator = allPaymentInstrs.iterator();
+	while(iterTemp.hasNext()){
+		orderPI = iterTemp.next();
+		if(orderPI.getPaymentMethod()=='ALLOTMENT'){
+			allotmentAmount = orderPI.getPaymentTransaction().getAmount();
+			break;
+		}
+	}
+	/*if(allotmentAmount > 0){
+		if(allotmentAmount >= basket.totalGrossPrice ){
+			flageallotmentcover=true;
+		}
+	}*/
+	return allotmentAmount.value;
+}
+function getRemainingOrderBalance(basket){
+	var giftCertTotal : Money = new Money(0.0, session.currency.currencyCode);
+	var allotmentAmount : Money = new Money(0.0, session.currency.currencyCode);
+	var gcPaymentInstrs : Collection = basket.getGiftCertificatePaymentInstruments();
+	var iter : Iterator = gcPaymentInstrs.iterator();
+	var orderPI : dw.order.OrderPaymentInstrument = null;
+	while( iter.hasNext() )
+	{
+		orderPI = iter.next();
+		giftCertTotal = giftCertTotal.add( orderPI.getPaymentTransaction().getAmount() );
+	}
+	//Any dummy value to show up credit card fields.
+	var remainingOrderBalance : Money = basket.totalGrossPrice;
+	var flageallotmentcover : Boolean = false;
+	if(giftCertTotal > 0){
+		remainingOrderBalance = remainingOrderBalance.subtract( giftCertTotal);
+	}
+	var allPaymentInstrs : Collection = basket.getPaymentInstruments();
+	var iterTemp : Iterator = allPaymentInstrs.iterator();
+	while(iterTemp.hasNext()){
+		orderPI = iterTemp.next();
+		if(orderPI.getPaymentMethod()=='ALLOTMENT'){
+			allotmentAmount = orderPI.getPaymentTransaction().getAmount();
+			break;
+		}
+	}
+	if(allotmentAmount > 0){
+		if(allotmentAmount >= basket.totalGrossPrice ){
+			flageallotmentcover=true;
+		}
+		remainingOrderBalance = remainingOrderBalance.subtract( allotmentAmount );
+	}
+	remainingOrderBalance = remainingOrderBalance.value;
+
+	return remainingOrderBalance;
+}
+
+function isKnifeAvailable(basket){
+	var knifeAvailable = false;
+	var plis : Iterator = basket.getProductLineItems().iterator();
+	while(plis.hasNext())
+	{
+		var pli : ProductLineItem = plis.next();
+		if(pli.product.custom.blade == 'true')
+		{
+			knifeAvailable = true;
+		}
+	}
+	return knifeAvailable;
+}
+
+function getBrandID(){
+	var intlPref = JSON.parse(System.getPreferences().getCustom()['internationalJSON']);
+	var currentSite = ""+request.httpParameterMap.currentSite.value;
+	var brand = intlPref["brands"][currentSite];
+	return brand;
+}
+module.exports={
+	getAvailability : getAvailability,
+	recommendationDisplay : recommendationDisplay,
+	getBadgeText : getBadgeText,
+	isVIP : isVIP,
+	isAllotmentOnly : isAllotmentOnly,
+	getRemainingOrderBalance : getRemainingOrderBalance,
+	isKnifeAvailable : isKnifeAvailable,
+	getAllotmentAmount : getAllotmentAmount,
+	getBrandID : getBrandID
+}
