@@ -1,0 +1,45 @@
+<iscontent type="application/json" charset="UTF-8" compact="true"/>
+<iscomment>
+	This template renders the details of a coupon redemption as JSON response.
+</iscomment>
+{
+	<isscript>
+	        var LineItemCtnr = pdict.Basket;
+			var giftCertTotal : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
+			var allotmentAmt : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
+			var gcPaymentInstrs : dw.util.Collection = pdict.Basket.getGiftCertificatePaymentInstruments();
+			var iter : dw.util.Iterator = gcPaymentInstrs.iterator();
+			var orderPI : dw.order.OrderPaymentInstrument = null;
+			var creditapplied: Boolean=false;
+			while( iter.hasNext() )
+			{
+				orderPI = iter.next();
+				giftCertTotal = giftCertTotal.add( orderPI.getPaymentTransaction().getAmount() );
+			}
+			var allPaymentInstrs : dw.util.Collection = LineItemCtnr.getPaymentInstruments();
+			var iterTemp : dw.util.Iterator = allPaymentInstrs.iterator();
+			while(iterTemp.hasNext()){
+				orderPI = iterTemp.next();
+				if(orderPI.getPaymentMethod()=='ALLOTMENT'){
+					allotmentAmt = allotmentAmt.add(orderPI.getPaymentTransaction().getAmount());
+				}
+			}
+			var ordertotal : dw.value.Money = new dw.value.Money(0.0, session.currency.currencyCode);
+			if(LineItemCtnr.totalGrossPrice.available){
+			    ordertotal=LineItemCtnr.totalGrossPrice.subtract(giftCertTotal);
+			    if(allotmentAmt > 0){
+			    	ordertotal=ordertotal.subtract(allotmentAmt);
+			    }
+			}
+			else{
+				ordertotal = LineItemCtnr.getAdjustedMerchandizeTotalPrice(true).subtract(giftCertTotal);
+				 if(allotmentAmt > 0){
+			    	ordertotal=ordertotal.subtract(allotmentAmt);
+			    }
+			}
+	</isscript>
+		"Total": {
+
+			    "OrderTotal": "<isprint value="${ordertotal}"/>"
+		}
+ }

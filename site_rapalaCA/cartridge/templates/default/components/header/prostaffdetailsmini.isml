@@ -1,0 +1,34 @@
+<div class="prostaff-header badge-header">
+<iscache type="relative" minute="0" varyby="price_promotion"/>
+	<isif condition="${!empty(pdict.badgeText)}">
+		<span class="prostaff-badgetext  badge-mini desktopHide">
+			<isset name="BadgeText" value="${pdict.badgeText.toString()}" scope="page" />
+			<isif condition="${BadgeText != 'B2B Member'}">
+			<isscript>
+			if(BadgeText == "Pro Staff Member"){
+			var h : String = BadgeText;
+			var arr : Array = [];
+			arr = h.split(" ");
+			var hs : String = arr[0] +" "+ arr[1];
+			}
+			else{
+			var h : String = BadgeText;
+			var arr : Array = [];
+			arr = h.split(" ");
+			var hs : String = arr[0];
+			}
+			</isscript>
+			(<isprint value="${hs}"/>)
+			</isif>
+		</span>
+	</isif>
+</div>
+<isif condition="${!empty(pdict.badgeText)}">
+	<isif condition="${hs.indexOf('Employee') > -1}">
+		<span class="mobileHide">Empl</span>
+	<iselseif condition="${hs.indexOf('Pro') > -1}">
+		<span class="mobileHide">Pro</span>
+	<iselse/>
+		<span class="mobileHide"><isprint value="${hs}"/></span>
+	</isif>
+</isif>
