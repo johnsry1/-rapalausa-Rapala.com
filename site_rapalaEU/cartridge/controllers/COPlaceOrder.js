@@ -161,7 +161,7 @@ function start() {
         	 //set knife confirmation
             Transaction.wrap(function () {
                 require('*/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
-                if(customer.profile.UUID == order.customer.profile.UUID) {
+                if(customer.profile && customer.profile.UUID == order.customer.profile.UUID) {
                     order.setCustomer(customer);
                 }
             });
