@@ -1,0 +1,32 @@
+/**
+*   Update the customer alltment amount once an order has been placed
+*	using allotment amount.
+*/
+importPackage( dw.system );
+importPackage( dw.customer );
+importPackage( dw.order );
+importPackage( dw.util );
+importPackage( dw.value );
+function updateAllotmentDetails( customer, _order )
+{
+   var remainingAllotmentAmount : Number = customer.profile.custom.allotment;
+   var profileUsedAllotmentAmount : Number = customer.profile.custom.allotmentUsed;
+   var usedAllotmentAmount : Money = new Money(0.0, Site.getCurrent().currencyCode);
+   
+   var orderPI : dw.order.OrderPaymentInstrument = null;
+   var ALLOTMENTPIList : Collection = _order.getPaymentInstruments("ALLOTMENT");
+   var iterTemp : dw.util.Iterator = ALLOTMENTPIList.iterator();
+	while(iterTemp.hasNext()){
+		orderPI = iterTemp.next();
+		usedAllotmentAmount = usedAllotmentAmount.add(orderPI.getPaymentTransaction().getAmount());
+	}   
+   remainingAllotmentAmount = remainingAllotmentAmount - usedAllotmentAmount;
+   customer.profile.custom.allotment = remainingAllotmentAmount; 
+   profileUsedAllotmentAmount = profileUsedAllotmentAmount + usedAllotmentAmount.value;
+   customer.profile.custom.allotmentUsed = profileUsedAllotmentAmount;
+   return true;
+}
+
+module.exports={
+	updateAllotmentDetails : updateAllotmentDetails
+}
