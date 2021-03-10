@@ -14,6 +14,7 @@ var URLUtils = require('dw/web/URLUtils');
 var Form = require('~/cartridge/scripts/models/FormModel');
 var Transaction = require('dw/system/Transaction');
 var Site = require('dw/system/Site');
+var OrderMgr = require('dw/order/OrderMgr');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -27,11 +28,7 @@ var ltkSignupEmail = require('int_listrak_controllers/cartridge/controllers/ltkS
 function show() {
     var accountHomeAsset, pageMeta, Content;
     session.custom.lastUrlBeforeLogin = session.clickStream.last.referer;
-    //Content = app.getModel('Content');
-    //accountHomeAsset = Content.get('myaccount-home');
 
-    //pageMeta = require('~/cartridge/scripts/meta');
-    //pageMeta.update(accountHomeAsset);
 	if(request.httpSecure){
 		app.getController('Account').UserAccountShow();
 	} else {
@@ -491,9 +488,7 @@ function signInHeader() {
 				Message : Message
 			}).render('util/postmessage');
 		}
-	}
-	
-   // app.getView().render('account/accountnavigation');
+    }
 }
 
 function lockedAccountInvalidate(){
