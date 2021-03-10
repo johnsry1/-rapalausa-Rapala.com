@@ -129,6 +129,11 @@ If you are not using the build cartridge the comments can be safely removed.
     <meta name="google-site-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.GoogleVerificationTag}"/>" />
 </isif>
 
+<iscomment>Insert meta tag for the "Facebook DomainV erification" feature to verify that you are the owner of this site.</iscomment>
+<isif condition="${'FacebookDomainVerification' in dw.system.Site.current.preferences.custom && dw.system.Site.current.preferences.custom.FacebookDomainVerification != ''}">
+    <meta name="facebook-domain-verification" content="<isprint value="${dw.system.Site.current.preferences.custom.FacebookDomainVerification}"/>" />
+</isif>
+
 <iscomment>Gather device-aware scripts</iscomment>
 <isinclude url="${URLUtils.url('Home-SetLayout')}"/>
 <!-- Facebook Pixel Code --> <script> !function(f,b,e,v,n,t,s)
