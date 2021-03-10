@@ -81,14 +81,10 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 										<!-- TRIGGER X : id=3 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandtriggerx') != null) && (dw.system.Site.current.preferences.custom.activebrandtriggerx == true)}">
 											<li><a class="triggerx" href="${URLUtils.https('Home-Show','id','3')}" title="${Resource.msg('footertab.triggerx','common',null)}">${Resource.msg('account.Trigger X','account',null)}</a></li>
-										<iselse>
-											<li><a class="triggerx" href="http://www.triggerx.com/" title="${Resource.msg('footertab.triggerx','common',null)}" target="_blank">${Resource.msg('account.Trigger X','account',null)}</a></li>
 										</isif>
 										<!-- Marcum : id=10 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandmarcum') != null) && (dw.system.Site.current.preferences.custom.activebrandmarcum == true)}">
 											<li><a class="marcum" href="${URLUtils.https('Home-Show','id','10')}" title="${Resource.msg('footertab.marcum','common',null)}">${Resource.msg('account.Marcum','account',null)}</a></li>
-										<iselse>
-											<li><a class="marcum" href="http://www.marcumtech.com/" title="${Resource.msg('footertab.marcum','common',null)}" target="_blank">${Resource.msg('account.Marcum','account',null)}</a></li>
 										</isif>
 										<!-- Strike Master : id=10 -->
 										<isif condition="${(dw.system.Site.current.getCustomPreferenceValue('activebrandstrikemaster') != null) && (dw.system.Site.current.preferences.custom.activebrandstrikemaster == true)}">
@@ -155,10 +151,10 @@ var currRequest : dw.system.Request = pdict.CurrentRequest;
 											</form>
 										</div>
 										<div class="receive-emails">
-											 <a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our 12 brands (details)</a>
+											 <a href='${URLUtils.url('Page-Show','cid','email-preference-center')}'>Receive emails from our brands (details)</a>
 										</div>
 										<div class="email-txt">
-											<span>Receive emails from our 12 brands (details)</span>
+											<span>Receive emails from our brands (details)</span>
 											<span class="Custom-tooltip tooltip-footer"> 
 												${Resource.msg('global.whatwilliget','locale',null)}
 												<div class="tooltip-body" style="display:none">

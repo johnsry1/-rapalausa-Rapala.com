@@ -159,7 +159,10 @@ function start() {
         } else {
         	 //set knife confirmation
             Transaction.wrap(function () {
-            	require('app_rapala_core/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
+                require('app_rapala_core/cartridge/scripts/checkout/CreateOrderCustomData.ds').setOrderCustomAttr(order);
+                if(customer.profile && customer.profile.UUID == order.customer.profile.UUID) {
+                    order.setCustomer(customer);
+                }
             });
             var handlePaymentsResult = handlePayments(order);
 
