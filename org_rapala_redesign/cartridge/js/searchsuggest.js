@@ -83,8 +83,8 @@ var searchsuggest = {
                 k = searchUrl + '?id=1';
             } else if (sessionId == 'sufix') {
                 k = searchUrl + '?id=2';
-            } else if (sessionId == 'triggerx') {
-                k = searchUrl + '?id=3';
+/*            } else if (sessionId == 'triggerx') {
+                k = searchUrl + '?id=3'; */
             } else if (sessionId == 'storm') {
                 k = searchUrl + '?id=4';
             } else if (sessionId == 'luhrjensen') {
@@ -97,8 +97,8 @@ var searchsuggest = {
                 k = searchUrl + '?id=8';
             } else if (sessionId == 'williamson') {
                 k = searchUrl + '?id=9';
-            } else if (sessionId == 'marcum') {
-                k = searchUrl + '?id=10';
+/*           } else if (sessionId == 'marcum') {
+                k = searchUrl + '?id=10'; */
             } else if (sessionId == 'strikemaster') {
                 k = searchUrl + '?id=11';
             } else if (sessionId == 'otter') {
