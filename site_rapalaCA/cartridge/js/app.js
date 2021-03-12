@@ -561,6 +561,18 @@ function initializeEvents() {
     if ($('.remove-bottom-button').length > 0) {
         $('.style-cservice').find('.content-back-button').remove();
     }
+    $('body').on('input', 'input.postal', function () {
+        var zipValue = $(this).val();
+        var zipLength = zipValue.length;
+        var position = 3;
+        var updatedZip = '';
+        var spaceCount = (zipValue.split(' ').length - 1);
+
+        if (zipLength > 3 && spaceCount < 1) {
+            updatedZip = [zipValue.slice(0, position), zipValue.slice(position)].join(' ');
+            $(this).val(updatedZip);
+        }
+    });
 }
 /**
  * @private
