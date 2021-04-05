@@ -1,0 +1,91 @@
+{
+    "__version": "1",
+    "settings": {
+        "http-host": "",
+        "https-host": "",
+        "default": "false"
+    },
+    "qa.rapala.com": [
+        {
+            "if-site-path": "eu-en",
+            "locale": "default",
+            "pipeline": "Default-Start"
+        },
+        {
+            "if-site-path": "fi-fi",
+            "host": "qa.rapala.fi"
+        },
+        {
+            "if-site-path": "fr-fr",
+            "host": "qa.rapala.fr"
+        },
+        {
+            "if-site-path": "en-gb",
+            "host": "qa.rapala.co.uk"
+        },
+        {
+            "if-site-path": "de-de",
+            "host": "qa.rapala.de"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ],
+    "qa.rapala.de": [
+        {
+            "locale": "de_DE",
+            "pipeline": "Default-Start"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ],
+    "qa.rapala.fi": [
+        {
+            "locale": "fi_FI",
+            "pipeline": "Default-Start"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ],
+    "qa.rapala.fr": [
+        {
+            "locale": "fr_FR",
+            "pipeline": "Default-Start"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ],
+    "qa.rapala.co.uk": [
+        {
+            "locale": "en_GB",
+            "pipeline": "Default-Start"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ],
+    "qa.triggerx.com": [
+        {
+            "if-site-path": "eu-en",
+            "locale": "en_EC"
+        }
+    ],
+    "qa.rapala.it": [
+        {
+            "locale": "it_IT",
+            "pipeline": "Default-Start"
+        },
+        {
+            "entry-point-pipelines": ["Default-Start", "Home-Show"],
+            "entry-point-destination": ["site-path"]
+        }
+    ]
+}
