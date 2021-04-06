@@ -6,7 +6,7 @@
 </isif>
 <div class="summary-section">
 	<isif condition="${(pdict.Basket != null) && (pdict.Basket.productLineItems.size() > 0 )}">
-		<div class="cart-summary-header">	
+		<div class="cart-summary-header">
 			<div class="summary-section-head">
 				<span class="heading"><isprint value="${Resource.msg('minicart.mycartsummarycheckout','checkout',null)}"/></span>
 				<span class="editcart summary-left-arrow">
@@ -17,20 +17,18 @@
 				</span>
 			</div>
 			<div class="basketItems">(<isprint value="${pdict.Basket.getProductQuantityTotal().toFixed()}"/><isif condition="${pdict.Basket.getProductQuantityTotal()  > 1}"> <isprint value="${Resource.msg('summary.items','checkout',null)}"/><iselse/> <isprint value="${Resource.msg('summary.item','checkout',null)}"/></isif>)</div>
-			<table class="summary-carttable" summary="Cart" cellspacing="0">
-				<thead>
-					<tr>
-						<th class="summary-itemcol col1"><div class="left-nav-style"><isprint value="${Resource.msg('global.items','locale',null)}"/></div></th>
-						<th class="summary-detcol col2" >&nbsp;</th>
-						<th class="summary-qtycol col3"><div class="left-nav-style"><isprint value="${Resource.msg('global.qty','locale',null)}"/></div></th>
-						<th class="summary-total col4"><div class="left-nav-style"><isprint value="${Resource.msg('global.price','locale',null)}"/></div></th>
-					</tr>
-				</thead>
-			</table>
 		</div>
 		<div class="cart-summary-cont">
 			<div class="item-cart-scrollbar">
 				<table class="summary-carttable" summary="Cart" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="summary-itemcol col1"><div class="left-nav-style"><isprint value="${Resource.msg('global.items','locale',null)}"/></div></th>
+                            <th class="summary-detcol col2" >&nbsp;</th>
+                            <th class="summary-qtycol col3"><div class="left-nav-style"><isprint value="${Resource.msg('global.qty','locale',null)}"/></div></th>
+                            <th class="summary-total col4"><div class="left-nav-style"><isprint value="${Resource.msg('global.price','locale',null)}"/></div></th>
+                        </tr>
+                    </thead>
 					<tbody>
 						<iscomment>LOOP TO SEPARATE DIFFERENT SHIPMENTS ex: Gift Registry Shipments Etc.</iscomment>
 						<isloop items="${pdict.CurrentForms.cart.shipments}" var="Shipment" status="loopstate">
@@ -42,16 +40,16 @@
 									{
 										var wishListItems = pdict.WishList.items;
 										var wishListItemsSize = wishListItems.size();
-									
-										for each( var wishListItem in wishListItems ) { 
+
+										for each( var wishListItem in wishListItems ) {
 											if (lineItem.productID == wishListItem.product.ID)
 											{
 												isInWishList = true;
 												break;
 											}
 										}
-									} 
-						
+									}
+
 								</isscript>
 								<isset name="prodval" value="false" scope="page"/>
 								<isset name="restrictedProd" value="false" scope="page"/>
@@ -61,7 +59,7 @@
 									<isif condition="${currItem == lineItem.productID}">
 										<isset name="prodval" value="true" scope="page"/>
 									</isif>
-								</isloop> 
+								</isloop>
 								<iscomment>Skip bonus-choice products in first pass.</iscomment>
 									<isif condition="${lineItem.bonusDiscountLineItem == null}">
 										<isloop items="${restrictedProds}" var="restrictedProduct">
@@ -87,7 +85,7 @@
 														<td colspan="4">
 															<isif condition="${lineItem != null && lineItem.product != null && !empty( lineItem.product) && lineItem.product.getClassificationCategory() != null && !empty(lineItem.product.getClassificationCategory())}">
 																<isif condition="${lineItem.product.getClassificationCategory().displayName == 'Sleds' || lineItem.product.getClassificationCategory().displayName == 'Shelters' }">
-																	
+
 																	<isset name="statesList" value="${new dw.util.ArrayList(dw.system.Site.getCurrent().getCustomPreferenceValue('acceptablestates'))}" scope="page"/>
 																	<isset name="statesize" value="${new Number(statesList.size())}" scope="page"/>
 																	<div class="notification-summery" id="message">
@@ -205,7 +203,7 @@
 															<iscomment>Call module to render product</iscomment>
 															<isdisplayliproduct p_productli="${lineItem}" p_formli="${FormLi}"  p_hideprice="${true}" p_hidepromo="${true}" p_link="${false}"/>
 															<div><isprint value="${Resource.msg('global.productbrand','locale',null)}"/><isprint value="${lineItem.product.brand}"></div>
-															<isif condition="${!empty(pdict.ProductAddedToWishlist) && pdict.ProductAddedToWishlist == lineItem.productID}">		
+															<isif condition="${!empty(pdict.ProductAddedToWishlist) && pdict.ProductAddedToWishlist == lineItem.productID}">
 																<isif condition="${!isInWishList}">
 																	<span class="cart-thisiswishlist" ><isprint value="${Resource.msg('global.thisiswishlist','locale',null)}"/></span>
 																	<br/>
@@ -224,11 +222,11 @@
 																</iscomment>
 																<iscomment>Get the price model for this product.</iscomment>
 																<isset name="PriceModel" value="${lineItem.product.getPriceModel()}" scope="page"/>
-																
+
 																<iscomment>Get StandardPrice from list price book.</iscomment>
 																<isinclude template="product/components/standardprice"/>
-																
-																<isif condition="${lineItem.bonusProductLineItem}"> 
+
+																<isif condition="${lineItem.bonusProductLineItem}">
 																	<span class="bonusitem"><isprint value="${Resource.msg('global.freegift','locale',null)}"/></span>
 																<iselse/>
 																	<isif condition="${lineItem.priceAdjustments.length > 0}">
@@ -405,8 +403,8 @@
 							<iscomment>
 								Display the selected bonus products for this bonus discount line item.
 								This requires looping through all form items and matching by UUID.
-								
-								Note:  we display these bonus products outside of any shipment even though 
+
+								Note:  we display these bonus products outside of any shipment even though
 								each one is contained in a shipment.  This display does not make sense in
 								multiple-shipment scenario.
 							</iscomment>
@@ -436,9 +434,9 @@
 												<div class="itemtotals">
 													<span class="bonusitem"><isprint value="${Resource.msg('global.bonus','locale',null)}"/></span>
 												</div>
-												
+
 												<button class="textbutton cart-grey-button" type="submit" value="${Resource.msg('global.remove','locale',null)}" name="${FormLi.deleteProduct.htmlName}"><span>${Resource.msg('global.remove','locale',null)}</span></button><br />
-												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">		
+												<isif condition="${empty(pdict.ProductAddedToWishlist) || pdict.ProductAddedToWishlist != lineItem.productID}">
 													<isif condition="${!isInWishList}">
 														<a class="addtowishlist cart-grey-button" href="${URLUtils.https('Cart-AddToWishlist', 'pid', lineItem.productID)}" name="${FormLi.addToWishList.htmlName}" title="${Resource.msg('global.addtowishlist','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
 														<br />
@@ -507,7 +505,7 @@
 							<tr><td colspan="5"><!-- SPACER FOR BOTTOM OF BUNDLE ROW --></td></tr>
 						</isloop>
 						<iscomment>Done looping selected bonus discount line items.</iscomment>
-										
+
 						<iscomment>Coupons</iscomment>
 						<isloop items="${pdict.CurrentForms.cart.coupons}" var="FormCoupon" status="loopstateCoupons">
 						<isif condition="${FormCoupon.object.applied}">
@@ -522,20 +520,20 @@
 										<isif condition="${FormCoupon.object.applied}">
 											<isloop items="${FormCoupon.object.priceAdjustments}" var="Promo" status="couponcount" >
 												<isif condition="${couponcount.count==1}"><div class="discountinfo"><isprint value="${Promo.lineItemText}"/></div></isif>
-											</isloop>	
+											</isloop>
 										</isif>
-									</div>	
+									</div>
 								</td>
 								<td class="cart-summary-quantitycolumn col3">1</td>
 								<td class="itemtotalcolumn coupontotal col4">
 									<isif condition="${FormCoupon.object.applied}">
-										<isloop items="${FormCoupon.object.priceAdjustments}" var="PriceAdjustment" status="couponcount" >	
+										<isloop items="${FormCoupon.object.priceAdjustments}" var="PriceAdjustment" status="couponcount" >
 											 <isif condition="${PriceAdjustment.promotion && PriceAdjustment.promotion.promotionClass == dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT}">
 												<isif condition="${couponcount.count==1}"><div class="discount_amount discount_amount-prod"><isprint value="${Resource.msg('global.applied','locale',null)}"/></div></isif>
 											<iselse/>
 												<isif condition="${couponcount.count==1}"><div class="discount_amount"><isprint value="${PriceAdjustment.price}"/></div></isif>
-											</isif>	
-										</isloop>	
+											</isif>
+										</isloop>
 									</isif>
 								</td>
 							</tr>
@@ -544,6 +542,6 @@
 					</tbody>
 				</table>
 			</div>
-		</div>	
+		</div>
 	</isif>
 </div>
