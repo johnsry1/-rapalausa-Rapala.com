@@ -169,7 +169,9 @@ function updateShippingMethodList() {
                 $shippingMethodList.find('[name$="_shippingMethodID"]').on('click', function () {
                     updateButton();
                     $('.shipping-methods .shipping-method .value .custom-link ').removeClass('active');
-                    $(this).closest('.custom-link').addClass('active');
+					$('.shipping-methods .shipping-method .value .custom-link ').removeAttr('aria-label');
+                    $(this).closest('.custom-link').addClass('active'); 
+					$(this).closest('.custom-link').attr( 'aria-label', 'The tick icon represents the currently method for shipping visually.' );
                     selectShippingMethod($(this).val());
                 });
 
