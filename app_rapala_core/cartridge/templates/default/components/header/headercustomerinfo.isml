@@ -142,14 +142,12 @@
 				<li class="ui-login <isif condition=" ${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
 					<div class="login-value mobile-view">
 						<isif condition="${pdict.CurrentCustomer.authenticated}">
-							<isset name="badgeText"
-								value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds')
-           	.getBadgeText(pdict.CurrentCustomer, pdict.CurrentForms)}"
-								scope="page" />
-							<isif condition="${!empty(badgeText) && badgeText != null}">
-								<isinclude
-									url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini', 'BT', badgeText)}" />
-							</isif>
+                            <a href="${URLUtils.https('Account-Show')}" />
+								<isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer, pdict.CurrentForms)}" scope="page" />
+								<isif condition="${!empty(badgeText) && badgeText != null}">
+									<isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini', 'BT', badgeText)}" />
+								</isif>
+							</a>
 						</isif>
 					</div>
 					<isif
