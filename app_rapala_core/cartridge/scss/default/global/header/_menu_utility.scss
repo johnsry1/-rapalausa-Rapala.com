@@ -203,12 +203,39 @@
                     }
                 }
             }
+
             .signedin {
                 height: 100%;
+                position: relative;
+                z-index: 2;
+
                 .userloggedin {
                     &.signedin {
                         display: block;
                         margin-top: -18px;
+
+                        @include respond(0, $desktop-breakpoint - 1) {
+                            margin-top: -56px;
+                        }
+                    }
+                }
+            }
+
+            .sign-up-blk {
+                @include respond(0, $desktop-breakpoint - 1) {
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+
+            &.active {
+                .signedin {
+                    .userloggedin {
+                        &.signedin {
+                            @include respond(0, $desktop-breakpoint - 1) {
+                                margin-top: -25px;
+                            }
+                        }
                     }
                 }
             }
