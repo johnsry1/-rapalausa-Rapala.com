@@ -195,7 +195,7 @@ module.exports = function (pdict) {
 			}
 			if (type === 'checkbox') {
 				input = '<div class="checkbox"><input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/></div>';
-			} else { 
+			} else {
 				input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
 			}
 			break;
@@ -246,9 +246,9 @@ module.exports = function (pdict) {
 			helpcontent = helpAsset.custom.body;
 		}
 		help = [
-			'<a class="tooltip Custom-tooltip">',
+			'<a aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
 			helplabel,
-			'<div class="tooltip-content" data-layout="small">',
+			'<div class="tooltip-content" role="tooltip" data-layout="small">',
 			helpcontent,
 			'</div>',
 			'</a>'
