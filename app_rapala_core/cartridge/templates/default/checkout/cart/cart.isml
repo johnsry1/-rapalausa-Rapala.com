@@ -1239,15 +1239,15 @@
 									 <div class="couponcodenew post-couponcode">
 									  <div id="couponentry" class="couponcode post-couponcode">
 											<div class="cart-coupon-code applycoupon dropdown" id="applycoupon">
-												<span class="label post-couponcode">${Resource.msg('billinginfo.havepromo','checkout',null)}</span>
-												 <div class="promo-sec bottom-promo-section">
-												 <span class="input-sec">
+												<span aria-label="${Resource.msg('billinginfo.havepromo','checkout',null)}" class="label post-couponcode">${Resource.msg('billinginfo.havepromo','checkout',null)}</span>
+												<div class="promo-sec bottom-promo-section">
+												<span class="input-sec">
 												 	<isif condition="${!empty(pdict.CouponStatus) && !empty(pdict.CouponStatus.couponCodeValue)}">
 														<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" value="${pdict.CouponStatus.couponCodeValue}" />
 													<iselse/>
 														<input type="text" class="couponinput" name="${pdict.CurrentForms.cart.couponCode.htmlName}" id="${pdict.CurrentForms.cart.couponCode.htmlName}" placeholder="${Resource.msg('cart.entercouponcode','checkout',null)}" />
 													</isif>
-													<button type="submit"  value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon" class="gray-button cartcoupon-apply">
+													<button aria-label="${Resource.msg('global.applypromo','locale',null)}" type="submit" value="${pdict.CurrentForms.cart.addCoupon.htmlName}" name="${pdict.CurrentForms.cart.addCoupon.htmlName}" id="add-coupon" class="gray-button cartcoupon-apply">
 														<isprint value="${Resource.msg('global.apply','locale',null)}"/>
 													</button>
 													</span>
