@@ -150,10 +150,10 @@ module.exports = function (pdict) {
     // label
     label = '<label class="label" for="' + name + '">';
     if(pdict.labellink) {
-    	label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + pdict.labellink + '</span>';
+    	label += '<span class="labeltext">' + pdict.labellink + '</span>';
 
     } else {
-    	label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+    	label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
     }
     if (required) {
         label += '<span class="requiredindicator">&#42; </span>';
@@ -164,7 +164,7 @@ module.exports = function (pdict) {
 	// input
 	switch (element) {
 		case 'select':
-            input = '<div aria-labelledby="' + name + '-label" class="select-style"><select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+            input = '<div class="select-style"><select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			// interate over pdict.formfield.options, append to the options array
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
@@ -206,13 +206,13 @@ module.exports = function (pdict) {
                 inputClass = inputClass+' textinputpw';
 			}
             if (type === 'checkbox') {
-                input = '<input aria-labelledby="' + name + '-label" class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + after;
+                input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + after;
             } else {
-                input = '<input aria-labelledby="' + name + '-label" class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
+                input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
             }
 			break;
 		case 'textarea':
-			input = '<textarea aria-labelledby="' + name + '-label" class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+			input = '<textarea class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			input += value;
 			input += '</textarea>';
 			break;
@@ -229,7 +229,7 @@ module.exports = function (pdict) {
                 }
                 optionId += '_' + optionKey;
                 optionLabel = '<label for="' + optionId + '">' + optionLabel + '</label>';
-                options.push('<input aria-labelledby="' + name + '-label" class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + optionId + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + optionLabel);
+                options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + optionId + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + optionLabel);
             });
             input += options.join('');
             break;
@@ -262,9 +262,9 @@ module.exports = function (pdict) {
 			helpcontent = helpAsset.custom.body;
 		}
 		help = [
-			'<a aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
+			'<a class="tooltip Custom-tooltip">',
 			helplabel,
-			'<div class="tooltip-content" role="tooltip" data-layout="small">',
+			'<div class="tooltip-content" data-layout="small">',
 			helpcontent,
 			'</div>',
 			'</a>'
