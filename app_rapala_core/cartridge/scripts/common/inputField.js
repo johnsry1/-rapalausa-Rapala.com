@@ -147,14 +147,14 @@ module.exports = function (pdict) {
 	if (required) {
 		label += '<span class="requiredindicator">&#42; </span>';
 	}
-	label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+	label += '<span class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
 	label += '</div>';
 
 	var options = [];
 	// input
 	switch (element) {
 		case 'select':
-			input = '<select aria-labelledby="' + name + '-label" class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+			input = '<select class="input-select ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			// interate over pdict.formfield.options, append to the options array
 			Object.keys(pdict.formfield.options).forEach(function (optionKey) {
 				var option = pdict.formfield.options[optionKey];
@@ -194,13 +194,13 @@ module.exports = function (pdict) {
                 inputClass = inputClass+' textinputpw';
 			}
 			if (type === 'checkbox') {
-				input = '<div class="checkbox"><input aria-labelledby="' + name + '-label" class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/></div>';
-			} else {
-				input = '<input aria-labelledby="' + name + '-label" class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
+				input = '<div class="checkbox"><input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/></div>';
+			} else { 
+				input = '<input class="' + inputClass + ' ' + fieldClass + '" type="' + type + '" ' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>';
 			}
 			break;
 		case 'textarea':
-			input = '<textarea aria-labelledby="' + name + '-label" class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+			input = '<textarea class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			input += value;
 			input += '</textarea>';
 			break;
@@ -213,7 +213,7 @@ module.exports = function (pdict) {
 				if (option.checked) {
 					checked = 'checked="checked"';
 				}
-				options.push('<input aria-labelledby="' + name + '-label" class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + Resource.msg(option.label, 'forms', null));
+				options.push('<input class="input-radio "' + fieldClass + ' type="radio"' + checked + ' id="' + id + '" name="' + name + '" value="' + value + '" ' + attributes + '/>' + Resource.msg(option.label, 'forms', null));
 			});
 			input += options.join('');
 			break;
