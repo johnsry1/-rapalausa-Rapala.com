@@ -105,6 +105,8 @@ var searchsuggest = {
                 k = searchUrl + '?id=21';
             } else if (sessionId == 'iceforce') {
                 k = searchUrl + '?id=20';
+            } else if (sessionId == '13fishing') {
+                k = searchUrl + '?id=13';
             }
             var searchTerm = $searchField.val();
             if (searchTerm != defaultValue && searchTerm != '') {
