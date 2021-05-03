@@ -142,24 +142,19 @@
 				<li class="ui-login <isif condition=" ${pdict.CurrentCustomer.registered && pdict.CurrentCustomer.authenticated}">active</isif>">
 					<div class="login-value mobile-view">
 						<isif condition="${pdict.CurrentCustomer.authenticated}">
-							<isset name="badgeText"
-								value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds')
-           	.getBadgeText(pdict.CurrentCustomer, pdict.CurrentForms)}"
-								scope="page" />
-							<isif condition="${!empty(badgeText) && badgeText != null}">
-								<isinclude
-									url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini', 'BT', badgeText)}" />
-							</isif>
+                            <a href="${URLUtils.https('Account-Show')}" />
+								<isset name="badgeText" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').getBadgeText(pdict.CurrentCustomer, pdict.CurrentForms)}" scope="page" />
+								<isif condition="${!empty(badgeText) && badgeText != null}">
+									<isinclude url="${URLUtils.url('COCustomer-CheckAndDisplayProStaffDetailsMini', 'BT', badgeText)}" />
+								</isif>
+							</a>
 						</isif>
 					</div>
-					<isif
-						condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
+					<isif condition="${!pdict.CurrentCustomer.registered && !pdict.CurrentCustomer.authenticated}">
 						<div class="sign-up-blk">
-							<a href="${URLUtils.https('Account-Show')}"
-								class="userlogin signin">
-								<isprint
-									value="${Resource.msg('global.Signin', 'locale', null)}" />
-								</a>
+							<a href="${URLUtils.https('Account-Show')}" class="userlogin signin">
+								<isprint value="${Resource.msg('global.Signin', 'locale', null)}" />
+							</a>
 						</div>
 						<div class="header-sign-in accountcontent">
 							<isinclude template="components/header/headersignin" />
@@ -173,18 +168,15 @@
 						<div class="confirmationcontainer forgotmsg" style="display:none;">
 							<div class="top_arrow"></div>
 							<div id="message" class="reset-success-email">
-								<isprint
-									value="${Resource.msg('passwordreset.sent', 'account', null)}" />
+								<isprint value="${Resource.msg('passwordreset.sent', 'account', null)}" />
 								<br>
-								<isprint
-									value="${Resource.msg('passwordreset.sent2', 'account', null)}" />
+								<isprint value="${Resource.msg('passwordreset.sent2', 'account', null)}" />
 							</div>
 						</div>
 						<div class="headermask" style="display: none;"></div>
-						<iselse />
+					<iselse/>
 						<div class="signedin">
-							&nbsp;<a href="${URLUtils.https('Account-Show')}"
-								class="userloggedin signedin"></a>
+							&nbsp;<a href="${URLUtils.https('Account-Show')}" class="userloggedin signedin"></a>
 						</div>
 					</isif>
 				</li>
