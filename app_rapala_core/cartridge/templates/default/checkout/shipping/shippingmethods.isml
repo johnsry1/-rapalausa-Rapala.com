@@ -25,7 +25,7 @@
 		<isslot id="shipping-msg" description="Header banner within the header, between the logo and search bar, width XXXpx by height XXpx." context="global" />
 	</div>
 	<div class="clear"><!-- FLOAT CLEAR --></div>
-	<div class="shippingmethod-tooltip">
+	<div class="shippingmethod-tooltip" aria-label="${Resource.msg('singleshipping.howshippingcalculated','checkout',null)}">
 		<a class="Custom-tooltip">
 			${Resource.msg('singleshipping.howshippingcalculated','checkout',null)}
 			<div class="tooltip-body howshippingcalctip-body" style="display:none">
@@ -45,7 +45,7 @@
 								<li>${Resource.msg('singleshipping.howshippingcalculatedcontent2.7','checkout',null)}</li>
 								<li>${Resource.msg('singleshipping.howshippingcalculatedcontent2.8','checkout',null)}</li>
 							</ul>
-						</li> 
+						</li>
 						<li>${Resource.msg('singleshipping.howshippingcalculatedcontent3','checkout',null)}</li>
 						<li>${Resource.msg('singleshipping.howshippingcalculatedcontent4','checkout',null)}</li>
 						<li>${Resource.msg('singleshipping.howshippingcalculatedcontent5','checkout',null)}</li>
@@ -54,7 +54,7 @@
 			</div>
 		</a>
 		<span class="pipeline">|</span>
-		<a class="Custom-tooltip">
+		<a class="Custom-tooltip" aria-label="${Resource.msg('singleshipping.shippingrestrictions','checkout',null)}">
 	${Resource.msg('singleshipping.shippingrestrictions','checkout',null)}
 	<div class="tooltip-body" style="display:none">
 		<div class="tooltipcontainer">
@@ -78,13 +78,13 @@
 	<isif condition="${pdict.ApplicableShippingMethods.size() > 0}">
 		<div class="shipping-methods">
 			<isloop items="${pdict.ApplicableShippingMethods}" var="shippingMethod" status="loopstate">
-	
+
 			<iscomment>exclude the shipming method '005', instore shipming method</iscomment>
 			<isset name="shippingCost" value="${pdict.ShippingCosts.get(shippingMethod.ID)}" scope="page"/>
 				<div class="shipping-method">
 					<div class="form-row form-indent label-inline">
 						<div class="shippingmethod-left">
-							<iscomment> 
+							<iscomment>
 								JIRA PREV-463 :	Radio button is selected even if the user clicks on Details link.
 							</iscomment>
 							<div class="value">
@@ -92,10 +92,10 @@
 									<label class= "first-label" for="shipping-method-${shippingMethod.ID}">
 										<div class='custom-link <isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">active</isif>'<isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}"> aria-label='The tick icon represents the currently method for shipping visually.'</isif>>
 											<div class="custom-link-div">
-												
+
 													<label>
 															<isprint value="${shippingMethod.displayName}"/>
-										
+
 															<iscomment>
 																The format for rendering shipping values is to render the base shipping cost. If there are shipping
 																price adjustments, the adjustments are also rendered. Finally, if there is a surcharge associated with
@@ -103,11 +103,11 @@
 															</iscomment>
 															<div class="shippingprice-detail">
 																<isif condition="${shippingCost.shippingPriceAdjustmentsTotal != 0}">
-																	
+
 																	<span class="standard-shipping standardshipping"><isprint value="${shippingCost.baseShipping}"/></span>
 																	<span class="discount-shipping discountshipping">
 																		<isif condition="${shippingCost.baseShippingAdjusted == 0}">
-																			${Resource.msg('global.freeshipping', 'locale', null)} 
+																			${Resource.msg('global.freeshipping', 'locale', null)}
 																		<iselse/>
 																			<isprint value="${shippingCost.baseShippingAdjusted}"/>
 																		</isif>
@@ -115,7 +115,7 @@
 																<iselse/>
 																	<span><isprint value="${shippingCost.baseShipping}"></span>
 																</isif>
-											
+
 																<isif condition="${shippingCost.surchargeAdjusted > 0}">
 																	<span class="shippingsurcharge"> + <isprint value="${shippingCost.surchargeAdjusted}"/> ${Resource.msg('singleshipping.surcharge','checkout',null)}</span>
 																</isif>
@@ -124,7 +124,7 @@
 																<input class="input-radio" type="radio" name="${pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.htmlName}" id="shipping-method-${shippingMethod.ID}" value="${shippingMethod.ID}" <isif condition="${(empty(pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value) && shippingMethod.defaultMethod) || (pdict.CurrentForms.singleshipping.shippingAddress.shippingMethodID.value == shippingMethod.ID)}">checked="checked"</isif> />
 															</div>
 													</label>
-												
+
 											</div>
 										</div>
 									</label>
@@ -136,8 +136,8 @@
 								<isif condition="${!empty(shippingMethod.description)}">
 									<div class="form-caption"><isprint value="${shippingMethod.description}"/></div>
 								</isif>
-				
-								<iscomment>  Display approaching shipping promotional discounts. 
+
+								<iscomment>  Display approaching shipping promotional discounts.
 								<ul class="shipping-promos">
 									<isloop items="${DiscountPlan.getApproachingShippingDiscounts(shipment, shippingMethod)}" var="shippingDiscount">
 										<li>${Resource.msg('approachingpromo.purchase','checkout',null)} <isprint value="${shippingDiscount.getDistanceFromConditionThreshold()}" /> ${Resource.msg('approachingpromo.more','checkout',null)} ${Resource.msg('approachingpromo.receive','checkout',null)}: <isprint value="${shippingDiscount.getDiscount().getPromotion().getCalloutMsg()}" encoding="off" /><br/>
@@ -146,7 +146,7 @@
 							</span>
 						</div>
 					</div><!-- END: shippingmethod -->
-				</div> 
+				</div>
 			</isloop>
 		</div><!-- END: shippingmethods -->
 		<div class="clear"><!-- FLOAT CLEAR --></div>

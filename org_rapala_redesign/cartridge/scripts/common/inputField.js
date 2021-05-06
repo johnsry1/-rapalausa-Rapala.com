@@ -150,10 +150,10 @@ module.exports = function (pdict) {
     // label
     label = '<label class="label" for="' + name + '">';
     if(pdict.labellink) {
-    	label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + pdict.labellink + '</span>';
+        label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + pdict.labellink + '</span>';
 
     } else {
-    	label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
+        label += '<span id="' + name + '-label" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="labeltext">' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
     }
     if (required) {
         label += '<span class="requiredindicator">&#42; </span>';
@@ -212,7 +212,7 @@ module.exports = function (pdict) {
             }
 			break;
 		case 'textarea':
-			input = '<textarea aria-labelledby="' + name + '-label" class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
+            input = '<textarea aria-labelledby="' + name + '-label" class="input-textarea ' + fieldClass + '" id="' + id + '" name="' + name + '" ' + attributes + '>';
 			input += value;
 			input += '</textarea>';
 			break;
@@ -262,9 +262,9 @@ module.exports = function (pdict) {
 			helpcontent = helpAsset.custom.body;
 		}
 		help = [
-			'<a aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
-			helplabel,
-			'<div class="tooltip-content" role="tooltip" data-layout="small">',
+            '<a aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
+            helplabel,
+            '<div class="tooltip-content" role="tooltip" data-layout="small">',
 			helpcontent,
 			'</div>',
 			'</a>'
