@@ -1027,8 +1027,11 @@
                         line-height: 20px;
                         font-weight: normal;
                         font-family: $lucida-font-family;
+
+                        a,
                         span {
                             float: left;
+
                             &.Custom-tooltip {
                                 background: url('../images/responsive-icons/tooltip.svg') no-repeat 0 0;
                                 height: 11px;
@@ -4228,7 +4231,12 @@ body {
             }
         }
     }
-
+    .form-horizontal {
+        label {
+            text-align: left;
+            width: auto;
+        }
+    }
 }
 
 .pt_checkout {
@@ -5264,6 +5272,7 @@ body {
                         &.ordertotalstable,
                         &.order-totals-table {
                             .label {
+                                a,
                                 span {
                                     &.Custom-tooltip {
                                         background: url("../images/responsive-icons/tooltip.svg") no-repeat;
