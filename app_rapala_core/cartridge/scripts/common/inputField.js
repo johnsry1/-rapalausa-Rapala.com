@@ -246,9 +246,9 @@ module.exports = function (pdict) {
 			helpcontent = helpAsset.custom.body;
 		}
 		help = [
-            '<a aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
+            '<a tabindex="0" aria-describedby="' + pdict.formfield.label.replace('.', '') + '" aria-label="' + Resource.msg(pdict.formfield.label, 'forms', null) + '" class="tooltip Custom-tooltip">',
             helplabel,
-            '<div class="tooltip-content" role="tooltip" data-layout="small">',
+            '<div class="tooltip-content" id="' + pdict.formfield.label.replace('.', '') +'" role="tooltip" data-layout="small">',
 			helpcontent,
 			'</div>',
 			'</a>'
