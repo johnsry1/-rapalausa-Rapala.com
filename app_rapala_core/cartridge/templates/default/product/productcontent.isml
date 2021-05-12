@@ -232,6 +232,7 @@
 									</div>
 								</div>
 								<div class="addTo-cart-section">
+                                    <label class="sr-only" aria-label="${Resource.msg('global.quantity','locale',null)}" for="Quantity"><isprint value="${Resource.msg('global.quantity','locale',null)}" /></label>
 									<input type="text" class="input-text quantityinput" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}"/>
 									<isif condition="${pdict.CurrentHttpParameterMap.isCart.stringValue == 'true'}">
 										<input type="hidden" value="${pdict.CurrentHttpParameterMap.lineItemID.stringValue}" name="lineItemId" class="line-itemid"/>
@@ -274,6 +275,7 @@
 									</div>
 								</div>
 								<div class="addTo-cart-section">
+                                    <label class="sr-only" aria-label="${Resource.msg('global.quantity','locale',null)}" for="Quantity"><isprint value="${Resource.msg('global.quantity','locale',null)}" /></label>
 									<input type="text" class="input-text quantityinput" name="Quantity" id="Quantity" size="2" maxlength="3" value="${Number(empty(pdict.CurrentHttpParameterMap.Quantity.stringValue) ? 1 : pdict.CurrentHttpParameterMap.Quantity.stringValue).toFixed()}" data-available="${availableCount}" disabled/>
 									<button name="_addToCart" id="add-to-cart" type="button" title="${buttonTitleDisabledSelectVariation}" value="${buttonTitleDisabledSelectVariation}" data-gtmdata="${JSON.stringify(tagManager.getProductAddToCartObject(pdict.Product.ID))}" class="button-fancy-large  add-to-cart-disabled addtocartbutton disabled"<isprint value="${disabledAttr}" encoding="off"/>>${buttonTitle}</button>
 								</div>
@@ -395,14 +397,14 @@
 					<div class="clear"></div>
 
 				</div>
-                
+
         <isscript>
             var prop65 = dw.content.ContentMgr.getContent('prop65-warning');
         </isscript>
         <isif condition="${prop65.onlineFlag == true && !empty(prop65.custom.body)}">
             <div class="prop-65"><img src ="${URLUtils.staticURL('/images/warning.svg')}" /><isprint value="${prop65.custom.body}" encoding="off"/></div>
         </isif>
-                
+
 	<iscomment>This is ugly, but it works until we can get a better solution</iscomment>
 	<isif condition="${pdict.GetImages}">
 		<div id="update-images" style="display:none">

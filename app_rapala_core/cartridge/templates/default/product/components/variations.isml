@@ -57,7 +57,8 @@
 							<br/><span class="learnmore"><isprint value="${Resource.msg('product.notsure','product',null)}"/>&nbsp;<a href="${URLUtils.url('Page-Include','cid', learnMoreAssetId)}"><isprint value="${Resource.msg('product.learnmore','product',null)}"/></a></span>
 						</isif>
 					</div>
-					<ul class="swatchesdisplay">
+                    <span class="sr-only" id="${VA.ID}" aria-label="<isprint value="${VA.displayName}"/>"><isprint value="${VA.displayName}"/></span>
+					<ul class="swatchesdisplay" role="listbox" aria-labelledby="${VA.ID}">
 						<isloop items="${VAVALS}" var="VV">
 							<isset name="lgImage" value="${PVM.getImage('large', VA, VV)}" scope="page"/>
 							<isif condition="${VV.getImage('hi-res')}">
@@ -83,7 +84,7 @@
 									<isset name="display" value="${VV.value}" scope="page"/>
 								</isif>
 
-								<a title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" tabindex="0" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
+								<a role="option" title="${anchorTitle}" class="swatchanchor corner-ribbon-wrapper" tabindex="0" data-lgimg='<isif condition="${!empty(lgImage)}">{"url":"${lgImage.getURL()}", "title":"${lgImage.title}", "alt":"${lgImage.alt}", "hires":"${hiresURL}"}</isif>'>
 									<isif condition="${newColors.contains(VV.displayValue)}">
 										<span class="new corner-ribbon">New</span>
 									</isif>
@@ -118,7 +119,8 @@
 								<br/><span class="learnmore"><isprint value="${Resource.msg('product.notsure','product',null)}"/>&nbsp;<a href="${URLUtils.url('Page-Include','cid', learnMoreAssetId)}"><isprint value="${Resource.msg('product.learnmore','product',null)}"/></a></span>
 							</isif>
 						</div>
-						<select>
+                        <label for="${VA.ID}" class="sr-only" aria-label="<isprint value="${VA.displayName}"/>"><isprint value="${VA.displayName}"/></label>
+						<select id="${VA.ID}">
 							<isloop items="${VAVALS}" var="VV">
 								<isif condition="${Valength > 0}">
 									<option value="">
