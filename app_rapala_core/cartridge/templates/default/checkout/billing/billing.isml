@@ -235,7 +235,7 @@
 											};
 									 	</isscript>
 								    	<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addressid}" rowClass=" " type="input" value="true" attributes="${addressCustAttr}"/>
-								    	<a class="Custom-tooltip tooltip">
+								    	<a class="Custom-tooltip tooltip" tabindex="0" aria-label="${Resource.msg('global.tooltipNicknameheader','locale',null)}">
 											<img class="tooltip-shipping-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer Nick">
@@ -273,7 +273,7 @@
 								<div class="formfield email-field">
 									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 									<div class="whyemail-address">
-										<a class="Custom-tooltip">
+										<a class="Custom-tooltip" tabindex="0" aria-label="${Resource.msg('global.whyrequired','locale',null)}">
 											<span class="whyemail-address-tooltip"><isprint value="${Resource.msg('global.whyrequired','locale',null)}"/> </span>
 											<div class="tooltip-body" style="display:none">
 												<div class="tooltipcontainer">
@@ -292,7 +292,7 @@
 									<div class="custom-link"></div>
 									<div class="checkbox">
 										<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.addToAddressBook}" type="checkbox"/>
-									</div
+									</div>
 								</div>
 							</isif>
 							<iscomment><div class="custom-checkbox">
@@ -323,7 +323,7 @@
 
 					 	<isif condition="${!flageallotmentcover}">
 						   	<div class="cardnotworking">
-								<a class="Custom-tooltip">
+								<a class="Custom-tooltip" tabindex="0" aria-label="${Resource.msg('global.creditcardnotworking','locale',null)}">
 									<span class="cardnotworking-tooltip"><isprint value="${Resource.msg('global.creditcardnotworking','locale',null)}"/></span>
 									<div class="tooltip-body" style="display:none">
 										<div class="tooltipcontainer">
@@ -432,7 +432,8 @@
 								</div>
 
 								<div class="ordergothrough-tooltip">
-									<a class="ordergothrough_tooltip Custom-tooltip"><isprint value="${Resource.msg('global.didmyordergothrough','locale',null)}"/>
+									<a class="ordergothrough_tooltip Custom-tooltip" tabindex="0" aria-label="${Resource.msg('global.didmyordergothrough','locale',null)}">
+                                        <isprint value="${Resource.msg('global.didmyordergothrough','locale',null)}"/>
 										<img src ="${URLUtils.staticURL('/images/responsive-icons/tooltip.svg')}" />
 										<div class="tooltip-body" style="display:none">
 											<div class="tooltipcontainer">
