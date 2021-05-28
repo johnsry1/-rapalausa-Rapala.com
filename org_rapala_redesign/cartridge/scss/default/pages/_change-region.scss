@@ -245,34 +245,172 @@
         outline: none;
     }
 }
+
 .change-region-dropdown {
     float: left;
     margin-top: 5px;
     position: relative;
-    .rapala-middle-block{
-        position: absolute;
-		left: 0px;
-        width: 200px;
-        z-index: 1000;
-        .top_arrow {
-            left: 3px;
-        }
-        .url {
-            color: $night-rider;
-        }
-    }
+    display: block;
+
     @include respond(0, $desktop-breakpoint - 1) {
         margin-top: 25px;
+
         .rapala-middle-block {
             top: 130%;
-			display: inline-table;
-        }
-    }
-    @include respond($desktop-breakpoint - 1, $xxlg-content-breakpoint){
-        .rapala-middle-block {
-            top: 92%;
-			left: 0px;
+            display: inline-table;
         }
     }
 
+    @include respond($desktop-breakpoint - 1, $xxlg-content-breakpoint){
+        .rapala-middle-block {
+            top: 92%;
+            left: 0;
+        }
+    }
+
+    .top_arrow {
+        left: 15px;
+    }
+
+    span.change-region-header-flag {
+        display: flex;
+
+        img {
+            background: none;
+            width: 100%;
+            height: auto;
+            border: 1px solid $img-border-thumbnil;
+        }
+    }
+
+    .rapala-middle-block{
+        flex-flow: row wrap;
+        z-index: 1000;
+        box-sizing: border-box;
+        border: 1px solid $darker-gray;
+        border-radius: 3px;
+        align-items: center;
+        display: none;
+        flex-flow: row wrap;
+        min-height: rem(101px);
+        background-color: $bg-white;
+        padding: 2px 5px;
+        position: absolute;
+        top: 85%;
+        width: 200px;
+
+        @include respond(0, $desktop-breakpoint - 1) {
+            top: 40%;
+
+            .top_arrow {
+                left: 3px;
+            }
+        }
+
+        p {
+            padding: 0;
+            width: 100%;
+        }
+
+        a {
+            padding: 2px 5px;
+            display: flex !important;
+            align-items: center;
+
+            .rapala-iternational-text {
+                @include geoip-link();
+            }
+
+            &:hover {
+                text-decoration: $geoip-link-decoration;
+            }
+
+            &.country {
+                justify-content: left;
+                color: $night-rider;
+
+                > div {
+                    display: inline-block;
+
+                    &.url {
+                        margin: 0 5px;
+                    }
+                }
+            }
+
+            &.gray-button {
+                justify-content: center;
+            }
+        }
+
+        .top_arrow {
+            left: 3px;
+        }
+
+        .url {
+            color: $night-rider;
+        }
+
+        .rapala-iternational-flag {
+            display: inline-block;
+            width: 16px;
+            height: auto;
+            background-size: cover;
+
+            img {
+                background: none;
+                width: rem(16px);
+                height: auto;
+                border: 1px solid gray;
+            }
+        }
+
+        .link-ca,
+        .link-us,
+        .link-eu,
+        .link-fi,
+        .link-uk,
+        .link-fr {
+            background: none;
+            width: 100%;
+            height: auto;
+        }
+
+        .international-link {
+            .rapala-iternational-flag {
+                margin: 0 7px 0 0;
+                background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+            }
+        }
+    }
+
+    .rapala-iternational-flag {
+        display: inline-block;
+        width: rem(18px);
+        height: rem(12px);
+        background-size: cover;
+
+        img {
+            background: none;
+            width: rem(16px);
+            height: auto;
+            border: .5px solid $img-border-thumbnil;
+        }
+    }
+
+    .international-link {
+        .rapala-iternational-flag {
+            margin: 0 7px 0 0;
+            background: url('../images/change-region/all-other-countries.png') top left no-repeat;
+        }
+    }
+
+    .gray-button {
+        @include gray-button(none);
+        font-size: 10px;
+        font-weight: normal;
+        height: 20px;
+        margin: 5px 0;
+        line-height: 100%;
+    }
 }
