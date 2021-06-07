@@ -42,6 +42,19 @@
     }
     a {
         @include geoip-link();
+
+        &.country {
+            display: block;
+            width: 100%;
+
+            > div {
+                display: inline-block;
+
+                &.url {
+                    margin: 0 5px;
+                }
+            }
+        }
     }
     .rapala-middle-block {
         box-sizing: border-box;
@@ -128,9 +141,42 @@
         width: 100%;
         text-align: center;
         background: transparent url(../images/change-region/international-links-background-repeat-y.png) repeat-y center top;
+
+        @include respond(medium-down) {
+            max-width: 316px;
+            margin: auto;
+        }
+
+        &.rapala-top-block {
+            width: 47%;
+            max-width: 316px;
+            clear: none;
+            text-align: center;
+            background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
+            margin-bottom: rem(40px);
+
+            @include respond(medium-down) {
+                width: 100%;
+                margin: 0 auto 2.5rem auto;
+            }
+
+            &.shop-rapala-products {
+                @include respond(large-up) {
+                    float: left;
+                }
+            }
+
+            &.explore-rapala-products {
+                @include respond(large-up) {
+                    float: right;
+                }
+            }
+        }
+
         .distrobutors-countries-list {
             padding: rem(25px) rem(45px);
             text-align: center;
+
             @include respond(large-up) {
                 -webkit-column-count: 3;
                 -moz-column-count: 3;
@@ -138,6 +184,7 @@
                 text-align: left;
             }
         }
+
         .distributor-link {
             box-sizing: border-box;
             text-align: center;
