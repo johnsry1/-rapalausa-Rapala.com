@@ -170,6 +170,7 @@
                         font-family: $font;
                     }
                 }
+
                 .product-tile {
                     .product-image {
                         .quickview {
@@ -183,6 +184,8 @@
                         }
                     }
                     .product-name {
+                        overflow: visible;
+
                         a {
                             font-family: $font;
                         }
@@ -443,5 +446,12 @@
             @include quickview;
             height: $quickview-height !important;
         }
+    }
+}
+
+.search-result-options {
+    .selectorOut {
+        left: auto;
+        right: 0;
     }
 }
