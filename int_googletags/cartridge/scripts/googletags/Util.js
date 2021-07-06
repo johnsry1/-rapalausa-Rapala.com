@@ -124,6 +124,34 @@ exports.getProductArrayFromList = function (productList, objectCreationCallback,
 };
 
 /**
+ * Creates an ecommerce array based on an Product iterator. The itertor can contain
+ * Product, ProductListItem, or ProductLineItem.
+ *
+ * This is a GTM output for flowbox
+ *
+ * @param {Iterator} productList
+ * @return {Array}
+ */
+ exports.getFlowBoxProductArrayFromList = function (productList) {
+    /** @type {Array} */
+    let productArray = [];
+    let count = 0;
+
+    while (productList.hasNext()) {
+        
+        if (count >= 20) {
+            break;
+        }
+        let item = productList.next();
+        prodObj = { "id": item.product.ID , "quantity" : item.quantityValue};
+        productArray.push(prodObj);
+        count++;   
+    }
+    return productArray;
+ };
+
+
+/**
  *
  * @param {ProductSearchModel} productSearchResult
  * @param {PagingModel} productPagingModel
