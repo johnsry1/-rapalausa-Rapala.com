@@ -133,6 +133,7 @@ const Org_TagManager = {
         if (order) {
             obj.ecommerce.purchase.products = Util.getProductArrayFromList(order.productLineItems.iterator(), this.getOrderConfirmationProductObject);
             obj.ecommerce.purchase.actionField = this.getConfirmationActionFieldObject(order);
+            obj.ecommerce.purchase.flowbox = Util.getFlowBoxProductArrayFromList(basket.getProductLineItems().iterator());
         }
 
         return obj;
