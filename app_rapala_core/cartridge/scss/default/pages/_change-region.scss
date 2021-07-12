@@ -124,10 +124,12 @@
         width: 100%;
         text-align: center;
         background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
+
         @include respond(medium-down) {
             max-width: 316px;
             margin: auto;
         }
+
         &.rapala-top-block {
             width: 47%;
             max-width: 316px;
@@ -135,21 +137,25 @@
             text-align: center;
             background: transparent url(../images/change-region/international-links-background-repeat-new-y.png) repeat-y center top;
             margin-bottom: rem(40px);
+
             @include respond(medium-down) {
                 width: 100%;
                 margin: 0 auto 2.5rem auto;
             }
+
             &.shop-rapala-products {
                 @include respond(large-up) {
                     float: left;
                 }
             }
+
             &.explore-rapala-products {
                 @include respond(large-up) {
                     float: right;
                 }
             }
         }
+
         .distrobutors-countries-list {
             padding: rem(25px) rem(45px);
             @include respond(large-up) {
@@ -265,9 +271,15 @@
 .change-region-dropdown {
     display: block;
     float: left;
+
+    @include respond(0, $desktop-breakpoint - 1) {
+        margin-top: 17.5px;
+    }
+
     .top_arrow {
         left: 15px;
     }
+
     .rapala-middle-block {
         box-sizing: border-box;
         border: 1px solid $darker-gray;
@@ -280,8 +292,10 @@
         padding: 2px 5px;
         position: absolute;
         top: 85%;
+
         @include respond(0, $desktop-breakpoint - 1) {
             top: 40%;
+
             .top_arrow {
                 left: 3px;
             }
@@ -291,32 +305,40 @@
             padding: 0;
             width: 100%;
         }
+
         a {
             padding: 2px 5px;
         }
+
         a:not(.gray-button) {
             line-height: 12px;
             height: 25px;
+
             .rapala-iternational-text {
                 @include geoip-link();
             }
+
             &:hover {
                 text-decoration: $geoip-link-decoration;
             }
+
             &.country {
                 > div {
                     display: inline-block;
+
                     &.url {
                         font-size: small;;
                     }
                 }
             }
         }
+
         .rapala-iternational-flag {
             display: inline-block;
             width: 16px;
             height: auto;
             background-size: cover;
+
             img {
                 background: none;
                 width: rem(16px);
@@ -324,6 +346,7 @@
                 border: 1px solid gray;
             }
         }
+
         .link-ca,
         .link-us,
         .link-eu,
@@ -334,18 +357,12 @@
             width: 100%;
             height: auto;
         }
+
         .international-link {
             .rapala-iternational-flag {
                 margin: 0 7px 0 0;
                 background: url('../images/change-region/all-other-countries.png') top left no-repeat;
             }
         }
-
     }
-    @include respond(0, $desktop-breakpoint - 1) {
-        margin-top: 17.5px;
-    }
-    
-
 }
-

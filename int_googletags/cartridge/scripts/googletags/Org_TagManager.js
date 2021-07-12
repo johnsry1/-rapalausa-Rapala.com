@@ -103,6 +103,7 @@ const Org_TagManager = {
 
         if (basket) {
             obj.ecommerce.checkout.products = Util.getProductArrayFromList(basket.getProductLineItems().iterator(), this.getOrderProductObject);
+            obj.ecommerce.checkout.flowbox = Util.getFlowBoxProductArrayFromList(basket.getProductLineItems().iterator());
         }
 
         obj.ecommerce.checkout.actionField.step = session.custom.checkoutStep;
@@ -132,6 +133,7 @@ const Org_TagManager = {
         if (order) {
             obj.ecommerce.purchase.products = Util.getProductArrayFromList(order.productLineItems.iterator(), this.getOrderConfirmationProductObject);
             obj.ecommerce.purchase.actionField = this.getConfirmationActionFieldObject(order);
+            obj.ecommerce.purchase.flowbox = Util.getFlowBoxProductArrayFromList(order.productLineItems.iterator());
         }
 
         return obj;

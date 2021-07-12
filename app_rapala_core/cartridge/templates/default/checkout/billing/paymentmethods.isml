@@ -31,11 +31,11 @@
 			<div id="couponsform" class="giftcertcouponform">
 				<div id="couponentry" class="couponform">
 					<div class="formfield couponcode">
-						<span class="label"><isprint value="${Resource.msg('billinginfo.havepromo','checkout',null)}"/></span>
+						<span aria-label="${Resource.msg('billinginfo.havepromo','checkout',null)}" class="label"><isprint value="${Resource.msg('billinginfo.havepromo','checkout',null)}"/></span>
 						<div class="promo-input-button hide">
 							<isinputfield formfield="${pdict.CurrentForms.billing.couponCode}" type="input" rowclass="label-above" label="false" attributes="${couponAttr}"/>
 							 <div class="coupon-apply">
-				                <button class="apply cancel" id="add-coupon" type="submit" name="${pdict.CurrentForms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+				                <button aria-label="${Resource.msg('global.applypromo','locale',null)}" class="apply cancel" id="add-coupon" type="submit" name="${pdict.CurrentForms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
 				            </div>
 						</div>
 						 <div class="form-row coupon-error error">
@@ -128,7 +128,7 @@
 <input type="hidden" value="${allotmentAmount}" class="allotmentAmount"/>
 <isset name="flageallotmentcover" value="${require('app_rapala_core/cartridge/scripts/util/UtilityHelpers.ds').isAllotmentOnly(pdict.Basket)}" scope="page"/>
 <isif condition="${pdict.OrderTotal > 0 && remainingBalance > 0}">
-	
+
 			<div id="paymentmethods"class="payment-method-options form-indent">
 				<div class="paymentmethods_cont">
 					<isloop items="${pdict.CurrentForms.billing.paymentMethods.selectedPaymentMethodID.options}" var="paymentMethodType">
@@ -279,7 +279,7 @@
 					 		<div class="formfield form-row-50 cardcvn">
 					 			<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.cvn}" type="input" rowclass="cvn" fieldClass="creditcard_cvn" dynamicname="true" requiredtext="${Resource.msg('forms.billing.securitycode.missing','forms',null)}"/>
 					 			<span class="formfieldtooltip">
-					                 <a class="cvc_tooltip tooltip">
+					                 <a class="cvc_tooltip tooltip" tabindex="0" aria-label="${Resource.msg('creditcard.cvnlabel','forms',null)}">
 					                     <img class="billingtooltip-promotion" src="${URLUtils.staticURL('/images/question_mark_icon.png')}"/>
 					                    <div class="tooltip-cvc tooltip-content hide">
 					                        <div class="tooltipcontainer">
