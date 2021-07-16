@@ -681,6 +681,12 @@
     tr {
         &.tablerow {
             background: none;
+            border-top: 1px $very-light-gray solid;
+
+            &:first-child {
+                border-top: none;
+            }
+
             &.sledscatrow {
                 background-color: $half-and-half;
                 background-image: none;
@@ -1021,8 +1027,11 @@
                         line-height: 20px;
                         font-weight: normal;
                         font-family: $lucida-font-family;
+
+                        a,
                         span {
                             float: left;
+
                             &.Custom-tooltip {
                                 background: url('../images/responsive-icons/tooltip.svg') no-repeat 0 0;
                                 height: 11px;
@@ -3934,6 +3943,10 @@ body {
                                 font-style: italic;
                                 font-family: $lucida-font-family;
 
+                                @include respond(0, $desktop-breakpoint - 1) {
+                                    right: 49%;
+                                }
+
                                 .tooltip {
                                     left: 0;
                                     top: 0;
@@ -4222,7 +4235,12 @@ body {
             }
         }
     }
-
+    .form-horizontal {
+        label {
+            text-align: left;
+            width: auto;
+        }
+    }
 }
 
 .pt_checkout {
@@ -5265,6 +5283,7 @@ body {
                         &.ordertotalstable,
                         &.order-totals-table {
                             .label {
+                                a,
                                 span {
                                     &.Custom-tooltip {
                                         background: url("../images/responsive-icons/tooltip.svg") no-repeat;
