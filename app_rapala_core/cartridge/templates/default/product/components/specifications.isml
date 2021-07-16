@@ -7,41 +7,41 @@
 		    <isset name="thisProduct" value="${pdict.Product}" scope="page"/>
 		</isif>
 	<iselse>
-		    <isset name="thisProduct" value="${pdict.Product}" scope="page"/>	
+		    <isset name="thisProduct" value="${pdict.Product}" scope="page"/>
 	</isif>
-	
+
 	<isset name="catalog" value="${require('app_rapala_core/cartridge/scripts/product/RapalaSpecChart.ds')}" scope="page" />
 	<isset name="tabularData" value="${catalog.getSpecificationChart(thisProduct)}" scope="page" />
 	<isset name="columnHeaders" value="${catalog.columnHeaders(thisProduct)}" scope="page" />
-	
+
 	<isif condition="${columnHeaders.length > 0}">
 	 	<div class="product-specifications desk-tab-view">
-		 	
-			   <iscomment><h2><isprint value="${Resource.msg('product.specifications', 'product', null)}" /></h2></iscomment> 
-				
+
+			   <iscomment><h2><isprint value="${Resource.msg('product.specifications', 'product', null)}" /></h2></iscomment>
+
 			<table class="specificiations">
 				<thead>
 					<tr class="header">
 						<isloop items="${columnHeaders}" var="header" status="spectTableHeaderLoopStatus">
-							<td><span><isprint value="${header}" /></span></td>
+							<th><span><isprint value="${header}" /></span></th>
 						</isloop>
 					</tr>
 				</thead>
 				<tbody>
 				<isloop items="${tabularData}" var="rowVal" status="spectTableRowLoopStatus">
 					<isset name="evenodd" value="${spectTableRowLoopStatus.even ? 'evenrow' : 'oddrow'}" scope="page"/>
-					<tr class="${evenodd}"> 
+					<tr class="${evenodd}">
 						<isloop items="${rowVal}" var="colVal" status="spectTableColumnLoopStatus">
-						
+
 							<isset name="showNew" value="${false}" scope="page" />
-							<isif condition="${colVal.indexOf("|") != -1}"> 
+							<isif condition="${colVal.indexOf("|") != -1}">
 								<isset name="splitColVals" value="${colVal.split("|")}" scope="page" />
 								<isset name="newColVal" value="${splitColVals[0]}" scope="page" />
-								<isset name="showNew" value="${true}" scope="page" />	
+								<isset name="showNew" value="${true}" scope="page" />
 							<iselse/>
 								<isset name="newColVal" value="${colVal}" scope="page" />
 							</isif>
-					  	
+
 					  		<td>
 					  			<isprint value="${newColVal}" />
 						  		<isif condition="${showNew == "true"}">
@@ -57,41 +57,41 @@
 	</isif>
 
 	<iscomment>For device </iscomment>
-	
+
 	<isif condition="${columnHeaders.length > 0}">
 	 	<div class="product-specifications iphone-view">
-		 	<iscomment><h2><isprint value=" ${Resource.msg('product.specifications', 'product', null)}" /></h2></iscomment>		
+		 	<iscomment><h2><isprint value=" ${Resource.msg('product.specifications', 'product', null)}" /></h2></iscomment>
 			<table class="specificiations">
 				<isloop items="${tabularData}" var="rowVal" status="spectTableRowLoopStatus">
 					<tbody>
 						<isloop items="${rowVal}" var="colVal" status="spectTableColumnLoopStatus">
 							<isloop items="${columnHeaders}" var="header" status="spectTableHeaderLoopStatus">
 							<isset name="showNew" value="${false}" scope="page" />
-							<isif condition="${colVal.indexOf("|") != -1}"> 
+							<isif condition="${colVal.indexOf("|") != -1}">
 								<isset name="splitColVals" value="${colVal.split("|")}" scope="page" />
 								<isset name="newColVal" value="${splitColVals[0]}" scope="page" />
-								<isset name="showNew" value="${true}" scope="page" />	
+								<isset name="showNew" value="${true}" scope="page" />
 							<iselse/>
 								<isset name="newColVal" value="${colVal}" scope="page" />
-							</isif>							
-							<isif condition="${spectTableColumnLoopStatus.count == spectTableHeaderLoopStatus.count}"> 
+							</isif>
+							<isif condition="${spectTableColumnLoopStatus.count == spectTableHeaderLoopStatus.count}">
 				 	 			<tr >
-		 			  				<isif condition="${spectTableHeaderLoopStatus.first}"> 
+		 			  				<isif condition="${spectTableHeaderLoopStatus.first}">
 		 								<th >
 		 									<isprint value="${header}" />	<isprint value="${newColVal}" />
 		 					 			</th>
 		 							<iselse>
 		 								<td ><isprint value="${header}" /></td>
-		   		 		 				<td ><isprint value="${newColVal}" /></td> 
+		   		 		 				<td ><isprint value="${newColVal}" /></td>
 		   		 		 			</iselse>
 		   		 		  			</isif>
 	 	 		 				 </tr>
 	   			 			</isif>
 							</isloop>
-						</isloop>	
+						</isloop>
 					</tbody>
 				</isloop>
 			</table>
 		</div>
-	</isif>	
+	</isif>
 </isif>
