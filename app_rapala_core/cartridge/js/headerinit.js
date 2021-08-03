@@ -596,8 +596,8 @@ var headerEvents = {
                 }
             }
         }
-    },
-/*    userTimeout: function() {
+    }/* ,
+   userTimeout: function() {
         if ($('.loggeduser').length) {
             var timeOutObj;
             $(document).on('click', function(){
