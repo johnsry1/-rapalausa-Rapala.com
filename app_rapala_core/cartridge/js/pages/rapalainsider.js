@@ -218,6 +218,13 @@ var rapalainsider = {
                         if ($('.filelist').find('ul').length > 0) {
                             $('.filelist').find('ul').css({'display': 'none'});
                         }
+                        
+                        // Dynamicaly generating tabindex for VIP
+                        if ($('.ui-dialog').hasClass('vipInsider-dlg')) {
+                            $('.vipInsider-dlg .formfield').each(function (i) {
+                                $(this).find(':input:not(:hidden)').attr('tabindex', i + 21);
+                            });
+                        }
                     }
                 }
             });
