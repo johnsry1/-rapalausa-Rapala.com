@@ -10,19 +10,19 @@
 				<isif condition="${subFolder.ID == 'strikemaster-customer-shipping' || subFolder.ID == 'marcum-customer-warranty' || subFolder.ID == 'strikemaster-customer-returns' || subFolder.ID == 'strikemaster-warranty'}">
 					<div class="cell contentbox upshift accordion handle-non-us">
 					<div class="contentboxcontent">	
-						<h1 class="customerservicetabs head">${subFolder.displayName}</h1>
+						<h1 class="customerservicetabs head" tabindex="0"> ${subFolder.displayName}</h1>
 						<div class="disabled expandcontent">
 						<ul>
 							<isloop items="${subFolder.onlineContent}" var="subContent">
 								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume' || subContent.ID == 'marcum-become-dealer' || subContent.ID == 'marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-become-dealer' || subContent.ID == 'strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us'}">								
-									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}" tabindex="0">${subContent.name}</a></li>
 								<iselse>
 									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
 										<li class="non-us-contactus hide">				
 									<iselse>
 										<li>
 									</isif>
-									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}" tabindex="0">${subContent.name}</a></li>
 								</isif>
 							</isloop>
 						</ul>
@@ -36,19 +36,19 @@
 					<div class="cell contentbox upshift accordion">
 				</isif>
 					<div class="contentboxcontent">
-						<h1 class="customerservicetabs head">${subFolder.displayName}</h1>
+						<h1 class="customerservicetabs head" tabindex="0">${subFolder.displayName}</h1>
 						<div class="disabled expandcontent">
 					   <ul>
 							<isloop items="${subFolder.onlineContent}" var="subContent">
 								<isif condition="${subContent.ID == 'customer-donation-request' || subContent.ID == 'become-dealer' || subContent.ID == 'dealer-locator-addition' || subContent.ID == 'customer-sendresume' || subContent.ID == 'marcum-become-dealer' || subContent.ID == 'marcum-customer-donation-request' || subContent.ID == 'marcum-dealer-locator-addition' || subContent.ID == 'strikemaster-become-dealer' || subContent.ID == 'strikemaster-customer-donation-request' || subContent.ID == 'strikemaster-dealer-locator-addition' || subContent.ID == 'marcum-customer-prostaff-inquiry' || subContent.ID == 'strikemaster-customer-prostaff-inquiry' ||  subContent.ID == 'customer-prostaff-enquire' || subContent.ID == 'customer-contact-us' || subContent.ID == 'marcum-contact-us' || subContent.ID == 'strikemaster-contact-us' || subContent.ID == 'strikemaster-find-service-center'}">								
-									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+									<li class="handle-non-us"><a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}" tabindex="0">${subContent.name}</a></li>
 								<iselse>
 									<isif condition="${subContent.ID == 'customer-contact-us-non-usa'}">
 										<li class="non-us-contactus hide">				
 									<iselse>
 										<li>
 									</isif>
-									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></li>
+									<a title="${subContent.name}" class="links" href="${URLUtils.url('Page-Show','cid',subContent.ID)}" tabindex="0">${subContent.name}</a></li>
 								</isif>
 							</isloop>
 						</ul>
@@ -70,7 +70,7 @@
 			</isif>
 		</isif>
 			<div class="contentboxcontent">
-				<h1 class="customerservicetabs head"><a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}">${subContent.name}</a></h1>
+				<h1 class="customerservicetabs head"><a title="${subContent.name}" href="${URLUtils.url('Page-Show','cid',subContent.ID)}" tabindex="0">${subContent.name}</a></h1>
 			</div><!-- End of contentboxcontent -->
 			</div><!-- END: cell contentbox upshift -->
 		</isloop>

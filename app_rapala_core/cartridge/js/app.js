@@ -767,7 +767,7 @@ jQuery(function () {
             function () {
                 jQuery(this).removeClass('tabover').addClass('contentbox');
             }
-        ).on('click', function () {
+        ).on('keypress click', function () {
             var $this = jQuery(this);
             if ($this.find('.expandcontent').length > 0) {
                 $this.find('h1').toggleClass('downarrow').next().toggle('fast');
