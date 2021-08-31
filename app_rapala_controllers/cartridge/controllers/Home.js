@@ -209,13 +209,13 @@ function countyPopUp() {
 	app.getView({customObject: COBrand}).render('content/home/internationalpopup');
 }
 
-/* function sessionWarnPopUp() {
+function sessionWarnPopUp() {
 	app.getView().render('components/session_warn_popup');
-} */
+}
 
-/* function sessionExpiredPopUp() {
+function sessionExpiredPopUp() {
 	app.getView().render('components/session_expired_popup');
-} */
+}
 
 function countrySelectorPopUp() {
 	app.getView().render('components/country_selector_popup');
