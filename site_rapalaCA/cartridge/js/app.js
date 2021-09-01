@@ -589,7 +589,7 @@ function initializeDom() {
     util.limitCharacters();
     //check login status
     util.loggedInStatus();
-    setInterval(timeoutModal, 1000);
+    /*setInterval(timeoutModal, 1000);
     function timeoutModal(){
         if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
             dialog.open({
@@ -611,7 +611,7 @@ function initializeDom() {
                 }
             })
         }
-    }
+    }*/
     // Make sure that the SVGs work properly in older browsers
     /*eslint-disable */
     svg4everybody();
