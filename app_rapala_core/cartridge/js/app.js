@@ -625,6 +625,7 @@ function initializeDom() {
     util.limitCharacters();
     //check login status
     util.loggedInStatus();
+    /*
     setInterval(timeoutModal, 1000);
     function timeoutModal(){
         if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
@@ -648,7 +649,7 @@ function initializeDom() {
             })
         }
     }
-    
+    */
 }
 
 var pages = {
