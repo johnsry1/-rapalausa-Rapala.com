@@ -210,11 +210,11 @@ function countyPopUp() {
 }
 
 function sessionWarnPopUp() {
-	app.getView().render('components/session_warn_popup');
+	//app.getView().render('components/session_warn_popup');
 }
 
 function sessionExpiredPopUp() {
-	app.getView().render('components/session_expired_popup');
+	//app.getView().render('components/session_expired_popup');
 }
 
 function countrySelectorPopUp() {

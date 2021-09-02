@@ -273,10 +273,10 @@
 								<div class="formfield email-field">
 									<isinputfield formfield="${pdict.CurrentForms.billing.billingAddress.email.emailAddress}" type="input" rowClass="form-row-50 form-row-left" fieldClass="guestemail" requiredtext="${Resource.msg('forms.address.email.missing','forms',null)}"/>
 									<div class="whyemail-address">
-										<a class="Custom-tooltip" tabindex="0" aria-label="${Resource.msg('global.whyrequired','locale',null)}">
+										<a class="Custom-tooltip" aria-describedby="whyemail-address-tooltip-content" aria-label="${Resource.msg('global.whyrequired','locale',null)}">
 											<span class="whyemail-address-tooltip"><isprint value="${Resource.msg('global.whyrequired','locale',null)}"/> </span>
 											<div class="tooltip-body" style="display:none">
-												<div class="tooltipcontainer">
+												<div class="tooltipcontainer" id="whyemail-address-tooltip-content">
 													<isprint value="${Resource.msg('global.whyemailrequired','locale',null)}"/>
 												</div>
 											</div>
@@ -422,7 +422,7 @@
 									</isif>
 									<div class="cart-payment-buttons">
 										<div class="trust-marks-imgs">
-											<img class="paymenttrustimgs-paypal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" />
+											<img class="paymenttrustimgs-paypal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Accepted Payments: PayPal, MasterCard, Visa, Discover Card and American Express." />
 											<div class="secure-payment-icons">
 												<span class="payment-trust-imgs smcs-payment-icon" roll="img" aria-label="Security Metrics PCI Certified"></span>
 												<span class="payment-trust-imgs pci-secured-payment-icon" roll="img" aria-label="Security Metrics Credit Card Safe"></span>

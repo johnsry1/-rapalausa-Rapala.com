@@ -625,6 +625,7 @@ function initializeDom() {
     util.limitCharacters();
     //check login status
     util.loggedInStatus();
+    /*
     setInterval(timeoutModal, 1000);
     function timeoutModal(){
         if (window.isAuthenciatedUser && document.cookie && document.cookie.indexOf('loginStatus') == -1) {
@@ -648,7 +649,7 @@ function initializeDom() {
             })
         }
     }
-    
+    */
 }
 
 var pages = {
@@ -767,7 +768,7 @@ jQuery(function () {
             function () {
                 jQuery(this).removeClass('tabover').addClass('contentbox');
             }
-        ).on('click', function () {
+        ).on('keypress click', function () {
             var $this = jQuery(this);
             if ($this.find('.expandcontent').length > 0) {
                 $this.find('h1').toggleClass('downarrow').next().toggle('fast');
